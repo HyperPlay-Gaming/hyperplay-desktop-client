@@ -1,11 +1,5 @@
-import { useAccount, useConnect, useSignMessage } from 'wagmi'
-import useAuthSession from './useAuthSession'
-import { injected } from 'wagmi/connectors'
-import alertStore from 'frontend/store/AlertStore'
-import { useTranslation } from 'react-i18next'
-import extensionState from 'frontend/state/ExtensionState'
+import { useAccount, useSignMessage } from 'wagmi'
 import { useSyncPlayStreakWithExternalSource as useSyncPlayStreakWithExternalSourceCore } from '@hyperplay/quests-ui'
-import authState from 'frontend/state/authState'
 
 // @dev: this hook needs to be used in a component with MobX observer
 export function useSyncPlayStreakWithExternalSource({
@@ -13,21 +7,8 @@ export function useSyncPlayStreakWithExternalSource({
 }: {
   refreshPlayStreak: () => void
 }) {
-  const { isSignedIn } = useAuthSession()
   const { address } = useAccount()
   const { signMessageAsync } = useSignMessage()
-  const { connectAsync } = useConnect()
-  const { t } = useTranslation()
-
-  const showWalletWarning = () => {
-    alertStore.setAlert(
-      'warning',
-      t(
-        'quests.playstreak.walletNotConnected',
-        'Please connect a wallet to sync your progress.'
-      )
-    )
-  }
 
   const { mutateAsync } = useSyncPlayStreakWithExternalSourceCore({
     getCSRFToken: async () => {
@@ -61,41 +42,10 @@ export function useSyncPlayStreakWithExternalSource({
   })
 
   const syncPlayStreakWithExternalSource = async (questId: number) => {
-    if (!isSignedIn) {
-      authState.openSignInModal()
-      return
-    }
-
-    const currentProvider = await window.api.getConnectedProvider()
-    const web3Provider = await window.api.getCurrentWeb3Provider()
-
-    const isWalletUnConnected =
-      currentProvider === 'Unconnected' && !web3Provider
-
-    // we do window.api.focusMainWindow() instead of onboardingStore.openOnboarding()
-    // because this can be called from a game window, not the main window
-    if (isWalletUnConnected) {
-      showWalletWarning()
-      window.api.focusMainWindow()
-      window.api.openOnboarding()
-      return
-    }
-
-    let connectedAddress = address
-
-    if (!connectedAddress) {
-      showWalletWarning()
-      extensionState.showPopup()
-      const { accounts } = await connectAsync({ connector: injected() })
-      connectedAddress = accounts[0]
-    }
-
-    if (!connectedAddress) {
-      showWalletWarning()
-      return
-    }
-
-    return mutateAsync({ questId, address: connectedAddress })
+    // we don't need to do anything here because the button is not shown if the user is not signed in
+    // or doesn't have a wallet connected
+    if (!address) return
+    return mutateAsync({ questId, address })
   }
 
   return {
