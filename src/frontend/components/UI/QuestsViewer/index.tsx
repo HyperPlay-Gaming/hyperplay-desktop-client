@@ -34,12 +34,12 @@ export const QuestsViewer = observer(
     const { invalidateQuery } = useGetUserPlayStreak(visibleQuestId)
 
     const getPendingExternalSync = useCallback(async () => {
-      if (!address || !visibleQuestId) return false
+      if (!address || !visibleQuestId || !isSignedIn) return false
       return window.api.checkPendingSync({
         questId: visibleQuestId,
         wallet: address
       })
-    }, [address, visibleQuestId])
+    }, [address, visibleQuestId, isSignedIn])
 
     const { syncPlayStreakWithExternalSource } =
       useSyncPlayStreakWithExternalSource({
