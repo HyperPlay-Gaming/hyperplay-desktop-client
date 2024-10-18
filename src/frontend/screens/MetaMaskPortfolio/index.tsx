@@ -13,7 +13,7 @@ const MetaMaskPortfolio = function () {
         <div className={MetaMaskPortfolioStyles.loader}></div>
         <webview
           className={MetaMaskPortfolioStyles.homeWebview}
-          src={`https://portfolio.metamask.io/${page}`}
+          src={`https://portfolio.metamask.io/${page}?utm_source=hyperplay`}
           allowpopups={trueAsStr}
           partition={'persist:InPageWindowEthereumExternalWallet'}
           ref={webviewRef}
