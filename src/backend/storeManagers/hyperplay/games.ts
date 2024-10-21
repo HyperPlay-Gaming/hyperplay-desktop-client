@@ -787,8 +787,7 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${
-        (error as Error).message
+      `cancelExtraction: Error while canceling the operation ${(error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -1591,8 +1590,10 @@ export async function downloadGameIpdtManifest(
   const manifestPath = path.join(ipdtManifestsPath, manifestName)
   if (existsSync(manifestPath)) return false
 
+  console.log({ appName, version });
   const releaseId = generateID(appName, version)
   const manifestUrl = await getHyperPlayReleaseManifest(releaseId, platform)
+  console.log({ manifestUrl })
   if (!manifestUrl) return false
 
   // download and save the manifest file as a json file in manifest folder
@@ -1629,7 +1630,7 @@ async function applyPatching(
   const previousManifest = await getManifest(appName, platformKey, version)
   const currentManifest = await getManifest(appName, platformKey, newVersion)
 
-  const ipfsGateway = import.meta.env.IPFS_API
+  const ipfsGateway = process.env.IPFS_API;
 
   logInfo(
     `Patching ${gameInfo.title} from ${version} to ${newVersion}`,
@@ -1650,7 +1651,8 @@ async function applyPatching(
       install_path,
       currentManifest,
       previousManifest,
-      ipfsGateway
+      ipfsGateway,
+      ipfsGateway,
     )) {
       logInfo(output, LogPrefix.HyperPlay)
     }
@@ -1669,9 +1671,12 @@ async function getManifest(
   const manifestPath = path.normalize(
     path.join(ipdtManifestsPath, `${appName}-${platformName}-${version}.json`)
   )
+  // On Darwin (macOS), escape spaces in the path
+  const normalizedManifestPath = process.platform === 'darwin' ? manifestPath.replace(/ /g, '\\ ') : manifestPath;
+  console.log({ normalizedManifestPath })
 
-  if (!existsSync(manifestPath)) {
-    console.log(`${manifestPath} does not exist, downloading it`)
+  if (!existsSync(normalizedManifestPath)) {
+    console.log(`${normalizedManifestPath} does not exist, downloading it`)
     logDebug(
       `Manifest for ${appName} not found for version ${version} and platform ${platformName}`,
       LogPrefix.HyperPlay
