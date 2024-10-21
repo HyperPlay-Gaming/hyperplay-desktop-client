@@ -8,7 +8,10 @@ export const METAMASK_SNAPS_URL =
   'https://snaps.metamask.io/?utm_source=hyperplay'
 export const METAMASK_SNAPS_EXTERNAL_URL =
   'https://metamask.io/snaps/?utm_source=hyperplay'
-export const METAMASK_PORTFOLIO_URL =
-  'https://portfolio.metamask.io/?utm_source=hyperplay'
+export function getMetaMaskPortfolioPageUrl(page: string) {
+  return `https://portfolio.metamask.io/${page}?utm_source=hyperplay`
+}
+export const METAMASK_DOWNLOAD_URL =
+  'https://metamask.io/download/?utm_source=hyperplay'
 
 export const DEV_PORTAL_URL = 'https://developers.hyperplay.xyz/'
