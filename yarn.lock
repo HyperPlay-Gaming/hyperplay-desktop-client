@@ -1309,17 +1309,17 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/quests-ui@^0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.0.21.tgz#b14f70bac0eece560b5950f1b61c5d7e04fb6594"
-  integrity sha512-pqQN5s3UlLHQ02Bb63D8ftQFlZWPaKoXoP32Y++fgjsdKMw0pTGX3S1PxIkzXY+efbQcX5SDOVRrLX9qq0bj0Q==
+"@hyperplay/quests-ui@^0.0.28":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.0.28.tgz#6fedc3c92b8cf25bca2b0b18944d2967372d198f"
+  integrity sha512-LGe9AuwEu2l4JKaC3gFhRdODGKYjZHKH82svzbzVFEzpbX8k/jQFlDPmolByjJFrsCg98lLbaT7ZL4qSPzZH7A==
   dependencies:
     classnames "^2.5.1"
 
-"@hyperplay/ui@^1.7.18":
-  version "1.7.19"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.7.19.tgz#43bc58405a5cc4866d55b548203ce2bdeca6d3fa"
-  integrity sha512-uXqjABDqxvjXbF7o+GMriXyTgp62X39aPohr4W26G2uk+r+vNNy3t0JDGd0B4SyZnovcoCEocfWS6oirAOVnNg==
+"@hyperplay/ui@^1.8.4":
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.4.tgz#480eab4530e4357a3ded21149972c2b8caf17f69"
+  integrity sha512-fqTNvBRcg8gk7zbGet9zHHji80iE8TIM1/Kb7MCz1/5kpgJ+YVHWh0IcOA+XpRDdxbvaqiJUH63Z+kc3fTnhVw==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
@@ -1343,9 +1343,9 @@
     bignumber.js "^9.1.2"
 
 "@hyperplay/utils@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.2.4.tgz#17621d43f0d92a3d22de87dc08d96b0f2db2291c"
-  integrity sha512-aQLyh8xpVDK+R0jvHrU6eHtmcMu18PP+33bFlGvrqfLRhHfN7xmThrCfPzueWSP3u4MDQku6lQT3bYzMrATjvQ==
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.2.6.tgz#2862c690f4dbf7871c66631f29ce0561020ef8d7"
+  integrity sha512-9ldiOq7ioaEecHJaqKBbwo1594nMLUPQXjaeuupqWU88GJW1CNcbhJhi6p3H6v4eSsj5IWr5VkxGmAVyOKuBkg==
   dependencies:
     bignumber.js "^9.1.2"
 
@@ -2988,6 +2988,11 @@
   version "5.52.2"
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.52.2.tgz#a023864a892fda9858b724d667eb19cd84ce054a"
   integrity sha512-9vvbFecK4A0nDnrc/ks41e3UHONF1DAnGz8Tgbxkl59QcvKWmc0ewhYuIKRh8NC4ja5LTHT9EH16KHbn2AIYWA==
+
+"@tanstack/query-core@^5.59.0":
+  version "5.59.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.59.0.tgz#d8323f1c6eb0e573ab0aa85a7b7690d0c263818a"
+  integrity sha512-WGD8uIhX6/deH/tkZqPNcRyAhDUqs729bWKoByYHSogcshXfFbppOdTER5+qY7mFvu8KEFJwT0nxr8RfPTVh0Q==
 
 "@tanstack/react-query@^5.51.23":
   version "5.52.2"
@@ -12550,7 +12555,16 @@ string-length@^4.0.1:
     char-regex "^1.0.2"
     strip-ansi "^6.0.0"
 
-"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -12644,7 +12658,14 @@ stringify-entities@^4.0.0:
     character-entities-html4 "^2.0.0"
     character-entities-legacy "^3.0.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -13899,7 +13920,7 @@ word-wrap@^1.2.5:
   resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.5.tgz#d2c45c6dd4fbce621a66f136cbe328afd0410b34"
   integrity sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -13912,6 +13933,15 @@ wrap-ansi@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
   integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
+  dependencies:
+    ansi-styles "^4.0.0"
+    string-width "^4.1.0"
+    strip-ansi "^6.0.0"
+
+wrap-ansi@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
+  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"

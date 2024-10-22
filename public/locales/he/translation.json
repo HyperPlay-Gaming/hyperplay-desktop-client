@@ -1037,7 +1037,8 @@
     "importGameErrorMessage": "לא תיקיית משחק תקפה, משחק יבוא אינו אפשרי",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "אתה מחובר ל- HyperPlay עם ארנק חיצוני.",
-        "WALLET_DISCONNECTED": "אין לכם ארנק המחובר ל- HyperPlay."
+        "WALLET_DISCONNECTED": "אין לכם ארנק המחובר ל- HyperPlay.",
+        "comingSoon": "בקרוב"
     },
     "quests": {
         "playstreak": {
@@ -1054,6 +1055,9 @@
         "g7CreditsModal": {
             "title": "10 נקודות זיכוי",
             "description": "עקבו אחרי HyperPlay's Greatest Play Streak Challenges כל פעילות מעודדת אותך לעסוק במשחק אחר, להראות את הטוב ביותר של משחקי Web3. זמן המשחק שלך חשוב!"
+        },
+        "viewAllQuests": {
+            "title": "All Quests"
         }
     },
     "importGameErrorMessageExecutable": "משחק Game Game לוח לא נמצא, משחק יבוא אינו אפשרי",

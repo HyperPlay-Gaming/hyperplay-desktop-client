@@ -753,5 +753,8 @@
     "profile": "പ്രൊഫൈൽ",
     "import-game-folder": {
         "placeholder": "ഇറക്കുമതി ചെയ്യുവാനുള്ള കളിയറ തിരഞ്ഞെടുക്കൂ"
+    },
+    "overlay": {
+        "comingSoon": "ഉടൻ വരുന്നു…"
     }
 }

@@ -21,7 +21,7 @@ export default function ProgressHeader(props: {
   state: DownloadManagerState
 }) {
   const { t } = useTranslation()
-  const [progress] = hasProgress(props.appName)
+  const { progress } = hasProgress(props.appName)
   const [avgSpeed, setAvgDownloadSpeed] = useState<Point[]>(
     Array<Point>(20).fill({ download: 0, disk: 0 })
   )

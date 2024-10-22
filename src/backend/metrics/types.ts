@@ -339,6 +339,34 @@ export interface RewardClaimError {
   sensitiveProperties?: never
 }
 
+export interface ClientUpdateNotified {
+  event: 'Client Update Notified'
+  properties: {
+    currentVersion: string
+    newVersion: string
+  }
+  sensitiveProperties?: never
+}
+
+export interface ClientUpdateError {
+  event: 'Client Update Error'
+  properties: {
+    currentVersion: string
+    newVersion: string
+    error: string
+  }
+  sensitiveProperties?: never
+}
+
+export interface ClientUpdateDownloaded {
+  event: 'Client Update Downloaded'
+  properties: {
+    currentVersion: string
+    newVersion: string
+  }
+  sensitiveProperties?: never
+}
+
 export type PossibleMetricPayloads =
   | MetricsOptIn
   | MetricsOptOut
@@ -374,5 +402,8 @@ export type PossibleMetricPayloads =
   | RewardClaimStarted
   | RewardClaimSuccess
   | RewardClaimError
+  | ClientUpdateNotified
+  | ClientUpdateError
+  | ClientUpdateDownloaded
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']

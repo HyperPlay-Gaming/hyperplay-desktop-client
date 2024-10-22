@@ -954,7 +954,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Estás conectado a HyperPlay con un monedero externo.",
-        "WALLET_DISCONNECTED": "Usted no tiene una cartera conectada a HyperPlay."
+        "WALLET_DISCONNECTED": "Usted no tiene una cartera conectada a HyperPlay.",
+        "comingSoon": "Próximamente"
     },
     "sideload": {
         "warningTitle": "Importante",
@@ -1067,6 +1068,9 @@
         "g7CreditsModal": {
             "description": "Sumérgete en los mejores juegos de HyperPlay con emocionantes Desafíos de Play Streak. Cada actividad le anima a participar con un juego diferente, mostrando lo mejor de los juegos web3. ¡Tu tiempo de juego importa!",
             "title": "Ganar Game7 Créditos"
+        },
+        "viewAllQuests": {
+            "title": "Ver todas las búsquedas"
         }
     },
     "import-game-folder": {
