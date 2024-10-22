@@ -716,6 +716,7 @@
     },
     "Other": "Other",
     "overlay": {
+        "comingSoon": "Coming Soon",
         "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet.",
         "WALLET_DISCONNECTED": "You do not have a wallet connected to HyperPlay."
     },
@@ -757,7 +758,9 @@
             "playToStart": "Play this game to start your streak!",
             "progressTowardsStreak": "progress towards today's streak.",
             "streakCompleted": "Streak completed! Claim your rewards now.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "sync": "Sync Progress",
+            "syncSuccess": "Progress synced"
         },
         "points": "Points",
         "pointsClaimed": "Points Claimed",

@@ -787,5 +787,8 @@
         "wine-download-failed": {
             "title": "Eroare"
         }
+    },
+    "overlay": {
+        "comingSoon": "În curând…"
     }
 }

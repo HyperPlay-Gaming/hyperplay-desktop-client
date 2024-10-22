@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import styles from './index.module.scss'
 import { QuestLogWrapper } from './components/QuestLogWrapper'
 import { Alert } from '@hyperplay/ui'
@@ -10,12 +10,16 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import '@hyperplay/quests-ui/style.css'
 import { Reward } from 'common/types'
 import useGetQuests from 'frontend/hooks/useGetQuests'
+import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
+import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
+import { useAccount } from 'wagmi'
 
 export interface QuestsViewerProps {
   projectId: string
 }
 
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
+  const { address } = useAccount()
   const questResults = useGetQuests(appName)
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const { isSignedIn, data } = useAuthSession()
@@ -25,6 +29,20 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const initialQuestId = quests?.[0]?.id ?? null
   const visibleQuestId = selectedQuestId ?? initialQuestId
   const sessionEmail = data?.linkedAccounts.get('email')
+  const { invalidateQuery } = useGetUserPlayStreak(visibleQuestId)
+
+  const getPendingExternalSync = useCallback(async () => {
+    if (!address || !visibleQuestId || !isSignedIn) return false
+    return window.api.checkPendingSync({
+      questId: visibleQuestId,
+      wallet: address
+    })
+  }, [address, visibleQuestId, isSignedIn])
+
+  const { syncPlayStreakWithExternalSource } =
+    useSyncPlayStreakWithExternalSource({
+      refreshPlayStreak: invalidateQuery
+    })
 
   /**
    Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -33,6 +51,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
    t("quest.noG7ConnectionClaim", "You need to have a Game7 account linked to {{email}} to claim your rewards.")
    t("quest.noG7ConnectionSync", "You need to have a Game7 account linked to {{email}} to resync your tasks.")
    t("quest.notEnoughGas", "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.")
+   t("quest.playstreak.syncSuccess", "Progress synced")
    */
 
   let alertComponent = null
@@ -69,10 +88,8 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           setSelectedQuestId={setSelectedQuestId}
         />
         <QuestDetailsWrapper
-          questsWithExternalPlayStreakSync={[]}
-          syncPlayStreakWithExternalSource={async () =>
-            console.log('sync external')
-          }
+          getPendingExternalSync={getPendingExternalSync}
+          syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}
           tOverride={t}
           sessionEmail={sessionEmail}
           className={styles.detailsWrapper}

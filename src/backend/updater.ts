@@ -7,6 +7,8 @@ import { logError, logInfo, LogPrefix } from './logger/logger'
 import { isOnline } from './online_monitor'
 import { trackEvent } from './api/metrics'
 import { captureException } from '@sentry/electron'
+import { getFileSize } from './utils'
+import { ClientUpdateStatuses } from '@hyperplay/utils'
 // to test auto update on windows locally make sure you added the option "verifyUpdateCodeSignature": false
 // under build.win in package.json and also change the app version to an old one there
 
@@ -15,7 +17,10 @@ const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
 let newVersion: string
 
 autoUpdater.autoDownload = shouldCheckForUpdates
-autoUpdater.autoInstallOnAppQuit = false
+autoUpdater.autoInstallOnAppQuit = true
+
+let isAppUpdating = false
+let hasUpdated = false
 
 // check for updates every hour
 const checkUpdateInterval = 1 * 60 * 60 * 1000
@@ -50,11 +55,14 @@ autoUpdater.on('update-available', async (info) => {
 
 // log download progress
 autoUpdater.on('download-progress', (progress) => {
+  isAppUpdating = true
   logInfo(
     'Downloading HyperPlay update...' +
       `Download speed: ${progress.bytesPerSecond}, ` +
       `Downloaded: ${progress.percent.toFixed(2)}%, ` +
-      `Total downloaded: ${progress.transferred} of ${progress.total} bytes`,
+      `Total downloaded: ${getFileSize(progress.transferred)} of ${getFileSize(
+        progress.total
+      )} bytes`,
     LogPrefix.AutoUpdater
   )
 })
@@ -83,6 +91,7 @@ autoUpdater.on('update-downloaded', async () => {
   if (response === 1) {
     return autoUpdater.quitAndInstall()
   }
+  hasUpdated = true
 })
 
 autoUpdater.on('error', async (error) => {
@@ -90,6 +99,7 @@ autoUpdater.on('error', async (error) => {
     return
   }
 
+  isAppUpdating = false
   logError(`Error updating HyperPlay: ${error.message}`, LogPrefix.AutoUpdater)
 
   trackEvent({
@@ -125,3 +135,10 @@ autoUpdater.on('error', async (error) => {
     shell.openExternal('https://www.hyperplay.xyz/downloads')
   }
 })
+
+export function isClientUpdating(): ClientUpdateStatuses {
+  if (hasUpdated) {
+    return 'updated'
+  }
+  return isAppUpdating ? 'updating' : 'idle'
+}

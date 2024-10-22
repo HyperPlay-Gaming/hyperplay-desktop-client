@@ -14,6 +14,9 @@ import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import libraryState from 'frontend/state/libraryState'
 import classNames from 'classnames'
+import { HashRouter, Route, Routes } from 'react-router-dom'
+import MetaMaskPortfolio from 'frontend/screens/MetaMaskPortfolio'
+import { NavBarOverlayWrapper } from './NavBarOverlayWrapper'
 
 export const Overlay = observer(function ({
   appName,
@@ -121,11 +124,19 @@ export const Overlay = observer(function ({
 
     const classNameMods: Record<string, boolean> = {}
     classNameMods[BrowserGameStyles.hideOverlay] = !OverlayState.showOverlay
+
     overlayItems = (
       <div className={classNames(BrowserGameStyles.root, classNameMods)}>
         <div className={BrowserGameStyles.bgFilter} />
         <div className={BrowserGameStyles.contentContainer}>
-          {questsViewer}
+          <HashRouter>
+            <NavBarOverlayWrapper />
+            <Routes>
+              <Route path="/" element={questsViewer} />
+              <Route path="/quests" element={questsViewer} />
+              <Route path="/portfolio" element={<MetaMaskPortfolio />} />
+            </Routes>
+          </HashRouter>
           <div className={BrowserGameStyles.rightSideContainer}>
             {exitGameButton}
             {extensionManager}
