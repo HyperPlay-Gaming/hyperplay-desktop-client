@@ -1298,10 +1298,10 @@
     "@hyperplay/utils" "^0.0.14"
     mobx "^6.12.3"
 
-"@hyperplay/patcher@^0.0.12-alpha.5":
-  version "0.0.12-alpha.5"
-  resolved "https://registry.yarnpkg.com/@hyperplay/patcher/-/patcher-0.0.12-alpha.5.tgz#3bf3e4ec80e5e1350814d4e22bba1d5a749d0ebd"
-  integrity sha512-s755grHMIl2FaYNmxkhcYj1UvZcvO8H9EcGiR105ZThx9nZ9WrZfBXBlmha+5qdn93lD51xYdmdEeufKOZfovQ==
+"@hyperplay/patcher@^0.0.12-alpha.6":
+  version "0.0.12-alpha.6"
+  resolved "https://registry.yarnpkg.com/@hyperplay/patcher/-/patcher-0.0.12-alpha.6.tgz#23035a379bc9bac338c350e05ae724647ab8edbf"
+  integrity sha512-F6pbilaOaTc/D8jUy6gLRtnpK7fc7mmzSVdh6HDlo3rcllwTLA9U+JVgSuUXheD80d39O6R3Dbkja/WTwVNMMw==
   dependencies:
     kubo-rpc-client "^5.0.1"
 
@@ -8733,6 +8733,11 @@ is-path-inside@^3.0.3:
   resolved "https://registry.yarnpkg.com/is-path-inside/-/is-path-inside-3.0.3.tgz#d231362e53a07ff2b0e0ea7fed049161ffd16283"
   integrity sha512-Fd4gABb+ycGAmKou8eMftCupSir5lRxqf4aD/vd0cD2qc4HL07OjCeuHMr8Ro4CoMaeCKDB0/ECBOVWjTwUvPQ==
 
+is-plain-obj@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-2.1.0.tgz#45e42e37fccf1f40da8e5f76ee21515840c09287"
+  integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
+
 is-plain-obj@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-4.1.0.tgz#d65025edec3657ce032fd7db63c97883eaed71f0"
@@ -10192,6 +10197,13 @@ merge-descriptors@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.3.tgz#d80319a65f3c7935351e5cfdac8f9318504dbed5"
   integrity sha512-gaNvAS7TZ897/rVaZ0nMtAyxNyi/pdbjbAwUpFQpN70GqnVfOiXpeUUMKRBmzXaSQ8DdTX4/0ms62r2K+hE6mQ==
+
+merge-options@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/merge-options/-/merge-options-3.0.4.tgz#84709c2aa2a4b24c1981f66c179fe5565cc6dbb7"
+  integrity sha512-2Sug1+knBjkaMsMgf1ctR1Ujx+Ayku4EdJN4Z+C2+JzoeF7A3OZ9KM2GY0CpQS51NR61LTurMJrRKPhSs3ZRTQ==
+  dependencies:
+    is-plain-obj "^2.1.0"
 
 merge-stream@^2.0.0:
   version "2.0.0"
