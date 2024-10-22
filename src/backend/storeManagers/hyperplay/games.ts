@@ -9,9 +9,7 @@ import {
   LicenseConfigValidateResult,
   ChannelReleaseMeta,
   SiweValues,
-  UpdateArgs,
-  WineCommandArgs,
-  Runner
+  UpdateArgs
 } from '../../../common/types'
 import { generateID } from '@valist/sdk'
 import { hpLibraryStore } from './electronStore'
@@ -86,11 +84,10 @@ import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
 import Store from 'electron-store'
 import i18next from 'i18next'
-import { gameManagerMap } from '..'
-import { runWineCommand } from 'backend/launcher'
 import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
+import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
 import { chmod } from 'fs/promises'
@@ -326,29 +323,6 @@ export async function importGame(
   rmSync(path.join(pathName, `${appName}.json`))
   writeManifestFile(appName, gameInLibrary.install)
   return { stderr: '', stdout: '' }
-}
-
-export async function runWineCommandOnGame(
-  runner: Runner,
-  appName: string,
-  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
-): Promise<ExecResult> {
-  if (isNative(appName)) {
-    logError('runWineCommand called on native game!', LogPrefix.Gog)
-    return { stdout: '', stderr: '' }
-  }
-  const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
-  const gameSettings = await gameManagerMap[runner].getSettings(appName)
-
-  return runWineCommand({
-    gameSettings,
-    installFolderName: folder_name,
-    gameInstallPath: install.install_path,
-    commandParts,
-    wait,
-    protonVerb,
-    startFolder
-  })
 }
 
 type DistArgs = {
@@ -983,6 +957,9 @@ export async function install(
     )
     if (!`${error}`.includes('Download stopped or paused')) {
       callAbortController(appName)
+      return {
+        status: 'abort'
+      }
     }
 
     return {

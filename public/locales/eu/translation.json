@@ -434,7 +434,9 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -753,5 +755,10 @@
     },
     "import-game-folder": {
         "placeholder": "Aukeratu inportatzeko joko karpeta"
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Errorea"
+        }
     }
 }

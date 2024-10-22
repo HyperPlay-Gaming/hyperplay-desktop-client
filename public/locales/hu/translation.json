@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Semmi letöltött",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -1030,6 +1033,10 @@
         "wine-download": {
             "message": "Az alapértelmezett kompatibilitási réteg beállítása",
             "title": "Kompatibilitási réteg"
+        },
+        "wine-download-failed": {
+            "message": "Hibás az alapértelmezett kompatibilitási réteg létrehozása",
+            "title": "Hiba"
         }
     },
     "accounts": "fiókok",

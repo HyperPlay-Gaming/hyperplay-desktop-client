@@ -6,7 +6,8 @@ import {
   DMQueueElement,
   DownloadManagerState,
   GameInfo,
-  HyperPlayInstallInfo
+  HyperPlayInstallInfo,
+  GamePageActions
 } from 'common/types'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
 import {
@@ -34,15 +35,16 @@ type Props = {
   state?: DownloadManagerState
 }
 
-const options: Intl.DateTimeFormatOptions = {
-  hour: 'numeric',
-  minute: 'numeric'
-}
-
 function convertToTime(time: number) {
   const date = time ? new Date(time) : new Date()
-  const hour = new Intl.DateTimeFormat(undefined, options).format(date)
-  return { hour, fullDate: date.toLocaleString() }
+  const fullDate = new Intl.DateTimeFormat(undefined, {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  }).format(date)
+  return { fullDate }
 }
 
 type InstallInfo =
@@ -85,7 +87,8 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     path,
     gameInfo: DmGameInfo,
     size,
-    platformToInstall
+    platformToInstall,
+    channelName
   } = params
 
   const [gameInfo, setGameInfo] = useState(DmGameInfo)
@@ -99,11 +102,12 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     const getNewInfo = async () => {
       const newInfo = (await getGameInfo(appName, runner)) as GameInfo
 
-      if (size?.includes('?') && !installInfo) {
+      if (!installInfo) {
         const installInfo = await getInstallInfo(
           appName,
           runner,
-          platformToInstall
+          platformToInstall,
+          channelName
         )
         setInstallInfo(installInfo)
       }
@@ -113,7 +117,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
       }
     }
     getNewInfo()
-  }, [element])
+  }, [element, current, state])
 
   const {
     art_cover,
@@ -121,26 +125,27 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     install: { is_dlc }
   } = gameInfo || {}
 
-  const [progress] = hasProgress(appName)
+  const { progress } = hasProgress(appName)
   const { status } = element
   const finished = status === 'done'
   const canceled = status === 'error' || (status === 'abort' && !current)
   const isExtracting = gameProgressStatus === 'extracting'
 
-  const goToGamePage = () => {
+  const goToGamePage = (action?: GamePageActions) => {
     if (is_dlc) {
       return
     }
     return navigate(`/gamepage/${runner}/${appName}`, {
-      state: { fromDM: true, gameInfo: gameInfo }
+      state: { fromDM: true, gameInfo: gameInfo, action }
     })
   }
 
   // using one element for the different states so it doesn't
   // lose focus from the button when using a game controller
-  const handleMainActionClick = () => {
+  const handleMainActionClick = async () => {
+    const action = finished ? 'launch' : 'install'
     if (finished || canceled) {
-      return goToGamePage()
+      return goToGamePage(action)
     }
 
     // gameInfo must be defined in order to get folder name for stop installation modal
@@ -242,7 +247,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     update: t2('download-manager.install-type.update', 'Update')
   }
 
-  const { hour, fullDate } = getTime()
+  const { fullDate } = getTime()
 
   return (
     <>
@@ -277,7 +282,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
             </span>
           </span>
         </td>
-        <td title={fullDate}>{hour}</td>
+        <td title={fullDate}>{fullDate}</td>
         <td>{translatedTypes[type]}</td>
         <td>{getStoreName(runner, t2('Other'))}</td>
         <td>

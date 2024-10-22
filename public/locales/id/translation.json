@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Tidak ada download",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -1004,6 +1007,10 @@
         "wine-download": {
             "message": "Menyiapkan layer kompatibilitas default",
             "title": "Lapisan Kompatibilitas"
+        },
+        "wine-download-failed": {
+            "message": "Gagal untuk mengatur lapisan kompatibilitas default",
+            "title": "Kesalahan"
         }
     },
     "sideload": {

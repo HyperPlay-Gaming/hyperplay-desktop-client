@@ -22,7 +22,7 @@ import {
   screen,
   session
 } from 'electron'
-import 'backend/updater'
+
 import { autoUpdater } from 'electron-updater'
 import { cpus, platform } from 'os'
 import {
@@ -149,8 +149,10 @@ import { initExtension } from './extension/importer'
 import { hpApi } from './utils/hyperplay_api'
 import {
   initializeCompatibilityLayer,
-  checkWineBeforeLaunch
+  checkWineBeforeLaunch,
+  runWineCommandOnGame
 } from './utils/compatibility_layers'
+import { isClientUpdating } from 'backend/updater'
 
 /*
  * INSERT OTHER IPC HANDLERS HERE
@@ -224,7 +226,7 @@ import {
 import { uuid } from 'short-uuid'
 import { LDEnvironmentId, ldOptions } from './ldconstants'
 import getPartitionCookies from './utils/get_partition_cookies'
-import { runWineCommandOnGame } from 'backend/storeManagers/hyperplay/games'
+
 import { formatSystemInfo, getSystemInfo } from './utils/systeminfo'
 
 let ldMainClient: LDElectron.LDElectronMainClient
@@ -473,6 +475,11 @@ if (!gotTheLock) {
     const epicStoreSession = session.fromPartition('persist:epicstore')
     epicStoreSession.setPreloads([
       path.join(__dirname, '../preload/webview_style_preload.js')
+    ])
+    const g7PortalSession = session.fromPartition('persist:g7portal')
+    g7PortalSession.setPreloads([
+      path.join(__dirname, '../preload/hyperplay_store_preload.js'),
+      path.join(__dirname, '../preload/providerPreload.js')
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
@@ -915,8 +922,8 @@ ipcMain.handle('appIsInLibrary', async (event, appName, runner) => {
   return HyperPlayGameManager.appIsInLibrary(appName)
 })
 
-ipcMain.on('goToGamePage', async (event, appName) => {
-  return sendFrontendMessage('goToGamePage', appName)
+ipcMain.on('goToGamePage', async (event, gameId, action) => {
+  return sendFrontendMessage('goToGamePage', gameId, action)
 })
 
 ipcMain.on('navigate', async (event, appName) => {
@@ -1164,6 +1171,12 @@ ipcMain.handle(
     await syncPlaySession(appName, runner)
   }
 )
+
+ipcMain.handle('isClientUpdating', async () => {
+  return isClientUpdating()
+})
+
+ipcMain.on('restartClient', () => autoUpdater.quitAndInstall())
 
 // get pid/tid on launch and inject
 ipcMain.handle(

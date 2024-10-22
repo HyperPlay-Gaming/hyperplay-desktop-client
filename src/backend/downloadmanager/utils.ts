@@ -7,6 +7,8 @@ import { isOnline } from '../online_monitor'
 import { sendFrontendMessage } from '../main_window'
 import { trackEvent } from 'backend/metrics/metrics'
 import { gameManagerMap } from 'backend/storeManagers'
+import { captureException } from '@sentry/electron'
+import { platform } from 'os'
 
 async function installQueueElement(params: InstallParams): Promise<{
   status: DMStatus
@@ -80,6 +82,15 @@ async function installQueueElement(params: InstallParams): Promise<{
       ['Installation of', params.appName, 'failed with:', error],
       LogPrefix.DownloadManager
     )
+    captureException(error, {
+      tags: {
+        game_name: appName,
+        store_name: getStoreName(runner),
+        game_title: title,
+        platform: platform(),
+        platform_arch: platformToInstall
+      }
+    })
   }
 
   try {
@@ -139,7 +150,6 @@ async function installQueueElement(params: InstallParams): Promise<{
 
     return { status }
   } catch (error) {
-    trackFailedInstall(`${error}`)
     errorMessage(`${error}`)
     return { status: 'error' }
   } finally {

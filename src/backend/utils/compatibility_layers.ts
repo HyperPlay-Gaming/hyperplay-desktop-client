@@ -22,9 +22,12 @@ import {
 } from 'backend/utils'
 import { execSync } from 'child_process'
 import {
+  ExecResult,
   GameSettings,
   ProgressInfo,
+  Runner,
   State,
+  WineCommandArgs,
   WineInstallation
 } from 'common/types'
 import {
@@ -40,7 +43,7 @@ import { PlistObject, parse as plistParse } from 'plist'
 import LaunchCommand from '../storeManagers/legendary/commands/launch'
 import { NonEmptyString, Path } from '../storeManagers/legendary/commands/base'
 import { GameConfig } from 'backend/game_config'
-import { validWine } from 'backend/launcher'
+import { runWineCommand, validWine } from 'backend/launcher'
 import { sendFrontendMessage } from 'backend/main_window'
 import { DXVK, Winetricks } from 'backend/tools'
 import {
@@ -55,6 +58,7 @@ import {
   deleteAbortController
 } from './aborthandler/aborthandler'
 import { notify } from 'backend/dialog/dialog'
+import { gameManagerMap } from 'backend/storeManagers'
 
 /**
  * Loads the default wine installation path and version.
@@ -868,4 +872,30 @@ async function ContinueWithFoundWine(
   })
 
   return { response }
+}
+
+export async function runWineCommandOnGame(
+  runner: Runner,
+  appName: string,
+  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
+): Promise<ExecResult> {
+  if (gameManagerMap[runner].isNative(appName)) {
+    logError(
+      `runWineCommand called on native game: ${appName}`,
+      LogPrefix.Backend
+    )
+    return { stdout: '', stderr: '' }
+  }
+  const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
+  const gameSettings = await gameManagerMap[runner].getSettings(appName)
+
+  return runWineCommand({
+    gameSettings,
+    installFolderName: folder_name,
+    gameInstallPath: install.install_path,
+    commandParts,
+    wait,
+    protonVerb,
+    startFolder
+  })
 }

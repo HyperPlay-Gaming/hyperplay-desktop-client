@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Hiçbir şey indirilmedi",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -1004,6 +1007,10 @@
         "wine-download": {
             "message": "Varsayılan uyumluluk katmanını kurmak",
             "title": "Uyumluluk Katmanı"
+        },
+        "wine-download-failed": {
+            "title": "Hata",
+            "message": "Varsayılan uyumluluk katmanını kurmak için başarısız oldu"
         }
     },
     "quests": {

@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Nothing downloaded",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -1025,6 +1028,10 @@
         "wine-download": {
             "title": "Layer",
             "message": "Rozwiązanie domyślnej warstwy kompatybilności"
+        },
+        "wine-download-failed": {
+            "message": "Udowodniono, aby zbudować domyślną warstwę kompatybilności",
+            "title": "Błąd"
         }
     },
     "overlay": {

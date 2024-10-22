@@ -490,7 +490,10 @@
             "canceled": "Annullato",
             "clear": "Cancella Lista",
             "downloading": "Scaricamento",
-            "empty": "Niente da scaricare",
+            "empty": {
+                "finished": "Niente scaricato",
+                "queue": "Niente da scaricare"
+            },
             "finished": "Completato",
             "queued": "In coda",
             "remove": "Rimuovi dai Download",
@@ -1022,6 +1025,10 @@
         "wine-download": {
             "title": "Compatibility Layer",
             "message": "Impostazione dello strato di compatibilità predefinito"
+        },
+        "wine-download-failed": {
+            "title": "Errore",
+            "message": "Non riuscita a configurare lo strato di compatibilità predefinito"
         }
     },
     "sideload": {

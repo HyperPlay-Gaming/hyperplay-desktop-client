@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Nada",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -1021,6 +1024,10 @@
         "wine-download": {
             "title": "Compatibility Layer",
             "message": "Configurando a camada de compatibilidade padrão"
+        },
+        "wine-download-failed": {
+            "message": "Falhado para configurar a camada de compatibilidade padrão",
+            "title": "Erro"
         }
     },
     "quests": {

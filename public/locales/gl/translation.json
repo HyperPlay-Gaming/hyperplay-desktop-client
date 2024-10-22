@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Nada descargou",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -1026,6 +1029,10 @@
         "wine-download": {
             "message": "Montando o default capa de compatibilidade",
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "Fallado a setup o default capa de compatibilidade",
+            "title": "Erro"
         }
     },
     "achievements": {

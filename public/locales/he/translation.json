@@ -329,7 +329,10 @@
             "downloading": "מוריד",
             "canceled": "בוטל",
             "clear": "מחק רשימה",
-            "empty": "אין מה להוריד",
+            "empty": {
+                "finished": "שום דבר לא הורד",
+                "queue": "אין מה להוריד"
+            },
             "finished": "הושלם",
             "pause": "השהה הורדה",
             "queued": "בתור",
@@ -969,6 +972,10 @@
         "wine-download": {
             "title": "מנהל גרסאות Wine",
             "message": "הגדרת שכבת תאימות ברירת המחדל"
+        },
+        "wine-download-failed": {
+            "message": "נכשל בהקמת שכבת תאימות ברירת המחדל",
+            "title": "שגיאה"
         }
     },
     "profile": "פרופיל",

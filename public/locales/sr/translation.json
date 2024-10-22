@@ -752,7 +752,10 @@
             "canceled": "Отказано",
             "clear": "Обриши листу",
             "downloading": "Преузимање",
-            "empty": "Ништа за преузимање",
+            "empty": {
+                "finished": "#Ništica @download",
+                "queue": "Ништа за преузимање"
+            },
             "finished": "Завршено",
             "queued": "У реду",
             "remove": "Уклони из преузимања",
@@ -1055,6 +1058,10 @@
         "wine-download": {
             "message": "@Setting up @the default #kompatibilnost #red",
             "title": "Вине Манагер"
+        },
+        "wine-download-failed": {
+            "message": "#Zakazati #na setup @the default #kompatibilnost #red",
+            "title": "Грешка"
         }
     },
     "sideload": {

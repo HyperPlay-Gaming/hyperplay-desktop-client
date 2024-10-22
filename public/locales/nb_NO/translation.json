@@ -433,7 +433,9 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -772,6 +774,11 @@
             "zip": {
                 "placeholder": "Velg ei fil"
             }
+        }
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Feil"
         }
     }
 }

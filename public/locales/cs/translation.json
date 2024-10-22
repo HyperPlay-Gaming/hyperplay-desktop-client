@@ -481,7 +481,10 @@
             "canceled": "Zrušeno",
             "clear": "Vymazat seznam",
             "downloading": "Stahování",
-            "empty": "Nic ke stažení",
+            "empty": {
+                "finished": "Nic stažené",
+                "queue": "Nic ke stažení"
+            },
             "finished": "Dokončeno",
             "queued": "Ve frontě",
             "remove": "Odebrat ze stažených",
@@ -944,6 +947,10 @@
         "wine-download": {
             "message": "Nastavení výchozí kompatibilizační vrstvy",
             "title": "Kompatibilita Vrstva"
+        },
+        "wine-download-failed": {
+            "message": "Vypnuto nastavení výchozí kompatibilizační vrstvy",
+            "title": "Chyba"
         }
     },
     "quest": {

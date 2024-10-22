@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Ingenting nedladdat",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -1028,6 +1031,10 @@
         "wine-download": {
             "message": "Ställ in standard kompatibilitet lager",
             "title": "Kompatibilitet Layer"
+        },
+        "wine-download-failed": {
+            "title": "Fel",
+            "message": "Underlåten att ställa in standardkompatibilitetsskiktet"
         }
     },
     "overlay": {

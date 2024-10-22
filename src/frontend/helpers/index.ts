@@ -126,6 +126,8 @@ const getStoreName = (runner: Runner, other: string) => {
       return 'Epic Games'
     case 'gog':
       return 'GOG'
+    case 'hyperplay':
+      return 'HyperPlay'
     default:
       return other
   }

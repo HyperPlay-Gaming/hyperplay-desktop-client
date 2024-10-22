@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "دانلود آهنگ Nothing",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -1030,6 +1033,10 @@
         "wine-download": {
             "message": "تنظیم لایه سازگاری پیش فرض",
             "title": "لایه Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "شکست در تنظیم لایه سازگاری پیش فرض",
+            "title": "خطا"
         }
     },
     "overlay": {

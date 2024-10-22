@@ -481,7 +481,10 @@
             "canceled": "Cancelado",
             "clear": "Limpar Lista",
             "downloading": "Baixando",
-            "empty": "Nada na fila",
+            "empty": {
+                "finished": "Nada",
+                "queue": "Nada na fila"
+            },
             "finished": "Concluído",
             "queued": "Na fila",
             "remove": "Remover da fila",
@@ -975,6 +978,10 @@
         "wine-download": {
             "title": "Camada de compatibilidade",
             "message": "Configurando a camada de compatibilidade padrão"
+        },
+        "wine-download-failed": {
+            "message": "Falhado para configurar a camada de compatibilidade padrão",
+            "title": "Erro"
         }
     },
     "importGameErrorTitle": "Erro ao importar o jogo",

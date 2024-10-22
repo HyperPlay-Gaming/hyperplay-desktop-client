@@ -481,7 +481,10 @@
             "canceled": "Cancelado",
             "clear": "Limpiar lista",
             "downloading": "Descargando",
-            "empty": "Nada para descargar",
+            "empty": {
+                "finished": "Nada descargado",
+                "queue": "Nada que descargar"
+            },
             "finished": "Completado",
             "queued": "Encolado",
             "remove": "Eliminar de las descargas",
@@ -990,6 +993,10 @@
         "wine-download": {
             "message": "Configuración de la capa de compatibilidad por defecto",
             "title": "Compatibilidad"
+        },
+        "wine-download-failed": {
+            "message": "Failed to setup the default compatibility layer",
+            "title": "Error"
         }
     },
     "quest": {
