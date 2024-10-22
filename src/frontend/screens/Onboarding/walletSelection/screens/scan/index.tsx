@@ -6,6 +6,7 @@ import { WarningIcon } from 'frontend/assets/hyperplay'
 import { Button } from '@hyperplay/ui'
 import walletStore from 'frontend/state/WalletState'
 import { observer } from 'mobx-react-lite'
+import { METAMASK_DOWNLOAD_URL } from 'common/constants'
 
 interface ScanScreenProps {
   qrCodeSvg: string
@@ -39,9 +40,7 @@ const ScanScreen = (props: ScanScreenProps) => {
           `Don’t have a wallet?`
         )}{' '}
         <a
-          onClick={() =>
-            window.api.openExternalUrl('https://metamask.io/download/')
-          }
+          onClick={() => window.api.openExternalUrl(METAMASK_DOWNLOAD_URL)}
           className="button-sm"
         >
           {t(

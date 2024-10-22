@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import MetaMaskPortfolioStyles from './index.module.scss'
 import { useParams } from 'react-router-dom'
+import { getMetaMaskPortfolioPageUrl } from 'common/constants'
 
 const MetaMaskPortfolio = function () {
   const trueAsStr = 'true' as unknown as boolean | undefined
@@ -13,7 +14,7 @@ const MetaMaskPortfolio = function () {
         <div className={MetaMaskPortfolioStyles.loader}></div>
         <webview
           className={MetaMaskPortfolioStyles.homeWebview}
-          src={`https://portfolio.metamask.io/${page}`}
+          src={getMetaMaskPortfolioPageUrl(page)}
           allowpopups={trueAsStr}
           partition={'persist:InPageWindowEthereumExternalWallet'}
           ref={webviewRef}
