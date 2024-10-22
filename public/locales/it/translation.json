@@ -979,6 +979,9 @@
         "g7CreditsModal": {
             "title": "Earn Game7 Credits",
             "description": "Immergiti nei migliori giochi di HyperPlay con emozionanti sfide di gioco. Ogni attività ti incoraggia a impegnarsi con un gioco diverso, mostrando il meglio del gioco web3. Il tuo tempo di gioco conta!"
+        },
+        "viewAllQuests": {
+            "title": "Visualizza tutte le missioni"
         }
     },
     "ALL": "Tutto",
@@ -1053,7 +1056,8 @@
     "importGameErrorMessage": "Non una cartella di gioco valida, importare il gioco non è possibile",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Sei connesso a HyperPlay con un portafoglio esterno.",
-        "WALLET_DISCONNECTED": "Non hai un portafoglio collegato a HyperPlay."
+        "WALLET_DISCONNECTED": "Non hai un portafoglio collegato a HyperPlay.",
+        "comingSoon": "In arrivo"
     },
     "achievements": {
         "progress": {

@@ -1014,12 +1014,16 @@
         "g7CreditsModal": {
             "description": "HyperPlay의 최고 게임으로 흥미 진진한 Play Streak Challenges. 각 활동은 당신이 다른 게임과 참여하는 것을 격려, web3 게임의 베스트를 보여. 당신의 playtime 사정!",
             "title": "Game7 크레딧 획득"
+        },
+        "viewAllQuests": {
+            "title": "모든 퀘스트 보기"
         }
     },
     "accounts": "계정 만들기",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "HyperPlay와 외부 지갑에 연결됩니다.",
-        "WALLET_DISCONNECTED": "HyperPlay에 연결된 지갑이 없습니다."
+        "WALLET_DISCONNECTED": "HyperPlay에 연결된 지갑이 없습니다.",
+        "comingSoon": "Coming Soon"
     },
     "importGameErrorMessageExecutable": "(한국어) 실행할 수 없습니다, 수입 게임 가능",
     "back_to_game": "게임으로 돌아가기",

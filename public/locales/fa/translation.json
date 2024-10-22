@@ -1010,6 +1010,9 @@
         "g7CreditsModal": {
             "title": "اعتبار بازی 7",
             "description": "بازی های برتر HyperPlay با چالش های هیجان انگیز Play Streak هر فعالیت شما را تشویق می کند تا با یک بازی متفاوت درگیر شوید و بهترین بازی های Web3 را نشان دهید. زمان بازی شما مهم است!"
+        },
+        "viewAllQuests": {
+            "title": "مشاهده All Quests"
         }
     },
     "sideload": {
@@ -1041,7 +1044,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "شما به HyperPlay با کیف پول خارجی متصل هستید.",
-        "WALLET_DISCONNECTED": "شما کیف پول متصل به HyperPlay ندارید."
+        "WALLET_DISCONNECTED": "شما کیف پول متصل به HyperPlay ندارید.",
+        "comingSoon": "به‌زودی"
     },
     "achievements": {
         "progress": {

@@ -780,5 +780,8 @@
         "wine-download-failed": {
             "title": "Feil"
         }
+    },
+    "overlay": {
+        "comingSoon": "Kommer snart"
     }
 }
