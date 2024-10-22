@@ -108,6 +108,7 @@ export function QuestsSummaryTableWrapper({
           }}
           selected={id === selectedQuestId}
           description={name}
+          className={id === selectedQuestId ? 'gradientBorder' : undefined}
         />
       )
     }) ?? []
