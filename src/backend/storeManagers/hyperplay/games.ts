@@ -1672,7 +1672,7 @@ async function getManifest(
     path.join(ipdtManifestsPath, `${appName}-${platformName}-${version}.json`)
   )
   // On Darwin (macOS), escape spaces in the path
-  const normalizedManifestPath = process.platform === 'darwin' ? manifestPath.replace(/ /g, '\\ ') : manifestPath;
+  const normalizedManifestPath = process.platform === 'darwin' ? manifestPath.replace(/\\/g, '\\\\').replace(/ /g, '\\ ') : manifestPath;
   console.log({ normalizedManifestPath })
 
   if (!existsSync(normalizedManifestPath)) {
