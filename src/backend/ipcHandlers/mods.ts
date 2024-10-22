@@ -8,11 +8,10 @@ import {
 } from 'backend/services/ExtractZipService'
 import { libraryManagerMap } from 'backend/storeManagers'
 import {
-  calculateProgress,
   getDestinationPath,
   inProgressExtractionsMap
 } from 'backend/storeManagers/hyperplay/games'
-import { copyRecursiveAsync } from 'backend/utils'
+import { copyRecursiveAsync, calculateProgress } from 'backend/utils'
 import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
 import { readdirSync, rm } from 'graceful-fs'
 

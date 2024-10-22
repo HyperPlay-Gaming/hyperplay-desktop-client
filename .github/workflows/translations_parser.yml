@@ -1,0 +1,21 @@
+name: i18n Parser
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  i18n_parser:
+    uses: HyperPlay-Gaming/workflows/.github/workflows/nodejs_commands.yml@main
+    with:
+      node_version: '20'
+      pkg_manager: 'yarn'
+      install: 'yarn setup'
+      name: 'i18n parser'
+      command_one: 'yarn i18n --fail-on-update'
+      command_one_name: 'i18n parser'
+      checkout_recursive: false
+    secrets:
+      NPM_TOKEN: '${{ secrets.NPM_TOKEN }}'
+      pat: ${{ secrets.pat }}

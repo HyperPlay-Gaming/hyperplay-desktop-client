@@ -22,7 +22,7 @@ import {
   screen,
   session
 } from 'electron'
-import 'backend/updater'
+
 import { autoUpdater } from 'electron-updater'
 import { cpus, platform } from 'os'
 import {
@@ -38,7 +38,7 @@ import {
 import * as LDElectron from 'launchdarkly-electron-client-sdk'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
-import { DXVK, Winetricks } from './tools'
+import { DXVK, SteamWindows, Winetricks } from './tools'
 import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
 import { LegendaryUser } from 'backend/storeManagers/legendary/user'
@@ -51,16 +51,13 @@ import {
   getStoreName,
   isEpicServiceOffline,
   handleExit,
-  checkRosettaInstall,
   openUrlOrFile,
   resetApp,
-  setGPTKDefaultOnMacOS,
   showAboutWindow,
   showItemInFolder,
   wait,
   getShellPath,
-  checkWineBeforeLaunch,
-  downloadDefaultWine
+  writeConfig
 } from './utils'
 import {
   configPath,
@@ -80,7 +77,6 @@ import {
   isCLIFullscreen,
   isCLINoGui,
   isFlatpak,
-  isMac,
   isSteamDeckGameMode,
   onboardLocalStore,
   publicDir,
@@ -97,7 +93,6 @@ import {
 import { handleOtp, handleProtocol } from './protocol'
 import {
   initLogger,
-  logChangedSetting,
   logError,
   logInfo,
   LogPrefix,
@@ -150,6 +145,15 @@ import * as Sentry from '@sentry/electron'
 import { DEV_PORTAL_URL, devSentryDsn, prodSentryDsn } from 'common/constants'
 import { getHpOverlay, initOverlay } from './overlay'
 
+import { initExtension } from './extension/importer'
+import { hpApi } from './utils/hyperplay_api'
+import {
+  initializeCompatibilityLayer,
+  checkWineBeforeLaunch,
+  runWineCommandOnGame
+} from './utils/compatibility_layers'
+import { isClientUpdating } from 'backend/updater'
+
 /*
  * INSERT OTHER IPC HANDLERS HERE
  */
@@ -183,7 +187,7 @@ import {
   getEpicListingUrl,
   getHyperPlayReleaseObject
 } from './storeManagers/hyperplay/utils'
-import { postPlaySessionTime } from './utils/quests'
+import { checkG7ConnectionStatus, postPlaySessionTime } from './utils/quests'
 
 import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'
 
@@ -222,7 +226,7 @@ import {
 import { uuid } from 'short-uuid'
 import { LDEnvironmentId, ldOptions } from './ldconstants'
 import getPartitionCookies from './utils/get_partition_cookies'
-import { runWineCommandOnGame } from 'backend/storeManagers/hyperplay/games'
+
 import { formatSystemInfo, getSystemInfo } from './utils/systeminfo'
 
 let ldMainClient: LDElectron.LDElectronMainClient
@@ -264,8 +268,16 @@ async function completeHyperPlayQuest() {
   if (!completeHpSummonQuestIsActive) {
     return
   }
-  logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
+  logInfo('Completing HyperPlay Quest', LogPrefix.HyperPlay)
   try {
+    const isConnected = await checkG7ConnectionStatus()
+    if (!isConnected) {
+      logInfo(
+        'HyperPlay account is not connected to Game7 Account',
+        LogPrefix.HyperPlay
+      )
+    }
+
     const cookieString = await getPartitionCookies({
       partition: 'persist:auth',
       url: DEV_PORTAL_URL
@@ -284,7 +296,7 @@ async function completeHyperPlayQuest() {
         `Failed to complete summon task: ${
           error?.message ?? response.statusText
         }`,
-        LogPrefix.Backend
+        LogPrefix.HyperPlay
       )
       trackEvent({
         event: 'HyperPlay Summon Quest Failed'
@@ -464,6 +476,11 @@ if (!gotTheLock) {
     epicStoreSession.setPreloads([
       path.join(__dirname, '../preload/webview_style_preload.js')
     ])
+    const g7PortalSession = session.fromPartition('persist:g7portal')
+    g7PortalSession.setPreloads([
+      path.join(__dirname, '../preload/hyperplay_store_preload.js'),
+      path.join(__dirname, '../preload/providerPreload.js')
+    ])
 
     // keyboards with alt and no option key can be used with mac so register both
     const hpOverlay = await getHpOverlay()
@@ -633,21 +650,10 @@ if (!gotTheLock) {
       }, 10000)
     }
 
-    // Will download Wine if none was found
-    const availableWine = (await GlobalConfig.get().getAlternativeWine()) || []
-    const toolkitDownloaded = availableWine.some(
-      (wine) => wine.type === 'toolkit'
-    )
-    const shouldDownloadWine =
-      !availableWine.length || (isMac && !toolkitDownloaded)
-
-    Promise.all([
-      DXVK.getLatest(),
-      Winetricks.download(),
-      shouldDownloadWine ? downloadDefaultWine() : null,
-      isMac && checkRosettaInstall(),
-      isMac && !shouldDownloadWine && setGPTKDefaultOnMacOS()
-    ])
+    // Setup the compatibility layer if not on Windows
+    if (!isWindows) {
+      initializeCompatibilityLayer()
+    }
 
     // set initial zoom level after a moment, if set in sync the value stays as 1
     setTimeout(() => {
@@ -904,8 +910,8 @@ ipcMain.handle('appIsInLibrary', async (event, appName, runner) => {
   return HyperPlayGameManager.appIsInLibrary(appName)
 })
 
-ipcMain.on('goToGamePage', async (event, appName) => {
-  return sendFrontendMessage('goToGamePage', appName)
+ipcMain.on('goToGamePage', async (event, gameId, action) => {
+  return sendFrontendMessage('goToGamePage', gameId, action)
 })
 
 ipcMain.on('navigate', async (event, appName) => {
@@ -1065,31 +1071,9 @@ ipcMain.on('toggleVKD3D', (event, { appName, action }) => {
     })
 })
 
-ipcMain.handle('writeConfig', (event, { appName, config }) => {
-  logInfo(
-    `Writing config for ${appName === 'default' ? 'HyperPlay' : appName}`,
-    LogPrefix.Backend
-  )
-  const oldConfig =
-    appName === 'default'
-      ? GlobalConfig.get().getSettings()
-      : GameConfig.get(appName).config
-
-  // log only the changed setting
-  logChangedSetting(config, oldConfig)
-
-  if (appName === 'default') {
-    GlobalConfig.get().set(config as AppSettings)
-    GlobalConfig.get().flush()
-    const currentConfigStore = configStore.get_nodefault('settings')
-    if (currentConfigStore) {
-      configStore.set('settings', { ...currentConfigStore, ...config })
-    }
-  } else {
-    GameConfig.get(appName).config = config as GameSettings
-    GameConfig.get(appName).flush()
-  }
-})
+ipcMain.handle('writeConfig', (event, { appName, config }) =>
+  writeConfig(appName, config)
+)
 
 ipcMain.on('setSetting', (event, { appName, key, value }) => {
   if (appName === 'default') {
@@ -1175,6 +1159,12 @@ ipcMain.handle(
     await syncPlaySession(appName, runner)
   }
 )
+
+ipcMain.handle('isClientUpdating', async () => {
+  return isClientUpdating()
+})
+
+ipcMain.on('restartClient', () => autoUpdater.quitAndInstall())
 
 // get pid/tid on launch and inject
 ipcMain.handle(
@@ -1966,6 +1956,8 @@ ipcMain.handle('launchApp', async (e, appName, runner) =>
   gameManagerMap[runner].launch(appName)
 )
 
+ipcMain.handle('installSteamWindows', async () => SteamWindows.installSteam())
+
 ipcMain.handle('isNative', (e, { appName, runner }) => {
   return gameManagerMap[runner].isNative(appName)
 })
@@ -2091,5 +2083,3 @@ ipcMain.handle('getHyperPlayListings', async () => {
  */
 
 import './storeManagers/legendary/eos_overlay/ipc_handler'
-import { initExtension } from './extension/importer'
-import { hpApi } from './utils/hyperplay_api'

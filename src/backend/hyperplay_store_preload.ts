@@ -1,3 +1,4 @@
+import { GamePageActions } from 'common/types'
 import { contextBridge, ipcRenderer } from 'electron'
 
 contextBridge.exposeInMainWorld('api', {
@@ -18,6 +19,9 @@ contextBridge.exposeInMainWorld('api', {
   apiVersion: 1,
   appIsInLibrary: async (gameId: string) =>
     ipcRenderer.invoke('appIsInLibrary', gameId, 'hyperplay'),
-  goToGamePage: (gameId: string) => ipcRenderer.send('goToGamePage', gameId),
-  navigate: (route: string) => ipcRenderer.send('navigate', route)
+  goToGamePage: (gameId: string, action: GamePageActions) =>
+    ipcRenderer.send('goToGamePage', gameId, action),
+  navigate: (route: string) => ipcRenderer.send('navigate', route),
+  isClientUpdating: async () => ipcRenderer.invoke('isClientUpdating'),
+  restartClient: () => ipcRenderer.send('restartClient')
 })

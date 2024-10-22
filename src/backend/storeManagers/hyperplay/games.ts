@@ -9,9 +9,7 @@ import {
   LicenseConfigValidateResult,
   ChannelReleaseMeta,
   SiweValues,
-  UpdateArgs,
-  WineCommandArgs,
-  Runner
+  UpdateArgs
 } from '../../../common/types'
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
@@ -39,8 +37,8 @@ import {
   spawnAsync,
   killPattern,
   shutdownWine,
-  calculateEta,
-  getExecutableAndArgs
+  getExecutableAndArgs,
+  calculateProgress
 } from 'backend/utils'
 import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import path, { dirname, join } from 'path'
@@ -74,11 +72,10 @@ import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
 import Store from 'electron-store'
 import i18next from 'i18next'
-import { gameManagerMap } from '..'
-import { runWineCommand } from 'backend/launcher'
 import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
+import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -313,29 +310,6 @@ export async function importGame(
   return { stderr: '', stdout: '' }
 }
 
-export async function runWineCommandOnGame(
-  runner: Runner,
-  appName: string,
-  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
-): Promise<ExecResult> {
-  if (isNative(appName)) {
-    logError('runWineCommand called on native game!', LogPrefix.Gog)
-    return { stdout: '', stderr: '' }
-  }
-  const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
-  const gameSettings = await gameManagerMap[runner].getSettings(appName)
-
-  return runWineCommand({
-    gameSettings,
-    installFolderName: folder_name,
-    gameInstallPath: install.install_path,
-    commandParts,
-    wait,
-    protonVerb,
-    startFolder
-  })
-}
-
 type DistArgs = {
   gamePath: string
   appName: string
@@ -445,10 +419,6 @@ function getDownloadUrl(platformInfo: PlatformConfig, appName: string) {
   return downloadUrl
 }
 
-function roundToTenth(x: number) {
-  return Math.round(x * 10) / 10
-}
-
 async function downloadGame(
   appName: string,
   directory: string,
@@ -556,24 +526,6 @@ async function downloadGame(
       channelName
     })
   })
-}
-
-export function calculateProgress(
-  downloadedBytes: number,
-  downloadSize: number,
-  downloadSpeed: number,
-  diskWriteSpeed: number,
-  progress: number
-) {
-  const eta = calculateEta(downloadedBytes, downloadSpeed, downloadSize)
-
-  return {
-    percent: roundToTenth(progress),
-    diskSpeed: roundToTenth(diskWriteSpeed / 1024 / 1024),
-    downSpeed: roundToTenth(downloadSpeed / 1024 / 1024),
-    bytes: roundToTenth(downloadedBytes / 1024 / 1024),
-    eta
-  }
 }
 
 function sanitizeFileName(filename: string) {
