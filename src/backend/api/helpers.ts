@@ -126,3 +126,5 @@ export const getHyperPlayListings = async () =>
   ipcRenderer.invoke('getHyperPlayListings')
 
 export const otp = async (otp: string) => ipcRenderer.send('otp', otp)
+
+export const openOnboarding = () => ipcRenderer.send('openOnboarding')
