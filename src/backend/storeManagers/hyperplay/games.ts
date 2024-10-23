@@ -49,7 +49,8 @@ import {
   killPattern,
   shutdownWine,
   getExecutableAndArgs,
-  calculateProgress
+  calculateProgress,
+  ProgressCallback
 } from 'backend/utils'
 import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import path, { dirname, join } from 'path'
@@ -1412,6 +1413,43 @@ export async function update(
 
   // try patching first, if it fails, download the new version
   const isMarketWars = gameInfo.account_name === 'marketwars'
+  const window = getMainWindow()
+  let downloadStarted = false
+  function handleProgress(
+    downloadedBytes: number,
+    downloadSpeed: number,
+    diskWriteSpeed: number,
+    progress: number
+  ) {
+    const currentProgress = calculateProgress(
+      downloadedBytes,
+      Number.parseInt('0'),
+      downloadSpeed,
+      diskWriteSpeed,
+      progress
+    )
+
+    if (downloadedBytes > 0 && !downloadStarted) {
+      downloadStarted = true
+      sendFrontendMessage('gameStatusUpdate', {
+        appName,
+        status: 'installing',
+        runner: 'hyperplay',
+        folder: gameInfo.install.install_path
+      })
+    }
+
+    window?.webContents.send(`progressUpdate-${appName}`, {
+      appName,
+      status: 'installing',
+      runner: 'hyperplay',
+      folder: gameInfo.install.install_path,
+      progress: {
+        folder: gameInfo.install.install_path,
+        ...currentProgress
+      }
+    })
+  }
   try {
     const {
       channels,
@@ -1427,7 +1465,7 @@ export async function update(
     }
 
     const newVersion = channels[channelName].release_meta.name
-    await applyPatching(gameInfo, newVersion)
+    await applyPatching(gameInfo, newVersion, handleProgress)
 
     if (isMarketWars) {
       try {
@@ -1588,8 +1626,11 @@ export async function downloadGameIpdtManifest(
   )
   return true
 }
-
-async function applyPatching(gameInfo: GameInfo, newVersion: string) {
+async function applyPatching(
+  gameInfo: GameInfo,
+  newVersion: string,
+  progressCallback: ProgressCallback
+) {
   console.log('I got inside applyPatching!')
   // get previous and current manifest
   const appName = gameInfo.app_name
@@ -1623,6 +1664,12 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
   })
 
   try {
+    let totalBlocks = 0
+    let downloadedBlocks = 0
+    let downloadedData = 0
+    const blockSize = 512 * 1024 // 512KB in bytes
+    const startTime = Date.now()
+
     for await (const output of patchFolder(
       ipdtPatcher,
       install_path,
@@ -1632,6 +1679,33 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
       ipfsGateway
     )) {
       logInfo(output, LogPrefix.HyperPlay)
+
+      const match = output.match(
+        /Blocks: (\d+)\/(\d+), Data Downloaded: ([\d.]+) MiB/
+      )
+      if (match) {
+        downloadedBlocks = parseInt(match[1], 10)
+        totalBlocks = parseInt(match[2], 10)
+        downloadedData = parseFloat(match[3]) * 1024 * 1024 // Convert MiB to bytes
+
+        const percent = (downloadedBlocks / totalBlocks) * 100
+        const currentTime = Date.now()
+        const elapsedTime = (currentTime - startTime) / 1000 // in seconds
+        const downloadSpeed = downloadedData / elapsedTime // bytes per second
+        const remainingData = (totalBlocks - downloadedBlocks) * blockSize
+        const eta = remainingData / downloadSpeed // in seconds
+
+        progressCallback(downloadedData, downloadSpeed, 0, percent)
+
+        logInfo(
+          `Progress: ${percent.toFixed(2)}%, Downloaded: ${
+            downloadedData / (1024 * 1024)
+          } MiB, Speed: ${downloadSpeed / 1024} KiB/s, ETA: ${eta.toFixed(
+            2
+          )} s`,
+          LogPrefix.HyperPlay
+        )
+      }
     }
   } catch (error) {
     console.log({ error })
