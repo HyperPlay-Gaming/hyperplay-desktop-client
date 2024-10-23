@@ -761,7 +761,8 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${(error as Error).message
+      `cancelExtraction: Error while canceling the operation ${
+        (error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -1425,7 +1426,7 @@ export async function update(
     }
 
     const newVersion = channels[channelName].release_meta.name
-    await applyPatching(appName, platform, newVersion)
+    await applyPatching(gameInfo, newVersion)
 
     if (isMarketWars) {
       try {
@@ -1567,7 +1568,7 @@ export async function downloadGameIpdtManifest(
   const manifestPath = path.join(ipdtManifestsPath, manifestName)
   if (existsSync(manifestPath)) return false
 
-  console.log({ appName, version });
+  console.log({ appName, version })
   const releaseId = generateID(appName, version)
   const manifestUrl = await getHyperPlayReleaseManifest(releaseId, platform)
   console.log({ manifestUrl })
@@ -1587,27 +1588,21 @@ export async function downloadGameIpdtManifest(
   return true
 }
 
-async function applyPatching(
-  appName: string,
-  platformKey: string,
-  newVersion: string
-) {
+async function applyPatching(gameInfo: GameInfo, newVersion: string) {
   console.log('I got inside applyPatching!')
   // get previous and current manifest
-  const gameInfo = getGameInfo(appName)
-  const { install_path, version } = gameInfo.install
+  const appName = gameInfo.app_name
+  const { install_path, version, platform } = gameInfo.install
 
-  if (!version || !install_path) {
+  if (!version || !install_path || !platform) {
     logError(
       `Version or install path not found for ${appName} in applyPatching`,
       LogPrefix.HyperPlay
     )
     throw new Error('Version or install path not found')
   }
-  const previousManifest = await getManifest(appName, platformKey, version)
-  const currentManifest = await getManifest(appName, platformKey, newVersion)
-
-  const ipfsGateway = process.env.IPFS_API;
+  const previousManifest = await getManifest(appName, platform, version)
+  const currentManifest = await getManifest(appName, platform, newVersion)
 
   logInfo(
     `Patching ${gameInfo.title} from ${version} to ${newVersion}`,
@@ -1618,8 +1613,7 @@ async function applyPatching(
     ipdtPatcher,
     install_path,
     currentManifest,
-    previousManifest,
-    ipfsGateway
+    previousManifest
   })
 
   try {
@@ -1627,9 +1621,7 @@ async function applyPatching(
       ipdtPatcher,
       install_path,
       currentManifest,
-      previousManifest,
-      ipfsGateway,
-      ipfsGateway,
+      previousManifest
     )) {
       logInfo(output, LogPrefix.HyperPlay)
     }
@@ -1649,7 +1641,10 @@ async function getManifest(
     path.join(ipdtManifestsPath, `${appName}-${platformName}-${version}.json`)
   )
   // On Darwin (macOS), escape spaces in the path
-  const normalizedManifestPath = process.platform === 'darwin' ? manifestPath.replace(/\\/g, '\\\\').replace(/ /g, '\\ ') : manifestPath;
+  const normalizedManifestPath =
+    process.platform === 'darwin'
+      ? manifestPath.replace(/\\/g, '\\\\').replace(/ /g, '\\ ')
+      : manifestPath
   console.log({ normalizedManifestPath })
 
   if (!existsSync(normalizedManifestPath)) {
