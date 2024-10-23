@@ -94,7 +94,6 @@ import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
 import { chmod } from 'fs/promises'
-import { filesize } from 'filesize'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
