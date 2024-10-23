@@ -15,7 +15,6 @@ import {
   gamesConfigPath,
   installPath,
   userHome,
-  isFlatpak,
   isMac,
   isWindows,
   getSteamCompatFolder,
