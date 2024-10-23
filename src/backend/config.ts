@@ -296,7 +296,7 @@ class GlobalConfigV0 extends GlobalConfig {
       autoInstallDxvkNvapi: false,
       addSteamShortcuts: false,
       preferSystemLibs: false,
-      checkForUpdatesOnStartup: !isFlatpak,
+      checkForUpdatesOnStartup: !isLinux,
       autoUpdateGames: true,
       customWinePaths: isWindows ? null : [],
       defaultInstallPath: installPath,
