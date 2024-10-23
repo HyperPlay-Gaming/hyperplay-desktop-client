@@ -1025,6 +1025,9 @@
         "g7CreditsModal": {
             "description": "تَقْتلُ في ألعابِ هايبر بلاي العلياِ مَع بلاي ستريك التحدياتِ المثيرةِ. كل نشاط يشجعك على الانخراط في لعبة مختلفة، عرض أفضل من القاموس على الشبكة 3. وقت اللعب الخاص بك يهم!",
             "title": "Earn Game7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "View All Quests"
         }
     },
     "accounts": "الحسابات",
@@ -1056,7 +1059,8 @@
     "exit_game": "لعبة الخروج",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "أنت متصل بـ(هايبر بلاي) بمحفظة خارجية.",
-        "WALLET_DISCONNECTED": "ليس لديك محفظة مرتبطة بـ(هايبر بلاي)."
+        "WALLET_DISCONNECTED": "ليس لديك محفظة مرتبطة بـ(هايبر بلاي).",
+        "comingSoon": "قريبا"
     },
     "please-wait": "من فضلك انتظر.",
     "email_subscription": {

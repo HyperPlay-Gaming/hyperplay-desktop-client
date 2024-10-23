@@ -969,6 +969,9 @@
         "g7CreditsModal": {
             "description": "Dive into HyperPlay top játékok izgalmas játék Streak kihívásokkal. Minden tevékenység arra ösztönzi Önt, hogy vegyen részt egy másik játék, bemutatva a legjobb web3 játék. A játékidő számít!",
             "title": "Earn Game7 Hitelek"
+        },
+        "viewAllQuests": {
+            "title": "Minden Quest megtekintése"
         }
     },
     "sideload": {
@@ -1017,7 +1020,8 @@
     "importGameErrorTitle": "Import Game hiba",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Ön csatlakozik a HyperPlay-hoz egy külső pénztárcával.",
-        "WALLET_DISCONNECTED": "Nincs olyan pénztárcád, amely a HyperPlay-hoz kapcsolódik."
+        "WALLET_DISCONNECTED": "Nincs olyan pénztárcád, amely a HyperPlay-hoz kapcsolódik.",
+        "comingSoon": "Hamarosan jönnek"
     },
     "back_to_game": "Vissza a játékhoz",
     "gameUpdateNotifications": {

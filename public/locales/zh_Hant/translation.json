@@ -1026,6 +1026,9 @@
         "g7CreditsModal": {
             "description": "D. 进入超Play的最高游戏,挑动“游戏Streak”挑战。 每一项活动都鼓励你进行不同的游戏,展示网络3合并的最佳方式。 你的游戏时间!",
             "title": "Earn Hor7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "观点"
         }
     },
     "profile": "個人資料",
@@ -1053,7 +1056,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "你与超Play有外部围墙.",
-        "WALLET_DISCONNECTED": "你没有与超Play连接的围墙."
+        "WALLET_DISCONNECTED": "你没有与超Play连接的围墙.",
+        "comingSoon": "即將到來"
     },
     "back_to_game": "重获游戏",
     "importGameErrorTitle": "进口游戏",

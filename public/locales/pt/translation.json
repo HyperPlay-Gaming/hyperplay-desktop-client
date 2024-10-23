@@ -1045,12 +1045,16 @@
         "g7CreditsModal": {
             "title": "Earn Game7 Créditos",
             "description": "Mergulhe nos melhores jogos da HyperPlay com emocionantes Play Streak Challenges. Cada atividade incentiva você a se envolver com um jogo diferente, mostrando o melhor dos jogos web3. O seu tempo de jogo importa!"
+        },
+        "viewAllQuests": {
+            "title": "Ver todas as missões"
         }
     },
     "importGameErrorTitle": "Importar erro de jogo",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Você está conectado ao HyperPlay com uma carteira externa.",
-        "WALLET_DISCONNECTED": "Você não tem uma carteira conectada ao HyperPlay."
+        "WALLET_DISCONNECTED": "Você não tem uma carteira conectada ao HyperPlay.",
+        "comingSoon": "Brevemente"
     },
     "importGameErrorMessage": "Não uma pasta de jogo válida, o jogo de importação não é possível",
     "importGameErrorMessageExecutable": "Jogo Executável não encontrado, importando jogo não é possível",

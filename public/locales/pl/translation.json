@@ -975,6 +975,9 @@
         "g7CreditsModal": {
             "description": "W pierwszej części gry HyperPlaya występują ekscytujące Play Streak Challenges. Każda aktywność zachęca do angażowania się w inną grę, pokazując najlepszą grę internetową. Śmiały czas gry!",
             "title": "Earn Game7 (ang.)"
+        },
+        "viewAllQuests": {
+            "title": "Wszystko co prawda"
         }
     },
     "exit_game": "Oficjalna strona gry",
@@ -1036,7 +1039,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Jest połączony z HyperPlay z zewnętrzną ścianą.",
-        "WALLET_DISCONNECTED": "Nie ma ścian połączonych z HyperPlay."
+        "WALLET_DISCONNECTED": "Nie ma ścian połączonych z HyperPlay.",
+        "comingSoon": "Coming Soon"
     },
     "dlcs": {
         "label": "Select DLC (ang.)"
