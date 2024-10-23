@@ -1256,10 +1256,10 @@
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
 
-"@hyperplay/extension-provider@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@hyperplay/extension-provider/-/extension-provider-0.0.6.tgz#46b21dc46ca3bdf790c10a61765cbe316c4718d1"
-  integrity sha512-4frPXLptZur9l94djdIZtY7k6jTTvGEiTA6fBBfcvGqlHqJV6lH+1nPPjddWRg/G5DE6YwWdl2hQzTiSKXf65g==
+"@hyperplay/extension-provider@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@hyperplay/extension-provider/-/extension-provider-0.0.7.tgz#20d380ced3e1cac2f700143471d49b0ff6ed9e1c"
+  integrity sha512-BcI53hI9sC1vtup1cB0+7a5gL34lSq8INUOl/CY/F+4l4YG7IHQBZ9E6IEd76oO+kloxpVBggoe1DUwa+qyutA==
   dependencies:
     "@hyperplay/utils" "^0.0.12"
     fs-extra "^11.2.0"
