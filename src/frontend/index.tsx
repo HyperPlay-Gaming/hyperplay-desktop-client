@@ -137,9 +137,9 @@ const renderApp = async () => {
 
   root.render(
     <React.StrictMode>
+      <StoreController />
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
-          <StoreController />
           <LDProvider>
             <HyperPlayDesignProvider forceColorScheme="dark">
               <GlobalState>
