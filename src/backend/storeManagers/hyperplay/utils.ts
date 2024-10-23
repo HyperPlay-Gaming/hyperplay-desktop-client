@@ -411,3 +411,5 @@ export const runModPatcher = async (appName: string) => {
     throw new Error(`Error running patcher: ${error}`)
   }
 }
+
+export const ipfsGateway = import.meta.env.VITE_IPFS_API

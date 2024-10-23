@@ -1298,10 +1298,10 @@
     "@hyperplay/utils" "^0.0.14"
     mobx "^6.12.3"
 
-"@hyperplay/patcher@^0.0.12-alpha.15":
-  version "0.0.12-alpha.15"
-  resolved "https://registry.yarnpkg.com/@hyperplay/patcher/-/patcher-0.0.12-alpha.15.tgz#d704978ff1dc6f9c8906f87cd2e0c28571879762"
-  integrity sha512-w7vcxBybHN0Ibj1f8TfvVN+cDWZxwYRwpAFasZjJ7v+tj/fhqiwt0uAtimsjWAufsyrcaD6/kc//qMarIiTclQ==
+"@hyperplay/patcher@0.0.12-alpha.6":
+  version "0.0.12-alpha.6"
+  resolved "https://registry.yarnpkg.com/@hyperplay/patcher/-/patcher-0.0.12-alpha.6.tgz#23035a379bc9bac338c350e05ae724647ab8edbf"
+  integrity sha512-F6pbilaOaTc/D8jUy6gLRtnpK7fc7mmzSVdh6HDlo3rcllwTLA9U+JVgSuUXheD80d39O6R3Dbkja/WTwVNMMw==
   dependencies:
     kubo-rpc-client "^5.0.1"
 

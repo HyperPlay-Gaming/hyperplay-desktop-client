@@ -62,6 +62,7 @@ import {
   getHyperPlayReleaseManifest,
   handleArchAndPlatform,
   handlePlatformReversed,
+  ipfsGateway,
   runModPatcher,
   sanitizeVersion
 } from './utils'
@@ -1272,7 +1273,7 @@ export function getGameInfo(appName: string): GameInfo {
     .find((app) => app.app_name === appName)
 
   if (!appInfo) {
-    throw new Error('App not found in library')
+    throw new Error(`AppName ${appName} not found in library`)
   }
 
   return appInfo
@@ -1594,6 +1595,10 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
   const appName = gameInfo.app_name
   const { install_path, version, platform } = gameInfo.install
 
+  if (!existsSync(ipdtPatcher)) {
+    await downloadPatcher()
+  }
+
   if (!version || !install_path || !platform) {
     logError(
       `Version or install path not found for ${appName} in applyPatching`,
@@ -1613,7 +1618,8 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
     ipdtPatcher,
     install_path,
     currentManifest,
-    previousManifest
+    previousManifest,
+    ipfsGateway
   })
 
   try {
@@ -1621,7 +1627,9 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
       ipdtPatcher,
       install_path,
       currentManifest,
-      previousManifest
+      previousManifest,
+      ipfsGateway,
+      ipfsGateway
     )) {
       logInfo(output, LogPrefix.HyperPlay)
     }
