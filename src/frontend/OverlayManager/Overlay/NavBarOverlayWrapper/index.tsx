@@ -26,14 +26,7 @@ export function NavBarOverlayWrapper() {
         <NavItem
           title={'Portfolio'}
           route={'/portfolio'}
-          icon={
-            <Images.MetaMaskColored
-              fill="none"
-              width={22}
-              height={36}
-              opacity={pathname === '/portfolio' ? '100%' : '60%'}
-            />
-          }
+          icon={<Images.MetaMaskColored fill="none" width={22} height={36} />}
           key={'/portfolio'}
           collapsed={collapsed}
           currentRoute={pathname}
