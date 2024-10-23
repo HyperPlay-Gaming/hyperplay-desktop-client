@@ -50,7 +50,8 @@ import {
   shutdownWine,
   getExecutableAndArgs,
   calculateProgress,
-  ProgressCallback
+  calculateEta,
+  getFileSize
 } from 'backend/utils'
 import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import path, { dirname, join } from 'path'
@@ -93,6 +94,7 @@ import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
 import { chmod } from 'fs/promises'
+import { filesize } from 'filesize'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1413,43 +1415,7 @@ export async function update(
 
   // try patching first, if it fails, download the new version
   const isMarketWars = gameInfo.account_name === 'marketwars'
-  const window = getMainWindow()
-  let downloadStarted = false
-  function handleProgress(
-    downloadedBytes: number,
-    downloadSpeed: number,
-    diskWriteSpeed: number,
-    progress: number
-  ) {
-    const currentProgress = calculateProgress(
-      downloadedBytes,
-      Number.parseInt('0'),
-      downloadSpeed,
-      diskWriteSpeed,
-      progress
-    )
 
-    if (downloadedBytes > 0 && !downloadStarted) {
-      downloadStarted = true
-      sendFrontendMessage('gameStatusUpdate', {
-        appName,
-        status: 'installing',
-        runner: 'hyperplay',
-        folder: gameInfo.install.install_path
-      })
-    }
-
-    window?.webContents.send(`progressUpdate-${appName}`, {
-      appName,
-      status: 'installing',
-      runner: 'hyperplay',
-      folder: gameInfo.install.install_path,
-      progress: {
-        folder: gameInfo.install.install_path,
-        ...currentProgress
-      }
-    })
-  }
   try {
     const {
       channels,
@@ -1465,7 +1431,7 @@ export async function update(
     }
 
     const newVersion = channels[channelName].release_meta.name
-    await applyPatching(gameInfo, newVersion, handleProgress)
+    await applyPatching(gameInfo, newVersion)
 
     if (isMarketWars) {
       try {
@@ -1626,14 +1592,11 @@ export async function downloadGameIpdtManifest(
   )
   return true
 }
-async function applyPatching(
-  gameInfo: GameInfo,
-  newVersion: string,
-  progressCallback: ProgressCallback
-) {
+async function applyPatching(gameInfo: GameInfo, newVersion: string) {
   console.log('I got inside applyPatching!')
   // get previous and current manifest
   const appName = gameInfo.app_name
+  const window = getMainWindow()
   const { install_path, version, platform } = gameInfo.install
 
   if (!existsSync(ipdtPatcher)) {
@@ -1692,17 +1655,36 @@ async function applyPatching(
         const currentTime = Date.now()
         const elapsedTime = (currentTime - startTime) / 1000 // in seconds
         const downloadSpeed = downloadedData / elapsedTime // bytes per second
-        const remainingData = (totalBlocks - downloadedBlocks) * blockSize
-        const eta = remainingData / downloadSpeed // in seconds
+        const totalSize = blockSize * totalBlocks
+        const eta =
+          calculateEta(downloadedBlocks, downloadSpeed, totalSize) ?? 0
 
-        progressCallback(downloadedData, downloadSpeed, 0, percent)
+        sendFrontendMessage('gameStatusUpdate', {
+          appName,
+          status: 'installing',
+          runner: 'hyperplay',
+          folder: gameInfo.install.install_path
+        })
+
+        window?.webContents.send(`progressUpdate-${appName}`, {
+          appName,
+          status: 'installing',
+          runner: 'hyperplay',
+          folder: gameInfo.install.install_path,
+          progress: {
+            folder: gameInfo.install.install_path,
+            percent,
+            diskSpeed: downloadSpeed,
+            downSpeed: downloadSpeed,
+            bytes: downloadedData / 1024 / 1024,
+            eta
+          }
+        })
 
         logInfo(
-          `Progress: ${percent.toFixed(2)}%, Downloaded: ${
-            downloadedData / (1024 * 1024)
-          } MiB, Speed: ${downloadSpeed / 1024} KiB/s, ETA: ${eta.toFixed(
-            2
-          )} s`,
+          `Progress: ${percent.toFixed(2)}%, Downloaded: ${getFileSize(
+            downloadedData
+          )} MiB, Speed: ${downloadSpeed / 1024} KiB/s, ETA: ${eta}`,
           LogPrefix.HyperPlay
         )
       }
