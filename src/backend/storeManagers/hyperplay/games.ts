@@ -1270,6 +1270,10 @@ export function appIsInLibrary(appName: string): boolean {
 }
 
 export function getGameInfo(appName: string): GameInfo {
+  if (!appName) {
+    throw new Error('AppName is empty')
+  }
+
   const appInfo = hpLibraryStore
     .get('games', [])
     .find((app) => app.app_name === appName)
@@ -1672,7 +1676,7 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
           folder: gameInfo.install.install_path,
           progress: {
             folder: gameInfo.install.install_path,
-            totalSize: totalSize / 1024 / 1024,
+            totalSize,
             percent,
             diskSpeed: downloadSpeed / 1024 / 1024,
             downSpeed: downloadSpeed / 1024 / 1024,
