@@ -983,7 +983,9 @@
             "playToStart": "dias",
             "progressTowardsStreak": "progredir para a sequência de hoje.",
             "streakCompleted": "Streak concluído! Reclama as tuas recompensas agora.",
-            "streakProgress": "Progresso de Streak"
+            "streakProgress": "Progresso de Streak",
+            "sync": "Sincronização",
+            "syncSuccess": "Progresso sincronizado"
         },
         "points": "Pontos",
         "signIn": "Entrar",
