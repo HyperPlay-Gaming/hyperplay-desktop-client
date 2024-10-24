@@ -1672,6 +1672,7 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
           folder: gameInfo.install.install_path,
           progress: {
             folder: gameInfo.install.install_path,
+            totalSize: totalSize / 1024 / 1024,
             percent,
             diskSpeed: downloadSpeed / 1024 / 1024,
             downSpeed: downloadSpeed / 1024 / 1024,
