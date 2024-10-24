@@ -1422,10 +1422,17 @@ export async function update(
   try {
     const {
       channels,
-      install: { channelName, platform }
+      install: { channelName, platform, install_size, install_path, executable }
     } = gameInfo
 
-    if (!channelName || !platform || !channels) {
+    if (
+      !channels ||
+      !channelName ||
+      !platform ||
+      !install_path ||
+      !executable ||
+      install_size === undefined
+    ) {
       logError(
         `Channel name or platform not found for ${appName} in update`,
         LogPrefix.HyperPlay
@@ -1444,6 +1451,18 @@ export async function update(
       }
     }
 
+    const installedInfo: InstalledInfo = {
+      appName,
+      install_path,
+      executable,
+      install_size,
+      is_dlc: false,
+      version: newVersion,
+      platform,
+      channelName
+    }
+
+    updateInstalledInfo(appName, installedInfo)
     return { status: 'done' }
   } catch (error) {
     //install the new version
