@@ -764,8 +764,7 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${
-        (error as Error).message
+      `cancelExtraction: Error while canceling the operation ${(error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -1667,12 +1666,12 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
       logInfo(output, LogPrefix.HyperPlay)
 
       const match = output.match(
-        /Blocks: (\d+)\/(\d+), Data Downloaded: ([\d.]+) MiB/
+        /Blocks: (\d+)\/(\d+), Data Downloaded: ([\d.]+)/
       )
       if (match) {
         downloadedBlocks = parseInt(match[1], 10)
         totalBlocks = parseInt(match[2], 10)
-        downloadedData = parseFloat(match[3]) * 1024 * 1024 // Convert MiB to bytes
+        downloadedData = parseFloat(match[3])
 
         const percent = (downloadedBlocks / totalBlocks) * 100
         const currentTime = Date.now()
