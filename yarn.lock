@@ -1305,7 +1305,7 @@
     "@hyperplay/utils" "^0.0.14"
     mobx "^6.12.3"
 
-"@hyperplay/patcher@^0.0.12-alpha.23":
+"@hyperplay/patcher@0.0.12-alpha.23":
   version "0.0.12-alpha.23"
   resolved "https://registry.yarnpkg.com/@hyperplay/patcher/-/patcher-0.0.12-alpha.23.tgz#718dea24042f90d70de43be69b1ff1c0a3288a93"
   integrity sha512-gk1dEUGAcgNianZSWNwV1mOruovttrfGLSO3VfgBppWA5dQbbjQ2Vncg1m762aSREQHhPBLdjFCQXpjeiaqBoQ==
