@@ -948,7 +948,9 @@
             "streakCompleted": "Streak ist fertig! Beanspruchen Sie jetzt Ihre Belohnungen.",
             "streakProgress": "Streak Fortschritt",
             "days": "Tage",
-            "now": "Jetzt"
+            "now": "Jetzt",
+            "sync": "Synthetische Fortschritte",
+            "syncSuccess": "Fortschritt synchronisiert"
         },
         "readyForClaim": "Bereit für Anspruch",
         "reward": "Zurück",

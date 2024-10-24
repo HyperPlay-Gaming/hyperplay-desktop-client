@@ -964,7 +964,9 @@
             "streakCompleted": "تم الانتهاء من الاستراحة! اطالب بمكافآتك الآن.",
             "streakProgress": "Streak Progress",
             "days": "أيام",
-            "now": "الآن"
+            "now": "الآن",
+            "sync": "ترجمة",
+            "syncSuccess": "التقدم المتزامن"
         },
         "type": {
             "playstreak": "اللعب ستريك",

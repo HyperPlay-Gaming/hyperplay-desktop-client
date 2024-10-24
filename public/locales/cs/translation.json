@@ -963,7 +963,9 @@
             "progressTowardsStreak": "postup směrem k dnešnímu pruhu.",
             "streakCompleted": "Streak dokončeno! Požádejte své odměny.",
             "days": "dnů",
-            "now": "Nyní"
+            "now": "Nyní",
+            "sync": "Synchronizujte postup",
+            "syncSuccess": "Postup synchronizované"
         },
         "readyForClaim": "Připravený pro nárok",
         "reward": "Přihlášení",

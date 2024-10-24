@@ -963,7 +963,9 @@
             "streakCompleted": "Streak terminé ! Demande tes récompenses maintenant.",
             "streakProgress": "Streak Progress",
             "days": "jours",
-            "now": "Maintenant"
+            "now": "Maintenant",
+            "sync": "Sync Progress",
+            "syncSuccess": "Progress synced"
         },
         "type": {
             "playstreak": "Jouer Streak",

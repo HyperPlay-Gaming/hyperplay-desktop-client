@@ -917,7 +917,9 @@
             "playToStart": "Spela detta spel för att starta din streak!",
             "progressTowardsStreak": "framsteg mot dagens streak.",
             "streakCompleted": "Streak färdig! Betala dina belöningar nu.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "sync": "Synkronisera framsteg",
+            "syncSuccess": "Framsteg synkroniserade"
         },
         "points": "Punkter",
         "connectSteamAccount": "Anslut gruppkonto",

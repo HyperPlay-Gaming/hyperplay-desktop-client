@@ -930,7 +930,9 @@
             "playToStart": "Gioca a questo gioco per iniziare la tua striscia!",
             "progressTowardsStreak": "progresso verso la striscia di oggi.",
             "streakCompleted": "Streak completato! Rivendica le tue ricompense.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "syncSuccess": "Progressi sincronizzati",
+            "sync": "Sync Progress"
         },
         "points": "Punti",
         "sync": "Sincronizza",

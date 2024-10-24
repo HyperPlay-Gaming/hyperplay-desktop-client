@@ -995,7 +995,9 @@
             "streakCompleted": "Streak #završen! @Claim #tvoj #nagrada sad#.",
             "streakProgress": "Streak",
             "days": "дана",
-            "now": "Now"
+            "now": "Now",
+            "sync": "Sync",
+            "syncSuccess": "#Napredak synced"
         },
         "type": {
             "reputation": "#Reputacija",

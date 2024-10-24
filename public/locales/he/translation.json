@@ -931,7 +931,9 @@
             "progressTowardsStreak": "התקדמות לקראת המשבר של היום.",
             "streakCompleted": "סטראק הושלם! תטען את התגמולים שלך עכשיו.",
             "streakProgress": "התקדמות",
-            "now": "ועכשיו"
+            "now": "ועכשיו",
+            "sync": "Sync Progress",
+            "syncSuccess": "התקדמות מסונכרנת"
         },
         "signIn": "כניסה",
         "points": "נקודות",

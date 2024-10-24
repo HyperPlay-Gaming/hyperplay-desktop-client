@@ -918,7 +918,9 @@
             "streakProgress": "Streak Progress",
             "playToStart": "Játszd ezt a játékot, hogy kezdd el a streak!",
             "progressTowardsStreak": "előrelépés a mai streak felé.",
-            "streakCompleted": "Streak befejeződött! Irányítsd a jutalmadat most."
+            "streakCompleted": "Streak befejeződött! Irányítsd a jutalmadat most.",
+            "sync": "Szinkron Progress",
+            "syncSuccess": "Progress szinkronizált"
         },
         "points": "Pontok",
         "signIn": "Bejelentkezés",

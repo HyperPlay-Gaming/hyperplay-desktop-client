@@ -910,7 +910,9 @@
             "playToStart": "Juga aquest joc per començar la seva ratxa!",
             "streakProgress": "Streak Progress",
             "progressTowardsStreak": "avançar cap a la ratxa actual.",
-            "streakCompleted": "Streak completat! Demana ara les teves recompenses."
+            "streakCompleted": "Streak completat! Demana ara les teves recompenses.",
+            "sync": "Sync Progress",
+            "syncSuccess": "Progress sincronitzat"
         },
         "signIn": "Inicia la sessió",
         "sync": "Sincronització",

@@ -947,7 +947,9 @@
             "playEachDay": "Παίξτε κάθε μέρα έτσι ώστε το streak σας να μην επαναφέρετε!",
             "streakCompleted": "Ο Streak ολοκλήρωσε! Ισχυρίστε τις ανταμοιβές σας τώρα.",
             "days": "ημέρες",
-            "now": "Τώρα"
+            "now": "Τώρα",
+            "sync": "Sync Progress",
+            "syncSuccess": "Πρόοδος συγχρονισμένη"
         },
         "readyForClaim": "Ετοιμαστείτε για αξίωση",
         "reward": "Reward",

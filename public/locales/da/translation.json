@@ -1014,7 +1014,9 @@
             "streakCompleted": "Streak afsluttet! Gør krav på dine belønninger nu.",
             "streakProgress": "Streak fremgang",
             "days": "dage",
-            "now": "Nu"
+            "now": "Nu",
+            "sync": "Synkronisering af synkronisering",
+            "syncSuccess": "Fremskridtssynkronisering"
         },
         "reward": "Belønningsfordele",
         "readyForClaim": "Klar til krav",

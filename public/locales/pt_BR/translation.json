@@ -1005,7 +1005,9 @@
             "streakCompleted": "Streak concluído! Reclama as tuas recompensas agora.",
             "streakProgress": "Progresso de Streak",
             "days": "dias",
-            "now": "Agora"
+            "now": "Agora",
+            "syncSuccess": "Progresso sincronizado",
+            "sync": "Sincronização"
         },
         "connectSteamAccount": "Conecte a conta Steam",
         "linkAccount": "Ligar o seu Conta Steam para verificar a elegibilidade.",

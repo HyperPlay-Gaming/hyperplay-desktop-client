@@ -782,7 +782,9 @@
             "dayResets": "Päivän palautus:",
             "playEachDay": "Pelaa joka päivä, jotta strippi ei palaudu!",
             "playToStart": "Pelaa tätä peliä aloittaaksesi pelin!",
-            "progressTowardsStreak": "edistystä kohti nykypäivän rajoja."
+            "progressTowardsStreak": "edistystä kohti nykypäivän rajoja.",
+            "sync": "Sync Progress",
+            "syncSuccess": "Progressi synkronoitu"
         },
         "signIn": "Kirjaudu",
         "sync": "Sync",

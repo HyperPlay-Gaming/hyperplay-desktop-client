@@ -960,7 +960,9 @@
             "streakCompleted": "Streak تکمیل شد! از پاداش های خود در حال حاضر بپرسید.",
             "streakProgress": "Streak Progress",
             "days": "روزها",
-            "now": "اکنون"
+            "now": "اکنون",
+            "sync": "Sync Progress",
+            "syncSuccess": "پیشرفت همگام سازی"
         },
         "readyForClaim": "آمادگی برای ادعای",
         "type": {

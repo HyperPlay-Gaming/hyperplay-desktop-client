@@ -917,7 +917,9 @@
             "playToStart": "Sizin line başlamaq üçün bu oyun oynayır!",
             "progressTowardsStreak": "bu gün sənaye doğru inkişaf.",
             "streakCompleted": "Streak tamamlandı! İndi mükafatlarınızı daxil edin.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "sync": "Axtarış",
+            "syncSuccess": "Proqram"
         },
         "points": "Nöqtələr",
         "signIn": "Daxil ol",
