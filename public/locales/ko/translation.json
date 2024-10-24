@@ -963,7 +963,9 @@
             "streakCompleted": "Streak 완료! 지금 보상을 받으세요.",
             "streakProgress": "Streak 진행",
             "days": "일수",
-            "now": "지금"
+            "now": "지금",
+            "sync": "Sync 진행",
+            "syncSuccess": "Synced 진행"
         },
         "View Game": "게임 보기",
         "reward": "상품정보",
