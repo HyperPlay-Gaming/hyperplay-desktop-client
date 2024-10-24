@@ -1463,6 +1463,7 @@ export async function update(
     }
 
     updateInstalledInfo(appName, installedInfo)
+    sendFrontendMessage('refreshLibrary')
     return { status: 'done' }
   } catch (error) {
     //install the new version
