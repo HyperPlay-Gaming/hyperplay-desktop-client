@@ -363,7 +363,7 @@
   },
   "optionalDependencies": {
     "@hyperplay/extension-importer": "^0.1.0-alpha",
-    "@hyperplay/extension-provider": "^0.0.6",
+    "@hyperplay/extension-provider": "^0.0.7",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/overlay": "^0.0.6",
     "@hyperplay/providers": "^0.0.5",
