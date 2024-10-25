@@ -1747,7 +1747,7 @@ async function applyPatching(
             downloadSpeed
           )}/s, ETA: ${eta} totalSize: ${totalSize} = ${getFileSize(
             totalSize
-          )} downloadedData: ${downloadedData} = downloadedDataInMiB: ${downloadedDataInMiB}`,
+          )}`,
           LogPrefix.HyperPlay
         )
       }
