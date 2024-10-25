@@ -933,7 +933,10 @@ ipcMain.on('navigate', async (event, appName) => {
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
-  if (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName)) {
+  if (
+    !appName ||
+    (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName))
+  ) {
     return null
   }
   return gameManagerMap[runner].getGameInfo(appName)
