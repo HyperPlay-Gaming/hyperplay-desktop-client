@@ -1419,54 +1419,41 @@ export async function update(
   // try patching first, if it fails, download the new version
   const isMarketWars = gameInfo.account_name === 'marketwars'
 
-  try {
-    const {
-      channels,
-      install: { channelName, platform, install_size, install_path, executable }
-    } = gameInfo
+  const {
+    channels,
+    install: { channelName, platform, install_size, install_path, executable }
+  } = gameInfo
 
-    if (
-      !channels ||
-      !channelName ||
-      !platform ||
-      !install_path ||
-      !executable ||
-      install_size === undefined
-    ) {
-      logError(
-        `Channel name or platform not found for ${appName} in update`,
-        LogPrefix.HyperPlay
-      )
-      throw new Error('Channel name or platform not found')
-    }
+  if (
+    !channels ||
+    !channelName ||
+    !platform ||
+    !install_path ||
+    !executable ||
+    install_size === undefined
+  ) {
+    logError(
+      `Channel name or platform not found for ${appName} in update`,
+      LogPrefix.HyperPlay
+    )
+    throw new Error('Channel name or platform not found')
+  }
 
-    const newVersion = channels[channelName].release_meta.name
-    await applyPatching(gameInfo, newVersion)
+  const newVersion = channels[channelName].release_meta.name
+  const abortController = createAbortController(appName)
+  const { status, error } = await applyPatching(
+    gameInfo,
+    newVersion,
+    abortController.signal
+  )
 
-    if (isMarketWars) {
-      try {
-        await runModPatcher(appName)
-      } catch (error) {
-        return { status: 'error' }
-      }
-    }
+  console.log({ status, error })
 
-    const installedInfo: InstalledInfo = {
-      appName,
-      install_path,
-      executable,
-      install_size,
-      is_dlc: false,
-      version: newVersion,
-      platform,
-      channelName
-    }
-
-    updateInstalledInfo(appName, installedInfo)
-    sendFrontendMessage('refreshLibrary')
-    return { status: 'done' }
-  } catch (error) {
-    //install the new version
+  if (status === 'abort') {
+    // if aborted dont do anything
+    return { status: 'abort' }
+  } else if (status === 'error' && !error?.includes('aborted')) {
+    // if error, download the zip file
     const installResult = await install(appName, {
       path: gameInfo.install.install_path,
       platformToInstall: gameInfo.install.platform,
@@ -1484,6 +1471,29 @@ export async function update(
     }
     return installResult
   }
+
+  if (isMarketWars) {
+    try {
+      await runModPatcher(appName)
+    } catch (error) {
+      return { status: 'error' }
+    }
+  }
+
+  const installedInfo: InstalledInfo = {
+    appName,
+    install_path,
+    executable,
+    install_size,
+    is_dlc: false,
+    version: newVersion,
+    platform,
+    channelName
+  }
+
+  updateInstalledInfo(appName, installedInfo)
+  sendFrontendMessage('refreshLibrary')
+  return { status: 'done' }
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -1615,12 +1625,15 @@ export async function downloadGameIpdtManifest(
   )
   return true
 }
-async function applyPatching(gameInfo: GameInfo, newVersion: string) {
+async function applyPatching(
+  gameInfo: GameInfo,
+  newVersion: string,
+  signal: AbortSignal
+): Promise<InstallResult> {
   console.log('I got inside applyPatching!')
   // get previous and current manifest
   const appName = gameInfo.app_name
   const window = getMainWindow()
-  const signal = createAbortController(appName).signal
   const { install_path, version, platform } = gameInfo.install
 
   if (!existsSync(ipdtPatcher)) {
@@ -1632,7 +1645,7 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
       `Version or install path not found for ${appName} in applyPatching`,
       LogPrefix.HyperPlay
     )
-    throw new Error('Version or install path not found')
+    return { status: 'error', error: 'Version or install path not found' }
   }
   const previousManifest = await getManifest(appName, platform, version)
   const currentManifest = await getManifest(appName, platform, newVersion)
@@ -1657,19 +1670,28 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
     const blockSize = 512 * 1024 // 512KB in bytes
     const startTime = Date.now()
 
-    const { generator, terminate } = patchFolder(
+    const { generator } = patchFolder(
       ipdtPatcher,
       install_path,
       currentManifest,
       previousManifest,
       ipfsGateway,
-      ipfsGateway
+      ipfsGateway,
+      signal
     )
 
-    signal.onabort = () => terminate()
+    if (signal.aborted) {
+      logWarning(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
+      return { status: 'abort' }
+    }
 
     for await (const output of generator) {
       logInfo(output, LogPrefix.HyperPlay)
+
+      if (signal.aborted) {
+        logWarning(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
+        return { status: 'abort' }
+      }
 
       const match = output.match(
         /Blocks: (\d+)\/(\d+), Data Downloaded: ([\d.]+)/
@@ -1683,7 +1705,7 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
         const currentTime = Date.now()
         const elapsedTime = (currentTime - startTime) / 1000 // in seconds
         const downloadedDataInMiB = downloadedData / 1024 / 1024 // in MiB
-        const downloadSpeed = downloadedDataInMiB / elapsedTime // bytes per second
+        const downloadSpeed = downloadedDataInMiB / elapsedTime
         const totalSize = blockSize * totalBlocks
         const eta =
           calculateEta(downloadedBlocks, downloadSpeed, totalSize) ?? 0
@@ -1706,7 +1728,7 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
             percent,
             diskSpeed: downloadSpeed / 1024 / 1024,
             downSpeed: downloadSpeed / 1024 / 1024,
-            bytes: downloadedData,
+            bytes: downloadedDataInMiB,
             eta
           }
         })
@@ -1716,18 +1738,19 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
             downloadedData
           )} MiB, Speed: ${
             downloadSpeed / 1024
-          } KiB/s, ETA: ${eta}, Download Size: ${totalSize} = ${getFileSize(
+          } KiB/s, ETA: ${eta} totalSize: ${totalSize} = ${getFileSize(
             totalSize
-          )}`,
+          )} downloadedData: ${downloadedData} = downloadedDataInMiB: ${downloadedDataInMiB}`,
           LogPrefix.HyperPlay
         )
       }
     }
   } catch (error) {
     console.log({ error })
-    throw new Error(`Error while patching ${error}`)
+    return { status: 'error', error: `Error while patching ${error}` }
   }
-  console.log('done patching')
+  logInfo(`Patching ${appName} completed`, LogPrefix.HyperPlay)
+  return { status: 'done' }
 }
 
 async function getManifest(
