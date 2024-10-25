@@ -1451,6 +1451,10 @@ export async function update(
 
   if (status === 'abort') {
     // if aborted dont do anything
+    notify({
+      title: gameInfo.title,
+      body: 'Update Stopped'
+    })
     return { status: 'abort' }
   } else if (status === 'error' && !error?.includes('aborted')) {
     // if error, download the zip file
@@ -1493,6 +1497,10 @@ export async function update(
 
   updateInstalledInfo(appName, installedInfo)
   sendFrontendMessage('refreshLibrary')
+  notify({
+    title: gameInfo.title,
+    body: 'Updated'
+  })
   return { status: 'done' }
 }
 
@@ -1699,16 +1707,15 @@ async function applyPatching(
       if (match) {
         downloadedBlocks = parseInt(match[1], 10)
         totalBlocks = parseInt(match[2], 10)
-        downloadedData = parseFloat(match[3])
+        downloadedData = parseInt(match[3])
 
         const percent = (downloadedBlocks / totalBlocks) * 100
         const currentTime = Date.now()
         const elapsedTime = (currentTime - startTime) / 1000 // in seconds
-        const downloadedDataInMiB = downloadedData / 1024 / 1024 // in MiB
-        const downloadSpeed = downloadedDataInMiB / elapsedTime
+        const downloadedDataInMiB = downloadedData / 1024 / 1024
+        const downloadSpeed = downloadedData / elapsedTime
         const totalSize = blockSize * totalBlocks
-        const eta =
-          calculateEta(downloadedBlocks, downloadSpeed, totalSize) ?? 0
+        const eta = calculateEta(downloadedData, downloadSpeed, totalSize) ?? 0
 
         sendFrontendMessage('gameStatusUpdate', {
           appName,
@@ -1736,9 +1743,9 @@ async function applyPatching(
         logInfo(
           `Progress: ${percent.toFixed(2)}%, Downloaded: ${getFileSize(
             downloadedData
-          )} MiB, Speed: ${
-            downloadSpeed / 1024
-          } KiB/s, ETA: ${eta} totalSize: ${totalSize} = ${getFileSize(
+          )}, Speed: ${getFileSize(
+            downloadSpeed
+          )}/s, ETA: ${eta} totalSize: ${totalSize} = ${getFileSize(
             totalSize
           )} downloadedData: ${downloadedData} = downloadedDataInMiB: ${downloadedDataInMiB}`,
           LogPrefix.HyperPlay
