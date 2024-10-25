@@ -764,7 +764,8 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${(error as Error).message
+      `cancelExtraction: Error while canceling the operation ${
+        (error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -1619,6 +1620,7 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
   // get previous and current manifest
   const appName = gameInfo.app_name
   const window = getMainWindow()
+  const signal = createAbortController(appName).signal
   const { install_path, version, platform } = gameInfo.install
 
   if (!existsSync(ipdtPatcher)) {
@@ -1664,6 +1666,8 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
       ipfsGateway
     )
 
+    signal.onabort = () => terminate()
+
     for await (const output of generator) {
       logInfo(output, LogPrefix.HyperPlay)
 
@@ -1678,7 +1682,8 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
         const percent = (downloadedBlocks / totalBlocks) * 100
         const currentTime = Date.now()
         const elapsedTime = (currentTime - startTime) / 1000 // in seconds
-        const downloadSpeed = downloadedData / elapsedTime // bytes per second
+        const downloadedDataInMiB = downloadedData / 1024 / 1024 // in MiB
+        const downloadSpeed = downloadedDataInMiB / elapsedTime // bytes per second
         const totalSize = blockSize * totalBlocks
         const eta =
           calculateEta(downloadedBlocks, downloadSpeed, totalSize) ?? 0
@@ -1701,7 +1706,7 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
             percent,
             diskSpeed: downloadSpeed / 1024 / 1024,
             downSpeed: downloadSpeed / 1024 / 1024,
-            bytes: downloadedData / 1024 / 1024,
+            bytes: downloadedData,
             eta
           }
         })
@@ -1709,7 +1714,11 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
         logInfo(
           `Progress: ${percent.toFixed(2)}%, Downloaded: ${getFileSize(
             downloadedData
-          )} MiB, Speed: ${downloadSpeed / 1024} KiB/s, ETA: ${eta}`,
+          )} MiB, Speed: ${
+            downloadSpeed / 1024
+          } KiB/s, ETA: ${eta}, Download Size: ${totalSize} = ${getFileSize(
+            totalSize
+          )}`,
           LogPrefix.HyperPlay
         )
       }
