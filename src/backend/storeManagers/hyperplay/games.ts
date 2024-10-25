@@ -1452,11 +1452,6 @@ export async function update(
   console.log({ status, error })
 
   if (status === 'abort') {
-    // if aborted dont do anything
-    notify({
-      title: gameInfo.title,
-      body: 'Update Stopped'
-    })
     return { status: 'abort' }
   } else if (status === 'error' && !error?.includes('aborted')) {
     // if error, download the zip file
@@ -1649,12 +1644,11 @@ async function applyPatching(
   newVersion: string,
   signal: AbortSignal
 ): Promise<InstallResult> {
-  console.log('I got inside applyPatching!')
-  // get previous and current manifest
   const appName = gameInfo.app_name
   const window = getMainWindow()
   const { install_path, version, platform } = gameInfo.install
   const { maxWorkers } = GlobalConfig.get().getSettings()
+  let aborted = false
 
   if (!existsSync(ipdtPatcher)) {
     await downloadPatcher()
@@ -1667,6 +1661,7 @@ async function applyPatching(
     )
     return { status: 'error', error: 'Version or install path not found' }
   }
+
   const previousManifest = await getManifest(appName, platform, version)
   const currentManifest = await getManifest(appName, platform, newVersion)
 
@@ -1674,14 +1669,6 @@ async function applyPatching(
     `Patching ${gameInfo.title} from ${version} to ${newVersion}`,
     LogPrefix.HyperPlay
   )
-
-  console.log({
-    ipdtPatcher,
-    install_path,
-    currentManifest,
-    previousManifest,
-    ipfsGateway
-  })
 
   try {
     let totalBlocks = 0
@@ -1698,11 +1685,17 @@ async function applyPatching(
       ipfsGateway,
       ipfsGateway,
       signal,
-      maxWorkers
+      maxWorkers ?? 6
     )
 
     if (signal.aborted) {
       logWarning(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
+      return { status: 'abort' }
+    }
+
+    signal.onabort = () => {
+      logWarning(`ON ABORT - Patching ${appName} aborted`, LogPrefix.HyperPlay)
+      aborted = true
       return { status: 'abort' }
     }
 
@@ -1769,6 +1762,11 @@ async function applyPatching(
     console.log({ error })
     return { status: 'error', error: `Error while patching ${error}` }
   }
+  // need this to cover 100% of abort cases
+  if (aborted) {
+    return { status: 'abort' }
+  }
+
   logInfo(`Patching ${appName} completed`, LogPrefix.HyperPlay)
   return { status: 'done' }
 }
