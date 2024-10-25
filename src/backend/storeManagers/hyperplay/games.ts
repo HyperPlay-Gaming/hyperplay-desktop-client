@@ -32,7 +32,8 @@ import {
   readdirSync,
   readFileSync,
   statSync,
-  writeFile
+  writeFile,
+  writeFileSync
 } from 'graceful-fs'
 import {
   isMac,
@@ -94,6 +95,7 @@ import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
 import { chmod } from 'fs/promises'
+import { GlobalConfig } from 'backend/config'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1631,6 +1633,15 @@ export async function downloadGameIpdtManifest(
     manifestName,
     createAbortController(appName)
   )
+
+  if (isWindows) {
+    // remove the empty line at the end of the json file to avoid issues on Windows
+    const manifestContent = readFileSync(manifestPath, 'utf-8')
+    const formattedManifest = manifestContent
+      .replace(/\r?\n+$/, '')
+      .replace(/\r?\n/g, '\r\n')
+    writeFileSync(manifestPath, formattedManifest)
+  }
   return true
 }
 async function applyPatching(
@@ -1643,6 +1654,7 @@ async function applyPatching(
   const appName = gameInfo.app_name
   const window = getMainWindow()
   const { install_path, version, platform } = gameInfo.install
+  const { maxWorkers } = GlobalConfig.get().getSettings()
 
   if (!existsSync(ipdtPatcher)) {
     await downloadPatcher()
@@ -1685,7 +1697,8 @@ async function applyPatching(
       previousManifest,
       ipfsGateway,
       ipfsGateway,
-      signal
+      signal,
+      maxWorkers
     )
 
     if (signal.aborted) {
