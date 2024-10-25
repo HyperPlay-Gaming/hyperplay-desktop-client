@@ -1655,14 +1655,16 @@ async function applyPatching(gameInfo: GameInfo, newVersion: string) {
     const blockSize = 512 * 1024 // 512KB in bytes
     const startTime = Date.now()
 
-    for await (const output of patchFolder(
+    const { generator, terminate } = patchFolder(
       ipdtPatcher,
       install_path,
       currentManifest,
       previousManifest,
       ipfsGateway,
       ipfsGateway
-    )) {
+    )
+
+    for await (const output of generator) {
       logInfo(output, LogPrefix.HyperPlay)
 
       const match = output.match(
