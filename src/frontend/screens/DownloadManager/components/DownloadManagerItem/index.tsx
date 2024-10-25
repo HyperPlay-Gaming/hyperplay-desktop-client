@@ -248,6 +248,8 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   }
 
   const { fullDate } = getTime()
+  const downloadsize =
+    progress.totalSize || installInfo?.manifest.download_size || 0
 
   return (
     <>
@@ -275,9 +277,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
           <span className="titleSize">
             {title}
             <span title={path}>
-              {size?.includes('?')
-                ? fileSize(Number(installInfo?.manifest.download_size) || 0)
-                : size}
+              {size?.includes('?') ? fileSize(Number(downloadsize)) : size}
               {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
             </span>
           </span>
