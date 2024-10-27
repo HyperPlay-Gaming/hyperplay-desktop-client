@@ -128,7 +128,7 @@ export default observer(function GamePage(): JSX.Element | null {
 
   const isInstalling = DMQueueState.isInstalling(appName)
   const isPlaying = status === 'playing'
-  const isUpdating = status === 'updating'
+  const isUpdating = status === 'updating' || status === 'patching'
   const isQueued = status === 'queued'
   const isReparing = status === 'repairing'
   const isMoving = status === 'moving'
@@ -629,11 +629,7 @@ export default observer(function GamePage(): JSX.Element | null {
                     onClick={handlePlay()}
                     autoFocus={true}
                     disabled={
-                      isReparing ||
-                      isMoving ||
-                      isUpdating ||
-                      isUninstalling ||
-                      isPatching
+                      isReparing || isMoving || isUpdating || isUninstalling
                     }
                     type={getPlayBtnClass()}
                   >
@@ -806,12 +802,15 @@ export default observer(function GamePage(): JSX.Element | null {
 
     const currentProgress = getCurrentProgress(progress, percent, bytes, eta)
 
-    if (isUpdating && is_installed) {
+    if (isPatching || (isUpdating && is_installed)) {
       if (!currentProgress) {
         return `${t('status.processing', 'Processing files, please wait')}...`
       }
       if (eta && eta.includes('verifying')) {
         return `${t('status.reparing')}: ${percent} [${bytes}]`
+      }
+      if (isPatching) {
+        return `${t('status.patching', 'Patching Files ')} ${currentProgress}`
       }
       return `${t('status.updating')} ${currentProgress}`
     }
@@ -827,9 +826,6 @@ export default observer(function GamePage(): JSX.Element | null {
     if (!isUpdating && isInstalling) {
       if (!currentProgress) {
         return `${t('status.processing', 'Processing files, please wait')}...`
-      }
-      if (isPatching) {
-        return `${t('status.patching', 'Patching Files ')} ${currentProgress}`
       }
       return `${t('status.installing')} ${currentProgress}`
     }
