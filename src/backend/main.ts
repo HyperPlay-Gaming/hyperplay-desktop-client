@@ -229,7 +229,7 @@ import getPartitionCookies from './utils/get_partition_cookies'
 
 import { formatSystemInfo, getSystemInfo } from './utils/systeminfo'
 
-let ldMainClient: LDElectron.LDElectronMainClient
+export let ldMainClient: LDElectron.LDElectronMainClient
 
 if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
   app.commandLine?.appendSwitch('remote-debugging-port', '9222')

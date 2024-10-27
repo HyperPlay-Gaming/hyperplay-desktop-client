@@ -96,6 +96,7 @@ import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
 import { chmod } from 'fs/promises'
 import { GlobalConfig } from 'backend/config'
+import { ldMainClient } from 'backend/main'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -322,7 +323,7 @@ export async function importGame(
   gameInLibrary.is_installed = true
   hpLibraryStore.set('games', currentLibrary)
 
-  sendFrontendMessage('refreshLibrary')
+  sendFrontendMessage('refreshLibrary', 'hyperplay')
 
   // delete current manifest file
   rmSync(path.join(pathName, `${appName}.json`))
@@ -1644,6 +1645,12 @@ async function applyPatching(
   newVersion: string,
   signal: AbortSignal
 ): Promise<InstallResult> {
+  const patcherisEnabled = ldMainClient.variation('enable-patcher', false)
+
+  if (!patcherisEnabled) {
+    return { status: 'error' }
+  }
+
   const appName = gameInfo.app_name
   const window = getMainWindow()
   const { install_path, version, platform } = gameInfo.install
