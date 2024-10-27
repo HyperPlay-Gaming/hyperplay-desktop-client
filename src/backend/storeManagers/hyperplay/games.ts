@@ -1725,14 +1725,14 @@ async function applyPatching(
 
         sendFrontendMessage('gameStatusUpdate', {
           appName,
-          status: 'installing',
+          status: 'patching',
           runner: 'hyperplay',
           folder: gameInfo.install.install_path
         })
 
         window?.webContents.send(`progressUpdate-${appName}`, {
           appName,
-          status: 'installing',
+          status: 'patching',
           runner: 'hyperplay',
           folder: gameInfo.install.install_path,
           progress: {
