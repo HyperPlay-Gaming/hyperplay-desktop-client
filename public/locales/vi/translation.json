@@ -41,7 +41,7 @@
                 "message": "Thông tin đăng nhập hết hạn, vui lòng đăng xuất rồi đăng nhập lại."
             },
             "cx-bottle-not-found": {
-                "message": "CrossOver bottle \"{{bottle_name}}\" không tồn tại, không thể khởi chạy!",
+                "message": "Bình CrossOver \"{{bottle_name}}\" không có, không thể khởi chạy!",
                 "title": "Không tìm thấy CrossOver bottle"
             },
             "diskspace": {
@@ -66,7 +66,7 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Có lỗi trong quá trình Cập Nhật"
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -74,11 +74,15 @@
                 "title": "Không tìm thấy Wine"
             },
             "winetricks": {
-                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
+                "message": "Winetricks đã trả về lỗi sau trong quá trình thực thi: {{newLine}}{{error}}  \nWinetricks đã gặp lỗi sau khi thực hiện: {{newLine}}{{error}}  \nWinetricks đã báo cáo lỗi sau khi thực thi: {{newLine}}{{error}}",
                 "title": "Có lỗi với Winetricks"
             },
             "delete-files": {
                 "body": "Lỗi khi xóa thư mục đã giải nén {{path}}. Vui lòng xóa nó thủ công. \n                {{paragraph}} \n                {{error}}"
+            },
+            "ubisoft-connect": {
+                "message": "Cài đặt Ubisoft Connect trong tiền tố trò chơi đã thất bại. Kiểm tra trang wiki của chúng tôi tại https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac để cài đặt thủ công.",
+                "title": "Ubisoft Connect"
             }
         },
         "info": {
@@ -95,7 +99,7 @@
         "ok": "Chấp nhận",
         "protocol": {
             "install": {
-                "not_installed": "Chưa được cài. Cài ngay?"
+                "not_installed": "Hiện tại chưa được cài đặt. Bạn có muốn cài đặt không?==WEBLATE_PART==Hiện tại chưa được cài. Bạn có muốn tiến hành cài đặt không?==WEBLATE_PART==Chưa cài đặt. Bạn có muốn cài đặt ngay bây giờ không?"
             }
         },
         "quit": {
@@ -142,14 +146,16 @@
                 "install": "Máy chủ Epic đang gặp sự cố nghiêm trọng, không thể cài đặt game!",
                 "update": "Máy chủ Epic đang gặp sự cố nghiêm trọng, không thể cập nhật game!"
             },
-            "title": "Cảnh báo",
+            "title": "Cảnh báo an toàn",
             "rosetta": {
-                "title": "Không tìm thấy Rosetta"
+                "title": "Không tìm thấy Rosetta",
+                "message": "HyperPlay yêu cầu Rosetta để hoạt động chính xác trên macOS với chip Apple Silicon. Vui lòng cài đặt nó từ terminal macOS bằng lệnh sau: \"softwareupdate --install-rosetta\" và khởi động lại HyperPlay. "
             },
             "wine-change": {
                 "title-gptk": "Bộ công cụ chuyển đổi trò chơi không tương thích ",
                 "message": "Chúng tôi không thể tìm thấy phiên bản wine đã chọn để khởi động tiêu đề này ({{selectedWine}}). {{newline}} Chúng tôi đã tìm thấy một phiên bản khác, bạn có muốn tiếp tục khởi động bằng {{foundWine}} không?",
-                "title": "Không tìm thấy Wine!"
+                "title": "Không tìm thấy Wine!",
+                "message-gptk": "Để có thể chạy các trò chơi sử dụng bộ công cụ chuyển đổi trò chơi Apple, bạn cần nâng cấp macOS của mình lên 14 (Sonoma) hoặc cao hơn. {{newline}} Chúng tôi đã tìm thấy Wine trên hệ thống của bạn, bạn có muốn tiếp tục khởi động bằng {{foundWine}} không?"
             }
         },
         "wineprefix": "Chọn thư mục của Wine Prefix",
@@ -164,12 +170,12 @@
         }
     },
     "button": {
-        "cancel": "Cancel",
+        "cancel": "Hủy",
         "go_to_library": "Truy cập thư viện",
         "login": "Đăng nhập",
         "sync": "Đồng bộ",
-        "syncing": "Đang đồng bộ",
-        "unsync": "Hủy đồng bộ",
+        "syncing": "Đang đồng bộ hóa",
+        "unsync": "Ngừng đồng bộ",
         "update": "Cập nhật thông tin",
         "continue": "Tiếp tục thực hiện",
         "download": "Tải",
@@ -180,19 +186,19 @@
             "back": "Back",
             "backspace": "Xóa ký tự trước",
             "close_dialog": "Đóng cửa sổ đối thoại",
-            "close_keyboard": "Close keyboard",
+            "close_keyboard": "Tắt bàn phím",
             "close_options": "Ngừng Tùy Chọn",
             "game_details": "Thông tin chi tiết về trò chơi",
-            "game_settings": "Game settings",
+            "game_settings": "Cấu hình trò chơi",
             "install_game": "Cài đặt game",
             "move_cursor": "Move cursor",
             "open_virtual_keyboard": "Open virtual keyboard",
-            "options": "Options",
-            "play_game": "Play game",
+            "options": "Các tùy chọn",
+            "play_game": "Tham gia trò chơi",
             "scroll": "Kéo xuống",
             "select": "Chọn lựa",
-            "space": "Space",
-            "update_game": "Update game"
+            "space": "Khu vực",
+            "update_game": "Cập nhật trò chơi điện tử"
         }
     },
     "docs": "Documentation",
@@ -202,7 +208,7 @@
             "update": "Cập nhật thông tin"
         },
         "label": {
-            "disk": "Disk",
+            "disk": "Ổ đĩa",
             "speed": "Download"
         },
         "link": "Downloads",
@@ -213,7 +219,7 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "ETA": "Thơi gian dự định",
+        "ETA": "Thời gian dự đoán",
         "title_dm": "Phần mềm quản lý tải xuống"
     },
     "epic": {
@@ -222,7 +228,7 @@
     },
     "Epic Games": "Epic Games Studio",
     "error": "Lỗi xảy ra",
-    "favourites": "Mục ưa thích",
+    "favourites": "Mục yêu thích",
     "game": {
         "status": "Tình hình",
         "store": "Cửa hàng",
@@ -252,20 +258,20 @@
     "help": {
         "amdfsr": "FSR của AMD giúp tăng tốc độ khung hình bằng cách nâng cấp độ phân giải thấp hơn trong Chế độ Toàn màn hình. Chất lượng hình ảnh tăng từ 5 lên 1 với một chút giảm hiệu suất. Bật tính năng này có thể cải thiện hiệu suất.\n\nFSR của AMD hỗ trợ tăng tốc độ khung hình bằng cách nâng cao độ phân giải thấp hơn trong Chế độ Toàn màn hình. Chất lượng hình ảnh cải thiện từ 5 lên 1 với một chút ảnh hưởng đến hiệu suất. Việc kích hoạt có thể cải thiện hiệu suất.\n\nCông nghệ FSR của AMD giúp cải thiện tốc độ khung hình bằng cách nâng cấp độ phân giải thấp hơn trong Chế độ Toàn màn hình. Chất lượng hình ảnh tăng từ 5 lên 1 nhưng có thể làm giảm hiệu suất một chút. Việc bật tính năng này có thể mang lại hiệu suất tốt hơn.",
         "custom_themes_path": "Tránh sử dụng tệp CSS từ các nguồn không đáng tin cậy. Nếu bạn có bất kỳ nghi ngờ nào, hãy yêu cầu xem xét trong kênh Discord của chúng tôi.",
-        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
+        "custom_themes_wiki": "Hãy kiểm tra Wiki để biết thêm thông tin về việc thêm các chủ đề tùy chỉnh. Bấm vào đây.",
         "dxvk": "DXVK là một lớp chuyển đổi dựa trên Vulkan dành cho các trò chơi DirectX 9, 10 và 11. Kích hoạt nó có thể giúp cải thiện khả năng tương thích. Có thể gây ra vấn đề, đặc biệt là với các trò chơi DirectX cổ điển.",
         "esync": "Esync hướng đến việc giảm thiểu gánh nặng của wineserver trong các trò chơi yêu cầu CPU cao. Kích hoạt tính năng này có thể mang lại hiệu suất tốt hơn.",
         "fsync": "Fsync hướng đến việc giảm bớt gánh nặng của wineserver trong các trò chơi nặng về CPU. Kích hoạt tính năng này có thể cải thiện hiệu suất trên các kernel Linux được hỗ trợ.",
         "game_language": {
             "fallback": "Để bỏ trống và áp dụng ngôn ngữ của HyperPlay.",
-            "in_game_config": "Không phải game nào cũng hỗ trợ cấu hình này, một số game có cài đặt ngôn ngữ riêng trong game",
+            "in_game_config": "Không phải tất cả các game đều hỗ trợ cấu hình này, một số game có tùy chọn ngôn ngữ trong phần cài đặt.",
             "valid_codes": "Mã ngôn ngữ phụ thuộc vào từng game."
         },
         "gamemode": "Feral GameMode applies automatic and temporary tweaks to the system when running games. Enabling may improve performance.",
         "general": "Đồng bộ với EGL nếu bạn có một cài đặt Epic Games Launcher đang hoạt động ở nơi khác và muốn chuyển game của mình để không phải tải lại.",
         "mangohud": "MangoHUD là một lớp phủ hiển thị và theo dõi FPS, nhiệt độ, tải của CPU/GPU và các tài nguyên khác của hệ thống.",
         "other": {
-            "part4": "Sử dụng ",
+            "part4": "==WEBLATE_PART==Sử dụng==WEBLATE_PART==Áp dụng==WEBLATE_PART==Thực hiện ",
             "part5": "Thảo luận về trò chơi",
             "part6": " sẽ được kích hoạt sau lệnh khởi động, ví dụ: ",
             "part7": " để vượt qua trình khởi động trong một số trò chơi, v.v."
@@ -289,7 +295,8 @@
         },
         "msync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance.",
         "dxvknvapi": "DXVK-NVAPI là một triển khai của NVAPI được xây dựng trên nền tảng DXVK và NVAPI gốc trên Linux, cho phép sử dụng DLSS trên các GPU Nvidia.",
-        "dxvkfpslimit": "Đặt giới hạn khung hình cho các trò chơi DXVK"
+        "dxvkfpslimit": "Đặt giới hạn khung hình cho các trò chơi DXVK",
+        "disable_logs": "Bật hộp kiểm này để vô hiệu hóa hầu hết các ghi vào tệp nhật ký (thông tin quan trọng luôn được ghi lại). Hãy chắc chắn tắt cài đặt này trước khi báo cáo bất kỳ sự cố nào."
     },
     "info": {
         "hyperplay": {
@@ -440,7 +447,7 @@
         "weblate": "Giúp dịch HyperPlay.",
         "nile-version": "Phiên bản sông Nile: "
     },
-    "Other": "Other",
+    "Other": "Khác nhau",
     "placeholder": {
         "alt-gogdl-bin": "Sử dụng GOGDL binary tích hợp sẵn...",
         "alt-legendary-bin": "Sử dụng binary Legendary được tích hợp sẵn...==WEBLATE_PART==  \nSử dụng binary Legendary có sẵn...==WEBLATE_PART==  \nSử dụng binary Legendary đã được tích hợp...",
@@ -455,11 +462,11 @@
         "mac": "Mac",
         "win": "Windows"
     },
-    "please-wait": "Please wait...",
-    "progress": "Progress",
+    "please-wait": "Vui lòng đợi...",
+    "progress": "Quá trình phát triển",
     "queue": {
         "label": {
-            "canceled": "Canceled",
+            "canceled": "Hủy bỏ",
             "clear": "Xóa mục đã chọn",
             "downloading": "Downloading",
             "empty": {
@@ -484,12 +491,12 @@
         "autodxvk": "Tự động cài đặt hoặc cập nhật DXVK trong prefix",
         "autosync": "Lưu tự động đồng bộ",
         "autovkd3d": "Tự động cài đặt hoặc cập nhật VKD3D trong prefix",
-        "change-target-exe": "Chọn một EXE thay thế để chạy",
+        "change-target-exe": "Chọn một EXE khác để thực hiện",
         "checkForUpdatesOnStartup": "Xem xét cập nhật HyperPlay khi khởi động",
         "crossover-version": "Phiên bản Crossover/Wine",
         "custom_themes_path": "Đường dẫn cho Chủ đề Tùy chỉnh",
         "customWineProton": "Đường dẫn tùy chọn cho Wine/Proton",
-        "darktray": "Sử dụng icon tối",
+        "darktray": "Sử dụng biểu tượng nền tối",
         "default-install-path": "Vị trí cài đặt mặc định",
         "default-steam-path": "Thư mục mặc định của Steam",
         "defaultWinePrefix": "Xác định thư mục cho prefix mới của Wine",
@@ -505,11 +512,11 @@
             "currentVersion": "Current Version: {{version}}",
             "disable": "Disable",
             "enable": "Enable",
-            "install": "Cài đặt",
+            "install": "Cài đặt phần mềm",
             "installed": "The Epic Overlay is installed",
             "installing": "The Epic Overlay is being installed...",
             "latestVersion": "Phiên bản cập nhật nhất: {{version}}",
-            "notInstalled": "The Epic Overlay is not installed",
+            "notInstalled": "Epic Overlay chưa được cài đặt thành công",
             "notInstalledMsg": "Epic Overlay chưa được cài đặt. Bạn có muốn cài đặt nó ngay bây giờ không?  \nEpic Overlay chưa được cài đặt. Bạn có muốn tiến hành cài đặt ngay bây giờ không?  \nEpic Overlay chưa được cài đặt. Bạn có muốn thực hiện cài đặt ngay bây giờ không?",
             "notInstalledTitle": "Chưa có overlay được cài đặt",
             "remove": "Gỡ cài đặt",
@@ -547,7 +554,7 @@
             "download": "Tải file",
             "forcedownload": "Tải về cưỡng bức",
             "forceupload": "Thực hiện tải lên bắt buộc",
-            "sync": "Đồng bộ",
+            "sync": "Cập nhật đồng thời",
             "syncing": "Đang thực hiện đồng bộ",
             "title": "Đồng bộ hóa bản sao lưu bằng tay",
             "upload": "Tải lên"
@@ -570,8 +577,8 @@
             "title": "Chạy chương trình EXE trong Prefix"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually (click to retry)",
-            "placeholder": "Chọn chính xác thư mục lưu game",
+            "not-found": "Không tìm thấy thư mục lưu, vui lòng chọn thủ công (nhấp để thử lại)  \nKhông tìm thấy thư mục lưu, hãy chọn nó một cách thủ công (nhấp để thử lại)  \nThư mục lưu không tồn tại, xin vui lòng chọn thủ công (nhấp để thử lại)",
+            "placeholder": "Chọn thư mục lưu game một cách chính xác",
             "warning": "Vui lòng kiểm tra kỹ hai lần xem đường dẫn có chính xác không (nhấp để thử lại)  \nVui lòng xác nhận lại hai lần xem đường dẫn có đúng không (nhấp để thử lại)  \nXin hãy kiểm tra lại hai lần để đảm bảo đường dẫn là chính xác (nhấp để thử lại)"
         },
         "select_theme": "Chọn mẫu giao diện",
@@ -583,7 +590,7 @@
         "wineversion": "Phiên bản Wine đang sử dụng",
         "autoUpdateGames": "Cập nhật game một cách tự động",
         "ignoreGameUpdates": "Bỏ qua cập nhật trò chơi",
-        "disable_logs": "Tắt nhật ký",
+        "disable_logs": "Tắt chức năng ghi nhật ký",
         "addgamestoapplications": "Tự động thêm trò chơi vào Ứng dụng",
         "showMetalOverlay": "Hiện lớp phủ thông tin thống kê",
         "alt-nile-bin": "Chọn một nhị phân Nile thay thế",
@@ -643,7 +650,11 @@
             "gpu": "GPU:",
             "cpu": "CPU:",
             "cpuDescription": "{{numOfCores}}x {{modelName}}",
-            "memoryStats": "{{percentUsed}}% đã sử dụng ({{usedGib}} / {{totalGib}}"
+            "memoryStats": "{{percentUsed}}% đã sử dụng ({{usedGib}} / {{totalGib}}",
+            "showDetailed": "Hiển thị thông số kỹ thuật hệ thống chi tiết",
+            "steamDeck": "Steam Deck",
+            "systemModel": "Mô hình hệ thống:",
+            "version": "Phiên bản: {{appVersion}}"
         },
         "wine": {
             "manager": {
@@ -657,8 +668,8 @@
         "collapse": "Thu gọn sidebar",
         "uncollapse": "Hủy thu gọn sidebar",
         "store": "Cửa ngõ thương mại",
-        "achievements": "Thành Tựu",
-        "library": "Thư Viện",
+        "achievements": "Những thành quả",
+        "library": "Bộ sưu tập",
         "downloadManager": "Phần mềm quản lý tải xuống"
     },
     "status": {
@@ -675,11 +686,11 @@
     "toolbox": {
         "settings": {
             "default-wineprefix": "Chọn thư mục prefix mặc định cho các cấu hình mới",
-            "wineprefix": "Chọn thư mục cho Wine Prefix mới"
+            "wineprefix": "Chọn thư mục cho các Wine Prefix vừa tạo"
         }
     },
     "tooltip": {
-        "addpath": "Thêm đường dẫn mới",
+        "addpath": "Thêm hướng đi mới",
         "removepath": "Xóa đường dẫn hiện tại"
     },
     "tray": {
@@ -721,18 +732,18 @@
         "size": "Kích thước màn hình"
     },
     "externalLink": {
-        "dontAskAgain": "Đừng hỏi lại",
-        "warning": "Bạn sắp mở một liên kết bên ngoài."
+        "dontAskAgain": "Đừng hỏi lại lần nào nữa",
+        "warning": "Bạn sắp mở một liên kết từ bên ngoài.==WEBLATE_PART==Bạn chuẩn bị mở một liên kết ngoài.==WEBLATE_PART==Bạn sẽ mở một liên kết bên ngoài."
     },
     "wiki_info": {
         "not_found": "Chúng tôi không thể xác định thêm thông tin."
     },
     "dlc": {
         "actions": "hành động thực hiện",
-        "installDlcs": "Cài đặt tất cả bản mở rộng (DLC)",
+        "installDlcs": "Cài đặt toàn bộ DLC",
         "noDlcFound": "Không tìm thấy DLC nào",
-        "size": "Kích thước",
-        "title": "Title"
+        "size": "Kích thước màn hình",
+        "title": "Thông tin thêm"
     },
     "amazon": "amazon",
     "Amazon Games": "Trò chơi Amazon",
@@ -747,7 +758,7 @@
     "hyperplay": {
         "buttons": {
             "agree": "Tôi đồng ý.",
-            "noThanks": "Không cảm ơn"
+            "noThanks": "Cảm ơn nhưng không cần thiết"
         },
         "turnAnalyticsOn": "Bật",
         "folder": "Thư mục tài liệu",
@@ -928,10 +939,10 @@
             "CONFIRMED": "Mã thông báo tùy chỉnh đã được thêm vào"
         }
     },
-    "exit_game": "Thoát game",
-    "profile": "Hồ sơ",
+    "exit_game": "Đóng game",
+    "profile": "Tài khoản",
     "sideload": {
-        "warningTitle": "Quan trọng",
+        "warningTitle": "Rất quan trọng",
         "warningMessage": "Cài đặt một trò chơi từ bên ngoài là một tính năng dành cho các nhà phát triển và người dùng có kinh nghiệm. Cài đặt một trình cài đặt chứa phần mềm độc hại có thể làm tổn hại máy tính của bạn và dẫn đến việc đánh cắp tài sản."
     },
     "import-game-folder": {
@@ -996,7 +1007,8 @@
     "gameUpdateNotifications": {
         "body": {
             "multiple": "{{gameName}} và các trò chơi khác đã sẵn sàng để cập nhật."
-        }
+        },
+        "title": "Cập nhật trò chơi có sẵn"
     },
     "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Khi khởi động lần đầu, Steam sẽ tải xuống các tệp cần thiết và sẽ mất vài phút để hoàn tất và màn hình đăng nhập xuất hiện;",
     "back_to_game": "Quay lại trò chơi",
