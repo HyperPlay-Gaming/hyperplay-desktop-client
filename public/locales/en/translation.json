@@ -367,6 +367,7 @@
             "extracting": "Extracting...",
             "installed": "Ready to play",
             "installing": "Downloading...",
+            "patching": "Patching...",
             "paused": "Paused"
         },
         "linkSteamAccountCta": "Go to Steam sign in",
