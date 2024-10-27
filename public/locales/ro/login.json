@@ -1,21 +1,22 @@
 {
     "button": {
-        "login": "Autentificare",
-        "loading": "Seîncarcă"
+        "login": "Înscriere",
+        "loading": "Se încarcă  \nÎncărcare  \nSe încarcă acum",
+        "error": "Eroare, încearcă un cod diferit."
     },
     "message": {
-        "part1": "In order to log in and install your games, you first need to follow the steps below:",
-        "part2": "Deschide",
-        "part3": "Epic Store aici",
-        "part4": ", log in to your account and copy your",
-        "part5": "numărul de informații authorization code",
-        "part6": "Paste your",
-        "part7": "număr authorization code",
-        "part8": "in the input box below and click on the login button."
+        "part1": "Pentru a te conecta și a instala jocurile tale, trebuie mai întâi să urmezi pașii de mai jos:  \nPentru a te autentifica și a instala jocurile tale, trebuie să urmezi mai întâi pașii de mai jos:  \nPentru a te loga și a instala jocurile tale, trebuie să urmezi mai întâi pașii de mai jos:",
+        "part2": "Deschide aplicația",
+        "part3": "Epic Store se află aici",
+        "part4": ", intră în contul tău și copiază-ți",
+        "part5": "numărul informațiilor codului de autorizare",
+        "part6": "Introdu-ți",
+        "part7": "număr pentru codul de autorizare",
+        "part8": "în caseta de introducere de mai jos și faceți clic pe butonul de conectare.  \nîn câmpul de introducere de mai jos și apăsați butonul de autentificare.  \nîn zona de introducere de mai jos și dați clic pe butonul de logare."
     },
     "status": {
         "error": "Eroare",
         "loading": "Se încarcă lista de jocuri, așteptați"
     },
-    "welcome": "Bun venit!"
+    "welcome": "Bine ai venit!  \nTe salutăm!  \nBun venit în comunitate!"
 }
