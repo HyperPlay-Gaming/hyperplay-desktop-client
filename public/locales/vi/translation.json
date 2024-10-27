@@ -112,8 +112,8 @@
             "title": "Select EXE to Run"
         },
         "select": {
-            "button": "Select",
-            "exe": "Chọn file EXE"
+            "button": "Chọn lựa",
+            "exe": "Chọn tệp thực thi EXE"
         },
         "shortcuts": {
             "message": "Các biểu tượng tắt đã được tạo ra trên màn hình chính và menu Bắt đầu",
