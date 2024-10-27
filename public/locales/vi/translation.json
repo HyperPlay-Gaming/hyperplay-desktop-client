@@ -199,7 +199,7 @@
     "download-manager": {
         "install-type": {
             "install": "Cài đặt phần mềm",
-            "update": "Cập nhật"
+            "update": "Cập nhật thông tin"
         },
         "label": {
             "disk": "Disk",
@@ -280,7 +280,7 @@
             "part1": "HyperPlay đang tìm thư mục lưu, đa phần đều đúng. Trong trường hợp HyperPlay tìm sai, hãy sử dụng ô ghi đè để thay đổi.",
             "part2": "Trong trường hợp bạn thay đổi thư mục prefix cho Wine hoặc Proton, bạn sẽ cần kiểm tra lại đường dẫn vì Proton sử dụng prefix (/pfx) và tên người dùng (steamuser) khác. Bạn có thể xóa đường dẫn hiện tại, thoát khỏi trang cài đặt đồng bộ và quay lại lần nữa để HyperPlay tìm thư mục với prefix đúng.",
             "part3": "Đồng bộ thủ công: Chọn Tải xuống để tải xuống các trò chơi được lưu trên Đám mây. Tải lên để tải game trong máy lên đám mây. Buộc Tải xuống và Buộc Tải lên sẽ bỏ qua phiên bản trong máy hoặc trên đám mây.",
-            "part4": "Đồng bộ lưu tự động sẽ đồng bộ các bản sao lưu mỗi lần bạn bắt đầu và kết thúc chơi game."
+            "part4": "Chức năng đồng bộ lưu tự động sẽ thực hiện việc đồng bộ các bản lưu mỗi khi bạn bắt đầu chơi và sau khi bạn hoàn thành."
         },
         "vkd3d": "VKD3D là một lớp chuyển đổi sử dụng Vulkan cho các trò chơi DirectX 12. Kích hoạt nó có thể cải thiện khả năng tương thích một cách rõ rệt. Không có ảnh hưởng đến các trò chơi DirectX trước đó.",
         "wine": {
@@ -316,7 +316,8 @@
         "wine-repfix": {
             "message": "Wine sử dụng một cái gọi là WINEPREFIX để bao bọc các ứng dụng Windows. Tiền tố này chứa các tệp cấu hình Wine và một bản sao của cấu trúc tệp của C: (ổ đĩa chính trên hệ điều hành Windows). Trong bản sao của ổ đĩa C:, các tệp lưu game và các phụ thuộc được cài đặt qua winetricks được lưu trữ.\n\nWine sử dụng một khái niệm gọi là WINEPREFIX để bao bọc các ứng dụng Windows. Tiền tố này bao gồm các tệp cấu hình của Wine và một bản sao của cấu trúc tệp trên ổ C: (ổ đĩa chính của hệ điều hành Windows). Trong bản sao của ổ C:, các tệp lưu game và các phụ thuộc được cài đặt thông qua winetricks được lưu giữ.\n\nWine áp dụng một khái niệm gọi là WINEPREFIX để bao bọc các ứng dụng Windows. Tiền tố này chứa các tệp cấu hình của Wine và một bản sao của cấu trúc tệp trên ổ C: (ổ đĩa chính của hệ điều hành Windows). Trong bản sao của ổ C:, các tệp lưu game và các phụ thuộc được cài đặt qua winetricks được lưu trữ."
         },
-        "wine-path-invalid": "Đường dẫn Wine không hợp lệ, vui lòng chọn một đường dẫn khác."
+        "wine-path-invalid": "Đường dẫn Wine không hợp lệ, vui lòng chọn một đường dẫn khác.",
+        "wine-path-none-found": "Không tìm thấy phiên bản Wine, hãy tải một phiên bản từ Trình quản lý Tương thích"
     },
     "install": {
         "path": "Chọn đường dẫn cài"
@@ -399,7 +400,7 @@
         "ignore": "Không quan tâm",
         "offline": "Chế độ ngoại tuyến",
         "offline-retry-in": "Ngoại tuyến. Đang thử lại trong {{seconds}} giây.  \nNgoại tuyến. Đang thử lại sau {{seconds}} giây.  \nNgoại tuyến. Thử lại sau {{seconds}} giây nữa.",
-        "retrying": "Retrying"
+        "retrying": "Thực hiện lại"
     },
     "Open": "Mở",
     "options": {
@@ -510,7 +511,7 @@
             "latestVersion": "Phiên bản cập nhật nhất: {{version}}",
             "notInstalled": "The Epic Overlay is not installed",
             "notInstalledMsg": "Epic Overlay chưa được cài đặt. Bạn có muốn cài đặt nó ngay bây giờ không?  \nEpic Overlay chưa được cài đặt. Bạn có muốn tiến hành cài đặt ngay bây giờ không?  \nEpic Overlay chưa được cài đặt. Bạn có muốn thực hiện cài đặt ngay bây giờ không?",
-            "notInstalledTitle": "Overlay not installed",
+            "notInstalledTitle": "Chưa có overlay được cài đặt",
             "remove": "Gỡ cài đặt",
             "removeConfirm": "Bạn có muốn gỡ bỏ Epic Overlay không?",
             "removeConfirmTitle": "Xác nhận xóa lớp phủ",
@@ -524,7 +525,7 @@
         "gamemode": "Sử dụng GameMode (Feral Game Mode là cần thiết để cài đặt)",
         "language": "Chọn ngôn ngữ của ứng dụng",
         "library_top_option": {
-            "disabled": "Tắt",
+            "disabled": "Không kích hoạt",
             "favourites": "Các trò chơi yêu thích",
             "recently_played": "Trò chơi gần đây nhất",
             "recently_played_installed": "Recently Played Games (Only Installed)"
@@ -657,7 +658,7 @@
         "downloadManager": "Phần mềm quản lý tải xuống"
     },
     "status": {
-        "installing": "Đang cài đặt",
+        "installing": "Thực hiện cài đặt",
         "logging": "Đang đăng nhập...",
         "processing": "Đang xử lý tệp, vui lòng đợi",
         "preparing_login": "Đang chuẩn bị đăng nhập... "
@@ -907,6 +908,9 @@
         },
         "description": {
             "PENDING": "Đang chờ xác nhận blockchain. Chúng tôi sẽ thông báo cho bạn khi nó được xác nhận"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Mã thông báo tùy chỉnh đã được thêm vào"
         }
     },
     "exit_game": "Thoát game",
