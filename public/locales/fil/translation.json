@@ -1,234 +1,1051 @@
 {
-    "All": "Lahat",
+    "All": "Lahat ng nilalaman",
     "hyperplay": {
         "onboarding": {
-            "terms": "Kasunduan sa Serbisyo",
+            "terms": "Mga Patakaran sa Serbisyo",
             "walletSelection": {
                 "screens": {
                     "import": {
-                        "learnMore": "Matuto pa"
+                        "learnMore": "Tuklasin pa.",
+                        "cantFindProfile": "Hindi mahanap ang iyong browser profile?",
+                        "createNewWallet": "Lumikha ng bagong MM extension wallet",
+                        "orWord": "O",
+                        "title": "Pumili ng browser na i-import mula sa",
+                        "useRecoveryPhrase": "Mag-import gamit ang Secret Recovery phrase",
+                        "details": "Ang mga browser sa ibaba ay may naka-install na MetaMask. Pumili ng isa na nais mong pag-importan.",
+                        "useRecoveryPhraseInfo": "Inirerekomenda ang tampok na ito para sa mga advanced na gumagamit at developer. Ang iyong lihim na recovery phrase ay naka-imbak nang lokal sa MetaMask at hindi kailanman ibinabahagi sa HyperPlay."
+                    },
+                    "info": {
+                        "title": "Ano ang wallet?",
+                        "login": {
+                            "title": "Isang Bagong Paraan upang Mag-Log In",
+                            "details": "Isang alternatibo sa paglikha ng mga bagong account at password sa bawat website, ikonekta na lang ang iyong wallet."
+                        },
+                        "skip": "Laktawan muna",
+                        "createWalletCTA": "Lumikha ng wallet",
+                        "createWalletDescription": "I-click ang “Lumikha ng wallet” sa ibaba kung wala kang wallet o nais mong lumikha ng bago:",
+                        "digitalAssets": {
+                            "details": "Ang mga wallet ay ginagamit upang magpadala, tumanggap, mag-imbak, at ipakita ang mga digital na asset tulad ng mga token at NFT.",
+                            "title": "Isang Tahanan para sa Iyong Digital na Yaman"
+                        }
+                    },
+                    "scan": {
+                        "details": "Lumikha ng isang naka-encrypt na channel ng komunikasyon. Ang iyong mga susi ay hindi kailanman ibabahagi sa HyperPlay.",
+                        "dontHaveWallet": "Wala ka bang wallet?",
+                        "getMetamask": "Kumuha ng MetaMask",
+                        "title": "I-scan ang QR gamit ang ",
+                        "updateWarning": "May mga isyu? Siguraduhing up to date ang MetaMask."
                     }
-                }
-            }
+                },
+                "title": "Mga Koneksyon ng Wallet",
+                "pleaseConnect": "Mangyaring ikonekta ang iyong wallet, o i-download ang Metamask mobile-app upang makapagsimula:"
+            },
+            "connectionCanceled": {
+                "description": "Pakikonpirma ang kahilingan sa koneksyon sa iyong mobile wallet upang magpatuloy.",
+                "title": "Kanselado ang koneksyon!"
+            },
+            "welcome": {
+                "text": {
+                    "bugs": "Pakisuyong tandaan na ang HyperPlay ay isang pampublikong alpha. Maraming mga tampok ang nasa ilalim ng pag-unlad, at magkakaroon ng mga bug.",
+                    "communityCTA_1": "Gusto naming marinig ang iyong feedback at makasama ka sa aming",
+                    "construction": "Ang HyperPlay ay nasa ilalim ng konstruksyon.",
+                    "communityCTA_2": "komunidad. Sama-sama, hubugin natin ang hinaharap ng gaming!",
+                    "description": "Ang HyperPlay ay isang game launcher at aggregator ng game store mula sa hinaharap. Sa HyperPlay, maaari mong dalhin ang iyong wallet, tokens, at assets sa bawat laro. Sinusuportahan ng HyperPlay ang buong aklatan ng Epic Store, GOG, at ang aming sariling HyperPlay store. Sa paggamit ng HyperPlay, sumasang-ayon ka sa aming"
+                },
+                "title": "Maligayang pagdating sa HyperPlay Early Access!"
+            },
+            "connectionConnected": {
+                "title": "Konektado ang wallet!",
+                "description": "Nakakonekta ang iyong wallet. Handa ka nang maglaro."
+            },
+            "analytics": {
+                "anonymized": "Magpadala ng anonymized na pag-click at interaksyon sa laro;",
+                "privacyCaption": "Ang data na ito ay pinagsama-sama at samakatuwid ay hindi nagpapakilala para sa mga layunin ng General Data Protection Regulation (EU) 2016/679. Para sa karagdagang impormasyon tungkol sa aming mga kasanayan sa privacy, mangyaring tingnan ang aming ",
+                "title": "Tulungan kaming pagbutihin ang HyperPlay!",
+                "body": "Nais ng HyperPlay na mangolekta ng data ng paggamit upang mas maunawaan kung paano nakikipag-ugnayan ang aming mga gumagamit sa aplikasyon. Ang impormasyong ito ay tumutulong sa amin na maunawaan kung paano mo ginagamit ang app at nagbibigay-daan sa amin na gawing mas mahusay ang HyperPlay para sa iyo.",
+                "hyperplayWill": "Gagawin ng HyperPlay:",
+                "neverCollectIP": " kolektahin ang iyong buong IP address;",
+                "neverCollectPersonal": " kolektahin ang mga susi, address, balanse, hash, o anumang personal na impormasyon;",
+                "neverSellData": " ibenta ang data para sa kita. Kailanman!"
+            },
+            "connectAgain": "Kumonekta muli"
         },
         "buttons": {
-            "noThanks": "Salamat Nalang"
+            "noThanks": "Salamat, pero hindi na",
+            "agree": "Sang-ayon ako"
         },
-        "folder": "Lagayan",
+        "folder": "Lalagyan",
         "gamecard": {
-            "paused": "Sandaling Nakahinto"
+            "paused": "Nakatigil na",
+            "installed": "Handa nang maglaro",
+            "installing": "Nagda-download...",
+            "distributables": "Nag-iinstall ng mga Distributables...",
+            "extracting": "Nagsasagawa ng pagkuha..."
         },
-        "logOut": "Mag log out",
-        "misc": "Hindi kailanman"
+        "logOut": "Mag-sign out",
+        "misc": "Walang pagkakataon",
+        "accesscodes": {
+            "success": {
+                "validation": "Tagumpay! Wasto ang access code"
+            },
+            "error": {
+                "validation": "Hindi wasto ang access code"
+            },
+            "requirescode": "Ang pag-update ng larong ito ay nangangailangan ng access code."
+        },
+        "achievements": {
+            "addThisGame": "Idagdag ang larong ito",
+            "freeMints": "Libreng Mints",
+            "gamesToMint": "Mga Laro na I-mint",
+            "noAchievements": {
+                "doubleCheckMessage": "Mukhang hindi kami makahanap ng anumang laro sa iyong Steam account sa ngayon. Isang mabilis na paalala na suriin ang iyong mga detalye ng laro na nakatakdang pampubliko. Sa ganitong paraan, ma-access namin ang iyong mga tagumpay at maibigay sa iyo ang pinakamahusay na karanasan.",
+                "oops": "Aba!"
+            }
+        },
+        "linkSteamAccountCta": "Pumunta sa pag-sign in sa Steam",
+        "otp": "Isang Beses na Passcode",
+        "Sync": "I-sync",
+        "syncing": "Nagsi-sync...",
+        "turnAnalyticsOff": "Patayin",
+        "linkSteamAccountDescription": "Mag-sign in sa Steam upang i-link ang iyong HyperPlay account.",
+        "publicAlpha": "Pampublikong Alpha",
+        "viewFullscreen": "Tumingin sa fullscreen",
+        "viewItem": "Tingnan ang {{item}}",
+        "analyticsOff": "Naka-off ang Analytics",
+        "analyticsOn": "Naka-on ang Analytics",
+        "browserImport": {
+            "appId": "App Id",
+            "profile": "Profile"
+        },
+        "linkSteamAccountTitle": "I-link ang Steam Account",
+        "viewPortfolio": "Tingnan ang portfolio",
+        "changeWallet": "Palitan ang wallet account",
+        "copyUrl": "Kopyahin ang URL",
+        "currentWallet": "Kasalukuyang wallet",
+        "discordApp": "Discord"
     },
     "info": {
-        "version": "Bersyon ng alak"
+        "version": "Bersyon ng alak na software",
+        "save-sync": {
+            "searching": "Sinusubukang tukuyin ang tamang save folder (i-click upang kanselahin)"
+        },
+        "settings": "Ang mga setting ay awtomatikong nasasave",
+        "hyperplay": {
+            "version": "Bersyon ng HyperPlay"
+        }
     },
     "infobox": {
-        "help": "Tulong",
-        "requirements": "Pangangailangan sa System",
-        "warning": "Babala"
+        "help": "Tulong na",
+        "requirements": "Mga Tuntunin ng Sistema",
+        "warning": "Babala sa lahat",
+        "wine-path-invalid": "Hindi wasto ang Wine Path, mangyaring pumili ng iba.",
+        "wine-path": "Wine Path",
+        "wine-prefix": {
+            "title": "Wine Prefix"
+        },
+        "wine-repfix": {
+            "message": "Gumagamit ang Wine ng tinatawag na WINEPREFIX upang i-encapsulate ang mga aplikasyon ng Windows. Ang prefix na ito ay naglalaman ng mga configuration file ng Wine at isang reproduksyon ng hierarchy ng file ng C: (ang pangunahing disk sa isang Windows OS). Sa reproduksyong ito ng C: drive, naka-imbak ang iyong mga save file ng laro at mga dependency na na-install sa pamamagitan ng winetricks."
+        }
     },
     "quest": {
-        "points": "mga puntos",
-        "reward": "gantimpala",
-        "signIn": "Mag-sign in",
-        "active": "Aktibo",
+        "points": "Mga yunit",
+        "reward": "premyo",
+        "signIn": "Mag-log in",
+        "active": "Gumagana",
         "claimWarning": {
-            "cancel": "Kanselahin",
-            "confirm": "Kumpirmahin"
-        }
+            "cancel": "Bawiin",
+            "confirm": "I-verify",
+            "body": "<bold>MAHALAGA:</bold> Mangyaring tiyakin na naglalaan ka ng sapat na gas sa {{networkName}} network para sa matagumpay na pagkumpirma ng transaksyon <bold>sa loob ng 7 araw.</bold>"
+        },
+        "noG7ConnectionClaim": "Kailangan mong magkaroon ng Game7 account na naka-link sa {{email}} upang makuha ang iyong mga gantimpala.",
+        "noG7ConnectionSync": "Kailangan mong magkaroon ng Game7 account na naka-link sa {{email}} upang ma-resync ang iyong mga gawain.",
+        "notEnoughGas": "Hindi sapat ang balanse ng wallet upang makuha ang iyong gantimpala dahil sa mga bayarin sa gas. Subukan ang ibang wallet o punan muli ito bago subukang muli.",
+        "playstreak": {
+            "now": "Ngayon",
+            "playToStart": "Laruin ang larong ito upang simulan ang iyong streak!",
+            "progressTowardsStreak": "progreso patungo sa streak ng araw na ito.",
+            "streakCompleted": "Natapos ang streak! Kunin ang iyong mga gantimpala ngayon.",
+            "streakProgress": "Progreso ng Streak",
+            "dayResets": "Nagsasauli ng Araw:",
+            "playEachDay": "Maglaro araw-araw upang hindi ma-reset ang iyong streak!",
+            "sync": "I-sync ang Progreso",
+            "syncSuccess": "Naka-sync ang progreso",
+            "days": "mga araw"
+        },
+        "g7Numclaimed": "Kabuuang Naangkin na G7 Credits",
+        "pointsClaimed": "Mga Nakuha na Punto",
+        "quests": "Mga Misyon",
+        "type": {
+            "playstreak": "Laro Streak"
+        },
+        "readyForClaim": "Handa na para sa pag-angkin",
+        "associatedGames": "Mga Kaugnay na Laro",
+        "connectSteamAccount": "Ikonekta ang Steam account",
+        "reputation": "Reputasyon",
+        "linkAccount": "I-link ang iyong Steam account upang suriin ang pagiging karapat-dapat.",
+        "needMoreAchievements": "Kailangan mong makumpleto ang {{percent}}% ng mga achievement sa isa sa mga larong ito.",
+        "View Game": "Tingnan ang Laro",
+        "claimAll": "I-claim ang lahat",
+        "claimed": "Nakuha na",
+        "sync": "I-sync"
     },
     "setting": {
         "library_top_option": {
-            "disabled": "Hindi pinagana"
+            "disabled": "Hindi hindi naka-off",
+            "recently_played": "Kamakailan ay Nilalaro na mga Laro",
+            "favourites": "Paboritong Laro",
+            "recently_played_installed": "Kamakailan na Laro (Tanging Naka-install)"
         },
         "manualsync": {
-            "download": "I-download",
-            "upload": "I-upload"
+            "download": "Mag-download",
+            "upload": "I-upload ang file",
+            "forcedownload": "Puwersang I-download",
+            "forceupload": "Puwersang I-upload",
+            "sync": "I-sync",
+            "syncing": "Nagsi-sync",
+            "title": "Manu-manong I-sync ang mga Save"
         },
         "eosOverlay": {
-            "cancelInstall": "Kanselahin",
-            "checkForUpdates": "Maghanap ng update",
-            "disable": "Isara",
-            "enable": "Buksan",
-            "install": "I-install",
-            "remove": "I-uninstall",
-            "updateNow": "I-update"
+            "cancelInstall": "Bawiin",
+            "checkForUpdates": "Hanapin ang mga update",
+            "disable": "I-patay",
+            "enable": "Isagawa",
+            "install": "I-set up",
+            "remove": "I-uninstall ang software",
+            "updateNow": "I-update ang nilalaman",
+            "removeConfirm": "Sigurado ka bang nais mong i-uninstall ang Epic Overlay?",
+            "checkingForUpdates": "Nagsusuri para sa mga update...",
+            "notInstalledTitle": "Overlay na hindi naka-install",
+            "currentVersion": "Kasalukuyang Bersyon: {{version}}",
+            "installed": "Ang Epic Overlay ay naka-install",
+            "installing": "Ang Epic Overlay ay ini-install...",
+            "latestVersion": "Pinakabagong Bersyon: {{version}}",
+            "notInstalled": "Hindi naka-install ang Epic Overlay",
+            "notInstalledMsg": "Hindi naka-install ang Epic Overlay. Nais mo bang i-install ito ngayon?",
+            "removeConfirmTitle": "Kumpirmahin ang pagtanggal ng overlay",
+            "updating": "Nag-aupdate..."
         },
-        "winecrossoverbottle": "CrossOver Bote",
-        "wineversion": "Bersyon ng alak"
+        "winecrossoverbottle": "CrossOver Sisidlan",
+        "wineversion": "Bersyon ng Wine na software",
+        "adddesktopshortcuts": "Awtomatikong magdagdag ng mga shortcut sa desktop",
+        "mangohud": "I-enable ang Mangohud (kailangan i-install ang Mangohud)",
+        "darktray": "Gumamit ng Madilim na Tray Icon",
+        "fsync": "I-enable ang Fsync",
+        "start-in-tray": "Simulan sa Naka-minimize",
+        "download-no-https": "I-download ang mga laro nang walang HTTPS (kapaki-pakinabang para sa mga CDN tulad ng LanCache)",
+        "defaultWinePrefix": "Itakda ang Folder para sa mga bagong Wine Prefixes",
+        "dxvkfpslimit": "Limitahan ang FPS (DX9, 10 at 11)",
+        "FsrSharpnessStrenght": "Lakas ng FSR Sharpness",
+        "offlinemode": "Patakbuhin ang Laro Offline",
+        "showfps": "Ipakita ang FPS (DX9, 10 at 11)",
+        "autoUpdateGames": "Awtomatikong i-update ang mga laro",
+        "egs-sync": "I-sync sa Na-install na Epic Games",
+        "enableFSRHack": "I-enable ang FSR Hack (kailangang suportahan ng bersyon ng Wine)",
+        "log": {
+            "copy-to-clipboard": "Kopyahin ang nilalaman ng log sa clipboard",
+            "instructions_title": "Paano mag-ulat ng problema?",
+            "join-hyperplay-discord": "Sumali sa aming Discord",
+            "no-file": "Walang natagpuang log file",
+            "show-in-folder": "Ipakita ang log file sa folder",
+            "instructions-part-02": "Upang matulungan kaming masuri at ayusin ang problema sa lalong madaling panahon, mangyaring magbigay ng maraming impormasyon hangga't maaari, kabilang ang isang kopya ng iyong mga log. Ang aming support team ay magmamanman sa parehong mga channel at gagawin ang kanilang makakaya upang tumugon sa iyong isyu sa lalong madaling panahon. Salamat sa iyong pasensya at pag-unawa habang nagtatrabaho kami upang malutas ang anumang mga problema na maaari mong maranasan.",
+            "instructions-part-01": "Kung makatagpo ka ng anumang isyu habang ginagamit ang HyperPlay, mayroon kaming dalawang itinalagang lugar upang iulat ang iyong mga isyu sa aming Discord Server. Kung ikaw ay isang manlalaro, mangyaring iulat ang anumang problema sa pamamagitan ng pagbisita sa player-support-forum. Kung ikaw ay isang game dev, mangyaring iulat ang anumang problema sa pamamagitan ng pagbisita sa dev-support-forum."
+        },
+        "default-install-path": "Default na Landas ng Pag-install",
+        "disable_controller": "Huwag paganahin ang pag-navigate ng Hyperplay gamit ang controller",
+        "addgamestoapplications": "Awtomatikong idagdag ang mga laro sa Mga Aplikasyon",
+        "alt-gogdl-bin": "Pumili ng Alternatibong GOGDL Binary na gagamitin",
+        "autodxvk": "Awtomatikong I-install/I-update ang DXVK sa Prefix",
+        "autodxvknvapi": "Awtomatikong I-install/I-update ang DXVK-NVAPI sa Prefix",
+        "ignoreGameUpdates": "Balewalain ang mga update ng laro",
+        "library_top_section": "Ituktok na Seksyon ng Library",
+        "msync": "Na-enable ang Msync",
+        "primerun": {
+            "confirmation": {
+                "message": "Isang graphics card lamang ang natukoy sa sistemang ito. Mangyaring tandaan na ang opsyong ito ay nilayon para sa mga multi-GPU na sistema na may headless GPUs (tulad ng mga laptop). Sa mga single-GPU na sistema, ang GPU ay awtomatikong ginagamit at ang pag-enable sa opsyong ito ay maaaring magdulot ng mga isyu. Talaga bang nais mong i-enable ang opsyong ito?",
+                "title": "Isang GPU lamang ang natukoy"
+            },
+            "description": "Gumamit ng Nakalaang Graphics Card"
+        },
+        "savefolder": {
+            "not-found": "Hindi matagpuan ang save folder, pakipili ito nang manu-mano (i-click upang subukan muli)",
+            "placeholder": "Pumili ng eksaktong folder ng mga save game",
+            "warning": "Pakisuriin nang dalawang beses kung tama ang landas (i-click upang subukan muli)"
+        },
+        "discordRPC": "I-enable ang Discord Rich Presence",
+        "addgamestosteam": "Awtomatikong idagdag ang mga laro sa Steam",
+        "alt-legendary-bin": "Pumili ng Alternatibong Legendary Binary",
+        "autoLaunchHyperPlay": "Awtomatikong Ilunsad ang HyperPlay",
+        "autosync": "Autosync ng Mga Save",
+        "language": "Pumili ng Wika",
+        "runexe": {
+            "message": "I-drag at i-drop ang mga file dito",
+            "title": "Patakbuhin ang EXE sa Prefix"
+        },
+        "steamruntime": "Gamitin ang Steam Runtime",
+        "addgamestostartmenu": "Idagdag ang mga laro sa start menu nang awtomatiko",
+        "default-steam-path": "Default na landas ng Steam",
+        "disable_logs": "I-disable ang Logs",
+        "prefered_language": "Pinas preferensiyang Wika (Code ng Wika)",
+        "showMetalOverlay": "Ipakita ang Stats Overlay",
+        "wineprefix": "WinePrefix folder",
+        "gamemode": "Gamitin ang GameMode (kailangan i-install ang Feral Game Mode)",
+        "maxRecentGames": "Nilalaro Kamakailan upang Ipakita",
+        "steamId": "Steam ID",
+        "autovkd3d": "Awtomatikong I-install/I-update ang VKD3D sa Prefix",
+        "change-target-exe": "Pumili ng alternatibong EXE na patakbuhin",
+        "checkForUpdatesOnStartup": "Suriin ang mga Update ng HyperPlay sa Startup",
+        "crossover-version": "Bersyon ng Crossover/Wine",
+        "custom_themes_path": "Daanan ng Mga Pasadyang Tema",
+        "customWineProton": "Pasadyang Landas ng Wine/Proton",
+        "preferSystemLibs": "Pumili ng mga system libraries",
+        "select_theme": "Pumili ng Tema",
+        "esync": "I-enable ang Esync",
+        "maxworkers": "Pinakamataas na Bilang ng mga Manggagawa kapag nagda-download",
+        "minimize-on-launch": "I-minimize ang HyperPlay Pagkatapos ng Paglunsad ng Laro"
     },
     "settings": {
         "navbar": {
-            "accounts": "Account",
-            "advanced": "Advanced",
-            "general": "Pangkalahatan",
-            "other": "Karagdagan"
+            "accounts": "Mga Akawnt",
+            "advanced": "Pinaunlad",
+            "general": "Pangkalahatang impormasyon",
+            "other": "Karagdagang impormasyon",
+            "sync": "Cloud Saves Sync",
+            "systemInformation": "Impormasyon ng Sistema",
+            "log": "Log"
         },
-        "copiedToClipboard": "Kinopya sa clipboard",
+        "copiedToClipboard": "Naka-copy sa clipboard!",
         "systemInformation": {
-            "copyToClipboard": "Kopyahin sa clipboard"
-        }
+            "copyToClipboard": "==WEBLATE_PART==\nKopyahin sa clipboard==WEBLATE_PART==\nKopyahin sa clipboard==WEBLATE_PART==\nKopyahin sa clipboard",
+            "osVersion": "Bersyon {{versionNumber}}",
+            "osNameFlatpak": "{{osName}} (sa loob ng Flatpak)",
+            "systemModel": "Modelo ng Sistema:",
+            "legendaryVersion": "Legendary: {{legendaryVersion}}",
+            "os": "Operating System:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gpu": "GPU:",
+            "gpuWithNumber": "GPU {{number}}:",
+            "memory": "Memorya:",
+            "memoryStats": "{{percentUsed}}% ginamit ({{usedGib}} / {{totalGib}}",
+            "showDetailed": "Ipakita ang detalyadong mga pagtutukoy ng sistema",
+            "cpu": "CPU:",
+            "steamDeck": "Steam Deck",
+            "gpuDriver": "Driver: {{driverVersion}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "version": "Bersyon: {{appVersion}}"
+        },
+        "reset-hyperplay": "I-reset ang HyperPlay",
+        "eacRuntime": {
+            "name": "EasyAntiCheat Runtime",
+            "installing": "Nag-iinstall ng EAC Runtime...",
+            "gameModeRequired": {
+                "title": "Kinakailangan ang GameMode",
+                "message": "Kinakailangan ang GameMode para gumana ang EAC runtime sa Flatpak. Gusto mo bang i-enable ito ngayon?"
+            }
+        },
+        "open-config-file": "Buksan ang Config File",
+        "battlEyeRuntime": {
+            "name": "BattlEye AntiCheat Runtime",
+            "installing": "Nag-iinstall ng BattlEye Runtime..."
+        },
+        "gameMode": {
+            "eacRuntimeEnabled": {
+                "title": "Pinagana ang EAC runtime",
+                "message": "Naka-enable ang EAC runtime, na hindi gagana nang tama nang walang GameMode. Gusto mo bang i-disable ang EAC Runtime at GameMode?"
+            }
+        },
+        "copyToClipboard": "Kopyahin ang Lahat ng Mga Setting sa Clipboard",
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
+        },
+        "default_hint": "Ang mga pagbabago sa seksyong ito ay nalalapat lamang bilang default na mga halaga kapag nag-iinstall ng mga laro. Kung nais mong baguhin ang mga setting ng isang na-install na laro, gamitin ang pindutan ng Mga Setting sa pahina ng laro.",
+        "log": {
+            "long-log-hint": "Nakatanggal ang log, huling 1000 linya ang ipinakita!"
+        },
+        "gamesSettings": "Mga Setting ng Laro",
+        "saves": {
+            "warning": "Ang Cloud Saves feature ay nasa Beta, mangyaring i-backup ang iyong mga save bago mag-sync (sakaling may mangyaring hindi tama)"
+        },
+        "clear-cache": "I-clear ang HyperPlay Cache",
+        "reset-extension": "I-reset ang Extension"
     },
     "sidebar": {
-        "library": "Aklatan",
-        "downloadManager": "Tagapamahala ng Pag-download"
+        "library": "Tanggapan ng mga aklat",
+        "downloadManager": "Tagapamahala ng Pag-download ng Nilalaman",
+        "achievements": "Mga Nakamit",
+        "store": "Tindahan"
     },
     "status": {
-        "installing": "Installing",
-        "processing": "Pinoproseso ang mga file, mangyaring maghintay"
+        "installing": "Pag-install",
+        "processing": "Pakiusap, maghintay habang pinoproseso ang mga file",
+        "logging": "Naglo-log In..."
     },
     "tray": {
-        "about": "Tungkol sa",
-        "quit": "Isara",
-        "show": "Ipakita",
-        "reload": "I-reload"
+        "about": "Tungkol sa impormasyon na ito",
+        "quit": "Mag-exit",
+        "show": "Ipakita ang",
+        "reload": "I-reload ang laro"
     },
     "userselector": {
-        "logIn": "Mag-log in",
-        "logout": "Mag log out",
-        "logout_confirmation": "Sigurado kang gusto mong mag-log out?",
-        "quit": "Isara"
+        "logIn": "Pumasok sa sistema",
+        "logout": "Mag-sign out",
+        "logout_confirmation": "Kumpiyansa ka bang nais mong mag-log out?",
+        "quit": "Mag-exit",
+        "logging_out": "Nag-log out",
+        "manageaccounts": "Pamahalaan ang mga Account",
+        "manageStore": "Pamahalaan ang mga tindahan"
     },
     "webview": {
         "controls": {
-            "back": "Bumalik",
-            "forward": "Sumulong",
-            "openInBrowser": "Buksan sa browser"
+            "back": "Pumunta pabalik",
+            "forward": "Lumakad pasulong",
+            "openInBrowser": "Buksan gamit ang browser",
+            "reload": "I-reload ang pahina"
         }
     },
     "wine": {
-        "actions": "Mga Gawain",
-        "release": "Petsa ng Pag-release",
-        "size": "Laki"
+        "actions": "Mga Hakbang",
+        "release": "Petsa ng Pagbigay",
+        "size": "Laki ng sukat",
+        "manager": {
+            "title": "Compatibility Layer ",
+            "not-found": "Walang nahanap na bersyon ng Wine. Mangyaring i-click ang icon ng pag-refresh upang subukan muli.",
+            "unzipping": "Naka-unzip"
+        }
     },
     "anticheat": {
-        "reference": "Sanggunian",
-        "source": "Source",
-        "status": "Katayuan"
+        "reference": "Sangguniang Konseho",
+        "source": "==WEBLATE_PART==\nPinagmulan==WEBLATE_PART==\nPinagmulan==WEBLATE_PART==\nPinagmulan",
+        "status": "Kahalagahan",
+        "anticheats": "Anticheats",
+        "may_not_work": "Maaaring hindi ito gumana dahil sa tinanggihan o sira na suporta sa anticheat.",
+        "title": "Kasama sa larong ito ang anti-cheat software"
     },
     "box": {
-        "choose": "Pumili",
-        "dontShowAgain": "Huwag ipakita ang edad",
+        "choose": "Pumili ng opsyon",
+        "dontShowAgain": "Huwag nang ipakita muli ang mensahe",
         "error": {
             "generic": {
-                "title": "Piliin ang EXE na Patakbuhin"
+                "title": "Pumili ng EXE na Patakbuhin"
             },
-            "title": "Error"
+            "title": "May pagkakamali",
+            "delete-files": {
+                "body": "Error sa pagtanggal ng na-extract na folder {{path}}. Pakitanggal ito nang manu-mano. \n                {{paragraph}} \n                {{error}}",
+                "title": "Error sa pagtanggal ng na-extract na folder"
+            },
+            "winetricks": {
+                "message": "Nagbalik ang Winetricks ng sumusunod na error sa panahon ng pagpapatupad: {{newLine}}{{error}}",
+                "title": "Error sa Winetricks"
+            },
+            "dxvk": {
+                "message": "Error sa pag-install ng DXVK/VKD3D! Pakisuri ang iyong koneksyon!",
+                "title": "DXVK/VKD3D error"
+            },
+            "folder-not-found": {
+                "title": "Mukhang tinanggal ang folder ng laro, nais mo bang tanggalin ang laro mula sa listahan ng naka-install?"
+            },
+            "launchAborted": "Nakapigil ang paglulunsad",
+            "moving": "Error sa Paglipat ng Laro {{error}}",
+            "steam": {
+                "message": "Nabigo ang pag-install ng Steam! Mangyaring basahin nang mabuti ang mga tagubilin at subukang muli! {{paragraph}} {{error}}",
+                "title": "Error sa Steam"
+            },
+            "ubisoft-connect": {
+                "message": "Nabigo ang pag-install ng Ubisoft Connect sa game prefix. Suriin ang aming wiki page sa https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac upang manu-manong i-install ito.",
+                "title": "Ubisoft Connect"
+            },
+            "update": {
+                "message": "May nangyaring mali sa pag-update! Mangyaring manu-manong i-uninstall at muling i-install ang HyperPlay.",
+                "title": "Error sa Pag-update"
+            },
+            "add": {
+                "steam": {
+                    "body": "Nabigo ang pagdaragdag ng {{game}} sa Steam na may: {{newLine}} {{error}}",
+                    "title": "Pagdaragdag ng Error"
+                }
+            },
+            "credentials": {
+                "message": "Nawalan na ng bisa ang iyong mga kredensyal, mangyaring mag-logout at mag-login muli."
+            },
+            "cx-bottle-not-found": {
+                "message": "Ang CrossOver bottle \"{{bottle_name}}\" ay hindi umiiral, hindi ma-launch!",
+                "title": "Hindi natagpuan ang CrossOver bottle"
+            },
+            "diskspace": {
+                "message": "Hindi sapat ang magagamit na espasyo sa disk",
+                "title": "Walang Espasyo"
+            }
         },
         "no": "HINDI",
-        "ok": "Sige",
+        "ok": "Sige na",
         "quit": {
-            "title": "Alis"
+            "title": "Mag-exit",
+            "message": "May mga nakabinbing operasyon, sigurado ka ba?"
         },
         "runexe": {
-            "title": "Piliin ang EXE na Patakbuhin"
+            "title": "Pumili ng EXE na Irun"
         },
         "select": {
-            "button": "Pumili"
+            "button": "Pumili ng opsyon",
+            "exe": "Pumili ng EXE"
         },
         "sync": {
-            "button": "Pumili"
+            "button": "Pumili ng opsyon",
+            "error": "Hindi wastong Daan",
+            "title": "Pumili ng direktoryo ng mga save"
         },
         "warning": {
-            "title": "Babala"
+            "title": "Babala sa panganib",
+            "wine-change": {
+                "title-gptk": "Hindi Tugma ang Game Porting Toolkit ",
+                "title": "Hindi natagpuan ang Wine!",
+                "message": "Hindi namin mahanap ang napiling bersyon ng wine upang ilunsad ang pamagat na ito ({{selectedWine}}). {{newline}} Nakahanap kami ng isa pa, nais mo bang ipagpatuloy ang paglulunsad gamit ang {{foundWine}}?",
+                "message-gptk": "Upang makapagpatakbo ng mga laro gamit ang Apple Gaming porting toolkit, kailangan mong i-upgrade ang iyong macOS sa 14 (Sonoma) o mas mataas. {{newline}} Nakakita kami ng Wine sa iyong sistema, nais mo bang ipagpatuloy ang paglulunsad gamit ang {{foundWine}} ?"
+            },
+            "rosetta": {
+                "title": "Hindi natagpuan ang Rosetta",
+                "message": "Ang HyperPlay ay nangangailangan ng Rosetta upang tumakbo nang tama sa macOS gamit ang Apple Silicon chips. Mangyaring i-install ito mula sa terminal ng macOS gamit ang sumusunod na utos: \"softwareupdate --install-rosetta\" at i-restart ang HyperPlay. "
+            },
+            "epic": {
+                "import": "May malaking outage ang mga Epic Servers ngayon, hindi ma-import ang laro!",
+                "install": "May malaking outage ang mga Epic Servers ngayon, hindi ma-install ang laro!",
+                "update": "May malaking outage ang Epic Servers ngayon, hindi ma-update ang laro!"
+            }
         },
-        "yes": "OO"
+        "yes": "O",
+        "protocol": {
+            "install": {
+                "not_installed": "Kasalukuyang hindi naka-install. I-install ba ito?"
+            }
+        },
+        "shortcuts": {
+            "title": "Mga Shortcut",
+            "message-remove-mac": "Tinanggal ang mga shortcut mula sa Applications folder",
+            "message-remove": "Tinanggal ang mga shortcut mula sa Desktop at Start Menu",
+            "message": "Nalikha ang mga shortcut sa Desktop at Start Menu",
+            "message-mac": "Nalikha ang mga shortcut sa Applications folder"
+        },
+        "cache-cleared": {
+            "message": "Na-clear ang cache ng HyperPlay.",
+            "title": "Nawalang cache"
+        },
+        "wineprefix": "Pumili ng Folder ng Wine Prefix",
+        "choose-egs-prefix": "Pumili ng Prefix kung saan naka-install ang EGS",
+        "choose-gogdl-binary": "Pumili ng GOGDL Binary (kailangan ng restart)",
+        "choose-legendary-binary": "Pumili ng Legendary binary",
+        "customWine": "Pumili ng Wine o Proton binary",
+        "default-install-path": "Pumili ng Default na Landas ng Pag-install",
+        "default-steam-path": "Daanan ng Steam.",
+        "downloadNow": "I-download ngayon",
+        "reset-app": {
+            "question": {
+                "message": "Sigurado ka bang nais mong i-reset ang HyperPlay? Ito ay mag-aalis ng lahat ng Mga Setting at Caching ngunit hindi aalisin ang iyong Mga Na-install na laro o ang iyong Epic credentials. Ang mga portable na bersyon (AppImage, WinPortable, ...) ng HyperPlay ay kailangang muling simulan nang manu-mano pagkatapos.",
+                "title": "I-reset ang HyperPlay"
+            }
+        },
+        "reset-extension": {
+            "question": {
+                "message": "Sigurado ka bang nais mong i-reset ang MetaMask Extension?",
+                "title": "I-reset ang Extension"
+            }
+        },
+        "vcruntime": {
+            "install": {
+                "message": "Ang mga link sa pag-download para sa Visual C++ Runtimes ay na-bukas na. Mangyaring i-install ang parehong x86 at x64 na bersyon."
+            },
+            "notfound": {
+                "message": "Hindi naka-install ang Microsoft Visual C++ Runtimes, na kinakailangan ng ilang laro",
+                "title": "Hindi naka-install ang VCRuntime"
+            }
+        },
+        "info": {
+            "update": {
+                "appUpdated": "Na-update ang HyperPlay",
+                "appUpdated-message": "Na-update ang HyperPlay. Gusto mo bang i-update at i-restart ang HyperPlay ngayon?"
+            }
+        }
     },
     "button": {
-        "cancel": "Kanselahin",
+        "cancel": "Bawiin",
         "continue": "Ipagpatuloy",
-        "download": "I-download",
-        "update": "I-update",
-        "install": "I-install"
+        "download": "I-download ang file",
+        "update": "I-update ang nilalaman",
+        "install": "I-install",
+        "go_to_library": "Pumunta sa Library",
+        "sync": "I-sync",
+        "syncing": "Nagsi-sync",
+        "unsync": "I-unsync"
     },
     "controller": {
         "hints": {
-            "back": "Bumalik",
-            "options": "Pagpipilian",
-            "select": "Pumili"
+            "back": "Balik",
+            "options": "Mga Alternatibo",
+            "select": "Pumili ng opsyon",
+            "close_dialog": "Isara ang dialog",
+            "install_game": "I-install ang laro",
+            "move_cursor": "Ilipat ang cursor",
+            "play_game": "Maglaro ng laro",
+            "backspace": "Backspace",
+            "open_virtual_keyboard": "Buksan ang virtual keyboard",
+            "scroll": "Mag-scroll",
+            "close_keyboard": "Isara ang keyboard",
+            "close_options": "Isara ang Mga Opsyon",
+            "game_details": "Mga detalye ng laro",
+            "game_settings": "Mga setting ng laro",
+            "update_game": "I-update ang laro"
         }
     },
     "dlc": {
-        "actions": "Mga Gawain",
-        "installDlcs": "I-install ang lahat ng DLC",
-        "size": "Laki",
-        "title": "Pamagat"
+        "actions": "Mga Hakbang",
+        "installDlcs": "I-set up ang lahat ng DLC",
+        "size": "Laki ng sukat",
+        "title": "Pamagat ng Nilalaman",
+        "noDlcFound": "Walang natagpuang DLCs"
     },
     "download-manager": {
         "install-type": {
-            "install": "I-install",
-            "update": "I-update"
+            "install": "I-set up",
+            "update": "I-update ang nilalaman"
         },
         "label": {
-            "speed": "I-download"
+            "speed": "I-download ito",
+            "disk": "Disk"
         },
         "queue": {
             "type": "Uri",
-            "start-time": "Nagsimula noong"
+            "start-time": "Nagsimula sa panahon ng",
+            "queue-time": "Idinagdag sa"
         },
-        "title_dm": "Tagapamahala ng Pag-download"
+        "title_dm": "Tagapamahala ng Pag-download ng Nilalaman",
+        "ETA": "Tinatayang Oras"
     },
-    "error": "Error",
+    "error": "May pagkakamali",
     "game": {
-        "status": "Katayuan"
+        "status": "Kalagayan ng sistema",
+        "store": "Tindahan",
+        "title": "Pamagat ng Laro"
     },
     "gameRelease": {
-        "main": "Pangunahing"
+        "main": "Pangunahing seksyon",
+        "demo": "Demo",
+        "prototype": "Prototype",
+        "alpha": "Alpha",
+        "beta": "Beta"
     },
     "library": {
-        "label": "Aklatan",
-        "refresh": "I-refresh"
+        "label": "Talaan ng mga aklat",
+        "refresh": "I-refresh ang pahina",
+        "alphabeticalAZ": "Alpabetikal A-Z",
+        "alphabeticalZA": "Alpabetikal Z-A",
+        "sortByStatus": "I-sort ayon sa Status"
     },
     "loading": {
-        "default": "Naglo-load…"
+        "default": "Naglo-load…  \nNaghahanda…  \nNaka-load…",
+        "website": "Naglo-load ng Website"
     },
     "notify": {
         "finished": {
             "add": {
                 "steam": {
-                    "title": "Idagdag sa Steam"
+                    "title": "Inilagay sa Steam",
+                    "success": "{{game}} ay matagumpay na idinagdag sa Steam. Kinakailangan ang muling pagsisimula ng Steam para magkabisa ang mga pagbabago.",
+                    "corrupt": "{{game}} ay hindi maidaragdag sa lahat ng natagpuang Steam user. Tingnan ang mga log para sa karagdagang impormasyon. Kinakailangan ang pag-restart ng Steam para magkabisa ang mga pagbabago."
                 }
             },
             "remove": {
                 "steam": {
-                    "title": "Alisin sa Steam"
+                    "title": "Nawala sa Steam",
+                    "corrupt": "{{game}} ay hindi maalis mula sa lahat ng natagpuang gumagamit ng Steam. Tingnan ang mga log para sa karagdagang impormasyon. Kinakailangan ang muling pagsisimula ng Steam upang magkabisa ang mga pagbabago.",
+                    "success": "{{game}} ay matagumpay na tinanggal mula sa Steam. Kinakailangan ang muling pagsisimula ng Steam para magkabisa ang mga pagbabago."
                 }
-            }
+            },
+            "reparing": "Natapos na ang Pag-aayos"
         },
         "install": {
-            "canceled": "Kinansela ang pag-install",
-            "error": "Nabigo ang Pag-iinstall"
+            "canceled": "Tinanggal ang pag-install",
+            "error": "Nabigo ang Pag-configure",
+            "finished": "Natapos ang Pag-install",
+            "imported": "Na-import na Laro",
+            "paused": "Naka-pause ang Pag-install",
+            "startInstall": "Nagsimula ang Pag-install",
+            "stopped": "Itinigil ang pag-install"
         },
-        "uninstalled": "I-uninstall"
-    },
-    "offline-message": {
-        "ignore": "Balewalain"
-    },
-    "Open": "Buksan",
-    "Other": "Karagdagan",
-    "progress": "Takbo",
-    "queue": {
-        "label": {
-            "canceled": "Kinansela"
+        "uninstalled": "Nawala",
+        "update": {
+            "finished": "Natapos ang Pag-update",
+            "paused": "Nakatigil ang Pag-update",
+            "canceled": "Naka-cancel ang Update",
+            "stopped": "Itinigil ang pag-update",
+            "started": "Nagsimula ang Update"
+        },
+        "moved": "Natapos ang Paglipat",
+        "moving": "Inililipat ang Laro",
+        "error": {
+            "move": "Error sa Paglipat ng Laro",
+            "reparing": "Error sa Pag-aayos"
+        },
+        "refresh": {
+            "error": "Hindi makuha ang mga release mula sa upstream, marahil dahil sa mga limitasyon ng Github API! Subukan muli mamaya."
         }
     },
-    "Settings": "Mga settings",
-    "accounts": "Account",
+    "offline-message": {
+        "ignore": "Balewalain",
+        "offline-retry-in": "Offline. Muling susubok sa {{seconds}} segundo.",
+        "hint": "Sinusuri namin ang koneksyon laban sa: {{newline}}github.com, {{newline}}gog.com, {{newline}}store.epicgames.com at {{newline}}cloudflare-dns.com",
+        "offline": "Offline",
+        "retrying": "Nagsusubok muli"
+    },
+    "Open": "Buksan",
+    "Other": "Karagdagang impormasyon",
+    "progress": "Pag-unlad",
+    "queue": {
+        "label": {
+            "canceled": "Kinansela ito",
+            "clear": "I-clear ang Listahan",
+            "pause": "I-pause ang pag-download",
+            "remove": "Tanggalin mula sa Downloads",
+            "resume": "Ibalik ang pag-download",
+            "empty": {
+                "finished": "Walang na-download",
+                "queue": "Walang idadownload"
+            }
+        }
+    },
+    "Settings": "Mga pagsasaayos",
+    "accounts": "mga talaan ng account",
     "import-game-folder": {
-        "placeholder": "Piliin ang Folder ng Laro na ii-import"
+        "placeholder": "Piliin ang folder ng laro na nais i-import",
+        "cta": "I-import ang Folder ng Laro",
+        "dialog": {
+            "title": "Pumili ng Folder ng Laro para I-import"
+        },
+        "error": "Nagkaroon ng error sa pag-import. Mangyaring tingnan ang mga log para sa karagdagang detalye.",
+        "label": "Mag-import ng Game Folder",
+        "success": "Matagumpay na na-import ang mga laro!"
     },
     "install": {
-        "path": "Piliin ang Install Path"
+        "path": "Pumili ng Lokasyon ng Pag-install"
     },
     "notification": {
         "wine-download-failed": {
-            "title": "Error"
+            "title": "Error",
+            "message": "Nabigong i-set up ang default na compatibility layer"
+        },
+        "wine-download": {
+            "title": "Compatibility Layer",
+            "message": "Nagsasaayos ng default na compatibility layer"
         }
     },
-    "favourites": "Paborito",
+    "favourites": "Paboritong mga laro",
     "accessibility": {
-        "zoom": "Palakihin"
+        "zoom": "Palakihin ang zoom",
+        "title": "Accessibility",
+        "actions_font_family_no_default": "Font Family ng Mga Aksyon (Default: ",
+        "all_tiles_in_color": "Ipakita ang lahat ng tile ng laro sa kulay",
+        "content_font_family_no_default": "Pamilya ng Font ng Nilalaman (Default: ",
+        "fonts": "Mga Font"
+    },
+    "Epic Games": "Epic Games",
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}} at iba pang mga laro ay handa nang i-update.",
+            "single": "May update na handa para sa {{gameName}}."
+        },
+        "title": "Available na mga Update ng Laro"
+    },
+    "GOG": "GOG",
+    "header": {
+        "show_available_games": "Ipakita ang mga hindi magagamit na laro",
+        "show_hidden": "Ipakita ang Nakatagong",
+        "store": "I-filter ang Tindahan"
+    },
+    "help": {
+        "steamruntime": "Mga custom na aklatan na ibinigay ng Steam upang makatulong na patakbuhin ang mga laro sa Linux at Windows (Proton). Ang pag-enable ay maaaring magpabuti ng compatibility.",
+        "wine": {
+            "part1": "Naghahanap ang HyperPlay ng mga bersyon ng Wine, Proton, at CrossOver sa mga sumusunod na folder:",
+            "part2": "Para sa ibang mga lugar, gumamit ng symbolic link sa isa sa mga folder na ito"
+        },
+        "custom_themes_wiki": "Suriin ang Wiki para sa karagdagang detalye sa pagdaragdag ng mga pasadyang tema. I-click dito.",
+        "sync": {
+            "part1": "Sinusubukan ng HyperPlay na hulaan ang tamang save folder at ito ay gagana sa karamihan ng mga kaso. Kung mali ang folder, gamitin ang override box upang baguhin ito.",
+            "part3": "Manwal na Sync: Pumili ng I-download upang i-download ang mga save ng laro na nakaimbak sa Cloud. Mag-upload upang i-upload ang mga lokal na save sa cloud. Ang Force Download at Force Upload ay hindi isasaalang-alang ang bersyon na lokal o nasa cloud.",
+            "part2": "Kung sakaling baguhin mo ang prefix folder para sa Wine o Proton, kailangan mong suriin muli ang landas dahil gumagamit ang Proton ng ibang prefix (/pfx) at username (steamuser). Kaya maaari mong simpleng tanggalin ang kasalukuyang landas, lumabas sa pahina ng mga setting ng sync, at bumalik muli para mahulaan ng HyperPlay ang folder isang beses pa gamit ang tamang prefix.",
+            "part4": "Ang Sync Saves Automatically ay magsi-sync ng mga save sa tuwing Magsisimula ka ng Laro at pagkatapos ng pagtatapos ng paglalaro."
+        },
+        "vkd3d": "Ang VKD3D ay isang Vulkan-based na translational layer para sa mga laro ng DirectX 12. Ang pag-enable nito ay maaaring makapagpabuti ng compatibility nang malaki. Wala itong epekto sa mga mas lumang laro ng DirectX.",
+        "amdfsr": "Ang FSR ng AMD ay tumutulong na mapabilis ang framerate sa pamamagitan ng pag-upscale ng mas mababang resolusyon sa Fullscreen Mode. Tumataas ang kalidad ng imahe mula 5 hanggang 1 sa gastos ng kaunting pagbagsak sa pagganap. Ang pag-enable nito ay maaaring magpabuti sa pagganap.",
+        "disable_logs": "I-toggle ang checkbox na ito sa ON upang huwag paganahin ang karamihan sa mga pagsusulat sa mga log file (ang kritikal na impormasyon ay palaging naka-log). Tiyaking i-off ang setting na ito bago mag-ulat ng anumang isyu.",
+        "gamemode": "Ang Feral GameMode ay nag-aaplay ng awtomatiko at pansamantalang mga pagbabago sa sistema kapag naglalaro ng mga laro. Ang pag-enable nito ay maaaring magpabuti sa pagganap.",
+        "dxvk": "Ang DXVK ay isang Vulkan-based na translational layer para sa mga laro ng DirectX 9, 10 at 11. Ang pag-enable nito ay maaaring magpabuti ng compatibility. Maaaring magdulot ng mga isyu lalo na para sa mga mas lumang laro ng DirectX.",
+        "game_language": {
+            "valid_codes": "Ang mga wastong code ng wika ay nakadepende sa laro.",
+            "fallback": "Iwanang blangko upang gamitin ang wika ng HyperPlay.",
+            "in_game_config": "Hindi lahat ng laro ay sumusuporta sa configuration na ito, ang ilan ay may setting ng wika sa loob ng laro."
+        },
+        "dxvkfpslimit": "Nagtatakda ng frame rate cap para sa mga laro ng DXVK",
+        "dxvknvapi": "Ang DXVK-NVAPI ay isang implementasyon ng NVAPI na itinayo sa ibabaw ng DXVK at ang linux native NVAPI, pinapayagan nito ang paggamit ng DLSS sa mga Nvidia GPU.",
+        "esync": "Ang Esync ay naglalayong bawasan ang overhead ng wineserver sa mga laro na mabigat sa CPU. Ang pag-enable nito ay maaaring magpabuti ng pagganap.",
+        "fsync": "Ang Fsync ay naglalayong bawasan ang overhead ng wineserver sa mga laro na mabigat sa CPU. Ang pag-enable nito ay maaaring magpabuti ng pagganap sa mga suportadong Linux kernel.",
+        "primerun": "Gumamit ng nakalaang graphics card upang i-render ang laro sa multi-GPU na mga sistema. Kailangan lamang ito sa mga gaming laptop o desktop na gumagamit ng headless GPU para sa pag-render (NVIDIA Optimus, AMD CrossFire)",
+        "steam_path": {
+            "info": "Ang landas na ito ay nagpapahintulot sa HyperPlay na matukoy kung anong bersyon ng Proton ang ginagamit ng Steam, para sa pagdaragdag ng mga non-Steam na laro sa Steam."
+        },
+        "other": {
+            "part6": " na tatawagin pagkatapos ng launch command, halimbawa: ",
+            "part7": " upang laktawan ang launcher sa ilang mga laro, atbp.",
+            "part4": "Gumamit ng "
+        },
+        "preferSystemLibs": "Ang mga pasadyang bersyon ng Wine (Wine-GE, Wine-Lutris) ay kasama ng kanilang mga dependency ng library. Sa pamamagitan ng pag-enable sa opsyong ito, ang mga naipadalang library na ito ay hindi isasaalang-alang at ang Wine ay maglo-load ng mga system library sa halip. Babala! Maaaring mangyari ang mga isyu kung ang mga dependency ay hindi natutugunan.",
+        "custom_themes_path": "Huwag gumamit ng mga CSS file mula sa mga hindi mapagkakatiwalaang mapagkukunan. Kapag may pagdududa, humingi ng pagsusuri sa aming Discord channel.",
+        "mangohud": "Ang MangoHUD ay isang overlay na nagtatampok at nagmamanman ng FPS, temperatura, CPU/GPU load at iba pang mapagkukunan ng sistema.",
+        "general": "I-sync sa EGL kung mayroon kang gumaganang pag-install ng Epic Games Launcher sa ibang lugar at nais na i-import ang iyong mga laro upang maiwasan ang muling pag-download ng mga ito.",
+        "msync": "Ang Msync ay naglalayong bawasan ang overhead ng wineserver sa mga laro na mabigat sa CPU. Ang pag-enable nito ay maaaring magpabuti ng performance sa ilang mga laro."
+    },
+    "hyperplayOverlay": {
+        "description": {
+            "PENDING": "Naghihintay para sa kumpirmasyon ng blockchain. Ipapaalam namin sa iyo kapag ito ay nakumpirma",
+            "FAILED": "Ang transaksyon ay nakansela o hindi naisumite, mangyaring subukan muli",
+            "INITIATED": "Nakatakdang kumpirmasyon ng wallet sa iyong mobile wallet",
+            "CONFIRMED": "Matagumpay na nakumpirma ang transaksyon!"
+        },
+        "greeting": {
+            "title": "HyperPlay Overlay",
+            "description": "Handa na ang HyperPlay Overlay! Pindutin ang {{overlayKeyMod}} + X upang ipakita o itago ito."
+        },
+        "signatureRequest": {
+            "CONFIRMED": "Isinumiteng lagda",
+            "FAILED": "Nakaputol ang lagda",
+            "INITIATED": "Naka-pending ang kahilingan sa lagda"
+        },
+        "txnRequest": {
+            "CONFIRMED": "Nakumpirma ang transaksyon",
+            "INITIATED": "Naka-pending ang kahilingan sa transaksyon",
+            "PENDING": "Isinumiteng transaksyon",
+            "FAILED": "Nakaputol ang transaksyon"
+        },
+        "extensionNotification": {
+            "DESCRIPTION": "Pindutin ang {{overlayKeyMod}} + X upang makita ang transaksyong ito",
+            "TITLE": "Humiling ng transaksyon"
+        },
+        "chainRequest": {
+            "INITIATED": "Custom network request",
+            "CONFIRMED": "Idinagdag ang pasadyang network",
+            "FAILED": "Nakansela ang custom network"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Nagdagdag ng custom na token",
+            "FAILED": "Naka-cancel ang kahilingan para sa custom token",
+            "INITIATED": "Naka-pending ang kahilingan para sa custom token"
+        }
+    },
+    "login": {
+        "epic": "Pag-login sa Epic Games",
+        "gog": "GOG Login",
+        "old-mac": "Ang iyong bersyon ng macOS ay {{version}}. Kinakailangan ang macOS 12 o mas bago upang makapag-log in.",
+        "alternative_method": "Alternatibong Paraan ng Pag-login",
+        "message": "Mag-login gamit ang iyong platform. Maaari kang mag-login sa higit sa isang platform nang sabay-sabay."
+    },
+    "message": {
+        "sync": "Tapos na ang Sync"
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Ikaw ay nakakonekta sa HyperPlay gamit ang isang external wallet.",
+        "comingSoon": "Darating sa Lalong Madali",
+        "WALLET_DISCONNECTED": "Wala kang naka-konektang wallet sa HyperPlay."
+    },
+    "options": {
+        "env_variables": {
+            "error": {
+                "space_in_key": "Hindi maaaring maglaman ng espasyo ang mga pangalan ng variable",
+                "equal_sign_in_key": "Hindi maaaring maglaman ng \"=\" sign ang mga pangalan ng variable",
+                "empty_key": "Hindi maaaring walang laman ang mga pangalan ng variable"
+            },
+            "info": "Itakda ang mga environment variable upang idagdag sa utos."
+        },
+        "gameargs": {
+            "title": "Mga Argumento ng Laro (Upang patakbuhin pagkatapos ng utos):",
+            "placeholder": "Ilagay dito ang mga Argumento ng Launcher"
+        },
+        "wrapper": {
+            "placeHolderValue": "Mga Argumento ng Wrapper",
+            "title": "Wrapper command:",
+            "args": "Mga Argumento",
+            "placeHolderKey": "Bagong Wrapper",
+            "exe": "Wrapper"
+        },
+        "advanced": {
+            "key": "Pangalan ng Variable",
+            "placeHolderKey": "PANGALAN",
+            "placeHolderValue": "Halimbawa: Daan/Patungo/ExtraFiles",
+            "title": "Mga Environment Variables",
+            "value": "Halaga"
+        }
+    },
+    "placeholder": {
+        "custom_themes_path": "Pumili ng landas upang hanapin ang mga pasadyang CSS file",
+        "alt-gogdl-bin": "Gumagamit ng built-in na GOGDL binary...",
+        "alt-legendary-bin": "Gumagamit ng built-in na Legendary binary...",
+        "egs-prefix": "Prefix kung saan naka-install ang EGS",
+        "prefered_language": "2-char code (i.e.: \"en\" o \"fr\")"
+    },
+    "quests": {
+        "quests": "Mga Misyon",
+        "g7CreditsModal": {
+            "title": "Kumita ng Game7 Credits",
+            "description": "Sumisid sa mga nangungunang laro ng HyperPlay sa mga kapana-panabik na Play Streak Challenges. Ang bawat aktibidad ay naghihikayat sa iyo na makilahok sa isang iba't ibang laro, na ipinapakita ang pinakamahusay ng web3 gaming. Mahalaga ang iyong oras ng paglalaro!"
+        },
+        "playstreak": {
+            "signInWarning": {
+                "client": "Sa kasalukuyan, hindi ka naka-log in, ang progreso ng play streak ay hindi masusubaybayan. Mangyaring mag-login sa HyperPlay sa pamamagitan ng dropdown sa kanang itaas upang masubaybayan ang progreso.",
+                "overlay": "Hindi ka kasalukuyang naka-log in, ang progreso ng play streak ay hindi masusubaybayan. Mangyaring lumabas sa laro at mag-log in sa HyperPlay sa pamamagitan ng dropdown sa kanang itaas upang masubaybayan ang progreso."
+            }
+        },
+        "viewAllQuests": {
+            "title": "Tingnan ang Lahat ng Quest"
+        },
+        "noneFound": {
+            "title": "Walang Nahanap na Mga Misyon.",
+            "message": "Walang natagpuang mga misyon."
+        }
+    },
+    "search": "Maghanap ng mga Laro",
+    "store": "Epic Store",
+    "exit_game": "Lumabas sa Laro",
+    "externalLink": {
+        "dontAskAgain": "Huwag nang magtanong muli",
+        "warning": "Ikaw ay malapit nang magbukas ng isang panlabas na link."
+    },
+    "other": {
+        "gogdl-version": "Bersyon ng GOGDL: ",
+        "legendary-version": "Bersyon ng Legendary: ",
+        "weblate": "Tumulong sa Pagsasalin ng HyperPlay."
+    },
+    "two_col_table": {
+        "save_hint": "Ang mga pagbabago sa talahanayang ito ay hindi awtomatikong nasusunod. I-click ang + na button"
+    },
+    "Recent": "Kamakailan lang na Laro",
+    "sideload": {
+        "warningTitle": "Mahalaga",
+        "warningMessage": "Ang side-loading ng laro ay isang tampok na nilayon para sa mga developer at may karanasang power user. Ang pag-side-load ng isang installer na naglalaman ng malware ay maaaring makompromiso ang iyong computer at humantong sa pagnanakaw ng pondo."
+    },
+    "toolbox": {
+        "settings": {
+            "default-wineprefix": "Pumili ng default na prefix folder para sa mga bagong config",
+            "wineprefix": "Pumili ng Folder para sa mga bagong Wine Prefixes"
+        }
+    },
+    "steam-install": {
+        "error-message": "Nagkaroon ng error habang nag-iinstall ng Steam. Pakisubukan muli.",
+        "compatibility-layer-not-available": "Walang available na compatibility layer. Mangyaring mag-install ng isa mula sa \"Settings > Wine Manager\" muna.",
+        "launch-tooltip": "Ilunsad ang Steam gamit ang HyperPlay Compatibility Layer",
+        "success-message": "Na-install na ang Steam. Maaari mo na itong ilunsad mula sa Library.",
+        "tooltip": "Ito ay mag-iinstall ng bersyon ng Steam para sa Windows at ito ay tatakbo gamit ang HyperPlay Compatibility Layer.\n\n    Ang ilang mga laro, lalo na ang mga mas lumang pamagat, mas bagong 3D na laro, o yaong may anti-cheat software ay maaaring hindi gumana nang maayos.\n\n    Ang inirerekomendang specs ay isang Mac na may Apple Silicon CPU (M1 o mas mataas) at hindi bababa sa 16GB ng RAM."
+    },
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "I-download at simulan ng HyperPlay ang Steam Setup para sa iyo. Mangyaring sundin ang mga tagubilin ng Steam sa kanilang installer;"
+    },
+    "HyperPlay will notify you once the installation is done;": "Ipapaalam sa iyo ng HyperPlay kapag natapos na ang pag-install;",
+    "importGameErrorMessageExecutable": "Hindi matagpuan ang Game Executable, hindi posible ang pag-import ng laro",
+    "importGameErrorTitle": "Error sa Pag-import ng Laro",
+    "Install Steam": "I-install ang Steam",
+    "Installing Steam": "Nag-iinstall ng Steam...",
+    "Launch Steam": "Ilunsad ang Steam",
+    "Launching Steam": "Naglulunsad ng Steam...",
+    "mods": {
+        "instructions": {
+            "step2": {
+                "title": "Hakbang 2",
+                "description": "Pumili ng na-download na ChromieCraft_3.3.5a.zip na file.",
+                "subtitle": "Pumili ng ChromieCraft_3.3.5a.zip File"
+            },
+            "step3": {
+                "description": "Pakitang piliin ang folder kung saan dapat i-install ang World of Warcraft: Wrath of the Lich King (3.3.5a).",
+                "subtitle": "Pumili ng Installation Folder",
+                "title": "Hakbang 3"
+            },
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Ang larong ito ay isang mod para sa World of Warcraft: Wrath of the Lich King (3.3.5a). Upang maglaro ng mod na ito, kinakailangan ng mga manlalaro na magkaroon ng kopya ng World of Warcraft 3.3.5a. {{newline}} {{newline}} Ang HyperPlay ay hindi nagho-host ng World of Warcraft. Ang mga manlalaro na may World of Warcraft ay maaaring makuha ang bersyon 3.3.5a mula sa mga mapagkukunan tulad ng:",
+                "subtitle": "I-download ang World of Warcraft 3.3.5a",
+                "title": "Hakbang 1",
+                "webtorrent": "Torrent (Magnet Link)"
+            },
+            "step4": {
+                "subtitle": "Access Code",
+                "title": "Hakbang 4"
+            },
+            "title": "Mga Tagubilin ng Mod"
+        }
+    },
+    "achievements": {
+        "progress": {
+            "minted": "sa chain",
+            "notMinted": "off chain"
+        }
+    },
+    "add_game": "Magdagdag ng Laro",
+    "ALL": "LAHAT",
+    "analytics": "Analitika",
+    "back_to_game": "Bumalik sa laro",
+    "please-wait": "Mangyaring maghintay...",
+    "email_subscription": {
+        "subtitle": "Ikaw ay bahagi na ng aming komunidad, at kami ay nasasabik na ibahagi ang mahahalagang update at pananaw sa iyo.",
+        "title": "Salamat sa pag-subscribe!"
+    },
+    "generic": {
+        "error": {
+            "component": "Walang natagpuang Laro - Subukan na mag-logout at mag-login muli o isa sa mga opsyon sa ibaba"
+        },
+        "library": {
+            "refresh": "I-refresh ang Library"
+        }
+    },
+    "globalSettings": "Pangkalahatang Mga Setting",
+    "profile": "Profile",
+    "At the end make sure to": "Sa dulo, siguraduhing",
+    "Cancel Installation": "Kanselahin ang Pag-install",
+    "epic": {
+        "offline-notification-body": "Maaaring hindi ganap na gumana ang mga online na serbisyo dahil offline ang mga server ng Epic Games!",
+        "offline-notification-title": "offline"
+    },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Kung nais mong ipagpatuloy, maghintay dahil maaaring tumagal ito ng ilang minuto upang matapos depende sa iyong koneksyon sa internet at configuration ng sistema;",
+    "importGameErrorMessage": "Hindi wastong folder ng laro, hindi posible ang pag-import ng laro",
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Nansel ang pagkuha ng base game",
+                "title": "Naka-cancel na Pagkuha"
+            },
+            "installed": {
+                "body": "Ang mod ay ilalapat sa pangunahing laro",
+                "title": "Naka-install ang Base Game"
+            },
+            "installing": {
+                "body": "Nagsasagawa ng pagkuha ng mga pangunahing file ng laro",
+                "title": "Nag-iinstall ng Base Game"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Pumili ng Lokasyon ng Base Game File",
+                "placeholder": "Pumili ng Zip File"
+            }
+        }
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Sa unang paglunsad, magda-download ang Steam ng mga kinakailangang file at aabutin ng ilang minuto upang matapos at lumabas ang login screen;",
+    "title": {
+        "allGames": "Lahat ng Laro"
+    },
+    "tooltip": {
+        "addpath": "Magdagdag ng Bagong Daan",
+        "removepath": "Tanggalin ang Path"
+    },
+    "UNCHECK 'Run Steam'": "Huwag lagyan ng tsek ang 'Patakbuhin ang Steam'",
+    "wiki_info": {
+        "not_found": "Hindi namin mahanap ang karagdagang impormasyon."
+    },
+    "dlcs": {
+        "label": "Pumili ng mga DLC na i-install:"
     }
 }
