@@ -120,10 +120,10 @@
             "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "Shortcuts were removed from Desktop and Start Menu",
             "message-remove-mac": "Shortcuts were removed from the Applications folder",
-            "title": "Shortcut"
+            "title": "Phím nhanh"
         },
         "sync": {
-            "button": "Chọn",
+            "button": "Chọn một lựa chọn",
             "error": "Đường dẫn không chính xác",
             "title": "Chọn thư mục để lưu game"
         },
@@ -147,7 +147,9 @@
                 "title": "Không tìm thấy Rosetta"
             },
             "wine-change": {
-                "title-gptk": "Bộ công cụ chuyển đổi trò chơi không tương thích "
+                "title-gptk": "Bộ công cụ chuyển đổi trò chơi không tương thích ",
+                "message": "Chúng tôi không thể tìm thấy phiên bản wine đã chọn để khởi động tiêu đề này ({{selectedWine}}). {{newline}} Chúng tôi đã tìm thấy một phiên bản khác, bạn có muốn tiếp tục khởi động bằng {{foundWine}} không?",
+                "title": "Không tìm thấy Wine!"
             }
         },
         "wineprefix": "Chọn thư mục của Wine Prefix",
@@ -169,7 +171,7 @@
         "syncing": "Đang đồng bộ",
         "unsync": "Hủy đồng bộ",
         "update": "Cập nhật thông tin",
-        "continue": "Tiếp tục",
+        "continue": "Tiếp tục thực hiện",
         "download": "Tải",
         "install": "Cài đặt"
     },
@@ -182,7 +184,7 @@
             "close_options": "Ngừng Tùy Chọn",
             "game_details": "Thông tin chi tiết về trò chơi",
             "game_settings": "Game settings",
-            "install_game": "Install game",
+            "install_game": "Cài đặt game",
             "move_cursor": "Move cursor",
             "open_virtual_keyboard": "Open virtual keyboard",
             "options": "Options",
