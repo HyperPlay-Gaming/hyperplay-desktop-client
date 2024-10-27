@@ -89,7 +89,7 @@
             }
         },
         "no": "Không",
-        "ok": "OK",
+        "ok": "Đống ý",
         "protocol": {
             "install": {
                 "not_installed": "Chưa được cài. Cài ngay?"
@@ -106,10 +106,10 @@
             }
         },
         "runexe": {
-            "title": "Chọn file EXE để chạy"
+            "title": "Select EXE to Run"
         },
         "select": {
-            "button": "Chọn",
+            "button": "Select",
             "exe": "Chọn file EXE"
         },
         "shortcuts": {
@@ -181,8 +181,8 @@
     "docs": "Documentation",
     "download-manager": {
         "install-type": {
-            "install": "Install",
-            "update": "Update"
+            "install": "Cài đặt",
+            "update": "Cập nhật"
         },
         "label": {
             "disk": "Disk",
@@ -288,7 +288,7 @@
     },
     "infobox": {
         "help": "Hỗ trợ",
-        "requirements": "Yêu cầu về hệ thống",
+        "requirements": "Yêu cầu hệ thống",
         "warning": "Warning",
         "wine-path": "Wine Path",
         "wine-prefix": {
@@ -477,17 +477,17 @@
             "currentVersion": "Current Version: {{version}}",
             "disable": "Disable",
             "enable": "Enable",
-            "install": "Install",
+            "install": "Cài đặt",
             "installed": "The Epic Overlay is installed",
             "installing": "The Epic Overlay is being installed...",
             "latestVersion": "Latest Version: {{version}}",
             "notInstalled": "The Epic Overlay is not installed",
             "notInstalledMsg": "The Epic Overlay is not installed. Do you want to install it now?",
             "notInstalledTitle": "Overlay not installed",
-            "remove": "Uninstall",
+            "remove": "Gỡ cài đặt",
             "removeConfirm": "Are you sure you want to uninstall the Epic Overlay?",
             "removeConfirmTitle": "Confirm overlay removal",
-            "updateNow": "Update",
+            "updateNow": "Cập nhật",
             "updating": "Updating..."
         },
         "esync": "Bật Esync",
