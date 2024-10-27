@@ -314,11 +314,11 @@
     },
     "infobox": {
         "help": "Hỗ trợ",
-        "requirements": "Yêu cầu hệ thống",
-        "warning": "Warning",
+        "requirements": "Cấu hình hệ thống cần thiết",
+        "warning": "Cảnh giác",
         "wine-path": "Đường dẫn đến Wine",
         "wine-prefix": {
-            "title": "Wine Prefix"
+            "title": "Cấu hình Wine"
         },
         "wine-repfix": {
             "message": "Wine sử dụng một cái gọi là WINEPREFIX để bao bọc các ứng dụng Windows. Tiền tố này chứa các tệp cấu hình Wine và một bản sao của cấu trúc tệp của C: (ổ đĩa chính trên hệ điều hành Windows). Trong bản sao của ổ đĩa C:, các tệp lưu game và các phụ thuộc được cài đặt qua winetricks được lưu trữ.\n\nWine sử dụng một khái niệm gọi là WINEPREFIX để bao bọc các ứng dụng Windows. Tiền tố này bao gồm các tệp cấu hình của Wine và một bản sao của cấu trúc tệp trên ổ C: (ổ đĩa chính của hệ điều hành Windows). Trong bản sao của ổ C:, các tệp lưu game và các phụ thuộc được cài đặt thông qua winetricks được lưu giữ.\n\nWine áp dụng một khái niệm gọi là WINEPREFIX để bao bọc các ứng dụng Windows. Tiền tố này chứa các tệp cấu hình của Wine và một bản sao của cấu trúc tệp trên ổ C: (ổ đĩa chính của hệ điều hành Windows). Trong bản sao của ổ C:, các tệp lưu game và các phụ thuộc được cài đặt qua winetricks được lưu trữ."
@@ -331,15 +331,16 @@
     },
     "library": {
         "label": "Thư viện trò chơi",
-        "refresh": "Tải lại",
+        "refresh": "Tải lại trang",
         "sortAscending": "Sắp xếp Tăng dần",
-        "sortByStatus": "Sắp xếp theo trạng thái",
+        "sortByStatus": "Sắp xếp theo tình hình",
         "sortDescending": "Sắp xếp giảm dần",
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
         },
-        "alphabeticalAZ": "Theo thứ tự chữ cái A-Z"
+        "alphabeticalAZ": "Theo thứ tự chữ cái A-Z",
+        "alphabeticalZA": "Theo thứ tự chữ cái Z-A"
     },
     "loading": {
         "default": "Đang tải",
@@ -347,10 +348,11 @@
     },
     "login": {
         "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
+        "epic": "Tài khoản Epic Games đăng nhập",
         "gog": "Tài khoản GOG đăng nhập",
         "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Đăng nhập Amazon"
+        "amazon": "Đăng nhập Amazon",
+        "old-mac": "Phiên bản macOS của bạn là {{version}}. Cần có macOS 12 hoặc mới hơn để đăng nhập."
     },
     "message": {
         "sync": "Đồng bộ đã xong",
@@ -359,14 +361,14 @@
     "notify": {
         "error": {
             "move": "Có lỗi xảy ra khi di chuyển game",
-            "reparing": "Đang sửa lỗi"
+            "reparing": "Đang tiến hành sửa lỗi"
         },
         "finished": {
             "add": {
                 "steam": {
                     "corrupt": "{{game}} không thể được thêm vào tất cả người dùng Steam đã phát hiện. Vui lòng xem nhật ký để biết thêm chi tiết. Cần khởi động lại Steam để áp dụng các thay đổi.",
                     "success": "{{game}} đã được thêm vào Steam thành công. Cần khởi động lại Steam để áp dụng các thay đổi.",
-                    "title": "Added to Steam"
+                    "title": "Đã được bổ sung vào Steam"
                 }
             },
             "remove": {
@@ -395,7 +397,7 @@
         },
         "uninstalled": "Hủy cài đặt",
         "update": {
-            "canceled": "Quá trình cập nhật đã hủy",
+            "canceled": "Cập nhật đã bị hủy",
             "finished": "Hoàn tất cập nhật",
             "started": "Cập nhật đã được bắt đầu",
             "paused": "Cập nhật đã tạm dừng",
@@ -422,9 +424,9 @@
             "error": {
                 "empty_key": "Tên biến không thể rỗng",
                 "equal_sign_in_key": "Tên biến không thể chứa ký hiệu \"=\"  \nTên biến không được phép có ký hiệu \"=\"  \nKý hiệu \"=\" không được phép xuất hiện trong tên biến",
-                "space_in_key": "Variable names can't contain spaces"
+                "space_in_key": "Tên biến không thể có dấu cách"
             },
-            "example": "Do NOT include the \"=\" sign, e.g: for a setting like \"MY_FLAG=123\", set MY_FLAG in NAME and 123 in VALUE.",
+            "example": "Không bao gồm dấu \"=\" , ví dụ: đối với một cài đặt như \"MY_FLAG=123\", hãy đặt MY_FLAG trong TÊN và 123 trong GIÁ TRỊ.  \nKhông bao gồm dấu \"=\" , ví dụ: đối với một cài đặt như \"MY_FLAG=123\", hãy đặt MY_FLAG vào TÊN và 123 vào GIÁ TRỊ.  \nKhông bao gồm dấu \"=\" , ví dụ: với một cài đặt như \"MY_FLAG=123\", hãy đặt MY_FLAG trong TÊN và 123 trong GIÁ TRỊ.",
             "info": "Cài đặt các biến môi trường để thêm vào câu lệnh."
         },
         "gameargs": {
@@ -434,7 +436,7 @@
         "quote-args-with-spaces": "Cảnh báo: Hãy chắc chắn rằng bạn đã bao quanh các tham số có khoảng trắng bằng dấu ngoặc! Ví dụ: \"đường/dẫn/có khoảng trắng/\"",
         "wrapper": {
             "args": "Luận điểm",
-            "arguments_example": "Arguments example: --arg; --extra-file=\"file-path/ with/spaces\"",
+            "arguments_example": "Ví dụ về tham số: --arg; --extra-file=\"đường-dẫn/tới/tệp có khoảng trắng\"",
             "exe": "Wrapper",
             "placeHolderKey": "Khung bọc mới",
             "placeHolderValue": "Tham số của Wrapper",
@@ -444,7 +446,7 @@
     "other": {
         "gogdl-version": "Phiên bản GOGDL: ",
         "legendary-version": "Phiên bản Legendary ",
-        "weblate": "Giúp dịch HyperPlay.",
+        "weblate": "Giúp đỡ trong việc dịch HyperPlay.",
         "nile-version": "Phiên bản sông Nile: "
     },
     "Other": "Khác nhau",
@@ -477,7 +479,7 @@
             "queued": "Queued",
             "remove": "Xóa khỏi thư mục Tải xuống",
             "resume": "Khôi phục tải xuống",
-            "pause": "Tạm dừng tải xuống"
+            "pause": "Dừng tải xuống tạm thời"
         }
     },
     "Recent": "Các trò chơi đã chơi gần đây",
@@ -509,9 +511,9 @@
             "cancelInstall": "Hủy",
             "checkForUpdates": "Kiểm tra xem có bản cập nhật mới không",
             "checkingForUpdates": "Checking for updates...",
-            "currentVersion": "Current Version: {{version}}",
-            "disable": "Disable",
-            "enable": "Enable",
+            "currentVersion": "Phiên bản hiện tại: {{version}}",
+            "disable": "Ngừng hoạt động",
+            "enable": "Kích hoạt tính năng",
             "install": "Cài đặt phần mềm",
             "installed": "The Epic Overlay is installed",
             "installing": "The Epic Overlay is being installed...",
@@ -535,7 +537,7 @@
             "disabled": "Không kích hoạt",
             "favourites": "Các trò chơi yêu thích",
             "recently_played": "Trò chơi gần đây nhất",
-            "recently_played_installed": "Recently Played Games (Only Installed)"
+            "recently_played_installed": "Trò chơi đã chơi gần đây (Chỉ cài đặt)  \nTrò chơi vừa chơi (Chỉ cài đặt)  \nCác trò chơi đã chơi gần đây (Chỉ cài đặt)"
         },
         "library_top_section": "Phần trên của Thư viện",
         "log": {
@@ -547,7 +549,8 @@
             "no-file": "Không phát hiện thấy file log",
             "show-in-folder": "Xem tệp log trong thư mục",
             "instructions-part-02": "Để giúp chúng tôi chẩn đoán và khắc phục sự cố nhanh nhất có thể, vui lòng cung cấp càng nhiều thông tin càng tốt, bao gồm một bản sao của nhật ký của bạn. Đội ngũ hỗ trợ của chúng tôi sẽ theo dõi cả hai kênh và cố gắng hết sức để phản hồi vấn đề của bạn nhanh nhất có thể. Cảm ơn bạn đã kiên nhẫn và thông cảm trong khi chúng tôi làm việc để giải quyết bất kỳ vấn đề nào bạn có thể gặp phải.",
-            "join-hyperplay-discord": "Tham gia Discord của chúng tôi"
+            "join-hyperplay-discord": "Tham gia Discord của chúng tôi",
+            "instructions-part-01": "Nếu bạn gặp bất kỳ vấn đề nào khi sử dụng HyperPlay, chúng tôi có hai khu vực chỉ định để báo cáo vấn đề của bạn trên Máy Chủ Discord của chúng tôi. Nếu bạn là người chơi, vui lòng báo cáo bất kỳ vấn đề nào bằng cách truy cập diễn đàn hỗ trợ người chơi. Nếu bạn là nhà phát triển trò chơi, vui lòng báo cáo bất kỳ vấn đề nào bằng cách truy cập diễn đàn hỗ trợ nhà phát triển."
         },
         "mangohud": "Bật Mangohud (Cần cài mangohud)",
         "manualsync": {
@@ -585,7 +588,7 @@
         "showfps": "Thể hiện FPS (DX9, 10 và 11)",
         "start-in-tray": "Khởi động với cửa sổ thu nhỏ",
         "steamruntime": "Áp dụng Steam Runtime",
-        "winecrossoverbottle": "CrossOver Bottle",
+        "winecrossoverbottle": "Hộp CrossOver",
         "wineprefix": "Thư mục dành cho WinePrefix",
         "wineversion": "Phiên bản Wine đang sử dụng",
         "autoUpdateGames": "Cập nhật game một cách tự động",
@@ -640,7 +643,7 @@
         "reset-hyperplay": "Đặt lại HyperPlay==WEBLATE_PART==Khôi phục HyperPlay==WEBLATE_PART==Làm mới HyperPlay",
         "saves": {
             "label": "Save Location:",
-            "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+            "warning": "Tính năng Lưu trữ Đám mây đang trong giai đoạn thử nghiệm, xin hãy sao lưu các lưu trữ của bạn trước khi tiến hành đồng bộ (trong trường hợp có điều gì không ổn xảy ra)"
         },
         "gamesSettings": "Thiết lập trò chơi",
         "systemInformation": {
@@ -883,7 +886,7 @@
         },
         "points": "Điểm",
         "sync": "Cập nhật đồng thời",
-        "reward": "Thưởng",
+        "reward": "Tiền thưởng",
         "claimWarning": {
             "cancel": "Hủy bỏ hành động",
             "confirm": "Xác nhận",
@@ -899,7 +902,10 @@
         "connectSteamAccount": "Kết nối tài khoản Steam",
         "notEnoughGas": "Số dư ví không đủ để nhận phần thưởng của bạn do phí gas. Hãy thử một ví khác hoặc nạp thêm vào ví này trước khi thử lại.",
         "g7Numclaimed": "Tổng số tín dụng G7 đã yêu cầu",
-        "View Game": "Xem Trò Chơi"
+        "View Game": "Xem Trò Chơi",
+        "linkAccount": "Liên kết tài khoản Steam của bạn để kiểm tra đủ điều kiện.",
+        "needMoreAchievements": "Bạn cần hoàn thành {{percent}}% các thành tựu trong một trong những trò chơi này.",
+        "reputation": "Danh tiếng"
     },
     "quests": {
         "quests": "Mục tiêu",
@@ -990,7 +996,8 @@
     },
     "overlay": {
         "comingSoon": "Sắp Mở",
-        "WALLET_DISCONNECTED": "Bạn chưa kết nối ví với HyperPlay."
+        "WALLET_DISCONNECTED": "Bạn chưa kết nối ví với HyperPlay.",
+        "EXTERNAL_WALLET_CONNECTED": "Bạn đã kết nối với HyperPlay bằng ví bên ngoài."
     },
     "dlcs": {
         "label": "Chọn DLC để cài đặt:"
@@ -1002,7 +1009,8 @@
     },
     "UNCHECK 'Run Steam'": "BỎ CHỌN 'Chạy Steam'",
     "email_subscription": {
-        "subtitle": "Bạn hiện là một phần của cộng đồng của chúng tôi, và chúng tôi rất vui được chia sẻ những cập nhật và thông tin quý giá với bạn."
+        "subtitle": "Bạn hiện là một phần của cộng đồng của chúng tôi, và chúng tôi rất vui được chia sẻ những cập nhật và thông tin quý giá với bạn.",
+        "title": "Cảm ơn bạn đã đăng ký!"
     },
     "gameUpdateNotifications": {
         "body": {
