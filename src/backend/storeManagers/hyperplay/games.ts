@@ -52,7 +52,8 @@ import {
   getExecutableAndArgs,
   calculateProgress,
   calculateEta,
-  getFileSize
+  getFileSize,
+  getPlatformName
 } from 'backend/utils'
 import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import path, { dirname, join } from 'path'
@@ -97,6 +98,7 @@ import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
 import { chmod } from 'fs/promises'
 import { GlobalConfig } from 'backend/config'
 import { ldMainClient } from 'backend/main'
+import { trackEvent } from 'backend/api/metrics'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1450,8 +1452,6 @@ export async function update(
     abortController.signal
   )
 
-  console.log({ status, error })
-
   if (status === 'abort') {
     return { status: 'abort' }
   } else if (status === 'error' && !error?.includes('aborted')) {
@@ -1587,6 +1587,12 @@ export const downloadPatcher = async () => {
         await chmod(ipdtPatcher, 0o755)
       }
     } catch (error) {
+      captureException(error, {
+        extra: {
+          method: 'downloadPatcher'
+        }
+      })
+
       logError(`Error downloading IPDT: ${error}`, LogPrefix.HyperPlay)
     }
   }
@@ -1612,10 +1618,8 @@ export async function downloadGameIpdtManifest(
   const manifestPath = path.join(ipdtManifestsPath, manifestName)
   if (existsSync(manifestPath)) return false
 
-  console.log({ appName, version })
   const releaseId = generateID(appName, version)
   const manifestUrl = await getHyperPlayReleaseManifest(releaseId, platform)
-  console.log({ manifestUrl })
   if (!manifestUrl) return false
 
   // download and save the manifest file as a json file in manifest folder
@@ -1666,8 +1670,35 @@ async function applyPatching(
       `Version or install path not found for ${appName} in applyPatching`,
       LogPrefix.HyperPlay
     )
+    captureException(
+      new Error(
+        'Could not start patching because of missing version, install_path or platform'
+      ),
+      {
+        extra: {
+          method: 'applyPatching',
+          appName,
+          install_path,
+          title: gameInfo.title,
+          platform,
+          version,
+          newVersion
+        }
+      }
+    )
+
     return { status: 'error', error: 'Version or install path not found' }
   }
+
+  trackEvent({
+    event: 'Patching Started',
+    properties: {
+      game_name: gameInfo.app_name,
+      game_title: gameInfo.title,
+      platform: getPlatformName(platform),
+      platform_arch: platform
+    }
+  })
 
   const previousManifest = await getManifest(appName, platform, version)
   const currentManifest = await getManifest(appName, platform, newVersion)
@@ -1766,13 +1797,47 @@ async function applyPatching(
       }
     }
   } catch (error) {
-    console.log({ error })
+    logError(`Error while patching ${error}`, LogPrefix.HyperPlay)
+
+    trackEvent({
+      event: 'Patching Failed',
+      properties: {
+        error: `${error}`,
+        game_name: gameInfo.app_name,
+        game_title: gameInfo.title,
+        platform: getPlatformName(platform),
+        platform_arch: platform
+      }
+    })
+
+    captureException(new Error(`Error while patching ${error}`), {
+      extra: {
+        method: 'applyPatching',
+        appName,
+        title: gameInfo.title,
+        install_path,
+        platform,
+        version,
+        newVersion
+      }
+    })
+
     return { status: 'error', error: `Error while patching ${error}` }
   }
   // need this to cover 100% of abort cases
   if (aborted) {
     return { status: 'abort' }
   }
+
+  trackEvent({
+    event: 'Patching Success',
+    properties: {
+      game_name: gameInfo.app_name,
+      game_title: gameInfo.title,
+      platform: getPlatformName(platform),
+      platform_arch: platform
+    }
+  })
 
   logInfo(`Patching ${appName} completed`, LogPrefix.HyperPlay)
   return { status: 'done' }
@@ -1791,10 +1856,8 @@ async function getManifest(
     process.platform === 'darwin'
       ? manifestPath.replace(/\\/g, '\\\\').replace(/ /g, '\\ ')
       : manifestPath
-  console.log({ normalizedManifestPath })
 
   if (!existsSync(normalizedManifestPath)) {
-    console.log(`${normalizedManifestPath} does not exist, downloading it`)
     logDebug(
       `Manifest for ${appName} not found for version ${version} and platform ${platformName}`,
       LogPrefix.HyperPlay
@@ -1804,6 +1867,16 @@ async function getManifest(
       await downloadGameIpdtManifest(appName, version)
       return manifestPath
     } catch (error) {
+      captureException(new Error(`Error downloading manifest ${error}`), {
+        extra: {
+          method: 'getManifest',
+          appName,
+          title: appName,
+          platformName,
+          version
+        }
+      })
+
       return ''
     }
   }
