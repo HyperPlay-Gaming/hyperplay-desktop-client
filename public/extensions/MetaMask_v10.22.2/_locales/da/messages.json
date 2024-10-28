@@ -75,6 +75,9 @@
   "asset": {
     "message": "Aktiv"
   },
+  "attemptingConnect": {
+    "message": "Forsøger at oprette forbindelse til blokkæden."
+  },
   "attributions": {
     "message": "Tilskrivninger"
   },
@@ -604,6 +607,9 @@
   },
   "selectType": {
     "message": "Vælg type"
+  },
+  "sendTokens": {
+    "message": "Send tokens"
   },
   "settings": {
     "message": "Indstillinger "

@@ -1246,10 +1246,10 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/check-disk-space/-/check-disk-space-3.5.2.tgz#367caa30fec5494e2714891aefcb021aa1fc7e2f"
   integrity sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==
 
-"@hyperplay/extension-importer@^0.1.0-alpha":
-  version "0.1.0-alpha"
-  resolved "https://registry.yarnpkg.com/@hyperplay/extension-importer/-/extension-importer-0.1.0-alpha.tgz#924bc9eecbd73f92f69f29a82101d0cbfd7dbfd3"
-  integrity sha512-k8gsXPuRJjQp8ZDz1DH4K919FQMX6YxrKPdKTxQ7tQq3TrHk+vQGMKrCabtO/rU9zFeN3KcEQuRJ9cGoGcu7aw==
+"@hyperplay/extension-importer@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@hyperplay/extension-importer/-/extension-importer-0.0.4.tgz#13ffda448d186c73a521885d04a232c3a160d247"
+  integrity sha512-xdHwOVcXrnrIofdf7om42VScOXhMjdlTpPGLpk/q0oK54kRwFFlZrYSyLidyIA80kScy1bHzlQN78n9pvi5KRA==
   dependencies:
     "@hyperplay/utils" "^0.0.9"
     classic-level "^1.4.1"
@@ -3440,17 +3440,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.13.tgz#f64277c341150c979e42b00e4ac289290c9df469"
   integrity sha512-N+0kuo9KgrUQ1Sn/ifDXsvg0TTleP7rIy4zOBGECxAljqvqfqpTfzx0Q1NUedOixRMBfe2Whhb056a42cWs26Q==
 
-"@types/node@^20.16.2":
+"@types/node@^20.16.2", "@types/node@^20.9.0":
   version "20.16.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.16.2.tgz#9e388f503a5af306e8c63319334887390966a11e"
   integrity sha512-91s/n4qUPV/wg8eE9KHYW1kouTfDk2FPGjXbBMfRWP/2vg1rCXNQL1OCabwGs0XSdukuK+MwCDXE30QpSeMUhQ==
-  dependencies:
-    undici-types "~6.19.2"
-
-"@types/node@^20.9.0":
-  version "20.16.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.16.9.tgz#1217c6cc77c4f3aaf4a6c76fb56b790e81e48120"
-  integrity sha512-rkvIVJxsOfBejxK7I0FO5sa2WxFmJCzoDwcd88+fq/CUfynNywTo/1/T6hyFz22CyztsnLS9nVlHOnTI36RH5w==
   dependencies:
     undici-types "~6.19.2"
 
@@ -6314,10 +6307,10 @@ electron-vite@^2.3.0:
     magic-string "^0.30.10"
     picocolors "^1.0.1"
 
-electron@32.1.2:
-  version "32.1.2"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-32.1.2.tgz#84d1efd95d41224e58a6a9bbd1db4ba80154fc02"
-  integrity sha512-CXe6doFzhmh1U7daOvUzmF6Cj8hssdYWMeEPRnRO6rB9/bbwMlWctcQ7P8NJXhLQ88/vYUJQrJvlJPh8qM0BRQ==
+electron@^32.0.1:
+  version "32.0.1"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-32.0.1.tgz#8bfc186b81a645c6b3b12f91e71db4231fd0c934"
+  integrity sha512-5Hd5Jaf9niYVR2hZxoRd3gOrcxPOxQV1XPV5WaoSfT9jLJHFadhlKtuSDIk3U6rQZke+aC7GqPPAv55nWFCMsA==
   dependencies:
     "@electron/get" "^2.0.0"
     "@types/node" "^20.9.0"

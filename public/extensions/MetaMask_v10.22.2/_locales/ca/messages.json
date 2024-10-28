@@ -75,6 +75,9 @@
   "asset": {
     "message": "Actius"
   },
+  "attemptingConnect": {
+    "message": "Intentant conectar a blockchain."
+  },
   "attributions": {
     "message": "Atribucions"
   },
@@ -607,6 +610,9 @@
   },
   "send": {
     "message": "Envia"
+  },
+  "sendTokens": {
+    "message": "Enviar Fitxes"
   },
   "settings": {
     "message": "Configuració"
