@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { QuestDetailsWrapper } from '@hyperplay/quests-ui'
-import { Reward } from '@hyperplay/utils'
+import { Reward, Quest } from '@hyperplay/utils'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import authState from 'frontend/state/authState'
@@ -11,14 +11,14 @@ import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayS
 
 export default function QuestDetails({
   questId,
-  appName,
   className,
-  isQuestsPage
+  isQuestsPage,
+  onPlayClick
 }: {
   questId: number | null
-  appName: string
   className?: string
   isQuestsPage?: boolean
+  onPlayClick?: (quest: Quest) => void
 }) {
   const { address } = useAccount()
   const { isSignedIn, data } = useAuthSession()
@@ -42,6 +42,7 @@ export default function QuestDetails({
 
   return (
     <QuestDetailsWrapper
+      onPlayClick={onPlayClick}
       getPendingExternalSync={getPendingExternalSync}
       syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}
       tOverride={t}
@@ -50,7 +51,6 @@ export default function QuestDetails({
       checkG7ConnectionStatus={window.api.checkG7ConnectionStatus}
       logInfo={window.api.logInfo}
       logError={window.api.logError}
-      projectId={appName}
       flags={{
         rewardTypeClaimEnabled: {
           ERC20: flags.erc20RewardsClaim,

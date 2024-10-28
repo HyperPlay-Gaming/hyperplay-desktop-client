@@ -30,3 +30,12 @@
   z-index: 4;
   grid-area: alert;
 }
+
+.detailsWrapper {
+  width: 800px;
+  max-width: unset !important;
+
+  @media (max-width: 1300px) {
+    width: 540px;
+  }
+}

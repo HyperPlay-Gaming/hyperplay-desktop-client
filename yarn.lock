@@ -1309,15 +1309,15 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/quests-ui@file:../quests-ui/hyperplay-quests-ui-0.0.34-alpha.0.tgz":
-  version "0.0.34-alpha.0"
-  resolved "file:../quests-ui/hyperplay-quests-ui-0.0.34-alpha.0.tgz#790a37224e9c0ac7158793cfe38337c112309f35"
+"@hyperplay/quests-ui@file:../quests-ui/hyperplay-quests-ui-0.0.34-alpha.6.tgz":
+  version "0.0.34-alpha.6"
+  resolved "file:../quests-ui/hyperplay-quests-ui-0.0.34-alpha.6.tgz#c75dc1407bfb941d8b334bcbbbeee63be4e59d96"
   dependencies:
     classnames "^2.5.1"
 
-"@hyperplay/ui@file:../ui-library/hyperplay-ui-1.8.7-alpha.2.tgz":
-  version "1.8.7-alpha.2"
-  resolved "file:../ui-library/hyperplay-ui-1.8.7-alpha.2.tgz#8e3898a0182781cf551fb7a432512a8373f5f185"
+"@hyperplay/ui@file:../ui-library/hyperplay-ui-1.8.7-alpha.4.tgz":
+  version "1.8.7-alpha.4"
+  resolved "file:../ui-library/hyperplay-ui-1.8.7-alpha.4.tgz#77820c712ce0f221ce4b7bb47fab63fc86a17dc8"
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"

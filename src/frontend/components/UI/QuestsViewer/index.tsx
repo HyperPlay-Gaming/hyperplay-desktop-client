@@ -66,7 +66,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         />
         <QuestDetails
           questId={visibleQuestId}
-          appName={appName}
           className={styles.detailsWrapper}
         />
       </div>
