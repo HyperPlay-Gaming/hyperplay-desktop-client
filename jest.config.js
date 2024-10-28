@@ -17,11 +17,6 @@ module.exports = {
   ],
   coverageReporters: ['text', 'html'],
   projects: ['<rootDir>/src/backend', '<rootDir>/src/frontend'],
-  transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!@hyperplay/patcher)'
-  ],
-  transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest'
-  },
+
   rootDir: '.'
 }
