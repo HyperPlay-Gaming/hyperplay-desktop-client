@@ -95,7 +95,6 @@ import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
 import { chmod } from 'fs/promises'
-import { GlobalConfig } from 'backend/config'
 import { ldMainClient } from 'backend/main'
 import { trackEvent } from 'backend/api/metrics'
 import { ipfsGateway } from './constants'
@@ -1658,7 +1657,6 @@ async function applyPatching(
   const appName = gameInfo.app_name
   const window = getMainWindow()
   const { install_path, version, platform } = gameInfo.install
-  const { maxWorkers } = GlobalConfig.get().getSettings()
   let aborted = false
 
   if (!existsSync(ipdtPatcher)) {
@@ -1722,8 +1720,7 @@ async function applyPatching(
       previousManifest,
       ipfsGateway,
       ipfsGateway,
-      signal,
-      maxWorkers ?? 6
+      signal
     )
 
     if (signal.aborted) {
