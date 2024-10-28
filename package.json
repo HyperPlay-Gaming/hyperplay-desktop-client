@@ -217,6 +217,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^20.0.0",
     "json5": "^2.2.3",
+    "kubo-rpc-client": "^5.0.1",
     "launchdarkly-electron-client-sdk": "^1.7.0",
     "launchdarkly-react-client-sdk": "^3.4.0",
     "lokijs": "^1.5.12",
