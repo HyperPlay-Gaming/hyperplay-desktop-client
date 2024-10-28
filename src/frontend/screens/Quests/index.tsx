@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { QuestsSummaryTableWrapper } from './components/QuestsSummaryTableWrapper'
-import { QuestDetailsViewPlayWrapper } from './components/QuestDetailsViewPlay'
 import styles from './index.module.scss'
 import { Alert, Background } from '@hyperplay/ui'
 import classNames from 'classnames'
@@ -8,6 +7,7 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { G7CreditsModal } from 'frontend/components/UI/G7CreditsModal'
+import QuestDetails from 'frontend/components/UI/QuestDetails'
 
 export function QuestsPage() {
   const { questId = null } = useParams()
@@ -49,7 +49,11 @@ export function QuestsPage() {
       >
         {alertComponent}
         <QuestsSummaryTableWrapper selectedQuestId={selectedQuestId} />
-        <QuestDetailsViewPlayWrapper selectedQuestId={selectedQuestId} />
+        <QuestDetails
+          questId={selectedQuestId}
+          appName={''}
+          isQuestsPage={true}
+        />
       </div>
     </>
   )

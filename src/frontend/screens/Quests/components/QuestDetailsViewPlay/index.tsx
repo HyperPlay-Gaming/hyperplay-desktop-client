@@ -113,6 +113,7 @@ export const QuestDetailsViewPlayWrapper = observer(
       })) ?? []
 
     const i18n: QuestDetailsTranslations = {
+      cta: t('quest.cta', 'Play/Install Game'),
       rewards: t('quest.reward', 'Rewards'),
       associatedGames: t('quest.associatedGames', 'Associated games'),
       linkSteamAccount: t(
@@ -124,7 +125,7 @@ export const QuestDetailsViewPlayWrapper = observer(
         `You need to have completed {{percent}}% of the achievements in one of these games.`,
         { percent: questMeta?.eligibility?.completion_threshold ?? '??' }
       ),
-      claim: t('quest.claimAll', 'Claim all'),
+      claim: t('quest.claim', 'Claim'),
       signIn: t('quest.signIn', 'Sign in'),
       play: navigateToGame.isPending
         ? t('please-wait', 'Please wait...')
