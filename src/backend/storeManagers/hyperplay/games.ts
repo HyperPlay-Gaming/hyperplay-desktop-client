@@ -66,7 +66,6 @@ import {
   getHyperPlayReleaseManifest,
   handleArchAndPlatform,
   handlePlatformReversed,
-  ipfsGateway,
   runModPatcher,
   sanitizeVersion
 } from './utils'
@@ -99,6 +98,7 @@ import { chmod } from 'fs/promises'
 import { GlobalConfig } from 'backend/config'
 import { ldMainClient } from 'backend/main'
 import { trackEvent } from 'backend/api/metrics'
+import { ipfsGateway } from './constants'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
