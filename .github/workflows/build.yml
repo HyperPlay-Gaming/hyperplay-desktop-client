@@ -35,8 +35,8 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: yarn install --network-timeout 600000 && yarn allow-scripts
-      - name: setup env production file
-        run: | 
+      - name: setup env file
+        run: |
           echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - name: Build artifacts.
@@ -73,9 +73,10 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: yarn setup
-      - name: setup env production file
-        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
-        run: echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
+      - name: setup env file
+        run: |
+          echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
+          echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - name: Build deb artifact
         run: yarn dist:linux:ci:deb
       - name: Build rpm artifact
@@ -104,9 +105,10 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: yarn setup
-      - name: setup env production file
-        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
-        run: echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
+      - name: setup env file
+        run: |
+          echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
+          echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - name: Build artifacts.
         run: yarn dist:mac:x64
         env:
