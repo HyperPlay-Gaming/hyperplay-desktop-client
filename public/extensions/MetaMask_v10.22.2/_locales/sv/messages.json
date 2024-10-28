@@ -75,6 +75,9 @@
   "asset": {
     "message": "Tillgång"
   },
+  "attemptingConnect": {
+    "message": "Försöker ansluta till blockkedja."
+  },
   "attributions": {
     "message": "Tillskrivningar"
   },
@@ -610,6 +613,9 @@
   },
   "send": {
     "message": "Skicka"
+  },
+  "sendTokens": {
+    "message": "Skicka tokens"
   },
   "settings": {
     "message": "Inställningar"

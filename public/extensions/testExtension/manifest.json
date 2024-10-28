@@ -12,22 +12,5 @@
     "default_popup": "popup.html"
   },
   "host_permissions": ["https://developer.chrome.com/*"],
-  "permissions": ["tabGroups", "tabs", "alarms", "notifications", "storage", "scripting", "activeTab"],
-  "background": {
-    "service_worker": "./service_worker.js"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "file://*/*",
-        "http://*/*",
-        "https://*/*"
-      ],
-      "js": [
-        "./contentscript.js"
-      ],
-      "run_at": "document_idle",
-      "all_frames": true
-    }
-  ]
+  "permissions": ["tabGroups"]
 }
