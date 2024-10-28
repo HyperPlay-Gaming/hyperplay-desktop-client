@@ -17,6 +17,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
     "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
