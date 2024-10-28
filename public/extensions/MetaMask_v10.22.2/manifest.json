@@ -1,5 +1,10 @@
 {
-  "action": {
+  "author": "https://metamask.io",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
     "default_icon": {
       "16": "images/icon-16.png",
       "19": "images/icon-19.png",
@@ -10,14 +15,10 @@
       "512": "images/icon-512.png"
     },
     "default_title": "MetaMask",
-    "default_popup": "popup-init.html"
-  },
-  "author": "https://metamask.io",
-  "background": {
-    "service_worker": "scripts/app-init.js"
+    "default_popup": "popup.html"
   },
   "commands": {
-    "_execute_action": {
+    "_execute_browser_action": {
       "suggested_key": {
         "windows": "Alt+Shift+M",
         "mac": "Alt+Shift+M",
@@ -38,7 +39,8 @@
         "scripts/lockdown-install.js",
         "scripts/lockdown-run.js",
         "scripts/lockdown-more.js",
-        "scripts/contentscript.js"
+        "scripts/contentscript.js",
+        "scripts/inpage.js"
       ],
       "run_at": "document_start",
       "all_frames": true
@@ -50,29 +52,10 @@
       "js": [
         "vendor/trezor/content-script.js"
       ]
-    },
-    {
-      "matches": [
-        "file://*/*",
-        "http://*/*",
-        "https://*/*"
-      ],
-      "js": [
-        "scripts/inpage.js"
-      ],
-      "run_at": "document_start",
-      "world": "MAIN",
-      "all_frames": true
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: 8b73be60",
-  "host_permissions": [
-    "http://localhost:8545/",
-    "file://*/*",
-    "http://*/*",
-    "https://*/*"
-  ],
+  "description": "other build from git id: 78be2c1a",
   "icons": {
     "16": "images/icon-16.png",
     "19": "images/icon-19.png",
@@ -83,27 +66,24 @@
     "128": "images/icon-128.png",
     "512": "images/icon-512.png"
   },
-  "manifest_version": 3,
-  "name": "MetaMask MV3 lavamoat snow",
+  "manifest_version": 2,
+  "name": "MetaMask lavamoat snow",
   "permissions": [
-    "activeTab",
-    "alarms",
-    "scripting",
     "storage",
     "unlimitedStorage",
-    "webRequest",
-    "offscreen"
+    "clipboardWrite",
+    "http://localhost:8545/",
+    "https://*.infura.io/",
+    "https://*.codefi.network/",
+    "https://*.cx.metamask.io/",
+    "https://chainid.network/chains.json",
+    "https://lattice.gridplus.io/*",
+    "activeTab",
+    "*://*.eth/",
+    "notifications"
   ],
-  "sandbox": {
-    "pages": [
-      "snaps/index.html"
-    ]
-  },
   "short_name": "__MSG_appName__",
-  "content_security_policy": {
-    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'none'; frame-ancestors 'none';",
-    "sandbox": "sandbox allow-scripts; script-src 'self' 'unsafe-inline' 'unsafe-eval'; object-src 'none'; default-src 'none'; connect-src *;"
-  },
+  "content_security_policy": "frame-ancestors 'none'; script-src 'self' 'wasm-unsafe-eval'; object-src 'none'",
   "externally_connectable": {
     "matches": [
       "https://metamask.io/*"
@@ -113,5 +93,5 @@
     ]
   },
   "minimum_chrome_version": "89",
-  "version": "12.3.0"
+  "version": "11.15.0"
 }

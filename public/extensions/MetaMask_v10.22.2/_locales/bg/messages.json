@@ -75,6 +75,9 @@
   "asset": {
     "message": "Актив"
   },
+  "attemptingConnect": {
+    "message": "Опит за свързване с blockchain."
+  },
   "attributions": {
     "message": "Функции"
   },
@@ -622,6 +625,9 @@
   },
   "send": {
     "message": "Изпращане"
+  },
+  "sendTokens": {
+    "message": "Изпращане на жетони"
   },
   "settings": {
     "message": "Настройки"

@@ -75,6 +75,9 @@
   "asset": {
     "message": "Aset"
   },
+  "attemptingConnect": {
+    "message": "Sedang cuba menyambungkan kepada rantaian blok."
+  },
   "attributions": {
     "message": "Atribusi"
   },
@@ -606,6 +609,9 @@
   },
   "send": {
     "message": "Hantar"
+  },
+  "sendTokens": {
+    "message": "Hantar Token"
   },
   "settings": {
     "message": "Tetapan"

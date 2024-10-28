@@ -33,6 +33,9 @@
   "approve": {
     "message": "मंजूर"
   },
+  "attemptingConnect": {
+    "message": "ब्लॉकचैन से कनेक्ट करने का प्रयास करना होगा।सब्र करे।"
+  },
   "attributions": {
     "message": "एट्रिब्यूशन"
   },
@@ -262,6 +265,9 @@
   },
   "send": {
     "message": "भेजें"
+  },
+  "sendTokens": {
+    "message": "भेजें टोकन"
   },
   "settings": {
     "message": "सेटिंग्स"
