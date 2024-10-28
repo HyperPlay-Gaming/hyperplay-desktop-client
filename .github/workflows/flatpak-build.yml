@@ -45,6 +45,7 @@ jobs:
         run: npm install --global yarn
       - name: setup env production file
         run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
+        run: echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - name: Install modules.
         run: yarn setup
       - name: Build artifacts.
