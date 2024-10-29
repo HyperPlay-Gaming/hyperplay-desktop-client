@@ -92,7 +92,6 @@ import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
 import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { chmod, readFile, writeFile } from 'fs/promises'
-import { ldMainClient } from 'backend/ldconstants'
 import { trackEvent } from 'backend/api/metrics'
 import { ipfsGateway } from './constants'
 
@@ -1661,11 +1660,11 @@ async function applyPatching(
   newVersion: string,
   signal: AbortSignal
 ): Promise<InstallResult> {
-  const patcherisEnabled = ldMainClient.variation('enable-patcher', false)
+  /*   const patcherisEnabled = ldMainClient.variation('enable-patcher', false)
 
   if (!patcherisEnabled) {
     return { status: 'error' }
-  }
+  } */
 
   const {
     app_name: appName,
