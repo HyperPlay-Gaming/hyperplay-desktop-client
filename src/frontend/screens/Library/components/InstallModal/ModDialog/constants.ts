@@ -1,4 +1,4 @@
-export const marketWarsDownloadLinks: Record<string, string> = {
+export const marketWarsLinksFallback: Record<string, string> = {
   chromieCraft: 'https://www.chromiecraft.com/en/downloads/',
   zip: 'https://bit.ly/3JwHKKX',
   archiveOrg: '',

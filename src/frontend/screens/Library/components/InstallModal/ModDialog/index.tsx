@@ -13,6 +13,7 @@ import { install } from 'frontend/helpers'
 import { signSiweMessage } from 'frontend/helpers/library'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import { marketWarsLinksFallback } from './constants'
 
 interface Props {
   backdropClick: () => void
@@ -47,7 +48,8 @@ const ModDialog: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation()
   const flags = useFlags()
-  const marketWarsDownloadLinks = flags.marketWarsLinks
+  const marketWarsDownloadLinks =
+    flags.marketWarsLinks || marketWarsLinksFallback
 
   const [zipFilePath, setZipFilePath] = useState<string>('')
   const [installPath, setInstallPath] = useState<string>(
