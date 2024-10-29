@@ -75,6 +75,9 @@
   "asset": {
     "message": "Ressurs"
   },
+  "attemptingConnect": {
+    "message": "Prøver å opprette forbindelse med blokkjede"
+  },
   "attributions": {
     "message": "Henvisninger"
   },
@@ -607,6 +610,9 @@
   },
   "selectType": {
     "message": "Velg type "
+  },
+  "sendTokens": {
+    "message": "Send tokener"
   },
   "settings": {
     "message": "Innstillinger"
