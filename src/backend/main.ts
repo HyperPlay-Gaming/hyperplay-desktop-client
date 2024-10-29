@@ -35,7 +35,6 @@ import {
   watch,
   writeFileSync
 } from 'graceful-fs'
-import * as LDElectron from 'launchdarkly-electron-client-sdk'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
 import { DXVK, SteamWindows, Winetricks } from './tools'
@@ -44,6 +43,7 @@ import { GlobalConfig } from './config'
 import { LegendaryUser } from 'backend/storeManagers/legendary/user'
 import { GOGUser } from './storeManagers/gog/user'
 import setup from './storeManagers/gog/setup'
+import { ldMainClient } from './ldconstants'
 import {
   clearCache,
   execAsync,
@@ -223,13 +223,9 @@ import {
   getGameOverride,
   getGameSdl
 } from 'backend/storeManagers/legendary/library'
-import { uuid } from 'short-uuid'
-import { LDEnvironmentId, ldOptions } from './ldconstants'
 import getPartitionCookies from './utils/get_partition_cookies'
 
 import { formatSystemInfo, getSystemInfo } from './utils/systeminfo'
-
-export let ldMainClient: LDElectron.LDElectronMainClient
 
 if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
   app.commandLine?.appendSwitch('remote-debugging-port', '9222')
@@ -584,27 +580,6 @@ if (!gotTheLock) {
         'zh_Hans',
         'zh_Hant'
       ]
-    })
-
-    let ldUser = GlobalConfig.get().getSettings().ldUser
-
-    if (!ldUser) {
-      logInfo('No LaunchDarkly user found, creating new one.')
-      ldUser = {
-        kind: 'user',
-        key: uuid()
-      }
-      configStore.set('settings.ldUser', ldUser)
-    }
-
-    ldMainClient = LDElectron.initializeInMain(
-      LDEnvironmentId,
-      ldUser,
-      ldOptions
-    )
-
-    ldMainClient.on('ready', () => {
-      logInfo('LaunchDarkly client initialized', LogPrefix.Backend)
     })
 
     const mainWindow = await initializeWindow()

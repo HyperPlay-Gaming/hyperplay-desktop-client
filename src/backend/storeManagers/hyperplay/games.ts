@@ -92,7 +92,7 @@ import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
 import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { chmod, readFile, writeFile } from 'fs/promises'
-import { ldMainClient } from 'backend/main'
+import { ldMainClient } from 'backend/ldconstants'
 import { trackEvent } from 'backend/api/metrics'
 import { ipfsGateway } from './constants'
 
