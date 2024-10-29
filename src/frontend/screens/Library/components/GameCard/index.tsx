@@ -110,7 +110,8 @@ const GameCard = ({
     isPaused,
     isExtracting,
     isPreparing,
-    isInstallingDistributables
+    isInstallingDistributables,
+    isPatching
   } = getCardStatus(status, isInstalled, layout)
 
   const handleRemoveFromQueue = () => {
@@ -132,6 +133,9 @@ const GameCard = ({
     }
     if (isPreparing) {
       return 'PREPARING'
+    }
+    if (isPatching) {
+      return 'PATCHING'
     }
     if (isUninstalling) {
       return 'UNINSTALLING'
