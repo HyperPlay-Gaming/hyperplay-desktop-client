@@ -1,5 +1,5 @@
 export const marketWarsDownloadLinks: Record<string, string> = {
-  chromieCraft: 'https://chromiecraft.com/download',
+  chromieCraft: 'https://www.chromiecraft.com/en/downloads/',
   zip: 'https://bit.ly/3JwHKKX',
   archiveOrg: '',
   webtorrent: 'https://webtorrent.io/',
