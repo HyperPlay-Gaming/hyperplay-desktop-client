@@ -94,7 +94,7 @@ import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 import { chmod, readFile, writeFile } from 'fs/promises'
 import { ldMainClient } from 'backend/main'
 import { trackEvent } from 'backend/api/metrics'
-import { downloadIPDTForOS, ipfsGateway, patchFolder } from './constants'
+import { ipfsGateway } from './constants'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1562,6 +1562,7 @@ function writeManifestFile(
 export const downloadPatcher = async () => {
   if (!existsSync(ipdtPatcher)) {
     try {
+      const { downloadIPDTForOS } = await import('@hyperplay/patcher')
       await downloadIPDTForOS(toolsPath)
 
       const version = await getIpdtPatcherVersion()
@@ -1672,6 +1673,8 @@ async function applyPatching(
   } = gameInfo
 
   try {
+    const { patchFolder } = await import('@hyperplay/patcher')
+
     const mainWindow = getMainWindow()
     let aborted = false
 
