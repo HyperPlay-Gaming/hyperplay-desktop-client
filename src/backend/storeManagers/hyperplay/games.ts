@@ -93,8 +93,9 @@ import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { chmod, readFile, writeFile } from 'fs/promises'
 import { ldMainClient } from 'backend/ldconstants'
-import { trackEvent } from 'backend/api/metrics'
 import { ipfsGateway } from './constants'
+import { trackEvent } from 'backend/metrics/metrics'
+import { PatchingError } from './types'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1656,6 +1657,82 @@ export async function downloadGameIpdtManifest(
   }
 }
 
+async function checkIfPatchingIsFaster(
+  oldManifestPath: string,
+  newManifestPath: string,
+  gameInfo: GameInfo
+) {
+  // read manifests
+  const oldManifestJson = JSON.parse(readFileSync(oldManifestPath).toString())
+  const newManifestJson = JSON.parse(readFileSync(newManifestPath).toString())
+
+  // compare manifests
+
+  const { compareManifests } = await import('@hyperplay/patcher')
+  const blockSizeForEstimateInKB = 140
+  const { estimatedPatchSizeInKB } = compareManifests(
+    oldManifestJson,
+    newManifestJson,
+    blockSizeForEstimateInKB
+  )
+
+  // calc break point % where patching is faster
+  if (
+    gameInfo?.install?.platform &&
+    gameInfo.channels &&
+    gameInfo?.install?.channelName &&
+    Object.hasOwn(gameInfo.channels, gameInfo.install.channelName)
+  ) {
+    const channelName = gameInfo.install.channelName
+    const [releaseMeta] = getReleaseMeta(gameInfo, channelName)
+    const platform = handleArchAndPlatform(
+      gameInfo.install.platform,
+      releaseMeta
+    )
+    const downloadSize = parseInt(
+      releaseMeta.platforms[platform]?.downloadSize ?? '0'
+    )
+    const installSize = parseInt(
+      releaseMeta.platforms[platform]?.installSize ?? '0'
+    )
+    const downloadSpeedInKBPerSecond = 25 * 1024
+    const extractionSpeedInKBPerSecond = 50 * 1024
+    const estTimeToInstallFullGameInSec =
+      (downloadSize / 1024) * downloadSpeedInKBPerSecond +
+      (installSize / 1024) * extractionSpeedInKBPerSecond
+
+    const patchingSpeedEstimateInKBPerSecond = 2 * 1024
+    const estTimeToPatchGameInSec =
+      estimatedPatchSizeInKB / patchingSpeedEstimateInKBPerSecond
+
+    if (estTimeToPatchGameInSec > estTimeToInstallFullGameInSec) {
+      const abortMessage = `Downloading full game instead of patching. \n 
+        Estimated time to install full game: ${estTimeToInstallFullGameInSec} seconds. \n
+        Estimated time to patch: ${estTimeToPatchGameInSec}
+      `
+      logInfo(abortMessage, LogPrefix.HyperPlay)
+      const patchingError = new PatchingError(
+        abortMessage,
+        'slower-than-install',
+        {
+          event: 'Patching Too Slow',
+          properties: {
+            game_name: gameInfo.app_name,
+            game_title: gameInfo.title,
+            platform: getPlatformName(platform),
+            platform_arch: platform,
+            est_time_to_install_sec: estTimeToInstallFullGameInSec.toString(),
+            est_time_to_patch_sec: estTimeToPatchGameInSec.toString(),
+            old_game_version: gameInfo.install.version ?? 'unknown',
+            new_game_version: gameInfo.version ?? 'unknown'
+          }
+        }
+      )
+      throw patchingError
+    }
+  }
+}
+
 async function applyPatching(
   gameInfo: GameInfo,
   newVersion: string,
@@ -1719,6 +1796,9 @@ async function applyPatching(
 
     const previousManifest = await getManifest(appName, platform, version)
     const currentManifest = await getManifest(appName, platform, newVersion)
+
+    // check if it is faster to patch or install and throw if install is faster
+    await checkIfPatchingIsFaster(previousManifest, currentManifest, gameInfo)
 
     logInfo(
       `Patching ${gameInfo.title} from ${version} to ${newVersion}`,
@@ -1826,6 +1906,16 @@ async function applyPatching(
     logInfo(`Patching ${appName} completed`, LogPrefix.HyperPlay)
     return { status: 'done' }
   } catch (error) {
+    if (error instanceof PatchingError) {
+      if (error.reason === 'slower-than-install') {
+        if (error.eventToTrack) {
+          trackEvent(error.eventToTrack)
+        }
+        // this will not track any error events or call captureException in the calling code. it will try to install
+        return { status: 'error' }
+      }
+    }
+
     logError(`Error while patching ${error}`, LogPrefix.HyperPlay)
 
     trackEvent({
