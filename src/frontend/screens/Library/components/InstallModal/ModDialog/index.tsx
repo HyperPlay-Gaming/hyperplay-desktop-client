@@ -11,8 +11,8 @@ import TextInputWithIconField from 'frontend/components/UI/TextInputWithIconFiel
 import { Button, Images } from '@hyperplay/ui'
 import { install } from 'frontend/helpers'
 import { signSiweMessage } from 'frontend/helpers/library'
-import { marketWarsDownloadLinks } from './constants'
 import ContextProvider from 'frontend/state/ContextProvider'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 interface Props {
   backdropClick: () => void
@@ -46,6 +46,9 @@ const ModDialog: React.FC<Props> = ({
   crossoverBottle
 }) => {
   const { t } = useTranslation()
+  const flags = useFlags()
+  const marketWarsDownloadLinks = flags.marketWarsLinks
+
   const [zipFilePath, setZipFilePath] = useState<string>('')
   const [installPath, setInstallPath] = useState<string>(
     getDefaultInstallPath()
