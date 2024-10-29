@@ -91,11 +91,10 @@ import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
 import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
-import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
 import { chmod, readFile, writeFile } from 'fs/promises'
 import { ldMainClient } from 'backend/main'
 import { trackEvent } from 'backend/api/metrics'
-import { ipfsGateway } from './constants'
+import { downloadIPDTForOS, ipfsGateway, patchFolder } from './constants'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
