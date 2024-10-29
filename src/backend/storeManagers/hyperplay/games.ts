@@ -31,9 +31,7 @@ import {
   rmSync,
   readdirSync,
   readFileSync,
-  statSync,
-  writeFile,
-  writeFileSync
+  statSync
 } from 'graceful-fs'
 import {
   isMac,
@@ -94,7 +92,7 @@ import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
 import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
-import { chmod } from 'fs/promises'
+import { chmod, readFile, writeFile } from 'fs/promises'
 import { ldMainClient } from 'backend/main'
 import { trackEvent } from 'backend/api/metrics'
 import { ipfsGateway } from './constants'
@@ -1574,14 +1572,7 @@ export const downloadPatcher = async () => {
         `IPDT patcher ${version} downloaded successfully`,
         LogPrefix.HyperPlay
       )
-      writeFile(versionFile, version, (err) => {
-        if (err) {
-          logError(
-            `Error writing IPDT version file: ${err}`,
-            LogPrefix.HyperPlay
-          )
-        }
-      })
+      await writeFile(versionFile, version)
 
       if (!isWindows) {
         await chmod(ipdtPatcher, 0o755)
@@ -1635,15 +1626,16 @@ export async function downloadGameIpdtManifest(
       manifestName,
       createAbortController(appName)
     )
+      .then(async () => {
+        // remove the empty line at the end of the json file to avoid EOF issues
+        const manifestContent = await readFile(manifestPath, 'utf8')
+        const manifestContentTrimmed = manifestContent.trim()
+        await writeFile(manifestPath, manifestContentTrimmed)
+      })
+      .catch((error) => {
+        throw new Error(`Error downloading manifest for ${appName}: ${error}`)
+      })
 
-    if (isWindows) {
-      // remove the empty line at the end of the json file to avoid issues on Windows
-      const manifestContent = readFileSync(manifestPath, 'utf-8')
-      const formattedManifest = manifestContent
-        .replace(/\r?\n+$/, '')
-        .replace(/\r?\n/g, '\r\n')
-      writeFileSync(manifestPath, formattedManifest)
-    }
     return true
   } catch (error) {
     logError(
@@ -1867,16 +1859,12 @@ async function getManifest(
   version: string
 ) {
   try {
-    const manifestPath = path.normalize(
-      path.join(ipdtManifestsPath, `${appName}-${platformName}-${version}.json`)
+    const manifestPath = path.join(
+      ipdtManifestsPath,
+      `${appName}-${platformName}-${version}.json`
     )
-    // On Darwin (macOS), escape spaces in the path
-    const normalizedManifestPath =
-      process.platform === 'darwin'
-        ? manifestPath.replace(/\\/g, '\\\\').replace(/ /g, '\\ ')
-        : manifestPath
 
-    if (!existsSync(normalizedManifestPath)) {
+    if (!existsSync(manifestPath)) {
       logDebug(
         `Manifest for ${appName} not found for version ${version} and platform ${platformName}`,
         LogPrefix.HyperPlay
