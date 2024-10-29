@@ -1452,6 +1452,7 @@ export async function update(
   )
 
   if (status === 'abort') {
+    logWarning(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
     return { status: 'abort' }
   } else if (status === 'error' && !error?.includes('aborted')) {
     // if error, download the zip file
@@ -1593,6 +1594,7 @@ export const downloadPatcher = async () => {
       })
 
       logError(`Error downloading IPDT: ${error}`, LogPrefix.HyperPlay)
+      throw new Error('Error downloading IPDT')
     }
   }
 }
@@ -1606,43 +1608,62 @@ export async function downloadGameIpdtManifest(
   appName: string,
   version: string
 ) {
-  const {
-    install: { channelName, platform, version: installedVersion },
-    is_installed
-  } = getGameInfo(appName)
-  if (!channelName || !platform || !is_installed) return false
+  try {
+    const {
+      install: { channelName, platform },
+      is_installed
+    } = getGameInfo(appName)
+    if (!channelName || !platform || !is_installed) return false
 
-  // download only if the manifest file is not already downloaded and its the same version
-  const manifestName = `${appName}-${platform}-${version}.json`
-  const manifestPath = path.join(ipdtManifestsPath, manifestName)
-  if (existsSync(manifestPath)) return false
+    // download only if the manifest file is not already downloaded and its the same version
+    const manifestName = `${appName}-${platform}-${version}.json`
+    const manifestPath = path.join(ipdtManifestsPath, manifestName)
+    if (existsSync(manifestPath)) return false
 
-  const releaseId = generateID(appName, version)
-  const manifestUrl = await getHyperPlayReleaseManifest(releaseId, platform)
-  if (!manifestUrl) return false
+    const releaseId = generateID(appName, version)
+    const manifestUrl = await getHyperPlayReleaseManifest(releaseId, platform)
+    if (!manifestUrl) return false
 
-  // download and save the manifest file as a json file in manifest folder
-  logInfo(
-    `Downloading manifest for ${appName} from ${manifestUrl} to ${manifestPath}`,
-    LogPrefix.HyperPlay
-  )
-  await downloadFile(
-    manifestUrl,
-    ipdtManifestsPath,
-    manifestName,
-    createAbortController(appName)
-  )
+    // download and save the manifest file as a json file in manifest folder
+    logInfo(
+      `Downloading manifest for ${appName} from ${manifestUrl} to ${manifestPath}`,
+      LogPrefix.HyperPlay
+    )
+    await downloadFile(
+      manifestUrl,
+      ipdtManifestsPath,
+      manifestName,
+      createAbortController(appName)
+    )
 
-  if (isWindows) {
-    // remove the empty line at the end of the json file to avoid issues on Windows
-    const manifestContent = readFileSync(manifestPath, 'utf-8')
-    const formattedManifest = manifestContent
-      .replace(/\r?\n+$/, '')
-      .replace(/\r?\n/g, '\r\n')
-    writeFileSync(manifestPath, formattedManifest)
+    if (isWindows) {
+      // remove the empty line at the end of the json file to avoid issues on Windows
+      const manifestContent = readFileSync(manifestPath, 'utf-8')
+      const formattedManifest = manifestContent
+        .replace(/\r?\n+$/, '')
+        .replace(/\r?\n/g, '\r\n')
+      writeFileSync(manifestPath, formattedManifest)
+    }
+    return true
+  } catch (error) {
+    logError(
+      `Error downloading manifest for ${appName}: ${error}`,
+      LogPrefix.HyperPlay
+    )
+    captureException(
+      new Error(`Error downloading manifest for ${appName}: ${error}`),
+      {
+        extra: {
+          method: 'downloadGameIpdtManifest',
+          appName,
+          version
+        }
+      }
+    )
+    return false
   }
-  return true
 }
+
 async function applyPatching(
   gameInfo: GameInfo,
   newVersion: string,
@@ -1654,59 +1675,62 @@ async function applyPatching(
     return { status: 'error' }
   }
 
-  const appName = gameInfo.app_name
-  const window = getMainWindow()
-  const { install_path, version, platform } = gameInfo.install
-  let aborted = false
-
-  if (!existsSync(ipdtPatcher)) {
-    await downloadPatcher()
-  }
-
-  if (!version || !install_path || !platform) {
-    logError(
-      `Version or install path not found for ${appName} in applyPatching`,
-      LogPrefix.HyperPlay
-    )
-    captureException(
-      new Error(
-        'Could not start patching because of missing version, install_path or platform'
-      ),
-      {
-        extra: {
-          method: 'applyPatching',
-          appName,
-          install_path,
-          title: gameInfo.title,
-          platform,
-          version,
-          newVersion
-        }
-      }
-    )
-
-    return { status: 'error', error: 'Version or install path not found' }
-  }
-
-  trackEvent({
-    event: 'Patching Started',
-    properties: {
-      game_name: gameInfo.app_name,
-      game_title: gameInfo.title,
-      platform: getPlatformName(platform),
-      platform_arch: platform
-    }
-  })
-
-  const previousManifest = await getManifest(appName, platform, version)
-  const currentManifest = await getManifest(appName, platform, newVersion)
-
-  logInfo(
-    `Patching ${gameInfo.title} from ${version} to ${newVersion}`,
-    LogPrefix.HyperPlay
-  )
+  const {
+    app_name: appName,
+    install: { install_path, version, platform }
+  } = gameInfo
 
   try {
+    const mainWindow = getMainWindow()
+    let aborted = false
+
+    if (!existsSync(ipdtPatcher)) {
+      await downloadPatcher()
+    }
+
+    if (!version || !install_path || !platform) {
+      logError(
+        `Version or install path not found for ${appName} in applyPatching`,
+        LogPrefix.HyperPlay
+      )
+      captureException(
+        new Error(
+          'Could not start patching because of missing version, install_path or platform'
+        ),
+        {
+          extra: {
+            method: 'applyPatching',
+            appName,
+            install_path,
+            title: gameInfo.title,
+            platform,
+            version,
+            newVersion
+          }
+        }
+      )
+
+      return { status: 'error', error: 'Version or install path not found' }
+    }
+
+    trackEvent({
+      event: 'Patching Started',
+      properties: {
+        game_name: gameInfo.app_name,
+        game_title: gameInfo.title,
+        platform: getPlatformName(platform),
+        platform_arch: platform
+      }
+    })
+
+    const previousManifest = await getManifest(appName, platform, version)
+    const currentManifest = await getManifest(appName, platform, newVersion)
+
+    logInfo(
+      `Patching ${gameInfo.title} from ${version} to ${newVersion}`,
+      LogPrefix.HyperPlay
+    )
+
     let totalBlocks = 0
     let downloadedBlocks = 0
     let downloadedData = 0
@@ -1724,12 +1748,10 @@ async function applyPatching(
     )
 
     if (signal.aborted) {
-      logWarning(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
       return { status: 'abort' }
     }
 
     signal.onabort = () => {
-      logWarning(`ON ABORT - Patching ${appName} aborted`, LogPrefix.HyperPlay)
       aborted = true
       return { status: 'abort' }
     }
@@ -1738,7 +1760,6 @@ async function applyPatching(
       logInfo(output, LogPrefix.HyperPlay)
 
       if (signal.aborted) {
-        logWarning(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
         return { status: 'abort' }
       }
 
@@ -1765,7 +1786,7 @@ async function applyPatching(
           folder: gameInfo.install.install_path
         })
 
-        window?.webContents.send(`progressUpdate-${appName}`, {
+        mainWindow?.webContents.send(`progressUpdate-${appName}`, {
           appName,
           status: 'patching',
           runner: 'hyperplay',
@@ -1793,6 +1814,23 @@ async function applyPatching(
         )
       }
     }
+    // need this to cover 100% of abort cases
+    if (aborted) {
+      return { status: 'abort' }
+    }
+
+    trackEvent({
+      event: 'Patching Success',
+      properties: {
+        game_name: gameInfo.app_name,
+        game_title: gameInfo.title,
+        platform: getPlatformName(platform),
+        platform_arch: platform
+      }
+    })
+
+    logInfo(`Patching ${appName} completed`, LogPrefix.HyperPlay)
+    return { status: 'done' }
   } catch (error) {
     logError(`Error while patching ${error}`, LogPrefix.HyperPlay)
 
@@ -1802,8 +1840,8 @@ async function applyPatching(
         error: `${error}`,
         game_name: gameInfo.app_name,
         game_title: gameInfo.title,
-        platform: getPlatformName(platform),
-        platform_arch: platform
+        platform: getPlatformName(platform!),
+        platform_arch: platform!
       }
     })
 
@@ -1821,23 +1859,6 @@ async function applyPatching(
 
     return { status: 'error', error: `Error while patching ${error}` }
   }
-  // need this to cover 100% of abort cases
-  if (aborted) {
-    return { status: 'abort' }
-  }
-
-  trackEvent({
-    event: 'Patching Success',
-    properties: {
-      game_name: gameInfo.app_name,
-      game_title: gameInfo.title,
-      platform: getPlatformName(platform),
-      platform_arch: platform
-    }
-  })
-
-  logInfo(`Patching ${appName} completed`, LogPrefix.HyperPlay)
-  return { status: 'done' }
 }
 
 async function getManifest(
@@ -1845,40 +1866,44 @@ async function getManifest(
   platformName: string,
   version: string
 ) {
-  const manifestPath = path.normalize(
-    path.join(ipdtManifestsPath, `${appName}-${platformName}-${version}.json`)
-  )
-  // On Darwin (macOS), escape spaces in the path
-  const normalizedManifestPath =
-    process.platform === 'darwin'
-      ? manifestPath.replace(/\\/g, '\\\\').replace(/ /g, '\\ ')
-      : manifestPath
+  try {
+    const manifestPath = path.normalize(
+      path.join(ipdtManifestsPath, `${appName}-${platformName}-${version}.json`)
+    )
+    // On Darwin (macOS), escape spaces in the path
+    const normalizedManifestPath =
+      process.platform === 'darwin'
+        ? manifestPath.replace(/\\/g, '\\\\').replace(/ /g, '\\ ')
+        : manifestPath
 
-  if (!existsSync(normalizedManifestPath)) {
-    logDebug(
-      `Manifest for ${appName} not found for version ${version} and platform ${platformName}`,
+    if (!existsSync(normalizedManifestPath)) {
+      logDebug(
+        `Manifest for ${appName} not found for version ${version} and platform ${platformName}`,
+        LogPrefix.HyperPlay
+      )
+
+      await downloadGameIpdtManifest(appName, version)
+    }
+
+    return manifestPath
+  } catch (error) {
+    logError(
+      `Error in getManifest for ${appName}: ${error}`,
       LogPrefix.HyperPlay
     )
-
-    try {
-      await downloadGameIpdtManifest(appName, version)
-      return manifestPath
-    } catch (error) {
-      captureException(new Error(`Error downloading manifest ${error}`), {
+    captureException(
+      new Error(`Error in getManifest for ${appName}: ${error}`),
+      {
         extra: {
           method: 'getManifest',
           appName,
-          title: appName,
           platformName,
           version
         }
-      })
-
-      return ''
-    }
+      }
+    )
+    return ''
   }
-
-  return manifestPath
 }
 
 // TODO: finish this method for Repair Game purposes
