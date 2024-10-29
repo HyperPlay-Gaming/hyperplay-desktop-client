@@ -1,1 +1,1 @@
-export const ipfsGateway = process.env.VITE_IPFS_API as string
+export const ipfsGateway = import.meta.env.VITE_IPFS_API
