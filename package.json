@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "private": true,
   "main": "build/main/main.js",
   "homepage": "./",
@@ -170,7 +170,7 @@
     "@hyperplay/chains": "^0.3.0",
     "@hyperplay/check-disk-space": "^3.5.2",
     "@hyperplay/quests-ui": "^0.0.30",
-    "@hyperplay/ui": "^1.8.4",
+    "@hyperplay/ui": "^1.8.6",
     "@hyperplay/utils": "^0.2.4",
     "@mantine/carousel": "^7.12.0",
     "@mantine/core": "^7.12.0",
@@ -364,10 +364,10 @@
   },
   "optionalDependencies": {
     "@hyperplay/extension-importer": "^0.0.4",
-    "@hyperplay/extension-provider": "^0.0.6",
+    "@hyperplay/extension-provider": "^0.0.7",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/overlay": "^0.0.6",
-    "@hyperplay/providers": "^0.0.5",
+    "@hyperplay/providers": "^0.0.6",
     "@hyperplay/proxy-server": "^0.0.11"
   },
   "packageManager": "yarn@1.22.19",

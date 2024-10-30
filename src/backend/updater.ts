@@ -2,7 +2,7 @@ import { dialog, shell } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
-import { configStore, icon } from './constants'
+import { configStore, icon, isLinux } from './constants'
 import { logError, logInfo, LogPrefix } from './logger/logger'
 import { isOnline } from './online_monitor'
 import { trackEvent } from './api/metrics'
@@ -16,7 +16,7 @@ const appSettings = configStore.get_nodefault('settings')
 const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
 let newVersion: string
 
-autoUpdater.autoDownload = shouldCheckForUpdates
+autoUpdater.autoDownload = shouldCheckForUpdates && !isLinux
 autoUpdater.autoInstallOnAppQuit = true
 
 let isAppUpdating = false
