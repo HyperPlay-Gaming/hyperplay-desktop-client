@@ -1604,16 +1604,16 @@ export async function downloadGameIpdtManifest(
       install: { channelName, platform },
       is_installed
     } = getGameInfo(appName)
-    if (!channelName || !platform || !is_installed) return false
+    if (!channelName || !platform || !is_installed) throw Error('Invalid game')
 
     // download only if the manifest file is not already downloaded and its the same version
     const manifestName = `${appName}-${platform}-${version}.json`
     const manifestPath = path.join(ipdtManifestsPath, manifestName)
-    if (existsSync(manifestPath)) return false
+    if (existsSync(manifestPath)) return
 
     const releaseId = generateID(appName, version)
     const manifestUrl = await getHyperPlayReleaseManifest(releaseId, platform)
-    if (!manifestUrl) return false
+    if (!manifestUrl) throw Error('Manifest URL not found')
 
     // download and save the manifest file as a json file in manifest folder
     logInfo(
@@ -1635,8 +1635,6 @@ export async function downloadGameIpdtManifest(
       .catch((error) => {
         throw new Error(`Error downloading manifest for ${appName}: ${error}`)
       })
-
-    return true
   } catch (error) {
     logError(
       `Error downloading manifest for ${appName}: ${error}`,
@@ -1652,7 +1650,7 @@ export async function downloadGameIpdtManifest(
         }
       }
     )
-    return false
+    throw new Error(`Error downloading manifest for ${appName}: ${error}`)
   }
 }
 
