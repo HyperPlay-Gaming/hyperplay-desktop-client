@@ -92,7 +92,7 @@ import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
 import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { chmod, writeFile } from 'fs/promises'
-import { trackEvent } from 'backend/api/metrics'
+import { trackEvent } from 'backend/metrics/metrics'
 import { getFlag } from 'backend/flags/flags'
 import { ipfsGateway } from 'backend/vite_constants'
 
