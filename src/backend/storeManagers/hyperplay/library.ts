@@ -16,7 +16,10 @@ import {
   sanitizeVersion,
   refreshGameInfoFromHpRelease
 } from './utils'
-import { getGameInfo as getGamesGameInfo } from './games'
+import {
+  downloadGameIpdtManifest,
+  getGameInfo as getGamesGameInfo
+} from './games'
 import { getValistListingApiUrl, qaToken } from 'backend/constants'
 
 export async function addGameToLibrary(projectId: string) {
@@ -236,6 +239,13 @@ export async function listUpdateableGames(): Promise<string[]> {
           val.channels[val.install.channelName].release_meta.platforms
         ).includes(val.install.platform)
       ) {
+        if (val.channels[val.install.channelName]) {
+          downloadGameIpdtManifest(val.app_name, val.install.version)
+          downloadGameIpdtManifest(
+            val.app_name,
+            val.channels[val.install.channelName].release_meta.name
+          )
+        }
         updateableGames.push(val.app_name)
       }
     } else {

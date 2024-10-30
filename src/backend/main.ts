@@ -92,6 +92,7 @@ import {
 import { handleOtp, handleProtocol } from './protocol'
 import {
   initLogger,
+  logDebug,
   logError,
   logInfo,
   LogPrefix,
@@ -906,11 +907,15 @@ ipcMain.on('navigate', async (event, appName) => {
 })
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
+  if (!appName) {
+    logDebug(
+      'skipping get game info because app name is empty',
+      LogPrefix.Backend
+    )
+    return null
+  }
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
-  if (
-    !appName ||
-    (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName))
-  ) {
+  if (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName)) {
     return null
   }
   return gameManagerMap[runner].getGameInfo(appName)

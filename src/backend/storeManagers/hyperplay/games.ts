@@ -91,7 +91,7 @@ import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
 import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
-import { chmod, readFile, writeFile } from 'fs/promises'
+import { chmod, writeFile } from 'fs/promises'
 import { trackEvent } from 'backend/api/metrics'
 import { getFlag } from 'backend/flags/flags'
 import { ipfsGateway } from 'backend/vite_constants'
@@ -1465,7 +1465,8 @@ export async function update(
       try {
         await runModPatcher(appName)
       } catch (error) {
-        return { status: 'error' }
+        logError(`Error running mod patcher: ${error}`, LogPrefix.HyperPlay)
+        return { status: 'error', error: `${error}` }
       }
     }
     return installResult
@@ -1613,28 +1614,19 @@ export async function downloadGameIpdtManifest(
 
     const releaseId = generateID(appName, version)
     const manifestUrl = await getHyperPlayReleaseManifest(releaseId, platform)
-    if (!manifestUrl) throw Error('Manifest URL not found')
+    if (!manifestUrl) return logWarning(`Manifest not found for ${appName}`)
 
     // download and save the manifest file as a json file in manifest folder
     logInfo(
       `Downloading manifest for ${appName} from ${manifestUrl} to ${manifestPath}`,
       LogPrefix.HyperPlay
     )
-    await downloadFile(
-      manifestUrl,
-      ipdtManifestsPath,
-      manifestName,
-      createAbortController(appName)
-    )
-      .then(async () => {
-        // remove the empty line at the end of the json file to avoid EOF issues
-        const manifestContent = await readFile(manifestPath, 'utf8')
-        const manifestContentTrimmed = manifestContent.trim()
-        await writeFile(manifestPath, manifestContentTrimmed)
-      })
-      .catch((error) => {
-        throw new Error(`Error downloading manifest for ${appName}: ${error}`)
-      })
+    const response = await fetch(manifestUrl)
+    if (!response.ok) {
+      throw new Error(`Failed to download manifest: ${response.statusText}`)
+    }
+    const manifestData = await response.text()
+    await writeFile(manifestPath, manifestData)
   } catch (error) {
     logError(
       `Error downloading manifest for ${appName}: ${error}`,
@@ -1740,6 +1732,7 @@ async function applyPatching(
     )
 
     if (signal.aborted) {
+      logInfo(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
       return { status: 'abort' }
     }
 
@@ -1752,6 +1745,7 @@ async function applyPatching(
       logInfo(output, LogPrefix.HyperPlay)
 
       if (signal.aborted) {
+        logInfo(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
         return { status: 'abort' }
       }
 
