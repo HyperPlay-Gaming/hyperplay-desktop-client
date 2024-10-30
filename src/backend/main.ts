@@ -22,7 +22,7 @@ import {
   screen,
   session
 } from 'electron'
-
+import { uuid } from 'short-uuid'
 import { autoUpdater } from 'electron-updater'
 import { cpus, platform } from 'os'
 import {
@@ -35,7 +35,6 @@ import {
   watch,
   writeFileSync
 } from 'graceful-fs'
-import * as LDElectron from 'launchdarkly-electron-client-sdk'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
 import { DXVK, SteamWindows, Winetricks } from './tools'
@@ -93,6 +92,7 @@ import {
 import { handleOtp, handleProtocol } from './protocol'
 import {
   initLogger,
+  logDebug,
   logError,
   logInfo,
   LogPrefix,
@@ -131,7 +131,7 @@ import {
 } from 'backend/storeManagers/gog/games'
 import { playtimeSyncQueue } from './storeManagers/gog/electronStores'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
-
+import { getFlag, initLDClient } from './flags/flags'
 import {
   autoUpdate,
   gameManagerMap,
@@ -223,13 +223,9 @@ import {
   getGameOverride,
   getGameSdl
 } from 'backend/storeManagers/legendary/library'
-import { uuid } from 'short-uuid'
-import { LDEnvironmentId, ldOptions } from './ldconstants'
 import getPartitionCookies from './utils/get_partition_cookies'
 
 import { formatSystemInfo, getSystemInfo } from './utils/systeminfo'
-
-export let ldMainClient: LDElectron.LDElectronMainClient
 
 if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
   app.commandLine?.appendSwitch('remote-debugging-port', '9222')
@@ -261,10 +257,11 @@ ipcMain.on('focusMainWindow', () => {
 })
 
 async function completeHyperPlayQuest() {
-  const completeHpSummonQuestIsActive = ldMainClient.variation(
+  const completeHpSummonQuestIsActive = getFlag(
     'complete-hp-summon-quest',
     false
   )
+
   if (!completeHpSummonQuestIsActive) {
     return
   }
@@ -496,8 +493,8 @@ if (!gotTheLock) {
     const openOverlayAcceleratorMac = 'Option+X'
     globalShortcut.register(openOverlayAcceleratorMac, toggle)
 
+    initExtension(hpApi)
     initOverlay(hpApi)
-
     initOnlineMonitor()
 
     initImagesCache()
@@ -596,15 +593,7 @@ if (!gotTheLock) {
       configStore.set('settings.ldUser', ldUser)
     }
 
-    ldMainClient = LDElectron.initializeInMain(
-      LDEnvironmentId,
-      ldUser,
-      ldOptions
-    )
-
-    ldMainClient.on('ready', () => {
-      logInfo('LaunchDarkly client initialized', LogPrefix.Backend)
-    })
+    initLDClient(ldUser)
 
     const mainWindow = await initializeWindow()
 
@@ -671,21 +660,9 @@ if (!gotTheLock) {
 
     initTrayIcon(mainWindow)
 
-    await HyperPlayGameManager.downloadPatcher()
-      .then(async () => {
-        logInfo('Patcher downloaded', LogPrefix.HyperPlay)
-      })
-      .catch((e) => {
-        logError(`Error downloading patcher: ${e}`, LogPrefix.HyperPlay)
-      })
-
     // Call checkGameUpdates for HyperPlay games every hour
     const checkGameUpdatesInterval = 1 * 60 * 60 * 1000
     setInterval(async () => {
-      if (!isOnline()) {
-        return
-      }
-
       try {
         await checkGameUpdates(['hyperplay'])
       } catch (error) {
@@ -703,10 +680,8 @@ ipcMain.once('loadingScreenReady', () => {
   logInfo('Loading Screen Ready', LogPrefix.Backend)
 })
 
-ipcMain.once('frontendReady', async () => {
+ipcMain.once('frontendReady', () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
-  await initExtension(hpApi)
-  ipcMain.emit('reloadApp')
   handleProtocol([openUrlArgument, ...process.argv])
   setTimeout(() => {
     logInfo('Starting the Download Queue', LogPrefix.Backend)
@@ -932,11 +907,15 @@ ipcMain.on('navigate', async (event, appName) => {
 })
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
+  if (!appName) {
+    logDebug(
+      'skipping get game info because app name is empty',
+      LogPrefix.Backend
+    )
+    return null
+  }
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
-  if (
-    !appName ||
-    (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName))
-  ) {
+  if (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName)) {
     return null
   }
   return gameManagerMap[runner].getGameInfo(appName)

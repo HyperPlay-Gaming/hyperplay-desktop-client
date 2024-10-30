@@ -130,6 +130,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const finished = status === 'done'
   const canceled = status === 'error' || (status === 'abort' && !current)
   const isExtracting = gameProgressStatus === 'extracting'
+  const isPatching = gameProgressStatus === 'patching'
 
   const goToGamePage = (action?: GamePageActions) => {
     if (is_dlc) {
@@ -182,7 +183,9 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const secondaryActionIcon = () => {
     if (state === 'paused') {
       return <PlayIcon className={styles.playIcon} />
-    } else if (state === 'running') {
+    }
+
+    if (state === 'running' && !isPatching) {
       return <PauseIcon className={styles.pauseIcon} />
     }
 

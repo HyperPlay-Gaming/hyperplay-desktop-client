@@ -66,6 +66,9 @@
   "approved": {
     "message": "Inaprubahan"
   },
+  "attemptingConnect": {
+    "message": "Sinusubukang kumonekta sa blockchain."
+  },
   "attributions": {
     "message": "Mga Attribution"
   },
@@ -550,6 +553,9 @@
   },
   "send": {
     "message": "Ipadala"
+  },
+  "sendTokens": {
+    "message": "Magpadala ng Mga Token"
   },
   "settings": {
     "message": "Mga Setting"

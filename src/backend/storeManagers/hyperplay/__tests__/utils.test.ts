@@ -3,7 +3,12 @@ import { GameInfo, HyperPlayRelease } from '../../../../common/types'
 jest.mock('electron')
 jest.mock('../../../logger/logger')
 jest.mock('../../../logger/logfile')
-
+jest.mock('backend/vite_constants', () => ({
+  VITE_IPFS_API: 'https://ipfs.io/ipfs/'
+}))
+jest.mock('backend/flags/flags', () => ({
+  VITE_LD_ENVIRONMENT_ID: '123'
+}))
 const TESTS_ENABLED = false
 const testIf = (condition: boolean) => (condition ? test : test.skip)
 

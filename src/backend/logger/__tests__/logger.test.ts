@@ -5,6 +5,12 @@ import { platform } from 'os'
 
 jest.mock('../logfile')
 jest.mock('../../dialog/dialog')
+jest.mock('backend/vite_constants', () => ({
+  VITE_IPFS_API: 'https://ipfs.io/ipfs/'
+}))
+jest.mock('backend/flags/flags', () => ({
+  VITE_LD_ENVIRONMENT_ID: '123'
+}))
 
 const testData = [
   1234,
