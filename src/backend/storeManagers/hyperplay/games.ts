@@ -1561,33 +1561,31 @@ function writeManifestFile(
 }
 
 export const downloadPatcher = async () => {
-  if (!existsSync(ipdtPatcher)) {
-    try {
-      const { downloadIPDTForOS } = await import('@hyperplay/patcher')
-      await downloadIPDTForOS(toolsPath)
+  try {
+    const { downloadIPDTForOS } = await import('@hyperplay/patcher')
+    await downloadIPDTForOS(toolsPath)
 
-      const version = await getIpdtPatcherVersion()
-      const versionFile = path.join(toolsPath, 'ipdt_version.txt')
+    const version = await getIpdtPatcherVersion()
+    const versionFile = path.join(toolsPath, 'ipdt_version.txt')
 
-      logInfo(
-        `IPDT patcher ${version} downloaded successfully`,
-        LogPrefix.HyperPlay
-      )
-      await writeFile(versionFile, version)
+    logInfo(
+      `IPDT patcher ${version} downloaded successfully`,
+      LogPrefix.HyperPlay
+    )
+    await writeFile(versionFile, version)
 
-      if (!isWindows) {
-        await chmod(ipdtPatcher, 0o755)
-      }
-    } catch (error) {
-      captureException(error, {
-        extra: {
-          method: 'downloadPatcher'
-        }
-      })
-
-      logError(`Error downloading IPDT: ${error}`, LogPrefix.HyperPlay)
-      throw new Error('Error downloading IPDT')
+    if (!isWindows) {
+      await chmod(ipdtPatcher, 0o755)
     }
+  } catch (error) {
+    captureException(error, {
+      extra: {
+        method: 'downloadPatcher'
+      }
+    })
+
+    logError(`Error downloading IPDT: ${error}`, LogPrefix.HyperPlay)
+    throw new Error('Error downloading IPDT')
   }
 }
 
@@ -1668,9 +1666,7 @@ async function applyPatching(
     const mainWindow = getMainWindow()
     let aborted = false
 
-    if (!existsSync(ipdtPatcher)) {
-      await downloadPatcher()
-    }
+    await downloadPatcher()
 
     if (!version || !install_path || !platform) {
       logError(
