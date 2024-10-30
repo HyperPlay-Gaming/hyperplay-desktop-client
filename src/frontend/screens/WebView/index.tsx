@@ -100,6 +100,12 @@ function WebView({
 
       startUrl = queryParam + queryParamAppends
     }
+  } else if (pathname.match('/marketplace')) {
+    const searchParams = new URLSearchParams(search)
+    const queryParam = searchParams.get('url')
+    if (queryParam) {
+      startUrl = decodeURIComponent(queryParam)
+    }
   }
 
   const isEpicLogin = runner === 'legendary' && startUrl === EPIC_LOGIN_URL

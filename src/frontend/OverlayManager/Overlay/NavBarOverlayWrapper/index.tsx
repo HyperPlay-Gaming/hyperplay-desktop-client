@@ -3,13 +3,51 @@ import styles from './index.module.scss'
 import { t } from 'i18next'
 import { NavBarOverlay, NavItem, Images, SubLink } from '@hyperplay/ui'
 import { Link, useLocation } from 'react-router-dom'
+import { BrowserGameProps } from 'frontend/OverlayManager/types'
+import { useQuery } from '@tanstack/react-query'
+import classNames from 'classnames'
 
-export function NavBarOverlayWrapper() {
+export function NavBarOverlayWrapper({ appName, runner }: BrowserGameProps) {
   const location = useLocation()
-  const { pathname } = location
+  const { pathname, search } = location
+  const searchParams = new URLSearchParams(search)
+  const urlQueryParam = searchParams.get('url')
   const [collapsed, setCollapsed] = useState(false)
   const comingSoonText = t('overlay.comingSoon', 'Coming Soon')
   const [mmCollapsed, mmSetCollapsed] = useState(false)
+  const [mktCollapsed, setMktCollapsed] = useState(false)
+
+  const { data } = useQuery({
+    queryKey: ['getGameInfo', appName],
+    queryFn: async () => {
+      return window.api.getGameInfo(appName, runner)
+    }
+  })
+
+  const marketplaceEnabled =
+    !!data && !!data.networks?.some((val) => !!val.marketplace_urls?.length)
+  const marketplaceClass: Record<string, boolean> = {}
+  marketplaceClass[styles.disabled] = !marketplaceEnabled
+
+  const mktplaceSublinks = data?.networks
+    ?.filter((val) => !!val.marketplace_urls)
+    .flatMap((val) =>
+      val
+        .marketplace_urls!.filter((val) => !!val)
+        .map((mktUrl) => {
+          return (
+            <SubLink
+              key={val.name}
+              component={Link}
+              to={`/marketplace?url=${encodeURIComponent(mktUrl)}`}
+              selected={pathname === '/marketplace' && urlQueryParam === mktUrl}
+              className={styles.sublink}
+            >
+              {val.name}
+            </SubLink>
+          )
+        })
+    )
 
   return (
     <NavBarOverlay
@@ -86,8 +124,12 @@ export function NavBarOverlayWrapper() {
           key={'/marketplace'}
           collapsed={collapsed}
           selected={pathname === '/marketplace'}
-          classNames={{ link: styles.disabled }}
-          secondaryTag={comingSoonText}
+          classNames={{ link: classNames(marketplaceClass) }}
+          secondaryTag={marketplaceEnabled ? undefined : comingSoonText}
+          subLinks={marketplaceEnabled ? mktplaceSublinks : undefined}
+          subLinksCollapsed={mktCollapsed}
+          setSubLinksCollapsed={() => setMktCollapsed(!mktCollapsed)}
+          onClick={() => setMktCollapsed(!mktCollapsed)}
         />,
         <NavItem
           title={'Achievements'}
