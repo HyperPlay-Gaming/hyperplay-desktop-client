@@ -93,8 +93,8 @@ import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 import { chmod, readFile, writeFile } from 'fs/promises'
 import { trackEvent } from 'backend/api/metrics'
-import { ipfsGateway } from './constants'
 import { getFlag } from 'backend/flags/flags'
+import { ipfsGateway } from 'backend/vite_constants'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
