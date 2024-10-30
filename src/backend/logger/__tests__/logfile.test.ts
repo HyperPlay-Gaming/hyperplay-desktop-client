@@ -12,7 +12,12 @@ jest.mock('electron-store')
 jest.mock('../../constants')
 jest.mock('../logger')
 jest.unmock('../logfile')
-
+jest.mock('backend/vite_constants', () => ({
+  VITE_IPFS_API: 'https://ipfs.io/ipfs/'
+}))
+jest.mock('backend/flags/flags', () => ({
+  VITE_LD_ENVIRONMENT_ID: '123'
+}))
 let tmpDir = {} as DirResult
 
 const shouldSkip = platform() === 'win32'
