@@ -6,9 +6,6 @@ export const useClaimedRewards = () => {
 
   const handleRewardsClaim = useCallback((rewards: Reward[]) => {
     setClaimedRewards(rewards)
-    setTimeout(() => {
-      setClaimedRewards(null)
-    }, 5000)
   }, [])
 
   const onClose = useCallback(() => {
