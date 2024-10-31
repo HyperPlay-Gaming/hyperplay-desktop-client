@@ -54,5 +54,10 @@ xyz.hyperplay.HyperPlay
 /public/extensions/resetExecutables/resetExtension
 electron.vite.config..*
 
+electron.vite.config.*.mjs
+
+.MMSDK_cached_chainId
+.MMSDK_cached_address
+
 # Patching
 blockstore
