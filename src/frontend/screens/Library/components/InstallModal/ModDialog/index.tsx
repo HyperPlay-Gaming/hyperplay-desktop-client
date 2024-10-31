@@ -160,7 +160,7 @@ const ModDialog: React.FC<Props> = ({
             <span className={styles.stepDescription}>
               {t('mods.instructions.step1.description', {
                 defaultValue:
-                  'This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain version 3.3.5a from sources like:',
+                  'This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain the version needed from the following sources:',
                 newline: '\n'
               })}
             </span>
@@ -173,7 +173,7 @@ const ModDialog: React.FC<Props> = ({
                   )
                 }
               >
-                {t('mods.instructions.step1.chromieCraft', 'ChromieCraft')}
+                {t('mods.instructions.step1.link1', 'Link 1')}
               </li>
               <li
                 className={styles.sourceItem}
@@ -181,10 +181,7 @@ const ModDialog: React.FC<Props> = ({
                   window.api.openExternalUrl(marketWarsDownloadLinks.magnet)
                 }
               >
-                {t(
-                  'mods.instructions.step1.webtorrent',
-                  'Torrent (Magnet Link)'
-                )}
+                {t('mods.instructions.step1.link2', 'Link 2 (Magnet Link)')}
               </li>
             </ul>
           </div>
@@ -194,17 +191,10 @@ const ModDialog: React.FC<Props> = ({
             </div>
             <div className={styles.stepSubtitle}>
               {t(
-                'mods.instructions.step2.subtitle',
-                'Select ChromieCraft_3.3.5a.zip File'
+                'mods.instructions.step2.subtitle1',
+                'Select the downloaded 3.3.5a zip file'
               )}
             </div>
-            <span className={styles.stepDescription}>
-              {t('mods.instructions.step2.description', {
-                defaultValue:
-                  'Select the downloaded ChromieCraft_3.3.5a.zip file.',
-                newline: '\n'
-              })}
-            </span>
             <TextInputWithIconField
               htmlId="setzippath"
               label={t(
