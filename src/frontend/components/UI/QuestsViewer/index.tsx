@@ -66,6 +66,10 @@ export function QuestsViewer({
    * t('quest.playstreak.dayResets', 'Day resets:')
    * t('quest.playstreak.progressTowardsStreak', 'progress towards today\'s streak.')
    * t('quest.points', 'Points')
+   * t('quest.claimWarning.body', '<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 7 days.</bold>')
+   * t('quest.claimWarning.body2', 'Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>')
+   * t('quest.claimWarning.cancel', 'Cancel')
+   * t('quest.claimWarning.confirm', 'Confirm')
    */
 
   let alertComponent = null
@@ -80,16 +84,6 @@ export function QuestsViewer({
       />
     )
   }
-
-  /**
-   Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
-   As a heads up, everytime you add a new key on any library, you need to add it as a block comment anywhere in the code as well.
-   
-   t("quest.claimWarning.body", "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 7 days.</bold>")
-    t("quest.claimWarning.body2", "Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>")
-    t('quest.claimWarning.cancel', 'Cancel')
-    t('quest.claimWarning.confirm', 'Confirm')
-   */
 
   return (
     <div className={styles.container}>
