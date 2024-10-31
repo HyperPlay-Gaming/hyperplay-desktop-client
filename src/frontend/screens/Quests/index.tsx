@@ -39,7 +39,6 @@ export function QuestsPage() {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
-      <G7CreditsModal />
       <div
         className={classNames(
           'contentContainer',
