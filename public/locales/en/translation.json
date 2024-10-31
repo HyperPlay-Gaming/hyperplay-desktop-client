@@ -783,17 +783,23 @@
         },
         "points": "Points",
         "pointsClaimed": "Points Claimed",
+        "questAvailable": "Quest available!",
+        "questComplete": "Quest complete!",
         "quests": "Quests",
         "readyForClaim": "Ready for claim",
         "reputation": "Reputation",
         "reward": "Reward",
+        "rewardClaimed": "Claim successful",
         "signIn": "Log in",
         "sync": "Sync",
+        "toClaimReward": "to claim your reward.",
+        "toSeeDetails": "to see details.",
         "type": {
             "playstreak": "Play Streak",
             "reputation": "Reputation"
         },
-        "View Game": "View Game"
+        "View Game": "View Game",
+        "youHaveClaimed": "You have claimed {{totalRewards}} reward{{plural}}."
     },
     "quests": {
         "g7CreditsModal": {

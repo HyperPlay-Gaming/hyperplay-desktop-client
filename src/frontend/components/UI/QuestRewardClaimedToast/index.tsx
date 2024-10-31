@@ -2,6 +2,7 @@ import React from 'react'
 import { Reward } from '@hyperplay/utils'
 import { ToastQuest } from '@hyperplay/ui'
 import Draggable from 'react-draggable'
+import { useTranslation } from 'react-i18next'
 
 type QuestRewardClaimedToastProps = {
   onCloseClick: () => void
@@ -16,6 +17,8 @@ export function QuestRewardClaimedToast({
   draggable = true,
   className
 }: QuestRewardClaimedToastProps) {
+  const { t } = useTranslation()
+
   if (!rewards?.length) {
     return null
   }
@@ -29,14 +32,19 @@ export function QuestRewardClaimedToast({
           overlayToggleKey: 'X',
           overlayToggleModKey: 'option',
           plus: '+',
-          questAvailable: 'Quest available!',
-          questComplete: 'Quest complete!',
-          rewardClaimed: 'Claim successful',
-          toClaimReward: 'to claim your reward.',
-          toSeeDetails: 'to see details.',
-          youHaveClaimed: `You have claimed ${totalRewards} reward${
-            totalRewards > 1 ? 's' : ''
-          }.`
+          questAvailable: t('quest.questAvailable', 'Quest available!'),
+          questComplete: t('quest.questComplete', 'Quest complete!'),
+          rewardClaimed: t('quest.rewardClaimed', 'Claim successful'),
+          toClaimReward: t('quest.toClaimReward', 'to claim your reward.'),
+          toSeeDetails: t('quest.toSeeDetails', 'to see details.'),
+          youHaveClaimed: t(
+            'quest.youHaveClaimed',
+            'You have claimed {{totalRewards}} reward{{plural}}.',
+            {
+              totalRewards,
+              plural: totalRewards > 1 ? 's' : ''
+            }
+          )
         }}
         onCloseClick={onCloseClick}
         status="claimed"
