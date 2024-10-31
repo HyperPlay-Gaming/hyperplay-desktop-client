@@ -26,52 +26,6 @@ export function QuestsViewer({
   const initialQuestId = quests?.[0]?.id ?? null
   const visibleQuestId = selectedQuestId ?? initialQuestId
 
-  /**
-   * Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
-   * As a heads up, everytime you add a new key on any library, you need to add it as a block comment anywhere in the code as well.
-   *
-   * t("quest.noG7ConnectionClaim", "You need to have a Game7 account linked to {{email}} to claim your rewards.")
-   * t("quest.noG7ConnectionSync", "You need to have a Game7 account linked to {{email}} to resync your tasks.")
-   * t("quest.notEnoughGas", "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.")
-   * t("quest.playstreak.syncSuccess", "Progress synced")
-   * t("quest.claim", "Claim")
-   * t('quest.notSignedIn.title', 'Not signed in')
-   * t('quest.notSignedIn.message', 'You need to be signed in to claim your reward.')
-   * t('quest.notEligible.title', 'Not eligible yet')
-   * t('quest.notEligible.message', 'You have not completed the required play streak days and can not claim your reward at this time.')
-   * t('quest.playstreak.sync', 'Sync Progress')
-   * t('quest.noG7ConnectionSync.title', 'No G7 account linked')
-   * t('quest.noG7ConnectionSync.message', 'You need to have a Game7 account linked to {{email}} to resync your tasks.')
-   * t('quest.notEnoughBalance.title', 'Low balance')
-   * t('quest.notEnoughGas.message', 'Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.')
-   * t('quest.claimFailed', 'Claim failed')
-   * t('quest.claimFailedMessage', 'Please try once more. If it still doesn\'t work, create a Discord support ticket.')
-   * t('quest.createDiscordTicket', 'Create Discord Ticket')
-   * t('quest.reward', 'Rewards')
-   * t('quest.associatedGames', 'Associated games')
-   * t('quest.linkAccount', 'Link your Steam account to check eligibility.')
-   * t('quest.needMoreAchievements', 'You need to have completed {{percent}}% of the achievements in one of these games.')
-   * t('quest.claim', 'Claim')
-   * t('quest.signIn', 'Sign in')
-   * t('quest.connectSteamAccount', 'Connect Steam account')
-   * t('quest.type.reputation', 'Reputation')
-   * t('quest.type.playstreak', 'Play Streak')
-   * t('quest.sync', 'Sync')
-   * t('quest.playstreak.streakProgress', 'Streak Progress')
-   * t('quest.playstreak.days', 'days')
-   * t('quest.playstreak.playToStart', 'Play this game to start your streak!')
-   * t('quest.playstreak.playEachDay', 'Play each day so your streak won\'t reset!')
-   * t('quest.playstreak.streakCompleted', 'Streak completed! Claim your rewards now.')
-   * t('quest.playstreak.now', 'Now')
-   * t('quest.playstreak.dayResets', 'Day resets:')
-   * t('quest.playstreak.progressTowardsStreak', 'progress towards today\'s streak.')
-   * t('quest.points', 'Points')
-   * t('quest.claimWarning.body', '<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 7 days.</bold>')
-   * t('quest.claimWarning.body2', 'Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>')
-   * t('quest.claimWarning.cancel', 'Cancel')
-   * t('quest.claimWarning.confirm', 'Confirm')
-   */
-
   let alertComponent = null
   if (!isSignedIn) {
     alertComponent = (
