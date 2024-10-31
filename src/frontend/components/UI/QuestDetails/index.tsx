@@ -13,12 +13,14 @@ export default function QuestDetails({
   questId,
   className,
   isQuestsPage,
-  onPlayClick
+  onPlayClick,
+  onRewardsClaimed
 }: {
   questId: number | null
   className?: string
   isQuestsPage?: boolean
   onPlayClick?: (quest: Quest) => void
+  onRewardsClaimed?: (rewards: Reward[]) => void
 }) {
   const { address } = useAccount()
   const { isSignedIn, data } = useAuthSession()
@@ -42,6 +44,8 @@ export default function QuestDetails({
 
   return (
     <QuestDetailsWrapper
+      showAlert={alert}
+      onRewardsClaimed={onRewardsClaimed}
       onPlayClick={onPlayClick}
       getPendingExternalSync={getPendingExternalSync}
       syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}

@@ -113,7 +113,6 @@ export const QuestDetailsViewPlayWrapper = observer(
       })) ?? []
 
     const i18n: QuestDetailsTranslations = {
-      cta: t('quest.cta', 'Play/Install Game'),
       rewards: t('quest.reward', 'Rewards'),
       associatedGames: t('quest.associatedGames', 'Associated games'),
       linkSteamAccount: t(
@@ -182,7 +181,6 @@ export const QuestDetailsViewPlayWrapper = observer(
           description={''}
           collapseIsOpen={collapseIsOpen}
           toggleCollapse={() => setCollapseIsOpen(!collapseIsOpen)}
-          onClaimClick={() => console.log('claim click')}
           eligibility={{
             reputation: {
               games: [],
@@ -191,6 +189,7 @@ export const QuestDetailsViewPlayWrapper = observer(
               steamAccountLinked: false
             },
             playStreak: {
+              standby: false,
               currentStreakInDays: 0,
               requiredStreakInDays: 1,
               minimumSessionTimeInSeconds: 100,
@@ -224,7 +223,6 @@ export const QuestDetailsViewPlayWrapper = observer(
         }
         collapseIsOpen={collapseIsOpen}
         toggleCollapse={() => setCollapseIsOpen(!collapseIsOpen)}
-        onClaimClick={() => console.log('claim click')}
         eligibility={{
           reputation: {
             games: steamGames,

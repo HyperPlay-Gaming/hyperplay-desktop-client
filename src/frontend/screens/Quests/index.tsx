@@ -12,6 +12,8 @@ import { fetchEpicListing, getGameInfo } from 'frontend/helpers'
 import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
 import { Quest } from '@hyperplay/utils'
+import { useClaimedRewards } from 'frontend/hooks/useClaimedRewards'
+import { QuestRewardClaimedToast } from 'frontend/components/UI/QuestRewardClaimedToast'
 
 export function QuestsPage() {
   const navigate = useNavigate()
@@ -19,6 +21,7 @@ export function QuestsPage() {
   const selectedQuestId = questId === null ? questId : parseInt(questId)
   const { isSignedIn } = useAuthSession()
   const { t } = useTranslation()
+  const { claimedRewards, handleRewardsClaim, onClose } = useClaimedRewards()
 
   useEffect(() => {
     window.api.trackScreen('Quests Page')
@@ -105,11 +108,17 @@ export function QuestsPage() {
         )}
       >
         {alertComponent}
+        <QuestRewardClaimedToast
+          className={styles.toast}
+          onCloseClick={onClose}
+          rewards={claimedRewards}
+        />
         <QuestsSummaryTableWrapper selectedQuestId={selectedQuestId} />
         <QuestDetails
           className={styles.detailsWrapper}
           questId={selectedQuestId}
           isQuestsPage={true}
+          onRewardsClaimed={handleRewardsClaim}
           onPlayClick={(quest) => {
             navigateToGame.mutate(quest)
           }}

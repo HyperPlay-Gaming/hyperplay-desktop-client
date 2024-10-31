@@ -7,12 +7,17 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import '@hyperplay/quests-ui/style.css'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import QuestDetails from '../QuestDetails'
+import { Reward } from '@hyperplay/utils'
 
 export interface QuestsViewerProps {
   projectId: string
+  onRewardsClaimed?: (rewards: Reward[]) => void
 }
 
-export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
+export function QuestsViewer({
+  projectId: appName,
+  onRewardsClaimed
+}: QuestsViewerProps) {
   const questResults = useGetQuests(appName)
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const { isSignedIn } = useAuthSession()
@@ -29,6 +34,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
    t("quest.noG7ConnectionSync", "You need to have a Game7 account linked to {{email}} to resync your tasks.")
    t("quest.notEnoughGas", "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.")
    t("quest.playstreak.syncSuccess", "Progress synced")
+   t("quest.claim", "Claim")
    */
 
   let alertComponent = null
@@ -67,6 +73,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         <QuestDetails
           questId={visibleQuestId}
           className={styles.detailsWrapper}
+          onRewardsClaimed={onRewardsClaimed}
         />
       </div>
     </div>

@@ -57,8 +57,7 @@ export function useGetRewards(questId: number | null) {
               chainName: getRewardCategory(reward_i, t),
               numToClaim: token_i.amount_per_user,
               numOfClaimsLeft: token_i.numClaimsLeft,
-              onClaim: () => {},
-              canClaim: false
+              onClaim: () => {}
             }
             rewards.push(questReward_i)
           }
@@ -69,8 +68,7 @@ export function useGetRewards(questId: number | null) {
             chainName: getRewardCategory(reward_i, t),
             numToClaim,
             numOfClaimsLeft: reward_i.numClaimsLeft,
-            onClaim: () => {},
-            canClaim: false
+            onClaim: () => {}
           }
           rewards.push(questReward_i)
         }
