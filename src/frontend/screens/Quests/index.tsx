@@ -7,7 +7,6 @@ import classNames from 'classnames'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { G7CreditsModal } from 'frontend/components/UI/G7CreditsModal'
 
 export function QuestsPage() {
   const { questId = null } = useParams()
