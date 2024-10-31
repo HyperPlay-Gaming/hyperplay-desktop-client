@@ -44,7 +44,6 @@ export default function QuestDetails({
 
   return (
     <QuestDetailsWrapper
-      showAlert={alert}
       onRewardsClaimed={onRewardsClaimed}
       onPlayClick={onPlayClick}
       getPendingExternalSync={getPendingExternalSync}
