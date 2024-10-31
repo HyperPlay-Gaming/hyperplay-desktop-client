@@ -195,12 +195,6 @@ const ModDialog: React.FC<Props> = ({
                 'Select the downloaded 3.3.5a zip file'
               )}
             </div>
-            <span className={styles.stepDescription}>
-              {t('mods.instructions.step2.description1', {
-                defaultValue: 'Select the downloaded 3.3.5a zip file.',
-                newline: '\n'
-              })}
-            </span>
             <TextInputWithIconField
               htmlId="setzippath"
               label={t(
