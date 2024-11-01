@@ -765,7 +765,8 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${(error as Error).message
+      `cancelExtraction: Error while canceling the operation ${
+        (error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -1723,7 +1724,7 @@ async function applyPatching(
       previousManifest,
       {
         signal,
-        s3API: ipfsGateway,
+        s3API: ipfsGateway
       }
     )
 
