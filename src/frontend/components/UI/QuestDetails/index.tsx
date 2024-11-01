@@ -24,7 +24,7 @@ import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayS
  * t('quest.notEligible.message', 'You have not completed the required play streak days and can not claim your reward at this time.')
  * t('quest.playstreak.sync', 'Sync Progress')
  * t('quest.noG7ConnectionSync.title', 'No G7 account linked')
- * t('quest.noG7ConnectionSync.message', 'You need to have a Game7 account linked to {{email}} to resync your tasks.')
+ * t('quest.noG7ConnectionSync.message', 'You need to have a Game7 account linked to {{email}} to claim your rewards.')
  * t('quest.notEnoughBalance.title', 'Low balance')
  * t('quest.notEnoughGas.message', 'Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.')
  * t('quest.claimFailed', 'Claim failed')
