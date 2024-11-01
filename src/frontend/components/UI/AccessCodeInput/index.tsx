@@ -25,6 +25,15 @@ export function AccessCodeInput({
   useEffect(() => {
     async function validateAccessCode() {
       if (licenseConfigId === undefined) {
+        window.api.logError(
+          'Could not validate access code input since license config id is undefined'
+        )
+        setErrorText(
+          t(
+            'hyperplay.accesscodes.error.licenseUndefined',
+            'Could not validate access code. Please check your internet access or firewall settings.'
+          )
+        )
         return
       }
 

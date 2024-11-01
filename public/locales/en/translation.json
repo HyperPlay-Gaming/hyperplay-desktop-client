@@ -330,6 +330,7 @@
     "hyperplay": {
         "accesscodes": {
             "error": {
+                "licenseUndefined": "Could not validate access code. Please check your internet access or firewall settings.",
                 "validation": "Access code is invalid"
             },
             "requirescode": "This game update requires an access code.",
