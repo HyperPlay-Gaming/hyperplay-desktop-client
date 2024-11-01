@@ -798,7 +798,6 @@
             "playstreak": "Play Streak",
             "reputation": "Reputation"
         },
-        "View Game": "View Game",
         "youHaveClaimed": "You have claimed {{totalRewards}} reward{{plural}}."
     },
     "quests": {
