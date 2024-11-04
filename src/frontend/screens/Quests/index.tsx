@@ -5,8 +5,7 @@ import { Alert, Background } from '@hyperplay/ui'
 import classNames from 'classnames'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
-import { useParams, useNavigate } from 'react-router-dom'
-import { G7CreditsModal } from 'frontend/components/UI/G7CreditsModal'
+import { useNavigate, useParams } from 'react-router-dom'
 import QuestDetails from 'frontend/components/UI/QuestDetails'
 import { fetchEpicListing, getGameInfo } from 'frontend/helpers'
 import { useMutation } from '@tanstack/react-query'
@@ -99,7 +98,6 @@ export function QuestsPage() {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
-      <G7CreditsModal />
       <div
         className={classNames(
           'contentContainer',

@@ -63,6 +63,7 @@ export async function prepareBaseGameForModding({
     status: 'extracting',
     progress: {
       folder: dirPath,
+      totalSize: 0,
       percent: 0,
       diskSpeed: 0,
       downSpeed: 0,
@@ -113,6 +114,7 @@ export async function prepareBaseGameForModding({
           status: 'extracting',
           progress: {
             folder: dirPath,
+            totalSize: totalSizeInBytes,
             ...currentProgress
           }
         })
@@ -141,6 +143,7 @@ export async function prepareBaseGameForModding({
         status: 'done',
         progress: {
           folder: dirPath,
+          totalSize: 0,
           percent: 0,
           diskSpeed: 0,
           downSpeed: 0,

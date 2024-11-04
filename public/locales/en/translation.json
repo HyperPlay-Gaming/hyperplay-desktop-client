@@ -590,15 +590,14 @@
         "instructions": {
             "selectZip": "",
             "step1": {
-                "chromieCraft": "ChromieCraft",
-                "description": "This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain version 3.3.5a from sources like:",
+                "description": "This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain the version needed from the following sources:",
+                "link1": "Link 1",
+                "link2": "Link 2 (Magnet Link)",
                 "subtitle": "Download World of Warcraft 3.3.5a",
-                "title": "Step 1",
-                "webtorrent": "Torrent (Magnet Link)"
+                "title": "Step 1"
             },
             "step2": {
-                "description": "Select the downloaded ChromieCraft_3.3.5a.zip file.",
-                "subtitle": "Select ChromieCraft_3.3.5a.zip File",
+                "subtitle1": "Select the downloaded 3.3.5a zip file",
                 "title": "Step 2"
             },
             "step3": {
