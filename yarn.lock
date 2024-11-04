@@ -1293,10 +1293,10 @@
     "@hyperplay/utils" "^0.0.14"
     mobx "^6.12.3"
 
-"@hyperplay/patcher@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@hyperplay/patcher/-/patcher-0.0.14.tgz#9b375e6b2803fe106fdba5bd00f154587ea78d9f"
-  integrity sha512-bR9c2xKmEF3EEUMcp8/YvBxahT7lywfYRDGB6KLQSmnqPbFuLeXaGzfThnu0F94N7I06MkK68+OgVCSptYPkLg==
+"@hyperplay/patcher@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@hyperplay/patcher/-/patcher-0.0.17.tgz#0b62dffbb622712c592d271e49b34c70448489c8"
+  integrity sha512-29DWtEGlCgxw22u0/k5QtZhSLn/MmHdXCsilCe9w/cbaWguT69oYSSE/E2omhaPIntF3w2/Lt0pxoSpY1Qly1g==
   dependencies:
     "@valist/sdk" "^2.10.5"
     ethers "^6.13.4"
