@@ -1663,6 +1663,8 @@ async function applyPatching(
     install: { install_path, version, platform }
   } = gameInfo
 
+  const datastoreDir = path.join(install_path!, '.temp', appName)
+
   try {
     const { patchFolder } = await import('@hyperplay/patcher')
 
@@ -1720,6 +1722,10 @@ async function applyPatching(
     const blockSize = 512 * 1024 // 512KB in bytes
     const startTime = Date.now()
 
+    if (!existsSync(datastoreDir)) {
+      mkdirSync(datastoreDir, { recursive: true })
+    }
+
     const { generator } = patchFolder(
       ipdtPatcher,
       install_path,
@@ -1727,17 +1733,20 @@ async function applyPatching(
       previousManifest,
       {
         signal,
-        s3API: ipfsGateway
+        s3API: ipfsGateway,
+        datastoreDir
       }
     )
 
     if (signal.aborted) {
       logInfo(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
+      rmSync(datastoreDir, { recursive: true })
       return { status: 'abort' }
     }
 
     signal.onabort = () => {
       aborted = true
+      rmSync(datastoreDir, { recursive: true })
       return { status: 'abort' }
     }
 
@@ -1747,6 +1756,17 @@ async function applyPatching(
       if (signal.aborted) {
         logInfo(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
         return { status: 'abort' }
+      }
+
+      if (output.includes('connection refused')) {
+        logError(
+          `Error while patching ${appName}: connection refused`,
+          LogPrefix.HyperPlay
+        )
+        return {
+          status: 'error',
+          error: 'Error while patching: connection refused'
+        }
       }
 
       const match = output.match(
@@ -1802,6 +1822,7 @@ async function applyPatching(
     }
     // need this to cover 100% of abort cases
     if (aborted) {
+      rmSync(datastoreDir, { recursive: true })
       return { status: 'abort' }
     }
 
@@ -1816,6 +1837,8 @@ async function applyPatching(
     })
 
     logInfo(`Patching ${appName} completed`, LogPrefix.HyperPlay)
+    rmSync(datastoreDir, { recursive: true })
+
     return { status: 'done' }
   } catch (error) {
     logError(`Error while patching ${error}`, LogPrefix.HyperPlay)
@@ -1842,7 +1865,7 @@ async function applyPatching(
         newVersion
       }
     })
-
+    rmSync(datastoreDir, { recursive: true })
     return { status: 'error', error: `Error while patching ${error}` }
   }
 }
