@@ -1263,12 +1263,12 @@
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
 
-"@hyperplay/extension-provider@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@hyperplay/extension-provider/-/extension-provider-0.0.7.tgz#20d380ced3e1cac2f700143471d49b0ff6ed9e1c"
-  integrity sha512-BcI53hI9sC1vtup1cB0+7a5gL34lSq8INUOl/CY/F+4l4YG7IHQBZ9E6IEd76oO+kloxpVBggoe1DUwa+qyutA==
+"@hyperplay/extension-provider@^0.0.8-alpha.0":
+  version "0.0.8-alpha.0"
+  resolved "https://registry.yarnpkg.com/@hyperplay/extension-provider/-/extension-provider-0.0.8-alpha.0.tgz#e4ffe7a05bc7c107cd5719f80d66a8457e2604ef"
+  integrity sha512-5yVJOBkOXmOLyIsq4HG/uxO80pvthpOCjToKtM8nJDFUUHCby0QfWJJi0FHkGn9ZtcxslIhEcnDLJlvTV8th+w==
   dependencies:
-    "@hyperplay/utils" "^0.0.12"
+    "@hyperplay/utils" "^0.3.3"
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
     zod "^3.23.8"
@@ -1284,14 +1284,6 @@
     cors "^2.8.5"
     express "^4.18.2"
     stream-throttle "^0.1.3"
-
-"@hyperplay/overlay@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@hyperplay/overlay/-/overlay-0.0.6.tgz#c25bc205917dfc0c17c9b95a525cea08960a3680"
-  integrity sha512-y9GON2QFoJybfElUhv8P9eDPwRXLyHzcCvr2GLPY685Yww8ryGlnpj8LevpLqirz71PqrR2p5P9wmUTybi9KMg==
-  dependencies:
-    "@hyperplay/utils" "^0.0.14"
-    mobx "^6.12.3"
 
 "@hyperplay/providers@^0.0.6":
   version "0.0.6"
@@ -1329,20 +1321,6 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.6.tgz#f97834bc4f6a5d9a9fe83c61915a6d63f938dfcf"
   integrity sha512-j5JAf0bxHRQL0H7hBUzukW1PgIW1evRmaHYfOHqd+uf8taTVAMDJzcOc+NQaAMzjJYtQjIZDdT+lbBk2WcvO8g==
 
-"@hyperplay/utils@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.12.tgz#4ce7a97268f862deae99363d2d8029ee80003cc0"
-  integrity sha512-EQ7i/OPlF8Se1DsLWvyrEf1Bv20wNnKpT7U+t6KolDudolhAnMNMvjnpcDc431ctWxpi9PZbYjNcwhkGdpo9ww==
-  dependencies:
-    bignumber.js "^9.1.2"
-
-"@hyperplay/utils@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.14.tgz#7420bdb67214c24086ed8463a9cabc30a7023192"
-  integrity sha512-eWn3jVTBBH2ki5+etZQs77hH4qVpphSINjBRW8AJ5oNtUXCqrPFS+eFimfUyzi+Kwl2/ef9lQ1QD3SEe/1BRZA==
-  dependencies:
-    bignumber.js "^9.1.2"
-
 "@hyperplay/utils@^0.0.9":
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.9.tgz#80836cfde5c4d63e41f5df809ae2e80314600c5a"
@@ -1350,10 +1328,10 @@
   dependencies:
     bignumber.js "^9.1.2"
 
-"@hyperplay/utils@^0.2.4":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.2.6.tgz#2862c690f4dbf7871c66631f29ce0561020ef8d7"
-  integrity sha512-9ldiOq7ioaEecHJaqKBbwo1594nMLUPQXjaeuupqWU88GJW1CNcbhJhi6p3H6v4eSsj5IWr5VkxGmAVyOKuBkg==
+"@hyperplay/utils@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.3.3.tgz#9d594a29012ae5a172138878208d6d4edb6412f2"
+  integrity sha512-t8XB7oFWJU4S1ULxVBURt9BhpgaZAq5C131Ch5wShxuMTjxxGEhTAAcppsH+VYd7lwtp4se9myzhc6u21rUNgQ==
   dependencies:
     bignumber.js "^9.1.2"
 
@@ -10442,7 +10420,7 @@ mobx-react-lite@^4.0.7:
   dependencies:
     use-sync-external-store "^1.2.0"
 
-mobx@^6.12.3, mobx@^6.13.1:
+mobx@^6.13.1:
   version "6.13.1"
   resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.13.1.tgz#76c41aa675199f75b84a257e4bec8ff839e33259"
   integrity sha512-ekLRxgjWJr8hVxj9ZKuClPwM/iHckx3euIJ3Np7zLVNtqJvfbbq7l370W/98C8EabdQ1pB5Jd3BbDWxJPNnaOg==
