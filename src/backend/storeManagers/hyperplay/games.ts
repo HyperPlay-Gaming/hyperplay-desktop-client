@@ -95,6 +95,7 @@ import { chmod, writeFile } from 'fs/promises'
 import { trackEvent } from 'backend/metrics/metrics'
 import { getFlag } from 'backend/flags/flags'
 import { ipfsGateway } from 'backend/vite_constants'
+import { GlobalConfig } from 'backend/config'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1726,6 +1727,19 @@ async function applyPatching(
       mkdirSync(datastoreDir, { recursive: true })
     }
 
+    const { maxWorkers } = GlobalConfig.get().getSettings()
+
+    console.log('patcher params---------', {
+      ipdtPatcher,
+      install_path,
+      currentManifest,
+      previousManifest,
+      signal,
+      s3API: ipfsGateway,
+      datastoreDir,
+      workers: maxWorkers || 6
+    })
+
     const { generator } = patchFolder(
       ipdtPatcher,
       install_path,
@@ -1734,7 +1748,8 @@ async function applyPatching(
       {
         signal,
         s3API: ipfsGateway,
-        datastoreDir
+        datastoreDir,
+        workers: maxWorkers || 6
       }
     )
 
