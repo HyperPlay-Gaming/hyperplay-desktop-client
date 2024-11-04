@@ -61,7 +61,7 @@ import {
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
 import {
-  getHyperPlayReleaseManifest,
+  getIPDTManifestUrl,
   handleArchAndPlatform,
   handlePlatformReversed,
   runModPatcher,
@@ -1608,10 +1608,13 @@ export async function downloadGameIpdtManifest(
     // download only if the manifest file is not already downloaded and its the same version
     const manifestName = `${appName}-${platform}-${version}.json`
     const manifestPath = path.join(ipdtManifestsPath, manifestName)
+    if (!existsSync(ipdtManifestsPath)) {
+      mkdirSync(ipdtManifestsPath, { recursive: true })
+    }
     if (existsSync(manifestPath)) return
 
     const releaseId = generateID(appName, version)
-    const manifestUrl = await getHyperPlayReleaseManifest(releaseId, platform)
+    const manifestUrl = await getIPDTManifestUrl(releaseId, platform)
     if (!manifestUrl) return logWarning(`Manifest not found for ${appName}`)
 
     // download and save the manifest file as a json file in manifest folder
@@ -1857,7 +1860,7 @@ async function getManifest(
 
     if (!existsSync(manifestPath)) {
       logDebug(
-        `Manifest for ${appName} not found for version ${version} and platform ${platformName}`,
+        `Manifest for ${appName} not found for version ${version} and platform ${platformName}, downloading it.`,
         LogPrefix.HyperPlay
       )
 
