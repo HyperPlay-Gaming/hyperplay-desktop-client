@@ -1,72 +1,73 @@
 {
     "accessibility": {
-        "actions_font_family_no_default": "Actions Font Family (Default: ",
-        "all_tiles_in_color": "Show all game tiles in color",
-        "content_font_family_no_default": "Content Font Family (Default: ",
-        "fonts": "Fonts",
-        "title": "Accessibility",
-        "zoom": "Zoom"
+        "actions_font_family_no_default": "Шрыфты Actions (па змаўчанні: ",
+        "all_tiles_in_color": "Адлюструйце ўсе гульнявыя пліткі ў колеры",
+        "content_font_family_no_default": "Шрыфт кантэнту (па змаўчанні: ",
+        "fonts": "Шрыфты",
+        "title": "Адаптацыя для карыстальнікаў",
+        "zoom": "Зум"
     },
-    "add_game": "Add Game",
+    "add_game": "Дадаць гульню",
     "All": "Усе",
     "anticheat": {
-        "anticheats": "Anticheats",
-        "may_not_work": "It may not work due to denied or broken anticheat support.",
-        "reference": "Reference",
-        "source": "Source",
-        "status": "Status",
-        "title": "This game includes anticheat software"
+        "anticheats": "Антычытчы",
+        "may_not_work": "Гэта можа не працаваць з-за адмовы або зламанай падтрымкі антычату.",
+        "reference": "Спасылка",
+        "source": "==WEBLATE_PART==\nКрыніца==WEBLATE_PART==\nКрыніца==WEBLATE_PART==\nКрыніца",
+        "status": "Станоўчае становішча",
+        "title": "У гэтай гульні ёсць праграмнае забеспячэнне для супрацьдзеяння чытынгу"
     },
     "box": {
         "cache-cleared": {
-            "message": "HyperPlay Cache Was Cleared!",
-            "title": "Cache Cleared"
+            "message": "Кэш HyperPlay паспяхова ачышчаны.",
+            "title": "Кэш ачышчаны паспартам"
         },
-        "choose": "Абраць",
-        "choose-egs-prefix": "Прэфікс, дзе ўсталяваны EGS",
-        "choose-gogdl-binary": "Select GOGDL Binary (needs restart)",
-        "choose-legendary-binary": "Select Legendary Binary (needs restart)",
-        "customWine": "Select the Wine or Proton Binary",
-        "default-install-path": "",
-        "default-steam-path": "Steam path.",
-        "downloadNow": "Download now",
+        "choose": "Выбар",
+        "choose-egs-prefix": "Абрэвіятура, дзе ўсталяваны EGS",
+        "choose-gogdl-binary": "Выберыце бінар GOGDL (неабходна перазагрузка)",
+        "choose-legendary-binary": "Выберыце Легендарны бінарны файл",
+        "customWine": "Выберыце бінарны файл для Wine або Proton",
+        "default-install-path": "Выберыце стандартны шлях усталёўкі",
+        "default-steam-path": "Папка Steam.",
+        "downloadNow": "Скачайце цяпер",
         "error": {
             "add": {
                 "steam": {
-                    "body": "Adding {{game}} to Steam failed with:{{newLine}} {{error}}",
-                    "title": "Error Adding Game to Steam"
+                    "body": "Даданне {{game}} у Steam не ўдалося з-за: {{newLine}} {{error}}  \nДаданне {{game}} ў Steam не атрымалася з-за:{{newLine}} {{error}}  \nНе ўдалося дадаць {{game}} у Steam: {{newLine}} {{error}}",
+                    "title": "Не ўдалося дадаць гульню ў Steam"
                 }
             },
             "credentials": {
-                "message": "Your Crendentials have expired, Logout and Login Again!"
+                "message": "Вашы ўліковыя даныя страцілі тэрмін дзеяння, калі ласка, выйдзіце з сістэмы і ўвядзіце ўліковыя даныя зноў.  \nВашы ўліковыя даныя скончыліся, калі ласка, выйдзіце і ўвядзіце іх зноў.  \nТэрмін дзеяння вашых уліковых даных скончыўся, калі ласка, выйдзіце і ўвайдзіце зноў."
             },
             "cx-bottle-not-found": {
-                "message": "The CrossOver bottle \"{{bottle_name}}\" does not exist, can't launch!",
-                "title": "CrossOver bottle not found"
+                "message": "Бутэлька CrossOver \"{{bottle_name}}\" адсутнічае, запуск немагчымы!",
+                "title": "Не знойдзена бутэлька CrossOver"
             },
             "diskspace": {
-                "message": "Not enough available disk space",
-                "title": "No Space"
+                "message": "Недастаткова вольнага месца на жорсткім дыску",
+                "title": "Няма месца"
             },
             "dxvk": {
-                "message": "Error installing DXVK/VKD3D! Check your connection!",
-                "title": "DXVK/VKD3D error"
+                "message": "Не ўдалося ўсталяваць DXVK/VKD3D! Праверце, калі ласка, злучэнне!",
+                "title": "Памылка DXVK/VKD3D"
             },
             "folder-not-found": {
-                "title": "Game folder appears to be deleted, do you want to remove the game from the installed list?"
+                "title": "Папка гульні, здаецца, была выдалена. Вы хочаце выдаліць гульню з спісу ўсталяваных?  \nПапка гульні, відаць, была выдалена. Ці жадаеце вы выдаліць гульню з усталяванага спісу?  \nЗдаецца, папка гульні была выдалена. Хочаце вы выдаліць гульню з спісу ўсталяваных?"
             },
             "generic": {
                 "message": "",
-                "title": "Select EXE to Run"
+                "title": "Выберыце EXE для старта"
             },
-            "launchAborted": "Launch aborted",
-            "title": "Error",
+            "launchAborted": "Запуск не адбыўся",
+            "title": "Памылка",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Не атрымалася абнавіць",
+                "message": "Што-то пайшло не так з абнаўленнем! Калі ласка, уручную выдаліце і пераўсталюйце HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -74,8 +75,22 @@
                 "title": "Wine Not Found"
             },
             "winetricks": {
-                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
-                "title": "Winetricks error"
+                "message": "Winetricks вярнула наступную памылку падчас выканання: {{newLine}}{{error}}  \nWinetricks адлюстраваў наступную памылку падчас выканання: {{newLine}}{{error}}  \nWinetricks паведамляе пра наступную памылку падчас выканання: {{newLine}}{{error}}",
+                "title": "Памылка Winetricks"
+            },
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "Устаноўка Ubisoft Connect у прэфіксе гульні не ўдалася. Праверце нашу старонку ў вікі па адрасе https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, каб усталяваць яе ўручную."
+            },
+            "moving": "Памылка перамяшчэння гульні {{error}}",
+            "steam": {
+                "error": "Выканальны файл Steam не знойдзены. Усталёўка, верагодна, была адменена карыстальнікам або не ўдалася на баку Steam.",
+                "message": "Усталёўка Steam не ўдалася! Калі ласка, уважліва прачытайце інструкцыі і паспрабуйце яшчэ раз! {{paragraph}} {{error}}",
+                "title": "Памылка Steam"
+            },
+            "delete-files": {
+                "body": "Памылка пры выдаленні выдзеленага каталога {{path}}. Калі ласка, выдаліце яго ўручную. \n                {{paragraph}} \n                {{error}}",
+                "title": "Памылка пры выдаленні выдзеленага каталога"
             }
         },
         "info": {
@@ -85,140 +100,159 @@
                 "message": "There is a new Version available!",
                 "message-finished": "Do you want to restart HyperPlay now?",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Update Finished"
+                "title-finished": "Update Finished",
+                "appUpdated": "HyperPlay быў абноўлены",
+                "appUpdated-message": "HyperPlay быў абноўлены. Вы хочаце абнавіць і перазапусціць HyperPlay зараз?"
             }
         },
-        "no": "НЕ",
-        "ok": "Ok",
+        "no": "НЕ  \nНЯ  \nНі",
+        "ok": "Гарача",
         "protocol": {
             "install": {
-                "not_installed": "Is Not Installed, do you wish to Install it?"
+                "not_installed": "Цяпер не ўстаноўлена. Хочаце ўсталяваць?"
             }
         },
         "quit": {
-            "message": "There are pending operations, are you sure?",
-            "title": "Exit"
+            "message": "Існуюць чаканыя аперацыі, вы ўпэўнены?",
+            "title": "Завяршэнне"
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
-                "title": "Reset HyperPlay"
+                "message": "Вы ўпэўнены, што хочаце скідаць HyperPlay? Гэта прывядзе да выдалення ўсіх налад і кэша, але не выдаліць вашы ўсталяваныя гульні або вашыя ўліковыя даныя Epic. Партатыўныя версіі (AppImage, WinPortable і г.д.) HyperPlay трэба будзе перазапусціць уручную пасля гэтага.\n\nВы ўпэўнены, што жадаеце скідаць HyperPlay? Гэта выдаліць усе наладкі і кэш, але не закране вашыя ўсталяваныя гульні або ўліковыя даныя Epic. Партатыўныя версіі (AppImage, WinPortable і г.д.) HyperPlay патрабуюць ручнога перазапуску пасля гэтага.\n\nЦі ўпэўнены вы, што хочаце скідаць HyperPlay? Гэта прывядзе да выдалення ўсіх налад і кэша, але не закране вашыя ўсталяваныя гульні або вашыя даныя Epic. Партатыўныя версіі (AppImage, WinPortable і г.д.) HyperPlay трэба будзе перазапусціць уручную пасля гэтага.",
+                "title": "Перазапусціць HyperPlay"
             }
         },
         "runexe": {
-            "title": "Select EXE to Run"
+            "title": "Выберыце EXE для старта"
         },
         "select": {
-            "button": "Select",
-            "exe": "Select EXE..."
+            "button": "Выбар",
+            "exe": "Абрэзуйце EXE"
         },
         "shortcuts": {
-            "message": "Shortcuts were created on Desktop and Start Menu",
-            "message-mac": "Shortcuts were created on the Applications folder",
-            "message-remove": "Shortcuts were removed from Desktop and Start Menu",
-            "message-remove-mac": "Shortcuts were removed from the Applications folder",
-            "title": "Shortcuts Removed"
+            "message": "Сцяжкі былі створаны на Дэсктопе і ў Пачатковым меню",
+            "message-mac": "Скарачэнні былі дададзены ў каталог Праграмы",
+            "message-remove": "Скарачэнні былі зняты з Рабочага стала і Пачатковага меню",
+            "message-remove-mac": "Скарачэнні былі зняты з тэчкі Праграмы",
+            "title": "Скарачэнні адменены"
         },
         "sync": {
-            "button": "Абраць",
-            "error": "",
-            "title": "Select EXE to Run"
+            "button": "Выбар",
+            "error": "Неправільны шлях",
+            "title": "Абрэніце каталог для захавання"
         },
         "vcruntime": {
             "install": {
-                "message": "The download links for the Visual C++ Runtimes have been opened. Please install both the x86 and x64 versions."
+                "message": "Спасылкі для спампоўкі Visual C++ Runtimes былі адкрыты. Калі ласка, усталюйце як версію x86, так і x64.  \nСпасылкі на загрузку Visual C++ Runtimes цяпер даступныя. Усталюйце абедзве версіі: x86 і x64.  \nСпасылкі для загрузкі Visual C++ Runtimes адкрыты. Усталюйце як x86, так і x64 версіі."
             },
             "notfound": {
-                "message": "The Microsoft Visual C++ Runtimes are not installed, which are required by some games",
-                "title": "VCRuntime not installed"
+                "message": "Не ўстаноўлены Microsoft Visual C++ Runtimes, якія патрабуюцца для некаторых гульняў",
+                "title": "VCRuntime адсутнічае"
             }
         },
         "warning": {
             "epic": {
-                "import": "Epic Servers are having major outage right now, the game cannot be imported!",
-                "install": "Epic Servers are having major outage right now, the game cannot be installed!",
-                "update": "Epic Servers are having major outage right now, the game cannot be updated!"
+                "import": "Зараз на серверах Epic вялікі збой, гульня не можа быць загружана!",
+                "install": "Серверы Epic зараз маюць вялікія праблемы, гульня не можа быць усталявана!  \nСерверы Epic зараз перажываюць сур'ёзны збой, гульня не ўстаноўлена!  \nСерверы Epic зараз не працуюць, гульня не ўдаецца ўсталяваць!",
+                "update": "Серверы Epic зараз маюць істотныя непаладкі, гульня не можа быць абноўлена!"
             },
-            "title": "Warning"
+            "title": "Сігналізацыя",
+            "rosetta": {
+                "message": "HyperPlay патрабуе Rosetta для правільнай працы на macOS з чыпамі Apple Silicon. Калі ласка, усталюйце яго з тэрмінала macOS, выкарыстоўваючы наступную каманду: \"softwareupdate --install-rosetta\" і перазапусціце HyperPlay. ",
+                "title": "Розета не знойдзена"
+            },
+            "wine-change": {
+                "message": "Мы не змаглі знайсці абраную версію wine для запуску гэтага загалоўка ({{selectedWine}}). {{newline}} Мы знайшлі іншую, вы хочаце працягнуць запуск з выкарыстаннем {{foundWine}}?",
+                "message-gptk": "Каб мець магчымасць запускаць гульні з выкарыстаннем Apple Gaming porting toolkit, вам неабходна абнавіць вашу macOS да 14 (Sonoma) або вышэй. {{newline}} Мы знайшлі Wine у вашай сістэме, вы хочаце працягнуць запуск з выкарыстаннем {{foundWine}} ?",
+                "title-gptk": "Game Porting Toolkit не сумяшчальны ",
+                "title": "Wine не знойдзены!"
+            }
         },
-        "wineprefix": "Абярыце тэчку з прэфіксам Wine",
-        "yes": "ТАК",
-        "dontShowAgain": "Больш не паказваць",
-        "choose-nile-binary": "Выберыце двайковы файл Nile"
+        "wineprefix": "Выберыце папку з прэфіксам Wine",
+        "yes": "ТАК==\nДА==\nСАПРАЎДЫ",
+        "dontShowAgain": "Не паказваць яшчэ раз",
+        "choose-nile-binary": "Выберыце двайковы файл Nile",
+        "reset-extension": {
+            "question": {
+                "message": "Вы ўпэўнены, што хочаце скідаць пашырэнне MetaMask?",
+                "title": "Скінуць пашырэнне"
+            }
+        }
     },
     "button": {
-        "cancel": "Cancel",
-        "go_to_library": "Go to Library",
+        "cancel": "Спыніць",
+        "go_to_library": "Перайдзі ў бібліятэку",
         "login": "Login",
-        "sync": "Сінхранізаваць",
-        "syncing": "",
-        "unsync": "",
-        "download": "Спампаваць",
-        "update": "Абнавіць",
-        "continue": "Працягнуць",
-        "install": "Ўсталяваць"
+        "sync": "Сінхронізацыя",
+        "syncing": "Сінхранізацыя",
+        "unsync": "Не сінхранізаваць",
+        "download": "Спампуйце",
+        "update": "Абнавіць праграму",
+        "continue": "Працягваць далей",
+        "install": "Усталяваць праграму"
     },
     "controller": {
         "hints": {
-            "back": "Back",
-            "backspace": "Backspace",
-            "close_dialog": "Close dialog",
-            "close_keyboard": "Close keyboard",
-            "close_options": "Close Options",
-            "game_details": "Game details",
-            "game_settings": "Game settings",
-            "install_game": "Install game",
-            "move_cursor": "Move cursor",
-            "open_virtual_keyboard": "Open virtual keyboard",
-            "options": "Options",
-            "play_game": "Play game",
-            "scroll": "Scroll",
-            "select": "Select",
-            "space": "Space",
-            "update_game": "Update game"
+            "back": "Назад у меню",
+            "backspace": "Клавіша сцірання",
+            "close_dialog": "Зачыніць акно дыялога",
+            "close_keyboard": "Схаваць клавіятуру",
+            "close_options": "Схаваць налады",
+            "game_details": "Апісанне гульні",
+            "game_settings": "Параметры гульні",
+            "install_game": "Інсталяваць гульню",
+            "move_cursor": "Перасунуць курсор",
+            "open_virtual_keyboard": "Адкрыйце віртуальную клавіятуру",
+            "options": "Выбар",
+            "play_game": "Сыграй у гульню",
+            "scroll": "Скролінг",
+            "select": "Выбар",
+            "space": "Сусвет",
+            "update_game": "Абнавіць гульнявую праграму"
         }
     },
     "docs": "Documentation",
     "download-manager": {
         "install-type": {
-            "install": "Install",
-            "update": "Update"
+            "install": "Усталяваць праграму",
+            "update": "Абнаўляць"
         },
         "label": {
-            "disk": "Disk",
-            "speed": "Download"
+            "disk": "Дыск",
+            "speed": "Скачаць"
         },
         "link": "Downloads",
         "queue": {
-            "end-time": "Finished at",
-            "queue-time": "Added at",
-            "start-time": "Started at",
-            "type": "Type"
+            "end-time": "Завершана ў",
+            "queue-time": "Дададзена ў",
+            "start-time": "Пачатак ад",
+            "type": "Тып"
         },
         "title": "Downloads",
-        "ETA": "Разліковы час"
+        "ETA": "Час, які чакаецца",
+        "title_dm": "Менеджар загрузак"
     },
     "epic": {
-        "offline-notification-body": "HyperPlay will maybe not work probably!",
-        "offline-notification-title": "offline"
+        "offline-notification-body": "Сэрвісы ў інтэрнэце могуць не працаваць належным чынам, бо серверы Epic Games неактыўныя!",
+        "offline-notification-title": "у аўтаномным рэжыме"
     },
     "Epic Games": "Epic Games",
-    "error": "Error",
-    "favourites": "Favourites",
+    "error": "Памылка",
+    "favourites": "Фаварыты",
     "game": {
-        "status": "Status",
-        "store": "Store",
-        "title": "Game Title"
+        "status": "Станоўчае становішча",
+        "store": "Гандлёвы пункт",
+        "title": "Назва гульні"
     },
     "generic": {
         "error": {
-            "component": "No Games found - Try to logout and login again or one of the options bellow"
+            "component": "Не знойдзена гульняў - паспрабуйце выйсці і зноў увайсці ў сістэму або адну з ніжэйпералічаных опцый"
         },
         "library": {
-            "refresh": "Refresh Library"
+            "refresh": "Аднавіць калекцыю"
         }
     },
-    "globalSettings": "Global Settings",
+    "globalSettings": "Агульныя налады",
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
@@ -226,52 +260,53 @@
         "ignore_hidden": "Ігнараваць схаванае",
         "platform": "Platform",
         "show_all_games": "Паказаць усе гульні",
-        "show_available_games": "Паказаць недаступныя гульні",
+        "show_available_games": "Паказаць гульні, што не даступныя",
         "show_favourites_only": "Паказаць толькі абранае",
-        "show_hidden": "Паказаць схаванае",
-        "store": "Адфільтраваць краму"
+        "show_hidden": "Адкрыць схаванае",
+        "store": "Адфільтраванне крамы"
     },
     "help": {
-        "amdfsr": "AMD's FSR helps boost framerate by upscaling lower resolutions in Fullscreen Mode. Image quality increases from 5 to 1 at the cost of a slight performance hit. Enabling may improve performance.",
-        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
-        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
-        "dxvk": "DXVK is a Vulkan-based translational layer for DirectX 9, 10 and 11 games. Enabling may improve compatibility. Might cause issues especially for older DirectX games.",
-        "esync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance.",
-        "fsync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels.",
+        "amdfsr": "FSR ад AMD дапамагае павысіць частату кадраў, павялічваючы ніжэйкія дазволы ў поўнаэкранным рэжыме. Якасць выявы павышаецца з 5 да 1 за кошт невялікага зніжэння прадукцыйнасці. Уключэнне можа палепшыць прадукцыйнасць.\n\nFSR ад AMD спрыяе павышэнню частоты кадраў шляхам маштабавання ніжэйкіх дазволаў у поўнаэкранным рэжыме. Якасць выявы павышаецца з 5 да 1, але гэта прыводзіць да невялікага зніжэння прадукцыйнасці. Уключэнне можа палепшыць прадукцыйнасць.\n\nFSR ад AMD дапамагае павысіць частату кадраў, маштабуючы ніжэйкія дазволы ў поўнаэкранным рэжыме. Якасць выявы павышаецца з 5 да 1, але гэта суправаджаецца невялікім зніжэннем прадукцыйнасці. Уключэнне можа палепшыць прадукцыйнасць.",
+        "custom_themes_path": "Не выкарыстоўвайце CSS-файлы з ненадзейных крыніц. Калі сумняваецеся, запытайцеся аб аглядзе ў нашым канале Discord.  \nНе карыстайцеся CSS-файламі з ненадзейных крыніц. Калі ў вас ёсць сумневы, папрасіце агляд у нашым канале Discord.  \nНе ўжывайце CSS-файлы з ненадзейных крыніц. Калі вы не ўпэўнены, запытайцеся аб аглядзе ў нашым Discord-канале.",
+        "custom_themes_wiki": "Праверце Вікі для атрымання больш падрабязнай інфармацыі аб дадаванні карыстальніцкіх тэм. Націсніце тут.  \nПраверце Вікі для атрымання дадатковай інфармацыі аб дадаванні карысных тэм. Націсніце тут.  \nАзнаёмцеся з Вікі для больш падрабязнай інфармацыі пра дадаванне карысных тэм. Націсніце тут.",
+        "dxvk": "DXVK - гэта трансляцыйны слой на аснове Vulkan для гульняў DirectX 9, 10 і 11. Уключэнне можа палепшыць сумяшчальнасць. Могуць узнікнуць праблемы, асабліва з больш старымі гульнямі на DirectX.\n\nDXVK з'яўляецца трансляцыйным слоем на базе Vulkan для гульняў DirectX 9, 10 і 11. Уключэнне можа павысіць сумяшчальнасць. Гэта можа выклікаць праблемы, асабліва з старымі гульнямі на DirectX.\n\nDXVK - гэта слой трансляцыі, заснаваны на Vulkan, для гульняў DirectX 9, 10 і 11. Уключэнне можа палепшыць сумяшчальнасць. Могуць узнікнуць праблемы, асабліва з гульнямі старэйшых версій DirectX.",
+        "esync": "Esync накіраваны на зніжэнне нагрузкі wineserver у гульнях з высокім выкарыстаннем ЦП. Уключэнне можа палепшыць прадукцыйнасць.  \nEsync імкнецца зменшыць нагрузку wineserver у гульнях, якія патрабуюць шмат рэсурсаў ЦП. Уключэнне можа павысіць прадукцыйнасць.  \nEsync прызначаны для зніжэння нагрузкі wineserver у гульнях з высокімі патрабаваннямі да ЦП. Уключэнне можа спрыяць паляпшэнню прадукцыйнасці.",
+        "fsync": "Fsync накіраваны на зніжэнне нагрузкі wineserver у гульнях з высокай нагрузкай на ЦП. Уключэнне можа палепшыць прадукцыйнасць на падтрымліваемых ядрах Linux.  \nFsync імкнецца зменшыць накладныя выдаткі wineserver у гульнях, якія патрабуюць вялікай магутнасці ЦП. Уключэнне можа павысіць прадукцыйнасць на сумяшчальных ядрах Linux.  \nFsync мае мэтай зменшыць нагрузку wineserver у гульнях з высокімі патрабаваннямі да ЦП. Уключэнне можа палепшыць прадукцыйнасць на падтрымліваемых версіях ядра Linux.",
         "game_language": {
-            "fallback": "Leave blank to use HyperPlay's language.",
-            "in_game_config": "Not all games support this configuration, some have in-game language setting.",
-            "valid_codes": "Valid language codes are game-dependant."
+            "fallback": "Пакіньце пустым, каб выбраць мову HyperPlay.",
+            "in_game_config": "Не ўсе гульні падтрымліваюць гэтую канфігурацыю, некаторыя маюць наладу мовы ў гульні.  \nНе ўсе гульні падтрымліваюць гэтую канфігурацыю, некаторыя маюць налады мовы ў гульні.  \nНе ўсе гульні падтрымліваюць гэтую канфігурацыю, некаторыя прапануюць наладжванне мовы ў гульні.",
+            "valid_codes": "Дзейныя коды моў залежаць ад гульні.  \nКоды моў, якія можна выкарыстоўваць, залежаць ад гульні.  \nКоды моў, якія лічацца сапраўднымі, залежаць ад гульні."
         },
-        "gamemode": "Feral GameMode applies automatic and temporary tweaks to the system when running games. Enabling may improve performance.",
-        "general": "",
-        "mangohud": "MangoHUD is an overlay that displays and monitors FPS, temperatures, CPU/GPU load and other system resources.",
+        "gamemode": "Feral GameMode робіць аўтаматычныя і часовыя карэкціроўкі ў сістэме падчас гульняў. Уключэнне можа спрыяць паляпшэнню прадукцыйнасці.",
+        "general": "Сінхранізуйце з EGL, калі ў вас ёсць працоўная ўстаноўка Epic Games Launcher у іншым месцы і вы хочаце імпартаваць свае гульні, каб пазбегнуць іх паўторнай загрузкі.",
+        "mangohud": "MangoHUD - гэта накладка, якая адлюстроўвае і маніторынгуюць FPS, тэмпературы, нагрузку на ЦП/ГП і іншыя сістэмныя рэсурсы.  \nMangoHUD - гэта накладка, якая паказвае і адсочвае FPS, тэмпературы, нагрузку на ЦП/ГП і іншыя рэсурсы сістэмы.  \nMangoHUD - гэта накладка, якая дэманструе і кантралюе FPS, тэмпературы, нагрузку на ЦП/ГП і іншыя сістэмныя рэсурсы.",
         "other": {
-            "part4": "",
-            "part5": "",
-            "part6": "",
-            "part7": ""
+            "part4": "Выкарыстоўвайце ",
+            "part5": "Аргументы гульні",
+            "part6": " каб быць выкліканым пасля каманды запуску, напрыклад: ",
+            "part7": " каб прапусціць лаунчер у некаторых гульнях і г.д."
         },
-        "preferSystemLibs": "Custom Wine versions (Wine-GE, Wine-Lutris) are shipped with their library dependencies. By enabling this option, these shipped libraries will be ignored and Wine will load system libraries instead. Warning! Issues may occur if dependencies are not met.",
-        "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
+        "preferSystemLibs": "Карыстальніцкія версіі Wine (Wine-GE, Wine-Lutris) пастаўляюцца з іх бібліятэчнымі залежнасцямі. Уключыўшы гэтую опцыю, гэтыя пастаўленыя бібліятэкі будуць ігнаравацца, і Wine загрузіць сістэмныя бібліятэкі замест гэтага. Увага! Могуць узнікнуць праблемы, калі залежнасці не будуць выкананы.\n\nКарыстальніцкія версіі Wine (Wine-GE, Wine-Lutris) пастаўляюцца з бібліятэчнымі залежнасцямі. Уключыўшы гэтую опцыю, пастаўленыя бібліятэкі будуць ігнаравацца, і Wine будзе загружаць сістэмныя бібліятэкі. Увага! Могуць узнікнуць праблемы, калі залежнасці не будуць выкананы.\n\nКарыстальніцкія версіі Wine (Wine-GE, Wine-Lutris) пастаўляюцца з бібліятэчнымі залежнасцямі. Калі вы ўключыце гэтую опцыю, пастаўленыя бібліятэкі будуць ігнаравацца, і Wine загрузіць бібліятэкі сістэмы. Увага! Могуць узнікнуць праблемы, калі залежнасці не будуць выкананы.",
+        "primerun": "Выкарыстоўвайце адмысловую графічную карту для рэндэрынгу гульняў на сістэмах з некалькімі графічнымі працэсарамі. Гэта неабходна толькі для гульнявых ноўтбукаў або настольных камп'ютараў, якія выкарыстоўваюць безгалоўны GPU для рэндэрынгу (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
-            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "Гэты шлях дазваляе HyperPlay вызначыць, якую версію Proton выкарыстоўвае Steam для дадавання гульняў, якія не з'яўляюцца Steam.  \nГэты шлях дазваляе HyperPlay вызначыць версію Proton, якую выкарыстоўвае Steam для дадавання гульняў, не з'яўляюцца Steam.  \nГэты шлях дазваляе HyperPlay вызначыць, якую версію Proton выкарыстоўвае Steam для інтэграцыі гульняў, якія не з'яўляюцца Steam."
         },
-        "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
+        "steamruntime": "Карысныя бібліятэкі, якія прадастаўляе Steam для запуску гульняў на Linux і Windows (Proton). Уключэнне можа палепшыць сумяшчальнасць.  \nКарысныя бібліятэкі, якія прапануе Steam для запуску гульняў на Linux і Windows (Proton). Уключэнне можа павысіць сумяшчальнасць.  \nСпецыяльныя бібліятэкі ад Steam для запуску гульняў на Linux і Windows (Proton). Уключэнне можа палепшыць сумяшчальнасць.",
         "sync": {
-            "part1": "",
-            "part2": "",
-            "part3": "",
-            "part4": ""
+            "part1": "HyperPlay спрабуе адгадаць правільную тэчку для захавання, і гэта будзе працаваць у большасці выпадкаў. У выпадку, калі тэчка няправільная, выкарыстоўвайце поле перапісвання, каб змяніць яе.",
+            "part2": "У выпадку, калі вы зменіце папку прэфікса для Wine або Proton, вам трэба будзе яшчэ раз праверыць шлях, бо Proton выкарыстоўвае іншы прэфікс (/pfx) і імя карыстальніка (steamuser). Так што вы можаце проста сцерці бягучы шлях, выйсці з старонкі налад сінхранізацыі і вярнуцца назад, каб HyperPlay зноў адгадаў папку з правільным прэфіксам.",
+            "part3": "Ручная сінхранізацыя: Выберыце Спампаваць, каб загрузіць захаванні гульняў, захаваныя ў воблаку. Загрузіць, каб загрузіць лакальныя захаванні ў воблака. Прынудзіць спампаваць і Прынудзіць загрузіць ігнаруюць версію, якая знаходзіцца лакальна або ў воблаку.",
+            "part4": "Аўтаматычная сінхранізацыя захаванняў будзе сінхранізаваць захаванні кожны раз, калі вы пачынаеце гульню і пасля заканчэння гульні."
         },
-        "vkd3d": "VKD3D is a Vulkan-based translational layer for DirectX 12 games. Enabling may improve compatibility significantly. Has no effect on older DirectX games.",
+        "vkd3d": "VKD3D - гэта перакладны слой на аснове Vulkan для гульняў DirectX 12. Уключэнне можа значна палепшыць сумяшчальнасць. Не ўплывае на старыя гульні DirectX.\n\nVKD3D з'яўляецца перакладным слоем на аснове Vulkan для гульняў DirectX 12. Уключэнне можа істотна палепшыць сумяшчальнасць. Не мае ўплыву на старыя гульні DirectX.\n\nVKD3D - гэта слой перакладу, заснаваны на Vulkan, для гульняў DirectX 12. Уключэнне можа значна павысіць сумяшчальнасць. Не ўплывае на старыя гульні DirectX.",
         "wine": {
-            "part1": "HyperPlay шукае версіі Wine, Proton і CrossOver у наступных папках:",
-            "part2": "Для іншых месцаў выкарыстоўвайце сімвалічную спасылку на адну з гэтых тэчак"
+            "part1": "HyperPlay знаходзіць версіі Wine, Proton і CrossOver у наступных дырэкторыях:",
+            "part2": "Для іншых месцаў выкарыстоўвайце сімвалічную спасылку на адну з гэтых каталогаў"
         },
-        "disable_logs": "Уключыце гэты сцяжок, каб адключыць большасць запісаў у файлы журналаў (крытычная інфармацыя заўсёды рэгіструецца). Не забудзьцеся ВЫКЛЮЧЫЦЬ гэту наладу, перш чым паведамляць аб любой праблеме.",
-        "dxvknvapi": "DXVK-NVAPI – гэта рэалізацыя NVAPI, пабудаваная на аснове DXVK і ўласнага NVAPI Linux, яна дазваляе выкарыстоўваць DLSS на відэакартах Nvidia.",
-        "msync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels."
+        "disable_logs": "Уключыце гэты сцяжок, каб адключыць асноўную частку запісаў у файлы журналаў (крытычная інфармацыя заўсёды захоўваецца). Пераканайцеся, што ВЫКЛЮЧЫЦЕ гэтую наладу перад тым, як паведаміць пра любую праблему.  \nУключыце гэты сцяжок, каб спыніць большасць запісаў у файлы журналаў (крытычная інфармацыя заўсёды фіксуецца). Пераканайцеся, што ВЫКЛЮЧЫЦЕ гэтую опцыю перад паведамленнем аб любой праблеме.  \nУключыце гэты сцяжок, каб забараніць большасць запісаў у файлы журналаў (крытычная інфармацыя заўсёды запісваецца). Не забудзьцеся ВЫКЛЮЧЫЦЬ гэтую опцыю перад тым, як паведаміць пра любую праблему.",
+        "dxvknvapi": "DXVK-NVAPI – гэта рэалізацыя NVAPI, якая была створана на аснове DXVK і натыўнага NVAPI для Linux, яна дазваляе выкарыстоўваць DLSS на GPU Nvidia.",
+        "msync": "Msync прызначаны для зніжэння нагрузкі wineserver у гульнях з высокімі патрабаваннямі да ЦП. Уключэнне можа палепшыць прадукцыйнасць у шэрагу гульняў.",
+        "dxvkfpslimit": "Усталёўвае абмежаванне частоты кадраў для гульняў DXVK"
     },
     "info": {
         "hyperplay": {
@@ -279,156 +314,162 @@
             "click-to-see-changelog": "Націсніце, каб убачыць журнал змяненняў",
             "newReleases": "Абнаўленне даступна!",
             "stable": "Стабільны",
-            "version": "HyperPlay Version"
+            "version": "Версія HyperPlay"
         },
         "save-sync": {
-            "searching": "Спроба вызначыць правільную тэчку захавання (націсніце, каб адмяніць)"
+            "searching": "Спроба знайсці правільную тэчку для захавання (націсніце, каб адмяніць)  \nСпроба выявіць правільную тэчку для захавання (націсніце, каб адмяніць)  \nСпроба ўстанавіць правільную тэчку захавання (націсніце, каб адмяніць)"
         },
-        "settings": "Налады захоўваюцца аўтаматычна",
-        "version": "Версія Wine"
+        "settings": "Налады захоўваюцца аўтаматычна без неабходнасці ручнога захавання",
+        "version": "Выпуск Wine"
     },
     "infobox": {
-        "help": "Даведка",
-        "requirements": "Сістэмныя патрабаванні",
-        "warning": "Папярэджанне",
-        "wine-path": "Шлях Wine",
+        "help": "Падтрымка",
+        "requirements": "Патрабаванні да сістэмы",
+        "warning": "Сігналізацыя",
+        "wine-path": "Маршрут Wine",
         "wine-prefix": {
-            "title": "Прэфікс Wine"
+            "title": "Прэфікс для Wine"
         },
         "wine-repfix": {
-            "message": "Wine выкарыстоўвае тое, што называецца WINEPREFIX для інкапсуляцыі прыкладанняў Windows. Гэты прэфікс змяшчае файлы канфігурацыі Wine і прайграванне іерархіі файлаў C: (асноўнага дыска ў АС Windows). У гэтай копіі дыска C: захоўваюцца файлы захавання гульні і залежнасці, усталяваныя праз winetricks."
+            "message": "Wine выкарыстоўвае тое, што называецца WINEPREFIX, для інкапсуляцыі прыкладанняў Windows. Гэты прэфікс утрымлівае файлы канфігурацыі Wine і адлюстраванне іерархіі файлаў C: (асноўнага дыска ў Windows). У гэтым адлюстраванні дыска C: захоўваюцца файлы захавання гульні і залежнасці, усталяваныя праз winetricks.\n\nWine выкарыстоўвае WINEPREFIX для інкапсуляцыі прыкладанняў Windows. Гэты прэфікс ўключае файлы канфігурацыі Wine і копію іерархіі файлаў C: (асноўнага дыска ў Windows). У гэтай копіі дыска C: захоўваюцца файлы захавання гульні і залежнасці, усталяваныя праз winetricks.\n\nWine выкарыстоўвае WINEPREFIX для абгорткі прыкладанняў Windows. Гэты прэфікс змяшчае файлы канфігурацыі Wine і адлюстраванне структуры файлаў C: (асноўнага дыска ў Windows). У гэтым адлюстраванні дыска C: захоўваюцца файлы захавання гульні і залежнасці, усталяваныя праз winetricks."
         },
-        "wine-path-invalid": "Wine Path несапраўдны, абярыце іншы.",
-        "wine-path-none-found": "Версія Wine не знойдзена, спампуйце яе з Wine Manager"
+        "wine-path-invalid": "Шлях Wine несапраўдны, калі ласка, выберыце іншы.  \nШлях да Wine недапушчальны, выберыце іншы.  \nШлях Wine не з'яўляецца сапраўдным, калі ласка, абярыце іншы.",
+        "wine-path-none-found": "Версія Wine не знойдзена, загрузіце яе з Менеджара Сумяшчальнасці"
     },
     "install": {
-        "path": "Выберыце шлях усталявання"
+        "path": "Укажыце шлях для ўсталёўкі"
     },
     "label": {
         "loading": "Загрузка"
     },
     "library": {
-        "refresh": "Refresh Library",
+        "refresh": "Абнавіць",
         "sortAscending": "Сартаваць па ўзрастанні",
-        "sortByStatus": "Сартаваць па статусе",
+        "sortByStatus": "Сартаваць па статусе гульні",
         "sortDescending": "Сартаваць па змяншэнні",
         "toggleLayout": {
             "grid": "Пераключыцца на макет сеткі",
             "list": "Пераключыцца на макет спісу"
         },
-        "label": "Бібліятэка"
+        "label": "Бібліятэчны рэсурс",
+        "alphabeticalAZ": "Алфавітны A-Z",
+        "alphabeticalZA": "Алфавітны ад Z да A"
     },
     "loading": {
-        "default": "Загрузка",
-        "website": "Loading Website"
+        "default": "Загрузка рэсурсаў",
+        "website": "Загрузка інтэрнэт-старонкі"
     },
     "login": {
-        "alternative_method": "Альтэрнатыўны метад уваходу",
-        "epic": "Уваход у Epic Games",
-        "gog": "Уваход у GOG",
-        "message": "Увайдзіце са сваёй платформы. Вы можаце ўвайсці на больш чым адну платформу адначасова.",
+        "alternative_method": "Іншы метад аўтэнтыфікацыі",
+        "epic": "Увайдзіце ў Epic Games",
+        "gog": "Увайдзіце ў GOG",
+        "message": "Увайдзіце ў сваю платформу. Вы можаце адначасова ўвайсці на некалькі платформаў.  \nУвайдзіце з дапамогай сваёй платформы. Вы можаце выкарыстоўваць больш за адну платформу адначасова.  \nУвайдзіце ў свой акаўнт на платформе. Вы можаце быць увайшлі на некалькі платформаў адначасова.",
         "amazon": "Уваход у Amazon",
-        "old-mac": "Ваша версія macOS: {{version}}. Для ўваходу патрабуецца macOS 12 або навей."
+        "old-mac": "Ваша версія macOS: {{version}}. Для ўваходу неабходна macOS 12 або больш новая версія.  \nВаша версія macOS: {{version}}. Для ўваходу патрабуецца, каб ваша macOS была версіі 12 або вышэй.  \nВаша версія macOS: {{version}}. Для ўваходу патрэбна macOS 12 або больш новая версія."
     },
     "message": {
-        "sync": "",
-        "unsync": ""
+        "sync": "Сінхранізацыя завершана",
+        "unsync": "Сінхранізацыя завершана"
     },
     "notify": {
         "error": {
-            "move": "Error Moving the Game",
-            "reparing": "Error Repairing"
+            "move": "Не ўдалося перамясціць гульню",
+            "reparing": "Памылка пры рамонце"
         },
         "finished": {
             "add": {
                 "steam": {
-                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
-                    "title": "Added to Steam"
+                    "corrupt": "{{game}} не ўдалося дадаць усім знойдзеным карыстальнікам Steam. Дадатковую інфармацыю можна знайсці ў журналах. Перазапуск Steam неабходны для таго, каб змены ўступілі ў сілу.",
+                    "success": "{{game}} быў паспяхова дададзены ў Steam. Перазапуск Steam неабходны для актывацыі зменаў.",
+                    "title": "Дададзена на Steam"
                 }
             },
             "remove": {
                 "steam": {
-                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
-                    "title": "Removed from Steam"
+                    "corrupt": "Не ўдалося выдаліць {{game}} з усіх знойдзеных карыстальнікаў Steam. Дадатковую інфармацыю глядзіце ў журналах. Для ўступлення змяненняў у сілу неабходна перазапусціць Steam.",
+                    "success": "{{game}} быў паспяхова выдалены з Steam. Перазагрузка Steam неабходная для ўступлення змен у сілу.",
+                    "title": "Зняты з Steam"
                 }
             },
-            "reparing": ""
+            "reparing": "Рамонт завершаны"
         },
         "install": {
-            "canceled": "Усталёўка скасаваная",
-            "error": "Памылка ўсталявання",
-            "finished": "",
-            "imported": "Game Imported",
-            "startInstall": "Installation Started"
+            "canceled": "Усталёўка не завершана",
+            "error": "Усталёўка не завершана",
+            "finished": "Устаноўка завершана",
+            "imported": "Гульня перанесеная",
+            "startInstall": "Усталёўка ідзе",
+            "paused": "Усталёўка прыпынена",
+            "stopped": "Устаноўка спынена"
         },
-        "moved": "",
-        "moving": "Moving Game",
+        "moved": "Завершана перамяшчэнне",
+        "moving": "Гульня руху",
         "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
-            "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
+            "error": "Не ўдалося атрымаць версіі з upstream, магчыма, з-за абмежаванняў API Github! Паспрабуйце яшчэ раз пазней."
         },
-        "uninstalled": "Выдаліць",
+        "uninstalled": "Знята",
         "update": {
-            "canceled": "",
-            "finished": "Update Finished",
-            "started": "Update Started"
+            "canceled": "Абнаўленне адменена",
+            "finished": "Абнаўленне завершана",
+            "started": "Запуск абнаўлення",
+            "stopped": "Абнаўленне спынена",
+            "paused": "Абнаўленне прыпынена"
         }
     },
     "offline-message": {
-        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
-        "ignore": "Ignore",
-        "offline": "Offline",
-        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
-        "retrying": "Retrying"
+        "hint": "Мы правяраем злучэнне з: {{newline}}github.com, {{newline}}gog.com, {{newline}}store.epicgames.com і {{newline}}cloudflare-dns.com",
+        "ignore": "Не звяртаць увагі",
+        "offline": "Не ў сетцы",
+        "offline-retry-in": "Афлайн. Паўторная спроба праз {{seconds}} секунд.  \nАфлайн. Паўторная спроба праз {{seconds}} секунд.  \nАфлайн. Паўторная спроба праз {{seconds}} сек.",
+        "retrying": "Паўторная спроба зноў"
     },
-    "Open": "Адкрыць",
+    "Open": "Уключыць",
     "options": {
         "advanced": {
-            "key": "Variable Name",
-            "placeHolderKey": "NAME",
-            "placeHolderValue": "E.g.: Path/To/ExtraFiles",
-            "title": "Environment Variables",
-            "value": "Value"
+            "key": "Назва пераменнай",
+            "placeHolderKey": "ІМЯ карыстальніка",
+            "placeHolderValue": "Напрыклад: Шлях/Да/ДадатковыхФайлаў",
+            "title": "Зменныя асяроддзя сістэмы",
+            "value": "Вартасць"
         },
         "env_variables": {
             "error": {
-                "empty_key": "Variable names can't be empty",
-                "equal_sign_in_key": "Variable names can't contain the \"=\" sign",
-                "space_in_key": "Variable names can't contain spaces"
+                "empty_key": "Зменныя не могуць мець пустыя імёны",
+                "equal_sign_in_key": "Імёны зменных не могуць утрымліваць знак \"=\"  \nІмёны зменных не павінны ўключаць знак \"=\"  \nЗнак \"=\" не можа быць у імёнах зменных",
+                "space_in_key": "Імёны зменных не могуць утрымліваць прабелы  \nІмёны зменных не павінны ўключаць прабелы  \nЗменныя не могуць мець прабелы ў сваіх назвах"
             },
-            "example": "Do NOT include the \"=\" sign, e.g: for a setting like \"MY_FLAG=123\", set MY_FLAG in NAME and 123 in VALUE.",
-            "info": "Set environment variables to append to the command."
+            "example": "Не ўключай знак \"=\" , напрыклад: для налады, як \"MY_FLAG=123\", усталюй MY_FLAG у ІМЯ і 123 у ЗНАЧЭННІ.  \nНе ўключай знак \"=\" , напрыклад: для налады, як \"MY_FLAG=123\", устань MY_FLAG у ІМЯ і 123 у ЗНАЧЭННІ.  \nНе ўключай знак \"=\" , напрыклад: для налады \"MY_FLAG=123\", задай MY_FLAG у ІМЯ і 123 у ЗНАЧЭННІ.",
+            "info": "Усталюйце зменныя асяроддзя, каб дадаць іх да каманды."
         },
         "gameargs": {
-            "placeholder": "",
-            "title": "Select EXE to Run"
+            "placeholder": "Увядзіце аргументы запуску",
+            "title": "Выберыце EXE для старта"
         },
-        "quote-args-with-spaces": "Warning: Make sure to quote args with spaces! E.g.: \"path/with spaces/\"",
+        "quote-args-with-spaces": "Увага: Пераканайцеся, што аргументы з прабеламі цытуюцца! Напрыклад: \"path/with spaces/\"",
         "wrapper": {
-            "args": "Arguments",
-            "arguments_example": "Arguments example: --arg; --extra-file=\"file-path/ with/spaces\"",
-            "exe": "Wrapper",
-            "placeHolderKey": "New Wrapper",
-            "placeHolderValue": "Wrapper Arguments",
-            "title": "Wrapper command:"
+            "args": "Дыскусійныя пункты",
+            "arguments_example": "Прыклад аргументаў: --arg; --extra-file=\"шлях/да/файла/ з/прабеламі\"  \nПрыклад аргументаў: --arg; --extra-file=\"шлях/да/файла/ з/прабеламі\"  \nПрыклад аргументаў: --arg; --extra-file=\"шлях/да/файла/ з/прабеламі\"",
+            "exe": "Упакоўка",
+            "placeHolderKey": "Новы пакувальны матэрыял",
+            "placeHolderValue": "Параметры абгорткі",
+            "title": "Каманда для абгорткі:"
         }
     },
     "other": {
         "gogdl-version": "Версія GOGDL: ",
-        "legendary-version": "Версія Legendary: ",
-        "weblate": "Help Improve this translation.",
+        "legendary-version": "Версія Легендарнага: ",
+        "weblate": "Памажыце ўдасканаліць гэты пераклад.",
         "nile-version": "Версія Ніла: "
     },
-    "Other": "Other",
+    "Other": "Іншыя",
     "placeholder": {
-        "alt-gogdl-bin": "Выкарыстанне ўбудаванага двайковага файла GOGDL...",
-        "alt-legendary-bin": "Выкарыстанне ўбудаванага двайковага файла Legendary...",
-        "custom_themes_path": "Выберыце шлях для пошуку карыстальніцкіх файлаў CSS",
-        "dxvkfpsvalue": "Цэлы станоўчы лік (напр. 30, 60, ...)",
-        "egs-prefix": "Прэфікс, дзе ўсталяваны EGS",
-        "prefered_language": "2-значны код (напрыклад: \"en\" ці \"fr\")",
+        "alt-gogdl-bin": "Выкарыстанне ўбудаванага бінарнага файла GOGDL...  \nУжыванне ўбудаванага бінарнага файла GOGDL...  \nЗастосаванне ўбудаванага двайковага файла GOGDL...",
+        "alt-legendary-bin": "Выкарыстанне ўбудаванага бінарнага файла Legendary...  \nВыкарыстанне ўбудаванага бінарніка Legendary...  \nУжыванне ўбудаванага двайковага файла Legendary...",
+        "custom_themes_path": "Выберыце шлях для доступу да карыстальніцкіх файлаў CSS",
+        "dxvkfpsvalue": "Станоўчае цэлае лік (напрыклад, 30, 60, ...)  \nСтаноўчы цэлы лік (напрыклад, 30, 60, ...)  \nПазітыўнае цэлае значэнне (напрыклад, 30, 60, ...)",
+        "egs-prefix": "Прэфікс, у якім знаходзіцца EGS",
+        "prefered_language": "2-літарны код (напрыклад: \"en\" або \"fr\")  \n2-літарны код (г.зн.: \"en\" або \"fr\")  \n2-значны код (напрыклад: \"en\" або \"fr\")",
         "alt-nile-bin": "Выкарыстоўваючы ўбудаваны двайковы файл Nile..."
     },
     "platforms": {
@@ -436,339 +477,662 @@
         "mac": "",
         "win": ""
     },
-    "please-wait": "Please wait...",
-    "progress": "Progress",
+    "please-wait": "Калі ласка, пачакайце...  \nКалі ласка, застаньцеся на лініі...  \nКалі ласка, не адлучайцеся...",
+    "progress": "Прасоўванне",
     "queue": {
         "label": {
-            "canceled": "Canceled",
-            "clear": "Clear List",
+            "canceled": "Спынена",
+            "clear": "Ачысціць пералік",
             "downloading": "Downloading",
             "empty": {
-                "queue": "Nothing to download"
+                "queue": "Нічога не патрабуецца для загрузкі",
+                "finished": "Нічога не загружана"
             },
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads",
-            "pause": "Прыпыніць загрузку"
+            "remove": "Аднавіць з загрузак",
+            "pause": "Паўзаваць загрузку",
+            "resume": "Працягнуць загрузку"
         }
     },
-    "Recent": "Played Recently",
-    "search": "",
+    "Recent": "Нядаўна гулялі",
+    "search": "Пошук гульняў",
     "setting": {
-        "adddesktopshortcuts": "Add desktop shortcuts automatically",
-        "addgamestostartmenu": "Add games to start menu automatically",
-        "addgamestosteam": "Add games to Steam automatically",
-        "alt-gogdl-bin": "Choose an Alternative GOGDL Binary to use (needs restart)",
-        "alt-legendary-bin": "Choose an Alternative Legendary Binary  (needs restart)to use",
-        "autodxvk": "Auto Install/Update DXVK on Prefix",
-        "autosync": "",
-        "autovkd3d": "Auto Install/Update VKD3D on Prefix",
-        "change-target-exe": "Select an alternative EXE to run",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover/Wine Version",
-        "custom_themes_path": "Custom Themes Path",
-        "customWineProton": "Custom Wine/Proton Paths",
-        "darktray": "Use Dark Tray Icon (needs restart)",
-        "default-install-path": "",
-        "default-steam-path": "Default Steam path",
-        "defaultWinePrefix": "Set Folder for new Wine Prefixes",
-        "disable_controller": "Disable HyperPlay navigation using controller",
-        "discordRPC": "Enable Discord Rich Presence",
-        "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
-        "egs-sync": "",
-        "enableFSRHack": "Enable FSR Hack (Wine version needs to support it)",
+        "adddesktopshortcuts": "Аўтаматычна дадаваць ярлыкі на дэсктоп",
+        "addgamestostartmenu": "Дадаваць гульні ў меню запуску аўтаматычна",
+        "addgamestosteam": "Аўтаматычнае дадаванне гульняў у Steam",
+        "alt-gogdl-bin": "Выберыце іншы бінар GOGDL для выкарыстання (неабходна перазагрузка)",
+        "alt-legendary-bin": "Выберыце іншы легендарны бінар (патрэбна перазагрузка) для выкарыстання",
+        "autodxvk": "Аўтаматычная ўстаноўка і абнаўленне DXVK на прэфіксе",
+        "autosync": "Аўтасінхранізацыя захаванняў",
+        "autovkd3d": "Аўтаматычная ўстаноўка і абнаўленне VKD3D на Prefix",
+        "change-target-exe": "Выберыце заменны EXE для запуску",
+        "checkForUpdatesOnStartup": "Аўтаматычная праверка абнаўленняў HyperPlay пры запуску",
+        "crossover-version": "Версія Crossover/Wine",
+        "custom_themes_path": "Папка з карыстальніцкімі тэмамі",
+        "customWineProton": "Настройвальныя шляхі Wine/Proton",
+        "darktray": "Ужыць цёмны значок у сістэмным трэі",
+        "default-install-path": "Шлях усталёўкі па змаўчанні",
+        "default-steam-path": "Асноўны шлях Steam",
+        "defaultWinePrefix": "Вызначце тэчку для новых прэфіксаў Wine",
+        "disable_controller": "Адключыць навігацыю Hyperplay з дапамогай кантролера",
+        "discordRPC": "Актываваць багатае прысутнасць Discord",
+        "download-no-https": "Спампуйце гульні без HTTPS (карысна для CDN, напрыклад, LanCache)  \nСпампуйце гульні без выкарыстання HTTPS (зручна для CDN, напрыклад, LanCache)  \nЗагружайце гульні без HTTPS (карысна для CDN, такіх як LanCache)",
+        "egs-sync": "Сінхранізацыя з усталяванымі Epic Games",
+        "enableFSRHack": "Актываваць FSR Hack (версія Wine павінна быць сумяшчальнай)",
         "eosOverlay": {
-            "cancelInstall": "Cancel",
-            "checkForUpdates": "Check for updates",
-            "checkingForUpdates": "Checking for updates...",
-            "currentVersion": "Current Version: {{version}}",
-            "disable": "Disable",
-            "enable": "Enable",
-            "install": "Install",
-            "installed": "The Epic Overlay is installed",
-            "installing": "The Epic Overlay is being installed...",
-            "latestVersion": "Latest Version: {{version}}",
-            "notInstalled": "The Epic Overlay is not installed",
-            "notInstalledMsg": "The Epic Overlay is not installed. Do you want to install it now?",
-            "notInstalledTitle": "Overlay not installed",
-            "remove": "Uninstall",
-            "removeConfirm": "Are you sure you want to uninstall the Epic Overlay?",
-            "removeConfirmTitle": "Confirm overlay removal",
-            "updateNow": "Update",
-            "updating": "Updating..."
+            "cancelInstall": "Спыніць",
+            "checkForUpdates": "Праверыць абнаўленні",
+            "checkingForUpdates": "Аднаўленне абнаўленняў...",
+            "currentVersion": "Актуальная версія: {{version}}  \nАктуальная версія: {{version}}  \nЦя версія: {{version}}",
+            "disable": "Забараніць",
+            "enable": "Уключыць функцыю",
+            "install": "Усталяваць праграму",
+            "installed": "Эпічны накладка ўсталявана",
+            "installing": "Усталёўка Epic Overlay завершана...",
+            "latestVersion": "Актуальная версія: {{version}}",
+            "notInstalled": "Эпічны наклад не інсталіраваны",
+            "notInstalledMsg": "Эпічны наклад не ўстаноўлены. Вы хочаце ўсталяваць яго зараз?  \nЭпічны наклад не ўсталяваны. Вы жадаеце ўсталяваць яго цяпер?  \nЭпічны наклад не ўстаноўлены. Ці хочаце вы ўсталяваць яго зараз?",
+            "notInstalledTitle": "Накладка не была ўсталявана",
+            "remove": "Зняць",
+            "removeConfirm": "Вы сапраўды ўпэўненыя, што хочаце выдаліць Epic Overlay?",
+            "removeConfirmTitle": "Пацвердзіце ліквідацыю накладкі",
+            "updateNow": "Абнаўляць",
+            "updating": "Абнаўляецца..."
         },
-        "esync": "Enable Esync",
-        "exit-to-tray": "",
-        "FsrSharpnessStrenght": "FSR Sharpness Strength",
-        "fsync": "Enable Fsync",
-        "gamemode": "",
-        "language": "Choose App Language",
+        "esync": "Увімкнуць Esync",
+        "exit-to-tray": "Выйсці ў сістэмны трей",
+        "FsrSharpnessStrenght": "Рэзкасць FSR",
+        "fsync": "Актываваць Fsync",
+        "gamemode": "Выкарыстоўвайце GameMode (Feral Game Mode трэба ўсталяваць)",
+        "language": "Выберыце мову для прыкладання",
         "library_top_option": {
-            "disabled": "Disabled",
-            "favourites": "Favourite Games",
-            "recently_played": "Recently Played Games",
-            "recently_played_installed": "Recently Played Games (Only Installed)"
+            "disabled": "Заблакаваная",
+            "favourites": "Найлепшыя гульні",
+            "recently_played": "Нядаўнія гульні",
+            "recently_played_installed": "Нядаўна гулялі гульні (толькі ўсталяваныя)  \nНядаўна прайграныя гульні (толькі ўсталяваныя)  \nГульні, якія нядаўна гулялі (толькі ўсталяваныя)"
         },
-        "library_top_section": "Library Top Section",
+        "library_top_section": "Секцыя бібліятэкі ў верхняй частцы",
         "log": {
-            "copy-to-clipboard": "Copy log content to clipboard.",
+            "copy-to-clipboard": "Капіруйце змест запісу ў буфер абмену",
             "current-log": "Current log",
             "instructions": "If you encounter any issues while using HyperPlay, we have two designated areas to report your issues in our Discord Server. If you're a player, please report any problems by visiting the player-support-forum. If you are a game dev, please report any problems by visiting the dev-support-forum.{{newLine}} {{newLine}} To help us diagnose and fix the problem as quickly as possible, please provide as much information as possible, including a copy of your logs. Our support team will monitor both channels and do their best to respond to your issue as quickly as possible. Thank you for your patience and understanding while we work to resolve any problems you may encounter.{{newLine}}",
-            "instructions_title": "How to report a problem?",
+            "instructions_title": "Як паведаміць пра непаладку?",
             "last-log": "Last Log",
-            "no-file": "No log file found.",
-            "show-in-folder": "Show log file in folder"
+            "no-file": "Не знойдзены файлы журнала",
+            "show-in-folder": "Паказаць файл журнала ў папцы",
+            "join-hyperplay-discord": "Далучайцеся да нашага Discord",
+            "instructions-part-02": "Каб дапамагчы нам дыягнаставаць і выправіць праблему як мага хутчэй, калі ласка, прадастаўце як мага больш інфармацыі, уключаючы копію вашых журналаў. Наша каманда падтрымкі будзе сачыць за абодвума каналамі і зробіць усё магчымае, каб адказаць на вашу праблему як мага хутчэй. Дзякуй за ваша цярплівасць і разуменне, пакуль мы працуем над вырашэннем любых праблем, з якімі вы можаце сутыкнуцца.",
+            "instructions-part-01": "Калі вы сутыкнуліся з праблемамі падчас выкарыстання HyperPlay, у нас ёсць дзве спецыяльныя зоны для паведамлення пра вашыя праблемы на нашым Discord-серверы. Калі вы гульняр, калі ласка, паведамляйце пра любыя праблемы, наведаўшы форум падтрымкі гульцоў. Калі вы распрацоўшчык гульняў, калі ласка, паведамляйце пра любыя праблемы, наведаўшы форум падтрымкі распрацоўшчыкаў."
         },
-        "mangohud": "",
+        "mangohud": "Уключыць Mangohud (Mangohud трэба ўсталяваць)",
         "manualsync": {
-            "download": "Спампаваць",
-            "forcedownload": "",
-            "forceupload": "",
-            "sync": "Сінхранізаваць",
-            "syncing": "",
-            "title": "Select EXE to Run",
-            "upload": "Запампаваць"
+            "download": "Спампуйце",
+            "forcedownload": "Прымусовае спампоўванне",
+            "forceupload": "Сілуйце загрузку",
+            "sync": "Сінхронізацыя",
+            "syncing": "Сінхранізацыя",
+            "title": "Уручную сінхранізуйце захаванні",
+            "upload": "Загрузіць дадзеныя"
         },
-        "maxRecentGames": "Recent Games to Show",
-        "maxworkers": "",
-        "minimize-on-launch": "Minimize HyperPlay After Game Launch",
-        "offlinemode": "",
-        "prefered_language": "Prefered Language (Language Code)",
-        "preferSystemLibs": "Prefer system libraries",
+        "maxRecentGames": "Гульні, якія былі сыграны нядаўна для дэманстрацыі",
+        "maxworkers": "Максімальная колькасць работнікаў пры загрузцы",
+        "minimize-on-launch": "Зменшыць HyperPlay пасля таго, як гульня запусціцца",
+        "offlinemode": "Запусціць гульню ў аўтаномным рэжыме",
+        "prefered_language": "Пераважная мова (Код мовы)  \nПераважная мова (Код мовы)  \nПераважаная мова (Код мовы)",
+        "preferSystemLibs": "Выбірайце сістэмныя бібліятэкі",
         "primerun": {
             "confirmation": {
-                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
-                "title": "Only 1 GPU detected"
+                "message": "У гэтай сістэме была выяўлена толькі адна відэакарта. Звярніце ўвагу, што гэты параметр прызначаны для сістэм з некалькімі GPU з безгалоўнымі GPU (як ноўтбукі). У сістэмах з адной GPU яна выкарыстоўваецца аўтаматычна, і ўключэнне гэтага параметра можа выклікаць праблемы. Ці сапраўды вы хочаце ўключыць гэты параметр?\n\nУ гэтай сістэме выяўлена толькі адна графічная карта. Звярніце ўвагу, што гэты варыянт прызначаны для сістэм з некалькімі GPU з безгалоўнымі GPU (напрыклад, ноўтбукі). У аднаграфічных сістэмах GPU выкарыстоўваецца аўтаматычна, і актывацыя гэтага параметра можа прывесці да праблем. Ці сапраўды вы хочаце актываваць гэты параметр?\n\nУ гэтай сістэме была знойдзена толькі адна графічная карта. Звярніце ўвагу, што гэты параметр прызначаны для сістэм з некалькімі GPU, якія маюць безгалоўныя GPU (як ноўтбукі). У аднаграфічных сістэмах GPU выкарыстоўваецца аўтаматычна, і актывацыя гэтага параметра можа выклікаць праблемы. Ці сапраўды вы хочаце актываваць гэты параметр?",
+                "title": "Адна GPU выяўлена"
             },
-            "description": "Use Dedicated Graphics Card"
+            "description": "Карыстайцеся адзіночнай графічнай картай"
         },
         "runexe": {
-            "message": "",
-            "title": "Select EXE to Run"
+            "message": "Перацягніце і адпусціце файлы сюды",
+            "title": "Запусціце EXE ў Prefix"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually (click to retry)",
-            "placeholder": "Выберыце дакладную тэчку захавання гульняў",
-            "warning": "Please check twice if the path is correct (click to retry)"
+            "not-found": "Папка для захавання не знойдзена, калі ласка, выберыце яе ўручную (націсніце, каб паспрабаваць зноў)  \nПапка для захавання не знойдзена, калі ласка, выберыце яе ўручную (націсніце, каб паўтарыць)  \nНе ўдалося знайсці папку для захавання, калі ласка, выберыце яе ўручную (націсніце, каб паспрабаваць яшчэ раз)",
+            "placeholder": "Выберыце патрэбную папку для захавання гульняў",
+            "warning": "Калі ласка, праверце шлях двойчы, каб пераканацца, што ён правільны (націсніце, каб паспрабаваць яшчэ раз)  \nКалі ласка, два разы праверце, ці правільны шлях (націсніце, каб паўтарыць)  \nКалі ласка, праверце шлях два разы, каб упэўніцца ў яго правільнасці (націсніце, каб паспрабаваць зноў)"
         },
-        "select_theme": "Выберыце тэму",
-        "showfps": "Паказаць FPS (DX9, 10 і 11)",
-        "start-in-tray": "Пачаць у згорнутым выглядзе",
-        "steamruntime": "Выкарыстоўвайце Steam Runtime",
-        "winecrossoverbottle": "Бутэлька CrossOver",
-        "wineprefix": "Тэчка WinePrefix",
-        "wineversion": "Версія Wine",
-        "autoUpdateGames": "Аўтаматычнае абнаўленне гульняў",
-        "ignoreGameUpdates": "Ігнараваць абнаўленні гульні",
-        "disable_logs": "Адключыць часопісы",
-        "addgamestoapplications": "Дадавайце гульні ў праграмы аўтаматычна",
-        "showMetalOverlay": "Паказаць накладанне статыстыкі",
+        "select_theme": "Выберыце стыль",
+        "showfps": "Паказаць FPS (DX9, 10 і 11)  \nАдлюстраваць FPS (DX9, 10 і 11)  \nДэманстраваць FPS (DX9, 10 і 11)",
+        "start-in-tray": "Запусціць у згорнутым выглядзе",
+        "steamruntime": "Ужывайце Steam Runtime",
+        "winecrossoverbottle": "Контэйнер CrossOver",
+        "wineprefix": "Папка WinePrefix",
+        "wineversion": "Выпуск Wine",
+        "autoUpdateGames": "Аўтаматычнае абнаўленне гульнявых праграм",
+        "ignoreGameUpdates": "Прапусціць абнаўленні гульні",
+        "disable_logs": "Забараніць запісы",
+        "addgamestoapplications": "Аўтаматычна дадаваць гульні ў прыкладанні",
+        "showMetalOverlay": "Адлюстраваць накладку з данымі",
         "alt-nile-bin": "Выберыце альтэрнатыўны двайковы файл Nile",
-        "autodxvknvapi": "Auto Install/Update DXVK on Prefix",
-        "msync": "Enable Esync"
+        "autodxvknvapi": "Аўтаматычная ўстаноўка/абнаўленне DXVK-NVAPI ў Prefix",
+        "msync": "Уключыць Msync",
+        "dxvkfpslimit": "Абмежаваць FPS (DX9, 10 і 11)",
+        "autoLaunchHyperPlay": "Аўтаматычны запуск HyperPlay",
+        "steamId": "ID Steam"
     },
     "settings": {
         "battlEyeRuntime": {
-            "installing": "Installing BattlEye Runtime...",
-            "name": "BattlEye AntiCheat Runtime"
+            "installing": "Усталёўка модуля BattlEye Runtime...",
+            "name": "Рэжым БэтлАй для антычытынгу"
         },
-        "clear-cache": "Clear HyperPlay Cache",
-        "copiedToClipboard": "Copied to Clipboard!",
-        "copyToClipboard": "Copy All Settings to Clipboard",
-        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
+        "clear-cache": "Ачысціць кэш платформы HyperPlay",
+        "copiedToClipboard": "Скапіравана ў крыпта-буфер!",
+        "copyToClipboard": "Капіяваць усе налады ў буфер абмену",
+        "default_hint": "Змены ў гэтым раздзеле будуць прымяняцца толькі як значэнні па змаўчанні пры ўсталёўцы гульняў. Калі вы хочаце змяніць налады гульні, якая ўжо ўсталявана, скарыстайцеся кнопкай Налады на старонцы гульні.",
         "eacRuntime": {
             "gameModeRequired": {
-                "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
-                "title": "GameMode required"
+                "message": "Для працы EAC runtime на Flatpak неабходны GameMode. Вы хочаце ўключыць яго цяпер?",
+                "title": "Рэжым гульні абавязковы"
             },
-            "installing": "Installing EAC Runtime...",
-            "name": "EasyAntiCheat Runtime"
+            "installing": "Усталёўка EAC Runtime пачалася...",
+            "name": "EasyAntiCheat у часе выканання"
         },
         "gameMode": {
             "eacRuntimeEnabled": {
-                "message": "The EAC runtime is enabled, which won't function correctly without GameMode. Do you want to disable the EAC Runtime and GameMode?",
-                "title": "EAC runtime enabled"
+                "message": "EAC Runtime ўключаны, але без GameMode ён не будзе працаваць карэктна. Вы хочаце адключыць EAC Runtime і GameMode?",
+                "title": "Уключаны EAC-runtime"
             }
         },
         "log": {
-            "long-log-hint": "Log truncated, last 1000 lines are shown!"
+            "long-log-hint": "Лог скарачаны, паказаны апошнія 1000 радкоў!  \nЛог абрэзаны, адлюстраваны апошнія 1000 радкоў!  \nЛог скарачаны, паказваюцца толькі апошнія 1000 радкоў!"
         },
         "navbar": {
-            "advanced": "Advanced",
+            "advanced": "Развіты",
             "games_settings_defaults": "Game Defaults",
-            "general": "Генерал",
-            "log": "Log",
-            "other": "Іншае",
-            "sync": "",
+            "general": "Асноўны",
+            "log": "Лаг",
+            "other": "Іншыя варыянты",
+            "sync": "Сінхранізацыя аблачных захаванняў",
             "wineExt": "Wine Extensions",
-            "accounts": "Уліковыя запісы"
+            "accounts": "Рахункі",
+            "systemInformation": "Сістэмная інфармацыя"
         },
-        "open-config-file": "Open Config File",
-        "reset-hyperplay": "Reset HyperPlay",
+        "open-config-file": "Адкрыйце файл канфігурацыі гульні",
+        "reset-hyperplay": "Перазапусціць HyperPlay",
         "saves": {
             "label": "Save Location:",
-            "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+            "warning": "Функцыя аблокавых захаванняў знаходзіцца ў бэта-версіі, калі ласка, зрабіце рэзервовую копію вашых захаванняў перад сінхранізацыяй (на выпадак, калі нешта пойдзе не так)  \nФункцыя захаванняў у аблоках у бэта-версіі, калі ласка, зрабіце рэзервовую копію вашых захаванняў перад сінхранізацыяй (на выпадак, калі нешта пойдзе не так)  \nФункцыя захаванняў у воблаку знаходзіцца ў бэта-тэставанні, калі ласка, зрабіце рэзервовую копію вашых захаванняў перад сінхранізацыяй (на выпадак, калі нешта пойдзе не так)"
         },
         "systemInformation": {
-            "copyToClipboard": "Скапіявана у буфер абмену",
-            "memory": "Памяць"
+            "copyToClipboard": "Скапіравана ў буфер абмену  \nСкапіравана ў кліпборд  \nСкапіравана ў буфер",
+            "memory": "Памяць аб'екта",
+            "steamDeck": "Steam Deck",
+            "gpu": "ГПУ:",
+            "gpuWithNumber": "GPU {{number}}:",
+            "osVersion": "Версія {{versionNumber}}",
+            "gpuDriver": "Драйвер: {{driverVersion}}",
+            "os": "Аперацыйная сістэма:",
+            "osNameFlatpak": "{{osName}} (унутры Flatpak)",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "legendaryVersion": "Легендарны: {{legendaryVersion}}",
+            "cpu": "ЦП:",
+            "memoryStats": "{{percentUsed}}% выкарыстана ({{usedGib}} / {{totalGib}}",
+            "showDetailed": "Пакажыце падрабязныя сістэмныя характарыстыкі",
+            "systemModel": "Мадэль сістэмы:",
+            "version": "Версія: {{appVersion}}"
         },
-        "gamesSettings": "Game settings",
+        "gamesSettings": "Параметры гульні",
         "wine": {
             "manager": {
-                "title": "Wine Manager (Beta)"
+                "title": "Кіраванне Wine"
             }
-        }
+        },
+        "reset-extension": "Скінуць пашырэнне"
     },
-    "Settings": "Налады",
+    "Settings": "Канфігурацыя",
     "sidebar": {
         "collapse": "Collapse sidebar",
         "uncollapse": "Uncollapse sidebar",
-        "store": "Крама",
-        "library": "Бібліятэка"
+        "store": "Аналітыка адключана",
+        "library": "Бібліятэчны рэсурс",
+        "achievements": "Дасягненні",
+        "downloadManager": "Менеджар загрузак"
     },
     "status": {
-        "installing": "Ўстаноўка",
-        "logging": "Уваход...",
-        "processing": "Апрацоўка файлаў, пачакайце",
+        "installing": "Устаноўка праграмы",
+        "logging": "Аўтарызацыя...",
+        "processing": "Файлы апрацоўваюцца, чакайце, калі ласка",
         "preparing_login": "Падрыхтоўка ўваходу... "
     },
-    "store": "Epic Store",
+    "store": "Эпік Магазін",
     "stores": "Stores",
     "title": {
-        "allGames": "All Games"
+        "allGames": "Усе гульні"
     },
     "toolbox": {
         "settings": {
-            "default-wineprefix": "Select the default prefix folder for new configs",
-            "wineprefix": "Select a Folder for new Wine Prefixes"
+            "default-wineprefix": "Абрэніце стандартную папку прэфікса для новых налад",
+            "wineprefix": "Абрэніце тэчку для стварэння новых прэфіксаў Wine"
         }
     },
     "tooltip": {
-        "addpath": "Add New Path",
-        "removepath": "Remove Path"
+        "addpath": "Стварыць новы шлях",
+        "removepath": "Аднавіць шлях"
     },
     "tray": {
-        "about": "About",
-        "quit": "Quit",
-        "reload": "Reload",
-        "show": "Паказаць"
+        "about": "Інфармацыя",
+        "quit": "Скасаваць",
+        "reload": "Зноў загрузіць",
+        "show": "Адлюстраваць"
     },
     "two_col_table": {
-        "save_hint": "Changes in this table are not saved automatically. Click the + button"
+        "save_hint": "Змены ў гэтай табліцы не захоўваюцца самастойна. Націсніце на кнопку +"
     },
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
-        "logging_out": "Logging out",
-        "logout": "Logout",
-        "logout_confirmation": "Вы ўпэўнены, што хочаце выйсці?",
-        "manageaccounts": "Manage Accounts",
-        "quit": "Quit",
-        "logIn": "Увайсці"
+        "logging_out": "Выход з уліковага запісу",
+        "logout": "Завяршыць сесію",
+        "logout_confirmation": "Вы сапраўды ўпэўнены, што хочаце выйсці?  \nВы ўпэўнены, што жадаеце выйсці?  \nЦі сапраўды вы хочаце выйсці?",
+        "manageaccounts": "Кіраванне акаўнтамі",
+        "quit": "Спыніць",
+        "logIn": "Аўтарызацыя",
+        "manageStore": "Кіраванне крамамі"
     },
     "webview": {
         "controls": {
-            "back": "Назад",
-            "forward": "Ісці наперад",
-            "openInBrowser": "Адкрыць ў браўзеры",
-            "reload": ""
+            "back": "Схавайцеся назад",
+            "forward": "Перайсці наперад",
+            "openInBrowser": "Запусціць у браўзеры",
+            "reload": "Аднавіць старонку"
         }
     },
     "wine": {
-        "actions": "Action",
+        "actions": "Учыненне",
         "manager": {
             "link": "Менеджэр Wine",
-            "not-found": "Версіі Wine не знойдзены. Націсніце на значок абнаўлення, каб паўтарыць спробу.",
-            "title": "Менеджэр Wine",
-            "unzipping": "Распакоўка"
+            "not-found": "Версіі Wine не былі знойдзены. Націсніце на значок абнаўлення, каб паспрабаваць яшчэ раз.  \nВерсіі Wine не адшуканы. Націсніце на значок абнаўлення, каб зрабіць спробу зноў.  \nНе знойдзена версій Wine. Націсніце на значок абнаўлення, каб паўтарыць спробу.",
+            "title": "Сумяшчальніцкая платформа ",
+            "unzipping": "Дэкампрэсія"
         },
-        "release": "Release Date",
-        "size": "Памер"
+        "release": "Дата выхаду",
+        "size": "Памер элемента"
     },
     "externalLink": {
-        "dontAskAgain": "Больш не пытайся",
-        "warning": "Вы збіраецеся адкрыць знешнюю спасылку."
+        "dontAskAgain": "Не задавай пытанняў зноў",
+        "warning": "Вы збіраецеся адкрыць знешні спасылку.  \nВы гатовыя адкрыць знешнюю спасылку.  \nВы плануеце адкрыць знешнюю спасылку."
     },
     "wiki_info": {
-        "not_found": "Мы не змаглі знайсці дадатковую інфармацыю."
+        "not_found": "Мы не змаглі адшукаць дадатковую інфармацыю."
     },
     "dlc": {
-        "actions": "Дзеянні",
-        "size": "Памер",
-        "title": "Назва",
-        "installDlcs": "Усталюйце ўсе DLC",
-        "noDlcFound": "DLC не знойдзены"
+        "actions": "Дзеянні персанажа",
+        "size": "Формат",
+        "title": "Назва прыкладання",
+        "installDlcs": "Усталюйце ўсе DLC-дапаўненні",
+        "noDlcFound": "DLC не знойдзены  \nDLC адсутнічаюць  \nDLC не былі знойдзены"
     },
     "amazon": "Amazon",
     "prime-gaming": "Prime Gaming",
     "Amazon Games": "Гульні Amazon",
     "hyperplay": {
-        "turnAnalyticsOff": "Выключыць",
-        "turnAnalyticsOn": "Уключыць",
+        "turnAnalyticsOff": "Спыніць",
+        "turnAnalyticsOn": "Актываваць",
         "onboarding": {
-            "terms": "Умовы абслугоўвання",
+            "terms": "Умовы сэрвісу",
             "walletSelection": {
                 "screens": {
                     "import": {
-                        "learnMore": "Даведацца больш"
+                        "learnMore": "Даведайцеся больш.  \nДаведайцеся больш падрабязна.  \nАтрымайце больш інфармацыі.",
+                        "useRecoveryPhraseInfo": "Гэтая функцыя рэкамендуецца для дасведчаных карыстальнікаў і распрацоўшчыкаў. Ваша сакрэтная фраза аднаўлення захоўваецца лакальна ў MetaMask і ніколі не дзяліцца з HyperPlay.",
+                        "cantFindProfile": "Не магу знайсці ваш профіль браўзера?",
+                        "details": "Браўзеры ніжэй ужо маюць усталяваны MetaMask. Выберыце той, з якога вы хацелі б імпартаваць.",
+                        "orWord": "АБО",
+                        "createNewWallet": "Стварыць новы кашалёк MM",
+                        "title": "Выберыце браўзер для імпарту",
+                        "useRecoveryPhrase": "Імпарт з дапамогай сакрэтнай фразы аднаўлення"
                     },
                     "info": {
-                        "skip": "Пакуль прапусціць"
+                        "skip": "Пакуль не займацца",
+                        "digitalAssets": {
+                            "title": "Дом для вашых лічбавых актываў",
+                            "details": "Гаманцы выкарыстоўваюцца для адпраўкі, атрымання, захоўвання і адлюстравання лічбавых актываў, такіх як токены і NFT."
+                        },
+                        "login": {
+                            "title": "Новы спосаб уваходу",
+                            "details": "Альтэрнатыва стварэнню новых уліковых запісаў і пароляў на кожным сайце - проста падключыце свой кашалёк."
+                        },
+                        "createWalletCTA": "Стварыць кашалёк",
+                        "title": "Што такое кашалёк?",
+                        "createWalletDescription": "Націсніце \"Стварыць кашалёк\" ніжэй, калі ў вас няма кашалька або вы хочаце стварыць новы:"
+                    },
+                    "scan": {
+                        "details": "Стварыце зашыфраваны канал сувязі. Вашы ключы ніколі не будуць падзелены з HyperPlay.",
+                        "dontHaveWallet": "Не маеце кашалька?",
+                        "getMetamask": "Атрымаць MetaMask",
+                        "title": "Скануйце QR з ",
+                        "updateWarning": "Проблемы? Пераканайцеся, што MetaMask абноўлены."
                     }
-                }
-            }
+                },
+                "pleaseConnect": "Калі ласка, падключыце свой кашалёк або загрузіце мабільны дадатак Metamask, каб пачаць:",
+                "title": "Злучэнні кашалька"
+            },
+            "analytics": {
+                "neverCollectIP": " збірайце свой поўны IP-адрас;",
+                "neverCollectPersonal": " збірайце ключы, адрасы, балансы, хэшы або любую асабістую інфармацыю;",
+                "neverSellData": " прадавайце дадзеныя для атрымання прыбытку. Ніколі!",
+                "optOut": "Заўсёды дазваляйце адмовіцца праз Налады;",
+                "privacyPolicyHere": "Палітыка канфідэнцыяльнасці тут.",
+                "privacyCaption": "Гэтыя дадзеныя агрэгуюцца і таму з'яўляюцца ананімнымі ў адпаведнасці з Агульным рэгламентам аб абароне дадзеных (ЕС) 2016/679. Для атрымання дадатковай інфармацыі адносна нашых практык у галіне прыватнасці, калі ласка, азнаёмцеся з нашай ",
+                "body": "HyperPlay хацела б сабраць дадзеныя аб выкарыстанні, каб лепш зразумець, як нашы карыстальнікі ўзаемадзейнічаюць з прыкладаннем. Гэтыя звесткі дапамагаюць нам зразумець, як вы карыстаецеся прыкладаннем, і дазваляюць зрабіць HyperPlay яшчэ лепшым для вас.",
+                "title": "Дапамажыце нам палепшыць HyperPlay!",
+                "anonymized": "Адправіць анонімны клік і ўзаемадзеянне з гульнёй;",
+                "hyperplayWill": "HyperPlay будзе:"
+            },
+            "connectionCanceled": {
+                "description": "Калі ласка, пацвердзіце запыт на злучэнне ў вашым мабільным кашальку, каб працягнуць.",
+                "title": "Злучэнне адменена!"
+            },
+            "welcome": {
+                "text": {
+                    "bugs": "Калі ласка, звярніце ўвагу, што HyperPlay знаходзіцца ў публічным альфа-тэставанні. Многія функцыі ўсё яшчэ знаходзяцца ў распрацоўцы, і будуць памылкі.",
+                    "construction": "HyperPlay знаходзіцца ў распрацоўцы.",
+                    "description": "HyperPlay — гэта запускальнік гульняў і агрэгатар крам гульняў з будучыні. З HyperPlay вы можаце перанесці свой кашалёк, токены і актывы ў кожную гульню. HyperPlay падтрымлівае ўсю бібліятэку Epic Store, GOG і нашу ўласную краму HyperPlay. Выкарыстоўваючы HyperPlay, вы згаджаецеся з нашымі",
+                    "communityCTA_1": "Мы былі б рады вашым водгукам і запрасіць вас далучыцца да нас у нашым",
+                    "communityCTA_2": "Супольнасць. Давайце разам фармаваць будучыню гульняў!"
+                },
+                "title": "Сардэчна запрашаем у HyperPlay Early Access!"
+            },
+            "connectionConnected": {
+                "title": "Гаманець падключаны!",
+                "description": "Ваш кашалёк падключаны. Вы гатовыя да гульні."
+            },
+            "connectAgain": "Падключыцеся зноў"
         },
         "browserImport": {
-            "profile": "Профіль",
-            "appId": "Ідэнтыфікатар праграмы"
+            "profile": "Профіль гульца",
+            "appId": "Ідэнтыфікатар праграмнага забеспячэння"
         },
-        "Sync": "Сінхранізаваць",
+        "Sync": "Сінхронізацыя",
         "buttons": {
-            "noThanks": "Не, дзякуй"
+            "noThanks": "Не, дзякуй.  \nНе, дзякуй вам.  \nНе, дзякуй за прапанову.",
+            "agree": "Я згодны"
         },
         "gamecard": {
-            "paused": "На паўзе"
+            "paused": "Затрымана",
+            "distributables": "Усталёўка распаўсюджвальных файлаў...",
+            "extracting": "Выдзяленне...",
+            "installed": "Гатова да гульні",
+            "installing": "Загрузка..."
         },
-        "discordApp": "Discord",
-        "folder": "Каталог",
-        "logOut": "Выхад",
+        "discordApp": "Дыскорд",
+        "folder": "Дырка",
+        "logOut": "Аднавіць выход",
         "misc": "Ніколі",
-        "viewFullscreen": "Поўны экран"
+        "viewFullscreen": "Поўнаэкранны рэжым",
+        "changeWallet": "Смяніць рахунак кашалька",
+        "copyUrl": "Скапіраваць URL",
+        "currentWallet": "Актуальны кашалёк",
+        "publicAlpha": "Публічная альфа",
+        "syncing": "Сінхранізацыя...",
+        "viewPortfolio": "Прагляд партфеля",
+        "viewItem": "Прагляд {{item}}",
+        "analyticsOff": "Аналітыка адключана",
+        "accesscodes": {
+            "requirescode": "Гэтае абнаўленне гульні патрабуе кода доступу.",
+            "error": {
+                "validation": "Код доступу недзейсны"
+            },
+            "success": {
+                "validation": "Успех! Код доступу сапраўдны"
+            }
+        },
+        "otp": "Аднаразовы код доступу",
+        "achievements": {
+            "addThisGame": "Дадаць гэтую гульню",
+            "freeMints": "Бясплатныя мintы",
+            "gamesToMint": "Ігры для манціравання",
+            "noAchievements": {
+                "oops": "Ой!",
+                "doubleCheckMessage": "Схоже, мы не змаглі знайсці ніякіх гульняў у вашым уліковым запісе Steam на дадзены момант. Невялікае нагадванне праверыць, што дэталі вашай гульні ўстаноўлены на агульны доступ. Такім чынам, мы зможам атрымаць доступ да вашых дасягненняў і забяспечыць вам найлепшы досвед."
+            }
+        },
+        "linkSteamAccountDescription": "Увайдзіце ў Steam, каб звязаць ваш уліковы запіс HyperPlay.",
+        "analyticsOn": "Аналітыка ўключана",
+        "linkSteamAccountCta": "Перайдзіце да ўваходу ў Steam",
+        "linkSteamAccountTitle": "Падключыць уліковы запіс Steam",
+        "connectWallet": "Падключыць кашалёк"
     },
     "notification": {
         "wine-download": {
-            "title": "Менеджэр Wine"
+            "title": "Сумяшчальніцкая платформа",
+            "message": "Настройка стандартнага сумяшчальнага слоя"
         },
         "wine-download-failed": {
-            "title": "Памылка"
+            "title": "Памылка",
+            "message": "Не ўдалося наладзіць стандартны сумяшчальны слой"
         }
     },
-    "profile": "Профіль",
+    "profile": "Профіль гульца",
     "quest": {
-        "active": "Актыўны",
+        "active": "Уключаны",
         "Play": "Прайграць",
         "playstreak": {
-            "days": "дзён",
-            "now": "Цяпер"
+            "days": "дзень",
+            "now": "Цяпер  \nЗараз  \nУ гэты момант",
+            "progressTowardsStreak": "прагрэс да сённяшняй серыі.",
+            "playEachDay": "Грайце кожны дзень, каб ваша серыя не была скасавана!",
+            "dayResets": "Скід дня:",
+            "playToStart": "Гуляйце ў гэтую гульню, каб пачаць сваю серыю!",
+            "streakCompleted": "Серыя завершана! Атрымайце свае ўзнагароды зараз.",
+            "streakProgress": "Прагрэс стрыка",
+            "sync": "Сінхранізацыя прагрэсу",
+            "syncSuccess": "Сінхранізацыя завершана"
         },
-        "points": "Пункты",
-        "signIn": "Увайсці",
-        "sync": "Сінхранізаваць",
+        "points": "Ацэнкі",
+        "signIn": "Увайдзіце",
+        "sync": "Сінхронізацыя",
         "claimWarning": {
-            "cancel": "Адмяніць",
-            "confirm": "Пацвердзіць"
+            "cancel": "Спыніць",
+            "confirm": "Пацвердзіць дзеянне",
+            "body": "<bold>ВАЖНА:</bold> Калі ласка, пераканайцеся, што вы выдзяляеце дастаткова газу ў сетцы {{networkName}} для паспяховага пацверджання транзакцыі <bold>на працягу 7 дзён.</bold>",
+            "body2": "Інакш ўзнагарода за квест <bold> страціць дзеянне і не будзе больш даступнай для атрымання.</bold>"
+        },
+        "readyForClaim": "Гатова да атрымання",
+        "associatedGames": "Супрацоўныя гульні",
+        "claimAll": "Патрабуйце ўсё",
+        "noG7ConnectionClaim": "Вам неабходна мець уліковы запіс Game7, звязаны з {{email}}, каб атрымаць вашы ўзнагароды.",
+        "type": {
+            "playstreak": "Гульнявы шэраг"
+        },
+        "g7Numclaimed": "Агульная колькасць заяўленых крэдытаў G7",
+        "noG7ConnectionSync": "Вам неабходна мець уліковы запіс Game7, звязаны з {{email}}, каб перасінхраніць вашы задачы.",
+        "notEnoughGas": "Недастаткова баланс кашалька для атрымання вашай узнагароды з-за газавых збораў. Спробуйце іншы кашальок або папоўніце гэты перад паўторнай спробай.",
+        "quests": "Квесты",
+        "reputation": "Рэпутацыя",
+        "needMoreAchievements": "Вы павінны завяршыць {{percent}}% дасягненняў у адной з гэтых гульняў.",
+        "claimed": "Патрабавана",
+        "connectSteamAccount": "Падключыць уліковы запіс Steam",
+        "linkAccount": "Падключыце свой уліковы запіс Steam, каб праверыць права на ўдзел.",
+        "reward": "Узнагарода",
+        "pointsClaimed": "Пункты, якія былі заяўлены",
+        "View Game": "Прагляд гульні"
+    },
+    "accounts": "профілі",
+    "gameRelease": {
+        "alpha": "Альфа-тест",
+        "demo": "Дэма-выданне",
+        "main": "Галоўнае меню",
+        "beta": "Бэта-тэставанне",
+        "prototype": "Протатып"
+    },
+    "analytics": "Статыстыка",
+    "import-game-folder": {
+        "placeholder": "Выберыце дырэкторыю для імпарту гульняў",
+        "error": "Падчас імпарту адбылася памылка. Калі ласка, паглядзіце журналы для атрымання больш падрабязнай інфармацыі.",
+        "cta": "Імпартуйце тэчку гульні",
+        "label": "Імпарт папкі гульні",
+        "success": "Ігры паспяхова імпартаваны!",
+        "dialog": {
+            "title": "Выберыце тэчку гульні для імпарту"
         }
     },
-    "accounts": "акаўнты",
-    "gameRelease": {
-        "alpha": "Альфа",
-        "demo": "Дэма…",
-        "main": "Асноўная",
-        "beta": "Beta"
+    "hyperplayOverlay": {
+        "signatureRequest": {
+            "INITIATED": "Запыт подпісу ў чаканні",
+            "FAILED": "Падпіс перарваны",
+            "CONFIRMED": "Подпіс адпраўлены"
+        },
+        "txnRequest": {
+            "FAILED": "Транзакцыя перапынена",
+            "INITIATED": "Запыт транзакцыі ў чаканні",
+            "PENDING": "Транзакцыя адправлена",
+            "CONFIRMED": "Транзакцыя пацверджана"
+        },
+        "walletWatch": {
+            "FAILED": "Запыт на карыстацкі токен адменены",
+            "CONFIRMED": "Дадзены карыстальніцкі токен дададзены",
+            "INITIATED": "Дадаць запыт на карыстацкі токен у чаканні"
+        },
+        "chainRequest": {
+            "CONFIRMED": "Дадзена карыстальніцкая сетка",
+            "FAILED": "Кастомная сетка адменена",
+            "INITIATED": "Карыстальніцкі запыт сеткі"
+        },
+        "greeting": {
+            "title": "Накладка HyperPlay",
+            "description": "Overlay HyperPlay гатовы! Націсніце {{overlayKeyMod}} + X, каб паказаць або схаваць яго."
+        },
+        "description": {
+            "FAILED": "Транзакцыя была адменена або не была адпраўлена, калі ласка, паспрабуйце яшчэ раз",
+            "PENDING": "Чакаем пацверджання з боку блокчэйна. Мы паведамім вам, калі гэта будзе пацверджана",
+            "INITIATED": "Пацверджанне кашалька чакае ў вашым мабільным кашальку",
+            "CONFIRMED": "Транзакцыя была паспяхова пацверджана!"
+        },
+        "extensionNotification": {
+            "DESCRIPTION": "Націсніце {{overlayKeyMod}} + X, каб убачыць гэтую транзакцыю",
+            "TITLE": "Запыт на транзакцыю"
+        }
     },
-    "analytics": "Аналітыка",
-    "import-game-folder": {
-        "placeholder": "Выберыце папку для імпарту гульняў"
-    }
+    "overlay": {
+        "WALLET_DISCONNECTED": "У вас няма гаманца, падключанага да HyperPlay.",
+        "comingSoon": "Скоро",
+        "EXTERNAL_WALLET_CONNECTED": "Вы падключаны да HyperPlay з дапамогай знешняга кашалька."
+    },
+    "quests": {
+        "g7CreditsModal": {
+            "title": "Зарабіць крэдыты Game7",
+            "description": "Занурцеся ў лепшыя гульні HyperPlay з захапляльнымі выклікамі Play Streak. Кожная актыўнасць заахвочвае вас узаемадзейнічаць з іншай гульнёй, дэманструючы лепшае з гульняў web3. Ваш час гульні важны!"
+        },
+        "noneFound": {
+            "message": "Квесты не знойдзены.",
+            "title": "Квесты не знойдзены."
+        },
+        "playstreak": {
+            "signInWarning": {
+                "client": "Вы зараз не ўвайшлі ў сістэму, прагрэс серыі не будзе адсочвацца. Калі ласка, увайдзіце ў HyperPlay праз выпадаючае меню ў верхнім правым куце, каб адсочваць прагрэс.",
+                "overlay": "Вы зараз не ўвайшлі ў сістэму, прагрэс гульнявога шэрагу не будзе адсочвацца. Калі ласка, выйдзіце з гульні і ўвайдзіце ў HyperPlay праз выпадаючае меню ў верхнім правым куце, каб адсочваць прагрэс."
+            }
+        },
+        "viewAllQuests": {
+            "title": "Паглядзець усе квесты"
+        },
+        "quests": "Квесты"
+    },
+    "dlcs": {
+        "label": "Выберыце DLC для ўстаноўкі:"
+    },
+    "sideload": {
+        "warningTitle": "Важна",
+        "warningMessage": "Сайдлоадынг гульні - гэта функцыя, прызначаная для распрацоўшчыкаў і вопытных карыстальнікаў. Сайдлоадынг ўсталёўшчыка, які змяшчае шкоднаснае ПА, можа пагражаць вашаму камп'ютару і прывесці да крадзяжу сродкаў."
+    },
+    "steam-install": {
+        "success-message": "Steam быў усталяваны. Цяпер вы можаце запусціць яго з Бібліятэкі.",
+        "tooltip": "Гэта ўсталюе версію Steam для Windows, якая будзе працаваць з выкарыстаннем сумяшчальнай платформы HyperPlay.  \n\nНекаторыя гульні, асабліва старыя тытулы, новыя 3D гульні або тыя, што маюць праграмнае забеспячэнне супраць чытынга, могуць працаваць некарэктна.  \n\nРэкамендаваныя спецыфікацыі - Mac з працэсарам Apple Silicon (M1 або вышэй) і не менш за 16 ГБ аператыўнай памяці.",
+        "error-message": "Падчас ўстаноўкі Steam адбылася памылка. Калі ласка, паспрабуйце яшчэ раз.",
+        "launch-tooltip": "Запусціце Steam з выкарыстаннем сумяшчальнай платформы HyperPlay",
+        "compatibility-layer-not-available": "Сумяшчальны слой недаступны. Спачатку ўсталюйце адзін з \"Налады > Менеджар Wine\"."
+    },
+    "gameUpdateNotifications": {
+        "body": {
+            "single": "Гатова абнаўленне для {{gameName}}.",
+            "multiple": "{{gameName}} і іншыя гульні гатовыя да абнаўлення."
+        },
+        "title": "Даступныя абнаўленні гульняў"
+    },
+    "UNCHECK 'Run Steam'": "Зніміце галачку з 'Запусціць Steam'",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Калі вы хочаце працягнуць, будзьце цярплівымі, бо гэта можа заняць некалькі хвілін у залежнасці ад вашага інтэрнэт-злучэння і канфігурацыі сістэмы;",
+    "Install Steam": "Усталяваць Steam",
+    "Installing Steam": "Усталёўка Steam...",
+    "Launch Steam": "Запусціць Steam",
+    "Launching Steam": "Запуск Steam...",
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Выдаленне базавай гульні адменена",
+                "title": "Скасаванае выцягванне"
+            },
+            "installed": {
+                "body": "Мод будзе прымяняцца да базавай гульні",
+                "title": "Базавая гульня ўсталявана"
+            },
+            "installing": {
+                "body": "Выдзяленне базавых файлаў гульні",
+                "title": "Усталёўка базавай гульні"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Выберыце месца для файла базавай гульні",
+                "placeholder": "Выберыце ZIP-файл"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "webtorrent": "Торэнт (магнітная спасылка)",
+                "chromieCraft": "ChromieCraft",
+                "description": "Гэтая гульня з'яўляецца модам для World of Warcraft: Wrath of the Lich King (3.3.5a). Каб гуляць у гэты мод, гульцы павінны валодаць копіяй World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay не хостыць World of Warcraft. Гульцы, якія валодаюць World of Warcraft, могуць атрымаць версію 3.3.5a з такіх крыніц, як:",
+                "subtitle": "Спампаваць World of Warcraft 3.3.5a",
+                "title": "Крок 1"
+            },
+            "step2": {
+                "description": "Выберыце загружаны файл ChromieCraft_3.3.5a.zip.",
+                "subtitle": "Выберыце файл ChromieCraft_3.3.5a.zip",
+                "title": "Крок 2"
+            },
+            "step3": {
+                "description": "Калі ласка, выберыце тэчку, куды павінна быць усталявана World of Warcraft: Wrath of the Lich King (3.3.5a).",
+                "subtitle": "Выберыце папку ўстаноўкі",
+                "title": "Крок 3"
+            },
+            "step4": {
+                "description": "Увядзіце код доступу, каб працягнуць усталёўку гульні.",
+                "subtitle": "Код доступу",
+                "title": "Крок 4"
+            },
+            "title": "Інструкцыі для мадэратараў"
+        }
+    },
+    "ALL": "УСЕ",
+    "back_to_game": "Назад у гульню",
+    "email_subscription": {
+        "title": "Дзякуй за падпіску!",
+        "subtitle": "Вы цяпер частка нашай супольнасці, і мы рады падзяліцца з вамі каштоўнымі абнаўленнямі і інфармацыяй."
+    },
+    "importGameErrorMessageExecutable": "Выканаўчы файл гульні не знойдзены, імпарт гульні немагчымы",
+    "importGameErrorTitle": "Памылка імпарту гульні",
+    "achievements": {
+        "progress": {
+            "minted": "на ланцугу",
+            "notMinted": "звонку"
+        }
+    },
+    "importGameErrorMessage": "Не сапраўдная тэчка гульні, імпарт гульні немагчымы",
+    "At the end make sure to": "У канцы пераканайцеся, што",
+    "Cancel Installation": "Скасаваць ўсталёўку",
+    "exit_game": "Выйсці з гульні",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay загрузіць і запусціць ўсталёўшчык Steam для вас. Калі ласка, прытрымлівайцеся інструкцый Steam у іх усталёўшчыку;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay паведаміць вам, калі ўстаноўка будзе завершана;",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Пры першым запуску Steam загрузіць неабходныя файлы, і гэта зойме некалькі хвілін, каб завяршыць і з'явіцца экран уваходу;"
 }

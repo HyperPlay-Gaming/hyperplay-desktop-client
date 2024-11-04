@@ -965,7 +965,9 @@
             "streakProgress": "Streak Progreso",
             "playToStart": "Xogo este xogo para arrancar o voso streak!",
             "days": "días",
-            "now": "Agora"
+            "now": "Agora",
+            "sync": "Sync Progreso",
+            "syncSuccess": "Progreso synced"
         },
         "readyForClaim": "A punto para reclamación",
         "type": {
