@@ -1564,15 +1564,16 @@ function writeManifestFile(
 export const downloadPatcher = async () => {
   try {
     const { downloadIPDTForOS } = await import('@hyperplay/patcher')
-    await downloadIPDTForOS(toolsPath)
-
-    const version = await getIpdtPatcherVersion()
     const versionFile = path.join(toolsPath, 'ipdt_version.txt')
 
-    logInfo(
-      `IPDT patcher ${version} downloaded successfully`,
-      LogPrefix.HyperPlay
-    )
+    const currentVersion = existsSync(versionFile)
+      ? readFileSync(versionFile, 'utf-8')
+      : undefined
+
+    await downloadIPDTForOS(toolsPath, currentVersion)
+    const version = await getIpdtPatcherVersion()
+
+    logInfo(`IPDT patcher ${version} setup successfully`, LogPrefix.HyperPlay)
     await writeFile(versionFile, version)
 
     if (!isWindows) {
@@ -1592,7 +1593,7 @@ export const downloadPatcher = async () => {
 
 const getIpdtPatcherVersion = async () => {
   const { stdout } = await spawnAsync(ipdtPatcher, ['-version'])
-  return `${stdout}`.split(' ')[2]
+  return `v${stdout}`.split(' ')[2]
 }
 
 export async function downloadGameIpdtManifest(
