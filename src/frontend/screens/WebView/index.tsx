@@ -9,12 +9,11 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import { DidNavigateEvent, WebviewTag } from 'electron'
 
-import { UpdateComponent } from 'frontend/components/UI'
 import WebviewControls from 'frontend/components/UI/WebviewControls'
 import ContextProvider from 'frontend/state/ContextProvider'
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { Runner } from 'common/types'
-import './index.css'
+import './index.scss'
 import LoginWarning from '../Login/components/LoginWarning'
 import authState from 'frontend/state/authState'
 import { observer } from 'mobx-react-lite'
@@ -281,30 +280,32 @@ function WebView({
 
   return (
     <div className={cn('WebView', classNames?.root)}>
-      {webviewRef.current && (
-        <WebviewControls
-          webview={webviewRef.current}
-          initURL={startUrl}
-          openInBrowser={!startUrl.startsWith('login')}
-          classNames={{ root: classNames?.webviewControls }}
+      <div className={'webviewLoader'}></div>
+      <div className={'webviewContentContainer'}>
+        {webviewRef.current && (
+          <WebviewControls
+            webview={webviewRef.current}
+            initURL={startUrl}
+            openInBrowser={!startUrl.startsWith('login')}
+            classNames={{ root: classNames?.webviewControls }}
+          />
+        )}
+        <webview
+          ref={webviewRef}
+          className={cn('WebView__webview', classNames?.webview)}
+          partition={partitionForWebview}
+          src={startUrl}
+          allowpopups={trueAsStr}
+          useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/200.0"
+          {...(preloadPath ? { preload: `file://${preloadPath}` } : {})}
         />
-      )}
-      {loading.refresh && <UpdateComponent message={loading.message} />}
-      <webview
-        ref={webviewRef}
-        className={cn('WebView__webview', classNames?.webview)}
-        partition={partitionForWebview}
-        src={startUrl}
-        allowpopups={trueAsStr}
-        useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/200.0"
-        {...(preloadPath ? { preload: `file://${preloadPath}` } : {})}
-      />
-      {showLoginWarningFor && (
-        <LoginWarning
-          warnLoginForStore={showLoginWarningFor}
-          onClose={onLoginWarningClosed}
-        />
-      )}
+        {showLoginWarningFor && (
+          <LoginWarning
+            warnLoginForStore={showLoginWarningFor}
+            onClose={onLoginWarningClosed}
+          />
+        )}
+      </div>
     </div>
   )
 }
