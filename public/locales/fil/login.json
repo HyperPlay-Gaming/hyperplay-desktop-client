@@ -1,7 +1,18 @@
 {
     "button": {
-        "loading": "Naglo-load…",
-        "login": "Mag-log in"
+        "loading": "Naka-load…",
+        "login": "Mag-login",
+        "error": "Error, subukan ang ibang Code"
     },
-    "welcome": "Salubong!"
+    "welcome": "Maligayang pagdating!  \nTinatanggap ka namin!  \nIsang mainit na pagtanggap!",
+    "message": {
+        "part1": "Upang makapag-login at mag-install ng iyong mga laro, kailangan mo munang sundin ang mga hakbang sa ibaba:",
+        "part2": "Buksan ang",
+        "part3": "Epic Store dito",
+        "part4": ", mag-login sa iyong account at kopyahin ang iyong",
+        "part5": "impormasyon ng numero ng code ng awtorisasyon",
+        "part6": "I-paste ang iyong",
+        "part7": "numero ng code ng awtorisasyon",
+        "part8": "sa input box sa ibaba at i-click ang button na mag-login."
+    }
 }
