@@ -43,10 +43,12 @@ function addToFinished(element: DMQueueElement, status: DMStatus) {
     (el) => el.params.appName === element.params.appName
   )
 
+  const updatedElement = { ...element, status: status ?? 'abort' }
+
   if (elementIndex >= 0) {
-    elements[elementIndex] = { ...element, status: status ?? 'abort' }
+    elements[elementIndex] = { ...elements[elementIndex], ...updatedElement }
   } else {
-    elements.push({ ...element, status })
+    elements.push(updatedElement)
   }
 
   downloadManager.set('finished', elements)
@@ -129,7 +131,7 @@ async function addToQueue(element: DMQueueElement) {
   )
 
   if (elementIndex >= 0) {
-    elements[elementIndex] = element
+    elements[elementIndex] = { ...elements[elementIndex], ...element }
   } else {
     const installInfo = await libraryManagerMap[
       element.params.runner
@@ -371,7 +373,11 @@ async function updateQueueElementParam<T extends keyof DMQueueElement>(
   )
   if (index !== -1) {
     queue[index][prop] = value
+    if (currentElement) {
+      currentElement[prop] = value
+    }
     downloadManager.set('queue', queue)
+    sendFrontendMessage('changedDMQueueInformation', queue, queueState)
   } else {
     throw new Error('Element not found in the queue')
   }
