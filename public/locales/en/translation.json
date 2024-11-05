@@ -720,6 +720,7 @@
         "links": {
             "bridge": "Bridge",
             "buy": "Buy",
+            "marketplace": "Marketplace",
             "portfolio": "Portfolio",
             "sell": "Sell",
             "swap": "Swap"
