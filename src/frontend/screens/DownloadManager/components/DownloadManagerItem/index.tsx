@@ -254,6 +254,12 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const downloadsize =
     progress.totalSize || installInfo?.manifest.download_size || 0
 
+  // calculate download time
+  const downloadTime = endTime - startTime
+  const downloadTimeInMinutes = Math.floor(downloadTime / 60000)
+  const downloadTimeInSeconds = Math.floor((downloadTime % 60000) / 1000)
+  const downloadTimeFormatted = `${downloadTimeInMinutes}m ${downloadTimeInSeconds}s`
+
   return (
     <>
       {showStopInstallModal ? (
@@ -285,7 +291,13 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
             </span>
           </span>
         </td>
-        <td title={fullDate}>{fullDate}</td>
+        <td
+          title={t('queue.label.timeElapsed', 'Time Elapsed: {{elapsed}}', {
+            elapsed: downloadTimeFormatted
+          })}
+        >
+          {fullDate}
+        </td>
         <td>{translatedTypes[type]}</td>
         <td>{getStoreName(runner, t2('Other'))}</td>
         <td>

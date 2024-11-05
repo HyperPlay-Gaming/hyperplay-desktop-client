@@ -805,7 +805,8 @@
             },
             "pause": "Pause download",
             "remove": "Remove from Downloads",
-            "resume": "Resume download"
+            "resume": "Resume download",
+            "timeElapsed": "Time Elapsed: {{elapsed}}"
         }
     },
     "Recent": "Played Recently",
