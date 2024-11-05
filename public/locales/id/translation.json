@@ -971,7 +971,9 @@
             "streakCompleted": "Login Klaim hadiah Anda sekarang.",
             "streakProgress": "Sitemap",
             "days": "hari",
-            "now": "Sekarang"
+            "now": "Sekarang",
+            "sync": "Sitemap",
+            "syncSuccess": "Sitemap"
         },
         "readyForClaim": "Siap untuk klaim",
         "type": {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styles from './index.module.scss'
-import { t } from 'i18next'
 import { NavBarOverlay, NavItem, Images, SubLink } from '@hyperplay/ui'
 import { Link, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { BrowserGameProps } from 'frontend/OverlayManager/types'
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
@@ -13,6 +13,7 @@ export function NavBarOverlayWrapper({ appName, runner }: BrowserGameProps) {
   const searchParams = new URLSearchParams(search)
   const urlQueryParam = searchParams.get('url')
   const [collapsed, setCollapsed] = useState(false)
+  const { t } = useTranslation()
   const comingSoonText = t('overlay.comingSoon', 'Coming Soon')
   const [mmCollapsed, mmSetCollapsed] = useState(false)
   const [mktCollapsed, setMktCollapsed] = useState(false)
@@ -78,7 +79,7 @@ export function NavBarOverlayWrapper({ appName, runner }: BrowserGameProps) {
               selected={pathname === '/portfolio'}
               className={styles.sublink}
             >
-              Portfolio
+              {t('overlay.links.portfolio', 'Portfolio')}
             </SubLink>,
             <SubLink
               key={'Swap'}
@@ -87,7 +88,7 @@ export function NavBarOverlayWrapper({ appName, runner }: BrowserGameProps) {
               selected={pathname === '/portfolio/swap'}
               className={styles.sublink}
             >
-              Swap
+              {t('overlay.links.swap', 'Swap')}
             </SubLink>,
             <SubLink
               key={'Bridge'}
@@ -96,7 +97,7 @@ export function NavBarOverlayWrapper({ appName, runner }: BrowserGameProps) {
               selected={pathname === '/portfolio/bridge'}
               className={styles.sublink}
             >
-              Bridge
+              {t('overlay.links.bridge', 'Bridge')}
             </SubLink>,
             <SubLink
               key={'Buy'}
@@ -105,7 +106,7 @@ export function NavBarOverlayWrapper({ appName, runner }: BrowserGameProps) {
               selected={pathname === '/portfolio/buy'}
               className={styles.sublink}
             >
-              Buy
+              {t('overlay.links.buy', 'Buy')}
             </SubLink>,
             <SubLink
               key={'Sell'}
@@ -114,7 +115,7 @@ export function NavBarOverlayWrapper({ appName, runner }: BrowserGameProps) {
               selected={pathname === '/portfolio/sell'}
               className={styles.sublink}
             >
-              Sell
+              {t('overlay.links.sell', 'Sell')}
             </SubLink>
           ]}
         />,

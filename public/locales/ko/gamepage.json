@@ -1,122 +1,122 @@
 {
     "box": {
         "change": {
-            "message": "이 작업은 해당 게임의 설치 위치를 변경합니다, 계속하시겠습니까?",
-            "path": "새 설치 경로 선택",
-            "title": "게임 설치 경로 변경"
+            "message": "이 작업은 이 게임의 설치 위치를 변경합니다. 확실하신가요?  \n이 작업은 게임의 설치 경로를 변경합니다. 진행하시겠습니까?  \n이 작업은 이 게임의 설치 위치를 수정합니다. 계속하시겠습니까?",
+            "path": "새로운 설치 위치 선택",
+            "title": "게임 설치 위치 변경"
         },
-        "choose": "선택",
-        "importpath": "가져올 게임 폴더 선택",
+        "choose": "선택해 주세요",
+        "importpath": "가져올 게임 폴더를 선택하십시오",
         "move": {
-            "message": "이 작업은 긴 시간이 소요될 수 있습니다, 계속하시겠습니까?",
-            "path": "이동할 위치 선택",
-            "title": "게임 설치 이동"
+            "message": "이 작업은 시간이 오래 걸릴 수 있습니다. 확신하십니까?",
+            "path": "이동할 곳을 선택하세요",
+            "title": "게임 설치 파일 이동"
         },
-        "no": "아니오",
+        "no": "아니라고요",
         "repair": {
-            "message": "이 게임의 복구를 시도하시겠습니까? 이 작업은 긴 시간이 소요될 수 있습니다.",
-            "title": "확인 및 복구"
+            "message": "이 게임을 고쳐보시겠습니까? 이 과정은 오랜 시간이 걸릴 수 있습니다.",
+            "title": "검토 및 복구"
         },
         "runexe": {
-            "title": "실행할 EXE 선택"
+            "title": "실행할 EXE를 고르세요"
         },
         "select": {
-            "button": "선택"
+            "button": "선택 옵션"
         },
         "sideload": {
-            "exe": "실행파일 선택"
+            "exe": "실행 파일을 선택하세요"
         },
         "stopInstall": {
-            "keepInstalling": "계속 설치",
-            "message": "다운로드한 파일을 유지하겠습니까?",
-            "title": "설치 중지",
-            "keepFilesMessage": "취소 후 다운로드 파일을 유지하려면 여기를 클릭하십시오."
+            "keepInstalling": "설치 중 계속 진행",
+            "message": "다운로드한 파일을 보관하시겠습니까?  \n다운로드한 파일을 계속 사용하시겠습니까?  \n다운로드한 파일을 남겨두시겠습니까?",
+            "title": "다운로드를 취소하시겠습니까?",
+            "keepFilesMessage": "취소 후 다운로드 파일을 보관하려면 여기를 확인하세요.  \n취소한 후에도 다운로드 파일을 유지하고 싶다면 여기를 클릭하세요.  \n다운로드 파일을 취소 후에도 유지하려면 여기를 확인해 주세요."
         },
         "uninstall": {
-            "checkbox": "prefix 제거: {{prefix}}{{newLine}}알림: 이 작업은 취소될 수 없으며 백업되지 않은 세이프파일 역시 삭제됩니다.",
-            "message": "이 게임을 제거하시겠습니까?",
-            "settingcheckbox": "설정 및 로그 삭제{{newLine}}알림: 이 작업은 취소될 수 없습니다. 모든 설정은 초기화되며, 로그 역시 삭제됩니다.",
-            "title": "제거",
-            "dlc": "이 DLC를 제거하고 싶습니까?",
-            "prefix_warning": "이 게임의 와인 접두사는 기본 접두사입니다. 당신이 정말로 삭제하려면, 당신은 수동으로해야."
+            "checkbox": "접두사 제거: {{prefix}}{{newLine}}알림: 이 작업은 되돌릴 수 없으며, 백업되지 않은 세이브 파일도 함께 삭제됩니다.",
+            "message": "이 게임을 삭제하시겠습니까?  \n이 게임을 언인스톨하시겠습니까?  \n이 게임을 제거하시겠습니까?",
+            "settingcheckbox": "설정 초기화 및 로그 삭제{{newLine}}참고: 이 작업은 되돌릴 수 없습니다. 모든 수정된 설정이 사라지고 로그가 삭제됩니다.",
+            "title": "언인스톨",
+            "dlc": "이 DLC를 삭제하시겠습니까?  \n이 DLC를 언인스톨하시겠습니까?  \n이 DLC를 제거하시겠습니까?",
+            "prefix_warning": "이 게임의 와인 프리픽스는 기본값으로 설정되어 있습니다. 삭제하려면 수동으로 작업해야 합니다."
         },
         "update": {
-            "message": "이 게임에 업데이트가 있습니다, 지금 업데이트하시겠습니까?",
-            "title": "게임 업데이트 필요",
-            "message-cancel": "그것은 updating 없이 이 게임을 할 수 없습니다"
+            "message": "이 게임에 업데이트가 있습니다. 지금 업데이트를 적용하시겠습니까?  \n이 게임이 업데이트되었습니다. 지금 업데이트를 진행하시겠습니까?  \n업데이트가 있는 게임입니다. 지금 업데이트하시겠어요?",
+            "title": "게임 업데이트가 필요해요",
+            "message-cancel": "이 게임은 업데이트 없이 플레이할 수 없습니다.  \n업데이트를 하지 않으면 이 게임을 할 수 없습니다.  \n업데이트 없이 이 게임을 즐길 수 없습니다."
         },
-        "wineprefix": "WinePrefix 폴더 선택",
-        "yes": "예",
-        "dont-show-again": "다시 표시 안 함",
-        "ok": "승인",
-        "aware": "나는 aware",
+        "wineprefix": "WinePrefix 폴더를 고르세요",
+        "yes": "맞아요",
+        "dont-show-again": "다시 나타내지 않음",
+        "ok": "승인됨",
+        "aware": "나는 잘 알고 있어",
         "compability": {
-            "message": "이 Windows 게임은 호환성 층을 사용하여 실행됩니다. 당신은 일부 문제 또는 게임을 모두 작동하지 않을 수 있습니다."
+            "message": "이 Windows 게임은 호환성 레이어를 이용해 실행됩니다. 일부 문제를 겪거나 게임이 전혀 작동하지 않을 수 있습니다."
         },
-        "yesCancel": "예, 취소",
+        "yesCancel": "네, 취소합니다.  \n네, 취소해 주세요.  \n네, 취소할게요.",
         "stopExtraction": {
-            "title": "추출을 취소하려면?"
+            "title": "추출을 포기하시겠습니까?"
         }
     },
     "button": {
         "add_to_favourites": "즐겨찾기에 추가",
-        "cancel": "일시정지/취소",
-        "continue": "계속 다운로드",
-        "finish": "완료",
-        "force_update": "사용 가능한 경우 강제 업데이트",
-        "force-innstall": "강제 설치",
-        "hide_game": "게임 숨김",
-        "import": "게임 들여오기",
-        "install": "설치",
-        "no-path-selected": "선택된 경로 없음",
+        "cancel": "정지/취소",
+        "continue": "다운로드를 이어서 진행합니다",
+        "finish": "완성하다",
+        "force_update": "업데이트가 가능하면 강제로 업데이트하기",
+        "force-innstall": "강제적으로 설치",
+        "hide_game": "게임을 가리다",
+        "import": "게임 임포트",
+        "install": "설치 완료",
+        "no-path-selected": "선택된 경로가 존재하지 않습니다",
         "queue": {
-            "remove": "대기열에서 제거",
-            "cancel": "다운로드 취소",
-            "continue": "계속 다운로드"
+            "remove": "대기열에서 제외",
+            "cancel": "다운로드를 중단합니다",
+            "continue": "다운로드를 이어서 진행합니다"
         },
         "remove_from_favourites": "즐겨찾기에서 제거",
-        "remove_from_recent": "최근 목록에서 제거",
-        "run-exe-first": "설치파일 먼저 실행",
-        "running-setup": "Setup 실행중",
+        "remove_from_recent": "최근 기록에서 삭제",
+        "run-exe-first": "설치 파일을 먼저 실행해 주세요",
+        "running-setup": "설치 준비 중",
         "sideload": {
-            "edit": "앱/게임 수정"
+            "edit": "앱/게임 변경"
         },
-        "unhide_game": "게임 숨기기 해제",
-        "uninstall": "설치 제거",
-        "update": "업데이트",
-        "remove_from_library": "제거",
-        "details": "세부 정보",
-        "favorites": "즐겨찾기",
-        "unfavorites": "즐겨찾기 해제"
+        "unhide_game": "게임 보이기",
+        "uninstall": "앱 삭제",
+        "update": "업데이트 진행",
+        "remove_from_library": "제거하다",
+        "details": "정보 세부사항",
+        "favorites": "가장 좋아하는",
+        "unfavorites": "즐겨찾기 없애기"
     },
-    "cloud_save_unsupported": "미지원",
-    "disabled": "비활성화",
+    "cloud_save_unsupported": "호환되지 않음",
+    "disabled": "비활성화됨",
     "dlc": {
-        "installDlcs": "모든 DLC를 설치합니다"
+        "installDlcs": "모든 DLC를 설치합니다."
     },
-    "enabled": "활성화",
+    "enabled": "켜짐",
     "game": {
-        "downloadSize": "다운로드 크기",
-        "firstPlayed": "최초 플레이",
-        "getting-download-size": "다운로드 크기 불러오는 중",
-        "getting-install-size": "설치 크기 불러우는 중",
-        "installSize": "설치 크기",
-        "language": "언어",
-        "lastPlayed": "마지막 플레이",
-        "neverPlayed": "플레이 한 적 없음",
-        "platform": "설치할 플랫폼 버전 선택",
-        "requirements": "시스템 요구 사항",
-        "totalPlayed": "플레이 시간",
-        "dlcs": "DLC 시리즈",
-        "selectChannelName": "채널 선택 이름 *"
+        "downloadSize": "다운로드 파일 크기",
+        "firstPlayed": "첫 번째 플레이",
+        "getting-download-size": "다운로드 크기 가져오는 중",
+        "getting-install-size": "설치 크기 가져오기",
+        "installSize": "설치 공간",
+        "language": "언어 옵션",
+        "lastPlayed": "마지막으로 한 플레이",
+        "neverPlayed": "전혀 플레이한 적이 없음",
+        "platform": "설치할 플랫폼 선택",
+        "requirements": "시스템 요구사항",
+        "totalPlayed": "소요 시간",
+        "dlcs": "DLC 추가 콘텐츠",
+        "selectChannelName": "채널명 선택 *"
     },
     "gamecard": {
-        "moving": "옮기는 중",
-        "repairing": "복구 중"
+        "moving": "옮기고 있습니다",
+        "repairing": "수리 작업 중"
     },
     "generic": {
-        "error": "알 수 없는 오류",
-        "noDescription": "설명이 존재하지 않습니다!"
+        "error": "알 수 없는 예외",
+        "noDescription": "설명이 없습니다!  \n설명은 제공되지 않습니다!  \n설명이 등록되어 있지 않습니다!"
     },
     "hours": "시간",
     "how-long-to-beat": {
@@ -126,125 +126,125 @@
     },
     "howLongToBeat": "클리어까지 걸리는 시간",
     "info": {
-        "canRunOffline": "네트워크 연결이 필요합니다",
-        "installedPlatform": "설치된 플랫폼",
-        "path": "설치 경로",
-        "size": "크기",
-        "syncsaves": "세이브 동기화",
-        "version": "버전",
-        "web3-supported": "웹3 지원"
+        "canRunOffline": "인터넷 연결이 필요합니다",
+        "installedPlatform": "설치된 플랫폼 목록",
+        "path": "설치 폴더",
+        "size": "규모",
+        "syncsaves": "세이브 데이터 동기화",
+        "version": "버전 업데이트",
+        "web3-supported": "웹3 기능을 갖추고 있습니다"
     },
     "install": {
-        "disk-space-left": "사용 가능한 공간",
-        "not-enough-disk-space": "디스크 공간이 부족합니다",
-        "path": "설치 경로 선택",
-        "path-not-writtable": "경고: 경로가 쓰기가 불가능할 수 있습니다.",
-        "space-after-install": "설치 후",
-        "wineprefix": "WinePrefix",
-        "wineversion": "Wine 버전",
-        "compatibility-warning": "이 Windows 게임은 호환성 층을 사용하여 실행됩니다. 당신의 경험은 다를 수 있습니다."
+        "disk-space-left": "사용할 수 있는 공간",
+        "not-enough-disk-space": "디스크 공간이 충분하지 않습니다  \n디스크 용량이 부족합니다  \n디스크 공간이 모자랍니다",
+        "path": "설치할 경로를 선택하십시오",
+        "path-not-writtable": "경고: 경로에 쓰기 권한이 없을 수 있습니다.  \n경고: 해당 경로에 쓰기가 불가능할 수 있습니다.  \n경고: 경로에 대한 쓰기 권한이 없을 수 있습니다.",
+        "space-after-install": "설치 직후",
+        "wineprefix": "와인 프리픽스",
+        "wineversion": "와인 버전 정보",
+        "compatibility-warning": "이 Windows 게임은 호환성 레이어를 사용하여 구동됩니다. 경험은 개인마다 다를 수 있습니다."
     },
     "label": {
         "game": {
             "third-party-game": "서드파티 게임 미지원"
         },
         "playing": {
-            "start": "실행",
-            "stop": "실행중 (중지)",
-            "update": "갱신"
+            "start": "게임 시작",
+            "stop": "게임 중 (중단)",
+            "update": "새로 고침"
         },
         "saves": {
-            "syncing": "세이브 동기화 중"
+            "syncing": "세이브 동기화 진행 중"
         }
     },
     "launch": {
-        "options": "시작 옵션..."
+        "options": "실행 설정..."
     },
     "not_logged_in": {
-        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "login": "Log in",
-        "title": "You are NOT logged in",
+        "epic": "HyperPlay에 Epic 계정으로 로그인하지 않았습니다. 스토어 페이지를 사용하여 로그인하지 말고 아래 버튼을 클릭하세요:",
+        "gog": "HyperPlay에서 GOG 계정으로 로그인하지 않았습니다. 스토어 페이지를 사용하여 로그인하지 말고 대신 다음 버튼을 클릭하세요:  \nHyperPlay에서 GOG 계정으로 로그인되어 있지 않습니다. 스토어 페이지를 통해 로그인하지 말고 아래 버튼을 클릭하세요:  \nHyperPlay에서 GOG 계정으로 로그인하지 않았습니다. 스토어 페이지를 사용하지 말고 아래 버튼을 클릭하세요:",
+        "login": "로그인하기",
+        "title": "로그인 상태가 아닙니다",
         "amazon": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:"
     },
-    "report_problem": "게임 실행 중에 생긴 문제를 제보하기",
+    "report_problem": "게임을 실행하는 동안의 문제를 제보하기",
     "sdl": {
         "title": "설치할 구성 요소를 선택합니다"
     },
     "setting": {
-        "use-default-wine-settings": "기본 Wine 세팅 사용",
-        "winecrossoverbottle": "CrossOver Bottle"
+        "use-default-wine-settings": "기본 호환성 설정 사용",
+        "winecrossoverbottle": "크로스오버 용기"
     },
     "sideload": {
         "field": {
-            "title": "타이틀"
+            "title": "제목 표시"
         },
         "info": {
-            "broser": "브라우저URL",
-            "exe": "EXE 선택",
-            "image": "앱 이미지",
-            "supports-web3": "이 게임은 웹3를 지원합니다.",
-            "title": "게임/앱 타이틀"
+            "broser": "웹 브라우저 URL",
+            "exe": "실행 프로그램 선택",
+            "image": "앱 사진",
+            "supports-web3": "이 게임은 웹3 기능이 있습니다.",
+            "title": "게임 또는 앱 제목"
         },
         "placeholder": {
-            "image": "여기에 이미지 URL을 입력하세요",
-            "title": "게임/앱의 타이틀을 추가하세요",
-            "url": "여기에 게임 URL을 입력하세요"
+            "image": "여기에 이미지 링크를 붙여넣으세요",
+            "title": "게임/앱의 이름을 추가하세요",
+            "url": "게임의 URL을 여기에 입력해 주세요"
         }
     },
     "specs": {
-        "minimum": "최소 사양",
-        "recommended": "권장 사양"
+        "minimum": "최소 사양 목록",
+        "recommended": "권장하는 사양"
     },
     "status": {
         "clickToUpdate": "업데이트하려면 클릭",
-        "downloading": "다운로드중",
+        "downloading": "다운로드 중입니다  \n다운로드 진행 중  \n다운로드가 진행되고 있습니다",
         "extracting": {
-            "progress": "압축해제중",
-            "cancel": "취소 추출"
+            "progress": "압축 파일을 해제하는 중입니다",
+            "cancel": "추출 작업 취소"
         },
-        "gameNotAvailable": "게임 플레이 불가",
+        "gameNotAvailable": "게임을 실행할 수 없습니다",
         "hasUpdates": "새 버전이 있습니다!",
-        "installed": "설치됨",
-        "installing": "설치중",
-        "moving": "설치 파일을 이동중입니다, 잠시 기다려주세요",
-        "moving-files": "파일 이동중 '{{file}}': {{percent}} ",
-        "notinstalled": "이 게임은 설치되지 않았습니다",
-        "notSupported": "미지원",
-        "notSupportedGame": "미지원",
-        "playing": "실행중",
-        "processing": "파일을 처리중입니다, 잠시 기다려주세요",
-        "queued": "대기중",
-        "reparing": "게임을 복구중입니다, 잠시 기다려주세요",
-        "syncingSaves": "세이브 동기화중",
-        "this-game-uses-third-party": "이 게임은 아직 지원하지 않는 서드파티 게임 런처를 사용합니다.",
-        "totalDownloaded": "총 다운로드",
-        "uninstalling": "제거중",
-        "updating": "업데이트중",
-        "paused": "일시중지됨",
-        "gog-goodie": "이 게임은 설치할 수 없습니다. https://gog.com/account에서 다운로드 가능한 콘텐츠를 확인하십시오",
-        "distributables": "분산형 설치",
-        "goodie": "설치하기",
-        "preparing": "다운로드 준비, 대기"
+        "installed": "설치가 완료되었습니다",
+        "installing": "설치 작업 중",
+        "moving": "설치 파일을 이동하고 있습니다. 잠시만 기다려 주세요.  \n설치 중 파일을 이동하고 있습니다. 잠시 기다려 주십시오.  \n설치 파일을 옮기는 중입니다. 잠시만 기다려 주세요.",
+        "moving-files": "파일 '{{file}}'을 이동하고 있습니다: {{percent}} ",
+        "notinstalled": "이 게임이 설치되어 있지 않습니다  \n이 게임은 아직 설치되지 않았습니다  \n이 게임은 설치가 완료되지 않았습니다",
+        "notSupported": "호환되지 않음",
+        "notSupportedGame": "지원 불가",
+        "playing": "진행 중",
+        "processing": "파일을 처리하고 있습니다. 잠시만 기다려 주세요.  \n파일을 처리하는 중입니다. 잠시 기다려 주십시오.  \n파일을 처리하는 중입니다. 잠시만 기다려 주세요.",
+        "queued": "대기 중입니다",
+        "reparing": "게임 수리 중입니다. 잠시만 기다려 주세요.  \n게임을 복구하고 있습니다. 잠시 기다려 주십시오.  \n게임 복구 중입니다. 잠시만 기다려 주세요.",
+        "syncingSaves": "세이브 데이터 동기화 진행 중",
+        "this-game-uses-third-party": "이 게임은 현재 지원되지 않는 서드파티 런처를 사용합니다.  \n이 게임은 아직 지원되지 않는 제3자 런처를 사용하고 있습니다.  \n이 게임은 서드파티 런처를 사용하지만, 현재 지원되지 않습니다.",
+        "totalDownloaded": "다운로드 총합",
+        "uninstalling": "제거 작업 중입니다",
+        "updating": "게임을 업데이트하는 중입니다",
+        "paused": "중지됨",
+        "gog-goodie": "이 게임은 설치할 수 없는 것 같습니다. https://gog.com/account에서 다운로드 가능한 콘텐츠를 확인해 보세요.  \n이 게임은 설치할 수 없는 것처럼 보입니다. https://gog.com/account에서 다운로드 가능한 콘텐츠를 확인하시기 바랍니다.  \n이 게임은 설치할 수 없는 것 같습니다. https://gog.com/account에서 다운로드할 수 있는 콘텐츠를 확인해 주세요.",
+        "distributables": "디스트리뷰터 설치",
+        "goodie": "설치할 수 없습니다",
+        "preparing": "다운로드를 준비 중입니다. 잠시만 기다려 주세요.  \n다운로드 준비 중입니다. 잠시만 기다려 주세요.  \n다운로드 준비 중입니다. 기다려 주시기 바랍니다."
     },
     "submenu": {
-        "addShortcut": "바로가기 생성",
-        "addToSteam": "Steam에 추가",
-        "change": "설치 경로 변경",
-        "disableEosOverlay": "Epic 오버레이 비활성화",
-        "enableEosOverlay": "Epic 오버레이 활성화",
-        "move": "게임 이동",
-        "protondb": "호환성 체크",
-        "removeFromSteam": "Steam에서 제거",
-        "removeShortcut": "바로가기 제거",
-        "settings": "설정",
-        "store": "스토어 페이지",
-        "verify": "확인 및 복구",
-        "extraInfo": "추가 정보"
+        "addShortcut": "바로가기 만들기",
+        "addToSteam": "Steam에 추가하기 위해서",
+        "change": "설치 경로 조정",
+        "disableEosOverlay": "에픽 오버레이 비활성화하기",
+        "enableEosOverlay": "에픽 오버레이 활성화하기",
+        "move": "게임을 옮기다",
+        "protondb": "호환성 점검",
+        "removeFromSteam": "Steam에서 없애기",
+        "removeShortcut": "단축 아이콘 삭제",
+        "settings": "설정 옵션",
+        "store": "상점 목록 페이지",
+        "verify": "검토 및 복구",
+        "extraInfo": "추가 정보입니다.  \n추가적인 정보  \n부가 정보"
     },
     "method": {
         "getInstallInfo": {
-            "error": "이 메시지를 가진 HyperPlay 팀에 문의하시기 바랍니다: {{error}} - {{context}}."
+            "error": "이 메시지를 통해 HyperPlay 팀에 연락해 주시기 바랍니다: {{error}} - {{context}}.  \nHyperPlay 팀에 다음 메시지로 연락해 주세요: {{error}} - {{context}}.  \n이 메시지를 사용하여 HyperPlay 팀에 문의해 주세요: {{error}} - {{context}}."
         }
     }
 }

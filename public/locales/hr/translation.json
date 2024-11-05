@@ -1,72 +1,73 @@
 {
     "accessibility": {
-        "actions_font_family_no_default": "Actions Font Family (Default: ",
-        "all_tiles_in_color": "Pokaži sve igrice u boji",
-        "content_font_family_no_default": "Content Font Family (Default: ",
-        "fonts": "Fontovi",
-        "title": "Prilagođeni pristup",
-        "zoom": "Uvečaj"
+        "actions_font_family_no_default": "Akcijska obitelj fontova (Zadano: ",
+        "all_tiles_in_color": "Prikaži sve pločice igara u boji",
+        "content_font_family_no_default": "Font obitelj sadržaja (Zadano: ",
+        "fonts": "Pisma",
+        "title": "Olakšan pristup",
+        "zoom": "Uvećaj"
     },
-    "add_game": "Add Game",
-    "All": "Sve",
+    "add_game": "Dodaj Igru",
+    "All": "Sveukupno",
     "anticheat": {
-        "anticheats": "Anticheats",
-        "may_not_work": "It may not work due to denied or broken anticheat support.",
-        "reference": "Reference",
-        "source": "Source",
-        "status": "Status",
-        "title": "This game includes anticheat software"
+        "anticheats": "Antivaralice",
+        "may_not_work": "Možda neće raditi zbog odbijene ili neispravne podrške za anticheat.  \nMožda neće funkcionirati zbog odbijene ili pokvarene podrške za anticheat.  \nMoguće je da neće raditi zbog odbijene ili oštećene anticheat podrške.",
+        "reference": "Izvor",
+        "source": "Izvorni sadržaj",
+        "status": "Status sustava",
+        "title": "Ova igra ima ugrađeni anticheat sustav"
     },
     "box": {
         "cache-cleared": {
-            "message": "HyperPlay cache je očišćen.",
-            "title": "Cache očišćen"
+            "message": "HyperPlay keš je ispraznjen.",
+            "title": "Keš je uspješno uklonjen"
         },
-        "choose": "Odaberi",
-        "choose-egs-prefix": "Odaberite Prefix gdje je EGS instaliran",
-        "choose-gogdl-binary": "Odaberi GOGDL Binary (treba ponovno pokrenuti)",
-        "choose-legendary-binary": "Select Legendary Binary (needs restart)",
-        "customWine": "Select the Wine or Proton Binary",
-        "default-install-path": "Odaberite Zadanu Lokaciju Instalacije",
-        "default-steam-path": "Steam path.",
-        "downloadNow": "Download now",
+        "choose": "Odabir",
+        "choose-egs-prefix": "Odaberite Prefiks u kojem je EGS instaliran",
+        "choose-gogdl-binary": "Odaberi GOGDL izvršni (treba restartati)",
+        "choose-legendary-binary": "Odaberite legendarni binarni (potrebno ponovno pokretanje)",
+        "customWine": "Izaberite binarni datoteku za Wine ili Proton",
+        "default-install-path": "Odaberite Predefiniranu Instalacijsku Putanju",
+        "default-steam-path": "Lokacija Steam-a.",
+        "downloadNow": "Preuzmi odmah sada",
         "error": {
             "add": {
                 "steam": {
-                    "body": "Adding {{game}} to Steam failed with:{{newLine}} {{error}}",
-                    "title": "Adding Error"
+                    "body": "Dodavanje {{game}} na Steam nije uspjelo s: {{newLine}} {{error}}  \nDodavanje {{game}} na Steam nije uspjelo s:{{newLine}} {{error}}  \nNeuspješno dodavanje {{game}} na Steam: {{newLine}} {{error}}",
+                    "title": "Dodavanje greške"
                 }
             },
             "credentials": {
-                "message": "Vaša prijava je istekla, ponovno se prijavite."
+                "message": "Vaši korisnički podaci su istekli, molimo vas da se odjavite i ponovo prijavite."
             },
             "cx-bottle-not-found": {
-                "message": "The CrossOver bottle \"{{bottle_name}}\" does not exist, can't launch!",
-                "title": "CrossOver bottle not found"
+                "message": "Boca CrossOver \"{{bottle_name}}\" nije dostupna, ne može se pokrenuti!",
+                "title": "CrossOver boca nije dostupna"
             },
             "diskspace": {
-                "message": "Nema dovoljno slobodnog prostora na disku",
-                "title": "Nema Prostora"
+                "message": "Prostor na disku nije dovoljan",
+                "title": "Nema mjesta"
             },
             "dxvk": {
-                "message": "Greška prilikom instalinanja DXVK/VKD3D! Provjeri vezu!",
-                "title": "DXVK/VKD3D error"
+                "message": "Greška prilikom instalacije DXVK/VKD3D! Molimo provjerite svoju vezu!  \nDošlo je do greške prilikom instalacije DXVK/VKD3D! Provjerite svoju mrežnu vezu!  \nNeuspjela instalacija DXVK/VKD3D! Provjerite vezu s internetom!",
+                "title": "Greška DXVK/VKD3D"
             },
             "folder-not-found": {
-                "title": "Game folder appears to be deleted, do you want to remove the game from the installed list?"
+                "title": "Izgleda da je mapa igre izbrisana, želite li ukloniti igru iz popisa instaliranih igara?  \nIzgleda da je mapa igre izbrisana, želite li da uklonite igru iz popisa instaliranih?  \nMapa igre se čini izbrisanom, želite li da izbrišete igru iz popisa instaliranih?"
             },
             "generic": {
                 "message": "",
-                "title": "Select EXE to Run"
+                "title": "Izaberite EXE za izvršavanje"
             },
-            "launchAborted": "Launch aborted",
-            "title": "Greška",
+            "launchAborted": "Pokretanje nije uspjelo",
+            "title": "Neispravnost",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Greška u ažuriranju",
+                "message": "Nešto je pošlo po zlu s ažuriranjem! Molimo ručno deinstalirajte i ponovo instalirajte HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -74,8 +75,22 @@
                 "title": "Wine Not Found"
             },
             "winetricks": {
-                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
-                "title": "Winetricks error"
+                "message": "Winetricks je vratio sljedeću pogrešku tijekom izvođenja: {{newLine}}{{error}}  \nWinetricks je tijekom izvođenja vratio sljedeću pogrešku: {{newLine}}{{error}}  \nWinetricks je prilikom izvođenja vratio sljedeću grešku: {{newLine}}{{error}}",
+                "title": "Winetricks pogreška"
+            },
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "Instalacija Ubisoft Connecta u prefiksu igre nije uspjela. Provjerite našu wiki stranicu na https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac za ručnu instalaciju."
+            },
+            "delete-files": {
+                "title": "Greška prilikom uklanjanja izvučene mape",
+                "body": "Greška prilikom uklanjanja izvučenog foldera {{path}}. Molimo uklonite ga ručno. \n                {{paragraph}} \n                {{error}}"
+            },
+            "moving": "Greška prilikom premještanja igre {{error}}",
+            "steam": {
+                "error": "Steam izvršna datoteka nije pronađena. Instalacija je vjerojatno otkazana od strane korisnika ili je neuspjela na Steam strani.",
+                "message": "Instalacija Steama nije uspjela! Molimo pažljivo pročitajte upute i pokušajte ponovo! {{paragraph}} {{error}}",
+                "title": "Steam greška"
             }
         },
         "info": {
@@ -85,140 +100,159 @@
                 "message": "There is a new Version available!",
                 "message-finished": "Do you want to restart HyperPlay now?",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Update Finished"
+                "title-finished": "Update Finished",
+                "appUpdated": "HyperPlay je ažuriran",
+                "appUpdated-message": "HyperPlay je ažuriran. Želite li ažurirati i ponovno pokrenuti HyperPlay sada?"
             }
         },
-        "no": "NE",
-        "ok": "Ok",
+        "no": "NE NE NE",
+        "ok": "Sve u redu",
         "protocol": {
             "install": {
-                "not_installed": "Is Not Installed, do you wish to Install it?"
+                "not_installed": "Trenutno nije instalirano. Da li želite instalirati?"
             }
         },
         "quit": {
-            "message": "There are pending operations, are you sure?",
-            "title": "Exit"
+            "message": "Postoje operacije koje čekaju, jeste li sigurni?",
+            "title": "Napustiti"
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
-                "title": "Reset HyperPlay"
+                "message": "Jeste li sigurni da želite resetirati HyperPlay? Ovo će ukloniti sve postavke i predmemoriju, ali neće izbrisati vaše instalirane igre ili Epic vjerodajnice. Prijenosne verzije (AppImage, WinPortable, ...) HyperPlaya moraju se ručno ponovno pokrenuti nakon toga.",
+                "title": "Vraćanje HyperPlay na zadane postavke"
             }
         },
         "runexe": {
-            "title": "Odaberi EXE za pokrenuti"
+            "title": "Odaberi EXE za pokretanje"
         },
         "select": {
-            "button": "Select",
-            "exe": "Select EXE"
+            "button": "Odabir",
+            "exe": "Odabir EXE"
         },
         "shortcuts": {
-            "message": "Shortcuts were created on Desktop and Start Menu",
-            "message-mac": "Shortcuts were created on the Applications folder",
-            "message-remove": "Shortcuts were removed from Desktop and Start Menu",
-            "message-remove-mac": "Shortcuts were removed from the Applications folder",
-            "title": "Shortcuts"
+            "message": "Prečaci su kreirani na Desktopu i u izborniku Start",
+            "message-mac": "Prečaci su kreirani u mapi Aplikacije",
+            "message-remove": "Prečaci su nestali s radne površine i iz izbornika Start",
+            "message-remove-mac": "Prečaci su eliminirani iz mape Aplikacije",
+            "title": "Prečice"
         },
         "sync": {
             "button": "Odaberi",
-            "error": "Pogrešni put",
-            "title": "Odaberi mapu za podatke"
+            "error": "Pogrešna staza",
+            "title": "Odaberi lokaciju za spremanje"
         },
         "vcruntime": {
             "install": {
-                "message": "The download links for the Visual C++ Runtimes have been opened. Please install both the x86 and x64 versions."
+                "message": "Preuzimanje Visual C++ Runtimes je sada dostupno. Molimo instalirajte obje verzije, x86 i x64."
             },
             "notfound": {
-                "message": "The Microsoft Visual C++ Runtimes are not installed, which are required by some games",
-                "title": "VCRuntime not installed"
+                "message": "Nisu instalirani Microsoft Visual C++ Runtimes, koji su potrebni za određene igre",
+                "title": "VCRuntime nije dostupan"
             }
         },
         "warning": {
             "epic": {
-                "import": "Epic Servers are having major outage right now, the game cannot be imported!",
-                "install": "Epic Servers are having major outage right now, the game cannot be installed!",
-                "update": "Epic Servers are having major outage right now, the game cannot be updated!"
+                "import": "Trenutno su Epic poslužitelji u velikom prekidu, igra se ne može importirati!",
+                "install": "Trenutno su Epic serveri u velikom prekidu, igra se ne može instalirati!",
+                "update": "Trenutno su Epic serveri u velikom prekidu, igra se ne može ažurirati!"
             },
-            "title": "Warning"
+            "title": "Prijetnja",
+            "rosetta": {
+                "message": "HyperPlay zahtijeva Rosettu za ispravan rad na macOS-u s Apple Silicon čipovima. Molimo instalirajte je iz macOS terminala koristeći sljedeću naredbu: \"softwareupdate --install-rosetta\" i ponovno pokrenite HyperPlay. ",
+                "title": "Rosetta nije pronađena"
+            },
+            "wine-change": {
+                "message": "Nismo mogli pronaći odabranu verziju vina za pokretanje ovog naslova ({{selectedWine}}). {{newline}} Pronašli smo drugu, želite li nastaviti pokretanje koristeći {{foundWine}}?",
+                "message-gptk": "Da biste mogli pokretati igre koristeći Apple Gaming porting toolkit, trebate nadograditi svoj macOS na 14 (Sonoma) ili noviji. {{newline}} Pronašli smo Wine na vašem sustavu, želite li nastaviti pokretanje koristeći {{foundWine}} ?",
+                "title-gptk": "Toolkit za portiranje igara nije kompatibilan ",
+                "title": "Wine nije pronađen!"
+            }
         },
-        "wineprefix": "Odaberite WinePrefix mapu",
-        "yes": "DA",
-        "dontShowAgain": "Ne prikazuj više",
-        "choose-nile-binary": "Odaberite Nile binary"
+        "wineprefix": "Odaberite mapu za Wine Prefix",
+        "yes": "DA  \nDA  \nDA",
+        "dontShowAgain": "Ne prikazuj više puta",
+        "choose-nile-binary": "Odaberite Nile binary",
+        "reset-extension": {
+            "question": {
+                "message": "Jeste li sigurni da želite resetirati MetaMask ekstenziju?",
+                "title": "Resetiraj ekstenziju"
+            }
+        }
     },
     "button": {
-        "cancel": "Cancel",
-        "go_to_library": "Go to Library",
+        "cancel": "Poništi",
+        "go_to_library": "Posjetite knjižnicu",
         "login": "Prijava",
         "sync": "Sinkroniziraj",
-        "syncing": "Sinkroniziranje",
-        "unsync": "Desinkroniziraj",
-        "continue": "Nastavi",
-        "download": "Preuzmi",
-        "update": "Ažuriraj",
-        "install": "Insraliraj"
+        "syncing": "Sinkronizacija",
+        "unsync": "Odspoji",
+        "continue": "Nastavi igrati",
+        "download": "Preuzmi datoteku",
+        "update": "Ažuriraj se",
+        "install": "Instalirajte"
     },
     "controller": {
         "hints": {
-            "back": "Back",
-            "backspace": "Backspace",
-            "close_dialog": "Close dialog",
-            "close_keyboard": "Close keyboard",
-            "close_options": "Close Options",
-            "game_details": "Game details",
-            "game_settings": "Game settings",
-            "install_game": "Install game",
-            "move_cursor": "Move cursor",
-            "open_virtual_keyboard": "Open virtual keyboard",
-            "options": "Options",
-            "play_game": "Play game",
-            "scroll": "Scroll",
-            "select": "Select",
-            "space": "Space",
-            "update_game": "Update game"
+            "back": "Nazad",
+            "backspace": "Povratna tipka",
+            "close_dialog": "Zatvori razgovor",
+            "close_keyboard": "Zatvori klavijaturu",
+            "close_options": "Zatvori izbor",
+            "game_details": "Podaci o igri",
+            "game_settings": "Opcije igre",
+            "install_game": "Instalacija igre",
+            "move_cursor": "Pomakni miš pointer",
+            "open_virtual_keyboard": "Aktivirajte virtualnu tipkovnicu",
+            "options": "Mogućnosti",
+            "play_game": "Započni igru",
+            "scroll": "Pomak",
+            "select": "Odabir",
+            "space": "Svijet",
+            "update_game": "Ažuriranje igre"
         }
     },
     "docs": "Documentation",
     "download-manager": {
         "install-type": {
-            "install": "Install",
-            "update": "Update"
+            "install": "Instalacija",
+            "update": "Nadogradnja"
         },
         "label": {
-            "disk": "Disk",
-            "speed": "Download"
+            "disk": "Disk==WEBLATE_PART==Disk==WEBLATE_PART==Disk",
+            "speed": "Preuzmi sada"
         },
         "link": "Downloads",
         "queue": {
-            "end-time": "Finished at",
-            "queue-time": "Added at",
-            "start-time": "Started at",
-            "type": "Type"
+            "end-time": "Završeno u",
+            "queue-time": "Dodano u sistem",
+            "start-time": "Počelo je u",
+            "type": "Kategorija"
         },
         "title": "Downloads",
-        "ETA": "Procijenjeno vrijeme"
+        "ETA": "Procjena vremena",
+        "title_dm": "Upravitelj preuzimanja"
     },
     "epic": {
-        "offline-notification-body": "HyperPlay vjerojatno neče raditi zato što EpicGames serveri su ugašeni!",
-        "offline-notification-title": "offline"
+        "offline-notification-body": "Moguće je da online usluge neće raditi ispravno jer su serveri Epic Gamesa trenutno offline!",
+        "offline-notification-title": "offline način"
     },
     "Epic Games": "Epic Games",
-    "error": "Error",
-    "favourites": "Favourites",
+    "error": "Neispravnost",
+    "favourites": "Omiljene stvari",
     "game": {
-        "status": "Status",
-        "store": "Store",
-        "title": "Game Title"
+        "status": "Status sustava",
+        "store": "Dućan",
+        "title": "Naziv igre"
     },
     "generic": {
         "error": {
-            "component": "No Games found - Try to logout and login again or one of the options bellow"
+            "component": "Nema igara - Pokušajte se odjaviti i ponovo prijaviti ili odaberite jednu od opcija u nastavku"
         },
         "library": {
-            "refresh": "Refresh Library"
+            "refresh": "Ponovno učitaj knjižnicu"
         }
     },
-    "globalSettings": "Global Settings",
+    "globalSettings": "Globalne opcije",
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
@@ -226,50 +260,53 @@
         "ignore_hidden": "Ignore Hidden",
         "platform": "Platforma",
         "show_all_games": "Show all games",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Prikaži nedostupne igre",
         "show_favourites_only": "Show Favourites only",
-        "show_hidden": "Show Hidden",
-        "store": "Filter Store"
+        "show_hidden": "Prikaži skrivene informacije",
+        "store": "Trgovina za filtriranje"
     },
     "help": {
-        "amdfsr": "AMD's FSR helps boost framerate by upscaling lower resolutions in Fullscreen Mode. Image quality increases from 5 to 1 at the cost of a slight performance hit. Enabling may improve performance.",
-        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
-        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
-        "dxvk": "DXVK is a Vulkan-based translational layer for DirectX 9, 10 and 11 games. Enabling may improve compatibility. Might cause issues especially for older DirectX games.",
-        "esync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance.",
-        "fsync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels.",
+        "amdfsr": "AMD-ov FSR poboljšava framerate povećanjem nižih rezolucija u punom ekranu. Kvaliteta slike se povećava s 5 na 1 uz minimalni gubitak performansi. Uključivanje može unaprijediti performanse.",
+        "custom_themes_path": "Ne koristite CSS datoteke iz nepouzdanih izvora. Kada sumnjate, zatražite pregled u našem Discord kanalu.  \nNe koristite CSS datoteke iz nepouzdanih izvora. Ako niste sigurni, zatražite pregled u našem Discord kanalu.  \nIzbjegavajte korištenje CSS datoteka iz nepouzdanih izvora. U slučaju sumnje, zatražite pregled u našem Discord kanalu.",
+        "custom_themes_wiki": "Provjerite Wiki za više detalja o dodavanju prilagođenih tema. Kliknite ovdje.  \nProvjerite Wiki za dodatne informacije o dodavanju vlastitih tema. Kliknite ovdje.  \nPogledajte Wiki za više informacija o dodavanju prilagođenih tema. Kliknite ovdje.",
+        "dxvk": "DXVK predstavlja Vulkanom zasnovani sloj za prevođenje za igre na DirectX 9, 10 i 11. Omogućavanje može poboljšati kompatibilnost. Mogu se javiti problemi, posebno s starijim DirectX igrama.",
+        "esync": "Esync se fokusira na smanjenje opterećenja wineservera u igrama koje koriste puno CPU-a. Uključivanje može poboljšati performanse.",
+        "fsync": "Fsync se fokusira na smanjenje opterećenja wineservera u igrama s visokom potrošnjom CPU-a. Uključivanje može unaprijediti performanse na podržanim Linux kernelima.",
         "game_language": {
-            "fallback": "Leave blank to use HyperPlay's language.",
-            "in_game_config": "Not all games support this configuration, some have in-game language setting.",
-            "valid_codes": "Valid language codes are game-dependant."
+            "fallback": "Prazno polje će koristiti jezik HyperPlay-a.",
+            "in_game_config": "Nisu sve igre prilagođene ovoj konfiguraciji, neke nude postavke jezika u igri.",
+            "valid_codes": "Valjani jezični kodovi ovise o igri.  \nValjani jezični kodovi ovise o specifičnostima igre.  \nValjani jezični kodovi su ovisni o igri."
         },
-        "gamemode": "Feral GameMode applies automatic and temporary tweaks to the system when running games. Enabling may improve performance.",
-        "general": "Sinkronizira sa EGL ako imaš instalaciju EpicGames Launcher-a negdje drugdje i želiš uvesti igrice bez ponovnog preuzimanja.",
-        "mangohud": "MangoHUD is an overlay that displays and monitors FPS, temperatures, CPU/GPU load and other system resources.",
+        "gamemode": "Feral GameMode vrši automatske i privremene izmjene sustava kada se pokreću igre. Uključivanje može poboljšati performanse.",
+        "general": "Sinkroniziraj s EGL ako imaš instaliran Epic Games Launcher negdje drugdje i želiš prebaciti svoje igre bez ponovnog preuzimanja.",
+        "mangohud": "MangoHUD je preklopnik koji prikazuje i prati FPS, temperature, opterećenje CPU/GPU te druge resurse sustava.",
         "other": {
-            "part4": "Koristi ",
-            "part5": "Argumenti igrice",
-            "part6": " pokrenuti če se poslije komande za pokretanje, naprimjer: ",
-            "part7": " za preskoćiti pokretač u nekim igricama, itd."
+            "part4": "==WEBLATE_PART==Iskoristi  \n==WEBLATE_PART==Upotrijebi  \n==WEBLATE_PART==Primijeni ",
+            "part5": "Argumenti za igru",
+            "part6": " bit će pozvan nakon izvršenja komande za pokretanje, na primjer: ",
+            "part7": " za preskočiti aplikaciju za pokretanje u nekim igrama, itd."
         },
-        "preferSystemLibs": "Custom Wine versions (Wine-GE, Wine-Lutris) are shipped with their library dependencies. By enabling this option, these shipped libraries will be ignored and Wine will load system libraries instead. Warning! Issues may occur if dependencies are not met.",
-        "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
+        "preferSystemLibs": "Prilagođene verzije Wine-a (Wine-GE, Wine-Lutris) dolaze s vlastitim knjižničnim ovisnostima. Omogućavanjem ove opcije, te isporučene knjižnice će biti ignorirane, a Wine će učitati sustavne knjižnice umjesto njih. Upozorenje! Mogu se pojaviti problemi ako ovisnosti nisu ispunjene.  \nPrilagođene verzije Wine-a (Wine-GE, Wine-Lutris) isporučuju se s vlastitim knjižničnim ovisnostima. Aktiviranjem ove opcije, te isporučene knjižnice bit će ignorirane, a Wine će umjesto njih učitati sustavne knjižnice. Upozorenje! Mogući su problemi ako ovisnosti nisu zadovoljene.  \nPrilagođene verzije Wine-a (Wine-GE, Wine-Lutris) dolaze s knjižničnim ovisnostima. Ako omogućite ovu opciju, te knjižnice će biti zanemarene, a Wine će učitati knjižnice iz sustava. Upozorenje! Mogu se javiti problemi ako ovisnosti nisu ispunjene.",
+        "primerun": "Koristite namjensku grafičku karticu za renderiranje igre na sustavima s više GPU-a. Potrebno je samo na gaming prijenosnicima ili radnim stanicama koje koriste bezglavu GPU za renderiranje (NVIDIA Optimus, AMD CrossFire)  \nKoristite namjensku grafičku karticu za renderiranje igara na sustavima s više GPU-a. Potrebno je samo na gaming laptopima ili računalima koja koriste bezglavu GPU za renderiranje (NVIDIA Optimus, AMD CrossFire)  \nIskoristite namjensku grafičku karticu za renderiranje igara na sustavima s više GPU-a. Ovo je potrebno samo na gaming prijenosnicima ili desktop računalima koja koriste bezglavu GPU za renderiranje (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
-            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "Ova putanja omogućuje HyperPlayu da utvrdi koju verziju Protona koristi Steam za integraciju igara koje nisu na Steamu."
         },
-        "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
+        "steamruntime": "Steam pruža prilagođene biblioteke za podršku pokretanju Linux i Windows (Proton) igara. Omogućavanje može unaprijediti kompatibilnost.",
         "sync": {
-            "part1": "HyperPlay pokušava pogoditi točnu lokaciju podata i ovo če raditi u večini sličaja. U sličaju da je mapa kriva, koristi premjesti polje da ju promijeniš.",
-            "part2": "U sličaju da promijeti mapu podata za WINE/PROTON, morat če te provjeriti mapu opet pošto PROTON koristi drugu mapu (/pfx) i korisničko ime (steamuser). Tako da možete jednostavno obrisati trenutni mapu i pokušati ponovno u postavke sinkronizacije da HyperPlay pogodi pravi put.",
-            "part3": "Manualna sinkronizacija: Odaberi Preuzimanje da preuzmeš podatke od igrice sa Cloud-a. Prebacivanje za prebaciti lokalne datoteke u Cloud. Forsirano preuzimanje i prebacivanje če ignorirati lokalne verzije i one u Cloud-u.",
-            "part4": "Sinkroniziranje se automatski radi svaki put kada pokrenete igricu i završtite sa igrom."
+            "part1": "HyperPlay nastoji pogoditi ispravnu mapu za pohranu i to će raditi u većini slučajeva. Ako je mapa netočna, koristi opciju za premošćivanje da je izmijeniš.",
+            "part2": "U slučaju da promijenite mapu prefiksa za Wine ili Proton, morat ćete ponovno provjeriti putanju jer Proton koristi drugačiji prefiks (/pfx) i korisničko ime (steamuser). Tako da možete jednostavno izbrisati trenutnu putanju, izaći iz postavki sinkronizacije i ponovno se vratiti kako bi HyperPlay mogao ponovno pogoditi mapu s pravim prefiksom.\n\nAko promijenite mapu prefiksa za Wine ili Proton, trebate ponovno provjeriti put jer Proton koristi drugačiji prefiks (/pfx) i korisničko ime (steamuser). Možete jednostavno obrisati trenutnu putanju, napustiti stranicu s postavkama sinkronizacije i vratiti se kako bi HyperPlay mogao ponovno odabrati ispravnu mapu.\n\nU slučaju promjene prefiks mape za Wine ili Proton, bit će potrebno ponovno provjeriti put jer Proton koristi drugačiji prefiks (/pfx) i korisničko ime (steamuser). Možete jednostavno izbrisati trenutni put, napustiti stranicu s postavkama sinkronizacije i ponovno se vratiti kako bi HyperPlay mogao ponovno pogoditi ispravnu mapu.",
+            "part3": "Ručno sinkroniziranje: Odaberi Preuzmi za preuzimanje sačuvanih podataka igara s oblaka. Odaberi Uploada za prijenos lokalnih podataka na oblak. Forsirano preuzimanje i forsirano učitavanje će zanemariti verzije koje su lokalne ili na oblaku.",
+            "part4": "Sinkronizacija spremljenih podataka odvijat će se automatski svaki put kada započnete igru i nakon što završite s njom."
         },
-        "vkd3d": "VKD3D is a Vulkan-based translational layer for DirectX 12 games. Enabling may improve compatibility significantly. Has no effect on older DirectX games.",
+        "vkd3d": "VKD3D predstavlja Vulkanom zasnovani sloj za prevođenje za igre na DirectX 12. Omogućavanje može značajno poboljšati kompatibilnost. Nema učinka na starije igre na DirectX-u.",
         "wine": {
-            "part1": "HyperPlay traži verzije za WIne, Proton i CrossOver u sljedečim mapama:",
-            "part2": "Za druga mjesta, koristite simbolični link do tih mapa"
+            "part1": "HyperPlay pretražuje verzije Wine, Proton i CrossOver u ovim mapama:  \nHyperPlay pronalazi verzije Wine, Proton i CrossOver u sljedećim direktorijima:  \nHyperPlay istražuje verzije Wine, Proton i CrossOver u navedenim mapama:",
+            "part2": "Za druge lokacije, iskoristite simboličku vezu do jedne od ovih mapa"
         },
-        "msync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels."
+        "msync": "Msync se fokusira na smanjenje opterećenja wineservera u igrama s visokim zahtjevima za CPU. Aktivacija može poboljšati performanse u određenim igrama.",
+        "dxvkfpslimit": "Postavlja ograničenje brzine okvira za DXVK igre",
+        "dxvknvapi": "DXVK-NVAPI je implementacija NVAPI izgrađena na vrhu DXVK i linux native NVAPI, omogućuje korištenje DLSS na Nvidia GPU-ima.",
+        "disable_logs": "Označite ovu potvrdnu kućicu DA kako biste onemogućili većinu zapisivanja u log datoteke (kritične informacije se uvijek bilježe). Obavezno isključite ovu postavku prije nego što prijavite bilo kakav problem."
     },
     "info": {
         "hyperplay": {
@@ -277,504 +314,822 @@
             "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Update Available!",
             "stable": "Stable",
-            "version": "HyperPlay verzija"
+            "version": "HyperPlay izdanje"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder (click to cancel)"
+            "searching": "Pokušavam otkriti ispravnu mapu za spremanje (kliknite za otkazivanje)  \nPokušavam pronaći ispravnu mapu za spremanje (kliknite za otkazivanje)  \nPokušavam identificirati ispravnu mapu za spremanje (kliknite za otkazivanje)"
         },
-        "settings": "Postavke se automatski spremaju",
-        "version": "Wine verzija"
+        "settings": "Postavke se automatski čuvaju",
+        "version": "Wine izdanje"
     },
     "infobox": {
-        "help": "Pomoč",
-        "requirements": "Zahtjevi sustava",
-        "warning": "Warning",
-        "wine-path": "Wine Path",
+        "help": "Asistencija",
+        "requirements": "Specifikacije sustava",
+        "warning": "Prijetnja",
+        "wine-path": "Put vina",
         "wine-prefix": {
-            "title": "Wine Prefix"
+            "title": "Wine Okruženje"
         },
         "wine-repfix": {
-            "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+            "message": "Wine koristi ono što se naziva WINEPREFIX za encapsulaciju Windows aplikacija. Ova prefiks sadrži Wine konfiguracijske datoteke i reprodukciju hijerarhije datoteka C: (glavni disk na Windows operativnom sustavu). U ovoj reprodukciji C: diska pohranjuju se vaši spremljeni podaci o igri i ovisnosti instalirane putem winetricks.\n\nWine koristi tzv. WINEPREFIX za obuhvaćanje Windows aplikacija. Ovaj prefiks uključuje Wine konfiguracijske datoteke i reprodukciju strukture datoteka C: (glavnog diska na Windows OS-u). U ovoj reprodukciji C: diska pohranjuju se vaši spremljeni podaci o igri i ovisnosti instalirane putem winetricks.\n\nWine koristi ono što se naziva WINEPREFIX za zatvaranje Windows aplikacija. Ovaj prefiks sadrži Wine konfiguracijske datoteke i reprodukciju hijerarhije datoteka C: (glavni disk Windows operativnog sustava). U ovoj reprodukciji C: diska pohranjuju se vaši spremljeni podaci o igri i ovisnosti instalirane putem winetricks."
+        },
+        "wine-path-invalid": "Putanja do Wine-a je nevažeća, molimo odaberite drugu.",
+        "wine-path-none-found": "Nema pronađene Wine verzije, preuzmite jednu iz Upravitelja kompatibilnosti"
     },
     "install": {
-        "path": "Odaberi stazu instalacije"
+        "path": "Odaberi direktorij za instalaciju"
     },
     "library": {
-        "label": "Library",
-        "refresh": "Osvježi",
+        "label": "Arhiva",
+        "refresh": "Osvježi stranicu",
         "sortAscending": "Razvrstaj uzlazno",
-        "sortByStatus": "Razvrstaj po stanju",
+        "sortByStatus": "Poredaj po stanju",
         "sortDescending": "Razvrstaj silazno",
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalAZ": "Abecedno A-Z",
+        "alphabeticalZA": "Abecedno Z-A"
     },
     "loading": {
-        "default": "Učitavanje",
-        "website": "Učitavanje web-stranice"
+        "default": "Učitavanje resursa",
+        "website": "Učitavanje internetske stranice"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Prijava na Amazon"
+        "alternative_method": "Alternativni način prijave",
+        "epic": "Prijavite se na Epic Games",
+        "gog": "GOG prijavni sustav",
+        "message": "Prijavite se koristeći svoju platformu. Možete se istovremeno prijaviti na više platformi.",
+        "amazon": "Prijava na Amazon",
+        "old-mac": "Vaša verzija macOS-a je {{version}}. Potrebna je macOS 12 ili novija verzija za prijavu."
     },
     "message": {
-        "sync": "Sinkroniziranje završeno",
-        "unsync": "Desinkroniziranje završeno"
+        "sync": "Završena sinkronizacija",
+        "unsync": "Desinkronizacija je kompletna"
     },
     "notify": {
         "error": {
-            "move": "Error Moving the Game",
-            "reparing": "Error Repairing"
+            "move": "Došlo je do greške prilikom premještanja igre",
+            "reparing": "Neuspjeh u popravku"
         },
         "finished": {
             "add": {
                 "steam": {
-                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
-                    "title": "Added to Steam"
+                    "corrupt": "{{game}} nije moguće dodati svim pronađenim Steam korisnicima. Provjerite logove za više informacija. Ponovno pokretanje Steama je potrebno da bi promjene postale aktivne.",
+                    "success": "{{game}} je uspješno dodan na Steam. Za primjenu promjena potrebno je ponovno pokrenuti Steam.",
+                    "title": "Dodano u Steam"
                 }
             },
             "remove": {
                 "steam": {
-                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
-                    "title": "Removed from Steam"
+                    "corrupt": "Nije moguće ukloniti {{game}} sa svih pronađenih Steam korisnika. Provjerite dnevnike za više informacija. Ponovno pokretanje Steama je potrebno da bi promjene stupile na snagu.",
+                    "success": "{{game}} je uspješno izbrisan s Steama. Za primjenu promjena potrebno je ponovno pokrenuti Steam.",
+                    "title": "Povučeno s Steama"
                 }
             },
-            "reparing": "Zavšen popravak"
+            "reparing": "Popravak dovršen"
         },
         "install": {
-            "canceled": "Instalacije prekinuta",
-            "error": "Instalacija Neuspjela",
-            "finished": "Instalacija gotova",
-            "imported": "Game Imported",
-            "startInstall": "Installation Started"
+            "canceled": "Instalacija otkazana",
+            "error": "Neuspjeh instalacije",
+            "finished": "Instalacija završena",
+            "imported": "Uvezena igra",
+            "startInstall": "Instalacija je u tijeku",
+            "stopped": "Instalacija je zaustavljena",
+            "paused": "Instalacija pauzirana"
         },
-        "moved": "Premještanje gotovo",
-        "moving": "Moving Game",
+        "moved": "Premještanje je završeno",
+        "moving": "Kretna igra",
         "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
-            "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
+            "error": "Nije uspjelo preuzimanje izdanja s izvora, možda zbog ograničenja Github API-ja! Pokušajte kasnije."
         },
-        "uninstalled": "Deinstalirano",
+        "uninstalled": "Deinstalirati",
         "update": {
-            "canceled": "Ažuriranje prekinuto",
-            "finished": "Ažuriranje gotovo",
-            "started": "Update Started"
+            "canceled": "Ažuriranje otkazano",
+            "finished": "Ažuriranje je završilo",
+            "started": "Ažuriranje je pokrenuto",
+            "stopped": "Ažuriranje zaustavljeno",
+            "paused": "Ažuriranje pauzirano"
         }
     },
     "offline-message": {
-        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
-        "ignore": "Ignore",
-        "offline": "Offline",
-        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
-        "retrying": "Retrying"
+        "hint": "Provjeravamo vezu s: {{newline}}github.com, {{newline}}gog.com, {{newline}}store.epicgames.com te {{newline}}cloudflare-dns.com",
+        "ignore": "Ne obraćaj pažnju",
+        "offline": "Nema veze s mrežom",
+        "offline-retry-in": "Offline. Ponovno pokušavam za {{seconds}} sekundi.",
+        "retrying": "Pokušaj ponovo"
     },
-    "Open": "Otvori",
+    "Open": "Otvori aplikaciju",
     "options": {
         "advanced": {
-            "key": "Variable Name",
-            "placeHolderKey": "NAME",
-            "placeHolderValue": "E.g.: Path/To/ExtraFiles",
-            "title": "Environment Variables",
-            "value": "Value"
+            "key": "Varijabla naziv",
+            "placeHolderKey": "OZNAKA",
+            "placeHolderValue": "Primjer: Staza/Do/DodatnihDatoteka",
+            "title": "Varijable okoliša",
+            "value": "Značaj"
         },
         "env_variables": {
             "error": {
-                "empty_key": "Variable names can't be empty",
-                "equal_sign_in_key": "Variable names can't contain the \"=\" sign",
-                "space_in_key": "Variable names can't contain spaces"
+                "empty_key": "Nazivi varijabli ne smiju biti prazni",
+                "equal_sign_in_key": "Imena varijabli ne mogu sadržavati znak \"=\"  \nImena varijabli ne smiju imati znak \"=\"  \nZnak \"=\" nije dozvoljen u imenima varijabli",
+                "space_in_key": "Varijable ne mogu imati razmake u imenima"
             },
-            "example": "Do NOT include the \"=\" sign, e.g: for a setting like \"MY_FLAG=123\", set MY_FLAG in NAME and 123 in VALUE.",
-            "info": "Set environment variables to append to the command."
+            "example": "Ne uključujte znak \"=\". Na primjer, za postavku poput \"MY_FLAG=123\", postavite MY_FLAG u IME i 123 u VRIJEDNOST.\n\nNemojte uključivati znak \"=\". Na primjer, za postavku \"MY_FLAG=123\", postavite MY_FLAG kao IME i 123 kao VRIJEDNOST.\n\nNe stavljajte znak \"=\". Na primjer, za postavku \"MY_FLAG=123\", postavite MY_FLAG u naziv i 123 u vrijednost.",
+            "info": "Postavite varijable okruženja za dodavanje naredbi.  \nPostavite varijable okruženja kako biste dodali u naredbu.  \nKonfigurirajte varijable okruženja za dodavanje u naredbu."
         },
         "gameargs": {
-            "placeholder": "Ovjde upiši argumente launchera",
-            "title": "Argumenti igrice (Za pokrenuti poslije komande):"
+            "placeholder": "Ovdje stavite argumente za pokretanje",
+            "title": "Argumenti igre (Za pokretanje nakon naredbe):==WEBLATE_PART==Argumenti za igru (Za izvršavanje nakon komande):==WEBLATE_PART==Argumenti za pokretanje igre (Nakon izvršene komande):"
         },
-        "quote-args-with-spaces": "Warning: Make sure to quote args with spaces! E.g.: \"path/with spaces/\"",
+        "quote-args-with-spaces": "Upozorenje: Provjerite da li ste citirali argumente koji sadrže razmake! Na primjer: \"putanja/s/razmacima/\"",
         "wrapper": {
-            "args": "Arguments",
-            "arguments_example": "Arguments example: --arg; --extra-file=\"file-path/ with/spaces\"",
-            "exe": "Wrapper",
-            "placeHolderKey": "New Wrapper",
-            "placeHolderValue": "Wrapper Arguments",
-            "title": "Wrapper command:"
+            "args": "Diskusije",
+            "arguments_example": "Primjer argumenata: --arg; --extra-file=\"putanja-do-datoteke/ s/prostorima\"  \nPrimjer argumenata: --arg; --extra-file=\"datoteka-putanja/ s/prostorima\"  \nPrimjer argumenata: --arg; --extra-file=\"file-path/ s/prostorima\"",
+            "exe": "Završni sloj",
+            "placeHolderKey": "Novi sloj",
+            "placeHolderValue": "Argumenti omota igre",
+            "title": "Naredba omota:"
         }
     },
     "other": {
-        "gogdl-version": "GOGDL Version: ",
-        "legendary-version": "Legendary Version: ",
-        "weblate": "Help Improve this translation.",
+        "gogdl-version": "GOGDL izdanje: ",
+        "legendary-version": "Legendarna verzija igre: ",
+        "weblate": "Pomoć u unapređenju ovog prijevoda.",
         "nile-version": "Verzija Nila: "
     },
-    "Other": "Other",
+    "Other": "Drugačije",
     "placeholder": {
-        "alt-gogdl-bin": "Using built-in GOGDL binary...",
-        "alt-legendary-bin": "Using built-in Legendary binary...",
-        "custom_themes_path": "Select the path to look for custom CSS files",
-        "egs-prefix": "Put gdje je EGS instaliran",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
-        "alt-nile-bin": "Korištenje ugrađenog Nile binarnog..."
+        "alt-gogdl-bin": "Iskorištavanje ugrađenog GOGDL binarnog alata...",
+        "alt-legendary-bin": "Iskorištavanje ugrađenog Legendary binarnog datoteke...",
+        "custom_themes_path": "Odaberite putanju za traženje vlastitih CSS datoteka",
+        "egs-prefix": "Direktorij u kojem je EGS instaliran",
+        "prefered_language": "2-znakovni kod (npr.: \"en\" ili \"fr\")",
+        "alt-nile-bin": "Korištenje ugrađenog Nile binarnog...",
+        "dxvkfpsvalue": "Pozitivna cijela brojna vrijednost (npr. 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
         "mac": "Mac",
         "win": "Windows"
     },
-    "please-wait": "Please wait...",
-    "progress": "Progress",
+    "please-wait": "Molim vas, sačekajte...",
+    "progress": "Napredovanje",
     "queue": {
         "label": {
-            "canceled": "Canceled",
-            "clear": "Clear List",
+            "canceled": "Prekinuto",
+            "clear": "Prazni popis",
             "downloading": "Downloading",
             "empty": {
-                "queue": "Nothing to download"
+                "queue": "Nema datoteka za preuzimanje",
+                "finished": "Nema preuzetih datoteka"
             },
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads",
-            "pause": "Zaustavi preuzimanja",
-            "resume": "Nastavi preuzimanje"
+            "remove": "Ukloni s popisa Preuzimanja",
+            "pause": "Prekini preuzimanje",
+            "resume": "Nastavi preuzimanje datoteke"
         }
     },
-    "Recent": "Played Recently",
-    "search": "Traži igre",
+    "Recent": "Nedavno igrano",
+    "search": "Potraži igre",
     "setting": {
-        "adddesktopshortcuts": "Add desktop shortcuts automatically",
-        "addgamestostartmenu": "Add games to start menu automatically",
-        "addgamestosteam": "Add games to Steam automatically",
-        "alt-gogdl-bin": "Odaberi drugu verziju GOGDL programa za koristiti",
-        "alt-legendary-bin": "Odaberi drugu verziju Legendary programa",
-        "autodxvk": "Auto Install/Update DXVK on Prefix",
-        "autosync": "Automatsko sinkroniziranje podataka",
-        "autovkd3d": "Auto Install/Update VKD3D on Prefix",
-        "change-target-exe": "Select an alternative EXE to run",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover/Wine Version",
-        "custom_themes_path": "Custom Themes Path",
-        "customWineProton": "Custom Wine/Proton Paths",
-        "darktray": "Use Dark Tray Icon",
-        "default-install-path": "Zadani put instalacije",
-        "default-steam-path": "Default Steam path",
-        "defaultWinePrefix": "Set Folder for new Wine Prefixes",
-        "disable_controller": "Disable HyperPlay navigation using controller",
-        "discordRPC": "Enable Discord Rich Presence",
-        "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
-        "egs-sync": "Sinkroniziraj sa instaliranim Epic Games",
-        "enableFSRHack": "Enable FSR Hack (Wine version needs to support it)",
+        "adddesktopshortcuts": "Dodaj prečace na radnu površinu bez ručnog unosa",
+        "addgamestostartmenu": "Dodajte igre u izbornik Start bez ručnog unosa",
+        "addgamestosteam": "Automatsko dodavanje igara na Steam",
+        "alt-gogdl-bin": "Odaberi drugu GOGDL izvršnu datoteku za korištenje",
+        "alt-legendary-bin": "Odaberi drugu legendarno binarnu verziju",
+        "autodxvk": "Automatsko instaliranje/ ažuriranje DXVK na Prefixu",
+        "autosync": "Sinkronizacija sačuvanih podataka automatski",
+        "autovkd3d": "Automatska instalacija/ ažuriranje VKD3D u Prefiksu",
+        "change-target-exe": "Izaberite alternativni EXE za izvršavanje",
+        "checkForUpdatesOnStartup": "Provjeri ima li ažuriranja za HyperPlay pri pokretanju",
+        "crossover-version": "Crossover/Wine varijanta",
+        "custom_themes_path": "Staza prilagođenih tema",
+        "customWineProton": "Prilagođene putanje za Wine/Proton",
+        "darktray": "Odaberi tamnu ikonu za sistemsku traku",
+        "default-install-path": "Zadani put za instalaciju",
+        "default-steam-path": "Zadani direktorij Steama",
+        "defaultWinePrefix": "Postavi direktorij za nove Wine prefikse",
+        "disable_controller": "Onemogući Hyperplay navigaciju pomoću kontrolera",
+        "discordRPC": "Uključi Discord Rich Presence",
+        "download-no-https": "Preuzmite igre bez HTTPS-a (korisno za CDN-ove npr. LanCache)  \nPreuzimanje igara bez HTTPS-a (korisno za CDN-ove poput LanCache)  \nIgre se mogu preuzeti bez HTTPS-a (korisno za CDN-ove kao što je LanCache)",
+        "egs-sync": "Sinkroniziraj s instaliranim Epic Games klijentom",
+        "enableFSRHack": "Omogući FSR hack (Wine verzija mora ga podržavati)  \nOmogući FSR hack (verzija Wine-a mora ga podržavati)  \nAktiviraj FSR hack (verzija Wine-a treba imati podršku za to)",
         "eosOverlay": {
-            "cancelInstall": "Cancel",
-            "checkForUpdates": "Check for updates",
-            "checkingForUpdates": "Checking for updates...",
-            "currentVersion": "Current Version: {{version}}",
-            "disable": "Disable",
-            "enable": "Enable",
-            "install": "Install",
-            "installed": "The Epic Overlay is installed",
-            "installing": "The Epic Overlay is being installed...",
-            "latestVersion": "Latest Version: {{version}}",
-            "notInstalled": "The Epic Overlay is not installed",
-            "notInstalledMsg": "The Epic Overlay is not installed. Do you want to install it now?",
-            "notInstalledTitle": "Overlay not installed",
-            "remove": "Uninstall",
-            "removeConfirm": "Are you sure you want to uninstall the Epic Overlay?",
-            "removeConfirmTitle": "Confirm overlay removal",
-            "updateNow": "Update",
-            "updating": "Updating..."
+            "cancelInstall": "Poništi",
+            "checkForUpdates": "Potražite ažuriranja",
+            "checkingForUpdates": "Traženje ažuriranja...",
+            "currentVersion": "Aktualna verzija: {{version}}",
+            "disable": "Deaktiviraj",
+            "enable": "Uključi",
+            "install": "Instalacija",
+            "installed": "Epic Overlay je instaliran na sustav",
+            "installing": "Epic Overlay se trenutno instalira...",
+            "latestVersion": "Najnovija verzija: {{version}}  \nNajnovija verzija: {{version}}  \nZadnja verzija: {{version}}",
+            "notInstalled": "Epic Overlay nije uočen",
+            "notInstalledMsg": "Epic Overlay nije instaliran. Želite li ga sada instalirati?  \nEpic Overlay nije instaliran. Da li želite instalirati sada?  \nEpic Overlay nije instaliran. Hoćete li ga sada instalirati?",
+            "notInstalledTitle": "Overlay nije dodan",
+            "remove": "Deinstalacija",
+            "removeConfirm": "Jeste li sigurni da želite izbrisati Epic Overlay?",
+            "removeConfirmTitle": "Potvrdi brisanje preklopa",
+            "updateNow": "Nadogradnja",
+            "updating": "Ažuriranje u tijeku..."
         },
-        "esync": "Enable Esync",
-        "exit-to-tray": "Izađi u ikonu na sistemsku ladicu",
-        "FsrSharpnessStrenght": "FSR Sharpness Strength",
-        "fsync": "Enable Fsync",
-        "gamemode": "Koristi GameMode(Feral Game Mode mora biti instaliran)",
-        "language": "Odaberi Jezik",
+        "esync": "Uključi Esync",
+        "exit-to-tray": "Izlaz u ikonu sistemske ladice",
+        "FsrSharpnessStrenght": "FSR Snaga Oštrine Slike",
+        "fsync": "Uključi Fsync",
+        "gamemode": "Primijenite GameMode (Feral Game Mode mora biti postavljen)",
+        "language": "Odabir jezika",
         "library_top_option": {
-            "disabled": "Disabled",
-            "favourites": "Favourite Games",
-            "recently_played": "Recently Played Games",
-            "recently_played_installed": "Recently Played Games (Only Installed)"
+            "disabled": "Deaktivirano",
+            "favourites": "Najdraže igre",
+            "recently_played": "Igre koje ste igrali u posljednje vrijeme",
+            "recently_played_installed": "Nedavno Igrane Igre (Samo Instalirane)  \nNedavno Igrane Igre (Samo Instalirane)  \nNedavno Igrane Igre (Samo Instalirane)"
         },
-        "library_top_section": "Library Top Section",
+        "library_top_section": "Gornji segment knjižnice",
         "log": {
-            "copy-to-clipboard": "Copy log content to clipboard.",
+            "copy-to-clipboard": "Kopiraj sadržaj dnevnika u međuspremnik.  \nKopiraj sadržaj zapisnika u međuspremnik.  \nKopiraj log sadržaj u međuspremnik.",
             "current-log": "Current log",
             "instructions": "Pridružite se našem Discordu i potražite odjeljak za \"#-podršku\". Pročitajte prikvačenu nit \"Prvo me pročitaj | Često postavljana pitanja\" i slijedite upute za dijeljenje ovih zapisa i svih relevantnih informacija o vašem problemu.",
-            "instructions_title": "How to report a problem?",
+            "instructions_title": "Kako prijaviti problem?  \nKako se prijaviti na problem?  \nKako obavijestiti o problemu?",
             "last-log": "Last Log",
-            "no-file": "No log file found.",
-            "show-in-folder": "Show log file in folder"
+            "no-file": "Nema datoteke s zapisima",
+            "show-in-folder": "Prikaži datoteku s zapisima u direktoriju",
+            "instructions-part-02": "Kako bismo vam pomogli dijagnosticirati i riješiti problem što je brže moguće, molimo vas da pružite što više informacija, uključujući kopiju vaših dnevnika. Naš tim za podršku će pratiti oba kanala i učiniti sve što je moguće da brzo odgovori na vaš problem. Hvala vam na strpljenju i razumijevanju dok radimo na rješavanju bilo kakvih problema na koje možete naići.",
+            "instructions-part-01": "Ako naiđete na bilo kakve probleme dok koristite HyperPlay, imamo dva određena područja za prijavu vaših problema na našem Discord poslužitelju. Ako ste igrač, molimo vas da prijavite bilo kakve probleme posjetom forumu za podršku igračima. Ako ste razvojni programer igara, molimo vas da prijavite bilo kakve probleme posjetom forumu za podršku programerima.",
+            "join-hyperplay-discord": "Pridružite se našem Discordu"
         },
-        "mangohud": "Omogući Mangohud (Mangohud mora biti instaliran)",
+        "mangohud": "Uključi Mangohud (moraš instalirati Mangohud)",
         "manualsync": {
-            "download": "Preuzmi",
-            "forcedownload": "Forsiraj preuzimanje",
-            "forceupload": "Forsijaj prebacivanje podataka",
-            "sync": "Sinkroniziraj",
-            "syncing": "Sinkroniziranje",
-            "title": "Manualna sinkronizacija podataka",
-            "upload": "Prebaci"
+            "download": "Preuzmi datoteku",
+            "forcedownload": "Obavezno preuzimanje",
+            "forceupload": "Obavezno prebacivanje podataka",
+            "sync": "Uskladi",
+            "syncing": "Sinkroniziranje podataka",
+            "title": "Ručno sinkroniziranje sačuvanih podataka",
+            "upload": "Prenesi"
         },
-        "maxRecentGames": "Recent Games to Show",
-        "maxworkers": "Maksimalan broj radnika za preuzimanje",
-        "minimize-on-launch": "Minimize HyperPlay After Game Launch",
-        "offlinemode": "Pokreni igrice bez pristupa internetu",
-        "prefered_language": "Prefered Language (Language Code)",
-        "preferSystemLibs": "Prefer system libraries",
+        "maxRecentGames": "Igre Igrane Nedavno za Prikaz",
+        "maxworkers": "Najveći broj radnika za preuzimanje",
+        "minimize-on-launch": "Minimizirajte HyperPlay nakon lansiranja igre",
+        "offlinemode": "Pokreni igru bez interneta",
+        "prefered_language": "Željeni jezik (jezični kod)",
+        "preferSystemLibs": "Dajte prednost sistemskim bibliotekama",
         "primerun": {
             "confirmation": {
-                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
-                "title": "Only 1 GPU detected"
+                "message": "U ovom sustavu otkrivena je samo jedna grafička kartica. Imajte na umu da je ova opcija namijenjena sustavima s više GPU-a koji imaju bezglave GPU-ove (poput prijenosnih računala). U sustavima s jednom grafičkom karticom, GPU se automatski koristi, a omogućavanje ove opcije može uzrokovati probleme. Želite li doista omogućiti ovu opciju?\n\nU ovom sustavu je otkrivena samo jedna grafička kartica. Imajte na umu da je ova opcija namijenjena sustavima s više GPU-a koji koriste bezglave GPU-ove (poput prijenosnih računala). Na sustavima s jednom grafičkom karticom, GPU se automatski koristi, a omogućavanje ove opcije može izazvati probleme. Da li doista želite omogućiti ovu opciju?\n\nSustav je otkrio samo jednu grafičku karticu. Imajte na umu da je ova opcija namijenjena sustavima s više GPU-a koji imaju bezglave GPU-ove (poput prijenosnih računala). Na sustavima s jednom grafičkom karticom, GPU se automatski koristi, a omogućavanje ove opcije može dovesti do problema. Želite li zaista omogućiti ovu opciju?",
+                "title": "Samo jedan GPU je prepoznat"
             },
-            "description": "Use Dedicated Graphics Card"
+            "description": "Upotrijebite namjensku grafičku karticu"
         },
         "runexe": {
-            "message": "Povicute i pustite datoteke ovjde",
-            "title": "Pokreni EXE na putu"
+            "message": "Povucite datoteke ovdje i ispustite ih",
+            "title": "Pokreni EXE unutar Prefiksa"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually (click to retry)",
-            "placeholder": "Odaberi točnu mapu podataka za igricu",
-            "warning": "Please check twice if the path is correct (click to retry)"
+            "not-found": "Nije pronađena mapa za spremanje, molimo odaberite je ručno (kliknite za ponovni pokušaj)",
+            "placeholder": "Odaberi specifičnu mapu za sačuvane igre",
+            "warning": "Molimo vas da dvaput provjerite je li putanja ispravna (kliknite za ponovni pokušaj)  \nMolimo vas da dvaput provjerite je li putanja točna (kliknite za ponovni pokušaj)  \nProvjerite dvaput je li putanja ispravna (kliknite za ponovni pokušaj)"
         },
-        "select_theme": "Select Theme",
-        "showfps": "Pokaži FPS (DX9, 10 i 11)",
-        "start-in-tray": "Start Minimized",
-        "steamruntime": "Use Steam Runtime",
-        "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "WinePrefix mapa",
-        "wineversion": "Wine verzija",
-        "ignoreGameUpdates": "Ignorirajte ažuriranja igre",
-        "autoUpdateGames": "Automatski ažuriraj igre",
-        "disable_logs": "Onemogući zapisnike",
-        "addgamestoapplications": "Automatski dodajte igre u aplikacije",
-        "showMetalOverlay": "Prikaži preklapanje statistike",
+        "select_theme": "Odabir teme",
+        "showfps": "Prikaži FPS (DX9, 10 i 11)  \nPrikaži FPS (za DX9, 10 i 11)  \nPrikazivanje FPS-a (DX9, 10 i 11)",
+        "start-in-tray": "Pokreni u minimiziranom načinu",
+        "steamruntime": "Upotrijebite Steam Runtime",
+        "winecrossoverbottle": "CrossOver bočica",
+        "wineprefix": "WinePrefix fascikl",
+        "wineversion": "Wine inačica",
+        "ignoreGameUpdates": "Preskočite ažuriranja igre",
+        "autoUpdateGames": "Igre se ažuriraju automatski",
+        "disable_logs": "Isključi zapisivanje",
+        "addgamestoapplications": "Igre se automatski dodaju u aplikacije",
+        "showMetalOverlay": "Prikaži statistički prikaz",
         "alt-nile-bin": "Odaberite alternativni Nile Binary",
-        "msync": "Enable Esync",
-        "autodxvknvapi": "Auto Install/Update DXVK on Prefix"
+        "msync": "Aktiviraj Msync",
+        "autodxvknvapi": "Automatska instalacija/ ažuriranje DXVK-NVAPI unutar Prefixa",
+        "autoLaunchHyperPlay": "Automatski pokreni HyperPlay",
+        "steamId": "Steam ID",
+        "dxvkfpslimit": "Ograniči FPS (DX9, 10 i 11)"
     },
     "settings": {
         "battlEyeRuntime": {
-            "installing": "Installing BattlEye Runtime...",
+            "installing": "Instalacija BattlEye Runtime-a...",
             "name": "BattlEye AntiCheat Runtime"
         },
-        "clear-cache": "Clear HyperPlay Cache",
-        "copiedToClipboard": "Copied to Clipboard!",
-        "copyToClipboard": "Copy All Settings to Clipboard",
-        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
+        "clear-cache": "Očisti predmemoriju HyperPlay",
+        "copiedToClipboard": "Kopirano u privremenu memoriju!",
+        "copyToClipboard": "Kopiraj sve postavke u clipboard za kasniju upotrebu",
+        "default_hint": "Izmjene u ovom dijelu primjenjuju se samo kao zadane opcije prilikom instalacije igara. Ako želite promijeniti postavke igre koja je već instalirana, upotrijebite gumb Postavke na stranici igre.",
         "eacRuntime": {
             "gameModeRequired": {
-                "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
-                "title": "GameMode required"
+                "message": "Za rad EAC runtime-a na Flatpaku potreban je GameMode. Želite li ga omogućiti sada?",
+                "title": "Obavezna je igračka postavka"
             },
-            "installing": "Installing EAC Runtime...",
-            "name": "EasyAntiCheat Runtime"
+            "installing": "Instalacija EAC Runtime-a...",
+            "name": "EasyAntiCheat Runtime==WEBLATE_PART==Runtime EasyAntiCheat==WEBLATE_PART==EasyAntiCheat izvršno vrijeme"
         },
         "gameMode": {
             "eacRuntimeEnabled": {
-                "message": "The EAC runtime is enabled, which won't function correctly without GameMode. Do you want to disable the EAC Runtime and GameMode?",
-                "title": "EAC runtime enabled"
+                "message": "EAC runtime je omogućen, koji neće ispravno raditi bez GameMode-a. Želite li onemogućiti EAC Runtime i GameMode?\n\nEAC runtime je aktiviran, ali neće ispravno funkcionirati bez GameMode-a. Želite li isključiti EAC Runtime i GameMode?\n\nEAC runtime je uključen, no neće raditi ispravno bez GameMode-a. Da li želite onemogućiti EAC Runtime i GameMode?",
+                "title": "EAC runtime je uključen"
             }
         },
         "log": {
-            "long-log-hint": "Log truncated, last 1000 lines are shown!"
+            "long-log-hint": "Zapis je skraćen, prikazano je posljednjih 1000 unosa!"
         },
         "navbar": {
-            "advanced": "Advanced",
+            "advanced": "Napredna",
             "games_settings_defaults": "Game Defaults",
-            "general": "Općenito",
-            "log": "Log",
-            "other": "Ostalo",
-            "sync": "Spremi-Podatke",
+            "general": "Opći pregled",
+            "log": "Evidencija",
+            "other": "Ostale opcije",
+            "sync": "Oblačno spremanje podataka",
             "wineExt": "Wine Extensions",
-            "accounts": "Konta",
-            "systemInformation": "_Informacije sustava"
+            "accounts": "Nalozi",
+            "systemInformation": "_Informacije o sustavu_  \n_Podaci sustava_  \n_Detalji sustava_"
         },
-        "open-config-file": "Open Config File",
-        "reset-hyperplay": "Reset HyperPlay",
+        "open-config-file": "Pristupite datoteci s postavkama",
+        "reset-hyperplay": "Vraćanje HyperPlay na zadane postavke",
         "saves": {
             "label": "Save Location:",
-            "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+            "warning": "Značajka Cloud Saves je u beta verziji, molimo vas da napravite sigurnosnu kopiju svojih spremanja prije sinkronizacije (u slučaju da nešto pođe po zlu)  \nZnačajka Cloud Saves je u beta fazi, molimo vas da napravite sigurnosnu kopiju svojih podataka prije sinkronizacije (u slučaju da nešto ne uspije)  \nZnačajka Cloud Saves je u beta testiranju, molimo vas da sačuvate svoje spremanje prije sinkronizacije (u slučaju da dođe do problema)"
         },
-        "gamesSettings": "Game settings",
+        "gamesSettings": "Podešavanja igara",
         "wine": {
             "manager": {
-                "title": "Wine Manager"
+                "title": "Wine upravitelj"
             }
         },
         "systemInformation": {
-            "copyToClipboard": "Kopiraj u međuspremnik",
-            "memory": "Memorija"
-        }
+            "copyToClipboard": "Kopiraj u međuspremnik podataka",
+            "memory": "==WEBLATE_PART==\nPamćenje==WEBLATE_PART==\nSjećanje==WEBLATE_PART==\nMemorijski prostor",
+            "gpu": "GPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "cpu": "CPU:",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpuDriver": "Upravljački program: {{driverVersion}}",
+            "memoryStats": "{{percentUsed}}% korišteno ({{usedGib}} / {{totalGib}}",
+            "version": "Verzija: {{appVersion}}",
+            "steamDeck": "Steam Deck",
+            "systemModel": "Model sustava:",
+            "os": "Operativni sustav:",
+            "osNameFlatpak": "{{osName}} (unutar Flatpak)",
+            "osVersion": "Verzija {{versionNumber}}",
+            "showDetailed": "Prikaži detaljne specifikacije sustava",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "Legendarno: {{legendaryVersion}}"
+        },
+        "reset-extension": "Resetiraj ekstenziju"
     },
-    "Settings": "Postavke",
+    "Settings": "Postavke sustava",
     "sidebar": {
         "collapse": "Collapse sidebar",
         "uncollapse": "Uncollapse sidebar",
-        "store": "Trgovina",
-        "library": "Biblioteka"
+        "store": "Analitika je isključena",
+        "library": "Arhiva",
+        "achievements": "Postignuća",
+        "downloadManager": "Upravitelj preuzimanja"
     },
     "status": {
-        "installing": "Instaliranje u tijeku",
-        "logging": "Logging In...",
-        "processing": "Obrada datoteka, pričekaj",
+        "installing": "Instalacija se trenutno provodi",
+        "logging": "Prijava u račun...",
+        "processing": "U tijeku je obrada datoteka, molimo vas da pričekate",
         "preparing_login": "Priprema prijave... "
     },
-    "store": "Epic Store",
+    "store": "Epic prodavnica",
     "stores": "Stores",
     "title": {
-        "allGames": "All Games"
+        "allGames": "Sve igre"
     },
     "toolbox": {
         "settings": {
-            "default-wineprefix": "Select the default prefix folder for new configs",
-            "wineprefix": "Select a Folder for new Wine Prefixes"
+            "default-wineprefix": "Odaberite zadani folder s prefiksom za nove postavke",
+            "wineprefix": "Izaberite mapu za nove Wine prefikse"
         }
     },
     "tooltip": {
-        "addpath": "Add New Path",
-        "removepath": "Remove Path"
+        "addpath": "Dodaj novi putokaz",
+        "removepath": "Obriši Putanju"
     },
     "tray": {
-        "about": "About",
-        "quit": "Quit",
-        "reload": "Reload",
-        "show": "Pokaži"
+        "about": "O temi",
+        "quit": "Prekini",
+        "reload": "Ponovno učitavanje",
+        "show": "Prikazati"
     },
     "two_col_table": {
-        "save_hint": "Changes in this table are not saved automatically. Click the + button"
+        "save_hint": "Ove promjene u tablici se ne spremaju automatski. Kliknite na gumb +"
     },
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
-        "logging_out": "Logging out",
-        "logout": "Logout",
-        "logout_confirmation": "Jeste li sigurni da se želite odjaviti?",
-        "manageaccounts": "Manage Accounts",
-        "quit": "Quit",
-        "logIn": "Prijavi se"
+        "logging_out": "Odjava",
+        "logout": "Izlaz iz računa",
+        "logout_confirmation": "Želite li se stvarno odjaviti?",
+        "manageaccounts": "Administracija računa",
+        "quit": "Prekini",
+        "logIn": "Ulogirajte se",
+        "manageStore": "Upravljaj trgovinama"
     },
     "webview": {
         "controls": {
-            "back": "Nazad",
-            "forward": "Naprijed",
-            "openInBrowser": "Otvori u pretraživaću",
-            "reload": "Osvježi stranicu"
+            "back": "Nazad na prethodno",
+            "forward": "Napreduj",
+            "openInBrowser": "Pokreni u pretraživaču",
+            "reload": "Osvježi ovu stranicu"
         }
     },
     "wine": {
-        "actions": "Action",
+        "actions": "Radnja",
         "manager": {
             "link": "Compatibility Layer ",
-            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Compatibility Layer ",
-            "unzipping": "Unzipping"
+            "not-found": "Nema pronađenih verzija Wine. Molimo vas da kliknete na ikonu za osvježavanje kako biste pokušali ponovo.  \nNema verzija Wine. Pritisnite ikonu za osvježavanje da biste pokušali ponovno.  \nNema dostupnih verzija Wine. Kliknite na ikonu za osvježavanje da biste pokušali ponovo.",
+            "title": "Kompatibilni sloj ",
+            "unzipping": "Dezintegracija"
         },
-        "release": "Release Date",
-        "size": "Size"
+        "release": "Datum lansiranja",
+        "size": "Obim"
     },
     "externalLink": {
-        "dontAskAgain": "Ne pitaj više",
-        "warning": "Upravo ćete otvoriti vanjsku poveznicu."
+        "dontAskAgain": "Ne postavljaj to pitanje opet",
+        "warning": "Uskoro ćete otvoriti vanjsku vezu.  \nSpremate se otvoriti vanjsku poveznicu.  \nPripremite se za otvaranje vanjske veze."
     },
     "wiki_info": {
-        "not_found": "Nismo mogli pronaći dodatne informacije."
+        "not_found": "Nismo uspjeli pronaći dodatne informacije.  \nNismo mogli pronaći dodatne podatke.  \nNismo uspjeli pronaći dodatne detalje."
     },
     "dlc": {
-        "actions": "Radnje",
-        "installDlcs": "Instaliraj sve DLC-eve",
-        "noDlcFound": "Nije pronađen nijedan DLC",
-        "size": "Size",
-        "title": "Title"
+        "actions": "Aktivnosti",
+        "installDlcs": "Instaliraj sve dodatke",
+        "noDlcFound": "Nema dostupnih DLC-ova",
+        "size": "Obim",
+        "title": "Tema"
     },
     "prime-gaming": "Prime Gaming",
     "amazon": "Amazon",
     "Amazon Games": "Amazonove igre",
     "hyperplayOverlay": {
         "txnRequest": {
-            "FAILED": "Prijevod prekinut."
+            "FAILED": "Prekid transakcije.",
+            "INITIATED": "Zahtjev za transakciju na čekanju",
+            "CONFIRMED": "Transakcija potvrđena",
+            "PENDING": "Transakcija je poslana"
+        },
+        "signatureRequest": {
+            "CONFIRMED": "Potpis poslan",
+            "INITIATED": "Zahtjev za potpisom na čekanju",
+            "FAILED": "Potpis prekinut"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Prilagođeni token dodan",
+            "INITIATED": "Dodaj prilagođeni zahtjev za tokenom na čekanju",
+            "FAILED": "Zahtev za prilagođeni token otkazan"
+        },
+        "chainRequest": {
+            "INITIATED": "Prilagođeni zahtjev za mrežu",
+            "CONFIRMED": "Prilagođena mreža dodana",
+            "FAILED": "Prilagođena mreža je otkazana"
+        },
+        "greeting": {
+            "description": "HyperPlay Overlay je spreman! Pritisnite {{overlayKeyMod}} + X za prikazivanje ili skrivanje.",
+            "title": "HyperPlay preklapanje"
+        },
+        "description": {
+            "PENDING": "Čekanje na potvrdu blockchaina. Obavijestit ćemo vas kada bude potvrđeno",
+            "CONFIRMED": "Transakcija je uspješno potvrđena!",
+            "FAILED": "Transakcija je otkazana ili nije podnesena, pokušajte ponovo",
+            "INITIATED": "Potvrda novčanika čeka u vašem mobilnom novčaniku"
+        },
+        "extensionNotification": {
+            "DESCRIPTION": "Pritisnite {{overlayKeyMod}} + X za pregled ove transakcije",
+            "TITLE": "Zatražena transakcija"
         }
     },
     "notification": {
         "wine-download": {
-            "title": "Compatibility Layer"
+            "title": "Kompatibilni sloj",
+            "message": "Postavljanje zadnjeg sloja kompatibilnosti"
         },
         "wine-download-failed": {
-            "title": "Pogreška"
+            "title": "Pogreška",
+            "message": "Neuspjeh u postavljanju zadnjeg sloja kompatibilnosti"
         }
     },
     "hyperplay": {
         "buttons": {
-            "noThanks": "Ne, hvala"
+            "noThanks": "Ne, ne trebam hvala",
+            "agree": "Slažem se"
         },
-        "folder": "Mapa",
+        "folder": "Mapa==WEBLATE_PART==Folder==WEBLATE_PART==Direktorij",
         "onboarding": {
-            "terms": "Uvjeti usluge",
+            "terms": "Uvjeti pružanja usluga",
             "walletSelection": {
                 "screens": {
                     "import": {
-                        "learnMore": "Saznaj više.",
-                        "orWord": "ILI"
+                        "learnMore": "Saznajte više.  \nUpoznajte se s više informacija.  \nIstražite dodatne detalje.",
+                        "orWord": "ILI",
+                        "title": "Odaberite preglednik za uvoz",
+                        "useRecoveryPhraseInfo": "Ova funkcija se preporučuje za napredne korisnike i programere. Vaša tajna fraza za oporavak pohranjuje se lokalno u MetaMasku i nikada se ne dijeli s HyperPlayom.",
+                        "cantFindProfile": "Ne mogu pronaći vaš profil preglednika?",
+                        "details": "Preglednici u nastavku već imaju instaliran MetaMask. Odaberite onaj iz kojeg želite uvesti.",
+                        "useRecoveryPhrase": "Uvezi koristeći frazu za oporavak",
+                        "createNewWallet": "Kreiraj novi MM ekstenzijski novčanik"
+                    },
+                    "info": {
+                        "createWalletDescription": "Kliknite na \"Kreiraj novčanik\" ispod ako nemate novčanik ili želite stvoriti novi:",
+                        "digitalAssets": {
+                            "details": "Novčanici se koriste za slanje, primanje, pohranu i prikaz digitalnih sredstava poput tokena i NFT-ova.",
+                            "title": "Dom za vaše digitalne resurse"
+                        },
+                        "login": {
+                            "title": "Novi način prijave",
+                            "details": "Alternativa stvaranju novih računa i lozinki na svakoj web stranici je jednostavno povezivanje vaše novčanika."
+                        },
+                        "skip": "Preskoči za sada",
+                        "title": "Što je novčanik?",
+                        "createWalletCTA": "Kreiraj novčanik"
+                    },
+                    "scan": {
+                        "details": "Kreirajte šifrirani komunikacijski kanal. Vaši ključevi nikada neće biti dijeljeni s HyperPlay.",
+                        "dontHaveWallet": "Nemate novčanik?",
+                        "getMetamask": "Preuzmi MetaMask",
+                        "title": "Skenirajte QR s ",
+                        "updateWarning": "Imate problema? Provjerite je li MetaMask ažuriran."
                     }
-                }
-            }
+                },
+                "title": "Povezivanje novčanika",
+                "pleaseConnect": "Molimo povežite svoj novčanik ili preuzmite mobilnu aplikaciju Metamask da biste započeli:"
+            },
+            "analytics": {
+                "privacyPolicyHere": "Politika privatnosti ovdje.",
+                "title": "Pomozite nam poboljšati HyperPlay!",
+                "body": "HyperPlay želi prikupiti podatke o korištenju kako bi bolje razumio kako naši korisnici koriste aplikaciju. Ove informacije pomažu nam razumjeti kako koristite aplikaciju i omogućuju nam da HyperPlay učinimo još boljim za vas.",
+                "anonymized": "Pošaljite anonimne klikove i interakcije s igrom;",
+                "neverCollectIP": " prikupi svoju punu IP adresu;",
+                "neverSellData": " prodaj podatke za profit. Ikada!",
+                "optOut": "Uvijek vam omogućuje da se isključite putem Postavki;",
+                "neverCollectPersonal": " prikupljati ključeve, adrese, salda, hash-e ili bilo kakve osobne informacije;",
+                "privacyCaption": "Ovi podaci su agregirani i stoga su anonimni u svrhu Opće uredbe o zaštiti podataka (EU) 2016/679. Za više informacija o našim praksama privatnosti, molimo pogledajte naš ",
+                "hyperplayWill": "HyperPlay će:"
+            },
+            "connectionCanceled": {
+                "title": "Veza otkazana!",
+                "description": "Molimo potvrdite zahtjev za povezivanje na svom mobilnom novčaniku kako biste nastavili."
+            },
+            "connectionConnected": {
+                "description": "Vaš novčanik je povezan. Spremni ste za igru.",
+                "title": "Novčanik povezan!"
+            },
+            "welcome": {
+                "text": {
+                    "description": "HyperPlay je pokretač igara i agregator trgovina igara iz budućnosti. S HyperPlayom možete ponijeti svoj novčanik, tokene i imovinu u svaku igru. HyperPlay podržava cijelu biblioteku Epic Storea, GOG-a i naše vlastite HyperPlay trgovine. Korištenjem HyperPlaya, slažete se s našim",
+                    "construction": "HyperPlay je u izradi.",
+                    "bugs": "Imajte na umu da je HyperPlay javna alfa. Mnoge značajke su još uvijek u razvoju i bit će grešaka.",
+                    "communityCTA_2": "zajednica. Zajedno oblikujmo budućnost gaminga!",
+                    "communityCTA_1": "Voljeli bismo čuti vaše mišljenje i da nam se pridružite u našem"
+                },
+                "title": "Dobrodošli u HyperPlay ranu pristup!"
+            },
+            "connectAgain": "Ponovno se povežite"
         },
         "browserImport": {
-            "appId": "ID aplikacije",
-            "profile": "Profil"
+            "appId": "Aplikacijski ID",
+            "profile": "Profil igrača"
         },
         "gamecard": {
-            "paused": "Zaustavljeno",
-            "installing": "Preuzimanje …"
+            "paused": "Prekinuto",
+            "installing": "Preuzimam...",
+            "extracting": "Izdvajanje...",
+            "installed": "Spremno za igru",
+            "distributables": "Instaliranje distributivnih datoteka..."
         },
-        "misc": "Nikada",
-        "turnAnalyticsOn": "Uključi",
+        "misc": "Nikada nikad",
+        "turnAnalyticsOn": "Pokreni",
         "discordApp": "Discord",
         "achievements": {
             "noAchievements": {
-                "oops": "Ups!"
+                "oops": "Uh-oh!",
+                "doubleCheckMessage": "Izgleda da trenutno ne možemo pronaći nijednu igru na vašem Steam računu. Samo brza napomena da dvaput provjerite jesu li detalji vaše igre postavljeni na javno. Na taj način možemo pristupiti vašim postignućima i pružiti vam najbolje iskustvo."
+            },
+            "freeMints": "Besplatni Mints",
+            "addThisGame": "Dodaj ovu igru",
+            "gamesToMint": "Igre za mintanje"
+        },
+        "Sync": "Usuglašavanje",
+        "turnAnalyticsOff": "Isključi funkciju",
+        "logOut": "Izlaz iz računa",
+        "viewFullscreen": "Prikaz na cijelom ekranu",
+        "syncing": "Sinkronizacija...",
+        "analyticsOn": "Analitika je uključena",
+        "viewItem": "Pogledajte {{item}}",
+        "accesscodes": {
+            "error": {
+                "validation": "Pristupni kod je nevažeći"
+            },
+            "requirescode": "Ova nadogradnja igre zahtijeva pristupni kod.",
+            "success": {
+                "validation": "Uspjeh! Pristupni kod je valjan"
             }
         },
-        "Sync": "Sinkronizacija",
-        "turnAnalyticsOff": "Isključi",
-        "logOut": "Odjavi se",
-        "viewFullscreen": "Prikaz preko cijelog ekrana"
+        "changeWallet": "Zamijeni novčanik",
+        "currentWallet": "Trenutni novčanik",
+        "linkSteamAccountDescription": "Prijavite se na Steam kako biste povezali svoj HyperPlay račun.",
+        "linkSteamAccountCta": "Idite na prijavu na Steam",
+        "analyticsOff": "Analitika je isključena",
+        "connectWallet": "Poveži novčanik",
+        "viewPortfolio": "Pogledaj portfelj",
+        "publicAlpha": "Javna alfa",
+        "otp": "Jednokratna lozinka",
+        "linkSteamAccountTitle": "Poveži Steam račun",
+        "copyUrl": "Kopiraj URL"
     },
     "quest": {
-        "active": "Aktivno",
+        "active": "Aktivno stanje igre",
         "Play": "Reproduciraj",
         "playstreak": {
-            "days": "dana",
-            "now": "Sada"
+            "days": "dnevni",
+            "now": "U ovom trenutku",
+            "dayResets": "Resetiranje dana:",
+            "playEachDay": "Igrajte svaki dan kako vaša serija ne bi bila resetirana!",
+            "playToStart": "Igrajte ovu igru kako biste započeli svoj niz!",
+            "streakProgress": "Napredak niza",
+            "streakCompleted": "Niz je završen! Preuzmite svoje nagrade sada.",
+            "progressTowardsStreak": "napredak prema današnjoj seriji.",
+            "sync": "Sinkroniziraj napredak",
+            "syncSuccess": "Napredak sinkroniziran"
         },
-        "points": "Točke",
-        "signIn": "Prijavi se",
-        "sync": "Sinkronizacija",
+        "points": "Točke igre",
+        "signIn": "Prijavite se",
+        "sync": "Usuglašavanje",
         "claimWarning": {
-            "cancel": "Odustani",
-            "confirm": "Potvrdi"
+            "cancel": "Prestanite",
+            "confirm": "Potvrđivanje",
+            "body": "<bold>VAŽNO:</bold> Molimo vas da osigurate da dodjeljujete dovoljno plina na {{networkName}} mreži kako bi transakcija bila uspješno potvrđena <bold>unutar 7 dana.</bold>",
+            "body2": "Inače, nagrada za misiju <bold> će isteći i više neće biti dostupna za preuzimanje.</bold>"
+        },
+        "g7Numclaimed": "Ukupno zatraženih G7 kredita",
+        "pointsClaimed": "Zatražene točke",
+        "reward": "Nagrada",
+        "noG7ConnectionClaim": "Morate imati Game7 račun povezan s {{email}} kako biste preuzeli svoje nagrade.",
+        "noG7ConnectionSync": "Trebate imati Game7 račun povezan s {{email}} kako biste ponovo sinkronizirali svoje zadatke.",
+        "notEnoughGas": "Nedovoljno sredstava u novčaniku za preuzimanje vaše nagrade zbog troškova plina. Pokušajte s drugim novčanikom ili dopunite ovaj prije ponovnog pokušaja.",
+        "claimAll": "Zatraži sve",
+        "connectSteamAccount": "Poveži Steam račun",
+        "linkAccount": "Povežite svoj Steam račun kako biste provjerili pravo na sudjelovanje.",
+        "needMoreAchievements": "Morate imati dovršenih {{percent}}% postignuća u jednoj od ovih igara.",
+        "associatedGames": "Povezane igre",
+        "claimed": "Zatraženo",
+        "View Game": "Pogledajte igru",
+        "quests": "Zadaci",
+        "readyForClaim": "Spremno za preuzimanje",
+        "reputation": "Reputacija",
+        "type": {
+            "playstreak": "Igračka serija"
         }
     },
-    "accounts": "Konta",
-    "ALL": "SVE",
-    "analytics": "Analitika",
+    "accounts": "Profili",
+    "ALL": "SVE  \nSVE SVE  \nSVE SVE SVE",
+    "analytics": "Statistika",
     "gameRelease": {
-        "alpha": "Alpha",
-        "beta": "Beta",
-        "demo": "Demo",
-        "main": "Glavni"
+        "alpha": "Alfa testiranje",
+        "beta": "Beta faza",
+        "demo": "Probna verzija",
+        "main": "Glavna opcija",
+        "prototype": "Prototip"
     },
-    "profile": "Profil",
+    "profile": "Profil igrača",
     "import-game-folder": {
-        "placeholder": "Odaberi mapu igre za uvesti"
+        "placeholder": "Odaberi mapu igre koju želiš uvesti",
+        "error": "Došlo je do pogreške tijekom uvoza. Molimo pogledajte dnevnike za više detalja.",
+        "success": "Igre su uspješno uvezene!",
+        "cta": "Uvezi mapu igre",
+        "dialog": {
+            "title": "Odaberite mapu igre za uvoz"
+        },
+        "label": "Uvezi mapu igre"
     },
     "overlay": {
-        "comingSoon": "Dolazi uskoro …"
-    }
+        "comingSoon": "Uskoro će biti dostupno",
+        "EXTERNAL_WALLET_CONNECTED": "Povezani ste s HyperPlay putem vanjske novčanika.",
+        "WALLET_DISCONNECTED": "Nemate novčanik povezan s HyperPlayom."
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "client": "Trenutno niste prijavljeni, napredak serije neće se pratiti. Molimo prijavite se na HyperPlay putem padajućeg izbornika u gornjem desnom kutu kako biste pratili napredak.",
+                "overlay": "Trenutno niste prijavljeni, napredak u igri neće se pratiti. Molimo vas da izađete iz igre i prijavite se na HyperPlay putem padajućeg izbornika u gornjem desnom kutu kako biste pratili napredak."
+            }
+        },
+        "g7CreditsModal": {
+            "description": "Zaronite u najbolje igre HyperPlay s uzbudljivim Play Streak izazovima. Svaka aktivnost potiče vas da se angažirate s drugom igrom, prikazujući najbolje od web3 gaminga. Vaše vrijeme igranja je važno!",
+            "title": "Zaradite Game7 kredite"
+        },
+        "noneFound": {
+            "title": "Nema pronađenih zadataka.",
+            "message": "Nema pronađenih zadataka."
+        },
+        "viewAllQuests": {
+            "title": "Pogledajte sve zadatke"
+        },
+        "quests": "Zadaci"
+    },
+    "sideload": {
+        "warningMessage": "Instalacija igre putem bočne strane je značajka namijenjena programerima i iskusnim korisnicima. Instalacija programa koji sadrži zlonamjerni softver može ugroziti vaše računalo i dovesti do krađe sredstava.",
+        "warningTitle": "Važno"
+    },
+    "dlcs": {
+        "label": "Odaberite DLC-ove za instalaciju:"
+    },
+    "importGameErrorMessage": "Nije vaša mapa igre, uvoz igre nije moguć",
+    "importGameErrorMessageExecutable": "Izvršna datoteka igre nije pronađena, uvoz igre nije moguć",
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "body": "Mod će biti primijenjen na osnovnu igru",
+                "title": "Osnovna igra instalirana"
+            },
+            "cancel": {
+                "body": "Otklanjanje osnovne igre otkazano",
+                "title": "Otkazana ekstrakcija"
+            },
+            "installing": {
+                "body": "Izdvajanje osnovnih datoteka igre",
+                "title": "Instaliranje osnovne igre"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Odaberite lokaciju datoteke osnovne igre",
+                "placeholder": "Odaberite Zip datoteku"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step2": {
+                "description": "Odaberite preuzetu datoteku ChromieCraft_3.3.5a.zip.",
+                "title": "Korak 2",
+                "subtitle": "Odaberite datoteku ChromieCraft_3.3.5a.zip"
+            },
+            "step3": {
+                "description": "Molimo odaberite mapu u koju treba instalirati World of Warcraft: Wrath of the Lich King (3.3.5a).",
+                "subtitle": "Odaberite mapu za instalaciju",
+                "title": "Korak 3"
+            },
+            "step4": {
+                "description": "Unesite pristupni kod za nastavak s instalacijom igre.",
+                "subtitle": "Pristupni kod",
+                "title": "Korak 4"
+            },
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Ova igra je mod za World of Warcraft: Wrath of the Lich King (3.3.5a). Da bi igrali ovaj mod, igrači moraju posjedovati kopiju World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay ne hosta World of Warcraft. Igrači koji posjeduju World of Warcraft mogu dobiti verziju 3.3.5a iz izvora kao što su:",
+                "subtitle": "Preuzmite World of Warcraft 3.3.5a",
+                "title": "Korak 1",
+                "webtorrent": "Torrent (Magnet Link)"
+            },
+            "title": "Upute za mod"
+        }
+    },
+    "Cancel Installation": "Otkaži instalaciju",
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}} i druge igre su spremne za ažuriranje.",
+            "single": "Dostupna je ažuriranje za {{gameName}}."
+        },
+        "title": "Dostupna ažuriranja igara"
+    },
+    "Install Steam": "Instalirajte Steam",
+    "Installing Steam": "Instaliram Steam...",
+    "Launch Steam": "Pokreni Steam",
+    "Launching Steam": "Pokreće se Steam...",
+    "email_subscription": {
+        "subtitle": "Sada ste dio naše zajednice i uzbuđeni smo što možemo s vama podijeliti vrijedne novosti i uvide.",
+        "title": "Hvala što ste se pretplatili!"
+    },
+    "back_to_game": "Povratak na igru",
+    "exit_game": "Izlaz iz igre",
+    "importGameErrorTitle": "Greška pri uvozu igre",
+    "achievements": {
+        "progress": {
+            "minted": "na lancu",
+            "notMinted": "izvan lanca"
+        }
+    },
+    "At the end make sure to": "Na kraju se pobrinite da",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay će preuzeti i pokrenuti Steam instalacijski program za vas. Molimo slijedite Steam upute na njihovom instalateru;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay će vas obavijestiti kada instalacija završi;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Ako želite nastaviti, budite strpljivi jer može potrajati nekoliko minuta da završi, ovisno o vašoj internetskoj vezi i konfiguraciji sustava;",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Prilikom prvog pokretanja Steam će preuzeti potrebne datoteke i trebat će nekoliko minuta da završi i da se prikaže ekran za prijavu;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Sloj kompatibilnosti nije dostupan. Molimo prvo instalirajte jedan iz \"Postavke > Wine Manager\".",
+        "error-message": "Došlo je do pogreške prilikom instalacije Steama. Pokušajte ponovo.",
+        "launch-tooltip": "Pokrenite Steam koristeći HyperPlay sloj kompatibilnosti",
+        "success-message": "Steam je instaliran. Sada ga možete pokrenuti iz Biblioteke.",
+        "tooltip": "Ovo će instalirati verziju Steama za Windows i radit će koristeći HyperPlay sloj kompatibilnosti.\n\n    Neke igre, posebno stariji naslovi, novije 3D igre ili one s anti-cheat softverom možda neće raditi ispravno.\n\n    Preporučene specifikacije su Mac s Apple Silicon CPU-om (M1 ili noviji) i najmanje 16GB RAM-a."
+    },
+    "UNCHECK 'Run Steam'": "UKLONITE oznaku 'Pokreni Steam'"
 }
