@@ -1,72 +1,73 @@
 {
     "accessibility": {
         "actions_font_family_no_default": "Actions Font Family (Default: ",
-        "all_tiles_in_color": "Show all game tiles in color",
-        "content_font_family_no_default": "Content Font Family (Default: ",
-        "fonts": "Fonts",
-        "title": "Accessibility",
-        "zoom": "Zoom"
+        "all_tiles_in_color": "എല്ലാ ഗെയിം ടൈലുകൾ നിറമുള്ളതിൽ കാണിക്കുക",
+        "content_font_family_no_default": "ഉള്ളടക്കത്തിന്റെ ഫോണ്ട് കുടുംബം (മൂല്യം: ",
+        "fonts": "ലിപികൾ",
+        "title": "പ്രവേശന സൗകര്യം",
+        "zoom": "സൂം"
     },
-    "add_game": "Add Game",
-    "All": "എല്ലാം",
+    "add_game": "ഗെയിം ചേർക്കുക",
+    "All": "എല്ലാവരും",
     "anticheat": {
-        "anticheats": "Anticheats",
+        "anticheats": "ചീറ്റ് തടയുന്ന സംവിധാനം",
         "may_not_work": "It may not work due to denied or broken anticheat support.",
-        "reference": "Reference",
-        "source": "Source",
-        "status": "Status",
-        "title": "This game includes anticheat software"
+        "reference": "അവലംബം",
+        "source": "ഉറവിടം",
+        "status": "സ്ഥിതി വിവരങ്ങൾ",
+        "title": "ഈ ഗെയിമിൽ ആന്റി ചീറ്റ് സോഫ്റ്റ്‌വെയർ ഉൾപ്പെടുന്നു  \nഈ ഗെയിമിൽ ആന്റി ചീറ്റ് സോഫ്റ്റ്‌വെയർ അടങ്ങിയിരിക്കുന്നു  \nഈ ഗെയിം ആന്റി ചീറ്റ് സോഫ്റ്റ്‌വെയർ ഉൾക്കൊള്ളുന്നു"
     },
     "box": {
         "cache-cleared": {
-            "message": "ഹീറോയിക് പിടിച്ചുവച്ചവ വിട്ടു.",
-            "title": "പിടിച്ചുവച്ചവ നീക്കി"
+            "message": "ഹൈപ്പർപ്ലേ കാഷെ മായ്ച്ചു.",
+            "title": "കാഷെ ശുദ്ധീകരിച്ചു"
         },
-        "choose": "തിരഞ്ഞെടുക്കൂ",
+        "choose": "തിരഞ്ഞെടുത്തത്",
         "choose-egs-prefix": "EGSന്റെ സ്ഥാപനയിടം തിരഞ്ഞെടുക്കൂ",
-        "choose-gogdl-binary": "Select GOGDL Binary (needs restart)",
-        "choose-legendary-binary": "ലെജന്ററിയുടെ ഈരക്കരേഖ തിരഞ്ഞെടുക്കുക",
-        "customWine": "വൈനിന്റെയോ പ്രോട്ടോണിന്റെയോ ഈരക്കരേഖ(Binary file) നല്കൂ",
-        "default-install-path": "പൊതു ഇന്സ്റ്റാളിടം തിരഞ്ഞെടുക്കൂ",
-        "default-steam-path": "Steam path.",
+        "choose-gogdl-binary": "GOGDL ബൈനറി തിരഞ്ഞെടുക്കുക (പുനരാരംഭം ആവശ്യമാണ്)  \nGOGDL ബൈനറി തിരഞ്ഞെടുക്കുക (പുനരാരംഭം ആവശ്യമാണ്)  \nGOGDL ബൈനറി തിരഞ്ഞെടുക്കുക (പുനരാരംഭം ആവശ്യമാണ്)",
+        "choose-legendary-binary": "ലെജന്ററി ബൈനറി തിരഞ്ഞെടുക്കുക",
+        "customWine": "വൈനിന്റെ അല്ലെങ്കിൽ പ്രോട്ടോണിന്റെ ബൈനറി തിരഞ്ഞെടുക്കുക",
+        "default-install-path": "മൂല ഇൻസ്റ്റാൾ പാത തിരഞ്ഞെടുക്കുക",
+        "default-steam-path": "സ്റ്റീം വഴി.",
         "downloadNow": "Download now",
         "error": {
             "add": {
                 "steam": {
-                    "body": "Adding {{game}} to Steam failed with:{{newLine}} {{error}}",
+                    "body": "Adding {{game}} Steam-ലേക്ക് ചേർക്കാൻ പരാജയപ്പെട്ടു: {{newLine}} {{error}}  \nSteam-ലേക്ക് {{game}} ചേർക്കാൻ പരാജയപ്പെട്ടു:{{newLine}} {{error}}  \nSteam-ലേക്ക് {{game}} ചേർക്കുന്നതിൽ പരാജയം: {{newLine}} {{error}}",
                     "title": "Adding Error"
                 }
             },
             "credentials": {
-                "message": "നിങ്ങളെക്കുറിച്ചുള്ള വിവരങ്ങള് പഴകിയിരിക്കുന്നു, പുറത്തുകടന്ന് വീണ്ടും കയറിനോക്കൂ."
+                "message": "നിങ്ങളുടെ ക്രെഡൻഷ്യലുകൾ കാലാവധി കഴിഞ്ഞിരിക്കുന്നു, ദയവായി പുറത്തുകടന്ന് വീണ്ടും ലോഗിൻ ചെയ്യുക."
             },
             "cx-bottle-not-found": {
                 "message": "The CrossOver bottle \"{{bottle_name}}\" does not exist, can't launch!",
                 "title": "CrossOver bottle not found"
             },
             "diskspace": {
-                "message": "തകിടില്(disk) ആവശ്യത്തിന് സ്ഥലമില്ലല്ലോ",
-                "title": "സ്ഥലമില്ല"
+                "message": "തകിടില്(disk) ആവശ്യമായ സ്ഥലമില്ല",
+                "title": "സ്ഥലം ലഭ്യമല്ല"
             },
             "dxvk": {
-                "message": "Error installing DXVK/VKD3D! Check your connection or if you have zstd/libzstd1 installed",
-                "title": "DXVK/VKD3D error"
+                "message": "DXVK/VKD3D ഇൻസ്റ്റാൾ ചെയ്യുന്നതിൽ പിശക്! നിങ്ങളുടെ കണക്ഷൻ പരിശോധിക്കുക! zstd/libzstd1 ഇൻസ്റ്റാൾ ചെയ്തിട്ടുണ്ടോ എന്ന് ഉറപ്പാക്കുക.",
+                "title": "DXVK/VKD3D പ്രശ്നം"
             },
             "folder-not-found": {
-                "title": "Game folder appears to be deleted, do you want to remove the game from the installed list?"
+                "title": "ഗെയിം ഫോൾഡർ ഇല്ലാതായതായി തോന്നുന്നു, നിങ്ങൾ ഇൻസ്റ്റാൾ ചെയ്ത പട്ടികയിൽ നിന്ന് ഗെയിം നീക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?  \nഗെയിം ഫോൾഡർ ഇല്ലാതായതായി തോന്നുന്നു, നിങ്ങൾ ഇൻസ്റ്റാൾ ചെയ്ത പട്ടികയിൽ നിന്ന് ഗെയിം നീക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?  \nഗെയിം ഫോൾഡർ ഇല്ലാതായതായി തോന്നുന്നു, നിങ്ങൾ ഗെയിം ഇൻസ്റ്റാൾ ചെയ്ത പട്ടികയിൽ നിന്ന് നീക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?"
             },
             "generic": {
                 "message": "",
-                "title": "Select EXE to Run"
+                "title": "EXE പ്രവർത്തിപ്പിക്കാൻ തിരഞ്ഞെടുക്കുക"
             },
-            "launchAborted": "Launch aborted",
-            "title": "കുഴപ്പം",
+            "launchAborted": "പ്രവേശനം അവസാനിപ്പിച്ചു",
+            "title": "ദോഷം",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "അപ്ഡേറ്റ് പ്രശ്നം",
+                "message": "അപ്ഡേറ്റിൽ എന്തോ തെറ്റായി! ദയവായി കൈമാനുവായി ഹൈപ്പർപ്ലേ അൺഇൻസ്റ്റാൾ ചെയ്ത് വീണ്ടും ഇൻസ്റ്റാൾ ചെയ്യുക."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -74,9 +75,23 @@
                 "title": "Wine Not Found"
             },
             "winetricks": {
-                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
-                "title": "Winetricks error"
-            }
+                "message": "Winetricks പ്രവർത്തനത്തിനിടെ താഴെ പറയുന്ന പിശക് തിരികെ നൽകി: {{newLine}}{{error}}  \nWinetricks പ്രവർത്തനത്തിനിടെ പിശക് തിരികെ നൽകി:{{newLine}}{{error}}  \nWinetricks പ്രവർത്തനത്തിനിടെ ലഭിച്ച പിശക്: {{newLine}}{{error}}",
+                "title": "വൈൻട്രിക്ക്സ് പ്രശ്നം"
+            },
+            "ubisoft-connect": {
+                "message": "യുബിസോഫ്റ്റ് കണക്ട് ഗെയിം പ്രിഫിക്‌സിൽ ഇൻസ്റ്റാൾ ചെയ്യുന്നത് പരാജയപ്പെട്ടു. അതിനെ കൈകാര്യം ചെയ്യാൻ ഞങ്ങളുടെ വിക്കി പേജ് സന്ദർശിക്കുക: https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac.",
+                "title": "യൂബിസോഫ്റ്റ് കണക്ട്"
+            },
+            "delete-files": {
+                "body": "എക്സ്ട്രാക്റ്റ് ചെയ്ത ഫോൾഡർ {{path}} നീക്കം ചെയ്യുന്നതിൽ പിശക്. ദയവായി ഇത് കൈമാറുക. \n                {{paragraph}} \n                {{error}}",
+                "title": "നിക്ഷിപ്ത ഫോൾഡർ നീക്കം ചെയ്യുന്നതിൽ പിശക്"
+            },
+            "steam": {
+                "error": "Steam പ്രവർത്തനക്ഷമമായ ഫയൽ കണ്ടെത്തിയില്ല. ഇൻസ്റ്റലേഷൻ ഉപയോക്താവിന്റെ നിർദ്ദേശം പ്രകാരം റദ്ദാക്കിയതായിരിക്കാം അല്ലെങ്കിൽ Steam-ൽ പരാജയപ്പെട്ടിരിക്കാം.",
+                "message": "സ്റ്റീം ഇൻസ്റ്റലേഷൻ പരാജയപ്പെട്ടു! ദയവായി നിർദ്ദേശങ്ങൾ ശ്രദ്ധാപൂർവ്വം വായിക്കുക, വീണ്ടും ശ്രമിക്കുക! {{paragraph}} {{error}}",
+                "title": "Steam പിശക്"
+            },
+            "moving": "ഗെയിം മാറ്റുന്നതിൽ പിശക് {{error}}"
         },
         "info": {
             "update": {
@@ -85,137 +100,154 @@
                 "message": "There is a new Version available!",
                 "message-finished": "Do you want to restart HyperPlay now?",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Update Finished"
+                "title-finished": "Update Finished",
+                "appUpdated": "HyperPlay അപ്ഡേറ്റ് ചെയ്തു"
             }
         },
-        "no": "വേണ്ട",
-        "ok": "ശരി",
+        "no": "അവശ്യം ഇല്ല",
+        "ok": "ശരി തന്നെയാണു",
         "protocol": {
             "install": {
-                "not_installed": "ഇത് നട്ടിട്ടില്ല, നടണോ?"
+                "not_installed": "ഇത് നിലവിൽ ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല. ഇൻസ്റ്റാൾ ചെയ്യണോ?  \nഇത് ഇപ്പോൾ ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല. ഇൻസ്റ്റാൾ ചെയ്യാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?  \nഇത് ഇപ്പോൾ നട്ടിട്ടില്ല. നിങ്ങൾ ഇൻസ്റ്റാൾ ചെയ്യാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?"
             }
         },
         "quit": {
-            "message": "ചെയ്തുതീര്ക്കാത്ത പണികളുണ്ട്, ഉറപ്പല്ലേ?",
-            "title": "പുറത്തിറക്ക്"
+            "message": "ചെയ്തുതീര്ക്കാത്ത പ്രവർത്തനങ്ങൾ ഉണ്ട്, നിങ്ങൾ ഉറപ്പാണോ?  \nചെയ്തുതീര്ക്കാത്ത കാര്യങ്ങൾ ഉണ്ട്, നിങ്ങൾക്ക് ഉറപ്പാണോ?  \nചെയ്തുതീര്ക്കാത്ത പ്രവർത്തനങ്ങൾ നിലനിൽക്കുന്നു, നിങ്ങൾക്ക് ഉറപ്പുണ്ടോ?",
+            "title": "പുറത്തിറക്കുക"
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "message": "നിങ്ങൾ ഹൈപ്പർപ്ലേ റീസെറ്റ് ചെയ്യാൻ ഉറച്ചാണോ? ഇത് എല്ലാ ക്രമീകരണങ്ങളും കാഷെ നീക്കം ചെയ്യും, എന്നാൽ നിങ്ങളുടെ ഇൻസ്റ്റാൾ ചെയ്ത ഗെയിമുകൾ അല്ലെങ്കിൽ നിങ്ങളുടെ എപ്പിക് ക്രെഡൻഷ്യലുകൾ നീക്കം ചെയ്യില്ല. ഹൈപ്പർപ്ലേയുടെ പോർട്ടബിൾ പതിപ്പുകൾ (ആപ്പ് ഇമേജ്, വിൻപോർട്ടബിൾ, ...) പിന്നീട് കൈമാനുവൽ ആയി പുനരാരംഭിക്കേണ്ടതുണ്ട്.",
                 "title": "Reset HyperPlay"
             }
         },
         "runexe": {
-            "title": "ഓടിക്കുവാനുള്ള EXE നല്കൂ"
+            "title": "EXE പ്രവർത്തിപ്പിക്കാൻ തിരഞ്ഞെടുക്കുക"
         },
         "select": {
-            "button": "തിരഞ്ഞെടുക്കൂ",
-            "exe": "EXE തിരഞ്ഞെടുക്കൂ"
+            "button": "തിരഞ്ഞെടുത്തത്",
+            "exe": "EXE തിരഞ്ഞെടുക്കുക"
         },
         "shortcuts": {
             "message": "കുറുക്കുവഴികള് പണിമേശയിലേക്കും തുടക്കപ്പട്ടികയിലേക്കും ചേര്ത്തിട്ടുണ്ട്",
-            "message-mac": "Shortcuts were created on the Applications folder",
-            "message-remove": "Shortcuts were removed from Desktop and Start Menu",
-            "message-remove-mac": "Shortcuts were removed from the Applications folder",
-            "title": "കുറുക്കുവഴികള്"
+            "message-mac": "അപ്ലിക്കേഷനുകൾ ഫോൾഡറിൽ ഷോർട്ട്കട്ടുകൾ നിർമ്മിക്കപ്പെട്ടു",
+            "message-remove": "ഡെസ്ക്ടോപ്പിലും സ്റ്റാർട്ട് മെനുവിലും ഷോർട്ട്കട്ടുകൾ ഇല്ലാതാക്കി",
+            "message-remove-mac": "അപ്ലിക്കേഷനുകളുടെ ഫോൾഡറിൽ നിന്ന് ഷോർട്ട്കട്ടുകൾ എടുത്തു",
+            "title": "വേഗത്തിലേക്ക് പോകാനുള്ള വഴികൾ"
         },
         "sync": {
-            "button": "തിരഞ്ഞെടുക്കൂ",
-            "error": "വഴി ശരിയല്ലല്ലോ",
-            "title": "സൂക്ഷിക്കാനുള്ള അറ തിരഞ്ഞെടുക്കൂ"
+            "button": "തിരഞ്ഞെടുക്കുക",
+            "error": "വഴി ശരിയല്ല",
+            "title": "സേവ് ചെയ്യാനുള്ള ഫോൾഡർ തിരഞ്ഞെടുക്കുക"
         },
         "vcruntime": {
             "install": {
-                "message": "The download links for the Visual C++ Runtimes have been opened. Please install both the x86 and x64 versions."
+                "message": "Visual C++ Runtimes-ന്റെ ഡൗൺലോഡ് ലിങ്കുകൾ തുറന്നിരിക്കുന്നു. ദയവായി x86യും x64യും ഇൻസ്റ്റാൾ ചെയ്യുക.  \nVisual C++ Runtimes-ന്റെ ഡൗൺലോഡ് ലിങ്കുകൾ ലഭ്യമാണ്. ദയവായി x86യും x64യും ഇൻസ്റ്റാൾ ചെയ്യുക.  \nVisual C++ Runtimes-ന്റെ ഡൗൺലോഡ് ലിങ്കുകൾ തുറന്നിട്ടുണ്ട്. ദയവായി x86യും x64യും ഇൻസ്റ്റാൾ ചെയ്യുക."
             },
             "notfound": {
-                "message": "The Microsoft Visual C++ Runtimes are not installed, which are required by some games",
-                "title": "VCRuntime not installed"
+                "message": "മൈക്രോസോഫ്റ്റ് വിസ്വൽ സി++ റൺടൈമുകൾ ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല, ചില ഗെയിമുകൾക്കായി ഇത് ആവശ്യമാണ്",
+                "title": "VCRuntime ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല"
             }
         },
         "warning": {
             "epic": {
-                "import": "Epic Servers are having major outage right now, the game cannot be imported!",
-                "install": "Epic Servers are having major outage right now, the game cannot be installed!",
-                "update": "Epic Servers are having major outage right now, the game cannot be updated!"
+                "import": "എപ്പിക് സർവറുകൾ ഇപ്പോൾ വലിയ പ്രശ്നത്തിലാണു, ഗെയിം ഇറക്കുമതി ചെയ്യാൻ കഴിയുന്നില്ല!",
+                "install": "എപ്പിക് സർവറുകൾ ഇപ്പോൾ വലിയ പ്രശ്നത്തിലാണു, ഗെയിം ഇൻസ്റ്റാൾ ചെയ്യാൻ കഴിയുന്നില്ല!",
+                "update": "എപ്പിക് സർവറുകൾ ഇപ്പോൾ വലിയ അപ്രാപ്തിയിൽ ആണ്, ഗെയിം അപ്ഡേറ്റ് ചെയ്യാൻ കഴിയുന്നില്ല!  \nഎപ്പിക് സർവറുകൾ ഇപ്പോൾ വലിയ അപ്രാപ്തി അനുഭവിക്കുന്നു, ഗെയിം അപ്ഡേറ്റ് ചെയ്യാൻ സാധിക്കുന്നില്ല!  \nഎപ്പിക് സർവറുകൾ ഇപ്പോൾ വലിയ പ്രശ്നത്തിലാണു, ഗെയിം അപ്ഡേറ്റ് ചെയ്യാൻ കഴിയുന്നില്ല!"
             },
-            "title": "Warning"
+            "title": "ചेतവു",
+            "wine-change": {
+                "message-gptk": "Apple Gaming porting toolkit ഉപയോഗിച്ച് ഗെയിമുകൾ പ്രവർത്തിപ്പിക്കാൻ, നിങ്ങളുടെ macOS 14 (Sonoma) അല്ലെങ്കിൽ അതിന് മുകളിൽ അപ്ഡേറ്റ് ചെയ്യേണ്ടതാണ്. {{newline}} നിങ്ങളുടെ സിസ്റ്റത്തിൽ Wine കണ്ടെത്തിയിട്ടുണ്ട്, {{foundWine}} ഉപയോഗിച്ച് തുടർന്നും ആരംഭിക്കാൻ നിങ്ങൾക്ക് ആഗ്രഹമുണ്ടോ?",
+                "title-gptk": "ഗെയിം പോർട്ടിംഗ് ടൂൾകിറ്റ് അനുയോജ്യമായില്ല ",
+                "message": "ഈ ശീർഷകം ({{selectedWine}}) ആരംഭിക്കാൻ തിരഞ്ഞെടുക്കപ്പെട്ട വൈൻ പതിപ്പ് കണ്ടെത്താൻ ഞങ്ങൾ unable ആയിരുന്നു. {{newline}} മറ്റൊരു പതിപ്പ് കണ്ടെത്തിയിട്ടുണ്ട്, {{foundWine}} ഉപയോഗിച്ച് തുടർന്നും ആരംഭിക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?"
+            },
+            "rosetta": {
+                "message": "HyperPlay macOS-ൽ Apple Silicon ചിപ്പുകൾക്കായി ശരിയായി പ്രവർത്തിക്കാൻ Rosetta ആവശ്യമാണ്. ദയവായി macOS ടെർമിനലിൽ താഴെ നൽകിയ കമാൻഡ് ഉപയോഗിച്ച് ഇത് ഇൻസ്റ്റാൾ ചെയ്യുക: \"softwareupdate --install-rosetta\" എന്നതും HyperPlay പുനരാരംഭിക്കുക. ",
+                "title": "റോസറ്റ കണ്ടെത്തിയില്ല"
+            }
         },
-        "wineprefix": "വൈനിരിക്കുന്ന അറ തിരഞ്ഞെടുക്കൂ",
-        "yes": "ശരി",
-        "dontShowAgain": "വീണ്ടും കാണിക്കരുത്",
-        "choose-nile-binary": "നൈൽ ബൈനറി തിരഞ്ഞെടുക്കുക"
+        "wineprefix": "വൈൻ പ്രിഫിക്സ് ഫോൾഡർ തിരഞ്ഞെടുക്കുക",
+        "yes": "അതെ, ശരിയായിരിക്കുന്നു",
+        "dontShowAgain": "ഇത് വീണ്ടും കാണിക്കരുത്",
+        "choose-nile-binary": "നൈൽ ബൈനറി തിരഞ്ഞെടുക്കുക",
+        "reset-extension": {
+            "question": {
+                "title": "വിപുലീകരണം പുനഃസജ്ജമാക്കുക",
+                "message": "നിങ്ങൾക്ക് MetaMask വിപുലീകരണം പുനഃസജ്ജീകരിക്കാൻ ഉറപ്പാണോ?"
+            }
+        }
     },
     "button": {
-        "cancel": "Cancel",
-        "go_to_library": "Go to Library",
+        "cancel": "വിട്ടുക",
+        "go_to_library": "ലൈബ്രറിയിലേക്ക് നീങ്ങുക",
         "login": "അകത്ത് കയറുക",
-        "sync": "ഒന്നിപ്പിക്കൂ",
-        "syncing": "ഒന്നിപ്പിക്കുന്നു",
-        "unsync": "പിരിക്കൂ",
-        "continue": "തുടരുക",
-        "download": "ഡൌണ്‍ലോഡ്",
-        "update": "പുതുക്കുക",
-        "install": "ഇൻസ്റ്റാളുചെയ്യൽ ആരംഭിക്കുക"
+        "sync": "സിങ്ക്",
+        "syncing": "സിങ്ക് ചെയ്യുന്നു",
+        "unsync": "അസിങ്ക്",
+        "continue": "തുടരുന്നുവെന്ന് തുടരുക",
+        "download": "ഡൗൺലോഡ് ചെയ്യാൻ",
+        "update": "പുതുക്കലുകൾ",
+        "install": "ഇൻസ്റ്റാളേഷൻ ആരംഭിക്കുക"
     },
     "controller": {
         "hints": {
-            "back": "Back",
+            "back": "പിന്നോട്ട്",
             "backspace": "Backspace",
-            "close_dialog": "Close dialog",
+            "close_dialog": "സംവാദം ക്ലോസ് ചെയ്യുക",
             "close_keyboard": "Close keyboard",
-            "close_options": "Close Options",
-            "game_details": "Game details",
-            "game_settings": "Game settings",
-            "install_game": "Install game",
-            "move_cursor": "Move cursor",
-            "open_virtual_keyboard": "Open virtual keyboard",
-            "options": "Options",
-            "play_game": "Play game",
-            "scroll": "Scroll",
-            "select": "Select",
-            "space": "Space",
-            "update_game": "Update game"
+            "close_options": "ഓപ്ഷനുകൾ അവസാനിപ്പിക്കുക",
+            "game_details": "ഗെയിം സംബന്ധിച്ച വിവരങ്ങൾ",
+            "game_settings": "ഗെയിം സജ്ജീകരണങ്ങൾ",
+            "install_game": "ഗെയിം ഇൻസ്റ്റാൾ ചെയ്യുക",
+            "move_cursor": "കഴിവ് ചലിപ്പിക്കുക",
+            "open_virtual_keyboard": "വിർച്വൽ കീബോർഡ് പ്രവർത്തനക്ഷമമാക്കുക",
+            "options": "ഓപ്ഷനുകൾ",
+            "play_game": "കളി കളിക്കുക",
+            "scroll": "സ്ക്രോൾ ചെയ്യുക",
+            "select": "ചെയ്യുക",
+            "space": "അന്തരീക്ഷം",
+            "update_game": "ഗെയിം നവീകരിക്കുക"
         }
     },
     "docs": "Documentation",
     "download-manager": {
         "install-type": {
-            "install": "Install",
-            "update": "Update"
+            "install": "ഇൻസ്റ്റാൾ ചെയ്യുക",
+            "update": "അപ്ഡേറ്റ് ചെയ്യുക"
         },
         "label": {
-            "disk": "Disk",
-            "speed": "Download"
+            "disk": "ഡിസ്‌ക്",
+            "speed": "ഡൗൺലോഡ് ചെയ്യുന്നത്"
         },
         "link": "Downloads",
         "queue": {
-            "end-time": "Finished at",
+            "end-time": "അവസാനിച്ചിരിക്കുന്നു",
             "queue-time": "Added at",
-            "start-time": "Started at",
+            "start-time": "ആരംഭിച്ച സമയം at",
             "type": "Type"
         },
         "title": "Downloads",
-        "ETA": "കണക്കാക്കിയ സമയം"
+        "ETA": "അനുമാനിത സമയം",
+        "title_dm": "ഡൗൺലോഡ് മാനേജർ"
     },
     "epic": {
-        "offline-notification-body": "HyperPlay will not work probably!",
+        "offline-notification-body": "എപ്പിക് ഗെയിംസ് സർവറുകൾ ഓഫ്‌ലൈൻ ആയതിനാൽ ഓൺലൈൻ സേവനങ്ങൾ പൂർണ്ണമായും പ്രവർത്തിക്കില്ല!",
         "offline-notification-title": "offline"
     },
     "Epic Games": "എപിക് ഗെയിംസ്",
-    "error": "Error",
-    "favourites": "Favourites",
+    "error": "ദോഷം",
+    "favourites": "ഇഷ്ടങ്ങൾ",
     "game": {
-        "status": "Status",
+        "status": "സ്ഥിതി വിവരങ്ങൾ",
         "store": "Store",
-        "title": "Game Title"
+        "title": "ഗെയിം നാമം"
     },
     "generic": {
         "error": {
-            "component": "No Games found - Try to logout and login again or one of the options bellow"
+            "component": "കളികൾ കണ്ടെത്തിയില്ല - ദയവായി ലോഗ് ഔട്ട് ചെയ്ത് വീണ്ടും ലോഗിൻ ചെയ്യാൻ ശ്രമിക്കുക അല്ലെങ്കിൽ താഴെ നൽകിയിരിക്കുന്ന ഓപ്ഷനുകളിൽ ഒന്നിനെ തിരഞ്ഞെടുക്കുക"
         },
         "library": {
-            "refresh": "Refresh Library"
+            "refresh": "പുസ്തകശാല പുതുക്കുക"
         }
     },
     "globalSettings": "ആഗോള ക്രമീകരണങ്ങള്",
@@ -228,48 +260,51 @@
         "show_all_games": "Show all games",
         "show_available_games": "Show non-Available games",
         "show_favourites_only": "Show Favourites only",
-        "show_hidden": "Show Hidden",
-        "store": "Filter Store"
+        "show_hidden": "മറച്ചിരിക്കുന്നവ കാണിക്കുക",
+        "store": "ഫിൽട്ടർ ഷോപ്പ്"
     },
     "help": {
-        "amdfsr": "AMD's FSR helps boost framerate by upscaling lower resolutions in Fullscreen Mode. Image quality increases from 5 to 1 at the cost of a slight performance hit. Enabling may improve performance.",
-        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
-        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
-        "dxvk": "DXVK is a Vulkan-based translational layer for DirectX 9, 10 and 11 games. Enabling may improve compatibility. Might cause issues especially for older DirectX games.",
-        "esync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance.",
-        "fsync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels.",
+        "amdfsr": "AMD-യുടെ FSR ഫുൾസ്ക്രീൻ മോഡിൽ താഴ്ന്ന റെസല്യൂഷനുകൾ അപ്‌സ്‌കെയിൽ ചെയ്ത് ഫ്രെയിംറേറ്റ് വർദ്ധിപ്പിക്കാൻ സഹായിക്കുന്നു. ഇമേജ് ഗുണമേന്മ 5 മുതൽ 1 വരെ വർദ്ധിക്കുന്നു, എന്നാൽ ചെറിയ പ്രകടന നഷ്ടത്തിന്റെ വിലക്ക്. സജീവമാക്കുന്നത് പ്രകടനം മെച്ചപ്പെടുത്താൻ സഹായിക്കാം.",
+        "custom_themes_path": "അവിശ്വസനീയമായ ഉറവിടങ്ങളിൽ നിന്നുള്ള CSS ഫയലുകൾ ഉപയോഗിക്കരുത്. സംശയത്തിൽ, ഞങ്ങളുടെ Discord ചാനലിൽ അവലോകനം ചോദിക്കുക.  \nഅവിശ്വസനീയമായ ഉറവിടങ്ങളിൽ നിന്നുള്ള CSS ഫയലുകൾ ഉപയോഗിക്കരുത്. സംശയമുണ്ടെങ്കിൽ, ഞങ്ങളുടെ Discord ചാനലിൽ അവലോകനം ചോദിക്കുക.  \nഅവിശ്വസനീയമായ ഉറവിടങ്ങളിൽ നിന്നുള്ള CSS ഫയലുകൾ ഉപയോഗിക്കരുത്. സംശയമുണ്ടെങ്കിൽ, ഞങ്ങളുടെ Discord ചാനലിൽ അവലോകനം തേടുക.",
+        "custom_themes_wiki": "വ്യക്തിഗത തീമുകൾ ചേർക്കുന്നതിനെക്കുറിച്ച് കൂടുതൽ വിവരങ്ങൾക്കായി വിക്കി പരിശോധിക്കുക. ഇവിടെ ക്ലിക്ക് ചെയ്യുക.  \nവ്യക്തിഗത തീമുകൾ ചേർക്കുന്നതിനെക്കുറിച്ച് കൂടുതൽ വിവരങ്ങൾക്കായി വിക്കി പരിശോധിക്കുക. ഇവിടെ ക്ലിക്ക് ചെയ്യുക.  \nവ്യക്തിഗത തീമുകൾ ചേർക്കുന്നതിനെക്കുറിച്ച് കൂടുതൽ വിവരങ്ങൾക്കായി വിക്കി പരിശോധിക്കുക. ഇവിടെ ക്ലിക്ക് ചെയ്യുക.",
+        "dxvk": "DXVK Vulkan അടിസ്ഥാനമാക്കിയുള്ള ഒരു പരിഭാഷാ പാളിയാണ്, ഇത് DirectX 9, 10, 11 ഗെയിമുകൾക്കായി രൂപകൽപ്പന ചെയ്തിരിക്കുന്നു. ഇത് സജീവമാക്കുന്നത് അനുയോജ്യത മെച്ചപ്പെടുത്താൻ സഹായിക്കാം, എന്നാൽ പഴയ DirectX ഗെയിമുകൾക്കായി ചില പ്രശ്നങ്ങൾ ഉണ്ടാകാൻ സാധ്യതയുണ്ട്.",
+        "esync": "Esync CPU-കേന്ദ്രിത ഗെയിമുകളിൽ wineserver-ന്റെ ഓവർഹെഡ് കുറയ്ക്കാൻ ശ്രമിക്കുന്നു. ഇത് സജീവമാക്കുന്നത് പ്രകടനം മെച്ചപ്പെടുത്താൻ സഹായിക്കാം.",
+        "fsync": "Fsync CPU-പ്രധാന ഗെയിമുകളിൽ wineserver-ന്റെ ഓവർഹെഡ് കുറയ്ക്കാൻ ലക്ഷ്യമിടുന്നു. പിന്തുണയുള്ള Linux കർണലുകളിൽ പ്രവർത്തനം മെച്ചപ്പെടുത്താൻ ഇത് സഹായിക്കാം.",
         "game_language": {
-            "fallback": "Leave blank to use HyperPlay's language.",
-            "in_game_config": "Not all games support this configuration, some have in-game language setting.",
+            "fallback": "HyperPlay-ന്റെ ഭാഷ ഉപയോഗിക്കാൻ ശൂന്യമായി വിടുക.",
+            "in_game_config": "എല്ലാ ഗെയിമുകളും ഈ കോൺഫിഗറേഷൻ പിന്തുണയ്ക്കുന്നില്ല, ചിലത് ഗെയിമിൽ ഭാഷാ ക്രമീകരണം ഉണ്ട്.  \nഎല്ലാ ഗെയിമുകളും ഈ ക്രമീകരണം പിന്തുണയ്ക്കുന്നില്ല, ചില ഗെയിമുകളിൽ ഭാഷാ ക്രമീകരണം ഉണ്ട്.  \nഎല്ലാ ഗെയിമുകളും ഈ ക്രമീകരണം പിന്തുണയ്ക്കുന്നില്ല, ചില ഗെയിമുകൾക്ക് ഗെയിമിനുള്ളിൽ ഭാഷാ ക്രമീകരണം ലഭ്യമാണ്.",
             "valid_codes": "Valid language codes are game-dependant."
         },
-        "gamemode": "Feral GameMode applies automatic and temporary tweaks to the system when running games. Enabling may improve performance.",
-        "general": "എപിക് ഗെയിം കടയുടെ കുഴപ്പമൊന്നുില്ലാത്ത ഒരു നടീല് മറ്റെവിടെയെങ്കിലും ഉണ്ടെങ്കില് നിങ്ങളുടെ കളികള് വീണ്ടും ഇറക്കിയെടുക്കുന്നത് ഒഴിവാക്കാനായി EGSുമായി ഒന്നിപ്പിക്കുക.",
-        "mangohud": "MangoHUD is an overlay that displays and monitors FPS, temperatures, CPU/GPU load and other system resources.",
+        "gamemode": "ഫെറൽ ഗെയിംമോഡ് ഗെയിമുകൾ ഓടിക്കുമ്പോൾ സിസ്റ്റത്തിലേക്ക് സ്വയം താൽക്കാലിക മാറ്റങ്ങൾ നൽകുന്നു. ഇത് സജീവമാക്കുന്നത് പ്രകടനം മെച്ചപ്പെടുത്താൻ സഹായിക്കാം.",
+        "general": "എപ്പിക് ഗെയിംസ് ലോഞ്ചർ മറ്റെവിടെയെങ്കിലും പ്രവർത്തിക്കുന്നുണ്ടെങ്കിൽ, നിങ്ങളുടെ കളികൾ വീണ്ടും ഡൗൺലോഡ് ചെയ്യുന്നത് ഒഴിവാക്കാൻ EGL-യുമായി സമന്വയിപ്പിക്കുക.",
+        "mangohud": "MangoHUD ഒരു ഓവർലേ ആണ്, ഇത് FPS, താപനില, CPU/GPU ലോഡ്, മറ്റ് സിസ്റ്റം വിഭവങ്ങൾ എന്നിവ പ്രദർശിപ്പിക്കുകയും നിരീക്ഷിക്കുകയും ചെയ്യുന്നു.  \nMangoHUD ഒരു ഓവർലേ ആണ്, ഇത് FPS, താപനില, CPU/GPU ലോഡ്, മറ്റ് സിസ്റ്റം വിഭവങ്ങൾ എന്നിവ കാണിക്കുകയും നിരീക്ഷിക്കുകയും ചെയ്യുന്നു.  \nMangoHUD ഒരു ഓവർലേ ആണ്, ഇത് FPS, താപനില, CPU/GPU ലോഡ്, മറ്റ് സിസ്റ്റം വിഭവങ്ങൾ എന്നിവയെ പ്രദർശിപ്പിക്കുകയും നിരീക്ഷിക്കുകയും ചെയ്യുന്നു.",
         "other": {
-            "part4": "കളി ഓടിത്തുടങ്ങിയതിനു ശേഷം വിളിക്കാന് ",
-            "part5": "കളിവാദങ്ങള്",
-            "part6": " ഉപയോഗിക്കുക, ഉദ്ദാഹരണത്തിന്:ചില കളികളില് ലോഞ്ചര് ഒഴിച്ചുവിടാനായി ",
-            "part7": " ചില കളികളുടെ തുറകള് ഒഴിവാക്കാനും മറ്റും."
+            "part4": "കളി തുടങ്ങുന്നതിന് ശേഷം വിളിക്കാനാണ് ",
+            "part5": "കളി വാദങ്ങൾ",
+            "part6": " ലോഞ്ച് കമാൻഡ് ശേഷം വിളിക്കേണ്ടത്, ഉദാഹരണത്തിന്: ",
+            "part7": " ചില ഗെയിമുകളിൽ തുറക്കൽ ഒഴിവാക്കാനും മറ്റ് കാര്യങ്ങൾ ചെയ്യാനും."
         },
-        "preferSystemLibs": "Custom Wine versions (Wine-GE, Wine-Lutris) are shipped with their library dependencies. By enabling this option, these shipped libraries will be ignored and Wine will load system libraries instead. Warning! Issues may occur if dependencies are not met.",
+        "preferSystemLibs": "കസ്റ്റം വൈൻ പതിപ്പുകൾ (വൈൻ-ജിഇ, വൈൻ-ലൂട്ട്രിസ്) അവരുടെ ലൈബ്രറി ആശ്രിതങ്ങളോടുകൂടി വിതരണം ചെയ്യുന്നു. ഈ ഓപ്ഷൻ സജീവമാക്കുന്നതിലൂടെ, ഈ ലൈബ്രറികൾ അവഗണിക്കപ്പെടുകയും വൈൻ സിസ്റ്റം ലൈബ്രറികൾ ലോഡ് ചെയ്യുകയും ചെയ്യും. മുന്നറിയിപ്പ്! ആശ്രിതങ്ങൾ നിറവേറ്റാത്ത പക്ഷം പ്രശ്നങ്ങൾ ഉണ്ടാകാം.",
         "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
-            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "ഈ പാത ഹൈപ്പർപ്ലേയ്ക്ക് സ്റ്റീം ഉപയോഗിക്കുന്ന പ്രോട്ടോൺ പതിപ്പ് കണ്ടെത്താൻ അനുവദിക്കുന്നു, സ്റ്റീമിലേക്ക് നോൺ-സ്റ്റീം ഗെയിമുകൾ ചേർക്കാൻ.  \nഈ പാത ഹൈപ്പർപ്ലേയ്ക്ക് സ്റ്റീം ഉപയോഗിക്കുന്ന പ്രോട്ടോൺ പതിപ്പ് കണ്ടെത്താൻ സഹായിക്കുന്നു, സ്റ്റീമിലേക്ക് നോൺ-സ്റ്റീം ഗെയിമുകൾ ചേർക്കുന്നതിനായി.  \nഈ പാത ഹൈപ്പർപ്ലേയ്ക്ക് സ്റ്റീം ഉപയോഗിക്കുന്ന പ്രോട്ടോൺ പതിപ്പ് കണ്ടെത്താൻ അനുവദിക്കുന്നു, സ്റ്റീമിലേക്ക് നോൺ-സ്റ്റീം ഗെയിമുകൾ ചേർക്കാൻ."
         },
-        "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
+        "steamruntime": "Steam നൽകുന്ന കസ്റ്റം ലൈബ്രറികൾ ലിനക്സ്, വിൻഡോസ് (പ്രോട്ടോൺ) ഗെയിമുകൾ പ്രവർത്തിപ്പിക്കാൻ സഹായിക്കുന്നു. സജീവമാക്കുന്നത് അനുയോജ്യത മെച്ചപ്പെടുത്താൻ സഹായിക്കാം.",
         "sync": {
-            "part1": "ശരിയായ അറകള് ഭൂരിഭാഗം തവണയും ഹീറോയിക് തപ്പിക്കണ്ടുപിടിക്കാറുണ്ട്. ഇത്തവണ ഈ അറ തെറ്റാണ്, ഇത് മാറ്റാനായി മാറ്റിയെഴുത്തുകളം ഉപയോഗിക്കൂ.",
-            "part2": "നിങ്ങള് വൈനിന്റെയോ പ്രോട്ടോണിന്റെയോ അറകള്(ഉപസര്ഗ്ഗം/prefix) മാറ്റി എന്നിരിക്കട്ടെ, പ്രോട്ടോണ് ഒരു വ്യത്യസ്ത ഉപസര്ഗ്ഗവും(/pref) ഉപഭോക്തൃനാമവും(streamuser) ഉപയോഗിക്കുന്നുതിനാല് അതിന്റെ പാത(path) നിങ്ങള് ഉറപ്പുവരുത്തേണ്ടിയിരിക്കുന്നു. അതിന്റെ പഴയ അറ ഇല്ലായ്മ ചെയ്തശേഷം ഒന്നിപ്പിക്കല്(syncing) താളില്നിന്നു പുറത്തിറങ്ങി വീണ്ടും കയറി ഹീറോയികിനെ പുതിയ സ്ഥലം താനെ കണ്ടെത്താന് അനുവദിക്കൂ.",
-            "part3": "നിര്ദ്ദേശിത ഒന്നിപ്പിക്കല്(manual syncing) : ക്ലൌഡില് സുക്ഷിച്ചിട്ടുള്ള കളിസൂക്ഷിപ്പുകള് ഇറക്കിയെടുക്കുവാനായി ഇറക്കിയെടുക്കൂ അമര്ത്തൂ. ക്ലൌഡിലേക്ക് കയറ്റിവയ്ക്കാനായി കയറ്റിവയ്ക്കൂ അമര്ത്തൂ. ക്ലൌഡിലുള്ള തനത് പതിപ്പ് അവഗണിക്കാനായി നിര്ബന്ധിച്ച് ഇറക്കിയെടുക്കുകയോ കയറ്റിവയ്ക്കുകയോ ആവാം.",
-            "part4": "താനേയുള്ള ഒന്നിപ്പിക്കല് സുക്ഷിപ്പ്(sync save), ഓരോ തവണ നിങ്ങള് കളി തുടങ്ങുമ്പോഴും കളികഴിഞ്ഞിറങ്ങുമ്പോഴും നിങ്ങളുടെ ഒന്നിപ്പിക്കലുകള് സൂക്ഷിക്കുന്നു."
+            "part1": "ഹൈപ്പർപ്ലേ ശരിയായ സേവ് ഫോൾഡർ കണ്ടെത്താൻ ശ്രമിക്കുന്നു, ഇത് പലപ്പോഴും ശരിയായി പ്രവർത്തിക്കും. ഫോൾഡർ തെറ്റായാൽ, മാറ്റാൻ ഓവർറൈഡ് ബോക്സ് ഉപയോഗിക്കുക.",
+            "part2": "വൈൻ അല്ലെങ്കിൽ പ്രോട്ടോൺ പ്രിഫിക്‌സ് ഫോൾഡർ മാറ്റിയാൽ, പ്രോട്ടോൺ വ്യത്യസ്ത പ്രിഫിക്‌സ് (/pfx)യും ഉപയോക്തൃനാമം (steamuser) ഉപയോഗിക്കുന്നു, അതിനാൽ പാത വീണ്ടും പരിശോധിക്കേണ്ടതുണ്ട്. നിലവിലെ പാത നീക്കം ചെയ്ത്, സിങ്ക് സെറ്റിംഗ്സ് പേജിൽ നിന്ന് പുറത്തേക്ക് പോകുകയും, ഹൈപ്പർപ്ലേ വീണ്ടും ശരിയായ പ്രിഫിക്‌സുമായി ഫോൾഡർ കണ്ടെത്താൻ അനുവദിക്കുക.",
+            "part3": "മാനുവൽ സിങ്ക്: ക്ലൗഡിൽ സൂക്ഷിച്ചിരിക്കുന്ന ഗെയിം സേവ്‌സ് ഡൗൺലോഡ് ചെയ്യാൻ ഡൗൺലോഡ് തിരഞ്ഞെടുക്കുക. പ്രാദേശിക സേവ്‌സ് ക്ലൗഡിലേക്ക് അപ്‌ലോഡ് ചെയ്യാൻ അപ്‌ലോഡ് തിരഞ്ഞെടുക്കുക. ഫോർസ് ഡൗൺലോഡ് അല്ലെങ്കിൽ ഫോർസ് അപ്‌ലോഡ് പ്രാദേശിക അല്ലെങ്കിൽ ക്ലൗഡിലുള്ള പതിപ്പുകൾക്ക് പരിഗണന നൽകില്ല.",
+            "part4": "സേവ് ഓട്ടോമാറ്റിക്കായി സിങ്ക് ചെയ്യുന്നത്, നിങ്ങൾ ഗെയിം ആരംഭിക്കുമ്പോഴും കളി അവസാനിപ്പിക്കുമ്പോഴും സേവ് ചെയ്യുന്നു."
         },
-        "vkd3d": "VKD3D is a Vulkan-based translational layer for DirectX 12 games. Enabling may improve compatibility significantly. Has no effect on older DirectX games.",
+        "vkd3d": "VKD3D Vulkan അടിസ്ഥാനമാക്കിയുള്ള ഒരു വിവർത്തന പാളിയാണ്, ഇത് DirectX 12 ഗെയിമുകൾക്കായി രൂപീകരിച്ചിരിക്കുന്നു. ഇത് സജീവമാക്കുന്നത് പൊരുത്തം വളരെ മെച്ചപ്പെടുത്താൻ സഹായിക്കാം. പഴയ DirectX ഗെയിമുകളിൽ ഇതിന് യാതൊരു സ്വാധീനവും ഇല്ല.",
         "wine": {
-            "part1": "വൈനിനും പ്രോട്ടോണിനും ക്രോസ്സോവറിനുമായി ഹീറോയിക് താഴെപ്പറയുന്ന സ്ഥലങ്ങളില് തപ്പുന്നു:",
-            "part2": "മറ്റിടങ്ങളെ ഈ സ്ഥലങ്ങളുമായി കോര്ക്കാന് കണ്ണികള് ഉപയോഗിക്കൂ"
+            "part1": "ഹൈപ്പർപ്ലേ വൈൻ, പ്രോട്ടോൺ, ക്രോസ്സോവറിന്റെ പതിപ്പുകൾ കണ്ടെത്താൻ താഴെപ്പറയുന്ന ഫോൾഡറുകളിൽ തിരയുന്നു:",
+            "part2": "മറ്റു സ്ഥലങ്ങൾക്കായി ഈ ഫോൾഡറുകളിൽ ഒന്നിലേക്ക് ഒരു പ്രതീക ലിങ്ക് ഉപയോഗിക്കുക"
         },
-        "msync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels."
+        "msync": "Msync CPU-പ്രധാനമായ ഗെയിമുകളിൽ wineserver-ന്റെ ഓവർഹെഡ് കുറയ്ക്കാൻ ശ്രമിക്കുന്നു. ഇത് ചില ഗെയിമുകളിൽ പ്രകടനം മെച്ചപ്പെടുത്താൻ സഹായകരമായേക്കാം.",
+        "disable_logs": "ഈ ചെക്ക് ബോക്സ് ഓൺ ചെയ്യാൻ ടോഗിൾ ചെയ്യുക, ഇത് ലോഗ് ഫയലിലേക്ക് എഴുതലുകൾ കൂടുതലും അപ്രവർത്തനമാക്കും (അത്യാവശ്യമായ വിവരങ്ങൾ എപ്പോഴും ലോഗ് ചെയ്യപ്പെടും). ഏതെങ്കിലും പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുന്നതിന് മുമ്പ് ഈ ക്രമീകരണം ഓഫ് ചെയ്യാൻ ഉറപ്പാക്കുക.",
+        "dxvkfpslimit": "DXVK ഗെയിമുകൾക്കായി ഒരു ഫ്രെയിം നിരക്ക് ക്യാപ് സജ്ജമാക്കുന്നു",
+        "dxvknvapi": "DXVK-NVAPI, DXVK-ന്റെ മുകളിൽ നിർമ്മിച്ച NVAPI-യുടെ ഒരു നടപ്പാക്കലാണ്, ഇത് Nvidia GPU-കളിൽ DLSS-ന്റെ ഉപയോഗം അനുവദിക്കുന്നു."
     },
     "info": {
         "hyperplay": {
@@ -282,303 +317,320 @@
         "save-sync": {
             "searching": "Trying to detect the correct save folder (click to cancel)"
         },
-        "settings": "ക്രമീകരണങ്ങള് താനെ സൂക്ഷിക്കപ്പെട്ടിരിക്കുന്നു",
-        "version": "Wine Version"
+        "settings": "ക്രമീകരണങ്ങള് സ്വയം സംരക്ഷിക്കപ്പെടുന്നു",
+        "version": "വൈൻ പതിപ്പ്"
     },
     "infobox": {
-        "help": "സഹായിക്കൂ",
-        "requirements": "ശുപാര്ശിക്കുന്ന സംവിധാനങ്ങള്",
-        "warning": "Warning",
-        "wine-path": "Wine Path",
+        "help": "സഹായം ആവശ്യമുണ്ട്",
+        "requirements": "സിസ്റ്റം ആവശ്യകതകള്‍",
+        "warning": "ചेतവു",
+        "wine-path": "വൈൻ വഴിയേ",
         "wine-prefix": {
-            "title": "Wine Prefix"
+            "title": "വൈൻ പ്രിഫിക്സ്"
         },
         "wine-repfix": {
-            "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+            "message": "Wine വിൻഡോസ് ആപ്ലിക്കേഷനുകൾ സംരക്ഷിക്കാൻ WINEPREFIX എന്നത് ഉപയോഗിക്കുന്നു. ഈ പ്രിഫിക്‌സ് വിൻറെ കോൺഫിഗറേഷൻ ഫയലുകളും C: (വിൻഡോസ് ഓഎസിലെ പ്രധാന ഡിസ്ക്) ന്റെ ഫയൽ ഘടനയുടെ പുനരനുകരണം ഉൾക്കൊള്ളുന്നു. C: ഡ്രൈവിന്റെ ഈ പുനരനുകരണത്തിൽ, നിങ്ങളുടെ ഗെയിം സേവ് ഫയലുകളും winetricks വഴി ഇൻസ്റ്റാൾ ചെയ്ത ആശ്രിതങ്ങളും സൂക്ഷിക്കപ്പെടുന്നു."
+        },
+        "wine-path-invalid": "വൈൻ പാത അസാധുവാണ്, ദയവായി മറ്റൊരു പാത തിരഞ്ഞെടുക്കുക.",
+        "wine-path-none-found": "Wine പതിപ്പ് കണ്ടെത്തിയില്ല, Compatibility Manager-ൽ നിന്ന് ഒരു പതിപ്പ് ഡൗൺലോഡ് ചെയ്യുക"
     },
     "install": {
-        "path": "നടീലിടം തിരഞ്ഞെടുക്കൂ"
+        "path": "ഇൻസ്റ്റലേഷൻ പാത തിരഞ്ഞെടുക്കുക"
     },
     "library": {
         "label": "Library",
         "refresh": "പുതുക്കുക",
         "sortAscending": "Sort Ascending",
-        "sortByStatus": "Sort by Status",
+        "sortByStatus": "സ്ഥിതിയാൽ ക്രമീകരിക്കുക",
         "sortDescending": "Sort Descending",
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalAZ": "അക്ഷരമാലയിലെ A-Z",
+        "alphabeticalZA": "അക്ഷരമാല Z-A"
     },
     "loading": {
-        "default": "ലോഡിംഗ്",
-        "website": "Loading Website"
+        "default": "ലോഡിംഗ് പ്രക്രിയ",
+        "website": "വെബ്സൈറ്റ് ചാർജുചെയ്യുന്നു"
     },
     "login": {
         "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "ആമസോൺ ലോഗിൻ"
+        "epic": "എപിക് ഗെയിംസ് അക്കൗണ്ടിൽ പ്രവേശിക്കുക",
+        "gog": "GOG അക്കൗണ്ടിൽ പ്രവേശിക്കുക",
+        "message": "നിങ്ങളുടെ പ്ലാറ്റ്ഫോമിൽ ലോഗിൻ ചെയ്യുക. നിങ്ങൾ ഒരേസമയം ഒന്നിലധികം പ്ലാറ്റ്ഫോമുകളിൽ ലോഗിൻ ചെയ്യാൻ കഴിയും.  \nനിങ്ങളുടെ പ്ലാറ്റ്ഫോമിൽ പ്രവേശിക്കുക. നിങ്ങൾ ഒരേസമയം കൂടുതൽthan ഒരു പ്ലാറ്റ്ഫോമിൽ പ്രവേശിക്കാം.  \nനിങ്ങളുടെ പ്ലാറ്റ്ഫോമിൽ സൈൻ ഇൻ ചെയ്യുക. നിങ്ങൾ ഒരേസമയം നിരവധി പ്ലാറ്റ്ഫോമുകളിൽ സൈൻ ഇൻ ചെയ്യാൻ കഴിയും.",
+        "amazon": "ആമസോൺ ലോഗിൻ",
+        "old-mac": "നിങ്ങളുടെ macOS പതിപ്പ് {{version}} ആണ്. ലോഗിൻ ചെയ്യാൻ macOS 12 അല്ലെങ്കിൽ പുതിയ പതിപ്പ് ആവശ്യമാണ്."
     },
     "message": {
-        "sync": "ഒന്നിപ്പിച്ചു",
-        "unsync": "പിരിച്ചു"
+        "sync": "സമയബന്ധം വിജയകരമായി പൂർത്തിയായി",
+        "unsync": "അസമന്വയം പൂർത്തിയാക്കുക"
     },
     "notify": {
         "error": {
-            "move": "കളി നീക്കുന്നതില് പിഴവു പറ്റി",
-            "reparing": "നന്നാക്കുന്നതല് പിഴവു പറ്റി"
+            "move": "കളി മാറ്റുന്നതില് പിഴവ് സംഭവിച്ചു",
+            "reparing": "നന്നാക്കുന്നതില് പിഴവുകൾ ഉണ്ടായി"
         },
         "finished": {
             "add": {
                 "steam": {
-                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
-                    "title": "Added to Steam"
+                    "corrupt": "{{game}} കണ്ടെത്തിയ എല്ലാ Steam ഉപയോക്താക്കളിലും ചേർക്കാൻ സാധിച്ചില്ല. കൂടുതൽ വിവരങ്ങൾക്ക് ലോഗുകൾ പരിശോധിക്കുക. മാറ്റങ്ങൾ പ്രാബല്യത്തിൽ വരാൻ Steam പുനരാരംഭിക്കേണ്ടതാണ്.",
+                    "success": "{{game}} Steam-ലേക്ക് വിജയകരമായി ചേർത്തു. മാറ്റങ്ങൾ പ്രാബല്യത്തിൽ വരാൻ Steam പുനരാരംഭിക്കുക ആവശ്യമാണ്.",
+                    "title": "Steam-ലേക്ക് ചേർത്തു"
                 }
             },
             "remove": {
                 "steam": {
-                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
-                    "title": "Removed from Steam"
+                    "corrupt": "{{game}} കണ്ടെത്തിയ എല്ലാ Steam ഉപയോക്താക്കളിൽ നിന്ന് നീക്കംചെയ്യാൻ സാധിച്ചില്ല. കൂടുതൽ വിവരങ്ങൾക്ക് ലോഗുകൾ പരിശോധിക്കുക. മാറ്റങ്ങൾ പ്രാബല്യത്തിൽ വരാൻ Steam പുനരാരംഭിക്കേണ്ടതുണ്ട്.",
+                    "success": "{{game}} Steam-ൽ നിന്ന് വിജയകരമായി നീക്കം ചെയ്തു. മാറ്റങ്ങൾ പ്രാബല്യത്തിൽ വരാൻ Steam-നെ പുനരാരംഭിക്കുക ആവശ്യമാണ്.",
+                    "title": "Steam-ൽ നിന്ന് നീക്കം ചെയ്യപ്പെട്ടു"
                 }
             },
-            "reparing": "നന്നാക്കിക്കഴിഞ്ഞു"
+            "reparing": "നന്നാക്കൽ പൂർത്തിയാക്കി"
         },
         "install": {
             "canceled": "സ്ഥാപനം റദ്ദാക്കി",
-            "error": "നടീല് പരാജയപ്പെട്ടു",
-            "finished": "സ്ഥാപിച്ചുകഴിഞ്ഞു",
-            "imported": "കളി കൊണ്ടുവന്നു",
-            "startInstall": "നടീല് തുടങ്ങി"
+            "error": "നടീല് സാധ്യമല്ല",
+            "finished": "ഇൻസ്റ്റലേഷൻ പൂർത്തിയായി",
+            "imported": "കളി ഉൾപ്പെടുത്തിയിരിക്കുന്നു",
+            "startInstall": "ഇൻസ്റ്റലേഷൻ ആരംഭിക്കുന്നു",
+            "paused": "സ്ഥാപനം നിർത്തി",
+            "stopped": "ഇൻസ്റ്റലേഷൻ നിർത്തി"
         },
-        "moved": "മാറ്റിക്കഴിഞ്ഞു",
-        "moving": "Moving Game",
+        "moved": "മാറ്റം സമാപിച്ചു",
+        "moving": "മൂവ്മെന്റ് ഗെയിം",
         "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
-            "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
+            "error": "ഉപരിതലത്തിൽ നിന്ന് റിലീസുകൾ ലഭ്യമാക്കാൻ സാധിച്ചില്ല, ഗിത്ഹബ് എപി ഐ നിയന്ത്രണങ്ങൾ കാരണം ആയിരിക്കാം! പിന്നീട് വീണ്ടും ശ്രമിക്കുക.  \nഉപരിതലത്തിൽ നിന്ന് റിലീസുകൾ നേടാൻ സാധിച്ചില്ല, ഗിത്ഹബ് എപി ഐ നിയന്ത്രണങ്ങൾ കാരണം ആയിരിക്കാം! പിന്നീട് വീണ്ടും ശ്രമിക്കുക.  \nഉപരിതലത്തിൽ നിന്ന് റിലീസുകൾ ലഭ്യമാക്കാൻ സാധിച്ചില്ല, ഗിത്ഹബ് എപി ഐ നിയന്ത്രണങ്ങൾ കാരണം ഉണ്ടാകാം! പിന്നീട് വീണ്ടും ശ്രമിക്കുക."
         },
-        "uninstalled": "എടുത്തുനീക്കി",
+        "uninstalled": "അവസാനിപ്പിച്ചിരിക്കുന്നു",
         "update": {
-            "canceled": "പുതുക്കല് റദ്ദാക്കി",
-            "finished": "പുതുക്കി",
-            "started": "Update Started"
+            "canceled": "അപ്ഡേറ്റ് റദ്ദാക്കി",
+            "finished": "അപ്ഡേറ്റ് പൂർത്തിയാക്കി",
+            "started": "അപ്ഡേറ്റ് ആരംഭിച്ചിരിക്കുന്നു",
+            "paused": "അപ്ഡേറ്റ് നിർത്തി",
+            "stopped": "അപ്ഡേറ്റ് നിർത്തി"
         }
     },
     "offline-message": {
-        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
-        "ignore": "Ignore",
-        "offline": "Offline",
-        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
-        "retrying": "Retrying"
+        "hint": "ഞങ്ങൾ കണക്ഷൻ പരിശോധിക്കുന്നു: {{newline}}github.com, {{newline}}gog.com, {{newline}}store.epicgames.com, {{newline}}cloudflare-dns.com",
+        "ignore": "അവഗണിക്കുക",
+        "offline": "ഓഫ്‌ലൈൻ മോഡ്",
+        "offline-retry-in": "ഓഫ്ലൈൻ. {{seconds}} സെക്കൻഡുകൾക്ക് വീണ്ടും ശ്രമിക്കുന്നു.  \nഓഫ്ലൈൻ. {{seconds}} സെക്കൻഡുകൾക്ക് വീണ്ടും ശ്രമിക്കുന്നു.  \nഓഫ്ലൈൻ. {{seconds}} സെക്കൻഡുകൾക്കുള്ളിൽ വീണ്ടും ശ്രമിക്കും.",
+        "retrying": "മറുപടി നൽകുന്നു"
     },
     "Open": "തുറക്കുക",
     "options": {
         "advanced": {
             "key": "Variable Name",
             "placeHolderKey": "NAME",
-            "placeHolderValue": "E.g.: Path/To/ExtraFiles",
-            "title": "Environment Variables",
+            "placeHolderValue": "ഉദാഹരണം: പാത/അധികഫയലുകൾ",
+            "title": "പരിസ്ഥിതി ചലനങ്ങൾ",
             "value": "Value"
         },
         "env_variables": {
             "error": {
                 "empty_key": "Variable names can't be empty",
-                "equal_sign_in_key": "Variable names can't contain the \"=\" sign",
-                "space_in_key": "Variable names can't contain spaces"
+                "equal_sign_in_key": "വേരിയബിൾ നാമങ്ങൾ \"=\" ചിഹ്നം അടങ്ങിയിരിക്കില്ല  \nവേരിയബിൾ നാമങ്ങളിൽ \"=\" ചിഹ്നം ഉൾപ്പെടാൻ കഴിയില്ല  \n\"=\" ചിഹ്നം അടങ്ങിയ വേരിയബിൾ നാമങ്ങൾ അനുവദനീയമല്ല",
+                "space_in_key": "വേരിയബിൾ നാമങ്ങൾക്കു ഇടങ്ങൾ ഉണ്ടാകാൻ പാടില്ല"
             },
-            "example": "Do NOT include the \"=\" sign, e.g: for a setting like \"MY_FLAG=123\", set MY_FLAG in NAME and 123 in VALUE.",
+            "example": "സമാനമായ ഒരു ക്രമീകരണത്തിന് \"=\" ചിഹ്നം ഉൾപ്പെടുത്തരുത്, ഉദാഹരണത്തിന് \"MY_FLAG=123\" എന്നതിൽ MY_FLAG നാമത്തിൽ, 123 മൂല്യത്തിൽ ക്രമീകരിക്കുക.  \n\"MY_FLAG=123\" എന്ന ക്രമീകരണത്തിന് \"=\" ചിഹ്നം ഉൾപ്പെടുത്തരുത്, MY_FLAG നാമത്തിൽ, 123 മൂല്യത്തിൽ ക്രമീകരിക്കുക.  \n\"MY_FLAG=123\" എന്ന ക്രമീകരണത്തിൽ \"=\" ചിഹ്നം ഉൾപ്പെടുത്തരുത്, MY_FLAG നാമത്തിൽ 123 മൂല്യം ക്രമീകരിക്കുക.",
             "info": "Set environment variables to append to the command."
         },
         "gameargs": {
             "placeholder": "ഇവിടെ ലോഞ്ചര് വാദങ്ങള് ഇടൂ",
-            "title": "കളി വാദങ്ങള് ആജ്ഞക്കു(command) ശേഷം ഒടിക്കാന്:"
+            "title": "ആജ്ഞയ്ക്കു(കമാൻഡ്) ശേഷം കളി വാദങ്ങള് നടത്തേണ്ടത്:"
         },
-        "quote-args-with-spaces": "Warning: Make sure to quote args with spaces! E.g.: \"path/with spaces/\"",
+        "quote-args-with-spaces": "മുന്നറിയിപ്പ്: ഇടവേളകളുള്ള args ഉദ്ധരിക്കേണ്ടതുണ്ട്! ഉദാഹരണത്തിന്: \"പാത/വാക്കുകൾക്കൊപ്പം/\"",
         "wrapper": {
-            "args": "Arguments",
-            "arguments_example": "Arguments example: --arg; --extra-file=\"file-path/ with/spaces\"",
+            "args": "വാദങ്ങൾ",
+            "arguments_example": "ആർഗ്യുമെന്റുകളുടെ ഉദാഹരണം: --arg; --extra-file=\"ഫയൽ-പാത/ ഇടങ്ങൾ/ ഉള്ളത്\"  \nആർഗ്യുമെന്റുകളുടെ ഉദാഹരണം: --arg; --extra-file=\"ഫയൽ-പാത/ ഇടങ്ങൾ/ ഉള്ളത്\"  \nആർഗ്യുമെന്റുകളുടെ ഉദാഹരണം: --arg; --extra-file=\"ഫയൽ-പാത/ ഇടങ്ങൾ/ ഉള്ളത്\"",
             "exe": "Wrapper",
-            "placeHolderKey": "New Wrapper",
-            "placeHolderValue": "Wrapper Arguments",
-            "title": "Wrapper command:"
+            "placeHolderKey": "പുതിയ ഷീറ്റ്",
+            "placeHolderValue": "വ്രാപ്പർ തർക്കങ്ങൾ",
+            "title": "വ്രാപ്പർ കമാൻഡ്:"
         }
     },
     "other": {
-        "gogdl-version": "GOGDL Version: ",
+        "gogdl-version": "GOGDL പതിപ്പ്: ",
         "legendary-version": "ലെജന്ററിയുടെ പതിപ്പ്: ",
-        "weblate": "ഹീറോയിക്കിനെ മൊഴിമാറ്റുവാന് സഹായിക്കൂ.",
+        "weblate": "ഹൈപ്പർപ്ലേയെ മൊഴിമാറ്റാൻ സഹായിക്കൂ.  \nഹൈപ്പർപ്ലേയുടെ വിവർത്തനം ചെയ്യാൻ സഹായിക്കൂ.  \nഹൈപ്പർപ്ലേയെ വിവർത്തനം ചെയ്യാൻ സഹായിക്കൂ.",
         "nile-version": "നൈൽ പതിപ്പ്: "
     },
-    "Other": "Other",
+    "Other": "മറ്റൊരു വിഭാഗം",
     "placeholder": {
-        "alt-gogdl-bin": "Using built-in GOGDL binary...",
-        "alt-legendary-bin": "തനത് ലെജന്ററി ഈരക്കരേഖ ഉപയോഗിക്കുന്നു...",
-        "custom_themes_path": "Select the path to look for custom CSS files",
-        "egs-prefix": "EGS സ്ഥാപിച്ചയിടം",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
-        "alt-nile-bin": "ബിൽറ്റ്-ഇൻ നൈൽ ബൈനറി ഉപയോഗിച്ച്..."
+        "alt-gogdl-bin": "നിർമ്മിത GOGDL ബൈനറി ഉപയോഗിക്കുന്നു...",
+        "alt-legendary-bin": "തനത് ലെജന്ററി ബൈനറി ഉപയോഗിക്കുന്നു...  \nതനത് ലെജന്ററി ബൈനറി ഉപയോഗിച്ച്...  \nനിർമ്മിത ലെജന്ററി ബൈനറി ഉപയോഗിക്കുന്നു...",
+        "custom_themes_path": "കസ്റ്റം CSS ഫയലുകൾക്കായി തിരയേണ്ട പാത തിരഞ്ഞെടുക്കുക",
+        "egs-prefix": "EGS സ്ഥാപിച്ച സ്ഥലം",
+        "prefered_language": "2-അക്ഷര കോഡ് (ഉദാഹരണത്തിന്: \"en\" അല്ലെങ്കിൽ \"fr\")",
+        "alt-nile-bin": "ബിൽറ്റ്-ഇൻ നൈൽ ബൈനറി ഉപയോഗിച്ച്...",
+        "dxvkfpsvalue": "സकारാത്മക സംഖ്യാ മൂല്യം (ഉദാഹരണത്തിന് 30, 60, ...)"
     },
     "platforms": {
         "linux": "ലിനക്സ്",
         "mac": "മാക്",
         "win": "വിൻഡോസ്"
     },
-    "please-wait": "Please wait...",
-    "progress": "Progress",
+    "please-wait": "ദയവായി ഒരു നിമിഷം കാത്തിരിക്കുക...",
+    "progress": "വികസനം",
     "queue": {
         "label": {
-            "canceled": "Canceled",
-            "clear": "Clear List",
+            "canceled": "റദ്ദാക്കുന്നു",
+            "clear": "ലിസ്റ്റ് ശുദ്ധീകരിക്കുക",
             "downloading": "Downloading",
             "empty": {
-                "queue": "Nothing to download"
+                "queue": "ഡൗൺലോഡ് ചെയ്യാൻ ആവശ്യമായ ഒന്നുമില്ല",
+                "finished": "എന്തും ഡൗൺലോഡ് ചെയ്തിട്ടില്ല"
             },
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads",
-            "pause": "ഡൗൺലോഡുകൾ താൽക്കാലികമായി നിർത്തുക",
-            "resume": "ഡൌൺലോഡ് തുടരുക"
+            "remove": "ഡൗൺലോഡുകളിൽ നിന്ന് നീക്കം ചെയ്യുക",
+            "pause": "ഡൗൺലോഡ് താൽക്കാലികമായി തടയുക",
+            "resume": "ഡൗൺലോഡ് വീണ്ടും തുടരുക"
         }
     },
-    "Recent": "പതിവ് കളികള്",
-    "search": "കളിയുടെ പേര് ഇവിടെ എഴുതൂ...",
+    "Recent": "സമീപകാലത്ത് കളിച്ച ഗെയിമുകൾ",
+    "search": "കളികൾ കണ്ടെത്താൻ ശ്രമിക്കുക",
     "setting": {
-        "adddesktopshortcuts": "കുറുക്കുവഴികള് മേശപ്പുറത്ത് താനേ ചേര്ക്കൂ",
-        "addgamestostartmenu": "കളികള് തുടക്കപ്പട്ടികയില് താനേ ചേര്ക്കൂ",
-        "addgamestosteam": "Add games to Steam automatically",
-        "alt-gogdl-bin": "Choose an Alternative GOGDL Binary to use (needs restart)",
-        "alt-legendary-bin": "Choose an Alternative Legendary Binary  (needs restart)",
-        "autodxvk": "ഉപസഗ്ഗ഻ത്തില്(പ്രഫിക്സില്) DXVK തന്നത്താന് സ്ഥാപിക്കൂ/പുതുക്കൂ",
-        "autosync": "താനേസൂക്ഷിക്കപ്പെട്ട ഒന്നിപ്പിക്കലുകള്",
-        "autovkd3d": "Auto Install/Update VKD3D on Prefix",
-        "change-target-exe": "ഓടിക്കുവാനായി പകരംവയ്ക്കാവുന്ന ഒരു EXE തിരഞ്ഞെടുക്കൂ",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover/Wine Version",
+        "adddesktopshortcuts": "കുറുക്കുവഴികള് മേശപ്പുറത്ത് സ്വയം സൃഷ്ടിക്കുക",
+        "addgamestostartmenu": "കളികൾ തുടക്കപ്പട്ടികയിൽ ഓട്ടോമാറ്റിക്കായി ചേർക്കുക",
+        "addgamestosteam": "Steam-ലേക്ക് ഗെയിമുകൾ സ്വയം ചേർക്കാൻ",
+        "alt-gogdl-bin": "മാറ്റാൻ ഒരു വ്യത്യസ്ത GOGDL ബൈനറി തിരഞ്ഞെടുക്കുക",
+        "alt-legendary-bin": "മറ്റൊരു ലെജൻഡറി ബൈനറി തിരഞ്ഞെടുക്കുക (പുനരാരംഭനം ആവശ്യമാണ്)",
+        "autodxvk": "DXVK പ്രഫിക്സിൽ സ്വയം ഇൻസ്റ്റാൾ ചെയ്യുക/പുതുക്കുക",
+        "autosync": "ഓട്ടോ സിങ്ക് ചെയ്യുന്ന സംരക്ഷണങ്ങള്‍",
+        "autovkd3d": "പ്രിഫിക്‌സിൽ VKD3D സ്വയം ഇൻസ്റ്റാൾ ചെയ്യാനും അപ്ഡേറ്റ് ചെയ്യാനും",
+        "change-target-exe": "ഓടിക്കാൻ ഉപയോഗിക്കാൻ പകരംവയ്ക്കാവുന്ന EXE തിരഞ്ഞെടുക്കുക",
+        "checkForUpdatesOnStartup": "സ്റ്റാർട്ടപ്പിൽ ഹൈപ്പർപ്ലേ അപ്ഡേറ്റുകൾ പരിശോധിക്കാൻ പരിശോധിക്കുക",
+        "crossover-version": "ക്രോസ്‌ഓവർ/വൈൻ പതിപ്പ്",
         "custom_themes_path": "Custom Themes Path",
-        "customWineProton": "ഇഷ്ടാനുസൃതം ചേര്ത്ത വൈന്/പ്രോട്ടോണ് അറകള്",
-        "darktray": "താലത്തില്(ട്രേയില്) ഇരുണ്ട ചിത്രം ഉപയോഗിക്കുക",
-        "default-install-path": "തനത് സ്ഥാപനയിടം",
+        "customWineProton": "വൈൻ/പ്രോട്ടോൺ ഇഷ്ടാനുസൃത പാതകൾ",
+        "darktray": "ഇരുണ്ട ത്രേ ഐക്കൺ ഉപയോഗിക്കുക",
+        "default-install-path": "സാധാരണ സ്ഥാപനം",
         "default-steam-path": "Default Steam path",
-        "defaultWinePrefix": "Set Folder for new Wine Prefixes",
-        "disable_controller": "Disable HyperPlay navigation using controller",
-        "discordRPC": "ഡിസ്കോര്ഡ് റിച്ച് പ്രെസന്സ് വക്കൂ",
-        "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
+        "defaultWinePrefix": "പുതിയ വൈൻ പ്രിഫിക്‌സുകൾക്കുള്ള ഫോൾഡർ നിശ്ചയിക്കുക",
+        "disable_controller": "കൺട്രോളർ ഉപയോഗിച്ച് ഹൈപ്പർപ്ലേ നാവിഗേഷൻ അപ്രവർത്തനമാക്കുക",
+        "discordRPC": "ഡിസ്കോര്ഡ് റിച്ച പ്രെസൻസിനെ എനേബിൾ ചെയ്യുക",
+        "download-no-https": "HTTPS ഇല്ലാതെ ഗെയിമുകൾ ഡൗൺലോഡ് ചെയ്യുക (CDNs-നായി ഉപകാരപ്രദം, ഉദാഹരണത്തിന് LanCache)  \nHTTPS ഇല്ലാതെ ഗെയിമുകൾ ഡൗൺലോഡ് ചെയ്യുക (CDNs-നായി ഉപകാരപ്രദമായ, ഉദാഹരണത്തിന് LanCache)  \nHTTPS ഇല്ലാതെ ഗെയിമുകൾ ഡൗൺലോഡ് ചെയ്യുക (CDNs-നായി, ഉദാഹരണത്തിന് LanCache, ഉപയോഗപ്രദമാണ്)",
         "egs-sync": "സ്ഥാപിച്ച എപിക് ഗെയിംസുമായി ഒന്നിപ്പിക്കുക",
-        "enableFSRHack": "എഫ്എസ്ആര് ഹാക്ക് വയ്ക്കൂ (Wine version needs to support it)",
+        "enableFSRHack": "എഫ്എസ്ആർ ഹാക്ക് സജീവമാക്കുക (Wine പതിപ്പ് ഇത് പിന്തുണയ്ക്കണം)  \nഎഫ്എസ്ആർ ഹാക്ക് പ്രവർത്തനക്ഷമമാക്കുക (Wine പതിപ്പ് ഇത് പിന്തുണയ്ക്കണം)  \nഎഫ്എസ്ആർ ഹാക്ക് പ്രവർത്തിപ്പിക്കുക (Wine പതിപ്പ് ഇത് പിന്തുണയ്ക്കണം)",
         "eosOverlay": {
-            "cancelInstall": "Cancel",
-            "checkForUpdates": "Check for updates",
-            "checkingForUpdates": "Checking for updates...",
-            "currentVersion": "Current Version: {{version}}",
-            "disable": "Disable",
-            "enable": "Enable",
-            "install": "Install",
-            "installed": "The Epic Overlay is installed",
-            "installing": "The Epic Overlay is being installed...",
+            "cancelInstall": "വിരാമം നൽകുക",
+            "checkForUpdates": "അപ്ഡേറ്റുകൾ പരിശോധിക്കുന്നുണ്ടോ?",
+            "checkingForUpdates": "അപ്ഡേറ്റുകൾ പരിശോധിക്കുന്നു...",
+            "currentVersion": "നിലവിലെ പതിപ്പ്: {{version}}",
+            "disable": "അവസാനിപ്പിക്കുക",
+            "enable": "പ്രവർത്തനം ആരംഭിക്കുക",
+            "install": "ഇൻസ്റ്റാൾ",
+            "installed": "എപ്പിക് ഓവർലേയ് ഇൻസ്റ്റാൾ ചെയ്തിട്ടുണ്ട്",
+            "installing": "എപ്പിക് ഓവർലേ സ്ഥാപിക്കപ്പെടുന്നു...",
             "latestVersion": "Latest Version: {{version}}",
-            "notInstalled": "The Epic Overlay is not installed",
-            "notInstalledMsg": "The Epic Overlay is not installed. Do you want to install it now?",
+            "notInstalled": "എപ്പിക് ഓവർലേ ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല",
+            "notInstalledMsg": "എപ്പിക് ഓവർലേ ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല. നിങ്ങൾ ഇപ്പോൾ അത് ഇൻസ്റ്റാൾ ചെയ്യാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?  \nഎപ്പിക് ഓവർലേ ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല. നിങ്ങൾ ഇപ്പോൾ അത് ഇൻസ്റ്റാൾ ചെയ്യാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?  \nഎപ്പിക് ഓവർലേ ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല. നിങ്ങൾ ഇപ്പോൾ ഇൻസ്റ്റാൾ ചെയ്യാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?",
             "notInstalledTitle": "Overlay not installed",
             "remove": "Uninstall",
-            "removeConfirm": "Are you sure you want to uninstall the Epic Overlay?",
-            "removeConfirmTitle": "Confirm overlay removal",
-            "updateNow": "Update",
-            "updating": "Updating..."
+            "removeConfirm": "നിങ്ങൾ എപ്പിക് ഓവർലേ നീക്കം ചെയ്യാൻ തീരുമാനിച്ചിട്ടുണ്ടോ?",
+            "removeConfirmTitle": "ഓവർലേയ് നീക്കം ചെയ്യാൻ സ്ഥിരീകരിക്കുക",
+            "updateNow": "അപ്ഡേറ്റ് ചെയ്യുക",
+            "updating": "അപ്ഡേറ്റുകൾ നടത്തുന്നു..."
         },
-        "esync": "Esync വയ്ക്കൂ",
-        "exit-to-tray": "സംവിധാന താലത്തിലേക്ക്(സിസ്റ്റം ട്രേ) ചുരുക്കുക",
+        "esync": "Esync പ്രവർത്തിപ്പിക്കുക",
+        "exit-to-tray": "സിസ്റ്റം താലത്തിൽ ചുരുക്കുക",
         "FsrSharpnessStrenght": "എഫ്എസ്ആര് ഷാര്പ്പ്നെസ്സ് സ്ട്രെങ്ത്",
-        "fsync": "Fsync വയ്ക്കൂ",
-        "gamemode": "ഗെയിംമോഡ് ഉപയോഗിക്കൂ (ഫെറലിന്റെ ഗെയിംമോഡ് ഇന്സ്റ്റാള് ചെയ്തിരിക്കണം)",
+        "fsync": "Fsync പ്രവർത്തിപ്പിക്കുക",
+        "gamemode": "ഗെയിംമോഡ് ഉപയോഗിക്കുക (ഫെറലിന്റെ ഗെയിംമോഡ് ഇൻസ്റ്റാൾ ചെയ്തിരിക്കണം)  \nഗെയിംമോഡ് പ്രയോഗിക്കുക (ഫെറലിന്റെ ഗെയിംമോഡ് ഇൻസ്റ്റാൾ ചെയ്യേണ്ടതാണ്)  \nഗെയിംമോഡ് ഉപയോഗിക്കുക (ഫെറലിന്റെ ഗെയിംമോഡ് ഇൻസ്റ്റാൾ ചെയ്തിരിക്കണം)",
         "language": "ആപ്പിന്റെ ഭാഷ",
         "library_top_option": {
-            "disabled": "Disabled",
-            "favourites": "Favourite Games",
-            "recently_played": "Recently Played Games",
-            "recently_played_installed": "Recently Played Games (Only Installed)"
+            "disabled": "നिष്ക്രിയമായത്",
+            "favourites": "ഇഷ്ടപ്പെട്ട ഗെയിമുകൾ",
+            "recently_played": "സമീപകാലത്ത് അനുഭവിച്ച ഗെയിമുകൾ",
+            "recently_played_installed": "കഴിഞ്ഞ കുറച്ച് കാലം കളിച്ച ഗെയിമുകൾ (മാത്രം ഇൻസ്റ്റാൾ ചെയ്തവ)"
         },
-        "library_top_section": "Library Top Section",
+        "library_top_section": "ലൈബ്രറി മുകളിൽ സെക്ഷൻ",
         "log": {
-            "copy-to-clipboard": "Copy log content to clipboard",
+            "copy-to-clipboard": "ലോഗ് വിവരങ്ങൾ ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തുക",
             "current-log": "Current Log",
             "instructions": "If you encounter any issues while using HyperPlay, we have two designated areas to report your issues in our Discord Server. If you're a player, please report any problems by visiting the player-support-forum. If you are a game dev, please report any problems by visiting the dev-support-forum.{{newLine}} {{newLine}} To help us diagnose and fix the problem as quickly as possible, please provide as much information as possible, including a copy of your logs. Our support team will monitor both channels and do their best to respond to your issue as quickly as possible. Thank you for your patience and understanding while we work to resolve any problems you may encounter.{{newLine}}",
-            "instructions_title": "How to report a problem?",
+            "instructions_title": "ഒരു പ്രശ്നം എങ്ങനെ അറിയിക്കാം?",
             "last-log": "Last Log",
-            "no-file": "No log file found",
-            "show-in-folder": "Show log file in folder"
+            "no-file": "ലോഗ് ഫയൽ ഇല്ല",
+            "show-in-folder": "ഫോൾഡറിൽ ലോഗ് ഫയൽ കാണിക്കുക",
+            "instructions-part-02": "സമസ്യയെ möglichst schnell തിരിച്ചറിയാനും പരിഹരിക്കാനും സഹായിക്കാൻ, ദയവായി നിങ്ങളുടെ ലോഗുകളുടെ ഒരു പകർപ്പ് ഉൾപ്പെടെ, möglichst viel വിവരങ്ങൾ നൽകുക. ഞങ്ങളുടെ പിന്തുണാ സംഘം രണ്ട് ചാനലുകളും നിരീക്ഷിക്കുകയും നിങ്ങളുടെ പ്രശ്നത്തിന് möglichst schnell പ്രതികരിക്കാൻ ശ്രമിക്കുകയും ചെയ്യും. നിങ്ങൾ നേരിടുന്ന പ്രശ്നങ്ങൾ പരിഹരിക്കാൻ ഞങ്ങൾ പ്രവർത്തിക്കുന്നതിനിടെ നിങ്ങളുടെ സഹനത്തിനും മനസ്സിലാക്കലിനും നന്ദി.",
+            "instructions-part-01": "HyperPlay ഉപയോഗിക്കുമ്പോൾ നിങ്ങൾക്ക് ഏതെങ്കിലും പ്രശ്നങ്ങൾ നേരിടുന്നുവെങ്കിൽ, ഞങ്ങളുടെ Discord സെർവറിൽ നിങ്ങളുടെ പ്രശ്നങ്ങൾ റിപ്പോർട്ട് ചെയ്യാൻ രണ്ട് നിശ്ചിത പ്രദേശങ്ങൾ ഉണ്ട്. നിങ്ങൾ ഒരു കളിക്കാരനാണെങ്കിൽ, ദയവായി കളിക്കാരൻ-സപ്പോർട്ട്-ഫോറം സന്ദർശിച്ച് പ്രശ്നങ്ങൾ റിപ്പോർട്ട് ചെയ്യുക. നിങ്ങൾ ഒരു ഗെയിം ഡെവലപ്പർ ആണെങ്കിൽ, ദയവായി ഡെവ്-സപ്പോർട്ട്-ഫോറം സന്ദർശിച്ച് പ്രശ്നങ്ങൾ റിപ്പോർട്ട് ചെയ്യുക.",
+            "join-hyperplay-discord": "ഞങ്ങളുടെ Discord-ൽ ചേരുക"
         },
-        "mangohud": "മാന്ഘൗട്ട് ഉപയോഗിക്കൂ(മാന്ഘൗട്ട് ഇന്സ്റ്റാള് ചെയ്തിരിക്കണം)",
+        "mangohud": "മാന്ഘൗട്ട് പ്രവർത്തിപ്പിക്കുക (മാന്ഘൗട്ട് ഇൻസ്റ്റാൾ ചെയ്തിരിക്കണം)",
         "manualsync": {
-            "download": "ഇറക്കിയെടുക്കൂ",
-            "forcedownload": "നിബ഻ന്ധിച്ച് ഇറക്കിയെടുക്ക്",
-            "forceupload": "നിബ഻ന്ധിച്ച് കയറ്റിവയ്ക്ക്",
-            "sync": "ഒന്നിപ്പിക്കൂ",
-            "syncing": "ഒന്നിപ്പിക്കുന്നു",
-            "title": "നിങ്ങള് സൂക്ഷിച്ച ഒന്നിപ്പിക്കലുകള്",
+            "download": "ഡൗൺലോഡ് ചെയ്യുന്നത്",
+            "forcedownload": "ഡൗൺലോഡ് നിർബന്ധിതമാക്കുക",
+            "forceupload": "കയറ്റിവയ്ക്കാൻ നിർബന്ധിക്കുക",
+            "sync": "സമന്വയിപ്പിക്കുക",
+            "syncing": "സമന്വയിപ്പിക്കുന്നു",
+            "title": "കൈമാറ്റം ചെയ്ത സംരക്ഷണങ്ങള്‍",
             "upload": "കയറ്റിവയ്ക്കുൂ"
         },
-        "maxRecentGames": "അടുത്തിടെയുള്ള പതിവ് കളികള്",
+        "maxRecentGames": "കഴിഞ്ഞ കുറച്ച് ദിവസങ്ങളില്‍ കളിച്ച കളികള്‍",
         "maxworkers": "ഇറക്കിയെടുക്കുമ്പോള് പണിയുന്നവരുടെ പരമാവധി എണ്ണം",
-        "minimize-on-launch": "Minimize HyperPlay After Game Launch",
-        "offlinemode": "ഓഫ്ലൈനില് കളിക്കുക",
-        "prefered_language": "Prefered Language (Language Code)",
-        "preferSystemLibs": "Prefer system libraries",
+        "minimize-on-launch": "ഗെയിം ലോഞ്ച് കഴിഞ്ഞാൽ ഹൈപ്പർപ്ലേ കുറയ്ക്കുക",
+        "offlinemode": "ഓഫ്ലൈനിൽ ഗെയിം ഓടിക്കുക",
+        "prefered_language": "ആവശ്യമായ ഭാഷ (ഭാഷാ കോഡ്)  \nആവശ്യമായ ഭാഷ (ഭാഷാ കോഡ്)  \nആവശ്യമായ ഭാഷ (ഭാഷാ കോഡ്)",
+        "preferSystemLibs": "സിസ്റ്റം ലൈബ്രറികൾക്ക് മുൻഗണന നൽകുക",
         "primerun": {
             "confirmation": {
-                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
-                "title": "Only 1 GPU detected"
+                "message": "ഈ സിസ്റ്റത്തിൽ ഒരു മാത്രം ഗ്രാഫിക്‌സ് കാർഡ് കണ്ടെത്തിയിട്ടുണ്ട്. ഈ ഓപ്ഷൻ ഹെഡ്‌ലെസ് GPU-കളുള്ള മൾട്ടി-GPU സിസ്റ്റങ്ങൾക്കായാണ് ഉദ്ദേശിച്ചിരിക്കുന്നത് (ലാപ്‌ടോപ്പുകൾ പോലുള്ള). സിംഗിൾ-GPU സിസ്റ്റങ്ങളിൽ, GPU സ്വയം ഉപയോഗിക്കപ്പെടുന്നു & ഈ ഓപ്ഷൻ സജീവമാക്കുന്നത് പ്രശ്നങ്ങൾ ഉണ്ടാക്കാം. നിങ്ങൾ ഈ ഓപ്ഷൻ സജീവമാക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?",
+                "title": "ഒരു GPU മാത്രം കണ്ടെത്തി"
             },
-            "description": "എന്വിഡിയ പ്രൈം റെന്റര് വയ്ക്കൂ"
+            "description": "ഡെഡിക്കേറ്റഡ് ഗ്രാഫിക്‌സ് കാർഡ് ഉപയോഗിക്കുക"
         },
         "runexe": {
-            "message": "രേഖകള് ഇവിടെനിന്നും വലിച്ചെടുക്കുക/ഇടുക",
-            "title": "ഉപസഗ്ഗ഻ത്തില് EXE ഓടിക്കുക"
+            "message": "ഫയലുകൾ ഇവിടെ വലിച്ചെടുക്കുക/ഇടുക",
+            "title": "Prefix-ൽ EXE ഓടിക്കുക"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually (click to retry)",
-            "placeholder": "കളി സൂക്ഷിക്കാനുള്ള കൃത്യമായ സ്ഥലം നല്കൂ",
-            "warning": "Please check twice if the path is correct (click to retry)"
+            "not-found": "സേവ് ഫോൾഡർ കണ്ടെത്തിയില്ല, ദയവായി അത് കൈമാറുക (മറുപടി നൽകാൻ ക്ലിക്ക് ചെയ്യുക)  \nസേവ് ഫോൾഡർ ലഭ്യമല്ല, ദയവായി അത് കൈമാറുക (മറുപടി നൽകാൻ ക്ലിക്ക് ചെയ്യുക)  \nസേവ് ഫോൾഡർ കണ്ടെത്താൻ കഴിയുന്നില്ല, ദയവായി അത് കൈമാറുക (മറുപടി നൽകാൻ ക്ലിക്ക് ചെയ്യുക)",
+            "placeholder": "സേവ് ഗെയിംസ് ഫോള്ഡർ കൃത്യമായി തിരഞ്ഞെടുക്കുക",
+            "warning": "ദയവായി പാത ശരിയാണോ എന്ന് രണ്ടുതവണ പരിശോധിക്കുക (മറുപടി നൽകാൻ ക്ലിക്ക് ചെയ്യുക)  \nദയവായി പാത ശരിയാണോ എന്ന് രണ്ടുതവണ പരിശോധിക്കുക (മറുപടി നൽകാൻ ക്ലിക്ക് ചെയ്യുക)  \nദയവായി പാത ശരിയാണോ എന്ന് രണ്ടുതവണ പരിശോധിക്കുക (മറുപടി നൽകാൻ ക്ലിക്ക് ചെയ്യുക)"
         },
-        "select_theme": "Select Theme",
-        "showfps": "ചിത്രനിരക്ക് കാണിക്കൂ (DX9ലും 10ലും 11ലും)",
-        "start-in-tray": "ചെറിയ കളമാക്കി തുറക്കൂ",
+        "select_theme": "തീം തിരഞ്ഞെടുക്കുക",
+        "showfps": "ചിത്രനിരക്ക് പ്രദർശിപ്പിക്കുക (DX9, 10, 11)  \nചിത്രനിരക്ക് കാണിക്കുക (DX9, 10, 11)  \nഫ്രെയിം നിരക്ക് കാണിക്കുക (DX9, 10, 11)",
+        "start-in-tray": "ചെറിയതായാണ് തുറക്കുക",
         "steamruntime": "Use Steam Runtime",
-        "winecrossoverbottle": "ക്രോസ്സോവര് കുപ്പി",
-        "wineprefix": "വൈനിരിക്കുന്ന അറ",
+        "winecrossoverbottle": "ക്രോസ്സോവർ ബോട്ടിൽ",
+        "wineprefix": "വൈൻപ്രിഫിക്സ് ഫോള്ഡർ",
         "wineversion": "വൈനിന്റെ പതിപ്പ്",
-        "autoUpdateGames": "ഗെയിമുകൾ യാന്ത്രികമായി അപ്ഡേറ്റ് ചെയ്യുക",
-        "ignoreGameUpdates": "ഗെയിം അപ്‌ഡേറ്റുകൾ അവഗണിക്കുക",
+        "autoUpdateGames": "ഗെയിമുകൾ സ്വയം പുതുക്കുക",
+        "ignoreGameUpdates": "ഗെയിം അപ്‌ഡേറ്റുകൾക്ക് ശ്രദ്ധ നൽകേണ്ടത് ഒഴിവാക്കുക",
         "disable_logs": "ലോഗുകൾ പ്രവർത്തനരഹിതമാക്കുക",
         "addgamestoapplications": "ആപ്ലിക്കേഷനുകളിലേക്ക് ഗെയിമുകൾ സ്വയമേവ ചേർക്കുക",
         "showMetalOverlay": "സ്ഥിതിവിവരക്കണക്കുകളുടെ ഓവർലേ കാണിക്കുക",
         "alt-nile-bin": "ഒരു ഇതര നൈൽ ബൈനറി തിരഞ്ഞെടുക്കുക",
-        "msync": "Esync വയ്ക്കൂ",
-        "autodxvknvapi": "ഉപസഗ്ഗ഻ത്തില്(പ്രഫിക്സില്) DXVK തന്നത്താന് സ്ഥാപിക്കൂ/പുതുക്കൂ"
+        "msync": "Msync സജ്ജമാക്കുക",
+        "autodxvknvapi": "DXVK-NVAPI പ്രഫിക്സിൽ സ്വയം ഇൻസ്റ്റാൾ/അപ്ഡേറ്റ് ചെയ്യുക",
+        "dxvkfpslimit": "FPS പരിധി (DX9, 10, 11)",
+        "steamId": "സ്റ്റീം ഐഡി",
+        "autoLaunchHyperPlay": "ഹൈപ്പർപ്ലേ സ്വയം ആരംഭിക്കുക"
     },
     "settings": {
         "battlEyeRuntime": {
-            "installing": "Installing BattlEye Runtime...",
-            "name": "BattlEye AntiCheat Runtime"
+            "installing": "BattlEye റൺടൈം ഇൻസ്റ്റാൾ ചെയ്യുന്നു...  \nBattlEye റൺടൈം സ്ഥാപിക്കുന്നു...  \nBattlEye റൺടൈം ഇൻസ്റ്റാൾ ചെയ്യുന്നു...",
+            "name": "BattlEye ആന്റി ചീറ്റ് റൺടൈം"
         },
         "clear-cache": "Clear HyperPlay Cache",
-        "copiedToClipboard": "Copied to Clipboard!",
-        "copyToClipboard": "Copy All Setting to Clipboard",
-        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
+        "copiedToClipboard": "ക്ലിപ്പ്ബോർഡിലേക്ക് കോപ്പി ചെയ്തിരിക്കുന്നു!",
+        "copyToClipboard": "എല്ലാ ക്രമീകരണങ്ങളും ക്ലിപ്പ്ബോർഡിലേക്ക് പകർപ്പിക്കുക",
+        "default_hint": "ഈ വിഭാഗത്തിലെ മാറ്റങ്ങൾ ഗെയിമുകൾ ഇൻസ്റ്റാൾ ചെയ്യുമ്പോൾ മാത്രം ഡിഫോൾട്ട് മൂല്യങ്ങളായി ബാധകമാണ്. ഇതിനകം ഇൻസ്റ്റാൾ ചെയ്ത ഗെയിമിന്റെ ക്രമീകരണങ്ങൾ മാറ്റാൻ ആഗ്രഹിക്കുന്നുവെങ്കിൽ, ഗെയിം പേജിൽ ക്രമീകരണങ്ങൾ ബട്ടൺ ഉപയോഗിക്കുക.",
         "eacRuntime": {
             "gameModeRequired": {
-                "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
-                "title": "GameMode required"
+                "message": "GameMode ഫ്ലാറ്റ്പാക്കിൽ EAC റൺടൈം പ്രവർത്തിക്കാൻ ആവശ്യമാണ്. നിങ്ങൾ ഇപ്പോൾ ഇത് സജീവമാക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?  \nGameMode ഫ്ലാറ്റ്പാക്കിൽ EAC റൺടൈം പ്രവർത്തിക്കാൻ ആവശ്യമാണ്. നിങ്ങൾ ഇപ്പോൾ ഇത് പ്രവർത്തനക്ഷമമാക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?  \nGameMode ഫ്ലാറ്റ്പാക്കിൽ EAC റൺടൈം പ്രവർത്തിക്കാൻ ആവശ്യമാണ്. നിങ്ങൾ ഇപ്പോൾ ഇത് എനേബിൾ ചെയ്യാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?",
+                "title": "ഗെയിംമോഡ് ആവശ്യമാണ്"
             },
-            "installing": "Installing EAC Runtime...",
+            "installing": "EAC റൺടൈം ഇൻസ്റ്റാൾ ചെയ്യുന്നത്...",
             "name": "EasyAntiCheat Runtime"
         },
         "gameMode": {
             "eacRuntimeEnabled": {
-                "message": "The EAC runtime is enabled, which won't function correctly without GameMode. Do you want to disable the EAC Runtime and GameMode?",
+                "message": "EAC റൺടൈം സജീവമാണ്, എന്നാൽ ഗെയിംമോഡ് ഇല്ലാതെ ഇത് ശരിയായി പ്രവർത്തിക്കില്ല. EAC റൺടൈംയും ഗെയിംമോഡും അപ്രവർത്തനത്തിലാക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?  \nEAC റൺടൈം സജീവമാണ്, ഗെയിംമോഡ് ഇല്ലാതെ ഇത് ശരിയായി പ്രവർത്തിക്കില്ല. EAC റൺടൈംയും ഗെയിംമോഡും അപ്രവർത്തനത്തിലാക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?  \nEAC റൺടൈം സജീവമാണ്, എന്നാൽ ഗെയിംമോഡ് ഇല്ലാതെ ഇത് ശരിയായി പ്രവർത്തിക്കില്ല. EAC റൺടൈംയും ഗെയിംമോഡും അപ്രവർത്തനത്തിലാക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?",
                 "title": "EAC runtime enabled"
             }
         },
@@ -586,175 +638,474 @@
             "long-log-hint": "Log truncated, last 1000 lines are shown!"
         },
         "navbar": {
-            "advanced": "Advanced",
+            "advanced": "പ്രഗതിശീലമായ",
             "games_settings_defaults": "Game Defaults",
-            "general": "പൊതുവായവ",
-            "log": "Log",
-            "other": "മറ്റുള്ളവ",
-            "sync": "ഒന്നിപ്പിക്കല് സൂക്ഷിക്കൂ",
+            "general": "പൊതുവായ കാര്യങ്ങൾ",
+            "log": "ലോഗ് ഫയൽ",
+            "other": "മറ്റുള്ളവകൾക്ക്",
+            "sync": "മേഘ സംരക്ഷണങ്ങൾ ഏകീകരിക്കുക",
             "wineExt": "Wine Extensions",
-            "accounts": "അക്കൗണ്ടുകൾ"
+            "accounts": "അക്കൗണ്ടുകൾ",
+            "systemInformation": "സിസ്റ്റം വിവരങ്ങൾ"
         },
-        "open-config-file": "Open Config File",
-        "reset-hyperplay": "Reset HyperPlay",
+        "open-config-file": "കോൺഫിഗ് ഫയൽ തുറക്കുക",
+        "reset-hyperplay": "ഹൈപ്പർപ്ലേ റീസെറ്റ് ചെയ്യുക",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
         },
-        "gamesSettings": "Game settings",
+        "gamesSettings": "ഗെയിം സജ്ജീകരണങ്ങൾ",
         "wine": {
             "manager": {
-                "title": "Wine Manager"
+                "title": "വൈൻ നിയന്ത്രകൻ"
             }
         },
         "systemInformation": {
-            "copyToClipboard": "ക്ലിപ്പ്ബോര്‍ഡിലേക്ക് പകര്‍ത്തട്ടെ?",
-            "memory": "മെമ്മറി"
-        }
+            "copyToClipboard": "ക്ലിപ്പ്ബോര്‍ഡിലേക്ക് കോപ്പി ചെയ്യണോ?  \nക്ലിപ്പ്ബോര്‍ഡിലേക്ക് പകര്‍ത്തണമോ?  \nക്ലിപ്പ്ബോര്‍ഡിലേക്ക് പകര്‍ത്താന്‍ ആഗ്രഹിക്കുന്നുണ്ടോ?",
+            "memory": "അനുഭവം",
+            "osVersion": "വർഷം {{versionNumber}}",
+            "gpu": "GPU:",
+            "os": "ഓപ്പറേറ്റിംഗ് സിസ്റ്റം:",
+            "osNameFlatpak": "{{osName}} (Flatpak-ൽ)",
+            "gogdlVersion": "ഗോഗ്ഡൽ: {{gogdlVersion}}",
+            "cpu": "സിപിയു:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "memoryStats": "{{percentUsed}}% ഉപയോഗിച്ചിരിക്കുന്നു ({{usedGib}} / {{totalGib}}",
+            "gpuDriver": "ഡ്രൈവർ: {{driverVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "ലെജൻഡറി: {{legendaryVersion}}",
+            "showDetailed": "വിവരവശങ്ങൾ കാണിക്കുക",
+            "steamDeck": "സ്റ്റീം ഡെക്ക്",
+            "version": "വർഷം: {{appVersion}}"
+        },
+        "reset-extension": "പുനഃസജ്ജീകരണ വിപുലീകരണം"
     },
-    "Settings": "ക്രമീകരണങ്ങള്",
+    "Settings": "ക്രമീകരണങ്ങൾ",
     "sidebar": {
         "collapse": "Collapse sidebar",
         "uncollapse": "Uncollapse sidebar",
-        "library": "പുസ്തകശാല",
-        "store": "കട"
+        "library": "പുസ്തകഗൃഹം",
+        "store": "വില്പനശാല",
+        "achievements": "സാധനങ്ങൾ",
+        "downloadManager": "ഡൗൺലോഡ് മാനേജർ"
     },
     "status": {
-        "installing": "Installing",
-        "logging": "Logging In...",
-        "processing": "Processing files, please wait",
+        "installing": "ഇൻസ്റ്റാൾ ചെയ്യുന്നത്",
+        "logging": "ലോഗിൻ ചെയ്യുന്നു...",
+        "processing": "ഫയലുകൾ പ്രോസസ്സ് ചെയ്യുന്നത് തുടരുന്നു, ദയവായി കാത്തിരിക്കുക",
         "preparing_login": "ലോഗിൻ തയ്യാറാക്കുന്നു... "
     },
-    "store": "കട",
+    "store": "എപ്പിക് വാണിജ്യ കേന്ദ്രം",
     "stores": "Stores",
     "title": {
-        "allGames": "മൊത്തം കളികള്"
+        "allGames": "സകല ഗെയിമുകൾ"
     },
     "toolbox": {
         "settings": {
-            "default-wineprefix": "Select the default prefix folder for new configs",
-            "wineprefix": "Select a Folder for new Wine Prefixes"
+            "default-wineprefix": "പുതിയ കോൺഫിഗറേഷനുകൾക്കുള്ള ഡിഫോൾട്ട് പ്രിഫിക്‌സ് ഫോൾഡർ തിരഞ്ഞെടുക്കുക",
+            "wineprefix": "പുതിയ വൈൻ പ്രിഫിക്‌സുകൾക്കായി ഒരു ഫോൾഡർ തിരഞ്ഞെടുക്കുക"
         }
     },
     "tooltip": {
-        "addpath": "പുതിയ ഇടം ചേര്ക്കുക",
-        "removepath": "ഇടം നീക്കുക"
+        "addpath": "പുതിയ മാർഗം ചേർക്കുക",
+        "removepath": "പാത നീക്കം ചെയ്യുക"
     },
     "tray": {
-        "about": "ഇതിനെക്കുറിച്ച്",
-        "quit": "പുറത്തുകടക്കുക",
-        "reload": "വീണ്ടും എടുക്കൂ",
-        "show": "കാണിക്കൂ"
+        "about": "ഇതിനെക്കുറിച്ചുള്ള വിവരങ്ങൾ",
+        "quit": "വിടുക",
+        "reload": "പുനഃലോഡ് ചെയ്യുക",
+        "show": "കാണിച്ചുകൊടുക്കുക"
     },
     "two_col_table": {
-        "save_hint": "Changes in this table are not saved automatically. Click the + button"
+        "save_hint": "ഈ പട്ടികയിലെ മാറ്റങ്ങൾ സ്വയം സംരക്ഷിക്കപ്പെടുന്നില്ല. + ബട്ടൺ ക്ലിക്ക് ചെയ്യുക"
     },
     "Update Available!": "",
     "userselector": {
         "discord": "ഡിസ്കോഡ഻്",
-        "logging_out": "Logging out",
-        "logout": "ഇറങ്ങൂ(ലോഗൌട്ട്)",
-        "logout_confirmation": "Logout?",
-        "manageaccounts": "Manage Accounts",
-        "quit": "പുറത്തുകടക്കൂ",
-        "logIn": "ലോഗിൻ"
+        "logging_out": "ലോഗ് ഔട്ട് ചെയ്യുന്നു",
+        "logout": "ഇറങ്ങുക",
+        "logout_confirmation": "നിങ്ങൾ ലോഗ് ഔട്ട് ചെയ്യാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?",
+        "manageaccounts": "അക്കൗണ്ടുകൾ കൈമാറുക",
+        "quit": "അവസാനിക്കുക",
+        "logIn": "ലോഗിൻ ചെയ്യുക",
+        "manageStore": "സ്റ്റോറുകൾ കൈകാര്യം ചെയ്യുക"
     },
     "webview": {
         "controls": {
             "back": "മടങ്ങിപ്പോവുക",
-            "forward": "മുന്നോട്ട് പോകുക",
-            "openInBrowser": "ബ്രൗസറിൽ തുറക്കുക",
-            "reload": "പേജ് റീലോഡ് ചെയ്യുക"
+            "forward": "മുന്നോട്ട് പോകാൻ",
+            "openInBrowser": "ബ്രൗസർ വഴി തുറക്കുക",
+            "reload": "പേജ് പുതുക്കാൻ"
         }
     },
     "wine": {
-        "actions": "Action",
+        "actions": "കൃത്യം",
         "manager": {
             "link": "Compatibility Layer ",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Compatibility Layer ",
+            "title": "സമന്വയ ഘടകം ",
             "unzipping": "Unzipping"
         },
-        "release": "Release Date",
-        "size": "Size"
+        "release": "പ്രസിദ്ധീകരണ തീയതി",
+        "size": "വലുപ്പം"
     },
     "externalLink": {
-        "dontAskAgain": "വീണ്ടും ചോദിക്കരുത്",
-        "warning": "നിങ്ങൾ ഒരു ബാഹ്യ ലിങ്ക് തുറക്കാൻ പോകുകയാണ്."
+        "dontAskAgain": "ഇനി ചോദിക്കേണ്ടതില്ല",
+        "warning": "നിങ്ങൾ ഒരു പുറം ലിങ്ക് തുറക്കാൻ പോകുന്നു.  \nനിങ്ങൾ ഒരു വിദേശ ലിങ്ക് തുറക്കാൻ ഉദ്ദേശിക്കുന്നു.  \nനിങ്ങൾ ഒരു എക്സ്റ്റർണൽ ലിങ്ക് തുറക്കാൻ തയ്യാറാണ്."
     },
     "wiki_info": {
-        "not_found": "ഞങ്ങൾക്ക് അധിക വിവരങ്ങൾ കണ്ടെത്താൻ കഴിഞ്ഞില്ല."
+        "not_found": "ഞങ്ങൾക്കു അധിക വിവരങ്ങൾ ലഭ്യമല്ല."
     },
     "dlc": {
-        "size": "Size",
-        "actions": "പ്രവർത്തനങ്ങൾ",
-        "noDlcFound": "DLC-കളൊന്നും കണ്ടെത്തിയില്ല",
-        "title": "Title",
-        "installDlcs": "എല്ലാ കൂട്ടുരേഖകളും നടൂ"
+        "size": "വലുപ്പം",
+        "actions": "കൃത്യങ്ങൾ",
+        "noDlcFound": "DLC-കളൊന്നും ലഭ്യമല്ല",
+        "title": "ശീർഷകം",
+        "installDlcs": "എല്ലാ ഡിഎൽസികൾ സ്ഥാപിക്കുക"
     },
     "amazon": "ആമസോൺ",
     "Amazon Games": "ആമസോൺ ഗെയിമുകൾ",
     "prime-gaming": "പ്രൈം ഗെയിമിംഗ്",
     "gameRelease": {
-        "beta": "ബീറ്റ",
-        "main": "പ്രധാന"
+        "beta": "ബീറ്റാ വേർഷൻ",
+        "main": "പ്രധാന വിഭാഗം",
+        "demo": "ഡെമോ",
+        "alpha": "ആൽഫ",
+        "prototype": "പ്രോട്ടോടൈപ്പ്"
     },
     "hyperplay": {
         "gamecard": {
-            "paused": "താല്‍ക്കാലികമായി നിര്‍ത്തിയിരിക്കുന്നു"
+            "paused": "താൽക്കാലികമായി നിർത്തിയിട്ടുണ്ട്",
+            "installing": "ഡൗൺലോഡ് ചെയ്യുന്നു...",
+            "extracting": "കയറ്റുമതി ചെയ്യുന്നു...",
+            "distributables": "ഡിസ്ട്രിബ്യൂട്ടബിളുകൾ ഇൻസ്റ്റാൾ ചെയ്യുന്നു..."
         },
         "browserImport": {
-            "profile": "പ്രൊഫൈൽ"
+            "profile": "ഉപയോക്തൃ പ്രൊഫൈൽ",
+            "appId": "ആപ്പ് ഐഡി"
         },
         "buttons": {
-            "noThanks": "വേണ്ട, നന്ദി"
+            "noThanks": "വേണ്ട, നന്ദി != നന്ദി, വേണ്ട != നന്ദി, ഞാൻ വേണ്ട",
+            "agree": "ഞാൻ സമ്മതിക്കുന്നു"
         },
-        "folder": "Folder",
-        "misc": "ഒരിയ്ക്കലുമില്ല",
-        "Sync": "ഒന്നിപ്പിക്കൂ",
-        "turnAnalyticsOff": "Turn off",
+        "folder": "ഡോക്യുമെന്റ് ഫോൾഡർ",
+        "misc": "ഒരിക്കലും സംഭവിക്കില്ല",
+        "Sync": "സമന്വയിപ്പിക്കുക",
+        "turnAnalyticsOff": "നിലവിൽ നിർത്തുക",
         "onboarding": {
             "walletSelection": {
                 "screens": {
                     "import": {
-                        "learnMore": "കൂടുതൽ അറിയാൻ"
+                        "learnMore": "കൂടുതൽ പഠിക്കുക.  \nകൂടുതൽ വിവരങ്ങൾ നേടുക.  \nകൂടുതൽ അറിയാൻ ശ്രമിക്കുക.",
+                        "createNewWallet": "പുതിയ MM വിപുലീകരണ വാലറ്റ് സൃഷ്ടിക്കുക",
+                        "details": "താഴെ കൊടുത്തിരിക്കുന്ന ബ്രൗസറുകളിൽ ഇതിനകം MetaMask ഇൻസ്റ്റാൾ ചെയ്തിട്ടുണ്ട്. നിങ്ങൾക്ക് ഇറക്കുമതി ചെയ്യാൻ ആഗ്രഹിക്കുന്നതിനെ തിരഞ്ഞെടുക്കുക.",
+                        "useRecoveryPhrase": "സീക്രട്ട് റിക്കവറി വാചകം ഉപയോഗിച്ച് ഇറക്കുമതി ചെയ്യുക",
+                        "useRecoveryPhraseInfo": "ഈ ഫീച്ചർ ഉയർന്ന ഉപയോക്താക്കൾക്കും വികസകര്ക്കും ശുപാർശ ചെയ്യുന്നു. നിങ്ങളുടെ രഹസ്യ പുനരധിവാസ വാചകം MetaMask-ൽ പ്രാദേശികമായി സംഭരിക്കപ്പെടുന്നു, HyperPlay-നൊപ്പം ഒരിക്കലും പങ്കുവെക്കപ്പെടുന്നില്ല.",
+                        "title": "ഇമ്പോർട്ട് ചെയ്യാൻ ബ്രൗസർ തിരഞ്ഞെടുക്കുക"
+                    },
+                    "info": {
+                        "login": {
+                            "title": "ലോഗിൻ ചെയ്യാനുള്ള പുതിയ മാർഗം",
+                            "details": "പ്രതിയിടങ്ങളിൽ പുതിയ അക്കൗണ്ടുകളും പാസ്വേഡുകളും സൃഷ്ടിക്കുന്നതിന് ഒരു ബദൽ, നിങ്ങളുടെ വാലറ്റ് ബന്ധിപ്പിക്കുക മാത്രം."
+                        },
+                        "digitalAssets": {
+                            "details": "വാലറ്റുകൾ ടോക്കണുകളും NFTs-ഉം പോലുള്ള ഡിജിറ്റൽ ആസ്തികൾ അയക്കാൻ, സ്വീകരിക്കാൻ, സംഭരിക്കാൻ, പ്രദർശിപ്പിക്കാൻ ഉപയോഗിക്കുന്നു."
+                        },
+                        "createWalletDescription": "നിങ്ങൾക്ക് ഒരു വാലറ്റ് ഇല്ലെങ്കിൽ അല്ലെങ്കിൽ പുതിയ ഒരു വാലറ്റ് സൃഷ്ടിക്കാൻ ആഗ്രഹിക്കുന്നുവെങ്കിൽ, താഴെ “ഒരു വാലറ്റ് സൃഷ്ടിക്കുക” എന്നതിൽ ക്ലിക്ക് ചെയ്യുക:",
+                        "createWalletCTA": "ഒരു വാലറ്റ് സൃഷ്ടിക്കുക",
+                        "skip": "ഇപ്പോൾ ഒഴിവാക്കുക",
+                        "title": "വാലറ്റ് എന്താണ്?"
+                    },
+                    "scan": {
+                        "title": "QR സ്കാൻ ചെയ്യുക ",
+                        "updateWarning": "പ്രശ്നങ്ങളുണ്ടോ? MetaMask അപ്‌ഡേറ്റ് ചെയ്തിട്ടുണ്ടെന്ന് ഉറപ്പാക്കുക.",
+                        "dontHaveWallet": "വാലറ്റ് ഇല്ലേ?",
+                        "getMetamask": "മെറ്റാമാസ്‌ക് നേടുക"
                     }
+                },
+                "pleaseConnect": "ദയവായി നിങ്ങളുടെ വാലറ്റ് ബന്ധിപ്പിക്കുക, അല്ലെങ്കിൽ ആരംഭിക്കാൻ മെറ്റാമാസ്‌ക് മൊബൈൽ ആപ്പ് ഡൗൺലോഡ് ചെയ്യുക:",
+                "title": "വാലറ്റ് കണക്ഷനുകൾ"
+            },
+            "terms": "സേവന നിബന്ധനകൾ",
+            "analytics": {
+                "neverSellData": " ലാഭത്തിനായി ഡാറ്റ വിൽക്കുക. ഒരിക്കലും!",
+                "title": "HyperPlay-നെ മെച്ചപ്പെടുത്താൻ ഞങ്ങളെ സഹായിക്കുക!",
+                "privacyCaption": "ഈ ഡാറ്റ സമാഹരിക്കപ്പെട്ടതാണ്, അതിനാൽ ഇത് പൊതുവായ ഡാറ്റ സംരക്ഷണ നിയമം (EU) 2016/679 ന്റെ ആവശ്യങ്ങൾക്കായി അനാമികമാണ്. ഞങ്ങളുടെ സ്വകാര്യതാ പ്രാക്ടീസുകൾക്കുറിച്ച് കൂടുതൽ വിവരങ്ങൾക്ക്, ദയവായി ഞങ്ങളുടെ ",
+                "neverCollectIP": " നിങ്ങളുടെ മുഴുവൻ ഐപി വിലാസം ശേഖരിക്കുക;",
+                "optOut": "സജ്ജീകരണങ്ങൾ വഴി നിങ്ങൾക്ക് എപ്പോഴും ഒഴിവാക്കാൻ അനുവദിക്കുക;",
+                "privacyPolicyHere": "സ്വകാര്യതാ നയം ഇവിടെ.",
+                "anonymized": "അനാമികമായ ക്ലിക്ക് & ഗെയിം ഇടപെടലുകൾ അയയ്ക്കുക;"
+            },
+            "connectionConnected": {
+                "title": "വാലറ്റ് ബന്ധിപ്പിച്ചു!",
+                "description": "നിങ്ങളുടെ വാലറ്റ് ബന്ധിപ്പിച്ചിരിക്കുന്നു. നിങ്ങൾ ഗെയിമിംഗ് ചെയ്യാൻ തയ്യാറാണ്."
+            },
+            "welcome": {
+                "title": "HyperPlay പ്രാരംഭ പ്രവേശനത്തിലേക്ക് സ്വാഗതം!",
+                "text": {
+                    "construction": "ഹൈപ്പർപ്ലേ നിർമ്മാണത്തിലുണ്ട്.",
+                    "communityCTA_1": "നിങ്ങളുടെ അഭിപ്രായം ഞങ്ങൾക്കു വളരെ ഇഷ്ടമാണ്, കൂടാതെ നിങ്ങൾ ഞങ്ങളോടൊപ്പം ചേരാൻ ആഗ്രഹിക്കുന്നു",
+                    "communityCTA_2": "സമൂഹം. ഒന്നിച്ച്, ഗെയിമിംഗിന്റെ ഭാവി രൂപകൽപ്പന ചെയ്യാം!",
+                    "bugs": "ദയവായി ശ്രദ്ധിക്കുക, HyperPlay ഒരു പൊതു ആൽഫയാണ്. നിരവധി ഫീച്ചറുകൾ ഇപ്പോഴും വികസനത്തിലുണ്ട്, കൂടാതെ ബഗ് ഉണ്ടാകും.",
+                    "description": "HyperPlay ഭാവിയിലെ ഒരു ഗെയിം ലോഞ്ചറും ഗെയിം സ്റ്റോർ ആഗ്രിഗേറ്ററും ആണ്. HyperPlay ഉപയോഗിച്ച്, നിങ്ങൾ നിങ്ങളുടെ വാലറ്റ്, ടോക്കണുകൾ, ആസ്തികൾ എല്ലായിടത്തും കൊണ്ടുപോകാം. HyperPlay എപ്പിക് സ്റ്റോറിന്റെ, GOG-ന്റെ, ഞങ്ങളുടെ സ്വന്തം HyperPlay സ്റ്റോറിന്റെ മുഴുവൻ ലൈബ്രറിയും പിന്തുണയ്ക്കുന്നു. HyperPlay ഉപയോഗിച്ച്, നിങ്ങൾ ഞങ്ങളുടെ"
                 }
             },
-            "terms": "സേവന നിബന്ധനകൾ"
+            "connectAgain": "മറുപടി നൽകുക",
+            "connectionCanceled": {
+                "title": "കണക്ഷൻ റദ്ദാക്കി!",
+                "description": "മുന്നോട്ട് പോകാൻ നിങ്ങളുടെ മൊബൈൽ വാലറ്റിൽ കണക്ഷൻ അഭ്യർത്ഥന സ്ഥിരീകരിക്കുക."
+            }
         },
-        "discordApp": "ഡിസ്കോഡ഻്",
-        "logOut": "പുറത്തിറങ്ങുക"
+        "discordApp": "ഡിസ്കോർഡ്",
+        "logOut": "ലോഗ് ഔട്ട് ചെയ്യുക",
+        "accesscodes": {
+            "requirescode": "ഈ ഗെയിം അപ്ഡേറ്റ് ഒരു ആക്സസ് കോഡ് ആവശ്യമാണ്.",
+            "error": {
+                "validation": "ആക്സസ് കോഡ് അസാധുവാണ്"
+            },
+            "success": {
+                "validation": "വിജയം! ആക്സസ് കോഡ് സാധുവാണ്"
+            }
+        },
+        "currentWallet": "നിലവിലെ വാലറ്റ്",
+        "viewItem": "കാണുക {{item}}",
+        "linkSteamAccountDescription": "നിങ്ങളുടെ HyperPlay അക്കൗണ്ട് ലിങ്ക് ചെയ്യാൻ Steam-ൽ സൈൻ ഇൻ ചെയ്യുക.",
+        "syncing": "സിങ്ക് ചെയ്യുന്നു...",
+        "turnAnalyticsOn": "ഓൺ ചെയ്യുക",
+        "achievements": {
+            "addThisGame": "ഈ ഗെയിം ചേർക്കുക",
+            "freeMints": "മുക്ത മിന്റുകൾ",
+            "gamesToMint": "മിന്റ് ചെയ്യാനുള്ള ഗെയിമുകൾ",
+            "noAchievements": {
+                "doubleCheckMessage": "നിങ്ങളുടെ സ്റ്റീം അക്കൗണ്ടിൽ നിലവിൽ ഗെയിമുകൾ കണ്ടെത്താൻ കഴിയുന്നില്ല. നിങ്ങളുടെ ഗെയിം വിവരങ്ങൾ പൊതു ആയി ക്രമീകരിച്ചിട്ടുണ്ടെന്ന് ദയവായി വീണ്ടും പരിശോധിക്കുക. ഇതിലൂടെ, ഞങ്ങൾ നിങ്ങളുടെ നേട്ടങ്ങൾ ആക്സസ് ചെയ്യുകയും മികച്ച അനുഭവം നൽകുകയും ചെയ്യാം.",
+                "oops": "അയ്യോ!"
+            }
+        },
+        "publicAlpha": "പൊതു ആൽഫ",
+        "copyUrl": "യൂആർഎൽ പകർപ്പ് ചെയ്യുക",
+        "linkSteamAccountCta": "Steam ലോഗിൻ ചെയ്യാൻ പോകുക",
+        "connectWallet": "വാലറ്റ് ബന്ധിപ്പിക്കുക",
+        "analyticsOn": "വിശകലനങ്ങൾ പ്രവർത്തനക്ഷമമാണ്",
+        "changeWallet": "വാലറ്റ് അക്കൗണ്ട് മാറ്റുക",
+        "viewFullscreen": "ഫുൾസ്ക്രീൻ കാണുക"
     },
     "notification": {
         "wine-download": {
-            "title": "Compatibility Layer"
+            "title": "സമന്വയ ഘടകം",
+            "message": "ഡിഫോൾട്ട് അനുയോജ്യത ലെയർ ക്രമീകരിക്കുന്നു"
         },
         "wine-download-failed": {
-            "title": "പിശക്"
+            "title": "പിശക്",
+            "message": "ഡിഫോൾട്ട് കംപാറ്റിബിലിറ്റി ലെയർ സജ്ജീകരിക്കാൻ പരാജയപ്പെട്ടു"
         }
     },
     "quest": {
-        "active": "Active",
-        "signIn": "പ്രവേശിക്കൂ",
+        "active": "സജീവമായ",
+        "signIn": "ലോഗിൻ ചെയ്യുക",
         "Play": "പ്ലേയ്",
         "playstreak": {
-            "days": "ദിവസങ്ങള്‍"
+            "days": "ദിവസങ്ങൾ",
+            "playEachDay": "പ്രതിദിനം കളിക്കുക, നിങ്ങളുടെ സ്ട്രീക്ക് പുനഃസജ്ജമാകുന്നില്ല!",
+            "playToStart": "ഈ ഗെയിം കളിച്ച് നിങ്ങളുടെ സ്ട്രീക്ക് ആരംഭിക്കുക!",
+            "syncSuccess": "പ്രോഗ്രസ് സമന്വയിതമായി",
+            "progressTowardsStreak": "ഇന്നത്തെ സ്ട്രീക്കിലേക്ക് പുരോഗതി.",
+            "dayResets": "ദിവസം പുനഃസജ്ജീകരിക്കുന്നു:",
+            "now": "ഇപ്പോൾ",
+            "streakCompleted": "സ്റ്റ്രീക്ക് പൂർത്തിയായി! നിങ്ങളുടെ സമ്മാനങ്ങൾ ഇപ്പോൾ അവകാശപ്പെടുക.",
+            "streakProgress": "സ്റ്റ്രീക്ക് പുരോഗതി",
+            "sync": "സിങ്ക് പുരോഗതി"
         },
-        "points": "പോയിന്റുകള്‍",
-        "sync": "ഒന്നിപ്പിക്കൂ",
+        "points": "പോയിന്റുകൾ",
+        "sync": "സമന്വയിപ്പിക്കുക",
         "claimWarning": {
-            "cancel": "റദ്ദാക്കുക",
-            "confirm": "സ്ഥിരീകരിക്കുക"
-        }
+            "cancel": "വിരാമം നൽകുക",
+            "confirm": "സ്ഥിരീകരിക്കുക",
+            "body2": "അല്ലെങ്കിൽ, Quest Reward <bold> കാലഹരണപ്പെട്ടുപോകും, അത് ഇനി അവകാശപ്പെടാനാവില്ല.</bold>",
+            "body": "<bold>പ്രധാനമായ:</bold> ഇടപാടിന് വിജയകരമായി സ്ഥിരീകരിക്കാൻ {{networkName}} നെറ്റ്വർക്കിൽ നിങ്ങൾക്ക് മതിയായ ഗാസ് അനുവദിക്കുന്നുവെന്ന് ഉറപ്പാക്കുക <bold> 7 ദിവസത്തിനുള്ളിൽ.</bold>"
+        },
+        "notEnoughGas": "നിങ്ങളുടെ സമ്മാനങ്ങൾ അവകാശപ്പെടാൻ വാലറ്റിന്റെ ബാലൻസ് ഗ്യാസ് ഫീസുകൾ കാരണം അർഹതയില്ല. മറ്റൊരു വാലറ്റ് പരീക്ഷിക്കുക അല്ലെങ്കിൽ വീണ്ടും ശ്രമിക്കുന്നതിന് മുമ്പ് ഈ വാലറ്റ് പുനഃപൂരിപ്പിക്കുക.",
+        "g7Numclaimed": "മൊത്തം അവകാശപ്പെട്ട G7 ക്രെഡിറ്റുകൾ",
+        "claimed": "ക്ലെയിംഡ്",
+        "claimAll": "എല്ലാം ക്ലെയിം ചെയ്യുക",
+        "reputation": "പ്രശസ്തി",
+        "type": {
+            "playstreak": "പ്ലേ സ്റ്റ്രീക്ക്"
+        },
+        "noG7ConnectionClaim": "നിങ്ങളുടെ സമ്മാനങ്ങൾ അവകാശപ്പെടാൻ {{email}} ലിങ്ക് ചെയ്ത ഒരു Game7 അക്കൗണ്ട് ഉണ്ടായിരിക്കണം.",
+        "associatedGames": "ബന്ധിത ഗെയിമുകൾ",
+        "connectSteamAccount": "Steam അക്കൗട്ട് ബന്ധിപ്പിക്കുക",
+        "linkAccount": "യോഗ്യത പരിശോധിക്കാൻ നിങ്ങളുടെ Steam അക്കൗണ്ട് ബന്ധിപ്പിക്കുക.",
+        "needMoreAchievements": "നിങ്ങൾക്ക് ഈ ഗെയിമുകളിൽ ഒന്നിൽ {{percent}}% നേട്ടങ്ങൾ പൂർത്തിയാക്കിയിരിക്കണം.",
+        "reward": "സമ്മാനം",
+        "quests": "ക്വസ്റ്റുകൾ",
+        "View Game": "ഗെയിം കാണുക",
+        "readyForClaim": "ക്ലെയിം ചെയ്യാൻ തയ്യാറാണ്",
+        "pointsClaimed": "കണക്കാക്കപ്പെട്ട പോയിന്റുകൾ"
     },
     "accounts": "അക്കൗണ്ടുകൾ",
-    "analytics": "അപഗ്രഥനം",
-    "profile": "പ്രൊഫൈൽ",
+    "analytics": "വിവരശേഖരണം",
+    "profile": "ഉപയോക്തൃ പ്രൊഫൈൽ",
     "import-game-folder": {
-        "placeholder": "ഇറക്കുമതി ചെയ്യുവാനുള്ള കളിയറ തിരഞ്ഞെടുക്കൂ"
+        "placeholder": "ഇറക്കുമതി ചെയ്യാൻ കളി ഫോൾഡർ തിരഞ്ഞെടുക്കുക",
+        "error": "ഇംപോർട്ടിന്റെ സമയത്ത് ഒരു പിശക് സംഭവിച്ചു. കൂടുതൽ വിവരങ്ങൾക്ക് ലോഗുകൾ കാണുക.",
+        "success": "ഗെയിമുകൾ വിജയകരമായി ഇറക്കുമതി ചെയ്തു!",
+        "cta": "ഗെയിം ഫോൾഡർ ഇറക്കുമതി ചെയ്യുക",
+        "dialog": {
+            "title": "ഇംപോർട്ട് ചെയ്യാൻ ഗെയിം ഫോൾഡർ തിരഞ്ഞെടുക്കുക"
+        },
+        "label": "ഗെയിം ഫോൾഡർ ഇറക്കുമതി ചെയ്യുക"
     },
     "overlay": {
-        "comingSoon": "ഉടൻ വരുന്നു…"
-    }
+        "comingSoon": "ഉടൻ വരുന്നു…",
+        "EXTERNAL_WALLET_CONNECTED": "നിങ്ങൾ ഒരു ബാഹ്യ വാലറ്റുമായി HyperPlay-ലേക്ക് ബന്ധിപ്പിച്ചിരിക്കുന്നു."
+    },
+    "dlcs": {
+        "label": "DLCs ഇൻസ്റ്റാൾ ചെയ്യാൻ തിരഞ്ഞെടുക്കുക:"
+    },
+    "quests": {
+        "quests": "ക്വസ്റ്റുകൾ",
+        "noneFound": {
+            "title": "ക്വസ്റ്റുകൾ കണ്ടെത്തിയില്ല.",
+            "message": "ക്വസ്റ്റുകൾ കണ്ടെത്തിയില്ല."
+        },
+        "g7CreditsModal": {
+            "description": "HyperPlay-ന്റെ മികച്ച ഗെയിമുകളിൽ രസകരമായ Play Streak Challenges-ൽ ചാടുക. ഓരോ പ്രവർത്തനവും നിങ്ങൾക്ക് വ്യത്യസ്ത ഗെയിമുകളുമായി ഇടപെടാൻ പ്രേരിപ്പിക്കുന്നു, web3 ഗെയിമിംഗിന്റെ മികച്ചതിനെ പ്രദർശിപ്പിക്കുന്നു. നിങ്ങളുടെ കളിയിടുന്ന സമയം പ്രധാനമാണ്!",
+            "title": "Game7 ക്രെഡിറ്റുകൾ നേടുക"
+        },
+        "playstreak": {
+            "signInWarning": {
+                "client": "നിങ്ങൾ ഇപ്പോൾ ലോഗിൻ ചെയ്തിട്ടില്ല, കളി സ്ട്രീക്ക് പുരോഗതി ട്രാക്ക് ചെയ്യപ്പെടില്ല. ദയവായി മുകളിൽ വലതുവശത്തെ ഡ്രോപ്പ് ഡൗണിലൂടെ HyperPlay-ൽ ലോഗിൻ ചെയ്യുക, പുരോഗതി ട്രാക്ക് ചെയ്യാൻ.",
+                "overlay": "നിങ്ങൾ ഇപ്പോൾ ലോഗിൻ ചെയ്തിട്ടില്ല, കളി തുടർച്ചയുടെ പുരോഗതി ട്രാക്ക് ചെയ്യപ്പെടില്ല. ദയവായി ഗെയിം വിട്ട്, പുരോഗതി ട്രാക്ക് ചെയ്യാൻ മുകളിൽ വലതുവശത്തെ ഡ്രോപ്പ്‌ഡൗൺ വഴി HyperPlay-ൽ ലോഗിൻ ചെയ്യുക."
+            }
+        },
+        "viewAllQuests": {
+            "title": "എല്ലാ ക്വസ്റ്റുകളും കാണുക"
+        }
+    },
+    "hyperplayOverlay": {
+        "chainRequest": {
+            "CONFIRMED": "കസ്റ്റം നെറ്റ്‌വർക്കുകൾ ചേർത്തു",
+            "INITIATED": "കസ്റ്റം നെറ്റ്‌വർക്കിന്റെ അഭ്യർത്ഥന",
+            "FAILED": "കസ്റ്റം നെറ്റ്‌വർക്കുകൾ റദ്ദാക്കപ്പെട്ടു"
+        },
+        "description": {
+            "FAILED": "ലാവണ്യം റദ്ദാക്കപ്പെട്ടു അല്ലെങ്കിൽ സമർപ്പിച്ചില്ല, ദയവായി വീണ്ടും ശ്രമിക്കുക",
+            "CONFIRMED": "ലാവണ്യം വിജയകരമായി സ്ഥിരീകരിച്ചു!",
+            "INITIATED": "നിങ്ങളുടെ മൊബൈൽ വാലറ്റിൽ ഒരു വാലറ്റ് സ്ഥിരീകരണം കാത്തിരിക്കുന്നു",
+            "PENDING": "ബ്ലോക്ക്‌ചെയിൻ സ്ഥിരീകരണത്തിനായി കാത്തിരിക്കുന്നു. ഇത് സ്ഥിരീകരിക്കുമ്പോൾ നിങ്ങളെ അറിയിക്കും"
+        },
+        "signatureRequest": {
+            "INITIATED": "സിഗ്നേച്ചർ അഭ്യർത്ഥന കാത്തിരിക്കുന്നു",
+            "CONFIRMED": "സിഗ്നേച്ചർ സമർപ്പിച്ചു",
+            "FAILED": "സിഗ്നേച്ചർ തടസ്സപ്പെട്ടു"
+        },
+        "txnRequest": {
+            "INITIATED": "ലാവണ്യ അഭ്യർത്ഥന കാത്തിരിക്കുന്നു",
+            "CONFIRMED": "Transaction confirmed",
+            "FAILED": "ലാവണ്യം തടഞ്ഞു",
+            "PENDING": "ലാവണ്യം സമർപ്പിച്ചു"
+        },
+        "greeting": {
+            "description": "HyperPlay ഓവർലേയ് തയ്യാറാണ്! അത് കാണിക്കാൻ അല്ലെങ്കിൽ മറയ്ക്കാൻ {{overlayKeyMod}} + X അമർത്തുക.",
+            "title": "ഹൈപ്പർപ്ലേ ഓവർലേ"
+        },
+        "walletWatch": {
+            "FAILED": "കസ്റ്റം ടോക്കൺ അഭ്യർത്ഥന റദ്ദാക്കി",
+            "CONFIRMED": "കസ്റ്റം ടോക്കൺ ചേർത്തു",
+            "INITIATED": "കസ്റ്റം ടോക്കൺ അഭ്യർത്ഥന കാത്തിരിക്കുന്നു"
+        },
+        "extensionNotification": {
+            "DESCRIPTION": "ഈ ഇടപാടുകൾ കാണാൻ {{overlayKeyMod}} + X അമർത്തുക"
+        }
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "ആദ്യമായി ആരംഭിക്കുമ്പോൾ സ്റ്റീം ആവശ്യമായ ഫയലുകൾ ഡൗൺലോഡ് ചെയ്യും, ഇത് പൂർത്തിയാകാൻ കുറച്ച് മിനിറ്റ് എടുക്കും, ലോഗിൻ സ്ക്രീൻ പ്രത്യക്ഷപ്പെടാൻ;",
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}} എന്നിവയും മറ്റ് ഗെയിമുകളും അപ്ഡേറ്റ് ചെയ്യാൻ തയ്യാറാണ്.",
+            "single": "{{gameName}} നായി ഒരു അപ്ഡേറ്റ് തയ്യാറാണ്."
+        },
+        "title": "ഗെയിം അപ്ഡേറ്റുകൾ ലഭ്യമാണ്"
+    },
+    "importGameErrorMessageExecutable": "ഗെയിം എക്സിക്യൂട്ടബിൾ കണ്ടെത്തിയില്ല, ഗെയിം ഇറക്കുമതി ചെയ്യാൻ സാധ്യമല്ല",
+    "ALL": "എല്ലാം",
+    "sideload": {
+        "warningMessage": "സൈഡ്-ലോഡിംഗ് ഒരു ഗെയിം വികസകരും പരിചയസമ്പന്നരായ ഉപയോക്താക്കളും ലക്ഷ്യമിട്ടുള്ള ഒരു സവിശേഷതയാണ്. മാൽവെയർ അടങ്ങിയ ഇൻസ്റ്റാളർ സൈഡ്-ലോഡ് ചെയ്യുന്നത് നിങ്ങളുടെ കമ്പ്യൂട്ടറിനെ അപകടത്തിലാക്കുകയും ഫണ്ടുകളുടെ മോഷണം സംഭവിക്കാനും കാരണമാകാം.",
+        "warningTitle": "പ്രധാനമാണ്"
+    },
+    "steam-install": {
+        "compatibility-layer-not-available": "അനുയോജ്യത ലെയർ ലഭ്യമല്ല. ദയവായി \"ക്രമീകരണങ്ങൾ > വൈൻ മാനേജർ\" എന്നിൽ നിന്ന് ഒന്നിനെ ആദ്യം ഇൻസ്റ്റാൾ ചെയ്യുക.",
+        "tooltip": "ഇത് സ്റ്റീമിന്റെ വിൻഡോസ് പതിപ്പ് ഇൻസ്റ്റാൾ ചെയ്യും, ഇത് ഹൈപ്പർപ്ലേ കംപാറ്റിബിലിറ്റി ലെയർ ഉപയോഗിച്ച് പ്രവർത്തിക്കും. \n\n    ചില ഗെയിമുകൾ, പ്രത്യേകിച്ച് പഴയ തലമുറയിലെ ഗെയിമുകൾ, പുതിയ 3D ഗെയിമുകൾ, അല്ലെങ്കിൽ ആന്റി-ചീറ്റ് സോഫ്റ്റ്‌വെയർ ഉള്ളവ ശരിയായി പ്രവർത്തിക്കാത്തതായിരിക്കാം. \n\n    ശുപാർശ ചെയ്ത സ്പെക്കുകൾ ആപ്പിൾ സിലിക്കൺ CPU (M1 അല്ലെങ്കിൽ അതിന് മുകളിൽ) ഉള്ള ഒരു മാക്, കുറഞ്ഞത് 16GB RAM.",
+        "success-message": "Steam ഇൻസ്റ്റാൾ ചെയ്തിട്ടുണ്ട്. നിങ്ങൾ ഇപ്പോൾ ഇത് ലൈബ്രറിയിൽ നിന്ന് ആരംഭിക്കാം.",
+        "launch-tooltip": "HyperPlay സാങ്കേതിക സമന്വയ പാളി ഉപയോഗിച്ച് Steam ആരംഭിക്കുക",
+        "error-message": "സ്റ്റീം ഇൻസ്റ്റാൾ ചെയ്യുമ്പോൾ ഒരു പിശക് സംഭവിച്ചു. ദയവായി വീണ്ടും ശ്രമിക്കുക."
+    },
+    "UNCHECK 'Run Steam'": "'Steam പ്രവർത്തിപ്പിക്കുക' അൺചെക്ക് ചെയ്യുക",
+    "importGameErrorTitle": "ഗെയിം ഇറക്കുമതി പിശക്",
+    "importGameErrorMessage": "ശരിയായ ഗെയിം ഫോൾഡർ അല്ല, ഗെയിം ഇറക്കുമതി ചെയ്യാൻ സാധ്യമല്ല",
+    "Install Steam": "Steam ഇൻസ്റ്റാൾ ചെയ്യുക",
+    "Installing Steam": "സ്റ്റീം ഇൻസ്റ്റാൾ ചെയ്യുന്നു...",
+    "Launch Steam": "Steam ആരംഭിക്കുക",
+    "Launching Steam": "Steam ആരംഭിക്കുന്നു...",
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "title": "റദ്ദാക്കിയ എക്സ്ട്രാക്ഷൻ",
+                "body": "അടിസ്ഥാന ഗെയിം എക്സ്ട്രാക്ഷൻ റദ്ദാക്കി"
+            },
+            "installed": {
+                "title": "അടിസ്ഥാന ഗെയിം ഇൻസ്റ്റാൾ ചെയ്തിരിക്കുന്നു"
+            },
+            "installing": {
+                "title": "ബേസ് ഗെയിം ഇൻസ്റ്റാൾ ചെയ്യുന്നു"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "ബേസ് ഗെയിം ഫയൽ സ്ഥാനം തിരഞ്ഞെടുക്കുക",
+                "placeholder": "സിപ് ഫയൽ തിരഞ്ഞെടുക്കുക"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step2": {
+                "subtitle": "ChromieCraft_3.3.5a.zip ഫയൽ തിരഞ്ഞെടുക്കുക",
+                "title": "പടി 2",
+                "description": "ഡൗൺലോഡ് ചെയ്ത ChromieCraft_3.3.5a.zip ഫയൽ തിരഞ്ഞെടുക്കുക."
+            },
+            "step3": {
+                "subtitle": "ഇൻസ്റ്റലേഷൻ ഫോൾഡർ തിരഞ്ഞെടുക്കുക",
+                "title": "ചുവടു 3"
+            },
+            "step4": {
+                "description": "ഗെയിം ഇൻസ്റ്റാൾ ചെയ്യാൻ തുടരാൻ ആക്സസ് കോഡ് നൽകുക.",
+                "subtitle": "ആക്സസ് കോഡ്",
+                "title": "ചുവടു 4"
+            },
+            "step1": {
+                "subtitle": "World of Warcraft 3.3.5a ഡൗൺലോഡ് ചെയ്യുക",
+                "chromieCraft": "ChromieCraft",
+                "description": "ഈ ഗെയിം വേൾഡ് ഓഫ് വോർക്രാഫ്റ്റ്: ലിച്ച് കിംഗ് (3.3.5a) നുള്ള ഒരു മോഡ് ആണ്. ഈ മോഡ് കളിക്കാൻ, കളിക്കാർക്ക് വേൾഡ് ഓഫ് വോർക്രാഫ്റ്റ് 3.3.5a യുടെ ഒരു പകർപ്പ് ഉടമയാകണം. {{newline}} {{newline}} ഹൈപ്പർപ്ലേ വേൾഡ് ഓഫ് വോർക്രാഫ്റ്റ് ഹോസ്റ്റ് ചെയ്യുന്നില്ല. വേൾഡ് ഓഫ് വോർക്രാഫ്റ്റ് ഉടമകൾക്ക് 3.3.5a പതിപ്പ് ലഭിക്കാൻ ഉറവിടങ്ങൾ ഉപയോഗിക്കാം:",
+                "title": "പടി 1",
+                "webtorrent": "ടോറന്റ് (മാഗ്നറ്റ് ലിങ്ക്)"
+            }
+        }
+    },
+    "email_subscription": {
+        "subtitle": "നിങ്ങൾ ഇപ്പോൾ നമ്മുടെ സമൂഹത്തിന്റെ ഭാഗമാണ്, valuable updates and insights with you.",
+        "title": "സബ്സ്ക്രൈബ് ചെയ്തതിന് നന്ദി!"
+    },
+    "achievements": {
+        "progress": {
+            "minted": "ചെയിനിൽ",
+            "notMinted": "ഓഫ് ചെയിൻ"
+        }
+    },
+    "exit_game": "ഗെയിം വിട്ടുകടക്കുക",
+    "At the end make sure to": "അവസാനത്തിൽ ഉറപ്പാക്കുക",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "ഹൈപ്പർപ്ലേ സ്റ്റീം സെറ്റപ്പ് ഡൗൺലോഡ് ചെയ്ത് ആരംഭിക്കും. ദയവായി സ്റ്റീം ഇൻസ്റ്റാളറിലെ നിർദ്ദേശങ്ങൾ പിന്തുടരുക;"
+    },
+    "HyperPlay will notify you once the installation is done;": "ഇൻസ്റ്റലേഷൻ പൂർത്തിയായാൽ ഹൈപ്പർപ്ലേ നിങ്ങൾക്ക് അറിയിക്കും;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "തുടരാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുവെങ്കിൽ, നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷനും സിസ്റ്റം കോൺഫിഗറേഷനും ആശ്രയിച്ച് പൂർത്തിയാക്കാൻ കുറച്ച് മിനിറ്റ് എടുക്കാം, അതിനാൽ ക്ഷമിക്കുക;"
 }

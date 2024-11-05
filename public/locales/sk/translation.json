@@ -959,7 +959,9 @@
             "progressTowardsStreak": "pokrok smerom k dnešnému pruhu.",
             "streakCompleted": "Strecha dokončená! Požiadať o svoje odmeny teraz.",
             "days": "dnů",
-            "now": "Teraz"
+            "now": "Teraz",
+            "sync": "Sync Pokrok",
+            "syncSuccess": "Pokrok synchronizovaný"
         },
         "readyForClaim": "Pripravení na reklamáciu",
         "type": {

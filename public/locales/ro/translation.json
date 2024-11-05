@@ -1,72 +1,73 @@
 {
     "accessibility": {
-        "actions_font_family_no_default": "Actions Font Family (Default: ",
-        "all_tiles_in_color": "Afișați toate piesele de joc colorate",
-        "content_font_family_no_default": "Content Font Family (Default: ",
-        "fonts": "Fonturi",
-        "title": "Accesibilitate",
+        "actions_font_family_no_default": "Familia de fonturi Actions (Implicit: ",
+        "all_tiles_in_color": "Afișați toate tile-urile de joc în culori",
+        "content_font_family_no_default": "Tipografia conținutului (Implicit: ",
+        "fonts": "Fonturi de text",
+        "title": "Facilități de acces",
         "zoom": "Zoom"
     },
-    "add_game": "Add Game",
-    "All": "Toate",
+    "add_game": "Adaugă un nou joc",
+    "All": "Toate  \nTot  \nÎntreaga",
     "anticheat": {
-        "anticheats": "Antitrucuri",
-        "may_not_work": "Este posibil să nu funcționeze din cauza suportului anticheat refuzat sau rupt.",
-        "reference": "Referinţă",
-        "source": "Sursă",
-        "status": "stare",
-        "title": "Acest joc include software anticheat"
+        "anticheats": "Mecanisme anti-trucuri",
+        "may_not_work": "Este posibil să nu funcționeze din cauza unei suport anticheat respins sau deteriorat.",
+        "reference": "Referințe",
+        "source": "Sursă principală",
+        "status": "stare de funcționare",
+        "title": "Acest joc are integrat un sistem anticheat"
     },
     "box": {
         "cache-cleared": {
             "message": "Cache-ul eroic a fost golit.",
-            "title": "Cache-ul a fost golit"
+            "title": "Cache-ul a fost eliminat"
         },
-        "choose": "Alege",
+        "choose": "Optează",
         "choose-egs-prefix": "Alegeți Prefix unde este instalat EGS",
-        "choose-gogdl-binary": "Selectați GOGDL Binary (trebuie repornit)",
-        "choose-legendary-binary": "Selectați Legendary Binary",
-        "customWine": "Selectați binarul Wine sau Proton",
-        "default-install-path": "Alegeți Calea de instalare implicită",
-        "default-steam-path": "Calea aburului.",
-        "downloadNow": "Descarcă acum",
+        "choose-gogdl-binary": "Selectați GOGDL Binary (restarting necesar)",
+        "choose-legendary-binary": "Selectați Binary Legendar",
+        "customWine": "Alegeți fișierul executabil Wine sau Proton",
+        "default-install-path": "Alegeți calea de instalare normală",
+        "default-steam-path": "Calea Steam.==WEBLATE_PART==Calea de pe Steam.==WEBLATE_PART==Ruta Steam.",
+        "downloadNow": "Obține acum",
         "error": {
             "add": {
                 "steam": {
-                    "body": "Adăugarea {{game}} la Steam a eșuat cu:{{newLine}} {{error}}",
-                    "title": "Eroare de adăugare"
+                    "body": "Adăugarea {{game}} la Steam a eșuat cu: {{newLine}} {{error}}  \nAdăugarea {{game}} pe Steam a eșuat cu: {{newLine}} {{error}}  \nAdăugarea {{game}} în Steam a eșuat cu: {{newLine}} {{error}}",
+                    "title": "A apărut o eroare la adăugare"
                 }
             },
             "credentials": {
-                "message": "Acreditările dvs. au expirat, vă rugăm să vă deconectați și să vă conectați din nou."
+                "message": "Acreditivele dumneavoastră au expirat, vă rugăm să vă deconectați și să vă reconectați.  \nAcreditările tale au expirat, te rugăm să te deconectezi și să te reconectezi.  \nAcreditările au expirat, vă rugăm să ieșiți din cont și să vă conectați din nou."
             },
             "cx-bottle-not-found": {
-                "message": "Sticla CrossOver „{{bottle_name}}” nu există, nu se poate lansa!",
-                "title": "Sticla CrossOver nu a fost găsită"
+                "message": "Sticla CrossOver „{{bottle_name}}” nu a fost găsită, nu se poate deschide!",
+                "title": "Sticla CrossOver nu este disponibilă"
             },
             "diskspace": {
-                "message": "Nu este suficient spațiu disponibil pe disc",
-                "title": "Fără Spațiu"
+                "message": "Spațiul pe disc nu este suficient disponibil",
+                "title": "Fără loc"
             },
             "dxvk": {
-                "message": "Eroare la instalarea DXVK/VKD3D! Vă rugăm să vă verificați conexiunea!",
-                "title": "Eroare DXVK/VKD3D"
+                "message": "Instalarea DXVK/VKD3D a eșuat! Vă rugăm să verificați conexiunea!",
+                "title": "Problema DXVK/VKD3D"
             },
             "folder-not-found": {
-                "title": "Dosarul jocului pare să fie șters, doriți să eliminați jocul din lista instalată?"
+                "title": "Dosarul jocului pare a fi șters, doriți să ștergeți jocul din lista instalată?"
             },
             "generic": {
                 "message": "O Eroare Necunoscută a apărut",
-                "title": "Eroare Necunoscută"
+                "title": "Selectați fișierul EXE de executat"
             },
-            "launchAborted": "Launch aborted",
-            "title": "Eroare",
+            "launchAborted": "Lansarea a fost oprită",
+            "title": "Defecțiune",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "A avut loc o excepție neprinsă!"
             },
             "update": {
-                "title": "Eroare de actualizare"
+                "title": "Problema la actualizare",
+                "message": "Ceva a mers prost cu actualizarea! Vă rugăm să dezinstalați manual și să reinstalați HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -74,8 +75,21 @@
                 "title": "Wine nu a fost găsit"
             },
             "winetricks": {
-                "message": "Winetricks a returnat următoarea eroare în timpul execuției:{{newLine}}{{error}}",
-                "title": "Eroare Winetricks"
+                "message": "Winetricks a generat următoarea eroare în timpul execuției:{{newLine}}{{error}}  \nWinetricks a raportat următoarea eroare în timpul execuției:{{newLine}}{{error}}  \nWinetricks a întâmpinat următoarea eroare în timpul execuției:{{newLine}}{{error}}",
+                "title": "Problema cu Winetricks"
+            },
+            "delete-files": {
+                "body": "Eroare la eliminarea folderului extras {{path}}. Vă rugăm să-l eliminați manual. \n                {{paragraph}} \n                {{error}}",
+                "title": "Eroare la eliminarea folderului extras"
+            },
+            "moving": "Eroare mutare joc {{error}}",
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "Instalarea Ubisoft Connect în prefixul jocului a eșuat. Verifică pagina noastră wiki la https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac pentru a-l instala manual."
+            },
+            "steam": {
+                "error": "Executable Steam nu a fost găsit. Instalarea a fost probabil anulată de utilizator sau a eșuat de partea Steam.",
+                "title": "Eroare Steam"
             }
         },
         "info": {
@@ -85,141 +99,157 @@
                 "message": "Există o nouă versiune disponibilă!",
                 "message-finished": "Doriți să reporniți HyperPlay acum?",
                 "title": "Lansatorul de jocuri eroice",
-                "title-finished": "Actualizare Finalizată"
+                "title-finished": "Actualizare Finalizată",
+                "appUpdated": "HyperPlay a fost actualizat"
             }
         },
-        "no": "NU",
-        "ok": "O.K",
+        "no": "NU, mulțumesc!",
+        "ok": "De acord",
         "protocol": {
             "install": {
-                "not_installed": "Nu este instalat, doriți să îl instalați?"
+                "not_installed": "În prezent, nu este instalat. Doriți să-l instalați?  \nMomentan nu este instalat. Vreți să-l instalați?  \nAcum nu este instalat. Doriți să-l instalați?"
             }
         },
         "quit": {
-            "message": "Sunt operațiuni în așteptare, ești sigur?",
-            "title": "Ieșire"
+            "message": "Există operațiuni nefinalizate, ești sigur?  \nSunt operațiuni restante, ești sigur?  \nExistă operațiuni în curs, ești sigur?",
+            "title": "Ieșire din program"
         },
         "reset-app": {
             "question": {
                 "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
-                "title": "Reset HyperPlay"
+                "title": "Reinitializează HyperPlay"
             }
         },
         "runexe": {
-            "title": "Selectați EXE pentru a rula"
+            "title": "Selectați fișierul EXE de rulat"
         },
         "select": {
-            "button": "Selectați",
-            "exe": "Selectați EXE"
+            "button": "Alege",
+            "exe": "Selectați aplicația EXE"
         },
         "shortcuts": {
-            "message": "Scurtăturile au fost create pe Desktop și pe meniul Start",
-            "message-mac": "Shortcuts were created on the Applications folder",
-            "message-remove": "Comenzile rapide au fost eliminate din Desktop și din meniul Start",
-            "message-remove-mac": "Shortcuts were removed from the Applications folder",
-            "title": "Scurtături"
+            "message": "Scurtăturile au fost configurate pe Desktop și în meniul de Start",
+            "message-mac": "S-au realizat scurtături în directorul Aplicații",
+            "message-remove": "Comenzile rapide au fost eliminate atât de pe Desktop, cât și din meniul Start",
+            "message-remove-mac": "Scurtăturile au fost scoase din directorul Aplicații",
+            "title": "Scurtături de tastatură"
         },
         "sync": {
             "button": "Alege",
-            "error": "Cale Nevalidă",
-            "title": "Alegeți directorul de salvare"
+            "error": "Cale Falsă",
+            "title": "Alegeți locația pentru salvări"
         },
         "vcruntime": {
             "install": {
-                "message": "Au fost deschise legăturile de descărcare pentru Visual C++ Runtimes. Vă rugăm să instalați ambele versiuni x86 și x64."
+                "message": "Descărcările pentru Visual C++ Runtimes sunt acum deschise. Vă rugăm să instalați atât versiunea x86, cât și versiunea x64."
             },
             "notfound": {
-                "message": "Runtimele Microsoft Visual C++ nu sunt instalate, care sunt cerute de unele jocuri",
-                "title": "VCRuntime nu este instalat"
+                "message": "Runtime-urile Microsoft Visual C++ nu sunt instalate, iar unele jocuri le necesită.  \nRuntime-urile Microsoft Visual C++ nu sunt prezente, fiind necesare pentru anumite jocuri.  \nRuntime-urile Microsoft Visual C++ nu sunt instalate, acestea fiind necesare pentru câteva jocuri.",
+                "title": "VCRuntime nu se găsește"
             }
         },
         "warning": {
             "epic": {
-                "import": "Serverele Epic au o întrerupere majoră în acest moment, jocul nu poate fi importat!",
-                "install": "Serverele Epic au o întrerupere majoră în acest moment, jocul nu poate fi instalat!",
-                "update": "Serverele Epic au o întrerupere majoră în acest moment, jocul nu poate fi actualizat!"
+                "import": "Serverele Epic au o defecțiune majoră în acest moment, jocul nu poate fi importat!  \nServerele Epic sunt afectate de o întrerupere semnificativă acum, jocul nu poate fi importat!  \nServerele Epic suferă o întrerupere majoră în acest moment, importul jocului nu este posibil!",
+                "install": "Serverele Epic au o problemă majoră în acest moment, jocul nu poate fi instalat!",
+                "update": "Serverele Epic suferă o cădere majoră în acest moment, actualizarea jocului nu este posibilă!"
             },
-            "title": "Avertizare"
+            "title": "Alerta",
+            "rosetta": {
+                "title": "Rosetta nu a fost găsită",
+                "message": "HyperPlay necesită Rosetta pentru a funcționa corect pe macOS cu cipuri Apple Silicon. Vă rugăm să o instalați din terminalul macOS folosind următoarea comandă: \"softwareupdate --install-rosetta\" și reporniți HyperPlay. "
+            },
+            "wine-change": {
+                "message-gptk": "Pentru a putea rula jocuri folosind toolkit-ul de portare pentru jocuri Apple, trebuie să îți actualizezi macOS la 14 (Sonoma) sau o versiune superioară. {{newline}} Am găsit Wine pe sistemul tău, vrei să continui lansarea folosind {{foundWine}} ?",
+                "message": "Nu am putut găsi versiunea de wine selectată pentru a lansa acest titlu ({{selectedWine}}). {{newline}} Am găsit alta, doriți să continuați lansarea folosind {{foundWine}}?",
+                "title": "Wine nu a fost găsit!"
+            }
         },
-        "wineprefix": "Alegeți dosarul Wine Prefix",
-        "yes": "DA",
-        "dontShowAgain": "Nu mai arăta",
-        "choose-nile-binary": "Selectați binarul Nil"
+        "wineprefix": "Alegeți directorul Wine Prefix",
+        "yes": "DA  \nDA  \nDA",
+        "dontShowAgain": "Nu mai expune din nou",
+        "choose-nile-binary": "Selectați binarul Nil",
+        "reset-extension": {
+            "question": {
+                "message": "Ești sigur că vrei să resetezi extensia MetaMask?",
+                "title": "Resetează extensia"
+            }
+        }
     },
     "button": {
-        "cancel": "Cancel",
-        "go_to_library": "Accesați Bibliotecă",
+        "cancel": "Anulare",
+        "go_to_library": "Accesați secțiunea Bibliotecă",
         "login": "Autentificare",
-        "sync": "Sincronizează",
+        "sync": "Sincronizare",
         "syncing": "Sincronizare",
-        "unsync": "Desincronizare",
-        "update": "Actualizare",
-        "continue": "Continue",
-        "download": "Descarcă",
-        "install": "Instalează"
+        "unsync": "Dezsincronizare",
+        "update": "Revizuire",
+        "continue": "Continuă să progresezi",
+        "download": "Descarcă fișierul",
+        "install": "Instalează aplicația"
     },
     "controller": {
         "hints": {
-            "back": "Negru",
-            "backspace": "Backspace",
-            "close_dialog": "Închide caseta de dialog",
-            "close_keyboard": "Închideți tastatura",
-            "close_options": "Close Options",
-            "game_details": "Detalii joc",
-            "game_settings": "Setările jocului",
-            "install_game": "Instalează jocul",
-            "move_cursor": "Mutați cursorul",
-            "open_virtual_keyboard": "Deschideți tastatura virtuală",
-            "options": "Options",
-            "play_game": "Joaca jocul",
-            "scroll": "Sul",
-            "select": "Select",
-            "space": "Spaţiu",
-            "update_game": "Actualizați jocul"
+            "back": "Revenire",
+            "backspace": "Tasta de revenire",
+            "close_dialog": "Închide interfața de dialog",
+            "close_keyboard": "Ascunde tastatura",
+            "close_options": "Finalizează opțiunile",
+            "game_details": "Specificații joc",
+            "game_settings": "Opțiunile jocului",
+            "install_game": "Instalează titlul de joc",
+            "move_cursor": "Schimbați poziția cursorului",
+            "open_virtual_keyboard": "Lansați tastatura virtuală",
+            "options": "Setări",
+            "play_game": "Începe jocul",
+            "scroll": "Defilare",
+            "select": "Selectați opțiunea",
+            "space": "Spațiul cosmic",
+            "update_game": "Actualizați jocul==WEBLATE_PART==Actualizați aplicația de joc==WEBLATE_PART==Îmbunătățiți jocul"
         }
     },
     "docs": "Documentație",
     "download-manager": {
         "install-type": {
-            "install": "Install",
-            "update": "Update"
+            "install": "Instalare software",
+            "update": "Revizuire"
         },
         "label": {
-            "disk": "Disk",
-            "speed": "Download"
+            "disk": "Discul",
+            "speed": "Obțineți descărcarea"
         },
         "link": "Downloads",
         "queue": {
-            "end-time": "Finished at",
-            "queue-time": "Added at",
-            "start-time": "Started at",
-            "type": "Type"
+            "end-time": "Concluzionată la",
+            "queue-time": "Adăugat în",
+            "start-time": "A început la",
+            "type": "Tipul"
         },
         "title": "Downloads",
-        "ETA": "Timpul estimat",
-        "title_dm": "Manager Descărcări"
+        "ETA": "Estimarea timpului",
+        "title_dm": "Administrator Descărcări"
     },
     "epic": {
-        "offline-notification-body": "Este posibil ca serviciile online să nu funcționeze complet, deoarece serverele Epic Games sunt offline!",
-        "offline-notification-title": "deconectat"
+        "offline-notification-body": "Funcționarea serviciilor online poate fi afectată, deoarece serverele Epic Games sunt offline!",
+        "offline-notification-title": "deconectat  \nîn modul offline  \nfără conexiune"
     },
     "Epic Games": "Epic Games",
-    "error": "Error",
-    "favourites": "Favorite",
+    "error": "Defecțiune",
+    "favourites": "Favorit",
     "game": {
-        "status": "stare",
+        "status": "stare de funcționare",
         "store": "Magazin",
-        "title": "Titlul jocului"
+        "title": "Titlul jocului video"
     },
     "generic": {
         "error": {
-            "component": "Nu s-au găsit jocuri - Încercați să vă deconectați și să vă conectați din nou sau una dintre opțiunile de mai jos"
+            "component": "Nu există jocuri disponibile - Încercați să vă deconectați și să vă reconectați sau să utilizați una dintre opțiunile de mai jos"
         },
         "library": {
-            "refresh": "Actualizează biblioteca"
+            "refresh": "Împrospătează biblioteca"
         }
     },
-    "globalSettings": "Setări Globale",
+    "globalSettings": "Setări Universale",
     "GOG": "GOG",
     "gog-store": "Magazinul GOG",
     "header": {
@@ -227,50 +257,53 @@
         "ignore_hidden": "Ignorați Ascuns",
         "platform": "Platformă",
         "show_all_games": "Arată toate jocurile",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Afișați jocurile indisponibile",
         "show_favourites_only": "Afișați numai Favoritele",
-        "show_hidden": "Arata ascuns",
-        "store": "Magazin de filtre"
+        "show_hidden": "Vizualizează ascuns",
+        "store": "Magazin pentru filtre"
     },
     "help": {
-        "amdfsr": "FSR de la AMD ajută la creșterea ratei de cadre prin creșterea rezoluțiilor mai mici în modul Ecran complet. Calitatea imaginii crește de la 5 la 1 cu prețul unei ușoare atingeri de performanță. Activarea poate îmbunătăți performanța.",
+        "amdfsr": "FSR de la AMD îmbunătățește rata de cadre prin scalarea rezoluțiilor inferioare în modul Ecran complet. Calitatea imaginii crește de la 5 la 1, dar cu un mic compromis în performanță. Activarea acestei opțiuni ar putea îmbunătăți performanța.",
         "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
-        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
-        "dxvk": "DXVK este un strat translațional bazat pe Vulkan pentru jocurile DirectX 9, 10 și 11. Activarea poate îmbunătăți compatibilitatea. Poate cauza probleme în special pentru jocurile DirectX mai vechi.",
-        "esync": "Esync își propune să reducă supraîncărcarea serverului de vin în jocurile care necesită un proces intensiv. Activarea poate îmbunătăți performanța.",
-        "fsync": "Fsync își propune să reducă supraîncărcarea serverului de vin în jocurile care necesită un proces intensiv. Activarea poate îmbunătăți performanța pe nucleele Linux acceptate.",
+        "custom_themes_wiki": "Accesează Wiki-ul pentru detalii suplimentare privind adăugarea temelor personalizate. Dă clic aici.",
+        "dxvk": "DXVK este un strat de traducere construit pe Vulkan pentru jocurile DirectX 9, 10 și 11. Activarea acestuia ar putea îmbunătăți compatibilitatea. Poate genera probleme, în special pentru jocurile DirectX mai vechi.",
+        "esync": "Esync se concentrează pe reducerea încărcării serverului Wine în jocurile care necesită resurse CPU mari. Activarea poate îmbunătăți performanța.",
+        "fsync": "Fsync intenționează să reducă sarcina serverului Wine în jocurile care necesită resurse CPU mari. Activarea acestei funcții poate îmbunătăți performanța pe nucleele Linux acceptate.",
         "game_language": {
-            "fallback": "Lăsați necompletat pentru a folosi limbajul lui HyperPlay.",
-            "in_game_config": "Nu toate jocurile acceptă această configurație, unele au setări de limbă în joc.",
-            "valid_codes": "Codurile de limbă valide depind de joc."
+            "fallback": "Lăsați câmpul liber pentru a folosi limba HyperPlay.",
+            "in_game_config": "Nu toate jocurile funcționează cu această configurație, unele având setări de limbă disponibile în joc.",
+            "valid_codes": "Codurile de limbă valide sunt în funcție de joc.==WEBLATE_PART==Codurile de limbă acceptate variază în funcție de joc.==WEBLATE_PART==Codurile de limbă valide sunt specifice fiecărui joc."
         },
-        "gamemode": "Feral GameMode aplică ajustări automate și temporare sistemului atunci când rulează jocuri. Activarea poate îmbunătăți performanța.",
-        "general": "Sincronizați cu EGS în cazul în care aveți o instalare funcțională a Epic Games Store în altă parte și doriți să vă importați jocurile pentru a evita descărcarea din nou.",
-        "mangohud": "MangoHUD este o suprapunere care afișează și monitorizează FPS, temperaturile, încărcarea CPU/GPU și alte resurse de sistem.",
+        "gamemode": "Feral GameMode aplică modificări automate și temporare la sistem în timpul jocurilor. Activarea sa poate îmbunătăți performanța.",
+        "general": "Sincronizați cu EGL dacă aveți o instalare activă a Epic Games Launcher în altă parte și doriți să transferați jocurile pentru a evita descărcarea lor din nou.",
+        "mangohud": "MangoHUD este un overlay care prezintă și monitorizează FPS, temperaturile, încărcarea CPU/GPU și alte resurse de sistem.",
         "other": {
-            "part4": "Folosește ",
-            "part5": "Argumente Joc",
-            "part6": " pentru a fi apelat după comanda de lansare, de exemplu: ",
-            "part7": " pentru a sări peste lansatorul în unele jocuri, etc."
+            "part4": "Folosește==WEBLATE_PART==Utilizează==WEBLATE_PART==Foloseste ",
+            "part5": "Argumente în Joc",
+            "part6": " pentru a fi activat după comanda de lansare, de exemplu: ",
+            "part7": " pentru a ocoli lansatorul în anumite jocuri, etc.  \npentru a evita lansatorul în câteva jocuri, etc.  \npentru a trece peste lansator în unele jocuri, etc."
         },
-        "preferSystemLibs": "Versiunile personalizate de vin (Wine-GE, Wine-Lutris) sunt livrate cu dependențele lor de bibliotecă. Prin activarea acestei opțiuni, aceste biblioteci livrate vor fi ignorate și Wine va încărca biblioteci de sistem. Avertizare! Pot apărea probleme dacă dependențele nu sunt îndeplinite.",
-        "primerun": "Utilizați placa grafică dedicată pentru a reda jocul pe sisteme multi-GPU. Este necesar doar pe laptop-uri sau desktop-uri de jocuri care utilizează un GPU fără cap pentru randare (NVIDIA Optimus, AMD CrossFire)",
+        "preferSystemLibs": "Versiunile personalizate de Wine (Wine-GE, Wine-Lutris) includ dependențele lor de bibliotecă. Dacă activați această opțiune, bibliotecile livrate vor fi ignorate, iar Wine va apela la bibliotecile de sistem. Avertisment! Pot apărea probleme dacă dependențele nu sunt respectate.",
+        "primerun": "Utilizați o placă grafică dedicată pentru a reda jocul pe sisteme cu mai multe GPU-uri. Aceasta este necesară doar pe laptopuri sau desktopuri de gaming care folosesc un GPU headless pentru randare (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
-            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "Această cale permite HyperPlay să determine ce versiune de Proton folosește Steam pentru a adăuga jocuri non-Steam în Steam.  \nAceastă cale îi permite lui HyperPlay să stabilească ce versiune de Proton utilizează Steam pentru a integra jocuri non-Steam.  \nAceastă cale permite HyperPlay să identifice versiunea de Proton pe care o folosește Steam pentru a adăuga jocuri care nu sunt pe Steam."
         },
-        "steamruntime": "Biblioteci personalizate furnizate de Steam pentru a ajuta la rularea jocurilor Linux și Windows (Proton). Activarea ar putea îmbunătăți compatibilitatea.",
+        "steamruntime": "Biblioteci personalizate furnizate de Steam pentru a ajuta la executarea jocurilor Linux și Windows (Proton). Activarea ar putea crește compatibilitatea.",
         "sync": {
-            "part1": "HyperPlay încearcă să ghicească folderul de salvare corect și acest lucru va funcționa în majoritatea cazurilor. În cazul în care folderul este greșit, utilizați caseta de înlocuire pentru a-l schimba.",
-            "part2": "In case you change the prefix folder for Wine or Proton, you will need to check the path again since Proton uses a different prefix (/pfx) and username (steamuser). Deci, puteți șterge simplu calea curentă, ieșiți din pagina de setări de sincronizare și reveniți din nou pentru ca HyperPlay să ghicească folderul încă o dată cu prefixul corect.",
-            "part3": "Sincronizare manuală: alegeți Descărcare pentru a descărca salvările de jocuri stocate pe Cloud. Încărcați pentru a încărca cele locale în cloud. Descărcarea forțată și încărcarea forțată vor ignora versiunea locală sau în cloud.",
-            "part4": "Sincronizarea salvărilor automat va sincroniza salvările de fiecare dată când începeți un joc și după ce terminați jocul."
+            "part1": "HyperPlay încearcă să găsească folderul de salvare corect, iar acest lucru va funcționa în majoritatea cazurilor. Dacă folderul nu este corect, folosiți caseta de substituție pentru a-l schimba.",
+            "part2": "Dacă schimbați folderul prefix pentru Wine sau Proton, va trebui să verificați din nou calea, deoarece Proton folosește un prefix diferit (/pfx) și un nume de utilizator (steamuser). Așadar, puteți pur și simplu să ștergeți calea curentă, să ieșiți din pagina de setări de sincronizare și să reveniți pentru ca HyperPlay să identifice folderul din nou cu prefixul corect.\n\nÎn cazul în care modificați folderul prefix pentru Wine sau Proton, va trebui să verificați din nou calea, deoarece Proton utilizează un prefix diferit (/pfx) și un nume de utilizator (steamuser). Așa că puteți să ștergeți pur și simplu calea curentă, să ieșiți din pagina de setări de sincronizare și să reveniți pentru ca HyperPlay să recunoască folderul din nou cu prefixul corect.\n\nDacă decideți să schimbați folderul prefix pentru Wine sau Proton, va trebui să verificați din nou calea, deoarece Proton folosește un prefix diferit (/pfx) și un nume de utilizator (steamuser). Prin urmare, puteți să ștergeți pur și simplu calea curentă, să ieșiți din pagina de setări de sincronizare și să reveniți pentru ca HyperPlay să ghicească folderul din nou cu prefixul corect.",
+            "part3": "Sincronizare manuală: selectați Descărcare pentru a descărca salvările jocurilor din Cloud. Alegeți Încărcare pentru a transfera salvările locale în cloud. Descărcarea forțată și încărcarea forțată vor ignora versiunea disponibilă local sau în cloud.",
+            "part4": "Sincronizarea salvărilor în mod automat va avea loc de fiecare dată când începeți un joc și după ce ați terminat de jucat."
         },
-        "vkd3d": "VKD3D este un strat translațional bazat pe Vulkan pentru jocurile DirectX 12. Activarea poate îmbunătăți semnificativ compatibilitatea. Nu are niciun efect asupra jocurilor DirectX mai vechi.",
+        "vkd3d": "VKD3D este un strat de traducere construit pe Vulkan pentru jocurile DirectX 12. Activarea acestuia poate aduce îmbunătățiri semnificative în ceea ce privește compatibilitatea. Nu afectează jocurile DirectX anterioare.",
         "wine": {
-            "part1": "HyperPlay caută pentru versiuni de Wine, Proton și CrossOver în următoarele foldere:",
-            "part2": "Pentru alte locuri, utilizați un link simbolic către unul dintre aceste dosare"
+            "part1": "HyperPlay explorează folderele de mai jos pentru a găsi versiunile de Wine, Proton și CrossOver:",
+            "part2": "Pentru alte destinații, creați un link simbolic către unul dintre aceste dosare"
         },
-        "msync": "Fsync își propune să reducă supraîncărcarea serverului de vin în jocurile care necesită un proces intensiv. Activarea poate îmbunătăți performanța pe nucleele Linux acceptate."
+        "msync": "Msync vizează diminuarea suprasarcinii serverului wineserver în jocurile care necesită resurse CPU considerabile. Activarea acestei opțiuni poate spori performanța în mai multe titluri.",
+        "disable_logs": "Bifați această casetă pentru a dezactiva majoritatea scrierilor în fișierele de jurnal (informațiile critice sunt întotdeauna înregistrate). Asigurați-vă că dezactivați această setare înainte de a raporta orice problemă.",
+        "dxvknvapi": "DXVK-NVAPI este o implementare a NVAPI construită pe baza DXVK și a NVAPI-ului nativ pentru Linux, permițând utilizarea DLSS pe GPU-uri Nvidia.",
+        "dxvkfpslimit": "Setează o limită de rată a cadrelor pentru jocurile DXVK"
     },
     "info": {
         "hyperplay": {
@@ -278,308 +311,324 @@
             "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Actualizare disponibila",
             "stable": "Grajd",
-            "version": "Versiune eroică"
+            "version": "HyperPlay - Versiune"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder (click to cancel)"
+            "searching": "Încerc să detectez folderul corect de salvare (click pentru a anula)  \nÎncerc să identific folderul corect de salvare (click pentru a anula)  \nÎncerc să găsesc folderul corect de salvare (click pentru a anula)"
         },
-        "settings": "Setările sunt salvate automat",
-        "version": "Versiune Wine"
+        "settings": "Setările se păstrează în mod automat",
+        "version": "Wine - versiune"
     },
     "infobox": {
-        "help": "Ajutor",
-        "requirements": "Cerințe de sistem",
-        "warning": "Warning",
+        "help": "Îndrumare",
+        "requirements": "Condiții de sistem",
+        "warning": "Alertă",
         "wine-path": "Calea Vinului",
         "wine-prefix": {
-            "title": "Prefix de vin"
+            "title": "Prefix Wine"
         },
         "wine-repfix": {
-            "message": "Wine folosește ceea ce se numește WINEPREFIX pentru a încapsula aplicațiile Windows. Acest prefix conține fișierele de configurare Wine și o reproducere a ierarhiei fișierelor C: (discul principal pe un sistem de operare Windows). În această reproducere a unității C:, sunt stocate fișierele de salvare a jocului și dependențele instalate prin winetricks."
-        }
+            "message": "Wine utilizează ceea ce se numește WINEPREFIX pentru a încadra aplicațiile Windows. Acest prefix include fișierele de configurare Wine și o replicare a structurii de fișiere de pe C: (discul principal pe un sistem de operare Windows). În această replicare a unității C:, sunt păstrate fișierele de salvare ale jocului și dependențele instalate prin winetricks.\n\nWine folosește un element numit WINEPREFIX pentru a izola aplicațiile Windows. Acest prefix conține fișierele de configurare Wine și o copie a ierarhiei fișierelor de pe C: (discul principal pe un sistem de operare Windows). În această copie a unității C:, sunt stocate fișierele de salvare ale jocului și dependențele instalate prin winetricks.\n\nWine se bazează pe un concept numit WINEPREFIX pentru a organiza aplicațiile Windows. Acest prefix include fișierele de configurare Wine și o replicare a structurii de fișiere de pe C: (discul principal pe un sistem de operare Windows). În această replicare a unității C:, se află fișierele de salvare ale jocului și dependențele instalate prin winetricks."
+        },
+        "wine-path-none-found": "Nici o versiune Wine nu a fost găsită, descărcați una din Managerul de Compatibilitate"
     },
     "install": {
-        "path": "Selectați Calea de instalare"
+        "path": "Selectați directorul de instalare"
     },
     "library": {
-        "label": "Library",
-        "refresh": "Reîmprospăta",
+        "label": "Arhivă",
+        "refresh": "Reîmprospătează",
         "sortAscending": "Sortare ascendentă",
-        "sortByStatus": "Sortați după Stare",
+        "sortByStatus": "Ordonează după Stare",
         "sortDescending": "Sortează descrescător",
         "toggleLayout": {
             "grid": "Comutați la un aspect al grilei",
             "list": "Comutați la un aspect de listă"
-        }
+        },
+        "alphabeticalAZ": "Alfabetic A-Z",
+        "alphabeticalZA": "Alfabetic Z-A"
     },
     "loading": {
-        "default": "Se încarcă",
-        "website": "Se încarcă site-ul web"
+        "default": "Se încarcă...  \nSe încarcă acum  \nÎncărcare în curs",
+        "website": "Se încarcă platforma online"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Conectare Amazon"
+        "alternative_method": "Modalitate alternativă de logare",
+        "epic": "Logare Epic Games",
+        "gog": "Logare GOG",
+        "message": "Conectează-te cu platforma ta. Poți să te conectezi la mai multe platforme în același timp.  \nConectează-te folosind platforma ta. Este posibil să te conectezi la mai multe platforme simultan.  \nAutentifică-te cu platforma ta. Poți fi conectat la mai multe platforme în același timp.",
+        "amazon": "Conectare Amazon",
+        "old-mac": "Versiunea ta de macOS este {{version}}. Este necesară macOS 12 sau o versiune mai nouă pentru a te conecta."
     },
     "message": {
-        "sync": "Sincronizare Completă",
-        "unsync": "Desincronizare Completă"
+        "sync": "Sincronizare Terminată",
+        "unsync": "Desincronizare Terminată"
     },
     "notify": {
         "error": {
-            "move": "Eroare la mutarea jocului",
-            "reparing": "Eroare la reparare"
+            "move": "Eroare la relocarea jocului",
+            "reparing": "Eroare în reparare"
         },
         "finished": {
             "add": {
                 "steam": {
-                    "corrupt": "{{game}} nu a putut fi adăugat la toți utilizatorii Steam găsiți. Consultați jurnalele pentru mai multe informații. Este necesară repornirea Steam, modificările vor intra în vigoare.",
-                    "success": "{{game}} a fost adăugat cu succes la Steam. Este necesară repornirea Steam, modificările vor intra în vigoare.",
-                    "title": "Adăugat la Steam"
+                    "corrupt": "{{game}} nu a fost adăugat la toți utilizatorii Steam descoperiți. Vă rugăm să verificați jurnalele pentru mai multe informații. Este necesară o repornire a Steam pentru ca modificările să devină efective.",
+                    "success": "{{game}} a fost adăugat cu succes pe Steam. Este necesară o repornire a Steam pentru ca modificările să aibă efect.  \n{{game}} a fost adăugat cu succes în Steam. Trebuie să repornești Steam pentru ca modificările să se aplice.  \n{{game}} a fost adăugat cu succes în Steam. O repornire a Steam este necesară pentru ca modificările să devină efective.",
+                    "title": "Adăugat în Steam"
                 }
             },
             "remove": {
                 "steam": {
-                    "corrupt": "{{game}} nu a putut fi eliminat de la toți utilizatorii Steam găsiți. Consultați jurnalele pentru mai multe informații. Este necesară repornirea Steam, modificările vor intra în vigoare.",
-                    "success": "{{game}} a fost eliminat cu succes pe Steam. Este necesară repornirea Steam, modificările vor intra în vigoare.",
-                    "title": "Eliminat din Steam"
+                    "corrupt": "{{game}} nu a putut fi scos de la toți utilizatorii Steam descoperiți. Vă rugăm să verificați jurnalele pentru mai multe informații. Este necesară repornirea Steam pentru ca modificările să devină efective.",
+                    "success": "{{game}} a fost îndepărtat cu succes din Steam. O repornire a Steam este necesară pentru ca modificările să devină efective.",
+                    "title": "Îndepărtat din Steam"
                 }
             },
-            "reparing": "Reparație Terminată"
+            "reparing": "Reparația este completă"
         },
         "install": {
-            "canceled": "Instalare Anulată",
-            "error": "Instalarea a eșuat",
-            "finished": "Instalare Finalizată",
-            "imported": "Joc importat",
-            "startInstall": "Instalarea a început"
+            "canceled": "Instalare anulată",
+            "error": "Instalarea a întâmpinat o eroare",
+            "finished": "Instalare finalizată",
+            "imported": "Joc transferat",
+            "startInstall": "Instalarea s-a demarat",
+            "paused": "Instalare suspendată",
+            "stopped": "Instalarea s-a oprit"
         },
-        "moved": "Mutare Finalizată",
-        "moving": "Joc de Mișcare",
+        "moved": "Mutare Finalizată cu Succes",
+        "moving": "Joc Mobil",
         "new-hyperplay-version": "A fost lansată o nouă versiune HyperPlayă!",
         "refresh": {
-            "error": "Nu s-au putut prelua versiunile din amonte, poate din cauza restricțiilor API-ului Github! Încercați mai târziu."
+            "error": "Nu am putut accesa versiunile de la sursa principală, posibil din cauza restricțiilor impuse de API-ul Github! Vă rugăm să încercați mai târziu."
         },
-        "uninstalled": "Dezinstalat",
+        "uninstalled": "Dezinstalare completă",
         "update": {
-            "canceled": "Actualizare Anulată",
-            "finished": "Actualizare Finalizată",
-            "started": "Actualizarea a început"
+            "canceled": "Actualizare anulată",
+            "finished": "Actualizare Finalizată cu Succes",
+            "started": "S-a început actualizarea",
+            "stopped": "Actualizarea oprită",
+            "paused": "Actualizare suspendată"
         }
     },
     "offline-message": {
-        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
-        "ignore": "Ignore",
-        "offline": "Offline",
-        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
-        "retrying": "Retrying"
+        "hint": "Verificăm conexiunea cu: {{newline}}github.com, {{newline}}gog.com, {{newline}}store.epicgames.com și {{newline}}cloudflare-dns.com",
+        "ignore": "Nu considera",
+        "offline": "Fără conexiune",
+        "offline-retry-in": "Offline. Încerc din nou în {{seconds}} secunde.  \nOffline. Reîncerc în {{seconds}} secunde.  \nOffline. Voi încerca din nou în {{seconds}} secunde.",
+        "retrying": "Reîncercare"
     },
-    "Open": "Deschide",
+    "Open": "Deschide aplicația",
     "options": {
         "advanced": {
-            "key": "Nume variabilă",
+            "key": "Denumire variabilă",
             "placeHolderKey": "NUME",
-            "placeHolderValue": "De exemplu: Path/To/ExtraFiles",
-            "title": "Opțiuni avansate (variabile de mediu):",
-            "value": "Valoare"
+            "placeHolderValue": "De exemplu: Calea/Către/FisiereExtra",
+            "title": "Variabile de mediu avansate:",
+            "value": "Valoare estimată"
         },
         "env_variables": {
             "error": {
-                "empty_key": "Numele variabilelor nu pot fi goale",
-                "equal_sign_in_key": "Numele variabilelor nu pot conține semnul „=\"",
-                "space_in_key": "Numele variabilelor nu pot conține spații"
+                "empty_key": "Variabilele nu pot avea nume goale",
+                "equal_sign_in_key": "Numele variabilelor nu pot include semnul „=”.  \nNumele variabilelor nu au voie să conțină semnul „=”.  \nSemnul „=” nu este permis în numele variabilelor.",
+                "space_in_key": "Spațiile nu sunt permise în numele variabilelor"
             },
-            "example": "NU includeți semnul „=\", de exemplu: pentru o setare precum „MY_FLAG=123”, setați MY_FLAG în NAME și 123 în VALUE.",
-            "info": "Setați variabilele de mediu pentru a le adăuga la comandă."
+            "example": "Nu includeți semnul „=”, de exemplu: pentru o setare precum „MY_FLAG=123”, introduceți MY_FLAG în NAME și 123 în VALUE.  \nNu adăugați semnul „=”, de exemplu: pentru o configurație precum „MY_FLAG=123”, plasați MY_FLAG în NAME și 123 în VALUE.  \nEvitați semnul „=”, de exemplu: pentru o setare ca „MY_FLAG=123”, completați MY_FLAG în NAME și 123 în VALUE.",
+            "info": "Configurați variabilele de mediu pentru a le adăuga la comandă.  \nStabiliți variabilele de mediu pentru a le atașa la comandă.  \nDefiniți variabilele de mediu pentru a le include în comandă."
         },
         "gameargs": {
             "placeholder": "Pune aici Argumentele Lansatorului",
-            "title": "Argumente de joc (Pentru a rula după comandă):"
+            "title": "Argumente de joc (Pentru a fi executate după comandă):  \nArgumente de joc (Pentru a rula în urma comenzii):  \nArgumente de joc (Pentru a fi folosite după comanda):"
         },
-        "quote-args-with-spaces": "Avertisment: asigurați-vă că citați argumentele cu spații! De exemplu: „cale/cu spații/”",
+        "quote-args-with-spaces": "Atenție: Asigurați-vă că încadrați argumentele cu spații! De exemplu: „cale/cu spații/”  \nAvertizare: Verificați să citați argumentele care conțin spații! De exemplu: „cale/cu spații/”  \nNotificare: Asigurați-vă că folosiți ghilimele pentru argumentele cu spații! De exemplu: „cale/cu spații/”",
         "wrapper": {
-            "args": "Argumente",
-            "arguments_example": "Exemplu de argumente: --arg; --extra-file=\"cale-fișier/ cu/spații\"",
+            "args": "Puncte de vedere",
+            "arguments_example": "Exemplu de argumente: --arg; --extra-file=\"cale-fișier/ cu/spații\"  \nExemplu de argumente: --arg; --extra-file=\"cale-fișier/ cu/spații\"  \nExemplu de argumente: --arg; --extra-file=\"cale-fișier/ cu/spații\"",
             "exe": "Înveliș",
-            "placeHolderKey": "Noul Wrapper",
-            "placeHolderValue": "Argumentele Wrapper",
-            "title": "Comanda Wrapper:"
+            "placeHolderKey": "Noua husă",
+            "placeHolderValue": "Argumentele pentru Wrapper",
+            "title": "Comanda Wrapper:  \nComanda de înfășurare:  \nComanda de tip Wrapper:"
         }
     },
     "other": {
         "gogdl-version": "Versiunea GOGDL: ",
         "legendary-version": "Versiune Legendary: ",
-        "weblate": "Ajută la traducerea HyperPlay.",
+        "weblate": "Sprijină traducerea HyperPlay.",
         "nile-version": "Versiunea Nile: "
     },
-    "Other": "Other",
+    "Other": "Altele",
     "placeholder": {
-        "alt-gogdl-bin": "Se utilizează binarul GOGDL încorporat...",
-        "alt-legendary-bin": "Folosind binarul Legendary încorporat...",
-        "custom_themes_path": "Select the path to look for custom CSS files",
-        "egs-prefix": "Prefixul unde este instalat EGS",
-        "prefered_language": "Cod de 2 caractere (adică: „en” sau „fr”)",
-        "alt-nile-bin": "Folosind binarul Nile încorporat..."
+        "alt-gogdl-bin": "Se folosește binarul GOGDL integrat...  \nSe utilizează binarul GOGDL predefinit...  \nSe aplică binarul GOGDL inclus...",
+        "alt-legendary-bin": "Folosind binarul Legendary integrat...  \nUtilizând binarul Legendary inclus...  \nFolosind binarul Legendary preinstalat...",
+        "custom_themes_path": "Selectați calea unde să căutați fișiere CSS personalizate",
+        "egs-prefix": "Locația prefixului unde EGS este instalat",
+        "prefered_language": "Cod de 2 litere (de exemplu: „en” sau „fr”)  \nCod de 2 caractere (exemplu: „en” sau „fr”)  \nCod de 2 simboluri (adică: „en” sau „fr”)",
+        "alt-nile-bin": "Folosind binarul Nile încorporat...",
+        "dxvkfpsvalue": "Valoare întreagă pozitivă (de exemplu, 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
         "mac": "Mac",
         "win": "Windows"
     },
-    "please-wait": "Please wait...",
-    "progress": "Progres",
+    "please-wait": "Te rog să aștepți...  \nTe rog să aștepți...  \nTe rog să aștepți...",
+    "progress": "Avansare",
     "queue": {
         "label": {
-            "canceled": "Canceled",
-            "clear": "Clear List",
+            "canceled": "Anulat",
+            "clear": "Elimină lista",
             "downloading": "Downloading",
             "empty": {
-                "queue": "Nothing to download"
+                "queue": "Nu există nimic de descărcat",
+                "finished": "Nimic descărcat"
             },
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads",
-            "resume": "Continuați descărcarea",
-            "pause": "Întrerupeți descărcările"
+            "remove": "Îndepărtează din Descărcări",
+            "resume": "Continuare descărcare",
+            "pause": "Suspendați descărcarea"
         }
     },
     "Recent": "Jocuri Recente",
-    "search": "Introdu numele jocului aici...",
+    "search": "Caută după numele jocului...",
     "setting": {
-        "adddesktopshortcuts": "Adăugați automat comenzi rapide pe desktop",
-        "addgamestostartmenu": "Adăugați jocuri în meniul Start automat",
+        "adddesktopshortcuts": "Generați automat comenzi rapide pe desktop",
+        "addgamestostartmenu": "Adăugați jocuri automat în meniul Start",
         "addgamestosteam": "Add games to Steam automatically",
-        "alt-gogdl-bin": "Alegeți un binar GOGDL alternativ pe care să îl utilizați",
-        "alt-legendary-bin": "Alegeți un Legendary Binary alternativ pe care să îl utilizați",
+        "alt-gogdl-bin": "Optați pentru un binar GOGDL diferit pe care să-l utilizați",
+        "alt-legendary-bin": "Optați pentru un Binary Legendar diferit pe care să-l utilizați",
         "autodxvk": "Instalare/Actualizare automată DXVK în Prefix",
-        "autosync": "Salvări de sincronizare automată",
-        "autovkd3d": "Instalare/Actualizare automată VKD3D pe Prefix",
-        "change-target-exe": "Selectați un EXE alternativ pentru a rula",
-        "checkForUpdatesOnStartup": "Verificare pentru actualizări la pornire",
-        "crossover-version": "Versiune crossover",
-        "custom_themes_path": "Custom Themes Path",
+        "autosync": "Salvări sincronizate în mod automat",
+        "autovkd3d": "Actualizare/Instalare automată VKD3D pe Prefix",
+        "change-target-exe": "Selectați o variantă EXE alternativă pentru a o rula",
+        "checkForUpdatesOnStartup": "Verifică dacă sunt actualizări HyperPlay la start",
+        "crossover-version": "Crossover/Wine - Versiune",
+        "custom_themes_path": "Locația Temelor Personalizate",
         "customWineProton": "Căi personalizate pentru Wine/Proton",
-        "darktray": "Utilizați Tray Icon întunecat",
-        "default-install-path": "Calea de instalare implicită",
-        "default-steam-path": "Calea Steam implicită",
-        "defaultWinePrefix": "Setați folderul pentru noile prefixe de vin",
-        "disable_controller": "Dezactivați navigarea eroică folosind controlerul",
-        "discordRPC": "Activați Discord Rich Presence",
-        "download-no-https": "Descărcați jocuri fără HTTPS (util pentru CDN-uri, de exemplu, LanCache)",
-        "egs-sync": "Sincronizare cu Epic Games instalat",
-        "enableFSRHack": "Activați FSR Hack (versiunea Wine trebuie să o accepte)",
+        "darktray": "Activați pictograma întunecată în bara de sistem",
+        "default-install-path": "Calea de instalare normală",
+        "default-steam-path": "Calea de bază a Steam",
+        "defaultWinePrefix": "Alegeți folderul pentru noile prefixe de Wine",
+        "disable_controller": "Dezactivați navigarea Hyperplay folosind controlerul",
+        "discordRPC": "Permiteți prezența bogată Discord",
+        "download-no-https": "Descărcați jocuri fără HTTPS (avantajos pentru CDN-uri, precum LanCache)",
+        "egs-sync": "Sincronizare cu versiunea instalată a Epic Games",
+        "enableFSRHack": "Permiteți hack-ul FSR (versiunea Wine trebuie să fie suportată)",
         "eosOverlay": {
-            "cancelInstall": "Anulare",
-            "checkForUpdates": "Verifică pentru actualizări",
-            "checkingForUpdates": "Se verifică actualizările...",
-            "currentVersion": "Versiunea curentă: {{version}}",
-            "disable": "Dezactivați",
-            "enable": "Permite",
+            "cancelInstall": "Renunțare",
+            "checkForUpdates": "Verifică actualizările disponibile",
+            "checkingForUpdates": "Se caută actualizări...  \nSe verifică dacă sunt actualizări...  \nSe face verificarea actualizărilor...",
+            "currentVersion": "Versiunea actuală: {{version}}  \nVersiunea în curs: {{version}}  \nVersiunea prezentă: {{version}}",
+            "disable": "Dezactivați opțiunea",
+            "enable": "Permite activarea",
             "install": "Instalează",
-            "installed": "Epic Overlay este instalat",
-            "installing": "Epic Overlay este instalat...",
-            "latestVersion": "Ultima versiune: {{version}}",
-            "notInstalled": "Epic Overlay nu este instalat",
-            "notInstalledMsg": "Epic Overlay nu este instalat. Vrei să-l instalezi acum?",
-            "notInstalledTitle": "Suprapunerea nu este instalată",
+            "installed": "Instalarea Epic Overlay a fost finalizată",
+            "installing": "Epic Overlay se află în proces de instalare...",
+            "latestVersion": "Ultima versiune: {{version}}  \nUltima versiune disponibilă: {{version}}  \nVersiunea actuală: {{version}}",
+            "notInstalled": "Overlay-ul Epic nu a fost instalat",
+            "notInstalledMsg": "Epic Overlay nu este instalat. Dorești să-l instalezi acum?  \nEpic Overlay nu este prezent. Vrei să-l instalezi acum?  \nEpic Overlay nu este configurat. Vrei să-l instalezi acum?",
+            "notInstalledTitle": "Suprapunerea nu este disponibilă",
             "remove": "Dezinstalează",
-            "removeConfirm": "Sigur doriți să dezinstalați Epic Overlay?",
-            "removeConfirmTitle": "Confirmați eliminarea suprapunerii",
-            "updateNow": "Actualizează",
-            "updating": "Se actualizează..."
+            "removeConfirm": "Vreți cu adevărat să dezinstalați Epic Overlay?",
+            "removeConfirmTitle": "Confirmați că ați dori să dezactivați suprapunerea",
+            "updateNow": "Îmbunătățire",
+            "updating": "Se actualizează...  \nSe face actualizarea...  \nActualizare în curs..."
         },
         "esync": "Activați Esync",
-        "exit-to-tray": "Ieșiți în System Tray",
+        "exit-to-tray": "Minimizați în System Tray",
         "FsrSharpnessStrenght": "Forța de claritate FSR",
-        "fsync": "Activați Fsync",
-        "gamemode": "Utilizați GameMode (Feral GameMode trebuie instalat)",
+        "fsync": "Permiteți Fsync",
+        "gamemode": "Folosiți GameMode (Feral GameMode trebuie să fie instalat)  \nApelați GameMode (Feral GameMode necesită instalare)  \nActivați GameMode (Feral GameMode trebuie să fie instalat)",
         "language": "Alegeți Limba aplicației",
         "library_top_option": {
-            "disabled": "Dezactivat",
-            "favourites": "Jocuri preferate",
-            "recently_played": "Jocuri jucate recent",
-            "recently_played_installed": "Jocuri jucate recent (numai instalate)"
+            "disabled": "Dezactivat temporar",
+            "favourites": "Jocuri preferate de mine",
+            "recently_played": "Jocuri jucate în ultima vreme",
+            "recently_played_installed": "Jocuri recent jucate (doar instalate)  \nJocuri jucate recent (doar cele instalate)  \nJocuri recent (numai cele instalate)"
         },
-        "library_top_section": "Secțiunea de sus a bibliotecii",
+        "library_top_section": "Zona de sus a bibliotecii",
         "log": {
-            "copy-to-clipboard": "Copiați conținutul jurnalului în clipboard",
+            "copy-to-clipboard": "Copiați datele logului în clipboard",
             "current-log": "Jurnal curent",
             "instructions": "Alăturați-vă Discordului nostru și căutați canalul care se potrivește cu sistemul dvs. de operare. Distribuiți conținutul jurnalelor afișate aici și includeți o descriere clară a problemei cu orice informații și detalii relevante.",
-            "instructions_title": "Cum se raportează o problemă?",
+            "instructions_title": "Cum pot raporta o problemă?  \nCum se poate raporta o problemă?  \nCare este modalitatea de a raporta o problemă?",
             "last-log": "Ultimul jurnal",
-            "no-file": "Nu a fost găsit niciun fișier jurnal",
-            "show-in-folder": "Afișați fișierul jurnal în dosar"
+            "no-file": "Nu există fișier jurnal disponibil",
+            "show-in-folder": "Afișați fișierul jurnal în dosar",
+            "instructions-part-02": "Pentru a ne ajuta să diagnosticăm și să rezolvăm problema cât mai repede posibil, vă rugăm să oferiți cât mai multe informații, inclusiv o copie a jurnalelor dvs. Echipa noastră de suport va monitoriza ambele canale și va face tot posibilul pentru a răspunde problemei dvs. cât mai repede posibil. Vă mulțumim pentru răbdare și înțelegere în timp ce lucrăm pentru a rezolva orice probleme pe care le-ați putea întâmpina.",
+            "join-hyperplay-discord": "Alătură-te Discord-ului nostru",
+            "instructions-part-01": "Dacă întâmpini probleme în timp ce folosești HyperPlay, avem două zone desemnate pentru a raporta problemele tale pe serverul nostru Discord. Dacă ești jucător, te rugăm să raportezi orice problemă vizitând forumul de suport pentru jucători. Dacă ești dezvoltator de jocuri, te rugăm să raportezi orice problemă vizitând forumul de suport pentru dezvoltatori."
         },
-        "mangohud": "Activați Mangohud (Mangohud trebuie instalat)",
+        "mangohud": "Permiteți Mangohud (Instalarea Mangohud este necesară)",
         "manualsync": {
-            "download": "Descarcă",
-            "forcedownload": "Forțează descărcarea",
-            "forceupload": "Forțează Încărcarea",
-            "sync": "Sincronizare",
-            "syncing": "Sincronizare în curs",
-            "title": "Salvări cu sincronizare manuală",
-            "upload": "Încărcați"
+            "download": "Descarcă fișierul",
+            "forcedownload": "Forțează să descarci",
+            "forceupload": "Forțează să se încarce",
+            "sync": "Sincronizare în timp real",
+            "syncing": "Sincronizare în proces",
+            "title": "Sincronizare salvări manuală",
+            "upload": "Adăugați fișierul"
         },
-        "maxRecentGames": "Jocuri recente de afișat",
-        "maxworkers": "Numărul maxim de lucrători la descărcare",
-        "minimize-on-launch": "Minimizați eroicul după lansarea jocului",
-        "offlinemode": "Rulați jocul offline",
-        "prefered_language": "Limba preferată (Codul de limbă)",
-        "preferSystemLibs": "Preferați bibliotecile de sistem",
+        "maxRecentGames": "Jocuri recent jucate de arătat",
+        "maxworkers": "Numărul maxim de lucrători în procesul de descărcare",
+        "minimize-on-launch": "Ascundeți HyperPlay după lansarea jocului",
+        "offlinemode": "Jucați jocul fără internet",
+        "prefered_language": "Limba aleasă (Codul limbii)  \nLimba dorită (Codul de limbă)  \nLimba preferată (Codul limbii)",
+        "preferSystemLibs": "Optați pentru bibliotecile de sistem",
         "primerun": {
             "confirmation": {
-                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
-                "title": "Only 1 GPU detected"
+                "message": "A fost detectată o singură placă grafică în acest sistem. Vă rugăm să rețineți că această opțiune este destinată sistemelor cu mai multe GPU-uri cu GPU-uri fără cap (cum ar fi laptopurile). În sistemele cu un singur GPU, GPU-ul este utilizat automat și activarea acestei opțiuni poate cauza probleme. Vreți cu adevărat să activați această opțiune?\n\nA fost identificată o singură placă video în acest sistem. Vă rugăm să observați că această opțiune este destinată sistemelor multi-GPU cu GPU-uri fără cap (precum laptopurile). În sistemele cu un singur GPU, GPU-ul este utilizat automat, iar activarea acestei opțiuni poate provoca probleme. Doriți cu adevărat să activați această opțiune?\n\nNumai o placă grafică a fost detectată în acest sistem. Vă rugăm să rețineți că această opțiune este destinată sistemelor cu mai multe GPU-uri care au GPU-uri fără cap (de exemplu, laptopuri). În sistemele cu un singur GPU, GPU-ul este utilizat automat, iar activarea acestei opțiuni poate genera probleme. Chiar doriți să activați această opțiune?",
+                "title": "Detectat doar un singur GPU"
             },
-            "description": "Use Dedicated Graphics Card"
+            "description": "Activare placă grafică dedicată"
         },
         "runexe": {
-            "message": "Trageți și plasați fișiere aici",
-            "title": "Rulați EXE pe Prefix"
+            "message": "Plasați fișierele aici prin tragere și eliberare",
+            "title": "Lansați EXE în Prefix"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually (click to retry)",
-            "placeholder": "Selectați folderul exact de salvare a jocurilor",
-            "warning": "Please check twice if the path is correct (click to retry)"
+            "not-found": "Folderul de salvare nu a fost găsit, vă rugăm să-l selectați manual (faceți clic pentru a încerca din nou)  \nFolderul de salvare nu a fost găsit, vă rugăm să-l alegeți manual (dați clic pentru a repeta)  \nNu s-a găsit folderul de salvare, vă rugăm să-l selectați manual (apăsați pentru a încerca din nou)",
+            "placeholder": "Selectați dosarul exact în care sunt salvate jocurile",
+            "warning": "Te rog să verifici de două ori dacă calea este corectă (dă clic pentru a încerca din nou)  \nTe rog să verifici din nou dacă calea este corectă (apasă pentru a repeta)  \nAsigură-te că calea este corectă (dă clic pentru a reîncerca)"
         },
-        "select_theme": "Selectează tema",
-        "showfps": "Afișați FPS (DX9, 10 și 11)",
-        "start-in-tray": "Pornește minimizat",
-        "steamruntime": "Utilizați Steam Runtime",
+        "select_theme": "Selectează stilul",
+        "showfps": "Afișați cadre pe secundă (DX9, 10 și 11)  \nArătați FPS (DX9, 10 și 11)  \nVizualizați FPS (DX9, 10 și 11)",
+        "start-in-tray": "Deschide în modul minimizat",
+        "steamruntime": "Activare Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "dosar WinePrefix",
-        "wineversion": "Versiune Wine",
-        "autoUpdateGames": "Actualizați automat jocurile",
-        "ignoreGameUpdates": "Ignora actualizările jocului",
-        "disable_logs": "Dezactivați jurnalele",
+        "wineprefix": "directorul WinePrefix",
+        "wineversion": "Wine - versiune",
+        "autoUpdateGames": "Actualizare automată a jocurilor",
+        "ignoreGameUpdates": "Omit actualizările jocului",
+        "disable_logs": "Oprește jurnalele",
         "addgamestoapplications": "Adăugați automat jocuri la Aplicații",
-        "showMetalOverlay": "Afișați statistici suprapuse",
+        "showMetalOverlay": "Arătați suprapunerile de date statistice",
         "alt-nile-bin": "Alegeți un binar alternativ pentru Nil",
-        "autodxvknvapi": "Instalare/Actualizare automată DXVK în Prefix",
-        "msync": "Activați Esync"
+        "autodxvknvapi": "Instalare/Actualizare automată DXVK-NVAPI pe Prefix",
+        "msync": "Permiteți Msync",
+        "steamId": "ID Steam",
+        "autoLaunchHyperPlay": "Lansare automată HyperPlay",
+        "dxvkfpslimit": "Limitează FPS (DX9, 10 și 11)"
     },
     "settings": {
         "battlEyeRuntime": {
-            "installing": "Se instalează BattlEye Runtime...",
-            "name": "BattlEye AntiCheat Runtime"
+            "installing": "Se instalează runtime-ul BattlEye...  \nSe efectuează instalarea BattlEye Runtime...  \nSe instalează sistemul BattlEye Runtime...",
+            "name": "Sistemul AntiCheat BattlEye în execuție"
         },
-        "clear-cache": "Goliți memoria cache eroică",
-        "copiedToClipboard": "Copiat în Clipboard!",
-        "copyToClipboard": "Copiați toate setările în Clipboard",
-        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
+        "clear-cache": "Curățați cache-ul HyperPlay",
+        "copiedToClipboard": "Copiat în clipboard!  \nCopiat în zona de transfer!  \nInformațiile au fost copiate în clipboard!",
+        "copyToClipboard": "Copiați toate setările în zona de transfer",
+        "default_hint": "Modificările din această secțiune se aplică doar ca valori prestabilite la instalarea jocurilor. Dacă doriți să ajustați setările unui joc deja instalat, folosiți butonul Setări de pe pagina jocului.",
         "eacRuntime": {
             "gameModeRequired": {
-                "message": "GameMode este necesar pentru ca EAC runtime să funcționeze pe Flatpak. Doriți să-l activați acum?",
-                "title": "GameMode necesar"
+                "message": "Este necesar GameMode pentru ca EAC runtime să funcționeze pe Flatpak. Doriți să-l activați acum?",
+                "title": "Este necesar un mod de joc"
             },
-            "installing": "Se instalează EAC Runtime...",
-            "name": "EasyAntiCheat Runtime"
+            "installing": "Se instalează EAC Runtime...  \nSe efectuează instalarea EAC Runtime...  \nInstalarea EAC Runtime este în curs...",
+            "name": "Executare EasyAntiCheat"
         },
         "gameMode": {
             "eacRuntimeEnabled": {
-                "message": "Timpul de rulare EAC este activat, care nu va funcționa corect fără GameMode. Doriți să dezactivați EAC Runtime și GameMode?",
+                "message": "Timpul de execuție EAC este activat, dar nu va funcționa corect fără GameMode. Doriți să dezactivați EAC Runtime și GameMode?  \nTimpul de rulare EAC este activat și nu va funcționa corect fără GameMode. Doriți să dezactivați EAC Runtime și GameMode?  \nEAC Runtime este activat, dar nu va funcționa corect fără GameMode. Doriți să dezactivați EAC Runtime și GameMode?",
                 "title": "EAC runtime activat"
             }
         },
@@ -587,89 +636,105 @@
             "long-log-hint": "Jurnalul trunchiat, sunt afișate ultimele 1000 de linii!"
         },
         "navbar": {
-            "advanced": "Avansat",
+            "advanced": "Avansat tehnologic",
             "games_settings_defaults": "Game Defaults",
             "general": "General",
-            "log": "Buturuga",
-            "other": "Altele",
-            "sync": "Salvare-Sincronizare",
+            "log": "Log de activitate",
+            "other": "Alte variante",
+            "sync": "Salvări Sincronizate în Cloud",
             "wineExt": "Extensii de vin",
-            "accounts": "Conturi",
-            "systemInformation": "Informații S_istem"
+            "accounts": "Conturi online",
+            "systemInformation": "Informații ale sistemului"
         },
-        "open-config-file": "Deschideți fișierul de configurare",
-        "reset-hyperplay": "Resetează eroic",
+        "open-config-file": "Accesați fișierul de configurare",
+        "reset-hyperplay": "Restabilește HyperPlay",
         "saves": {
             "label": "Salveaza locatia:",
-            "warning": "Funcția Cloud Saves este în versiune beta, vă rugăm să faceți backup înainte de sincronizare (în cazul în care ceva nu merge bine)"
+            "warning": "Funcția Cloud Saves este în prezent în beta, vă rugăm să salvați o copie a datelor înainte de sincronizare (în cazul în care apar erori)"
         },
-        "gamesSettings": "Setările jocului",
+        "gamesSettings": "Opțiunile jocului",
         "systemInformation": {
-            "copyToClipboard": "Copiați în clipboard",
-            "os": "Sistema operativo:",
-            "memory": "Memorie",
-            "osVersion": "Versiune: {versionNumber}"
+            "copyToClipboard": "Copiați în clipboard==WEBLATE_PART==Copiați în memorie==WEBLATE_PART==Copiați în clipboard-ul vostru",
+            "os": "Sistem de operare:",
+            "memory": "Memorie virtuală",
+            "osVersion": "Versiune {{versionNumber}}",
+            "gpu": "GPU:",
+            "memoryStats": "{{percentUsed}}% utilizat ({{usedGib}} / {{totalGib}}",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "osNameFlatpak": "{{osName}} (în interiorul Flatpak)",
+            "gpuWithNumber": "GPU {{number}}:",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpuDriver": "Driver: {{driverVersion}}",
+            "version": "Versiune: {{appVersion}}",
+            "showDetailed": "Afișați specificațiile detaliate ale sistemului",
+            "steamDeck": "Steam Deck",
+            "systemModel": "Model de sistem:",
+            "legendaryVersion": "Legendar: {{legendaryVersion}}",
+            "cpu": "CPU:"
         },
         "wine": {
             "manager": {
                 "title": "Manager de vinuri"
             }
-        }
+        },
+        "reset-extension": "Resetează extensia"
     },
-    "Settings": "Setări",
+    "Settings": "Preferințe",
     "sidebar": {
         "collapse": "Restrângeți bara laterală",
         "uncollapse": "Desfaceți bara laterală",
-        "library": "Bibliotecă",
-        "store": "Marketplace",
-        "downloadManager": "Manager Descărcări"
+        "library": "Centru de resurse",
+        "store": "Târg",
+        "downloadManager": "Manager Descărcări",
+        "achievements": "Realizări"
     },
     "status": {
-        "installing": "Se Instalează",
-        "logging": "Autentificare...",
-        "processing": "Se procesează fișierele, așteptați",
+        "installing": "Se efectuează instalarea",
+        "logging": "Autentificare în curs...",
+        "processing": "Vă rugăm să așteptați, fișierele sunt procesate",
         "preparing_login": "Se pregătește autentificare... "
     },
-    "store": "Magazin",
+    "store": "Epic Games Store",
     "stores": "Magazine",
     "title": {
-        "allGames": "Toate jocurile"
+        "allGames": "Jocuri disponibile"
     },
     "toolbox": {
         "settings": {
-            "default-wineprefix": "Selectați folderul de prefix implicit pentru noile configurații",
-            "wineprefix": "Selectați un folder pentru noile prefixe de vin"
+            "default-wineprefix": "Alegeți folderul de prefix prestabilit pentru noile configurații",
+            "wineprefix": "Alegeți un director pentru noile prefixe Wine"
         }
     },
     "tooltip": {
-        "addpath": "Adăugați o cale nouă",
-        "removepath": "Eliminați Calea"
+        "addpath": "Creează o cale nouă",
+        "removepath": "Eliminați traseul"
     },
     "tray": {
-        "about": "Despre",
-        "quit": "Părăsește",
-        "reload": "Reîncărcați",
-        "show": "Arată"
+        "about": "Detalii despre",
+        "quit": "Închide",
+        "reload": "Reîncărcați pagina",
+        "show": "Prezintă"
     },
     "two_col_table": {
-        "save_hint": "Modificările din acest tabel nu sunt salvate automat. Faceți clic pe butonul +"
+        "save_hint": "Modificările din acest tabel nu sunt salvate de la sine. Faceți clic pe butonul +"
     },
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
-        "logging_out": "Logging out",
-        "logout": "Deconectare",
-        "logout_confirmation": "Sigur doriți să vă deconectați?",
-        "manageaccounts": "Gestionați Conturile",
-        "quit": "Părăsește",
-        "logIn": "Log in"
+        "logging_out": "Deconectare utilizator",
+        "logout": "Deconectare utilizator",
+        "logout_confirmation": "Ești sigur că dorești să ieși din cont?",
+        "manageaccounts": "Gestionarea Conturilor",
+        "quit": "Închide",
+        "logIn": "Intră în cont",
+        "manageStore": "Gestionați magazinele"
     },
     "webview": {
         "controls": {
             "back": "Întoarce-te",
-            "forward": "Mergi inainte",
-            "openInBrowser": "Deschis în browser",
-            "reload": "Reîncarcă pagina"
+            "forward": "Progresează",
+            "openInBrowser": "Accesează în browser",
+            "reload": "Actualizează pagina"
         }
     },
     "wine": {
@@ -677,118 +742,384 @@
         "manager": {
             "link": "Manager de vinuri",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Manager de vinuri",
-            "unzipping": "Dezarhivare"
+            "title": "Strat de compatibilitate ",
+            "unzipping": "Dezarchivare"
         },
-        "release": "Data de lansare",
-        "size": "Mărime"
+        "release": "Ziua lansării",
+        "size": "Grosime"
     },
     "externalLink": {
-        "dontAskAgain": "Nu mai întreba",
-        "warning": "Sunteți pe cale să deschideți un link extern."
+        "dontAskAgain": "Nu mai pune aceeași întrebare",
+        "warning": "Sunteți pe punctul de a accesa un link extern.  \nUrmează să deschideți un link extern.  \nVă pregătiți să deschideți un link din afară."
     },
     "wiki_info": {
-        "not_found": "Nu am putut găsi informații suplimentare."
+        "not_found": "Nu am descoperit informații suplimentare."
     },
     "dlc": {
-        "actions": "Acțiuni",
-        "installDlcs": "Instalați toate DLC-urile",
-        "noDlcFound": "Nu s-au găsit DLC",
-        "size": "Mărime",
-        "title": "Title"
+        "actions": "Acțiuni disponibile",
+        "installDlcs": "Instalați toate pachetele DLC",
+        "noDlcFound": "Niciun DLC nu a fost găsit",
+        "size": "Grosime",
+        "title": "Denumire"
     },
     "amazon": "Amazon",
     "prime-gaming": "Prime Gaming",
     "Amazon Games": "Jocuri Amazon",
     "hyperplay": {
-        "folder": "Folder",
+        "folder": "Directoriu",
         "buttons": {
-            "agree": "Sunt de acord",
-            "noThanks": "Nu, mulţumesc"
+            "agree": "Sunt de acord cu opinia ta",
+            "noThanks": "Nu, mulțumesc.  \nNu, îți mulțumesc.  \nNu, mulțumesc foarte mult."
         },
         "discordApp": "Discord",
         "onboarding": {
-            "terms": "Termeni serviciu",
+            "terms": "Termeni de utilizare.",
             "walletSelection": {
                 "screens": {
                     "import": {
-                        "learnMore": "Află mai multe"
+                        "learnMore": "Învață mai multe.",
+                        "details": "Browserele de mai jos au deja MetaMask instalat. Alege-l pe cel din care dorești să imporți.",
+                        "cantFindProfile": "Nu pot găsi profilul tău de browser?",
+                        "createNewWallet": "Creează un nou portofel de extensie MM",
+                        "useRecoveryPhrase": "Importă folosind fraza de recuperare secretă",
+                        "useRecoveryPhraseInfo": "Această funcție este recomandată pentru utilizatori avansați și dezvoltatori. Fraza dvs. secretă de recuperare este stocată local în MetaMask și nu este niciodată partajată cu HyperPlay.",
+                        "title": "Selectați browserul din care să importați",
+                        "orWord": "SAU"
+                    },
+                    "info": {
+                        "createWalletDescription": "Fă clic pe „Creează un portofel” mai jos dacă nu ai un portofel sau vrei să creezi unul nou:",
+                        "skip": "Sari peste acum",
+                        "digitalAssets": {
+                            "title": "Un cămin pentru activele dumneavoastră digitale",
+                            "details": "Portofelele sunt folosite pentru a trimite, primi, stoca și afișa active digitale precum tokenuri și NFT-uri."
+                        },
+                        "login": {
+                            "title": "O nouă modalitate de a te conecta",
+                            "details": "O alternativă la crearea de conturi și parole noi pe fiecare site web, conectează-ți portofelul în schimb."
+                        },
+                        "createWalletCTA": "Creează un portofel",
+                        "title": "Ce este un portofel?"
+                    },
+                    "scan": {
+                        "dontHaveWallet": "Nu aveți un portofel?",
+                        "updateWarning": "Ai probleme? Asigură-te că MetaMask este actualizat.",
+                        "details": "Creați un canal de comunicare criptat. Cheile dumneavoastră nu vor fi niciodată partajate cu HyperPlay.",
+                        "getMetamask": "Obțineți MetaMask",
+                        "title": "Scanează QR cu "
                     }
-                }
-            }
+                },
+                "title": "Conexiuni portofel",
+                "pleaseConnect": "Te rugăm să-ți conectezi portofelul sau să descarci aplicația mobilă Metamask pentru a începe:"
+            },
+            "connectionConnected": {
+                "title": "Portofel conectat!",
+                "description": "Portofelul tău este conectat. Ești pregătit să te joci."
+            },
+            "analytics": {
+                "hyperplayWill": "HyperPlay va:",
+                "neverCollectIP": " colectați adresa dvs. IP completă;",
+                "privacyPolicyHere": "Politica de confidențialitate aici.",
+                "optOut": "Întotdeauna permiteți să renunțați prin Setări;",
+                "privacyCaption": "Aceste date sunt agregate și, prin urmare, sunt anonime în scopul Regulamentului General privind Protecția Datelor (UE) 2016/679. Pentru mai multe informații referitoare la practicile noastre de confidențialitate, vă rugăm să consultați ",
+                "anonymized": "Trimiteți clicuri și interacțiuni cu jocul anonimizate;",
+                "body": "HyperPlay ar dori să colecteze date de utilizare pentru a înțelege mai bine cum interacționează utilizatorii noștri cu aplicația. Aceste informații ne ajută să înțelegem cum folosiți aplicația și ne permit să facem HyperPlay și mai bun pentru dvs.",
+                "neverCollectPersonal": " colectați chei, adrese, solduri, hash-uri sau orice informație personală;",
+                "neverSellData": " vindeți date pentru profit. Niciodată!",
+                "title": "Ajută-ne să îmbunătățim HyperPlay!"
+            },
+            "connectionCanceled": {
+                "title": "Conexiune anulată!",
+                "description": "Vă rugăm să confirmați cererea de conectare pe portofelul dvs. mobil pentru a continua."
+            },
+            "welcome": {
+                "text": {
+                    "bugs": "Vă rugăm să rețineți că HyperPlay este o versiune alpha publică. Multe funcții sunt încă în dezvoltare și vor exista erori.",
+                    "construction": "HyperPlay este în construcție.",
+                    "communityCTA_2": "comunitate. Împreună, să conturăm viitorul jocurilor!",
+                    "communityCTA_1": "Ne-ar plăcea să ne oferi feedback și să te alături nouă în",
+                    "description": "HyperPlay este un launcher de jocuri și un agregator de magazine de jocuri din viitor. Cu HyperPlay, poți să îți duci portofelul, token-urile și activele în fiecare joc. HyperPlay suportă întreaga bibliotecă a Epic Store, GOG și propriul nostru magazin HyperPlay. Folosind HyperPlay, ești de acord cu"
+                },
+                "title": "Bine ați venit la HyperPlay Early Access!"
+            },
+            "connectAgain": "Conectează-te din nou"
         },
-        "copyUrl": "Copiați adresa URL",
+        "copyUrl": "Copiați legătura",
         "gamecard": {
-            "paused": "În pauză",
-            "installing": "Descărcare..."
+            "paused": "Oprit temporar",
+            "installing": "Descărcare în curs...",
+            "installed": "Pregătit de joacă",
+            "distributables": "Se instalează distributibile...",
+            "extracting": "Extracție..."
         },
-        "turnAnalyticsOff": "Oprește",
-        "logOut": "Deconectează-te",
+        "turnAnalyticsOff": "Închide",
+        "logOut": "Deconectare utilizator",
         "misc": "Niciodată",
         "browserImport": {
-            "profile": "Profil"
+            "profile": "Profil personal",
+            "appId": "Id aplicație"
         },
-        "Sync": "Sincronizare",
-        "syncing": "Sincronizarea...",
-        "turnAnalyticsOn": "Pornește"
+        "Sync": "Aliniază",
+        "syncing": "Sincronizare în desfășurare...",
+        "turnAnalyticsOn": "Între în funcțiune",
+        "achievements": {
+            "noAchievements": {
+                "oops": "Ups!",
+                "doubleCheckMessage": "Se pare că nu am putut găsi niciun joc în contul tău Steam în acest moment. O mică reamintire să verifici că detaliile jocului tău sunt setate pe public. Astfel, putem accesa realizările tale și îți putem oferi cea mai bună experiență."
+            },
+            "freeMints": "Mints gratuite",
+            "addThisGame": "Adaugă acest joc",
+            "gamesToMint": "Jocuri de mintuit"
+        },
+        "currentWallet": "Portofel curent",
+        "accesscodes": {
+            "requirescode": "Această actualizare a jocului necesită un cod de acces.",
+            "success": {
+                "validation": "Succes! Codul de acces este valid"
+            },
+            "error": {
+                "validation": "Codul de acces este invalid"
+            }
+        },
+        "linkSteamAccountCta": "Mergi la autentificarea Steam",
+        "linkSteamAccountDescription": "Conectează-te la Steam pentru a lega contul tău HyperPlay.",
+        "linkSteamAccountTitle": "Conectează contul Steam",
+        "viewItem": "Vizualizați {{item}}",
+        "analyticsOn": "Analitica este activată",
+        "changeWallet": "Schimbă contul portofelului",
+        "connectWallet": "Conectează portofelul",
+        "publicAlpha": "Alpha public",
+        "viewPortfolio": "Vizualizați portofoliul",
+        "viewFullscreen": "Vizualizare pe ecran complet"
     },
     "quest": {
-        "connectSteamAccount": "Conectează contul echipei",
-        "active": "Activ",
+        "connectSteamAccount": "Asociază contul Steam",
+        "active": "Activă",
         "Play": "Reluați",
         "playstreak": {
-            "days": "zile",
-            "now": "Acum"
+            "days": "zilele săptămânii",
+            "now": "Acum  \nÎn acest moment  \nAcum este timpul",
+            "progressTowardsStreak": "progresul către seria de astăzi.",
+            "streakProgress": "Progresul seriei",
+            "playEachDay": "Joacă în fiecare zi pentru a nu-ți reseta seria!",
+            "playToStart": "Joacă acest joc pentru a-ți începe seria!",
+            "streakCompleted": "Seria completată! Cereți-vă recompensele acum.",
+            "dayResets": "Resetări zilnice:",
+            "sync": "Sincronizare progres",
+            "syncSuccess": "Progres sincronizat"
         },
-        "points": "Puncte",
-        "signIn": "Autentificare",
-        "sync": "Sincronizare",
+        "points": "Puncte acumulate",
+        "signIn": "Conectare",
+        "sync": "Sincronizare în timp real",
         "claimWarning": {
-            "cancel": "Anulare",
-            "confirm": "Confirmă"
-        }
+            "cancel": "Anulează",
+            "confirm": "Confirmă",
+            "body": "<bold>IMPORTANT:</bold> Vă rugăm să vă asigurați că alocați suficient gaz pe rețeaua {{networkName}} pentru ca tranzacția să fie confirmată cu succes <bold>în termen de 7 zile.</bold>",
+            "body2": "În caz contrar, recompensa Quest <bold> va expira și nu va mai putea fi revendicată.</bold>"
+        },
+        "noG7ConnectionSync": "Trebuie să aveți un cont Game7 legat de {{email}} pentru a resincroniza sarcinile dvs.",
+        "g7Numclaimed": "Credite G7 revendicate total",
+        "readyForClaim": "Pregătit pentru revendicare",
+        "noG7ConnectionClaim": "Trebuie să ai un cont Game7 legat de {{email}} pentru a-ți revendica recompensele.",
+        "notEnoughGas": "Sold insuficient în portofel pentru a revendica recompensa din cauza taxelor de gaz. Încearcă un alt portofel sau reîncarcă-l pe acesta înainte de a încerca din nou.",
+        "reputation": "Reputație",
+        "type": {
+            "playstreak": "Seria de jocuri"
+        },
+        "quests": "Misiuni",
+        "View Game": "Vezi jocul",
+        "claimAll": "Solicitați tot",
+        "claimed": "Revendicat",
+        "needMoreAchievements": "Trebuie să fi completat {{percent}}% din realizările din unul dintre aceste jocuri.",
+        "pointsClaimed": "Puncte revendicate",
+        "reward": "Recompensă",
+        "associatedGames": "Jocuri asociate",
+        "linkAccount": "Conectează-ți contul Steam pentru a verifica eligibilitatea."
     },
     "gameRelease": {
-        "beta": "Beta",
-        "demo": "Demo",
-        "main": "Protagonist",
-        "alpha": "alfa"
+        "beta": "Versiune de test",
+        "demo": "Exemplu",
+        "main": "Personaj principal",
+        "alpha": "Alfa",
+        "prototype": "Prototip"
     },
-    "accounts": "Conturi",
-    "ALL": "Toate",
-    "analytics": "Telemetrie",
+    "accounts": "Conturi online",
+    "ALL": "Toate  \nTot  \nÎntreaga",
+    "analytics": "Statistici",
     "hyperplayOverlay": {
         "txnRequest": {
-            "FAILED": "Traducere întreruptă."
+            "FAILED": "Tranzacția a fost oprită.",
+            "CONFIRMED": "Tranzacție confirmată",
+            "PENDING": "Tranzacție trimisă",
+            "INITIATED": "Cerere de tranzacție în așteptare"
+        },
+        "chainRequest": {
+            "FAILED": "Rețeaua personalizată a fost anulată",
+            "CONFIRMED": "Rețea personalizată adăugată",
+            "INITIATED": "Cerere de rețea personalizată"
+        },
+        "signatureRequest": {
+            "CONFIRMED": "Semnătura trimisă",
+            "FAILED": "Semnătura a fost întreruptă",
+            "INITIATED": "Cererea de semnătură în așteptare"
+        },
+        "greeting": {
+            "title": "Overlay HyperPlay",
+            "description": "Overlay-ul HyperPlay este gata! Apasă {{overlayKeyMod}} + X pentru a-l arăta sau ascunde."
+        },
+        "description": {
+            "FAILED": "Tranzacția a fost anulată sau nu a fost trimisă, vă rugăm să încercați din nou",
+            "INITIATED": "O confirmare a portofelului este în așteptare în portofelul tău mobil",
+            "PENDING": "Aștept confirmarea blockchain. Te vom anunța când este confirmată"
+        },
+        "extensionNotification": {
+            "DESCRIPTION": "Apăsați {{overlayKeyMod}} + X pentru a vedea această tranzacție",
+            "TITLE": "Tranzacție solicitată"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Token personalizat adăugat",
+            "FAILED": "Cererea de token personalizat a fost anulată",
+            "INITIATED": "Adăugați cererea de token personalizat în așteptare"
         }
     },
-    "profile": "Profil",
+    "profile": "Profil personal",
     "import-game-folder": {
-        "placeholder": "Alege dosarul de joc pentru a importa"
+        "placeholder": "Alege locația jocului pe care dorești să-l imporți",
+        "dialog": {
+            "title": "Selectați folderul jocului pentru import"
+        },
+        "error": "A apărut o eroare în timpul importului. Te rugăm să verifici jurnalele pentru mai multe detalii.",
+        "cta": "Importați folderul jocului",
+        "label": "Importă folderul jocului"
     },
     "mods": {
         "instructions": {
             "step1": {
-                "title": "Pasul 1"
+                "title": "Etapa 1",
+                "chromieCraft": "ChromieCraft",
+                "description": "Acest joc este un mod pentru World of Warcraft: Wrath of the Lich King (3.3.5a). Pentru a juca acest mod, jucătorii trebuie să dețină o copie a World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nu găzduiește World of Warcraft. Jucătorii care dețin World of Warcraft pot obține versiunea 3.3.5a din surse precum:",
+                "subtitle": "Descarcă World of Warcraft 3.3.5a",
+                "webtorrent": "Torrent (Link Magnet)"
             },
             "step2": {
-                "title": "Pasul 2"
-            }
+                "title": "Faza 2",
+                "description": "Selectează fișierul ChromieCraft_3.3.5a.zip descărcat.",
+                "subtitle": "Selectează fișierul ChromieCraft_3.3.5a.zip"
+            },
+            "step3": {
+                "description": "Vă rugăm să alegeți folderul în care ar trebui să fie instalat World of Warcraft: Wrath of the Lich King (3.3.5a).",
+                "subtitle": "Selectează folderul de instalare",
+                "title": "Pasul 3"
+            },
+            "step4": {
+                "description": "Introduceți codul de acces pentru a continua cu instalarea jocului.",
+                "subtitle": "Cod de acces",
+                "title": "Pasul 4"
+            },
+            "title": "Instructiuni pentru mod"
         }
     },
     "mod": {
         "instructions": {
             "zip": {
-                "placeholder": "Selectează un fişier"
+                "placeholder": "Selectează arhiva ZIP",
+                "path": "Selectați locația fișierului jocului de bază"
+            }
+        },
+        "baseGame": {
+            "cancel": {
+                "body": "Extracția jocului de bază a fost anulată",
+                "title": "Extracție anulată"
+            },
+            "installed": {
+                "title": "Joc de bază instalat"
+            },
+            "installing": {
+                "body": "Se extrag fișierele de bază ale jocului",
+                "title": "Instalarea jocului de bază"
             }
         }
     },
     "notification": {
         "wine-download-failed": {
-            "title": "Eroare"
+            "title": "Eroare",
+            "message": "Configurarea stratului de compatibilitate implicit a eșuat"
+        },
+        "wine-download": {
+            "title": "Strat de compatibilitate",
+            "message": "Configurarea stratului de compatibilitate implicit"
         }
     },
     "overlay": {
-        "comingSoon": "În curând…"
-    }
+        "comingSoon": "În curând…",
+        "WALLET_DISCONNECTED": "Nu ai un portofel conectat la HyperPlay.",
+        "EXTERNAL_WALLET_CONNECTED": "Ești conectat la HyperPlay cu un portofel extern."
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "overlay": "În prezent nu ești conectat, progresul seriei de jocuri nu va fi urmărit. Te rugăm să ieși din joc și să te conectezi la HyperPlay prin meniul derulant din dreapta sus pentru a urmări progresul.",
+                "client": "În prezent, nu ești conectat, progresul seriei de jocuri nu va fi urmărit. Te rugăm să te conectezi la HyperPlay prin meniul derulant din dreapta sus pentru a urmări progresul."
+            }
+        },
+        "g7CreditsModal": {
+            "title": "Câștigă Credite Game7",
+            "description": "Intră în cele mai bune jocuri de pe HyperPlay cu provocări palpitante de Play Streak. Fiecare activitate te încurajează să te implici într-un joc diferit, evidențiind cele mai bune aspecte ale jocurilor web3. Timpul tău de joc contează!"
+        },
+        "noneFound": {
+            "message": "Nu au fost găsite misiuni.",
+            "title": "Nicio misiune găsită."
+        },
+        "quests": "Misiuni",
+        "viewAllQuests": {
+            "title": "Vezi toate misiunile"
+        }
+    },
+    "dlcs": {
+        "label": "Selectați DLC-urile de instalat:"
+    },
+    "steam-install": {
+        "compatibility-layer-not-available": "Stratul de compatibilitate nu este disponibil. Te rugăm să instalezi unul din \"Setări > Manager Wine\" mai întâi.",
+        "error-message": "A apărut o eroare în timpul instalării Steam. Vă rugăm să încercați din nou.",
+        "success-message": "Steam a fost instalat. Acum îl poți lansa din Bibliotecă.",
+        "launch-tooltip": "Lansați Steam folosind stratul de compatibilitate HyperPlay",
+        "tooltip": "Aceasta va instala versiunea Windows a Steam și va rula folosind un strat de compatibilitate HyperPlay.\n\n    Unele jocuri, în special titluri mai vechi, jocuri 3D mai noi sau cele cu software anti-cheat, s-ar putea să nu funcționeze corect.\n\n    Specificațiile recomandate sunt un Mac cu CPU Apple Silicon (M1 sau mai recent) și cel puțin 16GB de RAM."
+    },
+    "achievements": {
+        "progress": {
+            "notMinted": "off chain",
+            "minted": "pe lanț"
+        }
+    },
+    "At the end make sure to": "La final, asigurați-vă că",
+    "gameUpdateNotifications": {
+        "title": "Actualizări de jocuri disponibile",
+        "body": {
+            "multiple": "{{gameName}} și alte jocuri sunt gata de actualizare.",
+            "single": "Există o actualizare disponibilă pentru {{gameName}}."
+        }
+    },
+    "sideload": {
+        "warningMessage": "Instalarea unui joc din surse externe este o funcție destinată dezvoltatorilor și utilizatorilor avansați. Instalarea unui program de instalare care conține malware ar putea compromite computerul dumneavoastră și ar putea duce la furtul fondurilor.",
+        "warningTitle": "Important"
+    },
+    "UNCHECK 'Run Steam'": "DESELECTEAZĂ 'Rulează Steam'",
+    "exit_game": "Ieșiți din joc",
+    "importGameErrorMessageExecutable": "Executable-ul jocului nu a fost găsit, importul jocului nu este posibil",
+    "back_to_game": "Înapoi la joc",
+    "Cancel Installation": "Anulați instalarea",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay va descărca și va începe instalarea Steam pentru tine. Te rugăm să urmezi instrucțiunile Steam din installer-ul lor;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay vă va anunța odată ce instalarea este finalizată;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Dacă doriți să continuați, fiți răbdător, deoarece poate dura câteva minute pentru a termina, în funcție de conexiunea dvs. la internet și de configurația sistemului;",
+    "importGameErrorTitle": "Eroare la importul jocului",
+    "Install Steam": "Instalează Steam",
+    "Launch Steam": "Lansează Steam",
+    "Launching Steam": "Lansare Steam...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "La prima lansare, Steam va descărca fișierele necesare și va dura câteva minute până se finalizează și apare ecranul de autentificare;",
+    "email_subscription": {
+        "title": "Vă mulțumim că v-ați abonat!",
+        "subtitle": "Acum ești parte din comunitatea noastră și suntem încântați să împărtășim actualizări și informații valoroase cu tine."
+    },
+    "importGameErrorMessage": "Nu este un folder de joc valid, importul jocului nu este posibil"
 }
