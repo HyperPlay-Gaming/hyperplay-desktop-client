@@ -1,73 +1,73 @@
 {
     "accessibility": {
-        "actions_font_family_no_default": "Actions Font Family (Default: ",
-        "all_tiles_in_color": "모든 게임 타일을 컬러로 표시",
-        "content_font_family_no_default": "Content Font Family (Default: ",
-        "fonts": "글꼴",
-        "title": "접근성",
-        "zoom": "Zoom"
+        "actions_font_family_no_default": "액션 폰트 계열 (기본: ",
+        "all_tiles_in_color": "모든 게임 타일을 색깔로 나타내기",
+        "content_font_family_no_default": "콘텐츠 글꼴 종류 (기본: ",
+        "fonts": "폰트",
+        "title": "접근성 옵션",
+        "zoom": "줌"
     },
-    "add_game": "Add Game",
-    "All": "모두",
+    "add_game": "게임 추가하기",
+    "All": "전부",
     "anticheat": {
-        "anticheats": "안티 치트",
-        "may_not_work": "안티 치트 지원이 거부되거나 중단되어서 작동하지 않을 수 있습니다",
-        "reference": "Reference",
-        "source": "Source",
-        "status": "Status",
-        "title": "안티 치트 소프트웨어가 포함된 게임입니다"
+        "anticheats": "부정행위 방지",
+        "may_not_work": "안티 치트 지원이 거부되거나 불안정하여 작동하지 않을 수 있습니다.",
+        "reference": "참고 자료",
+        "source": "출처",
+        "status": "상황",
+        "title": "이 게임에는 부정행위 방지 소프트웨어가 포함되어 있습니다"
     },
     "box": {
         "cache-cleared": {
-            "message": "HyperPlay 캐시 삭제됨.",
-            "title": "캐시 삭제됨"
+            "message": "HyperPlay 캐시가 클리어되었습니다.",
+            "title": "캐시가 초기화되었습니다"
         },
-        "choose": "선택",
-        "choose-egs-prefix": "Epic Games Store가 설치된 접두사를 선택합니다",
-        "choose-gogdl-binary": "GOGDL 바이너리 파일 선택 (다시 시작해야 함)",
-        "choose-legendary-binary": "Legendary 바이너리 파일 선택",
-        "customWine": "Wine 혹은 Proton 바이너리 파일 선택",
-        "default-install-path": "기본 설치 경로 선택",
-        "default-steam-path": "Steam 경로.",
-        "downloadNow": "지금 다운로드",
+        "choose": "선택하시오",
+        "choose-egs-prefix": "EGS가 설치된 경로의 접두사를 선택합니다",
+        "choose-gogdl-binary": "GOGDL 바이너리 선택하기 (재시작 필요)",
+        "choose-legendary-binary": "전설의 바이너리 파일 선택",
+        "customWine": "Wine 또는 Proton 이진 파일을 선택하십시오",
+        "default-install-path": "기본 설치 위치 선택",
+        "default-steam-path": "스팀 파일 경로.",
+        "downloadNow": "지금 다운로드 진행하기",
         "error": {
             "add": {
                 "steam": {
-                    "body": "Steam에 {{game}} 게임 추가 실패, 에러:{{newLine}} {{error}}",
-                    "title": "추가 중 에러"
+                    "body": "Steam에 {{game}} 추가 실패, 오류: {{newLine}} {{error}}  \n{{game}}을(를) Steam에 추가하는 데 실패했습니다: {{newLine}} {{error}}  \nSteam에 {{game}} 추가 중 오류 발생: {{newLine}} {{error}}",
+                    "title": "추가 과정에서 에러"
                 }
             },
             "credentials": {
-                "message": "사용자의 인증서가 만료되었습니다, 로그아웃 한 뒤 다시 로그인 해주세요."
+                "message": "사용자의 자격 증명이 만료되었습니다. 로그아웃 후 다시 로그인해 주시기 바랍니다.  \n자격 증명이 만료되었습니다. 로그아웃하고 다시 로그인해 주세요.  \n인증 정보가 만료되었습니다. 로그아웃한 후 다시 로그인해 주세요."
             },
             "cx-bottle-not-found": {
-                "message": "\"{{bottle_name}}\" CrossOver bottle 이 없어 시작 할 수 없습니다!",
-                "title": "CrossOver bottle 없음"
+                "message": "\"CrossOver 병 \"{{bottle_name}}\"이 존재하지 않아 실행할 수 없습니다!\"  \n\"CrossOver 병 \"{{bottle_name}}\"이 없어서 시작할 수 없습니다!\"  \n\"CrossOver 병 \"{{bottle_name}}\"이 존재하지 않으므로 실행할 수 없습니다!\"",
+                "title": "CrossOver 병이 없습니다"
             },
             "diskspace": {
-                "message": "사용 가능한 디스크 공간이 충분하지 않습니다",
-                "title": "공간 없음"
+                "message": "디스크 공간이 충분하지 않습니다",
+                "title": "공간이 없습니다."
             },
             "dxvk": {
-                "message": "DXVK/VKD3D를 설치하는 동안 오류가 발생했습니다! 연결을 확인하세요!",
-                "title": "DXVK/VKD3D 오류"
+                "message": "DXVK/VKD3D 설치 중 오류가 발생했습니다! 연결 상태를 확인해 주세요!  \nDXVK/VKD3D 설치에 실패했습니다! 연결을 점검해 주세요!  \nDXVK/VKD3D를 설치하는 데 문제가 발생했습니다! 연결을 확인하시기 바랍니다!",
+                "title": "DXVK/VKD3D 경고"
             },
             "folder-not-found": {
-                "title": "게임 폴더가 삭제된 것 같습니다, 설치 목록에서 게임을 제거 하겠습니까?"
+                "title": "게임 폴더가 삭제된 것으로 보입니다. 설치 목록에서 게임을 제거하시겠습니까?  \n게임 폴더가 없어졌습니다. 설치된 목록에서 게임을 삭제하시겠습니까?  \n게임 폴더가 사라진 것 같습니다. 설치된 목록에서 게임을 제거할까요?"
             },
             "generic": {
                 "message": "",
-                "title": "Select EXE to Run"
+                "title": "실행할 EXE를 선택하세요"
             },
-            "launchAborted": "Launch aborted",
-            "title": "오류",
+            "launchAborted": "실행이 중단되었습니다.",
+            "title": "문제가 발생했습니다",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "잡히지 않은 예외 발생!"
             },
             "update": {
-                "title": "Update Error",
-                "message": "뭔가 업데이트로 잘못되었습니다! HyperPlay를 제거하고 다시 설치하십시오."
+                "title": "업데이트 실패",
+                "message": "업데이트에 문제가 생겼습니다! HyperPlay를 수동으로 언인스톨한 후 다시 설치해 주세요."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -75,22 +75,22 @@
                 "title": "Wine을 찾을 수 없음"
             },
             "winetricks": {
-                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
-                "title": "Winetricks error"
+                "message": "Winetricks 실행 중 다음 오류가 발생했습니다: {{newLine}}{{error}}  \nWinetricks 실행 중 다음 오류가 발생했습니다: {{newLine}}{{error}}  \nWinetricks 실행 중 다음과 같은 오류가 발생했습니다: {{newLine}}{{error}}",
+                "title": "Winetricks 에러"
             },
-            "moving": "오류 이동 게임 {{error}}",
+            "moving": "게임을 이동하는 중 오류 발생 {{error}}",
             "ubisoft-connect": {
-                "title": "Ubisoft 연결",
-                "message": "Ubisoft의 설치는 게임 접두사에서 실패했습니다. https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac에서 wiki 페이지를 확인하십시오."
+                "title": "유비소프트 연결 플랫폼",
+                "message": "Ubisoft Connect의 설치가 게임 접두사에서 실패했습니다. 수동 설치를 위해 https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac의 위키 페이지를 확인하세요.  \nUbisoft Connect 설치가 게임 접두사에서 실패했습니다. 수동으로 설치하려면 https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac의 위키 페이지를 참조하세요.  \n게임 접두사에서 Ubisoft Connect 설치가 실패했습니다. 수동 설치를 원하시면 https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac의 위키 페이지를 확인하시기 바랍니다."
             },
             "delete-files": {
-                "body": "오류 제거 추출 폴더 {{path}}. 자주 묻는 질문\n{{paragraph}}\n{{error}}",
-                "title": "오류 제거 추출 폴더"
+                "body": "추출된 폴더 {{path}}를 제거하는 중 오류가 발생했습니다. 수동으로 제거해 주십시오.  \n                {{paragraph}}  \n                {{error}}  \n==WEBLATE_PART==추출된 폴더 {{path}}를 삭제하는 데 오류가 발생했습니다. 수동으로 삭제해 주세요.  \n                {{paragraph}}  \n                {{error}}  \n==WEBLATE_PART==폴더 {{path}}를 제거하는 중 오류가 발생했습니다. 수동으로 삭제해 주시기 바랍니다.  \n                {{paragraph}}  \n                {{error}}",
+                "title": "추출 폴더 삭제 오류 발생"
             },
             "steam": {
-                "error": "Steam 실행할 수 없습니다. 설치는 사용자가 취소되거나 Steam 측에 실패했습니다.",
-                "message": "증기 설치 실패! 자주 묻는 질문 {{paragraph}} {{error}}",
-                "title": "증기 오류"
+                "error": "Steam 실행 파일을 찾을 수 없습니다. 설치가 사용자의 요청으로 취소되었거나 Steam에서 문제가 발생했을 수 있습니다.",
+                "message": "스팀 설치에 실패했습니다! 지침을 주의 깊게 읽고 다시 시도해 주세요! {{paragraph}} {{error}}  \n스팀 설치가 실패했습니다! 설명서를 잘 읽고 다시 시도해 주시기 바랍니다! {{paragraph}} {{error}}  \n스팀 설치가 실패했습니다! 지침을 신중히 읽고 다시 시도해 주세요! {{paragraph}} {{error}}",
+                "title": "증기 에러"
             }
         },
         "info": {
@@ -101,158 +101,158 @@
                 "message-finished": "지금 HyperPlay을 다시 시작하시겠습니까?",
                 "title": "HyperPlay Games Launcher",
                 "title-finished": "업데이트 완료",
-                "appUpdated": "HyperPlay 업데이트",
-                "appUpdated-message": "HyperPlay가 업데이트되었습니다. 지금 HyperPlay를 업데이트하고 재시작하시겠습니까?"
+                "appUpdated": "HyperPlay의 업데이트가 완료되었습니다",
+                "appUpdated-message": "HyperPlay가 업데이트되었습니다. HyperPlay를 지금 업데이트하고 재시작하시겠습니까?"
             }
         },
-        "no": "아니오",
-        "ok": "네",
+        "no": "아니라고요",
+        "ok": "확인했습니다",
         "protocol": {
             "install": {
-                "not_installed": "현재 설치되어 있지 않습니다. 설치하시겠습니까?"
+                "not_installed": "현재 설치되어 있지 않습니다. 설치할까요?"
             }
         },
         "quit": {
-            "message": "보류 중인 작업 있습니다, 계속 하시겠습니까?",
-            "title": "종료"
+            "message": "보류 중인 작업이 있습니다. 계속 진행하시겠습니까?  \n보류 중인 작업이 있습니다. 정말로 진행하시겠습니까?  \n보류 중인 작업이 있습니다. 확실하신가요?",
+            "title": "종료 선택"
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
-                "title": "Reset HyperPlay"
+                "message": "HyperPlay를 리셋하시겠습니까? 이 작업은 모든 설정과 캐시를 삭제하지만 설치된 게임이나 Epic 자격 증명은 남겨둡니다. HyperPlay의 휴대용 버전(AppImage, WinPortable 등)은 수동으로 재시작해야 합니다.",
+                "title": "하이퍼플레이 리셋"
             }
         },
         "runexe": {
-            "title": "실행할 EXE 선택"
+            "title": "실행할 EXE를 선택하십시오"
         },
         "select": {
-            "button": "선택",
-            "exe": "EXE 선택"
+            "button": "선택해 주세요",
+            "exe": "EXE 선택하기"
         },
         "shortcuts": {
-            "message": "바탕 화면 및 시작 메뉴에 바로 가기가 생성되었습니다",
-            "message-mac": "Shortcuts were created on the Applications folder",
-            "message-remove": "데스크톱 및 시작 메뉴에서 바로 가기가 제거되었습니다",
-            "message-remove-mac": "Shortcuts were removed from the Applications folder",
-            "title": "바로가기"
+            "message": "바탕 화면 및 시작 메뉴에 단축키가 생성되었습니다",
+            "message-mac": "응용 프로그램 폴더에 단축 아이콘이 생성되었습니다.",
+            "message-remove": "데스크톱 및 시작 메뉴에서 바로 가기 아이콘이 사라졌습니다",
+            "message-remove-mac": "응용 프로그램 폴더에서 단축 아이콘이 제거되었습니다.",
+            "title": "빠른 접근"
         },
         "sync": {
-            "button": "선택",
-            "error": "유효하지 않은 경로",
-            "title": "저장 디렉토리 선택"
+            "button": "선택하세요",
+            "error": "유효하지 않은 경로로 설정됨",
+            "title": "저장 파일 경로 선택"
         },
         "vcruntime": {
             "install": {
-                "message": "Visual C++ 런타임 다운로드 링크를 열었습니다. x86, x64 버전 모두 설치해 주세요."
+                "message": "Visual C++ 런타임의 다운로드 링크가 개방되었습니다. x86과 x64 버전을 모두 설치해 주시기 바랍니다."
             },
             "notfound": {
-                "message": "일부 게임에 필요한 Microsoft Visual C++ 런타임이 설치되지 않았습니다",
-                "title": "VC 런타임 설치되지 않음"
+                "message": "Microsoft Visual C++ 런타임이 설치되어 있지 않아 일부 게임을 실행할 수 없습니다",
+                "title": "VCRuntime가 없습니다"
             }
         },
         "warning": {
             "epic": {
-                "import": "현재 Epic 서버에 큰 장애가 발생하여 게임을 가져올 수 없습니다!",
-                "install": "현재 Epic 서버에 큰 장애가 발생하여 게임을 설치할 수 없습니다!",
-                "update": "현재 Epic 서버에 큰 장애가 발생하여 게임을 업데이트할 수 없습니다!"
+                "import": "현재 Epic 서버에 심각한 장애가 발생하여 게임을 가져올 수 없습니다!  \n현재 Epic 서버에서 큰 문제가 발생하여 게임을 가져올 수 없습니다!  \n현재 Epic 서버에 중대한 장애가 발생하여 게임을 가져올 수 없습니다!",
+                "install": "현재 Epic 서버에 심각한 장애가 발생하여 게임을 설치할 수 없습니다!  \n현재 Epic 서버에서 큰 문제가 발생하여 게임 설치가 불가능합니다!  \nEpic 서버에 중대한 장애가 발생하여 게임 설치가 이루어질 수 없습니다!",
+                "update": "현재 Epic 서버에 심각한 장애가 발생하여 게임 업데이트가 불가능합니다!  \n현재 Epic 서버에서 큰 문제가 발생하여 게임을 업데이트할 수 없습니다!  \nEpic 서버에 중대한 장애가 발생하여 게임 업데이트가 이루어질 수 없습니다!"
             },
-            "title": "경고",
+            "title": "경고 메시지",
             "wine-change": {
-                "title": "와인을 찾을 수 없습니다!",
-                "message-gptk": "Apple Gaming porting toolkit을 사용하여 게임을 실행하려면 macOS를 14 (Sonoma) 이상으로 업그레이드해야합니다. {{newline}} 우리는 당신의 시스템에 와인을 발견, 당신은 계속 {{foundWine}}를 사용하여 발사하고 싶습니까?",
-                "message": "이 제목을 실행하기 위해 선택한 와인 버전을 찾을 수 없습니다 ({{selectedWine}}). {{newline}} 우리는 또 다른 것을 발견, 당신은 계속 {{foundWine}}를 사용하여 발사하고 싶습니까?",
-                "title-gptk": "Game Porting Toolkit 호환되지 않음 "
+                "title": "와인을 찾을 수 없습니다!  \n와인을 발견할 수 없습니다!  \n와인을 찾을 수 없어요!",
+                "message-gptk": "Apple Gaming 포팅 툴킷을 통해 게임을 실행하려면 macOS를 14 (Sonoma) 이상으로 업데이트해야 합니다. {{newline}} 시스템에서 Wine을 발견했습니다. {{foundWine}}를 사용하여 계속하시겠습니까?",
+                "message": "이 제목을 실행하기 위해 선택한 와인 버전을 찾을 수 없습니다 ({{selectedWine}}). {{newline}} 다른 버전을 찾았습니다. {{foundWine}}를 사용하여 계속하시겠습니까?",
+                "title-gptk": "게임 포팅 툴킷이 호환되지 않습니다 "
             },
             "rosetta": {
-                "title": "Rosetta 찾을 수 없음",
-                "message": "하이퍼플레이는 Rosetta는 Apple 실리콘 칩으로 macOS에서 올바르게 실행합니다. 다음 명령을 사용하여 macOS 터미널에서 설치하십시오. \"softwareupdate --install-rosetta\"와 HyperPlay를 다시 시작합니다. "
+                "title": "로제타가 없습니다",
+                "message": "하이퍼플레이는 Apple 실리콘 칩이 있는 macOS에서 정상적으로 작동하기 위해 Rosetta를 요구합니다. macOS 터미널에서 다음 명령어를 사용하여 설치한 후 HyperPlay를 다시 시작하세요: \"softwareupdate --install-rosetta\". "
             }
         },
-        "wineprefix": "WinePrefix 폴더 선택",
-        "yes": "예",
-        "dontShowAgain": "다시 표시하지 않음",
+        "wineprefix": "와인 프리픽스 폴더 지정",
+        "yes": "맞아요",
+        "dontShowAgain": "다시 나타나지 않음",
         "choose-nile-binary": "나일 바이너리 선택",
         "reset-extension": {
             "question": {
-                "message": "MetaMask Extension을 재설정하시겠습니까?",
-                "title": "재설정 확장"
+                "message": "MetaMask 익스텐션을 초기화하시겠습니까?",
+                "title": "확장 리셋"
             }
         }
     },
     "button": {
-        "cancel": "Cancel",
-        "go_to_library": "라이브러리로 이동",
+        "cancel": "무효화",
+        "go_to_library": "라이브러리로 가세요",
         "login": "로그인",
-        "sync": "싱크",
-        "syncing": "싱크중",
-        "unsync": "싱크 해제",
-        "continue": "계속하기",
-        "download": "다운로드",
-        "update": "갱신",
-        "install": "설치"
+        "sync": "동기화",
+        "syncing": "동기화 중",
+        "unsync": "비동기화",
+        "continue": "계속 이어가기",
+        "download": "다운로드하기",
+        "update": "개정",
+        "install": "설치 완료"
     },
     "controller": {
         "hints": {
-            "back": "뒤로",
-            "backspace": "Backspace",
-            "close_dialog": "대화상자 닫기",
-            "close_keyboard": "키보드 닫기",
-            "close_options": "Close Options",
-            "game_details": "게임 세부 정보",
-            "game_settings": "게임 설정",
-            "install_game": "게임 설치",
-            "move_cursor": "커서 이동",
-            "open_virtual_keyboard": "가상 키보드 열기",
-            "options": "Options",
-            "play_game": "게임 플레이",
-            "scroll": "Scroll",
-            "select": "Select",
-            "space": "스페이스바",
-            "update_game": "게임 업데이트"
+            "back": "뒤로 돌아가기",
+            "backspace": "백스페이스 키",
+            "close_dialog": "대화 상자 닫기",
+            "close_keyboard": "키보드 끄기",
+            "close_options": "옵션을 닫다",
+            "game_details": "게임 내용",
+            "game_settings": "게임 구성",
+            "install_game": "게임을 설치합니다",
+            "move_cursor": "커서 위치 변경",
+            "open_virtual_keyboard": "가상 키보드 활성화",
+            "options": "설정",
+            "play_game": "게임을 실행하다",
+            "scroll": "스크롤바",
+            "select": "선택하기",
+            "space": "스페이스",
+            "update_game": "게임을 새로 고치다"
         }
     },
     "docs": "Documentation",
     "download-manager": {
         "install-type": {
-            "install": "Install",
-            "update": "Update"
+            "install": "설치 중",
+            "update": "수정사항"
         },
         "label": {
-            "disk": "Disk",
-            "speed": "Download"
+            "disk": "저장 장치",
+            "speed": "다운로드하기"
         },
         "link": "Downloads",
         "queue": {
-            "end-time": "Finished at",
-            "queue-time": "Added at",
-            "start-time": "Started at",
-            "type": "Type"
+            "end-time": "완료되었습니다",
+            "queue-time": "추가됨니다",
+            "start-time": "시작되었습니다",
+            "type": "종류"
         },
         "title": "Downloads",
-        "title_dm": "다운로드 Manager",
-        "ETA": "예상 시간"
+        "title_dm": "다운로드 관리 도구",
+        "ETA": "예상 시간 소요"
     },
     "epic": {
-        "offline-notification-body": "Epic Games 서버가 오프라인 상태이므로 온라인 서비스가 완전히 작동하지 않을 수 있습니다!",
-        "offline-notification-title": "offline"
+        "offline-notification-body": "Epic Games 서버가 다운되어 온라인 서비스가 완전히 작동하지 않을 수 있습니다!",
+        "offline-notification-title": "오프라인 모드"
     },
-    "Epic Games": "Epic Games",
-    "error": "Error",
-    "favourites": "즐겨찾기",
+    "Epic Games": "에픽 게임즈",
+    "error": "잘못된 요청",
+    "favourites": "좋아하는 항목",
     "game": {
-        "status": "Status",
-        "store": "스토어",
-        "title": "게임 이름"
+        "status": "상황",
+        "store": "판매점",
+        "title": "게임 명칭"
     },
     "generic": {
         "error": {
-            "component": "게임을 찾을 수 없습니다, 로그아웃했다가 다시 로그인하거나 아래 옵션 중 하나를 시도하세요"
+            "component": "게임을 찾을 수 없습니다. 로그아웃 후 다시 로그인하거나 아래의 옵션 중 하나를 시도해 보세요.  \n게임을 찾을 수 없습니다. 로그아웃하고 다시 로그인하거나 아래의 옵션을 선택해 보세요.  \n게임을 찾을 수 없습니다. 로그아웃한 후 다시 로그인하거나 아래의 옵션 중 하나를 시도해 주세요."
         },
         "library": {
-            "refresh": "라이브러리 새로 고침"
+            "refresh": "라이브러리 리프레시"
         }
     },
-    "globalSettings": "글로벌 설정",
+    "globalSettings": "세계 설정",
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
@@ -260,53 +260,53 @@
         "ignore_hidden": "숨김 무시",
         "platform": "플랫폼",
         "show_all_games": "모든 게임 표시",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "사용할 수 없는 게임 보기",
         "show_favourites_only": "즐겨찾기만 표시",
-        "show_hidden": "숨김 표시",
-        "store": "Filter Store"
+        "show_hidden": "숨김 내용 표시",
+        "store": "필터 매장"
     },
     "help": {
-        "amdfsr": "AMD's FSR helps boost framerate by upscaling lower resolutions in Fullscreen Mode. Image quality increases from 5 to 1 at the cost of a slight performance hit. Enabling may improve performance.",
-        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
-        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
-        "dxvk": "DXVK is a Vulkan-based translational layer for DirectX 9, 10 and 11 games. Enabling may improve compatibility. Might cause issues especially for older DirectX games.",
-        "esync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance.",
-        "fsync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels.",
+        "amdfsr": "AMD의 FSR은 전체 화면 모드에서 낮은 해상도를 업스케일하여 프레임 속도를 증가시킵니다. 이미지 품질은 약간의 성능 저하를 감수하고 5에서 1로 향상됩니다. 활성화하면 성능이 개선될 가능성이 있습니다.",
+        "custom_themes_path": "신뢰할 수 없는 소스의 CSS 파일을 사용하지 마십시오. 의문이 있을 경우, Discord 채널에서 검토를 요청하세요.",
+        "custom_themes_wiki": "사용자 정의 테마 추가에 대한 자세한 내용은 위키를 확인하세요. 여기를 클릭하세요.  \n사용자 정의 테마 추가에 대한 더 많은 정보를 보려면 위키를 확인하세요. 여기를 클릭하세요.  \n사용자 정의 테마를 추가하는 방법에 대한 자세한 내용은 위키를 참조하세요. 여기를 클릭하세요.",
+        "dxvk": "DXVK는 DirectX 9, 10 및 11 게임을 위한 Vulkan 기반의 변환 계층입니다. 이를 활성화하면 호환성이 향상될 수 있지만, 특히 오래된 DirectX 게임에서 문제가 발생할 수 있습니다.",
+        "esync": "Esync는 CPU 집약적인 게임에서 wineserver의 오버헤드를 줄이는 것을 지향합니다. 활성화하면 성능이 향상될 수 있습니다.",
+        "fsync": "Fsync는 CPU 집약적인 게임에서 wineserver의 오버헤드를 줄이는 것을 지향합니다. 활성화하면 지원되는 리눅스 커널에서 성능이 향상될 수 있습니다.",
         "game_language": {
-            "fallback": "Leave blank to use HyperPlay's language.",
-            "in_game_config": "Not all games support this configuration, some have in-game language setting.",
-            "valid_codes": "Valid language codes are game-dependant."
+            "fallback": "하이퍼플레이의 언어를 사용하려면 빈칸으로 두세요.",
+            "in_game_config": "모든 게임이 이 구성을 지원하는 것은 아니며, 일부 게임은 게임 내 언어 설정이 있습니다.  \n모든 게임이 이 설정을 지원하는 것은 아니며, 일부 게임은 게임 내에서 언어를 설정할 수 있습니다.  \n모든 게임이 이 구성을 지원하지 않으며, 일부는 게임 내 언어 설정 기능이 있습니다.",
+            "valid_codes": "유효한 언어 코드는 게임에 따라 다릅니다.  \n유효한 언어 코드는 게임에 의존합니다.  \n게임에 따라 유효한 언어 코드가 다릅니다."
         },
-        "gamemode": "Feral GameMode applies automatic and temporary tweaks to the system when running games. Enabling may improve performance.",
-        "general": "Epic Games Launcher가 다른 곳에 설치되어 있고 게임을 가져와서 다시 다운로드하지 않으려면 Epic Games Launcher와 동기화 하십시오.",
-        "mangohud": "MangoHUD is an overlay that displays and monitors FPS, temperatures, CPU/GPU load and other system resources.",
+        "gamemode": "페럴 게임 모드는 게임을 실행할 때 시스템에 자동으로 일시적인 조정을 적용합니다. 이를 활성화하면 성능이 향상될 수 있습니다.",
+        "general": "다른 곳에 Epic Games Launcher가 정상적으로 설치되어 있고 게임을 가져와서 다시 다운로드하지 않으려면 EGL과 동기화하세요.  \n다른 위치에 Epic Games Launcher가 설치되어 있고 게임을 가져와서 다시 다운로드하는 것을 피하고 싶다면 EGL과 동기화하십시오.  \nEpic Games Launcher가 다른 곳에 설치되어 있고 게임을 가져와서 중복 다운로드를 피하고 싶다면 EGL과 동기화하세요.",
+        "mangohud": "MangoHUD는 FPS, 온도, CPU/GPU 부하 및 기타 시스템 리소스를 표시하고 모니터링하는 오버레이입니다.  \nMangoHUD는 FPS, 온도, CPU/GPU 부하와 같은 시스템 리소스를 표시하고 감시하는 오버레이입니다.  \nMangoHUD는 FPS, 온도, CPU/GPU 사용량 및 기타 시스템 자원을 보여주고 모니터링하는 오버레이입니다.",
         "other": {
-            "part4": "다음을 사용 ",
-            "part5": "게임 인수",
-            "part6": " 시작 명령 후에 실행됩니다, 다음 예시와 같습니다: ",
-            "part7": " 일부 게임 등에서 런처를 건너 뜁니다."
+            "part4": "==WEBLATE_PART==다음을 사용하십시오.==WEBLATE_PART==다음을 활용하세요.==WEBLATE_PART==다음을 이용해 보세요. ",
+            "part5": "게임 인수값",
+            "part6": " 시작 명령 후에 호출되는 예시입니다: ",
+            "part7": " 일부 게임에서 런처를 건너뛰게 합니다."
         },
-        "preferSystemLibs": "Custom Wine versions (Wine-GE, Wine-Lutris) are shipped with their library dependencies. By enabling this option, these shipped libraries will be ignored and Wine will load system libraries instead. Warning! Issues may occur if dependencies are not met.",
-        "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
+        "preferSystemLibs": "사용자 정의 Wine 버전(Wine-GE, Wine-Lutris)은 라이브러리 의존성과 함께 배포됩니다. 이 옵션을 활성화하면 배포된 라이브러리가 무시되고 Wine은 시스템 라이브러리를 대신 로드합니다. 경고! 의존성이 충족되지 않으면 문제가 발생할 수 있습니다.",
+        "primerun": "멀티 GPU 시스템에서 게임을 렌더링하기 위해 전용 그래픽 카드를 사용하세요. 헤드리스 GPU를 사용하여 렌더링하는 게이밍 노트북이나 데스크탑에서만 필요합니다 (NVIDIA Optimus, AMD CrossFire).  \n멀티 GPU 시스템에서 게임을 렌더링하려면 전용 그래픽 카드를 사용해야 합니다. 헤드리스 GPU로 렌더링하는 게이밍 노트북이나 데스크탑에서만 필요합니다 (NVIDIA Optimus, AMD CrossFire).  \n게임을 멀티 GPU 시스템에서 렌더링하기 위해 전용 그래픽 카드를 사용하세요. 헤드리스 GPU로 렌더링하는 게이밍 노트북이나 데스크탑에서만 필요합니다 (NVIDIA Optimus, AMD CrossFire).",
         "steam_path": {
-            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "이 경로는 HyperPlay가 Steam에 비-Steam 게임을 추가하기 위해 Steam이 사용하는 Proton의 버전을 결정할 수 있게 해줍니다.  \n이 경로를 통해 HyperPlay는 비-Steam 게임을 Steam에 추가하기 위해 Steam이 사용하는 Proton의 버전을 확인할 수 있습니다.  \n이 경로는 HyperPlay가 비-Steam 게임을 Steam에 추가할 때 Steam이 사용하는 Proton의 버전을 식별할 수 있도록 합니다."
         },
-        "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
+        "steamruntime": "Steam에서 제공하는 커스텀 라이브러리로, Linux와 Windows (Proton) 게임을 실행하는 데 도움을 줍니다. 활성화하면 호환성이 향상될 수 있습니다.",
         "sync": {
-            "part1": "HyperPlay은 올바른 저장 폴더를 찾으려고 시도하며 대부분의 경우에 작동합니다. 폴더가 잘못된 경우 재정의 상자를 사용하여 변경하세요.",
-            "part2": "Wine 또는 Proton의 접두사 폴더를 변경하면 Proton은 다른 접두사(/pfx)와 사용자 이름(steamuser)을 사용하므로 경로를 다시 확인해야 합니다. 따라서 현재 경로를 지우고 동기화 설정 페이지에서 나갔다 돌아오면 HyperPlay이 올바른 접두사로 폴더를 다시 찾을 수 있습니다.",
-            "part3": "수동 동기화: 다운로드를 선택하여 클라우드에 저장된 게임 세이브을 다운로드합니다. 로컬 항목을 클라우드에 업로드하려면 업로드를 선택합니다. 강제 다운로드 및 강제 업로드는 로컬 또는 클라우드에 있는 버전을 무시합니다.",
-            "part4": "세이브 동기화는 게임을 시작하거나 종료할 때 마다 자동으로 동기화 합니다."
+            "part1": "HyperPlay는 올바른 저장 폴더를 추정하려고 하며, 대부분의 경우에 성공적으로 작동합니다. 폴더가 잘못된 경우 재정의 옵션을 사용하여 수정하세요.",
+            "part2": "Wine 또는 Proton의 접두사 폴더를 변경할 경우, Proton은 다른 접두사(/pfx)와 사용자 이름(steamuser)을 사용하므로 경로를 다시 확인해야 합니다. 따라서 현재 경로를 지우고 동기화 설정 페이지에서 나갔다가 다시 들어오면 HyperPlay가 올바른 접두사로 폴더를 다시 추정할 수 있습니다.",
+            "part3": "수동 동기화: 클라우드에 저장된 게임 세이브를 다운로드하려면 '다운로드'를 선택하고, 로컬 세이브를 클라우드에 업로드하려면 '업로드'를 선택하세요. 강제 다운로드와 강제 업로드는 로컬 또는 클라우드의 버전을 무시합니다.",
+            "part4": "게임을 시작할 때와 종료할 때 세이브를 자동으로 동기화합니다."
         },
-        "vkd3d": "VKD3D is a Vulkan-based translational layer for DirectX 12 games. Enabling may improve compatibility significantly. Has no effect on older DirectX games.",
+        "vkd3d": "VKD3D는 DirectX 12 게임을 위한 Vulkan 기반의 변환 계층입니다. 이를 활성화하면 호환성이 크게 향상될 수 있습니다. 이전 DirectX 게임에는 영향을 미치지 않습니다.",
         "wine": {
-            "part1": "Heroric은 다음 폴더에서 Wine, Proton, 그리고 CrossOver 의 버전을 검색합니다:",
-            "part2": "다른 경로의 경우에는, 이 폴더 중 하나에 심볼릭 링크를 사용하세요"
+            "part1": "HyperPlay는 다음 폴더에서 Wine, Proton 및 CrossOver의 버전을 검색합니다:  \nHyperPlay는 다음 폴더에서 Wine, Proton과 CrossOver의 버전을 찾습니다:  \nHyperPlay는 다음 폴더에서 Wine, Proton, CrossOver의 버전을 탐색합니다:",
+            "part2": "다른 경로에서는 이 폴더 중 하나에 심볼릭 링크를 생성하세요"
         },
-        "msync": "Msync는 CPU 집중적인 게임에서 wineserver overhead를 감소시키는 것을 돕습니다. Enabling은 여러 게임에서 성능을 향상시킬 수 있습니다.",
-        "disable_logs": "이 체크박스를 토글하여 로그파일의 대부분을 비활성화합니다. (신용 정보는 항상 로그입니다). 모든 문제를 보고하기 전에이 설정을 해제해야합니다.",
-        "dxvkfpslimit": "DXVK 게임의 프레임 속도 캡 설정",
-        "dxvknvapi": "DXVK-NVAPI는 DXVK와 리눅스 네이티브 NVAPI의 상단에 내장된 NVAPI의 구현으로 Nvidia GPU에서 DLSS의 사용을 허용합니다."
+        "msync": "Msync는 CPU 집약적인 게임에서 wineserver의 오버헤드를 줄이는 것을 목표로 하고 있습니다. 이를 활성화하면 여러 게임에서 성능이 향상될 수 있습니다.",
+        "disable_logs": "이 체크박스를 ON으로 설정하면 로그 파일에 대한 대부분의 기록이 비활성화됩니다(중요한 정보는 항상 기록됩니다). 문제를 보고하기 전에 이 설정을 OFF로 변경해야 합니다.",
+        "dxvkfpslimit": "DXVK 게임의 프레임 속도 상한선 설정",
+        "dxvknvapi": "DXVK-NVAPI는 DXVK와 리눅스 네이티브 NVAPI를 기반으로 하여 Nvidia GPU에서 DLSS를 사용할 수 있게 해주는 NVAPI의 구현입니다."
     },
     "info": {
         "hyperplay": {
@@ -314,159 +314,159 @@
             "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Update Available!",
             "stable": "Stable",
-            "version": "HyperPlay Version"
+            "version": "하이퍼플레이 버전 정보"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder (click to cancel)"
+            "searching": "올바른 저장 폴더를 감지하는 중입니다 (취소하려면 클릭하세요)  \n올바른 저장 폴더를 찾으려는 중입니다 (취소하려면 클릭하세요)  \n정확한 저장 폴더를 탐색 중입니다 (취소하려면 클릭하세요)"
         },
-        "settings": "설정은 자동으로 저장됩니다",
-        "version": "Wine Version"
+        "settings": "설정이 자동으로 보존됩니다",
+        "version": "와인 버전 정보"
     },
     "infobox": {
-        "help": "도움말",
-        "requirements": "시스템 요구 사양",
-        "warning": "Warning",
-        "wine-path": "Wine Path",
+        "help": "도움 필요",
+        "requirements": "시스템 필수 사양",
+        "warning": "알림",
+        "wine-path": "와인 경로",
         "wine-prefix": {
-            "title": "Wine Prefix"
+            "title": "와인 접두사"
         },
         "wine-repfix": {
-            "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
+            "message": "Wine은 Windows 애플리케이션을 캡슐화하기 위해 WINEPREFIX라는 개념을 사용합니다. 이 프리픽스는 Wine 설정 파일과 Windows OS의 주요 디스크인 C:의 파일 구조를 복제한 것입니다. 이 C: 드라이브의 복제본에는 게임 저장 파일과 winetricks를 통해 설치된 의존성이 저장됩니다."
         },
-        "wine-path-invalid": "Wine Path는 유효하지 않습니다. 다른 것을 선택하십시오.",
-        "wine-path-none-found": "와인 버전이 발견되지 않았습니다, 호환성 관리자에서 하나를 다운로드"
+        "wine-path-invalid": "Wine 경로가 유효하지 않습니다. 다른 경로를 선택해 주세요.  \nWine 경로가 잘못되었습니다. 다른 경로를 선택하시기 바랍니다.  \nWine 경로가 올바르지 않습니다. 다른 경로를 선택해 주세요.",
+        "wine-path-none-found": "와인 버전이 발견되지 않았습니다. 호환성 관리자에서 다운로드하세요.  \n와인 버전이 없습니다. 호환성 관리자에서 다운로드할 수 있습니다.  \n와인 버전을 찾을 수 없습니다. 호환성 관리자에서 다운로드하십시오."
     },
     "install": {
-        "path": "설치 경로 선택"
+        "path": "설치 위치 선택"
     },
     "library": {
-        "label": "Library",
-        "refresh": "새로고침",
+        "label": "자료실",
+        "refresh": "새로 업데이트",
         "sortAscending": "오름차순 정렬",
-        "sortByStatus": "상태별 정렬",
+        "sortByStatus": "상태 기준으로 정렬",
         "sortDescending": "내림차순 정렬",
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
         },
-        "alphabeticalAZ": "알파벳 A-Z",
-        "alphabeticalZA": "알파벳 Z-A"
+        "alphabeticalAZ": "A-Z 알파벳 순서",
+        "alphabeticalZA": "알파벳 Z에서 A까지  \n알파벳 역순 Z-A  \nZ-A 순서의 알파벳"
     },
     "loading": {
-        "default": "로딩 중",
-        "website": "웹사이트 로드 중"
+        "default": "로딩 중입니다  \n로딩 중이에요  \n로딩 중입니다...",
+        "website": "웹사이트를 로드하고 있습니다"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "alternative_method": "다른 로그인 방법",
+        "epic": "에픽 게임즈 계정 로그인",
+        "gog": "GOG에 로그인",
+        "message": "당신의 플랫폼으로 로그인하세요. 여러 플랫폼에 동시에 로그인할 수 있습니다.",
         "amazon": "아마존 로그인",
-        "old-mac": "MacOS 버전은 {{version}}입니다. macOS 12 이상이 로그인해야 합니다."
+        "old-mac": "귀하의 macOS 버전은 {{version}}입니다. 로그인하려면 macOS 12 이상이 필요합니다.  \n귀하의 macOS 버전은 {{version}}입니다. 로그인하려면 macOS 12 이상이 요구됩니다.  \n현재 macOS 버전은 {{version}}입니다. 로그인하려면 macOS 12 이상이 필요합니다."
     },
     "message": {
-        "sync": "동기화 완료",
-        "unsync": "동기화 해제 완료"
+        "sync": "동기화가 성공적으로 완료되었습니다",
+        "unsync": "동기화 해제가 완료되었습니다"
     },
     "notify": {
         "error": {
-            "move": "게임 이동 중 오류 발생",
-            "reparing": "복구 중 오류 발생"
+            "move": "게임 이동 시 오류가 발생했습니다.",
+            "reparing": "복구 작업 중 오류"
         },
         "finished": {
             "add": {
                 "steam": {
-                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
-                    "title": "Added to Steam"
+                    "corrupt": "{{game}}를 모든 발견된 Steam 사용자에게 추가할 수 없습니다. 더 많은 정보는 로그를 참조하세요. 변경 사항을 적용하려면 Steam을 재시작해야 합니다.",
+                    "success": "{{game}}가 Steam에 성공적으로 추가되었습니다. 변경 사항이 적용되려면 Steam을 재시작해야 합니다.",
+                    "title": "스팀에 포함됨"
                 }
             },
             "remove": {
                 "steam": {
-                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
-                    "title": "Removed from Steam"
+                    "corrupt": "{{game}}를 발견된 모든 Steam 사용자에서 제거할 수 없습니다. 더 많은 정보는 로그를 확인하세요. 변경 사항을 적용하려면 Steam을 재시작해야 합니다.",
+                    "success": "{{game}}가 Steam에서 성공적으로 삭제되었습니다. 변경 사항을 적용하려면 Steam을 다시 시작해야 합니다.",
+                    "title": "스팀에서 퇴출됨"
                 }
             },
-            "reparing": "복구 완료"
+            "reparing": "수리 완료됨"
         },
         "install": {
             "canceled": "설치 취소됨",
-            "error": "설치 실패",
-            "finished": "설치 완료됨",
-            "imported": "게임을 가져왔습니다",
-            "startInstall": "설치 시작됨",
-            "paused": "설치 Paused",
-            "stopped": "설치 중지"
+            "error": "설치 중 오류가 발생했습니다",
+            "finished": "설치 완료",
+            "imported": "게임이 불러와졌습니다",
+            "startInstall": "설치가 시작되었습니다.",
+            "paused": "설치가 멈췄습니다",
+            "stopped": "설치가 중단되었습니다."
         },
-        "moved": "이동 완료됨",
-        "moving": "Moving Game",
+        "moved": "이동이 완료되었습니다",
+        "moving": "이동하는 게임",
         "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
-            "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
+            "error": "업스트림에서 릴리스를 가져올 수 없습니다. Github API 제한이 원인일 수 있습니다! 나중에 다시 시도해 주세요."
         },
-        "uninstalled": "설치 제거됨",
+        "uninstalled": "삭제됨",
         "update": {
             "canceled": "업데이트 취소됨",
-            "finished": "업데이트 완료",
-            "started": "업데이트 시작됨",
-            "paused": "업데이트 Paused",
-            "stopped": "업데이트"
+            "finished": "업데이트가 성공적으로 완료되었습니다",
+            "started": "업데이트 프로세스가 시작되었습니다.",
+            "paused": "업데이트가 멈췄습니다",
+            "stopped": "업데이트가 중지되었습니다."
         }
     },
     "offline-message": {
-        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
-        "ignore": "Ignore",
-        "offline": "Offline",
-        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
-        "retrying": "Retrying"
+        "hint": "연결성을 확인하고 있습니다: {{newline}}github.com, {{newline}}gog.com, {{newline}}store.epicgames.com과 {{newline}}cloudflare-dns.com에 대해 확인 중입니다.",
+        "ignore": "무시됨",
+        "offline": "오프라인 모드",
+        "offline-retry-in": "오프라인입니다. {{seconds}}초 후에 다시 시도합니다.  \n오프라인 상태입니다. {{seconds}}초 후에 재시도합니다.  \n오프라인입니다. {{seconds}}초 후에 다시 연결을 시도합니다.",
+        "retrying": "재시도하고 있습니다"
     },
-    "Open": "열기",
+    "Open": "열림",
     "options": {
         "advanced": {
-            "key": "Variable Name",
-            "placeHolderKey": "NAME",
-            "placeHolderValue": "E.g.: Path/To/ExtraFiles",
-            "title": "Environment Variables",
-            "value": "Value"
+            "key": "변수 타이틀",
+            "placeHolderKey": "호칭",
+            "placeHolderValue": "예: 경로/추가 파일",
+            "title": "환경 설정 변수",
+            "value": "수치"
         },
         "env_variables": {
             "error": {
-                "empty_key": "Variable names can't be empty",
-                "equal_sign_in_key": "Variable names can't contain the \"=\" sign",
-                "space_in_key": "Variable names can't contain spaces"
+                "empty_key": "변수 이름은 빈 값이 될 수 없습니다",
+                "equal_sign_in_key": "변수 이름에는 \"=\" 기호를 포함할 수 없습니다.  \n변수 이름에 \"=\" 기호를 사용할 수 없습니다.  \n변수 이름은 \"=\" 기호를 포함할 수 없습니다.",
+                "space_in_key": "변수 이름에 공백이 들어갈 수 없습니다"
             },
-            "example": "Do NOT include the \"=\" sign, e.g: for a setting like \"MY_FLAG=123\", set MY_FLAG in NAME and 123 in VALUE.",
-            "info": "Set environment variables to append to the command."
+            "example": "\"이퀄 사인(=)을 포함하지 마세요. 예를 들어 'MY_FLAG=123'와 같은 설정의 경우, NAME에 MY_FLAG를, VALUE에 123을 설정하세요.\"  \n\"이퀄 기호(=)를 포함하지 마십시오. 예를 들어 'MY_FLAG=123'과 같은 설정에서는 NAME에 MY_FLAG를, VALUE에 123을 입력하세요.\"  \n\"이퀄 기호(=)를 포함하지 않도록 하세요. 예를 들어 'MY_FLAG=123' 같은 설정에서는 NAME에 MY_FLAG를, VALUE에 123을 설정하세요.\"",
+            "info": "명령에 추가할 환경 변수를 설정합니다.  \n명령에 추가하기 위해 환경 변수를 설정합니다.  \n명령에 덧붙일 환경 변수를 설정합니다."
         },
         "gameargs": {
-            "placeholder": "여기에 런처 인자를 넣으세요",
-            "title": "게임 인자 (명령어 다음에 실행됨):"
+            "placeholder": "여기에 런처 옵션을 입력하세요",
+            "title": "게임 인수 (명령어 실행 후):  \n게임 인자 (명령어 실행 후):  \n게임 인자 (명령어 후에 실행됨):"
         },
-        "quote-args-with-spaces": "Warning: Make sure to quote args with spaces! E.g.: \"path/with spaces/\"",
+        "quote-args-with-spaces": "경고: 공백이 있는 인자는 반드시 따옴표로 묶어야 합니다! 예: \"path/with spaces/\"  \n경고: 공백이 포함된 인자는 반드시 따옴표로 감싸야 합니다! 예: \"path/with spaces/\"  \n경고: 공백이 있는 인수를 따옴표로 묶는 것을 잊지 마세요! 예: \"path/with spaces/\"",
         "wrapper": {
-            "args": "Arguments",
-            "arguments_example": "Arguments example: --arg; --extra-file=\"file-path/ with/spaces\"",
-            "exe": "Wrapper",
-            "placeHolderKey": "New Wrapper",
-            "placeHolderValue": "Wrapper Arguments",
-            "title": "Wrapper command:"
+            "args": "논거",
+            "arguments_example": "인수 예제: --arg; --extra-file=\"파일 경로/여러 공백 포함\"",
+            "exe": "감싸는 것",
+            "placeHolderKey": "새 래퍼",
+            "placeHolderValue": "래퍼 아규먼트",
+            "title": "포장 명령:"
         }
     },
     "other": {
-        "gogdl-version": "GOGDL 버전: ",
-        "legendary-version": "Legendary 버전: ",
-        "weblate": "Heroric 번역을 도와주세요.",
+        "gogdl-version": "GOGDL 버전 정보: ",
+        "legendary-version": "전설의 버전: ",
+        "weblate": "하이퍼플레이 번역을 도와주세요.  \n하이퍼플레이를 번역해 주세요.  \n하이퍼플레이 번역에 도움을 주세요.",
         "nile-version": "나일 버전: "
     },
-    "Other": "Other",
+    "Other": "추가 사항",
     "placeholder": {
-        "alt-gogdl-bin": "내장된 GOGDL 바이너리 파일 사용...",
-        "alt-legendary-bin": "내장된 Legendary 바이너리 파일 사용...",
-        "custom_themes_path": "Select the path to look for custom CSS files",
-        "dxvkfpsvalue": "Positive integer value (e.g. 30, 60, ...)",
-        "egs-prefix": "Epic Games Store 설치 경로",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
+        "alt-gogdl-bin": "내장 GOGDL 바이너리 사용 중...  \n내장된 GOGDL 실행 파일을 사용하고 있습니다...  \nGOGDL 바이너리를 내장하여 사용합니다...",
+        "alt-legendary-bin": "내장된 Legendary 이진 파일 사용 중...  \n내장된 Legendary 바이너리 사용...  \n내장된 Legendary 실행 파일을 사용하고 있습니다...",
+        "custom_themes_path": "사용자 정의 CSS 파일을 찾기 위한 경로를 선택하십시오",
+        "dxvkfpsvalue": "양의 정수 값(예: 30, 60, ...)",
+        "egs-prefix": "EGS 설치 경로",
+        "prefered_language": "2자리 코드 (예: \"en\" 또는 \"fr\")",
         "alt-nile-bin": "내장 Nile 바이너리 사용..."
     },
     "platforms": {
@@ -474,667 +474,669 @@
         "mac": "Mac",
         "win": "Windows"
     },
-    "please-wait": "Please wait...",
-    "progress": "Progress",
+    "please-wait": "기다려 주시기 바랍니다...",
+    "progress": "진행 중",
     "queue": {
         "label": {
-            "canceled": "Canceled",
-            "clear": "Clear List",
+            "canceled": "취소 처리됨",
+            "clear": "목록 초기화",
             "downloading": "Downloading",
             "empty": {
-                "finished": "다운로드",
-                "queue": "Nothing to download"
+                "finished": "아무것도 다운로드되지 않음",
+                "queue": "다운로드할 내용이 없습니다"
             },
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads",
-            "pause": "다운로드 일시정지",
-            "resume": "계속 다운로드"
+            "remove": "다운로드 항목에서 제거하기",
+            "pause": "다운로드 일시 중지",
+            "resume": "다운로드를 계속합니다"
         }
     },
-    "Recent": "최근 플레이한 게임",
-    "search": "게임 검색",
+    "Recent": "최근에 즐긴 게임",
+    "search": "게임 검색하기",
     "setting": {
-        "adddesktopshortcuts": "데스크톱 바로 가기 자동 추가",
-        "addgamestostartmenu": "시작 메뉴에 게임 자동 추가",
-        "addgamestosteam": "Add games to Steam automatically",
-        "alt-gogdl-bin": "대신 사용할 GOGDL 바이너리 파일 선택",
-        "alt-legendary-bin": "대신 사용할 Legendary 바이너리 파일 선택",
-        "autodxvk": "접두사에서 DXVK 자동 설치/업데이트",
-        "autosync": "세이브 자동 동기화",
-        "autovkd3d": "접두사에서 VKD3D 자동 설치/업데이트",
-        "change-target-exe": "대체하여 실행할 EXE 선택",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover/Wine Version",
-        "custom_themes_path": "Custom Themes Path",
-        "customWineProton": "커스텀 Wine/Proton 경로",
-        "darktray": "다크 트레이 아이콘 사용",
-        "default-install-path": "기본 설치 경로",
-        "default-steam-path": "Default Steam path",
-        "defaultWinePrefix": "새로운 Wine 접두사를 위한 폴더 설정",
-        "disable_controller": "컨트롤러를 이용한 HyperPlay 탐색 비활성화",
-        "discordRPC": "Discord Rich Presence 활성화",
-        "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
-        "egs-sync": "설치된 Epic Games와 동기화",
-        "enableFSRHack": "FSR 활성화 (지원하는 Wine 버전을 사용해야 합니다)",
+        "adddesktopshortcuts": "데스크톱에 바로 가기를 자동으로 생성합니다.",
+        "addgamestostartmenu": "게임을 시작 메뉴에 자동으로 넣기",
+        "addgamestosteam": "Steam에 게임을 자동으로 추가하기",
+        "alt-gogdl-bin": "사용할 GOGDL 대체 바이너리 선택",
+        "alt-legendary-bin": "대신 사용할 전설적인 이진 파일 선택",
+        "autodxvk": "접두사에서 DXVK의 자동 설치 및 업데이트",
+        "autosync": "세이브 자동 동기화 기능",
+        "autovkd3d": "접두사에서 VKD3D를 자동으로 설치/업데이트합니다.  \n접두사에서 VKD3D를 자동 설치 및 업데이트합니다.  \n접두사에서 VKD3D의 자동 설치 및 업데이트.",
+        "change-target-exe": "대체 EXE를 선택하여 실행합니다",
+        "checkForUpdatesOnStartup": "HyperPlay 업데이트를 시작 시 확인",
+        "crossover-version": "크로스오버/와인 판",
+        "custom_themes_path": "맞춤형 테마 경로",
+        "customWineProton": "개인화된 Wine/Proton 경로",
+        "darktray": "다크 트레이 아이콘 설정",
+        "default-install-path": "기본 설치 경로 설정",
+        "default-steam-path": "기본 Steam 폴더",
+        "defaultWinePrefix": "새로운 Wine 접두사를 위한 폴더 만들기",
+        "disable_controller": "컨트롤러를 사용하여 Hyperplay 탐색 비활성화",
+        "discordRPC": "Discord 리치 프레즌스 기능 켜기",
+        "download-no-https": "HTTPS 없이 게임을 다운로드하는 것이 가능합니다 (CDN에 유용, 예: LanCache)",
+        "egs-sync": "설치된 Epic Games와 동기화하기",
+        "enableFSRHack": "FSR 해제 (Wine 버전이 이를 지원해야 합니다)  \nFSR 기능 활성화 (Wine 버전이 필요합니다)  \nFSR 사용 설정 (지원하는 Wine 버전이 필요합니다)",
         "eosOverlay": {
-            "cancelInstall": "Cancel",
-            "checkForUpdates": "Check for updates",
-            "checkingForUpdates": "Checking for updates...",
-            "currentVersion": "Current Version: {{version}}",
-            "disable": "Disable",
-            "enable": "Enable",
-            "install": "Install",
-            "installed": "The Epic Overlay is installed",
-            "installing": "The Epic Overlay is being installed...",
-            "latestVersion": "Latest Version: {{version}}",
-            "notInstalled": "The Epic Overlay is not installed",
-            "notInstalledMsg": "The Epic Overlay is not installed. Do you want to install it now?",
-            "notInstalledTitle": "Overlay not installed",
-            "remove": "Uninstall",
-            "removeConfirm": "Are you sure you want to uninstall the Epic Overlay?",
-            "removeConfirmTitle": "Confirm overlay removal",
-            "updateNow": "Update",
-            "updating": "Updating..."
+            "cancelInstall": "무효화",
+            "checkForUpdates": "업데이트를 점검하세요",
+            "checkingForUpdates": "업데이트를 점검하고 있습니다...",
+            "currentVersion": "현재 버전: {{version}}입니다.",
+            "disable": "끄기",
+            "enable": "켜기",
+            "install": "설치합니다",
+            "installed": "에픽 오버레이가 설치되었습니다.  \n에픽 오버레이가 설치되었습니다.  \n에픽 오버레이가 설치되었습니다.",
+            "installing": "에픽 오버레이 설치가 진행되고 있습니다...",
+            "latestVersion": "최신 버전: {{version}}  \n최신 버전: {{version}}  \n최신 버전: {{version}}입니다.",
+            "notInstalled": "에픽 오버레이가 설치되어 있지 않음",
+            "notInstalledMsg": "에픽 오버레이가 설치되어 있지 않습니다. 지금 설치하시겠습니까?  \n에픽 오버레이가 설치되지 않았습니다. 지금 설치하시겠습니까?  \n에픽 오버레이가 없습니다. 지금 설치하시겠습니까?",
+            "notInstalledTitle": "오버레이가 설치되지 않았어요",
+            "remove": "언인스톨",
+            "removeConfirm": "Epic Overlay를 언인스톨 하시겠습니까?",
+            "removeConfirmTitle": "오버레이를 제거할 것인지 확인",
+            "updateNow": "수정사항",
+            "updating": "업데이트를 하고 있습니다..."
         },
-        "esync": "Esync 활성화",
-        "exit-to-tray": "시스템 트레이로 나가기",
-        "FsrSharpnessStrenght": "FSR 선명도 강도",
-        "fsync": "Fsync 활성화",
-        "gamemode": "GameMode 사용 (Feral Game Mode가 설치되어 있어야 합니다)",
-        "language": "앱 언어 선택",
+        "esync": "Esync를 활성화하세요.",
+        "exit-to-tray": "시스템 트레이로 백그라운드 실행",
+        "FsrSharpnessStrenght": "FSR 선명도 수준",
+        "fsync": "Fsync 켜기",
+        "gamemode": "GameMode 사용 (Feral Game Mode가 설치되어 있어야 합니다)  \nGameMode를 사용하세요 (Feral Game Mode가 설치되어 있어야 합니다)  \nGameMode를 활성화하려면 Feral Game Mode가 설치되어 있어야 합니다.",
+        "language": "언어를 고르세요",
         "library_top_option": {
-            "disabled": "비활성화",
-            "favourites": "Favourite Games",
-            "recently_played": "최근 플레이 한 게임",
-            "recently_played_installed": "Recently Played Games (Only Installed)"
+            "disabled": "비활성화됨",
+            "favourites": "가장 좋아하는 게임",
+            "recently_played": "최근에 한 게임",
+            "recently_played_installed": "최근에 플레이한 게임 (오직 설치된 게임)"
         },
-        "library_top_section": "라이브러리 상단 섹션",
+        "library_top_section": "라이브러리 상단 부분",
         "log": {
-            "copy-to-clipboard": "로그 내용을 클립보드에 복사",
+            "copy-to-clipboard": "로그 정보를 클립보드에 복사",
             "current-log": "현재 로그",
             "instructions": "If you encounter any issues while using HyperPlay, we have two designated areas to report your issues in our Discord Server. If you're a player, please report any problems by visiting the player-support-forum. If you are a game dev, please report any problems by visiting the dev-support-forum.{{newLine}} {{newLine}} To help us diagnose and fix the problem as quickly as possible, please provide as much information as possible, including a copy of your logs. Our support team will monitor both channels and do their best to respond to your issue as quickly as possible. Thank you for your patience and understanding while we work to resolve any problems you may encounter.{{newLine}}",
-            "instructions_title": "How to report a problem?",
+            "instructions_title": "문제를 보고하는 방법은 무엇인가요?  \n문제를 어떻게 신고하나요?  \n문제를 어떻게 보고하죠?",
             "last-log": "마지막 로그",
-            "no-file": "로그 파일을 찾을 수 없습니다",
-            "show-in-folder": "폴더에 있는 로그 파일 표시",
-            "instructions-part-01": "HyperPlay를 사용하는 동안 어떤 문제가 발생하면 Discord Server에서 문제를 보고할 수 있는 두 개의 지정된 영역이 있습니다. 플레이어가 있다면, 플레이어 지원-포럼을 방문해서 문제를 신고하십시오. 게임 개발자인 경우, dev-support-forum을 방문해서 문제를 신고하십시오.",
-            "instructions-part-02": "진단을 돕고 가능한 한 빨리 문제를 해결하기 위해 로그의 사본을 포함하여 가능한 한 많은 정보를 제공하십시오. 우리의 지원 팀은 둘 다 수로를 감시하고 가능한 빨리 당신의 문제점에 응답하기 위하여 최선을 다할 것입니다. 우리는 당신이 직면 할 수있는 모든 문제를 해결하는 동안 당신의 인내 및 이해에 감사드립니다.",
-            "join-hyperplay-discord": "우리의 Discord에 가입"
+            "no-file": "로그 파일을 찾을 수 없습니다.",
+            "show-in-folder": "폴더에 있는 로그 파일 확인",
+            "instructions-part-01": "HyperPlay를 이용하는 동안 문제가 생기면 Discord 서버에 문제를 보고할 수 있는 두 개의 지정된 구역이 있습니다. 플레이어라면 플레이어 지원 포럼을 통해 문제를 신고해 주세요. 게임 개발자라면 개발자 지원 포럼을 통해 문제를 신고해 주세요.",
+            "instructions-part-02": "문제를 신속하게 진단하고 해결하기 위해 로그의 복사본을 포함하여 가능한 한 많은 정보를 제공해 주시기 바랍니다. 저희 지원 팀은 두 채널을 지속적으로 모니터링하며 귀하의 문제에 최대한 빠르게 응답하기 위해 노력할 것입니다. 문제 해결을 위해 애쓰는 동안 인내와 이해에 감사드립니다.",
+            "join-hyperplay-discord": "Discord에 함께 하세요"
         },
-        "mangohud": "Mangohud 활성화 (Mangohud가 설치 되어있어야 함)",
+        "mangohud": "Mangohud 활성화 (Mangohud가 설치되어 있어야 합니다)  \nMangohud 사용 설정 (Mangohud가 설치되어 있어야 합니다)  \nMangohud 기능 활성화 (Mangohud가 설치되어 있어야 합니다)",
         "manualsync": {
-            "download": "다운로드",
-            "forcedownload": "강제 다운로드",
-            "forceupload": "강제 업로드",
-            "sync": "동기화",
-            "syncing": "동기화 중",
-            "title": "세이브 수동 동기화",
-            "upload": "업로드"
+            "download": "다운로드하기",
+            "forcedownload": "다운로드 강제 진행",
+            "forceupload": "업로드를 강제로 수행",
+            "sync": "동기화 진행",
+            "syncing": "동기화 상태입니다",
+            "title": "수동으로 세이브 동기화",
+            "upload": "업로드 진행"
         },
-        "maxRecentGames": "표시할 최근 플레이한 게임",
-        "maxworkers": "다운로드할 때 최대 워커 개수",
-        "minimize-on-launch": "게임 실행 후 HyperPlay 최소화",
-        "offlinemode": "게임 오프라인으로 실행",
-        "prefered_language": "Prefered Language (Language Code)",
-        "preferSystemLibs": "Prefer system libraries",
+        "maxRecentGames": "최근에 플레이한 게임을 표시합니다",
+        "maxworkers": "다운로드할 때의 최대 작업자 수",
+        "minimize-on-launch": "게임 시작 후 HyperPlay를 최소화하세요",
+        "offlinemode": "오프라인 모드로 게임 시작",
+        "prefered_language": "우선 언어 (언어 코드)",
+        "preferSystemLibs": "시스템 라이브러리를 우선시합니다",
         "primerun": {
             "confirmation": {
-                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
-                "title": "Only 1 GPU detected"
+                "message": "이 시스템에서 그래픽 카드가 하나만 감지되었습니다. 이 옵션은 헤드리스 GPU(예: 노트북)가 있는 다중 GPU 시스템을 위한 것입니다. 단일 GPU 시스템에서는 GPU가 자동으로 사용되며 이 옵션을 활성화하면 문제가 발생할 수 있습니다. 정말로 이 옵션을 활성화하시겠습니까?",
+                "title": "GPU가 1개만 인식되었습니다."
             },
-            "description": "외장 그래픽 카드 사용"
+            "description": "전용 그래픽 카드 활용"
         },
         "runexe": {
-            "message": "여기에 파일을 끌어다 놓기",
-            "title": "접두사에서 EXE 실행"
+            "message": "여기에 파일을 끌어다 놓으십시오",
+            "title": "EXE를 접두사에서 실행"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually (click to retry)",
-            "placeholder": "올바른 게임 저장 폴더 선택",
-            "warning": "Please check twice if the path is correct (click to retry)"
+            "not-found": "저장 폴더를 찾을 수 없습니다. 수동으로 선택해 주세요 (재시도를 위해 클릭)  \n저장 폴더를 찾을 수 없습니다. 수동으로 선택해 주시기 바랍니다 (재시도를 위해 클릭)  \n저장 폴더를 찾을 수 없습니다. 수동으로 선택해 주세요 (다시 시도하려면 클릭)",
+            "placeholder": "정확한 저장 파일 폴더 선택",
+            "warning": "경로가 올바른지 두 번 확인하세요 (재시도를 클릭하세요)  \n경로가 정확한지 두 번 확인해 주세요 (재시도를 클릭하세요)  \n경로가 맞는지 두 번 확인하시기 바랍니다 (클릭하여 다시 시도하세요)"
         },
-        "select_theme": "Select Theme",
-        "showfps": "FPS 표시 (DX9, 10 및 11)",
-        "start-in-tray": "최소화로 시작",
-        "steamruntime": "Steam 런타임 사용",
-        "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "Wine 설치 경로 폴더",
-        "wineversion": "Wine 버전",
-        "autoUpdateGames": "게임 자동 업데이트",
-        "ignoreGameUpdates": "게임 업데이트 무시",
-        "disable_logs": "로그 비활성화",
-        "addgamestoapplications": "응용 프로그램에 자동으로 게임 추가",
-        "showMetalOverlay": "통계 오버레이 표시",
+        "select_theme": "테마 고르기",
+        "showfps": "FPS 표시 (DX9, 10, 11)  \nFPS 표시 (DirectX 9, 10, 11)  \nFPS 표시 (DX9, DX10, DX11)",
+        "start-in-tray": "최소화하여 시작",
+        "steamruntime": "스팀 런타임 활용하기",
+        "winecrossoverbottle": "크로스오버 용기",
+        "wineprefix": "와인 프리픽스 경로",
+        "wineversion": "와인 버전 정보",
+        "autoUpdateGames": "게임을 자동으로 갱신",
+        "ignoreGameUpdates": "게임 업데이트를 고려하지 않음",
+        "disable_logs": "로그 기록 비활성화",
+        "addgamestoapplications": "응용 프로그램에 게임을 자동으로 삽입",
+        "showMetalOverlay": "통계 오버레이 활성화",
         "alt-nile-bin": "대체 Nile 바이너리 선택",
-        "autodxvknvapi": "Prefix에 자동 설치/업데이트 DXVK-NVAPI",
-        "autoLaunchHyperPlay": "자동차 출시 하이퍼 뚱 베어",
-        "dxvkfpslimit": "제한 FPS (DX9, 10 및 11)",
-        "steamId": "증기 ID",
-        "msync": "Esync 활성화"
+        "autodxvknvapi": "Prefix에 DXVK-NVAPI를 자동으로 설치/업데이트",
+        "autoLaunchHyperPlay": "하이퍼플레이 자동 시작",
+        "dxvkfpslimit": "FPS 제한 설정 (DX9, 10, 11)",
+        "steamId": "증기 아이디",
+        "msync": "Msync 사용 설정"
     },
     "settings": {
         "battlEyeRuntime": {
-            "installing": "Installing BattlEye Runtime...",
-            "name": "BattlEye AntiCheat Runtime"
+            "installing": "BattlEye 런타임을 설치하는 중입니다...",
+            "name": "BattlEye 안티치트 실행 모듈"
         },
-        "clear-cache": "HyperPlay 캐시 삭제",
-        "copiedToClipboard": "클립보드에 복사되었습니다!",
-        "copyToClipboard": "모든 설정을 클립보드에 복사",
-        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
+        "clear-cache": "HyperPlay 캐시 클리어",
+        "copiedToClipboard": "클립보드에 복사 완료!  \n클립보드에 복사되었습니다!  \n클립보드로 복사되었습니다!",
+        "copyToClipboard": "모든 설정을 클립보드로 복사",
+        "default_hint": "이 섹션의 변경 사항은 게임 설치 시 기본값으로만 적용됩니다. 이미 설치된 게임의 설정을 변경하려면 게임 페이지의 설정 버튼을 클릭하세요.",
         "eacRuntime": {
             "gameModeRequired": {
-                "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
-                "title": "GameMode required"
+                "message": "Flatpak에서 EAC 런타임이 작동하려면 GameMode가 필요합니다. 지금 활성화하시겠습니까?",
+                "title": "게임 모드가 필수입니다"
             },
-            "installing": "Installing EAC Runtime...",
-            "name": "EasyAntiCheat Runtime"
+            "installing": "EAC 런타임을 설치하는 중입니다...",
+            "name": "이지안티치트 실행 시간"
         },
         "gameMode": {
             "eacRuntimeEnabled": {
-                "message": "The EAC runtime is enabled, which won't function correctly without GameMode. Do you want to disable the EAC Runtime and GameMode?",
-                "title": "EAC runtime enabled"
+                "message": "EAC 런타임이 활성화되어 있으며, GameMode가 없으면 제대로 작동하지 않습니다. EAC 런타임과 GameMode를 비활성화하시겠습니까?",
+                "title": "EAC 런타임이 켜져 있습니다"
             }
         },
         "log": {
-            "long-log-hint": "로그 잘림, 마지막 1000줄이 표시됩니다!"
+            "long-log-hint": "로그가 잘렸습니다. 마지막 1000줄이 표시됩니다!  \n로그가 축소되었습니다. 마지막 1000줄이 나타납니다!  \n로그가 잘렸습니다. 마지막 1000줄이 보입니다!"
         },
         "navbar": {
-            "advanced": "Advanced",
+            "advanced": "첨단",
             "games_settings_defaults": "Game Defaults",
-            "general": "일반",
-            "log": "Log",
-            "other": "기타",
-            "sync": "세이브-동기화",
+            "general": "일반 정보",
+            "log": "로그 기록",
+            "other": "기타 사항",
+            "sync": "클라우드 저장소 동기화",
             "wineExt": "Wine Extensions",
-            "systemInformation": "시스템 정보",
-            "accounts": "장부"
+            "systemInformation": "시스템 관련 정보",
+            "accounts": "계정 목록"
         },
-        "open-config-file": "Open Config File",
-        "reset-hyperplay": "Reset HyperPlay",
+        "open-config-file": "구성 설정 파일 열기",
+        "reset-hyperplay": "하이퍼플레이 리셋",
         "saves": {
             "label": "Save Location:",
-            "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+            "warning": "클라우드 저장 기능은 베타 버전입니다. 동기화하기 전에 저장 파일을 백업해 주세요(문제가 발생할 경우를 대비하여).  \n클라우드 저장 기능이 베타 상태입니다. 동기화 전에 저장 파일을 백업해 주시기 바랍니다(문제가 생길 경우를 대비하여).  \n클라우드 저장 기능이 현재 베타 테스트 중입니다. 동기화하기 전에 저장 파일을 반드시 백업해 주세요(문제가 발생할 수 있으니)."
         },
         "systemInformation": {
             "gpuWithNumber": "GPU {{number}}:",
             "legendaryVersion": "전설: {{legendaryVersion}}",
-            "memory": "기억:",
-            "memoryStats": "{{percentUsed}} % 사용 ({{usedGib}} / {{totalGib}}",
-            "cpu": "CPU의:",
-            "cpuDescription": "{{numOfCores}}x {{modelName}}",
-            "gogdlVersion": "Gogdl : {{gogdlVersion}}",
+            "memory": "기억하기:  \n기억의 조각:  \n기억의 순간:",
+            "memoryStats": "{{percentUsed}} % 사용됨 ({{usedGib}} / {{totalGib}})  \n{{percentUsed}} % 사용 중 ({{usedGib}} / {{totalGib}})  \n{{percentUsed}} % 소모됨 ({{usedGib}} / {{totalGib}})",
+            "cpu": "CPU 유닛:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}  \n{{modelName}}의 {{numOfCores}}배  \n{{numOfCores}}개 코어의 {{modelName}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
             "gpuDriver": "드라이버: {{driverVersion}}",
-            "version": "번역: {{appVersion}}",
+            "version": "버전: {{appVersion}}  \n버전: {{appVersion}}  \n버전: {{appVersion}}",
             "osNameFlatpak": "{{osName}}",
-            "osVersion": "버전 {{versionNumber}}",
-            "showDetailed": "상세한 시스템 사양 보기",
-            "steamDeck": "증기 갑판",
-            "systemModel": "체계 모형:",
-            "gpu": "GPU:",
-            "copyToClipboard": "클립보드에 복사",
-            "os": "운영체제:"
+            "osVersion": "버전 {{versionNumber}}으로 업데이트되었습니다",
+            "showDetailed": "자세한 시스템 사양 확인",
+            "steamDeck": "증기 덱",
+            "systemModel": "시스템 모델:  \n시스템 유형:  \n시스템 구조:",
+            "gpu": "그래픽 카드:",
+            "copyToClipboard": "클립보드에 복사됨",
+            "os": "OS:"
         },
-        "reset-extension": "재설정 확장",
-        "gamesSettings": "게임 설정",
+        "reset-extension": "확장 리셋",
+        "gamesSettings": "게임 환경 설정",
         "wine": {
             "manager": {
-                "title": "Wine 관리자"
+                "title": "와인 관리 도구"
             }
         }
     },
-    "Settings": "설정",
+    "Settings": "설정 옵션",
     "sidebar": {
         "collapse": "Collapse sidebar",
         "uncollapse": "Uncollapse sidebar",
-        "downloadManager": "다운로드 Manager",
-        "store": "마켓",
-        "library": "도서관",
-        "achievements": "달성도"
+        "downloadManager": "다운로드 관리 도구",
+        "store": "판매점",
+        "library": "도서실",
+        "achievements": "업적 목록"
     },
     "status": {
-        "installing": "설치 중",
-        "logging": "로그인 중…",
-        "processing": "파일을 처리 중입니다 잠시만 기다려 주십시오",
+        "installing": "설치 작업 중",
+        "logging": "로그인하는 중입니다…  \n로그인 진행 중…  \n로그인 시도 중…",
+        "processing": "파일을 처리하고 있습니다. 잠시만 기다려 주세요.  \n파일을 처리하는 중입니다. 잠시만 기다려 주십시오.  \n파일을 처리하는 중입니다. 잠시만 기다려 주세요.",
         "preparing_login": "로그인 준비 중... "
     },
-    "store": "Epic Store",
+    "store": "에픽 마켓",
     "stores": "Stores",
     "title": {
-        "allGames": "모든 게임"
+        "allGames": "전체 게임"
     },
     "toolbox": {
         "settings": {
-            "default-wineprefix": "새로운 구성을 위한 기본 접두사 폴더 선택하기",
-            "wineprefix": "새로운 Wine 접두사를 위한 폴더 선택하기"
+            "default-wineprefix": "새로운 설정을 위한 기본 폴더 접두사 선택",
+            "wineprefix": "새로운 Wine 접두사를 위한 폴더를 선택하십시오"
         }
     },
     "tooltip": {
-        "addpath": "새 경로 추가",
-        "removepath": "경로 삭제"
+        "addpath": "경로 추가하기",
+        "removepath": "경로 삭제하기"
     },
     "tray": {
-        "about": "정보",
-        "quit": "종료",
-        "reload": "새로고침",
-        "show": "표시"
+        "about": "관련 정보",
+        "quit": "나가기",
+        "reload": "새로 불러오기",
+        "show": "드러내다"
     },
     "two_col_table": {
-        "save_hint": "Changes in this table are not saved automatically. Click the + button"
+        "save_hint": "이 표의 변경 사항은 자동으로 저장되지 않습니다. + 버튼을 클릭하세요.  \n이 표의 수정 내용은 자동으로 저장되지 않습니다. + 버튼을 클릭해 주세요.  \n이 테이블의 변경 사항은 자동으로 저장되지 않습니다. + 버튼을 눌러 주세요."
     },
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
-        "logging_out": "Logging out",
-        "logout": "로그아웃",
-        "logout_confirmation": "정말로 로그아웃 하시겠습니까?",
-        "manageaccounts": "계정 관리",
-        "quit": "종료",
-        "manageStore": "매장 찾기",
-        "logIn": "Log in"
+        "logging_out": "로그아웃 진행 중",
+        "logout": "로그아웃 진행",
+        "logout_confirmation": "정말 로그아웃하시겠습니까?",
+        "manageaccounts": "계정 관리하기",
+        "quit": "나가기",
+        "manageStore": "상점 운영",
+        "logIn": "로그인하기"
     },
     "webview": {
         "controls": {
-            "back": "돌아가기",
-            "forward": "앞으로",
-            "openInBrowser": "브라우저에서 열기",
-            "reload": "페이지 새로고침"
+            "back": "되돌아가기",
+            "forward": "앞으로 이동하세요",
+            "openInBrowser": "브라우저를 통해 열기",
+            "reload": "페이지를 새로 불러옵니다"
         }
     },
     "wine": {
-        "actions": "Action",
+        "actions": "작용",
         "manager": {
             "link": "Wine 관리자",
-            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Wine 관리자",
-            "unzipping": "압축 풀기"
+            "not-found": "와인 버전을 찾을 수 없습니다. 새로 고침 아이콘을 클릭하여 다시 시도하세요.",
+            "title": "호환성 레이어 ",
+            "unzipping": "압축을 푸는 중"
         },
-        "release": "Release Date",
-        "size": "Size"
+        "release": "출시 날짜",
+        "size": "규모"
     },
     "externalLink": {
-        "dontAskAgain": "다시 묻지 않음",
-        "warning": "외부 링크를 열려고 합니다."
+        "dontAskAgain": "다시 물어보지 마세요",
+        "warning": "외부 링크를 열 준비가 되었습니다.  \n외부 링크를 여는 중입니다.  \n외부 링크를 열 예정입니다."
     },
     "wiki_info": {
-        "not_found": "추가 정보를 찾을 수 없습니다."
+        "not_found": "추가적인 정보를 찾을 수 없습니다."
     },
     "dlc": {
-        "actions": "동작",
-        "installDlcs": "모든 DLC를 설치합니다",
-        "noDlcFound": "DLC를 찾을 수 없습니다.",
-        "size": "Size",
-        "title": "Title"
+        "actions": "액션",
+        "installDlcs": "모든 DLC를 설치합니다.",
+        "noDlcFound": "DLC를 찾을 수 없습니다.  \nDLC가 발견되지 않았습니다.  \nDLC가 없습니다.",
+        "size": "규모",
+        "title": "제목 표시"
     },
     "amazon": "아마존",
     "Amazon Games": "아마존 게임",
     "prime-gaming": "프라임 게이밍",
     "gameUpdateNotifications": {
         "body": {
-            "single": "{{gameName}}에 대한 업데이트가 있습니다.",
-            "multiple": "{{gameName}} 다른 게임은 업데이트 할 준비가되어 있습니다."
+            "single": "{{gameName}}의 업데이트가 준비되었습니다.  \n{{gameName}}에 대한 업데이트가 완료되었습니다.  \n{{gameName}}의 업데이트가 준비되어 있습니다.",
+            "multiple": "{{gameName}} 및 다른 게임들이 업데이트할 준비가 되었습니다.  \n{{gameName}}과 다른 게임들이 업데이트를 준비하고 있습니다.  \n{{gameName}}와 기타 게임들이 업데이트를 위해 준비 완료되었습니다."
         },
-        "title": "Game 업데이트 가능"
+        "title": "게임 업데이트를 이용할 수 있습니다"
     },
     "hyperplay": {
         "accesscodes": {
             "error": {
-                "validation": "액세스 코드는 잘못된"
+                "validation": "액세스 코드가 올바르지 않습니다"
             },
-            "requirescode": "이 게임 업데이트는 액세스 코드가 필요합니다.",
+            "requirescode": "이 게임 업데이트를 위해서는 액세스 코드가 필요합니다.  \n이 게임 업데이트를 하려면 액세스 코드가 필요합니다.  \n이 게임 업데이트를 진행하려면 액세스 코드가 필요합니다.",
             "success": {
-                "validation": "성공! 액세스 코드는 유효하다"
+                "validation": "성공! 접근 코드가 올바릅니다"
             }
         },
         "browserImport": {
-            "appId": "앱 Id",
-            "profile": "프로필"
+            "appId": "앱 식별자",
+            "profile": "프로필 설정"
         },
         "onboarding": {
             "analytics": {
-                "neverCollectPersonal": " 키, 주소, 균형, 해시, 또는 개인 정보 수집;",
-                "neverCollectIP": " 전체 IP 주소를 수집;",
-                "privacyPolicyHere": "개인정보 보호정책.",
-                "neverSellData": " 수익의 데이터 판매. 더 보기!",
-                "optOut": "항상 설정을 통해 옵트 아웃을 허용;",
-                "title": "HyperPlay를 개선하는 데 도움이됩니다!",
-                "body": "HyperPlay는 사용 데이터를 수집하고, 사용자가 애플리케이션과 상호 작용하는 방법을 더 잘 이해합니다. 이 정보는 앱을 사용하는 방법을 이해하고 HyperPlay를 더 잘 만들 수 있습니다.",
-                "privacyCaption": "이 데이터는 집계되고 일반 데이터 보호 규정 (EU) 2016/679의 목적으로 익명입니다. 우리의 개인 정보 보호 관행과 관련하여 더 많은 정보를 원하시면, please see our ",
-                "anonymized": "익명화 클릭 & 게임 상호 작용;",
-                "hyperplayWill": "하이퍼플레이는:"
+                "neverCollectPersonal": " 키, 주소, 잔액, 해시 또는 어떤 개인 정보도 수집합니다;",
+                "neverCollectIP": " 전체 IP 주소를 수집합니다;  \n전체 IP 주소를 모읍니다;  \n전체 IP 주소를 수집하세요;",
+                "privacyPolicyHere": "개인정보 보호 정책입니다.",
+                "neverSellData": " 데이터를 판매하여 이익을 얻으세요. 언제나!",
+                "optOut": "항상 설정에서 옵트 아웃을 선택할 수 있도록 허용;  \n항상 설정을 통해 옵트 아웃할 수 있게 해주세요;  \n항상 설정에서 옵트 아웃 옵션을 제공하세요;",
+                "title": "HyperPlay 향상을 위해 여러분의 도움이 필요합니다!",
+                "body": "HyperPlay는 사용자가 애플리케이션을 어떻게 사용하는지에 대한 데이터를 수집하여 더 나은 이해를 도모하고자 합니다. 이 정보는 앱 사용 방식을 이해하고 HyperPlay를 개선하는 데 유용합니다.",
+                "privacyCaption": "이 데이터는 집계된 형태로 제공되며, 일반 데이터 보호 규정 (EU) 2016/679에 따라 익명입니다. 우리의 개인 정보 보호 관행에 대한 더 많은 정보는 다음을 확인하십시오. ",
+                "anonymized": "익명화된 클릭 및 게임 상호작용;  \n익명 클릭 및 게임 상호작용 전송;  \n익명으로 클릭 및 게임 상호작용 전송;",
+                "hyperplayWill": "하이퍼플레이는 다음과 같은 기능을 제공합니다:  \n하이퍼플레이는 다음과 같은 서비스를 제공합니다:  \n하이퍼플레이는 다음과 같은 작업을 수행합니다:"
             },
-            "connectAgain": "다시 연결",
+            "connectAgain": "다시 연결해 주세요",
             "welcome": {
                 "text": {
-                    "construction": "HyperPlay는 건설 중입니다.",
-                    "communityCTA_1": "우리는 당신의 의견을 사랑하고 당신이 우리의 것에 가입해야",
-                    "bugs": "HyperPlay는 공개 알파입니다. 많은 특징은 아직도 있습니다\n개발, 버그가 있습니다.",
-                    "description": "HyperPlay는 게임 발사기 및 게임 상점 집계입니다.\n현재 위치 HyperPlay를 사용하면 지갑, 토큰 및 자산을 운반할 수 있습니다.\n모든 게임으로. HyperPlay는 Epic의 전체 라이브러리를 지원합니다.\n상점, GOG, 그리고 우리의 자신의 HyperPlay 상점. HyperPlay를 사용함으로써 귀하는 동의한다.\n제품 정보",
-                    "communityCTA_2": "커뮤니티 함께, 게임의 미래를 형성하자!"
+                    "construction": "HyperPlay는 구축 중입니다.",
+                    "communityCTA_1": "우리는 당신의 피드백을 듣고 싶으며, 당신이 우리와 함께 하기를 바랍니다.  \n당신의 의견을 듣고 싶고, 우리와 함께해 주셨으면 좋겠습니다.  \n당신의 소중한 피드백을 기다리며, 우리와 함께해 주시길 바랍니다.",
+                    "bugs": "HyperPlay는 공개 알파입니다. 많은 기능이 아직 개발 중이고, 버그가 존재할 수 있습니다.",
+                    "description": "HyperPlay는 미래에서 온 게임 런처이자 게임 상점 집계기입니다. HyperPlay를 사용하면 지갑, 토큰 및 자산을 모든 게임에 지참할 수 있습니다. HyperPlay는 Epic 스토어, GOG 및 자체 HyperPlay 스토어의 전체 라이브러리를 지원합니다. HyperPlay를 사용함으로써 귀하는 우리의 이용 약관에 동의합니다.",
+                    "communityCTA_2": "커뮤니티와 함께 게임의 미래를 만들어 갑시다!  \n커뮤니티와 함께 게임의 미래를 설계해 봅시다!  \n함께 커뮤니티를 이루어 게임의 미래를 창조합시다!"
                 },
-                "title": "Hyper에 오신 것을 환영합니다 초기 액세스!"
+                "title": "HyperPlay 초기 액세스에 오신 것을 환영합니다!  \nHyperPlay 얼리 액세스에 오신 것을 환영합니다!  \nHyperPlay의 초기 액세스에 오신 것을 환영합니다!"
             },
             "walletSelection": {
                 "screens": {
                     "scan": {
-                        "updateWarning": "문제가 있습니까? MetaMask가 현재까지 확인할 수 있습니다.",
-                        "details": "암호화 통신 채널을 만듭니다. 당신의 열쇠는 HyperPlay와 결코 공유되지 않을 것입니다.",
-                        "dontHaveWallet": "지갑이 없나요?",
-                        "getMetamask": "MetaMask 받기",
-                        "title": "QR 스캔 "
+                        "updateWarning": "문제가 발생했나요? MetaMask가 최신 버전인지 확인하세요.  \n문제가 있으신가요? MetaMask가 최신 상태인지 확인해 보세요.  \n문제가 있습니까? MetaMask가 최신 버전으로 업데이트되어 있는지 확인하세요.",
+                        "details": "암호화된 통신 채널을 생성하세요. 당신의 키는 HyperPlay와 절대 공유되지 않습니다.  \n암호화된 커뮤니케이션 채널을 설정하십시오. 당신의 키는 HyperPlay와 결코 공유되지 않을 것입니다.  \n암호화된 통신 경로를 만드세요. 당신의 키는 HyperPlay와 절대 공유되지 않을 것입니다.",
+                        "dontHaveWallet": "지갑이 없으신가요?  \n지갑이 없으세요?  \n지갑이 없습니까?",
+                        "getMetamask": "MetaMask 이용하기",
+                        "title": "QR 코드 읽기 "
                     },
                     "info": {
-                        "createWalletDescription": "지갑이 없거나 새로운 것을 만들려면 아래 \"Create a wallet\"을 클릭하십시오",
+                        "createWalletDescription": "지갑이 없거나 새 지갑을 만들고 싶다면 아래의 \"Create a wallet\"을 클릭하세요.  \n지갑이 없거나 새로 만들고 싶으시면 아래의 \"Create a wallet\"을 클릭해 주세요.  \n지갑이 없거나 새로운 지갑을 생성하려면 아래의 \"Create a wallet\"을 클릭하십시오.",
                         "digitalAssets": {
-                            "details": "지갑은 토큰과 NFT와 같은 디지털 자산을 전송, 수신, 저장 및 디스플레이하는 데 사용됩니다.",
-                            "title": "디지털 자산의 집"
+                            "details": "지갑은 토큰 및 NFT와 같은 디지털 자산을 전송하고, 수신하며, 저장하고, 표시하는 데 사용됩니다.  \n지갑은 토큰과 NFT 같은 디지털 자산을 보내고, 받고, 저장하며, 보여주는 데 사용됩니다.  \n지갑은 디지털 자산인 토큰과 NFT를 전송, 수신, 저장 및 표시하는 데 활용됩니다.",
+                            "title": "디지털 자산을 위한 홈"
                         },
-                        "skip": "현재 위치",
-                        "createWalletCTA": "지갑 만들기",
-                        "title": "지갑은 무엇입니까?",
+                        "skip": "지금은 패스하기",
+                        "createWalletCTA": "지갑을 생성하세요",
+                        "title": "지갑이란 무엇인가요?  \n지갑은 어떤 것인가요?  \n지갑이란 무엇인지요?",
                         "login": {
-                            "details": "모든 웹 사이트에 새로운 계정 및 암호를 생성하는 대안은 대신 지갑을 연결합니다.",
-                            "title": "로그인하는 새로운 방법"
+                            "details": "모든 사이트에서 계정과 비밀번호를 새로 만드는 대신, 지갑을 연결하는 것이 더 간편합니다.",
+                            "title": "로그인하는 새로운 절차"
                         }
                     },
                     "import": {
-                        "orWord": "이름 *",
-                        "title": "브라우저를 선택하여 가져오기",
-                        "cantFindProfile": "브라우저 프로파일을 찾을 수 없습니다?",
-                        "createNewWallet": "새로운 MM 확장 지갑 만들기",
-                        "useRecoveryPhrase": "비밀번호 복구",
-                        "useRecoveryPhraseInfo": "이 기능은 고급 사용자 및 개발자에게 추천합니다. 비밀 복구 구문은 MetaMask에서 로컬로 저장되며 HyperPlay와 결코 공유되지 않습니다.",
-                        "details": "아래 브라우저에는 MetaMask가 설치되어 있습니다. 가져오기와 같은 것을 선택하세요.",
-                        "learnMore": "더 알아보기"
+                        "orWord": "또한",
+                        "title": "가져오기 위해 브라우저를 선택하세요",
+                        "cantFindProfile": "브라우저 프로필을 찾을 수 없어요?",
+                        "createNewWallet": "MM 확장 지갑 새로 만들기",
+                        "useRecoveryPhrase": "비밀 복구 문장을 이용한 가져오기",
+                        "useRecoveryPhraseInfo": "이 기능은 전문 사용자와 개발자에게 권장됩니다. 비밀 복구 문구는 MetaMask에 로컬로 저장되며 HyperPlay와는 절대적으로 공유되지 않습니다.",
+                        "details": "아래 브라우저에는 이미 MetaMask가 설치되어 있습니다. 가져올 브라우저를 선택하세요.  \n아래의 브라우저들에는 MetaMask가 이미 설치되어 있습니다. 가져올 브라우저를 선택하세요.  \n아래 나열된 브라우저에는 MetaMask가 설치되어 있습니다. 가져올 브라우저를 선택하세요.",
+                        "learnMore": "더 알아보는 방법입니다."
                     }
                 },
-                "pleaseConnect": "지갑을 연결하거나 Metamask 모바일 앱을 다운로드하십시오.\n시작 :",
-                "title": "지갑 연결"
+                "pleaseConnect": "지갑을 연결하거나 Metamask 모바일 앱을 다운로드하여 시작하십시오.",
+                "title": "지갑 연결 상태"
             },
             "connectionCanceled": {
-                "description": "모바일 지갑에 연결 요청을 확인하시기 바랍니다.",
-                "title": "연결 취소!"
+                "description": "모바일 지갑의 연결 요청을 확인하여 진행해 주시기 바랍니다.",
+                "title": "연결이 실패했습니다!"
             },
             "connectionConnected": {
-                "title": "지갑 연결!",
-                "description": "지갑이 연결됩니다. 게임이 준비되어 있습니다."
+                "title": "지갑이 성공적으로 연결되었습니다!",
+                "description": "지갑이 연결되었습니다. 게임을 시작할 준비가 되었습니다.  \n지갑이 연결되었습니다. 게임을 할 준비가 완료되었습니다.  \n지갑이 연결되었습니다. 게임을 즐길 준비가 되었습니다."
             },
-            "terms": "서비스 약관"
+            "terms": "이용 조건"
         },
         "achievements": {
             "noAchievements": {
-                "doubleCheckMessage": "현재 Steam 계정에서 게임을 찾을 수 없습니다. 당신의 게임 세부 사항이 공개되도록 double-check에 빠른 알림. 이 방법, 우리는 당신의 업적에 액세스하고 최고의 경험을 제공합니다.",
-                "oops": "인기 있는!"
+                "doubleCheckMessage": "현재 Steam 계정에서 게임을 찾을 수 없는 것 같습니다. 게임 세부 정보가 공개로 설정되어 있는지 확인해 주세요. 이렇게 하면 귀하의 업적에 접근하여 최상의 경험을 제공할 수 있습니다.",
+                "oops": "이런!"
             },
-            "gamesToMint": "민트 게임",
-            "addThisGame": "이 게임을 추가",
-            "freeMints": "무료 Mints"
+            "gamesToMint": "민트할 수 있는 게임",
+            "addThisGame": "이 게임을 등록하세요",
+            "freeMints": "무료 민트 이벤트"
         },
         "gamecard": {
-            "installed": "놀기",
-            "extracting": "추출 ...",
-            "installing": "내려 받는 중...",
-            "distributables": "분산형 설치",
-            "paused": "일시중지됨"
+            "installed": "게임 시작할 준비가 됐어요",
+            "extracting": "추출 중 ...  \n추출하기 ...  \n추출 진행 중 ...",
+            "installing": "다운로드 진행 중...",
+            "distributables": "디스트리뷰터 설치 중...",
+            "paused": "중지됨"
         },
-        "linkSteamAccountDescription": "HyperPlay 계정을 연결하기 위해 Steam에 로그인하십시오.",
-        "linkSteamAccountTitle": "링크 증기 계정",
-        "syncing": "동기화 ...",
-        "connectWallet": "지갑 연결",
-        "currentWallet": "현재 지갑",
+        "linkSteamAccountDescription": "HyperPlay 계정을 연결하려면 Steam에 로그인하세요.  \nHyperPlay 계정과 연결하기 위해 Steam에 로그인해 주세요.  \nSteam에 로그인하여 HyperPlay 계정을 연결하세요.",
+        "linkSteamAccountTitle": "스팀 계정 연동",
+        "syncing": "동기화 작업 중 ...",
+        "connectWallet": "지갑을 연결합니다",
+        "currentWallet": "현재 활성화된 지갑",
         "buttons": {
-            "agree": "나는 동의한다",
-            "noThanks": "사양하겠습니다"
+            "agree": "나는 찬성한다  \n나는 동의합니다  \n나는 수긍한다",
+            "noThanks": "사양할게요"
         },
-        "viewItem": "{{item}} 보기",
-        "linkSteamAccountCta": "Steam 로그인",
+        "viewItem": "{{item}}를 보기  \n{{item}} 확인하기  \n{{item}} 열기",
+        "linkSteamAccountCta": "Steam에 로그인하기==WEBLATE_PART==Steam에 접속하여 로그인==WEBLATE_PART==Steam 계정으로 로그인하기",
         "viewMyAccount": "내 계정 보기",
-        "publicAlpha": "공공 알파",
-        "viewPortfolio": "공지사항",
-        "analyticsOff": "Analytics 설정",
-        "analyticsOn": "Analytics가 켜집니다",
-        "changeWallet": "Swap 지갑 계정",
-        "otp": "1 시간 Passcode",
-        "logOut": "로그아웃",
-        "misc": "절대",
-        "copyUrl": "URL 복사",
-        "Sync": "동기화",
-        "turnAnalyticsOff": "끄기",
-        "turnAnalyticsOn": "켜기",
-        "discordApp": "디스코드",
-        "folder": "폴더",
-        "viewFullscreen": "전체 화면보기"
+        "publicAlpha": "공개 알파",
+        "viewPortfolio": "포트폴리오 확인하기",
+        "analyticsOff": "분석이 꺼져 있습니다",
+        "analyticsOn": "분석이 활성화되었습니다",
+        "changeWallet": "지갑 계정 전환",
+        "otp": "일회용 코드",
+        "logOut": "로그아웃 진행",
+        "misc": "결단코",
+        "copyUrl": "URL을 복사해 주세요",
+        "Sync": "동기화 상태",
+        "turnAnalyticsOff": "종료하기",
+        "turnAnalyticsOn": "활성화하기",
+        "discordApp": "디스코드입니다.  \n디스코드 플랫폼  \n디스코드 애플리케이션",
+        "folder": "폴더를 의미합니다.",
+        "viewFullscreen": "전체 화면 모드로 보기"
     },
-    "importGameErrorMessage": "유효한 게임 폴더가 아닙니다, 수입 게임은 불가능합니다",
-    "exit_game": "출구 Game",
+    "importGameErrorMessage": "유효하지 않은 게임 폴더입니다. 게임을 가져올 수 없습니다.  \n게임 폴더가 유효하지 않습니다. 게임을 가져오는 것이 불가능합니다.  \n유효한 게임 폴더가 아닙니다. 게임을 임포트할 수 없습니다.",
+    "exit_game": "게임을 종료합니다",
     "hyperplayOverlay": {
         "extensionNotification": {
-            "DESCRIPTION": "프레스 {{overlayKeyMod}} + X이 거래를 볼",
-            "TITLE": "거래 요청"
+            "DESCRIPTION": "{{overlayKeyMod}} + X를 눌러서 이 거래를 확인하십시오",
+            "TITLE": "거래를 요청했습니다"
         },
         "txnRequest": {
-            "PENDING": "제출된 거래",
-            "CONFIRMED": "거래 확인",
-            "FAILED": "거래 중단",
-            "INITIATED": "거래 요청"
+            "PENDING": "거래가 완료되었습니다",
+            "CONFIRMED": "거래가 확인되었습니다.  \n거래가 승인되었습니다.  \n거래가 완료되었습니다.",
+            "FAILED": "거래가 중단되었습니다.",
+            "INITIATED": "거래 요청이 처리 중입니다"
         },
         "walletWatch": {
-            "FAILED": "주문 토큰 요청 취소",
-            "CONFIRMED": "사용자 정의 토큰 추가",
-            "INITIATED": "사용자 정의 토큰 요청 pending 추가"
+            "FAILED": "맞춤형 토큰 요청이 취소되었습니다.",
+            "CONFIRMED": "사용자 정의 토큰이 추가되었습니다.",
+            "INITIATED": "사용자 정의 토큰 요청이 대기 중입니다."
         },
         "signatureRequest": {
-            "INITIATED": "서명 요청",
-            "CONFIRMED": "서명 제출",
-            "FAILED": "서명 중단"
+            "INITIATED": "서명 요청이 진행 중입니다",
+            "CONFIRMED": "서명 제출됨",
+            "FAILED": "서명이 중단되었습니다.  \n서명이 중단되었습니다.  \n서명 과정이 중단되었습니다."
         },
         "description": {
-            "FAILED": "거래가 취소되거나 제출되지 않았으므로 다시 시도하십시오",
-            "CONFIRMED": "거래가 성공적으로 확인되었습니다!",
-            "PENDING": "블록체인 확인을 기다리고 있습니다. 확인되면 알려 드리겠습니다",
-            "INITIATED": "지갑 확인은 모바일 지갑에서 종료됩니다"
+            "FAILED": "거래가 취소되었거나 제출되지 않았습니다. 다시 시도해 주세요.  \n거래가 취소되었거나 제출되지 않았습니다. 다시 한 번 시도해 주십시오.  \n거래가 취소되었거나 제출되지 않았습니다. 다시 시도해 보세요.",
+            "CONFIRMED": "거래가 성공적으로 승인되었습니다!  \n거래가 성공적으로 완료되었습니다!  \n거래가 성공적으로 인증되었습니다!",
+            "PENDING": "블록체인 확인을 기다리고 있습니다. 확인되면 알려드리겠습니다.  \n블록체인 확인을 대기 중입니다. 확인되면 알려드리겠습니다.  \n블록체인 확인을 기다리고 있습니다. 확인되면 소식을 전해드리겠습니다.",
+            "INITIATED": "모바일 지갑에서 지갑 확인이 진행 중입니다"
         },
         "chainRequest": {
-            "INITIATED": "주문 네트워크 요청",
-            "CONFIRMED": "사용자 정의 네트워크 추가",
-            "FAILED": "사용자 정의 네트워크 취소"
+            "INITIATED": "맞춤형 네트워크 요청",
+            "CONFIRMED": "사용자 정의 네트워크가 추가되었습니다.",
+            "FAILED": "사용자 정의 네트워크가 무효화되었습니다."
         },
         "greeting": {
-            "title": "HyperPlay 오버레이",
-            "description": "HyperPlay 오버레이가 준비되어 있습니다! 프레스 {{overlayKeyMod}} + X를 표시하거나 숨기십시오."
+            "title": "하이퍼플레이 인터페이스",
+            "description": "HyperPlay 오버레이가 준비되었습니다! {{overlayKeyMod}} + X를 눌러 표시하거나 숨기세요.  \nHyperPlay 오버레이가 활성화되었습니다! {{overlayKeyMod}} + X를 눌러 보이거나 숨길 수 있습니다.  \nHyperPlay 오버레이가 설정되었습니다! {{overlayKeyMod}} + X를 눌러 나타내거나 감추세요."
         }
     },
     "dlcs": {
-        "label": "DLC를 선택하여 설치:"
+        "label": "DLC를 선택하여 설치하세요:  \nDLC를 선택하고 설치합니다:  \n설치할 DLC를 선택하세요:"
     },
     "quest": {
-        "associatedGames": "관련 게임",
-        "claimAll": "모든 것",
-        "connectSteamAccount": "Steam 계정 연결",
-        "linkAccount": "연결하기 스팀 계정은 eligibility를 확인합니다.",
+        "associatedGames": "관련된 게임",
+        "claimAll": "모든 것을 요청하기",
+        "connectSteamAccount": "Steam 계정 연결 설정",
+        "linkAccount": "스팀 계정을 연결하여 자격 여부를 확인하십시오.",
         "errorMessage": "거래에 오류가 있었습니다.",
-        "needMoreAchievements": "이 게임 중 하나에서 업적의 {{percent}} %를 완료해야합니다.",
-        "readyForClaim": "자주 묻는 질문",
+        "needMoreAchievements": "이 게임 중 하나에서 업적의 {{percent}}%를 완료해야 합니다.  \n이 게임 중 하나에서 {{percent}}%의 업적을 달성해야 합니다.  \n이 게임 중 하나에서 {{percent}}%의 업적을 완료해야 합니다.",
+        "readyForClaim": "청구를 위한 준비가 끝났습니다",
         "playstreak": {
-            "dayResets": "일 리셋:",
-            "playEachDay": "매일 플레이하므로 streak이 재설정되지 않습니다!",
-            "playToStart": "당신의 streak을 시작하는이 게임을 재생!",
-            "progressTowardsStreak": "오늘 streak을 향해 진행.",
-            "streakCompleted": "Streak 완료! 지금 보상을 받으세요.",
-            "streakProgress": "Streak 진행",
-            "days": "일수",
-            "now": "지금"
+            "dayResets": "일 초기화:  \n일 재설정:  \n일 갱신:",
+            "playEachDay": "매일 플레이해서 연속 기록이 사라지지 않도록 하세요!",
+            "playToStart": "이 게임을 플레이하여 당신의 연속 기록을 시작하세요!  \n이 게임을 시작하여 연속 기록을 만들어 보세요!  \n이 게임을 통해 연속 기록을 시작해 보세요!",
+            "progressTowardsStreak": "오늘 streak을 위한 진행 상황.",
+            "streakCompleted": "연속 달성이 완료되었습니다! 지금 보상을 청구하세요.  \n연속 기록이 완료되었습니다! 지금 보상을 받아가세요.  \n연속 streak이 완료되었습니다! 지금 보상을 요청하세요.",
+            "streakProgress": "연속 기록 진행",
+            "days": "기간",
+            "now": "지금입니다  \n현재  \n지금 시점",
+            "sync": "동기화 진행 상황",
+            "syncSuccess": "진행 상태가 동기화되었습니다"
         },
-        "View Game": "게임 보기",
-        "reward": "상품정보",
+        "View Game": "게임 살펴보기",
+        "reward": "보상 항목",
         "claimFailed": "Claim 실패",
-        "notEnoughGas": "가스 수수료로 인해 보상을 청구하는 충분한 지갑 잔액. 다른 지갑을 시도하거나 retrying하기 전에이 것을 보충하십시오.",
+        "notEnoughGas": "가스 수수료로 인해 보상을 청구할 충분한 지갑 잔액이 없습니다. 다른 지갑을 사용하거나 재시도하기 전에 이 지갑을 보충하세요.  \n가스 수수료로 인해 보상을 청구할 수 있는 지갑 잔액이 부족합니다. 다른 지갑을 시도하거나 이 지갑을 보충한 후 다시 시도하세요.  \n가스 수수료 때문에 보상을 청구할 수 있는 지갑 잔액이 부족합니다. 다른 지갑을 사용하거나 이 지갑을 보충한 후 다시 시도해 보세요.",
         "type": {
-            "playstreak": "다운로드",
+            "playstreak": "게임 연속",
             "reputation": "평판"
         },
         "claimFailedMessage": "한 번 더 시도하십시오. 여전히 작동하지 않는 경우 Discord 지원 티켓을 만듭니다.",
         "createDiscordTicket": "Discord 티켓 만들기",
-        "active": "활성",
-        "claimed": "수령함",
-        "quests": "퀘스트",
+        "active": "활성화됨",
+        "claimed": "받음",
+        "quests": "작전",
         "Play": "재생",
         "signIn": "로그인",
-        "points": "포인트",
-        "sync": "동기화",
-        "reputation": "평판",
-        "pointsClaimed": "공지사항",
-        "g7Numclaimed": "총 클레임 G7 크레딧",
+        "points": "점",
+        "sync": "동기화 진행",
+        "reputation": "평판도",
+        "pointsClaimed": "포인트가 청구되었습니다",
+        "g7Numclaimed": "총 수령한 G7 크레딧",
         "claimWarning": {
-            "body": "<bold> 인터페이스:</bold> {{networkName}} 트랜잭션에 충분한 가스를 할당하여 24 시간 이내에 <bold>를 성공적으로 확인해야합니다.</bold>",
-            "body2": "그렇지 않으면, 퀘스트 보상 <bold>가 만료되고 더 이상 청구되지 않습니다.</bold>",
+            "body": "<bold>중요:</bold> 트랜잭션이 성공적으로 확인되도록 {{networkName}} 네트워크에 충분한 가스를 할당하는 것을 잊지 마세요. <bold>7일 이내에.</bold>",
+            "body2": "그렇지 않으면, 퀘스트 보상 <bold>가 만료되어 더 이상 청구할 수 없습니다.</bold>  \n그렇지 않으면, 퀘스트 보상 <bold>가 만료되며 더 이상 받을 수 없습니다.</bold>  \n그렇지 않으면, 퀘스트 보상 <bold>가 만료되어 더 이상 요청할 수 없습니다.</bold>",
             "title": "Quest Reward Claim을 확인",
-            "cancel": "취소",
-            "confirm": "승인"
+            "cancel": "취소 요청",
+            "confirm": "승인합니다"
         },
-        "noG7ConnectionClaim": "보상을 청구하려면 {{email}}에 연결된 Game7 계정이 있어야 합니다.",
-        "noG7ConnectionSync": "작업을 재 동기화하려면 {{email}}에 연결된 Game7 계정이 있어야 합니다."
+        "noG7ConnectionClaim": "보상을 받으려면 {{email}}에 연결된 Game7 계정이 필요합니다.  \n보상을 청구하려면 {{email}}와 연결된 Game7 계정이 있어야 합니다.  \n보상을 받으려면 {{email}}에 연결된 Game7 계정이 필요합니다.",
+        "noG7ConnectionSync": "작업을 다시 동기화하려면 {{email}}에 연결된 Game7 계정이 필요합니다.  \n작업을 재설정하려면 {{email}}와 연결된 Game7 계정이 있어야 합니다.  \n작업을 재동기화하려면 {{email}}에 연결된 Game7 계정이 필요합니다."
     },
     "sideload": {
-        "warningMessage": "Side-loading 게임은 개발자와 숙련 된 전력 사용자를위한 기능입니다. 악성 프로그램이 컴퓨터를 손상하고 자금을 납치 할 수있는 설치 프로그램을로드.",
-        "warningTitle": "중요"
+        "warningMessage": "사이드 로딩 기능은 개발자와 숙련된 사용자들을 위해 설계되었습니다. 악성 프로그램이 포함된 설치 파일을 사이드 로딩하면 컴퓨터가 손상되고 자금이 도난당할 위험이 있습니다.",
+        "warningTitle": "필수적인"
     },
     "quests": {
         "playstreak": {
             "signInWarning": {
-                "client": "현재 로그인되지 않습니다, streak 진행 상황을 추적하지 않습니다. 진행 상황을 추적하기 위해 top-right dropdown을 통해 HyperPlay에 로그인하십시오.",
-                "overlay": "현재 로그인되지 않습니다, streak 진행 상황을 추적하지 않습니다. 게임을 종료하고 HyperPlay에 로그인하십시오."
+                "client": "로그인하지 않은 상태입니다. 스트릭 진행 상황이 추적되지 않습니다. 진행 상황을 확인하려면 오른쪽 상단 드롭다운을 통해 HyperPlay에 로그인하시기 바랍니다.",
+                "overlay": "현재 로그인 상태가 아닙니다. 스트릭 진행 상황이 추적되지 않습니다. 게임을 종료하고 오른쪽 상단 드롭다운을 통해 HyperPlay에 로그인하시기 바랍니다."
             }
         },
-        "quests": "퀘스트",
+        "quests": "작전",
         "noneFound": {
-            "message": "찾을 수 없습니다.",
-            "title": "퀘스트 없음."
+            "message": "퀘스트가 없습니다.",
+            "title": "퀘스트가 발견되지 않았습니다."
         },
         "g7CreditsModal": {
-            "description": "HyperPlay의 최고 게임으로 흥미 진진한 Play Streak Challenges. 각 활동은 당신이 다른 게임과 참여하는 것을 격려, web3 게임의 베스트를 보여. 당신의 playtime 사정!",
-            "title": "Game7 크레딧 획득"
+            "description": "HyperPlay의 최고의 게임에서 흥미로운 Play Streak Challenges에 도전하세요. 각 활동은 다양한 게임에 참여하도록 유도하며, web3 게임의 진수를 보여줍니다. 당신의 플레이 시간이 중요합니다!\n\nHyperPlay의 인기 게임에서 짜릿한 Play Streak Challenges를 경험해 보세요. 각 활동은 다른 게임에 참여하도록 독려하며, web3 게임의 매력을 선보입니다. 당신의 플레이 시간이 중요합니다!\n\nHyperPlay의 인기 게임을 통해 흥미로운 Play Streak Challenges에 참여하세요. 각 활동은 다양한 게임에 참여하도록 유도하며, web3 게임의 최고를 보여줍니다. 당신의 플레이 시간이 중요합니다!",
+            "title": "Game7 크레딧을 취득하다"
         },
         "viewAllQuests": {
-            "title": "모든 퀘스트 보기"
+            "title": "모든 퀘스트 목록 보기"
         }
     },
-    "accounts": "계정 만들기",
+    "accounts": "계정 관리",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "HyperPlay와 외부 지갑에 연결됩니다.",
-        "WALLET_DISCONNECTED": "HyperPlay에 연결된 지갑이 없습니다.",
-        "comingSoon": "Coming Soon"
+        "EXTERNAL_WALLET_CONNECTED": "외부 지갑과 함께 HyperPlay에 연결되어 있습니다.",
+        "WALLET_DISCONNECTED": "HyperPlay에 연결된 지갑이 없습니다.  \nHyperPlay와 연결된 지갑이 없습니다.  \nHyperPlay에 지갑이 연결되어 있지 않습니다.",
+        "comingSoon": "곧 공개됩니다"
     },
-    "importGameErrorMessageExecutable": "(한국어) 실행할 수 없습니다, 수입 게임 가능",
-    "back_to_game": "게임으로 돌아가기",
+    "importGameErrorMessageExecutable": "게임 실행 파일을 찾을 수 없습니다. 게임을 임포트할 수 없습니다.",
+    "back_to_game": "게임으로 돌아가기 위해",
     "notification": {
         "wine-download": {
-            "message": "기본 호환성 층 설정",
-            "title": "호환성 층"
+            "message": "기본 호환성 레이어 구성",
+            "title": "호환성 슬라이스"
         },
         "wine-download-failed": {
-            "message": "기본 호환성 레이어 설정 실패",
-            "title": "오류"
+            "message": "기본 호환성 레이어를 설정하는 데 실패했습니다.  \n기본 호환성 레이어 구성이 실패했습니다.  \n기본 호환성 레이어를 설정하는 데 문제가 발생했습니다.",
+            "title": "잘못된 요청"
         }
     },
     "achievements": {
         "progress": {
-            "minted": "체인에",
-            "notMinted": "오프 체인"
+            "minted": "체인 내에서",
+            "notMinted": "체인 밖"
         }
     },
     "gameRelease": {
-        "prototype": "Prototype의 특징",
-        "alpha": "투명도",
-        "beta": "베타",
-        "demo": "데모",
-        "main": "주연"
+        "prototype": "프로토타입의 장점",
+        "alpha": "알파 값",
+        "beta": "베타 단계",
+        "demo": "체험판",
+        "main": "주요 역할"
     },
-    "importGameErrorTitle": "게임 오류",
+    "importGameErrorTitle": "게임 불러오기 오류",
     "email_subscription": {
-        "title": "감사합니다!",
-        "subtitle": "이제 커뮤니티의 일원이며, 소중한 업데이트와 통찰력을 공유하고 싶습니다."
+        "title": "구독해 주셔서 감사합니다!  \n구독해 주셔서 고맙습니다!  \n구독해 주셔서 정말 감사합니다!",
+        "subtitle": "이제 우리 커뮤니티의 일원이 되셨으며, 귀하와 소중한 업데이트와 통찰력을 나누게 되어 기쁩니다.  \n이제 커뮤니티의 일원이 되셨고, 귀하와 유용한 업데이트와 인사이트를 공유하게 되어 매우 기쁩니다.  \n이제 우리 커뮤니티의 일원이 되셨고, 귀하와 함께 소중한 업데이트와 통찰력을 나누게 되어 기대가 큽니다."
     },
-    "profile": "프로필",
-    "analytics": "진단공유",
-    "ALL": "모두",
+    "profile": "프로필 설정",
+    "analytics": "데이터 분석",
+    "ALL": "전부",
     "import-game-folder": {
-        "success": "성공적으로 수입 된 게임!",
-        "cta": "수입 게임 폴더",
+        "success": "게임이 성공적으로 가져와졌습니다!  \n게임을 성공적으로 임포트했습니다!  \n게임이 성공적으로 불러와졌습니다!",
+        "cta": "게임 폴더 불러오기",
         "dialog": {
-            "title": "Game Folder를 사용하여 가져 오기"
+            "title": "가져오기 위해 게임 폴더 선택"
         },
-        "error": "수입 중 오류가 있었습니다. 자세한 내용은 로그를 참조하십시오.",
-        "label": "수입 게임 폴더",
-        "placeholder": "게임 폴더를 가져 오기"
+        "error": "수입하는 동안 오류가 발생했습니다. 자세한 내용은 로그를 확인하세요.  \n수입 중에 문제가 발생했습니다. 더 많은 정보는 로그를 참조하시기 바랍니다.  \n수입 과정에서 오류가 발생했습니다. 자세한 내용은 로그를 확인해 주세요.",
+        "label": "게임 폴더 불러오기",
+        "placeholder": "가져올 게임 폴더를 선택하십시오"
     },
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "기본 게임 추출 취소",
-                "title": "취소 추출"
+                "body": "기본 게임 추출이 취소되었습니다.",
+                "title": "추출 작업이 중단되었습니다"
             },
             "installed": {
-                "body": "Mod는 기본 게임에 적용됩니다",
-                "title": "기본 게임 설치"
+                "body": "모드가 기본 게임에 적용될 예정입니다",
+                "title": "기본 게임이 설치 완료되었습니다."
             },
             "installing": {
-                "body": "기본 게임 파일 추출",
-                "title": "기본 게임 설치"
+                "body": "기본 게임 파일을 가져오는 중입니다.",
+                "title": "기본 게임을 설치하고 있습니다"
             }
         },
         "instructions": {
             "zip": {
-                "path": "Base Game 파일 선택",
-                "placeholder": "Zip 파일 선택"
+                "path": "기본 게임 파일 위치 지정",
+                "placeholder": "Zip 파일을 고르세요"
             }
         }
     },
     "mods": {
         "instructions": {
             "step1": {
-                "chromieCraft": "ChromieCraft의 특징",
-                "description": "이 게임은 월드 오브 워크래프트의 모드입니다: 리치 킹의 Wrath (3.3.5a). 이 모드를 재생하려면 플레이어는 Warcraft 3.3.5a의 세계 사본을 소유해야합니다. {{newline}} {{newline}} HyperPlay는 Warcraft의 세계를 호스팅하지 않습니다. Warcraft의 세계를 소유 한 플레이어는 다음과 같은 소스에서 3.3.5a 버전을 얻을 수 있습니다",
-                "subtitle": "다운로드 월드 오브 워크래프트 3.3.5a",
-                "webtorrent": "토렌트 (Magnet Link)",
-                "title": "1단계"
+                "chromieCraft": "ChromieCraft의 매력",
+                "description": "이 게임은 월드 오브 워크래프트: 리치 킹의 분노(3.3.5a) 모드입니다. 이 모드를 플레이하려면 플레이어는 월드 오브 워크래프트 3.3.5a의 사본을 소유해야 합니다. {{newline}} {{newline}} HyperPlay는 월드 오브 워크래프트를 호스팅하지 않습니다. 월드 오브 워크래프트를 소유한 플레이어는 다음과 같은 출처에서 3.3.5a 버전을 다운로드할 수 있습니다.",
+                "subtitle": "월드 오브 워크래프트 3.3.5a를 받으세요",
+                "webtorrent": "토렌트 (마그넷 연결)",
+                "title": "1단계 진행하기"
             },
             "step3": {
-                "description": "월드 오브 워크래프트(World of Warcraft: Wrath of Lich King (3.3.5a)가 설치되어야 하는 폴더를 선택하십시오.",
-                "subtitle": "연락처 한국어",
-                "title": "3단계"
+                "description": "월드 오브 워크래프트: 리치 왕의 분노 (3.3.5a)가 설치될 폴더를 선택해 주세요.  \n리치 왕의 분노 (3.3.5a) 월드 오브 워크래프트를 설치할 폴더를 선택하십시오.  \n월드 오브 워크래프트: 리치 왕의 분노 (3.3.5a)를 설치할 폴더를 선택하세요.",
+                "subtitle": "설치 위치 선택",
+                "title": "3단계입니다.  \n3단계로 진행하세요.  \n3단계로 이동합니다."
             },
             "step4": {
-                "description": "게임 설치를 진행하려면 액세스 코드를 입력하십시오.",
-                "subtitle": "오시는 길",
-                "title": "단계 4"
+                "description": "게임 설치를 진행하려면 접근 코드를 입력하세요.  \n게임을 설치하려면 액세스 코드를 입력해야 합니다.  \n게임 설치를 위해 액세스 코드를 입력해 주십시오.",
+                "subtitle": "액세스 코드",
+                "title": "4단계로 진행하세요"
             },
-            "title": "Mod 지침",
+            "title": "모드 안내서",
             "step2": {
-                "description": "다운로드 ChromieCraft_3.3.5a.zip 파일.",
-                "subtitle": "ChromieCraft_3.3.5a.zip을 선택하십시오. 파일 형식",
-                "title": "2단계"
+                "description": "다운로드한 ChromieCraft_3.3.5a.zip 파일을 선택하세요.  \nChromieCraft_3.3.5a.zip 파일을 다운로드한 후 선택합니다.  \nChromieCraft_3.3.5a.zip 파일을 선택하여 다운로드합니다.",
+                "subtitle": "ChromieCraft_3.3.5a.zip 파일을 선택합니다.",
+                "title": "2단계 완료"
             }
         }
     },
-    "At the end make sure to": "끝에서 확인",
-    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "첫 번째 발사 증기는 필요한 파일을 다운로드하고 완료하는 몇 분 및 로그인 화면이 나타납니다;",
-    "Launch Steam": "Steam 출시",
+    "At the end make sure to": "끝에서 확인해 주세요.  \n마지막에 확인해 주세요.  \n마지막에 꼭 확인하세요.",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "첫 실행 시 Steam은 필요한 파일을 다운로드하며 완료되기까지 몇 분이 소요되고 로그인 화면이 나타납니다.  \n첫 번째 실행 시 Steam이 필요한 파일을 다운로드하고 완료하는 데 몇 분이 걸리며 로그인 화면이 표시됩니다.  \n처음 실행할 때 Steam은 필요한 파일을 다운로드하고 완료하는 데 몇 분이 걸리며 로그인 화면이 나타납니다.",
+    "Launch Steam": "스팀 열기",
     "steam-install": {
-        "error-message": "증기를 설치하면서 오류가 발생했습니다. 다시 시도하십시오.",
-        "launch-tooltip": "HyperPlay 호환성 레이어를 사용하여 Steam 실행",
-        "success-message": "증기가 설치되었습니다. 이제 도서관에서 시작할 수 있습니다.",
-        "tooltip": "이것은 Steam의 Windows 버전을 설치하고 HyperPlay 호환성 레이어를 사용하여 실행됩니다.\n\n일부 게임 특히 이전 제목, 새로운 3D 게임, 또는 안티 cheat 소프트웨어와 그 제대로 작동하지 않을 수 있습니다.\n\n권장 사양은 Apple Silicon CPU (M1 이상) 및 RAM의 최소 16GB의 Mac입니다.",
-        "compatibility-layer-not-available": "호환성 층은 유효하지 않습니다. 먼저 \"Settings > Wine Manager\"에서 하나를 설치하십시오."
+        "error-message": "Steam 설치 중 에러가 발생했습니다. 다시 한 번 시도해 주세요.",
+        "launch-tooltip": "HyperPlay 호환성 레이어를 통해 Steam을 실행합니다.  \nHyperPlay 호환성 레이어를 이용해 Steam을 시작하세요.  \nHyperPlay 호환성 레이어로 Steam을 실행합니다.",
+        "success-message": "스팀이 설치되었습니다. 이제 라이브러리에서 실행할 수 있습니다.",
+        "tooltip": "이것은 Windows용 Steam을 설치하고 HyperPlay 호환성 레이어를 사용하여 실행합니다. \n\n특히 구형 게임, 최신 3D 게임 또는 안티 치트 소프트웨어가 있는 게임은 제대로 작동하지 않을 수 있습니다. \n\n권장 사양은 Apple Silicon CPU(M1 이상)와 최소 16GB RAM을 갖춘 Mac입니다.",
+        "compatibility-layer-not-available": "호환성 레이어가 없습니다. 먼저 \"설정 > 와인 관리자\"에서 하나를 설치하세요.  \n호환성 계층이 사용 불가능합니다. 먼저 \"설정 > 와인 관리자\"에서 설치해 주세요.  \n호환성 레이어가 제공되지 않습니다. 먼저 \"설정 > 와인 관리자\"에서 설치해야 합니다."
     },
-    "Install Steam": "Steam 설치",
-    "Cancel Installation": "공지사항",
+    "Install Steam": "스팀을 다운로드하여 설치하기",
+    "Cancel Installation": "설치를 취소합니다",
     "HyperPlay will download and start the Steam Setup for you": {
-        " Please follow Steam instructions on their installer;": "HyperPlay는 다운로드하고 Steam Setup을 시작합니다. 설치자에 증기 지시를 따르십시오;"
+        " Please follow Steam instructions on their installer;": "HyperPlay가 Steam 설치를 다운로드하고 실행합니다. 설치 프로그램의 Steam 지침을 따라 주시기 바랍니다;"
     },
-    "HyperPlay will notify you once the installation is done;": "HyperPlay는 한 번 설치가 완료됩니다;",
-    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "계속하려면, 환자가 인터넷 연결 및 시스템 구성에 따라 완료하는 데 몇 분 걸릴 수 있기 때문에;",
-    "Installing Steam": "Steam 설치 ...",
-    "Launching Steam": "Steam 출시 ...",
-    "UNCHECK 'Run Steam'": "UNCHECK 'Run 스팀 이름 *"
+    "HyperPlay will notify you once the installation is done;": "HyperPlay는 설치가 끝나면 당신에게 통지할 것입니다;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "계속하려면, 인터넷 속도와 시스템 설정에 따라 완료하는 데 몇 분이 걸릴 수 있으니 기다려 주시기 바랍니다;",
+    "Installing Steam": "Steam 설치 중 ...  \nSteam 설치 진행 중 ...  \nSteam 설치를 시작합니다 ...",
+    "Launching Steam": "스팀을 로드하고 있습니다...",
+    "UNCHECK 'Run Steam'": "'스팀 실행' 선택 해제"
 }

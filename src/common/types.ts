@@ -258,6 +258,7 @@ export interface InstallProgress {
   downSpeed?: number
   diskSpeed?: number
   file?: string
+  totalSize?: number
 }
 
 export interface InstalledInfo {

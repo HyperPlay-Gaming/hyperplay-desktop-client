@@ -1324,10 +1324,10 @@
   dependencies:
     classnames "^2.5.1"
 
-"@hyperplay/ui@^1.8.6":
-  version "1.8.6"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.6.tgz#f97834bc4f6a5d9a9fe83c61915a6d63f938dfcf"
-  integrity sha512-j5JAf0bxHRQL0H7hBUzukW1PgIW1evRmaHYfOHqd+uf8taTVAMDJzcOc+NQaAMzjJYtQjIZDdT+lbBk2WcvO8g==
+"@hyperplay/ui@^1.8.8":
+  version "1.8.8"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.8.tgz#35e833a3f9760fe0d74a539e32f9cc77a77cfa4c"
+  integrity sha512-UpSV2mbd1XLkZfh6YPiYCwj7ZEqz/Jk1aFym8YLrNmY70AjhVDMxBJmSxuy83iKWJbBeIZAxE5ZzAAU2fiZpFg==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
