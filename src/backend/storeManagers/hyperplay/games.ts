@@ -1734,17 +1734,6 @@ async function applyPatching(
 
     const { maxWorkers } = GlobalConfig.get().getSettings()
 
-    console.log('patcher params---------', {
-      ipdtPatcher,
-      install_path,
-      currentManifest,
-      previousManifest,
-      signal,
-      s3API: ipfsGateway,
-      datastoreDir,
-      workers: maxWorkers || 6
-    })
-
     const { generator } = patchFolder(
       ipdtPatcher,
       install_path,
@@ -1807,11 +1796,12 @@ async function applyPatching(
 
         // update queue element.size with totalSize
         const queueElement = getFirstQueueElement()
-        if (queueElement)
+        if (queueElement) {
           updateQueueElementParam(queueElement, 'params', {
             ...queueElement.params,
             size: getFileSize(totalSize)
           })
+        }
 
         sendFrontendMessage('gameStatusUpdate', {
           appName,
