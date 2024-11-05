@@ -320,6 +320,7 @@ export interface InstallParams extends InstallArgs {
   gameInfo: GameInfo
   runner: Runner
   size?: string
+  channelName?: string
 }
 
 export interface UpdateArgs {
@@ -595,6 +596,7 @@ export interface DMQueueElement {
   startTime: number
   endTime: number
   status?: DMStatus
+  channel?: string
 }
 
 type ProtonVerb =

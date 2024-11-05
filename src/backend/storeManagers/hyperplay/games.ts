@@ -61,7 +61,7 @@ import {
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
 import {
-  getHyperPlayReleaseManifest,
+  getIPDTManifestUrl,
   handleArchAndPlatform,
   handlePlatformReversed,
   runModPatcher,
@@ -82,7 +82,11 @@ import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { DownloadItem, dialog } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
-import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
+import {
+  cancelQueueExtraction,
+  getFirstQueueElement,
+  updateQueueElementParam
+} from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
 import Store from 'electron-store'
 import i18next from 'i18next'
@@ -95,6 +99,7 @@ import { chmod, writeFile } from 'fs/promises'
 import { trackEvent } from 'backend/metrics/metrics'
 import { getFlag } from 'backend/flags/flags'
 import { ipfsGateway } from 'backend/vite_constants'
+import { GlobalConfig } from 'backend/config'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1563,15 +1568,16 @@ function writeManifestFile(
 export const downloadPatcher = async () => {
   try {
     const { downloadIPDTForOS } = await import('@hyperplay/patcher')
-    await downloadIPDTForOS(toolsPath)
-
-    const version = await getIpdtPatcherVersion()
     const versionFile = path.join(toolsPath, 'ipdt_version.txt')
 
-    logInfo(
-      `IPDT patcher ${version} downloaded successfully`,
-      LogPrefix.HyperPlay
-    )
+    const currentVersion = existsSync(versionFile)
+      ? readFileSync(versionFile, 'utf-8')
+      : undefined
+
+    await downloadIPDTForOS(toolsPath, currentVersion)
+    const version = await getIpdtPatcherVersion()
+
+    logInfo(`IPDT patcher ${version} setup successfully`, LogPrefix.HyperPlay)
     await writeFile(versionFile, version)
 
     if (!isWindows) {
@@ -1591,7 +1597,7 @@ export const downloadPatcher = async () => {
 
 const getIpdtPatcherVersion = async () => {
   const { stdout } = await spawnAsync(ipdtPatcher, ['-version'])
-  return `${stdout}`.split(' ')[2]
+  return `v${stdout}`.split(' ')[2]
 }
 
 export async function downloadGameIpdtManifest(
@@ -1608,10 +1614,13 @@ export async function downloadGameIpdtManifest(
     // download only if the manifest file is not already downloaded and its the same version
     const manifestName = `${appName}-${platform}-${version}.json`
     const manifestPath = path.join(ipdtManifestsPath, manifestName)
+    if (!existsSync(ipdtManifestsPath)) {
+      mkdirSync(ipdtManifestsPath, { recursive: true })
+    }
     if (existsSync(manifestPath)) return
 
     const releaseId = generateID(appName, version)
-    const manifestUrl = await getHyperPlayReleaseManifest(releaseId, platform)
+    const manifestUrl = await getIPDTManifestUrl(releaseId, platform)
     if (!manifestUrl) return logWarning(`Manifest not found for ${appName}`)
 
     // download and save the manifest file as a json file in manifest folder
@@ -1659,6 +1668,8 @@ async function applyPatching(
     app_name: appName,
     install: { install_path, version, platform }
   } = gameInfo
+
+  const datastoreDir = path.join(install_path!, '.temp', appName)
 
   try {
     const { patchFolder } = await import('@hyperplay/patcher')
@@ -1717,23 +1728,34 @@ async function applyPatching(
     const blockSize = 512 * 1024 // 512KB in bytes
     const startTime = Date.now()
 
+    if (!existsSync(datastoreDir)) {
+      mkdirSync(datastoreDir, { recursive: true })
+    }
+
+    const { maxWorkers } = GlobalConfig.get().getSettings()
+
     const { generator } = patchFolder(
       ipdtPatcher,
       install_path,
       currentManifest,
       previousManifest,
-      ipfsGateway,
-      ipfsGateway,
-      signal
+      {
+        signal,
+        s3API: ipfsGateway,
+        datastoreDir,
+        workers: maxWorkers || 6
+      }
     )
 
     if (signal.aborted) {
       logInfo(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
+      rmSync(datastoreDir, { recursive: true })
       return { status: 'abort' }
     }
 
     signal.onabort = () => {
       aborted = true
+      rmSync(datastoreDir, { recursive: true })
       return { status: 'abort' }
     }
 
@@ -1743,6 +1765,17 @@ async function applyPatching(
       if (signal.aborted) {
         logInfo(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
         return { status: 'abort' }
+      }
+
+      if (output.includes('connection refused')) {
+        logError(
+          `Error while patching ${appName}: connection refused`,
+          LogPrefix.HyperPlay
+        )
+        return {
+          status: 'error',
+          error: 'Error while patching: connection refused'
+        }
       }
 
       const match = output.match(
@@ -1760,6 +1793,15 @@ async function applyPatching(
         const downloadSpeed = downloadedData / elapsedTime
         const totalSize = blockSize * totalBlocks
         const eta = calculateEta(downloadedData, downloadSpeed, totalSize) ?? 0
+
+        // update queue element.size with totalSize
+        const queueElement = getFirstQueueElement()
+        if (queueElement) {
+          updateQueueElementParam(queueElement, 'params', {
+            ...queueElement.params,
+            size: getFileSize(totalSize)
+          })
+        }
 
         sendFrontendMessage('gameStatusUpdate', {
           appName,
@@ -1798,6 +1840,7 @@ async function applyPatching(
     }
     // need this to cover 100% of abort cases
     if (aborted) {
+      rmSync(datastoreDir, { recursive: true })
       return { status: 'abort' }
     }
 
@@ -1812,6 +1855,8 @@ async function applyPatching(
     })
 
     logInfo(`Patching ${appName} completed`, LogPrefix.HyperPlay)
+    rmSync(datastoreDir, { recursive: true })
+
     return { status: 'done' }
   } catch (error) {
     logError(`Error while patching ${error}`, LogPrefix.HyperPlay)
@@ -1838,7 +1883,7 @@ async function applyPatching(
         newVersion
       }
     })
-
+    rmSync(datastoreDir, { recursive: true })
     return { status: 'error', error: `Error while patching ${error}` }
   }
 }
@@ -1856,7 +1901,7 @@ async function getManifest(
 
     if (!existsSync(manifestPath)) {
       logDebug(
-        `Manifest for ${appName} not found for version ${version} and platform ${platformName}`,
+        `Manifest for ${appName} not found for version ${version} and platform ${platformName}, downloading it.`,
         LogPrefix.HyperPlay
       )
 

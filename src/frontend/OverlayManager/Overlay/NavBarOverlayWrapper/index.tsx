@@ -15,41 +15,37 @@ export function NavBarOverlayWrapper() {
       linkItems={[
         <NavItem
           title={'Quests'}
-          route={'/quests'}
           icon={<Images.QuestIcon fill="white" />}
           key={'/quests'}
           collapsed={collapsed}
-          currentRoute={pathname === '/' ? '/quests' : pathname}
+          selected={pathname === '/quests'}
           component={Link}
           to={'/quests'}
         />,
         <NavItem
           title={'Portfolio'}
-          route={'/portfolio'}
           icon={<Images.MetaMaskColored fill="none" width={22} height={36} />}
           key={'/portfolio'}
           collapsed={collapsed}
-          currentRoute={pathname}
+          selected={pathname === '/portfolio'}
           component={Link}
           to={'/portfolio'}
         />,
         <NavItem
           title={'Marketplace'}
-          route={'/marketplace'}
           icon={<Images.Home fill="white" />}
           key={'/marketplace'}
           collapsed={collapsed}
-          currentRoute={pathname}
+          selected={pathname === '/marketplace'}
           classNames={{ link: styles.disabled }}
           secondaryTag={comingSoonText}
         />,
         <NavItem
           title={'Achievements'}
-          route={'/achievements'}
           icon={<Images.TrophyOutline fill="white" />}
           key={'/achievements'}
           collapsed={collapsed}
-          currentRoute={pathname}
+          selected={pathname === '/achievements'}
           classNames={{ link: styles.disabled }}
           secondaryTag={comingSoonText}
         />

@@ -32,7 +32,7 @@ export async function getHyperPlayStoreRelease(
   return data
 }
 
-export async function getHyperPlayReleaseManifest(
+export async function getIPDTManifestUrl(
   releaseId: string,
   platformName: string
 ): Promise<string> {
@@ -50,6 +50,14 @@ export async function getHyperPlayReleaseManifest(
       Cookie: cookieString
     }
   })
+  if (!validateResult.ok) {
+    const errMsg = await validateResult.text()
+    logError(
+      `Error getting release manifest for ${releaseId}. ${errMsg}`,
+      LogPrefix.HyperPlay
+    )
+    throw errMsg
+  }
   const data = await validateResult.json()
   return data?.manifest
 }
