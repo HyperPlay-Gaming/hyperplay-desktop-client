@@ -717,6 +717,13 @@
     "overlay": {
         "comingSoon": "Coming Soon",
         "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet.",
+        "links": {
+            "bridge": "Bridge",
+            "buy": "Buy",
+            "portfolio": "Portfolio",
+            "sell": "Sell",
+            "swap": "Swap"
+        },
         "WALLET_DISCONNECTED": "You do not have a wallet connected to HyperPlay."
     },
     "placeholder": {
