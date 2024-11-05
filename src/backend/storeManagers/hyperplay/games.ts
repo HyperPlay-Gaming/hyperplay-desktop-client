@@ -82,7 +82,11 @@ import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { DownloadItem, dialog } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
-import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
+import {
+  cancelQueueExtraction,
+  getFirstQueueElement,
+  updateQueueElementParam
+} from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
 import Store from 'electron-store'
 import i18next from 'i18next'
@@ -1800,6 +1804,14 @@ async function applyPatching(
         const downloadSpeed = downloadedData / elapsedTime
         const totalSize = blockSize * totalBlocks
         const eta = calculateEta(downloadedData, downloadSpeed, totalSize) ?? 0
+
+        // update queue element.size with totalSize
+        const queueElement = getFirstQueueElement()
+        if (queueElement)
+          updateQueueElementParam(queueElement, 'params', {
+            ...queueElement.params,
+            size: getFileSize(totalSize)
+          })
 
         sendFrontendMessage('gameStatusUpdate', {
           appName,

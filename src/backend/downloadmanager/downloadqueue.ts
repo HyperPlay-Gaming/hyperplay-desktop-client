@@ -139,9 +139,28 @@ async function addToQueue(element: DMQueueElement) {
       element.params.channelName ?? 'main'
     )
 
-    element.params.size = installInfo?.manifest?.download_size
-      ? getFileSize(installInfo?.manifest?.download_size)
-      : '?? MB'
+    element.channel = element.params.channelName ?? 'main'
+
+    if (!element.params.size) {
+      const installSize = installInfo?.manifest?.download_size
+        ? getFileSize(installInfo?.manifest?.download_size)
+        : '?? MB'
+
+      const updateSize =
+        // @ts-expect-error - confusion because of the platform
+        element.params.gameInfo.channels[element.channel!].release_meta
+          .platforms[element.params.platformToInstall].downloadSize
+          ? getFileSize(
+              // @ts-expect-error - confusion because of the platform
+              element.params.gameInfo.channels[element.channel!].release_meta
+                .platforms[element.params.platformToInstall].downloadSize
+            )
+          : '?? MB'
+
+      element.params.size =
+        element.type === 'install' ? installSize : updateSize
+    }
+
     elements.push(element)
   }
 
@@ -340,6 +359,24 @@ function processNotification(element: DMQueueElement, status: DMStatus) {
   }
 }
 
+async function updateQueueElementParam<T extends keyof DMQueueElement>(
+  element: DMQueueElement,
+  prop: T,
+  value: DMQueueElement[T]
+) {
+  const queue: DMQueueElement[] = downloadManager.get('queue', [])
+
+  const index = queue.findIndex(
+    (el) => el.params.appName === element.params.appName
+  )
+  if (index !== -1) {
+    queue[index][prop] = value
+    downloadManager.set('queue', queue)
+  } else {
+    throw new Error('Element not found in the queue')
+  }
+}
+
 export {
   initQueue,
   addToQueue,
@@ -349,5 +386,6 @@ export {
   cancelQueueExtraction,
   pauseCurrentDownload,
   resumeCurrentDownload,
-  getFirstQueueElement
+  getFirstQueueElement,
+  updateQueueElementParam
 }
