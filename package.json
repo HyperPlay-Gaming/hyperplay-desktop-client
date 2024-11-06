@@ -366,6 +366,7 @@
     "@hyperplay/extension-importer": "^0.0.4",
     "@hyperplay/extension-provider": "^0.0.8-alpha.0",
     "@hyperplay/mock-backend": "^0.0.1",
+    "@hyperplay/overlay": "^0.0.7-alpha.2",
     "@hyperplay/providers": "^0.0.6",
     "@hyperplay/proxy-server": "^0.0.11"
   },
