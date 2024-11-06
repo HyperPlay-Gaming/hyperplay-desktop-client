@@ -36,9 +36,11 @@ export function QuestLogWrapper({
   })
   const questIdToQuestStateMap: Record<number, QuestLogInfo['state']> = {}
   questsUiQuery.data
-    .filter((val) => !!val.data)
+    .filter((val) => !!val.data && val.data.questId !== undefined)
     .forEach(
-      (val) => (questIdToQuestStateMap[val.data.questId] = val.data.state)
+      (val) =>
+        // @ts-expect-error  we filter prior to this call
+        (questIdToQuestStateMap[val.data.questId] = val.data.state)
     )
 
   const questsUi =
