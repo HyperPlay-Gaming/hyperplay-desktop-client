@@ -144,23 +144,59 @@ async function addToQueue(element: DMQueueElement) {
     element.channel = element.params.channelName ?? 'main'
 
     if (!element.params.size) {
-      const installSize = installInfo?.manifest?.download_size
-        ? getFileSize(installInfo?.manifest?.download_size)
-        : '?? MB'
+      let size = '?? MB'
+      if (element.type === 'install') {
+        const installSize = installInfo?.manifest?.download_size
+        if (installSize) {
+          size = getFileSize(installSize)
+        }
+      } else {
+        const {
+          channelName,
+          platformToInstall,
+          gameInfo: { channels }
+        } = element.params
 
-      const updateSize =
-        // @ts-expect-error - confusion because of the platform
-        element.params.gameInfo.channels[element.channel!].release_meta
-          .platforms[element.params.platformToInstall].downloadSize
-          ? getFileSize(
-              // @ts-expect-error - confusion because of the platform
-              element.params.gameInfo.channels[element.channel!].release_meta
-                .platforms[element.params.platformToInstall].downloadSize
-            )
-          : '?? MB'
+        const updateSize =
+          // @ts-expect-error - confusion because of the platform type
+          channels[channelName ?? 'main'].release_meta.platforms[
+            platformToInstall
+          ]?.downloadSize
 
-      element.params.size =
-        element.type === 'install' ? installSize : updateSize
+        if (updateSize) {
+          size = getFileSize(updateSize)
+        }
+      }
+
+      element.params.size = size
+    }
+
+    if (!element.params.size) {
+      let size = '?? MB'
+      if (element.type === 'install') {
+        const installSize = installInfo?.manifest?.download_size
+        if (installSize) {
+          size = getFileSize(installSize)
+        }
+      } else {
+        const {
+          channelName,
+          platformToInstall,
+          gameInfo: { channels }
+        } = element.params
+
+        const updateSize =
+          // @ts-expect-error - confusion because of the platform type
+          channels[channelName ?? 'main'].release_meta.platforms[
+            platformToInstall
+          ].downloadSize
+
+        if (updateSize) {
+          size = getFileSize(updateSize)
+        }
+      }
+
+      element.params.size = size
     }
 
     elements.push(element)
@@ -373,13 +409,20 @@ async function updateQueueElementParam<T extends keyof DMQueueElement>(
   )
   if (index !== -1) {
     queue[index][prop] = value
-    if (currentElement) {
-      currentElement[prop] = value
-    }
+    updateCurrentElementParam(prop, value)
     downloadManager.set('queue', queue)
     sendFrontendMessage('changedDMQueueInformation', queue, queueState)
   } else {
     throw new Error('Element not found in the queue')
+  }
+}
+
+function updateCurrentElementParam<T extends keyof DMQueueElement>(
+  prop: T,
+  value: DMQueueElement[T]
+) {
+  if (currentElement) {
+    currentElement[prop] = value
   }
 }
 

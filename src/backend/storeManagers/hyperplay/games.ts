@@ -1925,7 +1925,7 @@ async function getManifest(
         }
       }
     )
-    return ''
+    throw new Error(`Error in getManifest for ${appName}: ${error}`)
   }
 }
 
