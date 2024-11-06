@@ -1,9 +1,7 @@
 import {
   getPlaystreakQuestStatus,
-  getGetQuestQueryKey,
-  getGetUserPlayStreakQueryKey,
-  getGetQuestQuery,
-  getGetUserPlaystreakQuery
+  getUserPlaystreakQueryOptions,
+  getQuestQueryOptions
 } from '@hyperplay/quests-ui'
 import { QuestLogInfo } from '@hyperplay/ui'
 import { Quest } from '@hyperplay/utils'
@@ -16,36 +14,41 @@ export interface UseGetQuestLogInfosProps {
 export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
   const getQuestQuery = useQueries({
     queries:
-      quests?.map((quest) => getGetQuestQuery(quest.id, window.api.getQuest)) ??
-      []
+      quests?.map((quest) =>
+        getQuestQueryOptions(quest.id, window.api.getQuest)
+      ) ?? []
   })
 
   const getUserPlaystreakQuery = useQueries({
     queries:
       quests?.map((quest) =>
-        getGetUserPlaystreakQuery(quest.id, window.api.getUserPlayStreak)
+        getUserPlaystreakQueryOptions(quest.id, window.api.getUserPlayStreak)
       ) ?? []
   })
 
   const questMap: Record<number, Quest> = {}
   getQuestQuery
     .filter((val) => !!val.data)
-    // @ts-expect-error we filter above
-    .forEach((val) => (questMap[val.data.id] = val.data))
+    .forEach((val) => {
+      if (!val.data) {
+        return
+      }
+      questMap[val.data.id] = val.data
+    })
 
   const questIdToQuestStateMap: Record<number, QuestLogInfo['state']> = {}
 
-  getUserPlaystreakQuery
-    .filter((val) => !!val.data)
-    .filter((val) => Object.hasOwn(questMap, val.data.questId))
-    .forEach((val) => {
-      const questId = val.data.questId
-      const questData = questMap[questId]
-      return (questIdToQuestStateMap[questId] = getPlaystreakQuestStatus(
-        questData,
-        val.data.userPlayStreak
-      ))
-    })
+  getUserPlaystreakQuery.forEach((val) => {
+    if (!val.data || !Object.hasOwn(questMap, val.data.questId)) {
+      return
+    }
+    const questId = val.data.questId
+    const questData = questMap[questId]
+    return (questIdToQuestStateMap[questId] = getPlaystreakQuestStatus(
+      questData,
+      val.data.userPlayStreak
+    ))
+  })
 
   console.log(
     'get quest query ',

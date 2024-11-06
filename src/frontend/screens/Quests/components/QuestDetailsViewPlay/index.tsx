@@ -239,7 +239,7 @@ export const QuestDetailsViewPlayWrapper = observer(
           },
           playStreak: getPlaystreakArgsFromQuestData({
             questMeta,
-            questPlayStreakData
+            questPlayStreakData: questPlayStreakData?.userPlayStreak
           })
         }}
         classNames={{ root: styles.questDetailsRoot }}
