@@ -1,72 +1,73 @@
 {
     "accessibility": {
         "actions_font_family_no_default": "Actions Font Family (Default: ",
-        "all_tiles_in_color": "Näita kõiki mänguplaate värviliselt",
-        "content_font_family_no_default": "Content Font Family (Default: ",
-        "fonts": "Fondid",
-        "title": "Kättesaadavus",
-        "zoom": "Zoom"
+        "all_tiles_in_color": "Esita kõik mänguplaadid värviliselt",
+        "content_font_family_no_default": "Sisu fondi perede valik (vaikimisi: ",
+        "fonts": "Tähtede stiilid",
+        "title": "Saadavus",
+        "zoom": "Suumi välja"
     },
-    "add_game": "Add Game",
-    "All": "Kõik",
+    "add_game": "Mängu juurde lisamine",
+    "All": "Iga",
     "anticheat": {
-        "anticheats": "Sohitegemisvastased tarkvarad",
+        "anticheats": "Petmisvastased lahendused",
         "may_not_work": "See ei pruugi toimida, sest sohitegemisvastase tarkvara tugi on keelatud või katki.",
-        "reference": "Viide",
-        "source": "Source",
-        "status": "Status",
-        "title": "See mäng sisaldab sohitegemisvastast tarkvara"
+        "reference": "Viidatud teave",
+        "source": "==WEBLATE_PART==\nAllikas==WEBLATE_PART==\nAllika==WEBLATE_PART==\nAllika andmed",
+        "status": "Olek",
+        "title": "See mäng sisaldab petmisvastast süsteemi"
     },
     "box": {
         "cache-cleared": {
-            "message": "HyperPlay-u vahemälu puhastati.",
-            "title": "Vahemälu puhastati"
+            "message": "HyperPlay vahemälu on eemaldatud.",
+            "title": "Vahemälu eemaldati"
         },
-        "choose": "Valige",
-        "choose-egs-prefix": "Valige prefiks, kuhu EGS on paigaldatud",
-        "choose-gogdl-binary": "Vali GOGDL binaarfail (vajab taaskäivitust)",
-        "choose-legendary-binary": "Valige Legendary binaarfail",
-        "customWine": "Valige Wine või Proton-i binaar",
-        "default-install-path": "Valige Vaikimisi paigalduskoht",
-        "default-steam-path": "Steami tee.",
+        "choose": "Valige sobiv",
+        "choose-egs-prefix": "Valige kaust, kuhu EGS on paigaldatud",
+        "choose-gogdl-binary": "Vali GOGDL binaarfail (taaskäivitamine vajalik)  \nVali GOGDL binaarfail (vajalik taaskäivitamine)  \nVali GOGDL binaarfail (taaskäivitamine on vajalik)",
+        "choose-legendary-binary": "Valige legendaarne binaarversioon",
+        "customWine": "Valige Wine või Proton'i versioon",
+        "default-install-path": "Määrake vaikimisi installatsioonikoht",
+        "default-steam-path": "Steami failitee.",
         "downloadNow": "Lae alla nüüd",
         "error": {
             "add": {
                 "steam": {
-                    "body": "Mängu {{game}} lisamine Steami ebaõnnestus: {{newLine}} {{error}}",
+                    "body": "Mängu {{game}} lisamine Steami ebaõnnestus: {{newLine}} {{error}}  \nMängu {{game}} Steami lisamine ebaõnnestus: {{newLine}} {{error}}  \nSteami lisamine mängule {{game}} ebaõnnestus: {{newLine}} {{error}}",
                     "title": "Viga lisamisel"
                 }
             },
             "credentials": {
-                "message": "Teie kasutaja andmed on aegunud, palun logige välja ja logige uuesti sisse."
+                "message": "Teie mandaadid on aegunud, palun logige välja ja seejärel logige uuesti sisse.  \nTeie autentimisandmed on aegunud, palun logige välja ja logige uuesti sisse.  \nTeie sisselogimisandmed on aegunud, palun logige välja ja proovige uuesti sisse logida."
             },
             "cx-bottle-not-found": {
                 "message": "CrossOveri pudelit \"{{bottle_name}}\" pole olemas, ei saa käivitada!",
                 "title": "CrossOveri pudelit ei leitud"
             },
             "diskspace": {
-                "message": "Ei ole piisavalt vaba kettaruumi",
-                "title": "Ei ole ruumi"
+                "message": "Kettaruumi nappus",
+                "title": "Pole ruumi"
             },
             "dxvk": {
-                "message": "Viga DXVK/VKD3D installimisel! Palun kontrollige ühendust!",
-                "title": "DXVK/VKD3D viga"
+                "message": "Viga DXVK/VKD3D installimisel! Palun veenduge, et teie ühendus on korras!  \nDXVK/VKD3D installimise viga! Kontrollige palun oma internetiühendust!  \nDXVK/VKD3D paigaldamisel ilmnes viga! Palun kontrollige oma ühendust!",
+                "title": "DXVK/VKD3D viga ilmnes"
             },
             "folder-not-found": {
-                "title": "Mängukaust tundub olevat kustutatud, kas soovite mängu paigaldatute nimekirjast eemaldada?"
+                "title": "Mängukaust paistab olevat kadunud, kas soovite mängu installitud mängude loost eemaldada?"
             },
             "generic": {
                 "message": "",
-                "title": "Select EXE to Run"
+                "title": "Vali EXE fail, mida käivitada"
             },
-            "launchAborted": "Launch aborted",
-            "title": "Viga",
+            "launchAborted": "Käivitamine nurjus",
+            "title": "Vigane",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "Tekkis ootamatu erand!"
             },
             "update": {
-                "title": "Viga uuendamisel"
+                "title": "Viga uuenduse tegemisel",
+                "message": "Uuendamisega tekkis probleem! Palun desinstallige ja installige HyperPlay käsitsi."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -74,8 +75,22 @@
                 "title": "Wine'i ei leitud"
             },
             "winetricks": {
-                "message": "Winetricks tagastas jooksmise ajal järgmise vea:{{newLine}}{{error}}",
-                "title": "Winetricksi viga"
+                "message": "Winetricks andis jooksmise ajal järgmise vea:{{newLine}}{{error}}  \nWinetricks teatas jooksmise ajal järgmistest vigadest:{{newLine}}{{error}}  \nWinetricks näitas jooksmise ajal järgmist viga:{{newLine}}{{error}}",
+                "title": "Winetricks'i probleem"
+            },
+            "moving": "Mängu {{error}} liigutamise viga",
+            "ubisoft-connect": {
+                "message": "Ubisoft Connecti installimine mängu eeltingimustes ebaõnnestus. Kontrollige meie wiki lehte aadressil https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, et installida see käsitsi.",
+                "title": "Ubisoft Connect"
+            },
+            "delete-files": {
+                "body": "Viga eemaldades kaevandatud kausta {{path}}. Palun eemalda see käsitsi.  \n                {{paragraph}}  \n                {{error}}",
+                "title": "Viga eemaldades eraldatud kausta"
+            },
+            "steam": {
+                "error": "Steam'i käivitatavat faili ei leitud. Installatsioon tühistati tõenäoliselt kasutaja poolt või ebaõnnestus Steam'i poolel.",
+                "message": "Steami installimine ebaõnnestus! Palun loe juhiseid hoolikalt ja proovi uuesti! {{paragraph}} {{error}}",
+                "title": "Steam'i viga"
             }
         },
         "info": {
@@ -85,137 +100,155 @@
                 "message": "Saadaval on uus versioon!",
                 "message-finished": "Kas soovite HyperPlayu nüüd taaskäivitada?",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Uuendus lõpetatud"
+                "title-finished": "Uuendus lõpetatud",
+                "appUpdated": "HyperPlay uuendati",
+                "appUpdated-message": "HyperPlay uuendati. Kas soovite HyperPlay nüüd uuendada ja taaskäivitada?"
             }
         },
         "no": "EI",
-        "ok": "OK",
+        "ok": "Olgu",
         "protocol": {
             "install": {
-                "not_installed": "Hetkel ei ole paigaldatud, kas soovite selle paigaldada?"
+                "not_installed": "Hetkel ei ole see paigaldatud. Kas soovite selle installida?  \nHetkel pole see installitud. Kas soovite selle nüüd paigaldada?  \nPraegu ei ole see süsteemis. Kas soovite selle installida?"
             }
         },
         "quit": {
-            "message": "On pooleliolevad toimingud, kas olete kindel?",
-            "title": "Välju"
+            "message": "On pooleliolevad toimingud, kas olete selles kindel?  \nOn ootel toimingud, kas olete kindel?  \nKas olete kindel, et on pooleliolevad toimingud?",
+            "title": "Lahkumine"
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "message": "Kas olete kindel, et soovite HyperPlay'i lähtestada? See eemaldab kõik seaded ja vahemälu, kuid ei kustuta teie installitud mänge ega Epic'i mandaate. HyperPlay'i kaasaskantavad versioonid (AppImage, WinPortable jne) tuleb pärast seda käsitsi taaskäivitada.",
                 "title": "Reset HyperPlay"
             }
         },
         "runexe": {
-            "title": "Valige EXE mida käivitada"
+            "title": "Valige EXE fail, mida avada"
         },
         "select": {
-            "button": "Vali",
-            "exe": "Vali EXE"
+            "button": "Vali valik",
+            "exe": "Vali EXE-fail"
         },
         "shortcuts": {
-            "message": "Töölauale ja Start Menüüsse on loodud otseteed",
-            "message-mac": "Shortcuts were created on the Applications folder",
-            "message-remove": "Otseteed eemaldati töölaualt ja startmenüüst",
-            "message-remove-mac": "Shortcuts were removed from the Applications folder",
+            "message": "Töölaual ja Start Menüüdes on loodud otseteed",
+            "message-mac": "Rakenduste kaustas loodi lühikoodid",
+            "message-remove": "Otseteed on töölaualt ja startmenüüst eemaldatud",
+            "message-remove-mac": "Rakenduste kaustast on lühikoodid eemaldatud",
             "title": "Otseteed"
         },
         "sync": {
-            "button": "Valige",
-            "error": "Vale koht",
-            "title": "Valige salvestuste kaust"
+            "button": "Vali",
+            "error": "Vale suund",
+            "title": "Valige salvestuste asukoht"
         },
         "vcruntime": {
             "install": {
-                "message": "Visual C++ Runtime'ide allalaadimislingid on avatud. Palun paigaldage nii x86 kui ka x64 versioonid."
+                "message": "Visual C++ Runtime'ide allalaadimislingid on avatud. Palun installige nii x86 kui ka x64 versioonid."
             },
             "notfound": {
-                "message": "Microsoft Visual C++ Runtime'e pole installitud, mida mõned mängud nõuavad",
-                "title": "VCRuntime ei ole paigaldatud"
+                "message": "Microsoft Visual C++ Runtime'id ei ole installitud, mida mõned mängud vajavad.  \nMicrosoft Visual C++ Runtimes ei ole paigaldatud, mis on vajalik mõnede mängude jaoks.  \nMõned mängud vajavad Microsoft Visual C++ Runtimes'i, kuid need ei ole installitud.",
+                "title": "VCRuntime'i installimine on vajalik"
             }
         },
         "warning": {
             "epic": {
-                "import": "Epic-u serveritel on praegu suur katkestus, mängu ei saa importida!",
-                "install": "Epic-u serveritel on praegu suur katkestus, mängu ei saa installida!",
-                "update": "Epic-u serveritel on praegu suur katkestus, mängu ei saa uuendada!"
+                "import": "Epic-u serveritel on praegu tõsine katkestus, mängu ei ole võimalik importida!  \nEpic-u serverid kogevad praegu suurt tõrget, mängu importimine ei õnnestu!  \nEpic-u serverites on hetkel suur probleem, mängu importimine on võimatu!",
+                "install": "Epic-u serveritel on praegu tõsine katkestus, mängu ei ole võimalik installida!  \nEpic-u serverid on hetkel suures hädas, mängu ei saa paigaldada!  \nEpic-u serverites on praegu tõsine probleem, mängu installimine ei õnnestu!",
+                "update": "Epic-u serveritel on praegu tõsine katkestus, mängu ei saa värskendada!  \nEpic-u serverid kogevad hetkel suurt tõrget, mängu uuendamine ei ole võimalik!  \nEpic-u serverites on praegu suur probleem, mängu ei saa uuendada!"
             },
-            "title": "Hoiatus"
+            "title": "Hoiatus:",
+            "wine-change": {
+                "message-gptk": "Et saaksite käivitada mänge Apple'i mängude portimise tööriistaga, peate oma macOS-i versiooni uuendama 14-le (Sonoma) või kõrgemale. {{newline}} Leidsime teie süsteemist Wine'i, kas soovite jätkata käivitamist kasutades {{foundWine}} ?",
+                "title-gptk": "Mängude Portimise Tööriist ei ole ühilduv ",
+                "message": "Me ei leidnud valitud veini versiooni selle pealkirja ({{selectedWine}}) käivitamiseks. {{newline}} Me leidsime teise, kas soovite jätkata käivitamist kasutades {{foundWine}} ?"
+            },
+            "rosetta": {
+                "title": "Rosetta ei leitud",
+                "message": "HyperPlay vajab Apple Silicon kiipide korral korrektseks toimimiseks Rosettat. Palun installige see macOS terminali kaudu järgmise käsuga: \"softwareupdate --install-rosetta\" ja taaskäivitage HyperPlay. "
+            }
         },
-        "wineprefix": "Valige Wine prefiksi kaust",
-        "yes": "JAH",
-        "dontShowAgain": "Ära näita enam",
-        "choose-nile-binary": "Valige Niiluse kahendkood"
+        "wineprefix": "Valige Wine'i eelneva kausta",
+        "yes": "JAH  \nJah  \nJahh",
+        "dontShowAgain": "Ära näita seda enam",
+        "choose-nile-binary": "Valige Niiluse kahendkood",
+        "reset-extension": {
+            "question": {
+                "title": "Lähtesta laiendus",
+                "message": "Kas olete kindel, et soovite MetaMaski laienduse lähtestada?"
+            }
+        }
     },
     "button": {
-        "cancel": "Cancel",
-        "go_to_library": "Mine teeki",
+        "cancel": "Tühistamine",
+        "go_to_library": "Mine teekonda",
         "login": "Logi sisse",
-        "sync": "Sünkrooni",
+        "sync": "Sünkroniseerima",
         "syncing": "Sünkroonimine",
-        "unsync": "Mittesünkroniseerimine",
+        "unsync": "Eemalda sünkroonimine",
         "update": "Ajakohastamine",
         "download": "Laadi alla",
-        "continue": "Jätka",
-        "install": "Installi"
+        "continue": "Jätka teed",
+        "install": "Installeerimine"
     },
     "controller": {
         "hints": {
             "back": "Tagasi",
             "backspace": "Backspace",
-            "close_dialog": "Sulge dialoog",
-            "close_keyboard": "Sulge klaviatuur",
-            "close_options": "Close Options",
-            "game_details": "Mängu üksikasjad",
-            "game_settings": "Mängu seaded",
-            "install_game": "Paigalda mäng",
-            "move_cursor": "Liiguta kursorit",
-            "open_virtual_keyboard": "Ava virtuaalne klaviatuur",
-            "options": "Options",
+            "close_dialog": "Sulge kõne",
+            "close_keyboard": "Klaviatuuri lõpetamine",
+            "close_options": "Sulge võimalused",
+            "game_details": "Mängu kirjeldus",
+            "game_settings": "Mängu valikud",
+            "install_game": "Paigalda mängu",
+            "move_cursor": "Kursori positsiooni muutmine",
+            "open_virtual_keyboard": "Avage virtuaalne klaviatuur",
+            "options": "Valikute loend",
             "play_game": "Mängi mängu",
-            "scroll": "Scroll",
-            "select": "Select",
-            "space": "Tühik",
-            "update_game": "Uuenda mängu"
+            "scroll": "Kerige",
+            "select": "Vali välja",
+            "space": "Avakosmos",
+            "update_game": "Uuenda mängu seade"
         }
     },
     "docs": "Documentation",
     "download-manager": {
         "install-type": {
-            "install": "Install",
-            "update": "Update"
+            "install": "Installeerimine",
+            "update": "Uuenda"
         },
         "label": {
-            "disk": "Disk",
-            "speed": "Download"
+            "disk": "Kettasüsteem",
+            "speed": "Laadi alla nüüd"
         },
         "link": "Downloads",
         "queue": {
-            "end-time": "Finished at",
+            "end-time": "Valmis kell",
             "queue-time": "Added at",
-            "start-time": "Started at",
+            "start-time": "Alustas",
             "type": "Type"
         },
         "title": "Downloads",
-        "ETA": "Eeldatav kellaaeg"
+        "ETA": "Prognoositud aeg",
+        "title_dm": "Allalaadimise haldur"
     },
     "epic": {
-        "offline-notification-body": "Võrguteenused ei pruugi täielikult töötada, kuna Epic Gamesi serverid on võrguühenduseta!",
-        "offline-notification-title": "offline"
+        "offline-notification-body": "Võrguteenused ei pruugi täielikult toimida, kuna Epic Gamesi serverid on maas!  \nVõrguteenused võivad olla osaliselt kättesaamatud, kuna Epic Gamesi serverid ei ole aktiivsed!  \nVõrguteenused ei pruugi korralikult töötada, kuna Epic Gamesi serverid on välja lülitatud!",
+        "offline-notification-title": "võrguühenduseta"
     },
     "Epic Games": "Epic Games",
-    "error": "Error",
-    "favourites": "Lemmikud",
+    "error": "Vigane",
+    "favourites": "Lemmikvalikud",
     "game": {
-        "status": "Status",
-        "store": "Pood",
+        "status": "Olek",
+        "store": "Salvestus",
         "title": "Mängu pealkiri"
     },
     "generic": {
         "error": {
-            "component": "Mänge ei leitud - proovige uuesti sisse logida või ühte allolevatest võimalustest"
+            "component": "Mänge ei leitud - proovige logida välja ja seejärel uuesti sisse logida või valige üks allolevatest valikutest."
         },
         "library": {
-            "refresh": "Värskenda varamut"
+            "refresh": "Värskenda kogumikku"
         }
     },
     "globalSettings": "Globaalsed seaded",
@@ -226,50 +259,53 @@
         "ignore_hidden": "Ignoreeri peidetud",
         "platform": "Platvorm",
         "show_all_games": "Näita kõiki mänge",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Kuva mitteolemasolevad mängud",
         "show_favourites_only": "Näita ainult lemmikuid",
-        "show_hidden": "Näita peidetud",
-        "store": "Filtreeri poodi"
+        "show_hidden": "Näita salajased",
+        "store": "Filtreerimise pood"
     },
     "help": {
-        "amdfsr": "AMD FSR aitab suurendada kaadrisagedust, suurendades madalamaid resolutsioone täisekraani režiimis. Pildikvaliteet suureneb 5-st 1-le, mis toob aga kaasa kerge jõudluse vähenemise. Lubamine võib parandada jõudlust.",
-        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
-        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
-        "dxvk": "DXVK on Vulkanil põhinev tõlkekiht DirectX 9, 10 ja 11 mängude jaoks. Lubamine võib parandada ühilduvust. Võib põhjustada probleeme, eriti vanemate DirectX-mängude puhul.",
-        "esync": "Esynci eesmärk on vähendada wineserveri koormust CPU-mahukates mängudes. Lubamine võib parandada jõudlust.",
-        "fsync": "Fsynci eesmärk on vähendada wineserveri koormust CPU-mahukates mängudes. Lubamine võib parandada jõudlust toetatud Linuxi kernelitel.",
+        "amdfsr": "AMD FSR aitab tõsta kaadrisagedust, suurendades madalamaid resolutsioone täisekraani režiimis. Pildikvaliteet tõuseb 5-lt 1-le, kuid see toob kaasa väikese jõudluse languse. Lubamine võib jõudlust parandada.\n\nAMD FSR suurendab kaadrisagedust, skaleerides madalamaid resolutsioone täisekraani režiimis. Pildikvaliteet tõuseb 5-lt 1-le, mis võib põhjustada kerget jõudluse langust. Lubamine võib parandada jõudlust.\n\nAMD FSR aitab suurendada kaadrisagedust, skaleerides madalamaid resolutsioone täisekraani režiimis. Pildikvaliteet tõuseb 5-lt 1-le, kuid see võib põhjustada kerget jõudluse langust. Lubamine võib parandada jõudlust.",
+        "custom_themes_path": "Ärge kasutage CSS-faile usaldamatest allikatest. Kui kahtlete, küsige meie Discordi kanalist ülevaadet.  \nÄrge kasutage usaldamatest allikatest pärit CSS-faile. Kui teil on kahtlusi, paluge meie Discordi kanalist ülevaade.  \nÄrge kasutage CSS-faile, mis on pärit usaldamatest allikatest. Kui te pole kindel, küsige meie Discordi kanalist arvamust.",
+        "custom_themes_wiki": "Vaata Wiki't, et saada rohkem teavet kohandatud teemade lisamise kohta. Kliki siia.  \nVaata Wiki't, et leida rohkem teavet kohandatud teemade lisamise kohta. Kliki siia.  \nKülastage Wiki't, et saada lisainfot kohandatud teemade lisamise kohta. Kliki siia.",
+        "dxvk": "DXVK on Vulkanil põhinev tõlke kiht, mis on mõeldud DirectX 9, 10 ja 11 mängudele. Selle aktiveerimine võib suurendada ühilduvust, kuid võib tekitada probleeme vanemate DirectX mängudega.",
+        "esync": "Esynci funktsioon on vähendada wineserveri koormust CPU-rasketes mängudes. Selle lubamine võib suurendada jõudlust.",
+        "fsync": "Fsynci eesmärk on vähendada wineserveri koormust mängudes, mis nõuavad palju CPU-d. Selle lubamine võib parandada jõudlust toetatud Linuxi kernelites.",
         "game_language": {
-            "fallback": "HyperPlayu keele kasutamiseks jätke väli tühjaks.",
-            "in_game_config": "Kõik mängud ei toeta seda seadistust, mõnel on mängusisene keeleseadistus.",
+            "fallback": "Tühjendage väli, et valida HyperPlay'i keel.",
+            "in_game_config": "Mitte kõik mängud ei toeta seda konfiguratsiooni, mõnel on mängusisesed keelevalikud.  \nMõned mängud ei pruugi seda seadistust toetada, mõnedel on mängusisesed keelevalikud.  \nKuid mitte kõik mängud ei toeta seda seadistust, mõnedel on keelevalikud mängus.",
             "valid_codes": "Kehtivad keelekoodid sõltuvad mängust."
         },
-        "gamemode": "Feral GameMode rakendab mängude käivitamisel süsteemile automaatseid ja ajutisi kohandusi. Lubamine võib parandada jõudlust.",
-        "general": "Sünkroonige EGS-iga, kui teil on Epic Games Store'i töötav installatsioon mujal ja soovite oma mänge importida, et vältida nende uuesti allalaadimist.",
-        "mangohud": "MangoHUD on ülekate, mis kuvab ja jälgib FPS-i, temperatuure, CPU / GPU koormust ja muid süsteemiressursse.",
+        "gamemode": "Feral GameMode rakendab mängude käivitamisel süsteemis automaatseid ja ajutisi seadeid. Selle lubamine võib tõsta jõudlust.",
+        "general": "Sünkroonige EGL-iga, kui teil on Epic Games Launcheri funktsionaalne installatsioon mujal ja soovite oma mänge importida, et vältida nende uuesti allalaadimist.",
+        "mangohud": "MangoHUD on ülekate, mis kuvab ja jälgib kaadrisagedust, temperatuure, CPU/GPU koormust ning teisi süsteemi ressursse.",
         "other": {
-            "part4": "Kasutage ",
-            "part5": "Mängu argumendid",
-            "part6": " kutsutakse pärast käivituskäsku, näiteks: ",
-            "part7": " et jätta mõnedes mängudes käivitaja vahele jne."
+            "part4": "==WEBLATE_PART==Kasutage==WEBLATE_PART==Kasutage==WEBLATE_PART==Kasutage ",
+            "part5": "Mängu argumentatsioon",
+            "part6": " kutsutakse pärast käivitamise käsku, näiteks: ",
+            "part7": " et vahele jätta käivitaja mõnedes mängudes jne."
         },
-        "preferSystemLibs": "Kohandatud Wine versioonid (Wine-GE, Wine-Lutris) tarnitakse koos nende teegi sõltuvustega. Selle valiku lubamisel ignoreeritakse neid tarnitud teeke ja Wine laadib selle asemel süsteemiteeke. Hoiatus! Kui sõltuvusi ei täideta, võib tekkida probleeme.",
+        "preferSystemLibs": "Kohandatud Wine versioonid (Wine-GE, Wine-Lutris) on varustatud oma teegi sõltuvustega. Kui see valik on aktiveeritud, ignoreeritakse tarnitud teeke ning Wine laadib süsteemi teeke. Hoiatus! Probleemide tekkimine on võimalik, kui sõltuvusi ei ole täidetud.",
         "primerun": "Mitme GPU-süsteemides mängu renderdamiseks kasutage spetsiaalset graafikakaarti. Vajalik ainult mängusülearvutites või lauaarvutites, mis kasutavad renderdamiseks peata GPU-d (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
-            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "See tee võimaldab HyperPlay'l kindlaks teha, millist Proton'i versiooni Steam kasutab mitte-Steam mängude Steami lisamiseks."
         },
-        "steamruntime": "Steami pakutavad kohandatud teegid, mis aitavad käivitada Linuxi ja Windowsi (Protoni) mänge. Lubamine võib parandada ühilduvust.",
+        "steamruntime": "Steami pakutavad kohandatud teegid, mis aitavad Linuxi ja Windowsi (Protoni) mänge käivitada. Nende lubamine võib ühilduvust parandada.",
         "sync": {
-            "part1": "HyperPlay üritab ära arvata õige salvestuskausta ja see toimib enamikul juhtudel. Juhul kui kaust on vale, kasutage selle muutmiseks override-kasti.",
-            "part2": "Kui te muudate Wine'i või Proton'i prefiksi kausta, peate te tee uuesti kontrollima, kuna Proton kasutab teistsugust prefiksit (/pfx) ja kasutajanime (steamuser). Nii et võite lihtsalt kustutada praeguse faili koha, lahkuda sünkroonimise seadete lehelt ja minna uuesti tagasi, et HyperPlay saaks arvata veelkord kausta õige eesliitega.",
-            "part3": "Manuaalne sünkroonimine: Valige Download, et laadida alla pilve salvestatud mängude salvestused. Upload, et laadida kohalikud pilve üles. Force Download ja Force Upload ignoreerivad lokaalselt või pilves olevat versiooni.",
-            "part4": "Automaatne salvestuste sünkroonimine sünkroonib salvestused iga kord, kui alustate mängu ja pärast mängimise lõpetamist."
+            "part1": "HyperPlay üritab tuvastada õige salvestuskausta ning see peaks enamikul juhtudel olema efektiivne. Kui kaust on vale, kasutage selle muutmiseks ülekirjutamise kasti.",
+            "part2": "Kui muudate Wine'i või Proton'i prefiksi kausta, peate tee uuesti kontrollima, kuna Proton kasutab teistsugust prefiksit (/pfx) ja kasutajanime (steamuser). Seega võite lihtsalt praeguse tee kustutada, lahkuda sünkroonimise seadete lehelt ja seejärel tagasi tulla, et HyperPlay saaks kausta õige eesliitega uuesti leida.",
+            "part3": "Manuaalne sünkroonimine: Valige Laadi alla, et alla laadida pilves hoitud mängude salvestused. Laadi üles, et saata kohalikud salvestused pilve. Force Download ja Force Upload ei arvestata kohalike või pilves olevate versioonidega.",
+            "part4": "Iga kord, kui alustate mängu ja pärast mängimist, sünkroonitakse salvestused automaatselt."
         },
-        "vkd3d": "VKD3D on Vulkanil põhinev tõlkekiht DirectX 12 mängude jaoks. Selle lubamine võib ühilduvust oluliselt parandada. Ei mõjuta vanemaid DirectX mänge.",
+        "vkd3d": "VKD3D on Vulkanil põhinev tõlkekiht, mis on suunatud DirectX 12 mängudele. Selle aktiveerimine võib oluliselt suurendada ühilduvust. See ei avalda mõju vanadele DirectX mängudele.",
         "wine": {
-            "part1": "HyperPlay otsib Wine'i, Proton'i ja CrossOveri versioone järgmistes kaustades:",
-            "part2": "Muude kohtade puhul kasutage sümboolset linki ühele neist kaustadest"
+            "part1": "HyperPlay leiab versioone Wine'ist, Proton'ist ja CrossOver'ist järgmistest kaustadest:",
+            "part2": "Muudes asukohtades kasutage sümboolset linki mõnele neist kaustadest"
         },
-        "msync": "Fsynci eesmärk on vähendada wineserveri koormust CPU-mahukates mängudes. Lubamine võib parandada jõudlust toetatud Linuxi kernelitel."
+        "msync": "Fsynci eesmärk on vähendada wineserveri koormust mängudes, mis vajavad palju CPU ressursse. Lubamine võib mitmete mängude jõudlust parandada.",
+        "disable_logs": "Märgi see ruut KASUTAMISELE, et keelata enamik logifailidesse kirjutamist (kriitiline teave logitakse alati). Veenduge, et lülitate selle seade VÄLJA, enne kui teatate mingist probleemist.",
+        "dxvkfpslimit": "Seab DXVK mängude jaoks kaadrisageduse piiri",
+        "dxvknvapi": "DXVK-NVAPI on NVAPI rakendus, mis on ehitatud DXVK ja Linuxi kohaliku NVAPI peale, see võimaldab DLSS-i kasutamist Nvidia GPU-del."
     },
     "info": {
         "hyperplay": {
@@ -277,420 +313,457 @@
             "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Uuendus saadaval!",
             "stable": "Stabiilne",
-            "version": "HyperPlay Version"
+            "version": "HyperPlay versioon number"
         },
         "save-sync": {
             "searching": "Trying to detect the correct save folder (click to cancel)"
         },
-        "settings": "Seaded salvestatakse automaatselt",
-        "version": "Wine'i versioon"
+        "settings": "Seaded salvestatakse automaatselt ilma kasutaja sekkumiseta",
+        "version": "Wine'i versioon number"
     },
     "infobox": {
         "help": "Abi",
-        "requirements": "Süsteeminõuded",
-        "warning": "Warning",
-        "wine-path": "Wine'i tee",
+        "requirements": "Süsteemi tingimused",
+        "warning": "Hoiatamine",
+        "wine-path": "Veini marsruut",
         "wine-prefix": {
-            "title": "Wine prefiks"
+            "title": "Veini konfigureerimise prefiks"
         },
         "wine-repfix": {
-            "message": "Wine kasutab Windowsi rakenduste kapseldamiseks nn WINEPREFIXi. See eesliide sisaldab Wine'i konfiguratsioonifaile ja C: (Windows OSi põhiketta) failihierarhia reproduktsiooni. Sellesse C: ketta reproduktsiooni salvestatakse teie mängu salvestusfailid ja winetricks'i kaudu paigaldatud sõltuvused."
-        }
+            "message": "Wine kasutab Windowsi rakenduste kapseldamiseks WINEPREFIXi, mis sisaldab Wine'i seadistusteadete faile ja C: (Windows OSi põhiketta) failihierarhia kopeerimist. Selles C: ketta kopeerimises asuvad teie mängu salvestusfailid ja winetricks'i kaudu paigaldatud sõltuvused."
+        },
+        "wine-path-none-found": "Winet versiooni ei leitud, laadige see alla Ühilduvuse Halduse kaudu",
+        "wine-path-invalid": "Wine'i tee on vale, palun vali teine."
     },
     "install": {
-        "path": "Valige paigaldustee"
+        "path": "Määrake installatsiooni rada"
     },
     "library": {
         "label": "Library",
-        "refresh": "Värskenda",
+        "refresh": "Värskendama",
         "sortAscending": "Järjesta kasvavalt",
-        "sortByStatus": "Järjesta staatuse järgi",
+        "sortByStatus": "Järjesta staatuse alusel",
         "sortDescending": "Järjesta kahanevalt",
         "toggleLayout": {
             "grid": "Vaheta ruudustiku paigutusele",
             "list": "Vaheta loendi paigutusele"
-        }
+        },
+        "alphabeticalAZ": "A-Z tähestikuline",
+        "alphabeticalZA": "A–Z tähestikuline"
     },
     "loading": {
-        "default": "Laadimine",
-        "website": "Veebilehe laadimine"
+        "default": "Laadimine toimub",
+        "website": "Veebilehe sisu laadimine"
     },
     "login": {
         "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Amazoni sisselogimine"
+        "epic": "Epic Games'i kontole sisselogimine",
+        "gog": "GOG konto sisselogimine",
+        "message": "Logi sisse oma platvormiga. Sa saad siseneda rohkem kui ühte platvormi korraga.  \nLogi oma platvormile sisse. Sa saad samal ajal sisse logida mitmesse platvormi.  \nLogi sisse oma platvormi kaudu. Sa võid korraga sisse logida mitmesse platvormi.",
+        "amazon": "Amazoni sisselogimine",
+        "old-mac": "Teie macOS versioon on {{version}}. Sisselogimiseks on vajalik macOS 12 või uuem."
     },
     "message": {
-        "sync": "Sünkroonimine lõpetatud",
-        "unsync": "Mittesünkroniseerimine lõpetatud"
+        "sync": "Sünkroonimine on edukalt lõpetatud",
+        "unsync": "Sünkroniseerimine on täielikult lõpetatud"
     },
     "notify": {
         "error": {
-            "move": "Viga mängu liigutamisel",
-            "reparing": "Viga parandamisel"
+            "move": "Mängu üleviimisel ilmnes viga",
+            "reparing": "Viga remonditakse"
         },
         "finished": {
             "add": {
                 "steam": {
-                    "corrupt": "Mängu {{game}} ei saanud lisada kõigile leitud Steami kasutajatele. Lisainfo saamiseks vaadake logisid. Muutuste jõustumiseks on vajalik Steami taaskäivitamine.",
-                    "success": "Mäng {{game}} lisati edukalt Steami. Muutuste jõustumiseks on vajalik Steami taaskäivitamine.",
-                    "title": "Lisatud Steami"
+                    "corrupt": "{{game}} ei saanud lisada kõigile avastatud Steami kasutajatele. Lisainformatsiooni saamiseks vaadake logisid. Muutuste kehtima hakkamiseks on vajalik Steami taaskäivitamine.",
+                    "success": "Mäng {{X0X}} lisati Steami edukalt. Muutuste rakendamiseks on vajalik Steami taaskäivitamine.  \n{{X0X}} lisati Steami edukalt. Muutuste jõustumiseks tuleb Steami taaskäivitada.  \nMäng {{X0X}} on edukalt Steami lisatud. Muutuste kehtima hakkamiseks on vajalik Steami taaskäivitamine.",
+                    "title": "Lisatud Steami teenusesse"
                 }
             },
             "remove": {
                 "steam": {
-                    "corrupt": "Mängu {{game}} ei saanud eemaldada kõigilt leitud Steami kasutajatelt. Lisainfo saamiseks vaadake logisid. Muutuste jõustumiseks on vajalik Steami taaskäivitamine.",
-                    "success": "Mäng {{game}} eemaldati edukalt Steamist. Muutuste jõustumiseks on vajalik Steami taaskäivitamine.",
-                    "title": "Steamist eemaldatud"
+                    "corrupt": "{{game}} ei saanud eemaldada kõigilt avastatud Steami kasutajatelt. Rohkem teavet leiate logidest. Muutuste jõustumiseks on vajalik Steami taaskäivitamine.",
+                    "success": "Mäng {{game}} eemaldati Steamist edukalt. Muudatuste jõustumiseks on vajalik Steami taaskäivitamine.  \nMäng {{game}} on edukalt Steamist eemaldatud. Muudatuste kehtima hakkamiseks tuleb Steami taaskäivitada.  \n{{game}} eemaldati Steamist edukalt. Muudatuste rakendamiseks on vajalik Steami taaskäivitamine.",
+                    "title": "Steam'ist eemaldatud"
                 }
             },
-            "reparing": "Parandamine lõpetatud"
+            "reparing": "Remont on lõpetatud"
         },
         "install": {
-            "canceled": "Paigaldamine tühistatud",
+            "canceled": "Installeerimine tühistatud",
             "error": "Paigaldamine ebaõnnestus",
-            "finished": "Paigaldamine lõpetatud",
-            "imported": "Mäng imporditud",
-            "startInstall": "Paigaldamine algas"
+            "finished": "Installeerimine lõpetatud",
+            "imported": "Mäng imporditi",
+            "startInstall": "Paigaldamine on alustatud",
+            "paused": "Installeerimine peatatud",
+            "stopped": "Installatsioon peatatud"
         },
-        "moved": "Teisaldamine on lõpule viidud",
-        "moving": "Mängu liigutamine",
+        "moved": "Teisaldamine on lõpetatud",
+        "moving": "Mängu transportimine",
         "new-hyperplay-version": "Ilmus uus HyperPlayu versioon!",
         "refresh": {
-            "error": "Ei saanud hankida väljalaskeid upstream'ist, võib-olla Githubi API piirangute tõttu! Proovige hiljem uuesti."
+            "error": "Upstream'ist väljalaskete hankimine ei õnnestunud, võib-olla on see seotud Githubi API piirangutega! Proovige hiljem uuesti."
         },
-        "uninstalled": "Eemaldatud",
+        "uninstalled": "Desinstallitud",
         "update": {
-            "canceled": "Uuendatud tühistatud",
-            "finished": "Uuendus lõpetatud",
-            "started": "Uuendamine algas"
+            "canceled": "Uuendus tühistatud",
+            "finished": "Uuendus on tehtud",
+            "started": "Uuendamine on alustatud",
+            "paused": "Uuendus peatatud",
+            "stopped": "Uuendus peatatud"
         }
     },
     "offline-message": {
-        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "hint": "Kontrollime ühenduvust {{newline}}github.com, {{newline}}gog.com, {{newline}}store.epicgames.com ja {{newline}}cloudflare-dns.com vastu",
         "ignore": "Ignore",
-        "offline": "Offline",
-        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
-        "retrying": "Retrying"
+        "offline": "Ilma internetita",
+        "offline-retry-in": "Offline. Uuesti proovimine {{seconds}} sekundi pärast.",
+        "retrying": "Uuesti proovimine"
     },
     "Open": "Ava",
     "options": {
         "advanced": {
             "key": "Variable Name",
-            "placeHolderKey": "NAME",
-            "placeHolderValue": "Nt: Path/To/ExtraFiles",
-            "title": "Keskkonnamuutujad",
+            "placeHolderKey": "NIMI",
+            "placeHolderValue": "Asukoht/ExtraFailide jaoks",
+            "title": "Keskkonna parameetrid",
             "value": "Väärtus"
         },
         "env_variables": {
             "error": {
-                "empty_key": "Muutujate nimed ei saa olla tühjad",
-                "equal_sign_in_key": "Muutujate nimed ei tohi sisaldada märki \"=\"",
-                "space_in_key": "Muutujate nimed ei tohi sisaldada tühikuid"
+                "empty_key": "Muutujate nimed ei tohi olla tühjad  \nMuutujate nimed ei saa olla tühjad  \nMuutujate nimed peavad olema täidetud",
+                "equal_sign_in_key": "Muutujate nimed ei tohi sisaldada \"=\" märki  \nMuutujate nimed ei tohi sisaldada võrdusmärki \"=\"  \nMuutujate nimed ei tohi sisaldada sümbolit \"=\"",
+                "space_in_key": "Muutujate nimed ei tohi sisaldada tühikute märke"
             },
-            "example": "ÄRGE lisage märki \"=\", nt: sellise seadistuse nagu \"MY_FLAG=123\" puhul määrake NAME-sse MY_FLAG ja VALUE-sse 123.",
+            "example": "ÄRGE lisage \"=\" märki, näiteks seadistuse \"MY_FLAG=123\" puhul määrake NAME-sse MY_FLAG ja VALUE-sse 123.  \nÄRGE kasutage \"=\" märki, näiteks seadistuse \"MY_FLAG=123\" korral määrake NAME-sse MY_FLAG ja VALUE-sse 123.  \nÄRGE lisage \"=\" sümbolit, näiteks seadistuse \"MY_FLAG=123\" puhul määrake NAME-sse MY_FLAG ja VALUE-sse 123.",
             "info": "Määra keskkonnamuutujad, mis lisatakse käsule."
         },
         "gameargs": {
-            "placeholder": "Pange siia käiviti argumendid",
-            "title": "Mängu argumendid (käivitatakse pärast käsku):"
+            "placeholder": "Kandke siia käivitusargumendid",
+            "title": "Mängu argumendid (käivitatakse käsu järel):  \nMängu argumendid (käivitatakse käsu täitmisel):  \nMängu argumendid (käivitatakse pärast käsu sooritamist):"
         },
-        "quote-args-with-spaces": "Hoiatus: Veenduge, et tühikutega argumendid oleksid tsiteeritud! Näiteks: \"path/with spaces/\"",
+        "quote-args-with-spaces": "Hoiatus: Veenduge, et tühikutega argumendid on tsiteeritud! Näiteks: \"path/with spaces/\"  \nHoiatus: Kontrollige, et argumendid, mis sisaldavad tühikuid, oleksid tsiteeritud! Näiteks: \"path/with spaces/\"  \nHoiatus: Veenduge, et tühikutega argumendid on õigesti tsiteeritud! Näiteks: \"path/with spaces/\"",
         "wrapper": {
-            "args": "Argumendid",
-            "arguments_example": "Argumentide näide: --arg; --extra-file=\"file-path/ with/spaces\"",
-            "exe": "Ümbris",
-            "placeHolderKey": "Uus ümbris",
-            "placeHolderValue": "Ümbrise argumendid",
-            "title": "Ümbrise käsklus:"
+            "args": "Arutlused",
+            "arguments_example": "Argumentide näide: --arg; --extra-file=\"faili-teekond/ koos/ruumidega\"  \nArgumentide näide: --arg; --extra-file=\"faili-asukoht/ koos/vahedega\"  \nArgumentide näide: --arg; --extra-file=\"faili-tee/ koos/ruumidega\"",
+            "exe": "Ümbrik",
+            "placeHolderKey": "Uus mähis",
+            "placeHolderValue": "Pakendi argumendid",
+            "title": "Käskluse katte:"
         }
     },
     "other": {
         "gogdl-version": "GOGDL versioon: ",
-        "legendary-version": "Legendary versioon: ",
-        "weblate": "Aidake tõlkida HyperPlay'ut.",
+        "legendary-version": "Legendaarne versioon: ",
+        "weblate": "Aita tõlkida HyperPlay'd.  \nAita HyperPlay'd tõlkida.  \nPalun aita HyperPlay'd tõlkida.",
         "nile-version": "Niiluse versioon: "
     },
-    "Other": "Other",
+    "Other": "Veel",
     "placeholder": {
-        "alt-gogdl-bin": "Kasutusel on sisse-ehitatud GOGDL binaarfaili...",
-        "alt-legendary-bin": "Kasutusel on sisse-ehitatud Legendary binaarfail...",
-        "custom_themes_path": "Select the path to look for custom CSS files",
-        "egs-prefix": "Prefiks, kuhu EGS on paigaldatud",
-        "prefered_language": "2-täheline kood (st: \"en\" või \"fr\")",
-        "alt-nile-bin": "Sisseehitatud Niiluse kahendfaili kasutamine..."
+        "alt-gogdl-bin": "Kasutatakse sisseehitatud GOGDL binaarfaili...  \nKasutatakse GOGDL-i sisseehitatud binaarfaili...  \nKasutusel on GOGDL-i sisseehitatud binaarfail...",
+        "alt-legendary-bin": "Kasutatakse sisseehitatud Legendary binaari...  \nKasutatakse sisseehitatud Legendary binary't...  \nKasutusel on sisseehitatud Legendary binaar...",
+        "custom_themes_path": "Valige asukoht, kust leida kohandatud CSS-faile",
+        "egs-prefix": "Prefiks, kus EGS on installitud",
+        "prefered_language": "2-täheline kood (nt: \"en\" või \"fr\")  \n2-täheline kood (näiteks: \"en\" või \"fr\")  \n2-täheline kood (nt: \"en\" või \"fr\")",
+        "alt-nile-bin": "Sisseehitatud Niiluse kahendfaili kasutamine...",
+        "dxvkfpsvalue": "Positiivne täisarv (nt 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
         "mac": "Mac",
         "win": "Windows"
     },
-    "please-wait": "Please wait...",
-    "progress": "Progress",
+    "please-wait": "Palun oota...",
+    "progress": "Edenemise protsess",
     "queue": {
         "label": {
-            "canceled": "Canceled",
-            "clear": "Clear List",
+            "canceled": "Tühistamine",
+            "clear": "Puhasta nimekiri",
             "downloading": "Downloading",
             "empty": {
-                "queue": "Nothing to download"
+                "queue": "Ei ole midagi, mida alla laadida",
+                "finished": "Midagi ei ole alla laaditud"
             },
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Kustuta allalaadimistest",
+            "pause": "Peata allalaadimine",
+            "resume": "Jätka allalaadimist"
         }
     },
-    "Recent": "Hiljuti mängitud",
-    "search": "Otsi mänge",
+    "Recent": "Mängitud hiljuti",
+    "search": "Mängude otsimine",
     "setting": {
-        "adddesktopshortcuts": "Lisa töölaua otseteed automaatselt",
-        "addgamestostartmenu": "Mängude automaatne lisamine stardimenüüsse",
-        "addgamestosteam": "Add games to Steam automatically",
-        "alt-gogdl-bin": "Valige alternatiivne GOGDL binaarfail",
-        "alt-legendary-bin": "Valige alternatiivne Legendary binaarfail",
-        "autodxvk": "DXVK automaatne paigaldamine/uuendamine prefiksile",
-        "autosync": "Automaatne salvestiste sünkroonimine",
-        "autovkd3d": "VKD3D automaatne paigaldamine/uuendamine prefiksile",
-        "change-target-exe": "Valige alternatiivne EXE käivitamiseks",
-        "checkForUpdatesOnStartup": "Kontrolli HyperPlayu uuendusi käivitamisel",
-        "crossover-version": "Crossoveri versioon",
+        "adddesktopshortcuts": "Lisa automaatselt töölaua otseteed",
+        "addgamestostartmenu": "Mängude automaatne lisamine algusmenüüsse",
+        "addgamestosteam": "Lisa mängud automaatselt Steami==WEBLATE_PART==Lisa mänge Steami automaatselt==WEBLATE_PART==Lisa automaatselt mänge Steami",
+        "alt-gogdl-bin": "Valige kasutamiseks teine GOGDL binaarfail",
+        "alt-legendary-bin": "Valige alternatiivne legendaarne binaarfail",
+        "autodxvk": "DXVK-i automaatne installimine ja värskendamine prefiksis",
+        "autosync": "Automaatne salvestuste sünkroonimine",
+        "autovkd3d": "VKD3D automaatne värskendamine/paigaldamine prefiksis",
+        "change-target-exe": "Valige teine EXE käivitamiseks",
+        "checkForUpdatesOnStartup": "Kontrolli käivitamisel HyperPlay uuenduste olemasolu",
+        "crossover-version": "Crossoveri versioonimäärang",
         "custom_themes_path": "Custom Themes Path",
-        "customWineProton": "Kohandatud Wine/Proton teed",
-        "darktray": "Kasuta tumedat süsteemiriiuli ikooni",
-        "default-install-path": "Vaikimisi paigaldustee",
-        "default-steam-path": "Steami vaiketee",
-        "defaultWinePrefix": "Määrake uute Wine'i prefikside jaoks kaust",
-        "disable_controller": "Keela HyperPlay'u mängupuldiga navigeerimine",
-        "discordRPC": "Luba Discord Rich Presence",
-        "download-no-https": "Mängude allalaadimine ilma HTTPS-ita (kasulik CDNide jaoks, nt LanCache)",
+        "customWineProton": "Kohandatud rajad Wine'i ja Protoni jaoks",
+        "darktray": "Vali tumedat süsteemiriiuli ikooni",
+        "default-install-path": "Vaikimisi installatsiooni asukoht",
+        "default-steam-path": "Steami vaikimisi tee",
+        "defaultWinePrefix": "Määrake kaust, kuhu luua uued Wine'i prefiksid",
+        "disable_controller": "Keela Hyperplay navigeerimine kasutades kontrollerit",
+        "discordRPC": "Luba Discordi rikkalik kohalolek funktsioon",
+        "download-no-https": "Mängude allalaadimine, kasutades HTTPS-i asemel (kasulik CDN-ide, näiteks LanCache'i puhul)",
         "egs-sync": "Sünkroonimine paigaldatud Epic Games'iga",
-        "enableFSRHack": "Luba FSR häkk (Wine'i versioon peab seda toetama)",
+        "enableFSRHack": "Luba FSR häkkimine (Wine'i versioon peab selle toetama)  \nAktiveeri FSR häkk (Wine'i versioon peab seda võimaldama)  \nLuba FSR häkk (Wine'i versioon peab olema selleks sobiv)",
         "eosOverlay": {
-            "cancelInstall": "Tühista",
-            "checkForUpdates": "Kontrolli uuendusi",
-            "checkingForUpdates": "Uuenduste otsimine...",
-            "currentVersion": "Praegune versioon: {{version}}",
-            "disable": "Lülita välja",
-            "enable": "Luba",
-            "install": "Install",
-            "installed": "Epic-i ülekate on paigaldatud",
-            "installing": "Epic-i ülekatet paigaldatakse...",
+            "cancelInstall": "Tühista tellimus",
+            "checkForUpdates": "Kontrolli, kas on saadaval uuendusi",
+            "checkingForUpdates": "Uuenduste leidmine...",
+            "currentVersion": "Praegune versioon: {{version}}  \nPraegune versioon: {{version}}  \nPraegune versioon: {{version}}",
+            "disable": "Tühista",
+            "enable": "Luba võimalda",
+            "install": "Installeerimine",
+            "installed": "Epic-i ülekate on edukalt paigaldatud",
+            "installing": "Epic-i ülekatte paigaldamine on käimas...  \nEpic-i overlay paigaldatakse...  \nEpic-i overlay installimine toimub...",
             "latestVersion": "Uusim versioon: {{version}}",
-            "notInstalled": "Epic-i ülekate ei ole paigaldatud",
-            "notInstalledMsg": "Epic-i ülekate pole paigaldatud. Kas soovite selle kohe paigaldada?",
+            "notInstalled": "Epic-i ülekate ei ole installitud",
+            "notInstalledMsg": "Epic-i ülekate ei ole paigaldatud. Kas soovite selle nüüd paigaldada?  \nEpic-i ülekate puudub. Kas soovite selle kohe installida?  \nEpic-i ülekate on puudu. Kas soovite selle nüüd installida?",
             "notInstalledTitle": "Ülekate pole paigaldatud",
-            "remove": "Eemalda",
-            "removeConfirm": "Kas olete kindel, et soovite Epic-i ülekatte eemaldada?",
+            "remove": "Eemalda tarkvara",
+            "removeConfirm": "Kas olete kindel, et soovite Epic Overlay'd kustutada?",
             "removeConfirmTitle": "Ülekatte eemaldamise kinnitamine",
-            "updateNow": "Update",
-            "updating": "Uuendamine..."
+            "updateNow": "Uuenda",
+            "updating": "Uuendamine...  \nUuendamine käib...  \nUuendamine toimub..."
         },
-        "esync": "Luba Esync",
-        "exit-to-tray": "Välju süsteemiriiulisse",
-        "FsrSharpnessStrenght": "FSR teravuse tugevus",
-        "fsync": "Luba Fsync",
-        "gamemode": "Kasuta GameMode'i (Feral Game Mode peab olema paigaldatud)",
+        "esync": "Luba Esync'i lubamine",
+        "exit-to-tray": "Väljumine süsteemi ikooniribale",
+        "FsrSharpnessStrenght": "FSR teravuse määr",
+        "fsync": "Luba Fsync'i lubamine",
+        "gamemode": "Kasuta GameMode'i (Feral Game Mode tuleb installida)  \nKasuta GameMode'i (Feral Game Mode on vajalik paigaldada)  \nKasutage GameMode'i (Feral Game Mode tuleb installida)",
         "language": "Valige rakenduse keel",
         "library_top_option": {
-            "disabled": "Keelatud",
-            "favourites": "Lemmikmängud",
+            "disabled": "Aktiivne mitteolek",
+            "favourites": "Kallid mängud",
             "recently_played": "Hiljuti mängitud mängud",
-            "recently_played_installed": "Hiljuti mängitud mängud (ainult paigaldatud)"
+            "recently_played_installed": "Hiljuti mängitud mängud (ainult installitud)  \nViimati mängitud mängud (ainult paigaldatud)  \nViimased mängud (ainult installitud)"
         },
-        "library_top_section": "Teegi ülemine osa",
+        "library_top_section": "Raamatukogu ülemine jaotis",
         "log": {
-            "copy-to-clipboard": "Kopeeri logi sisu lõikelauale",
+            "copy-to-clipboard": "Kopeeri logi sisu lõikepinnale",
             "current-log": "Praegune logi",
             "instructions": "Liitu meie Discordiga ja otsi oma operatsioonisüsteemile vastav kanal. Jagage siin kuvatavate logide sisu ja lisage probleemi selge kirjeldus koos kõigi asjakohaste andmete ja üksikasjadega.",
-            "instructions_title": "Kuidas teatada probleemist?",
+            "instructions_title": "Kuidas probleemist teatada?  \nKuidas esitada probleemist teade?  \nKuidas probleemist aru anda?",
             "last-log": "Viimane logi",
-            "no-file": "Logifaili ei leitud",
-            "show-in-folder": "Kuva logifail kaustas"
+            "no-file": "Logifaili pole saadaval",
+            "show-in-folder": "Logifaili kuvamine kaustas",
+            "instructions-part-01": "Kui teil tekib HyperPlay kasutamisel probleeme, on meie Discordi serveris kaks määratud ala probleemide teatamiseks. Kui olete mängija, teatage probleemidest, külastades mängija tugifoorumit. Kui olete mängu arendaja, teatage probleemidest, külastades arendaja tugifoorumit.",
+            "join-hyperplay-discord": "Liituge meie Discordiga",
+            "instructions-part-02": "Kuna soovime probleemi võimalikult kiiresti diagnoosida ja lahendada, palun esitage nii palju teavet kui võimalik, sealhulgas koopia oma logidest. Meie tugimeeskond jälgib mõlemat kanalit ja teeb oma parima, et teie probleemile võimalikult kiiresti vastata. Aitäh teie kannatlikkuse ja arusaamise eest, kui töötame probleemide lahendamise nimel, millega võite kokku puutuda."
         },
-        "mangohud": "Luba Mangohud (Mangohud peab olema paigaldatud)",
+        "mangohud": "Luba Mangohud (Mangohud tuleb installida)  \nLuba Mangohud (Mangohud on vajalik paigaldada)  \nAktiveeri Mangohud (Mangohud tuleb enne paigaldada)",
         "manualsync": {
             "download": "Laadi alla",
-            "forcedownload": "Sunni alla laadima",
-            "forceupload": "Sunni üleslaadimine",
-            "sync": "Sünkrooni",
-            "syncing": "Sünkroonimine",
-            "title": "Käsitsi salvestuste sünkroonimine",
-            "upload": "Laadi üles"
+            "forcedownload": "Sundige fail allalaadimist",
+            "forceupload": "Sunniviisiline üleslaadimine",
+            "sync": "Sünkrooni protsess",
+            "syncing": "Sünkrooni loomine",
+            "title": "Käsitsi salvestuste kopeerimine",
+            "upload": "Üleslaadimine"
         },
-        "maxRecentGames": "Hiljuti mängitud mänge, mida näidata",
-        "maxworkers": "Töötajate maksimaalne arv allalaadimisel",
-        "minimize-on-launch": "Minimeeri HyperPlay pärast mängu käivitamist",
-        "offlinemode": "Käivita mäng võrguühenduseta",
-        "prefered_language": "Eelistatud keel (keelekood)",
-        "preferSystemLibs": "Eelista süsteemiteeke",
+        "maxRecentGames": "Mängud, mida hiljuti mängiti ja mida näidata",
+        "maxworkers": "Allalaadimise maksimaalne töötajate arv",
+        "minimize-on-launch": "Sulge HyperPlay mängu alustamise järel",
+        "offlinemode": "Käivita mäng võrguühenduseta režiimis",
+        "prefered_language": "Eelistatud keel (keelekood)  \nSoovitud keel (keelekood)  \nValitud keel (keelekood)",
+        "preferSystemLibs": "Eelista süsteemide raamatukogusid",
         "primerun": {
             "confirmation": {
-                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
-                "title": "Only 1 GPU detected"
+                "message": "Selles süsteemis tuvastati vaid üks graafikakaart. Palun pidage meeles, et see valik on mõeldud mitme GPU süsteemide jaoks, kus on peidetud GPU-d (nagu sülearvutid). Ühe GPU süsteemide korral kasutatakse GPU-d automaatselt ja selle valiku aktiveerimine võib põhjustada probleeme. Kas te tõeliselt soovite selle valiku aktiveerida?",
+                "title": "Ainult üks GPU on tuvastatud"
             },
-            "description": "Kasuta spetsiaalset graafikakaarti"
+            "description": "Kasutage eraldi graafikakaarti"
         },
         "runexe": {
-            "message": "Lohistage failid siia",
-            "title": "Käivita EXE prefiksil"
+            "message": "Looge failid siia==WEBLATE_PART==Kandke failid siia==WEBLATE_PART==Tõmmake failid siia",
+            "title": "Käivita EXE prefiksi kaudu"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually (click to retry)",
-            "placeholder": "Valige täpne mängude salvestiste kaust",
-            "warning": "Please check twice if the path is correct (click to retry)"
+            "not-found": "Salvestuskaust ei leitud, palun valige see käsitsi (klõpsake, et proovida uuesti)  \nSalvestuskausta ei leitud, palun valige see käsitsi (klõpsake, et uuesti proovida)  \nSalvestuskaust puudub, palun valige see käsitsi (klõpsake, et proovida uuesti)",
+            "placeholder": "Valige mängude salvestuste kaust täpselt",
+            "warning": "Palun kontrollige kaks korda, kas tee on õige (klõpsake, et proovida uuesti)  \nPalun veenduge, et rada on õige (klõpsake, et uuesti proovida)  \nKontrollige palun kaks korda, kas tee on õige (klõpsake, et proovida uuesti)"
         },
-        "select_theme": "Valige teema",
-        "showfps": "Näita FPS-i (DX9, 10 ja 11)",
-        "start-in-tray": "Käivita minimeeritult",
-        "steamruntime": "Kasuta Steam Runtime'i",
-        "winecrossoverbottle": "CrossOveri pudel",
-        "wineprefix": "WinePrefiksi kaust",
-        "wineversion": "Wine'i versioon",
+        "select_theme": "Valige oma teema",
+        "showfps": "Näita FPS-i (DX9, 10 ja 11)  \nKuva FPS (DX9, 10 ja 11)  \nDisplay FPS (DX9, 10 ja 11)",
+        "start-in-tray": "Käivita väiksemas aknas",
+        "steamruntime": "Kasutage Steam'i runtime'i",
+        "winecrossoverbottle": "CrossOveri pakend",
+        "wineprefix": "WinePrefiksi kaustade direktorium",
+        "wineversion": "Wine'i versioonikood",
         "autoUpdateGames": "Mängude automaatne värskendamine",
-        "ignoreGameUpdates": "Ignoreeri mängu värskendusi",
+        "ignoreGameUpdates": "Jäta mängu uuendused tähelepanuta",
         "disable_logs": "Keela logid",
-        "addgamestoapplications": "Lisage mänge rakendustesse automaatselt",
-        "showMetalOverlay": "Kuva statistika ülekate",
+        "addgamestoapplications": "Mängude automaatne lisamine rakendustesse",
+        "showMetalOverlay": "Kuva statistika ülevaade",
         "alt-nile-bin": "Valige alternatiivne Niiluse binaar",
-        "msync": "Luba Esync",
-        "autodxvknvapi": "DXVK automaatne paigaldamine/uuendamine prefiksile"
+        "msync": "Luba Msyncimise",
+        "autodxvknvapi": "DXVK-NVAPI automaatne installimine ja värskendamine prefiksis",
+        "steamId": "Steam ID",
+        "dxvkfpslimit": "Piira FPS-i (DX9, 10 ja 11)",
+        "autoLaunchHyperPlay": "Hüpermängu automaatne käivitamine"
     },
     "settings": {
         "battlEyeRuntime": {
-            "installing": "BattlEye Runtime paigaldamine...",
-            "name": "BattlEye AntiCheat Runtime"
+            "installing": "BattlEye Runtime'i installimine...",
+            "name": "BattlEye AntiCheat režiim"
         },
-        "clear-cache": "Tühjenda HyperPlay'u vahemälu",
-        "copiedToClipboard": "Kopeeritud lõikelauale!",
-        "copyToClipboard": "Kopeeri kõik seaded lõikelauale",
-        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
+        "clear-cache": "Puhasta HyperPlay'i vahemälu",
+        "copiedToClipboard": "Lõikelauale kopeeritud!",
+        "copyToClipboard": "Kopeeri kõik seaded mällu",
+        "default_hint": "Selles sektsioonis tehtud muudatused kehtivad ainult vaikeseadetena mängude installimisel. Kui soovite muuta juba installitud mängu seadeid, kasutage mängu lehe seadete nuppu.",
         "eacRuntime": {
             "gameModeRequired": {
-                "message": "GameMode on vajalik selleks, et EAC runtime töötaks Flatpaki peal. Kas soovite selle nüüd sisse lülitada?",
-                "title": "GameMode on vajalik"
+                "message": "Flatpaki keskkonnas EAC runtime'i toimimiseks on vajalik GameMode. Kas soovite selle kohe sisse lülitada?",
+                "title": "Mängurežiim on nõutav"
             },
-            "installing": "EAC Runtime paigaldamine...",
+            "installing": "EAC Runtime'i paigaldamine...  \nEAC Runtime'i installimine...  \nEAC Runtime'i seadistamine...",
             "name": "EasyAntiCheat Runtime"
         },
         "gameMode": {
             "eacRuntimeEnabled": {
-                "message": "EAC runtime on sisse lülitatud, mis ei tööta õigesti ilma GameMode'ita. Kas soovite lülitada välja EAC runtime'i ja GameMode'i?",
-                "title": "EAC runtime sisse lülitatud"
+                "message": "EAC runtime on aktiveeritud, kuid see vajab GameMode'i, et korralikult töötada. Kas soovite EAC runtime'i ja GameMode'i välja lülitada?",
+                "title": "EAC tööaeg on lubatud"
             }
         },
         "log": {
-            "long-log-hint": "Logi on kärbitud, näidatakse viimased 1000 rida!"
+            "long-log-hint": "Logi on lühendatud, kuvatakse viimased 1000 rida!  \nLogi on kärbitud, näidatakse ainult viimased 1000 rida!  \nLogi on lühendatud, viimased 1000 rida on nähtavad!"
         },
         "navbar": {
-            "advanced": "Täpsem",
+            "advanced": "Arenenud",
             "games_settings_defaults": "Game Defaults",
-            "general": "Üldine",
-            "log": "Logi",
-            "other": "Muu",
-            "sync": "Salvesta-sünkrooni",
+            "general": "Üldine kategooria",
+            "log": "Logi fail",
+            "other": "Veel üks",
+            "sync": "Pilvesalvestuste sünkrooni seadistus",
             "wineExt": "Wine'i laiendused",
-            "accounts": "Kontod",
-            "systemInformation": "S_üsteemi info"
+            "accounts": "Kontoarvud",
+            "systemInformation": "Süsteemi infoleht"
         },
-        "open-config-file": "Ava konfiguratsioonifail",
-        "reset-hyperplay": "Lähtesta HyperPlay",
+        "open-config-file": "Ava konfiguratsiooni dokument",
+        "reset-hyperplay": "Käivita HyperPlay uuesti",
         "saves": {
             "label": "Salvestuste asukoht:",
             "warning": "Pilvesalvestuse funktsioon on beetaversioonis, enne sünkroonimist varundage oma salvestused (juhuks, kui midagi läheb valesti)"
         },
-        "gamesSettings": "Mängu seaded",
+        "gamesSettings": "Mängu valikud",
         "wine": {
             "manager": {
-                "title": "Wine'i haldur"
+                "title": "Veini administraator"
             }
         },
         "systemInformation": {
-            "copyToClipboard": "Kopeeri lõikelauale",
+            "copyToClipboard": "Kopeeri mällu",
             "memory": "Mälu",
-            "os": "Operatsioonisüsteem"
-        }
+            "os": "Operatiivne süsteem",
+            "steamDeck": "Steam Deck",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gpu": "GPU:",
+            "showDetailed": "Kuvaa üksikasjalikke süsteeminõudeid",
+            "systemModel": "Süsteemi mudel:",
+            "gpuDriver": "Juht: {{driverVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "version": "Versioon: {{appVersion}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "cpu": "CPU:",
+            "legendaryVersion": "Legendaarne: {{legendaryVersion}}",
+            "memoryStats": "{{percentUsed}}% kasutatud ({{usedGib}} / {{totalGib}}",
+            "osNameFlatpak": "{{osName}} (Flatpak'i sees)",
+            "osVersion": "Versioon {{versionNumber}}"
+        },
+        "reset-extension": "Laiendi lähtestamine"
     },
-    "Settings": "Seaded",
+    "Settings": "Seadete menüü",
     "sidebar": {
         "collapse": "Ahenda külgriba",
         "uncollapse": "Lahtista külgriba",
-        "library": "Raamatukogu",
-        "store": "Pood"
+        "library": "Raamatute teekond",
+        "store": "Analüütika on välja lülitatud",
+        "achievements": "Saavutused",
+        "downloadManager": "Allalaadimise haldur"
     },
     "status": {
-        "installing": "Paigaldamine",
-        "logging": "Sisselogimine...",
-        "processing": "Failide töötlemine, palun oodake",
+        "installing": "Installeerimise protsess",
+        "logging": "Sisselogimine...  \nSisenemine...  \nLogimine...",
+        "processing": "Palun oodake, failide töötlemine on käimas",
         "preparing_login": "Sisselogimise ettevalmistamine... "
     },
-    "store": "Epic Pood",
+    "store": "Epic Müügikoht",
     "stores": "Poed",
     "title": {
-        "allGames": "Kõik mängud"
+        "allGames": "Kogu mängude valik"
     },
     "toolbox": {
         "settings": {
-            "default-wineprefix": "Valige vaikimisi prefiksi kaust uute konfiguratsioonide jaoks",
-            "wineprefix": "Valige uute Wine'i prefikside jaoks kaust"
+            "default-wineprefix": "Valige uus konfiguratsioonide vaikimisi prefiksikaust",
+            "wineprefix": "Määrake kaust uute Wine'i prefikside valimiseks"
         }
     },
     "tooltip": {
-        "addpath": "Lisa uus tee",
-        "removepath": "Eemalda tee"
+        "addpath": "Lisa uus marsruut",
+        "removepath": "Eemalda suund"
     },
     "tray": {
-        "about": "Info",
-        "quit": "Sulge",
-        "reload": "Laadi uuesti",
-        "show": "Näita"
+        "about": "Ülevaade",
+        "quit": "Sulgemine",
+        "reload": "Taaskäivita",
+        "show": "Kuvaa"
     },
     "two_col_table": {
-        "save_hint": "Selles tabelis tehtud muudatusi ei salvestata automaatselt. Klõpsake nuppu +"
+        "save_hint": "Selles tabelis tehtud muudatused ei salvestu automaatselt. Klõpsake nuppu +  \nSelles tabelis tehtud muudatused ei salvestata iseenesest. Klõpsake nuppu +  \nSelles tabelis tehtud muudatused ei salvestu automaatselt. Vajutage nuppu +"
     },
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
-        "logging_out": "Logging out",
+        "logging_out": "Logi välja",
         "logout": "Logi välja",
-        "logout_confirmation": "Kas olete kindel, et soovite välja logida?",
-        "manageaccounts": "Kontode haldamine",
-        "quit": "Sulge",
-        "logIn": "Logi sisse"
+        "logout_confirmation": "Kas olete kindel, et soovite süsteemist välja logida?",
+        "manageaccounts": "Kontode korraldamine",
+        "quit": "Sulgemine",
+        "logIn": "Logi oma kontole sisse",
+        "manageStore": "Halda poode"
     },
     "webview": {
         "controls": {
-            "back": "Tagasi",
-            "forward": "Edasi",
-            "openInBrowser": "Ava veebilehitsejas",
-            "reload": "Laadi leht uuesti"
+            "back": "Tagasi liikuma",
+            "forward": "Edasi liikuma",
+            "openInBrowser": "Ava oma brauseris",
+            "reload": "Laadi see leht uuesti"
         }
     },
     "wine": {
-        "actions": "Action",
+        "actions": "Aktiivsus",
         "manager": {
             "link": "Wine'i haldur",
-            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Wine'i haldur",
+            "not-found": "Ühtegi Wine'i versiooni ei leitud. Proovige uuesti, klõpsates värskendamise ikoonil.",
+            "title": "Ühilduvuse kiht ",
             "unzipping": "Lahtipakkimine"
         },
-        "release": "Release Date",
-        "size": "Suurus"
+        "release": "Käivitamise kuupäev",
+        "size": "Suuruse mõõt"
     },
     "externalLink": {
-        "dontAskAgain": "Ära enam küsi",
-        "warning": "Olete avamas välist linki."
+        "dontAskAgain": "Ära küsi veel kord",
+        "warning": "Olete avamas väliseid linke."
     },
     "wiki_info": {
-        "not_found": "Me ei leidnud lisateavet."
+        "not_found": "Me ei suutnud leida täiendavat teavet.  \nMe ei leidnud rohkem teavet.  \nMe ei saanud lisainfot kätte."
     },
     "dlc": {
-        "actions": "Tegevused",
-        "installDlcs": "Paigalda kõik DLC'd",
-        "noDlcFound": "DLC-sid ei leitud",
-        "size": "Suurus",
-        "title": "Title"
+        "actions": "Aktiivsed toimingud",
+        "installDlcs": "Paigalda kõik allalaaditavad sisud",
+        "noDlcFound": "DLC-sid ei eksisteeri",
+        "size": "Suurusaste",
+        "title": "Pealkiri"
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazoni mängud",
@@ -698,72 +771,354 @@
     "hyperplay": {
         "discordApp": "Discord",
         "buttons": {
-            "noThanks": "Ei aitäh"
+            "noThanks": "Aitäh, aga ma ei soovi",
+            "agree": "Ma olen nõus"
         },
         "logOut": "Logi välja",
-        "misc": "Mitte kunagi",
+        "misc": "Iialgi mitte",
         "onboarding": {
             "walletSelection": {
                 "screens": {
                     "import": {
-                        "learnMore": "Loe lisaks",
-                        "orWord": "VÕI"
+                        "learnMore": "Saada rohkem teavet.",
+                        "orWord": "VÕI",
+                        "title": "Vali brauser, kust importida",
+                        "useRecoveryPhraseInfo": "Seda funktsiooni soovitatakse edasijõudnud kasutajatele ja arendajatele. Teie salajane taastamisfraas salvestatakse kohalikult MetaMaskis ja ei jagata kunagi HyperPlayga.",
+                        "useRecoveryPhrase": "Importimine salajase taastamisfraasi abil",
+                        "createNewWallet": "Loo uus MM laienduse rahakott",
+                        "details": "Allpool olevad brauserid on juba MetaMaski installinud. Valige, millest soovite importida."
+                    },
+                    "scan": {
+                        "dontHaveWallet": "Ei ole rahakotti?",
+                        "getMetamask": "Hangi MetaMask",
+                        "title": "Skaneeri QR koodiga ",
+                        "updateWarning": "Kas on probleeme? Veenduge, et MetaMask oleks ajakohane."
+                    },
+                    "info": {
+                        "createWalletCTA": "Loo rahakott",
+                        "createWalletDescription": "Klõpsake allpool \"Loo rahakott\", kui teil ei ole rahakotti või soovite luua uue:",
+                        "digitalAssets": {
+                            "details": "Rahakotte kasutatakse digitaalsete varade, nagu tokenid ja NFT-d, saatmiseks, vastuvõtmiseks, salvestamiseks ja kuvamiseks."
+                        },
+                        "login": {
+                            "details": "Alternatiiv uute kontode ja paroolide loomisele igal veebisaidil, lihtsalt ühendage oma rahakott.",
+                            "title": "Uus viis sisselogimiseks"
+                        },
+                        "title": "Mis on rahakott?",
+                        "skip": "Jäta praegu vahele"
                     }
-                }
+                },
+                "pleaseConnect": "Palun ühendage oma rahakott või laadige alla Metamaski mobiilirakendus, et alustada:",
+                "title": "Rahakoti ühendused"
+            },
+            "connectionCanceled": {
+                "title": "Ühendus tühistatud!",
+                "description": "Palun kinnitage ühenduse taotlus oma mobiilse rahakoti kaudu, et jätkata."
+            },
+            "welcome": {
+                "text": {
+                    "construction": "HyperPlay on ehitamisel.",
+                    "communityCTA_2": "kogukond. Koos kujundame mängimise tulevikku!",
+                    "description": "HyperPlay on mängu käivitaja ja mängupoodide kogum tulevikust. HyperPlay'ga saate oma rahakoti, tokenid ja varad igasse mängu kaasa võtta. HyperPlay toetab kogu Epic Store'i, GOG-i ja meie enda HyperPlay poodi. HyperPlay kasutades nõustute meiega",
+                    "bugs": "Palun pange tähele, et HyperPlay on avalik alfa. Paljud funktsioonid on endiselt arendamisel ja seal võivad olla vead.",
+                    "communityCTA_1": "Me hindame teie tagasisidet ja soovime, et liituksite meiega"
+                },
+                "title": "Tere tulemast HyperPlay varajasse juurdepääsu!"
+            },
+            "analytics": {
+                "anonymized": "Saatke anonüümne klikkimise ja mängu interaktsiooni;",
+                "privacyPolicyHere": "Privaatsuspoliitika siin.",
+                "optOut": "Alati võimaldada teil seadetest loobuda;",
+                "privacyCaption": "Need andmed on kogutud ja seetõttu anonüümsed, et järgida Euroopa Liidu isikuandmete kaitse määrust (EU) 2016/679. Lisainformatsiooni meie privaatsustavade kohta leiate meie ",
+                "title": "Aita meil HyperPlay'd parandada!",
+                "neverSellData": " müü andmeid kasumi saamiseks. Iial!",
+                "body": "HyperPlay soovib koguda kasutusandmeid, et paremini mõista, kuidas meie kasutajad rakendusega suhtlevad. See teave aitab meil mõista, kuidas te rakendust kasutate, ja võimaldab meil HyperPlay teie jaoks veelgi paremaks muuta.",
+                "neverCollectIP": " kogu oma täielik IP-aadress;",
+                "neverCollectPersonal": " koguge võtmeid, aadresse, saldosid, räsinguid või muid isiklikke andmeid;"
+            },
+            "connectionConnected": {
+                "description": "Sinu rahakott on ühendatud. Sa oled mängimiseks valmis.",
+                "title": "Rahakott on ühendatud!"
+            },
+            "terms": "Teenuse tingimused.",
+            "connectAgain": "Ühendage uuesti"
+        },
+        "Sync": "Sünkrooni loomine",
+        "turnAnalyticsOff": "Käivita välja",
+        "browserImport": {
+            "appId": "Rakenduse number",
+            "profile": "Profiili teave"
+        },
+        "folder": "Kaustikute failide kaust",
+        "gamecard": {
+            "paused": "Peatatud  \nSeisak  \nOoteolek",
+            "distributables": "Installeerimine...",
+            "extracting": "Eemaldamine...",
+            "installing": "Laadimine..."
+        },
+        "copyUrl": "Kopeeri veebiaadress",
+        "viewFullscreen": "Vaata täisvaates",
+        "changeWallet": "Vaheta rahakoti kontot",
+        "syncing": "Sünkroonimine...",
+        "turnAnalyticsOn": "Lülita sisse",
+        "accesscodes": {
+            "requirescode": "See mängu uuendus nõuab juurdepääsukoodi.",
+            "success": {
+                "validation": "Edukas! Juurdepääsukood on kehtiv"
+            },
+            "error": {
+                "validation": "Juurdepääsukood on vale"
             }
         },
-        "Sync": "Sünkroonimine",
-        "turnAnalyticsOff": "Lülita välja",
-        "browserImport": {
-            "appId": "Rakenduse tunnus",
-            "profile": "Profiil"
+        "achievements": {
+            "noAchievements": {
+                "doubleCheckMessage": "Tundub, et me ei leidnud hetkel teie Steam'i kontolt ühtegi mängu. Kiire meeldetuletus, et kontrolliksite, kas teie mänguandmed on avalikud. Nii saame pääseda teie saavutustele ja pakkuda teile parimat kogemust.",
+                "oops": "Ups!"
+            },
+            "addThisGame": "Lisa see mäng",
+            "freeMints": "Tasuta Mints",
+            "gamesToMint": "Mängud, mida müüa"
         },
-        "folder": "Kaustik",
-        "gamecard": {
-            "paused": "Peatatud"
-        },
-        "copyUrl": "&Kopeeri URL",
-        "viewFullscreen": "Vaata täisekraanil"
+        "analyticsOff": "Analüütika on välja lülitatud",
+        "analyticsOn": "Analüütika on sisse lülitatud",
+        "linkSteamAccountDescription": "Logige sisse Steam'i, et siduda oma HyperPlay konto.",
+        "otp": "Ühekordne parool",
+        "viewPortfolio": "Vaata portfelli",
+        "viewItem": "Vaata {{item}}",
+        "currentWallet": "Praegune rahakott",
+        "linkSteamAccountCta": "Mine Steam'i sisselogimisele",
+        "connectWallet": "Ühenda rahakott",
+        "publicAlpha": "Avalik alfa"
     },
     "gameRelease": {
-        "beta": "Beta",
-        "main": "Veetrassil"
+        "beta": "Beeta test",
+        "main": "Peamine teema",
+        "prototype": "Prototüüp",
+        "alpha": "Alpha",
+        "demo": "Demo"
     },
     "quest": {
-        "active": "Aktiivne",
+        "active": "Töötav",
         "Play": "Esita",
         "playstreak": {
-            "days": "päeva",
-            "now": "Nüüd"
+            "days": "päeviku päevad",
+            "now": "Hetkel",
+            "playToStart": "Mängige seda mängu, et alustada oma järjestust!",
+            "progressTowardsStreak": "edusammud tänase järjestuse suunas.",
+            "dayResets": "Päeva lähtestamised:",
+            "playEachDay": "Mängige iga päev, et teie järjestus ei katkeks!",
+            "streakCompleted": "Seeria on lõpetatud! Nõudke oma auhindu nüüd.",
+            "streakProgress": "Seeria edenemine",
+            "sync": "Sünkroniseeri edenemine",
+            "syncSuccess": "Edenemine sünkroonitud"
         },
         "points": "Punktid",
         "signIn": "Logi sisse",
-        "sync": "Sünkroonimine",
+        "sync": "Sünkrooni seadmine",
         "claimWarning": {
-            "cancel": "Loobu",
-            "confirm": "Kinnita"
+            "cancel": "Loobu sellest",
+            "confirm": "Kinnitage palun",
+            "body": "<bold>OLULINE:</bold> Palun veenduge, et eraldaksite {{networkName}} võrgus piisavalt gaasi, et tehing saaks edukalt kinnitatud <bold> 7 päeva jooksul.</bold>",
+            "body2": "Vastasel juhul aegub Quest Reward <bold> ja seda ei saa enam nõuda.</bold>"
+        },
+        "View Game": "Vaata mängu",
+        "g7Numclaimed": "Kokku nõutud G7 krediiti",
+        "noG7ConnectionClaim": "Te peate omama Game7 kontot, mis on seotud {{email}} , et oma auhindu nõuda.",
+        "noG7ConnectionSync": "Peate olema {{email}} seotud Game7 kontoga, et oma ülesandeid uuesti sünkroonida.",
+        "notEnoughGas": "Rahakoti saldo on liiga madal, et oma auhinda nõuda gaasitasude tõttu. Proovige teist rahakotti või täiendage seda enne uuesti proovimist.",
+        "associatedGames": "Seotud mängud",
+        "claimAll": "Nõua kõiki",
+        "claimed": "Nõutud",
+        "connectSteamAccount": "Ühendage Steam'i konto",
+        "needMoreAchievements": "Sa pead olema lõpetanud {{percent}}% saavutustest ühes neist mängudest.",
+        "quests": "Ülesanded",
+        "readyForClaim": "Valmis nõudmiseks",
+        "reputation": "Reiting",
+        "reward": "Auhind",
+        "linkAccount": "Seosta oma Steam'i konto, et kontrollida sobivust.",
+        "pointsClaimed": "Nõuded täidetud",
+        "type": {
+            "playstreak": "Mängu järjestus"
         }
     },
     "accounts": "Kontod",
-    "ALL": "Kõik",
-    "analytics": "Analüütika",
+    "ALL": "Igaühe",
+    "analytics": "Statistika",
     "sideload": {
-        "warningTitle": "Oluline"
+        "warningTitle": "Märkimisväärne",
+        "warningMessage": "Mängu külgsuunamine on funktsioon, mis on mõeldud arendajatele ja kogenud kasutajatele. Installija külgsuunamine, mis sisaldab pahavara, võib ohustada teie arvutit ja viia rahade varastamiseni."
     },
-    "profile": "Profiil",
+    "profile": "Profiili teave",
     "import-game-folder": {
-        "placeholder": "Valige imporditav mängude kaust"
+        "placeholder": "Valige imporditav mängukaust",
+        "cta": "Impordi mängu kaust",
+        "dialog": {
+            "title": "Vali mängu kaust importimiseks"
+        },
+        "error": "Importimise ajal tekkis viga. Palun vaadake logisid lisainformatsiooni saamiseks.",
+        "label": "Impordi mängukaust",
+        "success": "Mängud imporditi edukalt!"
     },
     "mod": {
         "instructions": {
             "zip": {
-                "placeholder": "Vali fail"
+                "placeholder": "Vali zip-arhiiv",
+                "path": "Vali põhimängu faili asukoht"
+            }
+        },
+        "baseGame": {
+            "cancel": {
+                "body": "Põhimängu ekstraktsioon tühistatud",
+                "title": "Tühistatud väljavõte"
+            },
+            "installed": {
+                "body": "Moodi rakendatakse põhimängule",
+                "title": "Põhimäng installitud"
+            },
+            "installing": {
+                "title": "Põhimängu installimine"
             }
         }
     },
     "notification": {
         "wine-download-failed": {
-            "title": "Viga"
+            "title": "Viga",
+            "message": "Ebaõnnestus vaikeseadete ühilduvuse kihi seadistamine"
+        },
+        "wine-download": {
+            "message": "Vaikeseadete ühilduvuse kihi seadistamine",
+            "title": "Ühilduvuskihid"
         }
-    }
+    },
+    "hyperplayOverlay": {
+        "description": {
+            "INITIATED": "Teie mobiilse rahakoti kinnitamine on ootel",
+            "CONFIRMED": "Tehing kinnitati edukalt!",
+            "FAILED": "Tehing tühistati või ei esitatud, palun proovige uuesti",
+            "PENDING": "Ootame plokiahela kinnitust. Anname teada, kui see on kinnitatud"
+        },
+        "txnRequest": {
+            "INITIATED": "Tehingu taotlus ootel",
+            "CONFIRMED": "Tehing kinnitatud",
+            "FAILED": "Tehing katkestati",
+            "PENDING": "Tehing on esitatud"
+        },
+        "extensionNotification": {
+            "TITLE": "Tehingut on küsitud",
+            "DESCRIPTION": "Kinnitage {{overlayKeyMod}} + X, et näha seda tehingut"
+        },
+        "greeting": {
+            "description": "HyperPlay'i kiht on valmis! Vajutage {{overlayKeyMod}} + X, et seda näidata või peita.",
+            "title": "HyperPlay kattekiht"
+        },
+        "chainRequest": {
+            "CONFIRMED": "Kohandatud võrk lisatud",
+            "FAILED": "Kohandatud võrk tühistatud",
+            "INITIATED": "Kohandatud võrgu päring"
+        },
+        "signatureRequest": {
+            "FAILED": "Allkiri katkestatud",
+            "INITIATED": "Allkirja taotlus ootel",
+            "CONFIRMED": "Allkiri esitatud"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Kohandatud token lisatud",
+            "FAILED": "Kohandatud tokeni taotlus tühistatud",
+            "INITIATED": "Lisa kohandatud tokeni taotlus ootel"
+        }
+    },
+    "quests": {
+        "g7CreditsModal": {
+            "title": "Teenige Game7 krediite",
+            "description": "Sukelduge HyperPlay parimatesse mängudesse põnevate Play Streaki väljakutsetega. Iga tegevus kutsub teid üles osalema erinevas mängus, näidates web3 mängimise parimaid külgi. Teie mänguaeg on oluline!"
+        },
+        "playstreak": {
+            "signInWarning": {
+                "overlay": "Te ei ole hetkel sisse logitud, mängu järjestuse edenemist ei jälgita. Palun lahkuge mängust ja logige sisse HyperPlay'sse ülemises paremas rippmenüüs, et edenemist jälgida.",
+                "client": "Te ei ole hetkel sisse logitud, mängu järjestuse edusamme ei jälgita. Palun logige sisse HyperPlay'sse ülemises paremas rippmenüüs, et edusamme jälgida."
+            }
+        },
+        "noneFound": {
+            "message": "Ühtegi ülesannet ei leitud.",
+            "title": "Ükski ülesanne ei leitud."
+        },
+        "viewAllQuests": {
+            "title": "Vaata kõiki ülesandeid"
+        },
+        "quests": "Ülesanded"
+    },
+    "dlcs": {
+        "label": "Vali installimiseks DLC-d:"
+    },
+    "overlay": {
+        "comingSoon": "Varsti tulekul",
+        "EXTERNAL_WALLET_CONNECTED": "Olete ühendatud HyperPlay'ga välise rahakoti kaudu."
+    },
+    "importGameErrorMessageExecutable": "Mängu käivitatavat faili ei leitud, mängu importimine ei ole võimalik",
+    "steam-install": {
+        "tooltip": "See installib Windowsi versiooni Steamist ja see töötab HyperPlay ühilduvuskihi abil.  \n\nMõned mängud, eriti vanemad pealkirjad, uuemad 3D-mängud või need, millel on petmisevastane tarkvara, ei pruugi korralikult töötada.  \n\nSoovitatavad spetsifikatsioonid on Mac, millel on Apple Siliconi protsessor (M1 või uuem) ja vähemalt 16 GB RAM-i.",
+        "error-message": "Installimise ajal tekkis viga. Palun proovi uuesti.",
+        "launch-tooltip": "Käivita Steam HyperPlay ühilduvuse kihiga",
+        "success-message": "Steam on installitud. Nüüd saate selle avada Raamatukogust.",
+        "compatibility-layer-not-available": "Ühilduvuse kiht pole saadaval. Palun installige üks \"Seaded > Wine'i haldur\" kaudu kõigepealt."
+    },
+    "importGameErrorTitle": "Mängu importimise viga",
+    "email_subscription": {
+        "title": "Aitäh tellimuse eest!",
+        "subtitle": "Te olete nüüd osa meie kogukonnast ja meil on hea meel jagada teiega väärtuslikke uuendusi ja teadmisi."
+    },
+    "gameUpdateNotifications": {
+        "title": "Mängu uuendused saadaval",
+        "body": {
+            "single": "{{gameName}} jaoks on saadaval uuendus.",
+            "multiple": "{{gameName}} ja teised mängud on valmis uuendamiseks."
+        }
+    },
+    "achievements": {
+        "progress": {
+            "minted": "plokiahelas",
+            "notMinted": "off chain"
+        }
+    },
+    "UNCHECK 'Run Steam'": "Tühjendage 'Käivita Steam'",
+    "At the end make sure to": "Lõpus veendu, et",
+    "back_to_game": "Tagasi mängu juurde",
+    "exit_game": "Välju mängust",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay laadib alla ja käivitab Steam'i seadistuse sinu eest. Palun järgi Steam'i juhiseid nende installijast;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay teavitab teid, kui installimine on lõpetatud;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Kui soovite jätkata, olge kannatlik, kuna see võib võtta paar minutit, sõltuvalt teie internetiühendusest ja süsteemi konfiguratsioonist;",
+    "Install Steam": "Paigaldage Steam",
+    "Installing Steam": "Steami installimine...",
+    "Launch Steam": "Käita Steami",
+    "Launching Steam": "Käivitame Steami...",
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "See mäng on mod World of Warcraft: Wrath of the Lich King (3.3.5a) jaoks. Selle mod'i mängimiseks peavad mängijad omama koopiat World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay ei hosti World of Warcraft'i. Mängijad, kellel on World of Warcraft, saavad versiooni 3.3.5a hankida allikatest nagu:",
+                "subtitle": "Laadige alla World of Warcraft 3.3.5a",
+                "title": "Samm 1",
+                "webtorrent": "Torrent (magnetlink)"
+            },
+            "step2": {
+                "description": "Valige allalaaditud ChromieCraft_3.3.5a.zip fail.",
+                "subtitle": "Valige fail ChromieCraft_3.3.5a.zip",
+                "title": "Samm 2"
+            },
+            "step3": {
+                "subtitle": "Vali installatsioonikaust",
+                "title": "Samm 3"
+            },
+            "step4": {
+                "description": "Sisestage juurdepääsukood mängu installimise jätkamiseks.",
+                "subtitle": "Juurdepääsukood",
+                "title": "Samm 4"
+            },
+            "title": "Modifikatsiooni juhised"
+        }
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Esimese käivitamise ajal laadib Steam vajalikud failid alla ja see võtab paar minutit, et lõpetada ja sisselogimise ekraan ilmuda;",
+    "importGameErrorMessage": "Kehtetu mängu kaust, mängu importimine ei ole võimalik"
 }
