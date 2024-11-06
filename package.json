@@ -169,7 +169,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@hyperplay/chains": "^0.3.0",
     "@hyperplay/check-disk-space": "^3.5.2",
-    "@hyperplay/quests-ui": "^0.0.32",
+    "@hyperplay/quests-ui": "^0.0.34",
     "@hyperplay/ui": "^1.8.8",
     "@hyperplay/utils": "^0.2.4",
     "@mantine/carousel": "^7.12.0",

@@ -31,17 +31,10 @@ export function QuestLogWrapper({
   const pointsBalancesQuery = useGetPointsBalancesForProject(appName)
   const pointsBalances = pointsBalancesQuery?.data?.data
   const { t } = useTranslation()
-  const questsUiQuery = useGetQuestStates({
-    quests
-  })
-  const questIdToQuestStateMap: Record<number, QuestLogInfo['state']> = {}
-  questsUiQuery.data
-    .filter((val) => !!val.data && val.data.questId !== undefined)
-    .forEach(
-      (val) =>
-        // @ts-expect-error  we filter prior to this call
-        (questIdToQuestStateMap[val.data.questId] = val.data.state)
-    )
+  const { questIdToQuestStateMap, isLoading: isGetQuestStatesLoading } =
+    useGetQuestStates({
+      quests
+    })
 
   const questsUi =
     quests?.map((quest) => {
@@ -99,7 +92,7 @@ export function QuestLogWrapper({
   const isLoading =
     questsResults?.data.isLoading ||
     questsResults?.data.isFetching ||
-    questsUiQuery.isLoading
+    isGetQuestStatesLoading
   questLog = (
     <QuestLog
       quests={questsUi ?? []}

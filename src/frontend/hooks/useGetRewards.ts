@@ -1,12 +1,12 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import useGetQuest from './useGetQuest'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { useTranslation } from 'react-i18next'
 import { QuestReward } from '@hyperplay/ui'
+import { useGetQuest } from '@hyperplay/quests-ui'
 
 export function useGetRewards(questId: number | null) {
-  const questResult = useGetQuest(questId)
+  const questResult = useGetQuest(questId, window.api.getQuest)
   const questMeta = questResult.data.data
 
   const queryClient = useQueryClient()
