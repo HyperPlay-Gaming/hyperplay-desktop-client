@@ -960,7 +960,9 @@
             "progressTowardsStreak": "vooruitgang naar de staak van vandaag.",
             "streakProgress": "Streak Progress",
             "days": "dagen",
-            "now": "Nu"
+            "now": "Nu",
+            "sync": "Vertaling:",
+            "syncSuccess": "Vertaling:"
         },
         "readyForClaim": "Klaar voor claim",
         "type": {

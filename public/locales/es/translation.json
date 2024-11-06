@@ -1018,7 +1018,9 @@
             "progressTowardsStreak": "progreso hacia la actual racha.",
             "days": "días",
             "streakCompleted": "¡Racha completada! Reclama tus recompensas ahora.",
-            "streakProgress": "Progreso de la racha"
+            "streakProgress": "Progreso de la racha",
+            "sync": "Sincronización",
+            "syncSuccess": "Sincronización de los progresos"
         },
         "errorMessage": "Ha habido un error en la transacción.",
         "Play": "Jugar",
@@ -1109,15 +1111,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Este juego es un mod para World of Warcraft: Wrath of the Lich King (3.3.5a). Para jugar este mod, los jugadores deben poseer una copia de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay no alberga World of Warcraft. Los jugadores que poseen World of Warcraft pueden obtener la versión 3.3.5a de fuentes como:",
+                "description": "Este juego es un mod para World of Warcraft: Wrath of the Lich King (3.3.5a). Para poder jugar a este mod, los jugadores deben tener una copia de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay no aloja World of Warcraft. Los jugadores que tengan World of Warcraft pueden obtener la versión necesaria de las siguientes fuentes:",
                 "webtorrent": "Torrent (Magnet Link)",
                 "subtitle": "Descargar World of Warcraft 3.3.5a",
-                "title": "Paso 1"
+                "title": "Paso 1",
+                "link1": "Enlace 1",
+                "link2": "Enlace 2 (Enlace magnético)"
             },
             "step2": {
                 "description": "Seleccione la descarga ChromieCraft_3.3.5a.zip file.",
                 "subtitle": "Seleccione ChromieCraft_3.3.5a.zip Archivo",
-                "title": "Paso 2"
+                "title": "Paso 2",
+                "subtitle1": "Seleccione el archivo zip 3.3.5a descargado"
             },
             "step3": {
                 "description": "Por favor seleccione la carpeta donde World of Warcraft: Wrath of the Lich King (3.3.5a) debe ser instalado.",

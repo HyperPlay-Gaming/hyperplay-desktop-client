@@ -134,7 +134,9 @@ export const Overlay = observer(function ({
             <Routes>
               <Route path="/" element={questsViewer} />
               <Route path="/quests" element={questsViewer} />
-              <Route path="/portfolio" element={<MetaMaskPortfolio />} />
+              <Route path="/portfolio" element={<MetaMaskPortfolio />}>
+                <Route path=":page" element={<MetaMaskPortfolio />} />
+              </Route>
             </Routes>
           </HashRouter>
           <div className={BrowserGameStyles.rightSideContainer}>
