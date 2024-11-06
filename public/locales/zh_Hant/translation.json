@@ -972,7 +972,9 @@
             "playToStart": "日 本",
             "progressTowardsStreak": "朝向今天的战.迈进.",
             "streakCompleted": "Streak完成了! 现在请你奖励.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "sync": "协同进步",
+            "syncSuccess": "A. 进展综述"
         },
         "points": "點",
         "sync": "同步",

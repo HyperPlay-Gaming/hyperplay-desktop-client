@@ -75,6 +75,9 @@
   "asset": {
     "message": "Imovina"
   },
+  "attemptingConnect": {
+    "message": "Pokušaj povezivanja na podatkovni blok."
+  },
   "attributions": {
     "message": "Svojstva"
   },
@@ -619,6 +622,9 @@
   },
   "send": {
     "message": "Pošalji"
+  },
+  "sendTokens": {
+    "message": "Pošalji tokene"
   },
   "settings": {
     "message": "Postavke"

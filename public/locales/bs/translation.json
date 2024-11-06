@@ -917,7 +917,9 @@
             "playToStart": "#Predstava @this #igra #na #početak #tvoj streak#!",
             "progressTowardsStreak": "#napredak ususret #današnji streak#.",
             "streakCompleted": "Streak #završen! @Claim #tvoj #nagrada sad#.",
-            "streakProgress": "Streak"
+            "streakProgress": "Streak",
+            "sync": "Sync",
+            "syncSuccess": "#Napredak synced"
         },
         "points": "Points",
         "sync": "Sinhronizuj",

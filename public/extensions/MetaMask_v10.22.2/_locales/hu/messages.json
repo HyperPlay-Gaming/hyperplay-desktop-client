@@ -75,6 +75,9 @@
   "asset": {
     "message": "Eszköz"
   },
+  "attemptingConnect": {
+    "message": "Próbálunk csatlakozni a blokklánchoz."
+  },
   "attributions": {
     "message": "Attribúciók"
   },
@@ -619,6 +622,9 @@
   },
   "send": {
     "message": "Küldés"
+  },
+  "sendTokens": {
+    "message": "Token küldése"
   },
   "settings": {
     "message": "Beállítások"

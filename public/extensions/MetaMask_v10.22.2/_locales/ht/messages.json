@@ -60,6 +60,9 @@
   "approved": {
     "message": "Apwouve"
   },
+  "attemptingConnect": {
+    "message": "Eseye konekte nan blockchain."
+  },
   "attributions": {
     "message": "Atribisyon"
   },
@@ -454,6 +457,9 @@
   },
   "send": {
     "message": "Voye"
+  },
+  "sendTokens": {
+    "message": "Voye Tokens"
   },
   "settings": {
     "message": "Paramèt"
