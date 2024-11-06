@@ -82,7 +82,11 @@ import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { DownloadItem, dialog } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
-import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
+import {
+  cancelQueueExtraction,
+  getFirstQueueElement,
+  updateQueueElementParam
+} from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
 import Store from 'electron-store'
 import i18next from 'i18next'
@@ -95,6 +99,7 @@ import { chmod, writeFile } from 'fs/promises'
 import { trackEvent } from 'backend/metrics/metrics'
 import { getFlag } from 'backend/flags/flags'
 import { ipfsGateway } from 'backend/vite_constants'
+import { GlobalConfig } from 'backend/config'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1563,15 +1568,16 @@ function writeManifestFile(
 export const downloadPatcher = async () => {
   try {
     const { downloadIPDTForOS } = await import('@hyperplay/patcher')
-    await downloadIPDTForOS(toolsPath)
-
-    const version = await getIpdtPatcherVersion()
     const versionFile = path.join(toolsPath, 'ipdt_version.txt')
 
-    logInfo(
-      `IPDT patcher ${version} downloaded successfully`,
-      LogPrefix.HyperPlay
-    )
+    const currentVersion = existsSync(versionFile)
+      ? readFileSync(versionFile, 'utf-8')
+      : undefined
+
+    await downloadIPDTForOS(toolsPath, currentVersion)
+    const version = await getIpdtPatcherVersion()
+
+    logInfo(`IPDT patcher ${version} setup successfully`, LogPrefix.HyperPlay)
     await writeFile(versionFile, version)
 
     if (!isWindows) {
@@ -1591,7 +1597,7 @@ export const downloadPatcher = async () => {
 
 const getIpdtPatcherVersion = async () => {
   const { stdout } = await spawnAsync(ipdtPatcher, ['-version'])
-  return `${stdout}`.split(' ')[2]
+  return `v${stdout}`.split(' ')[2]
 }
 
 export async function downloadGameIpdtManifest(
@@ -1726,6 +1732,8 @@ async function applyPatching(
       mkdirSync(datastoreDir, { recursive: true })
     }
 
+    const { maxWorkers } = GlobalConfig.get().getSettings()
+
     const { generator } = patchFolder(
       ipdtPatcher,
       install_path,
@@ -1734,7 +1742,8 @@ async function applyPatching(
       {
         signal,
         s3API: ipfsGateway,
-        datastoreDir
+        datastoreDir,
+        workers: maxWorkers || 6
       }
     )
 
@@ -1784,6 +1793,15 @@ async function applyPatching(
         const downloadSpeed = downloadedData / elapsedTime
         const totalSize = blockSize * totalBlocks
         const eta = calculateEta(downloadedData, downloadSpeed, totalSize) ?? 0
+
+        // update queue element.size with totalSize
+        const queueElement = getFirstQueueElement()
+        if (queueElement) {
+          updateQueueElementParam(queueElement, 'params', {
+            ...queueElement.params,
+            size: getFileSize(totalSize)
+          })
+        }
 
         sendFrontendMessage('gameStatusUpdate', {
           appName,
@@ -1907,7 +1925,7 @@ async function getManifest(
         }
       }
     )
-    return ''
+    throw new Error(`Error in getManifest for ${appName}: ${error}`)
   }
 }
 

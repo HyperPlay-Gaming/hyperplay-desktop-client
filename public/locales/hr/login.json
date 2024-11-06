@@ -1,21 +1,22 @@
 {
     "button": {
-        "login": "Prijava",
-        "loading": "Učitavanje"
+        "login": "Prijava u sustav",
+        "loading": "Učitavanje resursa",
+        "error": "Greška, pokušajte s drugim kodom."
     },
     "message": {
-        "part1": "Ukoliko se želite prijaviti i instalirati svoje igre, morate slijediti sljedeće korake:",
-        "part2": "Otvori",
-        "part3": "Epic Store ovdje",
-        "part4": ", prijavite se na vaš račun i kopirajte svoj",
-        "part5": "authorization code informacijski broj",
-        "part6": "Zalijepite vaš",
-        "part7": "authorization code broj",
-        "part8": "u donje polje i kliknite gumb za prijavu."
+        "part1": "Prvo, da biste se prijavili i instalirali svoje igre, trebate slijediti sljedeće korake:",
+        "part2": "Otvori aplikaciju",
+        "part3": "Epic platforma ovdje",
+        "part4": ", prijavite se na svoj profil i kopirajte svoj",
+        "part5": "broj informacija o autorizacijskom kodu",
+        "part6": "Zalijepite vaš sadržaj",
+        "part7": "kod za autorizaciju broj",
+        "part8": "u donjem okviru unesite podatke i pritisnite gumb za prijavu.==WEBLATE_PART==u donjem unosu upišite i kliknite na gumb za prijavu.==WEBLATE_PART==u donjem dijelu unesite informacije i odaberite gumb za prijavu."
     },
     "status": {
         "error": "Greška",
         "loading": "Učitavanje liste Igrica, pričekajte"
     },
-    "welcome": "Dobrodošli!"
+    "welcome": "Dobrodošli!  \nPozdrav!  \nDobrodošli u našu zajednicu!"
 }
