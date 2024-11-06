@@ -400,7 +400,8 @@
       "classic-level": false,
       "i18next-parser>esbuild": false,
       "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
-      "@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true
+      "@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
+      "@hyperplay/overlay>electron": false
     }
   }
 }
