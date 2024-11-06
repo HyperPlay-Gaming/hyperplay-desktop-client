@@ -145,13 +145,6 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   // lose focus from the button when using a game controller
   const handleMainActionClick = async () => {
     let action: GamePageActions | undefined = 'launch'
-    console.log('handleMainActionClick', {
-      finished,
-      canceled,
-      status,
-      isUpdate,
-      type
-    })
     if (!finished) {
       if (isUpdate) {
         action = 'update'

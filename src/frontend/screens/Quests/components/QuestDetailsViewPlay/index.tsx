@@ -233,6 +233,7 @@ export const QuestDetailsViewPlayWrapper = observer(
             steamAccountLinked: false
           },
           playStreak: getPlaystreakArgsFromQuestData({
+            // @ts-expect-error - fix these types later
             questMeta,
             questPlayStreakData
           })
