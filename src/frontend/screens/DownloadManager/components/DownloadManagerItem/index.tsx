@@ -130,6 +130,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const finished = status === 'done'
   const canceled = status === 'error' || (status === 'abort' && !current)
   const isExtracting = gameProgressStatus === 'extracting'
+  const isUpdate = type === 'update'
 
   const goToGamePage = (action?: GamePageActions) => {
     if (is_dlc) {
@@ -143,7 +144,22 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   // using one element for the different states so it doesn't
   // lose focus from the button when using a game controller
   const handleMainActionClick = async () => {
-    const action = finished ? 'launch' : 'install'
+    let action: GamePageActions | undefined = 'launch'
+    console.log('handleMainActionClick', {
+      finished,
+      canceled,
+      status,
+      isUpdate,
+      type
+    })
+    if (!finished) {
+      if (isUpdate) {
+        action = 'update'
+      } else {
+        action = 'install'
+      }
+    }
+
     if (finished || canceled) {
       return goToGamePage(action)
     }
