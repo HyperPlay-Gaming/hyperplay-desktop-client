@@ -484,8 +484,8 @@ if (!gotTheLock) {
 
     // keyboards with alt and no option key can be used with mac so register both
     const hpOverlay = await getHpOverlay()
-    const toggle =
-      () => hpOverlay?.toggleOverlay({ action: 'TOGGLE', actionCause: 'HOTKEY' }) ??
+    const toggle = () =>
+      hpOverlay?.toggleOverlay({ action: 'TOGGLE', actionCause: 'HOTKEY' }) ??
       (() =>
         logInfo(
           'Cannot toggle overlay without @hyperplay/overlay package',
