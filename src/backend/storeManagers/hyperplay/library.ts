@@ -7,7 +7,6 @@ import {
   HyperPlayRelease,
   InstallPlatform
 } from 'common/types'
-import axios from 'axios'
 import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
 import {
   getGameInfoFromHpRelease,
@@ -37,12 +36,19 @@ export async function addGameToLibrary(projectId: string) {
   }
 
   const listingUrl = getValistListingApiUrl(projectId)
+  const headers = qaToken ? { Authorization: `Bearer ${qaToken}` } : undefined
+  const res = await fetch(listingUrl, { headers })
 
-  const getConfig =
-    qaToken !== '' ? { headers: { Authorization: `Bearer ${qaToken}` } } : {}
-  const res = await axios.get<HyperPlayRelease>(listingUrl, getConfig)
+  if (!res.ok) {
+    logError(
+      `Failed to fetch game data from ${listingUrl}`,
+      LogPrefix.HyperPlay
+    )
+    return
+  }
 
-  const data = res.data
+  const data = (await res.json()) as HyperPlayRelease
+
   if (Object.keys(data).length === 0) {
     logWarning(
       `Cannot add game to library since game is no longer distributed by HyperPlay.`,

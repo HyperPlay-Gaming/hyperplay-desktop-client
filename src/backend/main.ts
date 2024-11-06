@@ -2016,7 +2016,11 @@ ipcMain.on('reloadApp', async () => {
 })
 
 ipcMain.handle('addHyperplayGame', async (_e, projectId) => {
-  await addGameToLibrary(projectId)
+  try {
+    await addGameToLibrary(projectId)
+  } catch (error) {
+    logError(`Failed to add game to library: ${error}`, LogPrefix.HyperPlay)
+  }
 })
 
 ipcMain.handle('getEpicListingUrl', async (_e, projectId) =>
