@@ -2,6 +2,7 @@ import getPartitionCookies from './utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from '../common/constants'
 import { LogPrefix } from './logger/logger'
 import { AuthSession } from '../common/types/auth'
+import { captureException } from '@sentry/electron'
 
 export async function getAuthSession() {
   const cookieString = await getPartitionCookies({
@@ -17,8 +18,14 @@ export async function getAuthSession() {
   })
 
   if (!response.ok) {
+    const responseError = await response.text()
+    captureException(responseError, {
+      tags: {
+        event: 'getAuthSession Error'
+      }
+    })
     throw new Error(
-      `${LogPrefix.Backend} Failed to get auth session: ${response.statusText}`
+      `${LogPrefix.Backend} Failed to get auth session. Status text: ${response.statusText}. Error message: ${responseError}`
     )
   }
 
