@@ -17,6 +17,7 @@ import classNames from 'classnames'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import MetaMaskPortfolio from 'frontend/screens/MetaMaskPortfolio'
 import { NavBarOverlayWrapper } from './NavBarOverlayWrapper'
+import WebView from 'frontend/screens/WebView'
 
 export const Overlay = observer(function ({
   appName,
@@ -130,13 +131,17 @@ export const Overlay = observer(function ({
         <div className={BrowserGameStyles.bgFilter} />
         <div className={BrowserGameStyles.contentContainer}>
           <HashRouter>
-            <NavBarOverlayWrapper />
+            <NavBarOverlayWrapper appName={appName} runner={runner} />
             <Routes>
               <Route path="/" element={questsViewer} />
               <Route path="/quests" element={questsViewer} />
               <Route path="/portfolio" element={<MetaMaskPortfolio />}>
                 <Route path=":page" element={<MetaMaskPortfolio />} />
               </Route>
+              <Route
+                path="/marketplace"
+                element={<WebView key="marketplace" />}
+              />
             </Routes>
           </HashRouter>
           <div className={BrowserGameStyles.rightSideContainer}>
