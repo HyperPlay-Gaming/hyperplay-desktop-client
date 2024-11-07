@@ -1660,7 +1660,7 @@ async function applyPatching(
 ): Promise<InstallResult> {
   const patcherisEnabled = getFlag('enable-patcher', false)
 
-  if (!patcherisEnabled) {
+  if (!patcherisEnabled || !isWindows) {
     return { status: 'error' }
   }
 
