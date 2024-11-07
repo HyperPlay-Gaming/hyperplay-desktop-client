@@ -64,19 +64,14 @@ export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
     ))
   })
 
-  console.log(
-    'get quest query ',
-    getQuestQuery.map((val) => val.data)
-  )
-  console.log(
-    'get user playstreak query ',
-    getUserPlaystreakQuery.map((val) => val.data)
-  )
-  console.log('quest id to state map ', questIdToQuestStateMap)
+  const allQueries = [...getQuestQuery, ...getUserPlaystreakQuery]
 
   return {
+    isPending: allQueries
+      .map((val) => val.status)
+      .reduce((prev, curr) => prev || curr === 'pending', false),
     // if any is loading or fetching
-    isLoading: [...getQuestQuery, ...getUserPlaystreakQuery]
+    isLoading: allQueries
       .map((val) => val.isLoading || val.isFetching)
       .reduce((prev, curr) => prev || curr, false),
     questIdToQuestStateMap

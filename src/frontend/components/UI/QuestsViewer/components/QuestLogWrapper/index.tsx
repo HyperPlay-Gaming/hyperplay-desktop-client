@@ -31,7 +31,7 @@ export function QuestLogWrapper({
   const pointsBalancesQuery = useGetPointsBalancesForProject(appName)
   const pointsBalances = pointsBalancesQuery?.data?.data
   const { t } = useTranslation()
-  const { questIdToQuestStateMap, isLoading: isGetQuestStatesLoading } =
+  const { questIdToQuestStateMap, isPending: isGetQuestStatesPending } =
     useGetQuestStates({
       quests
     })
@@ -92,7 +92,7 @@ export function QuestLogWrapper({
   const isLoading =
     questsResults?.data.isLoading ||
     questsResults?.data.isFetching ||
-    isGetQuestStatesLoading
+    isGetQuestStatesPending
   questLog = (
     <QuestLog
       quests={questsUi ?? []}
