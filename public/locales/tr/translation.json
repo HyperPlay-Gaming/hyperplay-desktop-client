@@ -916,7 +916,9 @@
             "playToStart": "Bu oyunu çizginize başlamak için oynayın!",
             "progressTowardsStreak": "bugünün çizgisine doğru ilerleme.",
             "streakProgress": "Streak Progress",
-            "streakCompleted": "Streak tamamlandı! Şimdi ödüllerinizi talep edin."
+            "streakCompleted": "Streak tamamlandı! Şimdi ödüllerinizi talep edin.",
+            "syncSuccess": "İlerleme senkronize edildi",
+            "sync": "Senkronizasyon"
         },
         "points": "Noktalar",
         "signIn": "Giriş yap",

@@ -914,7 +914,9 @@
             "playToStart": "このゲームをプレイして、あなたのストリークを開始します!",
             "progressTowardsStreak": "今日のストリークに向かって進んでください.",
             "streakCompleted": "完了! 今すぐ報酬を請求してください.",
-            "streakProgress": "Streakの進捗"
+            "streakProgress": "Streakの進捗",
+            "sync": "同期進捗",
+            "syncSuccess": "進捗同期"
         },
         "points": "点",
         "type": {
