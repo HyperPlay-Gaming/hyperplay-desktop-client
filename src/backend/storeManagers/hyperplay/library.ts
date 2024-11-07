@@ -55,7 +55,14 @@ export async function addGameToLibrary(projectId: string) {
     )
   }
 
+  logInfo(
+    `Successfully fetched game data from ${listingUrl}`,
+    LogPrefix.HyperPlay
+  )
+
   const data = (await res.json()) as HyperPlayRelease
+
+  logInfo(`Response: ${JSON.stringify(data, null, 2)}`, LogPrefix.HyperPlay)
 
   if (Object.keys(data).length === 0) {
     logWarning(
@@ -64,8 +71,16 @@ export async function addGameToLibrary(projectId: string) {
     )
     return
   }
+
+  logInfo(`Getting game info from HyperPlay release`, LogPrefix.HyperPlay)
+
   const gameInfo = getGameInfoFromHpRelease(data)
+
+  logInfo(`GameInfo: ${JSON.stringify(gameInfo, null, 2)}`, LogPrefix.HyperPlay)
+
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
+
+  logInfo(`Finished adding game to library`, LogPrefix.HyperPlay)
 }
 
 export const getInstallInfo = async (
