@@ -13,6 +13,7 @@ import { isSteamDeck } from './steamDeck'
 
 import { getGogdlVersion, getLegendaryVersion } from '../helperBinaries'
 import { getAppVersion } from 'backend/utils'
+import { logError, logInfo, LogPrefix } from 'backend/logger/logger'
 
 type GPUInfo = {
   // The PCI device ID of the graphics card (hexadecimal)
@@ -65,47 +66,76 @@ let cachedSystemInfo: SystemInformation | null = null
  * @param cache Whether cached information should be returned if possible
  */
 async function getSystemInfo(cache = true): Promise<SystemInformation> {
-  if (cache && cachedSystemInfo) return cachedSystemInfo
+  try {
+    if (cache && cachedSystemInfo) return cachedSystemInfo
+    logInfo('Gathering system specs...', LogPrefix.Backend)
+    const cpus = os.cpus()
+    const memory = await getMemoryInfo()
+    const gpus = await getGpuInfo()
+    const detailedOsInfo = await getOsInfo()
+    const isDeck = isSteamDeck(cpus, gpus)
+    const [legendaryVersion, gogdlVersion] = await Promise.all([
+      getLegendaryVersion(),
+      getGogdlVersion()
+    ])
 
-  const cpus = os.cpus()
-  const memory = await getMemoryInfo()
-  const gpus = await getGpuInfo()
-  const detailedOsInfo = await getOsInfo()
-  const isDeck = isSteamDeck(cpus, gpus)
-  const [legendaryVersion, gogdlVersion] = await Promise.all([
-    getLegendaryVersion(),
-    getGogdlVersion()
-  ])
-
-  const sysinfo: SystemInformation = {
-    CPU: {
-      model: cpus[0]!.model,
-      // FIXME: Technically the user could be on a server with more than one
-      //        physical CPU installed, but I'd say that's rather unlikely
-      cores: cpus.length
-    },
-    memory: {
-      total: memory.total,
-      used: memory.used,
-      totalFormatted: filesize(memory.total, { base: 2 }) as string,
-      usedFormatted: filesize(memory.used, { base: 2 }) as string
-    },
-    GPUs: gpus,
-    OS: {
-      platform: process.platform,
-      version: process.getSystemVersion(),
-      ...detailedOsInfo
-    },
-    isSteamDeck: isDeck,
-    isFlatpak: !!process.env.FLATPAK_ID,
-    softwareInUse: {
-      appVersion: getAppVersion(),
-      legendaryVersion: legendaryVersion,
-      gogdlVersion: gogdlVersion
+    const sysinfo: SystemInformation = {
+      CPU: {
+        model: cpus[0]!.model,
+        // FIXME: Technically the user could be on a server with more than one
+        //        physical CPU installed, but I'd say that's rather unlikely
+        cores: cpus.length
+      },
+      memory: {
+        total: memory.total,
+        used: memory.used,
+        totalFormatted: filesize(memory.total, { base: 2 }) as string,
+        usedFormatted: filesize(memory.used, { base: 2 }) as string
+      },
+      GPUs: gpus,
+      OS: {
+        platform: process.platform,
+        version: process.getSystemVersion(),
+        ...detailedOsInfo
+      },
+      isSteamDeck: isDeck,
+      isFlatpak: !!process.env.FLATPAK_ID,
+      softwareInUse: {
+        appVersion: getAppVersion(),
+        legendaryVersion: legendaryVersion,
+        gogdlVersion: gogdlVersion
+      }
+    }
+    cachedSystemInfo = sysinfo
+    return sysinfo
+  } catch (error) {
+    logError(['Failed to gather system specs', error], LogPrefix.Backend)
+    return {
+      CPU: {
+        model: 'Unknown',
+        cores: 0
+      },
+      memory: {
+        total: 0,
+        used: 0,
+        totalFormatted: 'Unknown',
+        usedFormatted: 'Unknown'
+      },
+      GPUs: [],
+      OS: {
+        platform: 'Unknown',
+        name: 'Unknown',
+        version: 'Unknown'
+      },
+      isSteamDeck: false,
+      isFlatpak: false,
+      softwareInUse: {
+        appVersion: 'Unknown',
+        legendaryVersion: 'Unknown',
+        gogdlVersion: 'Unknown'
+      }
     }
   }
-  cachedSystemInfo = sysinfo
-  return sysinfo
 }
 
 async function formatSystemInfo(info: SystemInformation): Promise<string> {
