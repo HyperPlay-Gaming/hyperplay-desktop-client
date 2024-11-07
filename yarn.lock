@@ -1263,10 +1263,10 @@
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
 
-"@hyperplay/extension-provider@^0.0.8-alpha.0":
-  version "0.0.8-alpha.0"
-  resolved "https://registry.yarnpkg.com/@hyperplay/extension-provider/-/extension-provider-0.0.8-alpha.0.tgz#e4ffe7a05bc7c107cd5719f80d66a8457e2604ef"
-  integrity sha512-5yVJOBkOXmOLyIsq4HG/uxO80pvthpOCjToKtM8nJDFUUHCby0QfWJJi0FHkGn9ZtcxslIhEcnDLJlvTV8th+w==
+"@hyperplay/extension-provider@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@hyperplay/extension-provider/-/extension-provider-0.0.8.tgz#74c95ebd4bb7f148051960fb614bd6d5462119a5"
+  integrity sha512-/5UHQdjHhvPX2iAmnZ9xy6c+yx70VYSYjnE/iSKdyfrZpIkY2kFzTGzi38nZV1GZVoKjV2EDuzLImYt9eXxjSw==
   dependencies:
     "@hyperplay/utils" "^0.3.3"
     fs-extra "^11.2.0"
@@ -1285,10 +1285,10 @@
     express "^4.18.2"
     stream-throttle "^0.1.3"
 
-"@hyperplay/overlay@^0.0.7-alpha.3":
-  version "0.0.7-alpha.3"
-  resolved "https://registry.yarnpkg.com/@hyperplay/overlay/-/overlay-0.0.7-alpha.3.tgz#5d029e974b091f667f69ec19ef31176983b324ca"
-  integrity sha512-HKIlEaijwQc1jNopUoV11lomegonk6iYRQvHgmfWFnQUGbcuWkzrMVFPgz82/iqfxyXFlQe1cccq2A5ONEMvOw==
+"@hyperplay/overlay@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@hyperplay/overlay/-/overlay-0.0.7.tgz#d212accddc925cac7f11d626b4ba30a9058819f9"
+  integrity sha512-iIKdcFewYLh32aqwDPYxUQHJ5LCNTayhfYU/8ZhL4t8/PmjZtmzSKiBoMH/U+8S31m9kE4aoavMmHYX5xhkqtw==
   dependencies:
     "@hyperplay/utils" "^0.3.3"
     mobx "^6.12.3"
