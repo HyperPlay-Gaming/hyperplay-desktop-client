@@ -6,24 +6,38 @@ import {
 import { QuestLogInfo } from '@hyperplay/ui'
 import { Quest } from '@hyperplay/utils'
 import { useQueries } from '@tanstack/react-query'
+import useAuthSession from './useAuthSession'
 
 export interface UseGetQuestLogInfosProps {
   quests?: Quest[] | null
 }
 
 export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
-  const getQuestQuery = useQueries({
-    queries:
+  const { isSignedIn } = useAuthSession()
+  type getQuestQueryOptionsType = ReturnType<typeof getQuestQueryOptions>
+  let getQuestQueries: getQuestQueryOptionsType[] = []
+  if (isSignedIn) {
+    getQuestQueries =
       quests?.map((quest) =>
         getQuestQueryOptions(quest.id, window.api.getQuest)
       ) ?? []
+  }
+  const getQuestQuery = useQueries({
+    queries: getQuestQueries
   })
 
-  const getUserPlaystreakQuery = useQueries({
-    queries:
+  type getUserPlaystreakQueryOptionsType = ReturnType<
+    typeof getUserPlaystreakQueryOptions
+  >
+  let getUserPlaystreakQueries: getUserPlaystreakQueryOptionsType[] = []
+  if (isSignedIn) {
+    getUserPlaystreakQueries =
       quests?.map((quest) =>
         getUserPlaystreakQueryOptions(quest.id, window.api.getUserPlayStreak)
       ) ?? []
+  }
+  const getUserPlaystreakQuery = useQueries({
+    queries: getUserPlaystreakQueries
   })
 
   const questMap: Record<number, Quest> = {}
