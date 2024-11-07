@@ -857,7 +857,8 @@
                 "validation": "¡Éxito! El código de acceso es válido"
             },
             "error": {
-                "validation": "Código de acceso no válido"
+                "validation": "Código de acceso no válido",
+                "licenseUndefined": "No se pudo validar el código de acceso. Verifique su acceso a Internet o la configuración del firewall."
             },
             "requirescode": "Esta actualización del juego requiere un código de acceso."
         },
@@ -955,7 +956,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Estás conectado a HyperPlay con un monedero externo.",
         "WALLET_DISCONNECTED": "Usted no tiene una cartera conectada a HyperPlay.",
-        "comingSoon": "Próximamente"
+        "comingSoon": "Próximamente",
+        "links": {
+            "bridge": "Puente",
+            "buy": "Comprar",
+            "sell": "Vender",
+            "portfolio": "Cartera",
+            "swap": "Intercambio",
+            "marketplace": "Mercado"
+        }
     },
     "sideload": {
         "warningTitle": "Importante",
