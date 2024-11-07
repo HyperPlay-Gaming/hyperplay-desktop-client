@@ -255,7 +255,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     progress.totalSize || installInfo?.manifest.download_size || 0
 
   // calculate download time
-  const downloadTime = endTime - startTime
+  const downloadTime = (current ? Date.now() : endTime) - startTime
   const downloadTimeInMinutes = Math.floor(downloadTime / 60000)
   const downloadTimeInSeconds = Math.floor((downloadTime % 60000) / 1000)
   const downloadTimeFormatted = `${downloadTimeInMinutes}m ${downloadTimeInSeconds}s`
