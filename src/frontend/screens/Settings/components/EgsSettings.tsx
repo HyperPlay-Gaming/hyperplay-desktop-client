@@ -12,6 +12,7 @@ import {
   ToggleSwitch
 } from 'frontend/components/UI'
 import libraryState from 'frontend/state/libraryState'
+import { Button } from '@hyperplay/ui'
 
 const EgsSettings = () => {
   const { t } = useTranslation()
@@ -113,17 +114,11 @@ const EgsSettings = () => {
           afterInput={
             <>
               <span className="rightButton">
-                <button
+                <Button
                   data-testid="syncButton"
                   onClick={async () => handleSync()}
                   disabled={isSyncing || !egsPath.length}
-                  className={`button is-small ${
-                    isLinked
-                      ? 'is-danger'
-                      : isSyncing
-                      ? 'is-primary'
-                      : 'settings'
-                  }`}
+                  style={{ display: 'flex', marginTop: '27px' }}
                 >
                   {`${
                     isLinked
@@ -132,17 +127,17 @@ const EgsSettings = () => {
                       ? t('button.syncing')
                       : t('button.sync')
                   }`}
-                </button>
+                </Button>
               </span>
-              <div>
-                {!isWindows && (
-                  <InfoBox text="infobox.help">{t('help.general')}</InfoBox>
-                )}
-              </div>
             </>
           }
         />
       )}
+      <div>
+        {!isWindows && (
+          <InfoBox text="infobox.help">{t('help.general')}</InfoBox>
+        )}
+      </div>
       {isWindows && (
         <ToggleSwitch
           htmlId="syncToggle"

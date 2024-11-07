@@ -35,8 +35,6 @@
         },
         "choose": "Choose",
         "choose-egs-prefix": "Choose Prefix where EGS is installed",
-        "choose-gogdl-binary": "Select GOGDL Binary (needs restart)",
-        "choose-legendary-binary": "Select Legendary binary",
         "customWine": "Select the Wine or Proton binary",
         "default-install-path": "Choose Default Install Path",
         "default-steam-path": "Steam path.",
@@ -710,8 +708,6 @@
         }
     },
     "other": {
-        "gogdl-version": "GOGDL Version: ",
-        "legendary-version": "Legendary Version: ",
         "weblate": "Help Translate HyperPlay."
     },
     "Other": "Other",
@@ -729,8 +725,6 @@
         "WALLET_DISCONNECTED": "You do not have a wallet connected to HyperPlay."
     },
     "placeholder": {
-        "alt-gogdl-bin": "Using built-in GOGDL binary...",
-        "alt-legendary-bin": "Using built-in Legendary binary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "dxvkfpsvalue": "Positive integer value (e.g. 30, 60, ...)",
         "egs-prefix": "Prefix where EGS is installed",
@@ -823,8 +817,6 @@
         "addgamestoapplications": "Add games to Applications automatically",
         "addgamestostartmenu": "Add games to start menu automatically",
         "addgamestosteam": "Add games to Steam automatically",
-        "alt-gogdl-bin": "Choose an Alternative GOGDL Binary to use",
-        "alt-legendary-bin": "Choose an Alternative Legendary Binary",
         "autodxvk": "Auto Install/Update DXVK on Prefix",
         "autodxvknvapi": "Auto Install/Update DXVK-NVAPI on Prefix",
         "autoLaunchHyperPlay": "Auto Launch HyperPlay",
