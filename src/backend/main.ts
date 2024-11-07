@@ -2017,6 +2017,10 @@ ipcMain.on('reloadApp', async () => {
 
 ipcMain.handle('addHyperplayGame', async (_e, projectId) => {
   try {
+    logInfo(
+      `Adding game to library: ${projectId} testing version 0.1`,
+      LogPrefix.HyperPlay
+    )
     await addGameToLibrary(projectId)
   } catch (error) {
     logError(`Failed to add game to library: ${error}`, LogPrefix.HyperPlay)
