@@ -119,11 +119,13 @@ const root = createRoot(container!) // createRoot(container!) if you use TypeScr
 const renderApp = async () => {
   const ldConfig = await window.api.getLDEnvConfig()
   const appVersion = await window.api.getAppVersion()
+  const platform = await window.api.getPlatform()
 
   const context = {
     ...ldConfig.ldUser,
     appVersion,
-    languageCode
+    languageCode,
+    platform
   }
 
   window.api.logInfo(
