@@ -37,14 +37,22 @@ export async function addGameToLibrary(projectId: string) {
 
   const listingUrl = getValistListingApiUrl(projectId)
   const headers = qaToken ? { Authorization: `Bearer ${qaToken}` } : undefined
-  const res = await fetch(listingUrl, { headers })
+
+  // Add timeout and error handling to fetch
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+
+  const res = await fetch(listingUrl, {
+    headers,
+    signal: controller.signal
+  })
+
+  clearTimeout(timeout)
 
   if (!res.ok) {
-    logError(
-      `Failed to fetch game data from ${listingUrl}`,
-      LogPrefix.HyperPlay
+    throw new Error(
+      `HTTP error! status: ${res.status} message: ${res.statusText}`
     )
-    return
   }
 
   const data = (await res.json()) as HyperPlayRelease
