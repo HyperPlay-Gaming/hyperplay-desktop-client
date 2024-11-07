@@ -490,7 +490,10 @@
             "canceled": "Annullato",
             "clear": "Cancella Lista",
             "downloading": "Scaricamento",
-            "empty": "Niente da scaricare",
+            "empty": {
+                "finished": "Niente scaricato",
+                "queue": "Niente da scaricare"
+            },
             "finished": "Completato",
             "queued": "In coda",
             "remove": "Rimuovi dai Download",
@@ -927,7 +930,9 @@
             "playToStart": "Gioca a questo gioco per iniziare la tua striscia!",
             "progressTowardsStreak": "progresso verso la striscia di oggi.",
             "streakCompleted": "Streak completato! Rivendica le tue ricompense.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "syncSuccess": "Progressi sincronizzati",
+            "sync": "Sync Progress"
         },
         "points": "Punti",
         "sync": "Sincronizza",
@@ -976,6 +981,9 @@
         "g7CreditsModal": {
             "title": "Earn Game7 Credits",
             "description": "Immergiti nei migliori giochi di HyperPlay con emozionanti sfide di gioco. Ogni attività ti incoraggia a impegnarsi con un gioco diverso, mostrando il meglio del gioco web3. Il tuo tempo di gioco conta!"
+        },
+        "viewAllQuests": {
+            "title": "Visualizza tutte le missioni"
         }
     },
     "ALL": "Tutto",
@@ -1022,6 +1030,10 @@
         "wine-download": {
             "title": "Compatibility Layer",
             "message": "Impostazione dello strato di compatibilità predefinito"
+        },
+        "wine-download-failed": {
+            "title": "Errore",
+            "message": "Non riuscita a configurare lo strato di compatibilità predefinito"
         }
     },
     "sideload": {
@@ -1046,7 +1058,8 @@
     "importGameErrorMessage": "Non una cartella di gioco valida, importare il gioco non è possibile",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Sei connesso a HyperPlay con un portafoglio esterno.",
-        "WALLET_DISCONNECTED": "Non hai un portafoglio collegato a HyperPlay."
+        "WALLET_DISCONNECTED": "Non hai un portafoglio collegato a HyperPlay.",
+        "comingSoon": "In arrivo"
     },
     "achievements": {
         "progress": {

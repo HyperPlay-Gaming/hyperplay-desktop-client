@@ -329,7 +329,10 @@
             "downloading": "מוריד",
             "canceled": "בוטל",
             "clear": "מחק רשימה",
-            "empty": "אין מה להוריד",
+            "empty": {
+                "finished": "שום דבר לא הורד",
+                "queue": "אין מה להוריד"
+            },
             "finished": "הושלם",
             "pause": "השהה הורדה",
             "queued": "בתור",
@@ -928,7 +931,9 @@
             "progressTowardsStreak": "התקדמות לקראת המשבר של היום.",
             "streakCompleted": "סטראק הושלם! תטען את התגמולים שלך עכשיו.",
             "streakProgress": "התקדמות",
-            "now": "ועכשיו"
+            "now": "ועכשיו",
+            "sync": "Sync Progress",
+            "syncSuccess": "התקדמות מסונכרנת"
         },
         "signIn": "כניסה",
         "points": "נקודות",
@@ -969,6 +974,10 @@
         "wine-download": {
             "title": "מנהל גרסאות Wine",
             "message": "הגדרת שכבת תאימות ברירת המחדל"
+        },
+        "wine-download-failed": {
+            "message": "נכשל בהקמת שכבת תאימות ברירת המחדל",
+            "title": "שגיאה"
         }
     },
     "profile": "פרופיל",
@@ -1030,7 +1039,8 @@
     "importGameErrorMessage": "לא תיקיית משחק תקפה, משחק יבוא אינו אפשרי",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "אתה מחובר ל- HyperPlay עם ארנק חיצוני.",
-        "WALLET_DISCONNECTED": "אין לכם ארנק המחובר ל- HyperPlay."
+        "WALLET_DISCONNECTED": "אין לכם ארנק המחובר ל- HyperPlay.",
+        "comingSoon": "בקרוב"
     },
     "quests": {
         "playstreak": {
@@ -1047,6 +1057,9 @@
         "g7CreditsModal": {
             "title": "10 נקודות זיכוי",
             "description": "עקבו אחרי HyperPlay's Greatest Play Streak Challenges כל פעילות מעודדת אותך לעסוק במשחק אחר, להראות את הטוב ביותר של משחקי Web3. זמן המשחק שלך חשוב!"
+        },
+        "viewAllQuests": {
+            "title": "All Quests"
         }
     },
     "importGameErrorMessageExecutable": "משחק Game Game לוח לא נמצא, משחק יבוא אינו אפשרי",

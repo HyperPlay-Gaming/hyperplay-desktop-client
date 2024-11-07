@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Tidak ada download",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -938,7 +941,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Anda terhubung ke HyperPlay dengan dompet eksternal.",
-        "WALLET_DISCONNECTED": "Anda tidak memiliki dompet yang terhubung ke HyperPlay."
+        "WALLET_DISCONNECTED": "Anda tidak memiliki dompet yang terhubung ke HyperPlay.",
+        "comingSoon": "Akan Datang"
     },
     "dlcs": {
         "label": "Pilih DLC untuk menginstal:"
@@ -967,7 +971,9 @@
             "streakCompleted": "Login Klaim hadiah Anda sekarang.",
             "streakProgress": "Sitemap",
             "days": "hari",
-            "now": "Sekarang"
+            "now": "Sekarang",
+            "sync": "Sitemap",
+            "syncSuccess": "Sitemap"
         },
         "readyForClaim": "Siap untuk klaim",
         "type": {
@@ -1004,6 +1010,10 @@
         "wine-download": {
             "message": "Menyiapkan layer kompatibilitas default",
             "title": "Lapisan Kompatibilitas"
+        },
+        "wine-download-failed": {
+            "message": "Gagal untuk mengatur lapisan kompatibilitas default",
+            "title": "Kesalahan"
         }
     },
     "sideload": {
@@ -1040,6 +1050,9 @@
         "g7CreditsModal": {
             "description": "Menyelam ke game top HyperPlay dengan Tantangan Streak Bermain yang menarik. Setiap aktivitas mendorong Anda untuk terlibat dengan permainan yang berbeda, menunjukkan yang terbaik dari game web3. Masalah bermain Anda!",
             "title": "Dapatkan Kredit Game7"
+        },
+        "viewAllQuests": {
+            "title": "Lihat Semua Quest"
         }
     },
     "email_subscription": {

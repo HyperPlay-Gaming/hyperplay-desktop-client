@@ -52,3 +52,8 @@ xyz.hyperplay.HyperPlay
 /public/extensions/resetExecutables/resetExtension-macos
 /public/extensions/resetExecutables/resetExtension.exe
 /public/extensions/resetExecutables/resetExtension
+
+electron.vite.config.*.mjs
+
+.MMSDK_cached_chainId
+.MMSDK_cached_address

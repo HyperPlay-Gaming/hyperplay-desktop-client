@@ -481,7 +481,10 @@
             "canceled": "Cancel·lat",
             "clear": "Esborra la llista",
             "downloading": "Es descarrega",
-            "empty": "No hi ha res per a descarregar",
+            "empty": {
+                "queue": "No hi ha res per a descarregar",
+                "finished": "No hi ha comentaris"
+            },
             "finished": "Completat",
             "queued": "A la cua",
             "remove": "Treu de les descàrregues",
@@ -907,7 +910,9 @@
             "playToStart": "Juga aquest joc per començar la seva ratxa!",
             "streakProgress": "Streak Progress",
             "progressTowardsStreak": "avançar cap a la ratxa actual.",
-            "streakCompleted": "Streak completat! Demana ara les teves recompenses."
+            "streakCompleted": "Streak completat! Demana ara les teves recompenses.",
+            "sync": "Sync Progress",
+            "syncSuccess": "Progress sincronitzat"
         },
         "signIn": "Inicia la sessió",
         "sync": "Sincronització",
@@ -1023,6 +1028,9 @@
         "g7CreditsModal": {
             "title": "Guanyar els crèdits Game7",
             "description": "Submergeix-te als millors jocs d'HyperPlay amb l'excitant joc Streak Challenges. Cada activitat t'anima a participar amb un joc diferent, mostrant el millor dels jocs web3. El teu temps de joc!"
+        },
+        "viewAllQuests": {
+            "title": "Veure totes les recerques"
         }
     },
     "accounts": "comptes",
@@ -1031,12 +1039,17 @@
         "wine-download": {
             "title": "Capa de compatibilitat",
             "message": "Configuració de la capa de compatibilitat predeterminada"
+        },
+        "wine-download-failed": {
+            "message": "No està Registrat? Clic aquí per registrar-se ..",
+            "title": "Errors"
         }
     },
     "importGameErrorTitle": "Error de joc d'importació",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Estàs connectat a HyperPlay amb una cartera externa.",
-        "WALLET_DISCONNECTED": "No teniu una cartera connectada a HyperPlay."
+        "WALLET_DISCONNECTED": "No teniu una cartera connectada a HyperPlay.",
+        "comingSoon": "Pròximament"
     },
     "achievements": {
         "progress": {

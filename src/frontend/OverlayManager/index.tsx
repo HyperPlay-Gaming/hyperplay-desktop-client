@@ -43,9 +43,7 @@ const OverlayManager = observer(function ({
         style={style}
         id="overlay-manager"
       >
-        {OverlayState.showOverlay ? (
-          <Overlay appName={appName} runner={runner} />
-        ) : null}
+        <Overlay appName={appName} runner={runner} />
         {url !== 'ignore' && OverlayState.renderState.showBrowserGame ? (
           <div>
             <WebviewControls

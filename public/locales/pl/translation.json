@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Nothing downloaded",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -914,7 +917,9 @@
             "playToStart": "Zagraj tę grę, aby rozpocząć swoją serię!",
             "progressTowardsStreak": "przebiega w kierunku dzisiejszych rund.",
             "streakCompleted": "Streak został ukończony. Teraz obie nagrody.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "sync": "Strona oficjalna",
+            "syncSuccess": "Postępowa syndykacja"
         },
         "points": "Punkty",
         "reputation": "Reputacja",
@@ -972,6 +977,9 @@
         "g7CreditsModal": {
             "description": "W pierwszej części gry HyperPlaya występują ekscytujące Play Streak Challenges. Każda aktywność zachęca do angażowania się w inną grę, pokazując najlepszą grę internetową. Śmiały czas gry!",
             "title": "Earn Game7 (ang.)"
+        },
+        "viewAllQuests": {
+            "title": "Wszystko co prawda"
         }
     },
     "exit_game": "Oficjalna strona gry",
@@ -1025,11 +1033,16 @@
         "wine-download": {
             "title": "Layer",
             "message": "Rozwiązanie domyślnej warstwy kompatybilności"
+        },
+        "wine-download-failed": {
+            "message": "Udowodniono, aby zbudować domyślną warstwę kompatybilności",
+            "title": "Błąd"
         }
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Jest połączony z HyperPlay z zewnętrzną ścianą.",
-        "WALLET_DISCONNECTED": "Nie ma ścian połączonych z HyperPlay."
+        "WALLET_DISCONNECTED": "Nie ma ścian połączonych z HyperPlay.",
+        "comingSoon": "Coming Soon"
     },
     "dlcs": {
         "label": "Select DLC (ang.)"

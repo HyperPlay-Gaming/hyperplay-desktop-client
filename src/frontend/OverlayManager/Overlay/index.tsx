@@ -13,6 +13,11 @@ import { Button } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import libraryState from 'frontend/state/libraryState'
+import classNames from 'classnames'
+import { HashRouter, Route, Routes } from 'react-router-dom'
+import MetaMaskPortfolio from 'frontend/screens/MetaMaskPortfolio'
+import { NavBarOverlayWrapper } from './NavBarOverlayWrapper'
+import WebView from 'frontend/screens/WebView'
 
 export const Overlay = observer(function ({
   appName,
@@ -33,27 +38,6 @@ export const Overlay = observer(function ({
       runner
     })
   }, [])
-
-  let exitGameButtonStyle = {
-    top: 'var(--space-md)',
-    right: 'var(--space-md)',
-    position: 'absolute',
-    zIndex: 200,
-    display: 'flex',
-    gap: 'var(--space-sm)'
-  } as React.CSSProperties
-
-  if (
-    OverlayState.renderState.showExitGameButton &&
-    !OverlayState.renderState.showExtension
-  ) {
-    exitGameButtonStyle = {
-      ...exitGameButtonStyle,
-      top: 0,
-      right: 0,
-      overflowY: 'hidden'
-    }
-  }
 
   const shouldShowExtension =
     WalletState.provider === PROVIDERS.METAMASK_EXTENSION ||
@@ -76,7 +60,7 @@ export const Overlay = observer(function ({
     let exitGameButton = null
     if (OverlayState.renderState.showExitGameButton) {
       exitGameButton = (
-        <div style={exitGameButtonStyle}>
+        <div className={BrowserGameStyles.buttonContainer}>
           <Button
             onClick={async () => {
               // mac can take ~5 seconds to close the wine process, so we close the overlay instantly
@@ -139,13 +123,33 @@ export const Overlay = observer(function ({
       questsViewer = <QuestsViewer projectId={appName} />
     }
 
+    const classNameMods: Record<string, boolean> = {}
+    classNameMods[BrowserGameStyles.hideOverlay] = !OverlayState.showOverlay
+
     overlayItems = (
-      <>
-        <div className={BrowserGameStyles.bgFilter}></div>
-        {exitGameButton}
-        {extensionManager}
-        {questsViewer}
-      </>
+      <div className={classNames(BrowserGameStyles.root, classNameMods)}>
+        <div className={BrowserGameStyles.bgFilter} />
+        <div className={BrowserGameStyles.contentContainer}>
+          <HashRouter>
+            <NavBarOverlayWrapper appName={appName} runner={runner} />
+            <Routes>
+              <Route path="/" element={questsViewer} />
+              <Route path="/quests" element={questsViewer} />
+              <Route path="/portfolio" element={<MetaMaskPortfolio />}>
+                <Route path=":page" element={<MetaMaskPortfolio />} />
+              </Route>
+              <Route
+                path="/marketplace"
+                element={<WebView key="marketplace" />}
+              />
+            </Routes>
+          </HashRouter>
+          <div className={BrowserGameStyles.rightSideContainer}>
+            {exitGameButton}
+            {extensionManager}
+          </div>
+        </div>
+      </div>
     )
   }
 

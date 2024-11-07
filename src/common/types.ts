@@ -256,6 +256,7 @@ export interface InstallProgress {
   downSpeed?: number
   diskSpeed?: number
   file?: string
+  totalSize?: number
 }
 
 export interface InstalledInfo {
@@ -946,6 +947,10 @@ export interface Quest {
       minimum_session_time_in_seconds: number
     }
   }
+  quest_external_game: null | {
+    runner: Runner
+    store_redirect_url: string
+  }
 }
 
 export interface RewardClaimSignature {
@@ -991,3 +996,5 @@ export interface PointsCollection {
   symbol: string
   image: string
 }
+
+export type { GamePageActions } from '@hyperplay/utils'

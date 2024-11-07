@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Mikään ladattu",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -779,7 +782,9 @@
             "dayResets": "Päivän palautus:",
             "playEachDay": "Pelaa joka päivä, jotta strippi ei palaudu!",
             "playToStart": "Pelaa tätä peliä aloittaaksesi pelin!",
-            "progressTowardsStreak": "edistystä kohti nykypäivän rajoja."
+            "progressTowardsStreak": "edistystä kohti nykypäivän rajoja.",
+            "sync": "Sync Progress",
+            "syncSuccess": "Progressi synkronoitu"
         },
         "signIn": "Kirjaudu",
         "sync": "Sync",
@@ -960,6 +965,10 @@
         "wine-download": {
             "title": "Compatibility Layer i",
             "message": "Oletusarvoisen yhteensopivuuden määrittäminen"
+        },
+        "wine-download-failed": {
+            "message": "Epäonnistuneen yhteensopivuuden määrittäminen",
+            "title": "Virhe"
         }
     },
     "analytics": "Analytiikat",
@@ -1013,7 +1022,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Olet yhteydessä HyperPlayyn ulkoisella lompakolla.",
-        "WALLET_DISCONNECTED": "Sinulla ei ole lompakkoa, joka on liitetty HyperPlayyn."
+        "WALLET_DISCONNECTED": "Sinulla ei ole lompakkoa, joka on liitetty HyperPlayyn.",
+        "comingSoon": "Tulossa pian"
     },
     "accounts": "tilit",
     "exit_game": "Exit Game",
@@ -1045,6 +1055,9 @@
         "g7CreditsModal": {
             "description": "HyperPlayn parhaat pelit, joissa on jännittäviä Play Streak -haasteita. Jokainen aktiviteetti kannustaa sinua osallistumaan toiseen peliin ja esittelemään parhaan verkkopelin. Peliaikasi on tärkeää!",
             "title": "Ansaitse Game7 -luottoja"
+        },
+        "viewAllQuests": {
+            "title": "Katso kaikki Quests"
         }
     },
     "import-game-folder": {

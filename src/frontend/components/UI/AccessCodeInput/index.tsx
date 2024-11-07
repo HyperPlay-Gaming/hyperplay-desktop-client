@@ -2,6 +2,7 @@ import { TextInput, TextInputProps } from '@hyperplay/ui'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
+import { captureException } from '@sentry/electron'
 
 export interface AccessCodeInputProps {
   licenseConfigId?: number
@@ -25,6 +26,18 @@ export function AccessCodeInput({
   useEffect(() => {
     async function validateAccessCode() {
       if (licenseConfigId === undefined) {
+        const errMsg =
+          'Could not validate access code input since license config id is undefined'
+        window.api.logError(errMsg)
+        setErrorText(
+          t(
+            'hyperplay.accesscodes.error.licenseUndefined',
+            'Could not validate access code. Please check your internet access or firewall settings.'
+          )
+        )
+        captureException(errMsg, {
+          tags: { event: 'validateAccessCode Error' }
+        })
         return
       }
 

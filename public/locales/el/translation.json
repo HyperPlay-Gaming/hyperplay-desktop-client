@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Τίποτα δεν κατεβάσει",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -944,7 +947,9 @@
             "playEachDay": "Παίξτε κάθε μέρα έτσι ώστε το streak σας να μην επαναφέρετε!",
             "streakCompleted": "Ο Streak ολοκλήρωσε! Ισχυρίστε τις ανταμοιβές σας τώρα.",
             "days": "ημέρες",
-            "now": "Τώρα"
+            "now": "Τώρα",
+            "sync": "Sync Progress",
+            "syncSuccess": "Πρόοδος συγχρονισμένη"
         },
         "readyForClaim": "Ετοιμαστείτε για αξίωση",
         "reward": "Reward",
@@ -1006,6 +1011,9 @@
         "g7CreditsModal": {
             "title": "Κερδίστε Game7 Credits",
             "description": "Αποκτήστε τα κορυφαία παιχνίδια του HyperPlay με συναρπαστικές προκλήσεις Play Streak. Κάθε δραστηριότητα σας ενθαρρύνει να συνεργαστείτε με ένα διαφορετικό παιχνίδι, δείχνοντας το καλύτερο παιχνίδι web3. Το playtime σας έχει σημασία!"
+        },
+        "viewAllQuests": {
+            "title": "Δείτε όλες τις αναζητήσεις"
         }
     },
     "back_to_game": "Επιστροφή στο παιχνίδι",
@@ -1037,11 +1045,16 @@
         "wine-download": {
             "message": "Δημιουργία του προεπιλεγμένου στρώματος συμβατότητας",
             "title": "Συμβατό στρώμα"
+        },
+        "wine-download-failed": {
+            "title": "Σφάλμα",
+            "message": "Απέτυχε να ρυθμίσει το προεπιλεγμένο στρώμα συμβατότητας"
         }
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Είστε συνδεδεμένοι με το HyperPlay με ένα εξωτερικό πορτοφόλι.",
-        "WALLET_DISCONNECTED": "Δεν έχετε πορτοφόλι συνδεδεμένο με HyperPlay."
+        "WALLET_DISCONNECTED": "Δεν έχετε πορτοφόλι συνδεδεμένο με HyperPlay.",
+        "comingSoon": "Έρχεται σύντομα"
     },
     "importGameErrorMessageExecutable": "Game Game Game Δεν είναι εφικτό, το παιχνίδι εισαγωγής δεν είναι εφικτό",
     "profile": "Προφίλ",

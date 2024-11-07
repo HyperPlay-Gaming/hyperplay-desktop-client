@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "#Ništica @download",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -914,7 +917,9 @@
             "playToStart": "#Predstava @this #igra #na #početak #tvoj streak#!",
             "progressTowardsStreak": "#napredak ususret #današnji streak#.",
             "streakCompleted": "Streak #završen! @Claim #tvoj #nagrada sad#.",
-            "streakProgress": "Streak"
+            "streakProgress": "Streak",
+            "sync": "Sync",
+            "syncSuccess": "#Napredak synced"
         },
         "points": "Points",
         "sync": "Sinhronizuj",
@@ -1000,6 +1005,10 @@
         "wine-download": {
             "message": "@Setting up @the default #kompatibilnost #red",
             "title": "#Kompatibilnost"
+        },
+        "wine-download-failed": {
+            "message": "#Zakazati #na setup @the default #kompatibilnost #red",
+            "title": "Greška"
         }
     },
     "quests": {
@@ -1017,6 +1026,9 @@
         "g7CreditsModal": {
             "title": "#Steći Game7 #Kredit",
             "description": "@Dive @into HyperPlay@'s #vrh #igra #uz @excite #Predstava Streak #Izazov. @Each #aktivnost #ohrabriti #free #na #sudjelovati #uz @a #drugačiji #igra, showcasing @the @best @of web3 gaming. #Tvoj playtime #pitanje#!"
+        },
+        "viewAllQuests": {
+            "title": "#Stav @All"
         }
     },
     "sideload": {
@@ -1042,7 +1054,8 @@
     "exit_game": "#Izlaz",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#.",
-        "WALLET_DISCONNECTED": "#Free @do #nemati @a #lisnica #spajati #na HyperPlay#."
+        "WALLET_DISCONNECTED": "#Free @do #nemati @a #lisnica #spajati #na HyperPlay#.",
+        "comingSoon": "#Doći"
     },
     "dlcs": {
         "label": "@Select @DLC #na @install#:"

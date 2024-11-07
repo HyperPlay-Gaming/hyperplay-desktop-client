@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Hiçbir şey indirilmedi",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -913,7 +916,9 @@
             "playToStart": "Bu oyunu çizginize başlamak için oynayın!",
             "progressTowardsStreak": "bugünün çizgisine doğru ilerleme.",
             "streakProgress": "Streak Progress",
-            "streakCompleted": "Streak tamamlandı! Şimdi ödüllerinizi talep edin."
+            "streakCompleted": "Streak tamamlandı! Şimdi ödüllerinizi talep edin.",
+            "syncSuccess": "İlerleme senkronize edildi",
+            "sync": "Senkronizasyon"
         },
         "points": "Noktalar",
         "signIn": "Giriş yap",
@@ -1004,6 +1009,10 @@
         "wine-download": {
             "message": "Varsayılan uyumluluk katmanını kurmak",
             "title": "Uyumluluk Katmanı"
+        },
+        "wine-download-failed": {
+            "title": "Hata",
+            "message": "Varsayılan uyumluluk katmanını kurmak için başarısız oldu"
         }
     },
     "quests": {
@@ -1021,6 +1030,9 @@
         "g7CreditsModal": {
             "description": "HyperPlay'in en iyi oyunları heyecan verici Play Streak Challenges ile. Her aktivite sizi farklı bir oyunla meşgul etmeye teşvik eder, web3 oyununun en iyisini gösterir. Oyun zamanı önemlidir!",
             "title": "Game7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "Tüm Questleri Görüntüle"
         }
     },
     "accounts": "hesaplar",
@@ -1041,7 +1053,8 @@
     "back_to_game": "Oyuna Geri Dönüş",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Dış bir cüzdanla HyperPlay'e bağlanırsınız.",
-        "WALLET_DISCONNECTED": "HyperPlay ile bağlantılı bir cüzdana sahip değilsiniz."
+        "WALLET_DISCONNECTED": "HyperPlay ile bağlantılı bir cüzdana sahip değilsiniz.",
+        "comingSoon": "Çok yakında"
     },
     "email_subscription": {
         "title": "Alt tarif için teşekkür ederiz!",

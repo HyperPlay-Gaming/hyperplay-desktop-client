@@ -330,6 +330,7 @@
     "hyperplay": {
         "accesscodes": {
             "error": {
+                "licenseUndefined": "Could not validate access code. Please check your internet access or firewall settings.",
                 "validation": "Access code is invalid"
             },
             "requirescode": "This game update requires an access code.",
@@ -590,15 +591,14 @@
         "instructions": {
             "selectZip": "",
             "step1": {
-                "chromieCraft": "ChromieCraft",
-                "description": "This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain version 3.3.5a from sources like:",
+                "description": "This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain the version needed from the following sources:",
+                "link1": "Link 1",
+                "link2": "Link 2 (Magnet Link)",
                 "subtitle": "Download World of Warcraft 3.3.5a",
-                "title": "Step 1",
-                "webtorrent": "Torrent (Magnet Link)"
+                "title": "Step 1"
             },
             "step2": {
-                "description": "Select the downloaded ChromieCraft_3.3.5a.zip file.",
-                "subtitle": "Select ChromieCraft_3.3.5a.zip File",
+                "subtitle1": "Select the downloaded 3.3.5a zip file",
                 "title": "Step 2"
             },
             "step3": {
@@ -716,7 +716,16 @@
     },
     "Other": "Other",
     "overlay": {
+        "comingSoon": "Coming Soon",
         "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet.",
+        "links": {
+            "bridge": "Bridge",
+            "buy": "Buy",
+            "marketplace": "Marketplace",
+            "portfolio": "Portfolio",
+            "sell": "Sell",
+            "swap": "Swap"
+        },
         "WALLET_DISCONNECTED": "You do not have a wallet connected to HyperPlay."
     },
     "placeholder": {
@@ -757,7 +766,9 @@
             "playToStart": "Play this game to start your streak!",
             "progressTowardsStreak": "progress towards today's streak.",
             "streakCompleted": "Streak completed! Claim your rewards now.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "sync": "Sync Progress",
+            "syncSuccess": "Progress synced"
         },
         "points": "Points",
         "pointsClaimed": "Points Claimed",
@@ -765,7 +776,7 @@
         "readyForClaim": "Ready for claim",
         "reputation": "Reputation",
         "reward": "Reward",
-        "signIn": "Sign in",
+        "signIn": "Log in",
         "sync": "Sync",
         "type": {
             "playstreak": "Play Streak"
@@ -787,12 +798,19 @@
                 "overlay": "You are currently not logged in, play streak progress will not be tracked. Please exit the game and login to HyperPlay via the top-right dropdown to track progress."
             }
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "viewAllQuests": {
+            "title": "View All Quests"
+        }
     },
     "queue": {
         "label": {
             "canceled": "Canceled",
-            "empty": "Nothing to download",
+            "clear": "Clear List",
+            "empty": {
+                "finished": "Nothing downloaded",
+                "queue": "Nothing to download"
+            },
             "pause": "Pause download",
             "remove": "Remove from Downloads",
             "resume": "Resume download"

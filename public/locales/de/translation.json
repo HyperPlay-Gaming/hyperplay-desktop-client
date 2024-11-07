@@ -481,7 +481,10 @@
             "canceled": "Abgebrochen",
             "clear": "Liste leeren",
             "downloading": "Lade herunter",
-            "empty": "Nichts zum Herunterladen",
+            "empty": {
+                "finished": "Nichts heruntergeladen",
+                "queue": "Nichts zum Herunterladen"
+            },
             "finished": "Abgeschlossen",
             "queued": "In Warteschlange",
             "remove": "Aus Downloads entfernen",
@@ -945,7 +948,9 @@
             "streakCompleted": "Streak ist fertig! Beanspruchen Sie jetzt Ihre Belohnungen.",
             "streakProgress": "Streak Fortschritt",
             "days": "Tage",
-            "now": "Jetzt"
+            "now": "Jetzt",
+            "sync": "Synthetische Fortschritte",
+            "syncSuccess": "Fortschritt synchronisiert"
         },
         "readyForClaim": "Bereit für Anspruch",
         "reward": "Zurück",
@@ -997,6 +1002,9 @@
         "g7CreditsModal": {
             "description": "Tauchen Sie mit spannenden Play Streak Challenges in die Top-Spiele von HyperPlay ein. Jede Aktivität ermutigt Sie, sich mit einem anderen Spiel zu engagieren, was das Beste von web3 Gaming zeigt. Deine Spielzeit zählt!",
             "title": "Earn Game7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "Alle Quests anzeigen"
         }
     },
     "gameRelease": {
@@ -1018,6 +1026,10 @@
         "wine-download": {
             "title": "Kompatibilitätsebene",
             "message": "Einrichtung der Standardkompatibilitätsschicht"
+        },
+        "wine-download-failed": {
+            "message": "Nicht eingerichtet, um die Standard-Kompatibilitätsschicht",
+            "title": "Fehler"
         }
     },
     "email_subscription": {
@@ -1037,7 +1049,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Sie sind mit HyperPlay mit einer externen Geldbörse verbunden.",
-        "WALLET_DISCONNECTED": "Sie haben keine Geldbörse mit HyperPlay verbunden."
+        "WALLET_DISCONNECTED": "Sie haben keine Geldbörse mit HyperPlay verbunden.",
+        "comingSoon": "Demnächst verfügbar"
     },
     "sideload": {
         "warningMessage": "Side-loading ein Spiel ist eine Funktion für Entwickler und erfahrene Power-Nutzer. Side-loaden eines Installers, der Malware enthält könnte Ihren Computer kompromittieren und zu Diebstahl von Geld führen.",

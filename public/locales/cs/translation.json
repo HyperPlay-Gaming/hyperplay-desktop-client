@@ -481,7 +481,10 @@
             "canceled": "Zrušeno",
             "clear": "Vymazat seznam",
             "downloading": "Stahování",
-            "empty": "Nic ke stažení",
+            "empty": {
+                "finished": "Nic stažené",
+                "queue": "Nic ke stažení"
+            },
             "finished": "Dokončeno",
             "queued": "Ve frontě",
             "remove": "Odebrat ze stažených",
@@ -944,6 +947,10 @@
         "wine-download": {
             "message": "Nastavení výchozí kompatibilizační vrstvy",
             "title": "Kompatibilita Vrstva"
+        },
+        "wine-download-failed": {
+            "message": "Vypnuto nastavení výchozí kompatibilizační vrstvy",
+            "title": "Chyba"
         }
     },
     "quest": {
@@ -956,7 +963,9 @@
             "progressTowardsStreak": "postup směrem k dnešnímu pruhu.",
             "streakCompleted": "Streak dokončeno! Požádejte své odměny.",
             "days": "dnů",
-            "now": "Nyní"
+            "now": "Nyní",
+            "sync": "Synchronizujte postup",
+            "syncSuccess": "Postup synchronizované"
         },
         "readyForClaim": "Připravený pro nárok",
         "reward": "Přihlášení",
@@ -1009,6 +1018,9 @@
         "g7CreditsModal": {
             "title": "Získejte hry7 kredity",
             "description": "Dive to HyperPlay’s top hry s vzrušující Play Streak Challenges. Každá aktivita vás povzbuzuje, abyste se zapojili s jinou hrou, což ukazuje nejlepší ze hry na webu3. Vaše herní otázky!"
+        },
+        "viewAllQuests": {
+            "title": "Zobrazit všechny úkoly"
         }
     },
     "accounts": "účty",
@@ -1037,7 +1049,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Jste připojeni do HyperPlay s externí peněženky.",
-        "WALLET_DISCONNECTED": "Nemáte peněženku připojenou k HyperPlay."
+        "WALLET_DISCONNECTED": "Nemáte peněženku připojenou k HyperPlay.",
+        "comingSoon": "Čeština"
     },
     "gameRelease": {
         "prototype": "Čeština",

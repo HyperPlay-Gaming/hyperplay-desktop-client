@@ -487,7 +487,10 @@
             "canceled": "أُلغيت",
             "clear": "اُمح القائمة",
             "downloading": "قيد التنزيل",
-            "empty": "لا شيء للتنزيل",
+            "empty": {
+                "finished": "لا شيء محمول",
+                "queue": "لا شيء للتنزيل"
+            },
             "finished": "مكتمل",
             "queued": "في قائمة الانتظار",
             "remove": "أزل من التنزيلات",
@@ -961,7 +964,9 @@
             "streakCompleted": "تم الانتهاء من الاستراحة! اطالب بمكافآتك الآن.",
             "streakProgress": "Streak Progress",
             "days": "أيام",
-            "now": "الآن"
+            "now": "الآن",
+            "sync": "ترجمة",
+            "syncSuccess": "التقدم المتزامن"
         },
         "type": {
             "playstreak": "اللعب ستريك",
@@ -1001,6 +1006,10 @@
         "wine-download": {
             "message": "إنشاء طبقة التوافق الافتراضي",
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "فشل في وضع طبقة التوافق الافتراضي",
+            "title": "خطأ"
         }
     },
     "quests": {
@@ -1018,6 +1027,9 @@
         "g7CreditsModal": {
             "description": "تَقْتلُ في ألعابِ هايبر بلاي العلياِ مَع بلاي ستريك التحدياتِ المثيرةِ. كل نشاط يشجعك على الانخراط في لعبة مختلفة، عرض أفضل من القاموس على الشبكة 3. وقت اللعب الخاص بك يهم!",
             "title": "Earn Game7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "View All Quests"
         }
     },
     "accounts": "الحسابات",
@@ -1049,7 +1061,8 @@
     "exit_game": "لعبة الخروج",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "أنت متصل بـ(هايبر بلاي) بمحفظة خارجية.",
-        "WALLET_DISCONNECTED": "ليس لديك محفظة مرتبطة بـ(هايبر بلاي)."
+        "WALLET_DISCONNECTED": "ليس لديك محفظة مرتبطة بـ(هايبر بلاي).",
+        "comingSoon": "قريبا"
     },
     "please-wait": "من فضلك انتظر.",
     "email_subscription": {

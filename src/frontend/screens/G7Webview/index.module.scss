@@ -1,0 +1,26 @@
+.topBar {
+  margin-bottom: var(--space-md-fixed);
+  margin-top: var(--space-xl-fixed);
+  flex: 0;
+}
+
+.root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.webviewRoot {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.webviewElement {
+  max-height: calc(100% - 30px);
+  flex: 1;
+}
+
+.webviewControls {
+  flex: 0;
+}

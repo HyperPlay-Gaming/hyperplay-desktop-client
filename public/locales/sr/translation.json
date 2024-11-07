@@ -752,7 +752,10 @@
             "canceled": "Отказано",
             "clear": "Обриши листу",
             "downloading": "Преузимање",
-            "empty": "Ништа за преузимање",
+            "empty": {
+                "finished": "#Ništica @download",
+                "queue": "Ништа за преузимање"
+            },
             "finished": "Завршено",
             "queued": "У реду",
             "remove": "Уклони из преузимања",
@@ -992,7 +995,9 @@
             "streakCompleted": "Streak #završen! @Claim #tvoj #nagrada sad#.",
             "streakProgress": "Streak",
             "days": "дана",
-            "now": "Now"
+            "now": "Now",
+            "sync": "Sync",
+            "syncSuccess": "#Napredak synced"
         },
         "type": {
             "reputation": "#Reputacija",
@@ -1040,6 +1045,9 @@
         "g7CreditsModal": {
             "description": "@Dive @into HyperPlay@'s #vrh #igra #uz @excite #Predstava Streak #Izazov. @Each #aktivnost #ohrabriti #free #na #sudjelovati #uz @a #drugačiji #igra, showcasing @the @best @of web3 gaming. #Tvoj playtime #pitanje#!",
             "title": "#Steći Game7 #Kredit"
+        },
+        "viewAllQuests": {
+            "title": "#Stav @All"
         }
     },
     "achievements": {
@@ -1055,6 +1063,10 @@
         "wine-download": {
             "message": "@Setting up @the default #kompatibilnost #red",
             "title": "Вине Манагер"
+        },
+        "wine-download-failed": {
+            "message": "#Zakazati #na setup @the default #kompatibilnost #red",
+            "title": "Грешка"
         }
     },
     "sideload": {
@@ -1063,7 +1075,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#.",
-        "WALLET_DISCONNECTED": "#Free @do #nemati @a #lisnica #spajati #na HyperPlay#."
+        "WALLET_DISCONNECTED": "#Free @do #nemati @a #lisnica #spajati #na HyperPlay#.",
+        "comingSoon": "#Doći"
     },
     "profile": "Профил",
     "ALL": "СВЕ",

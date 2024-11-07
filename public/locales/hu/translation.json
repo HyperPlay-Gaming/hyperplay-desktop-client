@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Semmi letöltött",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -915,7 +918,9 @@
             "streakProgress": "Streak Progress",
             "playToStart": "Játszd ezt a játékot, hogy kezdd el a streak!",
             "progressTowardsStreak": "előrelépés a mai streak felé.",
-            "streakCompleted": "Streak befejeződött! Irányítsd a jutalmadat most."
+            "streakCompleted": "Streak befejeződött! Irányítsd a jutalmadat most.",
+            "sync": "Szinkron Progress",
+            "syncSuccess": "Progress szinkronizált"
         },
         "points": "Pontok",
         "signIn": "Bejelentkezés",
@@ -966,6 +971,9 @@
         "g7CreditsModal": {
             "description": "Dive into HyperPlay top játékok izgalmas játék Streak kihívásokkal. Minden tevékenység arra ösztönzi Önt, hogy vegyen részt egy másik játék, bemutatva a legjobb web3 játék. A játékidő számít!",
             "title": "Earn Game7 Hitelek"
+        },
+        "viewAllQuests": {
+            "title": "Minden Quest megtekintése"
         }
     },
     "sideload": {
@@ -1014,7 +1022,8 @@
     "importGameErrorTitle": "Import Game hiba",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Ön csatlakozik a HyperPlay-hoz egy külső pénztárcával.",
-        "WALLET_DISCONNECTED": "Nincs olyan pénztárcád, amely a HyperPlay-hoz kapcsolódik."
+        "WALLET_DISCONNECTED": "Nincs olyan pénztárcád, amely a HyperPlay-hoz kapcsolódik.",
+        "comingSoon": "Hamarosan jönnek"
     },
     "back_to_game": "Vissza a játékhoz",
     "gameUpdateNotifications": {
@@ -1030,6 +1039,10 @@
         "wine-download": {
             "message": "Az alapértelmezett kompatibilitási réteg beállítása",
             "title": "Kompatibilitási réteg"
+        },
+        "wine-download-failed": {
+            "message": "Hibás az alapértelmezett kompatibilitási réteg létrehozása",
+            "title": "Hiba"
         }
     },
     "accounts": "fiókok",
