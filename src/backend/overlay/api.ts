@@ -2,7 +2,8 @@ import {
   PROVIDERS,
   OverlayRenderState,
   OverlayMode,
-  ToastKey
+  ToastKey,
+  HyperPlayAPI
 } from '@hyperplay/utils'
 import { Toast } from './types'
 import { ipcRenderer } from 'electron'
@@ -102,4 +103,6 @@ export const lockPopup = (lock: boolean) => ipcRenderer.send('lockPopup', lock)
 
 export const killOverlay = () => ipcRenderer.send('killOverlay')
 
-export const toggleOverlay = () => ipcRenderer.send('toggleOverlay')
+export const toggleOverlay = (
+  args: Parameters<HyperPlayAPI['toggleOverlay']>[0]
+) => ipcRenderer.send('toggleOverlay', args)

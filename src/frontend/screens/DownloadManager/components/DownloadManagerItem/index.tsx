@@ -131,6 +131,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const canceled = status === 'error' || (status === 'abort' && !current)
   const isExtracting = gameProgressStatus === 'extracting'
   const isUpdate = type === 'update'
+  const isPatching = gameProgressStatus === 'patching'
 
   const goToGamePage = (action?: GamePageActions) => {
     if (is_dlc) {
@@ -194,7 +195,9 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const secondaryActionIcon = () => {
     if (state === 'paused') {
       return <PlayIcon className={styles.playIcon} />
-    } else if (state === 'running') {
+    }
+
+    if (state === 'running' && !isPatching) {
       return <PauseIcon className={styles.pauseIcon} />
     }
 
@@ -267,6 +270,14 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   }
 
   const { fullDate } = getTime()
+  const downloadsize =
+    progress.totalSize || installInfo?.manifest.download_size || 0
+
+  // calculate download time
+  const downloadTime = (current ? Date.now() : endTime) - startTime
+  const downloadTimeInMinutes = Math.floor(downloadTime / 60000)
+  const downloadTimeInSeconds = Math.floor((downloadTime % 60000) / 1000)
+  const downloadTimeFormatted = `${downloadTimeInMinutes}m ${downloadTimeInSeconds}s`
 
   return (
     <>
@@ -294,14 +305,18 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
           <span className="titleSize">
             {title}
             <span title={path}>
-              {size?.includes('?')
-                ? fileSize(Number(installInfo?.manifest.download_size) || 0)
-                : size}
+              {size?.includes('?') ? fileSize(Number(downloadsize)) : size}
               {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
             </span>
           </span>
         </td>
-        <td title={fullDate}>{fullDate}</td>
+        <td
+          title={t('queue.label.timeElapsed', 'Time Elapsed: {{elapsed}}', {
+            elapsed: downloadTimeFormatted
+          })}
+        >
+          {fullDate}
+        </td>
         <td>{translatedTypes[type]}</td>
         <td>{getStoreName(runner, t2('Other'))}</td>
         <td>

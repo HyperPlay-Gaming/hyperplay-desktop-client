@@ -47,6 +47,7 @@ export function getMessage(
     | 'installing'
     | 'installed'
     | 'distributables'
+    | 'patching'
 ): string | undefined {
   switch (status) {
     case 'distributables':
@@ -62,5 +63,7 @@ export function getMessage(
       return t('hyperplay.gamecard.installing', 'Downloading...')
     case 'installed':
       return t('hyperplay.gamecard.installed', 'Ready to play')
+    case 'patching':
+      return t('hyperplay.gamecard.patching', 'Patching...')
   }
 }

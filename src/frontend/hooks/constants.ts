@@ -40,7 +40,8 @@ export function getStatusLabel({
     distributables: t(
       'gamepage:status.distributables',
       'Installing Distributables'
-    )
+    ),
+    patching: t('gamepage:status.patching', 'Patching')
   }
 
   return statusMap[status] || t('gamepage:status.notinstalled')

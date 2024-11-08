@@ -1,5 +1,5 @@
 import { GlobalConfig } from 'backend/config'
-import { LDEnvironmentId } from 'backend/ldconstants'
+import { LDEnvironmentId } from 'backend/flags/flags'
 import { ipcMain } from 'electron'
 import { getAppVersion } from '../utils'
 
