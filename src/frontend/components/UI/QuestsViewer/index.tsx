@@ -7,17 +7,12 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import '@hyperplay/quests-ui/style.css'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import QuestDetails from '../QuestDetails'
-import { Reward } from '@hyperplay/utils'
 
 export interface QuestsViewerProps {
   projectId: string
-  onRewardsClaimed?: (rewards: Reward[]) => void
 }
 
-export function QuestsViewer({
-  projectId: appName,
-  onRewardsClaimed
-}: QuestsViewerProps) {
+export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const questResults = useGetQuests(appName)
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const { isSignedIn } = useAuthSession()
@@ -52,7 +47,6 @@ export function QuestsViewer({
         <QuestDetails
           questId={visibleQuestId}
           className={styles.detailsWrapper}
-          onRewardsClaimed={onRewardsClaimed}
         />
       </div>
     </div>

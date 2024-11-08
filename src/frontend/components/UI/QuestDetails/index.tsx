@@ -8,6 +8,7 @@ import { useFlags } from 'launchdarkly-react-client-sdk'
 import { useTranslation } from 'react-i18next'
 import { useAccount } from 'wagmi'
 import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
+import claimedRewardToastState from 'frontend/state/ClaimedRewardToastState'
 
 /**
  * Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -59,14 +60,12 @@ export default function QuestDetails({
   questId,
   className,
   isQuestsPage,
-  onPlayClick,
-  onRewardsClaimed
+  onPlayClick
 }: {
   questId: number | null
   className?: string
   isQuestsPage?: boolean
   onPlayClick?: (quest: Quest) => void
-  onRewardsClaimed?: (rewards: Reward[]) => void
 }) {
   const { address } = useAccount()
   const { isSignedIn, data } = useAuthSession()
@@ -90,7 +89,9 @@ export default function QuestDetails({
 
   return (
     <QuestDetailsWrapper
-      onRewardsClaimed={onRewardsClaimed}
+      onRewardClaimed={(reward) =>
+        claimedRewardToastState.showClaimedReward(reward)
+      }
       onPlayClick={onPlayClick}
       getPendingExternalSync={getPendingExternalSync}
       syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}

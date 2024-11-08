@@ -17,7 +17,6 @@ import classNames from 'classnames'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import MetaMaskPortfolio from 'frontend/screens/MetaMaskPortfolio'
 import { NavBarOverlayWrapper } from './NavBarOverlayWrapper'
-import { useClaimedRewards } from 'frontend/hooks/useClaimedRewards'
 import { QuestRewardClaimedToast } from 'frontend/components/UI/QuestRewardClaimedToast'
 
 export const Overlay = observer(function ({
@@ -25,7 +24,6 @@ export const Overlay = observer(function ({
   runner
 }: BrowserGameProps) {
   const flags = useFlags()
-  const { claimedRewards, handleRewardsClaim, onClose } = useClaimedRewards()
 
   const txnToastContainerStyle = {} as React.CSSProperties
   if (OverlayState.title === 'HyperPlay Toasts') {
@@ -123,12 +121,7 @@ export const Overlay = observer(function ({
       flags.questsOverlayClaimModals ||
       libraryState.hasGame(gamesToShowQuestsFor)
     ) {
-      questsViewer = (
-        <QuestsViewer
-          projectId={appName}
-          onRewardsClaimed={handleRewardsClaim}
-        />
-      )
+      questsViewer = <QuestsViewer projectId={appName} />
     }
 
     const classNameMods: Record<string, boolean> = {}
@@ -149,10 +142,7 @@ export const Overlay = observer(function ({
           <div className={BrowserGameStyles.rightSideContainer}>
             {exitGameButton}
             {extensionManager}
-            <QuestRewardClaimedToast
-              onCloseClick={onClose}
-              rewards={claimedRewards}
-            />
+            <QuestRewardClaimedToast />
           </div>
         </div>
       </div>
