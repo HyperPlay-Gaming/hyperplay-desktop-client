@@ -100,6 +100,12 @@ function WebView({
 
       startUrl = queryParam + queryParamAppends
     }
+  } else if (pathname.match('/marketplace')) {
+    const searchParams = new URLSearchParams(search)
+    const queryParam = searchParams.get('url')
+    if (queryParam) {
+      startUrl = decodeURIComponent(queryParam)
+    }
   }
 
   const isEpicLogin = runner === 'legendary' && startUrl === EPIC_LOGIN_URL
@@ -270,7 +276,7 @@ function WebView({
 
   if (pathname === '/game7Portal') partitionForWebview = 'persist:g7portal'
   if (urlIsHpUrl(startUrl)) partitionForWebview = 'persist:hyperplaystore'
-  else if (shouldInjectProvider(startUrl))
+  else if (shouldInjectProvider(startUrl) || pathname.match('/marketplace'))
     partitionForWebview = 'persist:InPageWindowEthereumExternalWallet'
 
   return (

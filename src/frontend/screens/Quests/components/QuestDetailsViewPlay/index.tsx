@@ -238,6 +238,7 @@ export const QuestDetailsViewPlayWrapper = observer(
             steamAccountLinked: false
           },
           playStreak: getPlaystreakArgsFromQuestData({
+            // @ts-expect-error need to update quests-ui to match new hp/utils Quest type
             questMeta,
             questPlayStreakData: questPlayStreakData?.userPlayStreak
           })

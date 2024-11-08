@@ -54,7 +54,8 @@ import {
   MetaMaskInitMethod,
   ImportableBrowser,
   MetaMaskImportOptions,
-  ClientUpdateStatuses
+  ClientUpdateStatuses,
+  HyperPlayAPI
 } from '@hyperplay/utils'
 
 /**
@@ -94,7 +95,7 @@ interface HyperPlaySyncIPCFunctions {
   toastCloseOnClick: (key: ToastKey) => void
   lockPopup: (lock: boolean) => void
   killOverlay: () => void
-  toggleOverlay: () => void
+  toggleOverlay: HyperPlayAPI['toggleOverlay']
   authConnected: () => void
   goToGamePage: (gameId: string, action: GamePageActions) => void
   authDisconnected: () => void
