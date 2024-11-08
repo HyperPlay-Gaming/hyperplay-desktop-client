@@ -25,8 +25,10 @@ export default function StopInstallationModal(props: StopInstallProps) {
 
   const { runner, title, app_name, account_name } = props.gameInfo
   const isExtracting = props.status === 'extracting'
+  const isPatching = props.status === 'patching'
 
-  const showCheckbox = !isExtracting && account_name !== 'marketwars'
+  const showCheckbox =
+    !isPatching && !isExtracting && account_name !== 'marketwars'
 
   return (
     <Dialog onClose={props.onClose} showCloseButton>

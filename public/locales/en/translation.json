@@ -366,6 +366,7 @@
             "extracting": "Extracting...",
             "installed": "Ready to play",
             "installing": "Downloading...",
+            "patching": "Patching...",
             "paused": "Paused"
         },
         "linkSteamAccountCta": "Go to Steam sign in",
@@ -807,7 +808,8 @@
             },
             "pause": "Pause download",
             "remove": "Remove from Downloads",
-            "resume": "Resume download"
+            "resume": "Resume download",
+            "timeElapsed": "Time Elapsed: {{elapsed}}"
         }
     },
     "Recent": "Played Recently",

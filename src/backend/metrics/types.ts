@@ -192,6 +192,40 @@ export interface GameUpdateFailed {
   sensitiveProperties?: never
 }
 
+export interface PatchingStarted {
+  event: 'Patching Started'
+  properties: {
+    game_name: string
+    game_title: string
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
+  }
+  sensitiveProperties?: never
+}
+
+export interface PatchingSuccess {
+  event: 'Patching Success'
+  properties: {
+    game_name: string
+    game_title: string
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
+  }
+  sensitiveProperties?: never
+}
+
+export interface PatchingFailed {
+  event: 'Patching Failed'
+  properties: {
+    game_name: string
+    error: string
+    game_title: string
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
+  }
+  sensitiveProperties?: never
+}
+
 export interface GameUninstallRequested {
   event: 'Game Uninstall Requested'
   properties: {
@@ -405,5 +439,8 @@ export type PossibleMetricPayloads =
   | ClientUpdateNotified
   | ClientUpdateError
   | ClientUpdateDownloaded
+  | PatchingStarted
+  | PatchingSuccess
+  | PatchingFailed
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']

@@ -42,7 +42,9 @@ jobs:
         run: yarn setup
 
       - name: setup env production file
-        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
+        run: |
+          echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
+          echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
 
       - name: Build artifacts.
         run: yarn release:mac:x64
@@ -84,7 +86,9 @@ jobs:
         run: yarn setup
 
       - name: setup env production file
-        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
+        run: |
+          echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
+          echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
 
       - name: Build artifacts.
         run: yarn release:mac:arm64
