@@ -489,7 +489,12 @@
             "queued": "Encolado",
             "remove": "Eliminar de las descargas",
             "resume": "Descarga el currículum",
-            "pause": "Pausar la descarga"
+            "pause": "Pausar la descarga",
+            "timeElapsed": "Tiempo transcurrido: {{elapsed}}",
+            "retry-update": "Reintentar la actualización",
+            "stop": "Detener la descarga",
+            "launch": "Iniciar juego",
+            "retry-install": "Reintentar la instalación"
         }
     },
     "Recent": "Jugado recientemente",
@@ -894,7 +899,8 @@
             "paused": "Pausado",
             "extracting": "Extrayendo...",
             "installing": "Descargando...",
-            "distributables": "Instalando distribuibles..."
+            "distributables": "Instalando distribuibles...",
+            "patching": "Parcheando…"
         },
         "connectWallet": "Conectar monedero",
         "achievements": {
