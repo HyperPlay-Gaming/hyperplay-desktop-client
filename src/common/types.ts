@@ -238,6 +238,7 @@ export type Status =
   | 'paused'
   | 'preparing'
   | 'distributables'
+  | 'patching'
 
 export interface GameStatus {
   appName: string
@@ -318,6 +319,7 @@ export interface InstallParams extends InstallArgs {
   gameInfo: GameInfo
   runner: Runner
   size?: string
+  channelName?: string
 }
 
 export interface UpdateArgs {
@@ -593,6 +595,7 @@ export interface DMQueueElement {
   startTime: number
   endTime: number
   status?: DMStatus
+  channel?: string
 }
 
 type ProtonVerb =

@@ -13,7 +13,12 @@ import {
 } from '../../storeManagers/legendary/commands/base'
 
 jest.mock('../../logger/logfile')
-
+jest.mock('backend/vite_constants', () => ({
+  VITE_IPFS_API: 'https://ipfs.io/ipfs/'
+}))
+jest.mock('backend/flags/flags', () => ({
+  VITE_LD_ENVIRONMENT_ID: '123'
+}))
 describe('getDefaultWine', () => {
   if (process.env.GITHUB_ACTIONS) {
     test('return wine not found', () => {

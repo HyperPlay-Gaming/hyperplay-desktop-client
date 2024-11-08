@@ -36,6 +36,7 @@ export default function DownloadToastManager() {
   })
   const installedPlatform = currentElement?.params.platformToInstall
   const isExtracting = status === 'extracting'
+  const isPatching = status === 'patching'
   const { progress, etaInMs } = hasProgress(appName, isExtracting)
 
   let showPlayTimeout: NodeJS.Timeout | undefined = undefined
@@ -152,6 +153,7 @@ export default function DownloadToastManager() {
   const installPath = currentElement?.params.path
 
   function getDownloadStatus(): downloadStatus {
+    if (isPatching) return 'showOnlyCancel'
     if (isExtracting) return 'inExtraction'
     if (DMQueueState.isPaused(appName)) return 'paused'
     if (showPlay) return 'done'

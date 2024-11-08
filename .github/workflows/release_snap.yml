@@ -31,6 +31,8 @@ jobs:
       - name: Install modules.
         run: yarn setup
       - name: setup env production file
-        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
+        run: |
+          echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
+          echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
       - name: Update package on Snap Store
         run: yarn run dist:linux snap --publish always

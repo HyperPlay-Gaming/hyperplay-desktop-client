@@ -27,10 +27,14 @@ export function useGetDownloadStatusText(
     | 'paused'
     | 'installing'
     | 'installed'
+    | 'patching'
 
   function getStatus(): MessageStatus {
     if (status === 'distributables') {
       return 'distributables'
+    }
+    if (status === 'patching') {
+      return 'patching'
     }
     if (status === 'extracting') {
       return 'extracting'

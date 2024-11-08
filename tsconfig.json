@@ -14,10 +14,10 @@
     "importHelpers": true,
     "strictNullChecks": true,
     "ignoreDeprecations": "5.0",
-    "suppressImplicitAnyIndexErrors": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
     "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -34,6 +34,7 @@
     "**/__tests__/**",
     "**/__mocks__/**",
     "sign",
-    "./node_modules/@mysten"
+    "./node_modules/@mysten",
+    "./node_modules/@hyperplay/patcher"
   ]
 }
