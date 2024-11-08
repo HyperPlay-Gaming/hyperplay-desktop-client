@@ -162,19 +162,25 @@ export default observer(function GamePage(): JSX.Element | null {
 
   const hasRun = useRef(false)
   useEffect(() => {
-    if (!action || hasRun.current) return
-    hasRun.current = true
+    const mainAction = async () => {
+      if (!action || hasRun.current) return
+      hasRun.current = true
 
-    if (action === 'install') {
-      return setShowModal({ game: appName, show: true })
-    }
-    if (action === 'launch') {
-      if (isBrowserGame || gameInfo.is_installed) {
-        handlePlay()()
-      } else {
+      if (action === 'update') {
+        return updateGame(gameInfo)
+      }
+      if (action === 'install') {
         return setShowModal({ game: appName, show: true })
       }
+      if (action === 'launch') {
+        if (isBrowserGame || gameInfo.is_installed) {
+          handlePlay()()
+        } else {
+          return setShowModal({ game: appName, show: true })
+        }
+      }
     }
+    mainAction()
   }, [action])
 
   // Track the screen view once each time the appName, gameInfo or runner changes
