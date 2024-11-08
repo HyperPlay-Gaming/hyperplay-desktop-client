@@ -125,7 +125,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           getQuestRewardSignature={window.api.getQuestRewardSignature}
           confirmRewardClaim={window.api.confirmRewardClaim}
           getExternalTaskCredits={window.api.getExternalTaskCredits}
-          syncPlaySession={window.api.syncPlaySession}
           getDepositContracts={window.api.getDepositContracts}
           openSignInModal={authState.openSignInModal}
           resyncExternalTask={async (rewardId: string) => {
