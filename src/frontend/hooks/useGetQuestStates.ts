@@ -12,9 +12,12 @@ export interface UseGetQuestLogInfosProps {
   quests?: Quest[] | null
 }
 
+type getQuestQueryOptionsType = ReturnType<typeof getQuestQueryOptions>
+type getUserPlaystreakQueryOptionsType = ReturnType<
+  typeof getUserPlaystreakQueryOptions
+>
 export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
   const { isSignedIn } = useAuthSession()
-  type getQuestQueryOptionsType = ReturnType<typeof getQuestQueryOptions>
   let getQuestQueries: getQuestQueryOptionsType[] = []
   if (isSignedIn) {
     getQuestQueries =
@@ -26,9 +29,6 @@ export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
     queries: getQuestQueries
   })
 
-  type getUserPlaystreakQueryOptionsType = ReturnType<
-    typeof getUserPlaystreakQueryOptions
-  >
   let getUserPlaystreakQueries: getUserPlaystreakQueryOptionsType[] = []
   if (isSignedIn) {
     getUserPlaystreakQueries =
@@ -67,13 +67,8 @@ export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
   const allQueries = [...getQuestQuery, ...getUserPlaystreakQuery]
 
   return {
-    isPending: allQueries
-      .map((val) => val.status)
-      .reduce((prev, curr) => prev || curr === 'pending', false),
-    // if any is loading or fetching
-    isLoading: allQueries
-      .map((val) => val.isLoading || val.isFetching)
-      .reduce((prev, curr) => prev || curr, false),
+    isPending: allQueries.some((val) => val.status === 'pending'),
+    isLoading: allQueries.some((val) => val.isLoading || val.isFetching),
     questIdToQuestStateMap
   }
 }
