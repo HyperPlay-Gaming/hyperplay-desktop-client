@@ -15,7 +15,7 @@ const OverlayManager = observer(function ({
   appName,
   runner
 }: BrowserGameProps) {
-  useKeepPlaystreaksInSync(appName)
+  useKeepPlaystreaksInSync(appName, runner)
   const url = OverlayState.renderState.browserGameUrl
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
