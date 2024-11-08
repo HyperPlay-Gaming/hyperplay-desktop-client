@@ -1422,7 +1422,6 @@ export async function update(
     return { status: 'error' }
   }
 
-  // try patching first, if it fails, download the new version
   const isMarketWars = gameInfo.account_name === 'marketwars'
 
   const {
@@ -1430,14 +1429,15 @@ export async function update(
     install: { channelName, platform, install_size, install_path, executable }
   } = gameInfo
 
-  if (
-    !channels ||
-    !channelName ||
-    !platform ||
-    !install_path ||
-    !executable ||
-    install_size === undefined
-  ) {
+  const isValidUpdate =
+    channels &&
+    channelName &&
+    platform &&
+    install_path &&
+    executable &&
+    install_size !== undefined
+
+  if (!isValidUpdate) {
     logError(
       `Channel name or platform not found for ${appName} in update`,
       LogPrefix.HyperPlay
@@ -1497,7 +1497,7 @@ export async function update(
   }
 
   updateInstalledInfo(appName, installedInfo)
-  sendFrontendMessage('refreshLibrary')
+  sendFrontendMessage('refreshLibrary', 'hyperplay')
   notify({
     title: gameInfo.title,
     body: 'Updated'

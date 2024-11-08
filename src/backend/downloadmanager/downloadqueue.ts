@@ -171,34 +171,6 @@ async function addToQueue(element: DMQueueElement) {
       element.params.size = size
     }
 
-    if (!element.params.size) {
-      let size = '?? MB'
-      if (element.type === 'install') {
-        const installSize = installInfo?.manifest?.download_size
-        if (installSize) {
-          size = getFileSize(installSize)
-        }
-      } else {
-        const {
-          channelName,
-          platformToInstall,
-          gameInfo: { channels }
-        } = element.params
-
-        const updateSize =
-          // @ts-expect-error - confusion because of the platform type
-          channels[channelName ?? 'main'].release_meta.platforms[
-            platformToInstall
-          ].downloadSize
-
-        if (updateSize) {
-          size = getFileSize(updateSize)
-        }
-      }
-
-      element.params.size = size
-    }
-
     elements.push(element)
   }
 

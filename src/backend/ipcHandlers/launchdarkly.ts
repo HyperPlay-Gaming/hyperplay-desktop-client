@@ -6,5 +6,5 @@ import { getAppVersion } from '../utils'
 ipcMain.handle('getLDEnvConfig', async () => {
   const ldUser = GlobalConfig.get().getSettings().ldUser
   const appVersion = getAppVersion()
-  return { envId: LDEnvironmentId!, ldUser, appVersion }
+  return { envId: LDEnvironmentId, ldUser, appVersion }
 })
