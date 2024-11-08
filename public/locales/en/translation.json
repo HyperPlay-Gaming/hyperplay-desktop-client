@@ -676,7 +676,6 @@
         "retrying": "Retrying"
     },
     "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;",
-    "Open": "Open",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -806,9 +805,13 @@
                 "finished": "Nothing downloaded",
                 "queue": "Nothing to download"
             },
+            "launch": "Launch Game",
             "pause": "Pause download",
             "remove": "Remove from Downloads",
             "resume": "Resume download",
+            "retry-install": "Retry Install",
+            "retry-update": "Retry Update",
+            "stop": "Stop Download",
             "timeElapsed": "Time Elapsed: {{elapsed}}"
         }
     },
