@@ -40,7 +40,7 @@ export function QuestRewardClaimedToast({
             }
           )
         }}
-        onCloseClick={claimedRewardToastState.clearReward}
+        onCloseClick={() => claimedRewardToastState.clearReward()}
         status="claimed"
       />
     </div>

@@ -3,7 +3,6 @@ import { makeAutoObservable } from 'mobx'
 
 class ClaimedRewardToastState {
   private reward: Reward | null = null
-  private timeout: number = 5000
 
   constructor() {
     makeAutoObservable(this)
@@ -11,9 +10,6 @@ class ClaimedRewardToastState {
 
   showClaimedReward(reward: Reward) {
     this.reward = reward
-    setTimeout(() => {
-      this.clearReward()
-    }, this.timeout)
   }
 
   get claimedReward() {
