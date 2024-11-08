@@ -1597,7 +1597,7 @@ export const downloadPatcher = async () => {
 
 const getIpdtPatcherVersion = async () => {
   const { stdout } = await spawnAsync(ipdtPatcher, ['-version'])
-  return `v${stdout}`.split(' ')[2]
+  return 'v' + `${stdout}`.split(' ')[2]
 }
 
 export async function downloadGameIpdtManifest(
