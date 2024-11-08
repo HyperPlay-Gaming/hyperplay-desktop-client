@@ -72,6 +72,9 @@ const cachedUbisoftInstallerPath = join(
   'UbisoftConnectInstaller.exe'
 )
 
+const ipdtPatcher = join(toolsPath, 'ipdt')
+const ipdtManifestsPath = join(appConfigFolder, 'manifests')
+
 const { currentLogFile, lastLogFile, legendaryLogFile, gogdlLogFile } =
   createNewLogFileAndClearOldOnes()
 
@@ -118,6 +121,8 @@ export function getValistListingApiUrl(projectId: string) {
     (qaToken !== '' ? '?status=pending' : '')
   )
 }
+
+export const patchApiUrl = `${DEV_PORTAL_URL}api/v1/patches`
 
 export function getValidateLicenseKeysApiUrl() {
   return `${DEV_PORTAL_URL}api/v1/license_keys/validate`
@@ -202,20 +207,31 @@ const execOptions = {
   shell: getShell()
 }
 
-const defaultFolders = [gamesConfigPath, iconsFolder, imagesCachePath]
+const defaultFolders = [
+  gamesConfigPath,
+  iconsFolder,
+  imagesCachePath,
+  toolsPath,
+  ipdtManifestsPath
+]
 
-const necessaryFoldersByPlatform = {
+const necessaryFoldersByPlatform: {
+  [key in 'win32' | 'linux' | 'darwin']: string[]
+} = {
   win32: [...defaultFolders],
-  linux: [...defaultFolders, toolsPath],
-  darwin: [...defaultFolders, toolsPath]
+  linux: [...defaultFolders],
+  darwin: [...defaultFolders]
 }
 
 export function createNecessaryFolders() {
-  necessaryFoldersByPlatform[platform()].forEach((folder: string) => {
-    if (!existsSync(folder)) {
-      mkdirSync(folder)
-    }
-  })
+  const platformKey = platform() as 'win32' | 'linux' | 'darwin'
+  if (necessaryFoldersByPlatform[platformKey]) {
+    necessaryFoldersByPlatform[platformKey].forEach((folder: string) => {
+      if (!existsSync(folder)) {
+        mkdirSync(folder)
+      }
+    })
+  }
 }
 
 const onboardLocalStore = new TypeCheckedStoreBackend('onboardingStore', {
@@ -282,5 +298,7 @@ export {
   valistListingsApiUrl,
   mainReleaseChannelName,
   vulkanHelperBin,
-  cachedUbisoftInstallerPath
+  cachedUbisoftInstallerPath,
+  ipdtManifestsPath,
+  ipdtPatcher
 }

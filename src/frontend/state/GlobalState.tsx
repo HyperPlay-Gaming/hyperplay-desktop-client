@@ -376,7 +376,8 @@ class GlobalState extends PureComponent<Props> {
         'preparing',
         'uninstalling',
         'installing',
-        'distributables'
+        'distributables',
+        'patching'
       ].includes(status)
     ) {
       currentApp.status = status

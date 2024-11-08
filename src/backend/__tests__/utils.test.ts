@@ -5,6 +5,12 @@ jest.mock('electron')
 jest.mock('../logger/logger')
 jest.mock('../logger/logfile')
 jest.mock('../dialog/dialog')
+jest.mock('backend/vite_constants', () => ({
+  VITE_IPFS_API: 'https://ipfs.io/ipfs/'
+}))
+jest.mock('backend/flags/flags', () => ({
+  VITE_LD_ENVIRONMENT_ID: '123'
+}))
 
 describe('backend/utils.ts', () => {
   test('quoteIfNeccessary', () => {
