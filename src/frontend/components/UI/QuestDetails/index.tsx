@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next'
 import { useAccount } from 'wagmi'
 import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import claimedRewardToastState from 'frontend/state/ClaimedRewardToastState'
+import extensionState from 'frontend/state/ExtensionState'
 
 /**
  * Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -92,6 +93,7 @@ export default function QuestDetails({
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }
+      onShowMetaMaskPopup={() => extensionState.showPopup()}
       onPlayClick={onPlayClick}
       getPendingExternalSync={getPendingExternalSync}
       syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}
