@@ -2,6 +2,7 @@
   grid-area: content;
   width: var(--content-width);
   position: relative;
+  width: 100%;
 }
 
 .WebView.collapsed {
