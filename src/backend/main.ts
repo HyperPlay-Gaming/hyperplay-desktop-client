@@ -439,7 +439,7 @@ if (!gotTheLock) {
     // Someone tried to run a second instance, we should focus the overlay or the main window if no overlay is running.
     const hpOverlay = await getHpOverlay()
     if (hpOverlay?.overlayIsRunning()) {
-      hpOverlay.toggleOverlay({ action: 'ON' })
+      hpOverlay.toggleOverlay({ action: 'ON', actionCause: 'AUTOMATED' })
     } else {
       const mainWindow = getMainWindow()
       mainWindow?.show()
@@ -484,8 +484,8 @@ if (!gotTheLock) {
 
     // keyboards with alt and no option key can be used with mac so register both
     const hpOverlay = await getHpOverlay()
-    const toggle =
-      hpOverlay?.toggleOverlay ??
+    const toggle = () =>
+      hpOverlay?.toggleOverlay({ action: 'TOGGLE', actionCause: 'HOTKEY' }) ??
       (() =>
         logInfo(
           'Cannot toggle overlay without @hyperplay/overlay package',
@@ -2069,9 +2069,9 @@ ipcMain.on('killOverlay', async () => {
   hpOverlay?.closeOverlay()
 })
 
-ipcMain.on('toggleOverlay', async () => {
+ipcMain.on('toggleOverlay', async (ev, ...args) => {
   const hpOverlay = await getHpOverlay()
-  hpOverlay?.toggleOverlay()
+  hpOverlay?.toggleOverlay(...args)
 })
 
 ipcMain.handle('getHyperPlayListings', async () => {

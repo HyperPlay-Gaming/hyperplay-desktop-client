@@ -74,7 +74,7 @@ export const Overlay = observer(function ({
           </Button>
           <Button
             onClick={async () => {
-              window.api.toggleOverlay()
+              window.api.toggleOverlay({ action: 'OFF', actionCause: 'HOTKEY' })
             }}
             type="secondary"
             size="medium"

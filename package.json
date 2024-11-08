@@ -171,7 +171,7 @@
     "@hyperplay/check-disk-space": "^3.5.2",
     "@hyperplay/quests-ui": "^0.0.28",
     "@hyperplay/ui": "^1.8.8",
-    "@hyperplay/utils": "^0.2.4",
+    "@hyperplay/utils": "^0.3.3",
     "@mantine/carousel": "^7.12.0",
     "@mantine/core": "^7.12.0",
     "@mantine/dropzone": "^7.12.0",
@@ -364,9 +364,9 @@
   },
   "optionalDependencies": {
     "@hyperplay/extension-importer": "^0.0.4",
-    "@hyperplay/extension-provider": "^0.0.7",
+    "@hyperplay/extension-provider": "^0.0.8",
     "@hyperplay/mock-backend": "^0.0.1",
-    "@hyperplay/overlay": "^0.0.6",
+    "@hyperplay/overlay": "^0.0.7",
     "@hyperplay/providers": "^0.0.6",
     "@hyperplay/proxy-server": "^0.0.11"
   },
