@@ -1055,6 +1055,12 @@
         "manageStore": "Manage stores",
         "quit": "Quit"
     },
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask Portfolio is only available when connected with MetaMask."
+        },
+        "unsupported": "Unsupported Wallet Connection"
+    },
     "webview": {
         "controls": {
             "back": "Go back",
