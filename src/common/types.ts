@@ -82,8 +82,6 @@ export interface AppSettings extends GameSettings {
   addDesktopShortcuts: boolean
   addStartMenuShortcuts: boolean
   addSteamShortcuts: boolean
-  altGogdlBin: string
-  altLegendaryBin: string
   autoUpdateGames: boolean
   checkForUpdatesOnStartup: boolean
   autoLaunchHyperPlay: boolean
@@ -239,6 +237,7 @@ export type Status =
   | 'paused'
   | 'preparing'
   | 'distributables'
+  | 'patching'
 
 export interface GameStatus {
   appName: string
@@ -319,6 +318,7 @@ export interface InstallParams extends InstallArgs {
   gameInfo: GameInfo
   runner: Runner
   size?: string
+  channelName?: string
 }
 
 export interface UpdateArgs {
@@ -594,6 +594,7 @@ export interface DMQueueElement {
   startTime: number
   endTime: number
   status?: DMStatus
+  channel?: string
 }
 
 type ProtonVerb =

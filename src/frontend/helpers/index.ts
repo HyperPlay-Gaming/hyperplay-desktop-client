@@ -51,6 +51,9 @@ const getLegendaryConfig = async (): Promise<{
 }
 
 const getGameInfo = async (appName: string, runner: Runner) => {
+  if (!appName || !runner) {
+    return null
+  }
   return window.api.getGameInfo(appName, runner)
 }
 

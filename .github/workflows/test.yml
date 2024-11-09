@@ -28,6 +28,11 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
+      - name: setup env file
+        run: |
+          echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
+          echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
+
       - name: Install modules.
         run: yarn setup
 

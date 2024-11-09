@@ -35,8 +35,6 @@
         },
         "choose": "Choose",
         "choose-egs-prefix": "Choose Prefix where EGS is installed",
-        "choose-gogdl-binary": "Select GOGDL Binary (needs restart)",
-        "choose-legendary-binary": "Select Legendary binary",
         "customWine": "Select the Wine or Proton binary",
         "default-install-path": "Choose Default Install Path",
         "default-steam-path": "Steam path.",
@@ -330,6 +328,7 @@
     "hyperplay": {
         "accesscodes": {
             "error": {
+                "licenseUndefined": "Could not validate access code. Please check your internet access or firewall settings.",
                 "validation": "Access code is invalid"
             },
             "requirescode": "This game update requires an access code.",
@@ -367,6 +366,7 @@
             "extracting": "Extracting...",
             "installed": "Ready to play",
             "installing": "Downloading...",
+            "patching": "Patching...",
             "paused": "Paused"
         },
         "linkSteamAccountCta": "Go to Steam sign in",
@@ -676,7 +676,6 @@
         "retrying": "Retrying"
     },
     "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;",
-    "Open": "Open",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -709,19 +708,23 @@
         }
     },
     "other": {
-        "gogdl-version": "GOGDL Version: ",
-        "legendary-version": "Legendary Version: ",
         "weblate": "Help Translate HyperPlay."
     },
     "Other": "Other",
     "overlay": {
         "comingSoon": "Coming Soon",
         "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet.",
+        "links": {
+            "bridge": "Bridge",
+            "buy": "Buy",
+            "marketplace": "Marketplace",
+            "portfolio": "Portfolio",
+            "sell": "Sell",
+            "swap": "Swap"
+        },
         "WALLET_DISCONNECTED": "You do not have a wallet connected to HyperPlay."
     },
     "placeholder": {
-        "alt-gogdl-bin": "Using built-in GOGDL binary...",
-        "alt-legendary-bin": "Using built-in Legendary binary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "dxvkfpsvalue": "Positive integer value (e.g. 30, 60, ...)",
         "egs-prefix": "Prefix where EGS is installed",
@@ -827,9 +830,14 @@
                 "finished": "Nothing downloaded",
                 "queue": "Nothing to download"
             },
+            "launch": "Launch Game",
             "pause": "Pause download",
             "remove": "Remove from Downloads",
-            "resume": "Resume download"
+            "resume": "Resume download",
+            "retry-install": "Retry Install",
+            "retry-update": "Retry Update",
+            "stop": "Stop Download",
+            "timeElapsed": "Time Elapsed: {{elapsed}}"
         }
     },
     "Recent": "Played Recently",
@@ -839,8 +847,6 @@
         "addgamestoapplications": "Add games to Applications automatically",
         "addgamestostartmenu": "Add games to start menu automatically",
         "addgamestosteam": "Add games to Steam automatically",
-        "alt-gogdl-bin": "Choose an Alternative GOGDL Binary to use",
-        "alt-legendary-bin": "Choose an Alternative Legendary Binary",
         "autodxvk": "Auto Install/Update DXVK on Prefix",
         "autodxvknvapi": "Auto Install/Update DXVK-NVAPI on Prefix",
         "autoLaunchHyperPlay": "Auto Launch HyperPlay",

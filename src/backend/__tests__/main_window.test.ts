@@ -3,6 +3,12 @@ import { BrowserWindow, Display, screen } from 'electron'
 import { configStore } from '../constants'
 
 jest.mock('../logger/logfile')
+jest.mock('backend/vite_constants', () => ({
+  VITE_IPFS_API: 'https://ipfs.io/ipfs/'
+}))
+jest.mock('backend/flags/flags', () => ({
+  VITE_LD_ENVIRONMENT_ID: '123'
+}))
 
 describe('main_window', () => {
   describe('sendFrontendMessage', () => {

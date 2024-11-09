@@ -27,7 +27,7 @@ import libraryState from 'frontend/state/libraryState'
 import { hasStatus } from 'frontend/hooks/hasStatus'
 import { Images } from '@hyperplay/ui'
 import styles from './index.module.scss'
-const { PauseIcon, PlayIcon, XCircle, DownloadIcon } = Images
+const { PauseIcon, PlayIcon, XCircle, DownloadIcon, Refresh } = Images
 
 type Props = {
   element?: DMQueueElement
@@ -130,6 +130,8 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const finished = status === 'done'
   const canceled = status === 'error' || (status === 'abort' && !current)
   const isExtracting = gameProgressStatus === 'extracting'
+  const isUpdate = type === 'update'
+  const isPatching = gameProgressStatus === 'patching'
 
   const goToGamePage = (action?: GamePageActions) => {
     if (is_dlc) {
@@ -143,7 +145,15 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   // using one element for the different states so it doesn't
   // lose focus from the button when using a game controller
   const handleMainActionClick = async () => {
-    const action = finished ? 'launch' : 'install'
+    let action: GamePageActions | undefined = 'launch'
+    if (!finished) {
+      if (isUpdate) {
+        action = 'update'
+      } else {
+        action = 'install'
+      }
+    }
+
     if (finished || canceled) {
       return goToGamePage(action)
     }
@@ -173,6 +183,9 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     }
 
     if (canceled) {
+      if (isUpdate) {
+        return <Refresh className={styles.downloadIcon} />
+      }
       return <DownloadIcon className={styles.downloadIcon} />
     }
 
@@ -182,7 +195,9 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const secondaryActionIcon = () => {
     if (state === 'paused') {
       return <PlayIcon className={styles.playIcon} />
-    } else if (state === 'running') {
+    }
+
+    if (state === 'running' && !isPatching) {
       return <PauseIcon className={styles.pauseIcon} />
     }
 
@@ -202,11 +217,18 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const mainIconTitle = () => {
     const { status } = element
     if (status === 'done' || status === 'error') {
-      return t('Open')
+      return t('queue.label.launch', 'Launch Game')
+    }
+
+    if (canceled) {
+      if (isUpdate) {
+        return t('queue.label.retry-update', 'Retry Update')
+      }
+      return t('queue.label.retry-install', 'Retry Install')
     }
 
     return current
-      ? t('button.cancel', 'Cancel')
+      ? t('queue.label.stop', 'Stop Download')
       : t('queue.label.remove', 'Remove from Downloads')
   }
 
@@ -248,6 +270,14 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   }
 
   const { fullDate } = getTime()
+  const downloadsize =
+    progress.totalSize || installInfo?.manifest.download_size || 0
+
+  // calculate download time
+  const downloadTime = (current ? Date.now() : endTime) - startTime
+  const downloadTimeInMinutes = Math.floor(downloadTime / 60000)
+  const downloadTimeInSeconds = Math.floor((downloadTime % 60000) / 1000)
+  const downloadTimeFormatted = `${downloadTimeInMinutes}m ${downloadTimeInSeconds}s`
 
   return (
     <>
@@ -275,14 +305,18 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
           <span className="titleSize">
             {title}
             <span title={path}>
-              {size?.includes('?')
-                ? fileSize(Number(installInfo?.manifest.download_size) || 0)
-                : size}
+              {size?.includes('?') ? fileSize(Number(downloadsize)) : size}
               {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
             </span>
           </span>
         </td>
-        <td title={fullDate}>{fullDate}</td>
+        <td
+          title={t('queue.label.timeElapsed', 'Time Elapsed: {{elapsed}}', {
+            elapsed: downloadTimeFormatted
+          })}
+        >
+          {fullDate}
+        </td>
         <td>{translatedTypes[type]}</td>
         <td>{getStoreName(runner, t2('Other'))}</td>
         <td>

@@ -917,7 +917,9 @@
             "playToStart": "Zagraj tę grę, aby rozpocząć swoją serię!",
             "progressTowardsStreak": "przebiega w kierunku dzisiejszych rund.",
             "streakCompleted": "Streak został ukończony. Teraz obie nagrody.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "sync": "Strona oficjalna",
+            "syncSuccess": "Postępowa syndykacja"
         },
         "points": "Punkty",
         "reputation": "Reputacja",

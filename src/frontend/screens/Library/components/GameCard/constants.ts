@@ -34,6 +34,7 @@ export function getCardStatus(
   const isPreparing = status === 'preparing'
   const isExtracting = status === 'extracting'
   const isInstallingDistributables = status === 'distributables'
+  const isPatching = status === 'patching'
 
   const haveStatus =
     isMoving ||
@@ -49,7 +50,9 @@ export function getCardStatus(
     (isInstalled && layout !== 'grid') ||
     isPaused ||
     isPreparing ||
-    isInstallingDistributables
+    isInstallingDistributables ||
+    isExtracting ||
+    isPatching
 
   return {
     isInstalling,
@@ -63,6 +66,7 @@ export function getCardStatus(
     isPreparing,
     isExtracting,
     haveStatus,
-    isInstallingDistributables
+    isInstallingDistributables,
+    isPatching
   }
 }
