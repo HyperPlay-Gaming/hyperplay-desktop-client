@@ -1,5 +1,8 @@
 import React, { useCallback } from 'react'
-import { QuestDetailsWrapper } from '@hyperplay/quests-ui'
+import {
+  QuestDetailsWrapper,
+  claimedRewardToastState
+} from '@hyperplay/quests-ui'
 import { Reward, Quest } from '@hyperplay/utils'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
@@ -8,7 +11,6 @@ import { useFlags } from 'launchdarkly-react-client-sdk'
 import { useTranslation } from 'react-i18next'
 import { useAccount } from 'wagmi'
 import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
-import claimedRewardToastState from 'frontend/state/ClaimedRewardToastState'
 import extensionState from 'frontend/state/ExtensionState'
 
 /**
@@ -90,6 +92,7 @@ export default function QuestDetails({
 
   return (
     <QuestDetailsWrapper
+      // @ts-expect-error - TODO: investigate why this component is not using the types from QuestWrapperContextValue
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }

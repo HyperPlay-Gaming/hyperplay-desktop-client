@@ -2,8 +2,8 @@ import React from 'react'
 import { ToastQuest } from '@hyperplay/ui'
 import Draggable from 'react-draggable'
 import { useTranslation } from 'react-i18next'
-import claimedRewardToastState from 'frontend/state/ClaimedRewardToastState'
 import { observer } from 'mobx-react-lite'
+import { claimedRewardToastState } from '@hyperplay/quests-ui'
 
 type QuestRewardClaimedToastProps = {
   draggable?: boolean

@@ -56,8 +56,7 @@ export function useGetRewards(questId: number | null) {
               imageUrl: reward_i.image_url,
               chainName: getRewardCategory(reward_i, t),
               numToClaim: token_i.amount_per_user,
-              numOfClaimsLeft: token_i.numClaimsLeft,
-              onClaim: () => {}
+              numOfClaimsLeft: token_i.numClaimsLeft
             }
             rewards.push(questReward_i)
           }
@@ -67,8 +66,7 @@ export function useGetRewards(questId: number | null) {
             imageUrl: reward_i.image_url,
             chainName: getRewardCategory(reward_i, t),
             numToClaim,
-            numOfClaimsLeft: reward_i.numClaimsLeft,
-            onClaim: () => {}
+            numOfClaimsLeft: reward_i.numClaimsLeft
           }
           rewards.push(questReward_i)
         }
