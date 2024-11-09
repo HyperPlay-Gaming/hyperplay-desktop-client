@@ -12,6 +12,7 @@ import {
 import { Channel, ContractMetadata } from '@valist/sdk/dist/typesApi'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { DropdownItemType } from '@hyperplay/ui'
+export type { Quest } from '@hyperplay/utils'
 
 export type {
   Listing as HyperPlayRelease,
@@ -930,30 +931,6 @@ export interface Reward {
   }[]
   image_url: string
   numClaimsLeft: string
-}
-
-export interface Quest {
-  id: number
-  project_id: string
-  name: string
-  type: 'REPUTATIONAL-AIRDROP' | 'PLAYSTREAK'
-  status: string
-  description: string
-  rewards?: Reward[]
-  /* eslint-disable-next-line */
-  deposit_contracts: any[]
-  eligibility?: {
-    completion_threshold?: number
-    steam_games: { id: string }[]
-    play_streak: {
-      required_playstreak_in_days: number
-      minimum_session_time_in_seconds: number
-    }
-  }
-  quest_external_game: null | {
-    runner: Runner
-    store_redirect_url: string
-  }
 }
 
 export interface RewardClaimSignature {

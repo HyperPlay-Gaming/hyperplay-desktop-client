@@ -1325,10 +1325,10 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/quests-ui@^0.0.28":
-  version "0.0.28"
-  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.0.28.tgz#6fedc3c92b8cf25bca2b0b18944d2967372d198f"
-  integrity sha512-LGe9AuwEu2l4JKaC3gFhRdODGKYjZHKH82svzbzVFEzpbX8k/jQFlDPmolByjJFrsCg98lLbaT7ZL4qSPzZH7A==
+"@hyperplay/quests-ui@^0.0.38":
+  version "0.0.38"
+  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.0.38.tgz#774276bec89af9e496b81c7369e85719438fe790"
+  integrity sha512-30REpmCdsF3s4tZRXxqz5cg16H12J6SJ8yq1M525SJ7klKRhKJiWvKQDPg2/MbSEgihBl2oaZAsNQJkJkGs8Aw==
   dependencies:
     classnames "^2.5.1"
 
@@ -1341,13 +1341,6 @@
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.9.tgz#80836cfde5c4d63e41f5df809ae2e80314600c5a"
   integrity sha512-gMAa6gdFXfLrJUjPAD2is06qNo4MHzpb6Cbzt4xfNd7wI9chOblQ+piwTI1oFWs44GgfacsMq6i5esNly3hELg==
-  dependencies:
-    bignumber.js "^9.1.2"
-
-"@hyperplay/utils@^0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.3.3.tgz#9d594a29012ae5a172138878208d6d4edb6412f2"
-  integrity sha512-t8XB7oFWJU4S1ULxVBURt9BhpgaZAq5C131Ch5wShxuMTjxxGEhTAAcppsH+VYd7lwtp4se9myzhc6u21rUNgQ==
   dependencies:
     bignumber.js "^9.1.2"
 
