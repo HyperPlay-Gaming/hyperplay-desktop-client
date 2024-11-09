@@ -1690,13 +1690,15 @@ async function checkIfPatchingIsFaster(
     const installSize = parseInt(
       releaseMeta.platforms[platform]?.installSize ?? '0'
     )
+    // @TODO: get these speed values from local checks of download/write speed
     const downloadSpeedInKBPerSecond = 25 * 1024
     const extractionSpeedInKBPerSecond = 50 * 1024
     const estTimeToInstallFullGameInSec =
       (downloadSize / 1024) * downloadSpeedInKBPerSecond +
       (installSize / 1024) * extractionSpeedInKBPerSecond
 
-    const patchingSpeedEstimateInKBPerSecond = 2 * 1024
+    // @TODO: get this value from local check of patching speed
+    const patchingSpeedEstimateInKBPerSecond = 5 * 1024
     const estTimeToPatchGameInSec =
       estimatedPatchSizeInKB / patchingSpeedEstimateInKBPerSecond
 
