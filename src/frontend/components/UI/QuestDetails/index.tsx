@@ -96,7 +96,12 @@ export default function QuestDetails({
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }
-      onShowMetaMaskPopup={() => extensionState.showPopup()}
+      onShowMetaMaskPopup={async () => {
+        const currentProvider = await window.api.getConnectedProvider()
+        if (currentProvider === 'MetaMaskExtension') {
+          extensionState.showPopup()
+        }
+      }}
       onPlayClick={onPlayClick}
       getPendingExternalSync={getPendingExternalSync}
       syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}
