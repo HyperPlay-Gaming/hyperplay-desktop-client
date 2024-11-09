@@ -55,12 +55,7 @@ const OverlayManager = observer(function ({
             <webview
               src={url}
               className={BrowserGameStyles.browserGame}
-              partition={
-                WalletState.provider === PROVIDERS.METAMASK_MOBILE ||
-                PROVIDERS.WALLET_CONNECT
-                  ? 'persist:InPageWindowEthereumExternalWallet'
-                  : undefined
-              }
+              partition={'persist:InPageWindowEthereumExternalWallet'}
               webpreferences="contextIsolation=true"
               // setting = to {true} does not work :(
               allowpopups={trueAsStr}

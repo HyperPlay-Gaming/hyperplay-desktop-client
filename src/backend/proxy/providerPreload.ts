@@ -24,7 +24,11 @@ const enabledTopics = [
 ]
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const listenToRendererCalls = (fxn: string, topic: string, cb: any) => {
+const listenToRendererCalls = (
+  fxn: 'once' | 'on' | 'addListener',
+  topic: string,
+  cb: any
+) => {
   if (!enabledTopics.includes(topic)) {
     throw `Tried to listen to ${topic} through window.ethereum!`
   }
@@ -103,35 +107,46 @@ contextBridge?.exposeInMainWorld('providerApi', providerApi)
 
 function initProvider() {
   async function exposeWindowEthereum() {
-    console.log('exposing window ethereum')
-    if (!Object.hasOwn(window, 'ethereum')) {
-      const windowAny = window as any
-      windowAny.ethereum = {
-        request: windowAny.providerApi.provider.request,
-        send: windowAny.providerApi.provider.send,
-        sendAsync: windowAny.providerApi.provider.sendAsync,
-        once: windowAny.providerApi.provider.once,
-        on: windowAny.providerApi.provider.on,
-        off: windowAny.providerApi.provider.off,
-        addListener: windowAny.providerApi.provider.addListener,
-        removeListener: windowAny.providerApi.provider.removeListener,
-        removeAllListeners: windowAny.providerApi.provider.removeAllListeners,
-        isMetaMask: true,
-        enable: windowAny.providerApi.provider.enable,
-        selectedAddress: undefined,
-        accounts: undefined
-      }
+    const windowAny = window as any
+    windowAny.ethereum = {
+      request: windowAny.providerApi.provider.request,
+      send: windowAny.providerApi.provider.send,
+      sendAsync: windowAny.providerApi.provider.sendAsync,
+      once: windowAny.providerApi.provider.once,
+      on: windowAny.providerApi.provider.on,
+      off: windowAny.providerApi.provider.off,
+      addListener: windowAny.providerApi.provider.addListener,
+      removeListener: windowAny.providerApi.provider.removeListener,
+      removeAllListeners: windowAny.providerApi.provider.removeAllListeners,
+      isMetaMask: true,
+      enable: windowAny.providerApi.provider.enable,
+      selectedAddress: undefined,
+      accounts: undefined
+    }
 
-      windowAny.ethereum.on('accountsChanged', (accounts: string[]) => {
-        console.log('accounts changed', accounts)
-        windowAny.ethereum.selectedAddress = accounts[0]
-        windowAny.ethereum.accounts = accounts
-      })
+    windowAny.ethereum.on('accountsChanged', (accounts: string[]) => {
+      console.log('accounts changed', accounts)
+      windowAny.ethereum.selectedAddress = accounts[0]
+      windowAny.ethereum.accounts = accounts
+    })
 
-      const acct = await windowAny.ethereum.request({ method: 'eth_accounts' })
-      windowAny.ethereum.selectedAddress =
-        acct && acct.length > 0 ? acct[0] : ''
-      windowAny.ethereum.accounts = acct
+    const ev = new Event('ethereum#initialized')
+    window.dispatchEvent(ev)
+
+    const timeNow = Date.now()
+    const acct = await windowAny.ethereum.request({ method: 'eth_accounts' })
+    windowAny.ethereum.selectedAddress = acct && acct.length > 0 ? acct[0] : ''
+    windowAny.ethereum.accounts = acct
+
+    /**
+     * opensea performs 4 responsiveness checks by calling eth_accounts with 2 second timeouts.
+     * if all 4 fail, clicking MetaMask in the connection options will open the metamask.io download page.
+     * we reload the page so that MetaMask will connect as expected if the user unlocks their wallet
+     * after this time period.
+     */
+    const timeElapsed = Date.now() - timeNow
+    if (timeElapsed > 8000) {
+      window.location.reload()
     }
   }
 
@@ -154,9 +169,6 @@ function initProvider() {
   window.addEventListener('eip6963:requestProvider', () => {
     announceProvider()
   })
-
-  const ev = new Event('ethereum#initialized')
-  window.dispatchEvent(ev)
 }
 
 const exposeWindowEthereumProvider = `(${initProvider.toString()})()`
