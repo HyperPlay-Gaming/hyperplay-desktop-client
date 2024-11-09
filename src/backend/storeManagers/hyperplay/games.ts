@@ -1666,11 +1666,9 @@ async function checkIfPatchingIsFaster(
   // compare manifests
 
   const { compareManifests } = await import('@hyperplay/patcher')
-  const blockSizeForEstimateInKB = 140
   const { estimatedPatchSizeInKB } = compareManifests(
     oldManifestJson,
-    newManifestJson,
-    blockSizeForEstimateInKB
+    newManifestJson
   )
 
   // calc break point % where patching is faster
