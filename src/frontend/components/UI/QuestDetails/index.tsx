@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
 import {
   QuestDetailsWrapper,
-  claimedRewardToastState
+  claimedRewardToastState,
+  useGetUserPlayStreak
 } from '@hyperplay/quests-ui'
 import { Reward, Quest } from '@hyperplay/utils'
 import useAuthSession from 'frontend/hooks/useAuthSession'
-import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import authState from 'frontend/state/authState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { useTranslation } from 'react-i18next'
@@ -75,7 +75,10 @@ export default function QuestDetails({
   const { t } = useTranslation()
   const flags = useFlags()
   const sessionEmail = data?.linkedAccounts.get('email')
-  const { invalidateQuery } = useGetUserPlayStreak(questId)
+  const { invalidateQuery } = useGetUserPlayStreak(
+    questId,
+    window.api.getUserPlayStreak
+  )
 
   const getPendingExternalSync = useCallback(async () => {
     if (!address || !questId || !isSignedIn) return false
