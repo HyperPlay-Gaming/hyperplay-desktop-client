@@ -7,10 +7,10 @@ import {
 } from '@hyperplay/ui'
 import styles from './index.module.scss'
 import { useTranslation } from 'react-i18next'
-import { Quest } from 'common/types'
 import useGetG7UserCredits from 'frontend/hooks/useGetG7UserCredits'
 import useGetPointsBalancesForProject from 'frontend/hooks/useGetPointsBalances'
 import useGetQuests from 'frontend/hooks/useGetQuests'
+import { useGetQuestStates } from 'frontend/hooks/useGetQuestStates'
 
 export interface QuestLogWrapperProps {
   questsResults: ReturnType<typeof useGetQuests>
@@ -31,6 +31,27 @@ export function QuestLogWrapper({
   const pointsBalancesQuery = useGetPointsBalancesForProject(appName)
   const pointsBalances = pointsBalancesQuery?.data?.data
   const { t } = useTranslation()
+  const { questIdToQuestStateMap, isPending: isGetQuestStatesPending } =
+    useGetQuestStates({
+      quests
+    })
+
+  const questsUi =
+    quests?.map((quest) => {
+      const questUi_i: QuestLogInfo = {
+        questType: quest.type,
+        title: quest.name,
+        state: Object.hasOwn(questIdToQuestStateMap, quest.id)
+          ? questIdToQuestStateMap[quest.id]
+          : 'ACTIVE',
+        onClick: () => {
+          setSelectedQuestId(quest.id)
+        },
+        selected: selectedQuestId === quest.id,
+        id: quest.id
+      }
+      return questUi_i
+    }) ?? []
 
   const i18n: QuestLogTranslations = {
     quests: t('quest.quests', 'Quests'),
@@ -68,38 +89,19 @@ export function QuestLogWrapper({
   }
 
   let questLog = null
-  if (Array.isArray(quests)) {
-    const questsUi = quests.map((val: Quest) => {
-      const questUi_i: QuestLogInfo = {
-        questType: val.type,
-        title: val.name,
-        state: 'ACTIVE',
-        onClick: () => {
-          setSelectedQuestId(val.id)
-        },
-        selected: selectedQuestId === val.id,
-        id: val.id
-      }
-      return questUi_i
-    })
-    questLog = (
-      <QuestLog
-        quests={questsUi}
-        className={styles.questLog}
-        i18n={i18n}
-        pointsProps={pointsBalanceProps}
-      />
-    )
-  } else if (questsResults?.data.isLoading || questsResults?.data.isFetching) {
-    questLog = (
-      <QuestLog
-        quests={[]}
-        className={styles.questLog}
-        loading={true}
-        i18n={i18n}
-      />
-    )
-  }
+  const isLoading =
+    questsResults?.data.isLoading ||
+    questsResults?.data.isFetching ||
+    isGetQuestStatesPending
+  questLog = (
+    <QuestLog
+      quests={questsUi ?? []}
+      className={styles.questLog}
+      i18n={i18n}
+      pointsProps={pointsBalanceProps}
+      loading={isLoading}
+    />
+  )
 
   if (!quests?.length) {
     return null
