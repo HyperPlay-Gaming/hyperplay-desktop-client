@@ -26,8 +26,6 @@ export type {
   PlatformConfig
 } from '@valist/sdk/dist/typesShared'
 
-export type { Quest } from '@hyperplay/utils'
-
 export interface LicenseConfigValidateResult {
   valid: boolean
   platforms: PlatformsMetaInterface
