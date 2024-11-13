@@ -309,6 +309,8 @@
     "@babel/plugin-transform-arrow-functions": "^7.24.7",
     "@lavamoat/allow-scripts": "^3.2.0",
     "@lavamoat/preinstall-always-fail": "^2.1.0",
+    "@metamask/providers": "^18.1.1",
+    "@metamask/utils": "^10.0.1",
     "@playwright/test": "^1.46.0",
     "@testing-library/dom": "^7.31.2",
     "@testing-library/jest-dom": "^6.4.8",
@@ -366,8 +368,8 @@
     "@hyperplay/extension-importer": "^0.0.4",
     "@hyperplay/extension-provider": "^0.0.8",
     "@hyperplay/mock-backend": "^0.0.1",
-    "@hyperplay/patcher": "^0.0.17",
     "@hyperplay/overlay": "^0.0.7",
+    "@hyperplay/patcher": "^0.0.17",
     "@hyperplay/providers": "^0.0.6",
     "@hyperplay/proxy-server": "^0.0.11"
   },
