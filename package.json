@@ -169,7 +169,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@hyperplay/chains": "^0.3.0",
     "@hyperplay/check-disk-space": "^3.5.2",
-    "@hyperplay/quests-ui": "^0.0.38",
+    "@hyperplay/quests-ui": "^0.0.40",
     "@hyperplay/ui": "^1.8.9",
     "@hyperplay/utils": "^0.3.4",
     "@mantine/carousel": "^7.12.0",
@@ -366,8 +366,8 @@
     "@hyperplay/extension-importer": "^0.0.4",
     "@hyperplay/extension-provider": "^0.0.8",
     "@hyperplay/mock-backend": "^0.0.1",
-    "@hyperplay/patcher": "^0.0.17",
     "@hyperplay/overlay": "^0.0.7",
+    "@hyperplay/patcher": "^0.0.17",
     "@hyperplay/providers": "^0.0.6",
     "@hyperplay/proxy-server": "^0.0.11"
   },
