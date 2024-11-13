@@ -11,6 +11,7 @@ import { getTitleFromEpicStoreUrl, spawnAsync } from 'backend/utils'
 import {
   getValistListingApiUrl,
   isWindows,
+  patchApiUrl,
   qaToken,
   valistListingsApiUrl
 } from 'backend/constants'
@@ -19,6 +20,8 @@ import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { join } from 'path'
 import { existsSync } from 'graceful-fs'
 import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
+import getPartitionCookies from 'backend/utils/get_partition_cookies'
+import { DEV_PORTAL_URL } from 'common/constants'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -27,6 +30,36 @@ export async function getHyperPlayStoreRelease(
   const res = await axios.get<HyperPlayRelease>(gameIdUrl)
   const data = res.data
   return data
+}
+
+export async function getIPDTManifestUrl(
+  releaseId: string,
+  platformName: string
+): Promise<string> {
+  const url = new URL(patchApiUrl)
+  url.searchParams.append('release_id', releaseId)
+  url.searchParams.append('platform_name', platformName)
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
+
+  const validateResult = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Cookie: cookieString
+    }
+  })
+  if (!validateResult.ok) {
+    const errMsg = await validateResult.text()
+    logError(
+      `Error getting release manifest for ${releaseId}. ${errMsg}`,
+      LogPrefix.HyperPlay
+    )
+    throw errMsg
+  }
+  const data = await validateResult.json()
+  return data?.manifest
 }
 
 export async function getHyperPlayReleaseMap() {

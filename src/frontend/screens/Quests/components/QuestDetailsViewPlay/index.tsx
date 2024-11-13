@@ -6,13 +6,15 @@ import {
   QuestDetailsTranslations
 } from '@hyperplay/ui'
 import { useTranslation } from 'react-i18next'
-import useGetQuest from 'frontend/hooks/useGetQuest'
 import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { fetchEpicListing, getGameInfo } from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
-import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
-import { getPlaystreakArgsFromQuestData } from '@hyperplay/quests-ui'
+import {
+  getPlaystreakArgsFromQuestData,
+  useGetQuest,
+  useGetUserPlayStreak
+} from '@hyperplay/quests-ui'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
@@ -28,9 +30,12 @@ export const QuestDetailsViewPlayWrapper = observer(
     const { t } = useTranslation()
     const [collapseIsOpen, setCollapseIsOpen] = useState(false)
 
-    const questResult = useGetQuest(selectedQuestId)
+    const questResult = useGetQuest(selectedQuestId, window.api.getQuest)
     const questMeta = questResult.data.data
-    const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
+    const questPlayStreakResult = useGetUserPlayStreak(
+      selectedQuestId,
+      window.api.getUserPlayStreak
+    )
     const questPlayStreakData = questPlayStreakResult.data.data
 
     const rewardsQuery = useGetRewards(selectedQuestId)
@@ -204,6 +209,9 @@ export const QuestDetailsViewPlayWrapper = observer(
       )
     }
 
+    const dateTimeCurrentSessionStartedInMsSinceEpoch =
+      questPlayStreakResult?.data.dataUpdatedAt ?? Date.now()
+
     return (
       <QuestDetails
         ctaDisabled={navigateToGame.isPending}
@@ -233,9 +241,9 @@ export const QuestDetailsViewPlayWrapper = observer(
             steamAccountLinked: false
           },
           playStreak: getPlaystreakArgsFromQuestData({
-            // @ts-expect-error need to update quests-ui to match new hp/utils Quest type
             questMeta,
-            questPlayStreakData
+            questPlayStreakData: questPlayStreakData?.userPlayStreak,
+            dateTimeCurrentSessionStartedInMsSinceEpoch
           })
         }}
         classNames={{ root: styles.questDetailsRoot }}

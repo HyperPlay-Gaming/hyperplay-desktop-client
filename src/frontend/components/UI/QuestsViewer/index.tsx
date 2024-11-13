@@ -3,14 +3,13 @@ import styles from './index.module.scss'
 import { QuestLogWrapper } from './components/QuestLogWrapper'
 import { Alert } from '@hyperplay/ui'
 import { useTranslation } from 'react-i18next'
-import { QuestDetailsWrapper } from '@hyperplay/quests-ui'
+import { QuestDetailsWrapper, useGetUserPlayStreak } from '@hyperplay/quests-ui'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import authState from 'frontend/state/authState'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import '@hyperplay/quests-ui/style.css'
 import { Reward } from 'common/types'
 import useGetQuests from 'frontend/hooks/useGetQuests'
-import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import { useAccount } from 'wagmi'
 
@@ -29,7 +28,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const initialQuestId = quests?.[0]?.id ?? null
   const visibleQuestId = selectedQuestId ?? initialQuestId
   const sessionEmail = data?.linkedAccounts.get('email')
-  const { invalidateQuery } = useGetUserPlayStreak(visibleQuestId)
+  const { invalidateQuery } = useGetUserPlayStreak(
+    visibleQuestId,
+    window.api.getUserPlayStreak
+  )
 
   const getPendingExternalSync = useCallback(async () => {
     if (!address || !visibleQuestId || !isSignedIn) return false
@@ -123,7 +125,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           getQuestRewardSignature={window.api.getQuestRewardSignature}
           confirmRewardClaim={window.api.confirmRewardClaim}
           getExternalTaskCredits={window.api.getExternalTaskCredits}
-          syncPlaySession={window.api.syncPlaySession}
           getDepositContracts={window.api.getDepositContracts}
           openSignInModal={authState.openSignInModal}
           resyncExternalTask={async (rewardId: string) => {

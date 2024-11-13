@@ -128,7 +128,7 @@ export default observer(function GamePage(): JSX.Element | null {
 
   const isInstalling = DMQueueState.isInstalling(appName)
   const isPlaying = status === 'playing'
-  const isUpdating = status === 'updating'
+  const isUpdating = status === 'updating' || status === 'patching'
   const isQueued = status === 'queued'
   const isReparing = status === 'repairing'
   const isMoving = status === 'moving'
@@ -136,6 +136,7 @@ export default observer(function GamePage(): JSX.Element | null {
   const isSyncing = status === 'syncing-saves'
   const isPaused = DMQueueState.isPaused(appName)
   const isExtracting = status === 'extracting'
+  const isPatching = status === 'patching'
   const isInstallingDistributable = status === 'distributables'
   const isPreparing = status === 'preparing'
   const notAvailable = !gameAvailable && gameInfo.is_installed
@@ -147,6 +148,7 @@ export default observer(function GamePage(): JSX.Element | null {
   const installPlatform = gameInfo.install?.platform
   const isBrowserGame =
     installPlatform === 'Browser' || installPlatform === 'web'
+  const showProgress = isInstalling || isUpdating || isPatching
 
   const backRoute = getBackRoute(location.state)
 
@@ -160,19 +162,25 @@ export default observer(function GamePage(): JSX.Element | null {
 
   const hasRun = useRef(false)
   useEffect(() => {
-    if (!action || hasRun.current) return
-    hasRun.current = true
+    const mainAction = async () => {
+      if (!action || hasRun.current) return
+      hasRun.current = true
 
-    if (action === 'install') {
-      return setShowModal({ game: appName, show: true })
-    }
-    if (action === 'launch') {
-      if (isBrowserGame || gameInfo.is_installed) {
-        handlePlay()()
-      } else {
+      if (action === 'update') {
+        return updateGame(gameInfo)
+      }
+      if (action === 'install') {
         return setShowModal({ game: appName, show: true })
       }
+      if (action === 'launch') {
+        if (isBrowserGame || gameInfo.is_installed) {
+          handlePlay()()
+        } else {
+          return setShowModal({ game: appName, show: true })
+        }
+      }
     }
+    mainAction()
   }, [action])
 
   // Track the screen view once each time the appName, gameInfo or runner changes
@@ -459,7 +467,7 @@ export default observer(function GamePage(): JSX.Element | null {
                     }
                     runner={gameInfo.runner}
                     handleUpdate={async () => updateGame(gameInfo)}
-                    disableUpdate={isInstalling || isUpdating}
+                    disableUpdate={showProgress}
                     setShowExtraInfo={setShowExtraInfo}
                     onShowRequirements={
                       hasRequirements
@@ -593,14 +601,6 @@ export default observer(function GamePage(): JSX.Element | null {
                 </div>
               </div>
               <div className="gameStatus">
-                {isInstalling ||
-                  (isUpdating && (
-                    <progress
-                      className="installProgress"
-                      max={100}
-                      value={getProgress(progress)}
-                    />
-                  ))}
                 <p
                   style={{
                     color:
@@ -808,12 +808,15 @@ export default observer(function GamePage(): JSX.Element | null {
 
     const currentProgress = getCurrentProgress(progress, percent, bytes, eta)
 
-    if (isUpdating && is_installed) {
+    if (isPatching || (isUpdating && is_installed)) {
       if (!currentProgress) {
         return `${t('status.processing', 'Processing files, please wait')}...`
       }
       if (eta && eta.includes('verifying')) {
         return `${t('status.reparing')}: ${percent} [${bytes}]`
+      }
+      if (isPatching) {
+        return `${t('status.patching', 'Patching Files ')} ${currentProgress}`
       }
       return `${t('status.updating')} ${currentProgress}`
     }
@@ -987,7 +990,9 @@ function getCurrentProgress(
     ? ''
     : `${
         percent && bytes
-          ? `${percent.toFixed(2)}% [${bytes} MB]  ${eta ? `ETA: ${eta}` : ''}`
+          ? `${percent.toFixed(2)}% [${Number(bytes).toFixed(2)} MB]  ${
+              eta ? `ETA: ${eta}` : ''
+            }`
           : '...'
       }`
 }

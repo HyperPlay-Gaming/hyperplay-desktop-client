@@ -39,6 +39,10 @@ try {
     {
       find: '@hyperplay/overlay',
       replacement: join(__dirname, 'src', 'empty.js')
+    },
+    {
+      find: '@hyperplay/patcher',
+      replacement: join(__dirname, 'src', 'empty.js')
     }
   )
 }

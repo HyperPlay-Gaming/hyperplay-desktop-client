@@ -22,7 +22,7 @@ import {
   screen,
   session
 } from 'electron'
-
+import { uuid } from 'short-uuid'
 import { autoUpdater } from 'electron-updater'
 import { cpus, platform } from 'os'
 import {
@@ -35,7 +35,6 @@ import {
   watch,
   writeFileSync
 } from 'graceful-fs'
-import * as LDElectron from 'launchdarkly-electron-client-sdk'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
 import { DXVK, SteamWindows, Winetricks } from './tools'
@@ -131,7 +130,7 @@ import {
 } from 'backend/storeManagers/gog/games'
 import { playtimeSyncQueue } from './storeManagers/gog/electronStores'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
-
+import { getFlag, initLDClient } from './flags/flags'
 import {
   autoUpdate,
   gameManagerMap,
@@ -223,13 +222,9 @@ import {
   getGameOverride,
   getGameSdl
 } from 'backend/storeManagers/legendary/library'
-import { uuid } from 'short-uuid'
-import { LDEnvironmentId, ldOptions } from './ldconstants'
 import getPartitionCookies from './utils/get_partition_cookies'
 
 import { formatSystemInfo, getSystemInfo } from './utils/systeminfo'
-
-let ldMainClient: LDElectron.LDElectronMainClient
 
 if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
   app.commandLine?.appendSwitch('remote-debugging-port', '9222')
@@ -261,10 +256,11 @@ ipcMain.on('focusMainWindow', () => {
 })
 
 async function completeHyperPlayQuest() {
-  const completeHpSummonQuestIsActive = ldMainClient.variation(
+  const completeHpSummonQuestIsActive = getFlag(
     'complete-hp-summon-quest',
     false
   )
+
   if (!completeHpSummonQuestIsActive) {
     return
   }
@@ -498,7 +494,6 @@ if (!gotTheLock) {
 
     initExtension(hpApi)
     initOverlay(hpApi)
-
     initOnlineMonitor()
 
     initImagesCache()
@@ -597,15 +592,7 @@ if (!gotTheLock) {
       configStore.set('settings.ldUser', ldUser)
     }
 
-    ldMainClient = LDElectron.initializeInMain(
-      LDEnvironmentId,
-      ldUser,
-      ldOptions
-    )
-
-    ldMainClient.on('ready', () => {
-      logInfo('LaunchDarkly client initialized', LogPrefix.Backend)
-    })
+    initLDClient(ldUser)
 
     const mainWindow = await initializeWindow()
 
