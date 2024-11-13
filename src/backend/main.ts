@@ -2100,7 +2100,10 @@ ipcMain.handle('testApiConnection', async () => {
     if (response.status === 200) {
       logInfo('API connection successful', LogPrefix.Backend)
     } else {
-      logError('API connection failed', LogPrefix.Backend)
+      logError(
+        'API connection failed with status code: ' + response.status,
+        LogPrefix.Backend
+      )
     }
   } catch (e) {
     logError(`Error testing API connection: ${e}`, LogPrefix.Backend)
