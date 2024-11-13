@@ -95,7 +95,7 @@ export default function QuestDetails({
 
   return (
     <QuestDetailsWrapper
-      // @ts-expect-error - TODO: investigate why this component is not using the types from QuestWrapperContextValue
+      // @ts-expect-error - see: https://github.com/qmhc/vite-plugin-dts/issues/330
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }
