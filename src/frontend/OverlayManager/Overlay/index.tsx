@@ -17,7 +17,6 @@ import classNames from 'classnames'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import MetaMaskPortfolio from 'frontend/screens/MetaMaskPortfolio'
 import { NavBarOverlayWrapper } from './NavBarOverlayWrapper'
-import { QuestRewardClaimedToast } from 'frontend/components/UI/QuestRewardClaimedToast'
 import WebView from 'frontend/screens/WebView'
 
 export const Overlay = observer(function ({
@@ -149,7 +148,6 @@ export const Overlay = observer(function ({
           <div className={BrowserGameStyles.rightSideContainer}>
             {exitGameButton}
             {extensionManager}
-            <QuestRewardClaimedToast />
           </div>
         </div>
       </div>
