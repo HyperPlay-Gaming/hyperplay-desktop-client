@@ -336,7 +336,7 @@
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.3.1",
     "cross-env": "^7.0.3",
-    "electron": "32.1.2",
+    "electron": "33.2.0",
     "electron-builder": "^24.13.3",
     "electron-playwright-helpers": "^1.7.1",
     "electron-vite": "^2.3.0",
@@ -365,8 +365,8 @@
     "@hyperplay/extension-importer": "^0.1.0-alpha",
     "@hyperplay/extension-provider": "^0.0.8",
     "@hyperplay/mock-backend": "^0.0.1",
-    "@hyperplay/patcher": "^0.0.17",
     "@hyperplay/overlay": "^0.0.7",
+    "@hyperplay/patcher": "^0.0.17",
     "@hyperplay/providers": "^0.0.6",
     "@hyperplay/proxy-server": "^0.0.11"
   },
