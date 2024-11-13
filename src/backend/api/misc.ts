@@ -236,3 +236,7 @@ export const isClientUpdating = async () =>
   ipcRenderer.invoke('isClientUpdating')
 
 export const restartClient = () => ipcRenderer.send('restartClient')
+
+export const testApiConnection = async (): Promise<void> => {
+  return ipcRenderer.invoke('testApiConnection')
+}

@@ -2086,6 +2086,27 @@ ipcMain.handle('getHyperPlayListings', async () => {
   const listingsMap = await getHyperPlayReleaseObject()
   return JSON.parse(JSON.stringify(listingsMap))
 })
+
+ipcMain.handle('testApiConnection', async () => {
+  try {
+    const DEV_PORTAL_URL = 'https://developers.hyperplay.xyz/'
+    const response = await fetch(`${DEV_PORTAL_URL}/api/v1/listings`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if (response.status === 200) {
+      logInfo('API connection successful', LogPrefix.Backend)
+    } else {
+      logError('API connection failed', LogPrefix.Backend)
+    }
+  } catch (e) {
+    logError(`Error testing API connection: ${e}`, LogPrefix.Backend)
+  }
+})
+
 /*
  * INSERT OTHER IPC HANDLERS HERE
  */

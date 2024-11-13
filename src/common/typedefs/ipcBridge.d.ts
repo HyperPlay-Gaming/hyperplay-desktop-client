@@ -312,6 +312,7 @@ interface HyperPlayAsyncIPCFunctions {
     wallet: string
     questId: number
   }) => Promise<boolean>
+  testApiConnection: () => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
