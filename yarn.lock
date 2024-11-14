@@ -1325,17 +1325,17 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/quests-ui@^0.0.40":
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.0.40.tgz#9a98f273e4063f29ea57ca50ad144bc2c53f8931"
-  integrity sha512-I2H9SrPv+ARxdfSdwADCIvhyds/YKiWtVOAp5SFyF586C5IPjHmfNKqcYUsOvb7trxS8W6XiXkRfTyhXA4HQOA==
+"@hyperplay/quests-ui@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.1.0.tgz#10fad9ad123efd57d231ed7f1d9af86469b1aa63"
+  integrity sha512-VHTcOPZuoCXiAG0omnT6HqqEoakKjbEmQNrbLlsjhBwAHCnc4vNLtlXHjfNghEvlYjHG534dbbzHMRwqdN8y7A==
   dependencies:
     classnames "^2.5.1"
 
-"@hyperplay/ui@^1.8.9":
-  version "1.8.12"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.12.tgz#ca7e37bee24f88d986989161299d9d5a070e75a5"
-  integrity sha512-Rv+4e3U5r7O8AD/ts/3g817MnbGlOdzj00GbTiwja5z/DS7CtXf0HzkXBfMrsvNfRXcJN2941CD/P61kT4DZQg==
+"@hyperplay/ui@^1.8.18":
+  version "1.8.18"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.18.tgz#274946f82820a4ad3f64dd45caa00ecbfc87c56b"
+  integrity sha512-sXXjg5q2NraZAeK8ZfRplxFhZTyJdWhHVnC7Axp0wulDz7pH1YPY6L4Lf7vj+jZW9cIr3tHTSQQHfLdIAKYe6g==
 
 "@hyperplay/utils@^0.0.9":
   version "0.0.9"
@@ -1344,7 +1344,14 @@
   dependencies:
     bignumber.js "^9.1.2"
 
-"@hyperplay/utils@^0.3.3", "@hyperplay/utils@^0.3.4":
+"@hyperplay/utils@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.3.3.tgz#9d594a29012ae5a172138878208d6d4edb6412f2"
+  integrity sha512-t8XB7oFWJU4S1ULxVBURt9BhpgaZAq5C131Ch5wShxuMTjxxGEhTAAcppsH+VYd7lwtp4se9myzhc6u21rUNgQ==
+  dependencies:
+    bignumber.js "^9.1.2"
+
+"@hyperplay/utils@^0.3.4":
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.3.4.tgz#71d4abe910ec8550c865418118eb1c07df3b399d"
   integrity sha512-ndkDnp+iV9BlLCKpbq0XVuuc/ORzaZ+69wFvVvAftdU6mbwbk4EfxAwTOpmXWkLaiGp0MZaybYMa5zYZkxkW5w==
@@ -2991,10 +2998,27 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.59.13.tgz#8c962980af174bbd446b7e9b9999f7432897df80"
   integrity sha512-Oou0bBu/P8+oYjXsJQ11j+gcpLAMpqW42UlokQYEz4dE7+hOtVO9rVuolJKgEccqzvyFzqX4/zZWY+R/v1wVsQ==
 
-"@tanstack/react-query@^5.59.15":
-  version "5.59.15"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.59.15.tgz#fa1c5b4d96e6a148ec761f214304bbf5ac1906be"
-  integrity sha512-QbVlAkTI78wB4Mqgf2RDmgC0AOiJqer2c5k9STOOSXGv1S6ZkY37r/6UpE8DbQ2Du0ohsdoXgFNEyv+4eDoPEw==
+"@tanstack/query-core@^5.59.0":
+  version "5.59.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.59.0.tgz#d8323f1c6eb0e573ab0aa85a7b7690d0c263818a"
+  integrity sha512-WGD8uIhX6/deH/tkZqPNcRyAhDUqs729bWKoByYHSogcshXfFbppOdTER5+qY7mFvu8KEFJwT0nxr8RfPTVh0Q==
+
+"@tanstack/query-devtools@5.59.20":
+  version "5.59.20"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-devtools/-/query-devtools-5.59.20.tgz#a827ac682ec1268fc9c99e7b6eb739f35b5606aa"
+  integrity sha512-vxhuQ+8VV4YWQSFxQLsuM+dnEKRY7VeRzpNabFXdhEwsBYLrjXlF1pM38A8WyKNLqZy8JjyRO8oP4Wd/oKHwuQ==
+
+"@tanstack/react-query-devtools@^5.59.20":
+  version "5.59.20"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-5.59.20.tgz#bdc1678af07042c96996f44b04b6f0e5d22a16d2"
+  integrity sha512-AL/eQS1NFZhwwzq2Bq9Gd8wTTH+XhPNOJlDFpzPMu9NC5CQVgA0J8lWrte/sXpdWNo5KA4hgHnEdImZsF4h6Lw==
+  dependencies:
+    "@tanstack/query-devtools" "5.59.20"
+
+"@tanstack/react-query@^5.51.23":
+  version "5.52.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.52.2.tgz#3fffbc86351edcaeec335bc8958bcab4204bd169"
+  integrity sha512-d4OwmobpP+6+SvuAxW1RzAY95Pv87Gu+0GjtErzFOUXo+n0FGcwxKvzhswCsXKxsgnAr3bU2eJ2u+GXQAutkCQ==
   dependencies:
     "@tanstack/query-core" "5.59.13"
 
