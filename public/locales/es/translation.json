@@ -1051,7 +1051,9 @@
         "points": "Puntos",
         "claimFailed": "Reclamación rechazada",
         "createDiscordTicket": "Ticket creado en Discord",
-        "notEnoughGas": "El saldo del monedero es insuficiente para reclamar la recompensa debido a los gastos de gasolina. Prueba con otro monedero o recarga este antes de volver a intentarlo.",
+        "notEnoughGas": {
+            "message": "El saldo del monedero es insuficiente para reclamar la recompensa debido a los gastos de gasolina. Prueba con otro monedero o recarga este antes de volver a intentarlo."
+        },
         "claimFailedMessage": "Por favor, inténtalo una vez más. Si sigue sin funcionar, crea un ticket de soporte en Discord.",
         "pointsClaimed": "Cuestiones reclamadas",
         "g7Numclaimed": "Total Claimed G7 Credits",
@@ -1063,7 +1065,28 @@
             "title": "Confirmar reclamo de recompensa de misión"
         },
         "noG7ConnectionClaim": "Necesitas tener una cuenta Game7 vinculada a {{email}} para reclamar tus recompensas.",
-        "noG7ConnectionSync": "Necesitas tener una cuenta Game7 vinculada a {{email}} para resonar tus tareas."
+        "noG7ConnectionSync": {
+            "title": "Ninguna cuenta G7 vinculada",
+            "message": "Necesitas tener una cuenta de Game7 vinculada a {{email}} para resincronizar tus tareas."
+        },
+        "claim": "Solicitud",
+        "notEligible": {
+            "title": "No se puede elegir aún",
+            "message": "No has completado la racha de días de juego requerida y no puedes reclamar tu recompensa en este momento."
+        },
+        "notEnoughBalance": {
+            "title": "Balance bajo"
+        },
+        "notSignedIn": {
+            "message": "Debes iniciar sesión para reclamar tu recompensa.",
+            "title": "No ha iniciado sesión"
+        },
+        "questAvailable": "¡Misión disponible!",
+        "questComplete": "¡Misión completa!",
+        "rewardClaimed": "Solicitud aceptada",
+        "toClaimReward": "para reclamar tu recompensa.",
+        "toSeeDetails": "para ver los detalles.",
+        "youHaveClaimed": "Has reclamado {{totalRewards}} recompensa {{plural}} ."
     },
     "back_to_game": "Volver al juego",
     "email_subscription": {
