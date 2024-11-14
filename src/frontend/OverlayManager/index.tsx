@@ -9,11 +9,20 @@ import { Overlay } from './Overlay'
 import { WebviewTag } from 'electron'
 import WebviewControls from 'frontend/components/UI/WebviewControls'
 import AuthModal from 'frontend/components/UI/AuthModal'
+import { useKeepPlaystreaksInSync } from '@hyperplay/quests-ui'
 
 const OverlayManager = observer(function ({
   appName,
   runner
 }: BrowserGameProps) {
+  useKeepPlaystreaksInSync({
+    appName,
+    runner,
+    getQuest: window.api.getQuest,
+    getQuests: window.api.getQuests,
+    getUserPlayStreak: window.api.getUserPlayStreak,
+    syncPlaySession: window.api.syncPlaySession
+  })
   const url = OverlayState.renderState.browserGameUrl
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
