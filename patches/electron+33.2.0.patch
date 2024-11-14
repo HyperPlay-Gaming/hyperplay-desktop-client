@@ -80,7 +80,7 @@ index 8de7557..b22543a 100644
 -  "mksnapshot-v33.2.0-win32-ia32.zip": "a0a6b828e006b29a414f34af9a679bfc40a4bc2c143d56595e34dd15076af967",
 -  "mksnapshot-v33.2.0-win32-x64.zip": "b4ad643bbe67d90724b461b397edabab7052030c82aa5fb313ebfc52f9f32dde"
 +  "electron-v33.2.0-darwin-arm64.zip": "cec3e5588256099d2898e43b44130cf27473f8375c740abc13d4df3744207417",
-+  "electron-v33.2.0-darwin-x64.zip": "cec3e5588256099d2898e43b44130cf27473f8375c740abc13d4df3744207417",
++  "electron-v33.2.0-darwin-x64.zip": "b46546edceda2d88e9f0d92ffabb782a5374d7090c10301790e6a69fda50afd0",
 +  "electron-v33.2.0-linux-x64.zip": "5e4bc081056ca86e4912b920362740c7a1dcaf7be9394d2a4baffa586aadc377",
 +  "electron-v33.2.0-win32-x64.zip": "c963cfd4ac70eb1ae1ec029088b803a9f7fef28d44ebc8f2e6e8c0dfb4c929bb"
  }
