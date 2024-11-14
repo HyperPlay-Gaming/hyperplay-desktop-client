@@ -24,6 +24,7 @@ export const Overlay = observer(function ({
   runner
 }: BrowserGameProps) {
   const flags = useFlags()
+
   const txnToastContainerStyle = {} as React.CSSProperties
   if (OverlayState.title === 'HyperPlay Toasts') {
     txnToastContainerStyle.bottom = 'unset'
