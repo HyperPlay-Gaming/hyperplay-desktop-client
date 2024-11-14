@@ -1325,17 +1325,17 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/quests-ui@^0.0.38":
-  version "0.0.38"
-  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.0.38.tgz#774276bec89af9e496b81c7369e85719438fe790"
-  integrity sha512-30REpmCdsF3s4tZRXxqz5cg16H12J6SJ8yq1M525SJ7klKRhKJiWvKQDPg2/MbSEgihBl2oaZAsNQJkJkGs8Aw==
+"@hyperplay/quests-ui@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.1.0.tgz#10fad9ad123efd57d231ed7f1d9af86469b1aa63"
+  integrity sha512-VHTcOPZuoCXiAG0omnT6HqqEoakKjbEmQNrbLlsjhBwAHCnc4vNLtlXHjfNghEvlYjHG534dbbzHMRwqdN8y7A==
   dependencies:
     classnames "^2.5.1"
 
-"@hyperplay/ui@^1.8.9":
-  version "1.8.12"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.12.tgz#ca7e37bee24f88d986989161299d9d5a070e75a5"
-  integrity sha512-Rv+4e3U5r7O8AD/ts/3g817MnbGlOdzj00GbTiwja5z/DS7CtXf0HzkXBfMrsvNfRXcJN2941CD/P61kT4DZQg==
+"@hyperplay/ui@^1.8.18":
+  version "1.8.18"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.18.tgz#274946f82820a4ad3f64dd45caa00ecbfc87c56b"
+  integrity sha512-sXXjg5q2NraZAeK8ZfRplxFhZTyJdWhHVnC7Axp0wulDz7pH1YPY6L4Lf7vj+jZW9cIr3tHTSQQHfLdIAKYe6g==
 
 "@hyperplay/utils@^0.0.9":
   version "0.0.9"
@@ -1344,7 +1344,7 @@
   dependencies:
     bignumber.js "^9.1.2"
 
-"@hyperplay/utils@^0.3.3", "@hyperplay/utils@^0.3.4":
+"@hyperplay/utils@^0.3.4":
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.3.4.tgz#71d4abe910ec8550c865418118eb1c07df3b399d"
   integrity sha512-ndkDnp+iV9BlLCKpbq0XVuuc/ORzaZ+69wFvVvAftdU6mbwbk4EfxAwTOpmXWkLaiGp0MZaybYMa5zYZkxkW5w==
@@ -2995,6 +2995,18 @@
   version "5.59.0"
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.59.0.tgz#d8323f1c6eb0e573ab0aa85a7b7690d0c263818a"
   integrity sha512-WGD8uIhX6/deH/tkZqPNcRyAhDUqs729bWKoByYHSogcshXfFbppOdTER5+qY7mFvu8KEFJwT0nxr8RfPTVh0Q==
+
+"@tanstack/query-devtools@5.59.20":
+  version "5.59.20"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-devtools/-/query-devtools-5.59.20.tgz#a827ac682ec1268fc9c99e7b6eb739f35b5606aa"
+  integrity sha512-vxhuQ+8VV4YWQSFxQLsuM+dnEKRY7VeRzpNabFXdhEwsBYLrjXlF1pM38A8WyKNLqZy8JjyRO8oP4Wd/oKHwuQ==
+
+"@tanstack/react-query-devtools@^5.59.20":
+  version "5.59.20"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-5.59.20.tgz#bdc1678af07042c96996f44b04b6f0e5d22a16d2"
+  integrity sha512-AL/eQS1NFZhwwzq2Bq9Gd8wTTH+XhPNOJlDFpzPMu9NC5CQVgA0J8lWrte/sXpdWNo5KA4hgHnEdImZsF4h6Lw==
+  dependencies:
+    "@tanstack/query-devtools" "5.59.20"
 
 "@tanstack/react-query@^5.51.23":
   version "5.52.2"
