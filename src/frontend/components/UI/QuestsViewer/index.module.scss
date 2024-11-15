@@ -9,8 +9,9 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  flex: 1;
+  flex-shrink: 1;
   max-height: 100%;
+  overflow: hidden;
 }
 
 .detailsWrapper {
