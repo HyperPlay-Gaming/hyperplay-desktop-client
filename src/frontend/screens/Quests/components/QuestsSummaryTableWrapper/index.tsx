@@ -12,6 +12,7 @@ import { itemType } from '@hyperplay/ui/dist/components/Dropdowns/Dropdown'
 import useGetHyperPlayListings from 'frontend/hooks/useGetHyperPlayListings'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Quest } from 'common/types'
+import cn from 'classnames'
 
 export interface QuestsSummaryTableWrapperProps {
   selectedQuestId: number | null
@@ -145,6 +146,9 @@ export function QuestsSummaryTableWrapper({
       }}
       pageTitle={t('quests.quests', 'Quests')}
       className={styles.tableContainer}
+      classNames={{
+        gamesTable: cn(selectedQuestId && styles.questSelectedLayout)
+      }}
       searchBar={
         <SearchBar
           searchText={searchText}
