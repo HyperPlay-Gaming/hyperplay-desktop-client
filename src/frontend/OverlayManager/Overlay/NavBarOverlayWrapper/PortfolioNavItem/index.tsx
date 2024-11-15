@@ -46,7 +46,7 @@ export const PortfolioNavItem = observer(
             <NavItem
               onMouseEnter={open}
               onMouseLeave={close}
-              title={enablePortfolioNavItem ? 'true' : 'false'}
+              title={t('overlay.links.portfolio', 'Portfolio')}
               icon={
                 <Images.MetaMaskColored fill="none" width={22} height={36} />
               }
