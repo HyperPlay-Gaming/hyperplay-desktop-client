@@ -1103,10 +1103,12 @@ let powerDisplayId: number | null
 let gamePlaySessionStartTimes: Record<string, bigint> = {}
 
 function startNewPlaySession(appName: string) {
+  const prevStartTime = gamePlaySessionStartTimes[appName]
   gamePlaySessionStartTimes = {}
   // Uses hrtime for monotonic timer not subject to clock drift or sync errors
   const startPlayingTimeMonotonic = hrtime.bigint()
   gamePlaySessionStartTimes[appName] = startPlayingTimeMonotonic
+  return prevStartTime
 }
 
 async function syncPlaySession(appName: string, runner: Runner) {
@@ -1114,13 +1116,11 @@ async function syncPlaySession(appName: string, runner: Runner) {
     return
   }
 
+  // reset the time counter and start new session slightly before ending current session to prevent time loss
+  const startPlayingTimeMonotonic = startNewPlaySession(appName)
   const stopPlayingTimeMonotonic = hrtime.bigint()
   const sessionPlaytimeInMs =
-    (stopPlayingTimeMonotonic - gamePlaySessionStartTimes[appName]) /
-    BigInt(1000000)
-
-  // reset the time counter
-  startNewPlaySession(appName)
+    (stopPlayingTimeMonotonic - startPlayingTimeMonotonic) / BigInt(1000000)
 
   // update local json with time played
   const sessionPlaytimeInMinutes =
@@ -1132,9 +1132,10 @@ async function syncPlaySession(appName: string, runner: Runner) {
 
   const game = gameManagerMap[runner].getGameInfo(appName)
   const { hyperPlayListing } = await gameIsEpicForwarderOnHyperPlay(game)
-  postPlaySessionTime(
+  await postPlaySessionTime(
     hyperPlayListing?.project_id || appName,
-    parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
+    // round up to prevent session time loss
+    parseInt(((sessionPlaytimeInMs + BigInt(1000)) / BigInt(1000)).toString())
   )
 
   return sessionPlaytimeInMs

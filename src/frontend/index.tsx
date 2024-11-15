@@ -27,6 +27,7 @@ import ViewManager from './ViewManager'
 import SentryHandler from './SentryHandler'
 import { asyncWithLDProvider } from 'launchdarkly-react-client-sdk'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { WagmiProvider } from 'wagmi'
 import { config } from './config'
 
@@ -46,6 +47,8 @@ initShortcuts()
 
 const storage: Storage = window.localStorage
 storage.removeItem('nonAvailableGames')
+
+const showReactQueryDevtools = import.meta.env.VITE_SHOW_RQ_DEVTOOLS === 'true'
 
 const languageCode: string =
   configStore.get_nodefault('language') ?? storage.getItem('language') ?? 'en'
@@ -154,6 +157,9 @@ const renderApp = async () => {
               </GlobalState>
             </HyperPlayDesignProvider>
           </LDProvider>
+          {showReactQueryDevtools && (
+            <ReactQueryDevtools initialIsOpen={false} />
+          )}
         </QueryClientProvider>
       </WagmiProvider>
     </React.StrictMode>

@@ -737,8 +737,10 @@
     "quest": {
         "active": "Active",
         "associatedGames": "Associated games",
-        "claimAll": "Claim all",
+        "claim": "Claim",
         "claimed": "Claimed",
+        "claimFailed": "Claim failed",
+        "claimFailedMessage": "Please try once more. If it still doesn't work, create a Discord support ticket.",
         "claimWarning": {
             "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 7 days.</bold>",
             "body2": "Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>",
@@ -746,12 +748,29 @@
             "confirm": "Confirm"
         },
         "connectSteamAccount": "Connect Steam account",
+        "createDiscordTicket": "Create Discord Ticket",
         "g7Numclaimed": "Total Claimed G7 Credits",
         "linkAccount": "Link your Steam account to check eligibility.",
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
         "noG7ConnectionClaim": "You need to have a Game7 account linked to {{email}} to claim your rewards.",
-        "noG7ConnectionSync": "You need to have a Game7 account linked to {{email}} to resync your tasks.",
-        "notEnoughGas": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.",
+        "noG7ConnectionSync": {
+            "message": "You need to have a Game7 account linked to {{email}} to resync your tasks.",
+            "title": "No G7 account linked"
+        },
+        "notEligible": {
+            "message": "You have not completed the required play streak days and can not claim your reward at this time.",
+            "title": "Not eligible yet"
+        },
+        "notEnoughBalance": {
+            "title": "Low balance"
+        },
+        "notEnoughGas": {
+            "message": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying."
+        },
+        "notSignedIn": {
+            "message": "You need to be signed in to claim your reward.",
+            "title": "Not signed in"
+        },
         "playstreak": {
             "dayResets": "Day resets:",
             "days": "days",
@@ -766,16 +785,22 @@
         },
         "points": "Points",
         "pointsClaimed": "Points Claimed",
+        "questAvailable": "Quest available!",
+        "questComplete": "Quest complete!",
         "quests": "Quests",
         "readyForClaim": "Ready for claim",
         "reputation": "Reputation",
         "reward": "Reward",
+        "rewardClaimed": "Claim successful",
         "signIn": "Log in",
         "sync": "Sync",
+        "toClaimReward": "to claim your reward.",
+        "toSeeDetails": "to see details.",
         "type": {
-            "playstreak": "Play Streak"
+            "playstreak": "Play Streak",
+            "reputation": "Reputation"
         },
-        "View Game": "View Game"
+        "youHaveClaimed": "You have claimed {{totalRewards}} reward{{plural}}."
     },
     "quests": {
         "g7CreditsModal": {
