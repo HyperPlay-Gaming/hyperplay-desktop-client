@@ -1667,8 +1667,8 @@ async function checkIfPatchingIsFaster(
 
   const { compareManifests } = await import('@hyperplay/patcher')
   const { estimatedPatchSizeInKB } = compareManifests(
-    oldManifestJson,
-    newManifestJson
+    oldManifestJson.files,
+    newManifestJson.files
   )
 
   // calc break point % where patching is faster
@@ -1984,7 +1984,12 @@ async function applyPatching(
         newVersion
       }
     })
-    rmSync(datastoreDir, { recursive: true })
+
+    // errors can be thrown before datastore dir created. rmSync on nonexistent dir blocks indefinitely
+    if (existsSync(datastoreDir)) {
+      rmSync(datastoreDir, { recursive: true })
+    }
+
     return { status: 'error', error: `Error while patching ${error}` }
   }
 }
