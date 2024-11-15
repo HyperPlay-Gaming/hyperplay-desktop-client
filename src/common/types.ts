@@ -14,6 +14,8 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { DropdownItemType } from '@hyperplay/ui'
 export type { Quest } from '@hyperplay/utils'
 
+import { MetaMaskInpageProvider } from '@metamask/providers'
+
 export type {
   Listing as HyperPlayRelease,
   ProjectMetaApi as HyperPlayProjectMeta,
@@ -978,3 +980,9 @@ export interface PointsCollection {
 }
 
 export type { GamePageActions } from '@hyperplay/utils'
+
+declare global {
+  interface Window {
+    ethereum: MetaMaskInpageProvider
+  }
+}
