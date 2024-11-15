@@ -39,31 +39,31 @@ const listenToRendererCalls = (fxn: string, topic: string, cb: any) => {
 
 function extractJSONAfterError(input: string): object | null {
   try {
-      // Match the pattern where "error=" precedes a JSON string
-      const errorPattern = /error=(\{[^{}]*\})/;
+    // Match the pattern where "error=" precedes a JSON string
+    const errorPattern = /error=(\{[^{}]*\})/
 
-      const match = input.match(errorPattern);
+    const match = input.match(errorPattern)
 
-      if (match && match[1]) {
-          // Parse the JSON string captured by the regex
-          return JSON.parse(match[1]);
-      }
+    if (match && match[1]) {
+      // Parse the JSON string captured by the regex
+      return JSON.parse(match[1])
+    }
 
-      // Return null if no valid JSON is found
-      return null;
+    // Return null if no valid JSON is found
+    return null
   } catch (error) {
-      console.error("Error parsing JSON:", error);
-      return null;
+    console.error('Error parsing JSON:', error)
+    return null
   }
 }
 
 const provRequest = async (args: RequestArguments) => {
   const x = await ipcRenderer.invoke('providerRequest', args)
   const jsonErrorInString = extractJSONAfterError(`${x}`)
-  if (jsonErrorInString !== null){
+  if (jsonErrorInString !== null) {
     throw jsonErrorInString
   }
-  
+
   if (
     x !== null &&
     x !== 'undefined' &&
