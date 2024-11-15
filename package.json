@@ -309,6 +309,8 @@
     "@babel/plugin-transform-arrow-functions": "^7.24.7",
     "@lavamoat/allow-scripts": "^3.2.0",
     "@lavamoat/preinstall-always-fail": "^2.1.0",
+    "@metamask/providers": "^18.1.1",
+    "@metamask/utils": "^10.0.1",
     "@playwright/test": "^1.46.0",
     "@tanstack/react-query-devtools": "^5.59.20",
     "@testing-library/dom": "^7.31.2",
