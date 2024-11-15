@@ -1,8 +1,38 @@
-.disabled {
+$modalBgColor: var(--color-neutral-600);
+
+@mixin disable {
   cursor: not-allowed !important;
   opacity: 50%;
 }
 
+.disabled {
+  @include disable;
+
+  button {
+    @include disable;
+  }
+}
+
 .sublink {
   display: block;
+}
+
+.popoverDropdown {
+  border: 'none';
+  display: flex;
+  flex-direction: column;
+  background-color: $modalBgColor;
+  border-radius: var(--space-xs-fixed);
+  padding: var(--space-sm);
+  color: var(--color-neutral-100);
+  position: absolute;
+  max-width: 280px;
+}
+
+.arrow {
+  background-color: $modalBgColor;
+}
+
+.unsupportedModalTitle {
+  margin-bottom: var(--space-sm);
 }
