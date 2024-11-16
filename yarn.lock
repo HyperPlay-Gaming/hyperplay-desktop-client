@@ -1344,7 +1344,7 @@
   dependencies:
     bignumber.js "^9.1.2"
 
-"@hyperplay/utils@^0.3.4":
+"@hyperplay/utils@^0.3.3", "@hyperplay/utils@^0.3.4":
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.3.4.tgz#71d4abe910ec8550c865418118eb1c07df3b399d"
   integrity sha512-ndkDnp+iV9BlLCKpbq0XVuuc/ORzaZ+69wFvVvAftdU6mbwbk4EfxAwTOpmXWkLaiGp0MZaybYMa5zYZkxkW5w==
@@ -5822,9 +5822,9 @@ cross-fetch@^3.1.4:
     node-fetch "^2.6.12"
 
 cross-spawn@^7.0.0, cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
-  integrity sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.5.tgz#910aac880ff5243da96b728bc6521a5f6c2f2f82"
+  integrity sha512-ZVJrKKYunU38/76t0RMOulHOnUcbU9GbpWKAOZ0mhjr7CX6FVrH+4FrAapSOekrgFQ3f/8gwMEuIft0aKq6Hug==
   dependencies:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
