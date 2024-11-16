@@ -1,6 +1,7 @@
 import { RequestArguments } from 'common/typedefs/ipcBridge'
 import { JsonRpcCallback } from 'common/types'
 import { contextBridge, ipcRenderer, webFrame } from 'electron'
+import type { JsonRpcResponse } from '@metamask/utils'
 
 /**
  * @dev Extension must be removed prior to loading a page with this preload script.
@@ -24,7 +25,11 @@ const enabledTopics = [
 ]
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const listenToRendererCalls = (fxn: string, topic: string, cb: any) => {
+const listenToRendererCalls = (
+  fxn: 'once' | 'on' | 'addListener',
+  topic: string,
+  cb: any
+) => {
   if (!enabledTopics.includes(topic)) {
     throw `Tried to listen to ${topic} through window.ethereum!`
   }
@@ -66,29 +71,40 @@ const providerApi = {
     request: async (args: RequestArguments) => {
       return provRequest(args)
     },
-    send: async (...args: unknown[]) => {
-      return sendRequest(...args)
+    send: async (...args: unknown[]): Promise<JsonRpcResponse<any>> => {
+      return sendRequest(...args) as Promise<JsonRpcResponse<any>>
     },
-    sendAsync: async (payload: any, callback: JsonRpcCallback) => {
-      return sendAsyncRequest(payload, callback)
+    sendAsync: async (
+      payload: any,
+      callback: JsonRpcCallback
+    ): Promise<JsonRpcResponse<any>> => {
+      return sendAsyncRequest(payload, callback) as Promise<
+        JsonRpcResponse<any>
+      >
     },
     once: (topic: string, cb: any) => {
       listenToRendererCalls('once', topic, cb)
+      return window.ethereum
     },
     on: (topic: string, cb: any) => {
       listenToRendererCalls('on', topic, cb)
+      return window.ethereum
     },
     off: (topic: string, cb: any) => {
       ipcRenderer.off('providerApi' + topic, cb)
+      return window.ethereum
     },
     addListener: (topic: string, cb: any) => {
       listenToRendererCalls('addListener', topic, cb)
+      return window.ethereum
     },
     removeListener: (topic: string, cb: any) => {
       ipcRenderer.removeListener('providerApi' + topic, cb)
+      return window.ethereum
     },
-    removeAllListeners: (topic: string) => {
+    removeAllListeners: (topic?: string) => {
       ipcRenderer.removeAllListeners('providerApi' + topic)
+      return window.ethereum
     },
     enable: async () => {
       const args: RequestArguments = {
@@ -101,37 +117,60 @@ const providerApi = {
 
 contextBridge?.exposeInMainWorld('providerApi', providerApi)
 
+declare global {
+  interface Window {
+    providerApi: typeof providerApi
+  }
+}
+
 function initProvider() {
   async function exposeWindowEthereum() {
-    console.log('exposing window ethereum')
-    if (!Object.hasOwn(window, 'ethereum')) {
-      const windowAny = window as any
-      windowAny.ethereum = {
-        request: windowAny.providerApi.provider.request,
-        send: windowAny.providerApi.provider.send,
-        sendAsync: windowAny.providerApi.provider.sendAsync,
-        once: windowAny.providerApi.provider.once,
-        on: windowAny.providerApi.provider.on,
-        off: windowAny.providerApi.provider.off,
-        addListener: windowAny.providerApi.provider.addListener,
-        removeListener: windowAny.providerApi.provider.removeListener,
-        removeAllListeners: windowAny.providerApi.provider.removeAllListeners,
-        isMetaMask: true,
-        enable: windowAny.providerApi.provider.enable,
-        selectedAddress: undefined,
-        accounts: undefined
-      }
+    const windowAny = window
+    windowAny.ethereum = {
+      request: windowAny.providerApi.provider.request,
+      // @ts-expect-error deprecated send call needs to be generic
+      send: windowAny.providerApi.provider.send,
+      sendAsync: windowAny.providerApi.provider.sendAsync,
+      once: windowAny.providerApi.provider.once,
+      on: windowAny.providerApi.provider.on,
+      off: windowAny.providerApi.provider.off,
+      addListener: windowAny.providerApi.provider.addListener,
+      removeListener: windowAny.providerApi.provider.removeListener,
+      removeAllListeners: windowAny.providerApi.provider.removeAllListeners,
+      isMetaMask: true,
+      enable: windowAny.providerApi.provider.enable,
+      selectedAddress: null,
+      accounts: undefined
+    }
 
-      windowAny.ethereum.on('accountsChanged', (accounts: string[]) => {
-        console.log('accounts changed', accounts)
-        windowAny.ethereum.selectedAddress = accounts[0]
-        windowAny.ethereum.accounts = accounts
-      })
+    // @ts-expect-error TODO fix types in MetaMaskInpageProvider
+    windowAny.ethereum.on('accountsChanged', (accounts: string[]) => {
+      console.log('accounts changed', accounts)
+      // @ts-expect-error TODO fix types in MetaMaskInpageProvider
+      windowAny.ethereum.selectedAddress = accounts[0]
+      // @ts-expect-error TODO fix types in MetaMaskInpageProvider
+      windowAny.ethereum.accounts = accounts
+    })
 
-      const acct = await windowAny.ethereum.request({ method: 'eth_accounts' })
-      windowAny.ethereum.selectedAddress =
-        acct && acct.length > 0 ? acct[0] : ''
-      windowAny.ethereum.accounts = acct
+    const ev = new Event('ethereum#initialized')
+    window.dispatchEvent(ev)
+
+    const timeNow = Date.now()
+    const acct = await windowAny.ethereum.request({ method: 'eth_accounts' })
+    // @ts-expect-error TODO fix types in MetaMaskInpageProvider
+    windowAny.ethereum.selectedAddress = acct && acct.length > 0 ? acct[0] : ''
+    // @ts-expect-error TODO fix types in MetaMaskInpageProvider
+    windowAny.ethereum.accounts = acct
+
+    /**
+     * opensea performs 4 responsiveness checks by calling eth_accounts with 2 second timeouts.
+     * if all 4 fail, clicking MetaMask in the connection options will open the metamask.io download page.
+     * we reload the page so that MetaMask will connect as expected if the user unlocks their wallet
+     * after this time period.
+     */
+    const timeElapsed = Date.now() - timeNow
+    if (timeElapsed > 8000) {
+      window.location.reload()
     }
   }
 
@@ -154,9 +193,6 @@ function initProvider() {
   window.addEventListener('eip6963:requestProvider', () => {
     announceProvider()
   })
-
-  const ev = new Event('ethereum#initialized')
-  window.dispatchEvent(ev)
 }
 
 const exposeWindowEthereumProvider = `(${initProvider.toString()})()`
