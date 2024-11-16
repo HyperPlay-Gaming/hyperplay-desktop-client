@@ -100,6 +100,7 @@ import { trackEvent } from 'backend/metrics/metrics'
 import { getFlag } from 'backend/flags/flags'
 import { ipfsGateway } from 'backend/vite_constants'
 import { GlobalConfig } from 'backend/config'
+import { PatchingError } from './types'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1653,6 +1654,93 @@ export async function downloadGameIpdtManifest(
   }
 }
 
+async function checkIfPatchingIsFaster(
+  oldManifestPath: string,
+  newManifestPath: string,
+  gameInfo: GameInfo
+) {
+  // read manifests
+  const oldManifestJson = JSON.parse(readFileSync(oldManifestPath).toString())
+  const newManifestJson = JSON.parse(readFileSync(newManifestPath).toString())
+
+  // compare manifests
+
+  const { compareManifests } = await import('@hyperplay/patcher')
+  const { estimatedPatchSizeInKB } = compareManifests(
+    oldManifestJson.files,
+    newManifestJson.files
+  )
+
+  // calc break point % where patching is faster
+  if (
+    gameInfo?.install?.platform &&
+    gameInfo.channels &&
+    gameInfo?.install?.channelName &&
+    Object.hasOwn(gameInfo.channels, gameInfo.install.channelName)
+  ) {
+    const channelName = gameInfo.install.channelName
+    const [releaseMeta] = getReleaseMeta(gameInfo, channelName)
+    const platform = handleArchAndPlatform(
+      gameInfo.install.platform,
+      releaseMeta
+    )
+    const downloadSize = parseInt(
+      releaseMeta.platforms[platform]?.downloadSize ?? '0'
+    )
+    const installSize = parseInt(
+      releaseMeta.platforms[platform]?.installSize ?? '0'
+    )
+    // @TODO: get these speed values from local checks of download/write speed
+    const patchingSpeeds = getFlag('patching-speeds', {
+      downloadSpeedInKBPerSecond: 25600,
+      extractionSpeedInKBPerSecond: 51200,
+      patchingSpeedEstimateInKBPerSecond: 5120
+    }) as {
+      downloadSpeedInKBPerSecond: number
+      extractionSpeedInKBPerSecond: number
+      patchingSpeedEstimateInKBPerSecond: number
+    }
+    const downloadSpeedInKBPerSecond = patchingSpeeds.downloadSpeedInKBPerSecond
+    const extractionSpeedInKBPerSecond =
+      patchingSpeeds.extractionSpeedInKBPerSecond
+    const estTimeToInstallFullGameInSec =
+      (downloadSize / 1024) * downloadSpeedInKBPerSecond +
+      (installSize / 1024) * extractionSpeedInKBPerSecond
+
+    // @TODO: get this value from local check of patching speed
+    const patchingSpeedEstimateInKBPerSecond =
+      patchingSpeeds.patchingSpeedEstimateInKBPerSecond
+    const estTimeToPatchGameInSec =
+      estimatedPatchSizeInKB / patchingSpeedEstimateInKBPerSecond
+
+    if (estTimeToPatchGameInSec > estTimeToInstallFullGameInSec) {
+      const abortMessage = `Downloading full game instead of patching. \n 
+        Estimated time to install full game: ${estTimeToInstallFullGameInSec} seconds. \n
+        Estimated time to patch: ${estTimeToPatchGameInSec}
+      `
+      logInfo(abortMessage, LogPrefix.HyperPlay)
+      const patchingError = new PatchingError(
+        abortMessage,
+        'slower-than-install',
+        {
+          event: 'Patching Too Slow',
+          properties: {
+            game_name: gameInfo.app_name,
+            game_title: gameInfo.title,
+            platform: getPlatformName(platform),
+            platform_arch: platform,
+            est_time_to_install_sec: estTimeToInstallFullGameInSec.toString(),
+            est_time_to_patch_sec: estTimeToPatchGameInSec.toString(),
+            old_game_version: gameInfo.install.version ?? 'unknown',
+            new_game_version: gameInfo.version ?? 'unknown'
+          }
+        }
+      )
+      throw patchingError
+    }
+  }
+}
+
 async function applyPatching(
   gameInfo: GameInfo,
   newVersion: string,
@@ -1716,6 +1804,9 @@ async function applyPatching(
 
     const previousManifest = await getManifest(appName, platform, version)
     const currentManifest = await getManifest(appName, platform, newVersion)
+
+    // check if it is faster to patch or install and throw if install is faster
+    await checkIfPatchingIsFaster(previousManifest, currentManifest, gameInfo)
 
     logInfo(
       `Patching ${gameInfo.title} from ${version} to ${newVersion}`,
@@ -1859,6 +1950,16 @@ async function applyPatching(
 
     return { status: 'done' }
   } catch (error) {
+    if (error instanceof PatchingError) {
+      if (error.reason === 'slower-than-install') {
+        if (error.eventToTrack) {
+          trackEvent(error.eventToTrack)
+        }
+        // this will not track any error events or call captureException in the calling code. it will try to install
+        return { status: 'error' }
+      }
+    }
+
     logError(`Error while patching ${error}`, LogPrefix.HyperPlay)
 
     trackEvent({
@@ -1883,7 +1984,12 @@ async function applyPatching(
         newVersion
       }
     })
-    rmSync(datastoreDir, { recursive: true })
+
+    // errors can be thrown before datastore dir created. rmSync on nonexistent dir blocks indefinitely
+    if (existsSync(datastoreDir)) {
+      rmSync(datastoreDir, { recursive: true })
+    }
+
     return { status: 'error', error: `Error while patching ${error}` }
   }
 }
