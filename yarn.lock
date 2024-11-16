@@ -1293,10 +1293,10 @@
     "@hyperplay/utils" "^0.3.3"
     mobx "^6.12.3"
 
-"@hyperplay/patcher@^0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@hyperplay/patcher/-/patcher-0.0.17.tgz#0b62dffbb622712c592d271e49b34c70448489c8"
-  integrity sha512-29DWtEGlCgxw22u0/k5QtZhSLn/MmHdXCsilCe9w/cbaWguT69oYSSE/E2omhaPIntF3w2/Lt0pxoSpY1Qly1g==
+"@hyperplay/patcher@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@hyperplay/patcher/-/patcher-0.0.18.tgz#a0db981fede4d3a72be293fdefb24c454da54fe7"
+  integrity sha512-aCt29RsEuODjk5OA2/Lh9cAKIdfbivwlWcfOIUdF4susB0mpiRQVUVLdBzpSkXsiJ0jDId989jUdEfO1+wh3uw==
   dependencies:
     "@valist/sdk" "^2.10.5"
     ethers "^6.13.4"
@@ -1341,13 +1341,6 @@
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.9.tgz#80836cfde5c4d63e41f5df809ae2e80314600c5a"
   integrity sha512-gMAa6gdFXfLrJUjPAD2is06qNo4MHzpb6Cbzt4xfNd7wI9chOblQ+piwTI1oFWs44GgfacsMq6i5esNly3hELg==
-  dependencies:
-    bignumber.js "^9.1.2"
-
-"@hyperplay/utils@^0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.3.3.tgz#9d594a29012ae5a172138878208d6d4edb6412f2"
-  integrity sha512-t8XB7oFWJU4S1ULxVBURt9BhpgaZAq5C131Ch5wShxuMTjxxGEhTAAcppsH+VYd7lwtp4se9myzhc6u21rUNgQ==
   dependencies:
     bignumber.js "^9.1.2"
 
