@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -34,13 +34,13 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn install --network-timeout 600000 && yarn allow-scripts
+        run: pnpm install --ignore-scripts --fetch-timeout 600000 && pnpm allow-scripts
       - name: setup env file
         run: |
           echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - name: Build artifacts.
-        run: yarn dist:win
+        run: pnpm dist:win
       - name: Upload EXE.
         uses: actions/upload-artifact@v3
         with:
@@ -64,7 +64,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -72,17 +72,17 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
       - name: setup env file
         run: |
           echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - name: Build deb artifact
-        run: yarn dist:linux:ci:deb
+        run: pnpm dist:linux:ci:deb
       - name: Build rpm artifact
-        run: yarn dist:linux:ci:rpm
+        run: pnpm dist:linux:ci:rpm
       - name: Build pacman artifact
-        run: yarn dist:linux:ci:pacman
+        run: pnpm dist:linux:ci:pacman
   build_mac_x64:
     runs-on: macos-13
     concurrency:
@@ -96,7 +96,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -104,13 +104,13 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
       - name: setup env file
         run: |
           echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - name: Build artifacts.
-        run: yarn dist:mac:x64
+        run: pnpm run dist:mac:x64
         env:
           NOTARIZE: false
       - name: Upload Intel build.

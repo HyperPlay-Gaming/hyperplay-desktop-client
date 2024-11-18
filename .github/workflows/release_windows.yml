@@ -22,9 +22,9 @@ jobs:
           path: |
             node_modules
             .npm
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
       - name: Install SignPath module
         run: Install-Module -Name SignPath -Force
@@ -35,7 +35,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -46,7 +46,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn install  --frozen-lockfile --network-timeout 600000 && yarn allow-scripts
+        run: pnpm install --ignore-scripts --fetch-timeout 600000 && pnpm allow-scripts
 
       - name: setup env production file
         run: |
@@ -64,7 +64,7 @@ jobs:
             ${{ runner.os }}-artifacts-
 
       - name: Build artifacts.
-        run: yarn dist:win
+        run: pnpm run dist:win
 
       - name: Upload build file to Signpath
         run: |

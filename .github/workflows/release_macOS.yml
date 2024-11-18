@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -39,7 +39,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn setup
+        run: pnpm run setup
 
       - name: setup env production file
         run: |
@@ -47,7 +47,7 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
 
       - name: Build artifacts.
-        run: yarn release:mac:x64
+        run: pnpm release:mac:x64
         env:
           NOTARIZE: true
       - name: Copy dist/latest-mac.yml to dist/latest-mac-x64.yml
@@ -72,7 +72,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -83,7 +83,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn setup
+        run: pnpm run setup
 
       - name: setup env production file
         run: |
@@ -91,7 +91,7 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
 
       - name: Build artifacts.
-        run: yarn release:mac:arm64
+        run: pnpm release:mac:arm64
         env:
           NOTARIZE: true
       - name: Copy dist/latest-mac.yml to dist/latest-mac-arm64.yml
@@ -119,7 +119,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -130,7 +130,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn setup
+        run: pnpm run setup
 
       - name: Download artifacts from release-x64 and release-arm64 jobs
         uses: actions/download-artifact@v4
@@ -145,7 +145,7 @@ jobs:
 
       - name: Merge YMLs
         run: |
-          yarn add js-yaml
+          pnpm install js-yaml
           node merge-yml.js
         working-directory: ${{ github.workspace }}
 

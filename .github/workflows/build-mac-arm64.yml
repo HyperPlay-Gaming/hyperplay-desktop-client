@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -31,7 +31,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn setup
+        run: pnpm run setup
 
       - name: setup env production file
         run: |
@@ -39,6 +39,6 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
 
       - name: Build artifacts.
-        run: yarn release:mac:arm64
+        run: pnpm release:mac:arm64
         env:
           NOTARIZE: true

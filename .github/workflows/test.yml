@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -34,7 +34,7 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
 
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
 
       - name: Test
-        run: yarn test:ci
+        run: pnpm test:ci
