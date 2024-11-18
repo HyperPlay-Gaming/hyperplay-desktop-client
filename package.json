@@ -255,7 +255,7 @@
   },
   "scripts": {
     "setup": "pnpm install --ignore-scripts && pnpm exec allow-scripts",
-    "setupWithoutOptional": "node ./dev/rmOptionalDependencies.js && pnpm prettier-fix && pnpm install --ignore-optional && pnpm allow-scripts",
+    "setupWithoutOptional": "node ./dev/rmOptionalDependencies.js && pnpm prettier-fix && pnpm install --ignore-optional && pnpm exec allow-scripts",
     "start": "electron-vite dev --watch",
     "debug:react": "react-devtools",
     "codecheck": "tsc --noEmit",
