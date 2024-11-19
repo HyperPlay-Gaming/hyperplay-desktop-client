@@ -34,7 +34,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - uses: pnpm/action-setup@v3
         with:
           version: 9
@@ -58,8 +58,6 @@ jobs:
         run: pnpm run dist:linux:ci:flatpak
       - name: Clean up build files to save space
         run: rm -rf build dist/linux-unpacked node_modules public/bin/win32 public/bin/darwin ~/.cache
-      - name: Install Axios
-        run: pnpm install axios
       - name: Prepare Flatpak
         run: pnpm flatpak:prepare
       - name: Build Flatpak
