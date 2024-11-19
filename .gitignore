@@ -38,8 +38,7 @@ flatpak/build
 vite-plugin-electron.log
 .tool-versions
 .env
-# This could be required if you need to add your own .nmprc token for copy it inside a container
-.npmrc
+
 
 flathub/update-flathub.js
 xyz.hyperplay.HyperPlay
