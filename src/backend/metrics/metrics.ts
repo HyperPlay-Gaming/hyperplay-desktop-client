@@ -119,6 +119,7 @@ async function _trackEventPrivate(
   rudderstack.track({
     event: eventName,
     [idFieldName]: id,
+    anonymousId: ANONYMOUS_ID,
     properties: {
       ...properties,
       OS: getFormattedOsName()
@@ -165,6 +166,7 @@ export const trackScreen = async (name: string, properties?: apiObject) => {
     rudderstack.screen({
       [idFieldName]: metricsId,
       name,
+      anonymousId: ANONYMOUS_ID,
       properties: {
         ...(properties ?? {}),
         OS: getFormattedOsName()
