@@ -33,8 +33,6 @@ jobs:
           ssh://git@github.com/
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: Install PNPM
-        run: npm install -g pnpm
       - name: Install modules.
         run: pnpm install --ignore-scripts --fetch-timeout 600000 && pnpm allow-scripts
       - name: setup env file
@@ -73,8 +71,6 @@ jobs:
           ssh://git@github.com/
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: Install PNPM
-        run: npm install -g pnpm
       - name: Install modules.
         run: pnpm run setup
       - name: setup env file
@@ -107,8 +103,6 @@ jobs:
           ssh://git@github.com/
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: Install PNPM
-        run: npm install -g pnpm
       - name: Install modules.
         run: pnpm run setup
       - name: setup env file
