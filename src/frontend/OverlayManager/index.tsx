@@ -1,19 +1,26 @@
 import React, { useRef } from 'react'
 import BrowserGameStyles from './index.module.scss'
-import { PROVIDERS } from 'common/types/proxy-types'
 import { observer } from 'mobx-react-lite'
 import OverlayState from 'frontend/state/OverlayState'
-import WalletState from 'frontend/state/WalletState'
 import { BrowserGameProps } from './types'
 import { Overlay } from './Overlay'
 import { WebviewTag } from 'electron'
 import WebviewControls from 'frontend/components/UI/WebviewControls'
 import AuthModal from 'frontend/components/UI/AuthModal'
+import { useKeepPlaystreaksInSync } from '@hyperplay/quests-ui'
 
 const OverlayManager = observer(function ({
   appName,
   runner
 }: BrowserGameProps) {
+  useKeepPlaystreaksInSync({
+    appName,
+    runner,
+    getQuest: window.api.getQuest,
+    getQuests: window.api.getQuests,
+    getUserPlayStreak: window.api.getUserPlayStreak,
+    syncPlaySession: window.api.syncPlaySession
+  })
   const url = OverlayState.renderState.browserGameUrl
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -55,12 +62,7 @@ const OverlayManager = observer(function ({
             <webview
               src={url}
               className={BrowserGameStyles.browserGame}
-              partition={
-                WalletState.provider === PROVIDERS.METAMASK_MOBILE ||
-                PROVIDERS.WALLET_CONNECT
-                  ? 'persist:InPageWindowEthereumExternalWallet'
-                  : undefined
-              }
+              partition={'persist:InPageWindowEthereumExternalWallet'}
               webpreferences="contextIsolation=true"
               // setting = to {true} does not work :(
               allowpopups={trueAsStr}
