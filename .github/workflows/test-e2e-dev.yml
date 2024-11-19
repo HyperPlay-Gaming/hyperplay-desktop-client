@@ -86,6 +86,8 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
+      - name: Install PNPM
+        run: npm install -g pnpm
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf

@@ -32,7 +32,8 @@ jobs:
         run: |
           echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
-
+      - name: Install PNPM
+        run: npm install -g pnpm
       - name: Install modules.
         run: pnpm run setup
 
