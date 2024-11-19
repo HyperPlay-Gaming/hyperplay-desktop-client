@@ -32,7 +32,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
       - name: Reconfigure git to use HTTP authentication
