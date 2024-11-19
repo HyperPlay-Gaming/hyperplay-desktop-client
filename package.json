@@ -405,7 +405,8 @@
       "i18next-parser>esbuild": false,
       "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
       "@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
-      "@hyperplay/overlay>electron": false
+      "@hyperplay/overlay>electron": false,
+      "sass>@parcel/watcher": false
     }
   }
 }
