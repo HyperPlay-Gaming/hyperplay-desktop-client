@@ -54,7 +54,7 @@ import {
   LogPrefix,
   logWarning
 } from './logger/logger'
-import { basename, dirname, join, normalize } from 'path'
+import { basename, dirname, isAbsolute, join, normalize } from 'path'
 import { runRunnerCommand as runLegendaryCommand } from 'backend/storeManagers/legendary/library'
 import {
   gameInfoStore,
@@ -1246,6 +1246,7 @@ export function getExecutableAndArgs(executableWithArgs: string): {
   executable: string
   launchArgs: string
 } {
+  const isAbsolutePath = isAbsolute(executableWithArgs)
   if (executableWithArgs.includes('.app')) {
     const executable = executableWithArgs.split(' -')[0]
     const launchArgs = executableWithArgs.replace(executable, '').trim()
@@ -1254,6 +1255,10 @@ export function getExecutableAndArgs(executableWithArgs: string): {
   const match = executableWithArgs.match(/^(.*?\.(exe|bin|sh))/i)
   const executable = match ? match[0] : ''
   const launchArgs = executableWithArgs.replace(executable, '').trim()
+
+  if (isAbsolutePath) {
+    return { executable: executableWithArgs, launchArgs }
+  }
 
   return { executable, launchArgs }
 }

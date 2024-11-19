@@ -342,11 +342,6 @@ export async function launchGame(
 
     // Native
     if (isNative) {
-      const isAbsolutePath = path.isAbsolute(executable)
-      const exeOnly = isAbsolutePath
-        ? executable
-        : getExecutableAndArgs(executable).executable
-
       logInfo(
         `launching native ${
           runner === 'hyperplay' ? 'HyperPlay' : 'Sideloaded'
