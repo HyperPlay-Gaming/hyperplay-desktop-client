@@ -64,8 +64,10 @@ jobs:
           manifest-path: flatpak-build/xyz.hyperplay.HyperPlay.yml
           cache-key: flatpak-builder-${{ github.sha }}
       - name: Upload tar xz
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux-tar-xz
           path: dist/hyperplay*.tar.xz
           retention-days: 14
+          if-no-files-found: error
+          compression-level: 3
