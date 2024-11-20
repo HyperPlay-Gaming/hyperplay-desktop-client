@@ -9,6 +9,7 @@ import { FlagPosition } from 'frontend/components/UI/LanguageSelector'
 import { onboardingStore } from 'frontend/helpers/electronStores'
 import WelcomeStyles from './index.module.scss'
 import OnboardingStyles from '../index.module.scss'
+import { ReactComponent as DiamondBlue } from '/src/frontend/assets/diamond.svg'
 
 interface WelcomeProps {
   setScreen: React.Dispatch<React.SetStateAction<ONBOARDING_SCREEN>>
@@ -18,61 +19,96 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
   return (
     <>
       <Images.HyperPlayLogoColored className={OnboardingStyles.hpLogo} />
-      <h5>
-        {t(
-          'hyperplay.onboarding.welcome.title',
-          'Welcome to HyperPlay Early Access!'
-        )}
-      </h5>
+      <h6 className={WelcomeStyles.welcomeTitle}>
+        {t('hyperplay.onboarding.welcome.title2', 'Welcome to HyperPlay!')}
+      </h6>
       <div className={`body ${WelcomeStyles.welcomeBodyTextContainer}`}>
-        <div className={WelcomeStyles.boldText}>
+        <div className={WelcomeStyles.text}>
           {t(
-            'hyperplay.onboarding.welcome.text.construction',
-            `HyperPlay is under construction.`
-          )}
-        </div>
-        <div>
-          {t(
-            'hyperplay.onboarding.welcome.text.description',
-            `HyperPlay is a game launcher and game store aggregator from the
-          future. With HyperPlay, you can carry your wallet, tokens, and assets
-          into every game. HyperPlay supports the entire library of the Epic
-          Store, GOG, and our own HyperPlay store. By using HyperPlay, you agree
-          to our`
+            'hyperplay.onboarding.welcome.text.paragraph1',
+            `At HyperPlay, we’re building the next-generation game store 
+            for the future of gaming.`
           )}{' '}
-          <a
-            onClick={() =>
-              window.api.openExternalUrl(
-                `https://www.hyperplay.xyz/terms-of-service`
-              )
-            }
-          >
-            {t('hyperplay.onboarding.terms', `Terms of Service.`)}
-          </a>
         </div>
-        <div>
+        <div className={WelcomeStyles.text}>
           {t(
-            'hyperplay.onboarding.welcome.text.bugs',
-            `Please note that HyperPlay is a public alpha. Many features are still
-          in development, and there will be bugs.`
+            'hyperplay.onboarding.welcome.text.paragraph3',
+            `Seamlessly bring your wallet, tokens, 
+           and assets into every game while accessing 
+           the extensive libraries of the Epic Store, 
+           GOG, and our own HyperPlay Store, all in one place.`
+          )}
+        </div>
+        <div className={WelcomeStyles.textBold}>
+          {t(
+            'hyperplay.onboarding.welcome.text.bulletTitle',
+            `With HyperPlay, you can:`
           )}
         </div>
         <div>
+          <ul
+            className={`${WelcomeStyles.bulletPointIcon} ${WelcomeStyles.bulletPointList}`}
+          >
+            <li>
+              <DiamondBlue className={WelcomeStyles.diamondBlue} />
+              {t(
+                'hyperplay.onboarding.welcome.text.bulletPoint_1',
+                `Access a vast collection of 100+ on-chain enabled games`
+              )}
+            </li>
+            <li>
+              <DiamondBlue className={WelcomeStyles.diamondBlue} />
+              {t(
+                'hyperplay.onboarding.welcome.text.bulletPoint_2',
+                `Earn tokens, NFTs, and off-chain rewards by completing Quests`
+              )}
+            </li>
+            <li>
+              <DiamondBlue className={WelcomeStyles.diamondBlue} />
+              {t(
+                'hyperplay.onboarding.welcome.text.bulletPoint_3',
+                `Play Epic and GOG games directly through HyperPlay`
+              )}
+            </li>
+            <li>
+              <DiamondBlue className={WelcomeStyles.diamondBlue} />
+              {t(
+                'hyperplay.onboarding.welcome.text.bulletPoint_4',
+                `Install Steam (Windows version) on macOS with one easy click`
+              )}
+            </li>
+            <li>
+              <DiamondBlue className={WelcomeStyles.diamondBlue} />
+              {t(
+                'hyperplay.onboarding.welcome.text.bulletPoint_5',
+                `Run Windows games on macOS, Linux, and SteamDeck using our
+              advanced`
+              )}{' '}
+              <a
+                onClick={() =>
+                  window.api.openExternalUrl(
+                    `https://docs.hyperplay.xyz/faq#q-what-operating-systems-are-supported`
+                  )
+                }
+              >
+                Compatibility Layer (Beta)
+              </a>
+            </li>
+          </ul>{' '}
+        </div>
+        <div>
           {t(
-            'hyperplay.onboarding.welcome.text.communityCTA_1',
-            `We'd love your feedback and to have you join us in our`
+            'hyperplay.onboarding.welcome.text.2',
+            `Currently in Beta, we highly value your feedback and 
+            encourage you to report any issues or suggestions in our`
           )}{' '}
           <a
             onClick={() =>
               window.api.openExternalUrl(`https://discord.gg/hyperplay`)
             }
           >
-            {t('hyperplay.discordApp', `Discord`)}
+            {t('hyperplay.discordApp2', `Discord Community.`)}
           </a>{' '}
-          {t(
-            'hyperplay.onboarding.welcome.text.communityCTA_2',
-            `community. Together, let's shape the future of gaming!`
-          )}
         </div>
       </div>
       <div className={WelcomeStyles.languageSelector}>
@@ -84,6 +120,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
             onboardingStore.set('completedEarlyAccess', true)
             props.setScreen(ONBOARDING_SCREEN.ANALYTICS)
           }}
+          type="secondary"
         >
           {t('button.continue', 'Continue')}{' '}
           <FontAwesomeIcon
