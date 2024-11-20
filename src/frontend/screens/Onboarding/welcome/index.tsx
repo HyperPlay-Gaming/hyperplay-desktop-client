@@ -20,19 +20,19 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
     <>
       <Images.HyperPlayLogoColored className={OnboardingStyles.hpLogo} />
       <h6 className={WelcomeStyles.welcomeTitle}>
-        {t('hyperplay.onboarding.welcome.title2', 'Welcome to HyperPlay!')}
+        {t('hyperplay.onboarding.welcome.titleIntro', 'Welcome to HyperPlay!')}
       </h6>
       <div className={`body ${WelcomeStyles.welcomeBodyTextContainer}`}>
         <div className={WelcomeStyles.text}>
           {t(
-            'hyperplay.onboarding.welcome.text.paragraph1',
+            'hyperplay.onboarding.welcome.text.paragraphOne',
             `At HyperPlay, we’re building the next-generation game store 
             for the future of gaming.`
           )}{' '}
         </div>
         <div className={WelcomeStyles.text}>
           {t(
-            'hyperplay.onboarding.welcome.text.paragraph3',
+            'hyperplay.onboarding.welcome.text.paragraphThree',
             `Seamlessly bring your wallet, tokens, 
            and assets into every game while accessing 
            the extensive libraries of the Epic Store, 
@@ -52,35 +52,35 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
             <li>
               <DiamondBlue className={WelcomeStyles.diamondBlue} />
               {t(
-                'hyperplay.onboarding.welcome.text.bulletPoint_1',
+                'hyperplay.onboarding.welcome.text.bulletPointOne',
                 `Access a vast collection of 100+ on-chain enabled games`
               )}
             </li>
             <li>
               <DiamondBlue className={WelcomeStyles.diamondBlue} />
               {t(
-                'hyperplay.onboarding.welcome.text.bulletPoint_2',
+                'hyperplay.onboarding.welcome.text.bulletPointTwo',
                 `Earn tokens, NFTs, and off-chain rewards by completing Quests`
               )}
             </li>
             <li>
               <DiamondBlue className={WelcomeStyles.diamondBlue} />
               {t(
-                'hyperplay.onboarding.welcome.text.bulletPoint_3',
+                'hyperplay.onboarding.welcome.text.bulletPointThree',
                 `Play Epic and GOG games directly through HyperPlay`
               )}
             </li>
             <li>
               <DiamondBlue className={WelcomeStyles.diamondBlue} />
               {t(
-                'hyperplay.onboarding.welcome.text.bulletPoint_4',
+                'hyperplay.onboarding.welcome.text.bulletPointFour',
                 `Install Steam (Windows version) on macOS with one easy click`
               )}
             </li>
             <li>
               <DiamondBlue className={WelcomeStyles.diamondBlue} />
               {t(
-                'hyperplay.onboarding.welcome.text.bulletPoint_5',
+                'hyperplay.onboarding.welcome.text.bulletPointFive',
                 `Run Windows games on macOS, Linux, and SteamDeck using our
               advanced`
               )}{' '}
@@ -98,7 +98,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         </div>
         <div>
           {t(
-            'hyperplay.onboarding.welcome.text.2',
+            'hyperplay.onboarding.welcome.text.lastParagraph',
             `Currently in Beta, we highly value your feedback and 
             encourage you to report any issues or suggestions in our`
           )}{' '}
@@ -107,7 +107,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
               window.api.openExternalUrl(`https://discord.gg/hyperplay`)
             }
           >
-            {t('hyperplay.discordApp2', `Discord Community.`)}
+            {t('hyperplay.discordAppLink', `Discord Community.`)}
           </a>{' '}
         </div>
       </div>
