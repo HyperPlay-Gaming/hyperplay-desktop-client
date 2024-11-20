@@ -1,9 +1,13 @@
 .languageSelector {
-  margin: var(--space-lg) auto;
+  margin: var(--space-lg) 0px;
+
+  div {
+    width: auto;
+  }
 }
 
 .actionButton {
-  margin: 0px auto;
+  margin: var(--space-md) 0px;
 }
 .actionButton button {
   border-radius: var(--space-xs);
@@ -13,12 +17,15 @@
   margin-left: var(--space-xs);
 }
 
+.welcomeTitle {
+  color: var(--color-neutral-100);
+}
 .welcomeBody {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .welcomeBodyTextContainer {
-  color: var(--color-neutral-100);
+  color: var(--color-neutral-400);
 }
 
 .welcomeBodyTextContainer > div {
@@ -32,8 +39,38 @@
 .welcomeBodyTextContainer a:hover {
   color: var(--color-primary-300);
   transition: 0.2s;
+  font-size: var(--font-size-md);
 }
 
-.boldText {
+.text {
+  font-weight: 400;
+}
+
+.textBold {
   font-weight: var(--bold);
+  color: var(--color-neutral-100);
+}
+
+.diamondBlue {
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+}
+
+.bulletPointIcon {
+  list-style-type: none;
+}
+
+.bulletPointList {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.scrollableModal {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 15px;
 }
