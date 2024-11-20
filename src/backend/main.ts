@@ -1317,8 +1317,6 @@ ipcMain.handle(
     // Update playtime and last played date
     const finishedPlayingDate = new Date()
     tsStore.set(`${appName}.lastPlayed`, finishedPlayingDate.toISOString())
-    // Playtime of this session in minutes. Uses hrtime for monotonic timer not subject to clock drift or sync errors
-    const sessionPlaytimeInMs = await syncPlaySession(appName, runner)
 
     if (runner === 'gog') {
       await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
@@ -1337,6 +1335,12 @@ ipcMain.handle(
         appName,
         runner,
         status: 'syncing-saves'
+      })
+
+      sendFrontendMessage('gameStatusUpdate', {
+        appName,
+        runner,
+        status: 'done'
       })
 
       logInfo(`Uploading saves for ${title}`, LogPrefix.Backend)
@@ -1362,6 +1366,17 @@ ipcMain.handle(
       status: 'done'
     })
 
+    // Playtime of this session in minutes. Uses hrtime for monotonic timer not subject to clock drift or sync errors
+    let sessionPlaytimeInMs: bigint | undefined = undefined
+    try {
+      sessionPlaytimeInMs = await syncPlaySession(appName, runner)
+    } catch (error) {
+      logWarning(
+        `Error syncing playtime for ${appName}. Error: ${error}`,
+        LogPrefix.Backend
+      )
+    }
+
     trackEvent({
       event: 'Game Closed',
       properties: {
@@ -1371,7 +1386,7 @@ ipcMain.handle(
         store_name: getStoreName(runner),
         browserUrl: browserUrl ?? undefined,
         platform: getPlatformName(install.platform!),
-        playTimeInMs: Number(sessionPlaytimeInMs),
+        playTimeInMs: Number(sessionPlaytimeInMs ?? 0),
         platform_arch: install.platform!
       }
     })
