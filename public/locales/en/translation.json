@@ -359,7 +359,7 @@
         "connectWallet": "Connect wallet",
         "copyUrl": "Copy URL",
         "currentWallet": "Current wallet",
-        "discordApp2": "Discord Community.",
+        "discordAppLink": "Discord Community.",
         "folder": "Folder",
         "gamecard": {
             "distributables": "Installing Distributables...",
@@ -435,17 +435,17 @@
             },
             "welcome": {
                 "text": {
-                    "2": "Currently in Beta, we highly value your feedback and \n            encourage you to report any issues or suggestions in our",
-                    "bulletPoint_1": "Access a vast collection of 100+ on-chain enabled games",
-                    "bulletPoint_2": "Earn tokens, NFTs, and off-chain rewards by completing Quests",
-                    "bulletPoint_3": "Play Epic and GOG games directly through HyperPlay",
-                    "bulletPoint_4": "Install Steam (Windows version) on macOS with one easy click",
-                    "bulletPoint_5": "Run Windows games on macOS, Linux, and SteamDeck using our\n              advanced",
+                    "bulletPointFive": "Run Windows games on macOS, Linux, and SteamDeck using our\n              advanced",
+                    "bulletPointFour": "Install Steam (Windows version) on macOS with one easy click",
+                    "bulletPointOne": "Access a vast collection of 100+ on-chain enabled games",
+                    "bulletPointThree": "Play Epic and GOG games directly through HyperPlay",
+                    "bulletPointTwo": "Earn tokens, NFTs, and off-chain rewards by completing Quests",
                     "bulletTitle": "With HyperPlay, you can:",
-                    "paragraph1": "At HyperPlay, we’re building the next-generation game store \n            for the future of gaming.",
-                    "paragraph3": "Seamlessly bring your wallet, tokens, \n           and assets into every game while accessing \n           the extensive libraries of the Epic Store, \n           GOG, and our own HyperPlay Store, all in one place."
+                    "lastParagraph": "Currently in Beta, we highly value your feedback and \n            encourage you to report any issues or suggestions in our",
+                    "paragraphOne": "At HyperPlay, we’re building the next-generation game store \n            for the future of gaming.",
+                    "paragraphThree": "Seamlessly bring your wallet, tokens, \n           and assets into every game while accessing \n           the extensive libraries of the Epic Store, \n           GOG, and our own HyperPlay Store, all in one place."
                 },
-                "title2": "Welcome to HyperPlay!"
+                "titleIntro": "Welcome to HyperPlay!"
             }
         },
         "otp": "One Time Passcode",
