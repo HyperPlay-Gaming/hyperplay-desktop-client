@@ -226,6 +226,21 @@ export interface PatchingFailed {
   sensitiveProperties?: never
 }
 
+export interface PatchingTooSlow {
+  event: 'Patching Too Slow'
+  properties: {
+    game_name: string
+    game_title: string
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
+    old_game_version: string
+    new_game_version: string
+    est_time_to_patch_sec: string
+    est_time_to_install_sec: string
+  }
+  sensitiveProperties?: never
+}
+
 export interface GameUninstallRequested {
   event: 'Game Uninstall Requested'
   properties: {
@@ -442,5 +457,6 @@ export type PossibleMetricPayloads =
   | PatchingStarted
   | PatchingSuccess
   | PatchingFailed
+  | PatchingTooSlow
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']
