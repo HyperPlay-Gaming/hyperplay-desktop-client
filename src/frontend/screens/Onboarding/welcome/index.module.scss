@@ -1,5 +1,5 @@
 .languageSelector {
-  margin: var(--space-lg) 0px;
+  margin: var(--space-sm) 0;
 
   div {
     width: auto;
@@ -7,7 +7,7 @@
 }
 
 .actionButton {
-  margin: var(--space-md) 0px;
+  margin: var(--space-sm) 0;
 }
 .actionButton button {
   border-radius: var(--space-xs);
@@ -29,7 +29,7 @@
 }
 
 .welcomeBodyTextContainer > div {
-  margin: var(--space-md) 0px;
+  margin: var(--space-md) auto;
 }
 
 .welcomeBodyTextContainer a {
@@ -39,11 +39,10 @@
 .welcomeBodyTextContainer a:hover {
   color: var(--color-primary-300);
   transition: 0.2s;
-  font-size: var(--font-size-md);
 }
 
 .text {
-  font-weight: 400;
+  font-weight: var(--body-sm);
 }
 
 .textBold {
@@ -54,7 +53,7 @@
 .diamondBlue {
   width: 10px;
   height: 10px;
-  margin-right: 8px;
+  margin-right: var(--space-xs-fixed);
 }
 
 .bulletPointIcon {
@@ -67,10 +66,4 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.scrollableModal {
-  max-height: 200px;
-  overflow-y: auto;
-  padding-right: 15px;
 }
