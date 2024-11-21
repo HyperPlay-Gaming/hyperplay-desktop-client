@@ -1113,7 +1113,7 @@ function startNewPlaySession(appName: string) {
 
 async function syncPlaySession(appName: string, runner: Runner) {
   if (!Object.hasOwn(gamePlaySessionStartTimes, appName)) {
-    return
+    return BigInt(0)
   }
 
   // reset the time counter and start new session slightly before ending current session to prevent time loss
@@ -1366,16 +1366,8 @@ ipcMain.handle(
       status: 'done'
     })
 
-    // Playtime of this session in minutes. Uses hrtime for monotonic timer not subject to clock drift or sync errors
-    let sessionPlaytimeInMs: bigint | undefined = undefined
-    try {
-      sessionPlaytimeInMs = await syncPlaySession(appName, runner)
-    } catch (error) {
-      logWarning(
-        `Error syncing playtime for ${appName}. Error: ${error}`,
-        LogPrefix.Backend
-      )
-    }
+    // Playtime of this session in milliseconds. Uses hrtime for monotonic timer not subject to clock drift or sync errors
+    const sessionPlaytimeInMs = await syncPlaySession(appName, runner)
 
     trackEvent({
       event: 'Game Closed',
@@ -1386,7 +1378,7 @@ ipcMain.handle(
         store_name: getStoreName(runner),
         browserUrl: browserUrl ?? undefined,
         platform: getPlatformName(install.platform!),
-        playTimeInMs: Number(sessionPlaytimeInMs ?? 0),
+        playTimeInMs: Number(sessionPlaytimeInMs),
         platform_arch: install.platform!
       }
     })
