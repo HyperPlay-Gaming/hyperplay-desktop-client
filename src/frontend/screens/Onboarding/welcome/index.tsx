@@ -91,7 +91,10 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
                   )
                 }
               >
-                Compatibility Layer (Beta)
+                {t(
+                  'hyperplay.compatibilityLayer',
+                  `Compatibility Layer (Beta)`
+                )}
               </a>
             </li>
           </ul>{' '}
