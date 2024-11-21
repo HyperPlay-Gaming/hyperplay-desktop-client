@@ -356,6 +356,7 @@
             "noThanks": "No Thanks"
         },
         "changeWallet": "Swap wallet account",
+        "compatibilityLayer": "Compatibility Layer (Beta)",
         "connectWallet": "Connect wallet",
         "copyUrl": "Copy URL",
         "currentWallet": "Current wallet",
