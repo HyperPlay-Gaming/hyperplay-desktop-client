@@ -1111,7 +1111,21 @@ function startNewPlaySession(appName: string) {
   return prevStartTime
 }
 
-async function syncPlaySession(appName: string, runner: Runner) {
+async function postPlaySession(
+  appName: string,
+  runner: Runner,
+  sessionPlaytimeInMs: bigint
+) {
+  const game = gameManagerMap[runner].getGameInfo(appName)
+  const { hyperPlayListing } = await gameIsEpicForwarderOnHyperPlay(game)
+  await postPlaySessionTime(
+    hyperPlayListing?.project_id || appName,
+    // round up to prevent session time loss
+    parseInt(((sessionPlaytimeInMs + BigInt(1000)) / BigInt(1000)).toString())
+  )
+}
+
+function syncPlaySession(appName: string) {
   if (!Object.hasOwn(gamePlaySessionStartTimes, appName)) {
     return BigInt(0)
   }
@@ -1130,21 +1144,14 @@ async function syncPlaySession(appName: string, runner: Runner) {
     sessionPlaytimeInMinutes + BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
   tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
 
-  const game = gameManagerMap[runner].getGameInfo(appName)
-  const { hyperPlayListing } = await gameIsEpicForwarderOnHyperPlay(game)
-  await postPlaySessionTime(
-    hyperPlayListing?.project_id || appName,
-    // round up to prevent session time loss
-    parseInt(((sessionPlaytimeInMs + BigInt(1000)) / BigInt(1000)).toString())
-  )
-
   return sessionPlaytimeInMs
 }
 
 ipcMain.handle(
   'syncPlaySession',
   async (e, appName: string, runner: Runner) => {
-    await syncPlaySession(appName, runner)
+    const sessionPlaytimeInMs = syncPlaySession(appName)
+    await postPlaySession(appName, runner, sessionPlaytimeInMs)
   }
 )
 
@@ -1367,7 +1374,8 @@ ipcMain.handle(
     })
 
     // Playtime of this session in milliseconds. Uses hrtime for monotonic timer not subject to clock drift or sync errors
-    const sessionPlaytimeInMs = await syncPlaySession(appName, runner)
+    const sessionPlaytimeInMs = syncPlaySession(appName)
+    postPlaySession(appName, runner, sessionPlaytimeInMs)
 
     trackEvent({
       event: 'Game Closed',
