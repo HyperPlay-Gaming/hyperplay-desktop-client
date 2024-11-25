@@ -23530,6 +23530,10 @@ DEPRECATED
   border-color: var(--color-border-muted);
 }
 
+.snap-ui-renderer__input > .mm-text-field .mm-icon {
+  top: 0;
+}
+
 .snap-ui-renderer__input > .mm-text-field .mm-text--overflow-wrap-anywhere {
   overflow-wrap: normal;
 }
@@ -23543,10 +23547,6 @@ DEPRECATED
 
 .snap-ui-renderer__panel {
   gap: 8px;
-}
-
-.snap-ui-renderer__panel .mm-icon--size-inherit {
-  top: 0;
 }
 
 .snap-ui-renderer__text i {
@@ -23677,6 +23677,14 @@ DEPRECATED
 
 .snap-ui-renderer__selector-item:hover {
   background-color: var(--color-background-alternative-hover);
+}
+
+.snap-ui-renderer__link .snap-ui-renderer__address {
+  display: inline-flex;
+}
+
+.snap-ui-renderer__link .snap-ui-renderer__address + .mm-icon {
+  top: 0;
 }
 
 .snap-delineator__header {
@@ -26198,6 +26206,10 @@ DEPRECATED
   padding-bottom: 8px;
 }
 
+.asset-list-control-bar__button {
+  max-width: 35%;
+}
+
 .asset-list-control-bar__button:hover {
   background-color: var(--color-background-hover);
 }
@@ -26942,7 +26954,8 @@ DEPRECATED
   display: flex;
   max-width: inherit;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
 .coin-overview__primary-balance,
@@ -27029,7 +27042,8 @@ DEPRECATED
   display: flex;
   max-width: inherit;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
 .token-overview__primary-balance {
@@ -49721,7 +49735,7 @@ DEPRECATED
 }
 
 .confirmation-page__content > :last-child {
-  margin-bottom: 16px;
+  margin-top: auto;
 }
 
 .confirmation-page__navigation {
@@ -52867,14 +52881,31 @@ DEPRECATED
   width: 100%;
 }
 
+.request-decrypt-message__message-container {
+  position: relative;
+}
+
+.request-decrypt-message__message-container .scroll-to-bottom__button {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: 28px;
+}
+
+.request-decrypt-message__message-container .scroll-to-bottom__button:hover {
+  background-color: var(--color-primary-default);
+}
+
 .request-decrypt-message__message {
   overflow-wrap: break-word;
   margin: 20px;
   overflow: hidden;
-  border: 1px solid var(--color-border-alternative);
-  padding: 5px;
   border-radius: 5px;
   position: relative;
+  border: 1px solid var(--color-border-muted);
+  padding: 13px 16px;
 }
 
 .request-decrypt-message__message-text {
@@ -52884,6 +52915,7 @@ DEPRECATED
   font-style: normal;
   font-weight: normal;
   height: 115px;
+  overflow-y: scroll;
 }
 
 .request-decrypt-message__message-cover {
@@ -52901,6 +52933,14 @@ DEPRECATED
   width: 100%;
   top: 0;
   cursor: pointer;
+}
+
+[dir="ltr"] .request-decrypt-message__message-lock {
+  left: 0;
+}
+
+[dir="rtl"] .request-decrypt-message__message-lock {
+  right: 0;
 }
 
 .request-decrypt-message__message-lock__container {
@@ -52952,12 +52992,14 @@ DEPRECATED
   justify-content: space-evenly;
   margin-left: 20px;
   margin-right: 20px;
+  margin-top: 24px;
   display: flex;
   cursor: pointer;
 }
 
 .request-decrypt-message__message-copy-text {
   display: inline;
+  color: var(--color-primary-default);
 }
 
 [dir="ltr"] .request-decrypt-message__message-copy-text {
