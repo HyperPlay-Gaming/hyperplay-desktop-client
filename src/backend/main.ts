@@ -1332,6 +1332,12 @@ ipcMain.handle(
     await addRecentGame(game)
 
     if (autoSyncSaves && isOnline()) {
+      /**
+       * @dev It sets to done, so the GlobalState knows that the game session stopped.
+       * Then it changes the status to syncing-saves. Then It sets to done again.
+       * Otherwise it would count the Syncing Saves time (which can be long depending on the game) as playing time as well.
+       * done is not only the state for stopping playing but for finishing any other process that came before.
+       */
       sendFrontendMessage('gameStatusUpdate', {
         appName,
         runner,
