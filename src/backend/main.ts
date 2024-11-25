@@ -1111,9 +1111,23 @@ function startNewPlaySession(appName: string) {
   return prevStartTime
 }
 
-async function syncPlaySession(appName: string, runner: Runner) {
+async function postPlaySession(
+  appName: string,
+  runner: Runner,
+  sessionPlaytimeInMs: bigint
+) {
+  const game = gameManagerMap[runner].getGameInfo(appName)
+  const { hyperPlayListing } = await gameIsEpicForwarderOnHyperPlay(game)
+  await postPlaySessionTime(
+    hyperPlayListing?.project_id || appName,
+    // round up to prevent session time loss
+    parseInt(((sessionPlaytimeInMs + BigInt(1000)) / BigInt(1000)).toString())
+  )
+}
+
+function syncPlaySession(appName: string) {
   if (!Object.hasOwn(gamePlaySessionStartTimes, appName)) {
-    return
+    return BigInt(0)
   }
 
   // reset the time counter and start new session slightly before ending current session to prevent time loss
@@ -1130,21 +1144,14 @@ async function syncPlaySession(appName: string, runner: Runner) {
     sessionPlaytimeInMinutes + BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
   tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
 
-  const game = gameManagerMap[runner].getGameInfo(appName)
-  const { hyperPlayListing } = await gameIsEpicForwarderOnHyperPlay(game)
-  await postPlaySessionTime(
-    hyperPlayListing?.project_id || appName,
-    // round up to prevent session time loss
-    parseInt(((sessionPlaytimeInMs + BigInt(1000)) / BigInt(1000)).toString())
-  )
-
   return sessionPlaytimeInMs
 }
 
 ipcMain.handle(
   'syncPlaySession',
   async (e, appName: string, runner: Runner) => {
-    await syncPlaySession(appName, runner)
+    const sessionPlaytimeInMs = syncPlaySession(appName)
+    await postPlaySession(appName, runner, sessionPlaytimeInMs)
   }
 )
 
@@ -1317,8 +1324,6 @@ ipcMain.handle(
     // Update playtime and last played date
     const finishedPlayingDate = new Date()
     tsStore.set(`${appName}.lastPlayed`, finishedPlayingDate.toISOString())
-    // Playtime of this session in minutes. Uses hrtime for monotonic timer not subject to clock drift or sync errors
-    const sessionPlaytimeInMs = await syncPlaySession(appName, runner)
 
     if (runner === 'gog') {
       await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
@@ -1327,6 +1332,12 @@ ipcMain.handle(
     await addRecentGame(game)
 
     if (autoSyncSaves && isOnline()) {
+      /**
+       * @dev It sets to done, so the GlobalState knows that the game session stopped.
+       * Then it changes the status to syncing-saves. Then It sets to done again.
+       * Otherwise it would count the Syncing Saves time (which can be long depending on the game) as playing time as well.
+       * done is not only the state for stopping playing but for finishing any other process that came before.
+       */
       sendFrontendMessage('gameStatusUpdate', {
         appName,
         runner,
@@ -1337,6 +1348,12 @@ ipcMain.handle(
         appName,
         runner,
         status: 'syncing-saves'
+      })
+
+      sendFrontendMessage('gameStatusUpdate', {
+        appName,
+        runner,
+        status: 'done'
       })
 
       logInfo(`Uploading saves for ${title}`, LogPrefix.Backend)
@@ -1361,6 +1378,10 @@ ipcMain.handle(
       runner,
       status: 'done'
     })
+
+    // Playtime of this session in milliseconds. Uses hrtime for monotonic timer not subject to clock drift or sync errors
+    const sessionPlaytimeInMs = syncPlaySession(appName)
+    postPlaySession(appName, runner, sessionPlaytimeInMs)
 
     trackEvent({
       event: 'Game Closed',
