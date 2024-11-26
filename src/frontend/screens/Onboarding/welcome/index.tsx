@@ -115,7 +115,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         </div>
       </div>
       <div className={WelcomeStyles.languageSelector}>
-        <LanguageSelector flagPossition={FlagPosition.PREPEND} />
+        <LanguageSelector flagPossition={FlagPosition.PREPEND} extraClass="" />
       </div>
       <div className={WelcomeStyles.actionButton}>
         <Button
