@@ -228,7 +228,7 @@ export const getAppVersion = () => {
   return `${VERSION_NUMBER}`
 }
 
-async function handleExit() {
+async function handleExit(cleanUp?: () => Promise<any>) {
   const isLocked = existsSync(join(gamesConfigPath, 'lock'))
   const mainWindow = getMainWindow()
 
@@ -256,9 +256,12 @@ async function handleExit() {
         logInfo([`Unable to kill ${procName}, ignoring.`, error])
       }
     })
+  }
+  // Kill all child processes, closing browser and native games that are running
+  callAllAbortControllers()
 
-    // Kill all child processes
-    callAllAbortControllers()
+  if (cleanUp) {
+    await cleanUp()
   }
   app.exit()
 }
