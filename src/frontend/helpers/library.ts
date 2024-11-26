@@ -164,6 +164,7 @@ const launch = async ({
       return res()
     }
     showDialogModal({
+      isModal: false,
       message: t(
         'gamepage:box.compability.message',
         'This Windows game will run using a compatibility layer. You might encounter some issues or the game might not work at all.'
