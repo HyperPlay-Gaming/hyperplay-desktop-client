@@ -42,11 +42,13 @@ jobs:
       - name: Build artifacts.
         run: yarn dist:win
       - name: Upload EXE.
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: win-setup
           path: dist/HyperPlay*.exe
           retention-days: 7
+          if-no-files-found: error
+          compression-level: 3
   build_linux:
     runs-on: ubuntu-latest
     concurrency:
@@ -114,8 +116,10 @@ jobs:
         env:
           NOTARIZE: false
       - name: Upload Intel build.
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: mac-dmg-x64
           path: dist/HyperPlay*x64.dmg
           retention-days: 7
+          if-no-files-found: error
+          compression-level: 3

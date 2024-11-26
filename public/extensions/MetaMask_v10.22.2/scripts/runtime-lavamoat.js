@@ -94,7 +94,7 @@
     // security options are hard-coded at build time
     const {
       scuttleGlobalThis,
-    } = {"scuttleGlobalThis":{"enabled":true,"scuttlerName":"SCUTTLER","exceptions":["toString","getComputedStyle","addEventListener","removeEventListener","ShadowRoot","HTMLElement","Element","pageXOffset","pageYOffset","visualViewport","Reflect","Set","Object","navigator","harden","console","WeakSet","Event","Image","/cdc_[a-zA-Z0-9]+_[a-zA-Z]+/iu","performance","parseFloat","innerWidth","innerHeight","Symbol","Math","DOMRect","Number","Array","crypto","Function","Uint8Array","String","Promise","JSON","Date","__SENTRY__","appState","extra","stateHooks","sentryHooks","sentry"]}}
+    } = {"scuttleGlobalThis":{"enabled":true,"scuttlerName":"SCUTTLER","exceptions":["Proxy","toString","getComputedStyle","addEventListener","removeEventListener","ShadowRoot","HTMLElement","Element","pageXOffset","pageYOffset","visualViewport","Reflect","Set","Object","navigator","harden","console","WeakSet","Event","Image","fetch","OffscreenCanvas","/cdc_[a-zA-Z0-9]+_[a-zA-Z]+/iu","name","performance","parseFloat","innerWidth","innerHeight","Symbol","Math","DOMRect","Number","Array","crypto","Function","Uint8Array","String","Promise","JSON","Date","__SENTRY__","appState","extra","stateHooks","sentryHooks","sentry","setTimeout","Boolean"]}}
 
     function getGlobalRef () {
       if (typeof globalThis !== 'undefined') {
@@ -131,12 +131,12 @@
   const module = { exports }
   ;(function(){
 // START of injected code from ses
-// ses@1.1.0
+// ses@1.4.0
 'use strict';
 (() => {
   const functors = [
 // === functors[0] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   $h‍_imports([]);   /* global globalThis */
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   $h‍_imports([]);   /* global globalThis */
 /* eslint-disable no-restricted-globals */
 
 /**
@@ -184,8 +184,9 @@ const        {
   RangeError,
   ReferenceError,
   SyntaxError,
-  TypeError}=
-    globalThis;$h‍_once.FERAL_ERROR(FERAL_ERROR);$h‍_once.RangeError(RangeError);$h‍_once.ReferenceError(ReferenceError);$h‍_once.SyntaxError(SyntaxError);$h‍_once.TypeError(TypeError);
+  TypeError,
+  AggregateError}=
+    globalThis;$h‍_once.FERAL_ERROR(FERAL_ERROR);$h‍_once.RangeError(RangeError);$h‍_once.ReferenceError(ReferenceError);$h‍_once.SyntaxError(SyntaxError);$h‍_once.TypeError(TypeError);$h‍_once.AggregateError(AggregateError);
 
 const        {
   assign,
@@ -296,6 +297,9 @@ const        arrayIncludes=  uncurryThis(arrayPrototype.includes);$h‍_once.arr
 const        arrayJoin=  uncurryThis(arrayPrototype.join);
 /** @type {<T, U>(thisArg: readonly T[], callbackfn: (value: T, index: number, array: T[]) => U, cbThisArg?: any) => U[]} */$h‍_once.arrayJoin(arrayJoin);
 const        arrayMap=  /** @type {any} */  uncurryThis(arrayPrototype.map);$h‍_once.arrayMap(arrayMap);
+const        arrayFlatMap=  /** @type {any} */
+  uncurryThis(arrayPrototype.flatMap);$h‍_once.arrayFlatMap(arrayFlatMap);
+
 const        arrayPop=  uncurryThis(arrayPrototype.pop);
 /** @type {<T>(thisArg: T[], ...items: T[]) => number} */$h‍_once.arrayPop(arrayPop);
 const        arrayPush=  uncurryThis(arrayPrototype.push);$h‍_once.arrayPush(arrayPush);
@@ -431,7 +435,7 @@ const        noEvalEvaluate=  ()=>  {
 })()
 ,
 // === functors[1] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let TypeError;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]]]]]);   
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let TypeError;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]]]]]);   
 
 /** getThis returns globalThis in sloppy mode or undefined in strict mode. */
 function getThis() {
@@ -445,7 +449,7 @@ if( getThis()) {
 })()
 ,
 // === functors[2] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   $h‍_imports([]);   /* global globalThis */
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   $h‍_imports([]);   /* global globalThis */
 // @ts-check
 
 // `@endo/env-options` needs to be imported quite early, and so should
@@ -585,11 +589,11 @@ const        {
 })()
 ,
 // === functors[3] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   $h‍_imports([["./src/env-options.js", []]]);   
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   $h‍_imports([["./src/env-options.js", []]]);   
 })()
 ,
 // === functors[4] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let Set,String,isArray,arrayJoin,arraySlice,arraySort,arrayMap,keys,fromEntries,freeze,is,isError,setAdd,setHas,stringIncludes,stringStartsWith,stringifyJson,toStringTagSymbol;$h‍_imports([["../commons.js", [["Set", [$h‍_a => (Set = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["isArray", [$h‍_a => (isArray = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["arraySlice", [$h‍_a => (arraySlice = $h‍_a)]],["arraySort", [$h‍_a => (arraySort = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["keys", [$h‍_a => (keys = $h‍_a)]],["fromEntries", [$h‍_a => (fromEntries = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["is", [$h‍_a => (is = $h‍_a)]],["isError", [$h‍_a => (isError = $h‍_a)]],["setAdd", [$h‍_a => (setAdd = $h‍_a)]],["setHas", [$h‍_a => (setHas = $h‍_a)]],["stringIncludes", [$h‍_a => (stringIncludes = $h‍_a)]],["stringStartsWith", [$h‍_a => (stringStartsWith = $h‍_a)]],["stringifyJson", [$h‍_a => (stringifyJson = $h‍_a)]],["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]]]]]);   
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let Set,String,isArray,arrayJoin,arraySlice,arraySort,arrayMap,keys,fromEntries,freeze,is,isError,setAdd,setHas,stringIncludes,stringStartsWith,stringifyJson,toStringTagSymbol;$h‍_imports([["../commons.js", [["Set", [$h‍_a => (Set = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["isArray", [$h‍_a => (isArray = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["arraySlice", [$h‍_a => (arraySlice = $h‍_a)]],["arraySort", [$h‍_a => (arraySort = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["keys", [$h‍_a => (keys = $h‍_a)]],["fromEntries", [$h‍_a => (fromEntries = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["is", [$h‍_a => (is = $h‍_a)]],["isError", [$h‍_a => (isError = $h‍_a)]],["setAdd", [$h‍_a => (setAdd = $h‍_a)]],["setHas", [$h‍_a => (setHas = $h‍_a)]],["stringIncludes", [$h‍_a => (stringIncludes = $h‍_a)]],["stringStartsWith", [$h‍_a => (stringStartsWith = $h‍_a)]],["stringifyJson", [$h‍_a => (stringifyJson = $h‍_a)]],["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]]]]]);   
 
 
 
@@ -784,22 +788,38 @@ freeze(bestEffortStringify);
 })()
 ,
 // === functors[5] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   $h‍_imports([]);   // @ts-check
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   $h‍_imports([]);   // @ts-check
+
+/**
+ * TypeScript does not treat `AggregateErrorConstructor` as a subtype of
+ * `ErrorConstructor`, which makes sense because their constructors
+ * have incompatible signatures. However, we want to parameterize some
+ * operations by any error constructor, including possible `AggregateError`.
+ * So we introduce `GenericErrorConstructor` as a common supertype. Any call
+ * to it to make an instance must therefore first case split on whether the
+ * constructor is an AggregateErrorConstructor or a normal ErrorConstructor.
+ *
+ * @typedef {ErrorConstructor | AggregateErrorConstructor} GenericErrorConstructor
+ */
 
 /**
  * @callback BaseAssert
  * The `assert` function itself.
  *
  * @param {any} flag The truthy/falsy value
- * @param {Details=} optDetails The details to throw
- * @param {ErrorConstructor=} ErrorConstructor An optional alternate error
- * constructor to use.
+ * @param {Details} [optDetails] The details to throw
+ * @param {GenericErrorConstructor} [errConstructor]
+ * An optional alternate error constructor to use.
+ * @param {AssertMakeErrorOptions} [options]
  * @returns {asserts flag}
  */
 
 /**
  * @typedef {object} AssertMakeErrorOptions
- * @property {string=} errorName
+ * @property {string} [errorName]
+ * @property {Error} [cause]
+ * @property {Error[]} [errors]
+ *   Normally only used when the ErrorConstuctor is `AggregateError`
  */
 
 /**
@@ -808,10 +828,10 @@ freeze(bestEffortStringify);
  * The `assert.error` method, recording details for the console.
  *
  * The optional `optDetails` can be a string.
- * @param {Details=} optDetails The details of what was asserted
- * @param {ErrorConstructor=} ErrorConstructor An optional alternate error
- * constructor to use.
- * @param {AssertMakeErrorOptions=} options
+ * @param {Details} [optDetails] The details of what was asserted
+ * @param {GenericErrorConstructor} [errConstructor]
+ * An optional alternate error constructor to use.
+ * @param {AssertMakeErrorOptions} [options]
  * @returns {Error}
  */
 
@@ -826,9 +846,10 @@ freeze(bestEffortStringify);
  *
  * The optional `optDetails` can be a string for backwards compatibility
  * with the nodejs assertion library.
- * @param {Details=} optDetails The details of what was asserted
- * @param {ErrorConstructor=} ErrorConstructor An optional alternate error
- * constructor to use.
+ * @param {Details} [optDetails] The details of what was asserted
+ * @param {GenericErrorConstructor} [errConstructor]
+ * An optional alternate error constructor to use.
+ * @param {AssertMakeErrorOptions} [options]
  * @returns {never}
  */
 
@@ -839,9 +860,10 @@ freeze(bestEffortStringify);
  * Assert that two values must be `Object.is`.
  * @param {any} actual The value we received
  * @param {any} expected What we wanted
- * @param {Details=} optDetails The details to throw
- * @param {ErrorConstructor=} ErrorConstructor An optional alternate error
- * constructor to use.
+ * @param {Details} [optDetails] The details to throw
+ * @param {GenericErrorConstructor} [errConstructor]
+ * An optional alternate error constructor to use.
+ * @param {AssertMakeErrorOptions} [options]
  * @returns {void}
  */
 
@@ -852,7 +874,7 @@ freeze(bestEffortStringify);
  * @callback AssertTypeofBigint
  * @param {any} specimen
  * @param {'bigint'} typename
- * @param {Details=} optDetails
+ * @param {Details} [optDetails]
  * @returns {asserts specimen is bigint}
  */
 
@@ -860,7 +882,7 @@ freeze(bestEffortStringify);
  * @callback AssertTypeofBoolean
  * @param {any} specimen
  * @param {'boolean'} typename
- * @param {Details=} optDetails
+ * @param {Details} [optDetails]
  * @returns {asserts specimen is boolean}
  */
 
@@ -868,7 +890,7 @@ freeze(bestEffortStringify);
  * @callback AssertTypeofFunction
  * @param {any} specimen
  * @param {'function'} typename
- * @param {Details=} optDetails
+ * @param {Details} [optDetails]
  * @returns {asserts specimen is Function}
  */
 
@@ -876,7 +898,7 @@ freeze(bestEffortStringify);
  * @callback AssertTypeofNumber
  * @param {any} specimen
  * @param {'number'} typename
- * @param {Details=} optDetails
+ * @param {Details} [optDetails]
  * @returns {asserts specimen is number}
  */
 
@@ -884,7 +906,7 @@ freeze(bestEffortStringify);
  * @callback AssertTypeofObject
  * @param {any} specimen
  * @param {'object'} typename
- * @param {Details=} optDetails
+ * @param {Details} [optDetails]
  * @returns {asserts specimen is Record<any, any> | null}
  */
 
@@ -892,7 +914,7 @@ freeze(bestEffortStringify);
  * @callback AssertTypeofString
  * @param {any} specimen
  * @param {'string'} typename
- * @param {Details=} optDetails
+ * @param {Details} [optDetails]
  * @returns {asserts specimen is string}
  */
 
@@ -900,7 +922,7 @@ freeze(bestEffortStringify);
  * @callback AssertTypeofSymbol
  * @param {any} specimen
  * @param {'symbol'} typename
- * @param {Details=} optDetails
+ * @param {Details} [optDetails]
  * @returns {asserts specimen is symbol}
  */
 
@@ -908,7 +930,7 @@ freeze(bestEffortStringify);
  * @callback AssertTypeofUndefined
  * @param {any} specimen
  * @param {'undefined'} typename
- * @param {Details=} optDetails
+ * @param {Details} [optDetails]
  * @returns {asserts specimen is undefined}
  */
 
@@ -927,7 +949,7 @@ freeze(bestEffortStringify);
  *
  * Assert an expected typeof result.
  * @param {any} specimen The value to get the typeof
- * @param {Details=} optDetails The details to throw
+ * @param {Details} [optDetails] The details to throw
  * @returns {asserts specimen is string}
  */
 
@@ -988,7 +1010,7 @@ freeze(bestEffortStringify);
  *
  * @callback AssertQuote
  * @param {any} payload What to declassify
- * @param {(string|number)=} spaces
+ * @param {(string|number)} [spaces]
  * @returns {StringablePayload} The declassified payload
  */
 
@@ -1021,8 +1043,8 @@ freeze(bestEffortStringify);
  * `optRaise` returns normally, which would be unusual, the throw following
  * `optRaise(reason)` would still happen.
  *
- * @param {Raise=} optRaise
- * @param {boolean=} unredacted
+ * @param {Raise} [optRaise]
+ * @param {boolean} [unredacted]
  * @returns {Assert}
  */
 
@@ -1186,13 +1208,13 @@ freeze(bestEffortStringify);
  * @callback FilterConsole
  * @param {VirtualConsole} baseConsole
  * @param {ConsoleFilter} filter
- * @param {string=} topic
+ * @param {string} [topic]
  * @returns {VirtualConsole}
  */
 })()
 ,
 // === functors[6] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   $h‍_imports([]);   // @ts-check
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   $h‍_imports([]);   // @ts-check
 
 /**
  * @typedef {readonly any[]} LogArgs
@@ -1263,7 +1285,12 @@ freeze(bestEffortStringify);
  */
 
 /**
- * @typedef {{ NOTE: 'ERROR_NOTE:', MESSAGE: 'ERROR_MESSAGE:' }} ErrorInfo
+ * @typedef {{
+ *   NOTE: 'ERROR_NOTE:',
+ *   MESSAGE: 'ERROR_MESSAGE:',
+ *   CAUSE: 'cause:',
+ *   ERRORS: 'errors:',
+ * }} ErrorInfo
  */
 
 /**
@@ -1284,14 +1311,15 @@ freeze(bestEffortStringify);
 })()
 ,
 // === functors[7] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   $h‍_imports([["./internal-types.js", []]]);   
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   $h‍_imports([]);   // @ts-check
+/* eslint-disable @endo/no-polymorphic-call */
 
-
-
-
-
-const { freeze}=   Object;
+// eslint-disable-next-line no-restricted-globals
 const { isSafeInteger}=   Number;
+// eslint-disable-next-line no-restricted-globals
+const { freeze}=   Object;
+// eslint-disable-next-line no-restricted-globals
+const { toStringTag: toStringTagSymbol}=   Symbol;
 
 /**
  * @template Data
@@ -1338,9 +1366,11 @@ const makeSelfCell=  (data)=>{
  */
 const spliceAfter=  (prev, selfCell)=>  {
   if( prev===  selfCell) {
+    // eslint-disable-next-line no-restricted-globals
     throw TypeError('Cannot splice a cell into itself');
    }
   if( selfCell.next!==  selfCell||  selfCell.prev!==  selfCell) {
+    // eslint-disable-next-line no-restricted-globals
     throw TypeError('Expected self-linked cell');
    }
   const cell=  selfCell;
@@ -1388,10 +1418,12 @@ const spliceOut=  (cell)=>{
  */
 const        makeLRUCacheMap=  (keysBudget)=>{
   if( !isSafeInteger(keysBudget)||  keysBudget<  0) {
+    // eslint-disable-next-line no-restricted-globals
     throw TypeError('keysBudget must be a safe non-negative integer number');
    }
   /** @typedef {DoublyLinkedCell<WeakMap<K, V> | undefined>} LRUCacheCell */
   /** @type {WeakMap<K, LRUCacheCell>} */
+  // eslint-disable-next-line no-restricted-globals
   const keyToCell=  new WeakMap();
   let size=  0; // `size` must remain <= `keysBudget`
   // As a sigil, `head` uniquely is not in the `keyToCell` map.
@@ -1446,6 +1478,7 @@ const        makeLRUCacheMap=  (keysBudget)=>{
       // Either a fresh cell or a reused condemned cell.
       size+=  1;
       // Add its data.
+      // eslint-disable-next-line no-restricted-globals
       cell.data=  new WeakMap();
       // Advertise the cell for this key.
       keyToCell.set(key, cell);
@@ -1492,11 +1525,25 @@ const        makeLRUCacheMap=  (keysBudget)=>{
     get,
     set,
     delete: deleteIt,
-    [Symbol.toStringTag]: 'LRUCacheMap'});
+    // eslint-disable-next-line jsdoc/check-types
+    [/** @type {typeof Symbol.toStringTag} */  toStringTagSymbol]:
+      'LRUCacheMap'});
 
   return lruCacheMap;
  };$h‍_once.makeLRUCacheMap(makeLRUCacheMap);
 freeze(makeLRUCacheMap);
+})()
+,
+// === functors[8] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let makeLRUCacheMap;$h‍_imports([["../make-lru-cachemap.js", [["makeLRUCacheMap", [$h‍_a => (makeLRUCacheMap = $h‍_a)]]]],["./internal-types.js", []]]);   
+
+
+
+
+
+
+const { freeze}=   Object;
+const { isSafeInteger}=   Number;
 
 const defaultLoggedErrorsBudget=  1000;
 const defaultArgsPerErrorBudget=  100;
@@ -1563,8 +1610,10 @@ const        makeNoteLogArgsArrayKit=  (
 freeze(makeNoteLogArgsArrayKit);
 })()
 ,
-// === functors[8] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let RangeError,TypeError,WeakMap,arrayJoin,arrayMap,arrayPop,arrayPush,assign,freeze,globalThis,is,isError,regexpTest,stringIndexOf,stringReplace,stringSlice,stringStartsWith,weakmapDelete,weakmapGet,weakmapHas,weakmapSet,an,bestEffortStringify,makeNoteLogArgsArrayKit;$h‍_imports([["../commons.js", [["RangeError", [$h‍_a => (RangeError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["WeakMap", [$h‍_a => (WeakMap = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["arrayPop", [$h‍_a => (arrayPop = $h‍_a)]],["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]],["assign", [$h‍_a => (assign = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["is", [$h‍_a => (is = $h‍_a)]],["isError", [$h‍_a => (isError = $h‍_a)]],["regexpTest", [$h‍_a => (regexpTest = $h‍_a)]],["stringIndexOf", [$h‍_a => (stringIndexOf = $h‍_a)]],["stringReplace", [$h‍_a => (stringReplace = $h‍_a)]],["stringSlice", [$h‍_a => (stringSlice = $h‍_a)]],["stringStartsWith", [$h‍_a => (stringStartsWith = $h‍_a)]],["weakmapDelete", [$h‍_a => (weakmapDelete = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["weakmapHas", [$h‍_a => (weakmapHas = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]]]],["./stringify-utils.js", [["an", [$h‍_a => (an = $h‍_a)]],["bestEffortStringify", [$h‍_a => (bestEffortStringify = $h‍_a)]]]],["./types.js", []],["./internal-types.js", []],["./note-log-args.js", [["makeNoteLogArgsArrayKit", [$h‍_a => (makeNoteLogArgsArrayKit = $h‍_a)]]]]]);   
+// === functors[9] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let RangeError,TypeError,WeakMap,arrayJoin,arrayMap,arrayPop,arrayPush,assign,freeze,defineProperty,globalThis,is,isError,regexpTest,stringIndexOf,stringReplace,stringSlice,stringStartsWith,weakmapDelete,weakmapGet,weakmapHas,weakmapSet,AggregateError,an,bestEffortStringify,makeNoteLogArgsArrayKit;$h‍_imports([["../commons.js", [["RangeError", [$h‍_a => (RangeError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["WeakMap", [$h‍_a => (WeakMap = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["arrayPop", [$h‍_a => (arrayPop = $h‍_a)]],["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]],["assign", [$h‍_a => (assign = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["is", [$h‍_a => (is = $h‍_a)]],["isError", [$h‍_a => (isError = $h‍_a)]],["regexpTest", [$h‍_a => (regexpTest = $h‍_a)]],["stringIndexOf", [$h‍_a => (stringIndexOf = $h‍_a)]],["stringReplace", [$h‍_a => (stringReplace = $h‍_a)]],["stringSlice", [$h‍_a => (stringSlice = $h‍_a)]],["stringStartsWith", [$h‍_a => (stringStartsWith = $h‍_a)]],["weakmapDelete", [$h‍_a => (weakmapDelete = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["weakmapHas", [$h‍_a => (weakmapHas = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]],["AggregateError", [$h‍_a => (AggregateError = $h‍_a)]]]],["./stringify-utils.js", [["an", [$h‍_a => (an = $h‍_a)]],["bestEffortStringify", [$h‍_a => (bestEffortStringify = $h‍_a)]]]],["./types.js", []],["./internal-types.js", []],["./note-log-args.js", [["makeNoteLogArgsArrayKit", [$h‍_a => (makeNoteLogArgsArrayKit = $h‍_a)]]]]]);   
+
+
 
 
 
@@ -1823,8 +1872,8 @@ const tagError=  (err, optErrorName=  err.name)=>  {
  */
 const makeError=  (
   optDetails=  redactedDetails `Assert failed`,
-  ErrorConstructor=  globalThis.Error,
-  { errorName=  undefined}=   {})=>
+  errConstructor=  globalThis.Error,
+  { errorName=  undefined, cause=  undefined, errors=  undefined}=   {})=>
      {
   if( typeof optDetails===  'string') {
     // If it is a string, use it as the literal part of the template so
@@ -1836,7 +1885,29 @@ const makeError=  (
     throw TypeError( `unrecognized details ${quote(optDetails)}`);
    }
   const messageString=  getMessageString(hiddenDetails);
-  const error=  new ErrorConstructor(messageString);
+  const opts=  cause&&  { cause};
+  let error;
+  if(
+    typeof AggregateError!==  'undefined'&&
+    errConstructor===  AggregateError)
+    {
+    error=  AggregateError(errors||  [], messageString, opts);
+   }else {
+    error=  /** @type {ErrorConstructor} */  errConstructor(
+      messageString,
+      opts);
+
+    if( errors!==  undefined) {
+      // Since we need to tolerate `errors` on an AggregateError, may as
+      // well tolerate it on all errors.
+      defineProperty(error, 'errors', {
+        value: errors,
+        writable: true,
+        enumerable: false,
+        configurable: true});
+
+     }
+   }
   weakmapSet(hiddenMessageLogArgs, error, getLogArgs(hiddenDetails));
   if( errorName!==  undefined) {
     tagError(error, errorName);
@@ -1948,9 +2019,10 @@ const makeAssert=  (optRaise=  undefined, unredacted=  false)=>  {
   /** @type {AssertFail} */
   const fail=  (
     optDetails=  assertFailedDetails,
-    ErrorConstructor=  globalThis.Error)=>
+    errConstructor=  undefined,
+    options=  undefined)=>
        {
-    const reason=  makeError(optDetails, ErrorConstructor);
+    const reason=  makeError(optDetails, errConstructor, options);
     if( optRaise!==  undefined) {
       optRaise(reason);
      }
@@ -1968,9 +2040,10 @@ const makeAssert=  (optRaise=  undefined, unredacted=  false)=>  {
   function baseAssert(
     flag,
     optDetails=  undefined,
-    ErrorConstructor=  undefined)
+    errConstructor=  undefined,
+    options=  undefined)
     {
-    flag||  fail(optDetails, ErrorConstructor);
+    flag||  fail(optDetails, errConstructor, options);
    }
 
   /** @type {AssertEqual} */
@@ -1978,12 +2051,14 @@ const makeAssert=  (optRaise=  undefined, unredacted=  false)=>  {
     actual,
     expected,
     optDetails=  undefined,
-    ErrorConstructor=  undefined)=>
+    errConstructor=  undefined,
+    options=  undefined)=>
        {
     is(actual, expected)||
       fail(
         optDetails||  details `Expected ${actual} is same as ${expected}`,
-        ErrorConstructor||  RangeError);
+        errConstructor||  RangeError,
+        options);
 
    };
   freeze(equal);
@@ -2035,8 +2110,8 @@ freeze(makeAssert);
 const assert=  makeAssert();$h‍_once.assert(assert);
 })()
 ,
-// === functors[9] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let Set,String,TypeError,WeakMap,WeakSet,globalThis,apply,arrayForEach,defineProperty,freeze,getOwnPropertyDescriptor,getOwnPropertyDescriptors,getPrototypeOf,isInteger,isObject,objectHasOwnProperty,ownKeys,preventExtensions,setAdd,setForEach,setHas,toStringTagSymbol,typedArrayPrototype,weakmapGet,weakmapSet,weaksetAdd,weaksetHas,assert;$h‍_imports([["./commons.js", [["Set", [$h‍_a => (Set = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["WeakMap", [$h‍_a => (WeakMap = $h‍_a)]],["WeakSet", [$h‍_a => (WeakSet = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["arrayForEach", [$h‍_a => (arrayForEach = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]],["isInteger", [$h‍_a => (isInteger = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["ownKeys", [$h‍_a => (ownKeys = $h‍_a)]],["preventExtensions", [$h‍_a => (preventExtensions = $h‍_a)]],["setAdd", [$h‍_a => (setAdd = $h‍_a)]],["setForEach", [$h‍_a => (setForEach = $h‍_a)]],["setHas", [$h‍_a => (setHas = $h‍_a)]],["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]],["typedArrayPrototype", [$h‍_a => (typedArrayPrototype = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]],["weaksetAdd", [$h‍_a => (weaksetAdd = $h‍_a)]],["weaksetHas", [$h‍_a => (weaksetHas = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
+// === functors[10] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let Set,String,TypeError,WeakMap,WeakSet,globalThis,apply,arrayForEach,defineProperty,freeze,getOwnPropertyDescriptor,getOwnPropertyDescriptors,getPrototypeOf,isInteger,isObject,objectHasOwnProperty,ownKeys,preventExtensions,setAdd,setForEach,setHas,toStringTagSymbol,typedArrayPrototype,weakmapGet,weakmapSet,weaksetAdd,weaksetHas,assert;$h‍_imports([["./commons.js", [["Set", [$h‍_a => (Set = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["WeakMap", [$h‍_a => (WeakMap = $h‍_a)]],["WeakSet", [$h‍_a => (WeakSet = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["arrayForEach", [$h‍_a => (arrayForEach = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]],["isInteger", [$h‍_a => (isInteger = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["ownKeys", [$h‍_a => (ownKeys = $h‍_a)]],["preventExtensions", [$h‍_a => (preventExtensions = $h‍_a)]],["setAdd", [$h‍_a => (setAdd = $h‍_a)]],["setForEach", [$h‍_a => (setForEach = $h‍_a)]],["setHas", [$h‍_a => (setHas = $h‍_a)]],["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]],["typedArrayPrototype", [$h‍_a => (typedArrayPrototype = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]],["weaksetAdd", [$h‍_a => (weaksetAdd = $h‍_a)]],["weaksetHas", [$h‍_a => (weaksetHas = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
 
 
 
@@ -2285,8 +2360,12 @@ const        makeHardener=  ()=>  {
  };$h‍_once.makeHardener(makeHardener);
 })()
 ,
-// === functors[10] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   $h‍_imports([]);   /* eslint-disable no-restricted-globals */
+// === functors[11] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let arrayPush;$h‍_imports([["./commons.js", [["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]]]]]);   
+
+
+
+
 /**
  * @file Exports {@code whitelist}, a recursively defined
  * JSON record enumerating all intrinsics and their properties
@@ -2295,8 +2374,6 @@ const        makeHardener=  ()=>  {
  * @author JF Paradis
  * @author Mark S. Miller
  */
-
-/* eslint max-lines: 0 */
 
 /**
  * constantProperties
@@ -2341,6 +2418,8 @@ const        universalPropertyNames=  {
   Boolean: 'Boolean',
   DataView: 'DataView',
   EvalError: 'EvalError',
+  // https://github.com/tc39/proposal-float16array
+  Float16Array: 'Float16Array',
   Float32Array: 'Float32Array',
   Float64Array: 'Float64Array',
   Int8Array: 'Int8Array',
@@ -2368,6 +2447,8 @@ const        universalPropertyNames=  {
   Iterator: 'Iterator',
   // https://github.com/tc39/proposal-async-iterator-helpers
   AsyncIterator: 'AsyncIterator',
+  // https://github.com/endojs/endo/issues/550
+  AggregateError: 'AggregateError',
 
   // *** Other Properties of the Global Object
 
@@ -2471,14 +2552,25 @@ const        uniqueGlobalPropertyNames=  {
 
 // All the "subclasses" of Error. These are collectively represented in the
 // ECMAScript spec by the meta variable NativeError.
-// TODO Add AggregateError https://github.com/Agoric/SES-shim/issues/550
-$h‍_once.uniqueGlobalPropertyNames(uniqueGlobalPropertyNames);const NativeErrors=[
+/** @type {GenericErrorConstructor[]} */$h‍_once.uniqueGlobalPropertyNames(uniqueGlobalPropertyNames);
+const NativeErrors=  [
   EvalError,
   RangeError,
   ReferenceError,
   SyntaxError,
   TypeError,
-  URIError];
+  URIError
+  // https://github.com/endojs/endo/issues/550
+  // Commented out to accommodate platforms prior to AggregateError.
+  // Instead, conditional push below.
+  // AggregateError,
+];$h‍_once.NativeErrors(NativeErrors);
+
+if( typeof AggregateError!==  'undefined') {
+  // Conditional, to accommodate platforms prior to AggregateError
+  arrayPush(NativeErrors, AggregateError);
+ }
+
 
 
 /**
@@ -2528,7 +2620,7 @@ $h‍_once.uniqueGlobalPropertyNames(uniqueGlobalPropertyNames);const NativeErro
  */
 
 // Function Instances
-$h‍_once.NativeErrors(NativeErrors);const FunctionInstance={
+const        FunctionInstance=  {
   '[[Proto]]': '%FunctionPrototype%',
   length: 'number',
   name: 'string'
@@ -2669,7 +2761,9 @@ const CommonMath=  {
   // See https://github.com/Moddable-OpenSource/moddable/issues/523
   irem: false,
   // See https://github.com/Moddable-OpenSource/moddable/issues/523
-  mod: false};
+  mod: false,
+  // See https://github.com/Moddable-OpenSource/moddable/issues/523#issuecomment-1942904505
+  irandom: false};
 
 
 const        permitted=  {
@@ -2730,7 +2824,9 @@ const        permitted=  {
     setPrototypeOf: fn,
     values: fn,
     // https://github.com/tc39/proposal-array-grouping
-    groupBy: fn},
+    groupBy: fn,
+    // Seen on QuickJS
+    __getClass: false},
 
 
   '%ObjectPrototype%': {
@@ -2776,7 +2872,11 @@ const        permitted=  {
     // proposed but not yet std. To be removed if there
     caller: false,
     // proposed but not yet std. To be removed if there
-    arguments: false},
+    arguments: false,
+    // Seen on QuickJS. TODO grab getter for use by console
+    fileName: false,
+    // Seen on QuickJS. TODO grab getter for use by console
+    lineNumber: false},
 
 
   Boolean: {
@@ -2815,7 +2915,9 @@ const        permitted=  {
     // Seen at core-js https://github.com/zloirock/core-js#ecmascript-symbol
     useSimple: false,
     // Seen at core-js https://github.com/zloirock/core-js#ecmascript-symbol
-    useSetter: false},
+    useSetter: false,
+    // Seen on QuickJS
+    operatorSet: false},
 
 
   '%SymbolPrototype%': {
@@ -2875,6 +2977,8 @@ const        permitted=  {
   SyntaxError: NativeError('%SyntaxErrorPrototype%'),
   TypeError: NativeError('%TypeErrorPrototype%'),
   URIError: NativeError('%URIErrorPrototype%'),
+  // https://github.com/endojs/endo/issues/550
+  AggregateError: NativeError('%AggregateErrorPrototype%'),
 
   '%EvalErrorPrototype%': NativeErrorPrototype('EvalError'),
   '%RangeErrorPrototype%': NativeErrorPrototype('RangeError'),
@@ -2882,6 +2986,8 @@ const        permitted=  {
   '%SyntaxErrorPrototype%': NativeErrorPrototype('SyntaxError'),
   '%TypeErrorPrototype%': NativeErrorPrototype('TypeError'),
   '%URIErrorPrototype%': NativeErrorPrototype('URIError'),
+  // https://github.com/endojs/endo/issues/550
+  '%AggregateErrorPrototype%': NativeErrorPrototype('AggregateError'),
 
   // *** Numbers and Dates
 
@@ -2925,7 +3031,31 @@ const        permitted=  {
     // See https://github.com/Moddable-OpenSource/moddable/issues/523
     bitLength: false,
     // See https://github.com/Moddable-OpenSource/moddable/issues/523
-    fromArrayBuffer: false},
+    fromArrayBuffer: false,
+    // Seen on QuickJS
+    tdiv: false,
+    // Seen on QuickJS
+    fdiv: false,
+    // Seen on QuickJS
+    cdiv: false,
+    // Seen on QuickJS
+    ediv: false,
+    // Seen on QuickJS
+    tdivrem: false,
+    // Seen on QuickJS
+    fdivrem: false,
+    // Seen on QuickJS
+    cdivrem: false,
+    // Seen on QuickJS
+    edivrem: false,
+    // Seen on QuickJS
+    sqrt: false,
+    // Seen on QuickJS
+    sqrtrem: false,
+    // Seen on QuickJS
+    floorLog2: false,
+    // Seen on QuickJS
+    ctz: false},
 
 
   '%BigIntPrototype%': {
@@ -3093,7 +3223,9 @@ const        permitted=  {
     // https://github.com/tc39/proposal-is-usv-string
     isWellFormed: fn,
     toWellFormed: fn,
-    unicodeSets: fn},
+    unicodeSets: fn,
+    // Seen on QuickJS
+    __quote: false},
 
 
   '%StringIteratorPrototype%': {
@@ -3333,6 +3465,8 @@ const        permitted=  {
 
   BigInt64Array: TypedArray('%BigInt64ArrayPrototype%'),
   BigUint64Array: TypedArray('%BigUint64ArrayPrototype%'),
+  // https://github.com/tc39/proposal-float16array
+  Float16Array: TypedArray('%Float16ArrayPrototype%'),
   Float32Array: TypedArray('%Float32ArrayPrototype%'),
   Float64Array: TypedArray('%Float64ArrayPrototype%'),
   Int16Array: TypedArray('%Int16ArrayPrototype%'),
@@ -3345,6 +3479,8 @@ const        permitted=  {
 
   '%BigInt64ArrayPrototype%': TypedArrayPrototype('BigInt64Array'),
   '%BigUint64ArrayPrototype%': TypedArrayPrototype('BigUint64Array'),
+  // https://github.com/tc39/proposal-float16array
+  '%Float16ArrayPrototype%': TypedArrayPrototype('Float16Array'),
   '%Float32ArrayPrototype%': TypedArrayPrototype('Float32Array'),
   '%Float64ArrayPrototype%': TypedArrayPrototype('Float64Array'),
   '%Int16ArrayPrototype%': TypedArrayPrototype('Int16Array'),
@@ -3393,7 +3529,9 @@ const        permitted=  {
     // Properties of the Set Constructor
     '[[Proto]]': '%FunctionPrototype%',
     prototype: '%SetPrototype%',
-    '@@species': getter},
+    '@@species': getter,
+    // Seen on QuickJS
+    groupBy: false},
 
 
   '%SetPrototype%': {
@@ -3510,6 +3648,8 @@ const        permitted=  {
     constructor: 'DataView',
     getBigInt64: fn,
     getBigUint64: fn,
+    // https://github.com/tc39/proposal-float16array
+    getFloat16: fn,
     getFloat32: fn,
     getFloat64: fn,
     getInt8: fn,
@@ -3520,6 +3660,8 @@ const        permitted=  {
     getUint32: fn,
     setBigInt64: fn,
     setBigUint64: fn,
+    // https://github.com/tc39/proposal-float16array
+    setFloat16: fn,
     setFloat32: fn,
     setFloat64: fn,
     setInt8: fn,
@@ -3571,7 +3713,9 @@ const        permitted=  {
     find: fn,
     '@@toStringTag': 'string',
     // https://github.com/tc39/proposal-async-iterator-helpers
-    toAsync: fn},
+    toAsync: fn,
+    // See https://github.com/Moddable-OpenSource/moddable/issues/523#issuecomment-1942904505
+    '@@dispose': false},
 
 
   // https://github.com/tc39/proposal-iterator-helpers
@@ -3613,7 +3757,9 @@ const        permitted=  {
     some: fn,
     every: fn,
     find: fn,
-    '@@toStringTag': 'string'},
+    '@@toStringTag': 'string',
+    // See https://github.com/Moddable-OpenSource/moddable/issues/523#issuecomment-1942904505
+    '@@asyncDispose': false},
 
 
   // https://github.com/tc39/proposal-async-iterator-helpers
@@ -3709,9 +3855,8 @@ const        permitted=  {
     '[[Proto]]': '%FunctionPrototype%',
     all: fn,
     allSettled: fn,
-    // To transition from `false` to `fn` once we also have `AggregateError`
-    // TODO https://github.com/Agoric/SES-shim/issues/550
-    any: false, // ES2021
+    // https://github.com/Agoric/SES-shim/issues/550
+    any: fn,
     prototype: '%PromisePrototype%',
     race: fn,
     reject: fn,
@@ -3804,12 +3949,11 @@ const        permitted=  {
     evaluate: fn,
     globalThis: getter,
     name: getter,
-    // Should this be proposed?
-    toString: fn,
     import: asyncFn,
     load: asyncFn,
     importNow: fn,
-    module: fn},
+    module: fn,
+    '@@toStringTag': 'string'},
 
 
   lockdown: fn,
@@ -3818,8 +3962,8 @@ const        permitted=  {
   '%InitialGetStackString%': fn};$h‍_once.permitted(permitted);
 })()
 ,
-// === functors[11] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let TypeError,WeakSet,arrayFilter,create,defineProperty,entries,freeze,getOwnPropertyDescriptor,getOwnPropertyDescriptors,globalThis,is,isObject,objectHasOwnProperty,values,weaksetHas,constantProperties,sharedGlobalPropertyNames,universalPropertyNames,permitted;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["WeakSet", [$h‍_a => (WeakSet = $h‍_a)]],["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["is", [$h‍_a => (is = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["values", [$h‍_a => (values = $h‍_a)]],["weaksetHas", [$h‍_a => (weaksetHas = $h‍_a)]]]],["./permits.js", [["constantProperties", [$h‍_a => (constantProperties = $h‍_a)]],["sharedGlobalPropertyNames", [$h‍_a => (sharedGlobalPropertyNames = $h‍_a)]],["universalPropertyNames", [$h‍_a => (universalPropertyNames = $h‍_a)]],["permitted", [$h‍_a => (permitted = $h‍_a)]]]]]);   
+// === functors[12] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let TypeError,WeakSet,arrayFilter,create,defineProperty,entries,freeze,getOwnPropertyDescriptor,getOwnPropertyDescriptors,globalThis,is,isObject,objectHasOwnProperty,values,weaksetHas,constantProperties,sharedGlobalPropertyNames,universalPropertyNames,permitted;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["WeakSet", [$h‍_a => (WeakSet = $h‍_a)]],["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["is", [$h‍_a => (is = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["values", [$h‍_a => (values = $h‍_a)]],["weaksetHas", [$h‍_a => (weaksetHas = $h‍_a)]]]],["./permits.js", [["constantProperties", [$h‍_a => (constantProperties = $h‍_a)]],["sharedGlobalPropertyNames", [$h‍_a => (sharedGlobalPropertyNames = $h‍_a)]],["universalPropertyNames", [$h‍_a => (universalPropertyNames = $h‍_a)]],["permitted", [$h‍_a => (permitted = $h‍_a)]]]]]);   
 
 
 
@@ -3995,8 +4139,8 @@ const        getGlobalIntrinsics=  (globalObject)=>{
  };$h‍_once.getGlobalIntrinsics(getGlobalIntrinsics);
 })()
 ,
-// === functors[12] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let permitted,FunctionInstance,isAccessorPermit,Map,String,Symbol,TypeError,arrayFilter,arrayIncludes,arrayMap,entries,getOwnPropertyDescriptor,getPrototypeOf,isObject,mapGet,objectHasOwnProperty,ownKeys,symbolKeyFor;$h‍_imports([["./permits.js", [["permitted", [$h‍_a => (permitted = $h‍_a)]],["FunctionInstance", [$h‍_a => (FunctionInstance = $h‍_a)]],["isAccessorPermit", [$h‍_a => (isAccessorPermit = $h‍_a)]]]],["./commons.js", [["Map", [$h‍_a => (Map = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["Symbol", [$h‍_a => (Symbol = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["arrayIncludes", [$h‍_a => (arrayIncludes = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["ownKeys", [$h‍_a => (ownKeys = $h‍_a)]],["symbolKeyFor", [$h‍_a => (symbolKeyFor = $h‍_a)]]]]]);   
+// === functors[13] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let permitted,FunctionInstance,isAccessorPermit,Map,String,Symbol,TypeError,arrayFilter,arrayIncludes,arrayMap,entries,getOwnPropertyDescriptor,getPrototypeOf,isObject,mapGet,objectHasOwnProperty,ownKeys,symbolKeyFor;$h‍_imports([["./permits.js", [["permitted", [$h‍_a => (permitted = $h‍_a)]],["FunctionInstance", [$h‍_a => (FunctionInstance = $h‍_a)]],["isAccessorPermit", [$h‍_a => (isAccessorPermit = $h‍_a)]]]],["./commons.js", [["Map", [$h‍_a => (Map = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["Symbol", [$h‍_a => (Symbol = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["arrayIncludes", [$h‍_a => (arrayIncludes = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["ownKeys", [$h‍_a => (ownKeys = $h‍_a)]],["symbolKeyFor", [$h‍_a => (symbolKeyFor = $h‍_a)]]]]]);   
 
 
 
@@ -4328,8 +4472,8 @@ function                whitelistIntrinsics(
  }$h‍_once.default(     whitelistIntrinsics);
 })()
 ,
-// === functors[13] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let FERAL_FUNCTION,SyntaxError,TypeError,defineProperties,getPrototypeOf,setPrototypeOf,freeze;$h‍_imports([["./commons.js", [["FERAL_FUNCTION", [$h‍_a => (FERAL_FUNCTION = $h‍_a)]],["SyntaxError", [$h‍_a => (SyntaxError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]],["setPrototypeOf", [$h‍_a => (setPrototypeOf = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]]]]]);   
+// === functors[14] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let FERAL_FUNCTION,SyntaxError,TypeError,defineProperties,getPrototypeOf,setPrototypeOf,freeze;$h‍_imports([["./commons.js", [["FERAL_FUNCTION", [$h‍_a => (FERAL_FUNCTION = $h‍_a)]],["SyntaxError", [$h‍_a => (SyntaxError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]],["setPrototypeOf", [$h‍_a => (setPrototypeOf = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]]]]]);   
 
 
 
@@ -4467,8 +4611,8 @@ function                tameFunctionConstructors() {
  }$h‍_once.default(     tameFunctionConstructors);
 })()
 ,
-// === functors[14] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let Date,TypeError,apply,construct,defineProperties;$h‍_imports([["./commons.js", [["Date", [$h‍_a => (Date = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["construct", [$h‍_a => (construct = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]]]]]);   
+// === functors[15] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let Date,TypeError,apply,construct,defineProperties;$h‍_imports([["./commons.js", [["Date", [$h‍_a => (Date = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["construct", [$h‍_a => (construct = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]]]]]);   
 
 
 
@@ -4600,8 +4744,8 @@ function                tameDateConstructor(dateTaming=  'safe') {
  }$h‍_once.default(     tameDateConstructor);
 })()
 ,
-// === functors[15] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let Math,TypeError,create,getOwnPropertyDescriptors,objectPrototype;$h‍_imports([["./commons.js", [["Math", [$h‍_a => (Math = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["objectPrototype", [$h‍_a => (objectPrototype = $h‍_a)]]]]]);   
+// === functors[16] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let Math,TypeError,create,getOwnPropertyDescriptors,objectPrototype;$h‍_imports([["./commons.js", [["Math", [$h‍_a => (Math = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["objectPrototype", [$h‍_a => (objectPrototype = $h‍_a)]]]]]);   
 
 
 
@@ -4647,8 +4791,8 @@ function                tameMathObject(mathTaming=  'safe') {
  }$h‍_once.default(     tameMathObject);
 })()
 ,
-// === functors[16] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let FERAL_REG_EXP,TypeError,construct,defineProperties,getOwnPropertyDescriptor,speciesSymbol;$h‍_imports([["./commons.js", [["FERAL_REG_EXP", [$h‍_a => (FERAL_REG_EXP = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["construct", [$h‍_a => (construct = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["speciesSymbol", [$h‍_a => (speciesSymbol = $h‍_a)]]]]]);   
+// === functors[17] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let FERAL_REG_EXP,TypeError,construct,defineProperties,getOwnPropertyDescriptor,speciesSymbol;$h‍_imports([["./commons.js", [["FERAL_REG_EXP", [$h‍_a => (FERAL_REG_EXP = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["construct", [$h‍_a => (construct = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["speciesSymbol", [$h‍_a => (speciesSymbol = $h‍_a)]]]]]);   
 
 
 
@@ -4675,21 +4819,28 @@ function                tameRegExpConstructor(regExpTaming=  'safe') {
       return construct(FERAL_REG_EXP, rest, new.target);
      };
 
-    const speciesDesc=  getOwnPropertyDescriptor(FERAL_REG_EXP, speciesSymbol);
-    if( !speciesDesc) {
-      throw TypeError('no RegExp[Symbol.species] descriptor');
-     }
-
     defineProperties(ResultRegExp, {
       length: { value: 2},
       prototype: {
         value: RegExpPrototype,
         writable: false,
         enumerable: false,
-        configurable: false},
+        configurable: false}});
 
-      [speciesSymbol]: speciesDesc});
 
+    // Hermes does not have `Symbol.species`. We should support such platforms.
+    if( speciesSymbol) {
+      const speciesDesc=  getOwnPropertyDescriptor(
+        FERAL_REG_EXP,
+        speciesSymbol);
+
+      if( !speciesDesc) {
+        throw TypeError('no RegExp[Symbol.species] descriptor');
+       }
+      defineProperties(ResultRegExp, {
+        [speciesSymbol]: speciesDesc});
+
+     }
     return ResultRegExp;
    };
 
@@ -4711,8 +4862,8 @@ function                tameRegExpConstructor(regExpTaming=  'safe') {
  }$h‍_once.default(     tameRegExpConstructor);
 })()
 ,
-// === functors[17] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let toStringTagSymbol;$h‍_imports([["./commons.js", [["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]]]]]);   
+// === functors[18] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let toStringTagSymbol,iteratorSymbol;$h‍_imports([["./commons.js", [["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]],["iteratorSymbol", [$h‍_a => (iteratorSymbol = $h‍_a)]]]]]);   
 
 /**
  * @file Exports {@code enablements}, a recursively defined
@@ -4810,7 +4961,9 @@ const        moderateEnablements=  {
 
   '%ArrayPrototype%': {
     toString: true,
-    push: true  // set by "Google Analytics"
+    push: true, // set by "Google Analytics"
+    concat: true, // set by mobx generated code (old TS compiler?)
+    [iteratorSymbol]: true  // set by mobx generated code (old TS compiler?)
 },
 
   // Function.prototype has no 'prototype' property to enable.
@@ -4859,6 +5012,12 @@ const        moderateEnablements=  {
   '%ReferenceErrorPrototype%': {
     message: true, // to match TypeErrorPrototype.message
     name: true  // set by "node 14"
+},
+
+  // https://github.com/endojs/endo/issues/550
+  '%AggregateErrorPrototype%': {
+    message: true, // to match TypeErrorPrototype.message
+    name: true  // set by "node 14"?
 },
 
   '%PromisePrototype%': {
@@ -4947,8 +5106,8 @@ const        severeEnablements=  {
   '%SetPrototype%': '*'};$h‍_once.severeEnablements(severeEnablements);
 })()
 ,
-// === functors[18] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let Set,String,TypeError,arrayForEach,defineProperty,getOwnPropertyDescriptor,getOwnPropertyDescriptors,isObject,objectHasOwnProperty,ownKeys,setHas,minEnablements,moderateEnablements,severeEnablements;$h‍_imports([["./commons.js", [["Set", [$h‍_a => (Set = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["arrayForEach", [$h‍_a => (arrayForEach = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["ownKeys", [$h‍_a => (ownKeys = $h‍_a)]],["setHas", [$h‍_a => (setHas = $h‍_a)]]]],["./enablements.js", [["minEnablements", [$h‍_a => (minEnablements = $h‍_a)]],["moderateEnablements", [$h‍_a => (moderateEnablements = $h‍_a)]],["severeEnablements", [$h‍_a => (severeEnablements = $h‍_a)]]]]]);   
+// === functors[19] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let Set,String,TypeError,arrayForEach,defineProperty,getOwnPropertyDescriptor,getOwnPropertyDescriptors,isObject,objectHasOwnProperty,ownKeys,setHas,minEnablements,moderateEnablements,severeEnablements;$h‍_imports([["./commons.js", [["Set", [$h‍_a => (Set = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["arrayForEach", [$h‍_a => (arrayForEach = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["ownKeys", [$h‍_a => (ownKeys = $h‍_a)]],["setHas", [$h‍_a => (setHas = $h‍_a)]]]],["./enablements.js", [["minEnablements", [$h‍_a => (minEnablements = $h‍_a)]],["moderateEnablements", [$h‍_a => (moderateEnablements = $h‍_a)]],["severeEnablements", [$h‍_a => (severeEnablements = $h‍_a)]]]]]);   
 
 
 
@@ -5158,8 +5317,8 @@ function                enablePropertyOverrides(
  }$h‍_once.default(     enablePropertyOverrides);
 })()
 ,
-// === functors[19] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let Number,String,TypeError,defineProperty,getOwnPropertyNames,isObject,regexpExec,assert;$h‍_imports([["./commons.js", [["Number", [$h‍_a => (Number = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["getOwnPropertyNames", [$h‍_a => (getOwnPropertyNames = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["regexpExec", [$h‍_a => (regexpExec = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
+// === functors[20] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let Number,String,TypeError,defineProperty,getOwnPropertyNames,isObject,regexpExec,assert;$h‍_imports([["./commons.js", [["Number", [$h‍_a => (Number = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["getOwnPropertyNames", [$h‍_a => (getOwnPropertyNames = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["regexpExec", [$h‍_a => (regexpExec = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
 
 
 
@@ -5242,8 +5401,8 @@ function                tameLocaleMethods(intrinsics, localeTaming=  'safe') {
  }$h‍_once.default(     tameLocaleMethods);
 })()
 ,
-// === functors[20] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   $h‍_imports([]);   /**
+// === functors[21] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   $h‍_imports([]);   /**
  * makeEvalFunction()
  * A safe version of the native eval function which relies on
  * the safety of safeEvaluate for confinement.
@@ -5251,7 +5410,7 @@ function                tameLocaleMethods(intrinsics, localeTaming=  'safe') {
  * @param {Function} safeEvaluate
  */
 const        makeEvalFunction=  (safeEvaluate)=>{
-  // We use the the concise method syntax to create an eval without a
+  // We use the concise method syntax to create an eval without a
   // [[Construct]] behavior (such that the invocation "new eval()" throws
   // TypeError: eval is not a constructor"), but which still accepts a
   // 'this' binding.
@@ -5272,8 +5431,8 @@ const        makeEvalFunction=  (safeEvaluate)=>{
  };$h‍_once.makeEvalFunction(makeEvalFunction);
 })()
 ,
-// === functors[21] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let FERAL_FUNCTION,arrayJoin,arrayPop,defineProperties,getPrototypeOf,assert;$h‍_imports([["./commons.js", [["FERAL_FUNCTION", [$h‍_a => (FERAL_FUNCTION = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["arrayPop", [$h‍_a => (arrayPop = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
+// === functors[22] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let FERAL_FUNCTION,arrayJoin,arrayPop,defineProperties,getPrototypeOf,assert;$h‍_imports([["./commons.js", [["FERAL_FUNCTION", [$h‍_a => (FERAL_FUNCTION = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["arrayPop", [$h‍_a => (arrayPop = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
 
 
 
@@ -5353,8 +5512,8 @@ const        makeFunctionConstructor=  (safeEvaluate)=>{
  };$h‍_once.makeFunctionConstructor(makeFunctionConstructor);
 })()
 ,
-// === functors[22] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let TypeError,assign,create,defineProperty,entries,freeze,objectHasOwnProperty,unscopablesSymbol,makeEvalFunction,makeFunctionConstructor,constantProperties,universalPropertyNames;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["assign", [$h‍_a => (assign = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["unscopablesSymbol", [$h‍_a => (unscopablesSymbol = $h‍_a)]]]],["./make-eval-function.js", [["makeEvalFunction", [$h‍_a => (makeEvalFunction = $h‍_a)]]]],["./make-function-constructor.js", [["makeFunctionConstructor", [$h‍_a => (makeFunctionConstructor = $h‍_a)]]]],["./permits.js", [["constantProperties", [$h‍_a => (constantProperties = $h‍_a)]],["universalPropertyNames", [$h‍_a => (universalPropertyNames = $h‍_a)]]]]]);   
+// === functors[23] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let TypeError,assign,create,defineProperty,entries,freeze,objectHasOwnProperty,unscopablesSymbol,makeEvalFunction,makeFunctionConstructor,constantProperties,universalPropertyNames;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["assign", [$h‍_a => (assign = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["unscopablesSymbol", [$h‍_a => (unscopablesSymbol = $h‍_a)]]]],["./make-eval-function.js", [["makeEvalFunction", [$h‍_a => (makeEvalFunction = $h‍_a)]]]],["./make-function-constructor.js", [["makeFunctionConstructor", [$h‍_a => (makeFunctionConstructor = $h‍_a)]]]],["./permits.js", [["constantProperties", [$h‍_a => (constantProperties = $h‍_a)]],["universalPropertyNames", [$h‍_a => (universalPropertyNames = $h‍_a)]]]]]);   
 
 
 
@@ -5525,8 +5684,8 @@ const        setGlobalObjectEvaluators=  (
  };$h‍_once.setGlobalObjectEvaluators(setGlobalObjectEvaluators);
 })()
 ,
-// === functors[23] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let Proxy,String,TypeError,ReferenceError,create,freeze,getOwnPropertyDescriptors,globalThis,immutableObject,assert;$h‍_imports([["./commons.js", [["Proxy", [$h‍_a => (Proxy = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["ReferenceError", [$h‍_a => (ReferenceError = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["immutableObject", [$h‍_a => (immutableObject = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
+// === functors[24] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let Proxy,String,TypeError,ReferenceError,create,freeze,getOwnPropertyDescriptors,globalThis,immutableObject,assert;$h‍_imports([["./commons.js", [["Proxy", [$h‍_a => (Proxy = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["ReferenceError", [$h‍_a => (ReferenceError = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["immutableObject", [$h‍_a => (immutableObject = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
 
 
 
@@ -5620,8 +5779,8 @@ const        strictScopeTerminator=  new Proxy(
   strictScopeTerminatorHandler);$h‍_once.strictScopeTerminator(strictScopeTerminator);
 })()
 ,
-// === functors[24] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let Proxy,create,freeze,getOwnPropertyDescriptors,immutableObject,reflectSet,strictScopeTerminatorHandler,alwaysThrowHandler;$h‍_imports([["./commons.js", [["Proxy", [$h‍_a => (Proxy = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["immutableObject", [$h‍_a => (immutableObject = $h‍_a)]],["reflectSet", [$h‍_a => (reflectSet = $h‍_a)]]]],["./strict-scope-terminator.js", [["strictScopeTerminatorHandler", [$h‍_a => (strictScopeTerminatorHandler = $h‍_a)]],["alwaysThrowHandler", [$h‍_a => (alwaysThrowHandler = $h‍_a)]]]]]);   
+// === functors[25] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let Proxy,create,freeze,getOwnPropertyDescriptors,immutableObject,reflectSet,strictScopeTerminatorHandler,alwaysThrowHandler;$h‍_imports([["./commons.js", [["Proxy", [$h‍_a => (Proxy = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["immutableObject", [$h‍_a => (immutableObject = $h‍_a)]],["reflectSet", [$h‍_a => (reflectSet = $h‍_a)]]]],["./strict-scope-terminator.js", [["strictScopeTerminatorHandler", [$h‍_a => (strictScopeTerminatorHandler = $h‍_a)]],["alwaysThrowHandler", [$h‍_a => (alwaysThrowHandler = $h‍_a)]]]]]);   
 
 
 
@@ -5677,8 +5836,8 @@ const        createSloppyGlobalsScopeTerminator=  (globalObject)=>{
 freeze(createSloppyGlobalsScopeTerminator);
 })()
 ,
-// === functors[25] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let FERAL_EVAL,create,defineProperties,freeze,assert;$h‍_imports([["./commons.js", [["FERAL_EVAL", [$h‍_a => (FERAL_EVAL = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
+// === functors[26] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let FERAL_EVAL,create,defineProperties,freeze,assert;$h‍_imports([["./commons.js", [["FERAL_EVAL", [$h‍_a => (FERAL_EVAL = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
 
 
 
@@ -5769,8 +5928,8 @@ const        makeEvalScopeKit=  ()=>  {
  };$h‍_once.makeEvalScopeKit(makeEvalScopeKit);
 })()
 ,
-// === functors[26] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let FERAL_REG_EXP,regexpExec,stringSlice;$h‍_imports([["./commons.js", [["FERAL_REG_EXP", [$h‍_a => (FERAL_REG_EXP = $h‍_a)]],["regexpExec", [$h‍_a => (regexpExec = $h‍_a)]],["stringSlice", [$h‍_a => (stringSlice = $h‍_a)]]]]]);   
+// === functors[27] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let FERAL_REG_EXP,regexpExec,stringSlice;$h‍_imports([["./commons.js", [["FERAL_REG_EXP", [$h‍_a => (FERAL_REG_EXP = $h‍_a)]],["regexpExec", [$h‍_a => (regexpExec = $h‍_a)]],["stringSlice", [$h‍_a => (stringSlice = $h‍_a)]]]]]);   
 
 // Captures a key and value of the form #key=value or @key=value
 const sourceMetaEntryRegExp=
@@ -5822,8 +5981,8 @@ const        getSourceURL=  (src)=>{
  };$h‍_once.getSourceURL(getSourceURL);
 })()
 ,
-// === functors[27] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let FERAL_REG_EXP,SyntaxError,stringReplace,stringSearch,stringSlice,stringSplit,freeze,getSourceURL;$h‍_imports([["./commons.js", [["FERAL_REG_EXP", [$h‍_a => (FERAL_REG_EXP = $h‍_a)]],["SyntaxError", [$h‍_a => (SyntaxError = $h‍_a)]],["stringReplace", [$h‍_a => (stringReplace = $h‍_a)]],["stringSearch", [$h‍_a => (stringSearch = $h‍_a)]],["stringSlice", [$h‍_a => (stringSlice = $h‍_a)]],["stringSplit", [$h‍_a => (stringSplit = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]]]],["./get-source-url.js", [["getSourceURL", [$h‍_a => (getSourceURL = $h‍_a)]]]]]);   
+// === functors[28] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let FERAL_REG_EXP,SyntaxError,stringReplace,stringSearch,stringSlice,stringSplit,freeze,getSourceURL;$h‍_imports([["./commons.js", [["FERAL_REG_EXP", [$h‍_a => (FERAL_REG_EXP = $h‍_a)]],["SyntaxError", [$h‍_a => (SyntaxError = $h‍_a)]],["stringReplace", [$h‍_a => (stringReplace = $h‍_a)]],["stringSearch", [$h‍_a => (stringSearch = $h‍_a)]],["stringSlice", [$h‍_a => (stringSlice = $h‍_a)]],["stringSplit", [$h‍_a => (stringSplit = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]]]],["./get-source-url.js", [["getSourceURL", [$h‍_a => (getSourceURL = $h‍_a)]]]]]);   
 
 
 
@@ -6090,8 +6249,8 @@ $h‍_once.applyTransforms(applyTransforms);const transforms=freeze({
   applyTransforms: freeze(applyTransforms)});$h‍_once.transforms(transforms);
 })()
 ,
-// === functors[28] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let arrayFilter,arrayIncludes,getOwnPropertyDescriptor,getOwnPropertyNames,objectHasOwnProperty,regexpTest;$h‍_imports([["./commons.js", [["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["arrayIncludes", [$h‍_a => (arrayIncludes = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getOwnPropertyNames", [$h‍_a => (getOwnPropertyNames = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["regexpTest", [$h‍_a => (regexpTest = $h‍_a)]]]]]);   
+// === functors[29] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let arrayFilter,arrayIncludes,getOwnPropertyDescriptor,getOwnPropertyNames,objectHasOwnProperty,regexpTest;$h‍_imports([["./commons.js", [["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["arrayIncludes", [$h‍_a => (arrayIncludes = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getOwnPropertyNames", [$h‍_a => (getOwnPropertyNames = $h‍_a)]],["objectHasOwnProperty", [$h‍_a => (objectHasOwnProperty = $h‍_a)]],["regexpTest", [$h‍_a => (regexpTest = $h‍_a)]]]]]);   
 
 
 
@@ -6273,8 +6432,8 @@ const        getScopeConstants=  (globalObject, moduleLexicals=  {})=>  {
  };$h‍_once.getScopeConstants(getScopeConstants);
 })()
 ,
-// === functors[29] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let FERAL_FUNCTION,arrayJoin,apply,getScopeConstants;$h‍_imports([["./commons.js", [["FERAL_FUNCTION", [$h‍_a => (FERAL_FUNCTION = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]]]],["./scope-constants.js", [["getScopeConstants", [$h‍_a => (getScopeConstants = $h‍_a)]]]]]);   
+// === functors[30] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let FERAL_FUNCTION,arrayJoin,apply,getScopeConstants;$h‍_imports([["./commons.js", [["FERAL_FUNCTION", [$h‍_a => (FERAL_FUNCTION = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]]]],["./scope-constants.js", [["getScopeConstants", [$h‍_a => (getScopeConstants = $h‍_a)]]]]]);   
 
 
 
@@ -6386,8 +6545,8 @@ const        makeEvaluate=  (context)=>{
  };$h‍_once.makeEvaluate(makeEvaluate);
 })()
 ,
-// === functors[30] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let apply,freeze,strictScopeTerminator,createSloppyGlobalsScopeTerminator,makeEvalScopeKit,applyTransforms,mandatoryTransforms,makeEvaluate,assert;$h‍_imports([["./commons.js", [["apply", [$h‍_a => (apply = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]]]],["./strict-scope-terminator.js", [["strictScopeTerminator", [$h‍_a => (strictScopeTerminator = $h‍_a)]]]],["./sloppy-globals-scope-terminator.js", [["createSloppyGlobalsScopeTerminator", [$h‍_a => (createSloppyGlobalsScopeTerminator = $h‍_a)]]]],["./eval-scope.js", [["makeEvalScopeKit", [$h‍_a => (makeEvalScopeKit = $h‍_a)]]]],["./transforms.js", [["applyTransforms", [$h‍_a => (applyTransforms = $h‍_a)]],["mandatoryTransforms", [$h‍_a => (mandatoryTransforms = $h‍_a)]]]],["./make-evaluate.js", [["makeEvaluate", [$h‍_a => (makeEvaluate = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
+// === functors[31] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let apply,freeze,strictScopeTerminator,createSloppyGlobalsScopeTerminator,makeEvalScopeKit,applyTransforms,mandatoryTransforms,makeEvaluate,assert;$h‍_imports([["./commons.js", [["apply", [$h‍_a => (apply = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]]]],["./strict-scope-terminator.js", [["strictScopeTerminator", [$h‍_a => (strictScopeTerminator = $h‍_a)]]]],["./sloppy-globals-scope-terminator.js", [["createSloppyGlobalsScopeTerminator", [$h‍_a => (createSloppyGlobalsScopeTerminator = $h‍_a)]]]],["./eval-scope.js", [["makeEvalScopeKit", [$h‍_a => (makeEvalScopeKit = $h‍_a)]]]],["./transforms.js", [["applyTransforms", [$h‍_a => (applyTransforms = $h‍_a)]],["mandatoryTransforms", [$h‍_a => (mandatoryTransforms = $h‍_a)]]]],["./make-evaluate.js", [["makeEvaluate", [$h‍_a => (makeEvaluate = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
 
 
 
@@ -6499,8 +6658,8 @@ const        makeSafeEvaluator=  ({
  };$h‍_once.makeSafeEvaluator(makeSafeEvaluator);
 })()
 ,
-// === functors[31] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let WeakSet,defineProperty,freeze,functionPrototype,functionToString,stringEndsWith,weaksetAdd,weaksetHas;$h‍_imports([["./commons.js", [["WeakSet", [$h‍_a => (WeakSet = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["functionPrototype", [$h‍_a => (functionPrototype = $h‍_a)]],["functionToString", [$h‍_a => (functionToString = $h‍_a)]],["stringEndsWith", [$h‍_a => (stringEndsWith = $h‍_a)]],["weaksetAdd", [$h‍_a => (weaksetAdd = $h‍_a)]],["weaksetHas", [$h‍_a => (weaksetHas = $h‍_a)]]]]]);   
+// === functors[32] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let WeakSet,defineProperty,freeze,functionPrototype,functionToString,stringEndsWith,weaksetAdd,weaksetHas;$h‍_imports([["./commons.js", [["WeakSet", [$h‍_a => (WeakSet = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["functionPrototype", [$h‍_a => (functionPrototype = $h‍_a)]],["functionToString", [$h‍_a => (functionToString = $h‍_a)]],["stringEndsWith", [$h‍_a => (stringEndsWith = $h‍_a)]],["weaksetAdd", [$h‍_a => (weaksetAdd = $h‍_a)]],["weaksetHas", [$h‍_a => (weaksetHas = $h‍_a)]]]]]);   
 
 
 
@@ -6552,8 +6711,8 @@ const        tameFunctionToString=  ()=>  {
  };$h‍_once.tameFunctionToString(tameFunctionToString);
 })()
 ,
-// === functors[32] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let TypeError,globalThis,getOwnPropertyDescriptor,defineProperty;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]]]]]);Object.defineProperty(tameDomains, 'name', {value: "tameDomains"});$h‍_once.tameDomains(tameDomains);   
+// === functors[33] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let TypeError,globalThis,getOwnPropertyDescriptor,defineProperty;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]]]]]);Object.defineProperty(tameDomains, 'name', {value: "tameDomains"});$h‍_once.tameDomains(tameDomains);   
 
 
 
@@ -6600,8 +6759,12 @@ function        tameDomains(domainTaming=  'safe') {
  }
 })()
 ,
-// === functors[33] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let WeakSet,arrayFilter,arrayMap,arrayPush,defineProperty,freeze,fromEntries,isError,stringEndsWith,weaksetAdd,weaksetHas;$h‍_imports([["../commons.js", [["WeakSet", [$h‍_a => (WeakSet = $h‍_a)]],["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["fromEntries", [$h‍_a => (fromEntries = $h‍_a)]],["isError", [$h‍_a => (isError = $h‍_a)]],["stringEndsWith", [$h‍_a => (stringEndsWith = $h‍_a)]],["weaksetAdd", [$h‍_a => (weaksetAdd = $h‍_a)]],["weaksetHas", [$h‍_a => (weaksetHas = $h‍_a)]]]],["./types.js", []],["./internal-types.js", []]]);   
+// === functors[34] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let WeakSet,arrayFilter,arrayFlatMap,arrayMap,arrayPop,arrayPush,defineProperty,freeze,fromEntries,isError,stringEndsWith,stringIncludes,stringSplit,weaksetAdd,weaksetHas;$h‍_imports([["../commons.js", [["WeakSet", [$h‍_a => (WeakSet = $h‍_a)]],["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["arrayFlatMap", [$h‍_a => (arrayFlatMap = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["arrayPop", [$h‍_a => (arrayPop = $h‍_a)]],["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["fromEntries", [$h‍_a => (fromEntries = $h‍_a)]],["isError", [$h‍_a => (isError = $h‍_a)]],["stringEndsWith", [$h‍_a => (stringEndsWith = $h‍_a)]],["stringIncludes", [$h‍_a => (stringIncludes = $h‍_a)]],["stringSplit", [$h‍_a => (stringSplit = $h‍_a)]],["weaksetAdd", [$h‍_a => (weaksetAdd = $h‍_a)]],["weaksetHas", [$h‍_a => (weaksetHas = $h‍_a)]]]],["./types.js", []],["./internal-types.js", []]]);   
+
+
+
+
 
 
 
@@ -6649,8 +6812,17 @@ function        tameDomains(domainTaming=  'safe') {
 
 /** @typedef {keyof VirtualConsole | 'profile' | 'profileEnd'} ConsoleProps */
 
-/** @type {readonly [ConsoleProps, LogSeverity | undefined][]} */
-const consoleLevelMethods=  freeze([
+/**
+ * Those console methods whose actual parameters are `(fmt?, ...args)`
+ * even if their TypeScript types claim otherwise.
+ *
+ * Each is paired with what we consider to be their log severity level.
+ * This is the same as the log severity of these on other
+ * platform console implementations when they all agree.
+ *
+ * @type {readonly [ConsoleProps, LogSeverity | undefined][]}
+ */
+const        consoleLevelMethods=  freeze([
   ['debug', 'debug'], // (fmt?, ...args) verbose level on Chrome
   ['log', 'log'], // (fmt?, ...args) info level on Chrome
   ['info', 'info'], // (fmt?, ...args)
@@ -6658,13 +6830,22 @@ const consoleLevelMethods=  freeze([
   ['error', 'error'], // (fmt?, ...args)
 
   ['trace', 'log'], // (fmt?, ...args)
-  ['dirxml', 'log'], // (fmt?, ...args)
-  ['group', 'log'], // (fmt?, ...args)
-  ['groupCollapsed', 'log']  // (fmt?, ...args)
+  ['dirxml', 'log'], // (fmt?, ...args)          but TS typed (...data)
+  ['group', 'log'], // (fmt?, ...args)           but TS typed (...label)
+  ['groupCollapsed', 'log']  // (fmt?, ...args)  but TS typed (...label)
 ]);
 
-/** @type {readonly [ConsoleProps, LogSeverity | undefined][]} */
-const consoleOtherMethods=  freeze([
+/**
+ * Those console methods other than those already enumerated by
+ * `consoleLevelMethods`.
+ *
+ * Each is paired with what we consider to be their log severity level.
+ * This is the same as the log severity of these on other
+ * platform console implementations when they all agree.
+ *
+ * @type {readonly [ConsoleProps, LogSeverity | undefined][]}
+ */$h‍_once.consoleLevelMethods(consoleLevelMethods);
+const        consoleOtherMethods=  freeze([
   ['assert', 'error'], // (value, fmt?, ...args)
   ['timeLog', 'log'], // (label?, ...args) no fmt string
 
@@ -6687,8 +6868,8 @@ const consoleOtherMethods=  freeze([
   ['timeStamp', undefined]  // (label?)
 ]);
 
-/** @type {readonly [ConsoleProps, LogSeverity | undefined][]} */
-const        consoleWhitelist=  freeze([
+/** @type {readonly [ConsoleProps, LogSeverity | undefined][]} */$h‍_once.consoleOtherMethods(consoleOtherMethods);
+const consoleWhitelist=  freeze([
   ...consoleLevelMethods,
   ...consoleOtherMethods]);
 
@@ -6720,10 +6901,10 @@ const        consoleWhitelist=  freeze([
  * ]);
  */
 
-// /////////////////////////////////////////////////////////////////////////////
+// //////////////////////////// Logging Console ////////////////////////////////
 
-/** @type {MakeLoggingConsoleKit} */$h‍_once.consoleWhitelist(consoleWhitelist);
-const makeLoggingConsoleKit=  (
+/** @type {MakeLoggingConsoleKit} */
+const        makeLoggingConsoleKit=  (
   loggedErrorHandler,
   { shouldResetForDebugging=  false}=   {})=>
      {
@@ -6765,18 +6946,34 @@ const makeLoggingConsoleKit=  (
  };$h‍_once.makeLoggingConsoleKit(makeLoggingConsoleKit);
 freeze(makeLoggingConsoleKit);
 
+/**
+ * Makes the same calls on a `baseConsole` that were made on a
+ * `loggingConsole` to produce this `log`. In this way, a logging console
+ * can be used as a buffer to delay the application of these calls to a
+ * `baseConsole`.
+ *
+ * @param {LogRecord[]} log
+ * @param {VirtualConsole} baseConsole
+ */
+const        pumpLogToConsole=  (log, baseConsole)=>  {
+  for( const [name, ...args]of  log) {
+    // eslint-disable-next-line @endo/no-polymorphic-call
+    baseConsole[name](...args);
+   }
+ };
+// //////////////////////////// Causal Console /////////////////////////////////
 
-// /////////////////////////////////////////////////////////////////////////////
-
-/** @type {ErrorInfo} */
+/** @type {ErrorInfo} */$h‍_once.pumpLogToConsole(pumpLogToConsole);
 const ErrorInfo=  {
   NOTE: 'ERROR_NOTE:',
-  MESSAGE: 'ERROR_MESSAGE:'};
+  MESSAGE: 'ERROR_MESSAGE:',
+  CAUSE: 'cause:',
+  ERRORS: 'errors:'};
 
 freeze(ErrorInfo);
 
 /** @type {MakeCausalConsole} */
-const makeCausalConsole=  (baseConsole, loggedErrorHandler)=>  {
+const        makeCausalConsole=  (baseConsole, loggedErrorHandler)=>  {
   if( !baseConsole) {
     return undefined;
    }
@@ -6911,6 +7108,14 @@ const makeCausalConsole=  (baseConsole, loggedErrorHandler)=>  {
     // eslint-disable-next-line @endo/no-polymorphic-call
     baseConsole[severity](stackString);
     // Show the other annotations on error
+    if( error.cause) {
+      logErrorInfo(severity, error, ErrorInfo.CAUSE, [error.cause], subErrors);
+     }
+    // @ts-expect-error AggregateError has an `errors` property.
+    if( error.errors) {
+      // @ts-expect-error AggregateError has an `errors` property.
+      logErrorInfo(severity, error, ErrorInfo.ERRORS, error.errors, subErrors);
+     }
     for( const noteLogArgs of noteLogArgsArray) {
       logErrorInfo(severity, error, ErrorInfo.NOTE, noteLogArgs, subErrors);
      }
@@ -6956,11 +7161,105 @@ const makeCausalConsole=  (baseConsole, loggedErrorHandler)=>  {
  };$h‍_once.makeCausalConsole(makeCausalConsole);
 freeze(makeCausalConsole);
 
+/**
+ * @typedef {(...args: unknown[]) => void} Logger
+ */
 
-// /////////////////////////////////////////////////////////////////////////////
+/**
+ * This is a rather horrible kludge to indent the output to a logger in
+ * the case where some arguments are strings containing newlines. Part of
+ * the problem is that console-like loggers, including the one in ava,
+ * join the string arguments of the log message with a space.
+ * Because of this, there's an extra space at the beginning of each of
+ * the split lines. So this kludge compensated by putting an extra empty
+ * string at the beginning, so that the logger will add the same extra
+ * joiner.
+ * TODO: Fix this horrible kludge, and indent in a sane manner.
+ *
+ * @param {string} str
+ * @param {string} sep
+ * @param {string[]} indents
+ * @returns {string[]}
+ */
+const indentAfterAllSeps=  (str, sep, indents)=>  {
+  const [firstLine, ...restLines]=  stringSplit(str, sep);
+  const indentedRest=  arrayFlatMap(restLines, (line)=>[sep, ...indents, line]);
+  return ['', firstLine, ...indentedRest];
+ };
+
+/**
+ * @param {LoggedErrorHandler} loggedErrorHandler
+ */
+const        defineCausalConsoleFromLogger=  (loggedErrorHandler)=>{
+  /**
+   * Implement the `VirtualConsole` API badly by turning all calls into
+   * calls on `tlogger`. We need to do this to have `console` logging
+   * turn into calls to Ava's `t.log`, so these console log messages
+   * are output in the right place.
+   *
+   * @param {Logger} tlogger
+   * @returns {VirtualConsole}
+   */
+  const makeCausalConsoleFromLogger=  (tlogger)=>{
+    const indents=  [];
+    const logWithIndent=  (...args)=>  {
+      if( indents.length>  0) {
+        args=  arrayFlatMap(args, (arg)=>
+          typeof arg===  'string'&&  stringIncludes(arg, '\n')?
+              indentAfterAllSeps(arg, '\n', indents):
+              [arg]);
+
+        args=  [...indents, ...args];
+       }
+      return tlogger(...args);
+     };
+    const makeNamed=  (name, fn)=>
+      ({ [name]: (...args)=>  fn(...args)})[ name];
+
+    const baseConsole=  fromEntries([
+      ...arrayMap(consoleLevelMethods, ([name])=>  [
+        name,
+        makeNamed(name, logWithIndent)]),
+
+      ...arrayMap(consoleOtherMethods, ([name])=>  [
+        name,
+        makeNamed(name, (...args)=>  logWithIndent(name, ...args))])]);
+
+
+    // https://console.spec.whatwg.org/#grouping
+    for( const name of ['group', 'groupCollapsed']) {
+      if( baseConsole[name]) {
+        baseConsole[name]=  makeNamed(name, (...args)=>  {
+          if( args.length>=  1) {
+            // Prefix the logged data with "group" or "groupCollapsed".
+            logWithIndent(...args);
+           }
+          // A single space is enough;
+          // the host console will separate them with additional spaces.
+          arrayPush(indents, ' ');
+         });
+       }
+     }
+    if( baseConsole.groupEnd) {
+      baseConsole.groupEnd=  makeNamed('groupEnd', (...args)=>  {
+        arrayPop(indents);
+       });
+     }
+    harden(baseConsole);
+    const causalConsole=  makeCausalConsole(
+      /** @type {VirtualConsole} */  baseConsole,
+      loggedErrorHandler);
+
+    return (/** @type {VirtualConsole} */ causalConsole);
+   };
+  return freeze(makeCausalConsoleFromLogger);
+ };$h‍_once.defineCausalConsoleFromLogger(defineCausalConsoleFromLogger);
+freeze(defineCausalConsoleFromLogger);
+
+// ///////////////////////// Filter Console ////////////////////////////////////
 
 /** @type {FilterConsole} */
-const filterConsole=  (baseConsole, filter, _topic=  undefined)=>  {
+const        filterConsole=  (baseConsole, filter, _topic=  undefined)=>  {
   // TODO do something with optional topic string
   const whitelist=  arrayFilter(
     consoleWhitelist,
@@ -6986,8 +7285,8 @@ const filterConsole=  (baseConsole, filter, _topic=  undefined)=>  {
 freeze(filterConsole);
 })()
 ,
-// === functors[34] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let FinalizationRegistry,Map,mapGet,mapDelete,WeakMap,mapSet,finalizationRegistryRegister,weakmapSet,weakmapGet,mapEntries,mapHas;$h‍_imports([["../commons.js", [["FinalizationRegistry", [$h‍_a => (FinalizationRegistry = $h‍_a)]],["Map", [$h‍_a => (Map = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["mapDelete", [$h‍_a => (mapDelete = $h‍_a)]],["WeakMap", [$h‍_a => (WeakMap = $h‍_a)]],["mapSet", [$h‍_a => (mapSet = $h‍_a)]],["finalizationRegistryRegister", [$h‍_a => (finalizationRegistryRegister = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["mapEntries", [$h‍_a => (mapEntries = $h‍_a)]],["mapHas", [$h‍_a => (mapHas = $h‍_a)]]]]]);   
+// === functors[35] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let FinalizationRegistry,Map,mapGet,mapDelete,WeakMap,mapSet,finalizationRegistryRegister,weakmapSet,weakmapGet,mapEntries,mapHas;$h‍_imports([["../commons.js", [["FinalizationRegistry", [$h‍_a => (FinalizationRegistry = $h‍_a)]],["Map", [$h‍_a => (Map = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["mapDelete", [$h‍_a => (mapDelete = $h‍_a)]],["WeakMap", [$h‍_a => (WeakMap = $h‍_a)]],["mapSet", [$h‍_a => (mapSet = $h‍_a)]],["finalizationRegistryRegister", [$h‍_a => (finalizationRegistryRegister = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["mapEntries", [$h‍_a => (mapEntries = $h‍_a)]],["mapHas", [$h‍_a => (mapHas = $h‍_a)]]]]]);   
 
 
 
@@ -7111,8 +7410,8 @@ const        makeRejectionHandlers=  (reportReason)=>{
  };$h‍_once.makeRejectionHandlers(makeRejectionHandlers);
 })()
 ,
-// === functors[35] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let TypeError,apply,defineProperty,freeze,globalThis,defaultHandler,makeCausalConsole,makeRejectionHandlers;$h‍_imports([["../commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./assert.js", [["loggedErrorHandler", [$h‍_a => (defaultHandler = $h‍_a)]]]],["./console.js", [["makeCausalConsole", [$h‍_a => (makeCausalConsole = $h‍_a)]]]],["./unhandled-rejection.js", [["makeRejectionHandlers", [$h‍_a => (makeRejectionHandlers = $h‍_a)]]]],["./types.js", []],["./internal-types.js", []]]);   
+// === functors[36] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let TypeError,apply,defineProperty,freeze,globalThis,defaultHandler,makeCausalConsole,makeRejectionHandlers;$h‍_imports([["../commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./assert.js", [["loggedErrorHandler", [$h‍_a => (defaultHandler = $h‍_a)]]]],["./console.js", [["makeCausalConsole", [$h‍_a => (makeCausalConsole = $h‍_a)]]]],["./unhandled-rejection.js", [["makeRejectionHandlers", [$h‍_a => (makeRejectionHandlers = $h‍_a)]]]],["./types.js", []],["./internal-types.js", []]]);   
 
 
 
@@ -7309,8 +7608,8 @@ const        tameConsole=  (
  };$h‍_once.tameConsole(tameConsole);
 })()
 ,
-// === functors[36] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let WeakMap,WeakSet,apply,arrayFilter,arrayJoin,arrayMap,arraySlice,create,defineProperties,fromEntries,reflectSet,regexpExec,regexpTest,weakmapGet,weakmapSet,weaksetAdd,weaksetHas;$h‍_imports([["../commons.js", [["WeakMap", [$h‍_a => (WeakMap = $h‍_a)]],["WeakSet", [$h‍_a => (WeakSet = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["arraySlice", [$h‍_a => (arraySlice = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["fromEntries", [$h‍_a => (fromEntries = $h‍_a)]],["reflectSet", [$h‍_a => (reflectSet = $h‍_a)]],["regexpExec", [$h‍_a => (regexpExec = $h‍_a)]],["regexpTest", [$h‍_a => (regexpTest = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]],["weaksetAdd", [$h‍_a => (weaksetAdd = $h‍_a)]],["weaksetHas", [$h‍_a => (weaksetHas = $h‍_a)]]]]]);   
+// === functors[37] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let WeakMap,WeakSet,apply,arrayFilter,arrayJoin,arrayMap,arraySlice,create,defineProperties,fromEntries,reflectSet,regexpExec,regexpTest,weakmapGet,weakmapSet,weaksetAdd,weaksetHas;$h‍_imports([["../commons.js", [["WeakMap", [$h‍_a => (WeakMap = $h‍_a)]],["WeakSet", [$h‍_a => (WeakSet = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["arraySlice", [$h‍_a => (arraySlice = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["fromEntries", [$h‍_a => (fromEntries = $h‍_a)]],["reflectSet", [$h‍_a => (reflectSet = $h‍_a)]],["regexpExec", [$h‍_a => (regexpExec = $h‍_a)]],["regexpTest", [$h‍_a => (regexpTest = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]],["weaksetAdd", [$h‍_a => (weaksetAdd = $h‍_a)]],["weaksetHas", [$h‍_a => (weaksetHas = $h‍_a)]]]]]);   
 
 
 
@@ -7649,8 +7948,8 @@ const        tameV8ErrorConstructor=  (
  };$h‍_once.tameV8ErrorConstructor(tameV8ErrorConstructor);
 })()
 ,
-// === functors[37] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let FERAL_ERROR,TypeError,apply,construct,defineProperties,setPrototypeOf,getOwnPropertyDescriptor,defineProperty,NativeErrors,tameV8ErrorConstructor;$h‍_imports([["../commons.js", [["FERAL_ERROR", [$h‍_a => (FERAL_ERROR = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["construct", [$h‍_a => (construct = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["setPrototypeOf", [$h‍_a => (setPrototypeOf = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]]]],["../permits.js", [["NativeErrors", [$h‍_a => (NativeErrors = $h‍_a)]]]],["./tame-v8-error-constructor.js", [["tameV8ErrorConstructor", [$h‍_a => (tameV8ErrorConstructor = $h‍_a)]]]]]);   
+// === functors[38] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let FERAL_ERROR,TypeError,apply,construct,defineProperties,setPrototypeOf,getOwnPropertyDescriptor,defineProperty,NativeErrors,tameV8ErrorConstructor;$h‍_imports([["../commons.js", [["FERAL_ERROR", [$h‍_a => (FERAL_ERROR = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["construct", [$h‍_a => (construct = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["setPrototypeOf", [$h‍_a => (setPrototypeOf = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]]]],["../permits.js", [["NativeErrors", [$h‍_a => (NativeErrors = $h‍_a)]]]],["./tame-v8-error-constructor.js", [["tameV8ErrorConstructor", [$h‍_a => (tameV8ErrorConstructor = $h‍_a)]]]]]);   
 
 
 
@@ -7903,8 +8202,8 @@ function                tameErrorConstructor(
  }$h‍_once.default(     tameErrorConstructor);
 })()
 ,
-// === functors[38] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let ReferenceError,TypeError,Map,Set,arrayJoin,arrayMap,arrayPush,create,freeze,mapGet,mapHas,mapSet,setAdd,promiseCatch,promiseThen,values,weakmapGet,assert;$h‍_imports([["./commons.js", [["ReferenceError", [$h‍_a => (ReferenceError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["Map", [$h‍_a => (Map = $h‍_a)]],["Set", [$h‍_a => (Set = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["mapHas", [$h‍_a => (mapHas = $h‍_a)]],["mapSet", [$h‍_a => (mapSet = $h‍_a)]],["setAdd", [$h‍_a => (setAdd = $h‍_a)]],["promiseCatch", [$h‍_a => (promiseCatch = $h‍_a)]],["promiseThen", [$h‍_a => (promiseThen = $h‍_a)]],["values", [$h‍_a => (values = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
+// === functors[39] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let ReferenceError,TypeError,Map,Set,arrayJoin,arrayMap,arrayPush,create,freeze,mapGet,mapHas,mapSet,setAdd,promiseCatch,promiseThen,values,weakmapGet,assert;$h‍_imports([["./commons.js", [["ReferenceError", [$h‍_a => (ReferenceError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["Map", [$h‍_a => (Map = $h‍_a)]],["Set", [$h‍_a => (Set = $h‍_a)]],["arrayJoin", [$h‍_a => (arrayJoin = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]],["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["mapHas", [$h‍_a => (mapHas = $h‍_a)]],["mapSet", [$h‍_a => (mapSet = $h‍_a)]],["setAdd", [$h‍_a => (setAdd = $h‍_a)]],["promiseCatch", [$h‍_a => (promiseCatch = $h‍_a)]],["promiseThen", [$h‍_a => (promiseThen = $h‍_a)]],["values", [$h‍_a => (values = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
 
 
 
@@ -8267,8 +8566,8 @@ const        load=  async(
  };$h‍_once.load(load);
 })()
 ,
-// === functors[39] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let makeAlias,Proxy,TypeError,create,freeze,mapGet,mapHas,mapSet,ownKeys,reflectGet,reflectGetOwnPropertyDescriptor,reflectHas,reflectIsExtensible,reflectPreventExtensions,toStringTagSymbol,weakmapSet,assert;$h‍_imports([["./module-load.js", [["makeAlias", [$h‍_a => (makeAlias = $h‍_a)]]]],["./commons.js", [["Proxy", [$h‍_a => (Proxy = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["mapHas", [$h‍_a => (mapHas = $h‍_a)]],["mapSet", [$h‍_a => (mapSet = $h‍_a)]],["ownKeys", [$h‍_a => (ownKeys = $h‍_a)]],["reflectGet", [$h‍_a => (reflectGet = $h‍_a)]],["reflectGetOwnPropertyDescriptor", [$h‍_a => (reflectGetOwnPropertyDescriptor = $h‍_a)]],["reflectHas", [$h‍_a => (reflectHas = $h‍_a)]],["reflectIsExtensible", [$h‍_a => (reflectIsExtensible = $h‍_a)]],["reflectPreventExtensions", [$h‍_a => (reflectPreventExtensions = $h‍_a)]],["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
+// === functors[40] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let makeAlias,Proxy,TypeError,create,freeze,mapGet,mapHas,mapSet,ownKeys,reflectGet,reflectGetOwnPropertyDescriptor,reflectHas,reflectIsExtensible,reflectPreventExtensions,toStringTagSymbol,weakmapSet,assert;$h‍_imports([["./module-load.js", [["makeAlias", [$h‍_a => (makeAlias = $h‍_a)]]]],["./commons.js", [["Proxy", [$h‍_a => (Proxy = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["mapHas", [$h‍_a => (mapHas = $h‍_a)]],["mapSet", [$h‍_a => (mapSet = $h‍_a)]],["ownKeys", [$h‍_a => (ownKeys = $h‍_a)]],["reflectGet", [$h‍_a => (reflectGet = $h‍_a)]],["reflectGetOwnPropertyDescriptor", [$h‍_a => (reflectGetOwnPropertyDescriptor = $h‍_a)]],["reflectHas", [$h‍_a => (reflectHas = $h‍_a)]],["reflectIsExtensible", [$h‍_a => (reflectIsExtensible = $h‍_a)]],["reflectPreventExtensions", [$h‍_a => (reflectPreventExtensions = $h‍_a)]],["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
 
 
 
@@ -8470,8 +8769,8 @@ const        getDeferredExports=  (
  };$h‍_once.getDeferredExports(getDeferredExports);
 })()
 ,
-// === functors[40] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let TypeError,arrayPush,create,getOwnPropertyDescriptors,evadeHtmlCommentTest,evadeImportExpressionTest,rejectSomeDirectEvalExpressions,makeSafeEvaluator;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]]]],["./transforms.js", [["evadeHtmlCommentTest", [$h‍_a => (evadeHtmlCommentTest = $h‍_a)]],["evadeImportExpressionTest", [$h‍_a => (evadeImportExpressionTest = $h‍_a)]],["rejectSomeDirectEvalExpressions", [$h‍_a => (rejectSomeDirectEvalExpressions = $h‍_a)]]]],["./make-safe-evaluator.js", [["makeSafeEvaluator", [$h‍_a => (makeSafeEvaluator = $h‍_a)]]]]]);   
+// === functors[41] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let TypeError,arrayPush,create,getOwnPropertyDescriptors,evadeHtmlCommentTest,evadeImportExpressionTest,rejectSomeDirectEvalExpressions,makeSafeEvaluator;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]]]],["./transforms.js", [["evadeHtmlCommentTest", [$h‍_a => (evadeHtmlCommentTest = $h‍_a)]],["evadeImportExpressionTest", [$h‍_a => (evadeImportExpressionTest = $h‍_a)]],["rejectSomeDirectEvalExpressions", [$h‍_a => (rejectSomeDirectEvalExpressions = $h‍_a)]]]],["./make-safe-evaluator.js", [["makeSafeEvaluator", [$h‍_a => (makeSafeEvaluator = $h‍_a)]]]]]);   
 
 
 
@@ -8566,8 +8865,8 @@ const        compartmentEvaluate=  (compartmentFields, source, options)=>  {
  };$h‍_once.compartmentEvaluate(compartmentEvaluate);
 })()
 ,
-// === functors[41] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let assert,getDeferredExports,ReferenceError,SyntaxError,TypeError,arrayForEach,arrayIncludes,arrayPush,arraySome,arraySort,create,defineProperty,entries,freeze,isArray,keys,mapGet,weakmapGet,reflectHas,assign,compartmentEvaluate;$h‍_imports([["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]],["./module-proxy.js", [["getDeferredExports", [$h‍_a => (getDeferredExports = $h‍_a)]]]],["./commons.js", [["ReferenceError", [$h‍_a => (ReferenceError = $h‍_a)]],["SyntaxError", [$h‍_a => (SyntaxError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["arrayForEach", [$h‍_a => (arrayForEach = $h‍_a)]],["arrayIncludes", [$h‍_a => (arrayIncludes = $h‍_a)]],["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]],["arraySome", [$h‍_a => (arraySome = $h‍_a)]],["arraySort", [$h‍_a => (arraySort = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["isArray", [$h‍_a => (isArray = $h‍_a)]],["keys", [$h‍_a => (keys = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["reflectHas", [$h‍_a => (reflectHas = $h‍_a)]],["assign", [$h‍_a => (assign = $h‍_a)]]]],["./compartment-evaluate.js", [["compartmentEvaluate", [$h‍_a => (compartmentEvaluate = $h‍_a)]]]]]);   
+// === functors[42] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let assert,getDeferredExports,ReferenceError,SyntaxError,TypeError,arrayForEach,arrayIncludes,arrayPush,arraySome,arraySort,create,defineProperty,entries,freeze,isArray,keys,mapGet,weakmapGet,reflectHas,assign,compartmentEvaluate;$h‍_imports([["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]],["./module-proxy.js", [["getDeferredExports", [$h‍_a => (getDeferredExports = $h‍_a)]]]],["./commons.js", [["ReferenceError", [$h‍_a => (ReferenceError = $h‍_a)]],["SyntaxError", [$h‍_a => (SyntaxError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["arrayForEach", [$h‍_a => (arrayForEach = $h‍_a)]],["arrayIncludes", [$h‍_a => (arrayIncludes = $h‍_a)]],["arrayPush", [$h‍_a => (arrayPush = $h‍_a)]],["arraySome", [$h‍_a => (arraySome = $h‍_a)]],["arraySort", [$h‍_a => (arraySort = $h‍_a)]],["create", [$h‍_a => (create = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]],["isArray", [$h‍_a => (isArray = $h‍_a)]],["keys", [$h‍_a => (keys = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["reflectHas", [$h‍_a => (reflectHas = $h‍_a)]],["assign", [$h‍_a => (assign = $h‍_a)]]]],["./compartment-evaluate.js", [["compartmentEvaluate", [$h‍_a => (compartmentEvaluate = $h‍_a)]]]]]);   
 
 
 
@@ -9057,8 +9356,8 @@ $h‍_once.makeThirdPartyModuleInstance(makeThirdPartyModuleInstance);const make
  };$h‍_once.makeModuleInstance(makeModuleInstance);
 })()
 ,
-// === functors[42] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let assert,makeModuleInstance,makeThirdPartyModuleInstance,Map,ReferenceError,TypeError,entries,isArray,isObject,mapGet,mapHas,mapSet,weakmapGet;$h‍_imports([["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]],["./module-instance.js", [["makeModuleInstance", [$h‍_a => (makeModuleInstance = $h‍_a)]],["makeThirdPartyModuleInstance", [$h‍_a => (makeThirdPartyModuleInstance = $h‍_a)]]]],["./commons.js", [["Map", [$h‍_a => (Map = $h‍_a)]],["ReferenceError", [$h‍_a => (ReferenceError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["isArray", [$h‍_a => (isArray = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["mapHas", [$h‍_a => (mapHas = $h‍_a)]],["mapSet", [$h‍_a => (mapSet = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]]]]]);   
+// === functors[43] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let assert,makeModuleInstance,makeThirdPartyModuleInstance,Map,ReferenceError,TypeError,entries,isArray,isObject,mapGet,mapHas,mapSet,weakmapGet;$h‍_imports([["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]],["./module-instance.js", [["makeModuleInstance", [$h‍_a => (makeModuleInstance = $h‍_a)]],["makeThirdPartyModuleInstance", [$h‍_a => (makeThirdPartyModuleInstance = $h‍_a)]]]],["./commons.js", [["Map", [$h‍_a => (Map = $h‍_a)]],["ReferenceError", [$h‍_a => (ReferenceError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["isArray", [$h‍_a => (isArray = $h‍_a)]],["isObject", [$h‍_a => (isObject = $h‍_a)]],["mapGet", [$h‍_a => (mapGet = $h‍_a)]],["mapHas", [$h‍_a => (mapHas = $h‍_a)]],["mapSet", [$h‍_a => (mapSet = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]]]]]);   
 
 
 
@@ -9237,8 +9536,9 @@ const        instantiate=  (
  };$h‍_once.instantiate(instantiate);
 })()
 ,
-// === functors[43] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let Map,ReferenceError,TypeError,WeakMap,assign,defineProperties,entries,promiseThen,weakmapGet,weakmapSet,setGlobalObjectSymbolUnscopables,setGlobalObjectConstantProperties,setGlobalObjectMutableProperties,setGlobalObjectEvaluators,sharedGlobalPropertyNames,load,link,getDeferredExports,assert,compartmentEvaluate,makeSafeEvaluator;$h‍_imports([["./commons.js", [["Map", [$h‍_a => (Map = $h‍_a)]],["ReferenceError", [$h‍_a => (ReferenceError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["WeakMap", [$h‍_a => (WeakMap = $h‍_a)]],["assign", [$h‍_a => (assign = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["promiseThen", [$h‍_a => (promiseThen = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]]]],["./global-object.js", [["setGlobalObjectSymbolUnscopables", [$h‍_a => (setGlobalObjectSymbolUnscopables = $h‍_a)]],["setGlobalObjectConstantProperties", [$h‍_a => (setGlobalObjectConstantProperties = $h‍_a)]],["setGlobalObjectMutableProperties", [$h‍_a => (setGlobalObjectMutableProperties = $h‍_a)]],["setGlobalObjectEvaluators", [$h‍_a => (setGlobalObjectEvaluators = $h‍_a)]]]],["./permits.js", [["sharedGlobalPropertyNames", [$h‍_a => (sharedGlobalPropertyNames = $h‍_a)]]]],["./module-load.js", [["load", [$h‍_a => (load = $h‍_a)]]]],["./module-link.js", [["link", [$h‍_a => (link = $h‍_a)]]]],["./module-proxy.js", [["getDeferredExports", [$h‍_a => (getDeferredExports = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]],["./compartment-evaluate.js", [["compartmentEvaluate", [$h‍_a => (compartmentEvaluate = $h‍_a)]]]],["./make-safe-evaluator.js", [["makeSafeEvaluator", [$h‍_a => (makeSafeEvaluator = $h‍_a)]]]]]);   
+// === functors[44] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let Map,ReferenceError,TypeError,WeakMap,assign,defineProperties,entries,promiseThen,toStringTagSymbol,weakmapGet,weakmapSet,setGlobalObjectSymbolUnscopables,setGlobalObjectConstantProperties,setGlobalObjectMutableProperties,setGlobalObjectEvaluators,sharedGlobalPropertyNames,load,link,getDeferredExports,assert,compartmentEvaluate,makeSafeEvaluator;$h‍_imports([["./commons.js", [["Map", [$h‍_a => (Map = $h‍_a)]],["ReferenceError", [$h‍_a => (ReferenceError = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["WeakMap", [$h‍_a => (WeakMap = $h‍_a)]],["assign", [$h‍_a => (assign = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["promiseThen", [$h‍_a => (promiseThen = $h‍_a)]],["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]],["weakmapGet", [$h‍_a => (weakmapGet = $h‍_a)]],["weakmapSet", [$h‍_a => (weakmapSet = $h‍_a)]]]],["./global-object.js", [["setGlobalObjectSymbolUnscopables", [$h‍_a => (setGlobalObjectSymbolUnscopables = $h‍_a)]],["setGlobalObjectConstantProperties", [$h‍_a => (setGlobalObjectConstantProperties = $h‍_a)]],["setGlobalObjectMutableProperties", [$h‍_a => (setGlobalObjectMutableProperties = $h‍_a)]],["setGlobalObjectEvaluators", [$h‍_a => (setGlobalObjectEvaluators = $h‍_a)]]]],["./permits.js", [["sharedGlobalPropertyNames", [$h‍_a => (sharedGlobalPropertyNames = $h‍_a)]]]],["./module-load.js", [["load", [$h‍_a => (load = $h‍_a)]]]],["./module-link.js", [["link", [$h‍_a => (link = $h‍_a)]]]],["./module-proxy.js", [["getDeferredExports", [$h‍_a => (getDeferredExports = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]],["./compartment-evaluate.js", [["compartmentEvaluate", [$h‍_a => (compartmentEvaluate = $h‍_a)]]]],["./make-safe-evaluator.js", [["makeSafeEvaluator", [$h‍_a => (makeSafeEvaluator = $h‍_a)]]]]]);   
+
 
 
 
@@ -9345,10 +9645,6 @@ const        CompartmentPrototype=  {
     return compartmentEvaluate(compartmentFields, source, options);
    },
 
-  toString() {
-    return '[object Compartment]';
-   },
-
   module(specifier) {
     if( typeof specifier!==  'string') {
       throw TypeError('first argument of module() must be a string');
@@ -9405,7 +9701,19 @@ const        CompartmentPrototype=  {
     assertModuleHooks(this);
 
     return compartmentImportNow(/** @type {Compartment} */  this,  specifier);
-   }};$h‍_once.CompartmentPrototype(CompartmentPrototype);
+   }};
+
+
+// This causes `String(new Compartment())` to evaluate to `[object Compartment]`.
+// The descriptor follows the conventions of other globals with @@toStringTag
+// properties, e.g. Math.
+$h‍_once.CompartmentPrototype(CompartmentPrototype);defineProperties(CompartmentPrototype,{
+  [toStringTagSymbol]: {
+    value: 'Compartment',
+    writable: false,
+    enumerable: false,
+    configurable: true}});
+
 
 
 defineProperties(InertCompartment, {
@@ -9532,8 +9840,8 @@ const        makeCompartmentConstructor=  (
  };$h‍_once.makeCompartmentConstructor(makeCompartmentConstructor);
 })()
 ,
-// === functors[44] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let FERAL_FUNCTION,Float32Array,Map,Set,String,getOwnPropertyDescriptor,getPrototypeOf,iterateArray,iterateMap,iterateSet,iterateString,matchAllRegExp,matchAllSymbol,regexpPrototype,globalThis,InertCompartment;$h‍_imports([["./commons.js", [["FERAL_FUNCTION", [$h‍_a => (FERAL_FUNCTION = $h‍_a)]],["Float32Array", [$h‍_a => (Float32Array = $h‍_a)]],["Map", [$h‍_a => (Map = $h‍_a)]],["Set", [$h‍_a => (Set = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]],["iterateArray", [$h‍_a => (iterateArray = $h‍_a)]],["iterateMap", [$h‍_a => (iterateMap = $h‍_a)]],["iterateSet", [$h‍_a => (iterateSet = $h‍_a)]],["iterateString", [$h‍_a => (iterateString = $h‍_a)]],["matchAllRegExp", [$h‍_a => (matchAllRegExp = $h‍_a)]],["matchAllSymbol", [$h‍_a => (matchAllSymbol = $h‍_a)]],["regexpPrototype", [$h‍_a => (regexpPrototype = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./compartment.js", [["InertCompartment", [$h‍_a => (InertCompartment = $h‍_a)]]]]]);   
+// === functors[45] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let FERAL_FUNCTION,Float32Array,Map,Set,String,getOwnPropertyDescriptor,getPrototypeOf,iterateArray,iterateMap,iterateSet,iterateString,matchAllRegExp,matchAllSymbol,regexpPrototype,globalThis,InertCompartment;$h‍_imports([["./commons.js", [["FERAL_FUNCTION", [$h‍_a => (FERAL_FUNCTION = $h‍_a)]],["Float32Array", [$h‍_a => (Float32Array = $h‍_a)]],["Map", [$h‍_a => (Map = $h‍_a)]],["Set", [$h‍_a => (Set = $h‍_a)]],["String", [$h‍_a => (String = $h‍_a)]],["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]],["iterateArray", [$h‍_a => (iterateArray = $h‍_a)]],["iterateMap", [$h‍_a => (iterateMap = $h‍_a)]],["iterateSet", [$h‍_a => (iterateSet = $h‍_a)]],["iterateString", [$h‍_a => (iterateString = $h‍_a)]],["matchAllRegExp", [$h‍_a => (matchAllRegExp = $h‍_a)]],["matchAllSymbol", [$h‍_a => (matchAllSymbol = $h‍_a)]],["regexpPrototype", [$h‍_a => (regexpPrototype = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./compartment.js", [["InertCompartment", [$h‍_a => (InertCompartment = $h‍_a)]]]]]);   
 
 
 
@@ -9696,8 +10004,8 @@ const        getAnonymousIntrinsics=  ()=>  {
  };$h‍_once.getAnonymousIntrinsics(getAnonymousIntrinsics);
 })()
 ,
-// === functors[45] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let TypeError,freeze;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]]]]]);   
+// === functors[46] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let TypeError,freeze;$h‍_imports([["./commons.js", [["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["freeze", [$h‍_a => (freeze = $h‍_a)]]]]]);   
 
 
 const        tameHarden=  (safeHarden, hardenTaming)=>  {
@@ -9728,8 +10036,8 @@ const        tameHarden=  (safeHarden, hardenTaming)=>  {
 freeze(tameHarden);
 })()
 ,
-// === functors[46] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let Symbol,entries,fromEntries,getOwnPropertyDescriptors,defineProperties,arrayMap;$h‍_imports([["./commons.js", [["Symbol", [$h‍_a => (Symbol = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["fromEntries", [$h‍_a => (fromEntries = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]]]]]);   
+// === functors[47] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let Symbol,entries,fromEntries,getOwnPropertyDescriptors,defineProperties,arrayMap;$h‍_imports([["./commons.js", [["Symbol", [$h‍_a => (Symbol = $h‍_a)]],["entries", [$h‍_a => (entries = $h‍_a)]],["fromEntries", [$h‍_a => (fromEntries = $h‍_a)]],["getOwnPropertyDescriptors", [$h‍_a => (getOwnPropertyDescriptors = $h‍_a)]],["defineProperties", [$h‍_a => (defineProperties = $h‍_a)]],["arrayMap", [$h‍_a => (arrayMap = $h‍_a)]]]]]);   
 
 
 
@@ -9796,8 +10104,8 @@ const        tameSymbolConstructor=  ()=>  {
  };$h‍_once.tameSymbolConstructor(tameSymbolConstructor);
 })()
 ,
-// === functors[47] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let getOwnPropertyDescriptor,apply,defineProperty,toStringTagSymbol;$h‍_imports([["./commons.js", [["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]]]]]);   
+// === functors[48] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let getOwnPropertyDescriptor,apply,defineProperty,toStringTagSymbol;$h‍_imports([["./commons.js", [["getOwnPropertyDescriptor", [$h‍_a => (getOwnPropertyDescriptor = $h‍_a)]],["apply", [$h‍_a => (apply = $h‍_a)]],["defineProperty", [$h‍_a => (defineProperty = $h‍_a)]],["toStringTagSymbol", [$h‍_a => (toStringTagSymbol = $h‍_a)]]]]]);   
 
 
 
@@ -10009,8 +10317,8 @@ const        tameFauxDataProperties=  (intrinsics)=>{
  };$h‍_once.tameFauxDataProperties(tameFauxDataProperties);
 })()
 ,
-// === functors[48] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let getenv,FERAL_FUNCTION,FERAL_EVAL,TypeError,arrayFilter,globalThis,is,ownKeys,stringSplit,noEvalEvaluate,getOwnPropertyNames,getPrototypeOf,makeHardener,makeIntrinsicsCollector,whitelistIntrinsics,tameFunctionConstructors,tameDateConstructor,tameMathObject,tameRegExpConstructor,enablePropertyOverrides,tameLocaleMethods,setGlobalObjectConstantProperties,setGlobalObjectMutableProperties,setGlobalObjectEvaluators,makeSafeEvaluator,initialGlobalPropertyNames,tameFunctionToString,tameDomains,tameConsole,tameErrorConstructor,assert,makeAssert,getAnonymousIntrinsics,makeCompartmentConstructor,tameHarden,tameSymbolConstructor,tameFauxDataProperties;$h‍_imports([["@endo/env-options", [["getEnvironmentOption", [$h‍_a => (getenv = $h‍_a)]]]],["./commons.js", [["FERAL_FUNCTION", [$h‍_a => (FERAL_FUNCTION = $h‍_a)]],["FERAL_EVAL", [$h‍_a => (FERAL_EVAL = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["is", [$h‍_a => (is = $h‍_a)]],["ownKeys", [$h‍_a => (ownKeys = $h‍_a)]],["stringSplit", [$h‍_a => (stringSplit = $h‍_a)]],["noEvalEvaluate", [$h‍_a => (noEvalEvaluate = $h‍_a)]],["getOwnPropertyNames", [$h‍_a => (getOwnPropertyNames = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]]]],["./make-hardener.js", [["makeHardener", [$h‍_a => (makeHardener = $h‍_a)]]]],["./intrinsics.js", [["makeIntrinsicsCollector", [$h‍_a => (makeIntrinsicsCollector = $h‍_a)]]]],["./permits-intrinsics.js", [["default", [$h‍_a => (whitelistIntrinsics = $h‍_a)]]]],["./tame-function-constructors.js", [["default", [$h‍_a => (tameFunctionConstructors = $h‍_a)]]]],["./tame-date-constructor.js", [["default", [$h‍_a => (tameDateConstructor = $h‍_a)]]]],["./tame-math-object.js", [["default", [$h‍_a => (tameMathObject = $h‍_a)]]]],["./tame-regexp-constructor.js", [["default", [$h‍_a => (tameRegExpConstructor = $h‍_a)]]]],["./enable-property-overrides.js", [["default", [$h‍_a => (enablePropertyOverrides = $h‍_a)]]]],["./tame-locale-methods.js", [["default", [$h‍_a => (tameLocaleMethods = $h‍_a)]]]],["./global-object.js", [["setGlobalObjectConstantProperties", [$h‍_a => (setGlobalObjectConstantProperties = $h‍_a)]],["setGlobalObjectMutableProperties", [$h‍_a => (setGlobalObjectMutableProperties = $h‍_a)]],["setGlobalObjectEvaluators", [$h‍_a => (setGlobalObjectEvaluators = $h‍_a)]]]],["./make-safe-evaluator.js", [["makeSafeEvaluator", [$h‍_a => (makeSafeEvaluator = $h‍_a)]]]],["./permits.js", [["initialGlobalPropertyNames", [$h‍_a => (initialGlobalPropertyNames = $h‍_a)]]]],["./tame-function-tostring.js", [["tameFunctionToString", [$h‍_a => (tameFunctionToString = $h‍_a)]]]],["./tame-domains.js", [["tameDomains", [$h‍_a => (tameDomains = $h‍_a)]]]],["./error/tame-console.js", [["tameConsole", [$h‍_a => (tameConsole = $h‍_a)]]]],["./error/tame-error-constructor.js", [["default", [$h‍_a => (tameErrorConstructor = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]],["makeAssert", [$h‍_a => (makeAssert = $h‍_a)]]]],["./get-anonymous-intrinsics.js", [["getAnonymousIntrinsics", [$h‍_a => (getAnonymousIntrinsics = $h‍_a)]]]],["./compartment.js", [["makeCompartmentConstructor", [$h‍_a => (makeCompartmentConstructor = $h‍_a)]]]],["./tame-harden.js", [["tameHarden", [$h‍_a => (tameHarden = $h‍_a)]]]],["./tame-symbol-constructor.js", [["tameSymbolConstructor", [$h‍_a => (tameSymbolConstructor = $h‍_a)]]]],["./tame-faux-data-properties.js", [["tameFauxDataProperties", [$h‍_a => (tameFauxDataProperties = $h‍_a)]]]]]);   
+// === functors[49] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let getenv,FERAL_FUNCTION,FERAL_EVAL,TypeError,arrayFilter,globalThis,is,ownKeys,stringSplit,noEvalEvaluate,getOwnPropertyNames,getPrototypeOf,makeHardener,makeIntrinsicsCollector,whitelistIntrinsics,tameFunctionConstructors,tameDateConstructor,tameMathObject,tameRegExpConstructor,enablePropertyOverrides,tameLocaleMethods,setGlobalObjectConstantProperties,setGlobalObjectMutableProperties,setGlobalObjectEvaluators,makeSafeEvaluator,initialGlobalPropertyNames,tameFunctionToString,tameDomains,tameConsole,tameErrorConstructor,assert,makeAssert,getAnonymousIntrinsics,makeCompartmentConstructor,tameHarden,tameSymbolConstructor,tameFauxDataProperties;$h‍_imports([["@endo/env-options", [["getEnvironmentOption", [$h‍_a => (getenv = $h‍_a)]]]],["./commons.js", [["FERAL_FUNCTION", [$h‍_a => (FERAL_FUNCTION = $h‍_a)]],["FERAL_EVAL", [$h‍_a => (FERAL_EVAL = $h‍_a)]],["TypeError", [$h‍_a => (TypeError = $h‍_a)]],["arrayFilter", [$h‍_a => (arrayFilter = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]],["is", [$h‍_a => (is = $h‍_a)]],["ownKeys", [$h‍_a => (ownKeys = $h‍_a)]],["stringSplit", [$h‍_a => (stringSplit = $h‍_a)]],["noEvalEvaluate", [$h‍_a => (noEvalEvaluate = $h‍_a)]],["getOwnPropertyNames", [$h‍_a => (getOwnPropertyNames = $h‍_a)]],["getPrototypeOf", [$h‍_a => (getPrototypeOf = $h‍_a)]]]],["./make-hardener.js", [["makeHardener", [$h‍_a => (makeHardener = $h‍_a)]]]],["./intrinsics.js", [["makeIntrinsicsCollector", [$h‍_a => (makeIntrinsicsCollector = $h‍_a)]]]],["./permits-intrinsics.js", [["default", [$h‍_a => (whitelistIntrinsics = $h‍_a)]]]],["./tame-function-constructors.js", [["default", [$h‍_a => (tameFunctionConstructors = $h‍_a)]]]],["./tame-date-constructor.js", [["default", [$h‍_a => (tameDateConstructor = $h‍_a)]]]],["./tame-math-object.js", [["default", [$h‍_a => (tameMathObject = $h‍_a)]]]],["./tame-regexp-constructor.js", [["default", [$h‍_a => (tameRegExpConstructor = $h‍_a)]]]],["./enable-property-overrides.js", [["default", [$h‍_a => (enablePropertyOverrides = $h‍_a)]]]],["./tame-locale-methods.js", [["default", [$h‍_a => (tameLocaleMethods = $h‍_a)]]]],["./global-object.js", [["setGlobalObjectConstantProperties", [$h‍_a => (setGlobalObjectConstantProperties = $h‍_a)]],["setGlobalObjectMutableProperties", [$h‍_a => (setGlobalObjectMutableProperties = $h‍_a)]],["setGlobalObjectEvaluators", [$h‍_a => (setGlobalObjectEvaluators = $h‍_a)]]]],["./make-safe-evaluator.js", [["makeSafeEvaluator", [$h‍_a => (makeSafeEvaluator = $h‍_a)]]]],["./permits.js", [["initialGlobalPropertyNames", [$h‍_a => (initialGlobalPropertyNames = $h‍_a)]]]],["./tame-function-tostring.js", [["tameFunctionToString", [$h‍_a => (tameFunctionToString = $h‍_a)]]]],["./tame-domains.js", [["tameDomains", [$h‍_a => (tameDomains = $h‍_a)]]]],["./error/tame-console.js", [["tameConsole", [$h‍_a => (tameConsole = $h‍_a)]]]],["./error/tame-error-constructor.js", [["default", [$h‍_a => (tameErrorConstructor = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]],["makeAssert", [$h‍_a => (makeAssert = $h‍_a)]]]],["./get-anonymous-intrinsics.js", [["getAnonymousIntrinsics", [$h‍_a => (getAnonymousIntrinsics = $h‍_a)]]]],["./compartment.js", [["makeCompartmentConstructor", [$h‍_a => (makeCompartmentConstructor = $h‍_a)]]]],["./tame-harden.js", [["tameHarden", [$h‍_a => (tameHarden = $h‍_a)]]]],["./tame-symbol-constructor.js", [["tameSymbolConstructor", [$h‍_a => (tameSymbolConstructor = $h‍_a)]]]],["./tame-faux-data-properties.js", [["tameFauxDataProperties", [$h‍_a => (tameFauxDataProperties = $h‍_a)]]]]]);   
 
 
 
@@ -10452,8 +10760,8 @@ const        repairIntrinsics=  (options=  {})=>  {
  };$h‍_once.repairIntrinsics(repairIntrinsics);
 })()
 ,
-// === functors[49] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let globalThis,repairIntrinsics;$h‍_imports([["./assert-sloppy-mode.js", []],["./commons.js", [["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./lockdown.js", [["repairIntrinsics", [$h‍_a => (repairIntrinsics = $h‍_a)]]]]]);   
+// === functors[50] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let globalThis,repairIntrinsics;$h‍_imports([["./assert-sloppy-mode.js", []],["./commons.js", [["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./lockdown.js", [["repairIntrinsics", [$h‍_a => (repairIntrinsics = $h‍_a)]]]]]);   
 
 
 
@@ -10490,8 +10798,8 @@ globalThis.repairIntrinsics=  (options)=>{
  };
 })()
 ,
-// === functors[50] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let globalThis,makeCompartmentConstructor,tameFunctionToString,getGlobalIntrinsics;$h‍_imports([["./commons.js", [["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./compartment.js", [["makeCompartmentConstructor", [$h‍_a => (makeCompartmentConstructor = $h‍_a)]]]],["./tame-function-tostring.js", [["tameFunctionToString", [$h‍_a => (tameFunctionToString = $h‍_a)]]]],["./intrinsics.js", [["getGlobalIntrinsics", [$h‍_a => (getGlobalIntrinsics = $h‍_a)]]]]]);   
+// === functors[51] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let globalThis,makeCompartmentConstructor,tameFunctionToString,getGlobalIntrinsics;$h‍_imports([["./commons.js", [["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./compartment.js", [["makeCompartmentConstructor", [$h‍_a => (makeCompartmentConstructor = $h‍_a)]]]],["./tame-function-tostring.js", [["tameFunctionToString", [$h‍_a => (tameFunctionToString = $h‍_a)]]]],["./intrinsics.js", [["getGlobalIntrinsics", [$h‍_a => (getGlobalIntrinsics = $h‍_a)]]]]]);   
 
 
 
@@ -10507,15 +10815,68 @@ globalThis.Compartment=  makeCompartmentConstructor(
   markVirtualizedNativeFunction);
 })()
 ,
-// === functors[51] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   let globalThis,assert;$h‍_imports([["./commons.js", [["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
+// === functors[52] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let globalThis,assert;$h‍_imports([["./commons.js", [["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./error/assert.js", [["assert", [$h‍_a => (assert = $h‍_a)]]]]]);   
 
 
 globalThis.assert=  assert;
 })()
 ,
-// === functors[52] ===
-({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () {   $h‍_imports([["./src/lockdown-shim.js", []],["./src/compartment-shim.js", []],["./src/assert-shim.js", []]]);   
+// === functors[53] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   let symbolFor,globalThis,defineCausalConsoleFromLogger,loggedErrorHandler;$h‍_imports([["./commons.js", [["symbolFor", [$h‍_a => (symbolFor = $h‍_a)]],["globalThis", [$h‍_a => (globalThis = $h‍_a)]]]],["./error/console.js", [["defineCausalConsoleFromLogger", [$h‍_a => (defineCausalConsoleFromLogger = $h‍_a)]]]],["./error/assert.js", [["loggedErrorHandler", [$h‍_a => (loggedErrorHandler = $h‍_a)]]]]]);   
+
+
+
+// TODO possible additional exports. Some are privileged.
+// export { loggedErrorHandler };
+// export {
+//   makeCausalConsole,
+//   consoleLevelMethods,
+//   consoleOtherMethods,
+//   makeLoggingConsoleKit,
+//   filterConsole,
+//   pumpLogToConsole,
+// } from './src/error/console.js';
+// export { assertLogs, throwsAndLogs } from './src/error/throws-and-logs.js';
+
+/**
+ * Makes a Console like the
+ * [SES causal `console`](https://github.com/endojs/endo/blob/master/packages/ses/src/error/README.md)
+ * but whose output is redirected to the supplied `logger` function.
+ */
+const makeCausalConsoleFromLoggerForSesAva=
+  defineCausalConsoleFromLogger(loggedErrorHandler);
+
+/**
+ *`makeCausalConsoleFromLoggerForSesAva` is privileged because it exposes
+ * unredacted error info onto the `Logger` provided by the caller. It
+ * should not be made available to non-privileged code.
+ *
+ * Further, we consider this particular API choice to be experimental
+ * and may change in the future. It is currently only intended for use by
+ * `@endo/ses-ava`, with which it will be co-maintained.
+ *
+ * Thus, this `console-shim.js` makes `makeCausalConsoleFromLoggerForSesAva`
+ * available on `globalThis` which it *assumes* is the global of the start
+ * compartment and is therefore allowed to hold powers that should not be
+ * available in constructed compartments. It makes it available as the value of
+ * a global property named by a registered symbol named
+ * `MAKE_CAUSAL_CONSOLE_FROM_LOGGER_KEY_FOR_SES_AVA`.
+ *
+ * Anyone accessing this, including `@endo/ses-ava`, should feature test for
+ * this and be tolerant of its absence. It may indeed disappear from later
+ * versions of the ses-shim.
+ */
+const MAKE_CAUSAL_CONSOLE_FROM_LOGGER_KEY_FOR_SES_AVA=  symbolFor(
+  'MAKE_CAUSAL_CONSOLE_FROM_LOGGER_KEY_FOR_SES_AVA');
+
+
+globalThis[MAKE_CAUSAL_CONSOLE_FROM_LOGGER_KEY_FOR_SES_AVA]=
+  makeCausalConsoleFromLoggerForSesAva;
+})()
+,
+// === functors[54] ===
+({   imports: $h‍_imports,   liveVar: $h‍_live,   onceVar: $h‍_once,   importMeta: $h‍____meta, }) => (function () { 'use strict';   $h‍_imports([["./src/lockdown-shim.js", []],["./src/compartment-shim.js", []],["./src/assert-shim.js", []],["./src/console-shim.js", []]]);   
 })()
 ,
 ]; // functors end
@@ -10566,6 +10927,7 @@ globalThis.assert=  assert;
       ReferenceError: cell("ReferenceError"),
       SyntaxError: cell("SyntaxError"),
       TypeError: cell("TypeError"),
+      AggregateError: cell("AggregateError"),
       assign: cell("assign"),
       create: cell("create"),
       defineProperties: cell("defineProperties"),
@@ -10624,6 +10986,7 @@ globalThis.assert=  assert;
       arrayIncludes: cell("arrayIncludes"),
       arrayJoin: cell("arrayJoin"),
       arrayMap: cell("arrayMap"),
+      arrayFlatMap: cell("arrayFlatMap"),
       arrayPop: cell("arrayPop"),
       arrayPush: cell("arrayPush"),
       arraySlice: cell("arraySlice"),
@@ -10695,6 +11058,8 @@ globalThis.assert=  assert;
     },
     {
       makeLRUCacheMap: cell("makeLRUCacheMap"),
+    },
+    {
       makeNoteLogArgsArrayKit: cell("makeNoteLogArgsArrayKit"),
     },
     {
@@ -10708,12 +11073,12 @@ globalThis.assert=  assert;
       makeHardener: cell("makeHardener"),
     },
     {
+      NativeErrors: cell("NativeErrors"),
       constantProperties: cell("constantProperties"),
       universalPropertyNames: cell("universalPropertyNames"),
       initialGlobalPropertyNames: cell("initialGlobalPropertyNames"),
       sharedGlobalPropertyNames: cell("sharedGlobalPropertyNames"),
       uniqueGlobalPropertyNames: cell("uniqueGlobalPropertyNames"),
-      NativeErrors: cell("NativeErrors"),
       FunctionInstance: cell("FunctionInstance"),
       AsyncFunctionInstance: cell("AsyncFunctionInstance"),
       isAccessorPermit: cell("isAccessorPermit"),
@@ -10802,10 +11167,13 @@ globalThis.assert=  assert;
       tameDomains: cell("tameDomains"),
     },
     {
+      consoleLevelMethods: cell("consoleLevelMethods"),
+      consoleOtherMethods: cell("consoleOtherMethods"),
       makeLoggingConsoleKit: cell("makeLoggingConsoleKit"),
+      pumpLogToConsole: cell("pumpLogToConsole"),
       makeCausalConsole: cell("makeCausalConsole"),
+      defineCausalConsoleFromLogger: cell("defineCausalConsoleFromLogger"),
       filterConsole: cell("filterConsole"),
-      consoleWhitelist: cell("consoleWhitelist"),
     },
     {
       makeRejectionHandlers: cell("makeRejectionHandlers"),
@@ -10861,6 +11229,8 @@ globalThis.assert=  assert;
     },
     {
       repairIntrinsics: cell("repairIntrinsics"),
+    },
+    {
     },
     {
     },
@@ -10933,6 +11303,7 @@ function observeImports(map, importName, importIndex) {
       ReferenceError: cells[0].ReferenceError.set,
       SyntaxError: cells[0].SyntaxError.set,
       TypeError: cells[0].TypeError.set,
+      AggregateError: cells[0].AggregateError.set,
       assign: cells[0].assign.set,
       create: cells[0].create.set,
       defineProperties: cells[0].defineProperties.set,
@@ -10991,6 +11362,7 @@ function observeImports(map, importName, importIndex) {
       arrayIncludes: cells[0].arrayIncludes.set,
       arrayJoin: cells[0].arrayJoin.set,
       arrayMap: cells[0].arrayMap.set,
+      arrayFlatMap: cells[0].arrayFlatMap.set,
       arrayPop: cells[0].arrayPop.set,
       arrayPush: cells[0].arrayPush.set,
       arraySlice: cells[0].arraySlice.set,
@@ -11116,66 +11488,57 @@ function observeImports(map, importName, importIndex) {
   functors[7]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "./internal-types.js", 6);
     },
     liveVar: {
     },
     onceVar: {
       makeLRUCacheMap: cells[7].makeLRUCacheMap.set,
-      makeNoteLogArgsArrayKit: cells[7].makeNoteLogArgsArrayKit.set,
     },
     importMeta: {},
   });
   functors[8]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "../commons.js", 0);
-      observeImports(map, "./stringify-utils.js", 4);
-      observeImports(map, "./types.js", 5);
+      observeImports(map, "../make-lru-cachemap.js", 7);
       observeImports(map, "./internal-types.js", 6);
-      observeImports(map, "./note-log-args.js", 7);
     },
     liveVar: {
     },
     onceVar: {
-      unredactedDetails: cells[8].unredactedDetails.set,
-      loggedErrorHandler: cells[8].loggedErrorHandler.set,
-      makeAssert: cells[8].makeAssert.set,
-      assert: cells[8].assert.set,
+      makeNoteLogArgsArrayKit: cells[8].makeNoteLogArgsArrayKit.set,
     },
     importMeta: {},
   });
   functors[9]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "./commons.js", 0);
-      observeImports(map, "./error/assert.js", 8);
+      observeImports(map, "../commons.js", 0);
+      observeImports(map, "./stringify-utils.js", 4);
+      observeImports(map, "./types.js", 5);
+      observeImports(map, "./internal-types.js", 6);
+      observeImports(map, "./note-log-args.js", 8);
     },
     liveVar: {
     },
     onceVar: {
-      isTypedArray: cells[9].isTypedArray.set,
-      makeHardener: cells[9].makeHardener.set,
+      unredactedDetails: cells[9].unredactedDetails.set,
+      loggedErrorHandler: cells[9].loggedErrorHandler.set,
+      makeAssert: cells[9].makeAssert.set,
+      assert: cells[9].assert.set,
     },
     importMeta: {},
   });
   functors[10]({
     imports(entries) {
       const map = new Map(entries);
+      observeImports(map, "./commons.js", 0);
+      observeImports(map, "./error/assert.js", 9);
     },
     liveVar: {
     },
     onceVar: {
-      constantProperties: cells[10].constantProperties.set,
-      universalPropertyNames: cells[10].universalPropertyNames.set,
-      initialGlobalPropertyNames: cells[10].initialGlobalPropertyNames.set,
-      sharedGlobalPropertyNames: cells[10].sharedGlobalPropertyNames.set,
-      uniqueGlobalPropertyNames: cells[10].uniqueGlobalPropertyNames.set,
-      NativeErrors: cells[10].NativeErrors.set,
-      FunctionInstance: cells[10].FunctionInstance.set,
-      AsyncFunctionInstance: cells[10].AsyncFunctionInstance.set,
-      isAccessorPermit: cells[10].isAccessorPermit.set,
-      permitted: cells[10].permitted.set,
+      isTypedArray: cells[10].isTypedArray.set,
+      makeHardener: cells[10].makeHardener.set,
     },
     importMeta: {},
   });
@@ -11183,32 +11546,41 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./permits.js", 10);
     },
     liveVar: {
     },
     onceVar: {
-      makeIntrinsicsCollector: cells[11].makeIntrinsicsCollector.set,
-      getGlobalIntrinsics: cells[11].getGlobalIntrinsics.set,
+      NativeErrors: cells[11].NativeErrors.set,
+      constantProperties: cells[11].constantProperties.set,
+      universalPropertyNames: cells[11].universalPropertyNames.set,
+      initialGlobalPropertyNames: cells[11].initialGlobalPropertyNames.set,
+      sharedGlobalPropertyNames: cells[11].sharedGlobalPropertyNames.set,
+      uniqueGlobalPropertyNames: cells[11].uniqueGlobalPropertyNames.set,
+      FunctionInstance: cells[11].FunctionInstance.set,
+      AsyncFunctionInstance: cells[11].AsyncFunctionInstance.set,
+      isAccessorPermit: cells[11].isAccessorPermit.set,
+      permitted: cells[11].permitted.set,
     },
     importMeta: {},
   });
   functors[12]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "./permits.js", 10);
       observeImports(map, "./commons.js", 0);
+      observeImports(map, "./permits.js", 11);
     },
     liveVar: {
     },
     onceVar: {
-      default: cells[12].default.set,
+      makeIntrinsicsCollector: cells[12].makeIntrinsicsCollector.set,
+      getGlobalIntrinsics: cells[12].getGlobalIntrinsics.set,
     },
     importMeta: {},
   });
   functors[13]({
     imports(entries) {
       const map = new Map(entries);
+      observeImports(map, "./permits.js", 11);
       observeImports(map, "./commons.js", 0);
     },
     liveVar: {
@@ -11262,9 +11634,7 @@ function observeImports(map, importName, importIndex) {
     liveVar: {
     },
     onceVar: {
-      minEnablements: cells[17].minEnablements.set,
-      moderateEnablements: cells[17].moderateEnablements.set,
-      severeEnablements: cells[17].severeEnablements.set,
+      default: cells[17].default.set,
     },
     importMeta: {},
   });
@@ -11272,12 +11642,13 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./enablements.js", 17);
     },
     liveVar: {
     },
     onceVar: {
-      default: cells[18].default.set,
+      minEnablements: cells[18].minEnablements.set,
+      moderateEnablements: cells[18].moderateEnablements.set,
+      severeEnablements: cells[18].severeEnablements.set,
     },
     importMeta: {},
   });
@@ -11285,7 +11656,7 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./error/assert.js", 8);
+      observeImports(map, "./enablements.js", 18);
     },
     liveVar: {
     },
@@ -11297,24 +11668,24 @@ function observeImports(map, importName, importIndex) {
   functors[20]({
     imports(entries) {
       const map = new Map(entries);
+      observeImports(map, "./commons.js", 0);
+      observeImports(map, "./error/assert.js", 9);
     },
     liveVar: {
     },
     onceVar: {
-      makeEvalFunction: cells[20].makeEvalFunction.set,
+      default: cells[20].default.set,
     },
     importMeta: {},
   });
   functors[21]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "./commons.js", 0);
-      observeImports(map, "./error/assert.js", 8);
     },
     liveVar: {
     },
     onceVar: {
-      makeFunctionConstructor: cells[21].makeFunctionConstructor.set,
+      makeEvalFunction: cells[21].makeEvalFunction.set,
     },
     importMeta: {},
   });
@@ -11322,17 +11693,12 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./make-eval-function.js", 20);
-      observeImports(map, "./make-function-constructor.js", 21);
-      observeImports(map, "./permits.js", 10);
+      observeImports(map, "./error/assert.js", 9);
     },
     liveVar: {
     },
     onceVar: {
-      setGlobalObjectSymbolUnscopables: cells[22].setGlobalObjectSymbolUnscopables.set,
-      setGlobalObjectConstantProperties: cells[22].setGlobalObjectConstantProperties.set,
-      setGlobalObjectMutableProperties: cells[22].setGlobalObjectMutableProperties.set,
-      setGlobalObjectEvaluators: cells[22].setGlobalObjectEvaluators.set,
+      makeFunctionConstructor: cells[22].makeFunctionConstructor.set,
     },
     importMeta: {},
   });
@@ -11340,14 +11706,17 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./error/assert.js", 8);
+      observeImports(map, "./make-eval-function.js", 21);
+      observeImports(map, "./make-function-constructor.js", 22);
+      observeImports(map, "./permits.js", 11);
     },
     liveVar: {
     },
     onceVar: {
-      alwaysThrowHandler: cells[23].alwaysThrowHandler.set,
-      strictScopeTerminatorHandler: cells[23].strictScopeTerminatorHandler.set,
-      strictScopeTerminator: cells[23].strictScopeTerminator.set,
+      setGlobalObjectSymbolUnscopables: cells[23].setGlobalObjectSymbolUnscopables.set,
+      setGlobalObjectConstantProperties: cells[23].setGlobalObjectConstantProperties.set,
+      setGlobalObjectMutableProperties: cells[23].setGlobalObjectMutableProperties.set,
+      setGlobalObjectEvaluators: cells[23].setGlobalObjectEvaluators.set,
     },
     importMeta: {},
   });
@@ -11355,12 +11724,14 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./strict-scope-terminator.js", 23);
+      observeImports(map, "./error/assert.js", 9);
     },
     liveVar: {
     },
     onceVar: {
-      createSloppyGlobalsScopeTerminator: cells[24].createSloppyGlobalsScopeTerminator.set,
+      alwaysThrowHandler: cells[24].alwaysThrowHandler.set,
+      strictScopeTerminatorHandler: cells[24].strictScopeTerminatorHandler.set,
+      strictScopeTerminator: cells[24].strictScopeTerminator.set,
     },
     importMeta: {},
   });
@@ -11368,12 +11739,12 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./error/assert.js", 8);
+      observeImports(map, "./strict-scope-terminator.js", 24);
     },
     liveVar: {
     },
     onceVar: {
-      makeEvalScopeKit: cells[25].makeEvalScopeKit.set,
+      createSloppyGlobalsScopeTerminator: cells[25].createSloppyGlobalsScopeTerminator.set,
     },
     importMeta: {},
   });
@@ -11381,11 +11752,12 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
+      observeImports(map, "./error/assert.js", 9);
     },
     liveVar: {
     },
     onceVar: {
-      getSourceURL: cells[26].getSourceURL.set,
+      makeEvalScopeKit: cells[26].makeEvalScopeKit.set,
     },
     importMeta: {},
   });
@@ -11393,19 +11765,11 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./get-source-url.js", 26);
     },
     liveVar: {
     },
     onceVar: {
-      rejectHtmlComments: cells[27].rejectHtmlComments.set,
-      evadeHtmlCommentTest: cells[27].evadeHtmlCommentTest.set,
-      rejectImportExpressions: cells[27].rejectImportExpressions.set,
-      evadeImportExpressionTest: cells[27].evadeImportExpressionTest.set,
-      rejectSomeDirectEvalExpressions: cells[27].rejectSomeDirectEvalExpressions.set,
-      mandatoryTransforms: cells[27].mandatoryTransforms.set,
-      applyTransforms: cells[27].applyTransforms.set,
-      transforms: cells[27].transforms.set,
+      getSourceURL: cells[27].getSourceURL.set,
     },
     importMeta: {},
   });
@@ -11413,12 +11777,19 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
+      observeImports(map, "./get-source-url.js", 27);
     },
     liveVar: {
     },
     onceVar: {
-      isValidIdentifierName: cells[28].isValidIdentifierName.set,
-      getScopeConstants: cells[28].getScopeConstants.set,
+      rejectHtmlComments: cells[28].rejectHtmlComments.set,
+      evadeHtmlCommentTest: cells[28].evadeHtmlCommentTest.set,
+      rejectImportExpressions: cells[28].rejectImportExpressions.set,
+      evadeImportExpressionTest: cells[28].evadeImportExpressionTest.set,
+      rejectSomeDirectEvalExpressions: cells[28].rejectSomeDirectEvalExpressions.set,
+      mandatoryTransforms: cells[28].mandatoryTransforms.set,
+      applyTransforms: cells[28].applyTransforms.set,
+      transforms: cells[28].transforms.set,
     },
     importMeta: {},
   });
@@ -11426,12 +11797,12 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./scope-constants.js", 28);
     },
     liveVar: {
     },
     onceVar: {
-      makeEvaluate: cells[29].makeEvaluate.set,
+      isValidIdentifierName: cells[29].isValidIdentifierName.set,
+      getScopeConstants: cells[29].getScopeConstants.set,
     },
     importMeta: {},
   });
@@ -11439,17 +11810,12 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./strict-scope-terminator.js", 23);
-      observeImports(map, "./sloppy-globals-scope-terminator.js", 24);
-      observeImports(map, "./eval-scope.js", 25);
-      observeImports(map, "./transforms.js", 27);
-      observeImports(map, "./make-evaluate.js", 29);
-      observeImports(map, "./error/assert.js", 8);
+      observeImports(map, "./scope-constants.js", 29);
     },
     liveVar: {
     },
     onceVar: {
-      makeSafeEvaluator: cells[30].makeSafeEvaluator.set,
+      makeEvaluate: cells[30].makeEvaluate.set,
     },
     importMeta: {},
   });
@@ -11457,11 +11823,17 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
+      observeImports(map, "./strict-scope-terminator.js", 24);
+      observeImports(map, "./sloppy-globals-scope-terminator.js", 25);
+      observeImports(map, "./eval-scope.js", 26);
+      observeImports(map, "./transforms.js", 28);
+      observeImports(map, "./make-evaluate.js", 30);
+      observeImports(map, "./error/assert.js", 9);
     },
     liveVar: {
     },
     onceVar: {
-      tameFunctionToString: cells[31].tameFunctionToString.set,
+      makeSafeEvaluator: cells[31].makeSafeEvaluator.set,
     },
     importMeta: {},
   });
@@ -11473,24 +11845,19 @@ function observeImports(map, importName, importIndex) {
     liveVar: {
     },
     onceVar: {
-      tameDomains: cells[32].tameDomains.set,
+      tameFunctionToString: cells[32].tameFunctionToString.set,
     },
     importMeta: {},
   });
   functors[33]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "../commons.js", 0);
-      observeImports(map, "./types.js", 5);
-      observeImports(map, "./internal-types.js", 6);
+      observeImports(map, "./commons.js", 0);
     },
     liveVar: {
     },
     onceVar: {
-      makeLoggingConsoleKit: cells[33].makeLoggingConsoleKit.set,
-      makeCausalConsole: cells[33].makeCausalConsole.set,
-      filterConsole: cells[33].filterConsole.set,
-      consoleWhitelist: cells[33].consoleWhitelist.set,
+      tameDomains: cells[33].tameDomains.set,
     },
     importMeta: {},
   });
@@ -11498,11 +11865,19 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "../commons.js", 0);
+      observeImports(map, "./types.js", 5);
+      observeImports(map, "./internal-types.js", 6);
     },
     liveVar: {
     },
     onceVar: {
-      makeRejectionHandlers: cells[34].makeRejectionHandlers.set,
+      consoleLevelMethods: cells[34].consoleLevelMethods.set,
+      consoleOtherMethods: cells[34].consoleOtherMethods.set,
+      makeLoggingConsoleKit: cells[34].makeLoggingConsoleKit.set,
+      pumpLogToConsole: cells[34].pumpLogToConsole.set,
+      makeCausalConsole: cells[34].makeCausalConsole.set,
+      defineCausalConsoleFromLogger: cells[34].defineCausalConsoleFromLogger.set,
+      filterConsole: cells[34].filterConsole.set,
     },
     importMeta: {},
   });
@@ -11510,16 +11885,11 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "../commons.js", 0);
-      observeImports(map, "./assert.js", 8);
-      observeImports(map, "./console.js", 33);
-      observeImports(map, "./unhandled-rejection.js", 34);
-      observeImports(map, "./types.js", 5);
-      observeImports(map, "./internal-types.js", 6);
     },
     liveVar: {
     },
     onceVar: {
-      tameConsole: cells[35].tameConsole.set,
+      makeRejectionHandlers: cells[35].makeRejectionHandlers.set,
     },
     importMeta: {},
   });
@@ -11527,13 +11897,16 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "../commons.js", 0);
+      observeImports(map, "./assert.js", 9);
+      observeImports(map, "./console.js", 34);
+      observeImports(map, "./unhandled-rejection.js", 35);
+      observeImports(map, "./types.js", 5);
+      observeImports(map, "./internal-types.js", 6);
     },
     liveVar: {
     },
     onceVar: {
-      filterFileName: cells[36].filterFileName.set,
-      shortenCallSiteString: cells[36].shortenCallSiteString.set,
-      tameV8ErrorConstructor: cells[36].tameV8ErrorConstructor.set,
+      tameConsole: cells[36].tameConsole.set,
     },
     importMeta: {},
   });
@@ -11541,110 +11914,102 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "../commons.js", 0);
-      observeImports(map, "../permits.js", 10);
-      observeImports(map, "./tame-v8-error-constructor.js", 36);
     },
     liveVar: {
     },
     onceVar: {
-      default: cells[37].default.set,
+      filterFileName: cells[37].filterFileName.set,
+      shortenCallSiteString: cells[37].shortenCallSiteString.set,
+      tameV8ErrorConstructor: cells[37].tameV8ErrorConstructor.set,
     },
     importMeta: {},
   });
   functors[38]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "./commons.js", 0);
-      observeImports(map, "./error/assert.js", 8);
+      observeImports(map, "../commons.js", 0);
+      observeImports(map, "../permits.js", 11);
+      observeImports(map, "./tame-v8-error-constructor.js", 37);
     },
     liveVar: {
     },
     onceVar: {
-      makeAlias: cells[38].makeAlias.set,
-      load: cells[38].load.set,
+      default: cells[38].default.set,
     },
     importMeta: {},
   });
   functors[39]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "./module-load.js", 38);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./error/assert.js", 8);
+      observeImports(map, "./error/assert.js", 9);
     },
     liveVar: {
     },
     onceVar: {
-      deferExports: cells[39].deferExports.set,
-      getDeferredExports: cells[39].getDeferredExports.set,
+      makeAlias: cells[39].makeAlias.set,
+      load: cells[39].load.set,
     },
     importMeta: {},
   });
   functors[40]({
     imports(entries) {
       const map = new Map(entries);
+      observeImports(map, "./module-load.js", 39);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./transforms.js", 27);
-      observeImports(map, "./make-safe-evaluator.js", 30);
+      observeImports(map, "./error/assert.js", 9);
     },
     liveVar: {
     },
     onceVar: {
-      provideCompartmentEvaluator: cells[40].provideCompartmentEvaluator.set,
-      compartmentEvaluate: cells[40].compartmentEvaluate.set,
+      deferExports: cells[40].deferExports.set,
+      getDeferredExports: cells[40].getDeferredExports.set,
     },
     importMeta: {},
   });
   functors[41]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "./error/assert.js", 8);
-      observeImports(map, "./module-proxy.js", 39);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./compartment-evaluate.js", 40);
+      observeImports(map, "./transforms.js", 28);
+      observeImports(map, "./make-safe-evaluator.js", 31);
     },
     liveVar: {
     },
     onceVar: {
-      makeThirdPartyModuleInstance: cells[41].makeThirdPartyModuleInstance.set,
-      makeModuleInstance: cells[41].makeModuleInstance.set,
+      provideCompartmentEvaluator: cells[41].provideCompartmentEvaluator.set,
+      compartmentEvaluate: cells[41].compartmentEvaluate.set,
     },
     importMeta: {},
   });
   functors[42]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "./error/assert.js", 8);
-      observeImports(map, "./module-instance.js", 41);
+      observeImports(map, "./error/assert.js", 9);
+      observeImports(map, "./module-proxy.js", 40);
       observeImports(map, "./commons.js", 0);
+      observeImports(map, "./compartment-evaluate.js", 41);
     },
     liveVar: {
     },
     onceVar: {
-      link: cells[42].link.set,
-      instantiate: cells[42].instantiate.set,
+      makeThirdPartyModuleInstance: cells[42].makeThirdPartyModuleInstance.set,
+      makeModuleInstance: cells[42].makeModuleInstance.set,
     },
     importMeta: {},
   });
   functors[43]({
     imports(entries) {
       const map = new Map(entries);
+      observeImports(map, "./error/assert.js", 9);
+      observeImports(map, "./module-instance.js", 42);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./global-object.js", 22);
-      observeImports(map, "./permits.js", 10);
-      observeImports(map, "./module-load.js", 38);
-      observeImports(map, "./module-link.js", 42);
-      observeImports(map, "./module-proxy.js", 39);
-      observeImports(map, "./error/assert.js", 8);
-      observeImports(map, "./compartment-evaluate.js", 40);
-      observeImports(map, "./make-safe-evaluator.js", 30);
     },
     liveVar: {
     },
     onceVar: {
-      InertCompartment: cells[43].InertCompartment.set,
-      CompartmentPrototype: cells[43].CompartmentPrototype.set,
-      makeCompartmentConstructor: cells[43].makeCompartmentConstructor.set,
+      link: cells[43].link.set,
+      instantiate: cells[43].instantiate.set,
     },
     importMeta: {},
   });
@@ -11652,12 +12017,21 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./compartment.js", 43);
+      observeImports(map, "./global-object.js", 23);
+      observeImports(map, "./permits.js", 11);
+      observeImports(map, "./module-load.js", 39);
+      observeImports(map, "./module-link.js", 43);
+      observeImports(map, "./module-proxy.js", 40);
+      observeImports(map, "./error/assert.js", 9);
+      observeImports(map, "./compartment-evaluate.js", 41);
+      observeImports(map, "./make-safe-evaluator.js", 31);
     },
     liveVar: {
     },
     onceVar: {
-      getAnonymousIntrinsics: cells[44].getAnonymousIntrinsics.set,
+      InertCompartment: cells[44].InertCompartment.set,
+      CompartmentPrototype: cells[44].CompartmentPrototype.set,
+      makeCompartmentConstructor: cells[44].makeCompartmentConstructor.set,
     },
     importMeta: {},
   });
@@ -11665,11 +12039,12 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
+      observeImports(map, "./compartment.js", 44);
     },
     liveVar: {
     },
     onceVar: {
-      tameHarden: cells[45].tameHarden.set,
+      getAnonymousIntrinsics: cells[45].getAnonymousIntrinsics.set,
     },
     importMeta: {},
   });
@@ -11681,7 +12056,7 @@ function observeImports(map, importName, importIndex) {
     liveVar: {
     },
     onceVar: {
-      tameSymbolConstructor: cells[46].tameSymbolConstructor.set,
+      tameHarden: cells[46].tameHarden.set,
     },
     importMeta: {},
   });
@@ -11693,66 +12068,64 @@ function observeImports(map, importName, importIndex) {
     liveVar: {
     },
     onceVar: {
-      tameFauxDataProperty: cells[47].tameFauxDataProperty.set,
-      tameFauxDataProperties: cells[47].tameFauxDataProperties.set,
+      tameSymbolConstructor: cells[47].tameSymbolConstructor.set,
     },
     importMeta: {},
   });
   functors[48]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "@endo/env-options", 3);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./make-hardener.js", 9);
-      observeImports(map, "./intrinsics.js", 11);
-      observeImports(map, "./permits-intrinsics.js", 12);
-      observeImports(map, "./tame-function-constructors.js", 13);
-      observeImports(map, "./tame-date-constructor.js", 14);
-      observeImports(map, "./tame-math-object.js", 15);
-      observeImports(map, "./tame-regexp-constructor.js", 16);
-      observeImports(map, "./enable-property-overrides.js", 18);
-      observeImports(map, "./tame-locale-methods.js", 19);
-      observeImports(map, "./global-object.js", 22);
-      observeImports(map, "./make-safe-evaluator.js", 30);
-      observeImports(map, "./permits.js", 10);
-      observeImports(map, "./tame-function-tostring.js", 31);
-      observeImports(map, "./tame-domains.js", 32);
-      observeImports(map, "./error/tame-console.js", 35);
-      observeImports(map, "./error/tame-error-constructor.js", 37);
-      observeImports(map, "./error/assert.js", 8);
-      observeImports(map, "./get-anonymous-intrinsics.js", 44);
-      observeImports(map, "./compartment.js", 43);
-      observeImports(map, "./tame-harden.js", 45);
-      observeImports(map, "./tame-symbol-constructor.js", 46);
-      observeImports(map, "./tame-faux-data-properties.js", 47);
     },
     liveVar: {
     },
     onceVar: {
-      repairIntrinsics: cells[48].repairIntrinsics.set,
+      tameFauxDataProperty: cells[48].tameFauxDataProperty.set,
+      tameFauxDataProperties: cells[48].tameFauxDataProperties.set,
     },
     importMeta: {},
   });
   functors[49]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "./assert-sloppy-mode.js", 1);
+      observeImports(map, "@endo/env-options", 3);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./lockdown.js", 48);
+      observeImports(map, "./make-hardener.js", 10);
+      observeImports(map, "./intrinsics.js", 12);
+      observeImports(map, "./permits-intrinsics.js", 13);
+      observeImports(map, "./tame-function-constructors.js", 14);
+      observeImports(map, "./tame-date-constructor.js", 15);
+      observeImports(map, "./tame-math-object.js", 16);
+      observeImports(map, "./tame-regexp-constructor.js", 17);
+      observeImports(map, "./enable-property-overrides.js", 19);
+      observeImports(map, "./tame-locale-methods.js", 20);
+      observeImports(map, "./global-object.js", 23);
+      observeImports(map, "./make-safe-evaluator.js", 31);
+      observeImports(map, "./permits.js", 11);
+      observeImports(map, "./tame-function-tostring.js", 32);
+      observeImports(map, "./tame-domains.js", 33);
+      observeImports(map, "./error/tame-console.js", 36);
+      observeImports(map, "./error/tame-error-constructor.js", 38);
+      observeImports(map, "./error/assert.js", 9);
+      observeImports(map, "./get-anonymous-intrinsics.js", 45);
+      observeImports(map, "./compartment.js", 44);
+      observeImports(map, "./tame-harden.js", 46);
+      observeImports(map, "./tame-symbol-constructor.js", 47);
+      observeImports(map, "./tame-faux-data-properties.js", 48);
     },
     liveVar: {
     },
     onceVar: {
+      repairIntrinsics: cells[49].repairIntrinsics.set,
     },
     importMeta: {},
   });
   functors[50]({
     imports(entries) {
       const map = new Map(entries);
+      observeImports(map, "./assert-sloppy-mode.js", 1);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./compartment.js", 43);
-      observeImports(map, "./tame-function-tostring.js", 31);
-      observeImports(map, "./intrinsics.js", 11);
+      observeImports(map, "./lockdown.js", 49);
     },
     liveVar: {
     },
@@ -11764,7 +12137,9 @@ function observeImports(map, importName, importIndex) {
     imports(entries) {
       const map = new Map(entries);
       observeImports(map, "./commons.js", 0);
-      observeImports(map, "./error/assert.js", 8);
+      observeImports(map, "./compartment.js", 44);
+      observeImports(map, "./tame-function-tostring.js", 32);
+      observeImports(map, "./intrinsics.js", 12);
     },
     liveVar: {
     },
@@ -11775,9 +12150,35 @@ function observeImports(map, importName, importIndex) {
   functors[52]({
     imports(entries) {
       const map = new Map(entries);
-      observeImports(map, "./src/lockdown-shim.js", 49);
-      observeImports(map, "./src/compartment-shim.js", 50);
-      observeImports(map, "./src/assert-shim.js", 51);
+      observeImports(map, "./commons.js", 0);
+      observeImports(map, "./error/assert.js", 9);
+    },
+    liveVar: {
+    },
+    onceVar: {
+    },
+    importMeta: {},
+  });
+  functors[53]({
+    imports(entries) {
+      const map = new Map(entries);
+      observeImports(map, "./commons.js", 0);
+      observeImports(map, "./error/console.js", 34);
+      observeImports(map, "./error/assert.js", 9);
+    },
+    liveVar: {
+    },
+    onceVar: {
+    },
+    importMeta: {},
+  });
+  functors[54]({
+    imports(entries) {
+      const map = new Map(entries);
+      observeImports(map, "./src/lockdown-shim.js", 50);
+      observeImports(map, "./src/compartment-shim.js", 51);
+      observeImports(map, "./src/assert-shim.js", 52);
+      observeImports(map, "./src/console-shim.js", 53);
     },
     liveVar: {
     },
@@ -11805,6 +12206,9 @@ function observeImports(map, importName, importIndex) {
       stackFiltering: 'verbose',
       // prevents most common override mistake cases from tripping up users
       overrideTaming: 'severe',
+      // preserves JS locale methods, to avoid confusing users
+      // prevents aliasing: toLocaleString() to toString(), etc
+      localeTaming: 'unsafe',
     }
 
     lockdown(lockdownOptions)
@@ -12651,11 +13055,10 @@ const d = (strings, args) => strings.join() + args.join()
 const q = (arg) => arg
 
 /**
- * alwaysThrowHandler
- * This is an object that throws if any property is called. It's used as
- * a proxy handler which throws on any trap called.
- * It's made from a proxy with a get trap that throws. It's safe to
- * create one and share it between all Proxy handlers.
+ * AlwaysThrowHandler This is an object that throws if any property is called.
+ * It's used as a proxy handler which throws on any trap called. It's made from
+ * a proxy with a get trap that throws. It's safe to create one and share it
+ * between all Proxy handlers.
  */
 const alwaysThrowHandler = new Proxy(
   immutableObject,
@@ -12669,16 +13072,19 @@ const alwaysThrowHandler = new Proxy(
 )
 
 /**
- * scopeTerminatorHandler manages a strictScopeTerminator Proxy which serves as
- * the final scope boundary that will always return "undefined" in order
- * to prevent access to "start compartment globals".
+ * ScopeTerminatorHandler manages a strictScopeTerminator Proxy which serves as
+ * the final scope boundary that will always return "undefined" in order to
+ * prevent access to "start compartment globals".
+ *
  * @type {ProxyHandler}
  */
 const scopeProxyHandlerProperties = {
+  // eslint-disable-next-line no-unused-vars
   get(_shadow, _prop) {
     return undefined
   },
 
+  // eslint-disable-next-line no-unused-vars
   set(_shadow, prop, _value) {
     // We should only hit this if the has() hook returned true matches the v8
     // ReferenceError message "Uncaught ReferenceError: xyz is not defined"
