@@ -1344,7 +1344,7 @@
   dependencies:
     bignumber.js "^9.1.2"
 
-"@hyperplay/utils@^0.3.4":
+"@hyperplay/utils@^0.3.3", "@hyperplay/utils@^0.3.4":
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.3.4.tgz#71d4abe910ec8550c865418118eb1c07df3b399d"
   integrity sha512-ndkDnp+iV9BlLCKpbq0XVuuc/ORzaZ+69wFvVvAftdU6mbwbk4EfxAwTOpmXWkLaiGp0MZaybYMa5zYZkxkW5w==

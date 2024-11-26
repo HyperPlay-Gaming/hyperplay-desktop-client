@@ -80,7 +80,7 @@ import {
   deviceNameCache,
   vendorNameCache
 } from './utils/systeminfo/gpu/pci_ids'
-import { copyFile, mkdir, readdir, stat } from 'fs/promises'
+import { copyFile, lstat, mkdir, readdir } from 'fs/promises'
 import { GameConfig } from './game_config'
 
 const execAsync = promisify(exec)
@@ -1307,18 +1307,30 @@ export const writeConfig = (appName: string, config: Partial<AppSettings>) => {
 }
 
 export async function copyRecursiveAsync(src: string, dest: string) {
-  const exists = (await stat(src)).isDirectory()
-  if (exists) {
-    await mkdir(dest, { recursive: true })
-    const files = await readdir(src)
-    await Promise.all(
-      files.map(async (file) => {
+  if (!existsSync(src) || !src || !dest) {
+    return
+  }
+  const stats = await lstat(src)
+  if (stats.isSymbolicLink()) {
+    return // Skip symbolic links
+  }
+  if (stats.isDirectory()) {
+    try {
+      await mkdir(dest, { recursive: true })
+      const files = await readdir(src)
+      for (const file of files) {
         const srcFile = join(src, file)
         const destFile = join(dest, file)
         await copyRecursiveAsync(srcFile, destFile)
-      })
-    )
+      }
+    } catch (error) {
+      logError(`Failed to copy ${src} to ${dest}: ${error}`, LogPrefix.Backend)
+    }
   } else {
-    await copyFile(src, dest)
+    try {
+      await copyFile(src, dest)
+    } catch (error) {
+      logError(`Failed to copy ${src} to ${dest}: ${error}`, LogPrefix.Backend)
+    }
   }
 }
