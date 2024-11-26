@@ -59,7 +59,7 @@ export function QuestsPage() {
     id: 'ALPHA_ASC'
   })
 
-  const { questIdToQuestStateMap, isPending: isGetQuestStatesPending } =
+  const { questIdToQuestStateMap, isLoading: isGetQuestStatesLoading } =
     useGetQuestStates({
       quests
     })
@@ -230,7 +230,9 @@ export function QuestsPage() {
           }}
           filterProps={{ activeFilter, setActiveFilter }}
           isFetching={questsResults?.data.isFetching}
-          isPageLoading={questsResults?.data.isLoading}
+          isPageLoading={
+            questsResults?.data.isLoading || isGetQuestStatesLoading
+          }
           activeTab={activeFilter}
           tabs={tabs}
           messageModalProps={{
