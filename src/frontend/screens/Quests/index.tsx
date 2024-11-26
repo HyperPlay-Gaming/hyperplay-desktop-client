@@ -18,9 +18,24 @@ import {
   Background,
   QuestCard,
   QuestFilter,
+  QuestLogInfo,
   QuestsSummaryTable,
   SearchBar
 } from '@hyperplay/ui'
+import { useGetQuestStates } from 'frontend/hooks/useGetQuestStates'
+
+const tabs: { label: string; value: QuestFilter }[] = [
+  { label: 'Active', value: 'all' },
+  { label: 'Claim Ready', value: 'new' },
+  { label: 'Completed', value: 'minted' }
+]
+
+// map quest type to quest filter
+const logInfoToQuestFilter: Record<QuestLogInfo['state'], QuestFilter> = {
+  READY_FOR_CLAIM: 'new',
+  ACTIVE: 'all',
+  CLAIMED: 'minted'
+}
 
 export function QuestsPage() {
   const navigate = useNavigate()
@@ -43,6 +58,11 @@ export function QuestsPage() {
     text: 'Alphabetically (ASC)',
     id: 'ALPHA_ASC'
   })
+
+  const { questIdToQuestStateMap, isPending: isGetQuestStatesPending } =
+    useGetQuestStates({
+      quests
+    })
 
   useEffect(() => {
     window.api.trackScreen('Quests Page')
@@ -132,13 +152,23 @@ export function QuestsPage() {
   }
 
   const filteredQuests = sortedQuests?.filter((quest) => {
+    if (!questIdToQuestStateMap || !questIdToQuestStateMap[quest.id]) {
+      return true
+    }
+
+    return (
+      logInfoToQuestFilter[questIdToQuestStateMap[quest.id]] === activeFilter
+    )
+  })
+
+  const searchFilteredQuests = filteredQuests?.filter((quest) => {
     const questTitleMatch = quest.name
       .toLowerCase()
       .startsWith(searchText.toLowerCase())
     return questTitleMatch || gameTitleMatches(quest)
   })
 
-  const initialQuestId = filteredQuests?.[0]?.id ?? null
+  const initialQuestId = searchFilteredQuests?.[0]?.id ?? null
   const visibleQuestId = selectedQuestId ?? initialQuestId
 
   const achievementsSortOptions = [
@@ -148,7 +178,7 @@ export function QuestsPage() {
 
   const imagesToPreload: string[] = []
   const gameElements =
-    quests?.map(({ id, project_id, name, ...rest }) => {
+    searchFilteredQuests?.map(({ id, project_id, name, ...rest }) => {
       const imageUrl = listings
         ? listings[project_id]?.project_meta?.main_capsule
         : ''
@@ -201,15 +231,8 @@ export function QuestsPage() {
           filterProps={{ activeFilter, setActiveFilter }}
           isFetching={questsResults?.data.isFetching}
           isPageLoading={questsResults?.data.isLoading}
-          activeTab={'ACTIVE'}
-          tabs={
-            [
-              // TODO: uncomment when we can filter based on these categories
-              // { label: 'Active', value: 'ACTIVE' },
-              // { label: 'Claim Ready', value: 'CLAIM_READY' },
-              // { label: 'Completed', value: 'COMPLETED' }
-            ]
-          }
+          activeTab={activeFilter}
+          tabs={tabs}
           messageModalProps={{
             title: t('quests.noneFound.title', 'No Quests Found.'),
             message: t(
