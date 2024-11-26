@@ -18,24 +18,9 @@ import {
   Background,
   QuestCard,
   QuestFilter,
-  QuestLogInfo,
   QuestsSummaryTable,
   SearchBar
 } from '@hyperplay/ui'
-import { useGetQuestStates } from 'frontend/hooks/useGetQuestStates'
-
-const tabs: { label: string; value: QuestFilter }[] = [
-  { label: 'Active', value: 'all' },
-  { label: 'Claim Ready', value: 'new' },
-  { label: 'Completed', value: 'minted' }
-]
-
-// map quest type to quest filter
-const logInfoToQuestFilter: Record<QuestLogInfo['state'], QuestFilter> = {
-  READY_FOR_CLAIM: 'new',
-  ACTIVE: 'all',
-  CLAIMED: 'minted'
-}
 
 export function QuestsPage() {
   const navigate = useNavigate()
@@ -58,11 +43,6 @@ export function QuestsPage() {
     text: 'Alphabetically (ASC)',
     id: 'ALPHA_ASC'
   })
-
-  const { questIdToQuestStateMap, isLoading: isGetQuestStatesLoading } =
-    useGetQuestStates({
-      quests
-    })
 
   useEffect(() => {
     window.api.trackScreen('Quests Page')
@@ -151,17 +131,7 @@ export function QuestsPage() {
     return title?.toLowerCase().startsWith(searchText.toLowerCase())
   }
 
-  const filteredQuests = sortedQuests?.filter((quest) => {
-    if (!questIdToQuestStateMap || !questIdToQuestStateMap[quest.id]) {
-      return true
-    }
-
-    return (
-      logInfoToQuestFilter[questIdToQuestStateMap[quest.id]] === activeFilter
-    )
-  })
-
-  const searchFilteredQuests = filteredQuests?.filter((quest) => {
+  const searchFilteredQuests = sortedQuests?.filter((quest) => {
     const questTitleMatch = quest.name
       .toLowerCase()
       .startsWith(searchText.toLowerCase())
@@ -230,11 +200,9 @@ export function QuestsPage() {
           }}
           filterProps={{ activeFilter, setActiveFilter }}
           isFetching={questsResults?.data.isFetching}
-          isPageLoading={
-            questsResults?.data.isLoading || isGetQuestStatesLoading
-          }
+          isPageLoading={questsResults?.data.isLoading}
           activeTab={activeFilter}
-          tabs={tabs}
+          tabs={[]}
           messageModalProps={{
             title: t('quests.noneFound.title', 'No Quests Found.'),
             message: t(
