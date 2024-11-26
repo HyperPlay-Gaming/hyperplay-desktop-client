@@ -66,7 +66,7 @@
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: b4b8fc0d",
+  "description": "other build from git id: 41c9b553",
   "host_permissions": [
     "http://localhost:8545/",
     "file://*/*",
@@ -113,5 +113,5 @@
     ]
   },
   "minimum_chrome_version": "89",
-  "version": "12.7.1"
+  "version": "12.7.2"
 }
