@@ -228,6 +228,7 @@ export const getAppVersion = () => {
   return `${VERSION_NUMBER}`
 }
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 async function handleExit(cleanUp?: () => Promise<any>) {
   const isLocked = existsSync(join(gamesConfigPath, 'lock'))
   const mainWindow = getMainWindow()
