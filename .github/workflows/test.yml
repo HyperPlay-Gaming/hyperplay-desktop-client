@@ -38,3 +38,5 @@ jobs:
 
       - name: Test
         run: yarn test:ci
+        env:
+          QASE_JEST_DESKTOP_CLIENT_API_TOKEN: ${{ secrets.QASE_JEST_DESKTOP_CLIENT_API_TOKEN }}

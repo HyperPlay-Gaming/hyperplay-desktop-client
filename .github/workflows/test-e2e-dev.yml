@@ -101,3 +101,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           HOST_OS: win
+          QASE_JEST_DESKTOP_CLIENT_API_TOKEN: ${{ secrets.QASE_JEST_DESKTOP_CLIENT_API_TOKEN }}
