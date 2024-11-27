@@ -73,6 +73,7 @@ const openBlankWindow = (options: BrowserWindowConstructorOptions) => {
 function handleUrlOpenForWebContents(
   url: string,
   contents: Electron.WebContents,
+  /* eslint-disable-next-line */
   extensionImporter: any
 ): WindowOpenHandlerResponse {
   const urlToOpen = new URL(url)
