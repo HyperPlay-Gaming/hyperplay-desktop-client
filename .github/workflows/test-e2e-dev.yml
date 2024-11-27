@@ -13,64 +13,63 @@ env:
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
 
 jobs:
-  if: false
-  linux-dev:
-    runs-on: ubuntu-latest
-    concurrency:
-      group: e2e-dev-linux-${{ github.ref }}
-      cancel-in-progress: true
-    steps:
-      - name: Checkout repository.
-        uses: actions/checkout@v4
+  # linux-dev:
+  #   runs-on: ubuntu-latest
+  #   concurrency:
+  #     group: e2e-dev-linux-${{ github.ref }}
+  #     cancel-in-progress: true
+  #   steps:
+  #     - name: Checkout repository.
+  #       uses: actions/checkout@v4
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          cache: 'yarn'
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-      - name: Authenticate with private NPM package
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: Install modules.
-        run: yarn setup
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-      - name: Build and Test
-        run: yarn test:e2e-ci
+  #     - name: Setup NodeJS
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '20'
+  #         cache: 'yarn'
+  #     - name: Reconfigure git to use HTTP authentication
+  #       run: >
+  #         git config --global url."https://github.com/".insteadOf
+  #         ssh://git@github.com/
+  #     - name: Authenticate with private NPM package
+  #       run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+  #     - name: Install modules.
+  #       run: yarn setup
+  #       env:
+  #         PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+  #     - name: Build and Test
+  #       run: yarn test:e2e-ci
 
-  mac-dev:
-    runs-on: macos-13
-    concurrency:
-      group: e2e-dev-mac-${{ github.ref }}
-      cancel-in-progress: true
-    steps:
-      - name: Checkout repository.
-        uses: actions/checkout@v4
+  # mac-dev:
+  #   runs-on: macos-13
+  #   concurrency:
+  #     group: e2e-dev-mac-${{ github.ref }}
+  #     cancel-in-progress: true
+  #   steps:
+  #     - name: Checkout repository.
+  #       uses: actions/checkout@v4
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          cache: 'yarn'
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-      - name: Authenticate with private NPM package
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: Install modules.
-        run: yarn setup
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-      - name: Build and Test
-        run: yarn test:e2e-ci
-        env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
-          GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
-          CSC_IDENTITY_AUTO_DISCOVERY: false
+  #     - name: Setup NodeJS
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '20'
+  #         cache: 'yarn'
+  #     - name: Reconfigure git to use HTTP authentication
+  #       run: >
+  #         git config --global url."https://github.com/".insteadOf
+  #         ssh://git@github.com/
+  #     - name: Authenticate with private NPM package
+  #       run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+  #     - name: Install modules.
+  #       run: yarn setup
+  #       env:
+  #         PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+  #     - name: Build and Test
+  #       run: yarn test:e2e-ci
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  #         GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  #         CSC_IDENTITY_AUTO_DISCOVERY: false
 
   windows-dev:
     runs-on: windows-latest
@@ -101,3 +100,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+          HOST_OS: win
