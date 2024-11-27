@@ -351,8 +351,10 @@
     "husky": "^9.1.4",
     "i18next-parser": "^9.0.1",
     "jest": "^29.7.0",
+    "jest-qase-reporter": "^2.0.3",
     "pkg": "^5.8.1",
     "playwright": "^1.46.0",
+    "playwright-qase-reporter": "^2.0.16",
     "prettier": "^2.8.8",
     "pretty-quick": "^4.0.0",
     "react-markdown": "^9.0.1",
@@ -404,7 +406,8 @@
       "i18next-parser>esbuild": false,
       "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
       "@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
-      "@hyperplay/overlay>electron": false
+      "@hyperplay/overlay>electron": false,
+      "jest-qase-reporter>qase-javascript-commons>child-process-ext>es5-ext": true
     }
   }
 }

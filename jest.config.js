@@ -18,5 +18,20 @@ module.exports = {
   coverageReporters: ['text', 'html'],
   projects: ['<rootDir>/src/backend', '<rootDir>/src/frontend'],
 
-  rootDir: '.'
+  rootDir: '.',
+  reporters: [
+    'default',
+    [
+      'jest-qase-reporter',
+      {
+        mode: 'testops',
+        testops: {
+          api: {
+            token: process.env.QASE_JEST_DESKTOP_CLIENT_API_TOKEN
+          },
+          project: 'HC'
+        }
+      }
+    ]
+  ]
 }

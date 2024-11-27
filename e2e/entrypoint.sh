@@ -1,11 +1,27 @@
 #!/bin/bash
 
-echo "Clearing display lock for Xvfb"
-rm -rf /tmp/.X99-lock
+echo "Host OS is $HOST_OS"
 
-echo "Starting Xvfb"
-Xvfb :99 -ac &
-sleep 2
+# get os
+os=$HOST_OS
+# if [[ "$OSTYPE" == *"linux"* ]]
+# then
+#     os="linux"
+
+# elif [[ "$OSTYPE" == *"darwin"* ]]
+# then
+#     os="mac"
+# fi
+
+if [[ "$os" == "linux" ]]
+then
+    echo "Clearing display lock for Xvfb"
+    rm -rf /tmp/.X99-lock
+
+    echo "Starting Xvfb"
+    Xvfb :99 -ac &
+    sleep 2
+fi
 
 export DISPLAY=:99
 echo "Executing command $@"
@@ -17,18 +33,6 @@ echo "#########"
 echo "# Build #"
 echo "#########"
 echo
-
-# get os
-os="win"
-if [[ "$OSTYPE" == *"linux"* ]]
-then
-    os="linux"
-
-elif [[ "$OSTYPE" == *"darwin"* ]]
-then
-    os="mac"
-fi
-echo "OS is $os"
 
 yarn setup
 

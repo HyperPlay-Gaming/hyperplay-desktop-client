@@ -1,10 +1,10 @@
 name: Test E2E Packaged
 
 on:
-  pull_request:
-    branches: [main]
-  push:
-    branches: [main]
+  # pull_request:
+  #   branches: [main]
+  # push:
+  #   branches: [main]
   workflow_dispatch:
 
 env:
@@ -14,7 +14,6 @@ env:
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
 
 jobs:
-  if: false
   linux-packaged:
     runs-on: ubuntu-latest
     concurrency:
