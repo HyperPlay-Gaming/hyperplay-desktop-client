@@ -406,7 +406,8 @@
       "i18next-parser>esbuild": false,
       "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
       "@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
-      "@hyperplay/overlay>electron": false
+      "@hyperplay/overlay>electron": false,
+      "jest-qase-reporter>qase-javascript-commons>child-process-ext>es5-ext": true
     }
   }
 }
