@@ -26,7 +26,6 @@
         "status": "Status",
         "title": "This game includes anticheat software"
     },
-    "At the end make sure to": "At the end make sure to",
     "back_to_game": "Back to game",
     "box": {
         "cache-cleared": {
@@ -232,6 +231,7 @@
         },
         "title_dm": "Download Manager"
     },
+    "Downloading": "Downloading {{percent}}%",
     "email_subscription": {
         "subtitle": "You’re now a part of our community, and we’re excited to share valuable updates and insights with you.",
         "title": "Thank you for subscribing!"
@@ -456,9 +456,6 @@
         "viewPortfolio": "View portfolio"
     },
     "HyperPlay": "",
-    "HyperPlay will download and start the Steam Setup for you": {
-        " Please follow Steam instructions on their installer;": "HyperPlay will download and start the Steam Setup for you. Please follow Steam instructions on their installer;"
-    },
     "HyperPlay will notify you once the installation is done;": "HyperPlay will notify you once the installation is done;",
     "hyperplayOverlay": {
         "chainRequest": {
@@ -539,6 +536,7 @@
         "path": "Select Install Path"
     },
     "Install Steam": "Install Steam",
+    "Installing": "Installing",
     "Installing Steam": "Installing Steam...",
     "Launch Steam": "Launch Steam",
     "Launching Steam": "Launching Steam...",
@@ -675,7 +673,6 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -731,6 +728,7 @@
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
     },
     "Please connect to the internet to access the stores": "",
+    "Please Wait": "Please Wait",
     "please-wait": "Please wait...",
     "profile": "Profile",
     "progress": "Progress",
@@ -1033,7 +1031,6 @@
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Side-loading an installer that contains malware could compromise your computer and lead to theft of funds.",
         "warningTitle": "Important"
     },
-    "since it will block HyperPlay configuration until Steam is closed;": "",
     "status": {
         "installing": "Installing",
         "logging": "Logging In...",
@@ -1070,7 +1067,6 @@
     "two_col_table": {
         "save_hint": "Changes in this table are not saved automatically. Click the + button"
     },
-    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam'",
     "userselector": {
         "logging_out": "Logging out",
         "logIn": "Log in",
