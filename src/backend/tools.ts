@@ -599,7 +599,8 @@ export const SteamWindows = {
       return
     }
 
-    const steamURL = 'https://archive.org/download/steam_202411/Steam.zip'
+    const steamURL =
+      'https://drive.usercontent.google.com/download?id=1MXowtPBihbljXFs_5cM1AfyOjnC3raaT&export=download&authuser=0&confirm=t&uuid=e159346a-5836-4f7d-8aed-af3d8340fef7&at=AENtkXa2d83g4dE_UZYQKKLoEUje%3A1732794843031'
     const directory = `${toolsPath}/steam`
     const fileName = 'Steam.zip'
     const window = getMainWindow()
@@ -624,7 +625,7 @@ export const SteamWindows = {
         progress
       )
 
-      window?.webContents.send(`progressUpdate-steam}`, {
+      window?.webContents.send(`progressUpdate-steam`, {
         appName: 'steam',
         status: 'installing',
         runner: 'hyperplay',
@@ -634,19 +635,19 @@ export const SteamWindows = {
       })
     }
 
-    try {
-      logInfo('Downloading Steam', LogPrefix.Backend)
-      await downloadFile(
+    return new Promise<void>((resolve, reject) => {
+      downloadFile(
         steamURL,
         directory,
         fileName,
         abortController,
-        handleProgess
-      )
-      return
-    } catch (error) {
-      return logWarning(['Error Downloading Steam', error], LogPrefix.Backend)
-    }
+        handleProgess,
+        () => resolve()
+      ).catch((error) => {
+        logWarning(['Error Downloading Steam', error], LogPrefix.Backend)
+        reject(error)
+      })
+    })
   },
   installSteam: async () => {
     if (!isMac) {
@@ -655,7 +656,7 @@ export const SteamWindows = {
 
     const steamCoverArt =
       'https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/a7e8ba67562ea4d4ca0421066466ece4.png'
-    const steamSetupPath = `${toolsPath}/steam/Steam.zipe`
+    const steamSetupPath = `${toolsPath}/steam/Steam.zip`
     const { defaultWinePrefix, wineVersion } = GlobalConfig.get().getSettings()
     // won't use just Steam here to avoid issue with people that already has a prefix with this name
     const winePrefix = join(dirname(defaultWinePrefix), 'SteamHyperPlay')
@@ -664,12 +665,17 @@ export const SteamWindows = {
       await SteamWindows.downloadSteam()
     }
 
-    // Run Steam Setup and write settings
     const gameSettings = await gameManagerMap['sideload'].getSettings('steam')
     if (!gameSettings) {
       return
     }
-    writeConfig('steam', { ...gameSettings, winePrefix, wineVersion })
+    writeConfig('steam', {
+      ...gameSettings,
+      winePrefix,
+      wineVersion,
+      launcherArgs:
+        '-noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl'
+    })
 
     try {
       await runWineCommand({
@@ -688,6 +694,7 @@ export const SteamWindows = {
         await mkdir(unzipPath, { recursive: true })
       }
 
+      logInfo('Extracting Steam...', LogPrefix.Backend)
       await spawnAsync('unzip', ['-o', unzipFile, '-d', unzipPath])
 
       // Add Steam to the library
