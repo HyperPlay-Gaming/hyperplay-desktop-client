@@ -43,6 +43,26 @@ const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
         <ul>
           <li>
             {t(
+              'Recommended Specs for a better experience',
+              'Recommended Specs for a better experience'
+            )}
+            :
+          </li>
+          <ul>
+            <li>
+              {t('Apple Silicon M1 or above', 'Apple Silicon M1 or above')}
+            </li>
+            <li>{t('macOS 14.0 or above', 'macOS 14.0 or above')}</li>
+            <li>{t('16GB of RAM', '16GB of RAM')}</li>
+          </ul>
+          <li>
+            {t(
+              'Be aware that not all games will work and even if they do, they may not run as expected.',
+              'Be aware that not all games will work and even if they do, they may not run as expected.'
+            )}
+          </li>
+          <li>
+            {t(
               'If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;',
               'If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;'
             )}
