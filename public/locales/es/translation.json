@@ -1194,5 +1194,11 @@
     "Launching Steam": "Ejecutando Steam...",
     "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Si desea continuar, tenga paciencia ya que puede tardar unos minutos en finalizar dependiendo de su conexión a Internet y la configuración del sistema;",
     "Install Steam": "Instalar Steam",
-    "Installing Steam": "Instalando Steam..."
+    "Installing Steam": "Instalando Steam...",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask Portfolio solo está disponible cuando está conectado con MetaMask."
+        },
+        "unsupported": "Conexión al monedero no compatible"
+    }
 }
