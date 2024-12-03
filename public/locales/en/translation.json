@@ -29,7 +29,7 @@
     },
     "Apple Silicon M1 or above": "Apple Silicon M1 or above",
     "back_to_game": "Back to game",
-    "Be aware that not all games will work and even if they do, they may not run as expected": "Be aware that not all games will work and even if they do, they may not run as expected.",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Be aware that not all games will work, and even if they do, they may not run as expected.",
     "box": {
         "cache-cleared": {
             "message": "HyperPlay cache cleared.",
@@ -497,7 +497,7 @@
             "INITIATED": "Add custom token request pending"
         }
     },
-    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration.",
     "import-game-folder": {
         "cta": "Import Game Folder",
         "dialog": {
@@ -845,7 +845,7 @@
         }
     },
     "Recent": "Played Recently",
-    "Recommended Specs for a better experience": "Recommended Specs for a better experience",
+    "Recommended specs for a better experience": "Recommended specs for a better experience",
     "search": "Search for Games",
     "setting": {
         "adddesktopshortcuts": "Add desktop shortcuts automatically",
