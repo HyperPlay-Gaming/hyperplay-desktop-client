@@ -2169,7 +2169,7 @@ const assert=  makeAssert();$h‍_once.assert(assert);
  * @typedef {import('../types.js').Harden} Harden
  */
 
-// Obtain the string tag accessor of of TypedArray so we can indirectly use the
+// Obtain the string tag accessor of TypedArray so we can indirectly use the
 // TypedArray brand check it employs.
 const typedArrayToStringTag=  getOwnPropertyDescriptor(
   typedArrayPrototype,
