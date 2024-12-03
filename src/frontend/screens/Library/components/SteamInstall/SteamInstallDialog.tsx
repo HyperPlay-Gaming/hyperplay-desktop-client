@@ -70,7 +70,7 @@ const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
           <li>
             {t(
               'HyperPlay will notify you once the installation is done;',
-              'HyperPlay will notify you once the installation is done;'
+              'HyperPlay will notify you once the installation is done.'
             )}
           </li>
         </ul>
