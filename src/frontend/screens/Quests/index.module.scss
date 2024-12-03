@@ -43,6 +43,12 @@
   }
 }
 
+.questSelectedLayout {
+  @media (min-width: 1800px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .toast {
   position: fixed;
   bottom: 24px;
