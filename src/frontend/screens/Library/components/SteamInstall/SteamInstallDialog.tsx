@@ -43,8 +43,8 @@ const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
         <ul>
           <li>
             {t(
-              'Recommended Specs for a better experience',
-              'Recommended Specs for a better experience'
+              'Recommended specs for a better experience',
+              'Recommended specs for a better experience'
             )}
             :
           </li>
