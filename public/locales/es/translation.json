@@ -489,7 +489,12 @@
             "queued": "Encolado",
             "remove": "Eliminar de las descargas",
             "resume": "Descarga el currículum",
-            "pause": "Pausar la descarga"
+            "pause": "Pausar la descarga",
+            "timeElapsed": "Tiempo transcurrido: {{elapsed}}",
+            "retry-update": "Reintentar la actualización",
+            "stop": "Detener la descarga",
+            "launch": "Iniciar juego",
+            "retry-install": "Reintentar la instalación"
         }
     },
     "Recent": "Jugado recientemente",
@@ -857,7 +862,8 @@
                 "validation": "¡Éxito! El código de acceso es válido"
             },
             "error": {
-                "validation": "Código de acceso no válido"
+                "validation": "Código de acceso no válido",
+                "licenseUndefined": "No se pudo validar el código de acceso. Verifique su acceso a Internet o la configuración del firewall."
             },
             "requirescode": "Esta actualización del juego requiere un código de acceso."
         },
@@ -893,7 +899,8 @@
             "paused": "Pausado",
             "extracting": "Extrayendo...",
             "installing": "Descargando...",
-            "distributables": "Instalando distribuibles..."
+            "distributables": "Instalando distribuibles...",
+            "patching": "Parcheando…"
         },
         "connectWallet": "Conectar monedero",
         "achievements": {
@@ -955,7 +962,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Estás conectado a HyperPlay con un monedero externo.",
         "WALLET_DISCONNECTED": "Usted no tiene una cartera conectada a HyperPlay.",
-        "comingSoon": "Próximamente"
+        "comingSoon": "Próximamente",
+        "links": {
+            "bridge": "Puente",
+            "buy": "Comprar",
+            "sell": "Vender",
+            "portfolio": "Cartera",
+            "swap": "Intercambio",
+            "marketplace": "Mercado"
+        }
     },
     "sideload": {
         "warningTitle": "Importante",
@@ -1036,7 +1051,9 @@
         "points": "Puntos",
         "claimFailed": "Reclamación rechazada",
         "createDiscordTicket": "Ticket creado en Discord",
-        "notEnoughGas": "El saldo del monedero es insuficiente para reclamar la recompensa debido a los gastos de gasolina. Prueba con otro monedero o recarga este antes de volver a intentarlo.",
+        "notEnoughGas": {
+            "message": "El saldo del monedero es insuficiente para reclamar la recompensa debido a los gastos de gasolina. Prueba con otro monedero o recarga este antes de volver a intentarlo."
+        },
         "claimFailedMessage": "Por favor, inténtalo una vez más. Si sigue sin funcionar, crea un ticket de soporte en Discord.",
         "pointsClaimed": "Cuestiones reclamadas",
         "g7Numclaimed": "Total Claimed G7 Credits",
@@ -1048,7 +1065,28 @@
             "title": "Confirmar reclamo de recompensa de misión"
         },
         "noG7ConnectionClaim": "Necesitas tener una cuenta Game7 vinculada a {{email}} para reclamar tus recompensas.",
-        "noG7ConnectionSync": "Necesitas tener una cuenta Game7 vinculada a {{email}} para resonar tus tareas."
+        "noG7ConnectionSync": {
+            "title": "Ninguna cuenta G7 vinculada",
+            "message": "Necesitas tener una cuenta de Game7 vinculada a {{email}} para resincronizar tus tareas."
+        },
+        "claim": "Solicitud",
+        "notEligible": {
+            "title": "No se puede elegir aún",
+            "message": "No has completado la racha de días de juego requerida y no puedes reclamar tu recompensa en este momento."
+        },
+        "notEnoughBalance": {
+            "title": "Balance bajo"
+        },
+        "notSignedIn": {
+            "message": "Debes iniciar sesión para reclamar tu recompensa.",
+            "title": "No ha iniciado sesión"
+        },
+        "questAvailable": "¡Misión disponible!",
+        "questComplete": "¡Misión completa!",
+        "rewardClaimed": "Solicitud aceptada",
+        "toClaimReward": "para reclamar tu recompensa.",
+        "toSeeDetails": "para ver los detalles.",
+        "youHaveClaimed": "Has reclamado {{totalRewards}} recompensa {{plural}} ."
     },
     "back_to_game": "Volver al juego",
     "email_subscription": {
@@ -1156,5 +1194,11 @@
     "Launching Steam": "Ejecutando Steam...",
     "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Si desea continuar, tenga paciencia ya que puede tardar unos minutos en finalizar dependiendo de su conexión a Internet y la configuración del sistema;",
     "Install Steam": "Instalar Steam",
-    "Installing Steam": "Instalando Steam..."
+    "Installing Steam": "Instalando Steam...",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask Portfolio solo está disponible cuando está conectado con MetaMask."
+        },
+        "unsupported": "Conexión al monedero no compatible"
+    }
 }
