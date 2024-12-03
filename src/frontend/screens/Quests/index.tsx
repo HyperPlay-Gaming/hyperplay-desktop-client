@@ -19,7 +19,9 @@ import {
   QuestCard,
   QuestFilter,
   QuestsSummaryTable,
-  SearchBar
+  SearchBar,
+  DarkContainer,
+  LoadingSpinner
 } from '@hyperplay/ui'
 
 export function QuestsPage() {
@@ -225,14 +227,27 @@ export function QuestsPage() {
             />
           }
         />
-        <QuestDetails
-          className={styles.detailsWrapper}
-          questId={visibleQuestId}
-          isQuestsPage={true}
-          onPlayClick={(quest) => {
-            navigateToGame.mutate(quest)
-          }}
-        />
+        {visibleQuestId ? (
+          <QuestDetails
+            className={styles.detailsWrapper}
+            questId={visibleQuestId}
+            isQuestsPage={true}
+            onPlayClick={(quest) => {
+              navigateToGame.mutate(quest)
+            }}
+          />
+        ) : (
+          <>
+            <DarkContainer
+              className={classNames(
+                styles.detailsWrapper,
+                styles.loadingContainer
+              )}
+            >
+              <LoadingSpinner className={styles.loadingSpinner} />
+            </DarkContainer>
+          </>
+        )}
       </div>
     </>
   )

@@ -49,6 +49,19 @@
   }
 }
 
+.loadingContainer {
+  padding: var(--space-2lg);
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  font-size: var(--text-3xl);
+}
+
 .toast {
   position: fixed;
   bottom: 24px;
