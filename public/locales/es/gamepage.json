@@ -231,7 +231,8 @@
         },
         "gog-goodie": "Este juego no parece ser instalable. Comprueba el contenido descargable en https://gog.com/account",
         "goodie": "No se puede instalar",
-        "distributables": "Instalación de distribuibles"
+        "distributables": "Instalación de distribuibles",
+        "patching": "Parcheando archivos "
     },
     "submenu": {
         "addShortcut": "Añadir acceso directo",
