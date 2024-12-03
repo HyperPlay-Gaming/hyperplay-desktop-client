@@ -57,8 +57,8 @@ const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
           </ul>
           <li>
             {t(
-              'Be aware that not all games will work and even if they do, they may not run as expected.',
-              'Be aware that not all games will work and even if they do, they may not run as expected.'
+              'Be aware that not all games will work, and even if they do, they may not run as expected.',
+              'Be aware that not all games will work, and even if they do, they may not run as expected.'
             )}
           </li>
           <li>
