@@ -167,9 +167,9 @@ export function QuestsPage() {
               navigate(`/quests/${id}`)
             }
           }}
-          selected={id === selectedQuestId}
+          selected={id === visibleQuestId}
           description={name}
-          className={id === selectedQuestId ? 'gradientBorder' : undefined}
+          className={id === visibleQuestId ? 'gradientBorder' : undefined}
         />
       )
     }) ?? []
