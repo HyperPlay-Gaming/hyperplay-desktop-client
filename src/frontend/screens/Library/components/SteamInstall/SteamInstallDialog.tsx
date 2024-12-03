@@ -63,8 +63,8 @@ const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
           </li>
           <li>
             {t(
-              'If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;',
-              'If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;'
+              'If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration.',
+              'If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration.'
             )}
           </li>
           <li>
