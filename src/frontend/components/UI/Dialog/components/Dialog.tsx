@@ -13,13 +13,16 @@ interface DialogProps {
   children: ReactNode
   showCloseButton: boolean
   onClose: () => void
+  // modal or non-modal behavior https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
+  isModal?: boolean
 }
 
 export const Dialog: React.FC<DialogProps> = ({
   children,
   className,
   showCloseButton = false,
-  onClose
+  onClose,
+  isModal = true
 }) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null)
   const onCloseRef = useRef(onClose)
@@ -32,10 +35,14 @@ export const Dialog: React.FC<DialogProps> = ({
         onCloseRef.current()
       }
       dialog.addEventListener('cancel', cancel)
-      dialog['showModal']()
+      if (isModal) {
+        dialog.showModal()
+      } else {
+        dialog.show()
+      }
       return () => {
         dialog.removeEventListener('cancel', cancel)
-        dialog['close']()
+        dialog.close()
       }
     }
     return
@@ -63,7 +70,7 @@ export const Dialog: React.FC<DialogProps> = ({
     <dialog
       className={`Dialog__element ${className}`}
       ref={dialogRef}
-      onClick={onDialogClick}
+      onClick={isModal ? onDialogClick : undefined}
     >
       {showCloseButton && (
         <div className="Dialog__Close">
