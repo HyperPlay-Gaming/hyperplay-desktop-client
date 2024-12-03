@@ -1,3 +1,5 @@
+@import '@hyperplay/ui/utilities/_variables.scss';
+
 .root {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -43,8 +45,13 @@
   }
 }
 
+.tableContainer {
+  background-color: var(--color-neutral-800);
+  overflow-y: hidden;
+}
+
 .questSelectedLayout {
-  @media (min-width: 1800px) {
+  @include for-big-desktop-up {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
