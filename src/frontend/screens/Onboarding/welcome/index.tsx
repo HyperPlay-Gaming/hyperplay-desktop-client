@@ -32,17 +32,17 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         </div>
         <div className={WelcomeStyles.text}>
           {t(
-            'hyperplay.onboarding.welcome.text.paragraphThree',
+            'hyperplay.onboarding.welcome.text.paragraphThr',
             `Seamlessly bring your wallet, tokens, 
            and assets into every game while accessing 
            the extensive libraries of the Epic Store, 
-           GOG, and our own HyperPlay Store, all in one place.`
+           GOG, and our own HyperPlay Store-all in one place.`
           )}
         </div>
         <div className={WelcomeStyles.textBold}>
           {t(
-            'hyperplay.onboarding.welcome.text.bulletTitle',
-            `With HyperPlay, you can:`
+            'hyperplay.onboarding.welcome.text.TitleList',
+            `With HyperPlay you can:`
           )}
         </div>
         <div>
@@ -126,10 +126,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
           type="secondary"
         >
           {t('button.continue', 'Continue')}{' '}
-          <FontAwesomeIcon
-            icon={faArrowRight}
-            className={WelcomeStyles.actionButtonArrow}
-          />
+        
         </Button>
       </div>
     </>
