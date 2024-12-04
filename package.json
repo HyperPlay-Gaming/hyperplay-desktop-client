@@ -12,7 +12,7 @@
   },
   "author": {
     "name": "HyperPlay",
-    "email": "contact@hyperplay.xyz"
+    "email": "support@hyperplay.xyz"
   },
   "scripts": {
     "setup": "yarn install && patch-package && yarn allow-scripts",
