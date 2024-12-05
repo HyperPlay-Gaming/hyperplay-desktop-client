@@ -31,6 +31,7 @@ import ModDialog from './ModDialog'
 import { AccessCodeInput } from 'frontend/components/UI/AccessCodeInput'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { AlertCard } from '@hyperplay/ui'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   appName: string
@@ -45,6 +46,7 @@ export default React.memo(function InstallModal({
   runner,
   gameInfo = null
 }: Props) {
+  const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
   const { isSignedIn } = useAuthSession()
 
@@ -208,8 +210,11 @@ export default React.memo(function InstallModal({
       accessCodeContent = (
         <AlertCard
           showClose={false}
-          title="Login Required"
-          message="You need to be logged into HyperPlay to enter your access code and install this game."
+          title={t('installModal.loginRequired', 'Login Required')}
+          message={t(
+            'installModal.loginRequiredMessage',
+            'You need to be logged into HyperPlay to enter your access code and install this game. '
+          )}
           variant="warning"
         />
       )
