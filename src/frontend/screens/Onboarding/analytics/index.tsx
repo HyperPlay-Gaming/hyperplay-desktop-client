@@ -60,8 +60,8 @@ const Analytics: React.FC<AnalyticsProps> = function (props) {
       <Images.HyperPlayLogoColored className={OnboardingStyles.hpLogo} />
       <h6 className={AnalyticsStyle.title}>
         {t(
-          'hyperplay.onboarding.analytics.title',
-          `Help Us improve HyperPlay!`
+          'hyperplay.onboarding.analytics.titleOne',
+          `Help Us Improve HyperPlay!`
         )}
       </h6>
       <div className={`body ${AnalyticsStyle.marginBottomLg}`}>
