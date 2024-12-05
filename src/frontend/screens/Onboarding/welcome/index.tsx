@@ -87,7 +87,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
               <a
                 onClick={() =>
                   window.api.openExternalUrl(
-                    `https://docs.hyperplay.xyz/faq#q-what-operating-systems-are-supported`
+                    `https://paragraph.xyz/@hyperplay/how-to-play-your-windows-steam-library-on-macos`
                   )
                 }
               >
@@ -126,7 +126,6 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
           type="secondary"
         >
           {t('button.continue', 'Continue')}{' '}
-        
         </Button>
       </div>
     </>
