@@ -40,7 +40,7 @@ import { UpdateModalController } from './components/UI/UpdateModalController'
 import { QuestsPage } from './screens/Quests'
 import { NavigateListener } from './NavigateListener'
 import G7Webview from './screens/G7Webview'
-import CardPrivacyPolicy from './screens/Onboarding/analytics/AnalyticsV2'
+import CardPrivacyPolicy from './screens/Onboarding/analytics/CardPrivacyPolicy'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
