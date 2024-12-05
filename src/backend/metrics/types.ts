@@ -416,6 +416,12 @@ export interface ClientUpdateDownloaded {
   sensitiveProperties?: never
 }
 
+export interface AccountDropdownPortfolioClicked {
+  event: 'Portfolio Clicked in Account Dropdown'
+  properties?: never
+  sensitiveProperties?: never
+}
+
 export type PossibleMetricPayloads =
   | MetricsOptIn
   | MetricsOptOut
@@ -458,5 +464,6 @@ export type PossibleMetricPayloads =
   | PatchingSuccess
   | PatchingFailed
   | PatchingTooSlow
+  | AccountDropdownPortfolioClicked
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']
