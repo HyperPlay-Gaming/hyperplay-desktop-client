@@ -18,7 +18,8 @@ const tooltipProps: Partial<TooltipProps> = {
   position: 'right',
   withArrow: true,
   className: 'Tooltip menu',
-  arrowSize: 10
+  arrowSize: 10,
+  zIndex: 1001
 }
 
 export default observer(function SidebarLinks() {
