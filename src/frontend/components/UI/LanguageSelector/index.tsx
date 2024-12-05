@@ -15,6 +15,7 @@ export enum FlagPosition {
 interface Props {
   flagPossition?: FlagPosition
   showWeblateLink?: boolean
+  extraClass?: string
 }
 
 const languageLabels: { [key: string]: string } = {
@@ -103,7 +104,8 @@ const languageFlags: { [key: string]: string } = {
 
 export default function LanguageSelector({
   flagPossition = FlagPosition.NONE,
-  showWeblateLink = false
+  showWeblateLink = false,
+  extraClass = 'languageSelector'
 }: Props) {
   const { t, i18n } = useTranslation()
   const { language, setLanguage } = useContext(ContextProvider)
@@ -162,7 +164,7 @@ export default function LanguageSelector({
         onChange={(event) => handleChangeLanguage(event.target.value)}
         value={currentLanguage}
         label={t('setting.language', 'Choose Language')}
-        extraClass="languageSelector"
+        extraClass={extraClass}
         afterSelect={afterSelect}
       >
         {Object.keys(languageLabels).map((lang) => renderOption(lang))}
