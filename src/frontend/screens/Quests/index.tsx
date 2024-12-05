@@ -176,9 +176,11 @@ export function QuestsPage() {
       )
     }) ?? []
 
-  const suggestedSearchTitles = searchText
-    ? quests?.map((val) => val.name)
-    : undefined
+  let suggestedSearchTitles = undefined
+
+  if (searchText) {
+    suggestedSearchTitles = searchFilteredQuests?.map((val) => val.name)
+  }
 
   return (
     <>
