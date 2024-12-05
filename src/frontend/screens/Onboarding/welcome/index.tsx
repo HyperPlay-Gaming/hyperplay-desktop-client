@@ -3,8 +3,6 @@ import { ONBOARDING_SCREEN } from '../types'
 import { t } from 'i18next'
 import { Button, Images } from '@hyperplay/ui'
 import { LanguageSelector } from 'frontend/components/UI'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FlagPosition } from 'frontend/components/UI/LanguageSelector'
 import { onboardingStore } from 'frontend/helpers/electronStores'
 import WelcomeStyles from './index.module.scss'
@@ -32,17 +30,17 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         </div>
         <div className={WelcomeStyles.text}>
           {t(
-            'hyperplay.onboarding.welcome.text.paragraphThree',
+            'hyperplay.onboarding.welcome.text.paragraphThr',
             `Seamlessly bring your wallet, tokens, 
            and assets into every game while accessing 
            the extensive libraries of the Epic Store, 
-           GOG, and our own HyperPlay Store, all in one place.`
+           GOG, and our own HyperPlay Store-all in one place.`
           )}
         </div>
         <div className={WelcomeStyles.textBold}>
           {t(
-            'hyperplay.onboarding.welcome.text.bulletTitle',
-            `With HyperPlay, you can:`
+            'hyperplay.onboarding.welcome.text.TitleList',
+            `With HyperPlay you can:`
           )}
         </div>
         <div>
@@ -87,7 +85,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
               <a
                 onClick={() =>
                   window.api.openExternalUrl(
-                    `https://docs.hyperplay.xyz/faq#q-what-operating-systems-are-supported`
+                    `https://paragraph.xyz/@hyperplay/how-to-play-your-windows-steam-library-on-macos`
                   )
                 }
               >
@@ -115,7 +113,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         </div>
       </div>
       <div className={WelcomeStyles.languageSelector}>
-        <LanguageSelector flagPossition={FlagPosition.PREPEND} />
+        <LanguageSelector flagPossition={FlagPosition.PREPEND} extraClass="" />
       </div>
       <div className={WelcomeStyles.actionButton}>
         <Button
@@ -126,10 +124,6 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
           type="secondary"
         >
           {t('button.continue', 'Continue')}{' '}
-          <FontAwesomeIcon
-            icon={faArrowRight}
-            className={WelcomeStyles.actionButtonArrow}
-          />
         </Button>
       </div>
     </>
