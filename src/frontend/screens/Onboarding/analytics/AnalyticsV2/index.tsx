@@ -11,7 +11,7 @@ import { ReactComponent as CloseIcon } from '/src/frontend/assets/hyperplay/x-cl
 const storage = window.localStorage
 const hasAcceptedPrivacyPolicy = storage.getItem('hasAcceptedPrivacyPolicy')
 
-function AnalyticsV2() {
+function CardPrivacyPolicy() {
   const { metricsOptInStatus } = useContext(ContextProvider)
   const hasAcceptedV1 = metricsOptInStatus === MetricsOptInStatus.optedIn
   const [isVisible, setIsVisible] = useState(!hasAcceptedPrivacyPolicy)
@@ -48,4 +48,4 @@ function AnalyticsV2() {
   )
 }
 
-export default AnalyticsV2
+export default CardPrivacyPolicy
