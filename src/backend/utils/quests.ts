@@ -7,36 +7,41 @@ export async function postPlaySessionTime(
   appName: string,
   playSessionInSeconds: number
 ) {
-  logInfo(
-    `Posting play session for project id ${appName}. Time played in seconds was ${playSessionInSeconds}`,
-    LogPrefix.HyperPlay
-  )
-  const cookieString = await getPartitionCookies({
-    partition: 'persist:auth',
-    url: DEV_PORTAL_URL
-  })
-  const response = await fetch(`${DEV_PORTAL_URL}api/v1/quests/playStreak`, {
-    method: 'POST',
-    headers: {
-      Cookie: cookieString
-    },
-    body: JSON.stringify({
-      project_id: appName,
-      play_session_in_seconds: playSessionInSeconds
+  try {
+    logInfo(
+      `Posting play session for project id ${appName}. Time played in seconds was ${playSessionInSeconds}`,
+      LogPrefix.HyperPlay
+    )
+    const cookieString = await getPartitionCookies({
+      partition: 'persist:auth',
+      url: DEV_PORTAL_URL
     })
-  })
-  if (!response.ok) {
-    throw await response.text()
+    const response = await fetch(`${DEV_PORTAL_URL}api/v1/quests/playStreak`, {
+      method: 'POST',
+      headers: {
+        Cookie: cookieString
+      },
+      body: JSON.stringify({
+        project_id: appName,
+        play_session_in_seconds: playSessionInSeconds
+      })
+    })
+    if (!response.ok) {
+      throw await response.text()
+    }
+    const resultJson = await response.json()
+    logInfo(
+      `Posted playstreak playsession. response: ${JSON.stringify(
+        resultJson,
+        null,
+        4
+      )}`,
+      LogPrefix.HyperPlay
+    )
+  } catch (error) {
+    logInfo(`Error in postPlaySessionTime: ${error}`, LogPrefix.HyperPlay)
+    throw error
   }
-  const resultJson = await response.json()
-  logInfo(
-    `Posted playstreak playsession. response: ${JSON.stringify(
-      resultJson,
-      null,
-      4
-    )}`,
-    LogPrefix.HyperPlay
-  )
 }
 
 export async function checkG7ConnectionStatus() {

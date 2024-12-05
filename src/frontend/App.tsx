@@ -40,7 +40,7 @@ import { UpdateModalController } from './components/UI/UpdateModalController'
 import { QuestsPage } from './screens/Quests'
 import { NavigateListener } from './NavigateListener'
 import G7Webview from './screens/G7Webview'
-import AnalyticsV2 from './screens/Onboarding/analytics/AnalyticsV2'
+import CardPrivacyPolicy from './screens/Onboarding/analytics/AnalyticsV2'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
@@ -55,7 +55,7 @@ function App() {
         <TopNavBar />
         <Sidebar />
         <main className="content">
-          <AnalyticsV2 />
+          <CardPrivacyPolicy />
           <QaAuthHandler />
           <NavigateListener />
           <ExtensionHandler />

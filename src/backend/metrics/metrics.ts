@@ -99,6 +99,9 @@ function generateRandomId() {
   return ethers.hexlify(ethers.randomBytes(24))
 }
 
+// using property based sessions instead of the default time based https://docs.mixpanel.com/docs/features/sessions#property-based-sessions
+const session_id = generateRandomId()
+
 /**
  * An internal only function that adds context and global properties to the
  * event payload before sending.
@@ -121,7 +124,8 @@ async function _trackEventPrivate(
     [idFieldName]: id,
     properties: {
       ...properties,
-      OS: getFormattedOsName()
+      OS: getFormattedOsName(),
+      session_id
     },
     context: {
       app: {
@@ -167,7 +171,8 @@ export const trackScreen = async (name: string, properties?: apiObject) => {
       name,
       properties: {
         ...(properties ?? {}),
-        OS: getFormattedOsName()
+        OS: getFormattedOsName(),
+        session_id
       },
       context: {
         app: {
