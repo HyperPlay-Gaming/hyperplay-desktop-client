@@ -325,9 +325,7 @@ export default React.memo(function InstallModal({
                   gameInfo={gameInfo}
                 />
               ) : null}
-              {runner === 'hyperplay' && channelRequiresAccessCode
-                ? accessCodeInput
-                : null}
+              {accessCodeContent}
             </div>
             {hasWine ? (
               <WineSelector
