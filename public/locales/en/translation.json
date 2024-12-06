@@ -352,8 +352,8 @@
             "profile": "Profile"
         },
         "buttons": {
-            "agree": "I agree",
-            "noThanks": "No Thanks"
+            "primaryButton": "I Agree",
+            "secondaryButton": "No, Thanks"
         },
         "changeWallet": "Swap wallet account",
         "compatibilityLayer": "Compatibility Layer (Beta)",
@@ -374,19 +374,20 @@
         "linkSteamAccountDescription": "Sign in to Steam to link your HyperPlay account.",
         "linkSteamAccountTitle": "Link Steam Account",
         "logOut": "Log out",
-        "misc": "Never",
         "onboarding": {
             "analytics": {
-                "anonymized": "Send anonymized click & game interaction;",
                 "body": "HyperPlay would like to gather usage data to better understand how our users interact with the application. This information helps us understand how you use the app and lets us make HyperPlay even better for you.",
+                "bulletOne": "Always allow you to opt-out",
+                "bulletTwo": "Send anonymized click & game interaction",
                 "hyperplayWill": "HyperPlay will:",
-                "neverCollectIP": " collect your full IP address;",
-                "neverCollectPersonal": " collect keys, addresses, balances, hashes, or any personal information;",
-                "neverSellData": " sell data for profit. Ever!",
-                "optOut": "Always allow you to opt-out via Settings;",
+                "paragraphOne": "HyperPlay would like to gather usage data to better understand how our users interact with the application. \n           This lets us make HyperPlay even better for you.",
                 "privacyCaption": "This data is aggregated and is therefore anonymous for the purposes of General Data Protection Regulation (EU) 2016/679. For more information in relation to our privacy practices, please see our ",
-                "privacyPolicyHere": "Privacy Policy here.",
-                "title": "Help Us improve HyperPlay!"
+                "privacyPolicy": "Privacy Policy.",
+                "text": {
+                    "externalLink": "Learn More",
+                    "title": "We’ve updated our Privacy Policy"
+                },
+                "titleOne": "Help Us Improve HyperPlay!"
             },
             "connectAgain": "Connect again",
             "connectionCanceled": {
