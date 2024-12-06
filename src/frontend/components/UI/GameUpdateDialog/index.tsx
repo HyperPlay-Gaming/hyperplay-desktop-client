@@ -3,11 +3,13 @@ import { Dialog } from 'frontend/components/UI/Dialog'
 import TextInputField from '../TextInputField'
 import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
-import { Button } from '@hyperplay/ui'
+import { AlertCard, Button } from '@hyperplay/ui'
 import gameUpdateState from 'frontend/state/GameUpdateState'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
+import useAuthSession from 'frontend/hooks/useAuthSession'
 
 export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
+  const { isSignedIn } = useAuthSession()
   const [accessCode, setAccessCode] = useState('')
   const [accessCodeVerified, setAccessCodeVerified] = useState(false)
   const [errorText, setErrorText] = useState('')
@@ -72,6 +74,36 @@ export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
     }
   }
 
+  const accessCodeInput = (
+    <TextInputField
+      placeholder={'Enter access code'}
+      value={accessCode}
+      onChange={(ev) => setAccessCode(ev.target.value)}
+      htmlId="access_code_input"
+      isError={!!errorText}
+    ></TextInputField>
+  )
+
+  let accessCodeContent = null
+
+  if (channelRequiresAccessCode) {
+    if (!isSignedIn) {
+      accessCodeContent = (
+        <AlertCard
+          showClose={false}
+          title={t('installModal.loginRequired', 'Login Required')}
+          message={t(
+            'installModal.loginRequiredMessage',
+            'You need to be logged into HyperPlay to enter your access code and install this game. '
+          )}
+          variant="warning"
+        />
+      )
+    } else {
+      accessCodeContent = accessCodeInput
+    }
+  }
+
   return (
     <Dialog showCloseButton onClose={onClose} className={styles.dialog}>
       <div className="title">
@@ -80,13 +112,7 @@ export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
           'This game update requires an access code.'
         )}
       </div>
-      <TextInputField
-        placeholder={'Enter access code'}
-        value={accessCode}
-        onChange={(ev) => setAccessCode(ev.target.value)}
-        htmlId="access_code_input"
-        isError={!!errorText}
-      ></TextInputField>
+      {accessCodeContent}
       {errorText && (
         <div className={`caption ${styles.errorText}`}>{errorText}</div>
       )}

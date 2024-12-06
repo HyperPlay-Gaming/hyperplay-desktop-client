@@ -29,6 +29,9 @@ import ChannelNameSelection from 'frontend/components/UI/ChannelNameSelection'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
 import ModDialog from './ModDialog'
 import { AccessCodeInput } from 'frontend/components/UI/AccessCodeInput'
+import useAuthSession from 'frontend/hooks/useAuthSession'
+import { AlertCard } from '@hyperplay/ui'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   appName: string
@@ -43,7 +46,9 @@ export default React.memo(function InstallModal({
   runner,
   gameInfo = null
 }: Props) {
+  const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
+  const { isSignedIn } = useAuthSession()
 
   const [winePrefix, setWinePrefix] = useState('...')
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
@@ -198,6 +203,26 @@ export default React.memo(function InstallModal({
     />
   )
 
+  let accessCodeContent = null
+
+  if (channelRequiresAccessCode && runner === 'hyperplay') {
+    if (!isSignedIn) {
+      accessCodeContent = (
+        <AlertCard
+          showClose={false}
+          title={t('installModal.loginRequired', 'Login Required')}
+          message={t(
+            'installModal.loginRequiredMessage',
+            'You need to be logged into HyperPlay to enter your access code and install this game. '
+          )}
+          variant="warning"
+        />
+      )
+    } else {
+      accessCodeContent = accessCodeInput
+    }
+  }
+
   return (
     <div className="InstallModal">
       <Dialog
@@ -236,10 +261,7 @@ export default React.memo(function InstallModal({
                 gameInfo={gameInfo}
               />
             ) : null}
-            {runner === 'hyperplay' && channelRequiresAccessCode
-              ? accessCodeInput
-              : null}
-
+            {accessCodeContent}
             {hasWine ? (
               <WineSelector
                 winePrefix={winePrefix}
@@ -303,9 +325,7 @@ export default React.memo(function InstallModal({
                   gameInfo={gameInfo}
                 />
               ) : null}
-              {runner === 'hyperplay' && channelRequiresAccessCode
-                ? accessCodeInput
-                : null}
+              {accessCodeContent}
             </div>
             {hasWine ? (
               <WineSelector
