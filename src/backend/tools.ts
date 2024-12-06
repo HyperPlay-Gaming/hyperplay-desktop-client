@@ -15,6 +15,7 @@ import {
   downloadFile,
   execAsync,
   getWineFromProton,
+  spawnAsync,
   writeConfig
 } from './utils'
 import {
@@ -31,7 +32,7 @@ import { dirname, join } from 'path'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
 import { runWineCommand, validWine } from './launcher'
-import { chmod } from 'fs/promises'
+import { chmod, mkdir } from 'fs/promises'
 import {
   any_gpu_supports_version,
   get_nvngx_path,
@@ -599,9 +600,9 @@ export const SteamWindows = {
     }
 
     const steamURL =
-      'https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe'
+      'https://drive.usercontent.google.com/download?id=1MXowtPBihbljXFs_5cM1AfyOjnC3raaT&export=download&authuser=0&confirm=t&uuid=e159346a-5836-4f7d-8aed-af3d8340fef7&at=AENtkXa2d83g4dE_UZYQKKLoEUje%3A1732794843031'
     const directory = `${toolsPath}/steam`
-    const fileName = 'SteamSetup.exe'
+    const fileName = 'Steam.zip'
     const window = getMainWindow()
 
     if (!isOnline() || existsSync(join(directory, fileName)) || !window) {
@@ -618,13 +619,13 @@ export const SteamWindows = {
     ) {
       const currentProgress = calculateProgress(
         downloadedBytes,
-        Number.parseInt('2380800'),
+        Number.parseInt('718394478'),
         downloadSpeed,
         diskWriteSpeed,
         progress
       )
 
-      window?.webContents.send(`progressUpdate-steam}`, {
+      window?.webContents.send(`progressUpdate-steam`, {
         appName: 'steam',
         status: 'installing',
         runner: 'hyperplay',
@@ -634,19 +635,19 @@ export const SteamWindows = {
       })
     }
 
-    try {
-      logInfo('Downloading Steam', LogPrefix.Backend)
-      await downloadFile(
+    return new Promise<void>((resolve, reject) => {
+      downloadFile(
         steamURL,
         directory,
         fileName,
         abortController,
-        handleProgess
-      )
-      return
-    } catch (error) {
-      return logWarning(['Error Downloading Steam', error], LogPrefix.Backend)
-    }
+        handleProgess,
+        () => resolve()
+      ).catch((error) => {
+        logWarning(['Error Downloading Steam', error], LogPrefix.Backend)
+        reject(error)
+      })
+    })
   },
   installSteam: async () => {
     if (!isMac) {
@@ -655,7 +656,7 @@ export const SteamWindows = {
 
     const steamCoverArt =
       'https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/a7e8ba67562ea4d4ca0421066466ece4.png'
-    const steamSetupPath = `${toolsPath}/steam/SteamSetup.exe`
+    const steamSetupPath = `${toolsPath}/steam/Steam.zip`
     const { defaultWinePrefix, wineVersion } = GlobalConfig.get().getSettings()
     // won't use just Steam here to avoid issue with people that already has a prefix with this name
     const winePrefix = join(dirname(defaultWinePrefix), 'SteamHyperPlay')
@@ -664,16 +665,21 @@ export const SteamWindows = {
       await SteamWindows.downloadSteam()
     }
 
-    // Run Steam Setup and write settings
     const gameSettings = await gameManagerMap['sideload'].getSettings('steam')
     if (!gameSettings) {
       return
     }
-    writeConfig('steam', { ...gameSettings, winePrefix, wineVersion })
+    writeConfig('steam', {
+      ...gameSettings,
+      winePrefix,
+      wineVersion,
+      launcherArgs:
+        '-noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl'
+    })
 
     try {
       await runWineCommand({
-        commandParts: [steamSetupPath],
+        commandParts: ['wineboot', '-init'],
         wait: true,
         gameSettings: {
           ...gameSettings,
@@ -682,8 +688,17 @@ export const SteamWindows = {
         }
       })
 
+      const unzipFile = join(toolsPath, 'steam', 'Steam.zip')
+      const unzipPath = `${winePrefix}/drive_c/Program Files (x86)/Steam`
+      if (!existsSync(unzipPath)) {
+        await mkdir(unzipPath, { recursive: true })
+      }
+
+      logInfo('Extracting Steam...', LogPrefix.Backend)
+      await spawnAsync('unzip', ['-o', unzipFile, '-d', unzipPath])
+
       // Add Steam to the library
-      const executable = `${winePrefix}/drive_c/Program Files (x86)/Steam/Steam.exe`
+      const executable = join(unzipPath, 'Steam.exe')
 
       if (!existsSync(executable)) {
         logError(['Steam executable not found', executable], LogPrefix.Backend)
