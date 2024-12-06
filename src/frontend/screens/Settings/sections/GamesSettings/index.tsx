@@ -33,19 +33,15 @@ import {
 import ContextProvider from 'frontend/state/ContextProvider'
 import Tools from '../../components/Tools'
 import SettingsContext from '../../SettingsContext'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import useSetting from 'frontend/hooks/useSetting'
 import { defaultWineVersion } from '../..'
-import Collapsible from 'frontend/components/UI/Collapsible/Collapsible'
 import SyncSaves from '../SyncSaves'
 import EnableDXVKFpsLimit from '../../components/EnableDXVKFpsLimit'
+import { Tabs, getTabsClassNames } from '@hyperplay/ui'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-type Props = {
-  useDetails?: boolean
-}
-
-export default function GamesSettings({ useDetails = true }: Props) {
+export default function GamesSettings() {
   const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
   const { isDefault, gameInfo } = useContext(SettingsContext)
@@ -87,100 +83,85 @@ export default function GamesSettings({ useDetails = true }: Props) {
           )}
         </p>
       )}
-
-      {showCrossPlatformOptions && (
-        <>
-          <Collapsible
-            isOpen
-            isCollapsible={useDetails}
-            summary={isLinux ? 'Wine' : 'Wine/Crossover'}
-          >
+      <Tabs
+        defaultValue={showCrossPlatformOptions ? 'wine' : 'other'}
+        classNames={getTabsClassNames(
+          { list: 'settingsTabList' },
+          { list: 'outline' }
+        )}
+      >
+        <Tabs.List className="tabsList">
+          {showCrossPlatformOptions && (
+            <Tabs.Tab value="wine">
+              {isLinux ? 'Wine' : 'Wine/Crossover'}
+            </Tabs.Tab>
+          )}
+          <Tabs.Tab value="other">
+            {showCrossPlatformOptions
+              ? t('settings.navbar.other', 'Other')
+              : t('settings.navbar.advanced', 'Advanced')}
+          </Tabs.Tab>
+          {hasCloudSaves && (
+            <Tabs.Tab value="sync">
+              {t('settings.navbar.sync', 'Cloud Saves Sync')}
+            </Tabs.Tab>
+          )}
+        </Tabs.List>
+        {showCrossPlatformOptions && (
+          <Tabs.Panel value="wine">
             <WineVersionSelector />
             <WinePrefix />
             <CrossoverBottle />
-
             {!isCrossover && (
               <>
                 <AutoDXVK />
                 {isLinux && (
                   <>
                     <AutoDXVKNVAPI />
-
                     <AutoVKD3D />
-
                     <EacRuntime />
-
                     <BattlEyeRuntime />
                   </>
                 )}
                 <Tools />
               </>
             )}
-          </Collapsible>
-        </>
-      )}
-
-      <Collapsible
-        isOpen={nativeGame}
-        isCollapsible={useDetails}
-        summary={
-          showCrossPlatformOptions
-            ? t('settings.navbar.other', 'Other')
-            : t('settings.navbar.advanced', 'Advanced')
-        }
-      >
-        <AlternativeExe />
-
-        <ShowFPS />
-
-        {showCrossPlatformOptions && <EnableDXVKFpsLimit />}
-
-        {showCrossPlatformOptions && (
-          <>
-            <EnableEsync />
-            <EnableMsync />
-            {isLinux && (
-              <>
-                <EnableFsync />
-
-                <PreferSystemLibs />
-
-                <EnableFSR />
-
-                <GameMode />
-              </>
-            )}
-          </>
+          </Tabs.Panel>
         )}
-
-        <UseDGPU />
-
-        {isLinux && <Mangohud />}
-
-        <SteamRuntime />
-
-        <IgnoreGameUpdates />
-
-        <OfflineMode />
-
-        <EnvVariablesTable />
-
-        <WrappersTable />
-
-        <LauncherArgs />
-
-        <PreferedLanguage />
-      </Collapsible>
-
-      {hasCloudSaves && (
-        <Collapsible
-          isOpen={false}
-          isCollapsible={useDetails}
-          summary={t('settings.navbar.sync', 'Cloud Saves Sync')}
-        >
-          <SyncSaves />
-        </Collapsible>
-      )}
+        <Tabs.Panel value="other">
+          <AlternativeExe />
+          <ShowFPS />
+          {showCrossPlatformOptions && <EnableDXVKFpsLimit />}
+          {showCrossPlatformOptions && (
+            <>
+              <EnableEsync />
+              <EnableMsync />
+              {isLinux && (
+                <>
+                  <EnableFsync />
+                  <PreferSystemLibs />
+                  <EnableFSR />
+                  <GameMode />
+                </>
+              )}
+            </>
+          )}
+          <UseDGPU />
+          {isLinux && <Mangohud />}
+          <SteamRuntime />
+          <IgnoreGameUpdates />
+          <OfflineMode />
+          <EnvVariablesTable />
+          <WrappersTable />
+          <LauncherArgs />
+          <PreferedLanguage />
+        </Tabs.Panel>
+        {hasCloudSaves && (
+          <Tabs.Panel value="sync">
+            <SyncSaves />
+          </Tabs.Panel>
+        )}
+      </Tabs>
     </>
   )
 }
