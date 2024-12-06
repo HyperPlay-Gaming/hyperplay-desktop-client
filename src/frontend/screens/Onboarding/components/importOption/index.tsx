@@ -5,7 +5,7 @@ import { ImportableBrowser } from '@hyperplay/utils'
 import { Images } from '@hyperplay/ui'
 
 interface WalletOptionProps {
-  title: ImportableBrowser
+  title: ImportableBrowser | string
   onClick: () => void
   classNames?: string
   override?: 'create' | 'recovery'

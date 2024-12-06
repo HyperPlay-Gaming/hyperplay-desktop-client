@@ -19,10 +19,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          standalone: ${{ runner.os == 'Windows' }}
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -30,11 +36,11 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
       - name: Checkout flathub repository.
         run: git clone https://github.com/flathub/xyz.hyperplay.HyperPlay.git
       - name: Update flathub release
-        run: export RELEASE_VERSION=${{ github.ref_name }} && yarn release:updateFlathub:ci
+        run: export RELEASE_VERSION=${{ github.ref_name }} && pnpm release:updateFlathub:ci
       - name: Branch flathub repo
         run: git checkout -b "${{ github.ref_name }}"
         working-directory: ./xyz.hyperplay.HyperPlay
