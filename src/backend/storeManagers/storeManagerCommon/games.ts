@@ -358,7 +358,13 @@ export async function launchGame(
         )
         // On Mac, it gives an error when changing the permissions of the file inside the app bundle. But we need it for other executables like scripts.
         if (isLinux || (isMac && !exeOnly.endsWith('.app'))) {
-          await chmod(exeOnly, 0o775)
+          try {
+            await chmod(exeOnly, 0o775)
+          } catch (error) {
+            logWarning(
+              'Was not possible to change permission to this file, maybe the owner is Root?'
+            )
+          }
         }
       }
 

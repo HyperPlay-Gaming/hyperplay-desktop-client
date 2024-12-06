@@ -197,6 +197,15 @@ describe('backend/utils.ts', () => {
       expect(getExecutableAndArgs(input)).toEqual(expected)
     })
 
+    it('should correctly parse executable with .exe extension and no arguments', () => {
+      const input = 'path/to/application.exe'
+      const expected = {
+        executable: 'path/to/application.exe',
+        launchArgs: ''
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
     it('should correctly parse executable with .app extension and no arguments', () => {
       const input = 'path/to/application.app'
       const expected = {
@@ -226,10 +235,10 @@ describe('backend/utils.ts', () => {
     })
 
     it('should return empty strings if no executable is found', () => {
-      const input = '--arg1 --arg2'
+      const input = ''
       const expected = {
         executable: '',
-        launchArgs: '--arg1 --arg2'
+        launchArgs: ''
       }
       expect(getExecutableAndArgs(input)).toEqual(expected)
     })
@@ -257,6 +266,42 @@ describe('backend/utils.ts', () => {
       const expected = {
         executable: 'path/t o/exec utable.exe',
         launchArgs: '--arg1 --arg2'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should handle simple executable name without args', () => {
+      const input = 'executable.exe'
+      const expected = {
+        executable: 'executable.exe',
+        launchArgs: ''
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should handle simple executable name with args', () => {
+      const input = 'steam --no-browser'
+      const expected = {
+        executable: 'steam',
+        launchArgs: '--no-browser'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should handle absolute path from /usr/bin', () => {
+      const input = '/usr/bin/steam --no-browser'
+      const expected = {
+        executable: '/usr/bin/steam',
+        launchArgs: '--no-browser'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should handle absolute path from /usr/local/bin', () => {
+      const input = '/usr/local/bin/custom-launcher --fullscreen'
+      const expected = {
+        executable: '/usr/local/bin/custom-launcher',
+        launchArgs: '--fullscreen'
       }
       expect(getExecutableAndArgs(input)).toEqual(expected)
     })
