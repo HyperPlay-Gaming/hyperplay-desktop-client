@@ -14,4 +14,5 @@ export function getMetaMaskPortfolioPageUrl(page: string) {
 export const METAMASK_DOWNLOAD_URL =
   'https://metamask.io/download/?utm_source=hyperplay'
 
-export const DEV_PORTAL_URL = 'https://developers.hyperplay.xyz/'
+export const DEV_PORTAL_URL =
+  'https://hyperplay-dev-git-feat-addcompletedstatus-hyperplay.vercel.app/'

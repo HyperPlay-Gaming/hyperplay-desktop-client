@@ -7,6 +7,7 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import '@hyperplay/quests-ui/style.css'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import QuestDetails from '../QuestDetails'
+import { useGetQuestStates } from 'frontend/hooks/useGetQuestStates'
 
 export interface QuestsViewerProps {
   projectId: string
@@ -17,8 +18,20 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const { isSignedIn } = useAuthSession()
   const { t } = useTranslation()
-  const quests = questResults?.data?.data
-  const initialQuestId = quests?.[0]?.id ?? null
+  let quests = questResults?.data?.data
+
+  const { questIdToQuestStateMap, isPending: isGetQuestStatesPending } =
+    useGetQuestStates({
+      quests
+    })
+
+  let initialQuestId = quests?.[0]?.id ?? null
+  if (!isGetQuestStatesPending && quests) {
+    quests = quests.filter((quest_i) =>
+      Object.hasOwn(questIdToQuestStateMap, quest_i.id)
+    )
+    initialQuestId = quests?.[0]?.id ?? null
+  }
   const visibleQuestId = selectedQuestId ?? initialQuestId
 
   let alertComponent = null
@@ -39,7 +52,9 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       {alertComponent}
       <div className={styles.questsViewerContainer}>
         <QuestLogWrapper
-          questsResults={questResults}
+          questIdToQuestStateMap={questIdToQuestStateMap}
+          isLoading={questResults?.data.isPending || isGetQuestStatesPending}
+          quests={quests}
           projectId={appName}
           selectedQuestId={visibleQuestId}
           setSelectedQuestId={setSelectedQuestId}

@@ -50,7 +50,10 @@ export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
       questMap[val.data.id] = val.data
     })
 
-  const questIdToQuestStateMap: Record<number, QuestLogInfo['state']> = {}
+  const questIdToQuestStateMap: Record<
+    number,
+    QuestLogInfo['state'] | undefined
+  > = {}
 
   getUserPlaystreakQuery.forEach((val) => {
     if (!val.data || !Object.hasOwn(questMap, val.data.questId)) {
