@@ -1242,25 +1242,48 @@ export function getPlatformName(platform: string): PlatformName {
   return platformMap[platform] || platform || 'Unknown'
 }
 
+const splitExeAndArgs = (executableWithArgs: string) => {
+  const executable = executableWithArgs.split(' -')[0]
+  const launchArgs = executableWithArgs.replace(executable, '').trim()
+
+  return [executable, launchArgs]
+}
+
 export function getExecutableAndArgs(executableWithArgs: string): {
   executable: string
   launchArgs: string
 } {
+  if (!executableWithArgs) {
+    return { executable: '', launchArgs: '' }
+  }
+
+  // Handle absolute paths first
   const isAbsolutePath = isAbsolute(executableWithArgs)
+  if (isAbsolutePath) {
+    const [exe, args] = splitExeAndArgs(executableWithArgs)
+    return { executable: exe, launchArgs: args }
+  }
+
+  // Handle .app paths
   if (executableWithArgs.includes('.app')) {
-    const executable = executableWithArgs.split(' -')[0]
+    const [executable, launchArgs] = splitExeAndArgs(executableWithArgs)
+    return { executable, launchArgs }
+  }
+
+  // Handle common extensions
+  const matchWithExt = executableWithArgs.match(/^(.*?\.(exe|bin|sh))/i)
+  if (matchWithExt) {
+    const executable = matchWithExt[0]
     const launchArgs = executableWithArgs.replace(executable, '').trim()
     return { executable, launchArgs }
   }
-  const match = executableWithArgs.match(/^(.*?\.(exe|bin|sh))/i)
-  const executable = match ? match[0] : ''
-  const launchArgs = executableWithArgs.replace(executable, '').trim()
 
-  if (isAbsolutePath) {
-    return { executable: executableWithArgs, launchArgs }
+  // Handle executables without extension
+  const [executable, ...argParts] = splitExeAndArgs(executableWithArgs)
+  return {
+    executable,
+    launchArgs: argParts.join(' ')
   }
-
-  return { executable, launchArgs }
 }
 
 function roundToTenth(x: number) {
