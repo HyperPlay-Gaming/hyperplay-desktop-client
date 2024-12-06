@@ -1,43 +1,67 @@
 .buttonContainer {
   display: flex;
   flex-direction: row;
-  margin: var(--space-lg) auto;
+  align-items: flex-start;
+  margin-left: 0;
+  margin-top: var(--space-xl);
   gap: var(--space-xs);
 }
 
+.title {
+  color: var(--color-neutral-100);
+  margin-bottom: var(--space-xs);
+}
+
 .buttonContainer button {
-  min-width: 188px;
+  min-width: 120px;
   border-radius: var(--space-xs);
 }
 
 .bulletPointContainer {
   display: flex;
   flex-direction: row;
+  justify-content: start;
+  align-items: flex-start;
 }
 
 .bulletPointContainer > svg {
-  padding-top: var(--space-2xs);
-  padding-right: var(--space-sm);
-  height: 13px;
+  padding-right: var(--space-xs);
+  width: 28px;
+  height: 28px;
 }
 
 .bulletPointContainer > body:first-word {
-  color: var(--color-status-error);
+  font-size: var(--body-sm);
 }
 
-.infoText {
+.bullets {
   color: var(--color-neutral-100);
+  font-weight: var(--bold);
+  margin-bottom: var(--space-xs);
+}
+
+.titleSm {
+  color: var(--color-neutral-100);
+  font-size: var(--body);
+  font-weight: var(--bold);
+  margin-bottom: var(--space-lg);
+}
+
+.bullets {
+  color: var(--color-neutral-400);
 }
 
 .marginBottomLg {
   margin-bottom: var(--space-lg);
+  color: var(--color-neutral-400);
 }
 .marginBottomSm {
   margin-bottom: var(--space-xs);
 }
 
 .privacyCaption {
-  color: var(--color-neutral-300);
+  color: var(--color-neutral-400);
+  margin-top: var(--space-lg);
 }
 
 .privacyCaption > a {
