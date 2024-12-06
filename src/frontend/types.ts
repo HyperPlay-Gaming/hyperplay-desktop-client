@@ -73,6 +73,7 @@ export type DialogModalOptions = {
   buttons?: Array<ButtonOptions>
   type?: DialogType
   onClose?: () => void
+  isModal?: boolean
 }
 
 export interface ExternalLinkDialogOptions {

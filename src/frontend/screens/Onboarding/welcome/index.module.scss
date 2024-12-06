@@ -1,9 +1,13 @@
 .languageSelector {
-  margin: var(--space-lg) auto;
+  margin: var(--space-sm) 0;
+
+  div {
+    width: auto;
+  }
 }
 
 .actionButton {
-  margin: 0px auto;
+  margin: var(--space-sm) 0;
 }
 .actionButton button {
   border-radius: var(--space-xs);
@@ -13,16 +17,19 @@
   margin-left: var(--space-xs);
 }
 
+.welcomeTitle {
+  color: var(--color-neutral-100);
+}
 .welcomeBody {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .welcomeBodyTextContainer {
-  color: var(--color-neutral-100);
+  color: var(--color-neutral-400);
 }
 
 .welcomeBodyTextContainer > div {
-  margin: var(--space-md) 0px;
+  margin: var(--space-md) auto;
 }
 
 .welcomeBodyTextContainer a {
@@ -34,6 +41,31 @@
   transition: 0.2s;
 }
 
-.boldText {
+.text {
+  font-weight: var(--body-sm);
+}
+
+.textBold {
   font-weight: var(--bold);
+  color: var(--color-neutral-100);
+}
+
+.diamondBlue {
+  width: 10px;
+  height: 10px;
+  margin-right: var(--space-xs-fixed);
+}
+
+.bulletPointIcon {
+  list-style-type: none;
+}
+
+.bulletPointList {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-indent: -18px;
+  padding-left: 18px;
 }

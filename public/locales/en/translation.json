@@ -352,14 +352,15 @@
             "profile": "Profile"
         },
         "buttons": {
-            "agree": "I agree",
-            "noThanks": "No Thanks"
+            "primaryButton": "I Agree",
+            "secondaryButton": "No, Thanks"
         },
         "changeWallet": "Swap wallet account",
+        "compatibilityLayer": "Compatibility Layer (Beta)",
         "connectWallet": "Connect wallet",
         "copyUrl": "Copy URL",
         "currentWallet": "Current wallet",
-        "discordApp": "Discord",
+        "discordAppLink": "Discord Community.",
         "folder": "Folder",
         "gamecard": {
             "distributables": "Installing Distributables...",
@@ -373,19 +374,20 @@
         "linkSteamAccountDescription": "Sign in to Steam to link your HyperPlay account.",
         "linkSteamAccountTitle": "Link Steam Account",
         "logOut": "Log out",
-        "misc": "Never",
         "onboarding": {
             "analytics": {
-                "anonymized": "Send anonymized click & game interaction;",
                 "body": "HyperPlay would like to gather usage data to better understand how our users interact with the application. This information helps us understand how you use the app and lets us make HyperPlay even better for you.",
+                "bulletOne": "Always allow you to opt-out",
+                "bulletTwo": "Send anonymized click & game interaction",
                 "hyperplayWill": "HyperPlay will:",
-                "neverCollectIP": " collect your full IP address;",
-                "neverCollectPersonal": " collect keys, addresses, balances, hashes, or any personal information;",
-                "neverSellData": " sell data for profit. Ever!",
-                "optOut": "Always allow you to opt-out via Settings;",
+                "paragraphOne": "HyperPlay would like to gather usage data to better understand how our users interact with the application. \n           This lets us make HyperPlay even better for you.",
                 "privacyCaption": "This data is aggregated and is therefore anonymous for the purposes of General Data Protection Regulation (EU) 2016/679. For more information in relation to our privacy practices, please see our ",
-                "privacyPolicyHere": "Privacy Policy here.",
-                "title": "Help Us improve HyperPlay!"
+                "privacyPolicy": "Privacy Policy.",
+                "text": {
+                    "externalLink": "Learn More",
+                    "title": "We’ve updated our Privacy Policy"
+                },
+                "titleOne": "Help Us Improve HyperPlay!"
             },
             "connectAgain": "Connect again",
             "connectionCanceled": {
@@ -396,7 +398,6 @@
                 "description": "Your wallet is connected. You are ready to game.",
                 "title": "Wallet connected!"
             },
-            "terms": "Terms of Service.",
             "walletSelection": {
                 "pleaseConnect": "Please connect your wallet, or download the Metamask mobile-app to get\n        started:",
                 "screens": {
@@ -436,13 +437,17 @@
             },
             "welcome": {
                 "text": {
-                    "bugs": "Please note that HyperPlay is a public alpha. Many features are still\n          in development, and there will be bugs.",
-                    "communityCTA_1": "We'd love your feedback and to have you join us in our",
-                    "communityCTA_2": "community. Together, let's shape the future of gaming!",
-                    "construction": "HyperPlay is under construction.",
-                    "description": "HyperPlay is a game launcher and game store aggregator from the\n          future. With HyperPlay, you can carry your wallet, tokens, and assets\n          into every game. HyperPlay supports the entire library of the Epic\n          Store, GOG, and our own HyperPlay store. By using HyperPlay, you agree\n          to our"
+                    "bulletPointFive": "Run Windows games on macOS, Linux, and SteamDeck using our\n              advanced",
+                    "bulletPointFour": "Install Steam (Windows version) on macOS with one easy click",
+                    "bulletPointOne": "Access a vast collection of 100+ on-chain enabled games",
+                    "bulletPointThree": "Play Epic and GOG games directly through HyperPlay",
+                    "bulletPointTwo": "Earn tokens, NFTs, and off-chain rewards by completing Quests",
+                    "lastParagraph": "Currently in Beta, we highly value your feedback and \n            encourage you to report any issues or suggestions in our",
+                    "paragraphOne": "At HyperPlay, we’re building the next-generation game store \n            for the future of gaming.",
+                    "paragraphThr": "Seamlessly bring your wallet, tokens, \n           and assets into every game while accessing \n           the extensive libraries of the Epic Store, \n           GOG, and our own HyperPlay Store-all in one place.",
+                    "TitleList": "With HyperPlay you can:"
                 },
-                "title": "Welcome to HyperPlay Early Access!"
+                "titleIntro": "Welcome to HyperPlay!"
             }
         },
         "otp": "One Time Passcode",

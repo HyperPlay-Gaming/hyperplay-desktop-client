@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import {
   NavBarOverlay,
@@ -15,11 +15,21 @@ import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export function NavBarOverlayWrapper({ appName, runner }: BrowserGameProps) {
   const location = useLocation()
-  const { pathname } = location
+  const { pathname, search } = location
   const [collapsed, setCollapsed] = useState(false)
   const { t } = useTranslation()
   const comingSoonText = t('overlay.comingSoon', 'Coming Soon')
   const flags = useFlags()
+
+  const searchParams = new URLSearchParams(search)
+  const urlQueryParam = searchParams.get('url')
+
+  useEffect(() => {
+    window.api.trackScreen('Overlay Page', {
+      pathname: pathname === '/' ? '/quests' : pathname,
+      url: urlQueryParam ?? undefined
+    })
+  }, [pathname])
 
   const linkItems: NavBarOverlayProps['linkItems'] = [
     <NavItem
