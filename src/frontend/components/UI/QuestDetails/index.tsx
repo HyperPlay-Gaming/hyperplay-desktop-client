@@ -95,7 +95,6 @@ export default function QuestDetails({
 
   return (
     <QuestDetailsWrapper
-      // @ts-expect-error - see: https://github.com/qmhc/vite-plugin-dts/issues/330
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }
@@ -105,7 +104,7 @@ export default function QuestDetails({
           extensionState.showPopup()
         }
       }}
-      onPlayClick={onPlayClick}
+      onPlayClick={onPlayClick ?? console.log}
       getPendingExternalSync={getPendingExternalSync}
       syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}
       tOverride={t}
@@ -124,12 +123,14 @@ export default function QuestDetails({
         },
         questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled
       }}
+      // @ts-expect-error string does not match event names
       trackEvent={window.api.trackEvent}
       signInWithSteamAccount={() => window.api.signInWithProvider('steam')}
       openDiscordLink={window.api.openDiscordLink}
       selectedQuestId={questId}
       getQuest={window.api.getQuest}
       getUserPlayStreak={window.api.getUserPlayStreak}
+      // @ts-expect-error not using this method currently
       getSteamGameMetadata={window.api.getSteamGameMetadata}
       claimPoints={async (reward: Reward) =>
         window.api.claimQuestPointsReward(reward.id.toString())
