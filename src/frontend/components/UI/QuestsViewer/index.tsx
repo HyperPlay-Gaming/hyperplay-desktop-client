@@ -25,6 +25,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       quests
     })
 
+  /**
+   * Filter out the completed status quests where the user hasn't met the eligibility requirements yet.
+   * In these cases, the user can no longer earn a reward or claim a reward.
+   */
   let initialQuestId = quests?.[0]?.id ?? null
   if (!isGetQuestStatesPending && quests) {
     quests = quests.filter((quest_i) =>
