@@ -13,10 +13,7 @@ import { Quest } from '@hyperplay/utils'
 
 export interface QuestLogWrapperProps {
   quests: Quest[] | null | undefined
-  questIdToQuestStateMap: Record<
-    number,
-    'ACTIVE' | 'READY_FOR_CLAIM' | 'CLAIMED' | undefined
-  >
+  questIdToQuestStateMap: Record<number, QuestLogInfo['state'] | undefined>
   isLoading: boolean
   projectId: string
   selectedQuestId: number | null
