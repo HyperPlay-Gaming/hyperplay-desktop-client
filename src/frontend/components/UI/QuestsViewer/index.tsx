@@ -18,24 +18,14 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const { isSignedIn } = useAuthSession()
   const { t } = useTranslation()
-  let quests = questResults?.data?.data
+  const quests = questResults?.data?.data
 
   const { questIdToQuestStateMap, isPending: isGetQuestStatesPending } =
     useGetQuestStates({
       quests
     })
 
-  /**
-   * Filter out the completed status quests where the user hasn't met the eligibility requirements yet.
-   * In these cases, the user can no longer earn a reward or claim a reward.
-   */
-  let initialQuestId = quests?.[0]?.id ?? null
-  if (!isGetQuestStatesPending && quests) {
-    quests = quests.filter((quest_i) =>
-      Object.hasOwn(questIdToQuestStateMap, quest_i.id)
-    )
-    initialQuestId = quests?.[0]?.id ?? null
-  }
+  const initialQuestId = quests?.[0]?.id ?? null
   const visibleQuestId = selectedQuestId ?? initialQuestId
 
   let alertComponent = null
