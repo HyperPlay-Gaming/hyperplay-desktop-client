@@ -111,14 +111,14 @@ const session_id = generateRandomId()
  * @param idFieldName
  * @param id
  */
-async function _trackEventPrivate(
+function _trackEventPrivate(
   eventName: PossibleMetricEventNames,
   properties:
     | PossibleMetricPayloads['properties']
     | PossibleMetricPayloads['sensitiveProperties'],
   idFieldName: 'anonymousId' | 'userId',
   id: GlobalAnonymousId | 'string'
-): Promise<void> {
+): void {
   rudderstack.track({
     event: eventName,
     [idFieldName]: id,
@@ -136,11 +136,11 @@ async function _trackEventPrivate(
   })
 }
 
-export const trackEvent = async ({
+export const trackEvent = ({
   event,
   properties,
   sensitiveProperties
-}: PossibleMetricPayloads): Promise<void> => {
+}: PossibleMetricPayloads): void => {
   const metricsId = metricsStore.get('metricsId')
   const optInStatus = metricsStore.get('metricsOptInStatus')
   const idFieldName = metricsId === ANONYMOUS_ID ? 'anonymousId' : 'userId'
@@ -160,6 +160,8 @@ export const trackEvent = async ({
     }
   }
 }
+
+export const flushEvents = async () => rudderstack.flush()
 
 export const trackScreen = async (name: string, properties?: apiObject) => {
   const metricsId = metricsStore.get('metricsId')
