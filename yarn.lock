@@ -1325,10 +1325,10 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/quests-ui@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.1.0.tgz#10fad9ad123efd57d231ed7f1d9af86469b1aa63"
-  integrity sha512-VHTcOPZuoCXiAG0omnT6HqqEoakKjbEmQNrbLlsjhBwAHCnc4vNLtlXHjfNghEvlYjHG534dbbzHMRwqdN8y7A==
+"@hyperplay/quests-ui@^0.1.8-beta.0":
+  version "0.1.8-beta.0"
+  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.1.8-beta.0.tgz#60d1ccb1c1a5f3eedea3c3c21b4c10b8b0a9669b"
+  integrity sha512-LzRoPv6y+pHR4ZgyqsFy+lVuO88T0iKEVXNNjUAR6jE+USRbMJwDtTHvwsB7YJPt3ZH8FeA9+8xztMEua8Uc2Q==
   dependencies:
     classnames "^2.5.1"
 
