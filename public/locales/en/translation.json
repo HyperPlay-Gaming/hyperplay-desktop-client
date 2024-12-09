@@ -331,6 +331,7 @@
                 "licenseUndefined": "Could not validate access code. Please check your internet access or firewall settings.",
                 "validation": "Access code is invalid"
             },
+            "placeholder": "Enter access code",
             "requirescode": "This game update requires an access code.",
             "success": {
                 "validation": "Success! Access code is valid"

@@ -75,7 +75,7 @@ export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
 
   const accessCodeInput = (
     <TextInputField
-      placeholder={'Enter access code'}
+      placeholder={t('hyperplay.accesscodes.placeholder', 'Enter access code')}
       value={accessCode}
       onChange={(ev) => setAccessCode(ev.target.value)}
       htmlId="access_code_input"
