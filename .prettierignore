@@ -7,3 +7,4 @@ flatpak
 extensions/
 doc
 sign/
+pnpm-lock.yaml
