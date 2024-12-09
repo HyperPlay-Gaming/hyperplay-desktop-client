@@ -159,7 +159,7 @@ function Settings() {
                 <GeneralSettings />
               </Tabs.Panel>
               <Tabs.Panel value="gamesSettings">
-                <GamesSettings useDetails={false} />
+                <GamesSettings />
               </Tabs.Panel>
               <Tabs.Panel value="advSettings">
                 <AdvancedSettings />
