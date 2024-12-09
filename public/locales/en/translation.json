@@ -546,7 +546,8 @@
     "Installing Steam": "Installing Steam...",
     "installModal": {
         "loginRequired": "Login Required",
-        "loginRequiredMessage": "You need to be logged into HyperPlay to enter your access code and install this game. "
+        "loginRequiredMessage": "You need to be logged into HyperPlay to enter your access code and install this game. ",
+        "loginRequiredMessageUpdate": "You need to be logged into HyperPlay to enter your access code and update this game. "
     },
     "Launch Steam": "Launch Steam",
     "Launching Steam": "Launching Steam...",

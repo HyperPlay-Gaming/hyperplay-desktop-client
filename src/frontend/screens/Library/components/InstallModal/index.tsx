@@ -29,9 +29,8 @@ import ChannelNameSelection from 'frontend/components/UI/ChannelNameSelection'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
 import ModDialog from './ModDialog'
 import { AccessCodeInput } from 'frontend/components/UI/AccessCodeInput'
-import useAuthSession from 'frontend/hooks/useAuthSession'
-import { AlertCard } from '@hyperplay/ui'
 import { useTranslation } from 'react-i18next'
+import AccessCodeContainer from 'frontend/components/UI/AccessCodeContainer'
 
 type Props = {
   appName: string
@@ -48,7 +47,6 @@ export default React.memo(function InstallModal({
 }: Props) {
   const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
-  const { isSignedIn } = useAuthSession()
 
   const [winePrefix, setWinePrefix] = useState('...')
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
@@ -205,22 +203,20 @@ export default React.memo(function InstallModal({
 
   let accessCodeContent = null
 
-  if (channelRequiresAccessCode && runner === 'hyperplay') {
-    if (!isSignedIn) {
-      accessCodeContent = (
-        <AlertCard
-          showClose={false}
-          title={t('installModal.loginRequired', 'Login Required')}
-          message={t(
-            'installModal.loginRequiredMessage',
-            'You need to be logged into HyperPlay to enter your access code and install this game. '
-          )}
-          variant="warning"
-        />
-      )
-    } else {
-      accessCodeContent = accessCodeInput
-    }
+  if (gameInfo) {
+    accessCodeContent = (
+      <AccessCodeContainer
+        gameInfo={gameInfo}
+        channelNameToInstall={channelNameToInstall}
+        matchingRunner={runner === 'hyperplay'}
+        warningMessage={t(
+          'installModal.loginRequiredMessage',
+          'You need to be logged into HyperPlay to enter your access code and install this game. '
+        )}
+      >
+        {accessCodeInput}
+      </AccessCodeContainer>
+    )
   }
 
   return (

@@ -3,13 +3,12 @@ import { Dialog } from 'frontend/components/UI/Dialog'
 import TextInputField from '../TextInputField'
 import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
-import { AlertCard, Button } from '@hyperplay/ui'
+import { Button } from '@hyperplay/ui'
 import gameUpdateState from 'frontend/state/GameUpdateState'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
-import useAuthSession from 'frontend/hooks/useAuthSession'
+import AccessCodeContainer from '../AccessCodeContainer'
 
 export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
-  const { isSignedIn } = useAuthSession()
   const [accessCode, setAccessCode] = useState('')
   const [accessCodeVerified, setAccessCodeVerified] = useState(false)
   const [errorText, setErrorText] = useState('')
@@ -86,22 +85,20 @@ export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
 
   let accessCodeContent = null
 
-  if (channelRequiresAccessCode) {
-    if (!isSignedIn) {
-      accessCodeContent = (
-        <AlertCard
-          showClose={false}
-          title={t('installModal.loginRequired', 'Login Required')}
-          message={t(
-            'installModal.loginRequiredMessage',
-            'You need to be logged into HyperPlay to enter your access code and install this game. '
-          )}
-          variant="warning"
-        />
-      )
-    } else {
-      accessCodeContent = accessCodeInput
-    }
+  if (gameInfo) {
+    accessCodeContent = (
+      <AccessCodeContainer
+        gameInfo={gameInfo}
+        channelNameToInstall={channelName ?? ''}
+        matchingRunner={true}
+        warningMessage={t(
+          'installModal.loginRequiredMessageUpdate',
+          'You need to be logged into HyperPlay to enter your access code and update this game. '
+        )}
+      >
+        {accessCodeInput}
+      </AccessCodeContainer>
+    )
   }
 
   return (
