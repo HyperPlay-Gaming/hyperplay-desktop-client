@@ -10,20 +10,25 @@ import useAuthSession from './useAuthSession'
 
 export interface UseGetQuestLogInfosProps {
   quests?: Quest[] | null
+  enabled?: boolean
 }
 
 type getQuestQueryOptionsType = ReturnType<typeof getQuestQueryOptions>
 type getUserPlaystreakQueryOptionsType = ReturnType<
   typeof getUserPlaystreakQueryOptions
 >
-export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
+export function useGetQuestStates({
+  quests,
+  enabled = true
+}: UseGetQuestLogInfosProps) {
   const { isSignedIn } = useAuthSession()
   let getQuestQueries: getQuestQueryOptionsType[] = []
   if (isSignedIn) {
     getQuestQueries =
-      quests?.map((quest) =>
-        getQuestQueryOptions(quest.id, window.api.getQuest)
-      ) ?? []
+      quests?.map((quest) => ({
+        ...getQuestQueryOptions(quest.id, window.api.getQuest),
+        enabled
+      })) ?? []
   }
   const getQuestQuery = useQueries({
     queries: getQuestQueries
@@ -32,9 +37,13 @@ export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
   let getUserPlaystreakQueries: getUserPlaystreakQueryOptionsType[] = []
   if (isSignedIn) {
     getUserPlaystreakQueries =
-      quests?.map((quest) =>
-        getUserPlaystreakQueryOptions(quest.id, window.api.getUserPlayStreak)
-      ) ?? []
+      quests?.map((quest) => ({
+        ...getUserPlaystreakQueryOptions(
+          quest.id,
+          window.api.getUserPlayStreak
+        ),
+        enabled
+      })) ?? []
   }
   const getUserPlaystreakQuery = useQueries({
     queries: getUserPlaystreakQueries
@@ -50,7 +59,10 @@ export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
       questMap[val.data.id] = val.data
     })
 
-  const questIdToQuestStateMap: Record<number, QuestLogInfo['state']> = {}
+  const questIdToQuestStateMap: Record<
+    number,
+    QuestLogInfo['state'] | undefined
+  > = {}
 
   getUserPlaystreakQuery.forEach((val) => {
     if (!val.data || !Object.hasOwn(questMap, val.data.questId)) {
@@ -68,7 +80,8 @@ export function useGetQuestStates({ quests }: UseGetQuestLogInfosProps) {
 
   return {
     isPending: allQueries.some((val) => val.status === 'pending'),
-    isLoading: allQueries.some((val) => val.isLoading || val.isFetching),
+    isLoading: allQueries.some((val) => val.isLoading),
+    isFetching: allQueries.some((val) => val.isFetching),
     questIdToQuestStateMap
   }
 }
