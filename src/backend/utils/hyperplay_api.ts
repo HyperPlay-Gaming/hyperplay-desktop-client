@@ -57,7 +57,10 @@ export const hpApi: HyperPlayAPI = {
   },
   setBadgeTextInRenderer: (text: string) =>
     getMainWindow()?.webContents.send('setBadgeTextInRenderer', text),
-  openUrl: async (url: string) => openUrlOrFile(url),
+  openUrl: async (url: string) => {
+    logInfo(`hp api openUrl ${url}`)
+    return openUrlOrFile(url)
+  },
   captureException,
   configFolder,
   appConfigFolder,
