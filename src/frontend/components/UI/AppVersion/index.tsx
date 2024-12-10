@@ -18,15 +18,5 @@ export default function AppVersion() {
     })
   }, [])
 
-  return (
-    <div
-      className="body-sm"
-      style={{
-        color: 'var(--color-neutral-400)',
-        margin: 'var(--space-xl) 0px var(--space-md) 0px'
-      }}
-    >
-      {t('info.hyperplay.version', 'HyperPlay Version') + `: ${appVersion}`}
-    </div>
-  )
+  return <div>{appVersion}</div>
 }
