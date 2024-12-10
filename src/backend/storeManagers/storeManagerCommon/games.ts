@@ -97,11 +97,9 @@ function handleUrlOpenForWebContents(
     return { action: 'deny' }
   }
   return (
-    extensionImporter?.windowOpenHandlerForExtension(
-      url + '123',
-      contents,
-      hpApi
-    ) ?? { action: 'deny' }
+    extensionImporter?.windowOpenHandlerForExtension(url, contents, hpApi) ?? {
+      action: 'deny'
+    }
   )
 }
 
