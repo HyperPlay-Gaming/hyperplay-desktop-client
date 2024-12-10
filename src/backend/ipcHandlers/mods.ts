@@ -233,7 +233,14 @@ export async function prepareBaseGameForModding({
         readdirSync(extractedFolderFullPath).forEach(async (file) => {
           const srcPath = path.join(extractedFolderFullPath, file)
           const destPath = path.join(dirPath, file)
-          await copyRecursiveAsync(srcPath, destPath)
+          try {
+            await copyRecursiveAsync(srcPath, destPath)
+          } catch (error) {
+            const errorMessage = `Error copying ${srcPath} to ${destPath} ${error}`
+            logError(errorMessage, LogPrefix.HyperPlay)
+            extractService.emit('error', new Error(errorMessage))
+            throw new Error(errorMessage)
+          }
         })
 
         // remove the extracted folder
