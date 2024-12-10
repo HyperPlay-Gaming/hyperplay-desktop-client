@@ -455,7 +455,6 @@
             }
         },
         "otp": "One Time Passcode",
-        "publicAlpha": "Public Alpha",
         "Sync": "Sync",
         "syncing": "Syncing...",
         "turnAnalyticsOff": "Turn off",
@@ -518,9 +517,6 @@
     "importGameErrorMessageExecutable": "Game Executable not found, importing game is not possible",
     "importGameErrorTitle": "Import Game Error",
     "info": {
-        "hyperplay": {
-            "version": "HyperPlay Version"
-        },
         "save-sync": {
             "searching": "Trying to detect the correct save folder (click to cancel)"
         },
