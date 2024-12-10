@@ -1322,8 +1322,8 @@ async function checkPermissions(src: string, dest: string) {
       )
     }
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`Permission error: ${error.message}`)
+    if (error) {
+      throw new Error(`Permission error: ${error}`)
     }
     throw error
   }
