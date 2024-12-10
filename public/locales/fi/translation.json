@@ -864,7 +864,7 @@
         "folder": "Kansio",
         "gamecard": {
             "paused": "Pysäytetty",
-            "distributables": "Jakelun asentaminen",
+            "distributables": "Jakelijoiden asentaminen...",
             "installing": "Ladataan...",
             "extracting": "Harjoittaa...",
             "installed": "Valmiina pelaamaan",
