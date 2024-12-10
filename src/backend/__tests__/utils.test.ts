@@ -268,7 +268,7 @@ describe('backend/utils.ts', () => {
     })
   })
 
-  describe.only('copyRecursiveAsync', () => {
+  describe('copyRecursiveAsync', () => {
     const testDir = join(os.tmpdir(), `test-copy-${Date.now()}`)
     const sourceDir = join(testDir, 'source')
     const destDir = join(testDir, 'dest')
