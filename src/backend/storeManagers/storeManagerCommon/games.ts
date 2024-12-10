@@ -57,7 +57,7 @@ const openBlankWindow = (options: BrowserWindowConstructorOptions) => {
   const browserGame = new BrowserWindow(options)
 
   browserGame.webContents.on('will-navigate', async (...params) => {
-    logInfo(`'will navigate to ', ${JSON.stringify(params[0], null, 4)}`)
+    logInfo(`'will navigate to ', ${params}`)
     import('@hyperplay/extension-importer').then((extensionImporter) => {
       extensionImporter?.windowOpenHandlerForExtension(
         params[0].url,
