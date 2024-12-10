@@ -16,16 +16,19 @@ const dialog = {
   showMessageBox: jest.fn()
 }
 
-const app = {
+class App extends EventEmitter {
   // app override
-  getPath: jest.fn().mockImplementation((path: string) => {
+  getPath = jest.fn().mockImplementation((path: string) => {
     return join(appBasePath, path)
-  }),
+  })
   getVersion(): string {
     return '1.0.0'
-  },
-  requestSingleInstanceLock: jest.fn().mockReturnValue(true)
+  }
+
+  requestSingleInstanceLock = jest.fn().mockReturnValue(true)
 }
+
+const app = new App()
 
 class Notification {
   public show() {
