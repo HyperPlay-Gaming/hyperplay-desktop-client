@@ -5,10 +5,10 @@ import { t } from 'i18next'
 import { configStore, icon, isLinux } from './constants'
 import { logError, logInfo, LogPrefix } from './logger/logger'
 import { isOnline } from './online_monitor'
-import { trackEvent } from './api/metrics'
 import { captureException } from '@sentry/electron'
 import { getFileSize } from './utils'
 import { ClientUpdateStatuses } from '@hyperplay/utils'
+import { trackEvent } from './metrics/metrics'
 // to test auto update on windows locally make sure you added the option "verifyUpdateCodeSignature": false
 // under build.win in package.json and also change the app version to an old one there
 
