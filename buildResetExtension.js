@@ -9,10 +9,11 @@ const resetExtensionScript =
   './node_modules/@hyperplay/extension-importer/src/resetExtension.js'
 if (existsSync(resetExtensionScript)) {
   console.log('spawning pkg', resetExtensionScript, args)
-  const command = platform() === 'win32' ? 'yarn.cmd' : 'yarn'
+  const command = platform() === 'win32' ? 'pnpm.cmd' : 'pnpm'
   const result = spawnSync(
     command,
     [
+      'run',
       'pkg',
       resetExtensionScript,
       '--out-path',

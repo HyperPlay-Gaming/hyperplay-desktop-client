@@ -80,15 +80,15 @@ This projects uses optional NPM packages.
 For internal developers, use:
 
 ```bash
-yarn setup
-yarn start
+pnpm run setup
+pnpm start
 ```
 
 For external developers, use:
 
 ```bash
-yarn setupWithoutOptional
-yarn start
+pnpm run setupWithoutOptional
+pnpm start
 ```
 
 #### M1/M2 Mac
@@ -102,16 +102,16 @@ Error: Cannot find module @rollup/rollup-darwin-arm64. npm has a bug related to 
 Please try the following
 
 ```bash
-rm -f yarn.lock
+rm -f pnpm-lock.yaml
 rm -rf node_modules
-yarn cache clean
-yarn setupWithoutOptional
-yarn start
+pnpm cache delete
+pnpm run setupWithoutOptional
+pnpm start
 ```
 
 #### Lavamoat
 
-Please note that at times, the console may alert you to run `yarn allow-scripts auto`. This is from `@lavamoat/allow-scripts` and is due to a dependency adding a new preinstall or postinstall script. After running `yarn allow-scripts auto` and updating the package.json to enable or disable the script, please run `yarn setup` or `yarn setupWithoutOptional` again.
+Please note that at times, the console may alert you to run `pnpm exec allow-scripts auto`. This is from `@lavamoat/allow-scripts` and is due to a dependency adding a new preinstall or postinstall script. After running `pnpm exec allow-scripts auto` and updating the package.json to enable or disable the script, please run `pnpm run setup` or `pnpm run setupWithoutOptional` again.
 
 ## Credits
 
