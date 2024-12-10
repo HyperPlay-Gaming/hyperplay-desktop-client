@@ -1,5 +1,11 @@
 import * as utils from '../utils'
-import { getExecutableAndArgs } from '../utils'
+import { getExecutableAndArgs, copyRecursiveAsync } from '../utils'
+import { mkdir, writeFile, symlink } from 'fs/promises'
+import { join } from 'path'
+import { chmod, existsSync } from 'fs'
+import { rimraf } from 'rimraf'
+import os from 'os'
+import * as fs from 'fs'
 
 jest.mock('electron')
 jest.mock('../logger/logger')
@@ -259,6 +265,101 @@ describe('backend/utils.ts', () => {
         launchArgs: '--arg1 --arg2'
       }
       expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+  })
+
+  describe.only('copyRecursiveAsync', () => {
+    const testDir = join(os.tmpdir(), `test-copy-${Date.now()}`)
+    const sourceDir = join(testDir, 'source')
+    const destDir = join(testDir, 'dest')
+
+    beforeEach(async () => {
+      // Setup test directories
+      await mkdir(sourceDir, { recursive: true })
+      await mkdir(destDir, { recursive: true })
+    })
+
+    afterEach(async () => {
+      // Cleanup test directories
+      await rimraf(testDir)
+    })
+
+    it('should copy a single file', async () => {
+      const testFile = join(sourceDir, 'test.txt')
+      const destFile = join(destDir, 'test.txt')
+      await writeFile(testFile, 'test content')
+
+      await copyRecursiveAsync(testFile, destFile)
+
+      expect(existsSync(destFile)).toBe(true)
+    })
+
+    it('should copy a directory recursively', async () => {
+      const subDir = join(sourceDir, 'subdir')
+      const testFile = join(subDir, 'test.txt')
+      await mkdir(subDir, { recursive: true })
+      await writeFile(testFile, 'test content')
+
+      await copyRecursiveAsync(sourceDir, join(destDir, 'source'))
+
+      expect(existsSync(join(destDir, 'source/subdir/test.txt'))).toBe(true)
+    })
+
+    it('should skip symbolic links', async () => {
+      const testFile = join(sourceDir, 'test.txt')
+      const linkFile = join(sourceDir, 'link.txt')
+      await writeFile(testFile, 'test content')
+      await symlink(testFile, linkFile)
+
+      await copyRecursiveAsync(linkFile, join(destDir, 'link.txt'))
+
+      expect(existsSync(join(destDir, 'link.txt'))).toBe(false)
+    })
+
+    it('should handle invalid source path', async () => {
+      const result = await copyRecursiveAsync('nonexistent', destDir)
+      expect(result).toBeUndefined()
+    })
+
+    it('should throw on permission error', async () => {
+      const testFile = join(sourceDir, 'test.txt')
+      await writeFile(testFile, 'test content')
+
+      // Make destination directory read-only
+      await new Promise((resolve) => chmod(destDir, '444', resolve))
+
+      await expect(
+        copyRecursiveAsync(testFile, join(destDir, 'test.txt'))
+      ).rejects.toThrow('Permission error')
+    })
+
+    it('should throw on timeout', async () => {
+      const COPY_TIMEOUT_MS = 30000
+      const testFile = join(sourceDir, 'test.txt')
+      await writeFile(testFile, 'test content')
+
+      // Mock the copyFile function to simulate a slow operation
+      const mockCopyFile = jest
+        .spyOn(fs.promises, 'copyFile')
+        .mockImplementation(async () => {
+          return new Promise((resolve) => {
+            setTimeout(resolve, COPY_TIMEOUT_MS + 1000) // Wait longer than timeout
+          })
+        })
+
+      const destFile = join(destDir, 'test.txt')
+
+      await expect(copyRecursiveAsync(testFile, destFile)).rejects.toThrow(
+        'Timeout'
+      )
+
+      // Restore original implementation
+      mockCopyFile.mockRestore()
+    })
+
+    it('should handle empty source and destination', async () => {
+      const result = await copyRecursiveAsync('', '')
+      expect(result).toBeUndefined()
     })
   })
 })
