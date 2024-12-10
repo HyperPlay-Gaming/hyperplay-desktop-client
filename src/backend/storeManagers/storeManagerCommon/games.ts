@@ -57,6 +57,7 @@ const openBlankWindow = (options: BrowserWindowConstructorOptions) => {
   const browserGame = new BrowserWindow(options)
 
   browserGame.webContents.on('will-navigate', async (...params) => {
+    logInfo(`'will navigate to ', ${params}`)
     import('@hyperplay/extension-importer').then((extensionImporter) => {
       extensionImporter?.windowOpenHandlerForExtension(
         params[0].url,
@@ -84,6 +85,7 @@ function handleUrlOpenForWebContents(
   const runner = parentURL.searchParams.get('runner') as Runner | null
 
   if (url === 'about:blank') {
+    logInfo(`handling url about blank', ${url}`)
     return { action: 'allow', createWindow: openBlankWindow }
   }
 
@@ -93,9 +95,19 @@ function handleUrlOpenForWebContents(
     appName &&
     runner
   ) {
+    logInfo(`
+      'handling url new window ',
+      ${url},
+      ${['https:', 'http:'].includes(protocol)},
+      ${protocol},
+      ${urlToOpen},
+      ${parentURL},
+      ${appName},
+      ${runner}`)
     openNewBrowserGameWindow(url, appName, runner)
     return { action: 'deny' }
   }
+  logInfo(`'handling url falling back to ext importer or denying', ${url}`)
   return (
     extensionImporter?.windowOpenHandlerForExtension(url, contents, hpApi) ?? {
       action: 'deny'
