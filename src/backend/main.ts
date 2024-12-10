@@ -4,6 +4,7 @@ import {
   AppSettings,
   GamepadInputEvent,
   GameSettings,
+  LaunchParams,
   Runner,
   StatusPromise
 } from 'common/types'
@@ -173,7 +174,7 @@ import 'backend/proxy/ipcHandlers'
 import './ipcHandlers'
 import './ipcHandlers/checkDiskSpace'
 
-import { metricsAreEnabled, trackEvent } from './metrics/metrics'
+import { flushEvents, metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
@@ -313,6 +314,26 @@ async function completeHyperPlayQuest() {
   logInfo(`Completed HyperPlay Summon task`, LogPrefix.Backend)
 }
 
+let allLaunchHandlerPromises: StatusPromise[] = []
+async function handleAppQuit() {
+  try {
+    // ensure game launch is cleaned up, play sessions are counted, and game closed event is emitted before shutting down app
+    const allGameLaunchHandlersSettled = Promise.allSettled(
+      allLaunchHandlerPromises
+    )
+    const oneSecondTimeout = new Promise((res) => {
+      setTimeout(() => {
+        res('TIMED_OUT')
+      }, 1000)
+    })
+    await Promise.race([allGameLaunchHandlersSettled, oneSecondTimeout])
+    logInfo(`All game launch handlers settled`)
+    allLaunchHandlerPromises = []
+  } catch (err) {
+    logError(`Error in a game launch handler: ${err}`)
+  }
+}
+
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
@@ -356,7 +377,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
       return mainWindow.hide()
     }
 
-    handleExit()
+    handleExit(handleAppQuit)
   })
 
   // if (isWindows) {
@@ -1162,217 +1183,189 @@ ipcMain.handle('isClientUpdating', async () => {
 
 ipcMain.on('restartClient', () => autoUpdater.quitAndInstall())
 
-// get pid/tid on launch and inject
-ipcMain.handle(
-  'launch',
-  async (event, { appName, launchArguments, runner }): StatusPromise => {
-    const game = gameManagerMap[runner].getGameInfo(appName)
-    const gameSettings = await gameManagerMap[runner].getSettings(appName)
-    const { autoSyncSaves, savesPath, gogSaves = [] } = gameSettings
+const handleGameLaunch = async ({
+  appName,
+  launchArguments,
+  runner
+}: LaunchParams): StatusPromise => {
+  const game = gameManagerMap[runner].getGameInfo(appName)
+  const gameSettings = await gameManagerMap[runner].getSettings(appName)
+  const { autoSyncSaves, savesPath, gogSaves = [] } = gameSettings
 
-    const { title, app_name, browserUrl, install } = game
+  const { title, app_name, browserUrl, install } = game
 
-    const { minimizeOnGameLaunch } = GlobalConfig.get().getSettings()
+  const { minimizeOnGameLaunch } = GlobalConfig.get().getSettings()
 
-    const startPlayingDate = new Date()
-    startNewPlaySession(appName)
+  const startPlayingDate = new Date()
+  startNewPlaySession(appName)
 
-    if (!tsStore.has(game.app_name)) {
-      tsStore.set(
-        `${game.app_name}.firstPlayed`,
-        startPlayingDate.toISOString()
-      )
+  if (!tsStore.has(game.app_name)) {
+    tsStore.set(`${game.app_name}.firstPlayed`, startPlayingDate.toISOString())
+  }
+
+  logInfo(`Launching ${title} (${game.app_name})`, LogPrefix.Backend)
+  trackEvent({
+    event: 'Game Launched',
+    properties: {
+      game_name: app_name,
+      isBrowserGame: browserUrl !== undefined,
+      game_title: title,
+      store_name: getStoreName(runner),
+      browserUrl: browserUrl ?? undefined,
+      platform: getPlatformName(install.platform!),
+      platform_arch: install.platform!
     }
+  })
 
-    logInfo(`Launching ${title} (${game.app_name})`, LogPrefix.Backend)
-    trackEvent({
-      event: 'Game Launched',
-      properties: {
-        game_name: app_name,
-        isBrowserGame: browserUrl !== undefined,
-        game_title: title,
-        store_name: getStoreName(runner),
-        browserUrl: browserUrl ?? undefined,
-        platform: getPlatformName(install.platform!),
-        platform_arch: install.platform!
-      }
-    })
+  // purposefully not awaiting this
+  completeHyperPlayQuest()
 
-    // purposefully not awaiting this
-    completeHyperPlayQuest()
-
-    if (autoSyncSaves && isOnline()) {
-      sendFrontendMessage('gameStatusUpdate', {
-        appName,
-        runner,
-        status: 'syncing-saves'
-      })
-      logInfo(`Downloading saves for ${title}`, LogPrefix.Backend)
-      try {
-        await gameManagerMap[runner].syncSaves(
-          appName,
-          '--skip-upload',
-          savesPath,
-          gogSaves
-        )
-        logInfo(`Saves for ${title} downloaded`, LogPrefix.Backend)
-      } catch (error) {
-        logError(
-          `Error while downloading saves for ${title}. ${error}`,
-          LogPrefix.Backend
-        )
-      }
-    }
-
+  if (autoSyncSaves && isOnline()) {
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       runner,
-      status: 'playing'
+      status: 'syncing-saves'
     })
-
-    const mainWindow = getMainWindow()
-    if (minimizeOnGameLaunch) {
-      mainWindow?.hide()
+    logInfo(`Downloading saves for ${title}`, LogPrefix.Backend)
+    try {
+      await gameManagerMap[runner].syncSaves(
+        appName,
+        '--skip-upload',
+        savesPath,
+        gogSaves
+      )
+      logInfo(`Saves for ${title} downloaded`, LogPrefix.Backend)
+    } catch (error) {
+      logError(
+        `Error while downloading saves for ${title}. ${error}`,
+        LogPrefix.Backend
+      )
     }
+  }
 
-    // Prevent display from sleep
-    if (!powerDisplayId) {
-      logInfo('Preventing display from sleep', LogPrefix.Backend)
-      powerDisplayId = powerSaveBlocker.start('prevent-display-sleep')
-    }
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    runner,
+    status: 'playing'
+  })
 
-    const logFileLocation = getLogFileLocation(appName)
+  const mainWindow = getMainWindow()
+  if (minimizeOnGameLaunch) {
+    mainWindow?.hide()
+  }
 
-    const systemInfo = await getSystemInfo()
-      .then(formatSystemInfo)
-      .catch((error) => {
-        logError(
-          ['Failed to fetch system information', error],
-          LogPrefix.Backend
-        )
-        return 'Error, check general log'
-      })
-    writeFileSync(logFileLocation, 'System Info:\n' + `${systemInfo}\n` + '\n')
+  // Prevent display from sleep
+  if (!powerDisplayId) {
+    logInfo('Preventing display from sleep', LogPrefix.Backend)
+    powerDisplayId = powerSaveBlocker.start('prevent-display-sleep')
+  }
 
-    const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
+  const logFileLocation = getLogFileLocation(appName)
+
+  const systemInfo = await getSystemInfo()
+    .then(formatSystemInfo)
+    .catch((error) => {
+      logError(['Failed to fetch system information', error], LogPrefix.Backend)
+      return 'Error, check general log'
+    })
+  writeFileSync(logFileLocation, 'System Info:\n' + `${systemInfo}\n` + '\n')
+
+  const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
+  appendFileSync(
+    logFileLocation,
+    'System Info:\n' +
+      `${systemInfo}\n` +
+      '\n' +
+      `Game Settings: ${gameSettingsString}\n` +
+      '\n' +
+      `Game launched at: ${startPlayingDate}\n` +
+      '\n'
+  )
+
+  if (logsDisabled) {
     appendFileSync(
       logFileLocation,
-      'System Info:\n' +
-        `${systemInfo}\n` +
-        '\n' +
-        `Game Settings: ${gameSettingsString}\n` +
-        '\n' +
-        `Game launched at: ${startPlayingDate}\n` +
-        '\n'
+      'IMPORTANT: Logs are disabled. Enable logs before reporting an issue.'
+    )
+  }
+
+  const isNative = gameManagerMap[runner].isNative(appName)
+
+  // check if isNative, if not, check if wine is valid
+  if (!isNative) {
+    const isWineOkToLaunch = await checkWineBeforeLaunch(
+      appName,
+      gameSettings,
+      logFileLocation
     )
 
-    if (logsDisabled) {
-      appendFileSync(
-        logFileLocation,
-        'IMPORTANT: Logs are disabled. Enable logs before reporting an issue.'
+    if (!isWineOkToLaunch) {
+      logError(
+        `Was not possible to launch using ${gameSettings.wineVersion.name}`,
+        LogPrefix.Backend
       )
-    }
 
-    const isNative = gameManagerMap[runner].isNative(appName)
-
-    // check if isNative, if not, check if wine is valid
-    if (!isNative) {
-      const isWineOkToLaunch = await checkWineBeforeLaunch(
+      sendFrontendMessage('gameStatusUpdate', {
         appName,
-        gameSettings,
-        logFileLocation
-      )
+        runner,
+        status: 'done'
+      })
 
-      if (!isWineOkToLaunch) {
-        logError(
-          `Was not possible to launch using ${gameSettings.wineVersion.name}`,
-          LogPrefix.Backend
-        )
-
-        sendFrontendMessage('gameStatusUpdate', {
-          appName,
-          runner,
-          status: 'done'
-        })
-
-        return { status: 'error' }
-      }
+      return { status: 'error' }
     }
+  }
+
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    runner,
+    status: 'playing'
+  })
+
+  const command = gameManagerMap[runner].launch(appName, launchArguments)
+
+  const launchResult = await command.catch((exception) => {
+    logError(exception, LogPrefix.Backend)
+    appendFileSync(
+      logFileLocation,
+      `An exception occurred when launching the game:\n${exception.stack}`
+    )
+    return false
+  })
+
+  // Stop display sleep blocker
+  if (powerDisplayId !== null) {
+    logInfo('Stopping Display Power Saver Blocker', LogPrefix.Backend)
+    powerSaveBlocker.stop(powerDisplayId)
+  }
+
+  // Update playtime and last played date
+  const finishedPlayingDate = new Date()
+  tsStore.set(`${appName}.lastPlayed`, finishedPlayingDate.toISOString())
+
+  if (runner === 'gog') {
+    await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
+  }
+
+  await addRecentGame(game)
+
+  if (autoSyncSaves && isOnline()) {
+    /**
+     * @dev It sets to done, so the GlobalState knows that the game session stopped.
+     * Then it changes the status to syncing-saves. Then It sets to done again.
+     * Otherwise it would count the Syncing Saves time (which can be long depending on the game) as playing time as well.
+     * done is not only the state for stopping playing but for finishing any other process that came before.
+     */
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      runner,
+      status: 'done'
+    })
 
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       runner,
-      status: 'playing'
+      status: 'syncing-saves'
     })
-
-    const command = gameManagerMap[runner].launch(appName, launchArguments)
-
-    const launchResult = await command.catch((exception) => {
-      logError(exception, LogPrefix.Backend)
-      appendFileSync(
-        logFileLocation,
-        `An exception occurred when launching the game:\n${exception.stack}`
-      )
-      return false
-    })
-
-    // Stop display sleep blocker
-    if (powerDisplayId !== null) {
-      logInfo('Stopping Display Power Saver Blocker', LogPrefix.Backend)
-      powerSaveBlocker.stop(powerDisplayId)
-    }
-
-    // Update playtime and last played date
-    const finishedPlayingDate = new Date()
-    tsStore.set(`${appName}.lastPlayed`, finishedPlayingDate.toISOString())
-
-    if (runner === 'gog') {
-      await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
-    }
-
-    await addRecentGame(game)
-
-    if (autoSyncSaves && isOnline()) {
-      /**
-       * @dev It sets to done, so the GlobalState knows that the game session stopped.
-       * Then it changes the status to syncing-saves. Then It sets to done again.
-       * Otherwise it would count the Syncing Saves time (which can be long depending on the game) as playing time as well.
-       * done is not only the state for stopping playing but for finishing any other process that came before.
-       */
-      sendFrontendMessage('gameStatusUpdate', {
-        appName,
-        runner,
-        status: 'done'
-      })
-
-      sendFrontendMessage('gameStatusUpdate', {
-        appName,
-        runner,
-        status: 'syncing-saves'
-      })
-
-      sendFrontendMessage('gameStatusUpdate', {
-        appName,
-        runner,
-        status: 'done'
-      })
-
-      logInfo(`Uploading saves for ${title}`, LogPrefix.Backend)
-      try {
-        await gameManagerMap[runner].syncSaves(
-          appName,
-          '--skip-download',
-          savesPath,
-          gogSaves
-        )
-        logInfo(`Saves uploaded for ${title}`, LogPrefix.Backend)
-      } catch (error) {
-        logError(
-          `Error uploading saves for ${title}. Error: ${error}`,
-          LogPrefix.Backend
-        )
-      }
-    }
 
     sendFrontendMessage('gameStatusUpdate', {
       appName,
@@ -1380,10 +1373,41 @@ ipcMain.handle(
       status: 'done'
     })
 
-    // Playtime of this session in milliseconds. Uses hrtime for monotonic timer not subject to clock drift or sync errors
-    const sessionPlaytimeInMs = syncPlaySession(appName)
-    postPlaySession(appName, runner, sessionPlaytimeInMs)
+    logInfo(`Uploading saves for ${title}`, LogPrefix.Backend)
+    try {
+      await gameManagerMap[runner].syncSaves(
+        appName,
+        '--skip-download',
+        savesPath,
+        gogSaves
+      )
+      logInfo(`Saves uploaded for ${title}`, LogPrefix.Backend)
+    } catch (error) {
+      logError(
+        `Error uploading saves for ${title}. Error: ${error}`,
+        LogPrefix.Backend
+      )
+    }
+  }
 
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    runner,
+    status: 'done'
+  })
+
+  // Playtime of this session in milliseconds. Uses hrtime for monotonic timer not subject to clock drift or sync errors
+  const sessionPlaytimeInMs = syncPlaySession(appName)
+
+  // need to await so that on main window close, this finishes before app exits
+  try {
+    await postPlaySession(appName, runner, sessionPlaytimeInMs)
+  } catch (err) {
+    logError(`Error posting playsession ${err}`)
+  }
+
+  // need to await so that on main window close, this finishes before app exits
+  try {
     trackEvent({
       event: 'Game Closed',
       properties: {
@@ -1397,17 +1421,27 @@ ipcMain.handle(
         platform_arch: install.platform!
       }
     })
-
-    // Exit if we've been launched without UI
-    if (isCLINoGui) {
-      app.exit()
-    } else {
-      mainWindow?.show()
-    }
-
-    return { status: launchResult ? 'done' : 'error' }
+    await flushEvents()
+  } catch (err) {
+    logError(`Error tracking game closed ${err}`)
   }
-)
+
+  // Exit if we've been launched without UI
+  if (isCLINoGui) {
+    app.exit()
+  } else {
+    mainWindow?.show()
+  }
+
+  return { status: launchResult ? 'done' : 'error' }
+}
+
+// get pid/tid on launch and inject
+ipcMain.handle('launch', async (event, args): StatusPromise => {
+  const handleGameLaunchPromise = handleGameLaunch(args)
+  allLaunchHandlerPromises.push(handleGameLaunchPromise)
+  return handleGameLaunchPromise
+})
 
 ipcMain.handle('openDialog', async (e, args) => {
   const mainWindow = getMainWindow()
