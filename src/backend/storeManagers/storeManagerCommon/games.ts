@@ -254,10 +254,6 @@ const openNewBrowserGameWindow = async (
 
     browserGame.on('close', () => {
       res(true)
-      app.removeListener(
-        'web-contents-created',
-        openNewBrowserGameWindowListener
-      )
     })
   })
 }
