@@ -334,6 +334,7 @@
                 "licenseUndefined": "Could not validate access code. Please check your internet access or firewall settings.",
                 "validation": "Access code is invalid"
             },
+            "placeholder": "Enter access code",
             "requirescode": "This game update requires an access code.",
             "success": {
                 "validation": "Success! Access code is valid"
@@ -546,6 +547,11 @@
     "Install Steam": "Install Steam",
     "Installing": "Installing",
     "Installing Steam": "Installing Steam...",
+    "installModal": {
+        "loginRequired": "Login Required",
+        "loginRequiredMessage": "You need to be logged into HyperPlay to enter your access code and install this game. ",
+        "loginRequiredMessageUpdate": "You need to be logged into HyperPlay to enter your access code and update this game. "
+    },
     "Launch Steam": "Launch Steam",
     "Launching Steam": "Launching Steam...",
     "library": {
