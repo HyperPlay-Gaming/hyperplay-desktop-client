@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 const storage = window.localStorage
 let lastVersion = storage.getItem('last_version')?.replaceAll('"', '')
@@ -8,7 +7,6 @@ if (lastVersion === undefined) {
 }
 
 export default function AppVersion() {
-  const { t } = useTranslation()
   const [appVersion, setAppVersion] = useState(lastVersion)
 
   useEffect(() => {
