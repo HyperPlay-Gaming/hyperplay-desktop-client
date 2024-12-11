@@ -18,24 +18,24 @@
             "title": "Tarkista ja korjaa"
         },
         "runexe": {
-            "title": "Select EXE to Run"
+            "title": "Valitse suoritettava EXE"
         },
         "select": {
-            "button": "Select"
+            "button": "Valitse"
         },
         "sideload": {
-            "exe": "Select Executable"
+            "exe": "Valitse suoritettava"
         },
         "stopInstall": {
             "keepInstalling": "Jatka asentamista",
             "message": "Haluatko SÄILYTTÄÄ ladatut tiedostot?",
-            "title": "Pysäytä asennus",
+            "title": "Haluatko peruuttaa latauksen?",
             "keepFilesMessage": "Tarkista tästä, jos haluat säilyttää lataustiedostot peruutuksen jälkeen."
         },
         "uninstall": {
-            "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
+            "checkbox": "Poista etuliite: {{prefix}}{{newLine}}Huomaa: Tätä ei voi kumota, ja se poistaa myös varmuuskopioimattomat tallennustiedostot.",
             "message": "Haluatko poistaa pelin asennuksen?",
-            "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
+            "settingcheckbox": "Tyhjennä asetukset ja poista loki{{newLine}}Huomaa: Tätä ei voi kumota. Kaikki muutetut asetukset unohtuvat ja loki poistetaan.",
             "title": "Poista",
             "dlc": "Haluatko poistaa DLC:n?",
             "prefix_warning": "Tämän pelin viinin etuliite on oletusarvo. Jos haluat poistaa sen, sinun on tehtävä se manuaalisesti."
@@ -62,13 +62,13 @@
         "add_to_favourites": "Add To Favourites",
         "cancel": "Pysäytä/Peruuta",
         "continue": "Jatka lataamista",
-        "finish": "Finish",
-        "force_update": "Force Update if Available",
-        "force-innstall": "Force Install",
-        "hide_game": "Hide Game",
+        "finish": "Viimeistele",
+        "force_update": "Pakota päivitys, jos saatavilla",
+        "force-innstall": "Pakota asentaminen",
+        "hide_game": "Piilota peli",
         "import": "Tuo peli",
         "install": "Asenna",
-        "no-path-selected": "No path selected",
+        "no-path-selected": "Ei valittua polkua",
         "queue": {
             "remove": "Remove from Queue",
             "cancel": "Peruuta lataus",
