@@ -70,9 +70,68 @@ const openBlankWindow = (options: BrowserWindowConstructorOptions) => {
   return browserGame.webContents
 }
 
+function handleUrlOpenForWebContents(
+  url: string,
+  contents: Electron.WebContents,
+  /* eslint-disable-next-line */
+  extensionImporter: any
+): WindowOpenHandlerResponse {
+  const urlToOpen = new URL(url)
+  const protocol = urlToOpen.protocol
+  const urlParent = contents.getURL()
+  const parentURL = new URL(urlParent)
+  const appName = parentURL.searchParams.get('appName')
+  const runner = parentURL.searchParams.get('runner') as Runner | null
+
+  if (url === 'about:blank') {
+    return { action: 'allow', createWindow: openBlankWindow }
+  }
+
+  if (
+    ['https:', 'http:'].includes(protocol) &&
+    domainsAreEqual(urlToOpen, parentURL) &&
+    appName &&
+    runner
+  ) {
+    openNewBrowserGameWindow(url, appName, runner)
+    return { action: 'deny' }
+  }
+  return (
+    extensionImporter?.windowOpenHandlerForExtension(url, contents, hpApi) ?? {
+      action: 'deny'
+    }
+  )
+}
+
+const openNewBrowserGameWindowListener = async (
+  ev: Electron.Event,
+  contents: Electron.WebContents
+) => {
+  try {
+    const extensionImporter = await import('@hyperplay/extension-importer')
+
+    // Check for a webview
+    if (contents.getType() === 'webview') {
+      /* this overrides the handler set in extension-importer but falls back to its behavior */
+      contents.setWindowOpenHandler((handler) => {
+        const { url } = handler
+        return handleUrlOpenForWebContents(url, contents, extensionImporter)
+      })
+    }
+  } catch (err) {
+    logError(
+      `Error setting up window open handler for webview web contents`,
+      LogPrefix.HyperPlay
+    )
+  }
+}
+
+app.on('web-contents-created', openNewBrowserGameWindowListener)
+
 const openNewBrowserGameWindow = async (
   browserUrl: string,
-  gameInfo: GameInfo
+  appName: string,
+  runner: Runner
 ): Promise<boolean> => {
   let connectedProvider = PROVIDERS.UNCONNECTED
   /* eslint-disable-next-line */
@@ -80,39 +139,10 @@ const openNewBrowserGameWindow = async (
   try {
     const proxyServer = await import('@hyperplay/providers')
     connectedProvider = proxyServer.connectedProvider
-    extensionImporter = await import('@hyperplay/extension-importer')
   } catch (err) {
     logError(`Error importing proxy server ${err}`, LogPrefix.HyperPlay)
   }
   const hpOverlay = await getHpOverlay()
-  const urlParent = new URL(browserUrl)
-
-  function handleUrlOpen(
-    url: string,
-    contents: Electron.WebContents
-  ): WindowOpenHandlerResponse {
-    const urlToOpen = new URL(url)
-    const protocol = urlToOpen.protocol
-
-    if (url === 'about:blank') {
-      return { action: 'allow', createWindow: openBlankWindow }
-    }
-
-    if (
-      ['https:', 'http:'].includes(protocol) &&
-      domainsAreEqual(urlToOpen, urlParent)
-    ) {
-      openNewBrowserGameWindow(url, gameInfo)
-      return { action: 'deny' }
-    }
-    return (
-      extensionImporter?.windowOpenHandlerForExtension(
-        url,
-        contents,
-        hpApi
-      ) ?? { action: 'deny' }
-    )
-  }
 
   return new Promise((res) => {
     const browserGame = new BrowserWindow({
@@ -158,21 +188,19 @@ const openNewBrowserGameWindow = async (
     browserGame.setIgnoreMouseEvents(false)
     browserGame.setMinimizable(true)
 
-    const abortController = createAbortController(gameInfo.app_name)
+    const abortController = createAbortController(appName)
     abortController.signal.addEventListener('abort', () => {
       browserGame.close()
     })
 
     const url = !app.isPackaged
-      ? `http://localhost:5173?view=BrowserGame&appName=${gameInfo.app_name}&runner=${gameInfo.runner}`
+      ? `http://localhost:5173?view=BrowserGame&appName=${appName}&runner=${runner}`
       : `file://${path.join(
           buildDir,
           `./index.html`
-        )}?view=BrowserGame&appName=${gameInfo.app_name}&runner=${
-          gameInfo.runner
-        }`
+        )}?view=BrowserGame&appName=${appName}&runner=${runner}`
 
-    const openNewBroswerGameWindowListener = (
+    const interceptFullscreenKeyInput = (
       ev: Electron.Event,
       contents: Electron.WebContents
     ) => {
@@ -183,15 +211,9 @@ const openNewBrowserGameWindow = async (
           'before-input-event',
           checkContentsUrlBeforeHandling(contents)
         )
-
-        /* this overrides the handler set in extension-importer but falls back to its behavior */
-        contents.setWindowOpenHandler((handler) => {
-          const { url } = handler
-          return handleUrlOpen(url, contents)
-        })
       }
     }
-    app.on('web-contents-created', openNewBroswerGameWindowListener)
+    app.on('web-contents-created', interceptFullscreenKeyInput)
 
     browserGame.loadURL(url)
     // this is electron's suggested way to prevent visual flash
@@ -232,10 +254,6 @@ const openNewBrowserGameWindow = async (
 
     browserGame.on('close', () => {
       res(true)
-      app.removeListener(
-        'web-contents-created',
-        openNewBroswerGameWindowListener
-      )
     })
   })
 }
@@ -298,7 +316,12 @@ export async function launchGame(
 
     if (webGameUrl) browserUrl = webGameUrl
 
-    if (browserUrl) return openNewBrowserGameWindow(browserUrl, gameInfo)
+    if (browserUrl)
+      return openNewBrowserGameWindow(
+        browserUrl,
+        gameInfo.app_name,
+        gameInfo.runner
+      )
 
     throw `Could not launch web game for ${appName}`
   }
