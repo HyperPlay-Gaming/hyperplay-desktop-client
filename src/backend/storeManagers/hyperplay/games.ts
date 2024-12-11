@@ -1588,11 +1588,16 @@ export const downloadPatcher = async () => {
     captureException(error, {
       extra: {
         method: 'downloadPatcher'
+      },
+      tags: {
+        feature: 'Patcher',
+        method: 'downloadPatcher'
       }
     })
 
-    logError(`Error downloading IPDT: ${error}`, LogPrefix.HyperPlay)
-    throw new Error('Error downloading IPDT')
+    const errorMsg = `Error downloading IPDT: ${error}`
+    logError(errorMsg, LogPrefix.HyperPlay)
+    throw errorMsg
   }
 }
 
