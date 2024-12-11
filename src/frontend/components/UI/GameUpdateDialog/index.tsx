@@ -6,6 +6,7 @@ import styles from './index.module.scss'
 import { Button } from '@hyperplay/ui'
 import gameUpdateState from 'frontend/state/GameUpdateState'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
+import AccessCodeContainer from '../AccessCodeContainer'
 
 export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
   const [accessCode, setAccessCode] = useState('')
@@ -72,6 +73,34 @@ export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
     }
   }
 
+  const accessCodeInput = (
+    <TextInputField
+      placeholder={t('hyperplay.accesscodes.placeholder', 'Enter access code')}
+      value={accessCode}
+      onChange={(ev) => setAccessCode(ev.target.value)}
+      htmlId="access_code_input"
+      isError={!!errorText}
+    ></TextInputField>
+  )
+
+  let accessCodeContent = null
+
+  if (gameInfo) {
+    accessCodeContent = (
+      <AccessCodeContainer
+        gameInfo={gameInfo}
+        channelNameToInstall={channelName ?? ''}
+        matchingRunner={true}
+        warningMessage={t(
+          'installModal.loginRequiredMessageUpdate',
+          'You need to be logged into HyperPlay to enter your access code and update this game. '
+        )}
+      >
+        {accessCodeInput}
+      </AccessCodeContainer>
+    )
+  }
+
   return (
     <Dialog showCloseButton onClose={onClose} className={styles.dialog}>
       <div className="title">
@@ -80,13 +109,7 @@ export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
           'This game update requires an access code.'
         )}
       </div>
-      <TextInputField
-        placeholder={'Enter access code'}
-        value={accessCode}
-        onChange={(ev) => setAccessCode(ev.target.value)}
-        htmlId="access_code_input"
-        isError={!!errorText}
-      ></TextInputField>
+      {accessCodeContent}
       {errorText && (
         <div className={`caption ${styles.errorText}`}>{errorText}</div>
       )}

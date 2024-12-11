@@ -21,6 +21,7 @@ interface MessageBoxModalProps {
   checkboxLabel?: string
   checkboxValue?: boolean
   isModal?: boolean
+  className?: string
 }
 
 const MessageBoxModal: React.FC<MessageBoxModalProps> = function (props) {
@@ -71,7 +72,10 @@ const MessageBoxModal: React.FC<MessageBoxModalProps> = function (props) {
     <Dialog
       onClose={props.onClose}
       showCloseButton
-      className={classNames({ errorDialog: props.type === 'ERROR' })}
+      className={classNames(
+        { errorDialog: props.type === 'ERROR' },
+        props.className
+      )}
       isModal={props.isModal}
     >
       <DialogHeader onClose={props.onClose}>{props.title}</DialogHeader>

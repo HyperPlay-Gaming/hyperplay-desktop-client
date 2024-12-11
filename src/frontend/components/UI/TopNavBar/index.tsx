@@ -16,6 +16,7 @@ import {
 } from 'frontend/constants'
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { extractMainDomain } from '../../../helpers/extract-main-domain'
+import AppVersion from '../AppVersion'
 
 const TopNavBar = observer(() => {
   const { t } = useTranslation()
@@ -63,8 +64,8 @@ const TopNavBar = observer(() => {
           className={styles.hpTextLogo}
         />
         <div className={styles.alphaBadge}>
-          <div className={`caption ${styles.alphaCaption}`}>
-            {t(`hyperplay.publicAlpha`, `Public Alpha`)}
+          <div className={`menu-item ${styles.alphaCaption}`}>
+            <AppVersion />
           </div>
         </div>
         <>

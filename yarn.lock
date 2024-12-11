@@ -1253,10 +1253,10 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/check-disk-space/-/check-disk-space-3.5.2.tgz#367caa30fec5494e2714891aefcb021aa1fc7e2f"
   integrity sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==
 
-"@hyperplay/extension-importer@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@hyperplay/extension-importer/-/extension-importer-0.1.0.tgz#6a358d1fa2e54cf4a7ee64a829c35bf672339f8d"
-  integrity sha512-pSkFEJGk9wr0fkDPeD1IT9NMexbHVZJc2F7cLpbQWZ6FlipZke2ZxoVDsNbB/l0akixDjhVPh6zOjNVM/+LI8g==
+"@hyperplay/extension-importer@^0.1.1-alpha.0":
+  version "0.1.1-alpha.0"
+  resolved "https://registry.yarnpkg.com/@hyperplay/extension-importer/-/extension-importer-0.1.1-alpha.0.tgz#44e89501858a5efec22c86526ccb9a09b1df669b"
+  integrity sha512-4fLeWIytInGigl16usfKmupxQVmmMcTRmFVPiZdzzn57cazcRGDx6e9G9EukrOJtqTEnf2P4vPxZ9YQ1oNhKKg==
   dependencies:
     "@hyperplay/utils" "^0.0.9"
     classic-level "^1.4.1"

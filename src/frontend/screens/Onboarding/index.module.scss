@@ -4,10 +4,10 @@
   display: flex;
   flex-direction: column;
   align-items: left;
-  padding: 18px 32px;
+  padding: var(--space-xl-fixed);
 
   position: absolute;
-  top: 50%;
+  top: 50% !important;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -17,6 +17,8 @@
   z-index: 2100;
 
   text-align: left;
+  max-height: calc(100% - var(--space-lg-fixed));
+  overflow-y: auto;
 }
 
 .welcomeModal body {
@@ -35,6 +37,11 @@
   width: 880px;
 }
 
+.firstWelcomeModal {
+  width: 650px;
+  top: 55%;
+}
+
 .blurBackground {
   position: absolute;
   top: 0%;
@@ -43,7 +50,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(2px);
-  z-index: 2100;
+  z-index: 100001;
 }
 
 .hpLogo {
