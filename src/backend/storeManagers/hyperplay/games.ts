@@ -1588,6 +1588,10 @@ export const downloadPatcher = async () => {
     captureException(error, {
       extra: {
         method: 'downloadPatcher'
+      },
+      tags: {
+        feature: 'Patcher',
+        method: 'downloadPatcher'
       }
     })
 
