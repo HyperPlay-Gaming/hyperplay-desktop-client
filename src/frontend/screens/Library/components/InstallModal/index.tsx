@@ -29,6 +29,8 @@ import ChannelNameSelection from 'frontend/components/UI/ChannelNameSelection'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
 import ModDialog from './ModDialog'
 import { AccessCodeInput } from 'frontend/components/UI/AccessCodeInput'
+import { useTranslation } from 'react-i18next'
+import AccessCodeContainer from 'frontend/components/UI/AccessCodeContainer'
 
 type Props = {
   appName: string
@@ -43,6 +45,7 @@ export default React.memo(function InstallModal({
   runner,
   gameInfo = null
 }: Props) {
+  const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
 
   const [winePrefix, setWinePrefix] = useState('...')
@@ -198,6 +201,24 @@ export default React.memo(function InstallModal({
     />
   )
 
+  let accessCodeContent = null
+
+  if (gameInfo) {
+    accessCodeContent = (
+      <AccessCodeContainer
+        gameInfo={gameInfo}
+        channelNameToInstall={channelNameToInstall}
+        matchingRunner={runner === 'hyperplay'}
+        warningMessage={t(
+          'installModal.loginRequiredMessage',
+          'You need to be logged into HyperPlay to enter your access code and install this game. '
+        )}
+      >
+        {accessCodeInput}
+      </AccessCodeContainer>
+    )
+  }
+
   return (
     <div className="InstallModal">
       <Dialog
@@ -236,10 +257,7 @@ export default React.memo(function InstallModal({
                 gameInfo={gameInfo}
               />
             ) : null}
-            {runner === 'hyperplay' && channelRequiresAccessCode
-              ? accessCodeInput
-              : null}
-
+            {accessCodeContent}
             {hasWine ? (
               <WineSelector
                 winePrefix={winePrefix}
@@ -303,9 +321,7 @@ export default React.memo(function InstallModal({
                   gameInfo={gameInfo}
                 />
               ) : null}
-              {runner === 'hyperplay' && channelRequiresAccessCode
-                ? accessCodeInput
-                : null}
+              {accessCodeContent}
             </div>
             {hasWine ? (
               <WineSelector

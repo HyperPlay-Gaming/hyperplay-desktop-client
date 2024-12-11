@@ -334,6 +334,7 @@
                 "licenseUndefined": "Could not validate access code. Please check your internet access or firewall settings.",
                 "validation": "Access code is invalid"
             },
+            "placeholder": "Enter access code",
             "requirescode": "This game update requires an access code.",
             "success": {
                 "validation": "Success! Access code is valid"
@@ -454,7 +455,6 @@
             }
         },
         "otp": "One Time Passcode",
-        "publicAlpha": "Public Alpha",
         "Sync": "Sync",
         "syncing": "Syncing...",
         "turnAnalyticsOff": "Turn off",
@@ -517,9 +517,6 @@
     "importGameErrorMessageExecutable": "Game Executable not found, importing game is not possible",
     "importGameErrorTitle": "Import Game Error",
     "info": {
-        "hyperplay": {
-            "version": "HyperPlay Version"
-        },
         "save-sync": {
             "searching": "Trying to detect the correct save folder (click to cancel)"
         },
@@ -546,6 +543,11 @@
     "Install Steam": "Install Steam",
     "Installing": "Installing",
     "Installing Steam": "Installing Steam...",
+    "installModal": {
+        "loginRequired": "Login Required",
+        "loginRequiredMessage": "You need to be logged into HyperPlay to enter your access code and install this game. ",
+        "loginRequiredMessageUpdate": "You need to be logged into HyperPlay to enter your access code and update this game. "
+    },
     "Launch Steam": "Launch Steam",
     "Launching Steam": "Launching Steam...",
     "library": {
