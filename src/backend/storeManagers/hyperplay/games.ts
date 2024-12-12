@@ -1751,9 +1751,9 @@ async function applyPatching(
   newVersion: string,
   signal: AbortSignal
 ): Promise<InstallResult> {
-  const patcherisEnabled = getFlag('enable-patcher', false)
+  const gamesPatcherIsEnabled = getFlag('enable-patcher-per-game', {}) as object
 
-  if (!patcherisEnabled || !isWindows) {
+  if (!Object.hasOwn(gamesPatcherIsEnabled, gameInfo.app_name) || !isWindows) {
     return { status: 'error' }
   }
 
