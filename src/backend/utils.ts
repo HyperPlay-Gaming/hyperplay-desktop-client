@@ -80,7 +80,7 @@ import {
   deviceNameCache,
   vendorNameCache
 } from './utils/systeminfo/gpu/pci_ids'
-import { access, constants, copyFile, lstat, mkdir, readdir } from 'fs/promises'
+import { copyFile, lstat, mkdir, readdir } from 'fs/promises'
 import { GameConfig } from './game_config'
 
 const execAsync = promisify(exec)
@@ -1306,76 +1306,33 @@ export const writeConfig = (appName: string, config: Partial<AppSettings>) => {
   }
 }
 
-// Helper function to check permissions
-async function checkPermissions(src: string, dest: string) {
-  try {
-    // Check if we can read from source
-    await access(src, constants.R_OK)
-
-    // Check if destination parent directory exists and is writable
-    const destDir = dirname(dest)
-    try {
-      await access(destDir, constants.W_OK)
-    } catch {
-      throw new Error(
-        `No write permission for destination directory: ${destDir}`
-      )
-    }
-  } catch (error) {
-    if (error) {
-      throw new Error(`Permission error: ${error}`)
-    }
-    throw error
-  }
-}
-
 const COPY_TIMEOUT_MS = 30000 // wait time before throwing a timeout error
 export async function copyRecursiveAsync(src: string, dest: string) {
-  if (!existsSync(src) || !src || !dest) {
-    return
-  }
-
-  // Check permissions before proceeding
-  await checkPermissions(src, dest)
-
   const stats = await lstat(src)
   if (stats.isSymbolicLink()) {
     return // Skip symbolic links
   }
 
-  if (stats.isDirectory()) {
-    try {
-      await mkdir(dest, { recursive: true })
-      const files = await readdir(src)
-      for (const file of files) {
+  const isDirectory = stats.isDirectory()
+
+  if (isDirectory) {
+    await mkdir(dest, { recursive: true })
+    const files = await readdir(src)
+    await Promise.all(
+      files.map(async (file) => {
         const srcFile = join(src, file)
         const destFile = join(dest, file)
-        await Promise.race([
-          copyRecursiveAsync(srcFile, destFile),
-          wait(COPY_TIMEOUT_MS).then(() => {
-            throw new Error(
-              `Timeout (${COPY_TIMEOUT_MS}ms) copying ${srcFile} to ${destFile}`
-            )
-          })
-        ])
-      }
-    } catch (error) {
-      logError(`Failed to copy ${src} to ${dest}: ${error}`, LogPrefix.Backend)
-      throw error
-    }
+        await copyRecursiveAsync(srcFile, destFile)
+      })
+    )
   } else {
-    try {
-      await Promise.race([
-        copyFile(src, dest),
-        wait(COPY_TIMEOUT_MS).then(() => {
-          throw new Error(
-            `Timeout (${COPY_TIMEOUT_MS}ms) copying ${src} to ${dest}`
-          )
-        })
-      ])
-    } catch (error) {
-      logError(`Failed to copy ${src} to ${dest}: ${error}`, LogPrefix.Backend)
-      throw error
-    }
+    await Promise.race([
+      copyFile(src, dest),
+      wait(COPY_TIMEOUT_MS).then(() => {
+        throw new Error(
+          `Timeout (${COPY_TIMEOUT_MS}ms) copying ${src} to ${dest}`
+        )
+      })
+    ])
   }
 }

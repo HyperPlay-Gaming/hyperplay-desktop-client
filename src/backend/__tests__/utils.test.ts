@@ -316,23 +316,6 @@ describe('backend/utils.ts', () => {
       expect(existsSync(join(destDir, 'link.txt'))).toBe(false)
     })
 
-    it('should handle invalid source path', async () => {
-      const result = await copyRecursiveAsync('nonexistent', destDir)
-      expect(result).toBeUndefined()
-    })
-
-    it('should throw on permission error', async () => {
-      const testFile = join(sourceDir, 'test.txt')
-      await writeFile(testFile, 'test content')
-
-      // Make destination directory read-only
-      await new Promise((resolve) => chmod(destDir, '444', resolve))
-
-      await expect(
-        copyRecursiveAsync(testFile, join(destDir, 'test.txt'))
-      ).rejects.toThrow('Permission error')
-    })
-
     it('should throw on timeout', async () => {
       const COPY_TIMEOUT_MS = 30000
       const testFile = join(sourceDir, 'test.txt')
@@ -355,11 +338,6 @@ describe('backend/utils.ts', () => {
 
       // Restore original implementation
       mockCopyFile.mockRestore()
-    })
-
-    it('should handle empty source and destination', async () => {
-      const result = await copyRecursiveAsync('', '')
-      expect(result).toBeUndefined()
     })
   })
 })
