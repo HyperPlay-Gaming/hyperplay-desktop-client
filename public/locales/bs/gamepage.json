@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Nastavite instalaciju",
             "message": "Želite li ZADRŽATI preuzete datoteke?",
-            "title": "Zaustavi instalaciju",
+            "title": "Da li želite da otkažete preuzimanje?",
             "keepFilesMessage": "#Pregled tuda li #free @want# to #tvrđava @the #preuzimanje #kartoteka @after canceling#."
         },
         "uninstall": {
@@ -99,8 +99,8 @@
     "game": {
         "downloadSize": "Veličina Preuzimanja",
         "firstPlayed": "Prvi put odigrano",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Dobijanje veličine preuzimanja",
+        "getting-install-size": "Dobijanje veličine instalacije",
         "installSize": "Veličina Instalacije",
         "language": "Jezik",
         "lastPlayed": "Zadnji put odigrano",
@@ -226,7 +226,8 @@
         "playing": "#Igrati",
         "syncingSaves": "Sinhoniziranje podataka",
         "downloading": "Preuzimanje",
-        "paused": "Paused"
+        "paused": "Paused",
+        "patching": "Patchovanje datoteka "
     },
     "submenu": {
         "addShortcut": "Dodaj prečicu",
