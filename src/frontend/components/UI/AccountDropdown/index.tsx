@@ -114,6 +114,11 @@ const WalletDropdown: React.FC = observer(() => {
                   ? 'topElementWalletDropdown'
                   : undefined
               }
+              onClick={async () =>
+                window.api.trackEvent({
+                  event: 'Portfolio Clicked in Account Dropdown'
+                })
+              }
             >
               <div className={`body ${styles.itemContents}`}>
                 {t('hyperplay.viewPortfolio', `View portfolio`)}

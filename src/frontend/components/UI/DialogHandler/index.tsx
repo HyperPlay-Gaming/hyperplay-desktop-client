@@ -44,6 +44,7 @@ export default function DialogHandler() {
           buttons={dialogModalOptions.buttons ? dialogModalOptions.buttons : []}
           isModal={dialogModalOptions.isModal}
           onClose={() => handleClose()}
+          className={dialogModalOptions.className}
         />
       )}
     </>
