@@ -50,9 +50,19 @@
                     "communityCTA_1": "Gusto naming marinig ang iyong opinyon at makasama ka sa aming  \nNais naming malaman ang iyong saloobin at makasama ka sa aming  \nMasaya kaming marinig ang iyong mga komento at makasama ka sa aming",
                     "construction": "Ang HyperPlay ay nasa yugto ng konstruksyon.",
                     "communityCTA_2": "komunidad. Magkasama, ating buuin ang kinabukasan ng paglalaro!  \nkomunidad. Sama-sama, tayo ang maghuhubog sa hinaharap ng mga laro!  \nkomunidad. Magtulungan tayo upang hubugin ang susunod na yugto ng gaming!",
-                    "description": "Ang HyperPlay ay isang game launcher at tagapag-ayos ng mga tindahan ng laro mula sa hinaharap. Sa HyperPlay, maaari mong dalhin ang iyong wallet, mga token, at mga asset sa lahat ng laro. Sinusuportahan ng HyperPlay ang buong library ng Epic Store, GOG, at ang aming sariling HyperPlay store. Sa paggamit ng HyperPlay, pumapayag ka sa aming"
+                    "description": "Ang HyperPlay ay isang game launcher at tagapag-ayos ng mga tindahan ng laro mula sa hinaharap. Sa HyperPlay, maaari mong dalhin ang iyong wallet, mga token, at mga asset sa lahat ng laro. Sinusuportahan ng HyperPlay ang buong library ng Epic Store, GOG, at ang aming sariling HyperPlay store. Sa paggamit ng HyperPlay, pumapayag ka sa aming",
+                    "bulletPointThree": "Maglaro ng mga Epic at GOG na laro nang direkta sa pamamagitan ng HyperPlay",
+                    "bulletPointTwo": "Kumita ng mga token, NFT, at mga gantimpalang off-chain sa pamamagitan ng pagtapos ng mga Quest",
+                    "lastParagraph": "Kasalukuyan sa Beta, pinahahalagahan namin ang iyong feedback at hinihimok kang iulat ang anumang isyu o mungkahi sa aming",
+                    "paragraphOne": "Sa HyperPlay, nagtatayo kami ng susunod na henerasyon ng tindahan ng laro para sa hinaharap ng gaming.",
+                    "bulletPointFive": "Patakbuhin ang mga laro ng Windows sa macOS, Linux, at SteamDeck gamit ang aming\n              advanced",
+                    "bulletPointFour": "I-install ang Steam (Windows na bersyon) sa macOS sa isang madaling pag-click",
+                    "bulletPointOne": "Mag-access ng napakalaking koleksyon ng higit sa 100+ na mga laro na pinagana ng on-chain",
+                    "paragraphThr": "Walang putol na dalhin ang iyong wallet, tokens, at mga asset sa bawat laro habang naa-access ang malawak na mga aklatan ng Epic Store, GOG, at ang aming sariling HyperPlay Store - lahat sa isang lugar.",
+                    "TitleList": "Sa HyperPlay maaari kang:"
                 },
-                "title": "Maligayang pagdating sa HyperPlay sa Paunang Access!"
+                "title": "Maligayang pagdating sa HyperPlay sa Paunang Access!",
+                "titleIntro": "Maligayang pagdating sa HyperPlay!"
             },
             "connectionConnected": {
                 "title": "Konektado ang iyong wallet!",
@@ -66,13 +76,24 @@
                 "hyperplayWill": "Gagawin ng HyperPlay:  \nGagampanan ng HyperPlay:  \nIsasagawa ng HyperPlay:",
                 "neverCollectIP": " tipunin ang iyong buong IP address;",
                 "neverCollectPersonal": " tipunin ang mga susi, address, balanse, hash, o anumang impormasyon na may kinalaman sa tao;",
-                "neverSellData": " ibenta ang data para sa kita. Kailanman!"
+                "neverSellData": " ibenta ang data para sa kita. Kailanman!",
+                "bulletOne": "Palaging payagan kang mag-opt-out",
+                "bulletTwo": "Magpadala ng anonymized na pag-click at interaksyon sa laro",
+                "paragraphOne": "Nais ng HyperPlay na mangalap ng data ng paggamit upang mas maunawaan kung paano nakikipag-ugnayan ang aming mga gumagamit sa aplikasyon. \n           Pinapayagan nito kaming gawing mas mahusay ang HyperPlay para sa iyo.",
+                "privacyPolicy": "Patakaran sa Privacy.",
+                "text": {
+                    "externalLink": "Alamin Pa",
+                    "title": "Na-update na namin ang aming Patakaran sa Privacy"
+                },
+                "titleOne": "Tulungan kaming pagbutihin ang HyperPlay!"
             },
             "connectAgain": "Kumonekta na naman"
         },
         "buttons": {
             "noThanks": "Accessibility",
-            "agree": "Sumasang-ayon ako"
+            "agree": "Sumasang-ayon ako",
+            "primaryButton": "Sang-ayon ako",
+            "secondaryButton": "Hindi, Salamat"
         },
         "folder": "Foldero",
         "gamecard": {
@@ -80,7 +101,8 @@
             "installed": "Oras na para maglaro",
             "installing": "Nagda-download na...  \nNagsisimula nang mag-download...  \nNagda-download ng mga file...",
             "distributables": "Nag-iinstall ng mga distributable...  \nNagsasagawa ng pag-install ng mga distributables...  \nNag-iinstall ng mga kinakailangang distributables...",
-            "extracting": "Nagsasagawa ng pagkuha...  \nNagsasagawa ng pagkuha...  \nNagsasagawa ng pagkuha..."
+            "extracting": "Nagsasagawa ng pagkuha...  \nNagsasagawa ng pagkuha...  \nNagsasagawa ng pagkuha...",
+            "patching": "Nagtatama..."
         },
         "logOut": "Mag-alis ng account",
         "misc": "Wine Manager",
@@ -89,9 +111,11 @@
                 "validation": "Tagumpay! Ang access code ay wasto"
             },
             "error": {
-                "validation": "Di tama ang access code"
+                "validation": "Di tama ang access code",
+                "licenseUndefined": "Hindi ma-validate ang access code. Pakisuri ang iyong internet access o mga setting ng firewall."
             },
-            "requirescode": "Ang pag-update ng larong ito ay nangangailangan ng isang code ng pag-access."
+            "requirescode": "Ang pag-update ng larong ito ay nangangailangan ng isang code ng pag-access.",
+            "placeholder": "Ilagay ang access code"
         },
         "achievements": {
             "addThisGame": "Ilagay ang larong ito",
@@ -122,7 +146,11 @@
         "changeWallet": "I-swap ang account ng wallet",
         "copyUrl": "Kopyahin ang URL na ito",
         "currentWallet": "Kasalukuyang wallet na ginagamit",
-        "discordApp": "Discord"
+        "discordApp": "Discord",
+        "compatibilityLayer": "Compatibility Layer (Beta)",
+        "connectWallet": "Ikonekta ang wallet",
+        "discordAppLink": "Komunidad ng Discord.",
+        "turnAnalyticsOn": "Buksan"
     },
     "info": {
         "version": "Bersyon ng Wine na software",
@@ -145,7 +173,8 @@
         },
         "wine-repfix": {
             "message": "Gumagamit ang Wine ng tinatawag na WINEPREFIX upang i-encapsulate ang mga aplikasyon ng Windows. Ang prefix na ito ay naglalaman ng mga configuration file ng Wine at isang kopya ng hierarchy ng file ng C: (ang pangunahing disk sa isang Windows OS). Sa kopyang ito ng C: drive, naka-imbak ang iyong mga save file ng laro at mga dependency na na-install gamit ang winetricks.\n\nGumagamit ang Wine ng tinatawag na WINEPREFIX upang i-encapsulate ang mga Windows application. Ang prefix na ito ay naglalaman ng mga configuration file ng Wine at isang bersyon ng hierarchy ng file ng C: (ang pangunahing disk sa isang Windows OS). Sa bersyon na ito ng C: drive, naka-imbak ang iyong mga save file ng laro at mga dependency na na-install sa pamamagitan ng winetricks.\n\nGumagamit ang Wine ng tinatawag na WINEPREFIX upang i-encapsulate ang mga aplikasyon ng Windows. Ang prefix na ito ay naglalaman ng mga configuration file ng Wine at isang bersyon ng file hierarchy ng C: (ang pangunahing disk sa isang Windows OS). Sa bersyon na ito ng C: drive, naka-imbak ang iyong mga save file ng laro at mga dependency na na-install sa pamamagitan ng winetricks."
-        }
+        },
+        "wine-path-none-found": "Walang nahanap na bersyon ng Wine, mag-download ng isa mula sa Compatibility Manager"
     },
     "quest": {
         "points": "Mga puntos ng laro",
@@ -155,11 +184,17 @@
         "claimWarning": {
             "cancel": "Bawiin ang utos",
             "confirm": "I-validate",
-            "body": "<bold>MAHALAGA:</bold> Mangyaring tiyakin na naglalaan ka ng sapat na gas sa {{networkName}} network para sa matagumpay na pagkumpirma ng transaksyon <bold>sa loob ng 7 araw.</bold>"
+            "body": "<bold>MAHALAGA:</bold> Mangyaring tiyakin na naglalaan ka ng sapat na gas sa {{networkName}} network para sa matagumpay na pagkumpirma ng transaksyon <bold>sa loob ng 7 araw.</bold>",
+            "body2": "Kung hindi, ang Quest Reward <bold> ay mag-e-expire at hindi na ma-claim.</bold>"
         },
         "noG7ConnectionClaim": "Kailangan mong ikonekta ang iyong Game7 account sa {{email}} upang maangkin ang iyong mga gantimpala.",
-        "noG7ConnectionSync": "Kailangan mong ikonekta ang iyong Game7 account sa {{email}} upang ma-resync ang iyong mga task.",
-        "notEnoughGas": "Ang balanse ng wallet mo ay hindi sapat upang makuha ang gantimpala dahil sa mga bayarin sa gas. Subukan ang ibang wallet o i-replenish ito bago subukang muli.",
+        "noG7ConnectionSync": {
+            "message": "Kailangan mong magkaroon ng nakataling Game7 na account sa {{email}} upang muling i-sync ang iyong mga gawain.",
+            "title": "Walang nakataling G7 na account"
+        },
+        "notEnoughGas": {
+            "message": "Hindi sapat ang balanse ng wallet upang kunin ang iyong gantimpala dahil sa mga bayarin sa gas. Subukan ang ibang wallet o punan muli ito bago subukang muli."
+        },
         "playstreak": {
             "now": "Sa ngayon",
             "playToStart": "Maglaro ng larong ito upang simulan ang iyong sunod-sunod na panalo!==WEBLATE_PART==Subukan ang larong ito upang simulan ang iyong serye!==WEBLATE_PART==I-play ang larong ito upang simulan ang iyong pagkakasunod-sunod!",
@@ -176,7 +211,8 @@
         "pointsClaimed": "Mga Nakuha na mga Puntos",
         "quests": "Mga Tungkulin",
         "type": {
-            "playstreak": "Tuloy-tuloy na Laro"
+            "playstreak": "Tuloy-tuloy na Laro",
+            "reputation": "Reputasyon"
         },
         "readyForClaim": "Handa na upang mag-claim",
         "associatedGames": "Mga Laro na Kaugnay",
@@ -187,7 +223,28 @@
         "View Game": "Tingnan ang Laro",
         "claimAll": "I-claim ang lahat",
         "claimed": "Nakuha na ang item",
-        "sync": "I-synchronize"
+        "sync": "I-synchronize",
+        "claim": "Kunin",
+        "claimFailed": "Nabigo ang pag-claim",
+        "claimFailedMessage": "Mangyaring subukan muli. Kung hindi pa rin ito gumagana, lumikha ng isang Discord support ticket.",
+        "createDiscordTicket": "Lumikha ng Discord Ticket",
+        "notEligible": {
+            "title": "Hindi pa kwalipikado",
+            "message": "Hindi mo natapos ang kinakailangang bilang ng mga araw ng paglalaro at hindi mo maangkin ang iyong gantimpala sa oras na ito."
+        },
+        "rewardClaimed": "Matagumpay na naangkin",
+        "toClaimReward": "upang kunin ang iyong gantimpala.",
+        "youHaveClaimed": "Nakuha mo na ang gantimpalang {{totalRewards}} {{plural}}.",
+        "questAvailable": "Available ang Quest!",
+        "questComplete": "Kumpleto na ang Misyon!",
+        "toSeeDetails": "upang makita ang mga detalye.",
+        "notEnoughBalance": {
+            "title": "Mababang balanse"
+        },
+        "notSignedIn": {
+            "message": "Kailangan mong naka-sign in upang makuha ang iyong gantimpala.",
+            "title": "Hindi naka-sign in"
+        }
     },
     "setting": {
         "library_top_option": {
@@ -301,7 +358,8 @@
         "select_theme": "Pumili ng Estilo",
         "esync": "I-on ang Esync",
         "maxworkers": "Pinakamataas na Bilang ng mga Worker sa proseso ng pagda-download",
-        "minimize-on-launch": "I-minimize ang HyperPlay kasunod ng paglunsad ng laro"
+        "minimize-on-launch": "I-minimize ang HyperPlay kasunod ng paglunsad ng laro",
+        "exit-to-tray": "Lumabas sa System Tray"
     },
     "settings": {
         "navbar": {
@@ -449,7 +507,8 @@
             "moving": "Error sa Paglipat ng Laro {{error}}  \nPagkakamali sa Paglipat ng Laro {{error}}  \nNabigong Ilipat ang Laro {{error}}",
             "steam": {
                 "message": "Nabigo ang pag-install ng Steam! Mangyaring suriin nang mabuti ang mga tagubilin at subukang muli! {{paragraph}} {{error}}  \nNabigo ang pag-install ng Steam! Pakiusap, basahin nang maigi ang mga tagubilin at subukang muli! {{paragraph}} {{error}}  \nNabigo ang pag-install ng Steam! Tiyaking basahin ang mga tagubilin nang maayos at subukang muli! {{paragraph}} {{error}}",
-                "title": "Kamalayan sa error ng Steam"
+                "title": "Kamalayan sa error ng Steam",
+                "error": "Hindi natagpuan ang executable ng Steam. Malamang na kinansela ng gumagamit ang pag-install o nabigo ito sa panig ng Steam."
             },
             "ubisoft-connect": {
                 "message": "Nabigo ang pag-install ng Ubisoft Connect sa game prefix. Bisitahin ang aming wiki page sa https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac para sa manu-manong pag-install nito.\n\nNabigo ang pag-install ng Ubisoft Connect sa game prefix. Tingnan ang aming wiki page sa https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac upang i-install ito nang manu-mano.\n\nNabigo ang pag-install ng Ubisoft Connect sa game prefix. I-check ang aming wiki page sa https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac para sa manu-manong pag-install.",
@@ -593,7 +652,8 @@
             "close_options": "Isara ang mga opsyon na ito",
             "game_details": "Mga katangian ng laro",
             "game_settings": "Mga setting ng laro",
-            "update_game": "I-upgrade ang laro"
+            "update_game": "I-upgrade ang laro",
+            "space": "Espasyo"
         }
     },
     "dlc": {
@@ -615,7 +675,8 @@
         "queue": {
             "type": "Uri",
             "start-time": "Nagsimula sa yugto ng",
-            "queue-time": "Nagdagdag sa"
+            "queue-time": "Nagdagdag sa",
+            "end-time": "Natapos na sa"
         },
         "title_dm": "Tagapamahala ng Pag-download ng mga Nilalaman",
         "ETA": "Inaasahang Oras"
@@ -709,7 +770,12 @@
             "empty": {
                 "finished": "Walang na-download na bagay",
                 "queue": "Walang kailangan i-download"
-            }
+            },
+            "launch": "Ilunsad ang Laro",
+            "retry-install": "Subukang muli ang Pag-install",
+            "stop": "Itigil ang Pag-download",
+            "timeElapsed": "Nakalipas na Oras: {{elapsed}}",
+            "retry-update": "Subukang muli ang Update"
         }
     },
     "Settings": "Mga opsyon",
@@ -794,7 +860,8 @@
         "other": {
             "part6": " na tatawagin kasunod ng launch command, halimbawa: ",
             "part7": " upang hindi na buksan ang launcher sa ilang mga laro, atbp.  \n upang iwasan ang launcher sa ilang mga laro, atbp.  \n upang laktawan ang launcher sa ilang mga laro, at iba pa.",
-            "part4": "Mag-apply ng "
+            "part4": "Mag-apply ng ",
+            "part5": "Mga Argumento ng Laro"
         },
         "preferSystemLibs": "Ang mga pasadyang bersyon ng Wine (Wine-GE, Wine-Lutris) ay kasama ng kanilang mga dependency ng library. Sa pamamagitan ng pag-enable sa opsyong ito, ang mga naipadalang library na ito ay hindi isasaalang-alang at ang Wine ay maglo-load ng mga system library sa halip. Babala! Maaaring mangyari ang mga isyu kung ang mga dependency ay hindi natutugunan.",
         "custom_themes_path": "Huwag gumamit ng CSS files mula sa mga hindi mapagkakatiwalaang sources. Kapag may alinlangan, magtanong para sa pagsusuri sa aming Discord channel.",
@@ -847,12 +914,21 @@
         "message": "Mag-login gamit ang iyong platform. Posible ang sabay-sabay na pag-login sa higit sa isang platform."
     },
     "message": {
-        "sync": "Natapos na ang pag-sync."
+        "sync": "Natapos na ang pag-sync.",
+        "unsync": "Tapos na ang Unsync"
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Ikaw ay nakakonekta sa HyperPlay sa tulong ng isang panlabas na wallet.",
         "comingSoon": "Darating na sa Lalong Madali",
-        "WALLET_DISCONNECTED": "Hindi ka nakakonekta sa anumang wallet sa HyperPlay."
+        "WALLET_DISCONNECTED": "Hindi ka nakakonekta sa anumang wallet sa HyperPlay.",
+        "links": {
+            "bridge": "Tulay",
+            "buy": "Bumili",
+            "marketplace": "Pamilihan",
+            "sell": "I-benta",
+            "portfolio": "Portfolio",
+            "swap": "Palitan"
+        }
     },
     "options": {
         "env_variables": {
@@ -861,7 +937,8 @@
                 "equal_sign_in_key": "Hindi maaaring maglaman ng \"=\" sign ang mga pangalan ng variable",
                 "empty_key": "Ang mga pangalan ng variable ay hindi maaaring walang laman"
             },
-            "info": "Itakda ang mga variable ng kapaligiran upang idagdag sa utos.  \nItakda ang mga environment variable para sa pagdaragdag sa utos.  \nI-configure ang mga environment variable upang isama sa utos."
+            "info": "Itakda ang mga variable ng kapaligiran upang idagdag sa utos.  \nItakda ang mga environment variable para sa pagdaragdag sa utos.  \nI-configure ang mga environment variable upang isama sa utos.",
+            "example": "Huwag isama ang \"=\" na tanda, halimbawa: para sa isang setting tulad ng \"MY_FLAG=123\", itakda ang MY_FLAG sa NAME at 123 sa VALUE."
         },
         "gameargs": {
             "title": "Mga Argumento ng Laro (Para tumakbo pagkatapos ng utos):  \nMga Argumento ng Laro (Upang isagawa pagkatapos ng utos):  \nMga Argumento ng Laro (Para sa pagpapatakbo pagkatapos ng utos):",
@@ -872,7 +949,8 @@
             "title": "Kautusan ng wrapper:",
             "args": "Mga Tanggol",
             "placeHolderKey": "Bagong Kapa",
-            "exe": "Balot==WEBLATE_PART==Balot na pambalot==WEBLATE_PART==Balot na nagbabalot"
+            "exe": "Balot==WEBLATE_PART==Balot na pambalot==WEBLATE_PART==Balot na nagbabalot",
+            "arguments_example": "Halimbawa ng mga argumento: --arg; --extra-file=\"file-path/ with/spaces\""
         },
         "advanced": {
             "key": "Pangalan ng Parametro",
@@ -880,14 +958,16 @@
             "placeHolderValue": "Halimbawa: Daan/Tungo/ExtraFiles",
             "title": "Mga Baryabol ng Kapaligiran",
             "value": "Pahalagahan"
-        }
+        },
+        "quote-args-with-spaces": "Babala: Siguraduhing i-quote ang mga args na may mga espasyo! Halimbawa: \"path/with spaces/\""
     },
     "placeholder": {
         "custom_themes_path": "Pumili ng landas para sa paghanap ng mga custom na CSS file",
         "alt-gogdl-bin": "Gumagamit ng nakabuilt-in na GOGDL binary...==WEBLATE_PART==Gumagamit ng GOGDL binary na nakabuilt-in...==WEBLATE_PART==Gumagamit ng GOGDL binary na kasama...",
         "alt-legendary-bin": "Gumagamit ng nakabuilt-in na Legendary binary...  \nGumagamit ng binary na Legendary na nakabuilt-in...  \nGumagamit ng binary ng Legendary na nakapaloob...",
         "egs-prefix": "Prefix na lokasyon ng pag-install ng EGS",
-        "prefered_language": "2-char code (i.e.: \"en\" o \"fr\")"
+        "prefered_language": "2-char code (i.e.: \"en\" o \"fr\")",
+        "dxvkfpsvalue": "Positibong integer na halaga (hal. 30, 60, ...)"
     },
     "quests": {
         "quests": "Mga Tungkulin",
@@ -957,7 +1037,8 @@
             "step2": {
                 "title": "Hakbang Dos",
                 "description": "Pumili ng file na ChromieCraft_3.3.5a.zip na na-download.  \nPumili ng na-download na file na ChromieCraft_3.3.5a.zip.  \nPumili ng file na na-download na tinatawag na ChromieCraft_3.3.5a.zip.",
-                "subtitle": "Pumili ng file na ChromieCraft_3.3.5a.zip"
+                "subtitle": "Pumili ng file na ChromieCraft_3.3.5a.zip",
+                "subtitle1": "Pumili ng na-download na 3.3.5a zip file"
             },
             "step3": {
                 "description": "Pakitang piliin ang lokasyon kung saan dapat i-install ang World of Warcraft: Wrath of the Lich King (3.3.5a).",
@@ -966,14 +1047,17 @@
             },
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Ang larong ito ay isang mod para sa World of Warcraft: Wrath of the Lich King (3.3.5a). Upang makapaglaro ng mod na ito, kinakailangan ng mga manlalaro na magkaroon ng kopya ng World of Warcraft 3.3.5a. {{newline}} {{newline}} Ang HyperPlay ay hindi nagho-host ng World of Warcraft. Ang mga manlalaro na nagmamay-ari ng World of Warcraft ay maaaring makuha ang bersyon 3.3.5a mula sa mga mapagkukunan tulad ng:",
+                "description": "Ang larong ito ay isang mod para sa World of Warcraft: Wrath of the Lich King (3.3.5a). Upang makapaglaro ng mod na ito, kailangan ng mga manlalaro na magkaroon ng kopya ng World of Warcraft 3.3.5a. {{newline}} {{newline}} Hindi nagho-host ang HyperPlay ng World of Warcraft. Ang mga manlalaro na may World of Warcraft ay maaaring makuha ang bersyon na kinakailangan mula sa mga sumusunod na mapagkukunan:",
                 "subtitle": "Kunin ang World of Warcraft 3.3.5a",
                 "title": "Hakbang 1.  \nHakbang una.  \nUnang Hakbang.",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "link1": "Link 1",
+                "link2": "Link 2 (Magnet Link)"
             },
             "step4": {
                 "subtitle": "Kodigo para sa Pag-access",
-                "title": "Ika-4 na Hakbang"
+                "title": "Ika-4 na Hakbang",
+                "description": "Ilagay ang access code upang magpatuloy sa pag-install ng laro."
             },
             "title": "Mga Direksyon ng Mod"
         }
@@ -1047,5 +1131,27 @@
     },
     "dlcs": {
         "label": "Pumili ng mga DLC na nais i-install:  \nPumili ng mga DLC na dapat i-install:  \nPumili ng mga DLC na i-download:"
-    }
+    },
+    "Downloading": "Nagda-download ng {{percent}}%",
+    "Installing": "Naga-install",
+    "installModal": {
+        "loginRequired": "Kinakailangan ang Pag-login",
+        "loginRequiredMessage": "Kailangan mong naka-log in sa HyperPlay upang ilagay ang iyong access code at i-install ang larong ito. ",
+        "loginRequiredMessageUpdate": "Kailangan mong naka-log in sa HyperPlay upang ilagay ang iyong access code at i-update ang larong ito. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 o mas mataas"
+    },
+    "Please Wait": "Mangyaring Maghintay",
+    "Recommended specs for a better experience": "Inirerekomendang mga specs para sa mas magandang karanasan",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "Ang MetaMask Portfolio ay available lamang kapag nakakonekta sa MetaMask."
+        },
+        "unsupported": "Hindi suportadong Koneksyon ng Wallet"
+    },
+    "16GB of RAM": "16GB ng RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 o higit pa",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Maging aware na hindi lahat ng laro ay gagana, at kahit na gumana sila, maaaring hindi sila tumakbo ayon sa inaasahan.",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Kung nais mong magpatuloy, mangyaring maghintay dahil maaaring tumagal ito ng ilang minuto upang matapos depende sa iyong koneksyon sa internet at pagsasaayos ng sistema."
 }
