@@ -29,7 +29,8 @@
         "stopInstall": {
             "keepInstalling": "நிறுவுவதை தொடரு",
             "message": "பதிவிறக்கம் செய்யப்பட்ட கோப்புகளை வைத்திருக்க விரும்புகிறீர்களா?",
-            "title": "நிறுவலை நிறுத்து"
+            "title": "நீங்கள் பதிவிறப்பை ரத்து செய்ய விரும்புகிறீர்களா?",
+            "keepFilesMessage": "ரத்து செய்த பிறகு பதிவிறப்பு கோப்புகளை வைத்திருக்க விரும்பினால் இங்கே சரிபார்க்கவும்."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
@@ -40,12 +41,21 @@
         },
         "update": {
             "message": "இந்த விளையாட்டுக்கு ஒரு புதுப்பிப்பு உள்ளது, இப்போது புதுப்பிக்க விரும்புகிறீர்களா?",
-            "title": "விளையாட்டு புதுப்பிப்பு தேவை"
+            "title": "விளையாட்டு புதுப்பிப்பு தேவை",
+            "message-cancel": "புதுப்பிக்காமல் இந்த விளையாட்டை விளையாட முடியாது"
         },
         "wineprefix": "ஒயின் ப்ரிஃபிக்ஸ் கோப்புறையைத் தேர்ந்தெடுக்கவும்",
         "yes": "ஆம்",
         "dont-show-again": "மீண்டும் காட்டாதே",
-        "ok": "சரி"
+        "ok": "சரி",
+        "aware": "நான் அறிவேன்",
+        "compability": {
+            "message": "இந்த விண்டோஸ் விளையாட்டு ஒத்திசைவு அடுக்கு பயன்படுத்தி இயங்கும். நீங்கள் சில சிக்கல்களை சந்திக்கலாம் அல்லது விளையாட்டு முற்றிலும் வேலை செய்யாது."
+        },
+        "yesCancel": "ஆம், ரத்து செய்க",
+        "stopExtraction": {
+            "title": "நீங்கள் எடுக்கையை ரத்து செய்ய விரும்புகிறீர்களா?"
+        }
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -87,15 +97,17 @@
     "game": {
         "downloadSize": "Download Size",
         "firstPlayed": "First Played",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "பதிவிறக்கும் அளவை பெறுகிறது",
+        "getting-install-size": "நிறுவல் அளவை பெறுகிறது",
         "installSize": "Install Size",
         "language": "Language",
         "lastPlayed": "Last Played",
         "neverPlayed": "Never",
         "platform": "Select Platform",
         "requirements": "System Requirements",
-        "totalPlayed": "Time Played"
+        "totalPlayed": "Time Played",
+        "selectChannelName": "சேனல் பெயரை தேர்ந்தெடுக்கவும்",
+        "dlcs": "DLCகள்"
     },
     "gamecard": {
         "moving": "நகர்த்தப்படுகிறது",
@@ -127,7 +139,8 @@
         "path-not-writtable": "Warning: path might not be writable.",
         "space-after-install": "After Install",
         "wineprefix": "WinePrefix",
-        "wineversion": "வைன் பதிப்பு"
+        "wineversion": "வைன் பதிப்பு",
+        "compatibility-warning": "இந்த விண்டோஸ் விளையாட்டு ஒத்திசைவு அடுக்கு பயன்படுத்தி இயங்கும். உங்கள் அனுபவம் மாறுபடலாம்."
     },
     "label": {
         "game": {
@@ -200,7 +213,16 @@
         "updating": "விளையாட்டு புதுப்பிக்கப்படுகிறது",
         "downloading": "பதிவிறக்குகிறது",
         "syncingSaves": "சேமிப்புகள் ஒத்திசைவு செய்யப்படுகிறது",
-        "paused": "இடைநிறுத்தப்பட்டது"
+        "paused": "இடைநிறுத்தப்பட்டது",
+        "preparing": "பதிவிறப்பை தயாரிக்கிறது, தயவுசெய்து காத்திருங்கள்",
+        "extracting": {
+            "cancel": "எடுக்கையை ரத்து செய்க",
+            "progress": "வெளியீடு செய்கிறது"
+        },
+        "moving-files": "கோப்பை நகர்த்துகிறது '{{file}}': {{percent}} ",
+        "playing": "விளையாடுகிறது",
+        "patching": "கோப்புகளை பPatch செய்கிறது ",
+        "distributables": "விநியோகங்களை நிறுவுகிறது"
     },
     "submenu": {
         "addShortcut": "குறுக்குவழியை சேர்",
@@ -215,5 +237,10 @@
         "settings": "அமைப்புகள்",
         "store": "விற்பனைக்கூடம்",
         "verify": "சரிபார்த்து சரிசெய்"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "இந்த செய்தியுடன் HyperPlay குழுவை தொடர்பு கொள்ளவும்: {{error}} - {{context}}."
+        }
     }
 }
