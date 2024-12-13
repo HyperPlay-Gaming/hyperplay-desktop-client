@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Kuruluma Devam Et",
             "message": "İndirilen dosyaları SAKLAMAK ister misiniz?",
-            "title": "Kurulumu Durdur",
+            "title": "İndirmeyi iptal etmek istiyor musunuz?",
             "keepFilesMessage": "İptal ettikten sonra indirme dosyalarını tutmak istiyorsanız burada kontrol edin."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "İndirme Boyutu",
         "firstPlayed": "İlk Oynanan",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "İndirme boyutu alınıyor",
+        "getting-install-size": "Kurulum boyutu alınıyor",
         "installSize": "Kurulum Boyutu",
         "language": "Dil",
         "lastPlayed": "Son Oynanan",
@@ -225,7 +225,8 @@
         "paused": "Duraklatıldı",
         "downloading": "İndiriliyor",
         "playing": "Oynatılıyor",
-        "syncingSaves": "Kayıtlar Eşzamanlanıyor"
+        "syncingSaves": "Kayıtlar Eşzamanlanıyor",
+        "patching": "Dosyalar yamanıyor "
     },
     "submenu": {
         "addShortcut": "Kısayol ekle",
