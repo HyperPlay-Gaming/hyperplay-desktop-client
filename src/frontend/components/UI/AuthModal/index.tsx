@@ -11,6 +11,7 @@ import walletState from '../../../state/WalletState'
 import { DEV_PORTAL_URL } from 'common/constants'
 import useAuthSession from '../../../hooks/useAuthSession'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import { useConnections } from 'wagmi'
 
 const url = `${DEV_PORTAL_URL}/signin?isLauncher=true`
 
@@ -25,6 +26,10 @@ const AuthModal = () => {
   const authSession = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
   const isAuthEnabled = flags.auth
+
+  const connections = useConnections()
+
+  console.log('connections', connections)
 
   const sendRetryConnectionMessage = () => {
     const webview = webviewRef.current
