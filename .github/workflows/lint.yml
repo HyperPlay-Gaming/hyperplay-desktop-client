@@ -13,10 +13,16 @@ jobs:
       cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          standalone: ${{ runner.os == 'Windows' }}
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -24,8 +30,8 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
       - name: Lint code.
-        run: yarn lint
+        run: pnpm lint
       - name: Prettier code.
-        run: yarn prettier
+        run: pnpm prettier

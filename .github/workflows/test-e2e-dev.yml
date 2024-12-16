@@ -24,10 +24,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -35,11 +35,11 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - name: Build and Test
-        run: yarn test:e2e-ci
+        run: pnpm test:e2e-ci
 
   mac-dev:
     runs-on: macos-13
@@ -51,10 +51,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -62,11 +62,11 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - name: Build and Test
-        run: yarn test:e2e-ci
+        run: pnpm test:e2e-ci
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
@@ -82,10 +82,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          standalone: ${{ runner.os == 'Windows' }}
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -93,11 +99,11 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn install --network-timeout 600000 && yarn allow-scripts
+        run: pnpm install --ignore-scripts --fetch-timeout 600000 && pnpm allow-scripts
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - name: Build and Test
-        run: yarn test:e2e-ci
+        run: pnpm test:e2e-ci
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
