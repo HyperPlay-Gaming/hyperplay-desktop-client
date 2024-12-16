@@ -319,7 +319,7 @@ describe('backend/utils.ts', () => {
     const destDir = join(testDir, 'dest')
 
     beforeEach(async () => {
-      jest.useFakeTimers()
+      jest.useFakeTimers({ advanceTimers: true })
       await mkdir(sourceDir, { recursive: true })
       await mkdir(destDir, { recursive: true })
     })
