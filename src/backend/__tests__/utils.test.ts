@@ -2,7 +2,7 @@ import * as utils from '../utils'
 import { getExecutableAndArgs, copyRecursiveAsync } from '../utils'
 import { mkdir, writeFile, symlink } from 'fs/promises'
 import { join } from 'path'
-import { chmod, existsSync } from 'fs'
+import { existsSync } from 'fs'
 import { rimraf } from 'rimraf'
 import os from 'os'
 import * as fs from 'fs'
@@ -319,13 +319,14 @@ describe('backend/utils.ts', () => {
     const destDir = join(testDir, 'dest')
 
     beforeEach(async () => {
-      // Setup test directories
+      jest.useFakeTimers()
       await mkdir(sourceDir, { recursive: true })
       await mkdir(destDir, { recursive: true })
     })
 
     afterEach(async () => {
-      // Cleanup test directories
+      jest.clearAllTimers() // Clear pending timers
+      jest.useRealTimers() // Restore real timers
       await rimraf(testDir)
     })
 
@@ -371,15 +372,20 @@ describe('backend/utils.ts', () => {
         .spyOn(fs.promises, 'copyFile')
         .mockImplementation(async () => {
           return new Promise((resolve) => {
-            setTimeout(resolve, COPY_TIMEOUT_MS + 1000) // Wait longer than timeout
+            setTimeout(resolve, COPY_TIMEOUT_MS + 1000)
           })
         })
 
       const destFile = join(destDir, 'test.txt')
 
-      await expect(copyRecursiveAsync(testFile, destFile)).rejects.toThrow(
-        'Timeout'
-      )
+      // Start the copy operation but don't await it yet
+      const copyPromise = copyRecursiveAsync(testFile, destFile)
+
+      // Advance timers to trigger timeout
+      jest.advanceTimersByTime(COPY_TIMEOUT_MS + 100)
+
+      // Now check if it throws
+      await expect(copyPromise).rejects.toThrow('Timeout')
 
       // Restore original implementation
       mockCopyFile.mockRestore()
