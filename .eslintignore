@@ -1,8 +1,11 @@
 i18next-parser.config.js
-flatpak/build/
 flatpak/.flatpak-builder/
 vite.config.ts
 **/__mocks__/**
 sign/**
 buildResetExtension.js
+build/**/*
+dist/**/*
+flatpak-build/**
+playwright-report/**
 pnpm-lock.yaml

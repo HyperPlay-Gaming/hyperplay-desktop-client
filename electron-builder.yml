@@ -1,0 +1,122 @@
+appId: gg.hyperplay.HyperPlay
+productName: HyperPlay
+files:
+  - build/**/*
+  - node_modules/**/*
+  - '!build/bin/*'
+  - build/bin/legendary.LICENSE
+
+extraResources:
+  - LICENSE_ALL
+
+electronDownload:
+  mirror: https://github.com/HyperPlay-Gaming/electron-releases/releases/download/
+  customDir: v33.2.0
+
+asarUnpack:
+  - build/app_icon.png
+  - build/app_icon.icns
+  - build/win_icon.ico
+  - build/trayIconLight24x24.png
+  - build/trayIconDark24x24.png
+  - build/extensions
+  - build/hyperplay_store_preload.js
+  - build/transparent_body_preload.js
+  - build/webviewPreload.js
+
+protocols:
+  - name: hyperplay
+    schemes:
+      - hyperplay
+
+win:
+  artifactName: ${productName}-${version}-Setup-${arch}.${ext}
+  icon: build/win_icon.ico
+  asarUnpack:
+    - build/bin/win32/legendary.exe
+    - build/bin/win32/gogdl.exe
+  files:
+    - build/bin/win32/*
+
+portable:
+  artifactName: ${productName}-${version}-Portable-${arch}.${ext}
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  deleteAppDataOnUninstall: false
+  installerIcon: build/win_icon.ico
+  uninstallerIcon: build/win_icon.ico
+
+mac:
+  artifactName: ${productName}-${version}-macOS-${arch}.${ext}
+  category: public.app-category.games
+  icon: build/app_icon.icns
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    com.apple.security.cs.allow-jit: true
+  notarize:
+    teamId: DLB2RYLUDX
+  asarUnpack:
+    - build/bin/darwin/legendary
+    - build/bin/darwin/gogdl
+  files:
+    - build/bin/darwin/*
+
+dmg:
+  background: public/dmg.png
+  window:
+    width: '600'
+    height: '500'
+  contents:
+    - x: 10
+      y: 215
+      type: file
+    - x: 420
+      y: 215
+      type: link
+      path: /Applications
+
+linux:
+  category: Game
+  description: An Open Source Launcher for Web3, GOG and Epic Games
+  desktop:
+    Name: HyperPlay
+    Comment[de]: Ein Open Source Spielelauncher for Web3, GOG und Epic Games
+  asarUnpack:
+    - build/bin/linux/legendary
+    - build/bin/linux/gogdl
+    - build/bin/linux/wmctrl
+    - build/bin/linux/vulkan-helper
+  files:
+    - build/bin/linux/*
+
+deb:
+  packageCategory: games
+  depends:
+    - curl
+
+pacman:
+  packageCategory: games
+  depends:
+    - curl
+
+rpm:
+  packageCategory: games
+  depends:
+    - curl
+
+snap:
+  allowNativeWayland: true
+  category: Games
+  synopsis: HyperPlay allows players to carry their MetaMask or WalletConnect wallet overlaid on top of every desktop game. Game developers can request transactions or signatures with a simple REST API call that supports every wallet to manage wallet interactions seamlessly.
+  description: HyperPlay allows players to carry their MetaMask or WalletConnect wallet overlaid on top of every desktop game. Game developers can request transactions or signatures with a simple REST API call that supports every wallet to manage wallet interactions seamlessly. You can also access your Epic and GOG games and play them using Proton or Wine that can be downloaded directly from the interface. DXVK, VKD3D and Winetricks are also included to play Windows Games.
+  publish:
+    provider: snapStore
+    channels: stable
+    repo: hyperplay
