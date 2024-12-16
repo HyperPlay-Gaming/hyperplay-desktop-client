@@ -1,1 +1,1 @@
-yarn codecheck && yarn lint && yarn i18n --fail-on-update
+pnpm codecheck && pnpm lint && pnpm i18n --fail-on-update

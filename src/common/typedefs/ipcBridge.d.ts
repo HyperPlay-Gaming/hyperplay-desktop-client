@@ -283,7 +283,10 @@ interface HyperPlayAsyncIPCFunctions {
   getQuests: (projectId?: string) => Promise<Quest[]>
   getQuest: (questId: number) => Promise<Quest>
   getUserPlayStreak: (questId: number) => Promise<UserPlayStreak>
-  getSteamGameMetadata: (gameId: number) => Promise<unknown>
+  getSteamGameMetadata: (gameId: number) => Promise<{
+    name?: string
+    capsule_image?: string
+  }>
   confirmRewardClaim: (params: ConfirmClaimParams) => Promise<void>
   getHyperPlayListings: () => Promise<Record<string, HyperPlayRelease>>
   getQuestRewardSignature: (

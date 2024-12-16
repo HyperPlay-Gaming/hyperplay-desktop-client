@@ -17,11 +17,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
-
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          standalone: ${{ runner.os == 'Windows' }}
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -31,7 +36,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn setup
+        run: pnpm run setup
 
       - name: setup env production file
         run: |
@@ -39,6 +44,6 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
 
       - name: Build artifacts.
-        run: yarn release:mac:arm64
+        run: pnpm release:mac:arm64
         env:
           NOTARIZE: true

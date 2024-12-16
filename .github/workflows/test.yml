@@ -15,10 +15,9 @@ jobs:
       - name: Checkout repository.
         uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
 
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -32,9 +31,15 @@ jobs:
         run: |
           echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
-
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          standalone: ${{ runner.os == 'Windows' }}
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
 
       - name: Test
-        run: yarn test:ci
+        run: pnpm test:ci
