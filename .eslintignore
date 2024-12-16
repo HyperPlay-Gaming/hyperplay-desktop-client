@@ -8,3 +8,4 @@ build/**/*
 dist/**/*
 flatpak-build/**
 playwright-report/**
+pnpm-lock.yaml

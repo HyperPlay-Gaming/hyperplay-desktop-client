@@ -1,3 +1,5 @@
+@import '@hyperplay/ui/utilities/_variables.scss';
+
 .root {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -35,9 +37,36 @@
   width: 800px;
   max-width: unset !important;
 
+  background-color: var(--color-neutral-800);
+  border: none;
+
   @media (max-width: 1300px) {
     width: 540px;
   }
+}
+
+.tableContainer {
+  background-color: var(--color-neutral-800);
+  overflow-y: hidden;
+}
+
+.questSelectedLayout {
+  @include for-big-desktop-up {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.loadingContainer {
+  padding: var(--space-2lg);
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  font-size: var(--text-3xl);
 }
 
 .toast {

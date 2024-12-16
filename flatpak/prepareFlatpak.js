@@ -1,4 +1,3 @@
-const { default: axios } = require('axios')
 const fs = require('fs')
 const package = require('../package.json')
 const child_process = require('child_process')
@@ -13,9 +12,10 @@ async function main() {
     let placeholder = ""
     let releaseTime = ""
     if (process.argv[2] === "release") {
-        const { data } = await axios.get("https://api.github.com/repos/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest")
-        const tarxz = data.assets.find((asset) => asset.browser_download_url.includes("tar.xz"))
-        const outputFile = `${os.tmpdir()}/hyperplay.tar.xz`
+        const response = await fetch("https://api.github.com/repos/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest");
+        const data = await response.json();
+        const tarxz = data.assets.find((asset) => asset.browser_download_url.includes("tar.xz"));
+        const outputFile = `${os.tmpdir()}/hyperplay.tar.xz`;
         child_process.spawnSync("curl", ["-L", tarxz.browser_download_url, "-o", outputFile, "--create-dirs"])
         const outputContent = fs.readFileSync(outputFile)
         const hashSum = crypto.createHash('sha512');

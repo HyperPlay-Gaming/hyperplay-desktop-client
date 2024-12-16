@@ -57,7 +57,9 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
           [`${OnboardingStyles.wideModal}`]:
             currentScreen === ONBOARDING_SCREEN.WALLET_SELECTION,
           [`${OnboardingStyles.regularModal}`]:
-            currentScreen !== ONBOARDING_SCREEN.WALLET_SELECTION
+            currentScreen !== ONBOARDING_SCREEN.WALLET_SELECTION,
+          [`${OnboardingStyles.firstWelcomeModal}`]:
+            currentScreen === ONBOARDING_SCREEN.WELCOME
         })}
       >
         {renderContent(currentScreen)}
