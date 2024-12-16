@@ -3,24 +3,27 @@ import { ONBOARDING_SCREEN } from '../types'
 import { t } from 'i18next'
 import { Button, Images } from '@hyperplay/ui'
 import AnalyticsStyle from './index.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faX } from '@fortawesome/free-solid-svg-icons'
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { onboardingStore } from 'frontend/helpers/electronStores'
 import { MetricsOptInStatus } from 'common/types'
 import OnboardingStyles from '../index.module.scss'
+import { ReactComponent as checkCircle } from '/src/frontend/assets/hyperplay/check-circle.svg'
 
 interface BulletPointProps {
-  icon: IconProp
+  icon: React.ElementType
   text: string
   color: string
   firstWord?: string
 }
 
-const BulletPoint = ({ text, icon, color, firstWord }: BulletPointProps) => {
+const BulletPoint = ({
+  text,
+  icon: Icon,
+  color,
+  firstWord
+}: BulletPointProps) => {
   return (
     <div className={AnalyticsStyle.bulletPointContainer}>
-      <FontAwesomeIcon icon={icon} color={color} />
+      <Icon color={color} />
       <div
         className={`body ${AnalyticsStyle.infoText} ${AnalyticsStyle.marginBottomSm}`}
       >
@@ -40,19 +43,8 @@ interface BulletPointWrapperProps {
 const CheckBulletPoint = ({ text }: BulletPointWrapperProps) => {
   return (
     <BulletPoint
-      icon={faCheck}
+      icon={checkCircle}
       color={'var(--color-status-success)'}
-      text={text}
-    />
-  )
-}
-
-const XBulletPoint = ({ text }: BulletPointWrapperProps) => {
-  return (
-    <BulletPoint
-      icon={faX}
-      color={'var(--color-status-error)'}
-      firstWord={t('hyperplay.misc', 'Never')}
       text={text}
     />
   )
@@ -66,75 +58,36 @@ const Analytics: React.FC<AnalyticsProps> = function (props) {
   return (
     <>
       <Images.HyperPlayLogoColored className={OnboardingStyles.hpLogo} />
-      <h5>
+      <h6 className={AnalyticsStyle.title}>
         {t(
-          'hyperplay.onboarding.analytics.title',
-          `Help Us improve HyperPlay!`
+          'hyperplay.onboarding.analytics.titleOne',
+          `Help Us Improve HyperPlay!`
         )}
-      </h5>
-      <div
-        className={`body ${AnalyticsStyle.infoText} ${AnalyticsStyle.marginBottomLg}`}
-      >
+      </h6>
+      <div className={`body ${AnalyticsStyle.marginBottomLg}`}>
         {t(
-          'hyperplay.onboarding.analytics.body',
-          `HyperPlay would like to gather usage data to better understand how our users interact with the application. This information helps us understand how you use the app and lets us make HyperPlay even better for you.`
+          'hyperplay.onboarding.analytics.paragraphOne',
+          `HyperPlay would like to gather usage data to better understand how our users interact with the application. 
+           This lets us make HyperPlay even better for you.`
         )}
       </div>
-      <div
-        className={`body ${AnalyticsStyle.infoText} ${AnalyticsStyle.marginBottomSm}`}
-      >
+      <div className={`${AnalyticsStyle.titleSm}`}>
         {t('hyperplay.onboarding.analytics.hyperplayWill', `HyperPlay will:`)}
       </div>
-      <CheckBulletPoint
-        text={t(
-          'hyperplay.onboarding.analytics.optOut',
-          'Always allow you to opt-out via Settings;'
-        )}
-      />
-      <CheckBulletPoint
-        text={t(
-          'hyperplay.onboarding.analytics.anonymized',
-          'Send anonymized click & game interaction;'
-        )}
-      />
-      <XBulletPoint
-        text={t(
-          'hyperplay.onboarding.analytics.neverCollectPersonal',
-          ' collect keys, addresses, balances, hashes, or any personal information;'
-        )}
-      />
-      <XBulletPoint
-        text={t(
-          'hyperplay.onboarding.analytics.neverCollectIP',
-          ' collect your full IP address;'
-        )}
-      />
-      <XBulletPoint
-        text={t(
-          'hyperplay.onboarding.analytics.neverSellData',
-          ' sell data for profit. Ever!'
-        )}
-      />
-      <div className={AnalyticsStyle.buttonContainer}>
-        <Button
-          type="tertiary"
-          onClick={() => {
-            onboardingStore.set('completedDataPrivacy', true)
-            window.api.changeMetricsOptInStatus(MetricsOptInStatus.optedOut)
-            props.setScreen(ONBOARDING_SCREEN.WALLET_SELECTION)
-          }}
-        >
-          {t('hyperplay.buttons.noThanks', `No Thanks`)}
-        </Button>
-        <Button
-          onClick={() => {
-            onboardingStore.set('completedDataPrivacy', true)
-            window.api.changeMetricsOptInStatus(MetricsOptInStatus.optedIn)
-            props.setScreen(ONBOARDING_SCREEN.WALLET_SELECTION)
-          }}
-        >
-          {t('hyperplay.buttons.agree', `I agree`)}
-        </Button>
+
+      <div className={`${AnalyticsStyle.bullets}`}>
+        <CheckBulletPoint
+          text={t(
+            'hyperplay.onboarding.analytics.bulletOne',
+            'Always allow you to opt-out'
+          )}
+        />
+        <CheckBulletPoint
+          text={t(
+            'hyperplay.onboarding.analytics.bulletTwo',
+            'Send anonymized click & game interaction'
+          )}
+        />
       </div>
       <div className={`caption-sm ${AnalyticsStyle.privacyCaption}`}>
         {t(
@@ -147,13 +100,34 @@ const Analytics: React.FC<AnalyticsProps> = function (props) {
               'https://www.hyperplay.xyz/privacy-policy'
             )
           }
-          className="button-sm"
+          className="caption-sm"
         >
-          {t(
-            'hyperplay.onboarding.analytics.privacyPolicyHere',
-            `Privacy Policy here.`
-          )}
+          {t('hyperplay.onboarding.analytics.privacyPolicy', `Privacy Policy.`)}
         </a>
+      </div>
+
+      <div className={AnalyticsStyle.buttonContainer}>
+        <Button
+          type="secondary"
+          onClick={() => {
+            onboardingStore.set('completedDataPrivacy', true)
+            window.api.changeMetricsOptInStatus(MetricsOptInStatus.optedIn)
+            props.setScreen(ONBOARDING_SCREEN.WALLET_SELECTION)
+          }}
+        >
+          {t('hyperplay.buttons.primaryButton', `I Agree`)}
+        </Button>
+
+        <Button
+          type="tertiary"
+          onClick={() => {
+            onboardingStore.set('completedDataPrivacy', true)
+            window.api.changeMetricsOptInStatus(MetricsOptInStatus.optedOut)
+            props.setScreen(ONBOARDING_SCREEN.WALLET_SELECTION)
+          }}
+        >
+          {t('hyperplay.buttons.secondaryButton', `No, Thanks`)}
+        </Button>
       </div>
     </>
   )

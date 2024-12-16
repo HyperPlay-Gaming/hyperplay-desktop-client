@@ -31,7 +31,7 @@ export const launchApp = async () => {
   process.env.APP_NAME_TO_MOCK = appNameToMock
   if (process.env.TEST_PACKAGED === 'true') {
     console.log('Testing packaged build')
-    // must run yarn dist:<platform> prior to test
+    // must run pnpm run dist:<platform> prior to test
     const latestBuild = findLatestBuild('dist')
     const appInfo = parseElectronApp(latestBuild)
     console.log(
