@@ -10,10 +10,10 @@ import { useTranslation } from 'react-i18next'
 import useGetG7UserCredits from 'frontend/hooks/useGetG7UserCredits'
 import useGetPointsBalancesForProject from 'frontend/hooks/useGetPointsBalances'
 import { Quest } from '@hyperplay/utils'
+import { useGetQuestStates } from 'frontend/hooks/useGetQuestStates'
 
 export interface QuestLogWrapperProps {
   quests: Quest[] | null | undefined
-  questIdToQuestStateMap: Record<number, QuestLogInfo['state'] | undefined>
   isLoading: boolean
   projectId: string
   selectedQuestId: number | null
@@ -22,7 +22,6 @@ export interface QuestLogWrapperProps {
 
 export function QuestLogWrapper({
   quests,
-  questIdToQuestStateMap,
   isLoading,
   projectId: appName,
   selectedQuestId,
@@ -33,6 +32,10 @@ export function QuestLogWrapper({
   const pointsBalancesQuery = useGetPointsBalancesForProject(appName)
   const pointsBalances = pointsBalancesQuery?.data?.data
   const { t } = useTranslation()
+  const { questIdToQuestStateMap, isPending: isGetQuestStatesPending } =
+    useGetQuestStates({
+      quests
+    })
 
   const questsUi =
     quests?.map((quest) => {
@@ -94,7 +97,7 @@ export function QuestLogWrapper({
       className={styles.questLog}
       i18n={i18n}
       pointsProps={pointsBalanceProps}
-      loading={isLoading}
+      loading={isLoading || isGetQuestStatesPending}
     />
   )
 
