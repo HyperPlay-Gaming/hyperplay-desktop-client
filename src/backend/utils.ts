@@ -80,7 +80,7 @@ import {
   deviceNameCache,
   vendorNameCache
 } from './utils/systeminfo/gpu/pci_ids'
-import { copyFile, mkdir, readdir, stat } from 'fs/promises'
+import { copyFile, lstat, mkdir, readdir } from 'fs/promises'
 import { GameConfig } from './game_config'
 
 const execAsync = promisify(exec)
@@ -1334,9 +1334,16 @@ export const writeConfig = (appName: string, config: Partial<AppSettings>) => {
   }
 }
 
+const COPY_TIMEOUT_MS = 30000 // wait time before throwing a timeout error
 export async function copyRecursiveAsync(src: string, dest: string) {
-  const exists = (await stat(src)).isDirectory()
-  if (exists) {
+  const stats = await lstat(src)
+  if (stats.isSymbolicLink()) {
+    return // Skip symbolic links
+  }
+
+  const isDirectory = stats.isDirectory()
+
+  if (isDirectory) {
     await mkdir(dest, { recursive: true })
     const files = await readdir(src)
     await Promise.all(
@@ -1347,6 +1354,13 @@ export async function copyRecursiveAsync(src: string, dest: string) {
       })
     )
   } else {
-    await copyFile(src, dest)
+    await Promise.race([
+      copyFile(src, dest),
+      wait(COPY_TIMEOUT_MS).then(() => {
+        throw new Error(
+          `Timeout (${COPY_TIMEOUT_MS}ms) copying ${src} to ${dest}`
+        )
+      })
+    ])
   }
 }
