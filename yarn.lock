@@ -1351,10 +1351,10 @@
   dependencies:
     bignumber.js "^9.1.2"
 
-"@hyperplay/utils@^0.3.6-alpha.0":
-  version "0.3.6-alpha.0"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.3.6-alpha.0.tgz#53491c0240815852e7a47d345587592cee2ac1ad"
-  integrity sha512-g28/p/GL/WOYQFxry4aXWr+ezjVkawbhI0spPdsX57dEHVCSB3kJ2owY9YatbjUGoxt7T1dzWHLxYJZ6yPL9KQ==
+"@hyperplay/utils@^0.3.6":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.3.6.tgz#db353f223663d5f80a527c57b464148de70c7bc9"
+  integrity sha512-4nbhOao4v4kiFVqeeDeCs7vUGkuAsckfxj+XFo+C/fWqy/s0t+Y+SIExkGdS5h9b1vBmLtqAQqNvJheLnrI9jQ==
   dependencies:
     bignumber.js "^9.1.2"
 
