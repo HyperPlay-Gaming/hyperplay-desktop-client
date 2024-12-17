@@ -1,7 +1,4 @@
 .Dialog__element {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -20,6 +17,12 @@
   --dialog-margin-horizontal: 32px;
   --dialog-margin-vertical: 24px;
   --dialog-gap: 24px;
+}
+
+.compatibility-warning {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .Dialog__element[open] {

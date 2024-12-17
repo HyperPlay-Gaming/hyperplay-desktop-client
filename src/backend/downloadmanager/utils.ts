@@ -235,10 +235,12 @@ async function updateQueueElement(params: InstallParams): Promise<{
   }
 
   try {
+    const prevVersion = params.gameInfo.install.version
     const { status } = await gameManagerMap[runner].update(appName, {
       siweValues,
       accessCode: params.accessCode
     })
+    const newVersion = params.gameInfo.install.version
 
     if (status === 'error') {
       errorMessage('')
@@ -250,7 +252,9 @@ async function updateQueueElement(params: InstallParams): Promise<{
           store_name: getStoreName(runner),
           game_title: title,
           platform: getPlatformName(params.platformToInstall),
-          platform_arch: params.platformToInstall
+          platform_arch: params.platformToInstall,
+          version_from: prevVersion,
+          version_to: newVersion
         }
       })
     }
