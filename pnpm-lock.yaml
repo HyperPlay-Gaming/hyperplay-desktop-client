@@ -39,13 +39,13 @@ dependencies:
     specifier: ^3.5.2
     version: 3.5.2
   '@hyperplay/quests-ui':
-    specifier: ^0.1.0
-    version: 0.1.7(@hyperplay/chains@0.3.0)(@hyperplay/ui@1.8.21)(@hyperplay/utils@0.3.6)(@tanstack/query-core@5.62.7)(@tanstack/react-query@5.62.7)(i18next@23.16.8)(mobx@6.13.5)(react-i18next@15.2.0)(react@18.3.1)(viem@2.21.55)(wagmi@2.14.3)
+    specifier: 0.1.8-alpha.0
+    version: 0.1.8-alpha.0(@hyperplay/chains@0.3.0)(@hyperplay/ui@1.8.21)(@hyperplay/utils@0.3.6)(@tanstack/query-core@5.62.7)(@tanstack/react-query@5.62.7)(i18next@23.16.8)(mobx@6.13.5)(react-i18next@15.2.0)(react@18.3.1)(viem@2.21.55)(wagmi@2.14.3)
   '@hyperplay/ui':
     specifier: ^1.8.18
     version: 1.8.21(@emotion/react@11.14.0)(@mantine/carousel@7.15.1)(@mantine/core@7.15.1)(@mantine/dropzone@7.15.1)(@mantine/hooks@7.15.1)(embla-carousel-autoplay@8.5.1)(embla-carousel-react@8.5.1)(react-dom@18.3.1)(react-markdown@9.0.1)(react@18.3.1)
   '@hyperplay/utils':
-    specifier: ^0.3.4
+    specifier: ^0.3.6
     version: 0.3.6
   '@mantine/carousel':
     specifier: ^7.12.0
@@ -3182,8 +3182,8 @@ packages:
     dev: false
     optional: true
 
-  /@hyperplay/quests-ui@0.1.7(@hyperplay/chains@0.3.0)(@hyperplay/ui@1.8.21)(@hyperplay/utils@0.3.6)(@tanstack/query-core@5.62.7)(@tanstack/react-query@5.62.7)(i18next@23.16.8)(mobx@6.13.5)(react-i18next@15.2.0)(react@18.3.1)(viem@2.21.55)(wagmi@2.14.3):
-    resolution: {integrity: sha512-qcLjBvgjCVu6waqpG/JuOGHCuramPmLK5V8ddOL+90KuOKqQ3mqShW4PTfZSLFO2s8prSZH8mw2lzNxKhgQ1Xw==}
+  /@hyperplay/quests-ui@0.1.8-alpha.0(@hyperplay/chains@0.3.0)(@hyperplay/ui@1.8.21)(@hyperplay/utils@0.3.6)(@tanstack/query-core@5.62.7)(@tanstack/react-query@5.62.7)(i18next@23.16.8)(mobx@6.13.5)(react-i18next@15.2.0)(react@18.3.1)(viem@2.21.55)(wagmi@2.14.3):
+    resolution: {integrity: sha512-F8BzdzjBoDTpKSu44g+AZjtnFQIph3UfhMGWtAyYt1LAZsjyPKAGoSvz1VngWMRA4+AxnUgzehKQK5bhwmCtug==}
     peerDependencies:
       '@hyperplay/chains': ^0.3.0
       '@hyperplay/ui': ^1.8.21
@@ -3244,11 +3244,6 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-markdown: 9.0.1(@types/react@18.3.17)(react@18.3.1)
-    transitivePeerDependencies:
-      - bufferutil
-      - debug
-      - encoding
-      - utf-8-validate
     dev: false
 
   /@hyperplay/utils@0.0.9:
@@ -4599,6 +4594,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.8
+      napi-wasm: 1.1.3
     dev: false
     bundledDependencies:
       - napi-wasm
@@ -13925,6 +13921,10 @@ packages:
 
   /napi-macros@2.2.2:
     resolution: {integrity: sha512-hmEVtAGYzVQpCKdbQea4skABsdXW4RUh5t5mJ2zzqowJS2OyXZTU1KhDVFhx+NlWZ4ap9mqR9TcDO3LTTttd+g==}
+    dev: false
+
+  /napi-wasm@1.1.3:
+    resolution: {integrity: sha512-h/4nMGsHjZDCYmQVNODIrYACVJ+I9KItbG+0si6W/jSjdA9JbWDoU4LLeMXVcEQGHjttI2tuXqDrbGF7qkUHHg==}
     dev: false
 
   /natural-compare@1.4.0:
