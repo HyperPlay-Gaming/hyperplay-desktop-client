@@ -132,7 +132,6 @@ export default function QuestDetails({
       selectedQuestId={questId}
       getQuest={window.api.getQuest}
       getUserPlayStreak={window.api.getUserPlayStreak}
-      // @ts-expect-error not using this method currently
       getSteamGameMetadata={window.api.getSteamGameMetadata}
       claimPoints={async (reward: Reward) =>
         window.api.claimQuestPointsReward(reward.id.toString())
