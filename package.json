@@ -407,5 +407,6 @@
       "@hyperplay/overlay>electron": false,
       "sass>@parcel/watcher": false
     }
-  }
+  },
+  "packageManager": "pnpm@8.7.6+sha1.a428b12202bc4f23b17e6dffe730734dae5728e2"
 }
