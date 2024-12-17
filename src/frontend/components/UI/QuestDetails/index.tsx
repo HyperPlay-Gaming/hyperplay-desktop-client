@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { useAccount } from 'wagmi'
 import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import extensionState from 'frontend/state/ExtensionState'
+import { PossibleMetricPayloads } from 'backend/metrics/types'
 
 /**
  * Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -63,7 +64,7 @@ export default function QuestDetails({
   questId,
   className,
   isQuestsPage,
-  onPlayClick
+  onPlayClick = () => {}
 }: {
   questId: number | null
   className?: string
@@ -95,7 +96,6 @@ export default function QuestDetails({
 
   return (
     <QuestDetailsWrapper
-      // @ts-expect-error - see: https://github.com/qmhc/vite-plugin-dts/issues/330
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }
@@ -124,7 +124,9 @@ export default function QuestDetails({
         },
         questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled
       }}
-      trackEvent={window.api.trackEvent}
+      trackEvent={async (eventPayload) =>
+        window.api.trackEvent(eventPayload as PossibleMetricPayloads)
+      }
       signInWithSteamAccount={() => window.api.signInWithProvider('steam')}
       openDiscordLink={window.api.openDiscordLink}
       selectedQuestId={questId}
