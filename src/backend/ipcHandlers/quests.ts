@@ -17,9 +17,10 @@ async function fetchQuests({
   projectId?: string
   status: 'ACTIVE' | 'COMPLETED'
 }): Promise<Quest[]> {
-  let url = `${DEV_PORTAL_URL}api/v1/quests?questStatus=${status}`
+  const url = new URL(`${DEV_PORTAL_URL}api/v1/quests`)
+  url.searchParams.append('questStatus', status)
   if (projectId) {
-    url += `&projectId=${projectId}`
+    url.searchParams.append('projectId', projectId)
   }
   const questMetaResults = await fetch(url)
   if (!questMetaResults.ok) {
@@ -28,7 +29,7 @@ async function fetchQuests({
   let questsMetaJson = await questMetaResults.json()
 
   if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
-    url += `&isTest=true`
+    url.searchParams.append('isTest', 'true')
     const testQuestMetaResults = await fetch(url)
     if (!testQuestMetaResults.ok) {
       throw await testQuestMetaResults.text()
