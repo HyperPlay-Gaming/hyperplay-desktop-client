@@ -215,6 +215,20 @@ const openNewBrowserGameWindow = async (
     }
     app.on('web-contents-created', interceptFullscreenKeyInput)
 
+    // Clear cache and storage data to prevent any data from being saved
+    browserGame.webContents.session.clearCache()
+    browserGame.webContents.session.clearStorageData({
+      storages: [
+        'filesystem',
+        'indexdb',
+        'localstorage',
+        'shadercache',
+        'websql',
+        'serviceworkers'
+      ],
+      quotas: ['temporary', 'syncable']
+    })
+
     browserGame.loadURL(url)
     // this is electron's suggested way to prevent visual flash
     // https://github.com/electron/electron/blob/main/docs/api/browser-window.md#using-the-ready-to-show-event
