@@ -293,8 +293,8 @@ optionalDependencies:
     specifier: ^0.1.1-alpha.0
     version: 0.1.1-alpha.1
   '@hyperplay/extension-provider':
-    specifier: 0.0.9-alpha.0
-    version: 0.0.9-alpha.0(electron@33.2.0)(ethers@6.13.4)
+    specifier: 0.0.9-alpha.1
+    version: 0.0.9-alpha.1(electron@33.2.0)(ethers@6.13.4)
   '@hyperplay/mock-backend':
     specifier: ^0.0.1
     version: 0.0.1
@@ -3065,8 +3065,8 @@ packages:
     dev: false
     optional: true
 
-  /@hyperplay/extension-provider@0.0.9-alpha.0(electron@33.2.0)(ethers@6.13.4):
-    resolution: {integrity: sha512-8D6XraVtlAAUABfYOY69/cq/qA5UOz1WAktuzlptj8qh30io+I2Ve3nuDUyOewWmv8qRvIB2bZ+FdNgLYqyA1Q==}
+  /@hyperplay/extension-provider@0.0.9-alpha.1(electron@33.2.0)(ethers@6.13.4):
+    resolution: {integrity: sha512-BZwl8KVcDyLHZQYpK/7WxlTPV+TE+IUVmN9mrpknvwpCkcGKcLLBzDoYEYHMmE80gEno6oXyBO/qYetU7hrvPg==}
     requiresBuild: true
     peerDependencies:
       electron: 33.2.0
