@@ -1588,11 +1588,16 @@ export const downloadPatcher = async () => {
     captureException(error, {
       extra: {
         method: 'downloadPatcher'
+      },
+      tags: {
+        feature: 'Patcher',
+        method: 'downloadPatcher'
       }
     })
 
-    logError(`Error downloading IPDT: ${error}`, LogPrefix.HyperPlay)
-    throw new Error('Error downloading IPDT')
+    const errorMsg = `Error downloading IPDT: ${error}`
+    logError(errorMsg, LogPrefix.HyperPlay)
+    throw errorMsg
   }
 }
 
@@ -1746,9 +1751,9 @@ async function applyPatching(
   newVersion: string,
   signal: AbortSignal
 ): Promise<InstallResult> {
-  const patcherisEnabled = getFlag('enable-patcher', false)
+  const gamesPatcherIsEnabled = getFlag('enable-patcher-per-game', {}) as object
 
-  if (!patcherisEnabled || !isWindows) {
+  if (!Object.hasOwn(gamesPatcherIsEnabled, gameInfo.app_name) || !isWindows) {
     return { status: 'error' }
   }
 

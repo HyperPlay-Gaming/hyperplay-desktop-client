@@ -32,31 +32,34 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          standalone: ${{ runner.os == 'Windows' }}
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: install yarn
-        run: npm install --global yarn
       - name: setup env production file
         run: |
           echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
       - name: Build artifacts.
-        run: yarn dist:linux:ci:flatpak
+        run: pnpm run dist:linux:ci:flatpak
       - name: Clean up build files to save space
         run: rm -rf build dist/linux-unpacked node_modules public/bin/win32 public/bin/darwin ~/.cache
-      - name: Install Axios
-        run: yarn add axios
       - name: Prepare Flatpak
-        run: yarn flatpak:prepare
+        run: pnpm flatpak:prepare
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:

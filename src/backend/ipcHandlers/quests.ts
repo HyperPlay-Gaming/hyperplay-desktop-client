@@ -10,10 +10,17 @@ import {
 } from 'common/types'
 import { app, ipcMain } from 'electron'
 
-export async function getQuests(projectId?: string): Promise<Quest[]> {
-  let url = `${DEV_PORTAL_URL}api/v1/quests?questStatus=ACTIVE`
+async function fetchQuests({
+  projectId,
+  status
+}: {
+  projectId?: string
+  status: 'ACTIVE' | 'COMPLETED'
+}): Promise<Quest[]> {
+  const url = new URL(`${DEV_PORTAL_URL}api/v1/quests`)
+  url.searchParams.append('questStatus', status)
   if (projectId) {
-    url += `&projectId=${projectId}`
+    url.searchParams.append('projectId', projectId)
   }
   const questMetaResults = await fetch(url)
   if (!questMetaResults.ok) {
@@ -22,7 +29,7 @@ export async function getQuests(projectId?: string): Promise<Quest[]> {
   let questsMetaJson = await questMetaResults.json()
 
   if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
-    url += `&isTest=true`
+    url.searchParams.append('isTest', 'true')
     const testQuestMetaResults = await fetch(url)
     if (!testQuestMetaResults.ok) {
       throw await testQuestMetaResults.text()
@@ -30,7 +37,15 @@ export async function getQuests(projectId?: string): Promise<Quest[]> {
     const testQuestsMetaJson = await testQuestMetaResults.json()
     questsMetaJson = questsMetaJson.concat(testQuestsMetaJson)
   }
+
   return questsMetaJson
+}
+
+export async function getQuests(projectId?: string): Promise<Quest[]> {
+  const activeQuests = await fetchQuests({ projectId, status: 'ACTIVE' })
+  const completedQuests = await fetchQuests({ projectId, status: 'COMPLETED' })
+
+  return activeQuests.concat(completedQuests)
 }
 
 ipcMain.handle('getQuests', async (e, projectId) => getQuests(projectId))

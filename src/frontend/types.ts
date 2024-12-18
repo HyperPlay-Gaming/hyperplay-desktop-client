@@ -74,6 +74,7 @@ export type DialogModalOptions = {
   type?: DialogType
   onClose?: () => void
   isModal?: boolean
+  className?: string
 }
 
 export interface ExternalLinkDialogOptions {
