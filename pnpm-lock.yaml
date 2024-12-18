@@ -39,8 +39,8 @@ dependencies:
     specifier: ^3.5.2
     version: 3.5.2
   '@hyperplay/quests-ui':
-    specifier: ^0.1.8
-    version: 0.1.8(@hyperplay/chains@0.3.0)(@hyperplay/ui@1.8.21)(@hyperplay/utils@0.3.6)(@tanstack/query-core@5.62.7)(@tanstack/react-query@5.62.7)(i18next@23.16.8)(mobx@6.13.5)(react-i18next@15.2.0)(react@18.3.1)(viem@2.21.55)(wagmi@2.14.3)
+    specifier: ^0.1.9
+    version: 0.1.9(@hyperplay/chains@0.3.0)(@hyperplay/ui@1.8.21)(@hyperplay/utils@0.3.6)(@tanstack/query-core@5.62.7)(@tanstack/react-query@5.62.7)(i18next@23.16.8)(mobx@6.13.5)(react-i18next@15.2.0)(react@18.3.1)(viem@2.21.55)(wagmi@2.14.3)
   '@hyperplay/ui':
     specifier: ^1.8.18
     version: 1.8.21(@emotion/react@11.14.0)(@mantine/carousel@7.15.1)(@mantine/core@7.15.1)(@mantine/dropzone@7.15.1)(@mantine/hooks@7.15.1)(embla-carousel-autoplay@8.5.1)(embla-carousel-react@8.5.1)(react-dom@18.3.1)(react-markdown@9.0.1)(react@18.3.1)
@@ -3182,8 +3182,8 @@ packages:
     dev: false
     optional: true
 
-  /@hyperplay/quests-ui@0.1.8(@hyperplay/chains@0.3.0)(@hyperplay/ui@1.8.21)(@hyperplay/utils@0.3.6)(@tanstack/query-core@5.62.7)(@tanstack/react-query@5.62.7)(i18next@23.16.8)(mobx@6.13.5)(react-i18next@15.2.0)(react@18.3.1)(viem@2.21.55)(wagmi@2.14.3):
-    resolution: {integrity: sha512-pcEFoZcfWOLN/lkDkmoY1dgZ+QfHDOiqorP5Q+jBG4837PNqDJ6/sEtQ724yw95UqJ4R0UTtQAJeqWGtBUFoew==}
+  /@hyperplay/quests-ui@0.1.9(@hyperplay/chains@0.3.0)(@hyperplay/ui@1.8.21)(@hyperplay/utils@0.3.6)(@tanstack/query-core@5.62.7)(@tanstack/react-query@5.62.7)(i18next@23.16.8)(mobx@6.13.5)(react-i18next@15.2.0)(react@18.3.1)(viem@2.21.55)(wagmi@2.14.3):
+    resolution: {integrity: sha512-/TX8c/xJu66+DbQfp58fIqBiZP+bXVYiY5SkakrBGvOviVrZjD0h3S14FgZ/CGRPNJVxI4c1lmYBLS/Of7E0vQ==}
     peerDependencies:
       '@hyperplay/chains': ^0.3.0
       '@hyperplay/ui': ^1.8.21
