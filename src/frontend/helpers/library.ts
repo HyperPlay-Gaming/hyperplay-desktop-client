@@ -278,9 +278,14 @@ const updateGame = async (gameInfo: GameInfo) => {
     gameInfo?.channels?.[gameInfo.install.channelName ?? ''].license_config
       .tokens
   let siweValues = undefined
+  console.log(
+    'updating game handler channelRequiresTokens ',
+    channelRequiresTokens
+  )
   if (channelRequiresTokens) {
     siweValues = await signSiweMessage()
   }
+  console.log('updating game with siwe values ', siweValues)
   return gameUpdateState.updateGame({ ...gameInfo, siweValues })
 }
 
@@ -292,12 +297,17 @@ export const hyperPlayCategories = ['all', 'hyperplay']
 export { install, launch, repair, updateGame }
 
 export async function signSiweMessage(): Promise<SiweValues> {
+  console.log('sign siwe message enter')
   const signer = await getSigner()
   const address = await signer.getAddress()
+  console.log('signer addr ', address)
 
   const siweMessage = await createSiweMessage(address)
+  console.log('siwe message ', siweMessage)
   const message = siweMessage.prepareMessage()
+  console.log('message ', message)
   const signature = await signer.signMessage(message)
+  console.log('signature ', signature)
 
   return {
     message,
