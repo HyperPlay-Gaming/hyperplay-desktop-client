@@ -146,7 +146,7 @@ const openNewBrowserGameWindow = async (
   const hpOverlay = await getHpOverlay()
 
   return new Promise((res) => {
-    const partition = `persist:${appName.toLowerCase()}`
+    const partition = `persist:${appName}`
     const browserGame = new BrowserWindow({
       icon: icon,
       fullscreen: true,
@@ -235,7 +235,7 @@ const openNewBrowserGameWindow = async (
       quotas: ['temporary', 'syncable']
     })
 
-    // Open DevTools if enabled
+    // Open DevTools
     if (!app.isPackaged || process.env.HP_ENABLE_DEVTOOLS === 'true') {
       browserGame.webContents.openDevTools()
     }
