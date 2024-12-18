@@ -254,7 +254,7 @@
     "zod": "^3.23.8"
   },
   "scripts": {
-    "setup": "pnpm install --ignore-scripts && pnpm exec allow-scripts",
+    "setup": "pnpm install --ignore-scripts && patch-package && pnpm exec allow-scripts",
     "setupWithoutOptional": "node ./dev/rmOptionalDependencies.js && pnpm prettier-fix && pnpm install --ignore-optional && pnpm exec allow-scripts",
     "start": "electron-vite dev --watch",
     "debug:react": "react-devtools",
@@ -367,7 +367,7 @@
   },
   "optionalDependencies": {
     "@hyperplay/extension-importer": "^0.1.1-alpha.0",
-    "@hyperplay/extension-provider": "^0.0.8",
+    "@hyperplay/extension-provider": "^0.0.9",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/overlay": "^0.0.7",
     "@hyperplay/patcher": "^0.0.18",
