@@ -1412,7 +1412,12 @@ async function createSiweMessage(signerAddress: string): Promise<SiweMessage> {
   const statementRes = await fetch(
     DEV_PORTAL_URL + 'api/v1/license_contracts/validate/get-nonce'
   )
-  const statement = String(statementRes?.body)
+  if (!statementRes.ok) {
+    const responseError = await statementRes.text()
+    throw new Error(`Failed to get nonce for SIWE message. ${responseError}`)
+  }
+  const nonce = await statementRes.text()
+  const statement = String(nonce)
 
   return new SiweMessage({
     domain,
@@ -1500,6 +1505,7 @@ export async function update(
         `Could not get SIWE sig for updating token gated game. ${err}`,
         LogPrefix.HyperPlay
       )
+      captureException(err)
     }
   }
 
