@@ -222,16 +222,7 @@ const openNewBrowserGameWindow = async (
     const gameSession = session.fromPartition(partition)
     gameSession.clearCache()
     gameSession.clearStorageData({
-      storages: [
-        'filesystem',
-        'indexdb',
-        'localstorage',
-        'shadercache',
-        'websql',
-        'serviceworkers',
-        'cachestorage',
-        'cookies'
-      ],
+      storages: ['filesystem', 'shadercache', 'cachestorage'],
       quotas: ['temporary', 'syncable']
     })
 
