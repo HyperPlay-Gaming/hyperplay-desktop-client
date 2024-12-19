@@ -101,6 +101,7 @@ import { getFlag } from 'backend/flags/flags'
 import { ipfsGateway } from 'backend/vite_constants'
 import { GlobalConfig } from 'backend/config'
 import { PatchingError } from './types'
+import { SiweMessage } from 'siwe'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1397,6 +1398,51 @@ export async function launch(appName: string): Promise<boolean> {
   return launchGame(appName, getGameInfo(appName), 'hyperplay')
 }
 
+async function createSiweMessage(signerAddress: string): Promise<SiweMessage> {
+  const mainWindowUrl = getMainWindow()?.webContents.getURL()
+  if (mainWindowUrl === undefined) {
+    throw 'could not get main window url'
+  }
+  const url = new URL(mainWindowUrl)
+  const domain = url.host ? url.host : 'hyperplay'
+  const origin = url.origin.startsWith('file://')
+    ? 'file://hyperplay'
+    : url.origin
+
+  const statementRes = await fetch(
+    DEV_PORTAL_URL + 'api/v1/license_contracts/validate/get-nonce'
+  )
+  if (!statementRes.ok) {
+    const responseError = await statementRes.text()
+    throw new Error(`Failed to get nonce for SIWE message. ${responseError}`)
+  }
+  const nonce = await statementRes.text()
+
+  return new SiweMessage({
+    domain,
+    address: signerAddress,
+    statement: nonce.replaceAll('"', ''),
+    uri: origin,
+    version: '1',
+    chainId: 1
+  })
+}
+
+export async function requestSIWE() {
+  const providers = await import('@hyperplay/providers')
+  const signer = await providers.provider.getSigner()
+  const address = await signer.getAddress()
+  const siweMessage = await createSiweMessage(address)
+  const message = siweMessage.prepareMessage()
+  const signature = await signer.signMessage(message)
+
+  return {
+    message,
+    signature,
+    address
+  }
+}
+
 // TODO: Refactor to only replace updated files
 export async function update(
   appName: string,
@@ -1423,8 +1469,6 @@ export async function update(
     return { status: 'error' }
   }
 
-  const isMarketWars = gameInfo.account_name === 'marketwars'
-
   const {
     channels,
     install: { channelName, platform, install_size, install_path, executable }
@@ -1446,6 +1490,24 @@ export async function update(
     throw new Error('Channel name or platform not found')
   }
 
+  const channelRequiresToken = !!channels[channelName]?.license_config.tokens
+
+  if (channelRequiresToken && args?.siweValues === undefined) {
+    // request from frontend
+    if (args === undefined) {
+      args = {}
+    }
+    try {
+      args.siweValues = await requestSIWE()
+    } catch (err) {
+      logError(
+        `Could not get SIWE sig for updating token gated game. ${err}`,
+        LogPrefix.HyperPlay
+      )
+      captureException(err)
+    }
+  }
+
   const newVersion = channels[channelName].release_meta.name
   const abortController = createAbortController(appName)
   const { status, error } = await applyPatching(
@@ -1453,6 +1515,8 @@ export async function update(
     newVersion,
     abortController.signal
   )
+
+  const isMarketWars = gameInfo.account_name === 'marketwars'
 
   if (status === 'abort') {
     logWarning(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
