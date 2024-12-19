@@ -28,7 +28,6 @@ jobs:
           node-version: '20'
       - uses: pnpm/action-setup@v3
         with:
-          version: 9
           standalone: ${{ runner.os == 'Windows' }}
       - name: Install node-gyp
         run: pnpm add --global node-gyp
@@ -40,7 +39,7 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: pnpm install --ignore-scripts --fetch-timeout 600000 && pnpm allow-scripts
+        run: pnpm run setup
       - name: setup env file
         run: |
           echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
@@ -74,7 +73,6 @@ jobs:
           node-version: '20'
       - uses: pnpm/action-setup@v3
         with:
-          version: 9
           standalone: ${{ runner.os == 'Windows' }}
       - name: Install node-gyp
         run: pnpm add --global node-gyp
@@ -112,7 +110,6 @@ jobs:
           node-version: '20'
       - uses: pnpm/action-setup@v3
         with:
-          version: 9
           standalone: ${{ runner.os == 'Windows' }}
       - name: Install node-gyp
         run: pnpm add --global node-gyp
