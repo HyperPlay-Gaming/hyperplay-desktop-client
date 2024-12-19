@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Telepítés folytatása",
             "message": "Szeretnéd MEGTARTANI a letöltött fájlokat?",
-            "title": "Telepítés megállítása",
+            "title": "Biztosan meg akarja szakítani a letöltést?",
             "keepFilesMessage": "Ellenőrizze itt, ha meg akarja tartani a letöltési fájlokat a törlés után."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Letöltési méret",
         "firstPlayed": "Először játszott",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Letöltési méret megszerzése",
+        "getting-install-size": "Telepítési méret megszerzése",
         "installSize": "Telepítési méret",
         "language": "Nyelv",
         "lastPlayed": "Legutóbb játszott",
@@ -225,7 +225,8 @@
         "moving-files": "Mozgó fájl \"{{file}}\": {{percent}} ",
         "gog-goodie": "Ez a játék nem tűnik telepíthetőnek. Ellenőrizze a letöltött tartalmat a https://gog.com/account",
         "goodie": "Nem telepíthető",
-        "preparing": "Készüljön le, várjon"
+        "preparing": "Készüljön le, várjon",
+        "patching": "Fájlok javítása "
     },
     "submenu": {
         "addShortcut": "Parancsikon hozzáadása",

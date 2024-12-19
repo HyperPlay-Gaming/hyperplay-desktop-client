@@ -229,9 +229,9 @@
     },
     "button": {
         "go_to_library": "Gå til biblioteket",
-        "sync": "Synkronisere",
+        "sync": "Synkroniser",
         "syncing": "Synkroniserer",
-        "unsync": "Fjern synkronisering",
+        "unsync": "Af-synkroniser",
         "login": "Log ind",
         "cancel": "Afbestille",
         "download": "Hent",
@@ -308,7 +308,7 @@
         },
         "install": {
             "canceled": "Installation annulleret",
-            "finished": "Installation afsluttet",
+            "finished": "Installation færdig",
             "imported": "Spil importeret",
             "startInstall": "Installation påbegyndt",
             "error": "Installation mislykkedes",
@@ -321,7 +321,7 @@
             "error": "Kunne ikke hente udgivelser fra upstream, måske på grund af Github API-begrænsninger! Prøv igen senere."
         },
         "update": {
-            "canceled": "Opdateret annulleret",
+            "canceled": "Opdatering annulleret",
             "finished": "Opdatering Færdig",
             "started": "Opdatering startet",
             "paused": "Opdater pause",
@@ -380,7 +380,7 @@
         "steamruntime": "Brug Steam Runtime",
         "winecrossoverbottle": "CrossOver flaske",
         "defaultWinePrefix": "Indstil mappe til nye vinpræfikser",
-        "disable_controller": "Deaktiver heroisk navigation ved hjælp af controller",
+        "disable_controller": "Deaktiver Hyperplay-navigation ved hjælp af controller",
         "discordRPC": "Aktiver Discord Rich Presence",
         "download-no-https": "Download spil uden HTTPS (nyttigt til CDN'er, f.eks. LanCache)",
         "egs-sync": "Synkroniser med installerede episke spil",
@@ -459,7 +459,7 @@
         "manager": {
             "link": "Vinchef",
             "error": "Kunne ikke hente Wine/Proton-versioner denne gang.",
-            "title": "Vinchef",
+            "title": "Kompatibilitetslag ",
             "unzipping": "Udpakker",
             "not-found": "Ingen vin versioner fundet. Klik på opdateringsikonet for at prøve igen."
         },
@@ -776,7 +776,12 @@
             },
             "remove": "Fjern fra downloads",
             "resume": "Genop download",
-            "pause": "Sæt downloads på pause"
+            "pause": "Sæt downloads på pause",
+            "launch": "Start spil",
+            "retry-install": "Prøv installation igen",
+            "timeElapsed": "Tid forløbet: {{elapsed}}",
+            "retry-update": "Prøv opdatering igen",
+            "stop": "Stop Download"
         }
     },
     "add_game": "Tilføj spil",
@@ -875,7 +880,16 @@
                 "optOut": "Altid tillade dig at fravælge via Indstillinger;",
                 "neverCollectIP": " indsamle din fulde IP-adresse;",
                 "neverCollectPersonal": " indsamle nøgler, adresser, balancer, hashes eller personlige oplysninger;",
-                "privacyPolicyHere": "Cookie- og privatlivspolitik her."
+                "privacyPolicyHere": "Cookie- og privatlivspolitik her.",
+                "bulletTwo": "Send anonymiserede klik- og spilinteraktioner",
+                "paragraphOne": "HyperPlay ønsker at indsamle brugsdata for bedre at forstå, hvordan vores brugere interagerer med applikationen. \n           Dette gør det muligt for os at gøre HyperPlay endnu bedre for dig.",
+                "bulletOne": "Tillad altid, at du kan fravælge",
+                "privacyPolicy": "Privatlivspolitik.",
+                "text": {
+                    "externalLink": "Lær mere",
+                    "title": "Vi har opdateret vores privatlivspolitik"
+                },
+                "titleOne": "Hjælp os med at forbedre HyperPlay!"
             },
             "connectionCanceled": {
                 "description": "Bekræft venligst forbindelsens anmodning på din mobile tegnebog for at fortsætte.",
@@ -891,9 +905,19 @@
                     "communityCTA_1": "Vi vil elske din feedback og få dig til at deltage i os i vores",
                     "bugs": "Bemærk venligst, at HyperPlay er en offentlig alpha. Mange funktioner er stadig\ni udvikling, og der vil være bugs.",
                     "description": "HyperPlay er en spil launcher og spil butik aggregator fra\nfremtid. Med HyperPlay kan du bære din tegnebog, poletter og aktiver\nind i hvert spil. HyperPlay understøtter hele biblioteket af Epic\nStore, GOG og vores egen HyperPlay butik. Ved at bruge HyperPlay accepterer du\ntil vores",
-                    "communityCTA_2": "fællesskab. Lad os sammen forme fremtiden for spil!"
+                    "communityCTA_2": "fællesskab. Lad os sammen forme fremtiden for spil!",
+                    "paragraphOne": "Hos HyperPlay bygger vi den næste generations spilstor  \n            for fremtidens gaming.",
+                    "bulletPointThree": "Spil Epic- og GOG-spil direkte gennem HyperPlay",
+                    "bulletPointTwo": "Tjen tokens, NFTs og off-chain belønninger ved at fuldføre opgaver",
+                    "lastParagraph": "I øjeblikket i Beta, værdsætter vi din feedback højt og  \n            opfordrer dig til at rapportere eventuelle problemer eller forslag i vores",
+                    "paragraphThr": "Sømløst bring din tegnebog, tokens,  \n           og aktiver ind i hvert spil, mens du får adgang  \n           til de omfattende biblioteker i Epic Store,  \n           GOG og vores egen HyperPlay Store - alt på ét sted.",
+                    "TitleList": "Med HyperPlay kan du:",
+                    "bulletPointFive": "Kør Windows-spil på macOS, Linux og SteamDeck ved hjælp af vores\n              avancerede",
+                    "bulletPointFour": "Installer Steam (Windows-version) på macOS med ét nemt klik",
+                    "bulletPointOne": "Få adgang til en stor samling af 100+ on-chain aktiverede spil"
                 },
-                "title": "Velkommen til Hyper Afspil Tidlig adgang!"
+                "title": "Velkommen til Hyper Afspil Tidlig adgang!",
+                "titleIntro": "Velkommen til HyperPlay!"
             },
             "connectAgain": "Tilslut igen",
             "terms": "Vilkår for tjeneste"
@@ -912,12 +936,14 @@
         "linkSteamAccountTitle": "Link Steam-konto",
         "accesscodes": {
             "error": {
-                "validation": "Adgangskode er ugyldig"
+                "validation": "Adgangskode er ugyldig",
+                "licenseUndefined": "Kunne ikke validere adgangskode. Tjek venligst din internetadgang eller firewall-indstillinger."
             },
             "requirescode": "Denne spilopdatering kræver en adgangskode.",
             "success": {
                 "validation": "Succes! Adgangskode er gyldig"
-            }
+            },
+            "placeholder": "Indtast adgangskode"
         },
         "publicAlpha": "Offentlige undersøgelser",
         "changeWallet": "Skift tegnebog konto",
@@ -927,7 +953,9 @@
         "viewPortfolio": "Se portefølje",
         "buttons": {
             "agree": "Jeg accepterer",
-            "noThanks": "Nej tak"
+            "noThanks": "Nej tak",
+            "primaryButton": "Jeg accepterer",
+            "secondaryButton": "Nej, tak"
         },
         "connectWallet": "Tilslut tegnebog",
         "analyticsOff": "Analytics slukkes",
@@ -940,7 +968,8 @@
             "installed": "Klar til at spille",
             "installing": "Downloader...",
             "paused": "Pause",
-            "distributables": "Installation af Distributables"
+            "distributables": "Installation af Distributables",
+            "patching": "Opdaterer..."
         },
         "currentWallet": "Nuværende tegnebog",
         "otp": "Et tidspaskode",
@@ -953,7 +982,9 @@
         "turnAnalyticsOn": "Slå til",
         "Sync": "Synkronisering",
         "syncing": "Synkroniserer...",
-        "viewFullscreen": "Se fuld skærm"
+        "viewFullscreen": "Se fuld skærm",
+        "discordAppLink": "Discord-fællesskab.",
+        "compatibilityLayer": "Kompatibilitetslag (Beta)"
     },
     "hyperplayOverlay": {
         "chainRequest": {
@@ -1028,7 +1059,9 @@
         "claimFailed": "Krav mislykkedes",
         "claimFailedMessage": "Prøv venligst endnu mere. Hvis det stadig ikke virker, skal du oprette en Discord-supportbillet.",
         "createDiscordTicket": "Oprettet Discord billet",
-        "notEnoughGas": "Utilstrækkelig tegnebogsbalance til at kræve din belønning på grund af gasgebyrer. Prøv en anden tegnebog eller genopfylde denne, før du tager hånd om det.",
+        "notEnoughGas": {
+            "message": "Utilstrækkelig tegnebogs saldo til at indløse din belønning på grund af gasafgifter. Prøv en anden tegnebog eller genopfyld denne, før du prøver igen."
+        },
         "claimed": "Krav til krav",
         "quests": "Quests",
         "reputation": "Omdømme",
@@ -1048,7 +1081,28 @@
             "confirm": "Bekræft"
         },
         "noG7ConnectionClaim": "Du skal have en Game7-konto knyttet til {{email}} for at kræve dine belønninger.",
-        "noG7ConnectionSync": "Du skal have en Game7-konto knyttet til {{email}} for at gensyne dine opgaver."
+        "noG7ConnectionSync": {
+            "message": "Du skal have en Game7-konto tilknyttet {{email}} for at resynkronisere dine opgaver.",
+            "title": "Ingen G7-konto tilknyttet"
+        },
+        "claim": "Krav",
+        "notEligible": {
+            "message": "Du har ikke gennemført de krævede spille dage og kan ikke kræve din belønning på nuværende tidspunkt.",
+            "title": "Ikke berettiget endnu"
+        },
+        "notEnoughBalance": {
+            "title": "Lav saldo"
+        },
+        "notSignedIn": {
+            "message": "Du skal være logget ind for at indløse din belønning.",
+            "title": "Ikke logget ind"
+        },
+        "rewardClaimed": "Kravet er gennemført",
+        "toClaimReward": "for at indløse din belønning.",
+        "toSeeDetails": "for at se detaljer.",
+        "youHaveClaimed": "Du har krævet {{totalRewards}} belønning{{plural}}.",
+        "questAvailable": "Quest tilgængelig!",
+        "questComplete": "Quest fuldført!"
     },
     "importGameErrorMessageExecutable": "Spil spil Udførelse ikke fundet, import af spil er ikke muligt",
     "exit_game": "Afslut spil",
@@ -1081,7 +1135,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Du er forbundet til HyperPlay med en ekstern tegnebog.",
         "WALLET_DISCONNECTED": "Du har ikke en tegnebog, der er forbundet til HyperPlay.",
-        "comingSoon": "Kommer snart"
+        "comingSoon": "Kommer snart",
+        "links": {
+            "bridge": "Bro",
+            "buy": "Køb",
+            "portfolio": "Portefølje",
+            "sell": "Sælg",
+            "swap": "Byt",
+            "marketplace": "Markedsplads"
+        }
     },
     "quests": {
         "quests": "Quests",
@@ -1150,15 +1212,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Dette spil er en mod for Warcraft: Wrath af Lich King (3.3.5a). For at spille denne mod skal spillere eje en kopi af Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay ikke vært for Warcraft. Spillere, der ejer Warcraft kan få version 3.3.5a fra kilder som:",
+                "description": "Dette spil er en mod til World of Warcraft: Wrath of the Lich King (3.3.5a). For at spille denne mod skal spillere eje en kopi af World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay hoster ikke World of Warcraft. Spillere, der ejer World of Warcraft, kan få den nødvendige version fra følgende kilder:",
                 "subtitle": "Download World of Warcraft 3.3.5a",
                 "title": "Trin 1",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "link2": "Link 2 (Magnetlink)",
+                "link1": "Link 1"
             },
             "step2": {
                 "description": "Vælg den downloadede ChromieCraft_3.3.5a.zip-fil.",
                 "subtitle": "Vælg ChromieCraft_3.3.5a.zip Filen fil",
-                "title": "Trin 2"
+                "title": "Trin 2",
+                "subtitle1": "Vælg den downloadede 3.3.5a zip-fil"
             },
             "step3": {
                 "description": "Vælg mappen, hvor Warcraft: Wrath of te Lich King (3.3.5a) skal installeres.",
@@ -1192,5 +1257,27 @@
     "Install Steam": "Installer Steam",
     "Installing Steam": "Installation af Steam...",
     "Launch Steam": "Start Steam",
-    "UNCHECK 'Run Steam'": "Hoteller i nærheden af UNCHECK 'Run Steam ''"
+    "UNCHECK 'Run Steam'": "Hoteller i nærheden af UNCHECK 'Run Steam ''",
+    "Downloading": "Downloader {{percent}}%",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Hvis du ønsker at fortsætte, bedes du være tålmodig, da det kan tage et par minutter at afslutte afhængigt af din internetforbindelse og systemkonfiguration.",
+    "installModal": {
+        "loginRequired": "Login kræves",
+        "loginRequiredMessage": "Du skal være logget ind på HyperPlay for at indtaste din adgangskode og installere dette spil. ",
+        "loginRequiredMessageUpdate": "Du skal være logget ind på HyperPlay for at indtaste din adgangskode og opdatere dette spil. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 eller nyere"
+    },
+    "Please Wait": "Vent venligst",
+    "Recommended specs for a better experience": "Anbefalede specifikationer for en bedre oplevelse",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask-porteføljen er kun tilgængelig, når den er tilsluttet MetaMask."
+        },
+        "unsupported": "Ikke-understøttet tegnebogsforbindelse"
+    },
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 eller højere",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Vær opmærksom på, at ikke alle spil vil fungere, og selvom de gør, kan de muligvis ikke køre som forventet.",
+    "Installing": "Installerer"
 }

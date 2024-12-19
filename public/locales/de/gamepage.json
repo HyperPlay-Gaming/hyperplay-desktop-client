@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Installation fortsetzen",
             "message": "Möchtest du die heruntergeladenen Dateien BEHALTEN?",
-            "title": "Installation abbrechen",
+            "title": "Möchten Sie den Download abbrechen?",
             "keepFilesMessage": "Überprüfen Sie hier, ob Sie die Download-Dateien nach dem Abbrechen behalten möchten."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Downloadgröße",
         "firstPlayed": "Erstmals gespielt",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Größe des Downloads wird ermittelt",
+        "getting-install-size": "Größe der Installation wird ermittelt",
         "installSize": "Installierte Größe",
         "language": "Sprache",
         "lastPlayed": "Zuletzt gespielt",
@@ -225,7 +225,8 @@
         "gog-goodie": "Dieses Spiel scheint nicht installierbar zu sein. Überprüfen Sie die Download-Inhalte auf https://gog.com/account",
         "goodie": "Nicht installierbar",
         "moving-files": "Datei verschieben '{{file}}': {{percent}} ",
-        "preparing": "Download vorbereiten, bitte warten"
+        "preparing": "Download vorbereiten, bitte warten",
+        "patching": "Dateien werden gepatcht "
     },
     "submenu": {
         "addShortcut": "Verknüpfung hinzufügen",

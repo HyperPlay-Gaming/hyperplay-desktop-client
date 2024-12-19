@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Retirar dos Downloads",
             "pause": "Suspender o download",
-            "resume": "Reiniciar o download"
+            "resume": "Reiniciar o download",
+            "retry-install": "Tentar instalar novamente",
+            "retry-update": "Tentar atualizar novamente",
+            "stop": "Parar Download",
+            "timeElapsed": "Tempo Decorrido: {{elapsed}}",
+            "launch": "Iniciar Jogo"
         }
     },
     "Recent": "Jogados Recentemente",
@@ -816,8 +821,18 @@
                     "bugs": "Lembre-se de que o HyperPlay é uma alfa pública. Muitas funcionalidades ainda estão em desenvolvimento e bugs poderão surgir.",
                     "communityCTA_1": "Seria ótimo contar com seu feedback e que você participasse conosco na nossa",
                     "communityCTA_2": "comunidade. Vamos unir forças para definir o futuro dos jogos!",
-                    "description": "HyperPlay é um launcher de jogos e um agregador de lojas de jogos do futuro. Com o HyperPlay, você pode levar sua carteira, tokens e ativos para qualquer jogo. O HyperPlay oferece suporte a toda a biblioteca da Epic Store, GOG e à nossa própria loja HyperPlay. Ao utilizar o HyperPlay, você concorda com nossos"
-                }
+                    "description": "HyperPlay é um launcher de jogos e um agregador de lojas de jogos do futuro. Com o HyperPlay, você pode levar sua carteira, tokens e ativos para qualquer jogo. O HyperPlay oferece suporte a toda a biblioteca da Epic Store, GOG e à nossa própria loja HyperPlay. Ao utilizar o HyperPlay, você concorda com nossos",
+                    "bulletPointFive": "Execute jogos do Windows no macOS, Linux e SteamDeck usando nosso\n              avançado",
+                    "bulletPointFour": "Instale o Steam (versão para Windows) no macOS com um clique fácil",
+                    "bulletPointOne": "Acesse uma vasta coleção de mais de 100 jogos habilitados para blockchain",
+                    "TitleList": "Com o HyperPlay você pode:",
+                    "bulletPointThree": "Jogue jogos da Epic e GOG diretamente através do HyperPlay",
+                    "bulletPointTwo": "Ganhe tokens, NFTs e recompensas off-chain completando Quests",
+                    "lastParagraph": "Atualmente em Beta, valorizamos muito seu feedback e \n            encorajamos você a relatar quaisquer problemas ou sugestões em nosso",
+                    "paragraphOne": "No HyperPlay, estamos construindo a loja de jogos de próxima geração \n            para o futuro dos jogos.",
+                    "paragraphThr": "Traga seu wallet, tokens, \n           e ativos para cada jogo enquanto acessa \n           as extensas bibliotecas da Epic Store, \n           GOG, e nossa própria HyperPlay Store - tudo em um só lugar."
+                },
+                "titleIntro": "Bem-vindo ao HyperPlay!"
             },
             "analytics": {
                 "neverCollectIP": " capturar o seu endereço IP completo;",
@@ -829,7 +844,16 @@
                 "body": "A HyperPlay deseja reunir dados de uso para compreender melhor como nossos usuários interagem com o aplicativo. Essas informações nos ajudam a entender como você utiliza o app e nos permitem aprimorar ainda mais o HyperPlay para você.\n\nA HyperPlay pretende coletar dados de uso para entender melhor a interação dos nossos usuários com a aplicação. Essas informações nos ajudam a saber como você utiliza o app e nos possibilitam tornar o HyperPlay ainda melhor para você.\n\nA HyperPlay gostaria de reunir dados de uso para entender melhor a forma como nossos usuários interagem com o aplicativo. Essas informações nos ajudam a compreender como você usa o app e nos permitem melhorar ainda mais o HyperPlay para você.",
                 "neverSellData": " vender informações para ganhar dinheiro. Nunca!",
                 "optOut": "Sempre permita que você desative a participação nas Configurações;",
-                "title": "Ajude-nos a evoluir o HyperPlay!"
+                "title": "Ajude-nos a evoluir o HyperPlay!",
+                "bulletOne": "Sempre permita que você opte por sair",
+                "privacyPolicy": "Política de Privacidade.",
+                "bulletTwo": "Enviar cliques e interações de jogo anonimizados",
+                "paragraphOne": "A HyperPlay gostaria de coletar dados de uso para entender melhor como nossos usuários interagem com o aplicativo. \n           Isso nos permite tornar a HyperPlay ainda melhor para você.",
+                "text": {
+                    "externalLink": "Saiba Mais",
+                    "title": "Atualizamos nossa Política de Privacidade"
+                },
+                "titleOne": "Ajude-nos a melhorar o HyperPlay!"
             },
             "connectionConnected": {
                 "description": "Sua carteira está conectada. Você está pronto para jogar.  \nSua carteira foi conectada. Você está preparado para jogar.  \nA sua carteira está conectada. Você está pronto para a diversão.",
@@ -846,7 +870,8 @@
             "extracting": "A extração está em andamento...  \nExtraindo...  \nProcesso de extração...",
             "paused": "Suspenso",
             "distributables": "Instalação de distribuições...",
-            "installed": "Pronto para a partida"
+            "installed": "Pronto para a partida",
+            "patching": "Atualizando..."
         },
         "logOut": "Encerrar sessão",
         "misc": "De jeito nenhum",
@@ -861,7 +886,9 @@
         "analyticsOn": "A análise está em funcionamento",
         "buttons": {
             "agree": "Concordo plenamente",
-            "noThanks": "Não, muito obrigado"
+            "noThanks": "Não, muito obrigado",
+            "primaryButton": "Eu concordo",
+            "secondaryButton": "Não, Obrigado"
         },
         "copyUrl": "Copiar a URL",
         "discordApp": "Discord",
@@ -875,9 +902,11 @@
                 "validation": "Sucesso! O código de acesso foi validado"
             },
             "error": {
-                "validation": "Código de acesso incorreto"
+                "validation": "Código de acesso incorreto",
+                "licenseUndefined": "Não foi possível validar o código de acesso. Verifique seu acesso à internet ou configurações de firewall."
             },
-            "requirescode": "É preciso um código de acesso para esta atualização do jogo."
+            "requirescode": "É preciso um código de acesso para esta atualização do jogo.",
+            "placeholder": "Digite o código de acesso"
         },
         "changeWallet": "Mudar Conta da Carteira",
         "achievements": {
@@ -896,7 +925,9 @@
         "syncing": "Sincronização em andamento...",
         "viewMyAccount": "Ver minha conta",
         "viewItem": "Exibir {{item}}",
-        "viewFullscreen": "Modo de tela cheia"
+        "viewFullscreen": "Modo de tela cheia",
+        "discordAppLink": "Comunidade Discord.",
+        "compatibilityLayer": "Camada de Compatibilidade (Beta)"
     },
     "hyperplayOverlay": {
         "description": {
@@ -1009,7 +1040,9 @@
         "claimFailed": "Reclamação falhada",
         "claimFailedMessage": "Por favor, tente mais uma vez. Se ainda não funcionar, crie um ticket de suporte Discord.",
         "createDiscordTicket": "Bilhete de discórdia criado",
-        "notEnoughGas": "Falta de saldo na carteira para receber sua recompensa devido às taxas de gás. Utilize uma carteira alternativa ou faça um depósito nesta antes de tentar novamente.",
+        "notEnoughGas": {
+            "message": "Saldo insuficiente na carteira para reivindicar sua recompensa devido às taxas de gás. Tente uma carteira diferente ou reabasteça esta antes de tentar novamente."
+        },
         "pointsClaimed": "Pontos Atribuídos",
         "g7Numclaimed": "Total de Créditos G7 Solicitados",
         "claimWarning": {
@@ -1020,7 +1053,28 @@
             "confirm": "Validação"
         },
         "noG7ConnectionClaim": "Para reivindicar suas recompensas, você deve ter uma conta Game7 conectada a {{email}}.",
-        "noG7ConnectionSync": "Você deve ter uma conta Game7 ligada a {{email}} para re-sincronizar suas tarefas."
+        "noG7ConnectionSync": {
+            "title": "Nenhuma conta G7 vinculada",
+            "message": "Você precisa ter uma conta Game7 vinculada a {{email}} para re-sincronizar suas tarefas."
+        },
+        "claim": "Reivindicar",
+        "notSignedIn": {
+            "message": "Você precisa estar conectado para reivindicar sua recompensa.",
+            "title": "Não conectado"
+        },
+        "rewardClaimed": "Reivindicação bem-sucedida",
+        "toSeeDetails": "para ver os detalhes.",
+        "youHaveClaimed": "Você reivindicou a recompensa {{totalRewards}} {{plural}}.",
+        "toClaimReward": "para reivindicar sua recompensa.",
+        "notEligible": {
+            "message": "Você não completou os dias de sequência de jogo necessários e não pode reivindicar sua recompensa neste momento.",
+            "title": "Ainda não é elegível"
+        },
+        "notEnoughBalance": {
+            "title": "Saldo baixo"
+        },
+        "questAvailable": "Missão disponível!",
+        "questComplete": "Missão completa!"
     },
     "notification": {
         "wine-download": {
@@ -1056,7 +1110,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Você está utilizando uma carteira externa para se conectar ao HyperPlay.",
         "WALLET_DISCONNECTED": "Você não tem uma carteira associada ao HyperPlay.",
-        "comingSoon": "Disponível em Breve"
+        "comingSoon": "Disponível em Breve",
+        "links": {
+            "buy": "Comprar",
+            "bridge": "Ponte",
+            "marketplace": "Mercado",
+            "portfolio": "Portfólio",
+            "sell": "Vender",
+            "swap": "Trocar"
+        }
     },
     "importGameErrorMessage": "A pasta do jogo não é válida, não é possível realizar a importação do jogo",
     "importGameErrorMessageExecutable": "O executável do jogo não foi localizado, portanto, a importação do jogo é inviável",
@@ -1096,15 +1158,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "Crafteando Cromos",
-                "description": "Este jogo é um mod para World of Warcraft: Wrath of the Lich King (3.3.5a). Para jogar este mod, os jogadores precisam possuir uma cópia do World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay não disponibiliza World of Warcraft. Jogadores que têm World of Warcraft podem obter a versão 3.3.5a de fontes como:",
+                "description": "Este jogo é um mod para World of Warcraft: Wrath of the Lich King (3.3.5a). Para jogar este mod, os jogadores devem possuir uma cópia de World of Warcraft 3.3.5a. {{newline}} {{newline}} A HyperPlay não hospeda World of Warcraft. Jogadores que possuem World of Warcraft podem obter a versão necessária nas seguintes fontes:",
                 "subtitle": "Obtenha o World of Warcraft 3.3.5a",
                 "title": "Fase 1",
-                "webtorrent": "Torrent (Conexão Magnet)"
+                "webtorrent": "Torrent (Conexão Magnet)",
+                "link1": "Link 1",
+                "link2": "Link 2 (Link Magnet)"
             },
             "step2": {
                 "description": "Selecione o ficheiro ChromieCraft_3.3.5a.zip que foi feito o download.",
                 "subtitle": "Selecione o arquivo ChromieCraft_3.3.5a.zip",
-                "title": "Fase 2"
+                "title": "Fase 2",
+                "subtitle1": "Selecione o arquivo zip 3.3.5a baixado"
             },
             "step3": {
                 "description": "Por favor, selecione a pasta onde o World of Warcraft: Wrath of the Lich King (3.3.5a) será instalado.  \nPor favor, indique a pasta em que o World of Warcraft: Wrath of the Lich King (3.3.5a) deve ser instalado.  \nPor favor, escolha o diretório onde o World of Warcraft: Wrath of the Lich King (3.3.5a) deve ser instalado.",
@@ -1138,5 +1203,27 @@
     "Cancel Installation": "Anular instalação",
     "HyperPlay will notify you once the installation is done;": "O HyperPlay te notificará assim que a instalação for realizada;",
     "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Se você pretende continuar, tenha calma, pois pode demorar alguns minutos para finalizar, dependendo da sua conexão de internet e da configuração do sistema;",
-    "Launch Steam": "Executar Steam"
+    "Launch Steam": "Executar Steam",
+    "Apple Silicon M1 or above": "Apple Silicon M1 ou superior",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Esteja ciente de que nem todos os jogos funcionarão, e mesmo que funcionem, podem não rodar como esperado.",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Se você deseja continuar, por favor, tenha paciência, pois pode levar alguns minutos para terminar, dependendo da sua conexão com a internet e configuração do sistema.",
+    "installModal": {
+        "loginRequired": "Login necessário",
+        "loginRequiredMessage": "Você precisa estar logado no HyperPlay para inserir seu código de acesso e instalar este jogo. ",
+        "loginRequiredMessageUpdate": "Você precisa estar logado no HyperPlay para inserir seu código de acesso e atualizar este jogo. "
+    },
+    "Recommended specs for a better experience": "Especificações recomendadas para uma melhor experiência",
+    "16GB of RAM": "16GB de RAM",
+    "Downloading": "Baixando {{percent}}%",
+    "Installing": "Instalando",
+    "macOS 14": {
+        "0 or above": "macOS 14.0 ou superior"
+    },
+    "Please Wait": "Por Favor Aguarde",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "O portfólio MetaMask está disponível apenas quando conectado ao MetaMask."
+        },
+        "unsupported": "Conexão de carteira não suportada"
+    }
 }

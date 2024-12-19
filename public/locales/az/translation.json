@@ -183,9 +183,9 @@
         "cancel": "Cancel",
         "go_to_library": "Kitabxanaya gedin",
         "login": "Daxil ol",
-        "sync": "Sinxronizasiya",
-        "syncing": "Sinxronizasiya",
-        "unsync": "Sinxronizasiyadan çıxarın",
+        "sync": "Senkronizasiya",
+        "syncing": "Senkronizasiya Olunur",
+        "unsync": "Senkronizasiya Etmə",
         "continue": "Davam edin",
         "download": "Endir",
         "update": "Yenilə",
@@ -260,7 +260,7 @@
         "ignore_hidden": "Gizləməyə məhəl qoyma",
         "platform": "Platforma",
         "show_all_games": "Bütün oyunları göstərin",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Mövcud olmayan oyunları göstərin",
         "show_favourites_only": "Yalnız Sevimliləri göstərin",
         "show_hidden": "Gizli göstər",
         "store": "Filtr Mağazası"
@@ -391,9 +391,9 @@
             "reparing": "Təmiri Bitirdi"
         },
         "install": {
-            "canceled": "Quraşdırma Ləğv edildi",
+            "canceled": "Quraşdırma Ləğv Edildi",
             "error": "Quraşdırma uğursuz oldu",
-            "finished": "Quraşdırma tamamlandı",
+            "finished": "Quraşdırma başa çatdı",
             "imported": "Oyun İdxal",
             "startInstall": "Quraşdırma Başladı",
             "stopped": "Qablaşdırma",
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Silindi",
         "update": {
-            "canceled": "Yeniləndi Ləğv edildi",
+            "canceled": "Yeniləmə Ləğv Edildi",
             "finished": "Yeniləmə Tamamlandı",
             "started": "Yeniləmə Başladı",
             "stopped": "Proqram",
@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "pause": "Endirmələri dayandır",
-            "resume": "Proqramlar"
+            "resume": "Proqramlar",
+            "launch": "Oyunu Başlat",
+            "stop": "Yükləməni dayandır",
+            "timeElapsed": "Keçən vaxt: {{elapsed}}",
+            "retry-update": "Yeniləməni Təkrar Et",
+            "retry-install": "Quraşdırmanı yenidən cəhd et"
         }
     },
     "Recent": "Bu yaxınlarda oynanılıb",
@@ -512,7 +517,7 @@
         "default-install-path": "Defolt Quraşdırma Yolu",
         "default-steam-path": "Defolt Buxar yolu",
         "defaultWinePrefix": "Yeni Şərab Prefiksləri üçün Qovluq qurun",
-        "disable_controller": "Nəzarətçidən istifadə edərək Qəhrəman naviqasiyasını söndürün",
+        "disable_controller": "İdarəetmə cihazı ilə Hyperplay naviqasiyasını deaktiv edin",
         "discordRPC": "Discord Rich Presence-i aktivləşdirin",
         "download-no-https": "HTTPS olmadan oyunları endirin (CDN-lər üçün faydalıdır, məsələn, LanCache)",
         "egs-sync": "Quraşdırılmış Epic Games ilə sinxronizasiya edin",
@@ -746,7 +751,7 @@
         "manager": {
             "link": "Şərab meneceri",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Şərab meneceri",
+            "title": "Uyğunluq Qatı ",
             "unzipping": "Açma"
         },
         "release": "Buraxılış tarixi",
@@ -789,7 +794,8 @@
             "paused": "Fasilə verildi",
             "extracting": "Ümumi...",
             "installing": "İndi...",
-            "installed": "Oynamaq üçün hazır"
+            "installed": "Oynamaq üçün hazır",
+            "patching": "Yamanma..."
         },
         "onboarding": {
             "walletSelection": {
@@ -839,7 +845,16 @@
                 "neverSellData": " qiymət üçün data satmaq. Oxunub!",
                 "optOut": "Hər zaman Ayarlar vasitəsi ilə seçim-out imkan verir;",
                 "privacyCaption": "Bu məlumat birləşdirilmişdir və bu ümumi Data Protection Təhlükəsizlik Təhlükəsizlik Təhlükəsizliyinin (AB) 2016/679 tərəfindən anonimdir. Bizim gizlilik proqramları ilə bağlı daha çox məlumat üçün, lütfen gözləyin ",
-                "body": "HyperPlay, istifadəçilərin proqramla necə əlaqədar olduğunu daha yaxşı anlamaq üçün istifadə etmək istəyirdi. Bu məlumat, app istifadə etdiyinizi anlamağa kömək edir və HyperPlay'i sizin üçün daha yaxşı edir."
+                "body": "HyperPlay, istifadəçilərin proqramla necə əlaqədar olduğunu daha yaxşı anlamaq üçün istifadə etmək istəyirdi. Bu məlumat, app istifadə etdiyinizi anlamağa kömək edir və HyperPlay'i sizin üçün daha yaxşı edir.",
+                "bulletOne": "Həmişə çıxış etməyə icazə verin",
+                "bulletTwo": "Anonim klik və oyun qarşılıqlı əlaqəsini göndərin",
+                "paragraphOne": "HyperPlay istifadəçi məlumatlarını toplamaq istəyir ki, istifadəçilərimizin tətbiqlə necə qarşılıqlı əlaqədə olduğunu daha yaxşı başa düşsün. \n           Bu, HyperPlay-i sizin üçün daha da yaxşı etməyə imkan tanıyır.",
+                "privacyPolicy": "Məxfilik Siyasəti.",
+                "text": {
+                    "externalLink": "Daha Ətraflı Öyrən",
+                    "title": "Məxfilik Siyasətimizi yenilədik"
+                },
+                "titleOne": "HyperPlay-ı inkişaf etdirməyə kömək edin!"
             },
             "terms": "Xidmət xidmətləri.",
             "connectionCanceled": {
@@ -853,9 +868,19 @@
                     "communityCTA_2": "community. Birgə, oyun gəlir!",
                     "description": "HyperPlay bir oyun starter və oyun mağazası aggregator\nhaqqında HyperPlay ilə, cüzdanınızı, heç birləşdirə bilərsiniz, və aktivlər\nhər oyun. HyperPlay, Epic'in bütün kitabxanasını dəstəyir\nYadda saxla HyperPlay istifadə etdiyiniz zaman, razı olursunuz\nBizimlə",
                     "bugs": "HyperPlay ümumi alfa olduğunu unutmayın. Bir çox xüsusiyyətlər haqqında\ninkişaf, və uşaqlar olacaq.",
-                    "construction": "HyperPlay tikinti altında."
+                    "construction": "HyperPlay tikinti altında.",
+                    "TitleList": "HyperPlay ilə edə bilərsiniz:",
+                    "bulletPointTwo": "Tapşırıqları tamamlayaraq tokenlər, NFT-lər və off-chain mükafatlar qazanın",
+                    "paragraphOne": "HyperPlay-da biz gələcəyin oyunları üçün növbəti nəsil oyun mağazasını \n            qururuq.",
+                    "paragraphThr": "Cüzdanınızı, tokenlərinizi və aktivlərinizi hər bir oyuna problemsiz gətirin, \n           Epic Store, GOG və öz HyperPlay Mağazamızın geniş kitabxanalarına \n           bir yerdə daxil olun.",
+                    "bulletPointFive": "Windows oyunlarını macOS, Linux və SteamDeck-də bizim\n              inkişaf etmiş",
+                    "bulletPointFour": "Bir asan kliklə macOS-da Steam (Windows versiyası) quraşdırın",
+                    "bulletPointOne": "100-dən çox on-chain aktivləşdirilmiş oyunların geniş kolleksiyasına daxil olun",
+                    "bulletPointThree": "Epic və GOG oyunlarını birbaşa HyperPlay vasitəsilə oynayın",
+                    "lastParagraph": "Hal-hazırda Beta mərhələsindədir, sizin fikrinizi yüksək qiymətləndiririk və \n            hər hansı bir problem və ya təklifinizi bizimlə"
                 },
-                "title": "Hipertaniya İlk Access oynayır!"
+                "title": "Hipertaniya İlk Access oynayır!",
+                "titleIntro": "HyperPlay-a xoş gəlmisiniz!"
             },
             "connectionConnected": {
                 "description": "Sizin cüzdan bağlıdır. Oyuna hazırsınız.",
@@ -868,7 +893,9 @@
         },
         "buttons": {
             "noThanks": "Xeyr, təşəkkürlər",
-            "agree": "Mən razılıq"
+            "agree": "Mən razılıq",
+            "primaryButton": "Razıyam",
+            "secondaryButton": "Yox, Təşəkkürlər"
         },
         "logOut": "Çıx",
         "connectWallet": "Yadda saxla",
@@ -894,17 +921,21 @@
         "viewPortfolio": "Bakı",
         "accesscodes": {
             "error": {
-                "validation": "Access kodu qeyd olunur"
+                "validation": "Access kodu qeyd olunur",
+                "licenseUndefined": "Giriş kodunu təsdiqləyə bilmədik. Zəhmət olmasa internet bağlantınızı və ya firewall parametrlərinizi yoxlayın."
             },
             "requirescode": "Bu oyun yeniləndirilməsi giriş kodunu edir.",
             "success": {
                 "validation": "Qeydiyyat! Access kodu mövcuddur"
-            }
+            },
+            "placeholder": "Giriş kodunu daxil edin"
         },
         "changeWallet": "Swap cüzdan hesabı",
         "publicAlpha": "Elan",
         "syncing": "Qeydiyyat...",
-        "viewFullscreen": "Tam ekran bax"
+        "viewFullscreen": "Tam ekran bax",
+        "compatibilityLayer": "Uyğunluq Qatı (Beta)",
+        "discordAppLink": "Discord İcması."
     },
     "quest": {
         "active": "Aktiv",
@@ -922,7 +953,7 @@
             "syncSuccess": "Proqram"
         },
         "points": "Nöqtələr",
-        "signIn": "Daxil ol",
+        "signIn": "Daxil olun",
         "sync": "Sinxronizasiya",
         "reward": "Qeydiyyat",
         "quests": "Avtomobil",
@@ -943,7 +974,9 @@
         "connectSteamAccount": "Daxil ol",
         "errorMessage": "Əməliyyat ilə bir məlumat var.",
         "reputation": "İdman",
-        "notEnoughGas": "Qeydli cüzdan balıqları ilə mükafat iddia etmək. Retrying əvvəl bir cüzdan və ya yeniləyin.",
+        "notEnoughGas": {
+            "message": "Qaz xərcləri səbəbindən mükafatınızı tələb etmək üçün cüzdan balansı kifayət deyil. Fərqli bir cüzdan sınayın və ya yenidən cəhd etmədən əvvəl bu cüzdanı doldurun."
+        },
         "pointsClaimed": "Qeydiyyat",
         "g7Numclaimed": "Xüsusi G7 Kreditlər",
         "claimWarning": {
@@ -954,7 +987,28 @@
             "confirm": "Təsdiqlə"
         },
         "noG7ConnectionClaim": "Sizin mükafatları iddia etmək üçün {{email}} ilə bağlı bir Game7 hesabı olmalıdır.",
-        "noG7ConnectionSync": "{{email}} ilə bağlı bir Game7 hesabınız olması lazımdır."
+        "noG7ConnectionSync": {
+            "message": "Tapşırıqlarınızı yenidən senkronizasiya etmək üçün {{email}} ilə bağlı bir Game7 hesabınız olmalıdır.",
+            "title": "G7 hesabı bağlı deyil"
+        },
+        "claim": "Tələb et",
+        "notEligible": {
+            "message": "Tələb olunan oyun ardıcıllığı günlərini tamamlamamısınız və bu anda mükafatı tələb edə bilmirsiniz.",
+            "title": "Hələ uyğun deyilsiniz"
+        },
+        "notEnoughBalance": {
+            "title": "Aşağı balans"
+        },
+        "notSignedIn": {
+            "message": "Mükafatı tələb etmək üçün daxil olmalısınız.",
+            "title": "Daxil olmamısınız"
+        },
+        "questAvailable": "Tapşırıq mövcuddur!",
+        "questComplete": "Tapşırıq tamamlandı!",
+        "rewardClaimed": "Tələb uğurla yerinə yetirildi",
+        "toClaimReward": "mükafatınızı tələb etmək üçün.",
+        "toSeeDetails": "təfərrüatları görmək üçün.",
+        "youHaveClaimed": "{{totalRewards}} mükafatını{{plural}} tələb etmisiniz."
     },
     "profile": "Profil",
     "importGameErrorMessageExecutable": "Oyuncaq tapmaq mümkün deyil",
@@ -1052,7 +1106,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Siz xarici cüzdan ilə HiperPlay bağlıdır.",
         "WALLET_DISCONNECTED": "HyperPlay bağlı bir cüzdanınız yoxdur.",
-        "comingSoon": "Çıxış"
+        "comingSoon": "Çıxış",
+        "links": {
+            "buy": "Al",
+            "swap": "Dəyişdir",
+            "bridge": "Körpü",
+            "marketplace": "Bazar",
+            "portfolio": "Portfel",
+            "sell": "Sat"
+        }
     },
     "exit_game": "Oyuncaq",
     "importGameErrorMessage": "Xüsusi oyun qrupu deyil, avtomatik oyun mümkün deyil",
@@ -1073,16 +1135,19 @@
     "mods": {
         "instructions": {
             "step1": {
-                "description": "Bu oyun World of Warcraft üçün bir mod: Lich King Wrath (3.3.5a). Bu modu oynamaq üçün, oyunçular Warcraft Dünya nümunə sahibi olmalıdır 3.3.5a. {{newline}} {{newline}} HyperPlay Warcraft World ev sahibi deyil. Warcraft-ın öz dünya sahibi olan oyunçular, kimi mövzulardan 3.3.5a verə bilər:",
+                "description": "Bu oyun World of Warcraft: Wrath of the Lich King (3.3.5a) üçün bir moddur. Bu moddan oynamaq üçün oyunçuların World of Warcraft 3.3.5a nüsxəsinə sahib olmaları lazımdır. {{newline}} {{newline}} HyperPlay World of Warcraft-ı təqdim etmir. World of Warcraft-a sahib olan oyunçular aşağıdakı mənbələrdən lazım olan versiyanı əldə edə bilərlər:",
                 "subtitle": "World of Warcraft 3.3.5a",
                 "title": "Addım 1",
                 "webtorrent": "Torrent (Magnet Link)",
-                "chromieCraft": "ChromieCraft"
+                "chromieCraft": "ChromieCraft",
+                "link1": "Bağlantı 1",
+                "link2": "Link 2 (Maqnit Linki)"
             },
             "step2": {
                 "description": "Qeyd olun ChromieCraft_3.3.5a.zip fak.",
                 "subtitle": "ChromieCraft_3.3.5a.zip Oxunub",
-                "title": "Addım 2"
+                "title": "Addım 2",
+                "subtitle1": "Yüklənmiş 3.3.5a zip faylını seçin"
             },
             "step3": {
                 "description": "World of Warcraft: Lich King Wrath (.3.5a) quraşdırılması lazımdır.",
@@ -1138,5 +1203,27 @@
     "Install Steam": "Daxil ol",
     "Installing Steam": "Daxil ol...",
     "Launch Steam": "Daxil ol",
-    "Launching Steam": "Daxil ol."
+    "Launching Steam": "Daxil ol.",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask Portfeli yalnız MetaMask ilə qoşulduqda mövcuddur."
+        },
+        "unsupported": "Dəstəklənməyən Cüzdan Bağlantısı"
+    },
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Bilin ki, bütün oyunlar işləməyə bilər və işləsələr belə, gözlənildiyi kimi işləməyə bilər.",
+    "Downloading": "Yüklənir {{percent}}%",
+    "Recommended specs for a better experience": "Daha yaxşı təcrübə üçün tövsiyə olunan spesifikasiyalar",
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 və ya daha yuxarı",
+    "Installing": "Quraşdırılır",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Davamat etmək istəyirsinizsə, internet bağlantınızın və sistem konfiqurasiyanızın vəziyyətinə görə tamamlanması bir neçə dəqiqə çəkə bilər, buna görə də səbirli olun.",
+    "installModal": {
+        "loginRequired": "Daxil olma tələb olunur",
+        "loginRequiredMessage": "HyperPlay-a daxil olmalısınız ki, giriş kodunuzu daxil edib bu oyunu quraşdırasınız. ",
+        "loginRequiredMessageUpdate": "Bu oyunu yeniləmək və giriş kodunuzu daxil etmək üçün HyperPlay-a daxil olmalısınız. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 və ya daha yuxarı"
+    },
+    "Please Wait": "Zəhmət olmasa Gözləyin"
 }

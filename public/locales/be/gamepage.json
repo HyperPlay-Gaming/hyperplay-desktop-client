@@ -29,23 +29,34 @@
         "stopInstall": {
             "keepInstalling": "Працягвайце ўсталёўваць",
             "message": "Вы хочаце ЗАХАВАЦЬ спампаваныя файлы?",
-            "title": "Спыніць усталёўку"
+            "title": "Вы хочаце адмяніць загрузку?",
+            "keepFilesMessage": "Праверце тут, калі вы хочаце захаваць файлы загрузкі пасля адмяняння."
         },
         "uninstall": {
             "checkbox": "Выдаліць прэфікс: {{prefix}}{{newLine}}Заўвага: гэта нельга адрабіць, а таксама прывядзе да выдалення файлаў захавання, у якіх няма рэзервовых копій.",
             "message": "Вы хочаце выдаліць гэтую гульню?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
             "title": "Выдаліць",
-            "dlc": "Выдаліць гэта прыкладанне?"
+            "dlc": "Выдаліць гэта прыкладанне?",
+            "prefix_warning": "Префікс Wine для гэтай гульні з'яўляецца стандартным. Калі вы сапраўды хочаце яго выдаліць, вам трэба зрабіць гэта ўручную."
         },
         "update": {
             "message": "Да гэтай гульні ёсць абнаўленне. Усталяваць абнаўленне?",
-            "title": "Гульня патрабуе абнаўлення"
+            "title": "Гульня патрабуе абнаўлення",
+            "message-cancel": "Немагчыма гуляць у гэтую гульню без абнаўлення"
         },
         "wineprefix": "Выберыце папку WinePrefix",
         "yes": "ТАК",
         "dont-show-again": "Больш не паказваць",
-        "ok": "ОК"
+        "ok": "ОК",
+        "aware": "Я ў курсе",
+        "compability": {
+            "message": "Гэтая гульня для Windows будзе працаваць з выкарыстаннем сумяшчальнай платформы. Вы можаце сутыкнуцца з некаторымі праблемамі або гульня можа не працаваць зусім."
+        },
+        "yesCancel": "Так, адмяніць",
+        "stopExtraction": {
+            "title": "Вы хочаце адмяніць экстракцыю?"
+        }
     },
     "button": {
         "add_to_favourites": "Дадаць у абранае",
@@ -75,7 +86,8 @@
         "update": "Абнаўленне",
         "remove_from_library": "Выдаліць",
         "favorites": "Упадабаць",
-        "details": "Дэталі"
+        "details": "Дэталі",
+        "unfavorites": "Выдаліць з любімых"
     },
     "cloud_save_unsupported": "Не падтрымліваецца",
     "disabled": "Інваліды",
@@ -86,22 +98,25 @@
     "game": {
         "downloadSize": "Памер спампоўкі",
         "firstPlayed": "Упершыню сыграна",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Атрыманне памеру загрузкі",
+        "getting-install-size": "Атрыманне памеру ўстаноўкі",
         "installSize": "Памер усталявання",
         "language": "мова",
         "lastPlayed": "Апошняя гульня",
         "neverPlayed": "ніколі",
         "platform": "Выберыце версію платформы для ўстаноўкі",
         "requirements": "Сістэмныя патрабаванні",
-        "totalPlayed": "Згуляны час"
+        "totalPlayed": "Згуляны час",
+        "selectChannelName": "Выберыце імя канала",
+        "dlcs": "DLC"
     },
     "gamecard": {
         "moving": "Пераезд",
         "repairing": "Рамонт"
     },
     "generic": {
-        "error": "Невядомая памылка"
+        "error": "Невядомая памылка",
+        "noDescription": "Апісанне недаступна"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -132,7 +147,8 @@
             "message": "Падтрымка антычыта перарваная ці немагчымая. Гульня не будзе працаваць. Вы ўсё роўна хочаце яго ўсталяваць?",
             "install": "Так (я разумею, што гэта не спрацуе)",
             "title": "Антычыць перапынены/адхілены"
-        }
+        },
+        "compatibility-warning": "Гэтая гульня для Windows будзе працаваць з выкарыстаннем сумяшчальнай платформы. Ваш досвед можа адрознівацца."
     },
     "label": {
         "game": {
@@ -205,7 +221,18 @@
         "updating": "Абнаўленне гульні",
         "paused": "На паўзе",
         "downloading": "Спампоўка",
-        "syncingSaves": "Сінхранізацыя захаванняў"
+        "syncingSaves": "Сінхранізацыя захаванняў",
+        "goodie": "Не ўсталёўваецца",
+        "extracting": {
+            "progress": "Экстракцыя",
+            "cancel": "Адмяніць экстракцыю"
+        },
+        "playing": "Гуляем",
+        "patching": "Патчынг файлаў ",
+        "moving-files": "Перамяшчэнне файла '{{file}}': {{percent}} ",
+        "preparing": "Падрыхтоўка загрузкі, калі ласка, пачакайце",
+        "gog-goodie": "Гэтая гульня, здаецца, не падлягае ўсталёўцы. Праверце загружаемы кантэнт на https://gog.com/account",
+        "distributables": "Устаноўка дистрибутыў"
     },
     "submenu": {
         "addShortcut": "Дадаць ярлык",
@@ -219,6 +246,12 @@
         "removeShortcut": "Выдаліць ярлыкі",
         "settings": "Налады",
         "store": "Старонка крамы",
-        "verify": "Праверка і рамонт"
+        "verify": "Праверка і рамонт",
+        "extraInfo": "Дадатковая інфармацыя"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Калі ласка, звяжыцеся з камандай HyperPlay з гэтым паведамленнем: {{error}} - {{context}}."
+        }
     }
 }

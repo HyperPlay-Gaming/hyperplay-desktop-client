@@ -137,7 +137,7 @@
             "title": "Dreceres"
         },
         "sync": {
-            "button": "Tria",
+            "button": "Trieu",
             "error": "Ruta no vàlida",
             "title": "Tria el directori de partides desades"
         },
@@ -183,9 +183,9 @@
         "cancel": "Cancel·la",
         "go_to_library": "Vés a la biblioteca",
         "login": "Inicia la sessió",
-        "sync": "Sincronitza",
-        "syncing": "S'està sincronitzant",
-        "unsync": "Dessincronitza",
+        "sync": "Sincronitzar",
+        "syncing": "Sincronitzant",
+        "unsync": "Desincronitzar",
         "update": "Actualitza",
         "continue": "Continuar",
         "download": "Descarrega",
@@ -260,7 +260,7 @@
         "ignore_hidden": "Ignora els amagats",
         "platform": "Plataforma",
         "show_all_games": "Mostra tots els jocs",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Mostra jocs no disponibles",
         "show_favourites_only": "Mostra'n només els preferits",
         "show_hidden": "Mostra'n els amagats",
         "store": "Filtre de botigues"
@@ -391,9 +391,9 @@
             "reparing": "Ha finalitzat la reparació del joc"
         },
         "install": {
-            "canceled": "S'ha cancel·lat la instal·lació",
+            "canceled": "Instal·lació cancel·lada",
             "error": "La instal·lació ha fallat",
-            "finished": "Ha finalitzat la instal·lació",
+            "finished": "Instal·lació finalitzada",
             "imported": "S'ha importat el joc",
             "startInstall": "S'ha iniciat la instal·lació",
             "stopped": "Instal·lació",
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Desinstal·lat",
         "update": {
-            "canceled": "S'ha cancel·lat l'actualització",
+            "canceled": "Actualització Cancel·lada",
             "finished": "L'actualització ha acabat",
             "started": "S'ha iniciat l'actualització",
             "paused": "Actualització Paused",
@@ -489,7 +489,12 @@
             "queued": "A la cua",
             "remove": "Treu de les descàrregues",
             "pause": "Pausa les baixades",
-            "resume": "Descàrrega de currículums"
+            "resume": "Descàrrega de currículums",
+            "launch": "Llançar el joc",
+            "retry-install": "Reintenta la instal·lació",
+            "retry-update": "Reintentar Actualització",
+            "stop": "Atura la descàrrega",
+            "timeElapsed": "Temps transcorregut: {{elapsed}}"
         }
     },
     "Recent": "Jugats fa poc",
@@ -512,7 +517,7 @@
         "default-install-path": "Ruta d'instal·lació predefinida",
         "default-steam-path": "Camí de l'Steam per defecte",
         "defaultWinePrefix": "Directori de prefixos Wine nous",
-        "disable_controller": "Desactiva la navegació del HyperPlay amb el controlador",
+        "disable_controller": "Desactivar la navegació de Hyperplay mitjançant el controlador",
         "discordRPC": "Activa la Discord Rich Presence",
         "download-no-https": "Descarrega jocs sense HTTPS (útil per CDNs com ara LanCache)",
         "egs-sync": "Sincronitza amb l'Epic Games instal·lat",
@@ -746,7 +751,7 @@
         "manager": {
             "link": "Gestor del Wine",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Gestor del Wine",
+            "title": "Capacitat de compatibilitat ",
             "unzipping": "S'està descomprimint"
         },
         "release": "Release Date",
@@ -782,7 +787,9 @@
         },
         "buttons": {
             "agree": "Estic d'acord",
-            "noThanks": "No, gràcies"
+            "noThanks": "No, gràcies",
+            "primaryButton": "Estic d'acord",
+            "secondaryButton": "No, gràcies"
         },
         "onboarding": {
             "walletSelection": {
@@ -829,9 +836,19 @@
                     "communityCTA_2": "comunitat. Junts, donem forma al futur del joc!",
                     "bugs": "Si us plau, tingui en compte que HyperPlay és una alfa pública. Encara hi ha moltes característiques\nen desenvolupament, i hi haurà errors.",
                     "communityCTA_1": "Ens encantarà la teva opinió i t'apuntes a nosaltres",
-                    "description": "HyperPlay és un joc de llançament i agregador de la botiga de jocs\nfutur. Amb HyperPlay, podeu portar la vostra cartera, fitxes i actius\nen cada joc. HyperPlay suporta tota la biblioteca de l’Epicentre\nBotiga, GOG i la nostra pròpia botiga HyperPlay. En utilitzar HyperPlay, vostè accepta\nals nostres"
+                    "description": "HyperPlay és un joc de llançament i agregador de la botiga de jocs\nfutur. Amb HyperPlay, podeu portar la vostra cartera, fitxes i actius\nen cada joc. HyperPlay suporta tota la biblioteca de l’Epicentre\nBotiga, GOG i la nostra pròpia botiga HyperPlay. En utilitzar HyperPlay, vostè accepta\nals nostres",
+                    "bulletPointOne": "Accedeix a una vasta col·lecció de més de 100 jocs habilitats per a la cadena",
+                    "bulletPointFive": "Executa jocs de Windows a macOS, Linux i SteamDeck utilitzant el nostre\n              avançat",
+                    "bulletPointFour": "Instal·la Steam (versió de Windows) a macOS amb un sol clic fàcil",
+                    "bulletPointThree": "Juga els jocs d'Epic i GOG directament a través de HyperPlay",
+                    "bulletPointTwo": "Guanya tokens, NFTs i recompenses fora de cadena completant missions",
+                    "lastParagraph": "Actualment en Beta, valorem molt els teus comentaris i \n            t'animem a informar-nos de qualsevol problema o suggeriment a la nostra",
+                    "paragraphOne": "A HyperPlay, estem construint la botiga de jocs de nova generació \n            per al futur del gaming.",
+                    "paragraphThr": "Porta sense problemes la teva cartera, tokens, \n           i actius a cada joc mentre accedeixes \n           a les àmplies biblioteques de l'Epic Store, \n           GOG, i la nostra pròpia botiga HyperPlay, tot en un sol lloc.",
+                    "TitleList": "Amb HyperPlay pots:"
                 },
-                "title": "Benvinguts a Hyper Juga Early Access!"
+                "title": "Benvinguts a Hyper Juga Early Access!",
+                "titleIntro": "Benvingut a HyperPlay!"
             },
             "analytics": {
                 "hyperplayWill": "HyperPlay:",
@@ -843,7 +860,16 @@
                 "neverSellData": " vendre dades per obtenir beneficis. Ever!",
                 "optOut": "Sempre et permet desactivar-lo mitjançant Configuració;",
                 "privacyCaption": "© 2019 Fundació Catalunya Europa. Reg. de Fundacions Núm. 2395 _ Nota Legal Més informació sobre les nostres pràctiques de privacitat ",
-                "privacyPolicyHere": "Política de privacitat."
+                "privacyPolicyHere": "Política de privacitat.",
+                "bulletOne": "Permetre's sempre optar per no participar",
+                "bulletTwo": "Envia clics i interaccions de joc anonimitzades",
+                "paragraphOne": "HyperPlay voldria recopilar dades d'ús per entendre millor com els nostres usuaris interactuen amb l'aplicació. \n           Això ens permet millorar HyperPlay encara més per a vosaltres.",
+                "privacyPolicy": "Política de Privadesa.",
+                "text": {
+                    "externalLink": "Més informació",
+                    "title": "Hem actualitzat la nostra Política de Privacitat"
+                },
+                "titleOne": "Ajuda'ns a millorar HyperPlay!"
             },
             "connectionCanceled": {
                 "title": "Connexió cancel·lada!",
@@ -860,7 +886,8 @@
             "installing": "S'està baixant...",
             "distributables": "Instal·lació de distribuïdors",
             "installed": "A punt per jugar",
-            "extracting": "Extracció..."
+            "extracting": "Extracció...",
+            "patching": "Patching..."
         },
         "discordApp": "Discord",
         "folder": "Carpeta",
@@ -874,8 +901,10 @@
             },
             "requirescode": "Aquesta actualització del joc requereix un codi d'accés.",
             "error": {
-                "validation": "El codi d'accés no és vàlid"
-            }
+                "validation": "El codi d'accés no és vàlid",
+                "licenseUndefined": "No s'ha pogut validar el codi d'accés. Si us plau, comprova la teva connexió a Internet o la configuració del tallafoc."
+            },
+            "placeholder": "Introdueix el codi d'accés"
         },
         "analyticsOn": "L'anàlisi s'activa",
         "achievements": {
@@ -897,7 +926,9 @@
         "publicAlpha": "Públic Alpha",
         "changeWallet": "Compte de la cartera d'intercanvi",
         "linkSteamAccountTitle": "Compte Steam Enllaç",
-        "viewFullscreen": "Veure pantalla completa"
+        "viewFullscreen": "Veure pantalla completa",
+        "compatibilityLayer": "Capacitat de compatibilitat (Beta)",
+        "discordAppLink": "Comunitat de Discord."
     },
     "quest": {
         "active": "Actiu",
@@ -914,7 +945,7 @@
             "sync": "Sync Progress",
             "syncSuccess": "Progress sincronitzat"
         },
-        "signIn": "Inicia la sessió",
+        "signIn": "Inicia sessió",
         "sync": "Sincronització",
         "connectSteamAccount": "Connecta el compte de l'equip",
         "points": "Punts",
@@ -936,7 +967,9 @@
         "claimFailed": "Error de reclamació",
         "claimFailedMessage": "Si us plau, intenti-ho una vegada més. Si encara no funciona, crea un tiquet de suport Discord.",
         "createDiscordTicket": "Entrada Restaurar contrasenya oblidada",
-        "notEnoughGas": "Insuficient equilibri cartera per reclamar la seva recompensa a causa de les taxes de gas. Proveu una cartera diferent o torneu-la a repetir.",
+        "notEnoughGas": {
+            "message": "Saldo de cartera insuficient per reclamar la vostra recompensa a causa de les comissions de gas. Proveu una cartera diferent o reompliu aquesta abans de tornar a intentar."
+        },
         "pointsClaimed": "Punts Reclamats",
         "g7Numclaimed": "Total Reclamats G7 Crèdits",
         "claimWarning": {
@@ -947,7 +980,28 @@
             "confirm": "Confirmar"
         },
         "noG7ConnectionClaim": "Has de tenir un compte Game7 vinculat a {{email}} per reclamar les teves recompenses.",
-        "noG7ConnectionSync": "Si us plau, introdueix dins de la caixa de text els caràcters que veu a la imatge de sota. Això és requerit per evitar enviaments automàtics."
+        "noG7ConnectionSync": {
+            "message": "Necessites tenir un compte de Game7 vinculat a {{email}} per resincronitzar les teves tasques.",
+            "title": "No hi ha cap compte de G7 vinculat"
+        },
+        "notEligible": {
+            "message": "No has completat els dies de continuïtat de joc requerits i no pots reclamar la teva recompensa en aquest moment.",
+            "title": "Encara no ets elegible"
+        },
+        "notEnoughBalance": {
+            "title": "Saldo baix"
+        },
+        "notSignedIn": {
+            "message": "Necessites iniciar sessió per reclamar la teva recompensa.",
+            "title": "No has iniciat sessió"
+        },
+        "rewardClaimed": "Reclamació exitosa",
+        "youHaveClaimed": "Has reclamat {{totalRewards}} recompensa{{plural}}.",
+        "claim": "Reclama",
+        "questAvailable": "Missió disponible!",
+        "questComplete": "Missió completa!",
+        "toClaimReward": "per reclamar la vostra recompensa.",
+        "toSeeDetails": "per veure detalls."
     },
     "ALL": "TOT",
     "gameRelease": {
@@ -1049,7 +1103,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Estàs connectat a HyperPlay amb una cartera externa.",
         "WALLET_DISCONNECTED": "No teniu una cartera connectada a HyperPlay.",
-        "comingSoon": "Pròximament"
+        "comingSoon": "Pròximament",
+        "links": {
+            "bridge": "Pont",
+            "buy": "Comprar",
+            "marketplace": "Mercat",
+            "portfolio": "Portafoli",
+            "sell": "Vèn",
+            "swap": "Intercanvi"
+        }
     },
     "achievements": {
         "progress": {
@@ -1075,14 +1137,17 @@
             "step1": {
                 "title": "Pas 1",
                 "chromieCraft": "CromieCraft",
-                "description": "Aquest joc és un mod per al World of Warcraft: la ira del rei Lich (3.3.5a). Per tal de jugar aquest mod, els jugadors han de tenir una còpia de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay no acull World of Warcraft. Els jugadors que posseeixen World of Warcraft poden obtenir la versió 3.3.5a de fonts com:",
+                "description": "Aquest joc és un mod per a World of Warcraft: Wrath of the Lich King (3.3.5a). Per jugar a aquest mod, els jugadors han de tenir una còpia de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay no allotja World of Warcraft. Els jugadors que tinguin World of Warcraft poden obtenir la versió necessària a les següents fonts:",
                 "subtitle": "Descarregar World of Warcraft 3.3.5a",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "link1": "Enllaç 1",
+                "link2": "Enllaç 2 (Enllaç Magnet)"
             },
             "step2": {
                 "title": "Pas 2",
                 "subtitle": "Seleccioneu ChromieCraft_3.3.5a.zip Fitxer",
-                "description": "Seleccioneu la descàrrega Fitxer ChromieCraft_3.3.5a.zip."
+                "description": "Seleccioneu la descàrrega Fitxer ChromieCraft_3.3.5a.zip.",
+                "subtitle1": "Selecciona el fitxer zip 3.3.5a descarregat"
             },
             "step3": {
                 "title": "Pas 3",
@@ -1138,5 +1203,27 @@
     "Launch Steam": "Llançament de vapor",
     "Launching Steam": "Llançament de vapor ...",
     "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "En el primer llançament Steam descarregarà els arxius necessaris i trigarà uns minuts a acabar i la pantalla d'inici de sessió a aparèixer;",
-    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '"
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Si desitges continuar, si us plau, tingues paciència ja que pot trigar uns minuts a finalitzar depenent de la teva connexió a Internet i configuració del sistema.",
+    "installModal": {
+        "loginRequiredMessage": "Necessites estar connectat a HyperPlay per introduir el teu codi d'accés i instal·lar aquest joc. ",
+        "loginRequiredMessageUpdate": "Necessiteu estar connectat a HyperPlay per introduir el vostre codi d'accés i actualitzar aquest joc. ",
+        "loginRequired": "Inici de sessió requerit"
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 o superior"
+    },
+    "Recommended specs for a better experience": "Especificacions recomanades per a una millor experiència",
+    "16GB of RAM": "16GB de RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 o superior",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Sigues conscient que no tots els jocs funcionaran, i fins i tot si ho fan, potser no funcionaran com s'esperava.",
+    "Downloading": "Descarregant {{percent}}%",
+    "Installing": "Instal·lant",
+    "Please Wait": "Si us plau, espereu",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "El portafoli de MetaMask només està disponible quan està connectat amb MetaMask."
+        },
+        "unsupported": "Connexió de cartera no compatible"
+    }
 }

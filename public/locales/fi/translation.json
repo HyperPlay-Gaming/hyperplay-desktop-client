@@ -981,7 +981,8 @@
             "requirescode": "Tämä pelin päivitys vaatii käyttökoodin.",
             "success": {
                 "validation": "Menestystä! Access-koodi on voimassa"
-            }
+            },
+            "placeholder": "Syötä pääsykoodi"
         },
         "achievements": {
             "noAchievements": {
@@ -1219,5 +1220,10 @@
     },
     "Please Wait": "Ole hyvä ja odota",
     "Recommended specs for a better experience": "Suositellut tekniset tiedot paremman kokemuksen saamiseksi",
-    "16GB of RAM": "16 Gt RAM-muistia"
+    "16GB of RAM": "16 Gt RAM-muistia",
+    "installModal": {
+        "loginRequiredMessage": "Sinun täytyy olla kirjautuneena HyperPlayhin syöttääksesi pääsykoodisi ja asentaaksesi tämän pelin. ",
+        "loginRequiredMessageUpdate": "Sinun täytyy olla kirjautuneena HyperPlayhin syöttääksesi pääsykoodisi ja päivittääksesi tämän pelin. ",
+        "loginRequired": "Kirjautuminen vaaditaan"
+    }
 }

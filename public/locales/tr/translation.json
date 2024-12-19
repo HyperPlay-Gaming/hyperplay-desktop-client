@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "resume": "İndirmeyi Sürdür",
-            "pause": "İndirmeleri duraklat"
+            "pause": "İndirmeleri duraklat",
+            "retry-update": "Güncellemeyi Yeniden Deneyin",
+            "stop": "İndirmeyi Durdur",
+            "timeElapsed": "Geçen Süre: {{elapsed}}",
+            "launch": "Oyunu Başlat",
+            "retry-install": "Yüklemeyi Yeniden Deneyin"
         }
     },
     "Recent": "Son Oynanan",
@@ -776,7 +781,8 @@
             "paused": "Duraklatıldı",
             "distributables": "Dağıtılabilirler",
             "extracting": "Türleme...",
-            "installed": "Oynamaya hazır"
+            "installed": "Oynamaya hazır",
+            "patching": "Yamanıyor..."
         },
         "misc": "Hiçbir Zaman",
         "onboarding": {
@@ -828,7 +834,16 @@
                 "neverSellData": " kâr için veri satmak. Hiç!",
                 "title": "HiperPlay geliştirmemize yardımcı olun!",
                 "body": "HyperPlay, kullanıcılarımızın uygulama ile nasıl etkileşime girdiğini daha iyi anlamak için kullanım verilerini toplamak ister. Bu bilgiler uygulamayı nasıl kullandığınızı anlamamıza yardımcı olur ve HyperPlay'i sizin için daha iyi hale getirelim.",
-                "privacyCaption": "Bu veriler toplanır ve bu nedenle Genel Veri Koruma Yönetmeliği (EU) 2016/679 amaçları için anonimdir. Gizlilik uygulamalarımızla ilgili daha fazla bilgi için lütfen gizliliğimizi görün "
+                "privacyCaption": "Bu veriler toplanır ve bu nedenle Genel Veri Koruma Yönetmeliği (EU) 2016/679 amaçları için anonimdir. Gizlilik uygulamalarımızla ilgili daha fazla bilgi için lütfen gizliliğimizi görün ",
+                "bulletOne": "Her zaman çıkış yapmanıza izin verin",
+                "bulletTwo": "Anonim tıklama ve oyun etkileşimi gönder",
+                "paragraphOne": "HyperPlay, kullanıcıların uygulama ile nasıl etkileşimde bulunduğunu daha iyi anlamak için kullanım verilerini toplamak istiyor. \n           Bu, HyperPlay'i sizin için daha iyi hale getirmemizi sağlıyor.",
+                "privacyPolicy": "Gizlilik Politikası.",
+                "text": {
+                    "externalLink": "Daha Fazla Bilgi Edinin",
+                    "title": "Gizlilik Politikamızı güncelledik"
+                },
+                "titleOne": "HyperPlay'ı Geliştirmemize Yardımcı Olun!"
             },
             "connectionCanceled": {
                 "description": "Lütfen mobil cüzdanınızın devam etmesi için bağlantı talebini onaylayın.",
@@ -844,9 +859,19 @@
                     "communityCTA_2": "topluluk. Birlikte, oyun geleceği şekillendirelim!",
                     "construction": "HyperPlay inşaat altında.",
                     "bugs": "Lütfen HyperPlay'in halka açık bir alfa olduğunu unutmayın. Birçok özellik hala\nGeliştirmede ve böcekler olacak.",
-                    "description": "HyperPlay bir oyun başlatıcı ve oyun mağazası aggregator from the\nGelecek. HyperPlay ile cüzdanınızı, jetlerinizi ve varlıklarını taşıyabilirsiniz\nHer oyuna. HyperPlay, Epic'in tüm kütüphanesini destekler\nMağaza, GOG ve kendi HyperPlay mağazamız. HyperPlay kullanarak, aynı fikirdesiniz\nBizim için"
+                    "description": "HyperPlay bir oyun başlatıcı ve oyun mağazası aggregator from the\nGelecek. HyperPlay ile cüzdanınızı, jetlerinizi ve varlıklarını taşıyabilirsiniz\nHer oyuna. HyperPlay, Epic'in tüm kütüphanesini destekler\nMağaza, GOG ve kendi HyperPlay mağazamız. HyperPlay kullanarak, aynı fikirdesiniz\nBizim için",
+                    "bulletPointThree": "HyperPlay üzerinden Epic ve GOG oyunlarını doğrudan oynayın",
+                    "bulletPointTwo": "Görevleri tamamlayarak token, NFT ve zincir dışı ödüller kazanın",
+                    "lastParagraph": "Şu anda Beta aşamasında, geri bildiriminizi çok önemsiyoruz ve \n            herhangi bir sorun veya öneriyi rapor etmenizi teşvik ediyoruz.",
+                    "paragraphOne": "HyperPlay'de, oyun geleceği için bir sonraki nesil oyun mağazasını inşa ediyoruz.",
+                    "paragraphThr": "Cüzdanınızı, token'larınızı ve varlıklarınızı her oyuna sorunsuz bir şekilde getirirken, Epic Store, \n           GOG ve kendi HyperPlay Store'umuzun geniş kütüphanelerine erişin - hepsi tek bir yerde.",
+                    "bulletPointOne": "100'den fazla zincir üzerinde etkinleştirilmiş oyunlardan oluşan geniş bir koleksiyona erişin",
+                    "TitleList": "HyperPlay ile şunları yapabilirsiniz:",
+                    "bulletPointFive": "Windows oyunlarını macOS, Linux ve SteamDeck üzerinde çalıştırın, \n              gelişmiş",
+                    "bulletPointFour": "macOS'ta bir tıklama ile Steam'i (Windows sürümü) yükleyin"
                 },
-                "title": "Hyper'e hoş geldiniz Play early Access!"
+                "title": "Hyper'e hoş geldiniz Play early Access!",
+                "titleIntro": "HyperPlay'a hoş geldiniz!"
             },
             "connectAgain": "Tekrar Bağla"
         },
@@ -862,7 +887,9 @@
         },
         "buttons": {
             "noThanks": "Hayır, Teşekkürler",
-            "agree": "Ben de katılıyorum"
+            "agree": "Ben de katılıyorum",
+            "primaryButton": "Kabul Ediyorum",
+            "secondaryButton": "Hayır, Teşekkürler"
         },
         "copyUrl": "URL'yi kopyala",
         "discordApp": "Discord",
@@ -877,11 +904,13 @@
         "accesscodes": {
             "requirescode": "Bu oyun güncellemesi bir erişim kodu gerektirir.",
             "error": {
-                "validation": "Access kodu geçersizdir"
+                "validation": "Access kodu geçersizdir",
+                "licenseUndefined": "Erişim kodunu doğrulamak mümkün olmadı. Lütfen internet erişiminizi veya güvenlik duvarı ayarlarınızı kontrol edin."
             },
             "success": {
                 "validation": "Başarı! Access kodu geçerli"
-            }
+            },
+            "placeholder": "Erişim kodunu girin"
         },
         "analyticsOff": "Analytics kapalı",
         "linkSteamAccountTitle": "Link Steam Hesabı",
@@ -896,7 +925,9 @@
         "publicAlpha": "Public Alpha",
         "viewMyAccount": "Hesabımı Görüntüle",
         "linkSteamAccountCta": "Steam işaretine gidin",
-        "viewFullscreen": "View fullscreen"
+        "viewFullscreen": "View fullscreen",
+        "compatibilityLayer": "Uyumluluk Katmanı (Beta)",
+        "discordAppLink": "Discord Topluluğu."
     },
     "gameRelease": {
         "main": "Ana",
@@ -942,7 +973,9 @@
         "claimFailed": "Dava başarısız oldu",
         "claimFailedMessage": "Lütfen bir kez daha deneyin. Hala çalışmıyorsa, bir Discord destek bileti oluşturun.",
         "createDiscordTicket": "Created Discord ticket",
-        "notEnoughGas": "Gaz ücretleri nedeniyle ödülünüzü talep etmek için yeterli cüzdan dengesi. Farklı bir cüzdanı deneyin ya da yeniden denemeden önce bunu tamamlayın.",
+        "notEnoughGas": {
+            "message": "Gaz ücretleri nedeniyle ödülünüzü talep etmek için yetersiz cüzdan bakiyesi. Farklı bir cüzdan deneyin veya yeniden denemeden önce bu cüzdanı doldurun."
+        },
         "pointsClaimed": "Puanlar Davalı",
         "g7Numclaimed": "Toplam Davalı G7 Kredi",
         "claimWarning": {
@@ -953,7 +986,28 @@
             "confirm": "Kabul Et"
         },
         "noG7ConnectionClaim": "Ödüllerinizi iddia etmek için [X43X) ile bağlantılı bir Game7 hesabına ihtiyacınız var.",
-        "noG7ConnectionSync": "Görevlerinizi yeniden tanımlamak için [X43X ile bağlantılı bir Game7 hesabına sahip olmanız gerekir."
+        "noG7ConnectionSync": {
+            "message": "Görevlerinizi yeniden senkronize etmek için {{email}} ile bağlı bir Game7 hesabına sahip olmalısınız.",
+            "title": "Bağlı bir G7 hesabı yok"
+        },
+        "toSeeDetails": "detayları görmek için.",
+        "notEnoughBalance": {
+            "title": "Düşük bakiye"
+        },
+        "claim": "Talep Et",
+        "notEligible": {
+            "message": "Gerekli oyun streak günlerini tamamlamadınız ve bu zamanda ödülünüzü talep edemezsiniz.",
+            "title": "Henüz uygun değil"
+        },
+        "notSignedIn": {
+            "message": "Ödülünüzü talep etmek için giriş yapmanız gerekiyor.",
+            "title": "Giriş yapılmadı"
+        },
+        "questAvailable": "Görev mevcut!",
+        "questComplete": "Görev tamamlandı!",
+        "rewardClaimed": "Talep başarılı",
+        "toClaimReward": "ödülünüzü talep etmek için.",
+        "youHaveClaimed": "{{totalRewards}} ödülünü{{plural}} talep ettiniz."
     },
     "ALL": "Tümü",
     "analytics": "Analytics",
@@ -1054,7 +1108,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Dış bir cüzdanla HyperPlay'e bağlanırsınız.",
         "WALLET_DISCONNECTED": "HyperPlay ile bağlantılı bir cüzdana sahip değilsiniz.",
-        "comingSoon": "Çok yakında"
+        "comingSoon": "Çok yakında",
+        "links": {
+            "bridge": "Köprü",
+            "sell": "Sat",
+            "buy": "Satın Al",
+            "portfolio": "Portföy",
+            "marketplace": "Pazar Yeri",
+            "swap": "Değiştir"
+        }
     },
     "email_subscription": {
         "title": "Alt tarif için teşekkür ederiz!",
@@ -1096,15 +1158,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "KromieCraft",
-                "description": "Bu oyun World of Warcraft için bir mod: Lich King (.3.5a) Wrath. Bu mod oynamak için, oyuncular World of Warcraft 3.3.5a'nın bir kopyasını sahibi olmalıdır. {{newline}} {{newline}} HyperPlay, World of Warcraft'ı barındırmaz. World of Warcraft'a sahip oyuncular, 33.5a'yı gibi kaynaklardan elde edebilir:",
+                "description": "Bu oyun, World of Warcraft: Wrath of the Lich King (3.3.5a) için bir moddur. Bu modu oynamak için oyuncuların World of Warcraft 3.3.5a kopyasına sahip olmaları gerekmektedir. {{newline}} {{newline}} HyperPlay, World of Warcraft'ı barındırmamaktadır. World of Warcraft'a sahip olan oyuncular, gerekli sürümü aşağıdaki kaynaklardan temin edebilirler:",
                 "subtitle": "World of Warcraft 33.5a",
                 "webtorrent": "Torrent (Magnet Link)",
-                "title": "1. adım"
+                "title": "1. adım",
+                "link1": "Bağlantı 1",
+                "link2": "Bağlantı 2 (Manyetik Bağlantı)"
             },
             "step2": {
                 "description": "İndirilenleri seçin KromieCraft_3.3.5a.zip dosyası.",
                 "subtitle": "ChromieCraft_3.3.5a.zip Dosya",
-                "title": "2. adım"
+                "title": "2. adım",
+                "subtitle1": "İndirilen 3.3.5a zip dosyasını seçin"
             },
             "step3": {
                 "description": "Lütfen World of Warcraft'ın nerede yer aldığı klasörü seçin: Lich King'in Wrath of the Lich King (3.3.5a) yüklenmesi gerekir.",
@@ -1138,5 +1203,27 @@
         "success-message": "Steam kuruldu. Şimdi onu Kütüphaneden başlatabilirsiniz.",
         "tooltip": "Bu, Steam'in Windows versiyonunu kuracak ve HiperPlay Uyumluluk Katmanını kullanacak.\n\nBazı oyunlar özellikle yaşlı başlıklar, yeni 3D oyunları veya anti-cheat yazılımı ile olanlar düzgün çalışmayabilir.\n\nÖnerilen özellikler Apple Silikon CPU (M1 veya üstü) ve en az 16GB RAM ile bir Mac."
     },
-    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam ‘ ‘ ‘"
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam ‘ ‘ ‘",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Tüm oyunların çalışmayabileceğini ve çalışsalar bile beklenildiği gibi çalışmayabileceğini unutmayın.",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Devam etmek istiyorsanız, internet bağlantınıza ve sistem yapılandırmanıza bağlı olarak tamamlanması birkaç dakika sürebileceğinden lütfen sabırlı olun.",
+    "installModal": {
+        "loginRequiredMessage": "Bu oyunu yüklemek ve erişim kodunuzu girmek için HyperPlay'a giriş yapmanız gerekiyor. ",
+        "loginRequiredMessageUpdate": "HyperPlay'a giriş yapmanız ve erişim kodunuzu girip bu oyunu güncellemeniz gerekiyor. ",
+        "loginRequired": "Giriş Gerekli"
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 veya üzeri"
+    },
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask Portföyü yalnızca MetaMask ile bağlantı kurulduğunda kullanılabilir."
+        },
+        "unsupported": "Desteklenmeyen Cüzdan Bağlantısı"
+    },
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 veya üstü",
+    "Downloading": "İndiriliyor {{percent}}%",
+    "Installing": "Yükleniyor",
+    "Please Wait": "Lütfen Bekleyin",
+    "Recommended specs for a better experience": "Daha iyi bir deneyim için önerilen özellikler"
 }

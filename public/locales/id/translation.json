@@ -184,8 +184,8 @@
         "go_to_library": "Pergi ke Pustaka",
         "login": "Log Masuk",
         "sync": "Sinkronkan",
-        "syncing": "Menyinkronkan",
-        "unsync": "Batalkan sinkronisasi",
+        "syncing": "Sedang Sinkronisasi",
+        "unsync": "Hentikan Sinkronisasi",
         "continue": "Lanjutkan",
         "update": "Perbarui",
         "download": "Unduh",
@@ -260,7 +260,7 @@
         "ignore_hidden": "Abaikan yang Disembunyikan",
         "platform": "Platform",
         "show_all_games": "Tampilkan semua gim",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Tampilkan game yang tidak tersedia",
         "show_favourites_only": "Hanya Tampilkan Gim Favorit",
         "show_hidden": "Tampilkan yang Disembunyikan",
         "store": "Toko Filter"
@@ -391,9 +391,9 @@
             "reparing": "Perbaikan Selesai"
         },
         "install": {
-            "canceled": "Pemasangan Dibatalkan",
+            "canceled": "Instalasi Dibatalkan",
             "error": "Pemasangan Gagal",
-            "finished": "Pemasangan Selesai",
+            "finished": "Instalasi Selesai",
             "imported": "Gim Diimpor",
             "startInstall": "Pemasangan Dimulai",
             "stopped": "Instalasi berhenti",
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Dihapus",
         "update": {
-            "canceled": "Pembaruan Dibatalkan",
+            "canceled": "Perbarui Dibatalkan",
             "finished": "Pembaruan Selesai",
             "started": "Pembaruan Dimulai",
             "stopped": "Update berhenti",
@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "pause": "Jeda unduh",
-            "resume": "Lanjutkan Download"
+            "resume": "Lanjutkan Download",
+            "timeElapsed": "Waktu Berlalu: {{elapsed}}",
+            "launch": "Luncurkan Permainan",
+            "retry-install": "Coba Instal Ulang",
+            "stop": "Hentikan Unduhan",
+            "retry-update": "Coba Perbarui"
         }
     },
     "Recent": "Dimainkan Baru-Baru Ini",
@@ -512,7 +517,7 @@
         "default-install-path": "Lokasi Pemasangan Bawaan",
         "default-steam-path": "Lokasi Steam bawaan",
         "defaultWinePrefix": "Atur Folder untuk Prefiks Wine baru",
-        "disable_controller": "Nonaktifkan navigasi HyperPlay menggunakan pengontrol",
+        "disable_controller": "Nonaktifkan navigasi Hyperplay menggunakan pengontrol",
         "discordRPC": "Aktifkan Discord Rich Presence",
         "download-no-https": "Unduh gim tanpa HTTPS (berguna untuk CDN misalnya LanCache)",
         "egs-sync": "Sinkronkan dengan Epic Games yang Terpasang",
@@ -746,7 +751,7 @@
         "manager": {
             "link": "Manajer Wine",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Manajer Wine",
+            "title": "Lapisan Kompatibilitas ",
             "unzipping": "Mengekstrak"
         },
         "release": "Release Date",
@@ -780,8 +785,10 @@
             },
             "requirescode": "Pembaruan game ini memerlukan kode akses.",
             "error": {
-                "validation": "Kode akses tidak valid"
-            }
+                "validation": "Kode akses tidak valid",
+                "licenseUndefined": "Tidak dapat memvalidasi kode akses. Silakan periksa akses internet atau pengaturan firewall Anda."
+            },
+            "placeholder": "Masukkan kode akses"
         },
         "onboarding": {
             "connectAgain": "Login",
@@ -799,7 +806,16 @@
                 "neverSellData": " jual data untuk keuntungan. Sitemap!",
                 "neverCollectIP": " mengumpulkan alamat IP penuh Anda;",
                 "privacyCaption": "Data ini dikumpulkan dan oleh karena itu anonim untuk tujuan Peraturan Perlindungan Data Umum (EU) 2016/679. Untuk informasi lebih lanjut terkait dengan praktik privasi kami, silakan lihat kami ",
-                "title": "Bantu Kami meningkatkan HyperPlay!"
+                "title": "Bantu Kami meningkatkan HyperPlay!",
+                "paragraphOne": "HyperPlay ingin mengumpulkan data penggunaan untuk lebih memahami bagaimana pengguna kami berinteraksi dengan aplikasi. \n           Ini memungkinkan kami untuk membuat HyperPlay lebih baik untuk Anda.",
+                "bulletOne": "Selalu izinkan Anda untuk keluar",
+                "bulletTwo": "Kirim klik & interaksi game yang dianonimkan",
+                "privacyPolicy": "Kebijakan Privasi.",
+                "text": {
+                    "externalLink": "Pelajari Lebih Lanjut",
+                    "title": "Kami telah memperbarui Kebijakan Privasi kami"
+                },
+                "titleOne": "Bantu Kami Meningkatkan HyperPlay!"
             },
             "connectionCanceled": {
                 "description": "Harap konfirmasi permintaan koneksi pada dompet seluler Anda untuk melanjutkan.",
@@ -848,9 +864,19 @@
                     "description": "HyperPlay adalah game peluncur dan permainan toko agregator dari\nSitemap Dengan HyperPlay, Anda dapat membawa dompet, token, dan aset Anda\nke setiap permainan. HyperPlay mendukung seluruh perpustakaan Epic\nToko, GOG, dan toko HyperPlay kami sendiri. Dengan menggunakan HyperPlay, Anda setuju\nKami",
                     "communityCTA_1": "Kami menyukai umpan balik Anda dan Anda telah bergabung dengan kami di kami",
                     "construction": "HyperPlay di bawah konstruksi.",
-                    "bugs": "Harap dicatat bahwa HyperPlay adalah alfa publik. Banyak fitur masih\ndalam pengembangan, dan akan ada bug."
+                    "bugs": "Harap dicatat bahwa HyperPlay adalah alfa publik. Banyak fitur masih\ndalam pengembangan, dan akan ada bug.",
+                    "bulletPointFive": "Jalankan permainan Windows di macOS, Linux, dan SteamDeck menggunakan\n              canggih kami",
+                    "bulletPointFour": "Instal Steam (versi Windows) di macOS dengan satu klik mudah",
+                    "bulletPointOne": "Akses koleksi besar dari 100+ game yang diaktifkan on-chain",
+                    "bulletPointThree": "Mainkan game Epic dan GOG langsung melalui HyperPlay",
+                    "bulletPointTwo": "Dapatkan token, NFT, dan hadiah off-chain dengan menyelesaikan Misi",
+                    "lastParagraph": "Saat ini dalam Beta, kami sangat menghargai umpan balik Anda dan \n            mendorong Anda untuk melaporkan masalah atau saran di",
+                    "paragraphOne": "Di HyperPlay, kami sedang membangun toko game generasi berikutnya \n            untuk masa depan gaming.",
+                    "paragraphThr": "Bawa dompet, token, \n           dan aset Anda ke dalam setiap game dengan mulus sambil mengakses \n           perpustakaan luas dari Epic Store, \n           GOG, dan HyperPlay Store kami - semuanya dalam satu tempat.",
+                    "TitleList": "Dengan HyperPlay Anda dapat:"
                 },
-                "title": "Selamat Datang di Hyper Bermain Akses Awal!"
+                "title": "Selamat Datang di Hyper Bermain Akses Awal!",
+                "titleIntro": "Selamat datang di HyperPlay!"
             },
             "terms": "Persyaratan Layanan"
         },
@@ -870,7 +896,9 @@
         },
         "buttons": {
             "agree": "Sitemap",
-            "noThanks": "Tidak, Terima Kasih"
+            "noThanks": "Tidak, Terima Kasih",
+            "primaryButton": "Saya Setuju",
+            "secondaryButton": "Tidak, Terima Kasih"
         },
         "connectWallet": "Login",
         "linkSteamAccountCta": "Pergi ke tanda uap di",
@@ -883,7 +911,8 @@
             "extracting": "Login.",
             "distributables": "Menginstal Distributables",
             "installing": "Mengunduh...",
-            "paused": "Dijeda"
+            "paused": "Dijeda",
+            "patching": "Memperbaiki..."
         },
         "linkSteamAccountDescription": "Masuk ke Steam untuk menghubungkan akun HyperPlay Anda.",
         "linkSteamAccountTitle": "Link Akun Uap",
@@ -900,7 +929,9 @@
         "copyUrl": "Salin URL",
         "Sync": "Sinkronisasi",
         "turnAnalyticsOff": "Matikan",
-        "viewFullscreen": "Lihat layar penuh"
+        "viewFullscreen": "Lihat layar penuh",
+        "compatibilityLayer": "Lapisan Kompatibilitas (Beta)",
+        "discordAppLink": "Komunitas Discord."
     },
     "hyperplayOverlay": {
         "signatureRequest": {
@@ -942,7 +973,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Anda terhubung ke HyperPlay dengan dompet eksternal.",
         "WALLET_DISCONNECTED": "Anda tidak memiliki dompet yang terhubung ke HyperPlay.",
-        "comingSoon": "Akan Datang"
+        "comingSoon": "Akan Datang",
+        "links": {
+            "bridge": "Jembatan",
+            "portfolio": "Portofolio",
+            "buy": "Beli",
+            "marketplace": "Pasar",
+            "sell": "Jual",
+            "swap": "Tukar"
+        }
     },
     "dlcs": {
         "label": "Pilih DLC untuk menginstal:"
@@ -985,7 +1024,9 @@
         "needMoreAchievements": "Anda harus menyelesaikan {{percent}}% dari pencapaian dalam salah satu permainan ini.",
         "claimFailedMessage": "Silahkan coba sekali lagi. Jika masih tidak bekerja, buat tiket dukungan Diskord.",
         "createDiscordTicket": "Dibuat tiket Discord",
-        "notEnoughGas": "Saldo dompet yang tidak memadai untuk mengklaim hadiah Anda karena biaya gas. Coba dompet yang berbeda atau mengisi ulang satu ini sebelum dicoba.",
+        "notEnoughGas": {
+            "message": "Saldo dompet tidak cukup untuk mengklaim hadiah Anda karena biaya gas. Coba dompet lain atau isi ulang yang ini sebelum mencoba lagi."
+        },
         "active": "Aktif",
         "Play": "Lanjut",
         "signIn": "Masuk",
@@ -1004,7 +1045,28 @@
             "confirm": "Konfirmasikan"
         },
         "noG7ConnectionClaim": "Anda harus memiliki akun Game7 yang terkait dengan {{email}} untuk mengklaim hadiah Anda.",
-        "noG7ConnectionSync": "Anda harus memiliki akun Game7 yang terkait dengan {{email}} untuk menginkronkan tugas Anda."
+        "noG7ConnectionSync": {
+            "message": "Anda perlu memiliki akun Game7 yang terhubung ke {{email}} untuk menyinkronkan ulang tugas Anda.",
+            "title": "Tidak ada akun G7 yang terhubung"
+        },
+        "claim": "Klaim",
+        "notEnoughBalance": {
+            "title": "Saldo rendah"
+        },
+        "notEligible": {
+            "title": "Belum memenuhi syarat",
+            "message": "Anda belum menyelesaikan jumlah hari bermain yang diperlukan dan tidak dapat mengklaim hadiah Anda saat ini."
+        },
+        "notSignedIn": {
+            "message": "Anda perlu masuk untuk mengklaim hadiah Anda.",
+            "title": "Belum masuk"
+        },
+        "questAvailable": "Quest tersedia!",
+        "questComplete": "Misi selesai!",
+        "rewardClaimed": "Klaim berhasil",
+        "toClaimReward": "untuk mengklaim hadiah Anda.",
+        "toSeeDetails": "untuk melihat detail.",
+        "youHaveClaimed": "Anda telah mengklaim hadiah {{totalRewards}} {{plural}}."
     },
     "notification": {
         "wine-download": {
@@ -1098,14 +1160,17 @@
             "step1": {
                 "webtorrent": "Sitemap",
                 "chromieCraft": "Login",
-                "description": "Game ini adalah mod untuk World of Warcraft: Wrath of the Lich King (3.3.5a). Untuk bermain mod ini, pemain harus memiliki salinan World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay tidak tuan rumah World of Warcraft. Pemain yang memiliki World of Warcraft dapat memperoleh versi 3.3.5a dari sumber seperti:",
+                "description": "Game ini adalah mod untuk World of Warcraft: Wrath of the Lich King (3.3.5a). Untuk memainkan mod ini, pemain harus memiliki salinan World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay tidak menyelenggarakan World of Warcraft. Pemain yang memiliki World of Warcraft dapat memperoleh versi yang dibutuhkan dari sumber berikut:",
                 "subtitle": "Unduh World of Warcraft 3.3.5a",
-                "title": "Langkah 1"
+                "title": "Langkah 1",
+                "link2": "Tautan 2 (Tautan Magnet)",
+                "link1": "Tautan 1"
             },
             "step2": {
                 "description": "Pilih download ChromieCraft_3.3.5a.zip file.",
                 "subtitle": "KromieCraft_3.3.5a.zip Login",
-                "title": "Langkah 2"
+                "title": "Langkah 2",
+                "subtitle1": "Pilih file zip 3.3.5a yang diunduh"
             },
             "step3": {
                 "subtitle": "Pilih Instalasi Login",
@@ -1139,5 +1204,27 @@
     "Install Steam": "Menginstal uap",
     "Launch Steam": "Luncurkan uap",
     "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Pada peluncuran pertama uap akan mengunduh file yang diperlukan dan akan memakan waktu beberapa menit untuk menyelesaikan dan layar login muncul;",
-    "UNCHECK 'Run Steam'": "Sitemap Sitemap"
+    "UNCHECK 'Run Steam'": "Sitemap Sitemap",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Jika Anda ingin melanjutkan, harap bersabar karena ini dapat memakan waktu beberapa menit untuk selesai tergantung pada koneksi internet dan konfigurasi sistem Anda.",
+    "installModal": {
+        "loginRequiredMessage": "Anda perlu masuk ke HyperPlay untuk memasukkan kode akses Anda dan menginstal game ini. ",
+        "loginRequiredMessageUpdate": "Anda perlu masuk ke HyperPlay untuk memasukkan kode akses Anda dan memperbarui game ini. ",
+        "loginRequired": "Login Diperlukan"
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 atau lebih"
+    },
+    "Recommended specs for a better experience": "Spesifikasi yang disarankan untuk pengalaman yang lebih baik",
+    "wallet": {
+        "unsupported": "Koneksi Dompet Tidak Didukung",
+        "portfolio": {
+            "onlyExtension": "Portofolio MetaMask hanya tersedia saat terhubung dengan MetaMask."
+        }
+    },
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 atau lebih",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Harap diperhatikan bahwa tidak semua game akan berfungsi, dan bahkan jika mereka melakukannya, mereka mungkin tidak berjalan seperti yang diharapkan.",
+    "Downloading": "Mengunduh {{percent}}%",
+    "Installing": "Menginstal",
+    "Please Wait": "Silakan Tunggu"
 }

@@ -185,7 +185,7 @@
         "login": "Zaloguj",
         "sync": "Synchronizuj",
         "syncing": "Synchronizowanie",
-        "unsync": "Desynchronizuj",
+        "unsync": "Rozłącz",
         "update": "Aktualizuj",
         "continue": "Kontynuuj",
         "download": "Pobieranie",
@@ -260,7 +260,7 @@
         "ignore_hidden": "Ignoruj ukryte",
         "platform": "Platforma",
         "show_all_games": "Pokaż wszystkie gry",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Pokaż niedostępne gry",
         "show_favourites_only": "Pokaż tylko ulubione",
         "show_hidden": "Pokaż ukryte",
         "store": "Filtruj"
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Odinstalowano",
         "update": {
-            "canceled": "Aktualizacja przerwana",
+            "canceled": "Aktualizacja anulowana",
             "finished": "Aktualizacja zakończona",
             "started": "Aktualizacja rozpoczęta",
             "paused": "Update Pause (ang.)",
@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "pause": "Wstrzymaj pobieranie",
-            "resume": "Wznów pobieranie"
+            "resume": "Wznów pobieranie",
+            "stop": "Zatrzymaj pobieranie",
+            "launch": "Uruchom grę",
+            "retry-install": "Spróbuj ponownie zainstalować",
+            "retry-update": "Spróbuj ponownie zaktualizować",
+            "timeElapsed": "Czas minął: {{elapsed}}"
         }
     },
     "Recent": "Ostatnio uruchamiane",
@@ -512,7 +517,7 @@
         "default-install-path": "Domyślna ścieżka instalacji",
         "default-steam-path": "Domyślna ścieżka Steam",
         "defaultWinePrefix": "Wybierz folder dla nowych prefiksów Wine",
-        "disable_controller": "Wyłącz nawigację kontrolerem",
+        "disable_controller": "Wyłącz nawigację Hyperplay za pomocą kontrolera",
         "discordRPC": "Włącz Discord Rich Presence",
         "download-no-https": "Pobieraj gry bez użycia szyfrowania HTTPS (przydatne przy CDN'ach np. LanCache)",
         "egs-sync": "Synchronizuj z zainstalowanym Epic Games",
@@ -746,7 +751,7 @@
         "manager": {
             "link": "Menedżer Wine",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Menedżer Wine",
+            "title": "Warstwa zgodności ",
             "unzipping": "Dekompresowanie"
         },
         "release": "Data wydania",
@@ -820,7 +825,16 @@
                 "hyperplayWill": "HyperPlay (ang.)",
                 "privacyPolicyHere": "Polityka prywatna.",
                 "privacyCaption": "Dane te są zjednoczone i są anonimowe w celach General Data Protection Regulation (UE) 2016/679. Dla więcej informacji w odniesieniu do naszych praktyk dotyczących prywatności widzą nasze dane ",
-                "neverCollectIP": " zbieram swój pełny adres;"
+                "neverCollectIP": " zbieram swój pełny adres;",
+                "text": {
+                    "externalLink": "Dowiedz się więcej",
+                    "title": "Zaktualizowaliśmy naszą Politykę Prywatności"
+                },
+                "titleOne": "Pomóż nam ulepszyć HyperPlay!",
+                "bulletOne": "Zawsze pozwalaj na rezygnację",
+                "bulletTwo": "Wyślij zanonimizowane kliknięcia i interakcje z grą",
+                "paragraphOne": "HyperPlay chciałby zebrać dane dotyczące użytkowania, aby lepiej zrozumieć, jak nasi użytkownicy korzystają z aplikacji. \n           To pozwala nam uczynić HyperPlay jeszcze lepszym dla Ciebie.",
+                "privacyPolicy": "Polityka prywatności."
             },
             "connectionCanceled": {
                 "description": "Poświadczasz możliwość potwierdzenia kontaktu z telefonem komórkowym do kontynuowania.",
@@ -832,9 +846,19 @@
                     "communityCTA_1": "Uwielbiamy się w twoim sprzężeniu, a w nas przyłączamy się do nas",
                     "description": "HyperPlay – gra startująca i systemowa agregatora sklepu z gier.\nprzyszłość. Z HyperPlay, możesz nosić ścianę, znaki i aktywa.\nW każdym meczu. HyperPlay wspiera całą bibliotekę Epic.\nStore, GOG i nasze sklepy HyperPlay. Poprzez użycie HyperPlay, zgadzasz się.\nnas",
                     "bugs": "Pytanie, że HyperPlay jest językiem publicznym. Wiele cech wciąż jest wciąż aktualnych.\nW trakcie rozwoju, i będzie tam trąbki.",
-                    "construction": "HyperPlay jest w fazie konstrukcji."
+                    "construction": "HyperPlay jest w fazie konstrukcji.",
+                    "bulletPointFive": "Uruchamiaj gry Windows na macOS, Linux i SteamDeck używając naszego\n              zaawansowanego",
+                    "bulletPointFour": "Zainstaluj Steam (wersja na Windows) na macOS jednym łatwym kliknięciem",
+                    "bulletPointOne": "Uzyskaj dostęp do ogromnej kolekcji 100+ gier z obsługą on-chain",
+                    "lastParagraph": "Obecnie w wersji beta, bardzo cenimy Twoje opinie i \n            zachęcamy do zgłaszania wszelkich problemów lub sugestii w naszym",
+                    "bulletPointThree": "Graj w gry Epic i GOG bezpośrednio przez HyperPlay",
+                    "bulletPointTwo": "Zarabiaj tokeny, NFT i nagrody off-chain, wykonując zadania",
+                    "paragraphOne": "W HyperPlay budujemy sklep z grami nowej generacji \n            dla przyszłości gier.",
+                    "paragraphThr": "Bezproblemowo przenieś swój portfel, tokeny \n           i zasoby do każdej gry, uzyskując dostęp \n           do rozbudowanych bibliotek Epic Store, \n           GOG oraz naszego własnego sklepu HyperPlay - wszystko w jednym miejscu.",
+                    "TitleList": "Z HyperPlay możesz:"
                 },
-                "title": "Welcome to Hyper (ang.). Wczesny dostęp!"
+                "title": "Welcome to Hyper (ang.). Wczesny dostęp!",
+                "titleIntro": "Witamy w HyperPlay!"
             },
             "connectAgain": "Ponownie Connect again",
             "connectionConnected": {
@@ -850,7 +874,9 @@
         "discordApp": "Discord",
         "buttons": {
             "noThanks": "Nie, dziękuję",
-            "agree": "Zgadzam się"
+            "agree": "Zgadzam się",
+            "primaryButton": "Zgadzam się",
+            "secondaryButton": "Nie, dziękuję"
         },
         "browserImport": {
             "profile": "Profil",
@@ -862,16 +888,19 @@
             "installing": "Pobieranie...",
             "distributables": "Installing Distributable",
             "extracting": "Wyjątek...",
-            "installed": "Ready to play"
+            "installed": "Ready to play",
+            "patching": "Aktualizowanie..."
         },
         "accesscodes": {
             "requirescode": "Ta aktualizacja wymaga kodu dostępu.",
             "error": {
-                "validation": "Kod dostępu jest nieprawidłowy"
+                "validation": "Kod dostępu jest nieprawidłowy",
+                "licenseUndefined": "Nie można zweryfikować kodu dostępu. Sprawdź swoje połączenie internetowe lub ustawienia zapory."
             },
             "success": {
                 "validation": "Sukces! kod dostępu"
-            }
+            },
+            "placeholder": "Wprowadź kod dostępu"
         },
         "linkSteamAccountDescription": "Sign in to Steam to link your HyperPlay (ang.).",
         "linkSteamAccountTitle": "Link Steam",
@@ -896,7 +925,9 @@
         "viewPortfolio": "Portfolio",
         "changeWallet": "Strona internetowa",
         "currentWallet": "Obecny wał",
-        "viewFullscreen": "Widok"
+        "viewFullscreen": "Widok",
+        "compatibilityLayer": "Warstwa zgodności (Beta)",
+        "discordAppLink": "Społeczność Discord."
     },
     "gameRelease": {
         "alpha": "Alfa",
@@ -942,7 +973,9 @@
         "createDiscordTicket": "Oficjalna strona Created Discord",
         "View Game": "Game",
         "claimFailed": "Claimowi nie udało się zrealizować",
-        "notEnoughGas": "Niesprawiedliwe ścianki mają prawo do nagrody z powodu opłat gazowych. Poświęcony został inny muret lub uzupełniony przed retrygią.",
+        "notEnoughGas": {
+            "message": "Niewystarczający stan portfela, aby odebrać swoją nagrodę z powodu opłat za gaz. Spróbuj innego portfela lub doładuj ten przed ponowną próbą."
+        },
         "pointsClaimed": "Point Cl (ang.)",
         "g7Numclaimed": "Total Cl nadaje G7 Credits",
         "claimWarning": {
@@ -953,7 +986,28 @@
             "confirm": "Potwierdź"
         },
         "noG7ConnectionClaim": "Musisz posiadać konto Game7, powiązane z X43X, aby stwierdzić nagrody.",
-        "noG7ConnectionSync": "Musisz posiadać konto Game7, powiązane z X43X."
+        "noG7ConnectionSync": {
+            "message": "Musisz mieć powiązane konto Game7 z {{email}}, aby ponownie zsynchronizować swoje zadania.",
+            "title": "Brak powiązanego konta G7"
+        },
+        "questAvailable": "Zadanie dostępne!",
+        "questComplete": "Zadanie ukończone!",
+        "claim": "Odbierz",
+        "youHaveClaimed": "Odebrałeś nagrodę {{totalRewards}} nagród{{plural}}.",
+        "notEligible": {
+            "message": "Nie ukończyłeś wymaganych dni gry i nie możesz w tej chwili odebrać swojej nagrody.",
+            "title": "Jeszcze nie kwalifikujesz się"
+        },
+        "notEnoughBalance": {
+            "title": "Niski stan konta"
+        },
+        "notSignedIn": {
+            "message": "Musisz być zalogowany, aby odebrać swoją nagrodę.",
+            "title": "Nie jesteś zalogowany"
+        },
+        "rewardClaimed": "Odbiór udany",
+        "toClaimReward": "aby odebrać swoją nagrodę.",
+        "toSeeDetails": "aby zobaczyć szczegóły."
     },
     "sideload": {
         "warningTitle": "Ważne",
@@ -1042,7 +1096,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Jest połączony z HyperPlay z zewnętrzną ścianą.",
         "WALLET_DISCONNECTED": "Nie ma ścian połączonych z HyperPlay.",
-        "comingSoon": "Coming Soon"
+        "comingSoon": "Coming Soon",
+        "links": {
+            "bridge": "Most",
+            "buy": "Kup",
+            "portfolio": "Portfolio",
+            "marketplace": "Rynek",
+            "sell": "Sprzedaj",
+            "swap": "Zamień"
+        }
     },
     "dlcs": {
         "label": "Select DLC (ang.)"
@@ -1096,15 +1158,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Gra jest modem dla World of Warcraft: Wrath of the Lich King (3,3.5a). Gracze muszą posiadać kopię World of Warcraft 3,3.5a. X155X X167X HyperPlay nie host World of Warcraft. Gracze, którzy posiadają World of Warcraft, mogą uzyskać wersję 3.3,5a",
+                "description": "Ta gra jest modem do World of Warcraft: Wrath of the Lich King (3.3.5a). Aby zagrać w ten mod, gracze muszą posiadać kopię World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nie hostuje World of Warcraft. Gracze, którzy posiadają World of Warcraft, mogą uzyskać potrzebną wersję z następujących źródeł:",
                 "subtitle": "Download World Warcraft 3,3.5a (ang.)",
                 "webtorrent": "Magnet Link (ang.)",
-                "title": "Krok 1"
+                "title": "Krok 1",
+                "link1": "Link 1",
+                "link2": "Link 2 (Link magnetyczny)"
             },
             "step2": {
                 "description": "Selected ściągnięty do pobrania. ChromieCraft_3.3.5a.zip (ang.).",
                 "subtitle": "ChromieCraft_3.3.5a (ang.). File",
-                "title": "Krok 2"
+                "title": "Krok 2",
+                "subtitle1": "Wybierz pobrany plik zip 3.3.5a"
             },
             "step3": {
                 "description": "Proszę wybrać folder, w którym powinien zostać zainstalowany świat Warcraft: Wrath of the Lich King (3,5a).",
@@ -1138,5 +1203,27 @@
         "success-message": "Steam zostało zainstalowane. Obecnie można ją wystrzelić z biblioteki.",
         "tooltip": "Umożliwia to zainstalowanie wersji systemu Windows Steam i korzysta z HyperPlay Compatibility Layer.\n\nNiektóre gry, zwłaszcza starsze tytuły, nowsze gry 3D lub te z oprogramowaniem antycheatowym mogą nie działać właściwie.\n\nWskaźniki rekomendowane to Mac z procesorem Apple Silicon (M1 lub więcej) i przynajmniej 16 GB pamięci RAM."
     },
-    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam (ang.). '"
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam (ang.). '",
+    "installModal": {
+        "loginRequiredMessageUpdate": "Musisz być zalogowany do HyperPlay, aby wprowadzić swój kod dostępu i zaktualizować tę grę. ",
+        "loginRequired": "Wymagane logowanie",
+        "loginRequiredMessage": "Musisz być zalogowany w HyperPlay, aby wprowadzić swój kod dostępu i zainstalować tę grę. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 lub nowszy"
+    },
+    "Please Wait": "Proszę czekać",
+    "Recommended specs for a better experience": "Zalecane specyfikacje dla lepszego doświadczenia",
+    "wallet": {
+        "unsupported": "Nieobsługiwane połączenie portfela",
+        "portfolio": {
+            "onlyExtension": "Portfolio MetaMask jest dostępne tylko po połączeniu z MetaMask."
+        }
+    },
+    "16GB of RAM": "16 GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 lub nowszy",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Bądź świadomy, że nie wszystkie gry będą działać, a nawet jeśli będą, mogą nie działać zgodnie z oczekiwaniami.",
+    "Downloading": "Pobieranie {{percent}}%",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Jeśli chcesz kontynuować, proszę o cierpliwość, ponieważ może to zająć kilka minut w zależności od twojego połączenia internetowego i konfiguracji systemu.",
+    "Installing": "Instalowanie"
 }

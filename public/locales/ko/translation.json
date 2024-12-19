@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "다운로드 항목에서 제거하기",
             "pause": "다운로드 일시 중지",
-            "resume": "다운로드를 계속합니다"
+            "resume": "다운로드를 계속합니다",
+            "timeElapsed": "경과 시간: {{elapsed}}",
+            "launch": "게임 시작",
+            "retry-install": "다시 설치하기",
+            "retry-update": "업데이트 다시 시도",
+            "stop": "다운로드 중지"
         }
     },
     "Recent": "최근에 즐긴 게임",
@@ -779,12 +784,14 @@
     "hyperplay": {
         "accesscodes": {
             "error": {
-                "validation": "액세스 코드가 올바르지 않습니다"
+                "validation": "액세스 코드가 올바르지 않습니다",
+                "licenseUndefined": "액세스 코드를 검증할 수 없습니다. 인터넷 접속 또는 방화벽 설정을 확인하세요."
             },
             "requirescode": "이 게임 업데이트를 위해서는 액세스 코드가 필요합니다.  \n이 게임 업데이트를 하려면 액세스 코드가 필요합니다.  \n이 게임 업데이트를 진행하려면 액세스 코드가 필요합니다.",
             "success": {
                 "validation": "성공! 접근 코드가 올바릅니다"
-            }
+            },
+            "placeholder": "접근 코드를 입력하세요"
         },
         "browserImport": {
             "appId": "앱 식별자",
@@ -801,7 +808,16 @@
                 "body": "HyperPlay는 사용자가 애플리케이션을 어떻게 사용하는지에 대한 데이터를 수집하여 더 나은 이해를 도모하고자 합니다. 이 정보는 앱 사용 방식을 이해하고 HyperPlay를 개선하는 데 유용합니다.",
                 "privacyCaption": "이 데이터는 집계된 형태로 제공되며, 일반 데이터 보호 규정 (EU) 2016/679에 따라 익명입니다. 우리의 개인 정보 보호 관행에 대한 더 많은 정보는 다음을 확인하십시오. ",
                 "anonymized": "익명화된 클릭 및 게임 상호작용;  \n익명 클릭 및 게임 상호작용 전송;  \n익명으로 클릭 및 게임 상호작용 전송;",
-                "hyperplayWill": "하이퍼플레이는 다음과 같은 기능을 제공합니다:  \n하이퍼플레이는 다음과 같은 서비스를 제공합니다:  \n하이퍼플레이는 다음과 같은 작업을 수행합니다:"
+                "hyperplayWill": "하이퍼플레이는 다음과 같은 기능을 제공합니다:  \n하이퍼플레이는 다음과 같은 서비스를 제공합니다:  \n하이퍼플레이는 다음과 같은 작업을 수행합니다:",
+                "text": {
+                    "title": "개인정보 보호정책이 업데이트되었습니다",
+                    "externalLink": "자세히 알아보기"
+                },
+                "bulletOne": "항상 선택 해제를 허용합니다",
+                "bulletTwo": "익명 클릭 및 게임 상호작용 전송",
+                "paragraphOne": "HyperPlay는 사용자가 애플리케이션과 상호작용하는 방식을 더 잘 이해하기 위해 사용 데이터 수집을 원합니다. \n           이를 통해 HyperPlay를 더욱 개선할 수 있습니다.",
+                "privacyPolicy": "개인정보 처리방침.",
+                "titleOne": "HyperPlay 개선에 도움을 주세요!"
             },
             "connectAgain": "다시 연결해 주세요",
             "welcome": {
@@ -810,9 +826,19 @@
                     "communityCTA_1": "우리는 당신의 피드백을 듣고 싶으며, 당신이 우리와 함께 하기를 바랍니다.  \n당신의 의견을 듣고 싶고, 우리와 함께해 주셨으면 좋겠습니다.  \n당신의 소중한 피드백을 기다리며, 우리와 함께해 주시길 바랍니다.",
                     "bugs": "HyperPlay는 공개 알파입니다. 많은 기능이 아직 개발 중이고, 버그가 존재할 수 있습니다.",
                     "description": "HyperPlay는 미래에서 온 게임 런처이자 게임 상점 집계기입니다. HyperPlay를 사용하면 지갑, 토큰 및 자산을 모든 게임에 지참할 수 있습니다. HyperPlay는 Epic 스토어, GOG 및 자체 HyperPlay 스토어의 전체 라이브러리를 지원합니다. HyperPlay를 사용함으로써 귀하는 우리의 이용 약관에 동의합니다.",
-                    "communityCTA_2": "커뮤니티와 함께 게임의 미래를 만들어 갑시다!  \n커뮤니티와 함께 게임의 미래를 설계해 봅시다!  \n함께 커뮤니티를 이루어 게임의 미래를 창조합시다!"
+                    "communityCTA_2": "커뮤니티와 함께 게임의 미래를 만들어 갑시다!  \n커뮤니티와 함께 게임의 미래를 설계해 봅시다!  \n함께 커뮤니티를 이루어 게임의 미래를 창조합시다!",
+                    "bulletPointFive": "우리의 고급 기능을 사용하여 macOS, Linux 및 SteamDeck에서 Windows 게임을 실행하세요",
+                    "paragraphOne": "HyperPlay에서는 게임의 미래를 위한 차세대 게임 스토어를 \n            구축하고 있습니다.",
+                    "paragraphThr": "지갑, 토큰 및 자산을 모든 게임에 원활하게 가져오고 \n           Epic Store, GOG 및 자체 HyperPlay Store의 방대한 라이브러리에 \n           한 곳에서 접근하세요.",
+                    "TitleList": "HyperPlay를 사용하면:",
+                    "bulletPointFour": "macOS에서 한 번의 클릭으로 Steam (Windows 버전) 설치",
+                    "bulletPointOne": "100개 이상의 온체인 지원 게임의 방대한 컬렉션에 접근하세요.",
+                    "bulletPointThree": "HyperPlay를 통해 Epic 및 GOG 게임을 직접 플레이하세요",
+                    "bulletPointTwo": "퀘스트를 완료하여 토큰, NFT 및 오프체인 보상을 획득하세요",
+                    "lastParagraph": "현재 베타 버전이며, 귀하의 피드백을 매우 중요하게 생각하며 \n            문제나 제안 사항을 보고해 주시기를 권장합니다."
                 },
-                "title": "HyperPlay 초기 액세스에 오신 것을 환영합니다!  \nHyperPlay 얼리 액세스에 오신 것을 환영합니다!  \nHyperPlay의 초기 액세스에 오신 것을 환영합니다!"
+                "title": "HyperPlay 초기 액세스에 오신 것을 환영합니다!  \nHyperPlay 얼리 액세스에 오신 것을 환영합니다!  \nHyperPlay의 초기 액세스에 오신 것을 환영합니다!",
+                "titleIntro": "HyperPlay에 오신 것을 환영합니다!"
             },
             "walletSelection": {
                 "screens": {
@@ -875,7 +901,8 @@
             "extracting": "추출 중 ...  \n추출하기 ...  \n추출 진행 중 ...",
             "installing": "다운로드 진행 중...",
             "distributables": "디스트리뷰터 설치 중...",
-            "paused": "중지됨"
+            "paused": "중지됨",
+            "patching": "패치 중..."
         },
         "linkSteamAccountDescription": "HyperPlay 계정을 연결하려면 Steam에 로그인하세요.  \nHyperPlay 계정과 연결하기 위해 Steam에 로그인해 주세요.  \nSteam에 로그인하여 HyperPlay 계정을 연결하세요.",
         "linkSteamAccountTitle": "스팀 계정 연동",
@@ -884,7 +911,9 @@
         "currentWallet": "현재 활성화된 지갑",
         "buttons": {
             "agree": "나는 찬성한다  \n나는 동의합니다  \n나는 수긍한다",
-            "noThanks": "사양할게요"
+            "noThanks": "사양할게요",
+            "primaryButton": "동의합니다",
+            "secondaryButton": "아니요, 괜찮습니다"
         },
         "viewItem": "{{item}}를 보기  \n{{item}} 확인하기  \n{{item}} 열기",
         "linkSteamAccountCta": "Steam에 로그인하기==WEBLATE_PART==Steam에 접속하여 로그인==WEBLATE_PART==Steam 계정으로 로그인하기",
@@ -903,7 +932,9 @@
         "turnAnalyticsOn": "활성화하기",
         "discordApp": "디스코드입니다.  \n디스코드 플랫폼  \n디스코드 애플리케이션",
         "folder": "폴더를 의미합니다.",
-        "viewFullscreen": "전체 화면 모드로 보기"
+        "viewFullscreen": "전체 화면 모드로 보기",
+        "compatibilityLayer": "호환성 레이어 (베타)",
+        "discordAppLink": "Discord 커뮤니티."
     },
     "importGameErrorMessage": "유효하지 않은 게임 폴더입니다. 게임을 가져올 수 없습니다.  \n게임 폴더가 유효하지 않습니다. 게임을 가져오는 것이 불가능합니다.  \n유효한 게임 폴더가 아닙니다. 게임을 임포트할 수 없습니다.",
     "exit_game": "게임을 종료합니다",
@@ -970,7 +1001,9 @@
         "View Game": "게임 살펴보기",
         "reward": "보상 항목",
         "claimFailed": "Claim 실패",
-        "notEnoughGas": "가스 수수료로 인해 보상을 청구할 충분한 지갑 잔액이 없습니다. 다른 지갑을 사용하거나 재시도하기 전에 이 지갑을 보충하세요.  \n가스 수수료로 인해 보상을 청구할 수 있는 지갑 잔액이 부족합니다. 다른 지갑을 시도하거나 이 지갑을 보충한 후 다시 시도하세요.  \n가스 수수료 때문에 보상을 청구할 수 있는 지갑 잔액이 부족합니다. 다른 지갑을 사용하거나 이 지갑을 보충한 후 다시 시도해 보세요.",
+        "notEnoughGas": {
+            "message": "가스 요금으로 인해 보상을 청구할 수 있는 지갑 잔액이 부족합니다. 다른 지갑을 사용하거나 이 지갑을 보충한 후 다시 시도해 주세요."
+        },
         "type": {
             "playstreak": "게임 연속",
             "reputation": "평판"
@@ -995,7 +1028,28 @@
             "confirm": "승인합니다"
         },
         "noG7ConnectionClaim": "보상을 받으려면 {{email}}에 연결된 Game7 계정이 필요합니다.  \n보상을 청구하려면 {{email}}와 연결된 Game7 계정이 있어야 합니다.  \n보상을 받으려면 {{email}}에 연결된 Game7 계정이 필요합니다.",
-        "noG7ConnectionSync": "작업을 다시 동기화하려면 {{email}}에 연결된 Game7 계정이 필요합니다.  \n작업을 재설정하려면 {{email}}와 연결된 Game7 계정이 있어야 합니다.  \n작업을 재동기화하려면 {{email}}에 연결된 Game7 계정이 필요합니다."
+        "noG7ConnectionSync": {
+            "message": "작업을 다시 동기화하려면 {{email}}에 Game7 계정이 연결되어 있어야 합니다.",
+            "title": "G7 계정이 연결되어 있지 않습니다"
+        },
+        "questComplete": "퀘스트 완료!",
+        "rewardClaimed": "청구 성공",
+        "toClaimReward": "보상을 청구하려면.",
+        "notEligible": {
+            "message": "필수 플레이 연속 일수를 완료하지 않아 현재 보상을 청구할 수 없습니다.",
+            "title": "아직 자격이 없습니다"
+        },
+        "notEnoughBalance": {
+            "title": "잔액 부족"
+        },
+        "notSignedIn": {
+            "message": "보상을 청구하려면 로그인해야 합니다.",
+            "title": "로그인하지 않음"
+        },
+        "questAvailable": "퀘스트가 가능합니다!",
+        "toSeeDetails": "자세한 내용을 보려면.",
+        "youHaveClaimed": "{{totalRewards}} 보상{{plural}}을(를) 청구하셨습니다.",
+        "claim": "청구"
     },
     "sideload": {
         "warningMessage": "사이드 로딩 기능은 개발자와 숙련된 사용자들을 위해 설계되었습니다. 악성 프로그램이 포함된 설치 파일을 사이드 로딩하면 컴퓨터가 손상되고 자금이 도난당할 위험이 있습니다.",
@@ -1025,7 +1079,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "외부 지갑과 함께 HyperPlay에 연결되어 있습니다.",
         "WALLET_DISCONNECTED": "HyperPlay에 연결된 지갑이 없습니다.  \nHyperPlay와 연결된 지갑이 없습니다.  \nHyperPlay에 지갑이 연결되어 있지 않습니다.",
-        "comingSoon": "곧 공개됩니다"
+        "comingSoon": "곧 공개됩니다",
+        "links": {
+            "bridge": "브리지",
+            "buy": "구매",
+            "sell": "판매",
+            "swap": "교환",
+            "marketplace": "마켓플레이스",
+            "portfolio": "포트폴리오"
+        }
     },
     "importGameErrorMessageExecutable": "게임 실행 파일을 찾을 수 없습니다. 게임을 임포트할 수 없습니다.",
     "back_to_game": "게임으로 돌아가기 위해",
@@ -1096,10 +1158,12 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft의 매력",
-                "description": "이 게임은 월드 오브 워크래프트: 리치 킹의 분노(3.3.5a) 모드입니다. 이 모드를 플레이하려면 플레이어는 월드 오브 워크래프트 3.3.5a의 사본을 소유해야 합니다. {{newline}} {{newline}} HyperPlay는 월드 오브 워크래프트를 호스팅하지 않습니다. 월드 오브 워크래프트를 소유한 플레이어는 다음과 같은 출처에서 3.3.5a 버전을 다운로드할 수 있습니다.",
+                "description": "이 게임은 월드 오브 워크래프트: 리치 왕의 분노 (3.3.5a)의 모드입니다. 이 모드를 플레이하려면 플레이어는 월드 오브 워크래프트 3.3.5a의 복사본을 소유해야 합니다. {{newline}} {{newline}} HyperPlay는 월드 오브 워크래프트를 호스팅하지 않습니다. 월드 오브 워크래프트를 소유한 플레이어는 다음 출처에서 필요한 버전을 얻을 수 있습니다:",
                 "subtitle": "월드 오브 워크래프트 3.3.5a를 받으세요",
                 "webtorrent": "토렌트 (마그넷 연결)",
-                "title": "1단계 진행하기"
+                "title": "1단계 진행하기",
+                "link1": "링크 1",
+                "link2": "링크 2 (자석 링크)"
             },
             "step3": {
                 "description": "월드 오브 워크래프트: 리치 왕의 분노 (3.3.5a)가 설치될 폴더를 선택해 주세요.  \n리치 왕의 분노 (3.3.5a) 월드 오브 워크래프트를 설치할 폴더를 선택하십시오.  \n월드 오브 워크래프트: 리치 왕의 분노 (3.3.5a)를 설치할 폴더를 선택하세요.",
@@ -1115,7 +1179,8 @@
             "step2": {
                 "description": "다운로드한 ChromieCraft_3.3.5a.zip 파일을 선택하세요.  \nChromieCraft_3.3.5a.zip 파일을 다운로드한 후 선택합니다.  \nChromieCraft_3.3.5a.zip 파일을 선택하여 다운로드합니다.",
                 "subtitle": "ChromieCraft_3.3.5a.zip 파일을 선택합니다.",
-                "title": "2단계 완료"
+                "title": "2단계 완료",
+                "subtitle1": "다운로드한 3.3.5a zip 파일을 선택하세요"
             }
         }
     },
@@ -1138,5 +1203,27 @@
     "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "계속하려면, 인터넷 속도와 시스템 설정에 따라 완료하는 데 몇 분이 걸릴 수 있으니 기다려 주시기 바랍니다;",
     "Installing Steam": "Steam 설치 중 ...  \nSteam 설치 진행 중 ...  \nSteam 설치를 시작합니다 ...",
     "Launching Steam": "스팀을 로드하고 있습니다...",
-    "UNCHECK 'Run Steam'": "'스팀 실행' 선택 해제"
+    "UNCHECK 'Run Steam'": "'스팀 실행' 선택 해제",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "계속 진행하시려면, 인터넷 연결 및 시스템 구성에 따라 완료하는 데 몇 분이 걸릴 수 있으니 잠시 기다려 주시기 바랍니다.",
+    "installModal": {
+        "loginRequiredMessage": "이 게임을 설치하고 액세스 코드를 입력하려면 HyperPlay에 로그인해야 합니다. ",
+        "loginRequiredMessageUpdate": "이 게임에 접근 코드를 입력하고 업데이트하려면 HyperPlay에 로그인해야 합니다. ",
+        "loginRequired": "로그인 필요"
+    },
+    "Recommended specs for a better experience": "더 나은 경험을 위한 권장 사양",
+    "16GB of RAM": "16GB의 RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 이상",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "모든 게임이 작동하지 않을 수 있으며, 작동하더라도 예상대로 실행되지 않을 수 있습니다.",
+    "Downloading": "다운로드 중 {{percent}}%",
+    "Installing": "설치 중",
+    "macOS 14": {
+        "0 or above": "macOS 14.0 이상"
+    },
+    "Please Wait": "잠시만 기다려 주세요",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask 포트폴리오는 MetaMask와 연결된 경우에만 사용할 수 있습니다."
+        },
+        "unsupported": "지원되지 않는 지갑 연결"
+    }
 }

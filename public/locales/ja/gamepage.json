@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "インストールを続ける",
             "message": "ダウンロードしたファイルを保持しますか？",
-            "title": "インストールを停止する",
+            "title": "ダウンロードをキャンセルしますか？",
             "keepFilesMessage": "キャンセル後にダウンロードファイルを保存したい場合は、こちらをチェックしてください."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "ダウンロードサイズ",
         "firstPlayed": "最初にプレイした",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "ダウンロードサイズを取得中",
+        "getting-install-size": "インストールサイズを取得中",
         "installSize": "インストールサイズ",
         "language": "Language",
         "lastPlayed": "最後にプレイした",
@@ -225,7 +225,8 @@
         "paused": "一時停止済み",
         "playing": "再生中",
         "downloading": "ダウンロード中",
-        "syncingSaves": "保存を同期しています"
+        "syncingSaves": "保存を同期しています",
+        "patching": "ファイルをパッチ中 "
     },
     "submenu": {
         "addShortcut": "ショートカットを追加する",

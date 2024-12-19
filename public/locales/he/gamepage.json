@@ -156,7 +156,8 @@
         "uninstalling": "מסיר התקנה",
         "preparing": "להכין את ההורדה, חכה",
         "distributables": "התקנת Distributables",
-        "paused": "הופסק"
+        "paused": "הופסק",
+        "patching": "תיקון קבצים "
     },
     "submenu": {
         "settings": "הגדרות",

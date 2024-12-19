@@ -29,23 +29,34 @@
         "stopInstall": {
             "keepInstalling": "Nastavite instalaciju",
             "message": "Želite li ZADRŽATI preuzete datoteke?",
-            "title": "Zaustavi instalaciju"
+            "title": "Želite li otkazati preuzimanje?",
+            "keepFilesMessage": "Provjerite ovdje ako želite zadržati datoteke preuzimanja nakon otkazivanja."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Želite li deinstalirati igricu?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
             "title": "Deinstaliraj",
-            "dlc": "Želite li deinstalirati ovu aplikaciju?"
+            "dlc": "Želite li deinstalirati ovu aplikaciju?",
+            "prefix_warning": "Wine prefiks za ovu igru je zadani prefiks. Ako ga stvarno želite izbrisati, morate to učiniti ručno."
         },
         "update": {
             "message": "Ova igra ima ažuriranje, želite li ažurirati sada?",
-            "title": "Igra treba ažuriranje"
+            "title": "Igra treba ažuriranje",
+            "message-cancel": "Nije moguće igrati ovu igru bez ažuriranja"
         },
         "wineprefix": "Odaberite WinePrefix mapu",
         "yes": "DA",
         "dont-show-again": "Nemoj više prikazivati",
-        "ok": "OK"
+        "ok": "OK",
+        "aware": "Svjestan sam",
+        "compability": {
+            "message": "Ova Windows igra će raditi koristeći sloj kompatibilnosti. Možda ćete naići na neke probleme ili igra možda neće raditi uopće."
+        },
+        "stopExtraction": {
+            "title": "Želite li otkazati ekstrakciju?"
+        },
+        "yesCancel": "Da, otkaži"
     },
     "button": {
         "add_to_favourites": "Dodaj u omiljene",
@@ -87,22 +98,25 @@
     "game": {
         "downloadSize": "Veličina Preuzimanja",
         "firstPlayed": "Prvo odigrano",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Dohvaćanje veličine preuzimanja",
+        "getting-install-size": "Dohvaćanje veličine instalacije",
         "installSize": "Veličina Instalacije",
         "language": "Jezik",
         "lastPlayed": "Zadnje odigrano",
         "neverPlayed": "Nikad",
         "platform": "Odaberi verziju platforme za instalirati",
         "requirements": "Zahtjevi sustava",
-        "totalPlayed": "Vrijeme igranja"
+        "totalPlayed": "Vrijeme igranja",
+        "selectChannelName": "Odaberite naziv kanala",
+        "dlcs": "DLC-ovi"
     },
     "gamecard": {
         "moving": "Premještanje",
         "repairing": "Popravljanje"
     },
     "generic": {
-        "error": "Nepoznata greška"
+        "error": "Nepoznata greška",
+        "noDescription": "Nema dostupnog opisa"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -127,7 +141,8 @@
         "path-not-writtable": "Upozorenje: staza se možda ne može prepisati.",
         "space-after-install": "Nakon Instalacije",
         "wineprefix": "WinePrefix",
-        "wineversion": "Wine verzija"
+        "wineversion": "Wine verzija",
+        "compatibility-warning": "Ova Windows igra će raditi koristeći sloj kompatibilnosti. Vaše iskustvo može varirati."
     },
     "label": {
         "game": {
@@ -201,7 +216,17 @@
         "syncingSaves": "Sinkoniziranje podataka",
         "paused": "Zaustavljeno",
         "playing": "Reprodukcija",
-        "downloading": "Preuzimanje u tijeku"
+        "downloading": "Preuzimanje u tijeku",
+        "patching": "Patchiranje datoteka ",
+        "moving-files": "Premještanje datoteke '{{file}}': {{percent}} ",
+        "gog-goodie": "Ova igra se čini neinstalabilnom. Provjerite preuzimajući sadržaj na https://gog.com/account",
+        "goodie": "Neinstalabilno",
+        "extracting": {
+            "progress": "Ekstrakcija",
+            "cancel": "Otkazivanje ekstrakcije"
+        },
+        "preparing": "Priprema preuzimanja, molimo pričekajte",
+        "distributables": "Instaliranje distributivnih paketa"
     },
     "submenu": {
         "addShortcut": "Dodaj prečace",
@@ -215,6 +240,12 @@
         "removeShortcut": "Ukloni prečace",
         "settings": "Postavke",
         "store": "Stranica Trgovine",
-        "verify": "Provjeri i popravi"
+        "verify": "Provjeri i popravi",
+        "extraInfo": "Dodatne informacije"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Molimo kontaktirajte HyperPlay tim s ovom porukom: {{error}} - {{context}}."
+        }
     }
 }

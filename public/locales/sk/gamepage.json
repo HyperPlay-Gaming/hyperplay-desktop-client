@@ -225,7 +225,8 @@
         "paused": "Pozastavené",
         "syncingSaves": "Synchronizácia uloženia",
         "playing": "Prehrávané",
-        "downloading": "Sťahovanie"
+        "downloading": "Sťahovanie",
+        "patching": "Oprava súborov "
     },
     "submenu": {
         "addShortcut": "Pridať skratku",

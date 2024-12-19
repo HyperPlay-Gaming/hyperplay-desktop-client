@@ -1,7 +1,8 @@
 {
     "button": {
         "login": "Logg inn",
-        "loading": "Laster inn"
+        "loading": "Laster inn",
+        "error": "Feil, prøv en annen kode."
     },
     "message": {
         "part1": "Følg instruksen for å logge inn og installere spill:",

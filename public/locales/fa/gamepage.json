@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "ادامه به نصب",
             "message": "آیا مایل هستید فایلهای دانلود شده را نگه دارید؟",
-            "title": "توقف نصب",
+            "title": "آیا می‌خواهید دانلود را لغو کنید؟",
             "keepFilesMessage": "اینجا را بررسی کنید اگر می خواهید فایل های دانلود را پس از لغو نگه دارید."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "سایز دانلود",
         "firstPlayed": "اولین اجرا",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "در حال دریافت اندازه دانلود",
+        "getting-install-size": "در حال دریافت اندازه نصب",
         "installSize": "سایز نصب",
         "language": "زبان",
         "lastPlayed": "آخرین اجرا",
@@ -225,7 +225,8 @@
         "gog-goodie": "به نظر نمی رسد که این بازی قابل نصب باشد. محتوای قابل دانلود در https://gog.com/account",
         "goodie": "قابل نصب نیست",
         "playing": "بازی",
-        "preparing": "آماده سازی دانلود، لطفا صبر کنید"
+        "preparing": "آماده سازی دانلود، لطفا صبر کنید",
+        "patching": "در حال وصله زدن فایل‌ها "
     },
     "submenu": {
         "addShortcut": "افزودن میانبر",

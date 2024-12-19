@@ -137,7 +137,7 @@
             "title": "Parancsikonok"
         },
         "sync": {
-            "button": "Kiválasztás",
+            "button": "Válassz",
             "error": "Érvénytelen útvonal",
             "title": "Válaszd ki a mentések könyvtárát"
         },
@@ -185,7 +185,7 @@
         "login": "Bejelentkezés",
         "sync": "Szinkronizálás",
         "syncing": "Szinkronizálás folyamatban",
-        "unsync": "Deszinkronizálás",
+        "unsync": "Szinkronizálás megszüntetése",
         "update": "Frissítés",
         "download": "Letöltés",
         "continue": "Folytatás",
@@ -260,7 +260,7 @@
         "ignore_hidden": "Rejtettek figyelmen kívül hagyása",
         "platform": "Platform",
         "show_all_games": "Összes játék mutatása",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Nem elérhető játékok megjelenítése",
         "show_favourites_only": "Csak kedvencek mutatása",
         "show_hidden": "Elrejtettek mutatása",
         "store": "Áruház szűrése"
@@ -391,7 +391,7 @@
             "reparing": "Javítás befejezve"
         },
         "install": {
-            "canceled": "Telepítés visszavonva",
+            "canceled": "Telepítés megszakítva",
             "error": "A telepítés meghiúsult",
             "finished": "Telepítés befejezve",
             "imported": "Játék importálva",
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Eltávolítva",
         "update": {
-            "canceled": "Frissítés visszavonva",
+            "canceled": "Frissítés megszakítva",
             "finished": "Frissítés befejezve",
             "started": "Frissítés elindult",
             "stopped": "Frissítés megállt",
@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "pause": "Letöltések szüneteltetése",
-            "resume": "Letöltés folytatása"
+            "resume": "Letöltés folytatása",
+            "timeElapsed": "Eltelt idő: {{elapsed}}",
+            "launch": "Játék indítása",
+            "retry-install": "Telepítés megismétlése",
+            "retry-update": "Frissítés újrapróbálása",
+            "stop": "Letiltás"
         }
     },
     "Recent": "Nemrég játszott",
@@ -512,7 +517,7 @@
         "default-install-path": "Alapértelmezett telepítési útvonal",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Mappa beállítása új Wine prefixeknek",
-        "disable_controller": "Disable HyperPlay navigation using controller",
+        "disable_controller": "A Hyperplay navigáció letiltása kontroller használatával",
         "discordRPC": "Discord Rich Presence engedélyezése",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "egs-sync": "Szinkronizálás a telepített Epic Gamesszel",
@@ -746,7 +751,7 @@
         "manager": {
             "link": "Wine kezelő",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Wine kezelő",
+            "title": "Kompatibilitási réteg ",
             "unzipping": "Kicsomagolás"
         },
         "release": "Release Date",
@@ -826,7 +831,16 @@
                 "hyperplayWill": "HyperPlay:",
                 "optOut": "Mindig engedje meg, hogy opt-out keresztül Beállítások;",
                 "neverCollectIP": " összegyűjti teljes IP-címét;",
-                "privacyCaption": "Ezeket az adatokat összesítették, ezért névtelen az (EU) 2016/679 általános adatvédelmi rendelet alkalmazásában. További információ adatvédelmi gyakorlatunkkal kapcsolatban, kérjük, lásd a miénket "
+                "privacyCaption": "Ezeket az adatokat összesítették, ezért névtelen az (EU) 2016/679 általános adatvédelmi rendelet alkalmazásában. További információ adatvédelmi gyakorlatunkkal kapcsolatban, kérjük, lásd a miénket ",
+                "paragraphOne": "A HyperPlay szeretné összegyűjteni a használati adatokat, hogy jobban megértsük, hogyan lépnek kapcsolatba felhasználóink az alkalmazással. \n           Ez lehetővé teszi számunkra, hogy a HyperPlay-t még jobbá tegyük számodra.",
+                "text": {
+                    "externalLink": "Tudj meg többet",
+                    "title": "Frissítettük az Adatvédelmi Szabályzatunkat"
+                },
+                "titleOne": "Segíts nekünk fejleszteni a HyperPlay-t!",
+                "bulletOne": "Mindig lehetőséget ad arra, hogy kilépj",
+                "bulletTwo": "Kattintások és játékinterakciók anonim küldése",
+                "privacyPolicy": "Adatvédelmi irányelvek."
             },
             "connectionCanceled": {
                 "description": "Kérjük, erősítse meg a kapcsolatkérést a mobil pénztárcáján, hogy folytassa.",
@@ -838,9 +852,19 @@
                     "construction": "A HyperPlay építkezés alatt áll.",
                     "communityCTA_1": "Szeretjük a visszajelzéseket, és csatlakozunk hozzánk",
                     "description": "HyperPlay egy játék indító és játékbolt aggregátor a\njövő. A HyperPlay segítségével hordozhatja a pénztárcáját, a tokeneket és az eszközöket\nminden játék. A HyperPlay támogatja az Epic teljes könyvtárát\nÜzlet, GOG és saját HyperPlay áruházunk. A HyperPlay használatával egyetért\na mi",
-                    "bugs": "Kérjük, vegye figyelembe, hogy a HyperPlay egy nyilvános alfa. Sok jellemző még mindig\na fejlődésben, és lesznek hibák."
+                    "bugs": "Kérjük, vegye figyelembe, hogy a HyperPlay egy nyilvános alfa. Sok jellemző még mindig\na fejlődésben, és lesznek hibák.",
+                    "bulletPointFour": "Telepítsd a Steamet (Windows verzió) macOS-re egy egyszerű kattintással",
+                    "bulletPointOne": "Hozzáférés egy hatalmas, 100+ on-chain engedéllyel rendelkező játék gyűjteményhez",
+                    "bulletPointThree": "Játssz az Epic és GOG játékokkal közvetlenül a HyperPlay-en",
+                    "bulletPointTwo": "Tokenek, NFT-k és off-chain jutalmak megszerzése küldetések teljesítésével",
+                    "lastParagraph": "Jelenleg Bétában vagyunk, nagyra értékeljük a visszajelzésedet, és \n            bátorítunk, hogy jelentsd a problémákat vagy javaslatokat a",
+                    "paragraphOne": "A HyperPlay-nél a jövő generációs játékboltot építjük \n            a játékok jövője számára.",
+                    "paragraphThr": "Zökkenőmentesen hozd magaddal a pénztárcádat, tokenjeidet, \n           és eszközeidet minden játékba, miközben hozzáférsz \n           az Epic Store, a GOG és a saját HyperPlay Boltunk \n           kiterjedt könyvtárához - mindez egy helyen.",
+                    "TitleList": "A HyperPlay-jal teheted:",
+                    "bulletPointFive": "Futtass Windows játékokat macOS, Linux és SteamDeck rendszereken a\n              fejlett"
                 },
-                "title": "Üdvözöljük a Hyper Játssz korai hozzáférést!"
+                "title": "Üdvözöljük a Hyper Játssz korai hozzáférést!",
+                "titleIntro": "Üdvözöljük a HyperPlay-en!"
             },
             "connectionConnected": {
                 "description": "A pénztárcád összekapcsolódik. Készen állsz a játékra.",
@@ -856,23 +880,28 @@
             "installing": "Letöltés…",
             "distributables": "Eloszthatók telepítése",
             "extracting": "Kitermelés...",
-            "installed": "Készülj játszani"
+            "installed": "Készülj játszani",
+            "patching": "Frissítés..."
         },
         "buttons": {
             "noThanks": "Nem, köszönöm",
-            "agree": "Egyetértek"
+            "agree": "Egyetértek",
+            "primaryButton": "Elfogadom",
+            "secondaryButton": "Nem, köszönöm"
         },
         "misc": "Soha",
         "turnAnalyticsOff": "Kikapcsolás",
         "Sync": "Szinkronizálás",
         "accesscodes": {
             "error": {
-                "validation": "Az Access kód érvénytelen"
+                "validation": "Az Access kód érvénytelen",
+                "licenseUndefined": "Nem sikerült érvényesíteni a hozzáférési kódot. Kérjük, ellenőrizd az internetkapcsolatodat vagy a tűzfalbeállításaidat."
             },
             "success": {
                 "validation": "Siker! Az Access kód érvényes"
             },
-            "requirescode": "Ez a játékfrissítés hozzáférési kódot igényel."
+            "requirescode": "Ez a játékfrissítés hozzáférési kódot igényel.",
+            "placeholder": "Add meg a hozzáférési kódot"
         },
         "achievements": {
             "gamesToMint": "Játékok mentára",
@@ -897,7 +926,9 @@
         "viewItem": "{{item}}",
         "analyticsOff": "Az analitika kikapcsolódik",
         "otp": "Egyszer Passcode",
-        "viewFullscreen": "Teljes képernyő"
+        "viewFullscreen": "Teljes képernyő",
+        "compatibilityLayer": "Kompatibilitási réteg (Béta)",
+        "discordAppLink": "Discord közösség."
     },
     "gameRelease": {
         "main": "Fő",
@@ -923,7 +954,7 @@
             "syncSuccess": "Progress szinkronizált"
         },
         "points": "Pontok",
-        "signIn": "Bejelentkezés",
+        "signIn": "Jelentkezz be",
         "sync": "Szinkronizálás",
         "connectSteamAccount": "Connect Steam fiók",
         "reputation": "Reputáció",
@@ -943,7 +974,9 @@
         "needMoreAchievements": "Meg kell befejezni {{percent}}% az eredmények az egyik ilyen játékok.",
         "reward": "Jutalom",
         "associatedGames": "Társult játékok",
-        "notEnoughGas": "Elég pénztárca-egyenleg, hogy követelje meg a jutalmat a gázdíjak miatt. Próbáljon ki egy másik pénztárcát, vagy töltse fel ezt, mielőtt visszavonul.",
+        "notEnoughGas": {
+            "message": "Nincs elegendő pénztárcaegyenleg a jutalmad igényléséhez a gázdíjak miatt. Próbálj meg egy másik pénztárcát, vagy töltsd fel ezt, mielőtt újrapróbálnád."
+        },
         "pointsClaimed": "Pontok betartott",
         "g7Numclaimed": "Teljes jogú G7 hitelek",
         "claimWarning": {
@@ -954,7 +987,28 @@
             "confirm": "Megerősítés"
         },
         "noG7ConnectionClaim": "Egy Game7 fiókot kell tartalmaznia a {{email}}-hez, hogy követelje meg jutalmait.",
-        "noG7ConnectionSync": "Szüksége van egy Game7-fiókra, amely a {{email}}-hez kapcsolódik, hogy újra bemutassa a feladatait."
+        "noG7ConnectionSync": {
+            "message": "Játék7 fiókot kell összekapcsolnod a {{email}}-al a feladataid újraszinkronizálásához.",
+            "title": "Nincs összekapcsolt G7 fiók"
+        },
+        "notEligible": {
+            "message": "Nem teljesítetted a szükséges játékfolyam napokat, és jelenleg nem tudod igényelni a jutalmadat.",
+            "title": "Még nem jogosult"
+        },
+        "notEnoughBalance": {
+            "title": "Alacsony egyenleg"
+        },
+        "rewardClaimed": "Igénylés sikeres",
+        "toClaimReward": "a jutalmad igényléséhez.",
+        "toSeeDetails": "a részletek megtekintéséhez.",
+        "notSignedIn": {
+            "message": "Be kell jelentkezned, hogy igénybe tudd venni a jutalmadat.",
+            "title": "Nincs bejelentkezve"
+        },
+        "questAvailable": "Küldetés elérhető!",
+        "questComplete": "Küldetés teljesítve!",
+        "youHaveClaimed": "Igényelted a {{totalRewards}} jutalmat{{plural}}.",
+        "claim": "Igénylés"
     },
     "quests": {
         "quests": "Küldetések",
@@ -1023,7 +1077,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Ön csatlakozik a HyperPlay-hoz egy külső pénztárcával.",
         "WALLET_DISCONNECTED": "Nincs olyan pénztárcád, amely a HyperPlay-hoz kapcsolódik.",
-        "comingSoon": "Hamarosan jönnek"
+        "comingSoon": "Hamarosan jönnek",
+        "links": {
+            "bridge": "Híd",
+            "buy": "Vásárlás",
+            "portfolio": "Portfólió",
+            "sell": "Eladás",
+            "swap": "Csere",
+            "marketplace": "Piac"
+        }
     },
     "back_to_game": "Vissza a játékhoz",
     "gameUpdateNotifications": {
@@ -1096,15 +1158,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Ez a játék egy mod for World of Warcraft: Wrath of the Lich King (3.3.5a). Annak érdekében, hogy ez az anya legyen, a játékosoknak rendelkezniük kell a World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nem fogadja el a World of Warcraft. Azok a játékosok, akik birtokolják a World of Warcraft 3.3.5a verziót olyan forrásokból, mint:",
+                "description": "Ez a játék a World of Warcraft: Wrath of the Lich King (3.3.5a) módja. A mód játszásához a játékosoknak rendelkezniük kell a World of Warcraft 3.3.5a példányával. {{newline}} {{newline}} A HyperPlay nem hosztolja a World of Warcraftot. A World of Warcrafttal rendelkező játékosok a szükséges verziót az alábbi forrásokból szerezhetik be:",
                 "subtitle": "Letöltés World of Warcraft 3.3.5a",
                 "title": "1. lépés",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "link2": "Link 2 (Mágneses link)",
+                "link1": "1. link"
             },
             "step2": {
                 "description": "Válassza ki a letöltött ChromieCraft_3.3.5a.zip fájl.",
                 "subtitle": "Válasszon ChromieCraft_3.3.5a.zip File",
-                "title": "2. lépés"
+                "title": "2. lépés",
+                "subtitle1": "Válaszd ki a letöltött 3.3.5a zip fájlt"
             },
             "step3": {
                 "description": "Kérjük, válassza ki a mappát, ahol a World of Warcraft: Wrath of the Lich King (3,3.5a) kell telepíteni.",
@@ -1138,5 +1203,27 @@
     "Installing Steam": "Installing Steam...",
     "Launch Steam": "Indítsa el a Steam",
     "Launching Steam": "Indítási gőz...",
-    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam \"...\""
+    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam \"...\"",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Ha folytatni szeretnéd, kérlek légy türelemmel, mivel ez néhány percet is igénybe vehet, attól függően, hogy milyen az internetkapcsolatod és a rendszer konfigurációja.",
+    "installModal": {
+        "loginRequiredMessage": "Be kell jelentkezned a HyperPlay-be, hogy megadd a hozzáférési kódodat és telepítsd ezt a játékot. ",
+        "loginRequiredMessageUpdate": "Be kell jelentkezned a HyperPlay-be, hogy megadd a hozzáférési kódodat és frissítsd ezt a játékot. ",
+        "loginRequired": "Bejelentkezés szükséges"
+    },
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "A MetaMask portfólió csak akkor érhető el, ha csatlakozol a MetaMaskhoz."
+        },
+        "unsupported": "Támogatott pénztárca kapcsolat"
+    },
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 vagy újabb",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Tudd, hogy nem minden játék fog működni, és még ha működik is, lehet, hogy nem a vártnak megfelelően fut.",
+    "Downloading": "Letöltés {{percent}}%",
+    "Installing": "Telepítés",
+    "macOS 14": {
+        "0 or above": "macOS 14.0 vagy újabb"
+    },
+    "Please Wait": "Kérlek várj",
+    "Recommended specs for a better experience": "Ajánlott specifikációk a jobb élmény érdekében"
 }

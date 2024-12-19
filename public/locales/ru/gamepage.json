@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Продолжить установку",
             "message": "Хотите ли вы оставить установленные файлы?",
-            "title": "Прекращение установки",
+            "title": "Вы хотите отменить загрузку?",
             "keepFilesMessage": "Проверьте здесь, если вы хотите сохранить файлы загрузки после отмены."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Размер загрузки",
         "firstPlayed": "Первый запуск",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Получение размера загрузки",
+        "getting-install-size": "Получение размера установки",
         "installSize": "Размер установки",
         "language": "Язык",
         "lastPlayed": "Последний запуск",
@@ -233,7 +233,8 @@
         "goodie": "Не устанавливается",
         "preparing": "Скачать, пожалуйста, подождите",
         "distributables": "Установка распределенных",
-        "paused": "Пауза"
+        "paused": "Пауза",
+        "patching": "Патчинг файлов "
     },
     "submenu": {
         "addShortcut": "Создать ярлык",

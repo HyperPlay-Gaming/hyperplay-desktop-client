@@ -12,7 +12,8 @@
             "exe": "Bajariladigan ni tanlang",
             "image": "Ilova tasviri",
             "title": "O'yin/ilova nomi",
-            "broser": "BrowserURL"
+            "broser": "BrowserURL",
+            "supports-web3": "Ushbu o'yin Web3 xususiyatlariga ega"
         }
     },
     "specs": {
@@ -42,12 +43,16 @@
         "uninstalling": "Oʻchirish",
         "updating": "O'yin yangilanmoqda",
         "extracting": {
-            "progress": "Chiqarish"
+            "progress": "Chiqarish",
+            "cancel": "Extractionni bekor qil"
         },
         "downloading": "Yuklab olinmoqda",
         "gog-goodie": "Bu oʻyinni oʻrnatib boʻlmaydi. Yuklab olinadigan kontentni https://gog.com/account orqali tekshiring",
         "goodie": "Oʻrnatish mumkin emas",
-        "paused": "Пауза қилинган"
+        "paused": "Пауза қилинган",
+        "patching": "Fayllarni yangilash ",
+        "distributables": "Ta'minotlarni o'rnatish",
+        "preparing": "Yuklash tayyorlanmoqda, iltimos kuting"
     },
     "box": {
         "change": {
@@ -79,7 +84,8 @@
         "stopInstall": {
             "keepInstalling": "Oʻrnatishda davom eting",
             "message": "Yuklab olingan fayllarni SAQLASHNI hohlaysizmi?",
-            "title": "O'rnatishni to'xtatish"
+            "title": "O'rnatishni to'xtatish",
+            "keepFilesMessage": "Agar bekor qilganingizdan so'ng yuklash fayllarini saqlamoqchi bo'lsangiz, bu yerda tekshiring."
         },
         "uninstall": {
             "checkbox": "Prefiksni olib tashlash: {{prefix}}{{newLine}}Izoh: Buni ortga qaytarib boʻlmaydi va zaxiralanmagan saqlangan fayllar ham olib tashlanadi.",
@@ -91,12 +97,21 @@
         },
         "update": {
             "message": "Bu oʻyinda yangilanish bor, yangilanish hozir qoʻllanilsinmi?",
-            "title": "O'yin yangilanishi kerak"
+            "title": "O'yin yangilanishi kerak",
+            "message-cancel": "Ushbu o'yinni yangilamasdan o'ynash imkoni yo'q"
         },
         "wineprefix": "WinePrefix papkasini tanlang",
         "yes": "HA",
         "ok": "KELISHDIKMI",
-        "dont-show-again": "Boshqa ko'rsatma"
+        "dont-show-again": "Boshqa ko'rsatma",
+        "aware": "Men xabardorman",
+        "yesCancel": "Ha, bekor qil",
+        "stopExtraction": {
+            "title": "Extractionni bekor qilmoqchimisiz?"
+        },
+        "compability": {
+            "message": "Ushbu Windows o'yini moslik qatlamidan foydalanadi. Siz ba'zi muammolarga duch kelishingiz yoki o'yin umuman ishlamasligi mumkin."
+        }
     },
     "button": {
         "add_to_favourites": "Sevimlilarga qo'shish",
@@ -112,7 +127,8 @@
         "no-path-selected": "Hech qanday yoʻl tanlanmagan",
         "queue": {
             "remove": "Navbatdan olib tashlash",
-            "continue": "Yuklab olishda davom eting"
+            "continue": "Yuklab olishda davom eting",
+            "cancel": "Yuklashni bekor qil"
         },
         "remove_from_favourites": "Sevimlilardan olib tashlash",
         "remove_from_recent": "Oxirgidan olib tashlash",
@@ -124,7 +140,9 @@
         "unhide_game": "O'yinni ko'rsatish",
         "uninstall": "Oʻchirish",
         "update": "Yangilash",
-        "remove_from_library": "Ro'yxatdan o'chirish"
+        "remove_from_library": "Ro'yxatdan o'chirish",
+        "favorites": "Sevimli",
+        "unfavorites": "Sevimlidan chiqar"
     },
     "cloud_save_unsupported": "Qo'llab-quvvatlanmaydi",
     "disabled": "O'chirilgan",
@@ -144,7 +162,8 @@
         "platform": "O'rnatish uchun platforma versiyasini tanlang",
         "requirements": "Tizim talablari",
         "totalPlayed": "O'yin vaqti",
-        "dlcs": "DLClar"
+        "dlcs": "DLClar",
+        "selectChannelName": "Kanal nomini tanlang"
     },
     "gamecard": {
         "moving": "Harakatlanuvchi",
@@ -176,7 +195,8 @@
         "game-scores": "O'yin natijalari",
         "installedInfo": "O'rnatilgan ma'lumotlar",
         "protondb-compatibility-info": "Proton muvofiqlik darajasi",
-        "steamdeck-compatibility-info": "SteamDeck mosligi"
+        "steamdeck-compatibility-info": "SteamDeck mosligi",
+        "web3-supported": "Web3 xususiyatlariga ega"
     },
     "install": {
         "disk-space-left": "Bo'sh joy mavjud",
@@ -185,7 +205,8 @@
         "path-not-writtable": "Ogohlantirish: yo'l yozilmasligi mumkin.",
         "space-after-install": "O'rnatishdan keyin",
         "wineprefix": "WinePrefix",
-        "wineversion": "Vino versiyasi"
+        "wineversion": "Vino versiyasi",
+        "compatibility-warning": "Ushbu Windows o'yini moslik qatlamidan foydalanadi. Tajribangiz farq qilishi mumkin."
     },
     "label": {
         "game": {
@@ -236,5 +257,10 @@
         "settings": "Sozlamalar",
         "store": "Do'kon sahifasi",
         "verify": "Tasdiqlash va ta'mirlash"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Iltimos, ushbu xabar bilan HyperPlay jamoasi bilan bog'laning: {{error}} - {{context}}."
+        }
     }
 }

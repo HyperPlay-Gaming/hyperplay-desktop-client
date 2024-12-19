@@ -66,7 +66,8 @@
                 "title": "Ufanget unntak skjedde!"
             },
             "update": {
-                "title": "Oppdateringsfeil"
+                "title": "Oppdateringsfeil",
+                "message": "Noe gikk galt med oppdateringen! Vennligst avinstaller og installer HyperPlay på nytt manuelt."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,7 +77,21 @@
             "winetricks": {
                 "message": "Winetricks returnerte følgende feil under kjøring:{{newLine}}{{error}}",
                 "title": "Winetricks feil"
-            }
+            },
+            "delete-files": {
+                "body": "Feil ved fjerning av utvunnet mappe {{path}}. Vennligst fjern den manuelt.  \n                {{paragraph}}  \n                {{error}}",
+                "title": "Feil ved fjerning av utpakket mappe"
+            },
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "Installasjonen av Ubisoft Connect i spillprefikset mislyktes. Sjekk vår wiki-side på https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac for å installere det manuelt."
+            },
+            "steam": {
+                "message": "Steam-installasjonen feilet! Vennligst les instruksjonene nøye og prøv igjen! {{paragraph}} {{error}}",
+                "title": "Steam-feil",
+                "error": "Steam-kjørbar fil ble ikke funnet. Installasjonen ble sannsynligvis avbrutt av brukeren eller mislyktes på Steam-siden."
+            },
+            "moving": "Feil ved flytting av spill {{error}}"
         },
         "info": {
             "update": {
@@ -85,7 +100,9 @@
                 "message": "Det er en ny versjon tilgjengelig!",
                 "message-finished": "Vil du starte HyperPlay på nytt nå?",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Oppgradering fullført"
+                "title-finished": "Oppgradering fullført",
+                "appUpdated-message": "HyperPlay ble oppdatert. Vil du oppdatere og starte HyperPlay på nytt nå?",
+                "appUpdated": "HyperPlay ble oppdatert"
             }
         },
         "no": "Nei",
@@ -139,20 +156,36 @@
                 "install": "Epic Servers har stor driftsstans akkurat nå, spillet kan ikke installeres!",
                 "update": "Epic Servers har stor driftsstans akkurat nå, spillet kan ikke oppdateres!"
             },
-            "title": "Advarsel"
+            "title": "Advarsel",
+            "wine-change": {
+                "title": "Wine ikke funnet!",
+                "title-gptk": "Game Porting Toolkit er ikke kompatibel ",
+                "message": "Vi kunne ikke finne den valgte vinversjonen for å starte denne tittelen ({{selectedWine}}). {{newline}} Vi fant en annen, ønsker du å fortsette med å starte ved å bruke {{foundWine}} ?",
+                "message-gptk": "For å kunne kjøre spill ved hjelp av Apple Gaming-portering verktøyet, må du oppgradere macOS-en din til 14 (Sonoma) eller høyere. {{newline}} Vi fant Wine på systemet ditt, ønsker du å fortsette med å starte ved å bruke {{foundWine}} ?"
+            },
+            "rosetta": {
+                "message": "HyperPlay krever Rosetta for å kjøre riktig på macOS med Apple Silicon-brikker. Vennligst installer det fra macOS-terminalen ved å bruke følgende kommando: \"softwareupdate --install-rosetta\" og start HyperPlay på nytt. ",
+                "title": "Rosetta ikke funnet"
+            }
         },
         "wineprefix": "Velg mappe for Wine-prefiks",
         "yes": "Ja",
         "dontShowAgain": "Ikke vis igjen",
-        "choose-nile-binary": "Velg Nile binær"
+        "choose-nile-binary": "Velg Nile binær",
+        "reset-extension": {
+            "question": {
+                "message": "Er du sikker på at du vil tilbakestille MetaMask-utvidelsen?",
+                "title": "Tilbakestill utvidelse"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
         "go_to_library": "Gå til biblioteket",
         "login": "Logg inn",
         "sync": "Synkroniser",
-        "syncing": "Synkroniserer …",
-        "unsync": "Omgjør synkronisering",
+        "syncing": "Synkronisering",
+        "unsync": "Avsynkroniser",
         "download": "Last ned",
         "update": "Oppdater",
         "continue": "Fortsett",
@@ -195,7 +228,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Estimert tid",
+        "title_dm": "Nedlastingsbehandling"
     },
     "epic": {
         "offline-notification-body": "Netttjenester fungerer kanskje ikke fullt ut siden Epic Games-servere er offline!",
@@ -225,7 +260,7 @@
         "ignore_hidden": "Ignorer skjult",
         "platform": "Plattform",
         "show_all_games": "Vis alle spill",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Vis ikke tilgjengelige spill",
         "show_favourites_only": "Vis kun favoritter",
         "show_hidden": "Vis skjult",
         "store": "Filterbutikk"
@@ -268,7 +303,10 @@
             "part1": "Heroiske søk etter versjoner av Wine, Proton og CrossOver i følgende mapper:",
             "part2": "For andre steder, bruk en symbolsk lenke til en av disse mappene"
         },
-        "msync": "Fsync har som mål å redusere vinserveroverhead i CPU-intensive spill. Aktivering kan forbedre ytelsen på støttede Linux-kjerner."
+        "msync": "Fsync har som mål å redusere vinserveroverhead i CPU-intensive spill. Aktivering kan forbedre ytelsen på støttede Linux-kjerner.",
+        "dxvkfpslimit": "Setter en rammefrekvensgrense for DXVK-spill",
+        "disable_logs": "Aktiver denne avmerkingsboksen for å deaktivere de fleste skrivingene til loggfiler (kritisk informasjon logges alltid). Sørg for å slå av denne innstillingen før du rapporterer et problem.",
+        "dxvknvapi": "DXVK-NVAPI er en implementering av NVAPI bygget på toppen av DXVK og den linux-native NVAPI, det tillater bruk av DLSS på Nvidia GPUer."
     },
     "info": {
         "hyperplay": {
@@ -294,7 +332,9 @@
         },
         "wine-repfix": {
             "message": "Wine bruker det som kalles WINEPREFIX for å kapsle inn Windows-applikasjoner. Dette prefikset inneholder Wine-konfigurasjonsfilene og en reproduksjon av filhierarkiet til C: (hoveddisken på et Windows-operativsystem). I denne reproduksjonen av C:-stasjonen, lagres spilllagringsfiler og avhengigheter installert via vintriks."
-        }
+        },
+        "wine-path-none-found": "Ingen Wine-versjon ble funnet, last ned en fra Kompatibilitetsbehandleren",
+        "wine-path-invalid": "Wine-stien er ugyldig, vennligst velg en annen."
     },
     "install": {
         "path": "Velg Installer bane"
@@ -308,7 +348,9 @@
         "toggleLayout": {
             "grid": "Bytt til et rutenettoppsett",
             "list": "Bytt til et listeoppsett"
-        }
+        },
+        "alphabeticalZA": "Alfabetisk Z-A",
+        "alphabeticalAZ": "Alfabetisk A-Å"
     },
     "loading": {
         "default": "Laster",
@@ -319,7 +361,8 @@
         "epic": "Epic Games Login",
         "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Amazon-pålogging"
+        "amazon": "Amazon-pålogging",
+        "old-mac": "Din macOS-versjon er {{version}}. macOS 12 eller nyere er nødvendig for å logge inn."
     },
     "message": {
         "sync": "Synkronisering fullført",
@@ -352,7 +395,9 @@
             "error": "Installasjon feilet",
             "finished": "Installasjon fullført",
             "imported": "Spill importert",
-            "startInstall": "Installasjon startet"
+            "startInstall": "Installasjon startet",
+            "paused": "Installasjon pauset",
+            "stopped": "Installasjonen stoppet"
         },
         "moved": "Flytting fullført",
         "moving": "Moving Game",
@@ -362,9 +407,11 @@
         },
         "uninstalled": "Avinstallert",
         "update": {
-            "canceled": "Oppgradering avbrutt",
+            "canceled": "Oppdatering avbrutt",
             "finished": "Oppgradering fullført",
-            "started": "Oppgradering startet"
+            "started": "Oppgradering startet",
+            "paused": "Oppdatering pauset",
+            "stopped": "Oppdatering stoppet"
         }
     },
     "offline-message": {
@@ -419,7 +466,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefiks der EGS er installert",
         "prefered_language": "2-tegnskode (dvs.: \"en\" eller \"fr\")",
-        "alt-nile-bin": "Bruker innebygd Nile binær..."
+        "alt-nile-bin": "Bruker innebygd Nile binær...",
+        "dxvkfpsvalue": "Positiv heltallsverdi (f.eks. 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -434,13 +482,19 @@
             "clear": "Clear List",
             "downloading": "Downloading",
             "empty": {
-                "queue": "Nothing to download"
+                "queue": "Nothing to download",
+                "finished": "Ingen nedlastinger"
             },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "pause": "Sett nedlastinger på pause",
-            "resume": "Fortsett nedlasting"
+            "resume": "Fortsett nedlasting",
+            "timeElapsed": "Tid brukt: {{elapsed}}",
+            "launch": "Start spill",
+            "retry-install": "Prøv å installere på nytt",
+            "retry-update": "Prøv oppdatering på nytt",
+            "stop": "Stopp nedlasting"
         }
     },
     "Recent": "Spillt nylig",
@@ -463,7 +517,7 @@
         "default-install-path": "Standard installasjonsbane",
         "default-steam-path": "Standard Steam-bane",
         "defaultWinePrefix": "Angi mappe for nye vinprefikser",
-        "disable_controller": "Deaktiver heroisk navigasjon ved hjelp av kontrolleren",
+        "disable_controller": "Deaktiver Hyperplay-navigasjon ved bruk av kontroller",
         "discordRPC": "Aktiver Discord Rich Presence",
         "download-no-https": "Last ned spill uten HTTPS (nyttig for CDN-er, f.eks. LanCache)",
         "egs-sync": "Synkroniser med installerte episke spill",
@@ -508,7 +562,10 @@
             "instructions_title": "Hvordan rapportere et problem?",
             "last-log": "Siste logg",
             "no-file": "Ingen loggfil funnet",
-            "show-in-folder": "Vis loggfil i mappe"
+            "show-in-folder": "Vis loggfil i mappe",
+            "instructions-part-01": "Hvis du opplever problemer mens du bruker HyperPlay, har vi to bestemte områder for å rapportere problemene dine i vår Discord-server. Hvis du er spiller, vennligst rapporter eventuelle problemer ved å besøke spiller-støtte-forumet. Hvis du er spillutvikler, vennligst rapporter eventuelle problemer ved å besøke utvikler-støtte-forumet.",
+            "join-hyperplay-discord": "Bli med i vår Discord",
+            "instructions-part-02": "For å hjelpe oss med å diagnostisere og fikse problemet så raskt som mulig, vennligst gi så mye informasjon som mulig, inkludert en kopi av loggene dine. Vårt supportteam vil overvåke begge kanaler og gjøre sitt beste for å svare på problemet ditt så raskt som mulig. Takk for tålmodigheten og forståelsen mens vi jobber med å løse eventuelle problemer du måtte støte på."
         },
         "mangohud": "Aktiver Mangohud (Mangohud må installeres)",
         "manualsync": {
@@ -556,7 +613,10 @@
         "addgamestoapplications": "Legg spill til applikasjoner automatisk",
         "alt-nile-bin": "Velg en alternativ Nile Binær",
         "msync": "Aktiver Esync",
-        "autodxvknvapi": "Autoinstaller/oppdater DXVK på prefiks"
+        "autodxvknvapi": "Autoinstaller/oppdater DXVK på prefiks",
+        "steamId": "Steam-ID",
+        "dxvkfpslimit": "Begrens FPS (DX9, 10 og 11)",
+        "autoLaunchHyperPlay": "Auto start HyperPlay"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -605,20 +665,37 @@
         "systemInformation": {
             "os": "Operativsystem",
             "memory": "Minne",
-            "copyToClipboard": "Kopier til utklippstavlen"
+            "copyToClipboard": "Kopier til utklippstavlen",
+            "gpuDriver": "Driver: {{driverVersion}}",
+            "memoryStats": "{{percentUsed}}% brukt ({{usedGib}} / {{totalGib}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "osVersion": "Versjon {{versionNumber}}",
+            "cpu": "CPU:",
+            "gpu": "GPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "legendaryVersion": "Legendary: {{legendaryVersion}}",
+            "steamDeck": "Steam Deck",
+            "systemModel": "Systemmodell:",
+            "version": "Versjon: {{appVersion}}",
+            "showDetailed": "Vis detaljerte systemspesifikasjoner",
+            "osNameFlatpak": "{{osName}} (inne i Flatpak)"
         },
         "wine": {
             "manager": {
                 "title": "Vinsjef"
             }
-        }
+        },
+        "reset-extension": "Tilbakestill utvidelse"
     },
     "Settings": "Innstillinger",
     "sidebar": {
         "collapse": "Skjul sidefeltet",
         "uncollapse": "Slå opp sidefeltet",
         "store": "Markedsplassen",
-        "library": "Bibliotek"
+        "library": "Bibliotek",
+        "achievements": "Prestasjoner",
+        "downloadManager": "Nedlastingsbehandling"
     },
     "status": {
         "installing": "Installerer",
@@ -658,7 +735,8 @@
         "logout_confirmation": "Er du sikker på at du vil logge ut?",
         "manageaccounts": "Administrer kontoer",
         "quit": "Avslutt",
-        "logIn": "Logg inn"
+        "logIn": "Logg inn",
+        "manageStore": "Administrer butikker"
     },
     "webview": {
         "controls": {
@@ -673,7 +751,7 @@
         "manager": {
             "link": "Vinsjef",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Vinsjef",
+            "title": "Kompatibilitetslag ",
             "unzipping": "Pakning ut"
         },
         "release": "Utgivelsesdato",
@@ -699,7 +777,11 @@
     "hyperplay": {
         "gamecard": {
             "paused": "På pause",
-            "installing": "Laster ned …"
+            "installing": "Laster ned …",
+            "distributables": "Installerer distribusjoner...",
+            "installed": "Klar til å spille",
+            "patching": "Patcher...",
+            "extracting": "Utdragning..."
         },
         "browserImport": {
             "profile": "Profil",
@@ -710,14 +792,78 @@
             "walletSelection": {
                 "screens": {
                     "import": {
-                        "learnMore": "Lær mer"
+                        "learnMore": "Lær mer",
+                        "useRecoveryPhraseInfo": "Denne funksjonen anbefales for avanserte brukere og utviklere. Din hemmelige gjenopprettingsfrase lagres lokalt i MetaMask og deles aldri med HyperPlay.",
+                        "details": "Nettleserne nedenfor har allerede MetaMask installert. Velg den du ønsker å importere fra.",
+                        "cantFindProfile": "Kan ikke finne nettleserprofilen din?",
+                        "createNewWallet": "Opprett ny MM-utvidelseslommebok",
+                        "orWord": "ELLER",
+                        "useRecoveryPhrase": "Importer ved å bruke hemmelig gjenopprettingsfrase",
+                        "title": "Velg nettleser for importering fra"
                     },
                     "info": {
-                        "createWalletCTA": "Opprett lommebok"
+                        "createWalletCTA": "Opprett lommebok",
+                        "digitalAssets": {
+                            "title": "Et hjem for dine digitale eiendeler",
+                            "details": "Lommebøker brukes til å sende, motta, lagre og vise digitale eiendeler som tokens og NFTs."
+                        },
+                        "createWalletDescription": "Klikk på \"Opprett en lommebok\" nedenfor hvis du ikke har en lommebok eller ønsker å opprette en ny:",
+                        "login": {
+                            "details": "Et alternativ til å opprette nye kontoer og passord på hver nettside, bare koble lommeboken din i stedet.",
+                            "title": "En ny måte å logge inn på"
+                        },
+                        "skip": "Hopp over for nå",
+                        "title": "Hva er en lommebok?"
+                    },
+                    "scan": {
+                        "title": "Skann QR med ",
+                        "updateWarning": "Har du problemer? Sørg for at MetaMask er oppdatert.",
+                        "details": "Opprett en kryptert kommunikasjonskanal. Dine nøkler vil aldri bli delt med HyperPlay.",
+                        "getMetamask": "Få MetaMask",
+                        "dontHaveWallet": "Har du ikke en lommebok?"
                     }
-                }
+                },
+                "pleaseConnect": "Vennligst koble til lommeboken din, eller last ned Metamask mobilappen for å komme i gang:",
+                "title": "Lommeboktilkoblinger"
             },
-            "terms": "Bruksvilkår"
+            "terms": "Bruksvilkår",
+            "connectionCanceled": {
+                "description": "Vennligst bekreft tilkoblingsforespørselen på din mobile lommebok for å fortsette.",
+                "title": "Tilkobling avbrutt!"
+            },
+            "connectionConnected": {
+                "title": "Lommebok tilkoblet!",
+                "description": "Lommeboken din er tilkoblet. Du er klar til å spille."
+            },
+            "analytics": {
+                "privacyCaption": "Disse dataene er aggregert og er derfor anonyme i henhold til EUs personvernlovgivning (GDPR) 2016/679. For mer informasjon om våre personvernpraksiser, vennligst se vår ",
+                "body": "HyperPlay ønsker å samle bruksdata for bedre å forstå hvordan brukerne våre interagerer med applikasjonen. Denne informasjonen hjelper oss å forstå hvordan du bruker appen og lar oss gjøre HyperPlay enda bedre for deg.",
+                "hyperplayWill": "HyperPlay vil:",
+                "bulletOne": "Alltid tillate deg å melde deg ut",
+                "bulletTwo": "Send anonymiserte klikk- og spillinteraksjoner",
+                "paragraphOne": "HyperPlay ønsker å samle bruksdata for bedre å forstå hvordan brukerne våre interagerer med applikasjonen.  \n           Dette lar oss gjøre HyperPlay enda bedre for deg.",
+                "privacyPolicy": "Personvernerklæring.",
+                "text": {
+                    "externalLink": "Lær mer",
+                    "title": "Vi har oppdatert vår personvernerklæring"
+                },
+                "titleOne": "Hjelp oss med å forbedre HyperPlay!"
+            },
+            "connectAgain": "Koble til igjen",
+            "welcome": {
+                "text": {
+                    "bulletPointOne": "Få tilgang til en stor samling av 100+ spill med on-chain støtte",
+                    "bulletPointThree": "Spill Epic- og GOG-spill direkte gjennom HyperPlay",
+                    "bulletPointTwo": "Tjen tokens, NFTs og off-chain belønninger ved å fullføre oppdrag",
+                    "lastParagraph": "For øyeblikket i beta, vi setter stor pris på tilbakemeldingen din og \n            oppfordrer deg til å rapportere eventuelle problemer eller forslag i vår",
+                    "TitleList": "Med HyperPlay kan du:",
+                    "bulletPointFive": "Kjør Windows-spill på macOS, Linux og SteamDeck ved å bruke vår\n              avanserte",
+                    "bulletPointFour": "Installer Steam (Windows-versjon) på macOS med ett enkelt klikk",
+                    "paragraphOne": "Hos HyperPlay bygger vi den neste generasjonen av spillbutikken for fremtiden til gaming.",
+                    "paragraphThr": "Sømløst ta med deg lommeboken, tokens og eiendeler inn i hvert spill mens du får tilgang til de omfattende bibliotekene til Epic Store, GOG og vår egen HyperPlay Store - alt på ett sted."
+                },
+                "titleIntro": "Velkommen til HyperPlay!"
+            }
         },
         "logOut": "Logg ut",
         "folder": "Mappe",
@@ -725,19 +871,55 @@
         "syncing": "Synkroniserer …",
         "buttons": {
             "agree": "Jeg samtykker",
-            "noThanks": "Nei takk"
+            "noThanks": "Nei takk",
+            "primaryButton": "Jeg er enig",
+            "secondaryButton": "Nei, takk"
         },
         "copyUrl": "Kopier _nettadresse",
         "turnAnalyticsOff": "Skru av",
         "turnAnalyticsOn": "Skru på",
         "misc": "Aldri",
-        "viewFullscreen": "Fullskjermsvisning"
+        "viewFullscreen": "Fullskjermsvisning",
+        "changeWallet": "Bytt lommebokkonto",
+        "currentWallet": "Nåværende lommebok",
+        "analyticsOff": "Analyse er slått av",
+        "viewItem": "Vis {{item}}",
+        "achievements": {
+            "freeMints": "Gratis Mints",
+            "gamesToMint": "Spill å mynte",
+            "addThisGame": "Legg til dette spillet",
+            "noAchievements": {
+                "oops": "Oops!",
+                "doubleCheckMessage": "Det ser ut som vi ikke kunne finne noen spill på din Steam-konto for øyeblikket. Bare en rask påminnelse om å dobbeltsjekke at spillinformasjonen din er satt til offentlig. På denne måten kan vi få tilgang til prestasjonene dine og gi deg den beste opplevelsen."
+            }
+        },
+        "linkSteamAccountDescription": "Logg inn på Steam for å koble HyperPlay-kontoen din.",
+        "linkSteamAccountTitle": "Koble Steam-konto",
+        "otp": "Engangspassord",
+        "accesscodes": {
+            "requirescode": "Denne spilloppdateringen krever en tilgangskode.",
+            "error": {
+                "validation": "Tilgangskoden er ugyldig",
+                "licenseUndefined": "Kunne ikke validere tilgangskoden. Vennligst sjekk internett-tilgangen din eller brannmurinnstillingene."
+            },
+            "success": {
+                "validation": "Suksess! Tilgangskoden er gyldig"
+            },
+            "placeholder": "Skriv inn tilgangskode"
+        },
+        "connectWallet": "Koble til lommebok",
+        "linkSteamAccountCta": "Gå til Steam-pålogging",
+        "viewPortfolio": "Se portefølje",
+        "compatibilityLayer": "Kompatibilitetslag (Beta)",
+        "discordAppLink": "Discord-fellesskap.",
+        "analyticsOn": "Analyse er aktivert"
     },
     "gameRelease": {
         "alpha": "Alpha",
         "main": "Hovedrolle",
         "beta": "Beta",
-        "demo": "Demo"
+        "demo": "Demo",
+        "prototype": "Prototype"
     },
     "quest": {
         "active": "Aktiv",
@@ -745,43 +927,273 @@
         "signIn": "Logg inn",
         "playstreak": {
             "days": "dager",
-            "now": "Nå"
+            "now": "Nå",
+            "dayResets": "Dagsresetter:",
+            "playEachDay": "Spill hver dag så din rekke ikke blir nullstilt!",
+            "streakCompleted": "Streak fullført! Krev belønningene dine nå.",
+            "sync": "Synkroniser fremdrift",
+            "syncSuccess": "Fremdrift synkronisert",
+            "playToStart": "Spill dette spillet for å starte din rekke!",
+            "progressTowardsStreak": "fremgang mot dagens rekke.",
+            "streakProgress": "Streak-fremgang"
         },
         "points": "Punkter",
         "sync": "Bygger",
         "type": {
-            "reputation": "Omdømme"
+            "reputation": "Omdømme",
+            "playstreak": "Spillrekke"
         },
         "reputation": "Omdømme",
         "connectSteamAccount": "Koble til lagkonto",
         "claimWarning": {
             "cancel": "Avbryt",
-            "confirm": "Bekreft"
-        }
+            "confirm": "Bekreft",
+            "body": "<bold>VIKTIG:</bold> Vennligst sørg for at du tildeler nok gass på {{networkName}}-nettverket for at transaksjonen skal bli bekreftet <bold>innen 7 dager.</bold>",
+            "body2": "Ellers vil Quest-belønningen <bold> utløpe og ikke lenger være tilgjengelig for krav.</bold>"
+        },
+        "g7Numclaimed": "Totalt innløste G7-kreditter",
+        "readyForClaim": "Klar for krav",
+        "needMoreAchievements": "Du må ha fullført {{percent}}% av prestasjonene i ett av disse spillene.",
+        "notEligible": {
+            "title": "Ikke kvalifisert ennå",
+            "message": "Du har ikke fullført de nødvendige spilldagene og kan ikke kreve belønningen din på dette tidspunktet."
+        },
+        "associatedGames": "Tilknyttede spill",
+        "linkAccount": "Koble til Steam-kontoen din for å sjekke berettigelse.",
+        "reward": "Belønning",
+        "claimFailedMessage": "Vennligst prøv igjen. Hvis det fortsatt ikke fungerer, opprett en Discord supportbillett.",
+        "createDiscordTicket": "Opprett Discord-billett",
+        "noG7ConnectionClaim": "Du må ha en Game7-konto knyttet til {{email}} for å kreve belønningene dine.",
+        "noG7ConnectionSync": {
+            "message": "Du må ha en Game7-konto knyttet til {{email}} for å synkronisere oppgavene dine på nytt.",
+            "title": "Ingen G7-konto koblet"
+        },
+        "notSignedIn": {
+            "message": "Du må være innlogget for å kreve belønningen din.",
+            "title": "Ikke pålogget"
+        },
+        "pointsClaimed": "Poeng krevd",
+        "questAvailable": "Oppdrag tilgjengelig!",
+        "questComplete": "Oppdrag fullført!",
+        "toClaimReward": "for å kreve belønningen din.",
+        "toSeeDetails": "for å se detaljer.",
+        "claimFailed": "Krav mislyktes",
+        "claim": "Krev",
+        "claimed": "Krevd",
+        "notEnoughBalance": {
+            "title": "Lav saldo"
+        },
+        "notEnoughGas": {
+            "message": "Utilstrekkelig lommebokbalanse for å kreve belønningen din på grunn av gassavgifter. Prøv en annen lommebok eller fyll opp denne før du prøver igjen."
+        },
+        "quests": "Oppdrag",
+        "rewardClaimed": "Kravet ble utført",
+        "youHaveClaimed": "Du har krevd {{totalRewards}} belønning{{plural}}."
     },
     "accounts": "Kontoer",
     "ALL": "ALLE",
     "analytics": "Analyse",
     "profile": "Profil",
     "sideload": {
-        "warningTitle": "Viktig"
+        "warningTitle": "Viktig",
+        "warningMessage": "Side-lasting av et spill er en funksjon ment for utviklere og erfarne brukere. Side-lasting av en installasjonsprogram som inneholder skadelig programvare kan kompromittere datamaskinen din og føre til tyveri av midler."
     },
     "import-game-folder": {
-        "placeholder": "Vleg spillmappe å importere"
+        "placeholder": "Vleg spillmappe å importere",
+        "cta": "Importer spillmappe",
+        "error": "Det oppstod en feil under import. Vennligst se loggene for mer informasjon.",
+        "label": "Importer spillmappe",
+        "success": "Spill importert med suksess!",
+        "dialog": {
+            "title": "Velg spillmappe for import"
+        }
     },
     "mod": {
         "instructions": {
             "zip": {
-                "placeholder": "Velg ei fil"
+                "placeholder": "Velg ei fil",
+                "path": "Velg plassering for base spillfil"
+            }
+        },
+        "baseGame": {
+            "installed": {
+                "title": "Grunnspill installert",
+                "body": "Mod vil bli brukt på basis spillet"
+            },
+            "installing": {
+                "title": "Installerer grunnspillet",
+                "body": "Pakker ut grunnspillfiler"
+            },
+            "cancel": {
+                "body": "Base spillutvinning avbrutt",
+                "title": "Avbrutt uttak"
             }
         }
     },
     "notification": {
         "wine-download-failed": {
-            "title": "Feil"
+            "title": "Feil",
+            "message": "Feil ved oppsett av standard kompatibilitetslag"
+        },
+        "wine-download": {
+            "message": "Setter opp standard kompatibilitetslag",
+            "title": "Kompatibilitetslag"
         }
     },
     "overlay": {
-        "comingSoon": "Kommer snart"
+        "comingSoon": "Kommer snart",
+        "links": {
+            "buy": "Kjøp",
+            "bridge": "Bro",
+            "marketplace": "Marked",
+            "portfolio": "Portefølje",
+            "sell": "Selg",
+            "swap": "Bytt"
+        },
+        "EXTERNAL_WALLET_CONNECTED": "Du er koblet til HyperPlay med en ekstern lommebok.",
+        "WALLET_DISCONNECTED": "Du har ikke en lommebok koblet til HyperPlay."
+    },
+    "hyperplayOverlay": {
+        "extensionNotification": {
+            "DESCRIPTION": "Trykk {{overlayKeyMod}} + X for å se denne transaksjonen",
+            "TITLE": "Transaksjon forespurt"
+        },
+        "description": {
+            "FAILED": "Transaksjonen ble kansellert eller ikke sendt inn, vennligst prøv igjen",
+            "CONFIRMED": "Transaksjonen ble bekreftet!",
+            "INITIATED": "En lommebokbekreftelse venter i din mobile lommebok",
+            "PENDING": "Venter på bekreftelse fra blokkjeden. Vi gir deg beskjed når det er bekreftet"
+        },
+        "signatureRequest": {
+            "CONFIRMED": "Signatur sendt inn",
+            "INITIATED": "Signaturforespørsel venter",
+            "FAILED": "Signatur avbrutt"
+        },
+        "walletWatch": {
+            "INITIATED": "Legg til tilpasset tokenforespørsel som venter",
+            "CONFIRMED": "Egendefinert token lagt til",
+            "FAILED": "Tilpasset tokenforespørsel kansellert"
+        },
+        "chainRequest": {
+            "CONFIRMED": "Egendefinert nettverk lagt til",
+            "FAILED": "Egendefinert nettverk kansellert",
+            "INITIATED": "Egendefinert nettverksforespørsel"
+        },
+        "txnRequest": {
+            "CONFIRMED": "Transaksjon bekreftet",
+            "INITIATED": "Transaksjonsforespørsel på vent",
+            "FAILED": "Transaksjon avbrutt",
+            "PENDING": "Transaksjon sendt inn"
+        },
+        "greeting": {
+            "description": "HyperPlay-overlayet er klart! Trykk {{overlayKeyMod}} + X for å vise eller skjule det.",
+            "title": "HyperPlay-overlay"
+        }
+    },
+    "email_subscription": {
+        "subtitle": "Du er nå en del av vårt fellesskap, og vi er glade for å dele verdifulle oppdateringer og innsikter med deg.",
+        "title": "Takk for at du abonnerer!"
+    },
+    "gameUpdateNotifications": {
+        "title": "Spilloppdateringer tilgjengelig",
+        "body": {
+            "multiple": "{{gameName}} og andre spill er klare for oppdatering.",
+            "single": "Det er en oppdatering klar for {{gameName}}."
+        }
+    },
+    "dlcs": {
+        "label": "Velg DLC-er for å installere:"
+    },
+    "importGameErrorMessage": "Ikke en gyldig spillmappe, import av spill er ikke mulig",
+    "quests": {
+        "g7CreditsModal": {
+            "description": "Dykk inn i HyperPlays beste spill med spennende Play Streak-utfordringer. Hver aktivitet oppfordrer deg til å engasjere deg med et annet spill, og viser det beste av web3-spilling. Spilletiden din betyr noe!",
+            "title": "Tjen Game7-kreditter"
+        },
+        "noneFound": {
+            "message": "Det ble ikke funnet noen oppdrag.",
+            "title": "Ingen oppdrag funnet."
+        },
+        "playstreak": {
+            "signInWarning": {
+                "client": "Du er for øyeblikket ikke logget inn, fremgang i spillerekken vil ikke bli sporet. Vennligst logg inn på HyperPlay via nedtrekksmenyen øverst til høyre for å spore fremgang.",
+                "overlay": "Du er for øyeblikket ikke logget inn, spillprogresjonen vil ikke bli sporet. Vennligst avslutt spillet og logg inn på HyperPlay via nedtrekksmenyen øverst til høyre for å spore fremdriften."
+            }
+        },
+        "viewAllQuests": {
+            "title": "Vis alle oppdrag"
+        },
+        "quests": "Oppdrag"
+    },
+    "steam-install": {
+        "compatibility-layer-not-available": "Kompatibilitetslag ikke tilgjengelig. Vennligst installer en fra \"Innstillinger > Wine Manager\" først.",
+        "error-message": "Det oppstod en feil under installasjonen av Steam. Vennligst prøv igjen.",
+        "launch-tooltip": "Start Steam ved hjelp av HyperPlay-kompatibilitetslaget",
+        "success-message": "Steam har blitt installert. Du kan nå starte det fra Biblioteket.",
+        "tooltip": "Dette vil installere Windows-versjonen av Steam, og den vil kjøre ved hjelp av et HyperPlay-kompatibilitetslag. \n\n    Noen spill, spesielt eldre titler, nyere 3D-spill eller de med anti-juks programvare, fungerer kanskje ikke ordentlig. \n\n    De anbefalte spesifikasjonene er en Mac med Apple Silicon CPU (M1 eller høyere) og minst 16 GB RAM."
+    },
+    "back_to_game": "Tilbake til spill",
+    "importGameErrorTitle": "Import Spillfeil",
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "Dette spillet er en mod for World of Warcraft: Wrath of the Lich King (3.3.5a). For å spille denne modden, må spillerne eie en kopi av World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay hoster ikke World of Warcraft. Spillere som eier World of Warcraft kan skaffe den nødvendige versjonen fra følgende kilder:",
+                "title": "Trinn 1",
+                "subtitle": "Last ned World of Warcraft 3.3.5a",
+                "link1": "Lenke 1",
+                "link2": "Koble 2 (Magnetlenke)"
+            },
+            "step2": {
+                "title": "Trinn 2",
+                "subtitle1": "Velg den nedlastede 3.3.5a zip-filen"
+            },
+            "step3": {
+                "description": "Vennligst velg mappen der World of Warcraft: Wrath of the Lich King (3.3.5a) skal installeres.",
+                "subtitle": "Velg installasjonsmappe",
+                "title": "Trinn 3"
+            },
+            "title": "Mod-instruksjoner",
+            "step4": {
+                "subtitle": "Tilgangskode",
+                "title": "Trinn 4",
+                "description": "Skriv inn tilgangskoden for å fortsette med installasjonen av spillet."
+            }
+        }
+    },
+    "achievements": {
+        "progress": {
+            "minted": "på kjede",
+            "notMinted": "off chain"
+        }
+    },
+    "importGameErrorMessageExecutable": "Spillkjørbar fil ikke funnet, import av spill er ikke mulig",
+    "exit_game": "Avslutt spill",
+    "Cancel Installation": "Avbryt installasjon",
+    "Downloading": "Laster ned {{percent}}%",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Hvis du ønsker å fortsette, vær tålmodig da det kan ta noen minutter å fullføre avhengig av internettforbindelsen din og systemkonfigurasjonen.",
+    "Recommended specs for a better experience": "Anbefalte spesifikasjoner for en bedre opplevelse",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask-porteføljen er kun tilgjengelig når du er tilkoblet med MetaMask."
+        },
+        "unsupported": "Ikke støttet lommeboktilkobling"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay vil varsle deg når installasjonen er ferdig;",
+    "Install Steam": "Installer Steam",
+    "Launching Steam": "Starter Steam...",
+    "Installing Steam": "Installerer Steam...",
+    "Launch Steam": "Start Steam",
+    "16GB of RAM": "16 GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 eller høyere",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Vær oppmerksom på at ikke alle spill vil fungere, og selv om de gjør det, kan de ikke kjøre som forventet.",
+    "Installing": "Installerer",
+    "macOS 14": {
+        "0 or above": "macOS 14.0 eller høyere"
+    },
+    "Please Wait": "Vennligst vent",
+    "installModal": {
+        "loginRequired": "Innlogging kreves",
+        "loginRequiredMessage": "Du må være logget inn på HyperPlay for å skrive inn tilgangskoden din og installere dette spillet. ",
+        "loginRequiredMessageUpdate": "Du må være logget inn på HyperPlay for å angi tilgangskoden din og oppdatere dette spillet. "
     }
 }

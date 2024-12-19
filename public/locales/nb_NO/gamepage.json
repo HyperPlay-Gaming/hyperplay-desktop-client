@@ -29,7 +29,8 @@
         "stopInstall": {
             "keepInstalling": "Fortsett å installere",
             "message": "Behold nedlastede filer?",
-            "title": "Stopp installasjon"
+            "title": "Vil du avbryte nedlastingen?",
+            "keepFilesMessage": "Sjekk her hvis du vil beholde nedlastingsfilene etter å ha avbrutt."
         },
         "uninstall": {
             "checkbox": "Vil du fjerne prefikset også? Dette kan ikke angres.",
@@ -37,16 +38,26 @@
             "message": "Avinstaller dette spillet?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
             "title": "Avinstaller",
-            "dlc": "Vil du avinstallere denne appen?"
+            "dlc": "Vil du avinstallere denne appen?",
+            "prefix_warning": "Vin-prefikset for dette spillet er standardprefikset. Hvis du virkelig vil slette det, må du gjøre det manuelt."
         },
         "update": {
             "message": "Dette spillet har en oppdatering. Vil du bruke oppdatering nå?",
-            "title": "Spillet trenger oppdatering"
+            "title": "Spillet trenger oppdatering",
+            "message-cancel": "Det er ikke mulig å spille dette spillet uten oppdatering"
         },
         "wineprefix": "Velg WinePrefix-mappe",
         "yes": "Ja",
         "dont-show-again": "Ikke vis igjen",
-        "ok": "OK"
+        "ok": "OK",
+        "yesCancel": "Ja, avbryt",
+        "aware": "Jeg er klar over det",
+        "compability": {
+            "message": "Dette Windows-spillet vil kjøre ved hjelp av et kompatibilitetslag. Du kan støte på noen problemer, eller spillet kan ikke fungere i det hele tatt."
+        },
+        "stopExtraction": {
+            "title": "Vil du avbryte utvinningen?"
+        }
     },
     "button": {
         "add_to_favourites": "Legg til i favoritter",
@@ -76,7 +87,8 @@
         "update": "Oppdater",
         "details": "Informasjon",
         "favorites": "Legg til i favoritter",
-        "remove_from_library": "Fjern"
+        "remove_from_library": "Fjern",
+        "unfavorites": "Fjern favoritt"
     },
     "cloud_save_unsupported": "Ustøttet",
     "disabled": "Funksjonshemmet",
@@ -87,15 +99,17 @@
     "game": {
         "downloadSize": "Last ned størrelse",
         "firstPlayed": "Først spilt",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Henter nedlastingsstørrelse",
+        "getting-install-size": "Henter installasjonsstørrelse",
         "installSize": "Installasjonsstørrelse",
         "language": "Språk",
         "lastPlayed": "Sist spilt",
         "neverPlayed": "Aldri",
         "platform": "Velg plattformversjon som skal installeres",
         "requirements": "Systemkrav",
-        "totalPlayed": "Spilletid"
+        "totalPlayed": "Spilletid",
+        "dlcs": "DLC-er",
+        "selectChannelName": "Velg kanalnavn"
     },
     "gamecard": {
         "moving": "Flytte",
@@ -128,7 +142,8 @@
         "path-not-writtable": "Advarsel: banen er kanskje ikke skrivbar.",
         "space-after-install": "Etter installasjon",
         "wineprefix": "WinePrefix",
-        "wineversion": "Vinversjon"
+        "wineversion": "Vinversjon",
+        "compatibility-warning": "Dette Windows-spillet vil kjøre ved hjelp av et kompatibilitetslag. Opplevelsen din kan variere."
     },
     "label": {
         "game": {
@@ -202,7 +217,17 @@
         "paused": "På pause",
         "downloading": "Nedlasting pågår",
         "playing": "Spiller",
-        "syncingSaves": "Synkroniserer lagrer"
+        "syncingSaves": "Synkroniserer lagrer",
+        "patching": "Patcher filer ",
+        "extracting": {
+            "progress": "Utdragning",
+            "cancel": "Avbryt utvinning"
+        },
+        "preparing": "Forbereder nedlasting, vennligst vent",
+        "moving-files": "Flytter fil '{{file}}': {{percent}} ",
+        "gog-goodie": "Dette spillet ser ikke ut til å være installert. Sjekk nedlastbart innhold på https://gog.com/account",
+        "distributables": "Installerer distribusjoner",
+        "goodie": "Ikke installert"
     },
     "submenu": {
         "addShortcut": "Legg til snarvei",
@@ -216,6 +241,12 @@
         "removeShortcut": "Fjern snarveier",
         "settings": "Innstillinger",
         "store": "Butikkside",
-        "verify": "Bekreft og reparer"
+        "verify": "Bekreft og reparer",
+        "extraInfo": "Ekstra informasjon"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Vennligst kontakt HyperPlay-teamet med denne meldingen: {{error}} - {{context}}."
+        }
     }
 }

@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "resume": "Pokračovať v sťahovaní",
-            "pause": "Pozastaviť sťahovanie"
+            "pause": "Pozastaviť sťahovanie",
+            "launch": "Spustiť hru",
+            "retry-install": "Skúsiť znova nainštalovať",
+            "retry-update": "Skúsiť znova aktualizovať",
+            "timeElapsed": "Uplynulý čas: {{elapsed}}",
+            "stop": "Zastaviť sťahovanie"
         }
     },
     "Recent": "Played Recently",
@@ -822,7 +827,16 @@
                 "neverSellData": " predať údaje o zisku. Ever!",
                 "optOut": "Vždy vám umožní zvoliť nastavenia;",
                 "privacyPolicyHere": "Zásady ochrany osobných údajov tu.",
-                "title": "Pomôžte nám zlepšiť HyperPlay!"
+                "title": "Pomôžte nám zlepšiť HyperPlay!",
+                "bulletOne": "Vždy vám umožníme odhlásiť sa",
+                "bulletTwo": "Odoslať anonymizované kliknutia a interakcie s hrami",
+                "paragraphOne": "HyperPlay by rád zhromaždil údaje o používaní, aby lepšie pochopil, ako naši používatelia interagujú s aplikáciou. \n           To nám umožňuje spraviť HyperPlay ešte lepším pre vás.",
+                "privacyPolicy": "Zásady ochrany osobných údajov.",
+                "text": {
+                    "externalLink": "Zistite viac",
+                    "title": "Aktualizovali sme našu Zásady ochrany osobných údajov"
+                },
+                "titleOne": "Pomôžte nám zlepšiť HyperPlay!"
             },
             "welcome": {
                 "text": {
@@ -830,9 +844,19 @@
                     "bugs": "Upozorňujeme, že HyperPlay je verejný alfa. Mnoho funkcií sú stále\nvo vývoji a budú chyby.",
                     "communityCTA_2": "komunita. Spoločne, poďme formovať budúcnosť hier!",
                     "communityCTA_1": "Milujeme vašu spätnú väzbu a aby ste sa k nám pripojili",
-                    "description": "HyperPlay je herný štartér a herný obchod aggreor z\nbudúcnosť. S HyperPlay môžete nosiť svoju peňaženku, žetóny a majetok\ndo každej hry. HyperPlay podporuje celú knižnicu Epic\nObchod, GOG a náš vlastný obchod HyperPlay. Používaním HyperPlay súhlasíte\nNAŠE"
+                    "description": "HyperPlay je herný štartér a herný obchod aggreor z\nbudúcnosť. S HyperPlay môžete nosiť svoju peňaženku, žetóny a majetok\ndo každej hry. HyperPlay podporuje celú knižnicu Epic\nObchod, GOG a náš vlastný obchod HyperPlay. Používaním HyperPlay súhlasíte\nNAŠE",
+                    "bulletPointFour": "Nainštalujte Steam (verzia pre Windows) na macOS jedným jednoduchým kliknutím",
+                    "paragraphThr": "Bezproblémovo preneste svoju peňaženku, tokeny \n           a aktíva do každej hry, pričom získate prístup \n           k rozsiahlym knižniciam Epic Store, \n           GOG a našej vlastnej HyperPlay Store - všetko na jednom mieste.",
+                    "bulletPointOne": "Získajte prístup k rozsiahlej zbierke 100+ hier s podporou on-chain",
+                    "bulletPointThree": "Hrajte hry Epic a GOG priamo cez HyperPlay",
+                    "bulletPointTwo": "Získajte tokeny, NFT a off-chain odmeny dokončením úloh",
+                    "lastParagraph": "Aktuálne v beta verzii, veľmi si ceníme vašu spätnú väzbu a \n            povzbudzujeme vás, aby ste hlásili akékoľvek problémy alebo návrhy v našom",
+                    "paragraphOne": "V HyperPlay budujeme obchod s hrami novej generácie \n            pre budúcnosť hrania.",
+                    "TitleList": "S HyperPlay môžete:",
+                    "bulletPointFive": "Spustite Windows hry na macOS, Linuxe a SteamDecku pomocou našich\n              pokročilých"
                 },
-                "title": "Vitajte na Hyper Hrať Čoskoro Prístup!"
+                "title": "Vitajte na Hyper Hrať Čoskoro Prístup!",
+                "titleIntro": "Vitajte v HyperPlay!"
             },
             "connectionConnected": {
                 "description": "Vaša peňaženka je pripojená. Ste pripravení hrať.",
@@ -847,11 +871,13 @@
         "accesscodes": {
             "requirescode": "Táto aktualizácia hry vyžaduje prístupový kód.",
             "error": {
-                "validation": "Kód prístupu je neplatný"
+                "validation": "Kód prístupu je neplatný",
+                "licenseUndefined": "Nepodarilo sa overiť prístupový kód. Skontrolujte prosím svoje internetové pripojenie alebo nastavenia firewallu."
             },
             "success": {
                 "validation": "Úspech! Prístupový kód je platný"
-            }
+            },
+            "placeholder": "Zadajte prístupový kód"
         },
         "browserImport": {
             "appId": "App Id",
@@ -859,14 +885,17 @@
         },
         "buttons": {
             "agree": "Súhlasím",
-            "noThanks": "Nie, vďaka"
+            "noThanks": "Nie, vďaka",
+            "secondaryButton": "Nie, ďakujem",
+            "primaryButton": "Súhlasím"
         },
         "gamecard": {
             "extracting": "Extrahovanie...",
             "installed": "Pripravení hrať",
             "distributables": "Inštalácie",
             "installing": "Preberá sa…",
-            "paused": "Pozastavené"
+            "paused": "Pozastavené",
+            "patching": "Oprava..."
         },
         "viewItem": "Zobraziť {{item}}",
         "achievements": {
@@ -899,7 +928,9 @@
         "logOut": "Odhlásiť sa",
         "copyUrl": "Kopírovať adresu URL",
         "misc": "Nikdy",
-        "viewFullscreen": "Zobraziť celú obrazovku"
+        "viewFullscreen": "Zobraziť celú obrazovku",
+        "compatibilityLayer": "Kompatibilitná vrstva (Beta)",
+        "discordAppLink": "Komunita na Discorde."
     },
     "hyperplayOverlay": {
         "greeting": {
@@ -976,7 +1007,9 @@
         "claimFailed": "Nárok zlyhal",
         "claimFailedMessage": "Prosím skúste ešte raz. Ak to ešte nefunguje, vytvorte diskordovú podporu lístok.",
         "createDiscordTicket": "Vytvorené Discord ticket",
-        "notEnoughGas": "Nedostatočný zostatok na peňaženke, aby ste požiadali o odmenu z dôvodu poplatkov za plyn. Skúste inú peňaženku alebo doplňte tento jeden pred premenou.",
+        "notEnoughGas": {
+            "message": "Nedostatočný zostatok peňaženky na uplatnenie vašej odmeny kvôli poplatkom za plyn. Skúste inú peňaženku alebo doplňte túto pred opätovným pokusom."
+        },
         "active": "Aktívny",
         "signIn": "Prihlásiť sa",
         "Play": "Prehrať",
@@ -993,7 +1026,28 @@
             "cancel": "Zrušiť"
         },
         "noG7ConnectionClaim": "Musíte mať účet Game7 spojený s {{email}} požadovať svoje odmeny.",
-        "noG7ConnectionSync": "Musíte mať účet Game7 spojený s {{email}} pre opätovné úlohy."
+        "noG7ConnectionSync": {
+            "message": "Musíte mať prepojený účet Game7 s {{email}}, aby ste mohli znovu synchronizovať svoje úlohy.",
+            "title": "Žiadny prepojený účet G7"
+        },
+        "notSignedIn": {
+            "message": "Musíte byť prihlásený, aby ste si mohli uplatniť svoju odmenu.",
+            "title": "Nie ste prihlásený"
+        },
+        "questComplete": "Úloha dokončená!",
+        "toClaimReward": "na uplatnenie vašej odmeny.",
+        "toSeeDetails": "pre zobrazenie podrobností.",
+        "notEligible": {
+            "message": "Nedokončili ste požadované dni hrania a v tejto chvíli nemôžete získať svoju odmenu.",
+            "title": "Ešte nie ste oprávnení"
+        },
+        "notEnoughBalance": {
+            "title": "Nízky zostatok"
+        },
+        "youHaveClaimed": "Získali ste {{totalRewards}} odmenu{{plural}}.",
+        "questAvailable": "Úloha je k dispozícii!",
+        "rewardClaimed": "Úspešne uplatnené",
+        "claim": "Získať"
     },
     "quests": {
         "playstreak": {
@@ -1039,7 +1093,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Ste spojený s HyperPlay s externou peňaženky.",
         "WALLET_DISCONNECTED": "Nemáte peňaženku pripojené k HyperPlay.",
-        "comingSoon": "Čoskoro"
+        "comingSoon": "Čoskoro",
+        "links": {
+            "swap": "Vymeniť",
+            "buy": "Kúpiť",
+            "portfolio": "Portfólio",
+            "bridge": "Most",
+            "sell": "Predať",
+            "marketplace": "Trh"
+        }
     },
     "exit_game": "Exit hra",
     "back_to_game": "Späť na hru",
@@ -1096,15 +1158,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Táto hra je mod pre svet Warcraft: hnev Lich King (3.3.5a). Aby hrať tento mod, hráči musia vlastniť kópiu World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nie je hostiteľom World of Warcraft. Hráči, ktorí vlastnia svet Warcraft môže získať verziu 3.3.5a z zdrojov, ako sú:",
+                "description": "Táto hra je modifikácia pre World of Warcraft: Wrath of the Lich King (3.3.5a). Aby mohli hráči hrať tento mod, musia vlastniť kópiu World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nehostí World of Warcraft. Hráči, ktorí vlastnia World of Warcraft, môžu získať potrebnú verziu z nasledujúcich zdrojov:",
                 "webtorrent": "Torrent (Magnet Link)",
                 "subtitle": "Stiahnuť svet Warcraft 3.3.5a",
-                "title": "Krok 1"
+                "title": "Krok 1",
+                "link2": "Odkaz 2 (Magnet Link)",
+                "link1": "Odkaz 1"
             },
             "step2": {
                 "subtitle": "Vyberte ChromieCraft_3.3.5a.zip Aktuality",
                 "description": "Vyberte stiahnutý ChromieCraft_3.3.5a.zip súbor.",
-                "title": "Krok 2"
+                "title": "Krok 2",
+                "subtitle1": "Vyberte stiahnutý zip súbor 3.3.5a"
             },
             "step3": {
                 "description": "Prosím vyberte priečinok, kde je svet Warcraft: hnev Lich King (3.3.5a) by mal byť inštalovaný.",
@@ -1138,5 +1203,27 @@
     },
     "HyperPlay will notify you once the installation is done;": "HyperPlay vás informuje po dokončení inštalácie;",
     "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Ak chcete pokračovať, buďte trpezliví, pretože to môže trvať niekoľko minút na dokončenie v závislosti na vašom pripojenie k internetu a konfigurácii systému;",
-    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam \""
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam \"",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask portfólio je k dispozícii iba pri pripojení s MetaMask."
+        },
+        "unsupported": "Nepodporované pripojenie peňaženky"
+    },
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Ak chcete pokračovať, buďte prosím trpezliví, pretože to môže trvať niekoľko minút v závislosti od vášho internetového pripojenia a systémovej konfigurácie.",
+    "Installing": "Inštalácia",
+    "installModal": {
+        "loginRequired": "Prihlásenie je potrebné",
+        "loginRequiredMessage": "Musíte byť prihlásení do HyperPlay, aby ste zadali svoj prístupový kód a nainštalovali túto hru. ",
+        "loginRequiredMessageUpdate": "Musíte byť prihlásený do HyperPlay, aby ste zadali svoj prístupový kód a aktualizovali túto hru. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 alebo novší"
+    },
+    "Please Wait": "Prosím, čakajte",
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 alebo novší",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Buďte si vedomí, že nie všetky hry budú fungovať, a aj keď budú, nemusia bežať podľa očakávaní.",
+    "Downloading": "Sťahovanie {{percent}}%",
+    "Recommended specs for a better experience": "Odporúčané špecifikácie pre lepší zážitok"
 }

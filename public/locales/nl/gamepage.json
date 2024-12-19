@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Doorgaan met installeren",
             "message": "Wilt u de gedownloade bestanden bewaren?",
-            "title": "Installatie stoppen",
+            "title": "Wilt u de download annuleren?",
             "keepFilesMessage": "Controleer hier of je de download bestanden wilt houden na het annuleren."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Downloadgrootte",
         "firstPlayed": "Eerst gespeeld",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Downloadgrootte ophalen",
+        "getting-install-size": "Installatiegrootte ophalen",
         "installSize": "Installatie grootte",
         "language": "Taal",
         "lastPlayed": "Laatst gespeeld",
@@ -228,7 +228,8 @@
         "goodie": "Niet installeerbaar",
         "distributables": "Installing distributable",
         "preparing": "Vertaling:",
-        "paused": "Gepauzeerd"
+        "paused": "Gepauzeerd",
+        "patching": "Bestanden patchen "
     },
     "submenu": {
         "addShortcut": "Snelkoppeling toevoegen",

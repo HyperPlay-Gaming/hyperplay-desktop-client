@@ -137,7 +137,7 @@
             "title": "Raccourcis"
         },
         "sync": {
-            "button": "Sélectionner",
+            "button": "Choisir",
             "error": "Chemin invalide",
             "title": "Choisir le dossier de sauvegardes"
         },
@@ -260,7 +260,7 @@
         "ignore_hidden": "Ignorer les jeux cachés",
         "platform": "Système",
         "show_all_games": "Afficher tous les jeux",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Afficher les jeux non disponibles",
         "show_favourites_only": "N'afficher que les favoris",
         "show_hidden": "Afficher les jeux cachés",
         "store": "Filtrer le magasin"
@@ -391,9 +391,9 @@
             "reparing": "Réparation Terminée"
         },
         "install": {
-            "canceled": "Installation Annulée",
+            "canceled": "Installation annulée",
             "error": "Installation échouée",
-            "finished": "Installation Terminée",
+            "finished": "Installation terminée",
             "imported": "Jeu Importé",
             "startInstall": "Installation commencée",
             "stopped": "Installation arrêtée",
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Désinstallé",
         "update": {
-            "canceled": "Mise à jour Annulée",
+            "canceled": "Mise à jour annulée",
             "finished": "Mise à jour terminée",
             "started": "Mise à jour commencée",
             "stopped": "Mise à jour arrêtée",
@@ -489,7 +489,12 @@
             "queued": "En attente",
             "remove": "Retirer de la liste des Téléchargements",
             "pause": "Mettre les téléchargements en pause",
-            "resume": "Reprendre le téléchargement"
+            "resume": "Reprendre le téléchargement",
+            "timeElapsed": "Temps écoulé : {{elapsed}}",
+            "launch": "Lancer le jeu",
+            "retry-install": "Réessayer l'installation",
+            "retry-update": "Réessayer la mise à jour",
+            "stop": "Arrêter le téléchargement"
         }
     },
     "Recent": "Joué récemment",
@@ -512,7 +517,7 @@
         "default-install-path": "Chemin par défaut de l'installation",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Set Folder for new Wine Prefixes",
-        "disable_controller": "Disable HyperPlay navigation using controller",
+        "disable_controller": "Désactiver la navigation Hyperplay avec la manette",
         "discordRPC": "Activer Rich Presence dans Discord",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "egs-sync": "Synchroniser avec l'installation d'Epic Games",
@@ -746,7 +751,7 @@
         "manager": {
             "link": "Gestion de Wine",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Gestion de Wine",
+            "title": "Couche de compatibilité ",
             "unzipping": "Décompression"
         },
         "release": "Date de sortie",
@@ -773,18 +778,21 @@
         "accesscodes": {
             "requirescode": "Cette mise à jour de jeu nécessite un code d'accès.",
             "error": {
-                "validation": "Code d'accès est invalide"
+                "validation": "Code d'accès est invalide",
+                "licenseUndefined": "Impossible de valider le code d'accès. Veuillez vérifier votre accès Internet ou vos paramètres de pare-feu."
             },
             "success": {
                 "validation": "Succès ! Code d'accès est valide"
-            }
+            },
+            "placeholder": "Entrez le code d'accès"
         },
         "gamecard": {
             "installed": "Prêt à jouer",
             "extracting": "Extrait...",
             "installing": "Téléchargement...",
             "paused": "En suspend",
-            "distributables": "Installation de distributeurs"
+            "distributables": "Installation de distributeurs",
+            "patching": "Mise à jour..."
         },
         "analyticsOn": "L'analyse est activée",
         "onboarding": {
@@ -802,7 +810,16 @@
                 "privacyCaption": "Ces données sont agrégées et sont donc anonymes aux fins du Règlement général sur la protection des données (UE) 2016/679. Pour plus d'informations concernant nos pratiques de confidentialité, veuillez consulter notre ",
                 "body": "HyperPlay aimerait recueillir des données d'utilisation pour mieux comprendre comment nos utilisateurs interagissent avec l'application. Cette information nous aide à comprendre comment vous utilisez l'application et nous permet de rendre HyperPlay encore mieux pour vous.",
                 "hyperplayWill": "HyperPlay :",
-                "neverCollectPersonal": " recueillir des clés, des adresses, des soldes, des hachages ou tout renseignement personnel;"
+                "neverCollectPersonal": " recueillir des clés, des adresses, des soldes, des hachages ou tout renseignement personnel;",
+                "text": {
+                    "externalLink": "En savoir plus",
+                    "title": "Nous avons mis à jour notre politique de confidentialité"
+                },
+                "bulletOne": "Toujours vous permettre de vous désinscrire",
+                "bulletTwo": "Envoyer des clics et des interactions de jeu anonymisés",
+                "paragraphOne": "HyperPlay aimerait recueillir des données d'utilisation pour mieux comprendre comment nos utilisateurs interagissent avec l'application. \n           Cela nous permet de rendre HyperPlay encore meilleur pour vous.",
+                "privacyPolicy": "Politique de confidentialité.",
+                "titleOne": "Aidez-nous à améliorer HyperPlay !"
             },
             "connectAgain": "Se connecter à nouveau",
             "connectionCanceled": {
@@ -852,9 +869,19 @@
                     "bugs": "Veuillez noter que HyperPlay est une alpha publique. Beaucoup de fonctionnalités sont toujours\ndans le développement, et il y aura des insectes.",
                     "communityCTA_1": "Nous aimerions vos commentaires et vous joindre à nous dans notre",
                     "description": "HyperPlay est un lanceur de jeu et agrégateur de magasin de jeu du\nfutur. Avec HyperPlay, vous pouvez porter votre portefeuille, vos jetons et vos actifs\ndans chaque jeu. HyperPlay prend en charge toute la bibliothèque de l'Epic\nStore, GOG et notre propre boutique HyperPlay. En utilisant HyperPlay, vous acceptez\nà notre",
-                    "communityCTA_2": "communauté. Ensemble, façonnons l'avenir du jeu !"
+                    "communityCTA_2": "communauté. Ensemble, façonnons l'avenir du jeu !",
+                    "lastParagraph": "Actuellement en Bêta, nous attachons une grande importance à vos retours et  \n            vous encourageons à signaler tout problème ou suggestion dans notre",
+                    "paragraphOne": "Chez HyperPlay, nous construisons le magasin de jeux de nouvelle génération  \n            pour l'avenir du jeu.",
+                    "bulletPointFour": "Installez Steam (version Windows) sur macOS d'un simple clic",
+                    "bulletPointFive": "Exécutez des jeux Windows sur macOS, Linux et SteamDeck en utilisant notre\n              avancé",
+                    "bulletPointOne": "Accédez à une vaste collection de plus de 100 jeux activés sur la blockchain",
+                    "bulletPointThree": "Jouez à des jeux Epic et GOG directement via HyperPlay",
+                    "bulletPointTwo": "Gagnez des jetons, des NFT et des récompenses hors chaîne en complétant des quêtes",
+                    "paragraphThr": "Intégrez sans effort votre portefeuille, vos jetons,  \n           et vos actifs dans chaque jeu tout en accédant  \n           aux vastes bibliothèques de l'Epic Store,  \n           GOG, et notre propre HyperPlay Store - le tout en un seul endroit.",
+                    "TitleList": "Avec HyperPlay, vous pouvez :"
                 },
-                "title": "Bienvenue à Hyper Jouez Early Access!"
+                "title": "Bienvenue à Hyper Jouez Early Access!",
+                "titleIntro": "Bienvenue sur HyperPlay !"
             },
             "terms": "Conditions générales d’utilisation"
         },
@@ -892,11 +919,15 @@
         "turnAnalyticsOn": "Activer",
         "buttons": {
             "noThanks": "Non, merci",
-            "agree": "I agree"
+            "agree": "I agree",
+            "primaryButton": "J'accepte",
+            "secondaryButton": "Non, merci"
         },
         "discordApp": "Discord",
         "logOut": "Déconnexion",
-        "viewFullscreen": "Voir l'écran complet"
+        "viewFullscreen": "Voir l'écran complet",
+        "compatibilityLayer": "Couche de compatibilité (Bêta)",
+        "discordAppLink": "Communauté Discord."
     },
     "hyperplayOverlay": {
         "extensionNotification": {
@@ -977,7 +1008,9 @@
         "claimFailed": "Claim failed",
         "claimFailedMessage": "Essayez encore une fois. Si cela ne fonctionne toujours pas, créez un ticket de support Discord.",
         "createDiscordTicket": "Billet Discord",
-        "notEnoughGas": "Un solde de portefeuille insuffisant pour réclamer votre récompense en raison de frais de gaz. Essayez un portefeuille différent ou reconstituer celui-ci avant de rentrer.",
+        "notEnoughGas": {
+            "message": "Solde de portefeuille insuffisant pour réclamer votre récompense en raison des frais de gaz. Essayez un autre portefeuille ou approvisionnez celui-ci avant de réessayer."
+        },
         "connectSteamAccount": "Connecter le compte",
         "reputation": "Réputation",
         "active": "Actif",
@@ -986,7 +1019,7 @@
         "points": "Points",
         "quests": "Quêtes",
         "sync": "Synchroniser",
-        "signIn": "Connexion",
+        "signIn": "Se connecter",
         "pointsClaimed": "Points réclamés",
         "g7Numclaimed": "Total des crédits G7 réclamés",
         "claimWarning": {
@@ -997,7 +1030,28 @@
             "body2": "Sinon, le Quest Reward <bold> expirera et ne sera plus revendiqué</bold>"
         },
         "noG7ConnectionClaim": "Vous devez avoir un compte Game7 lié à {{email}} pour réclamer vos récompenses.",
-        "noG7ConnectionSync": "Vous devez avoir un compte Game7 lié à {{email}} pour resync vos tâches."
+        "noG7ConnectionSync": {
+            "message": "Vous devez avoir un compte Game7 lié à {{email}} pour resynchroniser vos tâches.",
+            "title": "Aucun compte G7 lié"
+        },
+        "notEligible": {
+            "title": "Pas encore éligible",
+            "message": "Vous n'avez pas complété les jours de jeu requis et ne pouvez pas réclamer votre récompense pour le moment."
+        },
+        "notEnoughBalance": {
+            "title": "Solde faible"
+        },
+        "notSignedIn": {
+            "message": "Vous devez être connecté pour réclamer votre récompense.",
+            "title": "Non connecté"
+        },
+        "toClaimReward": "pour réclamer votre récompense.",
+        "questComplete": "Quête terminée !",
+        "rewardClaimed": "Réclamation réussie",
+        "youHaveClaimed": "Vous avez réclamé la récompense {{totalRewards}}{{plural}}.",
+        "claim": "Réclamer",
+        "toSeeDetails": "voir les détails.",
+        "questAvailable": "Quête disponible !"
     },
     "sideload": {
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Enlever un installateur qui contient des logiciels malveillants pourrait compromettre votre ordinateur et conduire au vol de fonds.",
@@ -1055,7 +1109,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Vous êtes connecté à HyperPlay avec un portefeuille externe.",
         "WALLET_DISCONNECTED": "Vous n'avez pas de portefeuille connecté à HyperPlay.",
-        "comingSoon": "Bientôt disponible"
+        "comingSoon": "Bientôt disponible",
+        "links": {
+            "bridge": "Pont",
+            "buy": "Acheter",
+            "portfolio": "Portefeuille",
+            "marketplace": "Marché",
+            "sell": "Vendre",
+            "swap": "Échanger"
+        }
     },
     "ALL": "TOUS",
     "analytics": "Statistiques",
@@ -1096,15 +1158,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Ce jeu est un mod pour World of Warcraft: Wrath of the Lich King (3.3.5a). Pour jouer à ce mod, les joueurs doivent posséder une copie de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay n'héberge pas World of Warcraft. Les joueurs qui possèdent World of Warcraft peuvent obtenir la version 3.3.5a de sources comme:",
+                "description": "Ce jeu est un mod pour World of Warcraft : Wrath of the Lich King (3.3.5a). Pour jouer à ce mod, les joueurs doivent posséder une copie de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay n'héberge pas World of Warcraft. Les joueurs qui possèdent World of Warcraft peuvent obtenir la version nécessaire à partir des sources suivantes :",
                 "subtitle": "Télécharger World of Warcraft 3.3.5a",
                 "webtorrent": "Torrent (Magnet Link)",
-                "title": "Étape 1"
+                "title": "Étape 1",
+                "link1": "Lien 1",
+                "link2": "Lien 2 (lien magnétique)"
             },
             "step2": {
                 "description": "Sélectionnez le téléchargement Fichier ChromieCraft_3.3.5a.zip.",
                 "subtitle": "Sélectionnez ChromieCraft_3.3.5a.zip Fichier",
-                "title": "Étape 2"
+                "title": "Étape 2",
+                "subtitle1": "Sélectionnez le fichier zip 3.3.5a téléchargé"
             },
             "step3": {
                 "description": "Veuillez choisir le dossier où World of Warcraft: Wrath of the Lich King (3.3.5a) doit être installé.",
@@ -1138,5 +1203,27 @@
     },
     "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Si vous souhaitez continuer, soyez patient car il peut prendre quelques minutes pour terminer en fonction de votre connexion Internet et de la configuration du système;",
     "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Lors du premier lancement, Steam téléchargera les fichiers nécessaires et prendra quelques minutes pour terminer et l'écran de connexion pour apparaître;",
-    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '"
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Si vous souhaitez continuer, veuillez être patient car cela peut prendre quelques minutes en fonction de votre connexion Internet et de la configuration de votre système.",
+    "installModal": {
+        "loginRequired": "Connexion requise",
+        "loginRequiredMessage": "Vous devez être connecté à HyperPlay pour entrer votre code d'accès et installer ce jeu. ",
+        "loginRequiredMessageUpdate": "Vous devez être connecté à HyperPlay pour entrer votre code d'accès et mettre à jour ce jeu. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 ou supérieur"
+    },
+    "Recommended specs for a better experience": "Spécifications recommandées pour une meilleure expérience",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "Le portefeuille MetaMask n'est disponible que lorsqu'il est connecté à MetaMask."
+        },
+        "unsupported": "Connexion de portefeuille non prise en charge"
+    },
+    "16GB of RAM": "16 Go de RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 ou supérieur",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Soyez conscient que tous les jeux ne fonctionneront pas, et même s'ils le font, ils peuvent ne pas fonctionner comme prévu.",
+    "Downloading": "Téléchargement {{percent}}%",
+    "Please Wait": "Veuillez patienter",
+    "Installing": "Installation en cours"
 }

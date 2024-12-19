@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "تابع التثبيت",
             "message": "هل تريد إبقاء الملفات المُنزّلة؟",
-            "title": "أوقف التثبيت",
+            "title": "هل تريد إلغاء التنزيل؟",
             "keepFilesMessage": "تحقق هنا إذا كنت تريد الاحتفاظ بملفات تحميل بعد إلغاء."
         },
         "uninstall": {
@@ -99,8 +99,8 @@
     "game": {
         "downloadSize": "حجم التنزيل",
         "firstPlayed": "لُعبت لأول مرة في",
-        "getting-download-size": "قيد الحصول على حجم التنزيل",
-        "getting-install-size": "قيد الحصول على حجم التثبيت",
+        "getting-download-size": "الحصول على حجم التنزيل",
+        "getting-install-size": "الحصول على حجم التثبيت",
         "installSize": "حجم التثبيت",
         "language": "اللغة",
         "lastPlayed": "لُعِبت آخر مرة في",
@@ -179,7 +179,7 @@
         "title": "اختر المكونات المراد تثبيتها"
     },
     "setting": {
-        "use-default-wine-settings": "استخدم إعدادات واين الافتراضية",
+        "use-default-wine-settings": "استخدام إعدادات التوافق الافتراضية",
         "winecrossoverbottle": "قارورة كروس.أوفر"
     },
     "sideload": {
@@ -232,7 +232,8 @@
         "extracting": {
             "cancel": "الالغاء",
             "progress": "الاستخراج"
-        }
+        },
+        "patching": "تحديث الملفات "
     },
     "submenu": {
         "addShortcut": "أضف اختصارًا",

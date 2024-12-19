@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Fortsätt installationen",
             "message": "Vill du behålla nedladdade filer?",
-            "title": "Avbryt installationen",
+            "title": "Vill du avbryta nedladdningen?",
             "keepFilesMessage": "Kontrollera här om du vill behålla nedladdningsfilerna efter avbokning."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Nedladdningsstorlek",
         "firstPlayed": "Först spelat",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Hämtar nedladdningsstorlek",
+        "getting-install-size": "Hämtar installationsstorlek",
         "installSize": "Installationsstorlek",
         "language": "Språk",
         "lastPlayed": "Senast spelat",
@@ -178,7 +178,7 @@
         "title": "Ange komponenter att installera"
     },
     "setting": {
-        "use-default-wine-settings": "Använd standardinställningar för Wine",
+        "use-default-wine-settings": "Använd standardkompatibilitetsinställningar",
         "winecrossoverbottle": "CrossOver prefix"
     },
     "sideload": {
@@ -231,7 +231,8 @@
         "syncingSaves": "Synkroniserar sparfiler",
         "paused": "Pausad",
         "playing": "Spelar",
-        "downloading": "Laddar ner"
+        "downloading": "Laddar ner",
+        "patching": "Lagar filer "
     },
     "submenu": {
         "addShortcut": "Skapa genväg",

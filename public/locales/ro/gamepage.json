@@ -29,7 +29,8 @@
         "stopInstall": {
             "keepInstalling": "Continuați să instalați",
             "message": "Doriți să PĂSTRAȚI fișierele descărcate?",
-            "title": "Opriți instalarea"
+            "title": "Vrei să anulezi descărcarea?",
+            "keepFilesMessage": "Verifică aici dacă vrei să păstrezi fișierele de descărcare după anulare."
         },
         "uninstall": {
             "checkbox": "Doriți să eliminați și prefixul? Acest lucru nu poate fi anulat.",
@@ -37,16 +38,26 @@
             "message": "Doriți să dezinstalați acest joc?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
             "title": "Dezinstalează",
-            "dlc": "Doriți să dezinstalați această aplicație?"
+            "dlc": "Doriți să dezinstalați această aplicație?",
+            "prefix_warning": "Prefixul Wine pentru acest joc este prefixul implicit. Dacă vrei cu adevărat să-l ștergi, trebuie să o faci manual."
         },
         "update": {
             "message": "Acest joc are o actualizare, vrei să actualizezi acum?",
-            "title": "Jocul necesită actualizare"
+            "title": "Jocul necesită actualizare",
+            "message-cancel": "Nu este posibil să joci acest joc fără a-l actualiza"
         },
         "wineprefix": "Selectați folderul WinePrefix",
         "yes": "DA",
         "dont-show-again": "Nu mai arăta",
-        "ok": "OK"
+        "ok": "OK",
+        "aware": "Sunt conștient",
+        "compability": {
+            "message": "Acest joc Windows va rula folosind un strat de compatibilitate. Este posibil să întâlnești unele probleme sau jocul s-ar putea să nu funcționeze deloc."
+        },
+        "yesCancel": "Da, anulează",
+        "stopExtraction": {
+            "title": "Vrei să anulezi Extracția?"
+        }
     },
     "button": {
         "add_to_favourites": "Adaugă la favorite",
@@ -88,15 +99,17 @@
     "game": {
         "downloadSize": "Dimensiune descărcare",
         "firstPlayed": "Prima dată jucat",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Se obține dimensiunea descărcării",
+        "getting-install-size": "Se obține dimensiunea instalării",
         "installSize": "Mărime Instalare",
         "language": "Limba",
         "lastPlayed": "Ultima Dată Jucat",
         "neverPlayed": "Niciodată",
         "platform": "Selectați versiunea platformei de instalat",
         "requirements": "Cerințe de sistem",
-        "totalPlayed": "Timp Jucat"
+        "totalPlayed": "Timp Jucat",
+        "dlcs": "DLC-uri",
+        "selectChannelName": "Selectează Numele Canalului"
     },
     "gamecard": {
         "moving": "Mutare",
@@ -129,7 +142,8 @@
         "path-not-writtable": "Atenție: este posibil ca calea să nu poată fi scrisă.",
         "space-after-install": "După instalare",
         "wineprefix": "WinePrefix",
-        "wineversion": "Versiune Wine"
+        "wineversion": "Versiune Wine",
+        "compatibility-warning": "Acest joc Windows va rula folosind un strat de compatibilitate. Experiența ta poate varia."
     },
     "label": {
         "game": {
@@ -203,7 +217,17 @@
         "playing": "Activ",
         "paused": "În pauză",
         "syncingSaves": "Sincronizează Salvările",
-        "downloading": "Descărcare"
+        "downloading": "Descărcare",
+        "goodie": "Nu este instalabil",
+        "moving-files": "Mutând fișierul '{{file}}': {{percent}} ",
+        "preparing": "Se pregătește descărcarea, te rugăm să aștepți",
+        "extracting": {
+            "cancel": "Anulează Extracția",
+            "progress": "Se extrage"
+        },
+        "distributables": "Se instalează Distributabile",
+        "patching": "Patch-uri de fișiere ",
+        "gog-goodie": "Acest joc nu pare să fie instalabil. Verificați conținutul descărcabil pe https://gog.com/account"
     },
     "submenu": {
         "addShortcut": "Adaugă scurtătură",
@@ -217,6 +241,12 @@
         "removeShortcut": "Eliminați comenzile rapide",
         "settings": "Setări",
         "store": "Pagina magazinului",
-        "verify": "Verificați și Reparați"
+        "verify": "Verificați și Reparați",
+        "extraInfo": "Informații suplimentare"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Te rugăm să contactezi echipa HyperPlay cu acest mesaj: {{error}} - {{context}}."
+        }
     }
 }
