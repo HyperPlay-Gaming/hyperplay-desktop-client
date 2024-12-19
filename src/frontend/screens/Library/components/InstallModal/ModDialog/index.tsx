@@ -10,7 +10,6 @@ import { configStore } from 'frontend/helpers/electronStores'
 import TextInputWithIconField from 'frontend/components/UI/TextInputWithIconField'
 import { Button, Images } from '@hyperplay/ui'
 import { install } from 'frontend/helpers'
-import { signSiweMessage } from 'frontend/helpers/library'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { marketWarsLinksFallback } from './constants'
@@ -94,7 +93,7 @@ const ModDialog: React.FC<Props> = ({
     let siweValues
 
     if (requiresToken) {
-      siweValues = await signSiweMessage()
+      siweValues = await window.api.requestSIWE()
     }
 
     // Write Default game config with prefix on linux

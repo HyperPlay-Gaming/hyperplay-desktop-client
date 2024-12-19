@@ -10,12 +10,8 @@ import {
 import { TFunction } from 'i18next'
 import { getGameInfo, getPlatformName } from './index'
 import { DialogModalOptions } from 'frontend/types'
-import { SiweMessage } from 'siwe'
-import { ethers } from 'ethers'
-import axios from 'axios'
 import authState from 'frontend/state/authState'
 import gameUpdateState from 'frontend/state/GameUpdateState'
-import { DEV_PORTAL_URL } from 'common/constants'
 
 const storage: Storage = window.localStorage
 
@@ -283,7 +279,7 @@ const updateGame = async (gameInfo: GameInfo) => {
     channelRequiresTokens
   )
   if (channelRequiresTokens) {
-    siweValues = await signSiweMessage()
+    siweValues = await window.api.requestSIWE()
   }
   console.log('updating game with siwe values ', siweValues)
   return gameUpdateState.updateGame({ ...gameInfo, siweValues })
@@ -295,52 +291,3 @@ export const sideloadedCategories = ['all', 'sideload']
 export const hyperPlayCategories = ['all', 'hyperplay']
 
 export { install, launch, repair, updateGame }
-
-export async function signSiweMessage(): Promise<SiweValues> {
-  console.log('sign siwe message enter')
-  const signer = await getSigner()
-  const address = await signer.getAddress()
-  console.log('signer addr ', address)
-
-  const siweMessage = await createSiweMessage(address)
-  console.log('siwe message ', siweMessage)
-  const message = siweMessage.prepareMessage()
-  console.log('message ', message)
-  const signature = await signer.signMessage(message)
-  console.log('signature ', signature)
-
-  return {
-    message,
-    signature,
-    address
-  }
-}
-
-export async function getSigner(): Promise<ethers.Signer> {
-  if (!window.ethereum) throw new Error('Ethereum provider not found')
-  const provider = new ethers.BrowserProvider(window.ethereum)
-  return provider.getSigner()
-}
-
-export async function createSiweMessage(
-  signerAddress: string
-): Promise<SiweMessage> {
-  const domain = window.location.host ? window.location.host : 'hyperplay'
-  const origin = window.location.origin.startsWith('file://')
-    ? 'file://hyperplay'
-    : window.location.origin
-
-  const statementRes = await axios.get(
-    DEV_PORTAL_URL + 'api/v1/license_contracts/validate/get-nonce'
-  )
-  const statement = String(statementRes?.data)
-
-  return new SiweMessage({
-    domain,
-    address: signerAddress,
-    statement,
-    uri: origin,
-    version: '1',
-    chainId: 1
-  })
-}
