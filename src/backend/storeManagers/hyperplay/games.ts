@@ -1405,7 +1405,9 @@ async function createSiweMessage(signerAddress: string): Promise<SiweMessage> {
   }
   const url = new URL(mainWindowUrl)
   const domain = url.host ? url.host : 'hyperplay'
-  logInfo(`url origin ${url.origin} host ${url.host}`)
+  logInfo(
+    `url origin ${url.origin} host ${url.host} mainWindowUrl ${mainWindowUrl}`
+  )
   const origin = url.origin.startsWith('file://')
     ? 'file://hyperplay'
     : url.origin
