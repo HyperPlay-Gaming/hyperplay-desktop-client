@@ -13,7 +13,6 @@ if (existsSync(resetExtensionScript)) {
   const result = spawnSync(
     command,
     [
-      'run',
       'pkg',
       resetExtensionScript,
       '--out-path',
