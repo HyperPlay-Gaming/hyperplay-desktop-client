@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             node_modules
@@ -59,7 +59,7 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
 
       - name: Cache artifacts
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             dist
