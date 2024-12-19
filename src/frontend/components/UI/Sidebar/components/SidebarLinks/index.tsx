@@ -220,13 +220,13 @@ export default observer(function SidebarLinks() {
           </Tooltip>
         </div>
         <div className="sidebarLinkGradientWrapper">
-          <Tooltip {...tooltipProps} label="Wiki">
+          <Tooltip {...tooltipProps} label="Docs">
             <NavLink
-              data-testid="wiki"
+              data-testid="Docs"
               className={({ isActive }) =>
                 classNames('Sidebar__item', { active: isActive })
               }
-              to={{ pathname: '/wiki' }}
+              to={{ pathname: '/docs' }}
             >
               <Images.Page fill={sidebarSvgUnselectedFill} />
             </NavLink>
