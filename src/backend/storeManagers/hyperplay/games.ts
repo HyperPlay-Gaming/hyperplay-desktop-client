@@ -1404,10 +1404,13 @@ async function createSiweMessage(signerAddress: string): Promise<SiweMessage> {
     throw 'could not get main window url'
   }
   const url = new URL(mainWindowUrl)
-  const domain = url.host ? url.host : 'hyperplay'
-  const origin = url.origin.startsWith('file://')
-    ? 'file://hyperplay'
-    : url.origin
+  let domain = url.host
+  let origin = url.origin
+  // host is empty string and origin is null on the artifact
+  if (url.protocol === 'file:') {
+    domain = 'hyperplay'
+    origin = 'file://hyperplay'
+  }
 
   const statementRes = await fetch(
     DEV_PORTAL_URL + 'api/v1/license_contracts/validate/get-nonce'
