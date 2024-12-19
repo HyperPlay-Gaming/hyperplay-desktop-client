@@ -1417,12 +1417,11 @@ async function createSiweMessage(signerAddress: string): Promise<SiweMessage> {
     throw new Error(`Failed to get nonce for SIWE message. ${responseError}`)
   }
   const nonce = await statementRes.text()
-  const statement = String(nonce)
 
   return new SiweMessage({
     domain,
     address: signerAddress,
-    statement,
+    statement: nonce.replaceAll('"', ''),
     uri: origin,
     version: '1',
     chainId: 1
