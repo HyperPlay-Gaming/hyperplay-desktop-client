@@ -802,7 +802,6 @@ export async function install(
     modOptions
   }: InstallArgs
 ): Promise<InstallResult> {
-  console.log('installing game with siwe values ', siweValues)
   if (await resumeIfPaused(appName)) {
     return { status: 'done' }
   }

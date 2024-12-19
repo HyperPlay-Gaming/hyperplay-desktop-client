@@ -274,14 +274,9 @@ const updateGame = async (gameInfo: GameInfo) => {
     gameInfo?.channels?.[gameInfo.install.channelName ?? ''].license_config
       .tokens
   let siweValues = undefined
-  console.log(
-    'updating game handler channelRequiresTokens ',
-    channelRequiresTokens
-  )
   if (channelRequiresTokens) {
     siweValues = await window.api.requestSIWE()
   }
-  console.log('updating game with siwe values ', siweValues)
   return gameUpdateState.updateGame({ ...gameInfo, siweValues })
 }
 
