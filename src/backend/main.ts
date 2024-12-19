@@ -843,6 +843,8 @@ ipcMain.handle(
   }
 )
 
+ipcMain.handle('requestSIWE', HyperPlayGameManager.requestSIWE)
+
 ipcMain.handle('getEpicGamesStatus', async () => isEpicServiceOffline())
 
 ipcMain.handle('getMaxCpus', () => cpus().length)
