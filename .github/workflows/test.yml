@@ -33,7 +33,6 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - uses: pnpm/action-setup@v3
         with:
-          version: 9
           standalone: ${{ runner.os == 'Windows' }}
       - name: Install node-gyp
         run: pnpm add --global node-gyp

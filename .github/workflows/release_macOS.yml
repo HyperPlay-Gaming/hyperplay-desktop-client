@@ -30,7 +30,6 @@ jobs:
           node-version: '20'
       - uses: pnpm/action-setup@v4
         with:
-          version: 9
           standalone: ${{ runner.os == 'Windows' }}
       - name: Install node-gyp
         run: pnpm add --global node-gyp
@@ -80,8 +79,6 @@ jobs:
           node-version: '20'
 
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Reconfigure git to use HTTP authentication
         run: >
