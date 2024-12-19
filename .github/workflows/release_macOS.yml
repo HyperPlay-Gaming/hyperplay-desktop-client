@@ -126,6 +126,8 @@ jobs:
         with:
           node-version: '20'
 
+      - uses: pnpm/action-setup@v4
+
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
