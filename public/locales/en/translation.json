@@ -829,6 +829,7 @@
             }
         },
         "quests": "Quests",
+        "search": "Search",
         "viewAllQuests": {
             "title": "View All Quests"
         }
