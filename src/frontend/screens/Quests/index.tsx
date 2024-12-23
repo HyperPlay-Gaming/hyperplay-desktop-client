@@ -223,8 +223,8 @@ export function QuestsPage() {
             <SearchBar
               searchText={searchText}
               setSearchText={setSearchText}
-              i18n={{ placeholder: 'Search Quest' }}
-              styles={{ container: { margin: '0px 0px 0px auto' } }}
+              i18n={{ placeholder: t('quests.search', 'Search') }}
+              classNames={{ container: styles.searchBar }}
               suggestions={suggestedSearchTitles}
             />
           }
