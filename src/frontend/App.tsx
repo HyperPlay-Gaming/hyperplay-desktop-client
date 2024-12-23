@@ -98,7 +98,7 @@ function App() {
             />
             <Route path="epicstore" element={<WebView key="epicstore" />} />
             <Route path="gogstore" element={<WebView key="gogstore" />} />
-            <Route path="wiki" element={<WebView key="wiki" />} />
+            <Route path="docs" element={<WebView key="docs" />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
             <Route
               path="metamaskSnaps"
