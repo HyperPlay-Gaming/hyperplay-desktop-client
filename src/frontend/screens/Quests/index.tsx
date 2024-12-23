@@ -223,7 +223,7 @@ export function QuestsPage() {
             <SearchBar
               searchText={searchText}
               setSearchText={setSearchText}
-              i18n={{ placeholder: 'Search' }}
+              i18n={{ placeholder: t('quests.search', 'Search') }}
               classNames={{ container: styles.searchBar }}
               suggestions={suggestedSearchTitles}
             />
