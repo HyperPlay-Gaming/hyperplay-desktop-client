@@ -59,6 +59,20 @@ import { SiweMessage } from 'siwe'
  * t('quest.claimWarning.body2', 'Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>')
  * t('quest.claimWarning.cancel', 'Cancel')
  * t('quest.claimWarning.confirm', 'Confirm')
+ * t("wallet.detected.title", "Wallet Detected")
+ * t("wallet.detected.message", "To track progress with this wallet, add it as a Gameplay Wallet below by setting it.")
+ * t("wallet.verify.message", "You only need to verify each address once and can switch freely at any time.")
+ * t("wallet.new.title", "New Wallet Detected")
+ * t("wallet.new.message", "Your connected wallet doesn't match any Gameplay wallet tracked for this Quest. To track progress with this wallet, add it as a Gameplay Wallet below by setting it.")
+ * t("wallet.action.set", "Set")
+ * t("wallet.noWallet.message", "No wallet connected. Connect wallet to track Quest progress.")
+ * t("wallet.active.title", "Active Gameplay Wallet")
+ * t("wallet.noWallet.status", "No wallet connected")
+ * t("wallet.connected.title", "Connected Wallet")
+ * t("wallet.setConnected.title", "Set Connected Wallet")
+ * t("wallet.error.title", "Something went wrong")
+ * t("wallet.error.message", "Please try once more. If it still doesn't work, create a Discord support ticket.")
+ * t("wallet.error.action", "Create Discord Ticket")
  */
 
 export default function QuestDetails({

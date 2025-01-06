@@ -1091,10 +1091,42 @@
         "quit": "Quit"
     },
     "wallet": {
+        "action": {
+            "set": "Set"
+        },
+        "active": {
+            "title": "Active Gameplay Wallet"
+        },
+        "connected": {
+            "title": "Connected Wallet"
+        },
+        "detected": {
+            "message": "To track progress with this wallet, add it as a Gameplay Wallet below by setting it.",
+            "title": "Wallet Detected"
+        },
+        "error": {
+            "action": "Create Discord Ticket",
+            "message": "Please try once more. If it still doesn't work, create a Discord support ticket.",
+            "title": "Something went wrong"
+        },
+        "new": {
+            "message": "Your connected wallet doesn't match any Gameplay wallet tracked for this Quest. To track progress with this wallet, add it as a Gameplay Wallet below by setting it.",
+            "title": "New Wallet Detected"
+        },
+        "noWallet": {
+            "message": "No wallet connected. Connect wallet to track Quest progress.",
+            "status": "No wallet connected"
+        },
         "portfolio": {
             "onlyExtension": "MetaMask Portfolio is only available when connected with MetaMask."
         },
-        "unsupported": "Unsupported Wallet Connection"
+        "setConnected": {
+            "title": "Set Connected Wallet"
+        },
+        "unsupported": "Unsupported Wallet Connection",
+        "verify": {
+            "message": "You only need to verify each address once and can switch freely at any time."
+        }
     },
     "webview": {
         "controls": {
