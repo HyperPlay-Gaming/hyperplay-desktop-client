@@ -9,10 +9,11 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import authState from 'frontend/state/authState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { useTranslation } from 'react-i18next'
-import { useAccount } from 'wagmi'
+import { useAccount, useSignMessage } from 'wagmi'
 import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import extensionState from 'frontend/state/ExtensionState'
 import { PossibleMetricPayloads } from 'backend/metrics/types'
+import { SiweMessage } from 'siwe'
 
 /**
  * Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -75,6 +76,8 @@ export default function QuestDetails({
   const { isSignedIn, data } = useAuthSession()
   const { t } = useTranslation()
   const flags = useFlags()
+  const { signMessageAsync } = useSignMessage()
+
   const sessionEmail = data?.linkedAccounts.get('email')
   const { invalidateQuery } = useGetUserPlayStreak(
     questId,
@@ -94,8 +97,36 @@ export default function QuestDetails({
       refreshPlayStreak: invalidateQuery
     })
 
+  const getActiveWalletSignature = async () => {
+    const nonce = await window.api.getCSRFToken()
+
+    const siweMessage = new SiweMessage({
+      domain: window.location.host,
+      address,
+      statement: 'Sign in with Ethereum to the app.',
+      uri: window.location.origin,
+      version: '1',
+      chainId: 1,
+      nonce: nonce
+    })
+
+    const message = siweMessage.prepareMessage()
+
+    const signature = await signMessageAsync({
+      message
+    })
+
+    return {
+      message,
+      signature
+    }
+  }
+
   return (
     <QuestDetailsWrapper
+      getActiveWalletSignature={getActiveWalletSignature}
+      getActiveWallet={window.api.getActiveWallet}
+      setActiveWallet={window.api.setActiveWallet}
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }
