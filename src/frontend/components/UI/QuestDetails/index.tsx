@@ -117,7 +117,7 @@ export default function QuestDetails({
     const siweMessage = new SiweMessage({
       domain: window.location.host,
       address,
-      statement: 'Sign in with Ethereum to the app.',
+      statement: 'Sign to confirm your active wallet.',
       uri: window.location.origin,
       version: '1',
       chainId: 1,
