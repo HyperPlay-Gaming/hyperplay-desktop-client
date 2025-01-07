@@ -318,7 +318,7 @@ export default React.memo(function InstallModal({
                   gameInfo={gameInfo}
                 />
               ) : null}
-              {selectedChannel?.license_config.access_codes &&
+              {selectedChannel?.license_config?.access_codes &&
                 accessCodeContent}
             </div>
             {hasWine ? (
