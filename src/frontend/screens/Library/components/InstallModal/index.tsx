@@ -309,6 +309,7 @@ export default React.memo(function InstallModal({
             winePrefix={winePrefix}
             wineVersion={wineVersion}
             crossoverBottle={crossoverBottle}
+            isGated={selectedChannel?.license_config?.access_codes ?? false}
           >
             <div style={{ paddingTop: 'var(--space-md)' }}>
               {runner === 'hyperplay' && numberOfChannels > 1 ? (
@@ -318,8 +319,7 @@ export default React.memo(function InstallModal({
                   gameInfo={gameInfo}
                 />
               ) : null}
-              {selectedChannel?.license_config?.access_codes &&
-                accessCodeContent}
+              {accessCodeContent}
             </div>
             {hasWine ? (
               <WineSelector
