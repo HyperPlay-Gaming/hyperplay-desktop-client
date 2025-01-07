@@ -321,7 +321,7 @@ export default React.memo(function InstallModal({
                   gameInfo={gameInfo}
                 />
               ) : null}
-              {accessCodeContent}
+              {accessCode && accessCodeContent}
             </div>
             {hasWine ? (
               <WineSelector
