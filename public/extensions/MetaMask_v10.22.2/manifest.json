@@ -66,7 +66,7 @@
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: b9064fab",
+  "description": "other build from git id: b84f44e8",
   "host_permissions": [
     "http://localhost:8545/",
     "file://*/*",
