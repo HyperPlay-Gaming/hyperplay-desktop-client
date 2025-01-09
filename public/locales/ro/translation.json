@@ -89,7 +89,8 @@
             },
             "steam": {
                 "error": "Executable Steam nu a fost găsit. Instalarea a fost probabil anulată de utilizator sau a eșuat de partea Steam.",
-                "title": "Eroare Steam"
+                "title": "Eroare Steam",
+                "message": "Instalarea Steam a eșuat! Te rugăm să citești cu atenție instrucțiunile și să încerci din nou! {{paragraph}} {{error}}"
             }
         },
         "info": {
@@ -100,7 +101,8 @@
                 "message-finished": "Doriți să reporniți HyperPlay acum?",
                 "title": "Lansatorul de jocuri eroice",
                 "title-finished": "Actualizare Finalizată",
-                "appUpdated": "HyperPlay a fost actualizat"
+                "appUpdated": "HyperPlay a fost actualizat",
+                "appUpdated-message": "HyperPlay a fost actualizat. Vrei să actualizezi și să repornești HyperPlay acum?"
             }
         },
         "no": "NU, mulțumesc!",
@@ -162,7 +164,8 @@
             "wine-change": {
                 "message-gptk": "Pentru a putea rula jocuri folosind toolkit-ul de portare pentru jocuri Apple, trebuie să îți actualizezi macOS la 14 (Sonoma) sau o versiune superioară. {{newline}} Am găsit Wine pe sistemul tău, vrei să continui lansarea folosind {{foundWine}} ?",
                 "message": "Nu am putut găsi versiunea de wine selectată pentru a lansa acest titlu ({{selectedWine}}). {{newline}} Am găsit alta, doriți să continuați lansarea folosind {{foundWine}}?",
-                "title": "Wine nu a fost găsit!"
+                "title": "Wine nu a fost găsit!",
+                "title-gptk": "Toolkit-ul de portare a jocurilor nu este compatibil "
             }
         },
         "wineprefix": "Alegeți directorul Wine Prefix",
@@ -330,7 +333,8 @@
         "wine-repfix": {
             "message": "Wine utilizează ceea ce se numește WINEPREFIX pentru a încadra aplicațiile Windows. Acest prefix include fișierele de configurare Wine și o replicare a structurii de fișiere de pe C: (discul principal pe un sistem de operare Windows). În această replicare a unității C:, sunt păstrate fișierele de salvare ale jocului și dependențele instalate prin winetricks.\n\nWine folosește un element numit WINEPREFIX pentru a izola aplicațiile Windows. Acest prefix conține fișierele de configurare Wine și o copie a ierarhiei fișierelor de pe C: (discul principal pe un sistem de operare Windows). În această copie a unității C:, sunt stocate fișierele de salvare ale jocului și dependențele instalate prin winetricks.\n\nWine se bazează pe un concept numit WINEPREFIX pentru a organiza aplicațiile Windows. Acest prefix include fișierele de configurare Wine și o replicare a structurii de fișiere de pe C: (discul principal pe un sistem de operare Windows). În această replicare a unității C:, se află fișierele de salvare ale jocului și dependențele instalate prin winetricks."
         },
-        "wine-path-none-found": "Nici o versiune Wine nu a fost găsită, descărcați una din Managerul de Compatibilitate"
+        "wine-path-none-found": "Nici o versiune Wine nu a fost găsită, descărcați una din Managerul de Compatibilitate",
+        "wine-path-invalid": "Calea Wine este invalidă, te rugăm să selectezi alta."
     },
     "install": {
         "path": "Selectați directorul de instalare"
@@ -485,7 +489,12 @@
             "queued": "Queued",
             "remove": "Îndepărtează din Descărcări",
             "resume": "Continuare descărcare",
-            "pause": "Suspendați descărcarea"
+            "pause": "Suspendați descărcarea",
+            "timeElapsed": "Timp scurs: {{elapsed}}",
+            "retry-install": "Reîncercare instalare",
+            "launch": "Lansează jocul",
+            "retry-update": "Reîncercare actualizare",
+            "stop": "Oprește descărcarea"
         }
     },
     "Recent": "Jocuri Recente",
@@ -769,7 +778,9 @@
         "folder": "Directoriu",
         "buttons": {
             "agree": "Sunt de acord cu opinia ta",
-            "noThanks": "Nu, mulțumesc.  \nNu, îți mulțumesc.  \nNu, mulțumesc foarte mult."
+            "noThanks": "Nu, mulțumesc.  \nNu, îți mulțumesc.  \nNu, mulțumesc foarte mult.",
+            "primaryButton": "Sunt de acord",
+            "secondaryButton": "Nu, mulțumesc"
         },
         "discordApp": "Discord",
         "onboarding": {
@@ -825,7 +836,16 @@
                 "body": "HyperPlay ar dori să colecteze date de utilizare pentru a înțelege mai bine cum interacționează utilizatorii noștri cu aplicația. Aceste informații ne ajută să înțelegem cum folosiți aplicația și ne permit să facem HyperPlay și mai bun pentru dvs.",
                 "neverCollectPersonal": " colectați chei, adrese, solduri, hash-uri sau orice informație personală;",
                 "neverSellData": " vindeți date pentru profit. Niciodată!",
-                "title": "Ajută-ne să îmbunătățim HyperPlay!"
+                "title": "Ajută-ne să îmbunătățim HyperPlay!",
+                "paragraphOne": "HyperPlay ar dori să colecteze date de utilizare pentru a înțelege mai bine cum interacționează utilizatorii noștri cu aplicația. \n           Acest lucru ne permite să facem HyperPlay și mai bun pentru tine.",
+                "bulletOne": "Întotdeauna îți permite să te retragi",
+                "bulletTwo": "Trimite clicuri și interacțiuni de joc anonimizate",
+                "privacyPolicy": "Politica de confidențialitate.",
+                "text": {
+                    "externalLink": "Află mai multe",
+                    "title": "Am actualizat Politica noastră de Confidențialitate"
+                },
+                "titleOne": "Ajută-ne să îmbunătățim HyperPlay!"
             },
             "connectionCanceled": {
                 "title": "Conexiune anulată!",
@@ -837,9 +857,19 @@
                     "construction": "HyperPlay este în construcție.",
                     "communityCTA_2": "comunitate. Împreună, să conturăm viitorul jocurilor!",
                     "communityCTA_1": "Ne-ar plăcea să ne oferi feedback și să te alături nouă în",
-                    "description": "HyperPlay este un launcher de jocuri și un agregator de magazine de jocuri din viitor. Cu HyperPlay, poți să îți duci portofelul, token-urile și activele în fiecare joc. HyperPlay suportă întreaga bibliotecă a Epic Store, GOG și propriul nostru magazin HyperPlay. Folosind HyperPlay, ești de acord cu"
+                    "description": "HyperPlay este un launcher de jocuri și un agregator de magazine de jocuri din viitor. Cu HyperPlay, poți să îți duci portofelul, token-urile și activele în fiecare joc. HyperPlay suportă întreaga bibliotecă a Epic Store, GOG și propriul nostru magazin HyperPlay. Folosind HyperPlay, ești de acord cu",
+                    "paragraphThr": "Adu-ți fără probleme portofelul, token-urile \n           și activele în fiecare joc, în timp ce accesezi \n           bibliotecile extinse ale Epic Store, \n           GOG și propriul nostru HyperPlay Store - toate într-un singur loc.",
+                    "bulletPointFive": "Rulează jocuri Windows pe macOS, Linux și SteamDeck folosind\n              avansat",
+                    "bulletPointFour": "Instalează Steam (versiunea Windows) pe macOS cu un singur clic ușor",
+                    "bulletPointOne": "Accesează o vastă colecție de peste 100 de jocuri activate pe blockchain",
+                    "bulletPointThree": "Joacă jocuri Epic și GOG direct prin HyperPlay",
+                    "bulletPointTwo": "Câștigă tokenuri, NFT-uri și recompense off-chain completând Misiuni",
+                    "lastParagraph": "În prezent în Beta, apreciem foarte mult feedback-ul tău și \n            te încurajăm să raportezi orice probleme sau sugestii în",
+                    "paragraphOne": "La HyperPlay, construim magazinul de jocuri de generație următoare \n            pentru viitorul jocurilor.",
+                    "TitleList": "Cu HyperPlay poți:"
                 },
-                "title": "Bine ați venit la HyperPlay Early Access!"
+                "title": "Bine ați venit la HyperPlay Early Access!",
+                "titleIntro": "Bine ai venit la HyperPlay!"
             },
             "connectAgain": "Conectează-te din nou"
         },
@@ -849,7 +879,8 @@
             "installing": "Descărcare în curs...",
             "installed": "Pregătit de joacă",
             "distributables": "Se instalează distributibile...",
-            "extracting": "Extracție..."
+            "extracting": "Extracție...",
+            "patching": "Se aplică patch-uri..."
         },
         "turnAnalyticsOff": "Închide",
         "logOut": "Deconectare utilizator",
@@ -877,8 +908,10 @@
                 "validation": "Succes! Codul de acces este valid"
             },
             "error": {
-                "validation": "Codul de acces este invalid"
-            }
+                "validation": "Codul de acces este invalid",
+                "licenseUndefined": "Nu s-a putut valida codul de acces. Te rugăm să verifici accesul la internet sau setările firewall-ului."
+            },
+            "placeholder": "Introdu codul de acces"
         },
         "linkSteamAccountCta": "Mergi la autentificarea Steam",
         "linkSteamAccountDescription": "Conectează-te la Steam pentru a lega contul tău HyperPlay.",
@@ -889,7 +922,11 @@
         "connectWallet": "Conectează portofelul",
         "publicAlpha": "Alpha public",
         "viewPortfolio": "Vizualizați portofoliul",
-        "viewFullscreen": "Vizualizare pe ecran complet"
+        "viewFullscreen": "Vizualizare pe ecran complet",
+        "otp": "Cod de acces unic",
+        "analyticsOff": "Analitica este dezactivată",
+        "compatibilityLayer": "Strat de compatibilitate (Beta)",
+        "discordAppLink": "Comunitatea Discord."
     },
     "quest": {
         "connectSteamAccount": "Asociază contul Steam",
@@ -916,14 +953,20 @@
             "body": "<bold>IMPORTANT:</bold> Vă rugăm să vă asigurați că alocați suficient gaz pe rețeaua {{networkName}} pentru ca tranzacția să fie confirmată cu succes <bold>în termen de 7 zile.</bold>",
             "body2": "În caz contrar, recompensa Quest <bold> va expira și nu va mai putea fi revendicată.</bold>"
         },
-        "noG7ConnectionSync": "Trebuie să aveți un cont Game7 legat de {{email}} pentru a resincroniza sarcinile dvs.",
+        "noG7ConnectionSync": {
+            "message": "Trebuie să ai un cont Game7 legat de {{email}} pentru a resincroniza sarcinile tale.",
+            "title": "Nu ai un cont G7 legat"
+        },
         "g7Numclaimed": "Credite G7 revendicate total",
         "readyForClaim": "Pregătit pentru revendicare",
         "noG7ConnectionClaim": "Trebuie să ai un cont Game7 legat de {{email}} pentru a-ți revendica recompensele.",
-        "notEnoughGas": "Sold insuficient în portofel pentru a revendica recompensa din cauza taxelor de gaz. Încearcă un alt portofel sau reîncarcă-l pe acesta înainte de a încerca din nou.",
+        "notEnoughGas": {
+            "message": "Sold insuficient în portofel pentru a revendica recompensa din cauza taxelor de gaz. Încercați un alt portofel sau reîncărcați-l pe acesta înainte de a încerca din nou."
+        },
         "reputation": "Reputație",
         "type": {
-            "playstreak": "Seria de jocuri"
+            "playstreak": "Seria de jocuri",
+            "reputation": "Reputație"
         },
         "quests": "Misiuni",
         "View Game": "Vezi jocul",
@@ -933,7 +976,28 @@
         "pointsClaimed": "Puncte revendicate",
         "reward": "Recompensă",
         "associatedGames": "Jocuri asociate",
-        "linkAccount": "Conectează-ți contul Steam pentru a verifica eligibilitatea."
+        "linkAccount": "Conectează-ți contul Steam pentru a verifica eligibilitatea.",
+        "claim": "Revendică",
+        "claimFailed": "Revendicarea a eșuat",
+        "youHaveClaimed": "Ai revendicat recompensa {{totalRewards}} {{plural}}.",
+        "notSignedIn": {
+            "title": "Nu ești conectat",
+            "message": "Trebuie să fii conectat pentru a-ți revendica recompensa."
+        },
+        "questAvailable": "Misiune disponibilă!",
+        "rewardClaimed": "Revendicare reușită",
+        "toClaimReward": "pentru a-ți revendica recompensa.",
+        "toSeeDetails": "pentru a vedea detalii.",
+        "notEligible": {
+            "message": "Nu ai completat zilele necesare de joc și nu poți revendica recompensa ta în acest moment.",
+            "title": "Încă nu ești eligibil"
+        },
+        "createDiscordTicket": "Creează un tichet Discord",
+        "questComplete": "Misiune completă!",
+        "claimFailedMessage": "Vă rugăm să încercați din nou. Dacă tot nu funcționează, creați un tichet de suport pe Discord.",
+        "notEnoughBalance": {
+            "title": "Sold scăzut"
+        }
     },
     "gameRelease": {
         "beta": "Versiune de test",
@@ -969,7 +1033,8 @@
         "description": {
             "FAILED": "Tranzacția a fost anulată sau nu a fost trimisă, vă rugăm să încercați din nou",
             "INITIATED": "O confirmare a portofelului este în așteptare în portofelul tău mobil",
-            "PENDING": "Aștept confirmarea blockchain. Te vom anunța când este confirmată"
+            "PENDING": "Aștept confirmarea blockchain. Te vom anunța când este confirmată",
+            "CONFIRMED": "Tranzacția a fost confirmată cu succes!"
         },
         "extensionNotification": {
             "DESCRIPTION": "Apăsați {{overlayKeyMod}} + X pentru a vedea această tranzacție",
@@ -989,21 +1054,25 @@
         },
         "error": "A apărut o eroare în timpul importului. Te rugăm să verifici jurnalele pentru mai multe detalii.",
         "cta": "Importați folderul jocului",
-        "label": "Importă folderul jocului"
+        "label": "Importă folderul jocului",
+        "success": "Jocuri importate cu succes!"
     },
     "mods": {
         "instructions": {
             "step1": {
                 "title": "Etapa 1",
                 "chromieCraft": "ChromieCraft",
-                "description": "Acest joc este un mod pentru World of Warcraft: Wrath of the Lich King (3.3.5a). Pentru a juca acest mod, jucătorii trebuie să dețină o copie a World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nu găzduiește World of Warcraft. Jucătorii care dețin World of Warcraft pot obține versiunea 3.3.5a din surse precum:",
+                "description": "Acest joc este un mod pentru World of Warcraft: Wrath of the Lich King (3.3.5a). Pentru a juca acest mod, jucătorii trebuie să dețină o copie a World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nu găzduiește World of Warcraft. Jucătorii care dețin World of Warcraft pot obține versiunea necesară din următoarele surse:",
                 "subtitle": "Descarcă World of Warcraft 3.3.5a",
-                "webtorrent": "Torrent (Link Magnet)"
+                "webtorrent": "Torrent (Link Magnet)",
+                "link1": "Link 1",
+                "link2": "Link 2 (Link Magnet)"
             },
             "step2": {
                 "title": "Faza 2",
                 "description": "Selectează fișierul ChromieCraft_3.3.5a.zip descărcat.",
-                "subtitle": "Selectează fișierul ChromieCraft_3.3.5a.zip"
+                "subtitle": "Selectează fișierul ChromieCraft_3.3.5a.zip",
+                "subtitle1": "Selectează fișierul zip 3.3.5a descărcat"
             },
             "step3": {
                 "description": "Vă rugăm să alegeți folderul în care ar trebui să fie instalat World of Warcraft: Wrath of the Lich King (3.3.5a).",
@@ -1031,7 +1100,8 @@
                 "title": "Extracție anulată"
             },
             "installed": {
-                "title": "Joc de bază instalat"
+                "title": "Joc de bază instalat",
+                "body": "Modul va fi aplicat jocului de bază"
             },
             "installing": {
                 "body": "Se extrag fișierele de bază ale jocului",
@@ -1052,7 +1122,15 @@
     "overlay": {
         "comingSoon": "În curând…",
         "WALLET_DISCONNECTED": "Nu ai un portofel conectat la HyperPlay.",
-        "EXTERNAL_WALLET_CONNECTED": "Ești conectat la HyperPlay cu un portofel extern."
+        "EXTERNAL_WALLET_CONNECTED": "Ești conectat la HyperPlay cu un portofel extern.",
+        "links": {
+            "sell": "Vinde",
+            "bridge": "Pod",
+            "buy": "Cumpără",
+            "portfolio": "Portofoliu",
+            "marketplace": "Piață",
+            "swap": "Schimb"
+        }
     },
     "quests": {
         "playstreak": {
@@ -1121,5 +1199,28 @@
         "title": "Vă mulțumim că v-ați abonat!",
         "subtitle": "Acum ești parte din comunitatea noastră și suntem încântați să împărtășim actualizări și informații valoroase cu tine."
     },
-    "importGameErrorMessage": "Nu este un folder de joc valid, importul jocului nu este posibil"
+    "importGameErrorMessage": "Nu este un folder de joc valid, importul jocului nu este posibil",
+    "Installing Steam": "Instalare Steam...",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Dacă dorești să continui, te rugăm să ai răbdare, deoarece poate dura câteva minute pentru a termina, în funcție de conexiunea ta la internet și de configurația sistemului.",
+    "installModal": {
+        "loginRequiredMessage": "Trebuie să fii conectat la HyperPlay pentru a introduce codul tău de acces și a instala acest joc. ",
+        "loginRequiredMessageUpdate": "Trebuie să fii conectat la HyperPlay pentru a introduce codul tău de acces și a actualiza acest joc. ",
+        "loginRequired": "Autentificare necesară"
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 sau mai recent"
+    },
+    "Please Wait": "Te rugăm să aștepți",
+    "Recommended specs for a better experience": "Specificații recomandate pentru o experiență mai bună",
+    "wallet": {
+        "unsupported": "Conexiune portofel nesuportată",
+        "portfolio": {
+            "onlyExtension": "Portofoliul MetaMask este disponibil doar când ești conectat cu MetaMask."
+        }
+    },
+    "16GB of RAM": "16GB de RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 sau mai recent",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Fii conștient că nu toate jocurile vor funcționa, și chiar dacă o fac, s-ar putea să nu ruleze așa cum te aștepți.",
+    "Downloading": "Se descarcă {{percent}}%",
+    "Installing": "Se instalează"
 }

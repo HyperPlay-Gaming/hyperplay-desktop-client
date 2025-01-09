@@ -18,7 +18,7 @@
         "stopInstall": {
             "keepInstalling": "Fortsæt installationen",
             "message": "Vil du fortsætte med at hente filerne?",
-            "title": "Stop installationen",
+            "title": "Vil du annullere downloadet?",
             "keepFilesMessage": "Tjek her, hvis du ønsker at holde download-filer efter annullering."
         },
         "uninstall": {
@@ -188,7 +188,8 @@
             "progress": "Udtræk"
         },
         "gog-goodie": "Dette spil vises ikke for at blive installeret. Tjek download-indhold på https://gog.com/account",
-        "goodie": "Ikke at installere"
+        "goodie": "Ikke at installere",
+        "patching": "Patchfiler "
     },
     "submenu": {
         "addShortcut": "Opret genvej",
@@ -243,7 +244,7 @@
         }
     },
     "setting": {
-        "use-default-wine-settings": "Brug standard vinindstillinger",
+        "use-default-wine-settings": "Brug standard kompatibilitetsindstillinger",
         "winecrossoverbottle": "CrossOver flaske"
     },
     "hours": "Timer",

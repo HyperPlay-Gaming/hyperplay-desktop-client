@@ -29,7 +29,8 @@
         "stopInstall": {
             "keepInstalling": "Instalatzen jarraitu",
             "message": "Fitxategiak deskargatuta MANTENDU nahi dituzu?",
-            "title": "Instalazioa gelditu"
+            "title": "Deskarga bertan behera utzi nahi al duzu?",
+            "keepFilesMessage": "Bertan behera uzteko fitxategiak gordetzeko nahi baduzu, hemen egiaztatu."
         },
         "uninstall": {
             "checkbox": "Kendu aurrizkia: {{prefix}}{{newLine}}Oharra: Hau ezin da desegin eta babeskopiarik ez duten gordetze fitxategiak kenduko ditu ere.",
@@ -37,16 +38,26 @@
             "message": "Joko hau desinstatu nahi duzu?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
             "title": "Desinslalatu",
-            "dlc": "Aplikazioa desinstalatu nahi duzu?"
+            "dlc": "Aplikazioa desinstalatu nahi duzu?",
+            "prefix_warning": "Joko honen Wine aurrekaria lehenetsia da. Benetan ezabatu nahi baduzu, eskuz egin behar duzu."
         },
         "update": {
             "message": "Joko honek eguneraketa bat du, orain eguneratu?",
-            "title": "Jokoak eguneraketa behar du"
+            "title": "Jokoak eguneraketa behar du",
+            "message-cancel": "Joko hau eguneratu gabe jokatu ezin da."
         },
         "wineprefix": "Hautatu WinePrefix karpeta",
         "yes": "BAI",
         "dont-show-again": "Ez erakutsi berriro",
-        "ok": "Ados"
+        "ok": "Ados",
+        "compability": {
+            "message": "Windows joko honek bateragarritasun geruza bat erabiliko du. Arazo batzuk aurki ditzakezu edo jokoa ez da funtzionatu dezake."
+        },
+        "aware": "Jakitun naiz",
+        "yesCancel": "Bai, bertan behera utzi",
+        "stopExtraction": {
+            "title": "Etxea bertan behera utzi nahi al duzu?"
+        }
     },
     "button": {
         "add_to_favourites": "Gehitu gogokoetara",
@@ -76,7 +87,8 @@
         "update": "Eguneratu",
         "remove_from_library": "Ezabatu",
         "details": "Xehetasunak",
-        "favorites": "Gogokoa"
+        "favorites": "Gogokoa",
+        "unfavorites": "Desfavoritatu"
     },
     "cloud_save_unsupported": "Onartu gabe",
     "disabled": "Desgaituta",
@@ -87,15 +99,17 @@
     "game": {
         "downloadSize": "Deskarga-tamaina",
         "firstPlayed": "Lehen aldiz jokatua",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Deskargatzeko tamaina lortzen",
+        "getting-install-size": "Instalatzeko tamaina lortzen",
         "installSize": "Instalazioaren tamaina",
         "language": "Hizkuntza",
         "lastPlayed": "Azken jokaldia",
         "neverPlayed": "Inoiz ez",
         "platform": "Instalatzeko plataformaren bertsioa hautatu",
         "requirements": "Sistemaren betekizunak",
-        "totalPlayed": "Denbora jokatua"
+        "totalPlayed": "Denbora jokatua",
+        "selectChannelName": "Hautatu Kanala Izena",
+        "dlcs": "DLCak"
     },
     "gamecard": {
         "moving": "Mugitzen",
@@ -128,7 +142,8 @@
         "path-not-writtable": "Ohartarazpena: sarbide-ibilbidea ezin da idatzi.",
         "space-after-install": "Instalazioaren ondoren",
         "wineprefix": "WinePrefix",
-        "wineversion": "Ardoaren bertsioa"
+        "wineversion": "Ardoaren bertsioa",
+        "compatibility-warning": "Windows joko honek bateragarritasun geruza bat erabiliko du. Zure esperientzia alda daiteke."
     },
     "label": {
         "game": {
@@ -201,7 +216,18 @@
         "updating": "Jokoa eguneratzea",
         "paused": "Pausatua",
         "downloading": "Deskargatzen",
-        "syncingSaves": "Zaintza-zaindegien sinkronizazioa"
+        "syncingSaves": "Zaintza-zaindegien sinkronizazioa",
+        "distributables": "Banaketa instalatzen",
+        "patching": "Fitxategiak Patxinatzen ",
+        "extracting": {
+            "cancel": "Etxea bertan behera utzi",
+            "progress": "Etxea ateratzen"
+        },
+        "moving-files": "Fitxategia mugitzen '{{file}}': {{percent}} ",
+        "playing": "Jokatzen",
+        "preparing": "Deskargatzen prestatzen, mesedez itxaron",
+        "gog-goodie": "Joko hau instalatzeko modukoa ez dela dirudi. Begiratu deskargatzeko edukiak https://gog.com/account",
+        "goodie": "Ez da instalatzeko modukoa"
     },
     "submenu": {
         "addShortcut": "Sarbide zuzena gehitu",
@@ -215,6 +241,12 @@
         "removeShortcut": "Sarbide zuzenak kendu",
         "settings": "Konfigurazioa",
         "store": "Dendaren orrialdea",
-        "verify": "Egiaztatzea eta konpontzea"
+        "verify": "Egiaztatzea eta konpontzea",
+        "extraInfo": "Informazio Gehigarria"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Mesedez, jarri harremanetan HyperPlay Taldearekin mezu honekin: {{error}} - {{context}}."
+        }
     }
 }

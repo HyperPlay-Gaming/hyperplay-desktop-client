@@ -260,7 +260,7 @@
         "ignore_hidden": "Παράλειψη κρυφών στοιχείων",
         "platform": "Πλατφόρμα",
         "show_all_games": "Εμφάνιση όλων των παιχνιδιών",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Εμφάνιση μη διαθέσιμων παιχνιδιών",
         "show_favourites_only": "Εμφάνιση μόνο αγαπημένων",
         "show_hidden": "Εμφάνιση κρυφών στοιχείων",
         "store": "Φιλτράρισμα καταστήματος"
@@ -393,7 +393,7 @@
         "install": {
             "canceled": "Η εγκατάσταση ακυρώθηκε",
             "error": "Αποτυχημένη Εγκατάσταση",
-            "finished": "Η εγκατάσταση ολοκληρώθηκε",
+            "finished": "Η Εγκατάσταση Ολοκληρώθηκε",
             "imported": "Το παιχνίδι εισάχθηκε",
             "startInstall": "Η Εγκατάσταση έχει ξεκινήσει",
             "paused": "Εγκατάσταση Pause",
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Απεγκαταστάθηκε",
         "update": {
-            "canceled": "Η ενημέρωση ακυρώθηκε",
+            "canceled": "Η Ενημέρωση Ακυρώθηκε",
             "finished": "Η ενημέρωση ολοκληρώθηκε",
             "started": "Έναρξη Ενημέρωσης",
             "stopped": "Η ενημέρωση σταμάτησε",
@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "resume": "Συνέχιση λήψης",
-            "pause": "Παύση λήψεων"
+            "pause": "Παύση λήψεων",
+            "stop": "Διακοπή Λήψης",
+            "launch": "Εκκίνηση παιχνιδιού",
+            "retry-install": "Επανάληψη Εγκατάστασης",
+            "timeElapsed": "Χρόνος που έχει παρέλθει: {{elapsed}}",
+            "retry-update": "Επανάληψη Ενημέρωσης"
         }
     },
     "Recent": "Παίχτηκε Πρόσφατα",
@@ -512,7 +517,7 @@
         "default-install-path": "Προεπιλεγμένη Διαδρομή Εγκατάστασης",
         "default-steam-path": "Προεπιλεγμένη διαδρομή Steam",
         "defaultWinePrefix": "Καθορισμός Φακέλου για νέα Προθήματα Wine",
-        "disable_controller": "Απενεργοποίηση πλοήγησης με χρήση χειριστηρίου στο HyperPlay",
+        "disable_controller": "Απενεργοποίηση πλοήγησης Hyperplay με χρήση ελεγκτή",
         "discordRPC": "Ενεργοποίηση Discord Rich Presence",
         "download-no-https": "Λήψη παιχνιδιών χωρίς HTTPS (χρήσιμο για CDN π.χ. LanCache)",
         "egs-sync": "Συγχρονισμός με εγκατεστημένο Epic Games",
@@ -746,7 +751,7 @@
         "manager": {
             "link": "Διαχειριστής Wine",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Διαχειριστής Wine",
+            "title": "Στρώμα Συμβατότητας ",
             "unzipping": "Αποσυμπίεση"
         },
         "release": "Ημερομηνία κυκλοφορίας",
@@ -781,7 +786,16 @@
                 "neverCollectPersonal": " συλλέγουν κλειδιά, διευθύνσεις, ισορροπίες, hashes ή οποιεσδήποτε προσωπικές πληροφορίες;",
                 "neverSellData": " πωλούν δεδομένα για κέρδος. Ποτέ!",
                 "body": "Το HyperPlay θα ήθελε να συλλέξει δεδομένα χρήσης για να καταλάβει καλύτερα πώς οι χρήστες μας αλληλεπιδρούν με την εφαρμογή. Αυτές οι πληροφορίες μας βοηθούν να καταλάβουμε πώς χρησιμοποιείτε την εφαρμογή και μας επιτρέπουν να κάνουμε HyperPlay ακόμα καλύτερα για εσάς.",
-                "title": "Βοηθήστε μας να βελτιώσουμε το HyperPlay!"
+                "title": "Βοηθήστε μας να βελτιώσουμε το HyperPlay!",
+                "bulletOne": "Πάντα να σας επιτρέπει να αποχωρείτε",
+                "bulletTwo": "Αποστολή ανώνυμων κλικ και αλληλεπίδρασης παιχνιδιού",
+                "paragraphOne": "Το HyperPlay θα ήθελε να συγκεντρώσει δεδομένα χρήσης για να κατανοήσει καλύτερα πώς αλληλεπιδρούν οι χρήστες μας με την εφαρμογή.  \nΑυτό μας επιτρέπει να κάνουμε το HyperPlay ακόμα καλύτερο για εσάς.",
+                "privacyPolicy": "Πολιτική Απορρήτου.",
+                "text": {
+                    "externalLink": "Μάθετε περισσότερα",
+                    "title": "Έχουμε ενημερώσει την Πολιτική Απορρήτου μας"
+                },
+                "titleOne": "Βοηθήστε μας να βελτιώσουμε το HyperPlay!"
             },
             "connectionConnected": {
                 "description": "Το πορτοφόλι σας είναι συνδεδεμένο. Είστε έτοιμοι να παίξετε.",
@@ -831,8 +845,18 @@
                     "communityCTA_1": "Θα θέλαμε την ανάρρωσή σας και θα σας έχουμε ενταχθεί σε εμάς",
                     "communityCTA_2": "κοινότητα. Μαζί, ας διαμορφώσουμε το μέλλον του παιχνιδιού!",
                     "construction": "HyperPlay είναι υπό κατασκευή.",
-                    "description": "HyperPlay είναι ένα game Launcher και game store aggregator από το\nμέλλον. Με HyperPlay, μπορείτε να μεταφέρετε το πορτοφόλι σας, tokens και περιουσιακά στοιχεία\nσε κάθε παιχνίδι. HyperPlay υποστηρίζει ολόκληρη τη βιβλιοθήκη της Epic\nStore, GOG και το δικό μας κατάστημα HyperPlay. Χρησιμοποιώντας HyperPlay, συμφωνείτε\nμας"
-                }
+                    "description": "HyperPlay είναι ένα game Launcher και game store aggregator από το\nμέλλον. Με HyperPlay, μπορείτε να μεταφέρετε το πορτοφόλι σας, tokens και περιουσιακά στοιχεία\nσε κάθε παιχνίδι. HyperPlay υποστηρίζει ολόκληρη τη βιβλιοθήκη της Epic\nStore, GOG και το δικό μας κατάστημα HyperPlay. Χρησιμοποιώντας HyperPlay, συμφωνείτε\nμας",
+                    "paragraphOne": "Στο HyperPlay, χτίζουμε το κατάστημα παιχνιδιών επόμενης γενιάς  \n            για το μέλλον του gaming.",
+                    "paragraphThr": "Φέρτε απρόσκοπτα το πορτοφόλι, τα tokens,  \n           και τα περιουσιακά σας στοιχεία σε κάθε παιχνίδι ενώ έχετε πρόσβαση  \n           στις εκτενείς βιβλιοθήκες του Epic Store,  \n           GOG, και του δικού μας HyperPlay Store - όλα σε ένα μέρος.",
+                    "TitleList": "Με το HyperPlay μπορείτε να:",
+                    "bulletPointFive": "Εκτελέστε παιχνίδια Windows σε macOS, Linux και SteamDeck χρησιμοποιώντας το\n              προηγμένο",
+                    "bulletPointFour": "Εγκαταστήστε το Steam (έκδοση Windows) σε macOS με ένα εύκολο κλικ",
+                    "bulletPointOne": "Αποκτήστε πρόσβαση σε μια εκτενή συλλογή 100+ παιχνιδιών που υποστηρίζονται από blockchain",
+                    "bulletPointThree": "Παίξτε παιχνίδια Epic και GOG απευθείας μέσω του HyperPlay",
+                    "bulletPointTwo": "Κερδίστε tokens, NFTs και εκτός αλυσίδας ανταμοιβές ολοκληρώνοντας Αποστολές",
+                    "lastParagraph": "Αυτή τη στιγμή σε Beta, εκτιμούμε πολύ την ανατροφοδότησή σας και  \n            σας ενθαρρύνουμε να αναφέρετε τυχόν προβλήματα ή προτάσεις στην"
+                },
+                "titleIntro": "Καλώς ήρθατε στο HyperPlay!"
             },
             "connectAgain": "Σύνδεση ξανά",
             "connectionCanceled": {
@@ -852,12 +876,14 @@
         },
         "accesscodes": {
             "error": {
-                "validation": "Κωδικός πρόσβασης είναι άκυρη"
+                "validation": "Κωδικός πρόσβασης είναι άκυρη",
+                "licenseUndefined": "Δεν ήταν δυνατή η επικύρωση του κωδικού πρόσβασης. Παρακαλώ ελέγξτε την πρόσβαση στο διαδίκτυο ή τις ρυθμίσεις του τείχους προστασίας σας."
             },
             "requirescode": "Αυτή η ενημέρωση του παιχνιδιού απαιτεί έναν κωδικό πρόσβασης.",
             "success": {
                 "validation": "Επιτυχία! κωδικός πρόσβασης είναι έγκυρο"
-            }
+            },
+            "placeholder": "Εισάγετε τον κωδικό πρόσβασης"
         },
         "browserImport": {
             "appId": "App Id",
@@ -866,7 +892,9 @@
         "analyticsOn": "Το Analytics μετατρέπεται",
         "buttons": {
             "agree": "Συμφωνώ ότι συμφωνώ",
-            "noThanks": "Όχι ευχαριστώ"
+            "noThanks": "Όχι ευχαριστώ",
+            "primaryButton": "Συμφωνώ",
+            "secondaryButton": "Όχι, Ευχαριστώ"
         },
         "changeWallet": "Λογαριασμός λογαριασμού Swap πορτοφόλι",
         "connectWallet": "Connect πορτοφόλι",
@@ -876,7 +904,8 @@
             "extracting": "Εξορισμός...",
             "distributables": "Εγκατάσταση διανομέων",
             "installing": "Μεταφορτώνεται...",
-            "paused": "Σε παύση"
+            "paused": "Σε παύση",
+            "patching": "Ενημέρωση..."
         },
         "publicAlpha": "Δημόσια Alpha",
         "viewMyAccount": "Δείτε το λογαριασμό μου",
@@ -896,7 +925,9 @@
         "turnAnalyticsOn": "Ενεργοποίηση",
         "logOut": "Αποσύνδεση",
         "Sync": "Συγχρονισμός",
-        "viewFullscreen": "Δείτε πλήρη οθόνη"
+        "viewFullscreen": "Δείτε πλήρη οθόνη",
+        "discordAppLink": "Κοινότητα Discord.",
+        "compatibilityLayer": "Στρώμα Συμβατότητας (Beta)"
     },
     "hyperplayOverlay": {
         "signatureRequest": {
@@ -966,12 +997,14 @@
         },
         "View Game": "Δείτε παιχνίδι",
         "createDiscordTicket": "Δημιουργήθηκε εισιτήριο Discord",
-        "notEnoughGas": "Επαρκή ισορροπία πορτοφολιού για να διεκδικήσει την ανταμοιβή σας λόγω των τελών φυσικού αερίου. Δοκιμάστε ένα διαφορετικό πορτοφόλι ή αναπληρώστε αυτό πριν αναπροσανατολίσετε.",
+        "notEnoughGas": {
+            "message": "Ανεπαρκές υπόλοιπο πορτοφολιού για να διεκδικήσετε την ανταμοιβή σας λόγω τελών αερίου. Δοκιμάστε ένα διαφορετικό πορτοφόλι ή ανανεώστε αυτό πριν δοκιμάσετε ξανά."
+        },
         "Play": "Αναπαραγωγή",
         "points": "Σημεία",
         "reputation": "Φήμη",
         "active": "Ενεργό",
-        "signIn": "Σύνδεση",
+        "signIn": "Συνδεθείτε",
         "sync": "Συγχρονισμός",
         "pointsClaimed": "Υποχρεωμένα Σημεία",
         "g7Numclaimed": "Ολοκληρωμένο G7 Credits",
@@ -983,7 +1016,28 @@
             "title": "Επιβεβαίωση Quest Reward αξιώσεις"
         },
         "noG7ConnectionClaim": "Πρέπει να έχετε λογαριασμό Game7 που συνδέεται με το {{email}} για να διεκδικήσετε τις ανταμοιβές σας.",
-        "noG7ConnectionSync": "Πρέπει να έχετε λογαριασμό Game7 που συνδέεται με το {{email}} για να ανασυνάψετε τα καθήκοντά σας."
+        "noG7ConnectionSync": {
+            "title": "Δεν υπάρχει συνδεδεμένος λογαριασμός G7",
+            "message": "Πρέπει να έχετε συνδεδεμένο λογαριασμό Game7 με το {{email}} για να συγχρονίσετε ξανά τις εργασίες σας."
+        },
+        "claim": "Διεκδίκηση",
+        "notEligible": {
+            "message": "Δεν έχετε ολοκληρώσει τις απαιτούμενες ημέρες συνεχούς παιχνιδιού και δεν μπορείτε να διεκδικήσετε την ανταμοιβή σας αυτή τη στιγμή.",
+            "title": "Δεν είστε επιλέξιμοι ακόμα"
+        },
+        "notSignedIn": {
+            "message": "Πρέπει να είστε συνδεδεμένος για να διεκδικήσετε την ανταμοιβή σας.",
+            "title": "Δεν είστε συνδεδεμένος"
+        },
+        "rewardClaimed": "Η αξίωση ήταν επιτυχής",
+        "toClaimReward": "για να διεκδικήσετε την ανταμοιβή σας.",
+        "toSeeDetails": "για να δείτε λεπτομέρειες.",
+        "youHaveClaimed": "Έχετε διεκδικήσει {{totalRewards}} ανταμοιβή{{plural}}.",
+        "notEnoughBalance": {
+            "title": "Χαμηλό υπόλοιπο"
+        },
+        "questAvailable": "Διαθέσιμη Αποστολή!",
+        "questComplete": "Αποστολή ολοκληρώθηκε!"
     },
     "email_subscription": {
         "title": "Σας ευχαριστούμε για την εγγραφή!",
@@ -1054,7 +1108,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Είστε συνδεδεμένοι με το HyperPlay με ένα εξωτερικό πορτοφόλι.",
         "WALLET_DISCONNECTED": "Δεν έχετε πορτοφόλι συνδεδεμένο με HyperPlay.",
-        "comingSoon": "Έρχεται σύντομα"
+        "comingSoon": "Έρχεται σύντομα",
+        "links": {
+            "bridge": "Γέφυρα",
+            "buy": "Αγορά",
+            "marketplace": "Αγορά",
+            "swap": "Ανταλλαγή",
+            "portfolio": "Χαρτοφυλάκιο",
+            "sell": "Πώληση"
+        }
     },
     "importGameErrorMessageExecutable": "Game Game Game Δεν είναι εφικτό, το παιχνίδι εισαγωγής δεν είναι εφικτό",
     "profile": "Προφίλ",
@@ -1096,15 +1158,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Αυτό το παιχνίδι είναι ένα mod για το World of Warcraft: Wrath του Lich King (3.3.5a). Για να παίξει αυτό το mod, οι παίκτες πρέπει να κατέχουν ένα αντίγραφο του World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay δεν φιλοξενεί τον κόσμο του Warcraft. Οι παίκτες που κατέχουν το World of Warcraft μπορούν να λάβουν έκδοση 3.3.5a από πηγές όπως:",
+                "description": "Αυτό το παιχνίδι είναι ένα mod για το World of Warcraft: Wrath of the Lich King (3.3.5a). Για να παίξουν αυτό το mod, οι παίκτες πρέπει να έχουν μια αντίγραφο του World of Warcraft 3.3.5a. {{newline}} {{newline}} Το HyperPlay δεν φιλοξενεί το World of Warcraft. Οι παίκτες που έχουν το World of Warcraft μπορούν να αποκτήσουν την απαραίτητη έκδοση από τις παρακάτω πηγές:",
                 "subtitle": "Κατεβάστε τον κόσμο του Warcraft 3.3.5a",
                 "title": "Βήμα 1 Βήμα 1",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "link1": "Σύνδεσμος 1",
+                "link2": "Σύνδεσμος 2 (Μαγνητικός Σύνδεσμος)"
             },
             "step2": {
                 "description": "Επιλέξτε το κατέβασμα ChromieCraft_3.3.5a.zip αρχείο.",
                 "subtitle": "Επιλέξτε ChromieCraft_3.3.5a.zip File File File File File File",
-                "title": "Βήμα 2 Βήμα 2"
+                "title": "Βήμα 2 Βήμα 2",
+                "subtitle1": "Επιλέξτε το κατεβασμένο αρχείο zip 3.3.5a"
             },
             "step3": {
                 "description": "Παρακαλώ επιλέξτε το φάκελο όπου θα πρέπει να εγκατασταθεί το World of Warcraft: Wrath του Lich King (3.3.5a).",
@@ -1138,5 +1203,27 @@
     "Launch Steam": "Launch Steam",
     "Launching Steam": "Ξεκινώντας το Steam...",
     "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Στην πρώτη εκτόξευση του Steam θα κατεβάσει τα απαραίτητα αρχεία και θα χρειαστούν μερικά λεπτά για να ολοκληρωθεί και την οθόνη σύνδεσης που θα εμφανιστεί;",
-    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam «««"
+    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam «««",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Εάν επιθυμείτε να συνεχίσετε, παρακαλώ να είστε υπομονετικοί καθώς μπορεί να χρειαστούν μερικά λεπτά για να ολοκληρωθεί ανάλογα με τη σύνδεση στο διαδίκτυο και τη διαμόρφωση του συστήματός σας.",
+    "Installing": "Εγκατάσταση",
+    "installModal": {
+        "loginRequired": "Απαιτείται Σύνδεση",
+        "loginRequiredMessage": "Πρέπει να είστε συνδεδεμένοι στο HyperPlay για να εισάγετε τον κωδικό πρόσβασής σας και να εγκαταστήσετε αυτό το παιχνίδι. ",
+        "loginRequiredMessageUpdate": "Πρέπει να είστε συνδεδεμένοι στο HyperPlay για να εισάγετε τον κωδικό πρόσβασής σας και να ενημερώσετε αυτό το παιχνίδι. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 ή ανώτερο"
+    },
+    "Please Wait": "Παρακαλώ Περιμένετε",
+    "Recommended specs for a better experience": "Συνιστώμενες προδιαγραφές για καλύτερη εμπειρία",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "Το χαρτοφυλάκιο MetaMask είναι διαθέσιμο μόνο όταν είστε συνδεδεμένοι με το MetaMask."
+        },
+        "unsupported": "Μη Υποστηριζόμενη Σύνδεση Πορτοφολιού"
+    },
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 ή ανώτερο",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Να είστε ενήμεροι ότι δεν θα λειτουργούν όλα τα παιχνίδια, και ακόμη και αν λειτουργούν, μπορεί να μην τρέχουν όπως αναμένεται.",
+    "Downloading": "Κατεβάζοντας {{percent}}%"
 }

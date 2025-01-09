@@ -833,7 +833,16 @@
                 "optOut": "Permitirle siempre darse de baja a través de la configuración;",
                 "hyperplayWill": "HyperPlay hará:",
                 "neverCollectPersonal": " recopilar claves, direcciones, saldos, hashes o cualquier información personal;",
-                "body": "HyperPlay desea recopilar datos de uso para comprender mejor cómo interactúan nuestros usuarios con la aplicación. Esta información nos ayuda a entender cómo utiliza la aplicación y nos permite hacer HyperPlay aún mejor para usted."
+                "body": "HyperPlay desea recopilar datos de uso para comprender mejor cómo interactúan nuestros usuarios con la aplicación. Esta información nos ayuda a entender cómo utiliza la aplicación y nos permite hacer HyperPlay aún mejor para usted.",
+                "bulletOne": "Siempre permite que optes por no participar",
+                "bulletTwo": "Enviar clics e interacciones de juego anonimizados",
+                "paragraphOne": "HyperPlay desea recopilar datos de uso para comprender mejor cómo interactúan nuestros usuarios con la aplicación. \n           Esto nos permite hacer que HyperPlay sea aún mejor para ti.",
+                "privacyPolicy": "Política de privacidad.",
+                "text": {
+                    "externalLink": "Aprender más",
+                    "title": "Hemos actualizado nuestra Política de Privacidad"
+                },
+                "titleOne": "¡Ayúdanos a mejorar HyperPlay!"
             },
             "welcome": {
                 "title": "¡Bienvenido a HyperPlay Early Access!",
@@ -843,8 +852,18 @@
                     "construction": "HyperPlay está en fase de desarrollo.",
                     "communityCTA_2": "comunidad. Juntos, ¡demos forma al futuro de los juegos!",
                     "communityCTA_1": "Nos encantaría recibir sus comentarios y que se uniera a nosotros a nuestra",
-                    "beta": "Por favor, tenga en cuenta que HyperPlay se encuentra en fase Beta. Muchas funciones están aún\n          en desarrollo, y se esperan errores."
-                }
+                    "beta": "Por favor, tenga en cuenta que HyperPlay se encuentra en fase Beta. Muchas funciones están aún\n          en desarrollo, y se esperan errores.",
+                    "bulletPointFive": "Ejecuta juegos de Windows en macOS, Linux y SteamDeck usando nuestro  \n              avanzado",
+                    "bulletPointFour": "Instala Steam (versión de Windows) en macOS con un solo clic fácil",
+                    "bulletPointOne": "Accede a una vasta colección de más de 100 juegos habilitados en la cadena",
+                    "bulletPointThree": "Juega juegos de Epic y GOG directamente a través de HyperPlay",
+                    "bulletPointTwo": "Gana tokens, NFTs y recompensas fuera de la cadena completando misiones",
+                    "lastParagraph": "Actualmente en Beta, valoramos mucho tus comentarios y  \n            te animamos a reportar cualquier problema o sugerencia en nuestro",
+                    "paragraphOne": "En HyperPlay, estamos construyendo la tienda de juegos de próxima generación  \n            para el futuro del gaming.",
+                    "paragraphThr": "Lleva sin problemas tu billetera, tokens,  \n           y activos a cada juego mientras accedes  \n           a las extensas bibliotecas de Epic Store,  \n           GOG y nuestra propia tienda HyperPlay, todo en un solo lugar.",
+                    "TitleList": "Con HyperPlay puedes:"
+                },
+                "titleIntro": "¡Bienvenido a HyperPlay!"
             },
             "terms": "Condiciones del servicio.",
             "connectionCanceled": {
@@ -865,11 +884,14 @@
                 "validation": "Código de acceso no válido",
                 "licenseUndefined": "No se pudo validar el código de acceso. Verifique su acceso a Internet o la configuración del firewall."
             },
-            "requirescode": "Esta actualización del juego requiere un código de acceso."
+            "requirescode": "Esta actualización del juego requiere un código de acceso.",
+            "placeholder": "Ingresa el código de acceso"
         },
         "buttons": {
             "noThanks": "No, gracias",
-            "agree": "Estoy de acuerdo"
+            "agree": "Estoy de acuerdo",
+            "primaryButton": "Estoy de acuerdo",
+            "secondaryButton": "No, gracias"
         },
         "turnAnalyticsOn": "Encender",
         "viewFullscreen": "Ver a pantalla completa",
@@ -919,7 +941,9 @@
         "linkSteamAccountDescription": "Inicia sesión en Steam para vincular tu cuenta HyperPlay.",
         "viewMyAccount": "Consultar mi cuenta",
         "logOut": "Cerrar sesión",
-        "publicBeta": "Versión beta pública"
+        "publicBeta": "Versión beta pública",
+        "compatibilityLayer": "Capa de compatibilidad (Beta)",
+        "discordAppLink": "Comunidad de Discord."
     },
     "hyperplayOverlay": {
         "chainRequest": {
@@ -1200,5 +1224,21 @@
             "onlyExtension": "MetaMask Portfolio solo está disponible cuando está conectado con MetaMask."
         },
         "unsupported": "Conexión al monedero no compatible"
-    }
+    },
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Si deseas continuar, por favor ten paciencia ya que puede tardar unos minutos en finalizar dependiendo de tu conexión a internet y la configuración de tu sistema.",
+    "Installing": "Instalando",
+    "installModal": {
+        "loginRequired": "Inicio de sesión requerido",
+        "loginRequiredMessage": "Necesitas estar conectado a HyperPlay para ingresar tu código de acceso e instalar este juego. ",
+        "loginRequiredMessageUpdate": "Necesitas estar conectado a HyperPlay para ingresar tu código de acceso y actualizar este juego. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 o superior"
+    },
+    "Please Wait": "Por favor espera",
+    "Recommended specs for a better experience": "Especificaciones recomendadas para una mejor experiencia",
+    "16GB of RAM": "16GB de RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 o superior",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Ten en cuenta que no todos los juegos funcionarán, y aunque lo hagan, pueden no ejecutarse como se espera.",
+    "Downloading": "Descargando {{percent}}%"
 }

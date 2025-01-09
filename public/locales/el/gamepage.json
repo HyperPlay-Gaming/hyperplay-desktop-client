@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Συνέχιση εγκατάστασης",
             "message": "Θέλετε να ΔΙΑΤΗΡΗΣΕΤΕ τα ληφθέντα αρχεία;",
-            "title": "Διακοπή εγκατάστασης",
+            "title": "Θέλετε να ακυρώσετε τη λήψη;",
             "keepFilesMessage": "Ελέγξτε εδώ αν θέλετε να κρατήσετε τα αρχεία λήψης μετά την ακύρωση."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Μέγεθος λήψης",
         "firstPlayed": "Παίχτηκε πρώτη φορά",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Λήψη μεγέθους λήψης",
+        "getting-install-size": "Λήψη μεγέθους εγκατάστασης",
         "installSize": "Μέγεθος Εγκατάστασης",
         "language": "Γλώσσα",
         "lastPlayed": "Παίχτηκε Τελευταία φορά",
@@ -225,7 +225,8 @@
         "syncingSaves": "Συγχρονισμός save",
         "playing": "Παίζει",
         "downloading": "Κατεβαίνει",
-        "paused": "Σε παύση"
+        "paused": "Σε παύση",
+        "patching": "Ενημέρωση αρχείων "
     },
     "submenu": {
         "addShortcut": "Προσθήκη συντόμευσης",

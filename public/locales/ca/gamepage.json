@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Continua amb la instal·lació",
             "message": "Vols MANTENIR els fitxers baixats?",
-            "title": "Atura la instal·lació",
+            "title": "Voleu cancel·lar la descàrrega?",
             "keepFilesMessage": "Consulta aquí si vols guardar els fitxers de descàrrega després de la cancel·lació."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Mida de la baixada",
         "firstPlayed": "Primera partida",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Obtenint la mida de descàrrega",
+        "getting-install-size": "Obtenint la mida d'instal·lació",
         "installSize": "Mida d'instal·lació",
         "language": "Idioma",
         "lastPlayed": "Última partida",
@@ -231,7 +231,8 @@
         "preparing": "Preparant Descarregar, si us plau esperi",
         "distributables": "Instal·lació de distribuïdors",
         "gog-goodie": "Aquest joc no sembla instal·lar. Veure contingut descarregable en https://gog.com/account",
-        "goodie": "No instal·lat"
+        "goodie": "No instal·lat",
+        "patching": "Patching Files "
     },
     "submenu": {
         "addShortcut": "Afegeix una drecera",

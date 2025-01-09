@@ -225,7 +225,8 @@
         "playing": "Jogando",
         "preparing": "Preparando download, por favor espere",
         "syncingSaves": "Sincronizando Saves",
-        "distributables": "Instalando Dependências"
+        "distributables": "Instalando Dependências",
+        "patching": "Atualizando Arquivos "
     },
     "submenu": {
         "addShortcut": "Adicionar Atalho",
