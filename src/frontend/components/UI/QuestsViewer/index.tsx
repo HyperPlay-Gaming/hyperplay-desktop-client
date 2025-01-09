@@ -18,6 +18,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const { isSignedIn } = useAuthSession()
   const { t } = useTranslation()
   const quests = questResults?.data?.data
+
   const initialQuestId = quests?.[0]?.id ?? null
   const visibleQuestId = selectedQuestId ?? initialQuestId
 
@@ -39,7 +40,8 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       {alertComponent}
       <div className={styles.questsViewerContainer}>
         <QuestLogWrapper
-          questsResults={questResults}
+          isLoading={questResults?.data.isPending}
+          quests={quests}
           projectId={appName}
           selectedQuestId={visibleQuestId}
           setSelectedQuestId={setSelectedQuestId}

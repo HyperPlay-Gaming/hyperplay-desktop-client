@@ -477,6 +477,11 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   getQuestsForGame: (projectId: string) => Promise<Quest[]>
   installSteamWindows: () => Promise<void>
   isClientUpdating: () => Promise<ClientUpdateStatuses>
+  requestSIWE: () => Promise<{
+    message: string
+    signature: string
+    address: string
+  }>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

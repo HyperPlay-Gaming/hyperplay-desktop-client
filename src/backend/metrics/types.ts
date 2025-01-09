@@ -175,6 +175,8 @@ export interface GameUpdateSuccess {
     game_title: string
     platform: ReturnType<typeof getPlatformName>
     platform_arch: InstallPlatform
+    version_from?: string
+    version_to?: string
   }
   sensitiveProperties?: never
 }

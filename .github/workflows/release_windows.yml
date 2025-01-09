@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             node_modules
@@ -37,7 +37,6 @@ jobs:
           node-version: '20'
       - uses: pnpm/action-setup@v3
         with:
-          version: 9
           standalone: ${{ runner.os == 'Windows' }}
       - name: Install node-gyp
         run: pnpm add --global node-gyp
@@ -59,7 +58,7 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
 
       - name: Cache artifacts
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             dist

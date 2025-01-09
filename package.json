@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.22.3",
+  "version": "0.22.5",
   "private": true,
   "main": "build/main/main.js",
   "homepage": "./",
@@ -26,9 +26,9 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@hyperplay/chains": "^0.3.0",
     "@hyperplay/check-disk-space": "^3.5.2",
-    "@hyperplay/quests-ui": "^0.1.0",
+    "@hyperplay/quests-ui": "^0.1.9",
     "@hyperplay/ui": "^1.8.18",
-    "@hyperplay/utils": "^0.3.4",
+    "@hyperplay/utils": "^0.3.6",
     "@mantine/carousel": "^7.12.0",
     "@mantine/core": "^7.12.0",
     "@mantine/dropzone": "^7.12.0",
@@ -111,7 +111,7 @@
     "zod": "^3.23.8"
   },
   "scripts": {
-    "setup": "pnpm install --ignore-scripts && pnpm exec allow-scripts",
+    "setup": "pnpm install --ignore-scripts && patch-package && pnpm exec allow-scripts",
     "setupWithoutOptional": "node ./dev/rmOptionalDependencies.js && pnpm prettier-fix && pnpm install --ignore-optional && pnpm exec allow-scripts",
     "start": "electron-vite dev --watch",
     "debug:react": "react-devtools",
@@ -224,7 +224,7 @@
   },
   "optionalDependencies": {
     "@hyperplay/extension-importer": "^0.1.1-alpha.0",
-    "@hyperplay/extension-provider": "^0.0.8",
+    "@hyperplay/extension-provider": "^0.0.9",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/overlay": "^0.0.7",
     "@hyperplay/patcher": "^0.0.18",
@@ -264,5 +264,6 @@
       "@hyperplay/overlay>electron": false,
       "sass>@parcel/watcher": false
     }
-  }
+  },
+  "packageManager": "pnpm@9.15.0+sha256.09a8fe31a34fda706354680619f4002f4ccef6dadff93240d24ef6c831f0fd28"
 }

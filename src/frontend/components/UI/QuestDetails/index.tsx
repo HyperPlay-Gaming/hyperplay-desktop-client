@@ -105,7 +105,7 @@ export default function QuestDetails({
           extensionState.showPopup()
         }
       }}
-      onPlayClick={onPlayClick}
+      onPlayClick={onPlayClick ?? console.log}
       getPendingExternalSync={getPendingExternalSync}
       syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}
       tOverride={t}

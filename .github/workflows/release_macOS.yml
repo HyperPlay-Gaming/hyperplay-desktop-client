@@ -28,9 +28,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         with:
-          version: 9
           standalone: ${{ runner.os == 'Windows' }}
       - name: Install node-gyp
         run: pnpm add --global node-gyp
@@ -79,6 +78,8 @@ jobs:
         with:
           node-version: '20'
 
+      - uses: pnpm/action-setup@v4
+
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -124,6 +125,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - uses: pnpm/action-setup@v4
 
       - name: Reconfigure git to use HTTP authentication
         run: >
