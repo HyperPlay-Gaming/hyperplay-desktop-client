@@ -137,7 +137,7 @@
             "title": "Atallos"
         },
         "sync": {
-            "button": "Seleccionar",
+            "button": "Escoller",
             "error": "Ruta non válida",
             "title": "Seleccionar o cartafol de partidas gardadas"
         },
@@ -260,7 +260,7 @@
         "ignore_hidden": "Ignore Hidden",
         "platform": "Plataforma",
         "show_all_games": "Show all games",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Amosar xogos non dispoñibles",
         "show_favourites_only": "Show Favourites only",
         "show_hidden": "Show Hidden",
         "store": "Filter Store"
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Desintalado",
         "update": {
-            "canceled": "Actualización cancelada",
+            "canceled": "Actualización Cancelada",
             "finished": "Actualización rematada",
             "started": "Actualización iniciada",
             "paused": "Actualiza Parado",
@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "resume": "Continuar Descarga",
-            "pause": "Parar as descagas"
+            "pause": "Parar as descagas",
+            "launch": "Lanzar xogo",
+            "retry-install": "Reintentar instalación",
+            "retry-update": "Reintentar Actualización",
+            "stop": "Detén a descarga",
+            "timeElapsed": "Tempo transcorrido: {{elapsed}}"
         }
     },
     "Recent": "Xogado recentemente",
@@ -512,7 +517,7 @@
         "default-install-path": "Ruta de instalación predeterminada",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Estabelecer cartafol para os prefixos de Wine",
-        "disable_controller": "Disable HyperPlay navigation using controller",
+        "disable_controller": "Desactivar a navegación de Hyperplay usando o controlador",
         "discordRPC": "Activar a presencia enriquecida de Discord",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "egs-sync": "Sincronizar cos xogos instalados de Epic",
@@ -820,8 +825,18 @@
                     "communityCTA_2": "Comunitario. Xunto, deixado  forma o futuro de gaming!",
                     "bugs": "Compracer nota que HyperPlay é unha alfa pública. Moitas características son aínda\n          en desenvolvemento, e haberá  bechos.",
                     "description": "HyperPlay É un xogo launcher e tenda de xogo aggregator desde o\n          futuro. Con HyperPlay, podes levar a vosa carteira, tokens, e vantaxes\n          a cada xogo. HyperPlay Apoia a biblioteca enteira da Tenda\n          de Épica, GOG, e o noso propio HyperPlay tenda. Por utilizar HyperPlay, estás de acordo\n          ao noso",
-                    "construction": "HyperPlay É baixo construción."
-                }
+                    "construction": "HyperPlay É baixo construción.",
+                    "bulletPointFour": "Instala Steam (versión de Windows) en macOS cun só clic fácil",
+                    "bulletPointFive": "Executa xogos de Windows en macOS, Linux e SteamDeck usando o noso\n              avanzado",
+                    "bulletPointOne": "Accede a unha vasta colección de máis de 100 xogos habilitados para on-chain",
+                    "bulletPointThree": "Xoga a xogos de Epic e GOG directamente a través de HyperPlay",
+                    "bulletPointTwo": "Gaña tokens, NFTs e recompensas off-chain completando misións",
+                    "lastParagraph": "Actualmente en Beta, valoramos moito a túa opinión e  \n            animámoste a informar sobre calquera problema ou suxestión na nosa",
+                    "paragraphOne": "En HyperPlay, estamos construíndo a tenda de xogos de nova xeración  \n            para o futuro do xogo.",
+                    "paragraphThr": "Trae sen problemas a túa carteira, tokens,  \n           e activos a cada xogo mentres accedes  \n           ás amplas bibliotecas da Epic Store,  \n           GOG e á nosa propia HyperPlay Store - todo nun só lugar.",
+                    "TitleList": "Con HyperPlay podes:"
+                },
+                "titleIntro": "Benvido a HyperPlay!"
             },
             "analytics": {
                 "body": "HyperPlay Gostaría reunir dato de uso a mellor entender como os nosos usuarios interactúan coa aplicación. Esta información axúdanos  entende como utilizas o app e déixanos  fai HyperPlay uniforme mellor para ti.",
@@ -833,7 +848,16 @@
                 "optOut": "Sempre deixarte para optar-fóra vía Colocacións;",
                 "privacyCaption": "Este dato é agregado e é por tanto anónimo para os propósitos de Regulación de Protección de Dato Xeral (EU) 2016/679. Para máis información en relación ás nosas prácticas de privacidade, compracer ver o noso ",
                 "neverSellData": " Vende dato para beneficio. Ever!",
-                "privacyPolicyHere": "Política de privacidade aquí."
+                "privacyPolicyHere": "Política de privacidade aquí.",
+                "titleOne": "Axúdanos a mellorar HyperPlay!",
+                "bulletOne": "Permitir sempre optar por non participar",
+                "bulletTwo": "Enviar clics e interaccións de xogo anonimizados",
+                "paragraphOne": "HyperPlay gustaría recoller datos de uso para entender mellor como os nosos usuarios interactúan coa aplicación. \n           Isto permítenos mellorar HyperPlay para ti.",
+                "privacyPolicy": "Política de Privacidade.",
+                "text": {
+                    "externalLink": "Aprende máis",
+                    "title": "Actualizamos a nosa Política de Privacidade"
+                }
             },
             "connectionCanceled": {
                 "description": "Compracer confirmar a petición de conexión na vosa carteira móbil para proceder.",
@@ -845,12 +869,14 @@
         "viewItem": "Vista {{item}}",
         "accesscodes": {
             "error": {
-                "validation": "Código de acceso é nulo"
+                "validation": "Código de acceso é nulo",
+                "licenseUndefined": "Non se puido validar o código de acceso. Por favor, verifica o teu acceso a Internet ou as configuracións do cortafuegos."
             },
             "success": {
                 "validation": "Éxito! Código de acceso é válido"
             },
-            "requirescode": "Este xogo actualiza require un código de acceso."
+            "requirescode": "Este xogo actualiza require un código de acceso.",
+            "placeholder": "Introduce o código de acceso"
         },
         "analyticsOn": "Analytics É virado encima",
         "linkSteamAccountCta": "Vai a sinal de Vapor dentro",
@@ -868,7 +894,9 @@
         "analyticsOff": "Analytics É apagado",
         "buttons": {
             "agree": "Estou de acordo",
-            "noThanks": "Non, grazas"
+            "noThanks": "Non, grazas",
+            "primaryButton": "Acepto",
+            "secondaryButton": "Non, grazas"
         },
         "changeWallet": "Swap Conta de carteira",
         "viewMyAccount": "Vista a miña conta",
@@ -887,7 +915,8 @@
             "installed": "A punto para xogar",
             "paused": "En pausa",
             "installing": "Descargando...",
-            "distributables": "Instalador Distributables"
+            "distributables": "Instalador Distributables",
+            "patching": "Aplicando parches..."
         },
         "logOut": "Saír",
         "Sync": "Sincronizar",
@@ -897,7 +926,9 @@
         "copyUrl": "Copy URL",
         "turnAnalyticsOff": "Apagar",
         "turnAnalyticsOn": "Acender",
-        "viewFullscreen": "Vista fullscreen"
+        "viewFullscreen": "Vista fullscreen",
+        "compatibilityLayer": "Capa de compatibilidade (Beta)",
+        "discordAppLink": "Comunidad de Discord."
     },
     "hyperplayOverlay": {
         "greeting": {
@@ -982,11 +1013,13 @@
         "needMoreAchievements": "Necesitas para ter completado {{percent}}% das consecucións nun destes xogos.",
         "claimFailedMessage": "Compracer tentar unha vez máis. Se aínda non traballa, crear un tícket de apoio da Discordia.",
         "createDiscordTicket": "Tícket de Discordia creada",
-        "notEnoughGas": "Equilibrio de carteira insuficiente para afirmar a vosa recompensa debido a custos de gas. Tentar unha carteira diferente ou replenish isto un antes de tentar novamente.",
+        "notEnoughGas": {
+            "message": "Saldo insuficiente na carteira para reclamar a túa recompensa debido a taxas de gas. Proba cunha carteira diferente ou reabastece esta antes de reintentar."
+        },
         "active": "Activo",
         "Play": "Reproducir",
         "points": "Puntos",
-        "signIn": "Rexistro",
+        "signIn": "Iniciar sesión",
         "sync": "Sincronizar",
         "reputation": "Reputación",
         "pointsClaimed": "Os puntos Afirmaron",
@@ -999,7 +1032,28 @@
             "confirm": "Confirmar"
         },
         "noG7ConnectionClaim": "Necesitas para ter un Game7 a conta vinculou a {{email}} para afirmar as vosas recompensas.",
-        "noG7ConnectionSync": "Necesitas para ter un Game7 a conta vinculou a {{email}} a resync as vosas tarefas."
+        "noG7ConnectionSync": {
+            "title": "Non hai conta de G7 vinculada",
+            "message": "Necesita ter unha conta de Game7 vinculada a {{email}} para volver sincronizar as súas tarefas."
+        },
+        "claim": "Reclamar",
+        "notEligible": {
+            "title": "Aínda non é elegible",
+            "message": "Non completou os días de xogo requiridos e non pode reclamar a súa recompensa neste momento."
+        },
+        "notEnoughBalance": {
+            "title": "Saldo baixo"
+        },
+        "toClaimReward": "para reclamar a túa recompensa.",
+        "notSignedIn": {
+            "message": "Necesitas iniciar sesión para reclamar a túa recompensa.",
+            "title": "Non iniciado sesión"
+        },
+        "questAvailable": "¡Misión dispoñible!",
+        "questComplete": "Misión completa!",
+        "rewardClaimed": "Reclamación exitosa",
+        "toSeeDetails": "para ver detalles.",
+        "youHaveClaimed": "Reclamou a recompensa {{totalRewards}}."
     },
     "email_subscription": {
         "title": "Grazas Para subscribir!",
@@ -1029,7 +1083,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Es conectado a HyperPlay cunha carteira externa.",
         "WALLET_DISCONNECTED": "Non tes unha carteira conectou a HyperPlay.",
-        "comingSoon": "Proximamente"
+        "comingSoon": "Proximamente",
+        "links": {
+            "bridge": "Ponte",
+            "swap": "Intercambiar",
+            "sell": "Vender",
+            "marketplace": "Mercado",
+            "portfolio": "Portafolio",
+            "buy": "Comprar"
+        }
     },
     "notification": {
         "wine-download": {
@@ -1073,16 +1135,19 @@
     "mods": {
         "instructions": {
             "step1": {
-                "description": "Este xogo é un mod para Mundo de Warcraft: Ira do Lich Rei (3.3.5un). Para xogo este mod, os xogadores teñen que posuír unha copia de Mundo de Warcraft 3.3.5un. {{newline}} {{newline}} HyperPlay Cervas non Mundo anfitrión de Warcraft. Xogadores que posúen Mundo de Warcraft pode obter versión 3.3.5un desde a fontes lles gosta:",
+                "description": "Este xogo é un mod para World of Warcraft: Wrath of the Lich King (3.3.5a). Para xogar a este mod, os xogadores deben ter unha copia de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay non aloxa World of Warcraft. Os xogadores que posúan World of Warcraft poden obter a versión necesaria das seguintes fontes:",
                 "subtitle": "Mundo de descarga de Warcraft 3.3.5un",
                 "title": "Paso 1",
                 "webtorrent": "Torrente (Ligazón de Imán)",
-                "chromieCraft": "ChromieCraft"
+                "chromieCraft": "ChromieCraft",
+                "link1": "Ligazón 1",
+                "link2": "Ligazón 2 (Ligazón Magnet)"
             },
             "step2": {
                 "description": "Selecto o descargado ChromieCraft_3.3.5un.zip Ficheiro.",
                 "subtitle": "Selecto ChromieCraft_3.3.5un.zip Ficheiro",
-                "title": "Paso 2"
+                "title": "Paso 2",
+                "subtitle1": "Selecciona o arquivo zip 3.3.5a descargado"
             },
             "step4": {
                 "description": "Introducir o código de acceso para proceder con instalar o xogo.",
@@ -1138,5 +1203,27 @@
     "Installing Steam": "Vapor instalador...",
     "Launch Steam": "Vapor de lancha",
     "Launching Steam": "Lanzando Vapor...",
-    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "En primeiro Vapor de lancha descargará os ficheiros necesarios e tomará uns cantos minutos para acabar e o login pantalla para aparecer;"
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "En primeiro Vapor de lancha descargará os ficheiros necesarios e tomará uns cantos minutos para acabar e o login pantalla para aparecer;",
+    "Recommended specs for a better experience": "Especificacións recomendadas para unha mellor experiencia",
+    "16GB of RAM": "16GB de RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 ou superior",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Ten en conta que non todos os xogos funcionarán, e mesmo se o fan, pode que non se executen como se espera.",
+    "Downloading": "Descargando {{percent}}%",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Se desexa continuar, por favor, sexa paciente, xa que pode levar uns minutos rematar dependendo da súa conexión a internet e configuración do sistema.",
+    "Installing": "Instalando",
+    "installModal": {
+        "loginRequired": "Requírese iniciar sesión",
+        "loginRequiredMessage": "Necesitas estar conectado a HyperPlay para introducir o teu código de acceso e instalar este xogo. ",
+        "loginRequiredMessageUpdate": "Necesitas estar conectado a HyperPlay para introducir o teu código de acceso e actualizar este xogo. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 ou superior"
+    },
+    "Please Wait": "Por favor, agarda",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "O portafolio de MetaMask só está dispoñible cando está conectado con MetaMask."
+        },
+        "unsupported": "Conexión de carteira non soportada"
+    }
 }

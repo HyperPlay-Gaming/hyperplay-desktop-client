@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Kontynuuj instalację",
             "message": "Czy chcesz zachować pobrane pliki?",
-            "title": "Zatrzymaj instalację",
+            "title": "Czy chcesz anulować pobieranie?",
             "keepFilesMessage": "Jeśli chcesz przechowywać pliki po odwołaniu."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Rozmiar pobierania",
         "firstPlayed": "Pierwsze uruchomienie",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Pobieranie rozmiaru pliku",
+        "getting-install-size": "Pobieranie rozmiaru instalacji",
         "installSize": "Rozmiar instalacji",
         "language": "Język",
         "lastPlayed": "Ostatnio uruchamiane",
@@ -225,7 +225,8 @@
         "goodie": "Niedostępny",
         "distributables": "Installing Distributable",
         "gog-goodie": "Gra ta nie jest dostępna. Check downloadable content on https:/gog.com/account",
-        "preparing": "Przygotowanie do pomieszczeń"
+        "preparing": "Przygotowanie do pomieszczeń",
+        "patching": "Łatowanie plików "
     },
     "submenu": {
         "addShortcut": "Dodaj skrót",

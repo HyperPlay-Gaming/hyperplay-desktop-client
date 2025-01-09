@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Continuar Instalação",
             "message": "Deseja manter os arquivos baixados?",
-            "title": "Cancelar Instalação",
+            "title": "Você deseja cancelar o download?",
             "keepFilesMessage": "Marque aqui se pretende manter os arquivos de download após o cancelamento."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Tamanho do Download",
         "firstPlayed": "Jogado pela primeira vez",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Obtendo tamanho do download",
+        "getting-install-size": "Obtendo tamanho da instalação",
         "installSize": "Tamanho Instalado",
         "language": "Language",
         "lastPlayed": "Jogado pela última vez",
@@ -225,7 +225,8 @@
         },
         "distributables": "Instalando Dependências",
         "playing": "Jogando",
-        "syncingSaves": "Sincronizando os Saves"
+        "syncingSaves": "Sincronizando os Saves",
+        "patching": "Atualizando arquivos "
     },
     "submenu": {
         "addShortcut": "Adicionar Atalhos",

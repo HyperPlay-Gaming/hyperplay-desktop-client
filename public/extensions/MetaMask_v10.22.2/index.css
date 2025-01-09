@@ -6225,8 +6225,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("./fonts/fontawesome/fa-brands-400.eot");
-  src: url("./fonts/fontawesome/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("./fonts/fontawesome/fa-brands-400.woff2") format("woff2"), url("./fonts/fontawesome/fa-brands-400.woff") format("woff"), url("./fonts/fontawesome/fa-brands-400.ttf") format("truetype"), url("./fonts/fontawesome/fa-brands-400.svg#fontawesome") format("svg");
+  src: url("./fonts/fontawesome/fa-brands-400.woff2") format("woff2");
 }
 
 .fab {
@@ -6243,8 +6242,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url("./fonts/fontawesome/fa-solid-900.eot");
-  src: url("./fonts/fontawesome/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("./fonts/fontawesome/fa-solid-900.woff2") format("woff2"), url("./fonts/fontawesome/fa-solid-900.woff") format("woff"), url("./fonts/fontawesome/fa-solid-900.ttf") format("truetype"), url("./fonts/fontawesome/fa-solid-900.svg#fontawesome") format("svg");
+  src: url("./fonts/fontawesome/fa-solid-900.woff2") format("woff2");
 }
 
 .fa,
@@ -6262,8 +6260,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("./fonts/fontawesome/fa-regular-400.eot");
-  src: url("./fonts/fontawesome/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("./fonts/fontawesome/fa-regular-400.woff2") format("woff2"), url("./fonts/fontawesome/fa-regular-400.woff") format("woff"), url("./fonts/fontawesome/fa-regular-400.ttf") format("truetype"), url("./fonts/fontawesome/fa-regular-400.svg#fontawesome") format("svg");
+  src: url("./fonts/fontawesome/fa-regular-400.woff2") format("woff2");
 }
 
 .far {
@@ -6275,28 +6272,28 @@ readers do not read off random characters that represent icons */
   font-family: "Euclid Circular B";
   font-style: normal;
   font-weight: 400;
-  src: url("./fonts/Euclid/EuclidCircularB-Regular-WebXL.ttf") format("truetype");
+  src: url("./fonts/Euclid/EuclidCircularB-Regular-WebXL.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Euclid Circular B";
   font-style: italic;
   font-weight: 400;
-  src: url("./fonts/Euclid/EuclidCircularB-RegularItalic-WebXL.ttf") format("truetype");
+  src: url("./fonts/Euclid/EuclidCircularB-RegularItalic-WebXL.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Euclid Circular B";
   font-style: normal;
   font-weight: 500;
-  src: url("./fonts/Euclid/EuclidCircularB-Medium.ttf") format("truetype");
+  src: url("./fonts/Euclid/EuclidCircularB-Medium-WebXL.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Euclid Circular B";
   font-style: normal;
   font-weight: 700;
-  src: url("./fonts/Euclid/EuclidCircularB-Bold-WebXL.ttf") format("truetype");
+  src: url("./fonts/Euclid/EuclidCircularB-Bold-WebXL.woff2") format("woff2");
 }
 
 @font-face {
@@ -26202,12 +26199,30 @@ DEPRECATED
 }
 
 .asset-list-control-bar {
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-.asset-list-control-bar__button {
-  max-width: 35%;
+.asset-list-control-bar__network_control {
+  justify-content: space-between;
+  width: auto;
+  min-width: auto;
+  border-radius: 8px;
+  padding: 0 8px !important;
+  gap: 4px;
+}
+
+.asset-list-control-bar__buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.asset-list-control-bar__buttons .asset-list-control-bar__button {
+  width: 32px;
+  min-width: 32px;
+  margin: 0;
+  border-radius: 8px;
+  padding: 0;
 }
 
 .asset-list-control-bar__button:hover {
@@ -26244,6 +26259,11 @@ DEPRECATED
 
 [dir="rtl"] .selectable-list-item__selected-indicator {
   right: 4px;
+}
+
+.selectable-list-item .currency-display-component__text,
+.selectable-list-item .currency-display-component__suffix {
+  color: var(--color-text-alternative);
 }
 
 .token-cell--outdated .list-item__heading {
@@ -27475,7 +27495,7 @@ DEPRECATED
 }
 
 .expandIcon.expanded {
-  rotate: -90deg;
+  rotate: -180deg;
 }
 
 /*
@@ -47545,6 +47565,18 @@ DEPRECATED
   font-size: 14px !important;
 }
 
+.address-list-item__duplicate-contact-warning-icon {
+  align-self: center;
+}
+
+[dir="ltr"] .address-list-item__duplicate-contact-warning-icon {
+  margin-left: auto;
+}
+
+[dir="rtl"] .address-list-item__duplicate-contact-warning-icon {
+  margin-right: auto;
+}
+
 .address-list-item:hover, .address-list-item:focus-within {
   background: var(--color-background-default-hover);
 }
@@ -48143,6 +48175,10 @@ DEPRECATED
 
 .multichain-network-list-item__delete {
   visibility: hidden;
+}
+
+.multichain-network-list-item__rpc-endpoint {
+  max-width: 100%;
 }
 
 /*
@@ -49079,6 +49115,15 @@ DEPRECATED
   stroke: var(--color-error-default);
 }
 
+.asset-page__spending-caps {
+  text-decoration: none;
+}
+
+.asset-page__spending-caps:hover {
+  color: var(--color-primary-alternative);
+  text-decoration: underline;
+}
+
 /** Please import your files in alphabetical order **/
 /*
 Responsive breakpoints
@@ -49966,6 +50011,10 @@ DEPRECATED
 .send__select-recipient-wrapper {
   flex: 1 1 auto;
   height: 0;
+}
+
+.send__select-recipient-wrapper__list__duplicate-contact-banner {
+  padding: 8px 16px 0 16px;
 }
 
 .send__select-recipient-wrapper__list__link {
@@ -53950,57 +53999,41 @@ DEPRECATED
 */
 .error-page {
   display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  font-style: normal;
-  font-weight: normal;
-  padding: 35px 10px 10px 10px;
+  flex-flow: column;
+  padding: 16px;
   height: 100%;
 }
 
-.error-page__header {
-  font-size: 2.5rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: flex;
-  justify-content: center;
-  padding: 10px 0;
-  text-align: center;
-}
-
-.error-page__subheader {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  padding: 10px 0;
-  width: 100%;
-  max-width: 720px;
-  text-align: center;
-}
-
-.error-page__details {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  overflow-y: auto;
-  width: 100%;
-  max-width: 720px;
-  padding-top: 10px;
+@media screen and (min-width: 768px) {
+  .error-page__inner-wrapper {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .error-page__stack {
-  overflow-x: auto;
-  background-color: var(--color-background-alternative);
+  max-height: 120px;
+  overflow: auto;
+  font-family: var(--font-family-sans);
+  font-weight: var(--typography-l-body-xs-font-weight);
+  font-size: var(--typography-l-body-xs-font-size);
 }
 
 .error-page__link-text {
   color: var(--color-primary-default);
+}
+
+#sentry-feedback {
+  --font-family: var(--font-family-sans);
+  --inset: auto 20px 20px auto;
+  --input-font-size: 14px;
+  --button-color: var(--color-primary-default);
+  --button-primary-background: var(--color-primary-default);
+  --button-primary-border: var(--color-primary-default);
+  --button-primary-hover-background: var(--color-primary-default);
+  --success-color: var(--color-success-default);
+  --error-color: var(--color-error-default);
 }
 
 /*
@@ -57557,36 +57590,6 @@ DEPRECATED
   width: 25px;
 }
 
-.mm-smart-transactions-opt-in-modal__benefit {
-  flex: 1;
-}
-
-.mm-smart-transactions-opt-in-modal__icon {
-  --size: 40px;
-}
-
-.mm-smart-transactions-opt-in-modal__no-thanks-link {
-  opacity: 75%;
-}
-
-.mm-smart-transactions-opt-in-modal__no-thanks-link:hover {
-  color: var(--color-text-alternative) !important;
-  text-decoration: none !important;
-}
-
-.mm-smart-transactions-opt-in-modal .mm-modal-content__dialog {
-  background-image: url("/images/smart-transactions/smart-transactions-opt-in-background.svg");
-  background-repeat: no-repeat;
-}
-
-[dir="ltr"] .mm-smart-transactions-opt-in-modal .mm-modal-content__dialog {
-  background-position: -80px 16px;
-}
-
-[dir="rtl"] .mm-smart-transactions-opt-in-modal .mm-modal-content__dialog {
-  background-position: right -80px top 16px;
-}
-
 /*
 Responsive breakpoints
 */
@@ -60329,6 +60332,7 @@ DEPRECATED
   flex-flow: column;
   flex: 1;
   width: 100%;
+  gap: 24px;
 }
 
 .prepare-bridge-page__content {
@@ -60339,7 +60343,7 @@ DEPRECATED
   border: 1px solid var(--color-border-muted);
 }
 
-.prepare-bridge-page__from, .prepare-bridge-page__to {
+.prepare-bridge-page .bridge-box {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -60372,6 +60376,41 @@ DEPRECATED
 }
 
 .prepare-bridge-page__input-row .mm-text-field--focused {
+  outline: none;
+}
+
+.prepare-bridge-page__input-row .defined {
+  opacity: 1;
+}
+
+.prepare-bridge-page__input-row .defined > .mm-input--disabled {
+  opacity: 1;
+}
+
+.prepare-bridge-page .amount-input {
+  border: none;
+}
+
+.prepare-bridge-page .amount-input input {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+[dir="ltr"] .prepare-bridge-page .amount-input input {
+  text-align: right;
+  padding-right: 0;
+}
+
+[dir="rtl"] .prepare-bridge-page .amount-input input {
+  text-align: left;
+  padding-left: 0;
+}
+
+.prepare-bridge-page .amount-input input:focus, .prepare-bridge-page .amount-input input:focus-visible {
+  outline: none;
+}
+
+.prepare-bridge-page .amount-input .mm-text-field--focused {
   outline: none;
 }
 
@@ -60414,33 +60453,6 @@ DEPRECATED
   height: 10px;
   width: 10px;
   border: none;
-}
-
-.prepare-bridge-page .amount-input {
-  border: none;
-}
-
-.prepare-bridge-page .amount-input input {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-[dir="ltr"] .prepare-bridge-page .amount-input input {
-  text-align: right;
-  padding-right: 0;
-}
-
-[dir="rtl"] .prepare-bridge-page .amount-input input {
-  text-align: left;
-  padding-left: 0;
-}
-
-.prepare-bridge-page .amount-input input:focus, .prepare-bridge-page .amount-input input:focus-visible {
-  outline: none;
-}
-
-.prepare-bridge-page .amount-input .mm-text-field--focused {
-  outline: none;
 }
 
 .prepare-bridge-page__switch-tokens {
@@ -60496,6 +60508,90 @@ DEPRECATED
 
 .prepare-bridge-page__switch-tokens:disabled {
   cursor: not-allowed;
+}
+
+/*
+Responsive breakpoints
+*/
+/*
+DEPRECATED
+*/
+/**
+* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
+* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
+* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
+* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
+* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
+* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
+*/
+/*
+  Z-Indicies
+*/
+.quote-card {
+  flex-direction: column;
+  display: flex;
+  text-align: center;
+}
+
+.quote-card p {
+  font-size: 12px;
+}
+
+.quote-card__content {
+  padding: 16px;
+  gap: 4px;
+}
+
+.quote-card__timer {
+  height: 32px;
+}
+
+.quote-card__timer p {
+  color: var(--color-text-alternative);
+}
+
+.bridge-box > .quote-card__footer {
+  gap: 0;
+}
+
+.bridge-box > .quote-card__footer p {
+  color: var(--color-text-alternative);
+}
+
+.quote-card__info-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.quote-card__info-row__label {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.quote-card__info-row__label p {
+  font-weight: var(--font-weight-medium);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.quote-card__info-row__label__tooltip {
+  align-items: center;
+  height: 100%;
+}
+
+.quote-card__info-row__description {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.quote-card__info-row__description__secondary {
+  color: var(--color-text-alternative);
+}
+
+.quotes-modal .mm-modal-content__dialog {
+  display: flex;
+  height: 100%;
 }
 
 .bridge {

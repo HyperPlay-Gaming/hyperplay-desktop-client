@@ -211,10 +211,10 @@ export default observer(function SidebarLinks() {
           className="sidebarLinkGradientWrapper "
           onClick={() => handleExternalLink(window.api.openTwitterLink)}
         >
-          <Tooltip {...tooltipProps} label="Twitter">
+          <Tooltip {...tooltipProps} label="X">
             <div className="Sidebar__item">
               <button>
-                <Images.Twitter fill={sidebarSvgUnselectedFill} />
+                <Images.XLogo fill={sidebarSvgUnselectedFill} />
               </button>
             </div>
           </Tooltip>

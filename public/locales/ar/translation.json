@@ -189,9 +189,9 @@
         "cancel": "ألغِ",
         "go_to_library": "اذهب إلى المكتبة",
         "login": "سجل الدخول",
-        "sync": "زامن",
-        "syncing": "يزامن",
-        "unsync": "ألغ المزامنة",
+        "sync": "مزامنة",
+        "syncing": "جارٍ المزامنة",
+        "unsync": "إلغاء المزامنة",
         "continue": "مواصلة",
         "download": "تنزيل",
         "update": "تحديث",
@@ -266,7 +266,7 @@
         "ignore_hidden": "تجاهل المخفي",
         "platform": "منصة",
         "show_all_games": "اعرض كل الألعاب",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "عرض الألعاب غير المتاحة",
         "show_favourites_only": "أظهر المفضلة فقط",
         "show_hidden": "أظهر المخفي",
         "store": "صفِّ المتجر"
@@ -398,9 +398,9 @@
             "reparing": "اكتمل الإصلاح"
         },
         "install": {
-            "canceled": "أُلغي التثبيت",
+            "canceled": "تم إلغاء التثبيت",
             "error": "فشل التثبيت",
-            "finished": "انتهى التثبيت",
+            "finished": "اكتمل التثبيت",
             "imported": "اُستوردت اللعبة",
             "startInstall": "بدأ التثبيت",
             "paused": "التركيب",
@@ -414,7 +414,7 @@
         },
         "uninstalled": "أُلغي التثبيت",
         "update": {
-            "canceled": "أُلغي التحديث",
+            "canceled": "تم إلغاء التحديث",
             "finished": "انتهى التحديث",
             "started": "بدأ التحديث",
             "stopped": "التحديث توقف",
@@ -495,7 +495,12 @@
             "queued": "في قائمة الانتظار",
             "remove": "أزل من التنزيلات",
             "pause": "إيقاف التحميل مؤقتًا",
-            "resume": "كفي التنزيل"
+            "resume": "كفي التنزيل",
+            "launch": "إطلاق اللعبة",
+            "retry-install": "إعادة محاولة التثبيت",
+            "retry-update": "إعادة محاولة التحديث",
+            "stop": "إيقاف التنزيل",
+            "timeElapsed": "الوقت المنقضي: {{elapsed}}"
         }
     },
     "Recent": "لُعبت مؤخرا",
@@ -518,7 +523,7 @@
         "default-install-path": "مسار التثبيت الافتراضي",
         "default-steam-path": "مسار ستيم الافتراضي",
         "defaultWinePrefix": "عين ملفًا لسابقات واين الجديدة",
-        "disable_controller": "عطل التنقل في هِرُوِك باستخدام يد التحكم",
+        "disable_controller": "تعطيل تنقل Hyperplay باستخدام وحدة التحكم",
         "discordRPC": "مكن خاصية التواجد الغني المقدمة من دِسكُورْد",
         "download-no-https": "تنزيل الألعاب بدون إتش.تي.تي.بي.إس (مفيد لشبكات سي.دي.إن مثل لان.كاش)",
         "dxvkfpslimit": "Limit FPS (DX9, 10 and 11)",
@@ -759,7 +764,7 @@
         "manager": {
             "error": "تعذر جلب إصدارات واين/بروتون هذه المرة.",
             "link": "مدير واين",
-            "title": "مدير واين",
+            "title": "طبقة التوافق ",
             "unzipping": "جارٍ فك الضغط",
             "not-found": "لا توجد نسخ من النبيذ من فضلك اضغط على جهاز التحكم لتحاول مرة أخرى."
         },
@@ -795,7 +800,16 @@
                 "anonymized": "(ب) إرسال تفاعل غير مسمّى \" النقر \" ؛;",
                 "optOut": "(دائماً أسمح لكِ بالاختيار عن طريق (ستينغز;",
                 "privacyCaption": "وتُجمع هذه البيانات وبالتالي فهي مجهولة المصدر لأغراض اللائحة العامة لحماية البيانات (EU) 2016/679. للحصول على مزيد من المعلومات فيما يتعلق بممارساتنا الخاصة، يرجى أن نرى ",
-                "title": "ساعدنا في تحسين هيبر بلاي!"
+                "title": "ساعدنا في تحسين هيبر بلاي!",
+                "bulletOne": "السماح لك دائمًا بالخروج",
+                "bulletTwo": "إرسال نقرات وتفاعلات اللعبة بشكل مجهول",
+                "paragraphOne": "تود HyperPlay جمع بيانات الاستخدام لفهم كيفية تفاعل مستخدمينا مع التطبيق بشكل أفضل. \n           هذا يساعدنا على جعل HyperPlay أفضل لك.",
+                "privacyPolicy": "سياسة الخصوصية.",
+                "text": {
+                    "externalLink": "تعلم المزيد",
+                    "title": "لقد قمنا بتحديث سياسة الخصوصية الخاصة بنا"
+                },
+                "titleOne": "ساعدنا في تحسين HyperPlay!"
             },
             "welcome": {
                 "text": {
@@ -803,9 +817,19 @@
                     "construction": "(هايبر بلاي) قيد البناء.",
                     "bugs": "الرجاء ملاحظة أن (هايبر بلاي) هو ألفا عام لا تزال هناك العديد من السمات\nفي التنمية، وسيكون هناك حشرات.",
                     "description": "(هايبر بلاي) مُطلقة للعبة و مُجمّع مُتجر لعبة من المُتجر\nالمستقبل مع (هايبر بلاي) يمكنك حمل محفظتك و المكسور و الأصول\nفي كل لعبة (هايبر بلاي) يدعم كامل مكتبة (إيبيك)\nمخزن، جي جي، ومخزن هيبر بلاي الخاص بنا. بإستخدام (هايبر بلاي)، أنت توافق\nإلى",
-                    "communityCTA_1": "سنحب ردة فعلك وننضم إلينا"
+                    "communityCTA_1": "سنحب ردة فعلك وننضم إلينا",
+                    "paragraphThr": "قم بجلب محفظتك، ورموزك، وأصولك بسلاسة إلى كل لعبة أثناء الوصول إلى المكتبات الواسعة من متجر Epic، وGOG، ومتجر HyperPlay الخاص بنا - كل ذلك في مكان واحد.",
+                    "TitleList": "مع HyperPlay يمكنك:",
+                    "bulletPointTwo": "اكسب رموزًا، وNFTs، ومكافآت خارج السلسلة من خلال إكمال المهام",
+                    "bulletPointFour": "قم بتثبيت Steam (إصدار Windows) على macOS بنقرة واحدة سهلة",
+                    "bulletPointFive": "تشغيل ألعاب ويندوز على macOS وLinux وSteamDeck باستخدام\n              تقنيتنا المتقدمة",
+                    "bulletPointOne": "الوصول إلى مجموعة واسعة من أكثر من 100 لعبة مدعومة على السلسلة",
+                    "bulletPointThree": "العب ألعاب Epic وGOG مباشرة من خلال HyperPlay",
+                    "lastParagraph": "حاليًا في مرحلة البيتا، نحن نقدر ملاحظاتك بشدة ونشجعك على الإبلاغ عن أي مشكلات أو اقتراحات في",
+                    "paragraphOne": "في HyperPlay، نحن نبني متجر الألعاب من الجيل التالي لمستقبل الألعاب."
                 },
-                "title": "مرحبا بكم في هايبر إلعبْ الوصول المبكر!"
+                "title": "مرحبا بكم في هايبر إلعبْ الوصول المبكر!",
+                "titleIntro": "مرحبًا بك في HyperPlay!"
             },
             "connectionConnected": {
                 "description": "محفظتك مرتبطة أنت مستعد للعب.",
@@ -877,14 +901,18 @@
                 "validation": "نجاح! رمز الدخول صالح"
             },
             "error": {
-                "validation": "رمز الدخول غير صحيح"
-            }
+                "validation": "رمز الدخول غير صحيح",
+                "licenseUndefined": "تعذر التحقق من رمز الوصول. يرجى التحقق من اتصال الإنترنت أو إعدادات جدار الحماية لديك."
+            },
+            "placeholder": "أدخل رمز الوصول"
         },
         "analyticsOn": "محلل",
         "linkSteamAccountCta": "الذهاب إلى ستام علامة في",
         "buttons": {
             "agree": "أنا موافق",
-            "noThanks": "لا شكرا"
+            "noThanks": "لا شكرا",
+            "primaryButton": "أوافق",
+            "secondaryButton": "لا، شكرًا"
         },
         "connectWallet": "محفظة متصلة",
         "gamecard": {
@@ -892,7 +920,8 @@
             "installed": "مستعد للعب",
             "paused": "متوقف مؤقتًا",
             "installing": "ينزّل...",
-            "distributables": "المجموع"
+            "distributables": "المجموع",
+            "patching": "تحديث..."
         },
         "analyticsOff": "تم إيقاف التحليل",
         "viewItem": "View {{item}}",
@@ -910,7 +939,9 @@
         "syncing": "مزامنة ...",
         "turnAnalyticsOff": "عطّله",
         "logOut": "تسجيل الخروج",
-        "viewFullscreen": "مشاهدة كاملة"
+        "viewFullscreen": "مشاهدة كاملة",
+        "compatibilityLayer": "طبقة التوافق (بيتا)",
+        "discordAppLink": "مجتمع Discord."
     },
     "hyperplayOverlay": {
         "description": {
@@ -983,9 +1014,11 @@
         "claimFailed": "باء - المطالبة",
         "claimFailedMessage": "أرجوك حاول مرة أخرى إذا ما زالَ لا يَعْملُ، يَجْعلُ a تذكرة دعم خلافِ.",
         "createDiscordTicket": "تذكرة اختراق مثبتة",
-        "notEnoughGas": "عدم كفاية رصيد المحفظة لطلب مكافأتك بسبب رسوم الغاز جربي محفظة مختلفة أو تجديد هذه قبل إعادة التجريب.",
+        "notEnoughGas": {
+            "message": "رصيد المحفظة غير كافٍ للمطالبة بمكافأتك بسبب رسوم الغاز. حاول استخدام محفظة مختلفة أو قم بتعبئة هذه المحفظة قبل إعادة المحاولة."
+        },
         "active": "نشط",
-        "signIn": "لِج",
+        "signIn": "تسجيل الدخول",
         "Play": "شغِّل",
         "sync": "مزامنة",
         "reputation": "السمعة",
@@ -1000,7 +1033,28 @@
             "cancel": "إلغاء"
         },
         "noG7ConnectionClaim": "يجب أن يكون لديك حساب لعبة 7 مرتبط بـ {{email}} للمطالبة بمكافآتك.",
-        "noG7ConnectionSync": "يجب أن يكون لديك حساب لعبة 7 مرتبط بـ {{email}} لتصليح مهامك."
+        "noG7ConnectionSync": {
+            "message": "يجب أن يكون لديك حساب Game7 مرتبط بـ {{email}} لإعادة مزامنة مهامك.",
+            "title": "لا يوجد حساب G7 مرتبط"
+        },
+        "notEnoughBalance": {
+            "title": "رصيد منخفض"
+        },
+        "notEligible": {
+            "title": "غير مؤهل بعد",
+            "message": "لم تكمل الأيام المطلوبة للعب ولا يمكنك المطالبة بمكافأتك في هذا الوقت."
+        },
+        "questComplete": "المهمة مكتملة!",
+        "rewardClaimed": "تمت المطالبة بنجاح",
+        "questAvailable": "المهمة متاحة!",
+        "notSignedIn": {
+            "message": "يجب أن تكون مسجلاً للدخول للمطالبة بمكافأتك.",
+            "title": "لم يتم تسجيل الدخول"
+        },
+        "claim": "المطالبة",
+        "toClaimReward": "للمطالبة بمكافأتك.",
+        "toSeeDetails": "لرؤية التفاصيل.",
+        "youHaveClaimed": "لقد قمت بالمطالبة بمكافأة {{totalRewards}} {{plural}}."
     },
     "notification": {
         "wine-download": {
@@ -1062,7 +1116,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "أنت متصل بـ(هايبر بلاي) بمحفظة خارجية.",
         "WALLET_DISCONNECTED": "ليس لديك محفظة مرتبطة بـ(هايبر بلاي).",
-        "comingSoon": "قريبا"
+        "comingSoon": "قريبا",
+        "links": {
+            "buy": "شراء",
+            "portfolio": "محفظة",
+            "sell": "بيع",
+            "swap": "تبديل",
+            "bridge": "الجسر",
+            "marketplace": "سوق"
+        }
     },
     "please-wait": "من فضلك انتظر.",
     "email_subscription": {
@@ -1111,15 +1173,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "هذه اللعبة هي شعار لعالم الحرف الحربي: غضب ملك ليك (3.3.5 أ). وبغية لعب هذا النموذج، يجب على اللاعبين أن يمتلكوا نسخة من World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay لا يستضيفون عالم الحرب. يمكن لللاعبين الذين يمتلكون عالم السحرة الحصول على النسخة 3.3.5 (أ) من مصادر مثل:",
+                "description": "هذه اللعبة هي تعديل للعبة World of Warcraft: Wrath of the Lich King (3.3.5a). من أجل لعب هذا التعديل، يجب على اللاعبين امتلاك نسخة من World of Warcraft 3.3.5a. {{newline}} {{newline}} لا تستضيف HyperPlay لعبة World of Warcraft. يمكن للاعبين الذين يمتلكون World of Warcraft الحصول على النسخة المطلوبة من المصادر التالية:",
                 "subtitle": "حمولة العالم",
                 "title": "الخطوة 1",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "link1": "الرابط 1",
+                "link2": "رابط 2 (رابط مغناطيسي)"
             },
             "step2": {
                 "description": "اختيار التنزيل ChromieCraft_3.3.5a.zip file.",
                 "subtitle": "Select ChromieCraft_3.3.5a.zip File",
-                "title": "الخطوة 2"
+                "title": "الخطوة 2",
+                "subtitle1": "حدد ملف zip 3.3.5a الذي تم تنزيله"
             },
             "step3": {
                 "description": "يُرجى اختيار الملف الذي ينبغي أن يُركَّز فيه عالم الحروف الحربية: غضب ملك الليتش (3.3.5 أ).",
@@ -1153,5 +1218,27 @@
     "At the end make sure to": "في النهاية تأكد من",
     "Cancel Installation": "التركيب",
     "HyperPlay will notify you once the installation is done;": "(هايبر بلاي) سيعلمك حالما يتم التركيب;",
-    "UNCHECK 'Run Steam'": "UNCHECK Run Steam '"
+    "UNCHECK 'Run Steam'": "UNCHECK Run Steam '",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "محفظة MetaMask متاحة فقط عند الاتصال بـ MetaMask."
+        },
+        "unsupported": "اتصال محفظة غير مدعوم"
+    },
+    "Downloading": "جارٍ تنزيل {{percent}}%",
+    "Installing": "تثبيت",
+    "installModal": {
+        "loginRequired": "تسجيل الدخول مطلوب",
+        "loginRequiredMessage": "يجب أن تكون مسجلاً الدخول إلى HyperPlay لإدخال رمز الوصول الخاص بك وتثبيت هذه اللعبة. ",
+        "loginRequiredMessageUpdate": "يجب أن تكون مسجلاً الدخول إلى HyperPlay لإدخال رمز الوصول الخاص بك وتحديث هذه اللعبة. "
+    },
+    "16GB of RAM": "16 جيجابايت من الذاكرة العشوائية",
+    "Apple Silicon M1 or above": "شريحة أبل سيليكون M1 أو أعلى",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "كن على علم بأن ليس كل الألعاب ستعمل، وحتى إذا عملت، قد لا تعمل كما هو متوقع.",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "إذا كنت ترغب في المتابعة، يرجى التحلي بالصبر حيث قد يستغرق الأمر بضع دقائق للانتهاء اعتمادًا على اتصال الإنترنت الخاص بك وتكوين النظام.",
+    "macOS 14": {
+        "0 or above": "macOS 14.0 أو أعلى"
+    },
+    "Please Wait": "يرجى الانتظار",
+    "Recommended specs for a better experience": "المواصفات الموصى بها لتجربة أفضل"
 }

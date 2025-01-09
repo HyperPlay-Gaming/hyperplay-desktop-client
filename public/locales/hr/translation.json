@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Ukloni s popisa Preuzimanja",
             "pause": "Prekini preuzimanje",
-            "resume": "Nastavi preuzimanje datoteke"
+            "resume": "Nastavi preuzimanje datoteke",
+            "timeElapsed": "Prošlo vrijeme: {{elapsed}}",
+            "launch": "Pokreni igru",
+            "retry-install": "Pokušaj ponovo instalirati",
+            "retry-update": "Ponovno pokušajte ažurirati",
+            "stop": "Prekini preuzimanje"
         }
     },
     "Recent": "Nedavno igrano",
@@ -819,7 +824,9 @@
     "hyperplay": {
         "buttons": {
             "noThanks": "Ne, ne trebam hvala",
-            "agree": "Slažem se"
+            "agree": "Slažem se",
+            "primaryButton": "Slažem se",
+            "secondaryButton": "Ne, hvala"
         },
         "folder": "Mapa==WEBLATE_PART==Folder==WEBLATE_PART==Direktorij",
         "onboarding": {
@@ -871,7 +878,16 @@
                 "optOut": "Uvijek vam omogućuje da se isključite putem Postavki;",
                 "neverCollectPersonal": " prikupljati ključeve, adrese, salda, hash-e ili bilo kakve osobne informacije;",
                 "privacyCaption": "Ovi podaci su agregirani i stoga su anonimni u svrhu Opće uredbe o zaštiti podataka (EU) 2016/679. Za više informacija o našim praksama privatnosti, molimo pogledajte naš ",
-                "hyperplayWill": "HyperPlay će:"
+                "hyperplayWill": "HyperPlay će:",
+                "bulletOne": "Uvijek vam omogućujemo da se isključite",
+                "bulletTwo": "Pošaljite anonimne klikove i interakcije s igrom",
+                "paragraphOne": "HyperPlay želi prikupiti podatke o korištenju kako bi bolje razumio kako naši korisnici koriste aplikaciju.  \nOvo nam omogućuje da HyperPlay učinimo još boljim za vas.",
+                "privacyPolicy": "Politika privatnosti.",
+                "text": {
+                    "externalLink": "Saznajte više",
+                    "title": "Ažurirali smo našu Politiku privatnosti"
+                },
+                "titleOne": "Pomozite nam poboljšati HyperPlay!"
             },
             "connectionCanceled": {
                 "title": "Veza otkazana!",
@@ -887,9 +903,19 @@
                     "construction": "HyperPlay je u izradi.",
                     "bugs": "Imajte na umu da je HyperPlay javna alfa. Mnoge značajke su još uvijek u razvoju i bit će grešaka.",
                     "communityCTA_2": "zajednica. Zajedno oblikujmo budućnost gaminga!",
-                    "communityCTA_1": "Voljeli bismo čuti vaše mišljenje i da nam se pridružite u našem"
+                    "communityCTA_1": "Voljeli bismo čuti vaše mišljenje i da nam se pridružite u našem",
+                    "bulletPointFive": "Pokrenite Windows igre na macOS-u, Linuxu i SteamDecku koristeći naš\n              napredni",
+                    "bulletPointThree": "Igrajte Epic i GOG igre izravno putem HyperPlay-a",
+                    "bulletPointFour": "Instalirajte Steam (Windows verzija) na macOS s jednim jednostavnim klikom",
+                    "bulletPointOne": "Pristupite velikoj kolekciji od 100+ igara omogućeno na lancu",
+                    "bulletPointTwo": "Zarađujte tokene, NFT-ove i off-chain nagrade dovršavanjem misija",
+                    "lastParagraph": "Trenutno u Beta verziji, jako cijenimo vašu povratnu informaciju i \n            potičemo vas da prijavite bilo kakve probleme ili prijedloge u naš",
+                    "paragraphOne": "U HyperPlay-u gradimo trgovinu igara nove generacije \n            za budućnost igranja.",
+                    "paragraphThr": "Besprijekorno prenesite svoj novčanik, tokene, \n           i imovinu u svaku igru dok pristupate \n           opsežnim bibliotekama Epic Storea, \n           GOG-a i našoj vlastitoj HyperPlay trgovini - sve na jednom mjestu.",
+                    "TitleList": "S HyperPlay-om možete:"
                 },
-                "title": "Dobrodošli u HyperPlay ranu pristup!"
+                "title": "Dobrodošli u HyperPlay ranu pristup!",
+                "titleIntro": "Dobrodošli u HyperPlay!"
             },
             "connectAgain": "Ponovno se povežite"
         },
@@ -902,7 +928,8 @@
             "installing": "Preuzimam...",
             "extracting": "Izdvajanje...",
             "installed": "Spremno za igru",
-            "distributables": "Instaliranje distributivnih datoteka..."
+            "distributables": "Instaliranje distributivnih datoteka...",
+            "patching": "Patchiranje..."
         },
         "misc": "Nikada nikad",
         "turnAnalyticsOn": "Pokreni",
@@ -925,12 +952,14 @@
         "viewItem": "Pogledajte {{item}}",
         "accesscodes": {
             "error": {
-                "validation": "Pristupni kod je nevažeći"
+                "validation": "Pristupni kod je nevažeći",
+                "licenseUndefined": "Nije moguće provjeriti pristupni kod. Provjerite svoj pristup internetu ili postavke vatrozida."
             },
             "requirescode": "Ova nadogradnja igre zahtijeva pristupni kod.",
             "success": {
                 "validation": "Uspjeh! Pristupni kod je valjan"
-            }
+            },
+            "placeholder": "Unesite pristupni kod"
         },
         "changeWallet": "Zamijeni novčanik",
         "currentWallet": "Trenutni novčanik",
@@ -942,7 +971,9 @@
         "publicAlpha": "Javna alfa",
         "otp": "Jednokratna lozinka",
         "linkSteamAccountTitle": "Poveži Steam račun",
-        "copyUrl": "Kopiraj URL"
+        "copyUrl": "Kopiraj URL",
+        "compatibilityLayer": "Sloj kompatibilnosti (Beta)",
+        "discordAppLink": "Discord zajednica."
     },
     "quest": {
         "active": "Aktivno stanje igre",
@@ -972,8 +1003,13 @@
         "pointsClaimed": "Zatražene točke",
         "reward": "Nagrada",
         "noG7ConnectionClaim": "Morate imati Game7 račun povezan s {{email}} kako biste preuzeli svoje nagrade.",
-        "noG7ConnectionSync": "Trebate imati Game7 račun povezan s {{email}} kako biste ponovo sinkronizirali svoje zadatke.",
-        "notEnoughGas": "Nedovoljno sredstava u novčaniku za preuzimanje vaše nagrade zbog troškova plina. Pokušajte s drugim novčanikom ili dopunite ovaj prije ponovnog pokušaja.",
+        "noG7ConnectionSync": {
+            "message": "Morate imati povezan Game7 račun s {{email}} kako biste ponovo sinkronizirali svoje zadatke.",
+            "title": "Nema povezanog G7 računa"
+        },
+        "notEnoughGas": {
+            "message": "Nedovoljno sredstava u novčaniku za preuzimanje vaše nagrade zbog troškova plina. Pokušajte s drugim novčanikom ili dopunite ovaj prije ponovnog pokušaja."
+        },
         "claimAll": "Zatraži sve",
         "connectSteamAccount": "Poveži Steam račun",
         "linkAccount": "Povežite svoj Steam račun kako biste provjerili pravo na sudjelovanje.",
@@ -985,7 +1021,29 @@
         "readyForClaim": "Spremno za preuzimanje",
         "reputation": "Reputacija",
         "type": {
-            "playstreak": "Igračka serija"
+            "playstreak": "Igračka serija",
+            "reputation": "Reputacija"
+        },
+        "claim": "Zatraži",
+        "claimFailed": "Neuspjeh preuzimanja",
+        "claimFailedMessage": "Molimo pokušajte još jednom. Ako i dalje ne radi, otvorite Discord podršku.",
+        "createDiscordTicket": "Kreiraj Discord tiket",
+        "notEligible": {
+            "message": "Niste završili potrebne dane igranja i trenutno ne možete zatražiti svoju nagradu.",
+            "title": "Još niste podobni"
+        },
+        "notSignedIn": {
+            "message": "Morate biti prijavljeni da biste preuzeli svoju nagradu.",
+            "title": "Niste prijavljeni"
+        },
+        "questAvailable": "Misija dostupna!",
+        "questComplete": "Zadatak završen!",
+        "rewardClaimed": "Potvrda uspješna",
+        "toClaimReward": "da preuzmete svoju nagradu.",
+        "toSeeDetails": "da biste vidjeli detalje.",
+        "youHaveClaimed": "Zatražili ste {{totalRewards}} nagradu{{plural}}.",
+        "notEnoughBalance": {
+            "title": "Nizak saldo"
         }
     },
     "accounts": "Profili",
@@ -1012,7 +1070,15 @@
     "overlay": {
         "comingSoon": "Uskoro će biti dostupno",
         "EXTERNAL_WALLET_CONNECTED": "Povezani ste s HyperPlay putem vanjske novčanika.",
-        "WALLET_DISCONNECTED": "Nemate novčanik povezan s HyperPlayom."
+        "WALLET_DISCONNECTED": "Nemate novčanik povezan s HyperPlayom.",
+        "links": {
+            "bridge": "Most",
+            "buy": "Kupi",
+            "portfolio": "Portfelj",
+            "marketplace": "Tržište",
+            "sell": "Prodaj",
+            "swap": "Zamjena"
+        }
     },
     "quests": {
         "playstreak": {
@@ -1070,7 +1136,8 @@
             "step2": {
                 "description": "Odaberite preuzetu datoteku ChromieCraft_3.3.5a.zip.",
                 "title": "Korak 2",
-                "subtitle": "Odaberite datoteku ChromieCraft_3.3.5a.zip"
+                "subtitle": "Odaberite datoteku ChromieCraft_3.3.5a.zip",
+                "subtitle1": "Odaberite preuzetu zip datoteku 3.3.5a"
             },
             "step3": {
                 "description": "Molimo odaberite mapu u koju treba instalirati World of Warcraft: Wrath of the Lich King (3.3.5a).",
@@ -1084,10 +1151,12 @@
             },
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Ova igra je mod za World of Warcraft: Wrath of the Lich King (3.3.5a). Da bi igrali ovaj mod, igrači moraju posjedovati kopiju World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay ne hosta World of Warcraft. Igrači koji posjeduju World of Warcraft mogu dobiti verziju 3.3.5a iz izvora kao što su:",
+                "description": "Ova igra je mod za World of Warcraft: Wrath of the Lich King (3.3.5a). Da bi igrali ovaj mod, igrači moraju posjedovati kopiju World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay ne hosta World of Warcraft. Igrači koji posjeduju World of Warcraft mogu dobiti potrebnu verziju iz sljedećih izvora:",
                 "subtitle": "Preuzmite World of Warcraft 3.3.5a",
                 "title": "Korak 1",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "link1": "Link 1",
+                "link2": "Link 2 (Magnet Link)"
             },
             "title": "Upute za mod"
         }
@@ -1131,5 +1200,27 @@
         "success-message": "Steam je instaliran. Sada ga možete pokrenuti iz Biblioteke.",
         "tooltip": "Ovo će instalirati verziju Steama za Windows i radit će koristeći HyperPlay sloj kompatibilnosti.\n\n    Neke igre, posebno stariji naslovi, novije 3D igre ili one s anti-cheat softverom možda neće raditi ispravno.\n\n    Preporučene specifikacije su Mac s Apple Silicon CPU-om (M1 ili noviji) i najmanje 16GB RAM-a."
     },
-    "UNCHECK 'Run Steam'": "UKLONITE oznaku 'Pokreni Steam'"
+    "UNCHECK 'Run Steam'": "UKLONITE oznaku 'Pokreni Steam'",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Ako želite nastaviti, molimo vas da budete strpljivi jer može potrajati nekoliko minuta da se završi, ovisno o vašoj internetskoj vezi i konfiguraciji sustava.",
+    "installModal": {
+        "loginRequired": "Potrebna prijava",
+        "loginRequiredMessage": "Morate biti prijavljeni u HyperPlay da unesete svoj pristupni kod i instalirate ovu igru. ",
+        "loginRequiredMessageUpdate": "Morate biti prijavljeni na HyperPlay da unesete svoj pristupni kod i ažurirate ovu igru. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 ili noviji"
+    },
+    "Please Wait": "Molimo pričekajte",
+    "Recommended specs for a better experience": "Preporučene specifikacije za bolje iskustvo",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask portfelj dostupan je samo kada ste povezani s MetaMaskom."
+        },
+        "unsupported": "Nepodržana veza novčanika"
+    },
+    "16GB of RAM": "16GB RAM-a",
+    "Apple Silicon M1 or above": "Apple Silicon M1 ili noviji",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Budite svjesni da ne rade sve igre, a čak i ako rade, možda neće raditi kako se očekuje.",
+    "Downloading": "Preuzimanje {{percent}}%",
+    "Installing": "Instaliranje"
 }

@@ -183,9 +183,9 @@
         "cancel": "Отмена",
         "go_to_library": "Перейти в библиотеку",
         "login": "Вход",
-        "sync": "Синхронизировать",
+        "sync": "Синхронизация",
         "syncing": "Синхронизация",
-        "unsync": "Рассинхронизировать",
+        "unsync": "Отменить синхронизацию",
         "continue": "Продолжить",
         "download": "Скачать",
         "update": "Обновить",
@@ -260,7 +260,7 @@
         "ignore_hidden": "Игнорировать скрытые",
         "platform": "Платформа",
         "show_all_games": "Показать все игры",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Показать недоступные игры",
         "show_favourites_only": "Показать только избранное",
         "show_hidden": "Показать скрытые",
         "store": "Магазин"
@@ -391,7 +391,7 @@
             "reparing": "Восстановление завершено"
         },
         "install": {
-            "canceled": "Установка прервана",
+            "canceled": "Установка отменена",
             "error": "Установка не удалась",
             "finished": "Установка завершена",
             "imported": "Игра импортирована",
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Удалено",
         "update": {
-            "canceled": "Обновление прервано",
+            "canceled": "Обновление отменено",
             "finished": "Обновление завершено",
             "started": "Обновление началось",
             "paused": "Обновить",
@@ -489,7 +489,12 @@
             "queued": "Очередь",
             "remove": "Удалить из загрузок",
             "resume": "Продолжить Скачать",
-            "pause": "Приостановить загрузку"
+            "pause": "Приостановить загрузку",
+            "launch": "Запустить игру",
+            "stop": "Остановить загрузку",
+            "retry-install": "Повторить установку",
+            "retry-update": "Повторить обновление",
+            "timeElapsed": "Прошло времени: {{elapsed}}"
         }
     },
     "Recent": "Запускались недавно",
@@ -512,7 +517,7 @@
         "default-install-path": "Стандартный путь установки",
         "default-steam-path": "Путь к Steam по умолчанию",
         "defaultWinePrefix": "Указать папку для новых префиксов Wine",
-        "disable_controller": "Отключить навигацию в HyperPlay с помощью контроллера",
+        "disable_controller": "Отключить навигацию Hyperplay с помощью контроллера",
         "discordRPC": "Включить Discord Rich Presence",
         "download-no-https": "Скачивание игр без HTTPS (полезно для CDN, например, LanCache)",
         "egs-sync": "Синхронизировать с установленнными играми EGS",
@@ -747,7 +752,7 @@
         "manager": {
             "link": "Менеджер Wine",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Менеджер Wine",
+            "title": "Совместимый слой ",
             "unzipping": "Распаковка"
         },
         "release": "Дата выхода",
@@ -822,7 +827,16 @@
                 "body": "HyperPlay хотел бы собрать данные об использовании, чтобы лучше понять, как наши пользователи взаимодействуют с приложением. Эта информация помогает нам понять, как вы используете приложение, и позволяет нам сделать HyperPlay еще лучше для вас.",
                 "privacyCaption": "Эти данные агрегированы и поэтому являются анонимными для целей Общего регламента защиты данных (EU) 2016/679. Для получения дополнительной информации в отношении нашей практики конфиденциальности, пожалуйста, см ",
                 "anonymized": "Отправить анонимное взаимодействие нажатия и игры;",
-                "hyperplayWill": "HyperPlay:"
+                "hyperplayWill": "HyperPlay:",
+                "titleOne": "Помогите нам улучшить HyperPlay!",
+                "bulletTwo": "Отправить анонимизированные клики и взаимодействия с игрой",
+                "paragraphOne": "HyperPlay хотел бы собрать данные об использовании, чтобы лучше понять, как наши пользователи взаимодействуют с приложением. \n           Это позволяет нам сделать HyperPlay еще лучше для вас.",
+                "privacyPolicy": "Политика конфиденциальности.",
+                "text": {
+                    "externalLink": "Узнать больше",
+                    "title": "Мы обновили нашу Политику конфиденциальности"
+                },
+                "bulletOne": "Всегда позволяйте вам отказаться"
             },
             "welcome": {
                 "text": {
@@ -830,9 +844,19 @@
                     "bugs": "Обратите внимание, что HyperPlay - это публичная альфа. Многие функции по-прежнему\nв разработке, и будут клопы.",
                     "communityCTA_1": "Мы бы хотели, чтобы вы присоединились к нам",
                     "communityCTA_2": "сообщества. Вместе, давайте определим будущее игр!",
-                    "description": "HyperPlay - это пусковая установка и агрегатор игрового магазина от\nбудущее. С HyperPlay вы можете носить свой кошелек, токены и активы\nв каждую игру. HyperPlay поддерживает всю библиотеку Epic\nМагазин, GOG и наш собственный магазин HyperPlay. Используя HyperPlay, вы соглашаетесь\nк нам"
+                    "description": "HyperPlay - это пусковая установка и агрегатор игрового магазина от\nбудущее. С HyperPlay вы можете носить свой кошелек, токены и активы\nв каждую игру. HyperPlay поддерживает всю библиотеку Epic\nМагазин, GOG и наш собственный магазин HyperPlay. Используя HyperPlay, вы соглашаетесь\nк нам",
+                    "paragraphOne": "В HyperPlay мы создаем магазин игр следующего поколения  \n            для будущего игр.",
+                    "bulletPointFour": "Установите Steam (версия для Windows) на macOS одним простым кликом",
+                    "bulletPointOne": "Получите доступ к обширной коллекции из более чем 100 игр с поддержкой блокчейна",
+                    "bulletPointThree": "Играйте в игры Epic и GOG напрямую через HyperPlay",
+                    "bulletPointTwo": "Зарабатывайте токены, NFT и оффчейн-награды, выполняя квесты",
+                    "lastParagraph": "В настоящее время в бета-версии, мы высоко ценим ваши отзывы и  \n            призываем вас сообщать о любых проблемах или предложениях в нашем",
+                    "bulletPointFive": "Запускайте игры Windows на macOS, Linux и SteamDeck с помощью нашего\n              продвинутого",
+                    "paragraphThr": "Бесшовно переносите свой кошелек, токены  \n           и активы в каждую игру, получая доступ  \n           к обширным библиотекам Epic Store,  \n           GOG и нашему собственному магазину HyperPlay — все в одном месте.",
+                    "TitleList": "С HyperPlay вы можете:"
                 },
-                "title": "Добро пожаловать в Hyper Играйте в ранний доступ!"
+                "title": "Добро пожаловать в Hyper Играйте в ранний доступ!",
+                "titleIntro": "Добро пожаловать в HyperPlay!"
             },
             "connectionCanceled": {
                 "title": "Соединение отменено!",
@@ -846,7 +870,9 @@
         "misc": "Никогда",
         "buttons": {
             "agree": "Я согласен(-на)",
-            "noThanks": "Нет, спасибо"
+            "noThanks": "Нет, спасибо",
+            "primaryButton": "Я согласен",
+            "secondaryButton": "Нет, спасибо"
         },
         "copyUrl": "Копировать URL",
         "turnAnalyticsOff": "Отключить",
@@ -861,7 +887,8 @@
             "paused": "Пауза",
             "distributables": "Установка распределенных",
             "extracting": "Извлечение...",
-            "installed": "Готовы играть"
+            "installed": "Готовы играть",
+            "patching": "Идет патчинг..."
         },
         "folder": "Папка",
         "Sync": "Синхронизация",
@@ -886,18 +913,22 @@
         "otp": "Код времени",
         "accesscodes": {
             "error": {
-                "validation": "Код доступа недействительн"
+                "validation": "Код доступа недействительн",
+                "licenseUndefined": "Не удалось проверить код доступа. Пожалуйста, проверьте ваше интернет-соединение или настройки брандмауэра."
             },
             "success": {
                 "validation": "Успех! Код доступа действует"
             },
-            "requirescode": "Это обновление игры требует код доступа."
+            "requirescode": "Это обновление игры требует код доступа.",
+            "placeholder": "Введите код доступа"
         },
         "syncing": "Синхронизация...",
         "viewMyAccount": "Просмотр моей учетной записи",
         "analyticsOn": "Аналитика включена",
         "linkSteamAccountCta": "Перейти на знак Steam",
-        "viewFullscreen": "Смотреть полный экран"
+        "viewFullscreen": "Смотреть полный экран",
+        "compatibilityLayer": "Совместимый слой (бета)",
+        "discordAppLink": "Сообщество Discord."
     },
     "gameRelease": {
         "alpha": "Альфа",
@@ -941,7 +972,9 @@
         "claimFailed": "Claim failed",
         "claimFailedMessage": "Попробуй еще раз. Если это все еще не работает, создайте билет поддержки Discord.",
         "createDiscordTicket": "Созданный билет Discord",
-        "notEnoughGas": "Недостаточный баланс кошелька, чтобы потребовать вашу награду из-за платы за газ. Попробуйте другой кошелек или пополните его, прежде чем перепробовать.",
+        "notEnoughGas": {
+            "message": "Недостаточно средств на кошельке для получения вашей награды из-за газовых сборов. Попробуйте другой кошелек или пополните этот перед повторной попыткой."
+        },
         "associatedGames": "Связанные игры",
         "claimAll": "Заявить все",
         "pointsClaimed": "Заявленные пункты",
@@ -954,7 +987,28 @@
             "confirm": "Подтвердить"
         },
         "noG7ConnectionClaim": "Вам нужно иметь учетную запись Game7, связанную с {{email}}, чтобы претендовать на ваши награды.",
-        "noG7ConnectionSync": "Вы должны иметь учетную запись Game7, связанную с {{email}}, чтобы перестроить ваши задачи."
+        "noG7ConnectionSync": {
+            "message": "Вам необходимо связать аккаунт Game7 с {{email}}, чтобы повторно синхронизировать ваши задачи.",
+            "title": "Нет связанного аккаунта G7"
+        },
+        "notEligible": {
+            "title": "Еще не подходит",
+            "message": "Вы не завершили необходимые дни игровой активности и не можете получить свою награду в данный момент."
+        },
+        "claim": "Получить",
+        "notSignedIn": {
+            "message": "Вам необходимо войти в систему, чтобы получить свою награду.",
+            "title": "Не выполнен вход"
+        },
+        "youHaveClaimed": "Вы получили награду {{totalRewards}} награда{{plural}}.",
+        "notEnoughBalance": {
+            "title": "Низкий баланс"
+        },
+        "toSeeDetails": "для просмотра деталей.",
+        "questAvailable": "Квест доступен!",
+        "questComplete": "Задание выполнено!",
+        "rewardClaimed": "Успешно получено",
+        "toClaimReward": "чтобы получить вашу награду."
     },
     "quests": {
         "quests": "Квесты",
@@ -1053,7 +1107,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Вы подключены к HyperPlay с внешним кошельком.",
         "WALLET_DISCONNECTED": "У вас нет кошелька, подключенного к HyperPlay.",
-        "comingSoon": "Скоро будет"
+        "comingSoon": "Скоро будет",
+        "links": {
+            "bridge": "Мост",
+            "buy": "Купить",
+            "marketplace": "Маркетплейс",
+            "sell": "Продать",
+            "portfolio": "Портфолио",
+            "swap": "Обменять"
+        }
     },
     "importGameErrorMessage": "Не действительная игровая папка, импортировать игру невозможно",
     "importGameErrorMessageExecutable": "Игра Исполняемый не найден, импортировать игру невозможно",
@@ -1099,7 +1161,8 @@
             "step2": {
                 "subtitle": "Выберите ChromieCraft_3.3.5a.zip Файл",
                 "description": "Выберите загруженный ChromieCraft_3.3.5a.zip файл.",
-                "title": "Шаг 2"
+                "title": "Шаг 2",
+                "subtitle1": "Выберите загруженный zip-файл 3.3.5a"
             },
             "step3": {
                 "description": "Выберите папку, в которой должен быть установлен World of Warcraft: Wrath of the Lich King (3.3.5a).",
@@ -1114,10 +1177,12 @@
             "title": "Модные инструкции",
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Эта игра является модом для World of Warcraft: Wrath of the Lich King (3.3.5a). Чтобы играть в этот мод, игроки должны владеть копией World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay не принимает World of Warcraft. Игроки, которые владеют World of Warcraft, могут получить версию 3.3.5a из таких источников, как:",
+                "description": "Эта игра является модом для World of Warcraft: Wrath of the Lich King (3.3.5a). Чтобы играть в этот мод, игроки должны владеть копией World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay не размещает World of Warcraft. Игроки, которые владеют World of Warcraft, могут получить необходимую версию из следующих источников:",
                 "subtitle": "Скачать World of Warcraft 3.3.5a",
                 "webtorrent": "Торрент (Magnet Link)",
-                "title": "Шаг 1"
+                "title": "Шаг 1",
+                "link2": "Ссылка 2 (магнитная ссылка)",
+                "link1": "Ссылка 1"
             }
         }
     },
@@ -1139,5 +1204,27 @@
     "HyperPlay will notify you once the installation is done;": "HyperPlay уведомит вас после завершения установки;",
     "Installing Steam": "Установка Steam...",
     "Launch Steam": "Запуск",
-    "Launching Steam": "Запуск Steam..."
+    "Launching Steam": "Запуск Steam...",
+    "Downloading": "Загрузка {{percent}}%",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Если вы хотите продолжить, пожалуйста, будьте терпеливы, так как это может занять несколько минут в зависимости от вашего интернет-соединения и конфигурации системы.",
+    "Installing": "Установка",
+    "installModal": {
+        "loginRequired": "Требуется вход в систему",
+        "loginRequiredMessage": "Вам необходимо войти в HyperPlay, чтобы ввести свой код доступа и установить эту игру. ",
+        "loginRequiredMessageUpdate": "Вам необходимо войти в HyperPlay, чтобы ввести свой код доступа и обновить эту игру. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 или выше"
+    },
+    "Please Wait": "Пожалуйста, подождите",
+    "Recommended specs for a better experience": "Рекомендуемые характеристики для лучшего опыта",
+    "16GB of RAM": "16 ГБ ОЗУ",
+    "Apple Silicon M1 or above": "Apple Silicon M1 или выше",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Имейте в виду, что не все игры будут работать, и даже если они работают, они могут не запускаться так, как ожидалось.",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "Портфолио MetaMask доступно только при подключении к MetaMask."
+        },
+        "unsupported": "Несовместимое подключение кошелька"
+    }
 }

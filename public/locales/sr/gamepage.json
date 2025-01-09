@@ -252,7 +252,8 @@
         "goodie": "Није могуће инсталирати",
         "distributables": "#Instaliranje",
         "preparing": "@Preparing #Preuzimanje, @please #čekanje",
-        "paused": "Paused"
+        "paused": "Paused",
+        "patching": "Patchovanje fajlova "
     },
     "help": {
         "cloud_save_unsupported": "Ова игра не подржава чување у облаку. Ове информације пружају програмери игре. Неке игре имплементирају сопствени систем чувања у облаку"
