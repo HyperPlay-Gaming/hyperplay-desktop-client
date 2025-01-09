@@ -141,7 +141,7 @@ export default observer(function SidebarLinks() {
         )}
         {SHOW_QUESTS ? (
           <div className="sidebarLinkGradientWrapper">
-            <Tooltip {...tooltipProps} label="Quests">
+            <Tooltip {...tooltipProps} label={t('sidebar.quests', 'Quests')}>
               <NavLink
                 data-testid="quests"
                 className={({ isActive }) =>
@@ -175,7 +175,7 @@ export default observer(function SidebarLinks() {
           </Tooltip>
         </div>
         <div className="sidebarLinkGradientWrapper">
-          <Tooltip {...tooltipProps} label="Settings">
+          <Tooltip {...tooltipProps} label={t('sidebar.settings', 'Settings')}>
             <NavLink
               data-testid="settings"
               className={({ isActive }) =>
@@ -220,7 +220,7 @@ export default observer(function SidebarLinks() {
           </Tooltip>
         </div>
         <div className="sidebarLinkGradientWrapper">
-          <Tooltip {...tooltipProps} label="Docs">
+          <Tooltip {...tooltipProps} label={t('sidebar.docs', 'Docs')}>
             <NavLink
               data-testid="Docs"
               className={({ isActive }) =>
