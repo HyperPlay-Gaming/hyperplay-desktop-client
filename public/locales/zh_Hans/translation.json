@@ -489,7 +489,12 @@
             "queued": "已加入队列",
             "remove": "从下载中删除",
             "pause": "暂停下载",
-            "resume": "恢复下载"
+            "resume": "恢复下载",
+            "launch": "启动游戏",
+            "retry-install": "重试安装",
+            "retry-update": "重试更新",
+            "stop": "停止下载",
+            "timeElapsed": "已用时间：{{elapsed}}"
         }
     },
     "Recent": "最近玩过",
@@ -512,7 +517,7 @@
         "default-install-path": "默认安装路径",
         "default-steam-path": "默认 Steam 路径",
         "defaultWinePrefix": "为新的 WinePrefix设置文件夹",
-        "disable_controller": "使用控制器禁止 HyperPlay 导航",
+        "disable_controller": "使用控制器禁用Hyperplay导航",
         "discordRPC": "启用Discord的Rich Presence（活动状态）",
         "download-no-https": "不使用 HTTPS 下载游戏 (对 LanCache 等 CDN 有用)",
         "egs-sync": "与已安装的 Epic 游戏同步",
@@ -780,8 +785,18 @@
                     "communityCTA_2": "社区。让我们一起塑造游戏的未来！",
                     "description": "HyperPlay 是一款来自          未来的游戏启动器和游戏商店聚合器。\n有了 HyperPlay，你可以将自己的钱包、代币和资产\n          进入每款游戏。HyperPlay 支持 Epic\n          商店、GOG 和我们自己的 HyperPlay 商店的全部游戏库。使用HyperPlay，即表示您同意\n          我们的",
                     "construction": "HyperPlay 正在建设中。",
-                    "communityCTA_1": "我们希望您能提供反馈意见，并加入我们的"
-                }
+                    "communityCTA_1": "我们希望您能提供反馈意见，并加入我们的",
+                    "bulletPointFive": "在macOS、Linux和SteamDeck上运行Windows游戏，使用我们的\n              高级",
+                    "lastParagraph": "目前处于测试版，我们非常重视您的反馈，并鼓励您在我们的",
+                    "paragraphOne": "在 HyperPlay，我们正在为未来的游戏构建下一代游戏商店。",
+                    "paragraphThr": "无缝地将您的钱包、代币和资产带入每个游戏，同时访问 Epic 商店、GOG 和我们自己的 HyperPlay 商店的广泛库——一切尽在一个地方。",
+                    "TitleList": "使用 HyperPlay，您可以：",
+                    "bulletPointTwo": "通过完成任务赚取代币、NFT 和链外奖励",
+                    "bulletPointOne": "访问超过 100 款链上启用游戏的庞大收藏",
+                    "bulletPointThree": "通过 HyperPlay 直接玩 Epic 和 GOG 游戏",
+                    "bulletPointFour": "在 macOS 上轻松一键安装 Steam（Windows 版本）"
+                },
+                "titleIntro": "欢迎来到 HyperPlay！"
             },
             "analytics": {
                 "neverCollectIP": " 收集您的完整 IP 地址;",
@@ -793,17 +808,26 @@
                 "privacyCaption": "根据《一般数据保护条例》（欧盟）2016/679 的规定，这些数据是汇总数据，因此是匿名数据。如需了解更多有关我们隐私保护措施的信息，请参阅我们的 ",
                 "neverCollectPersonal": " 收集密钥、地址、余额、哈希值或任何个人信息;",
                 "privacyPolicyHere": "点击此处查看隐私政策。",
-                "title": "帮助我们改进 HyperPlay!"
+                "title": "帮助我们改进 HyperPlay!",
+                "privacyPolicy": "隐私政策。",
+                "paragraphOne": "HyperPlay 希望收集使用数据，以更好地了解用户如何与应用程序互动。\n           这使我们能够为您提供更好的 HyperPlay。",
+                "text": {
+                    "title": "我们已更新隐私政策",
+                    "externalLink": "了解更多"
+                },
+                "bulletOne": "始终允许您选择退出",
+                "bulletTwo": "发送匿名点击和游戏互动",
+                "titleOne": "帮助我们改进 HyperPlay！"
             },
             "terms": "服务条款。",
             "walletSelection": {
                 "screens": {
                     "import": {
                         "title": "选择要从哪个浏览器导入",
-                        "useRecoveryPhrase": "使用秘密恢复短语进入",
+                        "useRecoveryPhrase": "使用秘密恢复短语导入",
                         "cantFindProfile": "找不到您的浏览器配置文件？",
                         "createNewWallet": "创建新的 MM 扩展钱包",
-                        "details": "通过导入，您的 MetaMask 安装和    设置将被导入 HyperPlay。",
+                        "details": "以下浏览器已安装 MetaMask。请选择您想要导入的浏览器。",
                         "learnMore": "了解更多",
                         "useRecoveryPhraseInfo": "建议先进用户和开发商使用这一特点。 你的秘密恢复短语在当地存放在Meta Mask,从未与超Play分享.",
                         "orWord": "页: 1"
@@ -841,7 +865,9 @@
         },
         "buttons": {
             "agree": "我同意",
-            "noThanks": "不，谢谢"
+            "noThanks": "不，谢谢",
+            "primaryButton": "我同意",
+            "secondaryButton": "不，谢谢"
         },
         "wallet": {
             "notConnected": "未连接",
@@ -853,7 +879,7 @@
         "turnAnalyticsOn": "打开",
         "viewFullscreen": "全屏查看",
         "analyticsOn": "分析功能已开启",
-        "changeWallet": "更换钱包",
+        "changeWallet": "切换钱包账户",
         "copyUrl": "复制 URL",
         "currentWallet": "当前钱包",
         "discordApp": "Discord",
@@ -864,7 +890,8 @@
             "distributables": "批发",
             "paused": "已暂停",
             "extracting": "提取中...",
-            "installed": "愿意发挥作用"
+            "installed": "愿意发挥作用",
+            "patching": "正在修补..."
         },
         "Sync": "同步",
         "browserImport": {
@@ -879,8 +906,10 @@
             },
             "requirescode": "这一游戏更新需要一部准入法.",
             "error": {
-                "validation": "准入法无效"
-            }
+                "validation": "准入法无效",
+                "licenseUndefined": "无法验证访问代码。请检查您的互联网连接或防火墙设置。"
+            },
+            "placeholder": "输入访问代码"
         },
         "achievements": {
             "freeMints": "自由广告",
@@ -897,12 +926,14 @@
         "connectWallet": "连接围墙",
         "linkSteamAccountDescription": "为连接你的超Play账户而签字.",
         "linkSteamAccountCta": "签字",
-        "linkSteamAccountTitle": "联系船"
+        "linkSteamAccountTitle": "联系船",
+        "compatibilityLayer": "兼容层（测试版）",
+        "discordAppLink": "Discord 社区。"
     },
     "hyperplayOverlay": {
         "greeting": {
             "title": "HyperPlay Overlay",
-            "description": "HyperPlay Overlay已准备就绪！按 Alt + X 键显示或隐藏。"
+            "description": "HyperPlay 悬浮窗已准备好！按 {{overlayKeyMod}} + X 显示或隐藏它。"
         },
         "chainRequest": {
             "CONFIRMED": "已添加自定义网络",
@@ -928,7 +959,7 @@
         },
         "extensionNotification": {
             "TITLE": "要求进行交易",
-            "DESCRIPTION": "按 Alt 或 Option + X 查看此交易"
+            "DESCRIPTION": "按{{overlayKeyMod}} + X查看此交易"
         },
         "walletWatch": {
             "INITIATED": "添加自定义代币的请求待处理",
@@ -997,7 +1028,9 @@
         "connectSteamAccount": "1. 联接船",
         "reputation": "投 票",
         "claimFailed": "索赔失败",
-        "notEnoughGas": "由于汽油费,没有足够平衡地要求获得奖励。 在进行再造之前,打一条不同的围墙或补充.",
+        "notEnoughGas": {
+            "message": "由于燃气费用，钱包余额不足以领取您的奖励。请尝试其他钱包或在重试之前补充此钱包。"
+        },
         "claimFailedMessage": "由于汽油费,没有足够平衡地要求获得奖励。 在进行再造之前,打一条不同的围墙或补充.",
         "createDiscordTicket": "伪造票",
         "errorMessage": "交易有错误.",
@@ -1019,7 +1052,28 @@
             "cancel": "取消"
         },
         "noG7ConnectionClaim": "你们需要拥有一个与{{email}}相联的游戏7账户,以争取你们的奖励.",
-        "noG7ConnectionSync": "你们需要拥有一个与{{email}}相联的“游戏7”账户,以完成你们的任务."
+        "noG7ConnectionSync": {
+            "message": "您需要将 Game7 账户链接到 {{email}} 以重新同步您的任务。",
+            "title": "未链接 G7 账户"
+        },
+        "claim": "领取",
+        "notEligible": {
+            "message": "您尚未完成所需的游戏连续天数，无法在此时领取奖励。",
+            "title": "尚不符合资格"
+        },
+        "youHaveClaimed": "您已领取 {{totalRewards}} 奖励{{plural}}。",
+        "notSignedIn": {
+            "message": "您需要登录才能领取奖励。",
+            "title": "未登录"
+        },
+        "notEnoughBalance": {
+            "title": "余额不足"
+        },
+        "questAvailable": "任务可用！",
+        "questComplete": "任务完成！",
+        "rewardClaimed": "领取成功",
+        "toClaimReward": "以领取您的奖励。",
+        "toSeeDetails": "以查看详细信息。"
     },
     "quests": {
         "quests": "任务",
@@ -1068,7 +1122,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "你与超Play有外部围墙.",
         "WALLET_DISCONNECTED": "你没有与超Play连接的围墙.",
-        "comingSoon": "新赛季即将开启"
+        "comingSoon": "新赛季即将开启",
+        "links": {
+            "sell": "出售",
+            "bridge": "桥接",
+            "buy": "购买",
+            "portfolio": "投资组合",
+            "marketplace": "市场",
+            "swap": "交换"
+        }
     },
     "back_to_game": "重获游戏",
     "import-game-folder": {
@@ -1107,15 +1169,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "这一游戏是为战火世界所 mo的:利奇国王的Wrath(3.3.5a)。 为了发挥这一作用,参与者必须拥有一份3.3.5a.{{newline}}{{newline}}超Play的《世界战舰》副本。 拥有战舰的运动员可以从下列来源获得3.3.5a版本:",
+                "description": "这个游戏是《魔兽世界：巫妖王之 wrath》（3.3.5a）的一个模组。为了玩这个模组，玩家必须拥有《魔兽世界 3.3.5a》的副本。{{newline}} {{newline}} HyperPlay 不托管《魔兽世界》。拥有《魔兽世界》的玩家可以从以下来源获取所需版本：",
                 "subtitle": "3.3.5a",
                 "webtorrent": "Torrent(Magnet Link)",
-                "title": "第一步"
+                "title": "第一步",
+                "link2": "链接 2（磁力链接）",
+                "link1": "链接 1"
             },
             "step2": {
                 "description": "选择下载 ChromieCraft_3.3.5a.zip file.",
                 "subtitle": "Selected ChromieCraft_3.3.5a.zip 文件",
-                "title": "第二步"
+                "title": "第二步",
+                "subtitle1": "选择下载的3.3.5a压缩文件"
             },
             "step3": {
                 "description": "请选择安装世界军舰的夹:Lch King的Wrath(3.3.5a).",
@@ -1149,5 +1214,27 @@
         "success-message": "已经安装了轮船。 现在,你可以从图书馆发射.",
         "tooltip": "这将安装Windows版本的轮船,它将使用超Play兼容性。\n\n某些游戏,特别是旧题目、新的3D游戏,或具有反制软件的游戏,可能无法正常运转。\n\n推荐的光谱是Mac和Ampa Silicon CPU(M1或以上)和至少16GB of RAM."
     },
-    "UNCHECK 'Run Steam'": "UNCHECK'Runell 页: 1"
+    "UNCHECK 'Run Steam'": "UNCHECK'Runell 页: 1",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask 投资组合仅在连接到 MetaMask 时可用。"
+        },
+        "unsupported": "不支持的钱包连接"
+    },
+    "Downloading": "正在下载 {{percent}}%",
+    "installModal": {
+        "loginRequiredMessageUpdate": "您需要登录 HyperPlay 才能输入您的访问代码并更新此游戏。 ",
+        "loginRequired": "需要登录",
+        "loginRequiredMessage": "您需要登录 HyperPlay 才能输入您的访问代码并安装此游戏。 "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0或更高版本"
+    },
+    "Please Wait": "请稍候",
+    "Recommended specs for a better experience": "推荐配置以获得更好的体验",
+    "16GB of RAM": "16GB 内存",
+    "Apple Silicon M1 or above": "Apple Silicon M1 或更高版本",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "请注意，并非所有游戏都能正常运行，即使能，它们的表现也可能不如预期。",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "如果您希望继续，请耐心等待，因为根据您的互联网连接和系统配置，完成可能需要几分钟。",
+    "Installing": "正在安装"
 }

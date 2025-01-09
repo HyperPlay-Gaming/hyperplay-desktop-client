@@ -137,7 +137,7 @@
             "title": "میانبرها"
         },
         "sync": {
-            "button": "انتخاب",
+            "button": "انتخاب کنید",
             "error": "مسیر نامعتبر",
             "title": "انتخاب محل ذخیره"
         },
@@ -183,9 +183,9 @@
         "cancel": "Cancel",
         "go_to_library": "رفتن به کتابخانه",
         "login": "ورود",
-        "sync": "همگام سازی",
-        "syncing": "در حال همگام سازی",
-        "unsync": "عدم همگام سازی",
+        "sync": "همگام‌سازی",
+        "syncing": "در حال همگام‌سازی",
+        "unsync": "لغو همگام‌سازی",
         "continue": "ادامه",
         "download": "دانلود",
         "update": "روزآمدسازی",
@@ -260,7 +260,7 @@
         "ignore_hidden": "نادیده گرفتن موارد پنهان",
         "platform": "پلتفرم",
         "show_all_games": "نمایش همه بازی ها",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "نمایش بازی‌های غیرقابل دسترس",
         "show_favourites_only": "نمایش مورد علاقه ها",
         "show_hidden": "نمایش موارد پنهان",
         "store": "فیلتر فروشگاه"
@@ -407,7 +407,7 @@
         },
         "uninstalled": "حذف شد",
         "update": {
-            "canceled": "بهروزرسانی لغو شد",
+            "canceled": "به‌روزرسانی لغو شد",
             "finished": "آپدیت به پایان رسید",
             "started": "بهروزرسانی آغاز شد",
             "stopped": "Update متوقف شد",
@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "pause": "مکث بارگیری‌ها",
-            "resume": "ازسرگیری بارگیری"
+            "resume": "ازسرگیری بارگیری",
+            "retry-install": "تلاش مجدد برای نصب",
+            "retry-update": "تلاش مجدد برای به‌روزرسانی",
+            "stop": "متوقف کردن دانلود",
+            "timeElapsed": "زمان سپری شده: {{elapsed}}",
+            "launch": "بازی را راه‌اندازی کنید"
         }
     },
     "Recent": "اخیرا بازی شده",
@@ -512,7 +517,7 @@
         "default-install-path": "محل پیشفرض نصب",
         "default-steam-path": "مسیر پیش فرض استیم",
         "defaultWinePrefix": "تنظیم پوشه برای Wine Prefix جدید",
-        "disable_controller": "غیر فعال کردن کنترل HyperPlay با استفاده از دسته",
+        "disable_controller": "ناوبری هایپرپلی را با استفاده از کنترلر غیرفعال کنید",
         "discordRPC": "فعالسازی Discord Rich Presence",
         "download-no-https": "دانلود بازی ها بدون HTTPS (مفید برای CDNs مانند LanCache)",
         "egs-sync": "همگامسازی با بازیهای اپیک نصب شده",
@@ -746,7 +751,7 @@
         "manager": {
             "link": "مدیریت Wine",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "مدیریت کننده Wine",
+            "title": "لایه سازگاری ",
             "unzipping": "در حال خارج کردن از حالت فشرده"
         },
         "release": "Release Date",
@@ -772,12 +777,14 @@
     "hyperplay": {
         "accesscodes": {
             "error": {
-                "validation": "کد دسترسی بی اعتبار است"
+                "validation": "کد دسترسی بی اعتبار است",
+                "licenseUndefined": "نتوانستیم کد دسترسی را تأیید کنیم. لطفاً دسترسی اینترنت یا تنظیمات فایروال خود را بررسی کنید."
             },
             "requirescode": "این به روز رسانی بازی نیاز به یک کد دسترسی دارد.",
             "success": {
                 "validation": "موفقیت! کد دسترسی معتبر است"
-            }
+            },
+            "placeholder": "کد دسترسی را وارد کنید"
         },
         "onboarding": {
             "analytics": {
@@ -790,7 +797,16 @@
                 "neverCollectPersonal": " جمع آوری کلید، آدرس، تعادل، هش یا هر گونه اطلاعات شخصی؛;",
                 "title": "کمک به ما برای بهبود HyperPlay!",
                 "body": "HyperPlay مایل به جمع آوری داده های استفاده برای درک بهتر نحوه تعامل کاربران ما با برنامه خواهد بود. این اطلاعات به ما کمک می کند تا درک کنیم که چگونه از برنامه استفاده می کنید و به ما اجازه می دهد تا HyperPlay را حتی برای شما بهتر کنیم.",
-                "privacyCaption": "این داده ها جمع آوری شده و در نتیجه برای اهداف مقررات حفاظت از داده های عمومی (EU) 2016/679 ناشناس است. برای اطلاعات بیشتر در رابطه با شیوه های حریم خصوصی ما، لطفا ببینید "
+                "privacyCaption": "این داده ها جمع آوری شده و در نتیجه برای اهداف مقررات حفاظت از داده های عمومی (EU) 2016/679 ناشناس است. برای اطلاعات بیشتر در رابطه با شیوه های حریم خصوصی ما، لطفا ببینید ",
+                "privacyPolicy": "سیاست حفظ حریم خصوصی.",
+                "text": {
+                    "externalLink": "بیشتر بدانید",
+                    "title": "ما سیاست حفظ حریم خصوصی خود را به‌روزرسانی کرده‌ایم"
+                },
+                "titleOne": "به ما کمک کنید HyperPlay را بهبود ببخشیم!",
+                "bulletOne": "همیشه به شما اجازه می‌دهد که انصراف دهید",
+                "bulletTwo": "ارسال کلیک و تعامل بازی به صورت ناشناس",
+                "paragraphOne": "HyperPlay می‌خواهد داده‌های استفاده را جمع‌آوری کند تا بهتر بفهمد کاربران چگونه با برنامه تعامل دارند.\nاین به ما اجازه می‌دهد HyperPlay را برای شما بهتر کنیم."
             },
             "connectionCanceled": {
                 "title": "اتصال لغو شد!",
@@ -840,9 +856,19 @@
                     "communityCTA_2": "جامعه بیایید آینده بازی را شکل دهیم!",
                     "bugs": "توجه داشته باشید که HyperPlay یک آلفا عمومی است. بسیاری از ویژگی ها هنوز\nدر توسعه، و اشکالات وجود خواهد داشت.",
                     "communityCTA_1": "ما بازخورد شما را دوست داریم و شما را در ما ملحق می کنیم",
-                    "description": "HyperPlay یک پرتاب کننده بازی و گردآورنده فروشگاه بازی است.\nآینده با HyperPlay، می توانید کیف پول، توکن ها و دارایی های خود را حمل کنید.\nدر هر بازی HyperPlay از کل کتابخانه Epic پشتیبانی می کند\nفروشگاه، GOG و فروشگاه HyperPlay خود با استفاده از HyperPlay، شما موافقت می کنید\nبه ما"
+                    "description": "HyperPlay یک پرتاب کننده بازی و گردآورنده فروشگاه بازی است.\nآینده با HyperPlay، می توانید کیف پول، توکن ها و دارایی های خود را حمل کنید.\nدر هر بازی HyperPlay از کل کتابخانه Epic پشتیبانی می کند\nفروشگاه، GOG و فروشگاه HyperPlay خود با استفاده از HyperPlay، شما موافقت می کنید\nبه ما",
+                    "bulletPointFour": "نصب Steam (نسخه ویندوز) بر روی macOS با یک کلیک آسان",
+                    "bulletPointOne": "به مجموعه وسیعی از 100+ بازی فعال بر روی زنجیره دسترسی پیدا کنید",
+                    "bulletPointFive": "اجرای بازی‌های ویندوز بر روی macOS، لینوکس و SteamDeck با استفاده از\n              پیشرفته ما",
+                    "bulletPointThree": "بازی‌های Epic و GOG را مستقیماً از طریق HyperPlay بازی کنید",
+                    "bulletPointTwo": "با تکمیل مأموریت‌ها توکن‌ها، NFTها و پاداش‌های خارج از زنجیره کسب کنید",
+                    "lastParagraph": "در حال حاضر در حالت بتا هستیم، ما به بازخورد شما بسیار اهمیت می‌دهیم و  \n            شما را تشویق می‌کنیم که هرگونه مشکل یا پیشنهادی را در",
+                    "paragraphOne": "در HyperPlay، ما در حال ساخت فروشگاه بازی نسل بعدی  \n            برای آینده بازی‌ها هستیم.",
+                    "paragraphThr": "به‌طور یکپارچه کیف پول، توکن‌ها و دارایی‌های خود را به هر بازی وارد کنید در حالی که به  \n           کتابخانه‌های گسترده فروشگاه Epic،  \n           GOG و فروشگاه HyperPlay خودمان - همه در یک مکان - دسترسی دارید.",
+                    "TitleList": "با HyperPlay می‌توانید:"
                 },
-                "title": "خوش آمدید به Hyper بازی Early Access!"
+                "title": "خوش آمدید به Hyper بازی Early Access!",
+                "titleIntro": "به HyperPlay خوش آمدید!"
             },
             "connectAgain": "اتصال دوباره",
             "connectionConnected": {
@@ -872,7 +898,8 @@
             "installed": "آماده بازی",
             "paused": "متوقف شده",
             "distributables": "نصب Distributables",
-            "installing": "در حال دانلود"
+            "installing": "در حال دانلود",
+            "patching": "در حال وصله‌گذاری..."
         },
         "syncing": "...",
         "viewPortfolio": "View Portfolio",
@@ -886,7 +913,9 @@
         "publicAlpha": "عمومی آلفا",
         "buttons": {
             "noThanks": "نه ممنون",
-            "agree": "موافقم"
+            "agree": "موافقم",
+            "primaryButton": "من موافقم",
+            "secondaryButton": "نه، متشکرم"
         },
         "logOut": "خروج",
         "misc": "هرگز",
@@ -896,7 +925,9 @@
         "turnAnalyticsOn": "روشن کردن",
         "folder": "پوشه",
         "discordApp": "Discord",
-        "viewFullscreen": "View Fullscreen"
+        "viewFullscreen": "View Fullscreen",
+        "compatibilityLayer": "لایه سازگاری (بتا)",
+        "discordAppLink": "جامعه دیسکورد."
     },
     "hyperplayOverlay": {
         "txnRequest": {
@@ -975,14 +1006,16 @@
         "linkAccount": "لینک خود را حساب Steam برای بررسی واجد شرایط بودن.",
         "reputation": "Reputation",
         "createDiscordTicket": "ساخت بلیط Discord",
-        "notEnoughGas": "تعادل کیف پول کافی برای ادعای پاداش شما به دلیل هزینه های گاز یک کیف پول مختلف را امتحان کنید یا این کیف پول را قبل از دوباره پر کنید.",
+        "notEnoughGas": {
+            "message": "موجودی کیف پول کافی برای دریافت پاداش شما به دلیل هزینه‌های گاز وجود ندارد. کیف پول دیگری را امتحان کنید یا این کیف پول را قبل از تلاش مجدد شارژ کنید."
+        },
         "needMoreAchievements": "شما باید {{percent}}٪ از دستاوردهای در یکی از این بازی ها را تکمیل کنید.",
         "claimFailed": "مطالبات شکست خورده",
         "claimFailedMessage": "لطفا یک بار دیگر امتحان کنید. اگر هنوز کار نمی کند، یک بلیط پشتیبانی Discord ایجاد کنید.",
         "active": "فعال",
         "Play": "نمایش",
         "points": "نقاط",
-        "signIn": "ورود",
+        "signIn": "وارد شوید",
         "sync": "همگامسازی",
         "reward": "پاداش",
         "pointsClaimed": "امتیازات مطالبات",
@@ -995,7 +1028,28 @@
             "confirm": "تأیید"
         },
         "noG7ConnectionClaim": "شما باید یک حساب Game7 مرتبط با {{email}} داشته باشید تا پاداش های خود را مطالبه کنید.",
-        "noG7ConnectionSync": "شما باید یک حساب Game7 مرتبط با {{email}} داشته باشید تا وظایف خود را دوباره تنظیم کنید."
+        "noG7ConnectionSync": {
+            "message": "شما باید یک حساب Game7 به {{email}} متصل داشته باشید تا وظایف خود را دوباره همگام‌سازی کنید.",
+            "title": "هیچ حساب G7 متصل نیست"
+        },
+        "notEligible": {
+            "message": "شما روزهای لازم برای بازی را کامل نکرده‌اید و در حال حاضر نمی‌توانید پاداش خود را دریافت کنید.",
+            "title": "هنوز واجد شرایط نیستید"
+        },
+        "notEnoughBalance": {
+            "title": "موجودی کم"
+        },
+        "questAvailable": "ماموریت در دسترس است!",
+        "questComplete": "ماموریت کامل شد!",
+        "toClaimReward": "برای دریافت پاداش خود.",
+        "toSeeDetails": "برای مشاهده جزئیات.",
+        "claim": "دریافت",
+        "notSignedIn": {
+            "message": "برای ادعای پاداش خود باید وارد شوید.",
+            "title": "وارد نشده‌اید"
+        },
+        "rewardClaimed": "ادعا با موفقیت انجام شد",
+        "youHaveClaimed": "شما پاداش {{totalRewards}} را دریافت کرده‌اید{{plural}}."
     },
     "quests": {
         "playstreak": {
@@ -1047,7 +1101,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "شما به HyperPlay با کیف پول خارجی متصل هستید.",
         "WALLET_DISCONNECTED": "شما کیف پول متصل به HyperPlay ندارید.",
-        "comingSoon": "به‌زودی"
+        "comingSoon": "به‌زودی",
+        "links": {
+            "buy": "خرید",
+            "bridge": "پل",
+            "marketplace": "بازار",
+            "swap": "تعویض",
+            "portfolio": "پورتفولیو",
+            "sell": "فروش"
+        }
     },
     "achievements": {
         "progress": {
@@ -1095,16 +1157,19 @@
     "mods": {
         "instructions": {
             "step1": {
-                "description": "این بازی روشی برای World of Warcraft: Wrath of the Lich King (3.3.5a) است. برای بازی در این حالت، بازیکنان باید یک نسخه از World of Warcraft 3.3.5a داشته باشند. {{newline}} HyperPlay میزبان World of Warcraft نیست. بازیکنانی که دارای World of Warcraft هستند می توانند نسخه 3.3.5a را از منابعی مانند:",
+                "description": "این بازی یک مد برای World of Warcraft: Wrath of the Lich King (3.3.5a) است. برای بازی کردن این مد، بازیکنان باید یک نسخه از World of Warcraft 3.3.5a داشته باشند. {{newline}} {{newline}} HyperPlay میزبان World of Warcraft نیست. بازیکنانی که World of Warcraft را دارند می‌توانند نسخه مورد نیاز را از منابع زیر دریافت کنند:",
                 "subtitle": "دانلود بازی World of Warcraft 33.5a",
                 "webtorrent": "تورنت (Magnet Link)",
                 "chromieCraft": "Chromiecraft",
-                "title": "گام ۱"
+                "title": "گام ۱",
+                "link1": "لینک ۱",
+                "link2": "لینک ۲ (لینک مگنت)"
             },
             "step2": {
                 "description": "گزینه The Download را انتخاب کنید فایل Chromiecraft_3.3.5a.zip.",
                 "subtitle": "انتخاب Chromiecraft_3.3.5a.zip File File",
-                "title": "گام ۲"
+                "title": "گام ۲",
+                "subtitle1": "فایل فشرده 3.3.5a دانلود شده را انتخاب کنید"
             },
             "step3": {
                 "description": "لطفا پوشه ای را انتخاب کنید که World of Warcraft: Wrath of the Lich King (3.3.5a) باید نصب شود.",
@@ -1138,5 +1203,27 @@
         "success-message": "Steam نصب شده است. حالا می توانید آن را از کتابخانه راه اندازی کنید.",
         "tooltip": "این نسخه ویندوز Steam را نصب می کند و با استفاده از یک لایه HyperPlay Compatibility اجرا می شود.\n\nبرخی از بازی ها به ویژه عناوین قدیمی تر، بازی های سه بعدی جدید یا کسانی که دارای نرم افزار ضدcheat هستند ممکن است به درستی کار نکنند.\n\nمشخصات توصیه شده یک مک با پردازنده سیلیکون اپل (M1 یا بالاتر) و حداقل 16 گیگابایت رم است."
     },
-    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam\" \"\""
+    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam\" \"\"",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "اگر می‌خواهید ادامه دهید، لطفاً صبور باشید زیرا ممکن است بسته به اتصال اینترنت و پیکربندی سیستم شما چند دقیقه طول بکشد تا تمام شود.",
+    "Installing": "در حال نصب",
+    "installModal": {
+        "loginRequired": "ورود لازم است",
+        "loginRequiredMessage": "برای ورود به کد دسترسی و نصب این بازی، باید به HyperPlay وارد شوید. ",
+        "loginRequiredMessageUpdate": "برای وارد کردن کد دسترسی خود و به‌روزرسانی این بازی، باید به HyperPlay وارد شده باشید. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 یا بالاتر"
+    },
+    "Please Wait": "لطفاً صبر کنید",
+    "Recommended specs for a better experience": "مشخصات پیشنهادی برای تجربه بهتر",
+    "wallet": {
+        "unsupported": "اتصال کیف پول پشتیبانی نمی‌شود",
+        "portfolio": {
+            "onlyExtension": "پورتفولیو MetaMask تنها زمانی در دسترس است که با MetaMask متصل باشید."
+        }
+    },
+    "16GB of RAM": "16 گیگابایت RAM",
+    "Apple Silicon M1 or above": "سیلیکون اپل M1 یا بالاتر",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "به یاد داشته باشید که نه همه بازی‌ها کار خواهند کرد و حتی اگر کار کنند، ممکن است به‌طور مورد انتظار اجرا نشوند.",
+    "Downloading": "در حال دانلود {{percent}}%"
 }

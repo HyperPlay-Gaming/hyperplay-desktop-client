@@ -137,7 +137,7 @@
             "title": "Genvägar"
         },
         "sync": {
-            "button": "Ok",
+            "button": "Välj",
             "error": "Ogilltig sökväg",
             "title": "Väl mapp för sparfiler"
         },
@@ -183,9 +183,9 @@
         "cancel": "Cancel",
         "go_to_library": "Gå till Biblioteket",
         "login": "Logga in",
-        "sync": "Synkronisering",
+        "sync": "Synkronisera",
         "syncing": "Synkroniserar",
-        "unsync": "Avbryt synkronisering",
+        "unsync": "Avsynkronisera",
         "continue": "Fortsätt",
         "download": "Hämta",
         "update": "Uppdatera",
@@ -260,7 +260,7 @@
         "ignore_hidden": "Ignorera dolda",
         "platform": "Plattform",
         "show_all_games": "Visa alla spel",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Visa icke-tillgängliga spel",
         "show_favourites_only": "Visa endast favoriter",
         "show_hidden": "Visa dolda",
         "store": "Filter Store"
@@ -391,9 +391,9 @@
             "reparing": "Reparation slutförd"
         },
         "install": {
-            "canceled": "Installationen avbröts",
+            "canceled": "Installation avbruten",
             "error": "Installation misslyckades",
-            "finished": "Installation slutförd",
+            "finished": "Installation avslutad",
             "imported": "Spelimport slutförd",
             "startInstall": "Installation påbörjad",
             "paused": "Installation Paused",
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Avinstallerat",
         "update": {
-            "canceled": "Uppdatering avbröts",
+            "canceled": "Uppdatering avbruten",
             "finished": "Uppdatering slutförd",
             "started": "Uppdatering påbörjad",
             "stopped": "Uppdatering stoppad",
@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "resume": "Återupta nerladdning",
-            "pause": "Pausa hämtningar"
+            "pause": "Pausa hämtningar",
+            "timeElapsed": "Tid som förflutit: {{elapsed}}",
+            "retry-install": "Försök installera igen",
+            "launch": "Starta spel",
+            "retry-update": "Försök uppdatera igen",
+            "stop": "Stoppa nedladdning"
         }
     },
     "Recent": "Nyligen spelat",
@@ -512,7 +517,7 @@
         "default-install-path": "Standard installationssökväg",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Ange sökväg för nya Wine-prefix",
-        "disable_controller": "Deaktivera navigering via handkontroll",
+        "disable_controller": "Inaktivera Hyperplay-navigering med kontroller",
         "discordRPC": "Aktivera Discord Rich Presence",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "egs-sync": "Synkronisera med installerade Epic spel",
@@ -746,7 +751,7 @@
         "manager": {
             "link": "Wine hanterare",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Wine hanterare",
+            "title": "Kompatibilitetslager ",
             "unzipping": "Packar upp"
         },
         "release": "Utgivningsdatum",
@@ -777,7 +782,9 @@
         },
         "buttons": {
             "noThanks": "Nej tack",
-            "agree": "Jag håller med"
+            "agree": "Jag håller med",
+            "primaryButton": "Jag godkänner",
+            "secondaryButton": "Nej, tack"
         },
         "copyUrl": "Kopiera webbadress",
         "logOut": "Logga ut",
@@ -841,7 +848,16 @@
                 "neverSellData": " sälja data för vinst. Någonsin!",
                 "optOut": "Låt dig alltid välja bort via Inställningar;",
                 "privacyCaption": "Dessa uppgifter aggregeras och är därför anonyma för allmänna dataskyddsförordning (EU) 2016/679. För mer information om våra sekretesspraxis, se vår ",
-                "privacyPolicyHere": "Integritetspolicy här."
+                "privacyPolicyHere": "Integritetspolicy här.",
+                "paragraphOne": "HyperPlay skulle vilja samla in användardata för att bättre förstå hur våra användare interagerar med applikationen. \n           Detta gör att vi kan göra HyperPlay ännu bättre för dig.",
+                "bulletOne": "Tillåt alltid att du kan avstå",
+                "bulletTwo": "Skicka anonymiserade klick- och spelinteraktioner",
+                "privacyPolicy": "Integritetspolicy.",
+                "text": {
+                    "externalLink": "Läs mer",
+                    "title": "Vi har uppdaterat vår integritetspolicy"
+                },
+                "titleOne": "Hjälp oss att förbättra HyperPlay!"
             },
             "welcome": {
                 "title": "Välkommen till Hyper Spela tidig åtkomst!",
@@ -850,8 +866,18 @@
                     "communityCTA_2": "gemenskap. Låt oss forma framtiden för spel!",
                     "construction": "HyperPlay är under konstruktion.",
                     "description": "HyperPlay är en game launcher och game store aggregator från\nFramtiden. Med HyperPlay kan du bära din plånbok, tokens och tillgångar\ntill varje spel. HyperPlay stöder hela biblioteket i Epic\nStore, GOG och vår egen HyperPlay-butik. Genom att använda HyperPlay godkänner du\ntill vår",
-                    "bugs": "Observera att HyperPlay är en offentlig alfa. Många funktioner är fortfarande\ni utveckling, och det kommer att finnas buggar."
-                }
+                    "bugs": "Observera att HyperPlay är en offentlig alfa. Många funktioner är fortfarande\ni utveckling, och det kommer att finnas buggar.",
+                    "paragraphOne": "På HyperPlay bygger vi nästa generations spelbutik \n            för framtidens spelande.",
+                    "paragraphThr": "Sömlöst ta med din plånbok, tokens, \n           och tillgångar in i varje spel medan du får tillgång \n           till de omfattande biblioteken i Epic Store, \n           GOG och vår egen HyperPlay Store - allt på ett ställe.",
+                    "bulletPointFour": "Installera Steam (Windows-version) på macOS med ett enkelt klick",
+                    "bulletPointFive": "Kör Windows-spel på macOS, Linux och SteamDeck med vår\n              avancerade",
+                    "bulletPointOne": "Få tillgång till en stor samling av 100+ on-chain aktiverade spel",
+                    "bulletPointThree": "Spela Epic- och GOG-spel direkt genom HyperPlay",
+                    "bulletPointTwo": "Tjäna tokens, NFTs och off-chain belöningar genom att slutföra uppdrag",
+                    "lastParagraph": "För närvarande i Beta, vi värdesätter verkligen din feedback och \n            uppmuntrar dig att rapportera eventuella problem eller förslag i vår",
+                    "TitleList": "Med HyperPlay kan du:"
+                },
+                "titleIntro": "Välkommen till HyperPlay!"
             }
         },
         "folder": "Mapp",
@@ -862,7 +888,8 @@
             "paused": "Pausad",
             "distributables": "Installera Distributables",
             "extracting": "Utvinning...",
-            "installed": "Redo att spela"
+            "installed": "Redo att spela",
+            "patching": "Patchar..."
         },
         "syncing": "Synkroniserar …",
         "turnAnalyticsOn": "Sätt på",
@@ -881,12 +908,14 @@
         "otp": "One Time Passcode",
         "accesscodes": {
             "error": {
-                "validation": "Access-kod är ogiltig"
+                "validation": "Access-kod är ogiltig",
+                "licenseUndefined": "Kunde inte validera åtkomstkod. Kontrollera din internetanslutning eller brandväggsinställningar."
             },
             "success": {
                 "validation": "Framgång! Access-kod är giltig"
             },
-            "requirescode": "Denna speluppdatering kräver en åtkomstkod."
+            "requirescode": "Denna speluppdatering kräver en åtkomstkod.",
+            "placeholder": "Ange åtkomstkod"
         },
         "analyticsOff": "Analytics är avstängd",
         "changeWallet": "Swap plånbok konto",
@@ -897,7 +926,9 @@
         "linkSteamAccountCta": "Gå till Steam Sign in",
         "linkSteamAccountDescription": "Logga in på Steam för att länka ditt HyperPlay-konto.",
         "linkSteamAccountTitle": "Link Steam-konto",
-        "viewFullscreen": "Visa fullscreen"
+        "viewFullscreen": "Visa fullscreen",
+        "compatibilityLayer": "Kompatibilitetslager (Beta)",
+        "discordAppLink": "Discord-gemenskap."
     },
     "gameRelease": {
         "alpha": "Alpha",
@@ -943,7 +974,9 @@
         "associatedGames": "Associerade spel",
         "linkAccount": "Länka din Ångkonto för att kontrollera behörigheten.",
         "createDiscordTicket": "Skapad Discord biljett",
-        "notEnoughGas": "Otillräcklig plånboksbalans för att hävda din belöning på grund av gasavgifter. Prova en annan plånbok eller fylla på den här innan du går tillbaka.",
+        "notEnoughGas": {
+            "message": "Otillräckligt plånboksbalans för att hämta din belöning på grund av gasavgifter. Försök med en annan plånbok eller fyll på denna innan du försöker igen."
+        },
         "pointsClaimed": "Poäng som krävs",
         "g7Numclaimed": "Totalkrav G7 Credits",
         "claimWarning": {
@@ -954,7 +987,28 @@
             "cancel": "Avbryt"
         },
         "noG7ConnectionClaim": "Du måste ha ett Game7-konto kopplat till {{email}} för att göra anspråk på dina belöningar.",
-        "noG7ConnectionSync": "Du måste ha ett Game7-konto kopplat till {{email}} för att synkronisera dina uppgifter."
+        "noG7ConnectionSync": {
+            "message": "Du måste ha ett Game7-konto kopplat till {{email}} för att synkronisera dina uppgifter igen.",
+            "title": "Ingen G7-konto kopplad"
+        },
+        "notEligible": {
+            "message": "Du har inte fullföljt de nödvändiga speldagarna och kan inte kräva din belöning just nu.",
+            "title": "Inte berättigad än"
+        },
+        "notEnoughBalance": {
+            "title": "Låg balans"
+        },
+        "rewardClaimed": "Kravet lyckades",
+        "toClaimReward": "för att hämta din belöning.",
+        "toSeeDetails": "för att se detaljer.",
+        "youHaveClaimed": "Du har krävt {{totalRewards}} belöning{{plural}}.",
+        "questComplete": "Uppdraget slutfört!",
+        "notSignedIn": {
+            "message": "Du måste vara inloggad för att kunna hämta din belöning.",
+            "title": "Inte inloggad"
+        },
+        "questAvailable": "Uppdrag tillgängligt!",
+        "claim": "Kräv"
     },
     "ALL": "ALLA",
     "analytics": "Analytics",
@@ -1045,7 +1099,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Du är ansluten till HyperPlay med en extern plånbok.",
         "WALLET_DISCONNECTED": "Du har ingen plånbok ansluten till HyperPlay.",
-        "comingSoon": "Kommer snart"
+        "comingSoon": "Kommer snart",
+        "links": {
+            "bridge": "Bro",
+            "swap": "Byt",
+            "buy": "Köp",
+            "marketplace": "Marknadsplats",
+            "portfolio": "Portfölj",
+            "sell": "Sälj"
+        }
     },
     "email_subscription": {
         "title": "Tack för att du prenumererar!",
@@ -1096,15 +1158,18 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "Detta spel är en mod för World of Warcraft: Wrath of the Lich King (3.3.5a). För att spela denna mod måste spelarna äga en kopia av World of Warcraft 3.3.5a. {{newline}} HyperPlay är inte värd för World of Warcraft. Spelare som äger World of Warcraft kan få version 3.3.5a från källor som:",
+                "description": "Detta spel är en mod för World of Warcraft: Wrath of the Lich King (3.3.5a). För att spela denna mod måste spelare äga en kopia av World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay värdar inte World of Warcraft. Spelare som äger World of Warcraft kan få den nödvändiga versionen från följande källor:",
                 "subtitle": "Ladda ner World of Warcraft 3.3.5a",
                 "webtorrent": "Torrent (Magnet Link)",
-                "title": "Steg 1"
+                "title": "Steg 1",
+                "link1": "Länk 1",
+                "link2": "Länk 2 (Magnetlänk)"
             },
             "step2": {
                 "description": "Välj den nedladdade ChromieCraft_3.3.5a.zip-fil.",
                 "subtitle": "Välj ChromieCraft_3.3.5a.zip Fil",
-                "title": "Steg 2"
+                "title": "Steg 2",
+                "subtitle1": "Välj den nedladdade 3.3.5a zip-filen"
             },
             "step3": {
                 "description": "Vänligen välj mappen där World of Warcraft: Wrath of the Lich King (3.3.5a) ska installeras.",
@@ -1138,5 +1203,27 @@
     "At the end make sure to": "I slutet se till att",
     "Cancel Installation": "Avbryt installation",
     "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Om du vill fortsätta, ha tålamod eftersom det kan ta några minuter att avsluta beroende på din internetanslutning och systemkonfiguration;",
-    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam \""
+    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam \"",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Om du vill fortsätta, var vänlig och ha tålamod eftersom det kan ta några minuter att slutföra beroende på din internetanslutning och systemkonfiguration.",
+    "installModal": {
+        "loginRequiredMessage": "Du måste vara inloggad på HyperPlay för att ange din åtkomstkod och installera detta spel. ",
+        "loginRequiredMessageUpdate": "Du måste vara inloggad på HyperPlay för att ange din åtkomstkod och uppdatera detta spel. ",
+        "loginRequired": "Inloggning krävs"
+    },
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask-portföljen är endast tillgänglig när den är ansluten till MetaMask."
+        },
+        "unsupported": "Stöds inte plånboksanslutning"
+    },
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 eller högre",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Var medveten om att inte alla spel kommer att fungera, och även om de gör det, kanske de inte körs som förväntat.",
+    "Downloading": "Laddar ner {{percent}}%",
+    "Recommended specs for a better experience": "Rekommenderade specifikationer för en bättre upplevelse",
+    "Installing": "Installerar",
+    "macOS 14": {
+        "0 or above": "macOS 14.0 eller högre"
+    },
+    "Please Wait": "Vänligen vänta"
 }

@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Pokračovat v instalaci",
             "message": "Chcete ponechat stažené soubory?",
-            "title": "Zastavit instalaci",
+            "title": "Chcete zrušit stahování?",
             "keepFilesMessage": "Zkontrolujte, zda chcete zachovat stahování souborů po zrušení."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Velikost ke stažení",
         "firstPlayed": "Poprvé hráno",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Získávání velikosti stahování",
+        "getting-install-size": "Získávání velikosti instalace",
         "installSize": "Velikost instalace",
         "language": "Jazyk",
         "lastPlayed": "Naposledy hráno",
@@ -231,7 +231,8 @@
             "cancel": "Zrušení výpisu",
             "progress": "Čeština"
         },
-        "preparing": "Příprava ke stažení, prosím počkat"
+        "preparing": "Příprava ke stažení, prosím počkat",
+        "patching": "Oprava souborů "
     },
     "submenu": {
         "addShortcut": "Přidat zástupce",

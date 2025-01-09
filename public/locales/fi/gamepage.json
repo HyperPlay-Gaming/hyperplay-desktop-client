@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Latauksen koko",
         "firstPlayed": "Ensimmäisen kerran pelattu",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Latauskoko haetaan",
+        "getting-install-size": "Asennuskoko haetaan",
         "installSize": "Asennuskoko",
         "language": "Kieli",
         "lastPlayed": "Viimeksi pelattu",
@@ -225,7 +225,8 @@
         "downloading": "Tor-selaimen lataaminen",
         "paused": "Pysäytetty",
         "playing": "Toistaa",
-        "syncingSaves": "Synkronoidaan tallennuksia"
+        "syncingSaves": "Synkronoidaan tallennuksia",
+        "patching": "Tiedostojen korjaaminen "
     },
     "submenu": {
         "addShortcut": "Lisää pikakuvake",
