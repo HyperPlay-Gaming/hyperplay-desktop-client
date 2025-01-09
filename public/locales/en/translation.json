@@ -1038,8 +1038,11 @@
     "Settings": "Settings",
     "sidebar": {
         "achievements": "Achievements",
+        "docs": "Docs",
         "downloadManager": "Download Manager",
         "library": "Library",
+        "quests": "Quests",
+        "settings": "Settings",
         "store": "Store"
     },
     "sideload": {
