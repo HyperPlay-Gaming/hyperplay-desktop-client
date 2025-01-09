@@ -66,12 +66,14 @@
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: 41c9b553",
+  "description": "other build from git id: 0f96e8e3",
   "host_permissions": [
     "http://localhost:8545/",
     "file://*/*",
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "ws://*/*",
+    "wss://*/*"
   ],
   "icons": {
     "16": "images/icon-16.png",
@@ -113,5 +115,5 @@
     ]
   },
   "minimum_chrome_version": "89",
-  "version": "12.7.2"
+  "version": "12.9.3"
 }
