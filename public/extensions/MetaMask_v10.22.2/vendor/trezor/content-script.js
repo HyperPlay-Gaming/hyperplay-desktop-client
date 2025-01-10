@@ -7,6 +7,7 @@ port.onMessage.addListener(message => {
     window.postMessage(message, window.location.origin);
 });
 port.onDisconnect.addListener(d => {
+    console.log('trezor-connect disconnect called');
     port = null;
 });
 
