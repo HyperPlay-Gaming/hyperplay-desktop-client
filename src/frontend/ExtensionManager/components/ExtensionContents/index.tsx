@@ -38,8 +38,13 @@ export const ExtensionContents = observer(() => {
 })
 
 export const FloatingExtensionContents = observer(() => {
-  const shouldShow =
-    extensionState.isPopupOpen || extensionState.isNotificationOpen
+  const shouldShow = extensionState.renderPopupWindow
+  console.log(
+    'FloatingExtensionContents ',
+    shouldShow,
+    ' extensionState.extensionId ',
+    extensionState.extensionId
+  )
   return (
     <AnimatePresence>
       {shouldShow ? (
