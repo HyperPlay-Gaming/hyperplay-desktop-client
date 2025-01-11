@@ -2,6 +2,10 @@
 Passing messages from background script to popup
 */
 
+console.log(
+    'app/vendor/trezor/content-script.js chrome.runtime.connect called at ',
+    Date.now(),
+);
 let port = chrome.runtime.connect({ name: 'trezor-connect' });
 port.onMessage.addListener(message => {
     window.postMessage(message, window.location.origin);
