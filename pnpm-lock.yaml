@@ -132,7 +132,7 @@ importers:
         specifier: ^8.2.0
         version: 8.2.0
       electron-updater:
-        specifier: ^6.2.1
+        specifier: ^6.3.9
         version: 6.3.9
       embla-carousel-autoplay:
         specifier: '>=7.0.0'
