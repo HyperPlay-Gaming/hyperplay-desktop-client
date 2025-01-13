@@ -1,7 +1,8 @@
 {
     "button": {
         "login": "Đăng nhập",
-        "loading": "Đang tải"
+        "loading": "Đang tải",
+        "error": "Lỗi, hãy thử mã khác."
     },
     "message": {
         "part1": "Để đăng nhập và cài đặt game, làm theo hướng dẫn sau:",

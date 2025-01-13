@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Continuer l'installation",
             "message": "Souhaitez-vous CONSERVER les fichiers téléchargés ?",
-            "title": "Arrêter l'installation",
+            "title": "Voulez-vous annuler le téléchargement ?",
             "keepFilesMessage": "Vérifiez ici si vous voulez garder les fichiers de téléchargement après l'annulation."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Taille du téléchargement",
         "firstPlayed": "Joué pour la première fois",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Obtention de la taille de téléchargement",
+        "getting-install-size": "Obtention de la taille d'installation",
         "installSize": "Taille de l'installation",
         "language": "Langue",
         "lastPlayed": "Joué la dernière fois",
@@ -172,7 +172,7 @@
         "title": "Sélectionnez les composants à installer"
     },
     "setting": {
-        "use-default-wine-settings": "Utiliser les paramètres de Wine par défaut",
+        "use-default-wine-settings": "Utiliser les paramètres de compatibilité par défaut",
         "winecrossoverbottle": "Pont-Bouteille"
     },
     "sideload": {
@@ -225,7 +225,8 @@
         "playing": "Lecture en cours",
         "paused": "En suspend",
         "syncingSaves": "Synchronisation des sauvegardes en cours",
-        "downloading": "Téléchargement"
+        "downloading": "Téléchargement",
+        "patching": "Mise à jour des fichiers "
     },
     "submenu": {
         "addShortcut": "Ajouter un raccourci",

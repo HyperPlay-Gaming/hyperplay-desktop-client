@@ -62,6 +62,15 @@
             },
             "legendary": {
                 "generic": "Xatolik yuz berdi! Epic hisob qaydnomangizdan chiqish va tizimga kirishga harakat qiling. {{newline}} {{error}}"
+            },
+            "delete-files": {
+                "body": "Chiqarilgan papkani {{path}} olib tashlashda xato. Iltimos, uni qo'lda olib tashlang. \n                {{paragraph}} \n                {{error}}",
+                "title": "Chiqib olingan papkani olib tashlashda xato"
+            },
+            "steam": {
+                "error": "Steam bajarilishi topilmadi. O'rnatish foydalanuvchi tomonidan bekor qilingan yoki Steam tomondan muvaffaqiyatsiz bo'lgan bo'lishi mumkin.",
+                "title": "Steam xatosi",
+                "message": "Steam o'rnatilishi muvaffaqiyatsiz tugadi! Iltimos, ko'rsatmalarga diqqat bilan qarang va qayta urinib ko'ring! {{paragraph}} {{error}}"
             }
         },
         "choose": "Tanlang",
@@ -74,7 +83,13 @@
             },
             "wine-change": {
                 "message": "Ushbu nomni ishga tushirish uchun tanlangan vino versiyasini topa olmadik ({{selectedWine}}). {{newline}} Biz boshqasini topdik, {{foundWine}} yordamida ishga tushirishni davom ettirmoqchimisiz?",
-                "title": "Vino topilmadi!"
+                "title": "Vino topilmadi!",
+                "title-gptk": "O'yin Porting Toolkit mos emas ",
+                "message-gptk": "Apple Gaming porting toolkit yordamida o'yinlarni ishga tushirish uchun macOS'ingizni 14 (Sonoma) yoki yuqoriroq versiyaga yangilashingiz kerak. {{newline}} Biz sizning tizimingizda Wine topdik, {{foundWine}} yordamida ishga tushirishni davom ettirmoqchimisiz?"
+            },
+            "rosetta": {
+                "title": "Rosetta topilmadi",
+                "message": "HyperPlay Apple Silicon chiplarida to'g'ri ishlashi uchun Rosetta talab qiladi. Iltimos, quyidagi buyruqni macOS terminalidan foydalanib o'rnating: \"softwareupdate --install-rosetta\" va HyperPlay'ni qayta ishga tushiring. "
             }
         },
         "info": {
@@ -84,7 +99,9 @@
                 "message": "Yangi versiya mavjud!",
                 "message-finished": "Endi HyperPlay-ni qayta ishga tushirmoqchimisiz?",
                 "title": "Qahramonlik o'yinlari ishga tushirgich",
-                "title-finished": "Yangilash tugallandi"
+                "title-finished": "Yangilash tugallandi",
+                "appUpdated-message": "HyperPlay yangilandi. Hozir HyperPlay'ni yangilab, qayta ishga tushirmoqchimisiz?",
+                "appUpdated": "HyperPlay yangilandi"
             }
         },
         "no": "YO'Q",
@@ -137,7 +154,14 @@
         "choose-nile-binary": "Nil ikkilik-ni tanlang",
         "reset-app": {
             "question": {
-                "title": "Qahramonlikni tiklash"
+                "title": "Qahramonlikni tiklash",
+                "message": "HyperPlay'ni qayta tiklashni xohlaysizmi? Bu barcha Sozlamalar va Keshni olib tashlaydi, lekin o'rnatilgan o'yinlaringiz yoki Epic ma'lumotlaringizni olib tashlamaydi. HyperPlay'ning portativ versiyalari (AppImage, WinPortable, ...) keyin qo'lda qayta ishga tushirilishi kerak."
+            }
+        },
+        "reset-extension": {
+            "question": {
+                "message": "MetaMask kengaytmasini qayta tiklashni xohlaysizmi?",
+                "title": "Kengaytmani tiklash"
             }
         }
     },
@@ -181,7 +205,8 @@
         "manageaccounts": "Hisoblarni boshqarish",
         "quit": "Chiqish",
         "quitMessage": "Chiqishni xohlayotganingizga ishonchingiz komilmi?",
-        "logIn": "Tizimga kirish"
+        "logIn": "Tizimga kirish",
+        "manageStore": "Do'konlarni boshqarish"
     },
     "tray": {
         "show": "Ko'rsatish",
@@ -218,7 +243,7 @@
         "login": "Tizimga kirish",
         "sync": "Sinxronlash",
         "syncing": "Sinxronlash",
-        "unsync": "Sinxronizatsiyani bekor qilish",
+        "unsync": "Unsync",
         "download": "Yuklash",
         "update": "Yangilash",
         "install": "O'rnatish"
@@ -261,7 +286,8 @@
             "type": "Turi"
         },
         "title": "Yuklashlar",
-        "ETA": "Taxminiy vaqt"
+        "ETA": "Taxminiy vaqt",
+        "title_dm": "Yuklab olish menejeri"
     },
     "epic": {
         "offline-notification-body": "Onlayn xizmatlar to'liq ishlamasligi mumkin, chunki Epic Games serverlari oflayn!",
@@ -336,7 +362,8 @@
             "part2": "Boshqa joylar uchun ushbu papkalardan biriga ramziy havoladan foydalaning"
         },
         "disable_logs": "Jurnal fayllariga yozishning ko'p qismini o'chirish uchun ushbu katakchani ON holatiga o'tkazing (muhim ma'lumotlar har doim qayd qilinadi). Har qanday muammo haqida xabar berishdan oldin ushbu sozlamani O‘CHIRING.",
-        "msync": "Fsync protsessor talab qiladigan o'yinlarda vinoserver yukini kamaytirishga qaratilgan. Yoqish qoʻllab-quvvatlanadigan Linux yadrolarida ish faoliyatini yaxshilashi mumkin."
+        "msync": "Fsync protsessor talab qiladigan o'yinlarda vinoserver yukini kamaytirishga qaratilgan. Yoqish qoʻllab-quvvatlanadigan Linux yadrolarida ish faoliyatini yaxshilashi mumkin.",
+        "dxvknvapi": "DXVK-NVAPI - bu NVAPI'ni DXVK va Linuxning mahalliy NVAPI ustida amalga oshirilgan, u Nvidia GPU'larda DLSS'dan foydalanishga imkon beradi."
     },
     "info": {
         "hyperplay": {
@@ -381,7 +408,9 @@
             "grid": "Toʻr tartibiga oʻtish",
             "list": "Roʻyxat tartibiga oʻtish"
         },
-        "label": "Kutubxona"
+        "label": "Kutubxona",
+        "alphabeticalAZ": "Alifbo A-Z",
+        "alphabeticalZA": "Alfavit bo'yicha Z-A"
     },
     "Library": "Kutubxona",
     "loading": {
@@ -393,7 +422,8 @@
         "epic": "Epic Games tizimiga kirish",
         "gog": "GOG tizimiga kirish",
         "message": "Platformangiz bilan tizimga kiring. Siz bir vaqtning o'zida bir nechta platformaga kirishingiz mumkin.",
-        "amazon": "Amazonga kirish"
+        "amazon": "Amazonga kirish",
+        "old-mac": "Sizning macOS versiyangiz {{version}}. Kirish uchun macOS 12 yoki yangiroq talab qilinadi."
     },
     "message": {
         "sync": "Sinxronizatsiya tugallandi",
@@ -428,7 +458,8 @@
             "imported": "O'yin import qilingan",
             "startInstall": "O'rnatish boshlandi",
             "failed": "O‘rnatish amalga oshmadi",
-            "paused": "Oʻrnatish toʻxtatildi"
+            "paused": "Oʻrnatish toʻxtatildi",
+            "stopped": "O'rnatish to'xtatildi"
         },
         "moved": "Ko‘chirish tugallandi",
         "moving": "Harakatlanuvchi o'yin",
@@ -442,7 +473,8 @@
             "finished": "Yangilash tugallandi",
             "started": "Yangilash boshlandi",
             "failed": "Yangilash amalga oshmadi",
-            "paused": "Yangilash toʻxtatildi"
+            "paused": "Yangilash toʻxtatildi",
+            "stopped": "Yangilanish to'xtatildi"
         }
     },
     "offline-message": {
@@ -507,13 +539,19 @@
             "clear": "Roʻyxatni tozalash",
             "downloading": "Yuklab olinmoqda",
             "empty": {
-                "queue": "Yuklab olish uchun hech narsa"
+                "queue": "Yuklab olish uchun hech narsa",
+                "finished": "Hech narsa yuklanmadi"
             },
             "finished": "Bajarildi",
             "queued": "Navbatda",
             "remove": "Yuklab olishlardan olib tashlash",
             "pause": "Yuklashni to'xtatib turish",
-            "resume": "Yuklashni davom ettirish"
+            "resume": "Yuklashni davom ettirish",
+            "stop": "Yuklab olishni to'xtatish",
+            "timeElapsed": "O'tgan vaqt: {{elapsed}}",
+            "retry-update": "Yangilanishni qayta urinib ko'ring",
+            "launch": "O'yinni ishga tushirish",
+            "retry-install": "O'rnatishni qayta sinab ko'ring"
         }
     },
     "Recent": "Yaqinda o'ynadi",
@@ -586,7 +624,10 @@
             "instructions_title": "Muammo haqida qanday xabar berish kerak?",
             "last-log": "Oxirgi jurnal",
             "no-file": "Hech qanday jurnal fayli topilmadi",
-            "show-in-folder": "Jurnal faylini papkada ko'rsatish"
+            "show-in-folder": "Jurnal faylini papkada ko'rsatish",
+            "instructions-part-01": "Agar siz HyperPlay'dan foydalanishda muammolarga duch kelsangiz, bizning Discord Serverimizda muammolaringizni xabar berish uchun ikkita belgilangan joy mavjud. Agar siz o'yinchi bo'lsangiz, iltimos, o'yinchi qo'llab-quvvatlash forumiga tashrif buyurib, har qanday muammolarni xabar bering. Agar siz o'yin ishlab chiqaruvchisi bo'lsangiz, iltimos, ishlab chiqaruvchi qo'llab-quvvatlash forumiga tashrif buyurib, har qanday muammolarni xabar bering.",
+            "instructions-part-02": "Muammoni tezda aniqlash va hal qilishimizga yordam berish uchun iltimos, iloji boricha ko'proq ma'lumot bering, jumladan, loglaringizning nusxasini. Bizning qo'llab-quvvatlash jamoamiz ikkita kanalni kuzatib boradi va muammoingizga iloji boricha tezroq javob berish uchun qo'ldan kelganini qiladi. Sizning sabr-toqat va tushunishingiz uchun rahmat, biz har qanday muammolarni hal qilish ustida ishlaymiz.",
+            "join-hyperplay-discord": "Bizning Discord'ga qo'shiling"
         },
         "mangohud": "Mangohudni yoqish (Mangohud o'rnatilishi kerak)",
         "manualsync": {
@@ -631,7 +672,9 @@
         "showMetalOverlay": "Statistika qavatini ko'rsatish",
         "alt-nile-bin": "Muqobil Nil Binarini tanlang",
         "autodxvknvapi": "Prefiksda DXVK-ni avtomatik o'rnatish/yangilash",
-        "msync": "Esync-ni yoqing"
+        "msync": "Esync-ni yoqing",
+        "autoLaunchHyperPlay": "HyperPlay-ni avtomatik ishga tushirish",
+        "steamId": "Steam ID"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -675,9 +718,31 @@
             "warning": "Bulutli saqlash funksiyasi beta-versiyasida, sinxronlashdan oldin saqlangan maʼlumotlarning zaxira nusxasini yarating (agar biror narsa notoʻgʻri boʻlsa)"
         },
         "systemInformation": {
-            "memory": "Xotira"
+            "memory": "Xotira",
+            "gpuWithNumber": "GPU {{number}}:",
+            "os": "Operatsion tizim:",
+            "memoryStats": "{{percentUsed}}% ishlatilgan ({{usedGib}} / {{totalGib}}",
+            "systemModel": "Tizim modeli:",
+            "legendaryVersion": "Afsonaviy: {{legendaryVersion}}",
+            "steamDeck": "Steam Deck",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gpuDriver": "Drayver: {{driverVersion}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpu": "GPU:",
+            "osNameFlatpak": "{{osName}} (Flatpak ichida)",
+            "osVersion": "Versiya {{versionNumber}}",
+            "showDetailed": "Tizim spetsifikatsiyalarini batafsil ko'rsatish",
+            "cpu": "CPU:",
+            "copyToClipboard": "Qog'ozga nusxalash",
+            "version": "Versiya: {{appVersion}}"
         },
-        "gamesSettings": "O'yin sozlamalari"
+        "gamesSettings": "O'yin sozlamalari",
+        "reset-extension": "Kengaytmani qayta tiklash",
+        "wine": {
+            "manager": {
+                "title": "Wine Menejeri"
+            }
+        }
     },
     "Settings": "Sozlamalar",
     "status": {
@@ -720,43 +785,421 @@
             "walletSelection": {
                 "screens": {
                     "import": {
-                        "learnMore": "Batafsilroq"
+                        "learnMore": "Batafsilroq",
+                        "useRecoveryPhraseInfo": "Ushbu funksiyani ilg'or foydalanuvchilar va dasturchilar uchun tavsiya etamiz. Sizning maxfiy tiklash iborangiz MetaMask'da mahalliy ravishda saqlanadi va HyperPlay bilan hech qachon bo'lishilmaydi.",
+                        "createNewWallet": "Yangi MM kengaytma hamyonini yaratish",
+                        "title": "Import qilish uchun brauzerni tanlang",
+                        "cantFindProfile": "Brauzer profilingizni topa olmaysizmi?",
+                        "useRecoveryPhrase": "Maxfiy tiklash frazasidan foydalanib import qilish",
+                        "details": "Quyidagi brauzerlarda allaqachon MetaMask o'rnatilgan. Import qilishni xohlaganingizni tanlang.",
+                        "orWord": "YOKI"
+                    },
+                    "info": {
+                        "createWalletCTA": "Hamyon yarating",
+                        "title": "Hamyon nima?",
+                        "createWalletDescription": "Agar sizda hamyon bo'lmasa yoki yangi hamyon yaratmoqchi bo'lsangiz, quyidagi \"Hamyon yaratish\" tugmasini bosing:",
+                        "digitalAssets": {
+                            "details": "Hamyonlar tokenlar va NFTlar kabi raqamli aktivlarni yuborish, qabul qilish, saqlash va ko'rsatish uchun ishlatiladi.",
+                            "title": "Raqamli aktivlaringiz uchun uy"
+                        },
+                        "login": {
+                            "title": "Kirishning yangi usuli",
+                            "details": "Har bir veb-saytda yangi hisoblar va parollar yaratish o'rniga, shunchaki hamyoningizni ulashingiz mumkin."
+                        },
+                        "skip": "Hozir o'tkazib yuborish"
+                    },
+                    "scan": {
+                        "dontHaveWallet": "Hamyoningiz yo'qmi?",
+                        "getMetamask": "MetaMask oling",
+                        "title": "QR kodni skanerlash ",
+                        "details": "Shifrlangan aloqa kanali yarating. Sizning kalitlaringiz hech qachon HyperPlay bilan bo'lishilmaydi.",
+                        "updateWarning": "Muammolarga duch kelyapsizmi? MetaMask'ni yangilanganligiga ishonch hosil qiling."
                     }
-                }
+                },
+                "pleaseConnect": "Iltimos, hamyoningizni ulab qo'ying yoki boshlash uchun Metamask mobil ilovasini yuklab oling:",
+                "title": "Hamyon ulanishlari"
+            },
+            "connectAgain": "Yana ulanish",
+            "connectionConnected": {
+                "title": "Hamyon ulandi!",
+                "description": "Sizning hamyoningiz ulangan. O'yin o'ynashga tayyorsiz."
+            },
+            "analytics": {
+                "privacyCaption": "Ushbu ma'lumotlar yig'ilgan va shuning uchun Umumiy Ma'lumotlarni Himoya Qilish Qoidalari (EU) 2016/679 maqsadlari uchun anonimdir. Bizning maxfiylik amaliyotlarimiz haqida ko'proq ma'lumot olish uchun, iltimos, bizning ",
+                "hyperplayWill": "HyperPlay quyidagilarni amalga oshiradi:",
+                "body": "HyperPlay foydalanuvchilarning ilova bilan qanday o'zaro aloqada bo'lishlarini yaxshiroq tushunish uchun foydalanish ma'lumotlarini to'plashni xohlaydi. Ushbu ma'lumotlar bizga ilovadan qanday foydalanayotganingizni tushunishga yordam beradi va HyperPlay'ni siz uchun yanada yaxshiroq qilish imkonini beradi.",
+                "bulletOne": "Har doim chiqib ketish imkonini berish",
+                "bulletTwo": "Anonim bosish va o'yin o'zaro ta'sirini yuboring",
+                "paragraphOne": "HyperPlay foydalanuvchilarning ilova bilan qanday o'zaro aloqada bo'lishlarini yaxshiroq tushunish uchun foydalanish ma'lumotlarini to'plashni xohlaydi. \n           Bu bizga HyperPlay'ni siz uchun yanada yaxshiroq qilish imkonini beradi.",
+                "privacyPolicy": "Maxfiylik siyosati.",
+                "text": {
+                    "externalLink": "Ko'proq ma'lumot oling",
+                    "title": "Biz Maxfiylik Siyosatimizni yangiladik"
+                },
+                "titleOne": "HyperPlay'ni yaxshilashga yordam bering!"
+            },
+            "connectionCanceled": {
+                "title": "Ulanish bekor qilindi!",
+                "description": "Iltimos, davom etish uchun mobil hamyoningizda ulanish so'rovini tasdiqlang."
+            },
+            "welcome": {
+                "text": {
+                    "paragraphThr": "Hammasini bir joyda, Epic Store, GOG va o'zimizning HyperPlay Store'imizning keng kutubxonalariga kirish bilan birga, hamyoningizni, tokenlaringizni va aktivlaringizni har bir o'yinga muammosiz olib keling.",
+                    "bulletPointFive": "Bizning ilg'or texnologiyamizdan foydalanib, Windows o'yinlarini macOS, Linux va SteamDeckda ishga tushiring",
+                    "bulletPointFour": "Steam (Windows versiyasi) ni macOS'da bitta oson bosish bilan o'rnating",
+                    "bulletPointOne": "100+ on-chain imkoniyatiga ega o'yinlar to'plamiga kirish",
+                    "bulletPointThree": "Epic va GOG o'yinlarini to'g'ridan-to'g'ri HyperPlay orqali o'ynang",
+                    "bulletPointTwo": "Qiziqarli vazifalarni bajarish orqali tokenlar, NFTlar va off-chain mukofotlarni oling",
+                    "lastParagraph": "Hozirda Beta versiyasida, biz sizning fikringizni yuqori baholaymiz va \n            har qanday muammo yoki takliflarni bizga xabar berishingizni tavsiya qilamiz",
+                    "paragraphOne": "HyperPlay'da biz kelajak o'yinlari uchun yangi avlod o'yin do'konini qurmoqdamiz.",
+                    "TitleList": "HyperPlay bilan siz:"
+                },
+                "titleIntro": "HyperPlay'ga xush kelibsiz!"
             }
         },
         "misc": "Hech qachon",
         "Sync": "Sinxronlash",
         "gamecard": {
             "installing": "Yuklab olinmoqda…",
-            "paused": "Пауза қилинган"
+            "paused": "Пауза қилинган",
+            "installed": "O'ynashga tayyormiz",
+            "patching": "Patchlanmoqda...",
+            "extracting": "Ajratilmoqda...",
+            "distributables": "Ta'minotlarni o'rnatish..."
+        },
+        "analyticsOff": "Tahlil o'chirilgan",
+        "currentWallet": "Joriy hamyon",
+        "achievements": {
+            "addThisGame": "Ushbu o'yinni qo'shing",
+            "noAchievements": {
+                "doubleCheckMessage": "Hozirda sizning Steam hisobingizda hech qanday o'yin topilmadi. O'yin ma'lumotlaringizni jamoatchilikka ochiq ekanligini ikki marta tekshirishni eslatib o'tamiz. Shunday qilib, biz sizning yutuqlaringizga kirishimiz va eng yaxshi tajribani taqdim etishimiz mumkin.",
+                "oops": "Voy!"
+            },
+            "gamesToMint": "Mint qilish uchun o'yinlar",
+            "freeMints": "Bepul Mintlar"
+        },
+        "accesscodes": {
+            "error": {
+                "licenseUndefined": "Kirish kodini tasdiqlash mumkin emas edi. Iltimos, internetga ulanishingiz yoki xavfsizlik devori sozlamalaringizni tekshiring.",
+                "validation": "Kirish kodi noto'g'ri"
+            },
+            "success": {
+                "validation": "Muvaffaqiyat! Kirish kodi amal qiladi"
+            },
+            "requirescode": "Ushbu o'yin yangilanishi uchun kirish kodi talab qilinadi.",
+            "placeholder": "Kirish kodini kiriting"
+        },
+        "viewPortfolio": "Portfelni ko'rish",
+        "analyticsOn": "Tahlil yoqilgan",
+        "changeWallet": "Hamyon hisobini almashtirish",
+        "turnAnalyticsOn": "Yoqish",
+        "viewFullscreen": "Butun ekran ko'rinishini ko'ring",
+        "linkSteamAccountDescription": "HyperPlay hisobingizni bog'lash uchun Steam'ga kiring.",
+        "syncing": "Sinxronlash...",
+        "browserImport": {
+            "appId": "Ilova ID",
+            "profile": "Profil"
+        },
+        "connectWallet": "Hamyonni ulash",
+        "copyUrl": "URL manzilini nusxalash",
+        "linkSteamAccountCta": "Steam'ga kirish",
+        "linkSteamAccountTitle": "Steam hisobini bog'lash",
+        "otp": "Bir martalik parol",
+        "discordAppLink": "Discord Jamiyati.",
+        "compatibilityLayer": "Moslik qatlami (Beta)",
+        "turnAnalyticsOff": "O'chirish",
+        "viewItem": "{{item}} ni ko'rish",
+        "buttons": {
+            "primaryButton": "Men roziman",
+            "secondaryButton": "Yo'q, rahmat"
         }
     },
     "sidebar": {
         "store": "Do'kon",
-        "library": "Kutubxona"
+        "library": "Kutubxona",
+        "achievements": "Erishuvlar",
+        "downloadManager": "Yuklab olish menejeri"
     },
     "quest": {
         "active": "Faol",
         "Play": "Hozir O'yna",
-        "signIn": "Sign in",
+        "signIn": "Kirish",
         "sync": "Sinxronlash",
         "claimWarning": {
             "cancel": "Bekor qilish",
-            "confirm": "Tasdiqlash"
+            "confirm": "Tasdiqlash",
+            "body": "<bold>MUHIM:</bold> Iltimos, tranzaktsiya muvaffaqiyatli tasdiqlanishi uchun {{networkName}} tarmog'ida yetarli gaz ajratganingizga ishonch hosil qiling <bold> 7 kun ichida.</bold>",
+            "body2": "Aks holda, Quest mukofoti <bold> muddati o'tadi va uni da'vo qilish mumkin bo'lmaydi.</bold>"
+        },
+        "playstreak": {
+            "dayResets": "Kunlar yangilanadi:",
+            "days": "kunlar",
+            "sync": "Sinxronizatsiya jarayoni",
+            "syncSuccess": "Progress sinxronlashtirildi",
+            "playEachDay": "Har kuni o'ynang, shunda ketma-ketligingiz tiklanmaydi!",
+            "playToStart": "Ushbu o'yinni o'ynang va o'z ketma-ketligingizni boshlang!",
+            "streakCompleted": "Streak tugatildi! Mukofotlaringizni hozir oling.",
+            "streakProgress": "Streak Progress",
+            "progressTowardsStreak": "Bugungi ketma-ketlikka qarab rivojlanish.",
+            "now": "Hozir"
+        },
+        "claimed": "Da'vo qilingan",
+        "points": "Ballar",
+        "reward": "Mukofot",
+        "g7Numclaimed": "Jami talab qilingan G7 kreditlari",
+        "noG7ConnectionClaim": "Mukofotlaringizni da'vo qilish uchun {{email}} bilan bog'langan Game7 hisobingiz bo'lishi kerak.",
+        "claimFailedMessage": "Iltimos, yana bir bor urinib ko'ring. Agar hali ham ishlamasa, Discord yordam chiptasini yarating.",
+        "connectSteamAccount": "Steam hisobingizni ulash",
+        "notEligible": {
+            "title": "Hali malakali emas",
+            "message": "Siz talab qilingan o'yin davomiyligi kunlarini tugatmaganingiz sababli, hozirda mukofotingizni talab qila olmaysiz."
+        },
+        "needMoreAchievements": "Siz ushbu o'yinlardan birida yutuqlarning {{percent}}% ni bajarishingiz kerak.",
+        "notSignedIn": {
+            "title": "Kirish qilmadingiz",
+            "message": "Mukofotingizni olish uchun tizimga kirishingiz kerak."
+        },
+        "questAvailable": "Missiya mavjud!",
+        "questComplete": "Missiya tugadi!",
+        "rewardClaimed": "Da'vo muvaffaqiyatli",
+        "toClaimReward": "sovgangizni olish uchun.",
+        "youHaveClaimed": "Siz {{totalRewards}} mukofot{{plural}}ni talab qildingiz.",
+        "readyForClaim": "Talab qilingan",
+        "associatedGames": "Bog'langan o'yinlar",
+        "claim": "Da'vo qilish",
+        "claimFailed": "Da'vo qilish muvaffaqiyatsiz bo'ldi",
+        "noG7ConnectionSync": {
+            "title": "Hech qanday G7 hisobingiz bog'lanmagan",
+            "message": "Vazifalaringizni qayta sinxronlash uchun {{email}} ga bog'langan Game7 hisobingiz bo'lishi kerak."
+        },
+        "toSeeDetails": "ma'lumotlarni ko'rish uchun.",
+        "type": {
+            "playstreak": "O'yin ketma-ketligi",
+            "reputation": "Reputatsiya"
+        },
+        "pointsClaimed": "Olingan ballar",
+        "quests": "Qidiruvlar",
+        "reputation": "Reputatsiya",
+        "createDiscordTicket": "Discord chiptasini yaratish",
+        "linkAccount": "Muvaffaqiyatni tekshirish uchun Steam hisobingizni bog'lang.",
+        "notEnoughBalance": {
+            "title": "Past balans"
+        },
+        "notEnoughGas": {
+            "message": "Gaz to'lovlari sababli mukofotingizni olish uchun yetarli hamyon balansingiz yo'q. Boshqa hamyonni sinab ko'ring yoki qayta urinmasdan oldin ushbu hamyonni to'ldiring."
         }
     },
     "analytics": "Tashxis",
     "notification": {
         "wine-download": {
-            "title": "Vino menejeri"
+            "title": "Vino menejeri",
+            "message": "Standart moslik qatlamini sozlash"
         },
         "wine-download-failed": {
-            "title": "Xato"
+            "title": "Xato",
+            "message": "Standart moslik qatlamini o'rnatishda xato"
         }
     },
     "accounts": "Account",
     "import-game-folder": {
-        "placeholder": "Import qilish uchun o'yin papkasini tanlang"
+        "placeholder": "Import qilish uchun o'yin papkasini tanlang",
+        "label": "O'yin papkasini import qilish",
+        "error": "Import qilishda xato yuz berdi. Iltimos, batafsil ma'lumot uchun loglarni ko'ring.",
+        "success": "O'yinlar muvaffaqiyatli import qilindi!",
+        "cta": "O'yin papkasini import qilish",
+        "dialog": {
+            "title": "Import qilish uchun o'yin papkasini tanlang"
+        }
+    },
+    "overlay": {
+        "links": {
+            "sell": "Sotish",
+            "swap": "Almashtirish",
+            "bridge": "Ko'prik",
+            "portfolio": "Portfel",
+            "buy": "Sotib olish",
+            "marketplace": "Bozor"
+        },
+        "EXTERNAL_WALLET_CONNECTED": "Siz tashqi hamyon bilan HyperPlay'ga ulanganingiz.",
+        "comingSoon": "Yaqin orada",
+        "WALLET_DISCONNECTED": "Sizda HyperPlay'ga ulangan hamyon yo'q."
+    },
+    "hyperplayOverlay": {
+        "chainRequest": {
+            "CONFIRMED": "Maxsus tarmoq qo'shildi",
+            "FAILED": "Maxsus tarmoq bekor qilindi",
+            "INITIATED": "Maxsus tarmoq so'rovi"
+        },
+        "txnRequest": {
+            "INITIATED": "Transaktsiya so'rovi kutilyapti",
+            "FAILED": "Transaksiya to'xtatildi",
+            "PENDING": "Transaksiya yuborildi",
+            "CONFIRMED": "Transaksiya tasdiqlandi"
+        },
+        "extensionNotification": {
+            "TITLE": "So'rov qilingan tranzaksiya",
+            "DESCRIPTION": "Ushbu tranzaksiyani ko'rish uchun {{overlayKeyMod}} + X tugmasini bosing"
+        },
+        "greeting": {
+            "title": "HyperPlay Overlay",
+            "description": "HyperPlay Overlay tayyor! Uni ko'rsatish yoki yashirish uchun {{overlayKeyMod}} + X tugmasini bosing."
+        },
+        "walletWatch": {
+            "INITIATED": "Maxsus token qo'shish so'rovi kutilyapti",
+            "CONFIRMED": "Maxsus token qo'shildi",
+            "FAILED": "Maxsus token so'rovi bekor qilindi"
+        },
+        "signatureRequest": {
+            "CONFIRMED": "Imzo taqdim etildi",
+            "FAILED": "Imzo to'xtatildi",
+            "INITIATED": "Imzo so'rovi kutilyapti"
+        },
+        "description": {
+            "CONFIRMED": "Transaksiya muvaffaqiyatli tasdiqlandi!",
+            "FAILED": "Transaksiya bekor qilindi yoki yuborilmadi, iltimos, qaytadan urinib ko'ring",
+            "INITIATED": "Mobil hamyoningizda tasdiqlash kutilyapti",
+            "PENDING": "Blokcheyn tasdiqlanishini kutyapmiz. Tasdiqlanganda sizga xabar beramiz"
+        }
+    },
+    "exit_game": "O'yindan chiqish",
+    "gameRelease": {
+        "prototype": "Prototip",
+        "alpha": "Alpha",
+        "demo": "Demo",
+        "beta": "Beta",
+        "main": "Asosiy"
+    },
+    "dlcs": {
+        "label": "O'rnatish uchun DLClarni tanlang:"
+    },
+    "Cancel Installation": "O'rnatishni bekor qilish",
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Asosiy o'yin chiqarilishi bekor qilindi",
+                "title": "Bekor qilingan chiqarish"
+            },
+            "installing": {
+                "body": "Asosiy o'yin fayllarini chiqarish",
+                "title": "Asosiy o'yin o'rnatilmoqda"
+            },
+            "installed": {
+                "title": "Asosiy o'yin o'rnatildi",
+                "body": "Mod asosiy o'yinga qo'shiladi"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Asosiy o'yin fayl joylashuvini tanlang",
+                "placeholder": "Zip Faylini tanlang"
+            }
+        }
+    },
+    "quests": {
+        "g7CreditsModal": {
+            "title": "Game7 kreditlarini oling",
+            "description": "HyperPlay'ning eng yaxshi o'yinlariga qiziqarli Play Streak Challenges bilan sho'ng'ing. Har bir faoliyat sizni boshqa o'yin bilan shug'ullanishga undaydi, web3 o'yinlarining eng yaxshilarini namoyish etadi. O'yin vaqtingiz muhim!"
+        },
+        "quests": "Qidiruvlar",
+        "viewAllQuests": {
+            "title": "Barcha vazifalarni ko'rish"
+        },
+        "noneFound": {
+            "title": "Hech qanday qidiruv topilmadi.",
+            "message": "Hech qanday vazifa topilmadi."
+        },
+        "playstreak": {
+            "signInWarning": {
+                "client": "Siz hozirda tizimga kirmagansiz, o'yin ketma-ketligi rivojlanishi kuzatilmaydi. Iltimos, yuqori o'ngdagi ochiladigan menyu orqali HyperPlay'ga kiring.",
+                "overlay": "Siz hozirda tizimga kirmagansiz, o'yin ketma-ketligi kuzatilmaydi. Iltimos, o'yindan chiqib, yuqori o'ngdagi ochiladigan menyu orqali HyperPlay'ga kirish uchun tizimga kiring."
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "title": "Mod ko'rsatmalari",
+            "step1": {
+                "subtitle": "World of Warcraft 3.3.5a'ni yuklab oling",
+                "title": "1-qadam",
+                "description": "Ushbu o'yin World of Warcraft: Wrath of the Lich King (3.3.5a) uchun moddir. Ushbu modni o'ynash uchun, o'yinchilar World of Warcraft 3.3.5a nusxasiga ega bo'lishlari kerak. {{newline}} {{newline}} HyperPlay World of Warcraft'ni joylashtirmaydi. World of Warcraft'ga ega bo'lgan o'yinchilar kerakli versiyani quyidagi manbalardan olishi mumkin:",
+                "link1": "1-aloqa",
+                "link2": "Link 2 (Magnet Link)"
+            },
+            "step2": {
+                "title": "2-qadam",
+                "subtitle1": "Yuklangan 3.3.5a zip faylini tanlang"
+            },
+            "step4": {
+                "description": "O'yinni o'rnatishni davom ettirish uchun kirish kodini kiriting.",
+                "title": "4-qadam",
+                "subtitle": "Kirish kodi"
+            },
+            "step3": {
+                "description": "World of Warcraft: Wrath of the Lich King (3.3.5a) o'rnatilishi kerak bo'lgan papkani tanlang.",
+                "subtitle": "O'rnatish papkasini tanlang",
+                "title": "3-qadam"
+            }
+        }
+    },
+    "steam-install": {
+        "compatibility-layer-not-available": "Moslik qatlamini o'rnatish mumkin emas. Iltimos, avval \"Sozlamalar > Wine Manager\" dan birini o'rnating.",
+        "error-message": "Steam o'rnatishda xato yuz berdi. Iltimos, qaytadan urinib ko'ring.",
+        "launch-tooltip": "HyperPlay moslik qatlamidan foydalanib Steam'ni ishga tushiring",
+        "success-message": "Steam o'rnatildi. Endi uni Kutubxonadan ishga tushirishingiz mumkin.",
+        "tooltip": "Bu Steam-ning Windows versiyasini o'rnatadi va HyperPlay moslik qatlamidan foydalanib ishga tushadi.\n\n    Ba'zi o'yinlar, ayniqsa eski sarlavhalar, yangi 3D o'yinlar yoki anti-cheat dasturlari bilan bog'liq bo'lganlar to'g'ri ishlamasligi mumkin.\n\n    Tavsiya etilgan spetsifikatsiyalar - Apple Silicon CPU (M1 yoki undan yuqori) bo'lgan Mac va kamida 16GB RAM."
+    },
+    "gameUpdateNotifications": {
+        "title": "O'yin yangilanishlari mavjud",
+        "body": {
+            "multiple": "{{gameName}} va boshqa o'yinlar yangilanishga tayyor.",
+            "single": "{{gameName}} uchun yangilanish tayyor."
+        }
+    },
+    "importGameErrorMessage": "Yaroqli o'yin papkasi emas, o'yinni import qilish mumkin emas",
+    "profile": "Profil",
+    "achievements": {
+        "progress": {
+            "minted": "zanjirda",
+            "notMinted": "off chain"
+        }
+    },
+    "back_to_game": "O'yinga qaytish",
+    "importGameErrorTitle": "O'yin import qilishda xato",
+    "wallet": {
+        "unsupported": "Qo'llab-quvvatlanmaydigan hamyon ulanishi",
+        "portfolio": {
+            "onlyExtension": "MetaMask Portfolio faqat MetaMask bilan ulanishda mavjud."
+        }
+    },
+    "email_subscription": {
+        "subtitle": "Siz endi bizning jamoamizning bir qismisiz va biz siz bilan qimmatli yangiliklar va fikrlar bilan bo'lishishga tayyormiz.",
+        "title": "Obuna bo'lganingiz uchun rahmat!"
+    },
+    "Recommended specs for a better experience": "Yaxshi tajriba uchun tavsiya etilgan spetsifikatsiyalar",
+    "sideload": {
+        "warningMessage": "O'yinni yonma-yon yuklash, ishlab chiquvchilar va tajribali foydalanuvchilar uchun mo'ljallangan xususiyatdir. Zararli dasturiy ta'minotni o'z ichiga olgan o'rnatgichni yonma-yon yuklash, kompyuteringizni xavf ostiga qo'yishi va mablag'larni o'g'irlashga olib kelishi mumkin.",
+        "warningTitle": "Muhim"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay o'rnatish tugagach sizni xabardor qiladi;",
+    "importGameErrorMessageExecutable": "O'yin bajariladigan fayl topilmadi, o'yinni import qilish mumkin emas",
+    "Install Steam": "Steam'ni o'rnating",
+    "Installing Steam": "Steam o'rnatilmoqda...",
+    "Launch Steam": "Steam'ni ishga tushirish",
+    "16GB of RAM": "16GB RAM",
+    "ALL": "HAMMA",
+    "Apple Silicon M1 or above": "Apple Silicon M1 yoki undan yuqori",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Barcha o'yinlar ishlamasligi mumkinligini va agar ishlasa ham, kutilganidek ishlamasligi mumkinligini bilib oling.",
+    "Downloading": "Yuklanmoqda {{percent}}%",
+    "Installing": "O'rnatilmoqda",
+    "installModal": {
+        "loginRequired": "Kirish talab qilinadi",
+        "loginRequiredMessage": "Ushbu o'yinni o'rnatish va kirish kodini kiritish uchun HyperPlay'ga kirishingiz kerak. ",
+        "loginRequiredMessageUpdate": "Siz HyperPlay'ga kirgan bo'lishingiz kerak, aks holda kirish kodini kiritish va ushbu o'yinni yangilash imkoniyatingiz bo'lmaydi. "
+    },
+    "Launching Steam": "Steam ishga tushirilmoqda...",
+    "Please Wait": "Iltimos, kuting",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Davom etishni xohlasangiz, iltimos sabrli bo'ling, chunki bu internet ulanishingiz va tizim konfiguratsiyangizga qarab bir necha daqiqa davom etishi mumkin.",
+    "macOS 14": {
+        "0 or above": "macOS 14.0 yoki undan yuqori"
     }
 }
