@@ -25,7 +25,7 @@ import {
   GOG_LOGIN_URL,
   GOG_STORE_URL,
   HYPERPLAY_STORE_URL,
-  WIKI_URL
+  DOCS_URL
 } from '../../constants'
 import { METAMASK_SNAPS_URL } from 'common/constants'
 import storeAuthState from 'frontend/state/storeAuthState'
@@ -79,7 +79,7 @@ function WebView({
     '/hyperplaystore': hyperplayStore,
     '/epicstore': epicStore,
     '/gogstore': GOG_STORE_URL,
-    '/wiki': WIKI_URL,
+    '/docs': DOCS_URL,
     '/loginEpic': EPIC_LOGIN_URL,
     '/loginGOG': GOG_LOGIN_URL,
     '/loginweb/legendary': EPIC_LOGIN_URL,

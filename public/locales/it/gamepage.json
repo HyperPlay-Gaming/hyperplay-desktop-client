@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Continua l'installazione",
             "message": "Desideri tenere i files scaricati?",
-            "title": "Ferma l'installazione",
+            "title": "Vuoi annullare il download?",
             "keepFilesMessage": "Controllare qui se si desidera mantenere i file di download dopo la cancellazione."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Dimensione del download",
         "firstPlayed": "Giocato per la prima volta",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Ottenendo la dimensione del download",
+        "getting-install-size": "Ottenendo la dimensione dell'installazione",
         "installSize": "Dimensione dell'installazione",
         "language": "Lingua",
         "lastPlayed": "Giocato recentemente",
@@ -241,7 +241,8 @@
         "goodie": "Non installabile",
         "paused": "In pausa",
         "distributables": "Installazione di distributori",
-        "preparing": "Preparing Download, si prega di attendere"
+        "preparing": "Preparing Download, si prega di attendere",
+        "patching": "Patch dei file "
     },
     "submenu": {
         "addShortcut": "Aggiungi scorciatoia",

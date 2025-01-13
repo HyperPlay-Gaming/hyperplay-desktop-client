@@ -160,7 +160,8 @@
             "wine-change": {
                 "message-gptk": "Et saaksite käivitada mänge Apple'i mängude portimise tööriistaga, peate oma macOS-i versiooni uuendama 14-le (Sonoma) või kõrgemale. {{newline}} Leidsime teie süsteemist Wine'i, kas soovite jätkata käivitamist kasutades {{foundWine}} ?",
                 "title-gptk": "Mängude Portimise Tööriist ei ole ühilduv ",
-                "message": "Me ei leidnud valitud veini versiooni selle pealkirja ({{selectedWine}}) käivitamiseks. {{newline}} Me leidsime teise, kas soovite jätkata käivitamist kasutades {{foundWine}} ?"
+                "message": "Me ei leidnud valitud veini versiooni selle pealkirja ({{selectedWine}}) käivitamiseks. {{newline}} Me leidsime teise, kas soovite jätkata käivitamist kasutades {{foundWine}} ?",
+                "title": "Wine'i ei leitud!"
             },
             "rosetta": {
                 "title": "Rosetta ei leitud",
@@ -488,7 +489,12 @@
             "queued": "Queued",
             "remove": "Kustuta allalaadimistest",
             "pause": "Peata allalaadimine",
-            "resume": "Jätka allalaadimist"
+            "resume": "Jätka allalaadimist",
+            "timeElapsed": "Aeg möödunud: {{elapsed}}",
+            "launch": "Käita mängu",
+            "stop": "Peata allalaadimine",
+            "retry-update": "Proovi uuesti värskendust",
+            "retry-install": "Proovi installimist uuesti"
         }
     },
     "Recent": "Mängitud hiljuti",
@@ -772,7 +778,9 @@
         "discordApp": "Discord",
         "buttons": {
             "noThanks": "Aitäh, aga ma ei soovi",
-            "agree": "Ma olen nõus"
+            "agree": "Ma olen nõus",
+            "primaryButton": "Ma nõustun",
+            "secondaryButton": "Ei, aitäh"
         },
         "logOut": "Logi välja",
         "misc": "Iialgi mitte",
@@ -786,19 +794,22 @@
                         "useRecoveryPhraseInfo": "Seda funktsiooni soovitatakse edasijõudnud kasutajatele ja arendajatele. Teie salajane taastamisfraas salvestatakse kohalikult MetaMaskis ja ei jagata kunagi HyperPlayga.",
                         "useRecoveryPhrase": "Importimine salajase taastamisfraasi abil",
                         "createNewWallet": "Loo uus MM laienduse rahakott",
-                        "details": "Allpool olevad brauserid on juba MetaMaski installinud. Valige, millest soovite importida."
+                        "details": "Allpool olevad brauserid on juba MetaMaski installinud. Valige, millest soovite importida.",
+                        "cantFindProfile": "Ei leia oma brauseri profiili?"
                     },
                     "scan": {
                         "dontHaveWallet": "Ei ole rahakotti?",
                         "getMetamask": "Hangi MetaMask",
                         "title": "Skaneeri QR koodiga ",
-                        "updateWarning": "Kas on probleeme? Veenduge, et MetaMask oleks ajakohane."
+                        "updateWarning": "Kas on probleeme? Veenduge, et MetaMask oleks ajakohane.",
+                        "details": "Loo krüpteeritud suhtluskanal. Teie võtmeid ei jagata kunagi HyperPlay'ga."
                     },
                     "info": {
                         "createWalletCTA": "Loo rahakott",
                         "createWalletDescription": "Klõpsake allpool \"Loo rahakott\", kui teil ei ole rahakotti või soovite luua uue:",
                         "digitalAssets": {
-                            "details": "Rahakotte kasutatakse digitaalsete varade, nagu tokenid ja NFT-d, saatmiseks, vastuvõtmiseks, salvestamiseks ja kuvamiseks."
+                            "details": "Rahakotte kasutatakse digitaalsete varade, nagu tokenid ja NFT-d, saatmiseks, vastuvõtmiseks, salvestamiseks ja kuvamiseks.",
+                            "title": "Kodu teie digitaalsele varale"
                         },
                         "login": {
                             "details": "Alternatiiv uute kontode ja paroolide loomisele igal veebisaidil, lihtsalt ühendage oma rahakott.",
@@ -821,9 +832,19 @@
                     "communityCTA_2": "kogukond. Koos kujundame mängimise tulevikku!",
                     "description": "HyperPlay on mängu käivitaja ja mängupoodide kogum tulevikust. HyperPlay'ga saate oma rahakoti, tokenid ja varad igasse mängu kaasa võtta. HyperPlay toetab kogu Epic Store'i, GOG-i ja meie enda HyperPlay poodi. HyperPlay kasutades nõustute meiega",
                     "bugs": "Palun pange tähele, et HyperPlay on avalik alfa. Paljud funktsioonid on endiselt arendamisel ja seal võivad olla vead.",
-                    "communityCTA_1": "Me hindame teie tagasisidet ja soovime, et liituksite meiega"
+                    "communityCTA_1": "Me hindame teie tagasisidet ja soovime, et liituksite meiega",
+                    "bulletPointFive": "Käivitage Windowsi mänge macOS-is, Linuxis ja SteamDeckil, kasutades meie\n              täiustatud",
+                    "bulletPointFour": "Installige Steam (Windowsi versioon) macOS-is ühe lihtsa klõpsuga",
+                    "bulletPointOne": "Juurdepääs ulatuslikule kollektsioonile 100+ plokiahelaga mängust",
+                    "bulletPointThree": "Mängi Epic ja GOG mänge otse HyperPlay's",
+                    "bulletPointTwo": "Teenige tokeneid, NFT-sid ja off-chain auhindu, täites ülesandeid",
+                    "lastParagraph": "Praegu beetaversioonis, hindame kõrgelt teie tagasisidet ja  \n            julgustame teid teatama mistahes probleemidest või ettepanekutest meie",
+                    "paragraphOne": "HyperPlay's ehitame järgmise põlvkonna mängupoodi  \n            mängimise tuleviku jaoks.",
+                    "paragraphThr": "Viige oma rahakott, tokenid ja varad sujuvalt igasse mängu, samal ajal kui pääsete juurde  \n           ulatuslikele Epic Store'i, GOG-i ja meie enda HyperPlay poe raamatukogudele - kõik ühes kohas.",
+                    "TitleList": "HyperPlay'ga saad:"
                 },
-                "title": "Tere tulemast HyperPlay varajasse juurdepääsu!"
+                "title": "Tere tulemast HyperPlay varajasse juurdepääsu!",
+                "titleIntro": "Tere tulemast HyperPlay'sse!"
             },
             "analytics": {
                 "anonymized": "Saatke anonüümne klikkimise ja mängu interaktsiooni;",
@@ -834,7 +855,17 @@
                 "neverSellData": " müü andmeid kasumi saamiseks. Iial!",
                 "body": "HyperPlay soovib koguda kasutusandmeid, et paremini mõista, kuidas meie kasutajad rakendusega suhtlevad. See teave aitab meil mõista, kuidas te rakendust kasutate, ja võimaldab meil HyperPlay teie jaoks veelgi paremaks muuta.",
                 "neverCollectIP": " kogu oma täielik IP-aadress;",
-                "neverCollectPersonal": " koguge võtmeid, aadresse, saldosid, räsinguid või muid isiklikke andmeid;"
+                "neverCollectPersonal": " koguge võtmeid, aadresse, saldosid, räsinguid või muid isiklikke andmeid;",
+                "hyperplayWill": "HyperPlay teeb:",
+                "bulletOne": "Alati võimaldada loobuda",
+                "bulletTwo": "Saada anonüümne klikkide ja mängu interaktsiooni teave",
+                "paragraphOne": "HyperPlay soovib koguda kasutusandmeid, et paremini mõista, kuidas meie kasutajad rakendusega suhtlevad. \n           See võimaldab meil HyperPlay'd teie jaoks veelgi paremaks muuta.",
+                "privacyPolicy": "Privaatsuspoliitika.",
+                "text": {
+                    "externalLink": "Uuri lähemalt",
+                    "title": "Oleme uuendanud meie privaatsuspoliitikat"
+                },
+                "titleOne": "Aita meid aidata HyperPlay'd parandada!"
             },
             "connectionConnected": {
                 "description": "Sinu rahakott on ühendatud. Sa oled mängimiseks valmis.",
@@ -854,7 +885,9 @@
             "paused": "Peatatud  \nSeisak  \nOoteolek",
             "distributables": "Installeerimine...",
             "extracting": "Eemaldamine...",
-            "installing": "Laadimine..."
+            "installing": "Laadimine...",
+            "installed": "Valmis mängima",
+            "patching": "Parandamine..."
         },
         "copyUrl": "Kopeeri veebiaadress",
         "viewFullscreen": "Vaata täisvaates",
@@ -867,8 +900,10 @@
                 "validation": "Edukas! Juurdepääsukood on kehtiv"
             },
             "error": {
-                "validation": "Juurdepääsukood on vale"
-            }
+                "validation": "Juurdepääsukood on vale",
+                "licenseUndefined": "Ligipääsukoodi ei saanud valideerida. Palun kontrollige oma internetiühendust või tulemüüri seadeid."
+            },
+            "placeholder": "Sisestage juurdepääsukood"
         },
         "achievements": {
             "noAchievements": {
@@ -888,7 +923,10 @@
         "currentWallet": "Praegune rahakott",
         "linkSteamAccountCta": "Mine Steam'i sisselogimisele",
         "connectWallet": "Ühenda rahakott",
-        "publicAlpha": "Avalik alfa"
+        "publicAlpha": "Avalik alfa",
+        "linkSteamAccountTitle": "Seosta Steam'i konto",
+        "compatibilityLayer": "Ühilduvuse kiht (Beta)",
+        "discordAppLink": "Discordi kogukond."
     },
     "gameRelease": {
         "beta": "Beeta test",
@@ -924,8 +962,13 @@
         "View Game": "Vaata mängu",
         "g7Numclaimed": "Kokku nõutud G7 krediiti",
         "noG7ConnectionClaim": "Te peate omama Game7 kontot, mis on seotud {{email}} , et oma auhindu nõuda.",
-        "noG7ConnectionSync": "Peate olema {{email}} seotud Game7 kontoga, et oma ülesandeid uuesti sünkroonida.",
-        "notEnoughGas": "Rahakoti saldo on liiga madal, et oma auhinda nõuda gaasitasude tõttu. Proovige teist rahakotti või täiendage seda enne uuesti proovimist.",
+        "noG7ConnectionSync": {
+            "message": "Pead olema Game7 konto seotud {{email}} et oma ülesandeid uuesti sünkroonida.",
+            "title": "G7 kontot ei ole seotud"
+        },
+        "notEnoughGas": {
+            "message": "Rahakoti saldo on liiga madal, et oma auhinda nõuda gaasitasude tõttu. Proovige teist rahakotti või täiendage seda enne uuesti proovimist."
+        },
         "associatedGames": "Seotud mängud",
         "claimAll": "Nõua kõiki",
         "claimed": "Nõutud",
@@ -938,8 +981,30 @@
         "linkAccount": "Seosta oma Steam'i konto, et kontrollida sobivust.",
         "pointsClaimed": "Nõuded täidetud",
         "type": {
-            "playstreak": "Mängu järjestus"
-        }
+            "playstreak": "Mängu järjestus",
+            "reputation": "Reputatsioon"
+        },
+        "createDiscordTicket": "Loo Discord'i pilet",
+        "notEligible": {
+            "message": "Te ei ole täitnud vajalikke mängu järjestikuseid päevi ja ei saa praegu oma auhinda nõuda.",
+            "title": "Veel ei ole sobiv"
+        },
+        "notEnoughBalance": {
+            "title": "Madala saldo"
+        },
+        "notSignedIn": {
+            "message": "Te peate olema sisse logitud, et oma auhind kätte saada.",
+            "title": "Ei ole sisse logitud"
+        },
+        "claimFailedMessage": "Palun proovige veel kord. Kui see ikka ei toimi, looge Discordi tugipilet.",
+        "toSeeDetails": "detailide nägemiseks.",
+        "youHaveClaimed": "Oled nõudnud {{totalRewards}} auhinda{{plural}}.",
+        "claim": "Nõua",
+        "claimFailed": "Nõude esitamine ebaõnnestus",
+        "questAvailable": "Küsimus saadaval!",
+        "questComplete": "Ülesanne täidetud!",
+        "rewardClaimed": "Nõude täitmine õnnestus",
+        "toClaimReward": "oma auhinna nõudmiseks."
     },
     "accounts": "Kontod",
     "ALL": "Igaühe",
@@ -976,7 +1041,8 @@
                 "title": "Põhimäng installitud"
             },
             "installing": {
-                "title": "Põhimängu installimine"
+                "title": "Põhimängu installimine",
+                "body": "Põhimängu failide väljavõtmine"
             }
         }
     },
@@ -1052,7 +1118,16 @@
     },
     "overlay": {
         "comingSoon": "Varsti tulekul",
-        "EXTERNAL_WALLET_CONNECTED": "Olete ühendatud HyperPlay'ga välise rahakoti kaudu."
+        "EXTERNAL_WALLET_CONNECTED": "Olete ühendatud HyperPlay'ga välise rahakoti kaudu.",
+        "links": {
+            "bridge": "Sild",
+            "buy": "Osta",
+            "swap": "Vaheta",
+            "marketplace": "Turg",
+            "portfolio": "Portfell",
+            "sell": "Müü"
+        },
+        "WALLET_DISCONNECTED": "Sul ei ole HyperPlay'ga ühendatud rahakotti."
     },
     "importGameErrorMessageExecutable": "Mängu käivitatavat faili ei leitud, mängu importimine ei ole võimalik",
     "steam-install": {
@@ -1097,19 +1172,23 @@
         "instructions": {
             "step1": {
                 "chromieCraft": "ChromieCraft",
-                "description": "See mäng on mod World of Warcraft: Wrath of the Lich King (3.3.5a) jaoks. Selle mod'i mängimiseks peavad mängijad omama koopiat World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay ei hosti World of Warcraft'i. Mängijad, kellel on World of Warcraft, saavad versiooni 3.3.5a hankida allikatest nagu:",
+                "description": "See mäng on modifikatsioon World of Warcraft: Wrath of the Lich King (3.3.5a) jaoks. Selle modifikatsiooni mängimiseks peavad mängijad omama koopiat World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay ei hosti World of Warcrafti. Mängijad, kellel on World of Warcraft, saavad vajaliku versiooni järgmistest allikatest:",
                 "subtitle": "Laadige alla World of Warcraft 3.3.5a",
                 "title": "Samm 1",
-                "webtorrent": "Torrent (magnetlink)"
+                "webtorrent": "Torrent (magnetlink)",
+                "link1": "Link 1",
+                "link2": "Seosta 2 (Magnet Link)"
             },
             "step2": {
                 "description": "Valige allalaaditud ChromieCraft_3.3.5a.zip fail.",
                 "subtitle": "Valige fail ChromieCraft_3.3.5a.zip",
-                "title": "Samm 2"
+                "title": "Samm 2",
+                "subtitle1": "Valige allalaaditud 3.3.5a zip-fail"
             },
             "step3": {
                 "subtitle": "Vali installatsioonikaust",
-                "title": "Samm 3"
+                "title": "Samm 3",
+                "description": "Palun valige kaust, kuhu World of Warcraft: Wrath of the Lich King (3.3.5a) tuleks installida."
             },
             "step4": {
                 "description": "Sisestage juurdepääsukood mängu installimise jätkamiseks.",
@@ -1120,5 +1199,28 @@
         }
     },
     "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Esimese käivitamise ajal laadib Steam vajalikud failid alla ja see võtab paar minutit, et lõpetada ja sisselogimise ekraan ilmuda;",
-    "importGameErrorMessage": "Kehtetu mängu kaust, mängu importimine ei ole võimalik"
+    "importGameErrorMessage": "Kehtetu mängu kaust, mängu importimine ei ole võimalik",
+    "Downloading": "Laadimine {{percent}}%",
+    "Recommended specs for a better experience": "Soovitatavad spetsifikatsioonid parema kogemuse jaoks",
+    "Cancel Installation": "Tühista installimine",
+    "wallet": {
+        "unsupported": "Toetamata rahakoti ühendus",
+        "portfolio": {
+            "onlyExtension": "MetaMaski portfell on saadaval ainult MetaMaskiga ühendatuna."
+        }
+    },
+    "16GB of RAM": "16GB RAM-i",
+    "Apple Silicon M1 or above": "Apple Silicon M1 või uuem",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Olge teadlik, et mitte kõik mängud ei pruugi töötada ja isegi kui nad töötavad, ei pruugi nad käituda ootuspäraselt.",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Kui soovid jätkata, palun ole kannatlik, kuna see võib võtta paar minutit, olenevalt sinu internetiühendusest ja süsteemi konfiguratsioonist.",
+    "Installing": "Installeerimine",
+    "installModal": {
+        "loginRequired": "Sisselogimine vajalik",
+        "loginRequiredMessage": "Pead olema HyperPlay'sse sisse logitud, et sisestada oma juurdepääsukood ja installida see mäng. ",
+        "loginRequiredMessageUpdate": "Pead olema HyperPlay'sse sisse logitud, et sisestada oma juurdepääsukood ja värskendada seda mängu. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 või uuem"
+    },
+    "Please Wait": "Palun oota"
 }

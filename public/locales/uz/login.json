@@ -1,7 +1,18 @@
 {
     "button": {
         "loading": "Yuklanmoqda",
-        "login": "Tizimga kirish"
+        "login": "Tizimga kirish",
+        "error": "Xato, boshqa kodni sinab ko'ring"
     },
-    "welcome": "Welcome!"
+    "welcome": "Welcome!",
+    "message": {
+        "part1": "O'yinlaringizni kirish va o'rnatish uchun avval quyidagi qadamlarni bajarishingiz kerak:",
+        "part2": "Ochiq",
+        "part3": "Epic Store bu yerda",
+        "part4": ", hisobingizga kiring va nusxa oling",
+        "part5": "avtorizatsiya kod ma'lumot raqami",
+        "part6": "Joylashtiring",
+        "part7": "avtorizatsiya kod raqami",
+        "part8": "quyidagi kirish maydoniga joylashtiring va kirish tugmasini bosing."
+    }
 }
