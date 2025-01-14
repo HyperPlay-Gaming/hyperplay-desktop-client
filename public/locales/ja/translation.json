@@ -137,7 +137,7 @@
             "title": "Shortcuts"
         },
         "sync": {
-            "button": "選ぶ",
+            "button": "選択",
             "error": "無効なパス",
             "title": "保存ディレクトリを選択します"
         },
@@ -184,7 +184,7 @@
         "go_to_library": "Go to Library",
         "login": "Login",
         "sync": "同期",
-        "syncing": "同期しています",
+        "syncing": "同期中",
         "unsync": "非同期",
         "continue": "続ける",
         "download": "ダウンロード",
@@ -260,7 +260,7 @@
         "ignore_hidden": "Ignore Hidden",
         "platform": "プラットホーム",
         "show_all_games": "Show all games",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "利用できないゲームを表示",
         "show_favourites_only": "Show Favourites only",
         "show_hidden": "Show Hidden",
         "store": "Filter Store"
@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "pause": "ダウンロードの一時停止",
-            "resume": "ダウンロードを再開"
+            "resume": "ダウンロードを再開",
+            "retry-update": "更新を再試行",
+            "launch": "ゲームを起動",
+            "retry-install": "インストールを再試行",
+            "stop": "ダウンロードを停止",
+            "timeElapsed": "経過時間: {{elapsed}}"
         }
     },
     "Recent": "最近のゲーム",
@@ -512,7 +517,7 @@
         "default-install-path": "デフォルトのインストールパス",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Set Folder for new Wine Prefixes",
-        "disable_controller": "Disable HyperPlay navigation using controller",
+        "disable_controller": "コントローラーを使用してHyperplayナビゲーションを無効にする",
         "discordRPC": "Discord Rich Presenceを有効にする",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "egs-sync": "インストールされているEpic Gamesと同期する",
@@ -758,7 +763,9 @@
     "hyperplay": {
         "buttons": {
             "noThanks": "結構です",
-            "agree": "同意する"
+            "agree": "同意する",
+            "primaryButton": "同意します",
+            "secondaryButton": "いいえ、ありがとう"
         },
         "turnAnalyticsOff": "無効にする",
         "copyUrl": "URLをコピー",
@@ -817,7 +824,16 @@
                 "privacyPolicyHere": "プライバシーポリシーはこちら.",
                 "anonymized": "匿名化されたクリック&ゲームインタラクションを送信してください;",
                 "title": "HyperPlayを向上させる!",
-                "body": "HyperPlayは、ユーザーがアプリケーションとやり取りする方法をよりよく理解するために、使用データを収集したいと思います。 この情報は、アプリの使用方法を理解し、HyperPlayをより良いものにすることができます."
+                "body": "HyperPlayは、ユーザーがアプリケーションとやり取りする方法をよりよく理解するために、使用データを収集したいと思います。 この情報は、アプリの使用方法を理解し、HyperPlayをより良いものにすることができます.",
+                "bulletOne": "常にオプトアウトを許可",
+                "bulletTwo": "匿名化されたクリックとゲームのインタラクションを送信",
+                "paragraphOne": "HyperPlayは、ユーザーがアプリケーションとどのように対話しているかをよりよく理解するために使用データを収集したいと考えています。 \n           これにより、HyperPlayをさらに良くすることができます。",
+                "privacyPolicy": "プライバシーポリシー。",
+                "text": {
+                    "externalLink": "詳細を学ぶ",
+                    "title": "プライバシーポリシーを更新しました"
+                },
+                "titleOne": "HyperPlayを改善するためにご協力ください！"
             },
             "connectAgain": "再び接続する",
             "connectionConnected": {
@@ -834,9 +850,19 @@
                     "construction": "HyperPlayは工事中にあります.",
                     "communityCTA_1": "フィードバックが大好きで、ぜひご参加ください",
                     "communityCTA_2": "コミュニティ。 一緒に、ゲームの未来を形作りましょう!",
-                    "description": "HyperPlayはゲームランチャーであり、ゲームストアのアグリゲーターです。\n未来。 HyperPlayを使用すると、ウォレット、トークン、アセットを運ぶことができます。\nあらゆるゲームに。 HyperPlayは、Epicのライブラリ全体をサポートしています\nストア、GOG、自社のHyperPlayストア。 HyperPlayを利用することで、同意する\nお問い合わせ"
+                    "description": "HyperPlayはゲームランチャーであり、ゲームストアのアグリゲーターです。\n未来。 HyperPlayを使用すると、ウォレット、トークン、アセットを運ぶことができます。\nあらゆるゲームに。 HyperPlayは、Epicのライブラリ全体をサポートしています\nストア、GOG、自社のHyperPlayストア。 HyperPlayを利用することで、同意する\nお問い合わせ",
+                    "paragraphOne": "HyperPlayでは、ゲームの未来のための次世代ゲームストアを構築しています。",
+                    "bulletPointTwo": "クエストを完了することでトークン、NFT、オフチェーン報酬を獲得",
+                    "lastParagraph": "現在ベータ版中であり、あなたのフィードバックを非常に重視しており、 \n            問題や提案を報告することを奨励します。",
+                    "paragraphThr": "ウォレット、トークン、 \n           および資産をすべてのゲームにシームレスに持ち込み、 \n           Epic Store、GOG、そして私たち自身のHyperPlay Storeの広範なライブラリに \n           一つの場所でアクセスできます。",
+                    "TitleList": "HyperPlayを使えば：",
+                    "bulletPointThree": "HyperPlayを通じてEpicおよびGOGゲームを直接プレイ",
+                    "bulletPointFive": "macOS、Linux、SteamDeckでWindowsゲームを実行するための\n              高度な",
+                    "bulletPointFour": "macOSでSteam（Windows版）をワンクリックで簡単にインストール",
+                    "bulletPointOne": "100以上のオンチェーン対応ゲームの膨大なコレクションにアクセス"
                 },
-                "title": "ハイパーへようこそ 早期アクセスを再生!"
+                "title": "ハイパーへようこそ 早期アクセスを再生!",
+                "titleIntro": "HyperPlayへようこそ！"
             }
         },
         "achievements": {
@@ -855,7 +881,8 @@
             "paused": "一時停止済み",
             "installing": "ダウンロード中...",
             "installed": "再生する準備",
-            "extracting": "抽出..."
+            "extracting": "抽出...",
+            "patching": "パッチ適用中..."
         },
         "turnAnalyticsOn": "有効にする",
         "Sync": "シンク",
@@ -866,8 +893,10 @@
                 "validation": "成功! アクセスコードが有効"
             },
             "error": {
-                "validation": "アクセスコードが無効"
-            }
+                "validation": "アクセスコードが無効",
+                "licenseUndefined": "アクセスコードを検証できませんでした。インターネット接続またはファイアウォール設定を確認してください。"
+            },
+            "placeholder": "アクセスコードを入力"
         },
         "changeWallet": "Swapウォレットアカウント",
         "connectWallet": "ウォレットを接続",
@@ -882,7 +911,9 @@
         "linkSteamAccountTitle": "Steamアカウントのリンク",
         "publicAlpha": "パブリックアルファ",
         "otp": "ワンタイムパスコード",
-        "viewFullscreen": "フルスクリーンを見る"
+        "viewFullscreen": "フルスクリーンを見る",
+        "compatibilityLayer": "互換性レイヤー（ベータ）",
+        "discordAppLink": "Discordコミュニティ。"
     },
     "dlc": {
         "size": "サイズ",
@@ -905,7 +936,7 @@
         "connectSteamAccount": "チームアカウントを接続",
         "Play": "再生",
         "quests": "クエスト",
-        "signIn": "サインイン",
+        "signIn": "ログイン",
         "playstreak": {
             "days": "日",
             "now": "今",
@@ -935,7 +966,9 @@
         "claimFailed": "クレーム失敗",
         "claimFailedMessage": "お問い合わせ それでも機能しない場合は、Discordサポートチケットを作成します.",
         "createDiscordTicket": "作成したDiscordチケット",
-        "notEnoughGas": "十分なウォレット残高で、ガス手数料による報酬を請求できます。 別の財布を試したり、再試行する前にこれを補充してください.",
+        "notEnoughGas": {
+            "message": "ガス料金のため、報酬を受け取るためのウォレット残高が不足しています。別のウォレットを試すか、再試行する前にこのウォレットを補充してください。"
+        },
         "pointsClaimed": "ポイント申請",
         "g7Numclaimed": "請求総額 G7 クレジット",
         "claimWarning": {
@@ -946,7 +979,28 @@
             "confirm": "確認"
         },
         "noG7ConnectionClaim": "{{email}}にリンクされているGame7アカウントをお持ちで、報酬を請求する必要があります.",
-        "noG7ConnectionSync": "{{email}} にリンクされている Game7 アカウントをお持ちで、タスクを再同期する必要があります."
+        "noG7ConnectionSync": {
+            "message": "タスクを再同期するには、{{email}}にGame7アカウントをリンクする必要があります。",
+            "title": "G7アカウントがリンクされていません"
+        },
+        "claim": "請求",
+        "notEligible": {
+            "message": "必要なプレイ連続日数を満たしていないため、現在報酬を請求することはできません。",
+            "title": "まだ資格がありません"
+        },
+        "notSignedIn": {
+            "message": "報酬を受け取るにはサインインする必要があります。",
+            "title": "サインインしていません"
+        },
+        "questAvailable": "クエストが利用可能です！",
+        "questComplete": "クエスト完了！",
+        "rewardClaimed": "クレーム成功",
+        "toClaimReward": "報酬を受け取るため。",
+        "youHaveClaimed": "{{totalRewards}}の報酬{{plural}}を請求しました。",
+        "notEnoughBalance": {
+            "title": "残高不足"
+        },
+        "toSeeDetails": "詳細を見る。"
     },
     "quests": {
         "quests": "クエスト",
@@ -1045,7 +1099,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "外部ウォレットでHyperPlayに接続します.",
         "WALLET_DISCONNECTED": "HyperPlayに接続されているウォレットはありません.",
-        "comingSoon": "Coming Soon"
+        "comingSoon": "Coming Soon",
+        "links": {
+            "swap": "スワップ",
+            "portfolio": "ポートフォリオ",
+            "sell": "販売",
+            "bridge": "ブリッジ",
+            "buy": "購入",
+            "marketplace": "マーケットプレイス"
+        }
     },
     "importGameErrorMessageExecutable": "ゲーム 実行可能が見つからず、ゲームをインポートできない",
     "gameUpdateNotifications": {
@@ -1075,9 +1137,11 @@
             "step1": {
                 "title": "ステップ 1",
                 "chromieCraft": "クロムクラフト",
-                "description": "このゲームは、ウォークラフトの世界のためのMODです: リッチキングの神話 (3.3.5a). このMODを再生するには、プレイヤーはWarcraft 3.3.5aのWorldのコピーを所有しなければなりません。 {{newline}} {{newline}} HyperPlayはWarcraftのWorldをホストしていません。 WarcraftのWorldを所有しているプレイヤーは、以下のようなソースからバージョン3.3.5aを得ることができます",
+                "description": "このゲームはWorld of Warcraft: Wrath of the Lich King (3.3.5a) のモッドです。このモッドをプレイするには、プレイヤーはWorld of Warcraft 3.3.5aのコピーを所有している必要があります。{{newline}} {{newline}} HyperPlayはWorld of Warcraftをホストしていません。World of Warcraftを所有しているプレイヤーは、以下のソースから必要なバージョンを取得できます：",
                 "subtitle": "Warcraftのワールドをダウンロード 3.3.5a",
-                "webtorrent": "トレント(マグネットリンク)"
+                "webtorrent": "トレント(マグネットリンク)",
+                "link2": "リンク 2 (マグネットリンク)",
+                "link1": "リンク 1"
             },
             "step3": {
                 "title": "ステップ 3",
@@ -1087,7 +1151,8 @@
             "step2": {
                 "title": "ステップ 2",
                 "description": "ダウンロードする ChromieCraft_3.3.5a.zipファイル.",
-                "subtitle": "選択する ChromieCraft_3.3.5a.zip ファイル"
+                "subtitle": "選択する ChromieCraft_3.3.5a.zip ファイル",
+                "subtitle1": "ダウンロードした3.3.5aのzipファイルを選択"
             },
             "step4": {
                 "subtitle": "アクセスコード",
@@ -1138,5 +1203,27 @@
         "success-message": "Steamをインストールしました。 ライブラリから起動できるようになりました.",
         "tooltip": "これは、SteamのWindowsバージョンをインストールし、HyperPlayの互換性レイヤーを使用して実行されます。\n\n一部のゲームは、特に古いタイトル、新しい3Dゲーム、またはアンチチートソフトウェアを備えたゲームが正常に動作しない場合があります。\n\n推奨スペックは、Apple Silicon CPU(M1以上)と16GB以上のRAMを搭載したMacです."
     },
-    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam(オンスチーム) お問い合わせ"
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam(オンスチーム) お問い合わせ",
+    "Downloading": "ダウンロード中 {{percent}}%",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "続行する場合は、インターネット接続やシステム構成によって完了まで数分かかることがありますので、しばらくお待ちください。",
+    "Installing": "インストール中",
+    "installModal": {
+        "loginRequired": "ログインが必要です",
+        "loginRequiredMessage": "このゲームをインストールするには、HyperPlayにログインしてアクセスコードを入力する必要があります。 ",
+        "loginRequiredMessageUpdate": "アクセスコードを入力してこのゲームを更新するには、HyperPlayにログインする必要があります。 "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0以上"
+    },
+    "Please Wait": "お待ちください",
+    "Recommended specs for a better experience": "より良い体験のための推奨スペック",
+    "16GB of RAM": "16GBのRAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 以上",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "すべてのゲームが動作するわけではなく、動作する場合でも、期待通りに動作しない可能性があることに注意してください。",
+    "wallet": {
+        "unsupported": "サポートされていないウォレット接続",
+        "portfolio": {
+            "onlyExtension": "MetaMaskポートフォリオは、MetaMaskに接続しているときのみ利用可能です。"
+        }
+    }
 }

@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Ukuran Unduhan",
         "firstPlayed": "Pertama Kali Dimainkan",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Mendapatkan ukuran unduhan",
+        "getting-install-size": "Mendapatkan ukuran instalasi",
         "installSize": "Ukuran Pemasangan",
         "language": "Bahasa",
         "lastPlayed": "Terakhir Dimainkan",
@@ -225,7 +225,8 @@
         "paused": "Dijeda",
         "downloading": "Mengunduh",
         "playing": "Memutar",
-        "syncingSaves": "Menyinkronkan Penyimpanan"
+        "syncingSaves": "Menyinkronkan Penyimpanan",
+        "patching": "Memperbaiki Berkas "
     },
     "submenu": {
         "addShortcut": "Tambahkan pintasan",
