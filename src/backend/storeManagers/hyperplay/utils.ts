@@ -15,14 +15,13 @@ import {
   qaToken,
   valistListingsApiUrl
 } from 'backend/constants'
-import { getGameInfo, getSettings } from './games'
+import { getGameInfo } from './games'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { join } from 'path'
 import { existsSync } from 'graceful-fs'
 import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from 'common/constants'
-import { runWineCommand } from 'backend/launcher'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -387,14 +386,14 @@ export async function getEpicListingUrl(projectId: string): Promise<string> {
 }
 
 export const runModPatcher = async (appName: string) => {
-  // game_folder/client-patcher patch.exe -m patch/manifest.json
   const installPath = getGameInfo(appName)?.install.install_path
   if (!installPath) {
     logError(`Cannot find install path for ${appName}`, LogPrefix.HyperPlay)
     return
   }
 
-  const patcher = join(installPath, 'client-patcher.exe')
+  const patcherBinary = isWindows ? 'client-patcher.exe' : 'client-patcher'
+  const patcher = join(installPath, patcherBinary)
   const manifest = join(installPath, 'patch', 'manifest.json')
 
   logInfo(
@@ -407,15 +406,14 @@ export const runModPatcher = async (appName: string) => {
   }
 
   try {
-    if (!isWindows) {
-      const gameSettings = await getSettings(appName)
-      runWineCommand({
-        gameSettings,
-        commandParts: [patcher, 'patch', '-m', manifest],
-        wait: true
-      })
-    } else {
-      await spawnAsync(patcher, ['patch', '-m', manifest])
+    const { stderr, stdout } = await spawnAsync(
+      patcherBinary,
+      ['patch', '-m', 'patch/manifest.json'],
+      { cwd: installPath }
+    )
+    logInfo(['Patch Applied', stdout], LogPrefix.HyperPlay)
+    if (stderr) {
+      logError(stderr, LogPrefix.HyperPlay)
     }
   } catch (error) {
     throw new Error(`Error running patcher: ${error}`)
