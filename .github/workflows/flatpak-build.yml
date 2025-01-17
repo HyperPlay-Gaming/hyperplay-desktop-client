@@ -24,11 +24,11 @@ jobs:
       group: flatpak-${{ github.ref }}
       cancel-in-progress: true
     container:
-      image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
+      image: bilelmoussaoui/flatpak-github-actions:freedesktop-23.08
       options: --privileged
     steps:
       - name: install libnss, libatk, libatk-bridge, libcups, libgtk-3
-        run: sudo dnf install nss-tools atk-devel at-spi2-atk-devel cups-devel gtk3-devel -y
+        run: sudo dnf install nss-tools atk-devel at-spi2-atk-devel cups-devel gtk3-devel make automake gcc gcc-c++ -y
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Setup NodeJS
