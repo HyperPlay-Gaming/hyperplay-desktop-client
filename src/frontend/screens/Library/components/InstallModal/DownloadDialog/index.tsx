@@ -40,7 +40,6 @@ import { configStore } from 'frontend/helpers/electronStores'
 import { AlertCard, Button, Images } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
-import { signSiweMessage } from 'frontend/helpers/library'
 import styles from './index.module.scss'
 
 interface Props {
@@ -206,7 +205,7 @@ export default function DownloadDialog({
   async function handleInstall(path?: string) {
     let siweValues
     if (requiresToken) {
-      siweValues = await signSiweMessage()
+      siweValues = await window.api.requestSIWE()
     }
     backdropClick()
     // Write Default game config with prefix on linux

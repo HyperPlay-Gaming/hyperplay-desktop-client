@@ -37,11 +37,12 @@ jobs:
           node-version: '22'
       - uses: pnpm/action-setup@v3
         with:
-          version: 9
           standalone: ${{ runner.os == 'Windows' }}
       - name: Install node-gyp
         run: pnpm add --global node-gyp
         shell: bash
+      - name: install python setuptools
+        run: pip3 install setuptools
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf

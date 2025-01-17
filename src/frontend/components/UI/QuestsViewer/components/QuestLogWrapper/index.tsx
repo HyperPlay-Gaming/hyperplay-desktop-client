@@ -9,23 +9,24 @@ import styles from './index.module.scss'
 import { useTranslation } from 'react-i18next'
 import useGetG7UserCredits from 'frontend/hooks/useGetG7UserCredits'
 import useGetPointsBalancesForProject from 'frontend/hooks/useGetPointsBalances'
-import useGetQuests from 'frontend/hooks/useGetQuests'
+import { Quest } from '@hyperplay/utils'
 import { useGetQuestStates } from 'frontend/hooks/useGetQuestStates'
 
 export interface QuestLogWrapperProps {
-  questsResults: ReturnType<typeof useGetQuests>
+  quests: Quest[] | null | undefined
+  isLoading: boolean
   projectId: string
   selectedQuestId: number | null
   setSelectedQuestId: (id: number | null) => void
 }
 
 export function QuestLogWrapper({
-  questsResults,
+  quests,
+  isLoading,
   projectId: appName,
   selectedQuestId,
   setSelectedQuestId
 }: QuestLogWrapperProps) {
-  const quests = questsResults?.data?.data
   const userCredits = useGetG7UserCredits()
   const userCreditsBalance = userCredits?.data?.data
   const pointsBalancesQuery = useGetPointsBalancesForProject(appName)
@@ -41,6 +42,7 @@ export function QuestLogWrapper({
       const questUi_i: QuestLogInfo = {
         questType: quest.type,
         title: quest.name,
+        // @ts-expect-error Already filtered in parent component
         state: Object.hasOwn(questIdToQuestStateMap, quest.id)
           ? questIdToQuestStateMap[quest.id]
           : 'ACTIVE',
@@ -89,17 +91,13 @@ export function QuestLogWrapper({
   }
 
   let questLog = null
-  const isLoading =
-    questsResults?.data.isLoading ||
-    questsResults?.data.isFetching ||
-    isGetQuestStatesPending
   questLog = (
     <QuestLog
       quests={questsUi ?? []}
       className={styles.questLog}
       i18n={i18n}
       pointsProps={pointsBalanceProps}
-      loading={isLoading}
+      loading={isLoading || isGetQuestStatesPending}
     />
   )
 
