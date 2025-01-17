@@ -137,7 +137,7 @@
             "title": "Shortcuts"
         },
         "sync": {
-            "button": "Selecteer",
+            "button": "Kies",
             "error": "Ongeldig Pad",
             "title": "Selecteer de saves directory"
         },
@@ -183,9 +183,9 @@
         "cancel": "Cancel",
         "go_to_library": "Go to Library",
         "login": "Login",
-        "sync": "Synchroniseer",
+        "sync": "Synchroniseren",
         "syncing": "Synchroniseren",
-        "unsync": "De-synchroniseren",
+        "unsync": "Ontkoppelen",
         "continue": "Door­gaan",
         "download": "Download",
         "update": "Aanpassen",
@@ -260,7 +260,7 @@
         "ignore_hidden": "Ignore Hidden",
         "platform": "Platform",
         "show_all_games": "Show all games",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Toon niet-beschikbare games",
         "show_favourites_only": "Show Favourites only",
         "show_hidden": "Show Hidden",
         "store": "Filter Store"
@@ -391,9 +391,9 @@
             "reparing": "Klaar met de reparatie"
         },
         "install": {
-            "canceled": "Installatie geannuleerd",
+            "canceled": "Installatie Geannuleerd",
             "error": "Installatie mislukt",
-            "finished": "Installatie is voltooid",
+            "finished": "Installatie Voltooid",
             "imported": "Game Imported",
             "startInstall": "Installation Started",
             "paused": "Installatie Paused",
@@ -407,7 +407,7 @@
         },
         "uninstalled": "Verwijderd",
         "update": {
-            "canceled": "Update geannuleerd",
+            "canceled": "Bijwerken geannuleerd",
             "finished": "Update is voltooid",
             "started": "Update Started",
             "stopped": "Update stopte",
@@ -489,7 +489,12 @@
             "queued": "Queued",
             "remove": "Remove from Downloads",
             "pause": "Downloads pauzeren",
-            "resume": "Download hervatten"
+            "resume": "Download hervatten",
+            "launch": "Start spel",
+            "retry-install": "Probeer Installatie Opnieuw",
+            "retry-update": "Probeer opnieuw bij te werken",
+            "stop": "Download Stoppen",
+            "timeElapsed": "Verstreken tijd: {{elapsed}}"
         }
     },
     "Recent": "Recente Spellen",
@@ -512,7 +517,7 @@
         "default-install-path": "Standaard installatie pad",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Set Folder for new Wine Prefixes",
-        "disable_controller": "Disable HyperPlay navigation using controller",
+        "disable_controller": "Schakel Hyperplay-navigatie uit met de controller",
         "discordRPC": "\"Discord Rich Presence\" inschakelen",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "egs-sync": "Synchronisatie met geïnstalleerde Epic Games",
@@ -818,7 +823,16 @@
                 "title": "Help ons HyperPlay te verbeteren!",
                 "hyperplayWill": "HyperPlay zal:",
                 "body": "HyperPlay wil gebruiksgegevens verzamelen om beter te begrijpen hoe onze gebruikers met de aanvraag communiceren. Deze informatie helpt ons te begrijpen hoe je de app gebruikt en laat ons HyperPlay nog beter voor je maken.",
-                "neverCollectPersonal": " sleutels verzamelen, adressen, evenwichten, hashes, of persoonlijke informatie;"
+                "neverCollectPersonal": " sleutels verzamelen, adressen, evenwichten, hashes, of persoonlijke informatie;",
+                "privacyPolicy": "Privacybeleid.",
+                "titleOne": "Help ons HyperPlay te verbeteren!",
+                "bulletOne": "Altijd de mogelijkheid om je af te melden",
+                "bulletTwo": "Stuur geanonimiseerde klik- en game-interactie",
+                "paragraphOne": "HyperPlay wil gebruiksgegevens verzamelen om beter te begrijpen hoe onze gebruikers met de applicatie omgaan. \n           Dit stelt ons in staat om HyperPlay nog beter voor jou te maken.",
+                "text": {
+                    "externalLink": "Leer meer",
+                    "title": "We hebben ons privacybeleid bijgewerkt"
+                }
             },
             "welcome": {
                 "text": {
@@ -826,9 +840,19 @@
                     "communityCTA_2": "gemeenschap. Samen, laten we de toekomst van het spel vormen!",
                     "bugs": "Let op dat HyperPlay een publieke alfa is. Veel kenmerken zijn nog steeds\nin ontwikkeling, en er zullen insecten zijn.",
                     "construction": "HyperPlay staat onder de bouw.",
-                    "description": "HyperPlay is een spelwerper en game shop aggregator van de\ntoekomst. Met HyperPlay kun je je portemonnee, token en activa dragen.\nin elke wedstrijd. HyperPlay steunt de hele bibliotheek van de Epic\nGestolen, GG, en onze eigen HyperPlay winkel. Door HyperPlay te gebruiken, ben je het ermee eens."
+                    "description": "HyperPlay is een spelwerper en game shop aggregator van de\ntoekomst. Met HyperPlay kun je je portemonnee, token en activa dragen.\nin elke wedstrijd. HyperPlay steunt de hele bibliotheek van de Epic\nGestolen, GG, en onze eigen HyperPlay winkel. Door HyperPlay te gebruiken, ben je het ermee eens.",
+                    "bulletPointFive": "Voer Windows-spellen uit op macOS, Linux en SteamDeck met onze\n              geavanceerde",
+                    "bulletPointFour": "Installeer Steam (Windows-versie) op macOS met één gemakkelijke klik",
+                    "bulletPointThree": "Speel Epic- en GOG-games rechtstreeks via HyperPlay",
+                    "paragraphOne": "Bij HyperPlay bouwen we de gamewinkel van de volgende generatie  \n            voor de toekomst van gaming.",
+                    "lastParagraph": "Momenteel in Beta, we waarderen je feedback zeer en  \n            moedigen je aan om eventuele problemen of suggesties te melden in onze",
+                    "bulletPointOne": "Toegang tot een enorme collectie van 100+ on-chain geactiveerde games",
+                    "bulletPointTwo": "Verdien tokens, NFT's en off-chain beloningen door Quests te voltooien",
+                    "paragraphThr": "Breng naadloos je portemonnee, tokens,  \n           en activa in elke game terwijl je toegang hebt tot  \n           de uitgebreide bibliotheken van de Epic Store,  \n           GOG en onze eigen HyperPlay Store - alles op één plek.",
+                    "TitleList": "Met HyperPlay kun je:"
                 },
-                "title": "Welkom in Hyper Speel Early Access!"
+                "title": "Welkom in Hyper Speel Early Access!",
+                "titleIntro": "Welkom bij HyperPlay!"
             },
             "connectionCanceled": {
                 "description": "Bevestig het verzoek op je mobiele portemonnee om verder te gaan.",
@@ -858,7 +882,9 @@
         "analyticsOn": "Analytica wordt aangezet",
         "buttons": {
             "agree": "Mee eens",
-            "noThanks": "Nee, bedankt"
+            "noThanks": "Nee, bedankt",
+            "primaryButton": "Ik ga akkoord",
+            "secondaryButton": "Nee, bedankt"
         },
         "currentWallet": "Current portemonnee",
         "syncing": "Syncing...",
@@ -870,9 +896,11 @@
                 "validation": "Succes. Toegangscode is geldig"
             },
             "error": {
-                "validation": "Toegangscode is ongeldig"
+                "validation": "Toegangscode is ongeldig",
+                "licenseUndefined": "Kon toegangscode niet valideren. Controleer je internettoegang of firewallinstellingen."
             },
-            "requirescode": "Dit spel update vraagt een toegangscode."
+            "requirescode": "Dit spel update vraagt een toegangscode.",
+            "placeholder": "Voer toegangscode in"
         },
         "publicAlpha": "Public Alfa",
         "gamecard": {
@@ -880,7 +908,8 @@
             "installed": "Klaar om te spelen",
             "paused": "Gepauzeerd",
             "distributables": "Installing distributable",
-            "installing": "Bezig met ophalen..."
+            "installing": "Bezig met ophalen...",
+            "patching": "Patching..."
         },
         "otp": "Een Time Passcode",
         "browserImport": {
@@ -896,7 +925,9 @@
         "folder": "Map",
         "copyUrl": "URL kopiëren",
         "turnAnalyticsOn": "Inschakelen",
-        "viewFullscreen": "View fullscreen"
+        "viewFullscreen": "View fullscreen",
+        "compatibilityLayer": "Compatibiliteitslaag (Beta)",
+        "discordAppLink": "Discord-gemeenschap."
     },
     "hyperplayOverlay": {
         "signatureRequest": {
@@ -977,10 +1008,12 @@
         "needMoreAchievements": "Je moet de prestaties hebben voltooid in een van deze wedstrijden.",
         "quests": "Quest",
         "createDiscordTicket": "Gecreëerd Discord ticket",
-        "notEnoughGas": "Onvoldoende portemonnee balans om je beloning te claimen door gaskosten. Probeer een andere portemonnee of replenish deze voor het terugtrekken.",
+        "notEnoughGas": {
+            "message": "Onvoldoende saldo in de portemonnee om je beloning te claimen vanwege gaskosten. Probeer een andere portemonnee of vul deze aan voordat je het opnieuw probeert."
+        },
         "active": "Actief",
         "connectSteamAccount": "Verbind het team account",
-        "signIn": "Aanmelden",
+        "signIn": "Inloggen",
         "Play": "Speel",
         "points": "Punten",
         "reputation": "Reputatie",
@@ -995,7 +1028,28 @@
             "confirm": "Bevestigen"
         },
         "noG7ConnectionClaim": "Je moet een Game7 account hebben om je beloningen op te eisen.",
-        "noG7ConnectionSync": "Je moet een Game7 account hebben om je taken te herstellen."
+        "noG7ConnectionSync": {
+            "message": "Je moet een Game7-account gekoppeld hebben aan {{email}} om je taken opnieuw te synchroniseren.",
+            "title": "Geen G7-account gekoppeld"
+        },
+        "notEligible": {
+            "message": "Je hebt de vereiste speelreeksdagen niet voltooid en kunt op dit moment je beloning niet claimen.",
+            "title": "Nog niet in aanmerking komend"
+        },
+        "notEnoughBalance": {
+            "title": "Laag saldo"
+        },
+        "notSignedIn": {
+            "message": "Je moet ingelogd zijn om je beloning te claimen.",
+            "title": "Niet ingelogd"
+        },
+        "claim": "Claimen",
+        "questAvailable": "Quest beschikbaar!",
+        "questComplete": "Quest voltooid!",
+        "rewardClaimed": "Claimen succesvol",
+        "toClaimReward": "om je beloning te claimen.",
+        "youHaveClaimed": "Je hebt {{totalRewards}} beloning{{plural}} geclaimd.",
+        "toSeeDetails": "om details te zien."
     },
     "quests": {
         "quests": "Quest",
@@ -1047,7 +1101,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Je bent verbonden met HyperPlay met een externe portemonnee.",
         "WALLET_DISCONNECTED": "Je hebt geen portemonnee verbonden met HyperPlay.",
-        "comingSoon": "Binnenkort"
+        "comingSoon": "Binnenkort",
+        "links": {
+            "bridge": "Brug",
+            "buy": "Kopen",
+            "marketplace": "Marktplaats",
+            "portfolio": "Portefeuille",
+            "sell": "Verkopen",
+            "swap": "Wisselen"
+        }
     },
     "dlcs": {
         "label": "Select DLCs om te installeren:"
@@ -1095,16 +1157,19 @@
     "mods": {
         "instructions": {
             "step1": {
-                "description": "Dit spel is een modder voor World of Warcraft: Wrath of the Lich King (3,3,5a) Om deze modder te spelen, moeten spelers een kopie van World of Warcraft 3,5a hebben. Spelers die de wereld van Warcraft bezitten kunnen versie 3,3,5a van bronnen als:",
+                "description": "Dit spel is een mod voor World of Warcraft: Wrath of the Lich King (3.3.5a). Om deze mod te spelen, moeten spelers een exemplaar van World of Warcraft 3.3.5a bezitten. {{newline}} {{newline}} HyperPlay host geen World of Warcraft. Spelers die World of Warcraft bezitten, kunnen de benodigde versie verkrijgen via de volgende bronnen:",
                 "title": "Stap 1",
                 "webtorrent": "Torrent (Magnet Link)",
                 "chromieCraft": "ChromieCraft",
-                "subtitle": "Download World of Warcraft 3,3,5"
+                "subtitle": "Download World of Warcraft 3,3,5",
+                "link2": "Link 2 (Magnetlink)",
+                "link1": "Link 1"
             },
             "step2": {
                 "description": "Selecteer de download ChromieCraft 3,5a.",
                 "subtitle": "Select ChromieCraft3,3,5a. Veld",
-                "title": "Stap 2"
+                "title": "Stap 2",
+                "subtitle1": "Selecteer het gedownloade 3.3.5a zip-bestand"
             },
             "step3": {
                 "description": "Kies alsjeblieft de map waar World of Warcraft, Wrath of the Lich King geïnstalleerd moet worden.",
@@ -1138,5 +1203,27 @@
         "launch-tooltip": "Launch Steam gebruikt de HyperPlay Compatibility Layer",
         "success-message": "Steam is geïnstalleerd. Je kunt het nu uit de bibliotheek lanceren.",
         "tooltip": "Dit zal de Windows versie van Steam installeren en het zal rennen met een HyperPlay Compatibility Layer.\n\nVooral oudere titels, nieuwere 3D wedstrijden, of die met anti-kaat software werkt niet goed.\n\nDe herstellende specificaties zijn een Mac met Apple Silicon CPU (M1 of boven) en minstens 16GB van RAM."
-    }
+    },
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Als je wilt doorgaan, wees dan geduldig, want het kan enkele minuten duren om te voltooien, afhankelijk van je internetverbinding en systeemconfiguratie.",
+    "installModal": {
+        "loginRequired": "Inloggen Vereist",
+        "loginRequiredMessage": "Je moet ingelogd zijn op HyperPlay om je toegangscode in te voeren en deze game te installeren. ",
+        "loginRequiredMessageUpdate": "Je moet ingelogd zijn op HyperPlay om je toegangscode in te voeren en deze game bij te werken. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 of hoger"
+    },
+    "Please Wait": "Even geduld",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "MetaMask-portefeuille is alleen beschikbaar wanneer verbonden met MetaMask."
+        },
+        "unsupported": "Ongeldige portemonneeverbinding"
+    },
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 of hoger",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Wees je ervan bewust dat niet alle games zullen werken, en zelfs als ze dat doen, ze mogelijk niet naar verwachting draaien.",
+    "Downloading": "Aan het downloaden {{percent}}%",
+    "Installing": "Installeren",
+    "Recommended specs for a better experience": "Aanbevolen specificaties voor een betere ervaring"
 }

@@ -337,7 +337,12 @@
             "pause": "השהה הורדה",
             "queued": "בתור",
             "remove": "הסר מהורדות",
-            "resume": "המשך הורדה"
+            "resume": "המשך הורדה",
+            "retry-install": "נסה להתקין שוב",
+            "retry-update": "נסה לעדכן שוב",
+            "stop": "הפסק הורדה",
+            "launch": "השקת משחק",
+            "timeElapsed": "זמן שחלף: {{elapsed}}"
         }
     },
     "setting": {
@@ -784,12 +789,15 @@
             "distributables": "התקנת Distributables",
             "paused": "הופסק",
             "extracting": "לחלץ...",
-            "installed": "מוכן לשחק"
+            "installed": "מוכן לשחק",
+            "patching": "מתקן..."
         },
         "Sync": "סנכרן",
         "buttons": {
             "noThanks": "לא, תודה",
-            "agree": "אני מסכים"
+            "agree": "אני מסכים",
+            "primaryButton": "אני מסכים",
+            "secondaryButton": "לא, תודה"
         },
         "logOut": "התנתק",
         "onboarding": {
@@ -841,7 +849,16 @@
                 "title": "עזרו לנו לשפר את HyperPlay!",
                 "neverCollectIP": " לאסוף את כתובת ה-IP המלאה שלך;",
                 "privacyCaption": "נתונים אלה נאספים ולכן הם אנונימיים לצרכים של כללי הגנת נתונים (EU) 2016/679. לקבלת מידע נוסף ביחס לשיטות הפרטיות שלנו, אנא ראה אותנו ",
-                "neverCollectPersonal": " לאסוף מפתחות, כתובות, מאזן, חיס או כל מידע אישי;"
+                "neverCollectPersonal": " לאסוף מפתחות, כתובות, מאזן, חיס או כל מידע אישי;",
+                "bulletOne": "תמיד אפשר לאפשר לך לצאת",
+                "bulletTwo": "שלח קליקים ואינטראקציות משחק אנונימיים",
+                "paragraphOne": "HyperPlay מעוניינת לאסוף נתוני שימוש כדי להבין טוב יותר כיצד המשתמשים שלנו מתקשרים עם האפליקציה. \n           זה מאפשר לנו לשפר את HyperPlay עבורך.",
+                "privacyPolicy": "מדיניות פרטיות.",
+                "text": {
+                    "externalLink": "למד עוד",
+                    "title": "עדכנו את מדיניות הפרטיות שלנו"
+                },
+                "titleOne": "עזור לנו לשפר את HyperPlay!"
             },
             "welcome": {
                 "text": {
@@ -849,9 +866,19 @@
                     "communityCTA_2": "קהילה. בואו נעצב את העתיד של המשחקים!",
                     "bugs": "אנא שימו לב כי HyperPlay הוא אלפא ציבורי. תכונות רבות עדיין\nבפיתוח, ויהיו באגים.",
                     "communityCTA_1": "אנחנו נשמח את המשוב שלכם והצטרפו אלינו",
-                    "description": "HyperPlay הוא משגר משחקים ו-Game Store aggregator מהמשחק\nעתיד. עם HyperPlay, אתה יכול לשאת את הארנק שלך, אסימונים ונכסים\nלכל משחק. HyperPlay תומך בכל הספרייה של Epic\nחנות, GOG וחנות ה- HyperPlay שלנו. באמצעות HyperPlay, אתה מסכים\nלנו"
+                    "description": "HyperPlay הוא משגר משחקים ו-Game Store aggregator מהמשחק\nעתיד. עם HyperPlay, אתה יכול לשאת את הארנק שלך, אסימונים ונכסים\nלכל משחק. HyperPlay תומך בכל הספרייה של Epic\nחנות, GOG וחנות ה- HyperPlay שלנו. באמצעות HyperPlay, אתה מסכים\nלנו",
+                    "bulletPointThree": "שחק משחקי Epic ו-GOG ישירות דרך HyperPlay",
+                    "bulletPointTwo": "הרוויח אסימונים, NFTs ופרסים מחוץ לשרשרת על ידי השלמת משימות",
+                    "lastParagraph": "נמצא כרגע בבטא, אנו מעריכים מאוד את המשוב שלך ומעודדים אותך לדווח על בעיות או הצעות שלנו",
+                    "paragraphOne": "ב-HyperPlay, אנו בונים את חנות המשחקים של הדור הבא לעתיד המשחקים.",
+                    "paragraphThr": "הבא את הארנק, הטוקנים והנכסים שלך לכל משחק תוך גישה לספריות הרחבות של חנות Epic, GOG, וחנות HyperPlay שלנו - הכל במקום אחד.",
+                    "TitleList": "עם HyperPlay אתה יכול:",
+                    "bulletPointFive": "הרץ משחקי Windows על macOS, Linux ו-SteamDeck באמצעות שלנו\n              מתקדם",
+                    "bulletPointFour": "התקן את Steam (גרסת Windows) על macOS בלחיצה קלה אחת",
+                    "bulletPointOne": "גשת לאוסף רחב של 100+ משחקים מופעלים על-chain"
                 },
-                "title": "ברוכים הבאים להיפר שחקו ב-Early Access!"
+                "title": "ברוכים הבאים להיפר שחקו ב-Early Access!",
+                "titleIntro": "ברוך הבא ל-HyperPlay!"
             },
             "connectAgain": "שוב להתחבר",
             "connectionCanceled": {
@@ -892,15 +919,19 @@
                 "validation": "הצלחה! קוד הגישה הוא בתוקף"
             },
             "error": {
-                "validation": "קוד הגישה אינו חוקי"
-            }
+                "validation": "קוד הגישה אינו חוקי",
+                "licenseUndefined": "לא ניתן לאמת את קוד הגישה. אנא בדוק את גישת האינטרנט שלך או את הגדרות החומת אש שלך."
+            },
+            "placeholder": "הזן קוד גישה"
         },
         "linkSteamAccountCta": "עקבו אחרי Steam Sign In",
         "linkSteamAccountDescription": "היכנס ל-Steam כדי לקשר את חשבון HyperPlay שלך.",
         "linkSteamAccountTitle": "קישור לחשבון Steam",
         "analyticsOff": "Analytics כבוי",
         "changeWallet": "חשבון הארנק",
-        "viewFullscreen": "הצג מסך מלא"
+        "viewFullscreen": "הצג מסך מלא",
+        "compatibilityLayer": "שכבת תאימות (בטא)",
+        "discordAppLink": "קהילת Discord."
     },
     "analytics": "ניתוח",
     "sideload": {
@@ -935,7 +966,7 @@
             "sync": "Sync Progress",
             "syncSuccess": "התקדמות מסונכרנת"
         },
-        "signIn": "כניסה",
+        "signIn": "התחבר",
         "points": "נקודות",
         "sync": "סנכרן",
         "associatedGames": "משחקים קשורים",
@@ -957,7 +988,9 @@
         "claimFailed": "התביעה נכשלה",
         "createDiscordTicket": "כרטיסים נבחרים",
         "claimFailedMessage": "נסה פעם נוספת. אם זה עדיין לא עובד, ליצור כרטיס תמיכה דיסקורד.",
-        "notEnoughGas": "איזון ארנק חסר ערך כדי לטעון את הפרס שלך בגלל עמלות גז. נסה ארנק שונה או לחדש את זה לפני retrying.",
+        "notEnoughGas": {
+            "message": "יתרת הארנק אינה מספיקה כדי לדרוש את הפרס שלך עקב דמי גז. נסה ארנק אחר או מלא את הארנק הזה לפני שתנסה שוב."
+        },
         "pointsClaimed": "נקודות תביעות",
         "g7Numclaimed": "תגית: G7 Credits",
         "claimWarning": {
@@ -968,7 +1001,28 @@
             "confirm": "אישור"
         },
         "noG7ConnectionClaim": "אתה צריך חשבון Game7 מקושר X43X כדי לטעון את התגמולים שלך.",
-        "noG7ConnectionSync": "אתה צריך חשבון Game7 מקושר ל-X43X כדי לסנן את המשימות שלך."
+        "noG7ConnectionSync": {
+            "message": "עליך לקשר חשבון Game7 ל{{email}} כדי לסנכרן מחדש את המשימות שלך.",
+            "title": "אין חשבון G7 מקושר"
+        },
+        "questAvailable": "משימה זמינה!",
+        "questComplete": "המשימה הושלמה!",
+        "rewardClaimed": "הטענה הצליחה",
+        "youHaveClaimed": "דרשת את הפרס {{totalRewards}} {{plural}}.",
+        "toClaimReward": "כדי לדרוש את הפרס שלך.",
+        "toSeeDetails": "כדי לראות פרטים.",
+        "claim": "דרוש",
+        "notEligible": {
+            "title": "לא זכאי עדיין",
+            "message": "לא השלמת את ימי הרצף הנדרשים ואינך יכול לדרוש את הפרס שלך בשלב זה."
+        },
+        "notEnoughBalance": {
+            "title": "מאזן נמוך"
+        },
+        "notSignedIn": {
+            "message": "עליך להתחבר כדי לדרוש את הפרס שלך.",
+            "title": "לא מחובר"
+        }
     },
     "notification": {
         "wine-download": {
@@ -1040,7 +1094,15 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "אתה מחובר ל- HyperPlay עם ארנק חיצוני.",
         "WALLET_DISCONNECTED": "אין לכם ארנק המחובר ל- HyperPlay.",
-        "comingSoon": "בקרוב"
+        "comingSoon": "בקרוב",
+        "links": {
+            "bridge": "גשר",
+            "buy": "קנה",
+            "portfolio": "פורטפוליו",
+            "swap": "החלפה",
+            "marketplace": "שוק",
+            "sell": "מכור"
+        }
     },
     "quests": {
         "playstreak": {
@@ -1111,13 +1173,16 @@
                 "subtitle": "להורדה World of Warcraft 3.3.5a",
                 "title": "שלב 1",
                 "chromieCraft": "ChromieCraft",
-                "description": "משחק זה הוא שיטה עבור World of Warcraft: Wrath of the Lich King (3.3.5a). על מנת לשחק בשיטה זו, השחקנים חייבים להחזיק עותק של World of Warcraft 3.3.5a. [X156X] HyperPlay אינו מארח את World of Warcraft. שחקנים שבבעלותם World of Warcraft יכולים לקבל גרסה 3.3.5a ממקורות כגון:",
-                "webtorrent": "טורנט (Magnet Link)"
+                "description": "המשחק הזה הוא מוד עבור World of Warcraft: Wrath of the Lich King (3.3.5a). כדי לשחק במוד הזה, השחקנים חייבים להיות בעלי עותק של World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay אינה מארחת את World of Warcraft. שחקנים שיש להם את World of Warcraft יכולים להשיג את הגרסה הנדרשת מהמקורות הבאים:",
+                "webtorrent": "טורנט (Magnet Link)",
+                "link1": "קישור 1",
+                "link2": "קישור 2 (קישור מגנט)"
             },
             "step2": {
                 "title": "שלב 2",
                 "description": "בחר את ההורדה קובץ ChromieCraft_3.3.5a.zip.",
-                "subtitle": "בחר ChromieCraft_3.3.5a.zip File"
+                "subtitle": "בחר ChromieCraft_3.3.5a.zip File",
+                "subtitle1": "בחר את קובץ ה-zip 3.3.5a שהורדת"
             },
             "step4": {
                 "subtitle": "קוד גישה",
@@ -1154,5 +1219,27 @@
     "Installing Steam": "התקנת Steam.",
     "Launch Steam": "שיגור Steam",
     "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "בהשקה ראשונה Steam מורידה את הקבצים הדרושים ויקח כמה דקות כדי לסיים את מסך הכניסה להופיע;",
-    "UNCHECK 'Run Steam'": "UNCHECK - Run Steam \"\""
+    "UNCHECK 'Run Steam'": "UNCHECK - Run Steam \"\"",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "אם ברצונך להמשיך, אנא היה סבלני מכיוון שזה יכול לקחת כמה דקות להסתיים בהתאם לחיבור האינטרנט שלך ולתצורת המערכת.",
+    "installModal": {
+        "loginRequired": "דרושה התחברות",
+        "loginRequiredMessage": "עליך להיות מחובר ל-HyperPlay כדי להזין את קוד הגישה שלך ולהתקין את המשחק הזה. ",
+        "loginRequiredMessageUpdate": "עליך להיות מחובר ל-HyperPlay כדי להזין את קוד הגישה שלך ולעדכן את המשחק הזה. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 או מעל"
+    },
+    "Please Wait": "אנא המתן",
+    "Recommended specs for a better experience": "מפרטי המלצה לחוויה טובה יותר",
+    "wallet": {
+        "unsupported": "חיבור ארנק לא נתמך",
+        "portfolio": {
+            "onlyExtension": "פורטפוליו של MetaMask זמין רק כאשר מחוברים עם MetaMask."
+        }
+    },
+    "16GB of RAM": "16GB של RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 או מעל",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "שימו לב שלא כל המשחקים יעבדו, ואפילו אם הם כן, הם עשויים לא לפעול כפי שציפיתם.",
+    "Downloading": "מוריד {{percent}}%",
+    "Installing": "מתקין"
 }

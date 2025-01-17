@@ -101,7 +101,8 @@
                 "message-finished": "Bạn có muốn khởi động lại HyperPlay không?",
                 "title": "HyperPlay Games Launcher",
                 "title-finished": "Cập nhật hoàn tất",
-                "appUpdated": "HyperPlay đã được cập nhật"
+                "appUpdated": "HyperPlay đã được cập nhật",
+                "appUpdated-message": "HyperPlay đã được cập nhật. Bạn có muốn cập nhật và khởi động lại HyperPlay ngay bây giờ không?"
             }
         },
         "no": "Không có  \nKhông phải  \nKhông được",
@@ -488,7 +489,12 @@
             "queued": "Queued",
             "remove": "Xóa khỏi thư mục Tải xuống",
             "resume": "Khôi phục tải xuống",
-            "pause": "Dừng tải xuống tạm thời"
+            "pause": "Dừng tải xuống tạm thời",
+            "retry-install": "Thử cài đặt lại",
+            "launch": "Khởi động trò chơi",
+            "retry-update": "Thử lại cập nhật",
+            "stop": "Dừng tải xuống",
+            "timeElapsed": "Thời gian đã trôi qua: {{elapsed}}"
         }
     },
     "Recent": "Các trò chơi đã chơi gần đây",
@@ -778,7 +784,9 @@
     "hyperplay": {
         "buttons": {
             "agree": "Tôi đồng ý.  \nTôi tán thành.  \nTôi chấp nhận.",
-            "noThanks": "Cảm ơn nhưng không cần thiết"
+            "noThanks": "Cảm ơn nhưng không cần thiết",
+            "primaryButton": "Tôi đồng ý",
+            "secondaryButton": "Không, cảm ơn"
         },
         "turnAnalyticsOn": "Mở lên",
         "folder": "Thư mục tài liệu",
@@ -793,7 +801,8 @@
             "paused": "Tạm ngưng",
             "distributables": "Đang cài đặt các tệp phân phối...",
             "extracting": "Đang trích xuất...",
-            "installed": "Sẵn sàng để chơi"
+            "installed": "Sẵn sàng để chơi",
+            "patching": "Đang vá..."
         },
         "logOut": "Đăng ký thoát",
         "onboarding": {
@@ -849,7 +858,16 @@
                 "anonymized": "Gửi thông tin nhấp chuột và tương tác trò chơi ẩn danh;",
                 "body": "HyperPlay muốn thu thập dữ liệu sử dụng để hiểu rõ hơn về cách người dùng tương tác với ứng dụng. Thông tin này giúp chúng tôi hiểu cách bạn sử dụng ứng dụng và cho phép chúng tôi cải thiện HyperPlay tốt hơn cho bạn.",
                 "neverSellData": " bán dữ liệu để kiếm lợi nhuận. Mãi mãi!",
-                "privacyCaption": "Dữ liệu này được tổng hợp và do đó là ẩn danh cho mục đích của Quy định Bảo vệ Dữ liệu Chung (EU) 2016/679. Để biết thêm thông tin liên quan đến các thực tiễn bảo mật của chúng tôi, vui lòng xem "
+                "privacyCaption": "Dữ liệu này được tổng hợp và do đó là ẩn danh cho mục đích của Quy định Bảo vệ Dữ liệu Chung (EU) 2016/679. Để biết thêm thông tin liên quan đến các thực tiễn bảo mật của chúng tôi, vui lòng xem ",
+                "text": {
+                    "title": "Chúng tôi đã cập nhật Chính sách Bảo mật của mình",
+                    "externalLink": "Tìm hiểu thêm"
+                },
+                "privacyPolicy": "Chính sách bảo mật.",
+                "titleOne": "Giúp chúng tôi cải thiện HyperPlay!",
+                "bulletOne": "Luôn cho phép bạn từ chối",
+                "bulletTwo": "Gửi thông tin nhấp chuột và tương tác trò chơi ẩn danh",
+                "paragraphOne": "HyperPlay muốn thu thập dữ liệu sử dụng để hiểu rõ hơn cách người dùng tương tác với ứng dụng. \n           Điều này giúp chúng tôi cải thiện HyperPlay tốt hơn cho bạn."
             },
             "welcome": {
                 "text": {
@@ -857,9 +875,19 @@
                     "bugs": "Xin lưu ý rằng HyperPlay đang ở giai đoạn alpha công khai. Nhiều tính năng vẫn đang trong quá trình phát triển và sẽ có lỗi.",
                     "communityCTA_2": "cộng đồng. Cùng nhau, hãy định hình tương lai của trò chơi!",
                     "construction": "HyperPlay đang được xây dựng.",
-                    "communityCTA_1": "Chúng tôi rất mong nhận được phản hồi của bạn và có bạn tham gia cùng chúng tôi trong"
+                    "communityCTA_1": "Chúng tôi rất mong nhận được phản hồi của bạn và có bạn tham gia cùng chúng tôi trong",
+                    "TitleList": "Với HyperPlay, bạn có thể:",
+                    "bulletPointFive": "Chạy trò chơi Windows trên macOS, Linux và SteamDeck bằng cách sử dụng\n              công nghệ tiên tiến của chúng tôi",
+                    "paragraphOne": "Tại HyperPlay, chúng tôi đang xây dựng cửa hàng trò chơi thế hệ tiếp theo cho tương lai của ngành game.",
+                    "bulletPointFour": "Cài đặt Steam (phiên bản Windows) trên macOS chỉ với một cú nhấp chuột dễ dàng",
+                    "bulletPointOne": "Truy cập vào bộ sưu tập rộng lớn với hơn 100 trò chơi được kích hoạt trên chuỗi",
+                    "bulletPointThree": "Chơi các trò chơi Epic và GOG trực tiếp qua HyperPlay",
+                    "bulletPointTwo": "Kiếm token, NFT và phần thưởng ngoài chuỗi bằng cách hoàn thành các Nhiệm vụ",
+                    "lastParagraph": "Hiện tại đang trong giai đoạn Beta, chúng tôi rất trân trọng phản hồi của bạn và khuyến khích bạn báo cáo bất kỳ vấn đề hoặc gợi ý nào trong",
+                    "paragraphThr": "Mang ví, token và tài sản của bạn vào mọi trò chơi một cách liền mạch trong khi truy cập vào thư viện phong phú của Epic Store, GOG và cửa hàng HyperPlay của chúng tôi - tất cả trong một nơi."
                 },
-                "title": "Chào mừng bạn đến với HyperPlay Early Access!"
+                "title": "Chào mừng bạn đến với HyperPlay Early Access!",
+                "titleIntro": "Chào mừng bạn đến với HyperPlay!"
             },
             "connectAgain": "Kết nối lại",
             "connectionCanceled": {
@@ -874,11 +902,13 @@
         "accesscodes": {
             "requirescode": "Cập nhật trò chơi này yêu cầu mã truy cập.",
             "error": {
-                "validation": "Mã truy cập không hợp lệ"
+                "validation": "Mã truy cập không hợp lệ",
+                "licenseUndefined": "Không thể xác thực mã truy cập. Vui lòng kiểm tra kết nối internet hoặc cài đặt tường lửa của bạn."
             },
             "success": {
                 "validation": "Thành công! Mã truy cập hợp lệ"
-            }
+            },
+            "placeholder": "Nhập mã truy cập"
         },
         "achievements": {
             "freeMints": "Mint miễn phí",
@@ -899,7 +929,11 @@
         "linkSteamAccountTitle": "Liên kết tài khoản Steam",
         "connectWallet": "Kết nối ví",
         "publicAlpha": "Alpha công khai",
-        "viewPortfolio": "Xem danh mục đầu tư"
+        "viewPortfolio": "Xem danh mục đầu tư",
+        "otp": "Mã xác thực một lần",
+        "analyticsOff": "Phân tích đã bị tắt",
+        "compatibilityLayer": "Lớp tương thích (Beta)",
+        "discordAppLink": "Cộng đồng Discord."
     },
     "quest": {
         "active": "Tích cực tham gia",
@@ -930,20 +964,47 @@
             "body2": "Nếu không, Phần thưởng Nhiệm vụ <bold> sẽ hết hạn và sẽ không còn có thể yêu cầu nữa. </bold>"
         },
         "noG7ConnectionClaim": "Bạn cần có một tài khoản Game7 liên kết với {{email}} để nhận phần thưởng của bạn.",
-        "noG7ConnectionSync": "Bạn cần có một tài khoản Game7 liên kết với {{email}} để đồng bộ lại các nhiệm vụ của bạn.",
+        "noG7ConnectionSync": {
+            "message": "Bạn cần có tài khoản Game7 liên kết với {{email}} để đồng bộ lại các nhiệm vụ của bạn.",
+            "title": "Chưa liên kết tài khoản G7"
+        },
         "type": {
-            "playstreak": "Chơi Streak"
+            "playstreak": "Chơi Streak",
+            "reputation": "Danh tiếng"
         },
         "associatedGames": "Các trò chơi liên kết",
         "connectSteamAccount": "Kết nối tài khoản Steam",
-        "notEnoughGas": "Số dư ví không đủ để nhận phần thưởng của bạn do phí gas. Hãy thử một ví khác hoặc nạp thêm vào ví này trước khi thử lại.",
+        "notEnoughGas": {
+            "message": "Số dư ví không đủ để nhận phần thưởng của bạn do phí gas. Hãy thử một ví khác hoặc nạp lại ví này trước khi thử lại."
+        },
         "g7Numclaimed": "Tổng số tín dụng G7 đã yêu cầu",
         "View Game": "Xem Trò Chơi",
         "linkAccount": "Liên kết tài khoản Steam của bạn để kiểm tra đủ điều kiện.",
         "needMoreAchievements": "Bạn cần hoàn thành {{percent}}% các thành tựu trong một trong những trò chơi này.",
         "reputation": "Danh tiếng",
         "readyForClaim": "Sẵn sàng để yêu cầu",
-        "pointsClaimed": "Điểm đã yêu cầu"
+        "pointsClaimed": "Điểm đã yêu cầu",
+        "notEligible": {
+            "title": "Chưa đủ điều kiện",
+            "message": "Bạn chưa hoàn thành số ngày chơi liên tiếp cần thiết và không thể nhận phần thưởng của bạn vào lúc này."
+        },
+        "notEnoughBalance": {
+            "title": "Số dư thấp"
+        },
+        "notSignedIn": {
+            "message": "Bạn cần đăng nhập để nhận phần thưởng của mình.",
+            "title": "Chưa đăng nhập"
+        },
+        "createDiscordTicket": "Tạo vé Discord",
+        "rewardClaimed": "Yêu cầu thành công",
+        "toClaimReward": "để nhận phần thưởng của bạn.",
+        "toSeeDetails": "để xem chi tiết.",
+        "claimFailed": "Yêu cầu không thành công",
+        "claimFailedMessage": "Vui lòng thử lại một lần nữa. Nếu vẫn không hoạt động, hãy tạo một vé hỗ trợ trên Discord.",
+        "questComplete": "Nhiệm vụ hoàn thành!",
+        "questAvailable": "Nhiệm vụ có sẵn!",
+        "claim": "Nhận",
+        "youHaveClaimed": "Bạn đã nhận phần thưởng {{totalRewards}} phần thưởng{{plural}}."
     },
     "quests": {
         "quests": "Mục tiêu",
@@ -1027,8 +1088,10 @@
                 "title": "Bước thứ nhất",
                 "subtitle": "Tải xuống World of Warcraft 3.3.5a",
                 "chromieCraft": "ChromieCraft",
-                "description": "Trò chơi này là một bản mod cho World of Warcraft: Wrath of the Lich King (3.3.5a). Để chơi bản mod này, người chơi phải sở hữu một bản sao của World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay không lưu trữ World of Warcraft. Người chơi sở hữu World of Warcraft có thể lấy phiên bản 3.3.5a từ các nguồn như:",
-                "webtorrent": "Torrents (Liên kết Magnet)"
+                "description": "Trò chơi này là một bản mod cho World of Warcraft: Wrath of the Lich King (3.3.5a). Để chơi bản mod này, người chơi phải sở hữu một bản sao của World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay không lưu trữ World of Warcraft. Người chơi sở hữu World of Warcraft có thể lấy phiên bản cần thiết từ các nguồn sau:",
+                "webtorrent": "Torrents (Liên kết Magnet)",
+                "link1": "Liên kết 1",
+                "link2": "Liên kết 2 (Liên kết Magnet)"
             },
             "step3": {
                 "title": "Bước 3==WEBLATE_PART==Giai đoạn 3==WEBLATE_PART==Bước thứ ba",
@@ -1038,7 +1101,8 @@
             "step2": {
                 "title": "Bước số 2",
                 "description": "Chọn tệp ChromieCraft_3.3.5a.zip đã tải xuống.",
-                "subtitle": "Chọn tệp ChromieCraft_3.3.5a.zip"
+                "subtitle": "Chọn tệp ChromieCraft_3.3.5a.zip",
+                "subtitle1": "Chọn tệp zip 3.3.5a đã tải xuống"
             },
             "step4": {
                 "subtitle": "Mã truy cập",
@@ -1061,7 +1125,8 @@
                 "title": "Hủy bỏ giải nén"
             },
             "installed": {
-                "title": "Trò chơi cơ bản đã được cài đặt"
+                "title": "Trò chơi cơ bản đã được cài đặt",
+                "body": "Mod sẽ được áp dụng cho trò chơi gốc"
             },
             "installing": {
                 "body": "Đang giải nén các tệp trò chơi cơ bản",
@@ -1082,7 +1147,15 @@
     "overlay": {
         "comingSoon": "Sắp Mở",
         "WALLET_DISCONNECTED": "Bạn chưa kết nối ví với HyperPlay.",
-        "EXTERNAL_WALLET_CONNECTED": "Bạn đã kết nối với HyperPlay bằng ví bên ngoài."
+        "EXTERNAL_WALLET_CONNECTED": "Bạn đã kết nối với HyperPlay bằng ví bên ngoài.",
+        "links": {
+            "bridge": "Cầu nối",
+            "marketplace": "Thị trường",
+            "sell": "Bán",
+            "buy": "Mua",
+            "portfolio": "Danh mục đầu tư",
+            "swap": "Hoán đổi"
+        }
     },
     "dlcs": {
         "label": "Chọn DLC để cài đặt:"
@@ -1127,5 +1200,27 @@
     "Install Steam": "Cài đặt Steam",
     "Installing Steam": "Đang cài đặt Steam...",
     "Launch Steam": "Khởi động Steam",
-    "Launching Steam": "Khởi động Steam..."
+    "Launching Steam": "Khởi động Steam...",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "Danh mục MetaMask chỉ khả dụng khi kết nối với MetaMask."
+        },
+        "unsupported": "Kết nối ví không được hỗ trợ"
+    },
+    "installModal": {
+        "loginRequiredMessageUpdate": "Bạn cần đăng nhập vào HyperPlay để nhập mã truy cập và cập nhật trò chơi này. ",
+        "loginRequired": "Cần đăng nhập",
+        "loginRequiredMessage": "Bạn cần đăng nhập vào HyperPlay để nhập mã truy cập và cài đặt trò chơi này. "
+    },
+    "Please Wait": "Vui lòng chờ",
+    "Recommended specs for a better experience": "Thông số khuyến nghị để có trải nghiệm tốt hơn",
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 hoặc cao hơn",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Hãy lưu ý rằng không phải tất cả các trò chơi đều hoạt động, và ngay cả khi chúng hoạt động, chúng có thể không chạy như mong đợi.",
+    "Downloading": "Đang tải xuống {{percent}}%",
+    "Installing": "Đang cài đặt",
+    "macOS 14": {
+        "0 or above": "macOS 14.0 trở lên"
+    },
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Nếu bạn muốn tiếp tục, xin hãy kiên nhẫn vì điều này có thể mất vài phút để hoàn thành tùy thuộc vào kết nối internet và cấu hình hệ thống của bạn."
 }
