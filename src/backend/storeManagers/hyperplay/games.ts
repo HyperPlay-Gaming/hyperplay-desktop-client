@@ -811,6 +811,7 @@ export async function install(
     const gameInfo = getGameInfo(appName)
     const { title, account_name } = gameInfo
     const isMarketWars = account_name === 'marketwars'
+
     if (isMarketWars && modOptions?.zipFilePath) {
       try {
         await prepareBaseGameForModding({
@@ -819,6 +820,7 @@ export async function install(
           installPath: dirpath
         })
       } catch (error) {
+        callAbortController(appName)
         return { status: 'error' }
       }
     }
