@@ -31,12 +31,12 @@ const ExtensionManager = function () {
   } else if (isOffline) {
     mmContainerStyle.top = 115
   }
-  if (extensionState.isPopupOpen || extensionState.isNotificationOpen) {
+  if (extensionState.renderPopupWindow) {
     rootRef.current?.showModal()
   } else {
     rootRef.current?.close()
   }
-  if (extensionState.isPopupOpen || extensionState.isNotificationOpen) {
+  if (extensionState.renderPopupWindow) {
     rootRef.current?.showModal()
   } else {
     rootRef.current?.close()

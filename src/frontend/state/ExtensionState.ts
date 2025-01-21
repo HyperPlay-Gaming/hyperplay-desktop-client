@@ -1,11 +1,12 @@
 import { ExtensionStateInterface } from 'common/state/interfaces'
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 
 class ExtensionState implements ExtensionStateInterface {
   extensionId = ''
 
   isPopupOpen = false
   isNotificationOpen = false
+  renderPopupWindow = false
 
   constructor() {
     makeAutoObservable(this)
@@ -61,7 +62,10 @@ class ExtensionState implements ExtensionStateInterface {
   }
 
   toggleIsPopupOpen() {
-    window.api.toggleIsPopupOpen()
+    runInAction(() => {
+      console.log('setting render popup window to ', this.renderPopupWindow)
+      this.renderPopupWindow = !this.renderPopupWindow
+    })
   }
 
   showPopup() {
