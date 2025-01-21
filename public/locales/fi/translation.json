@@ -668,7 +668,7 @@
         },
         "systemInformation": {
             "copyToClipboard": "Kopioi leikepöydälle",
-            "os": "Käyttöjärjestelmä",
+            "os": "Käyttöjärjestelmä:",
             "version": "Versio (X9X)",
             "gpu": "GPU:",
             "gpuWithNumber": "GPU (X4X):",
