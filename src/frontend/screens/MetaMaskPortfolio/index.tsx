@@ -38,6 +38,7 @@ const MetaMaskPortfolio = function () {
           allowpopups={trueAsStr}
           partition={'persist:InPageWindowEthereumExternalWallet'}
           ref={webviewRef}
+          key={'metamask_portfolio' + page}
         />
       </div>
     </>
