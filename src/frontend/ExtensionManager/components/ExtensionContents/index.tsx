@@ -36,7 +36,7 @@ export const ExtensionContents = observer(() => {
       /**
        * The webview won't reload by just changing its src if it already loaded,
        * so we change the key to get it to reload when the url changes
-       */ 
+       */
       key={state}
     ></webview>
   )
