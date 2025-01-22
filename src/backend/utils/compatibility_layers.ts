@@ -616,13 +616,12 @@ export async function downloadDefaultWine() {
   if (isWindows) return null
 
   try {
-    // Refresh wine list
     await updateWineVersionInfos(true)
 
     // Get list of available wine versions
     const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
 
-    // use Wine-GE type if on Linux and GPTK or Wine-Crossover if on Mac
+    // use Proton-GE type if on Linux and GPTK or Wine-Crossover if on Mac
     const isGPTKCompatible = isMac ? await isMacSonomaOrHigher() : false
     const results = await Promise.all(
       availableWine.map(async (version) => {
@@ -703,7 +702,6 @@ export async function downloadDefaultWine() {
 }
 
 export async function setDefaultCompatibilityLayer() {
-  // Early return if not on supported platforms
   if (!isMac && !isLinux) {
     return
   }
