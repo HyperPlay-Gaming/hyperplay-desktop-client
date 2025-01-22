@@ -1,4 +1,4 @@
-name: Build mac x86
+name: Build mac x64
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ env:
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
 
 jobs:
-  release-mac-x86:
+  release-mac-x64:
     runs-on: macos-13
 
     steps:
