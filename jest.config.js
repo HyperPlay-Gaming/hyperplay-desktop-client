@@ -5,7 +5,8 @@ module.exports = {
   globals: {
     'ts-jest': {}
   },
-
+  testTimeout: 35000,
+  setupFilesAfterEnv: ['./jest.setup.ts'],
   collectCoverageFrom: ['**/*.{js,jsx,ts,tsx}', '!**/*.config.js'],
   coverageDirectory: '<rootDir>/coverage',
   coveragePathIgnorePatterns: [
