@@ -721,15 +721,11 @@ export async function setDefaultCompatibilityLayer() {
   const prefixName = isMac ? 'GPTK' : 'Proton'
 
   // Early return if already using target type
-  if (isMac) {
-    const ignoreList = ['crossover', 'toolkit']
-    if (
-      ignoreList.includes(defaultWine.type.toLowerCase()) ||
-      defaultWine.name.includes('Toolkit')
-    ) {
-      return
-    }
-  } else if (defaultWine.type === targetType) {
+  const ignoreList = ['crossover', 'toolkit', 'proton']
+  if (
+    ignoreList.includes(defaultWine.type.toLowerCase()) ||
+    defaultWine.name.includes('Toolkit')
+  ) {
     return
   }
 
