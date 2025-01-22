@@ -1,4 +1,4 @@
-name: Build mac arm64
+name: Build mac x64
 
 on:
   workflow_dispatch:
@@ -9,8 +9,8 @@ env:
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
 
 jobs:
-  release-mac-arm64:
-    runs-on: macos-latest-xlarge
+  release-mac-x64:
+    runs-on: macos-13
 
     steps:
       - name: Checkout code
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - uses: pnpm/action-setup@v3
         with:
           standalone: ${{ runner.os == 'Windows' }}
@@ -43,6 +43,6 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
 
       - name: Build artifacts.
-        run: pnpm release:mac:arm64
+        run: pnpm release:mac:x64
         env:
           NOTARIZE: true
