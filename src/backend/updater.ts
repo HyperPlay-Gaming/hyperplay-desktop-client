@@ -21,6 +21,8 @@ autoUpdater.autoInstallOnAppQuit = true
 
 let isAppUpdating = false
 let hasUpdated = false
+let updateAttempts = 0
+const MAX_UPDATE_ATTEMPTS = 3
 
 // check for updates every hour
 const checkUpdateInterval = 1 * 60 * 60 * 1000
@@ -102,6 +104,21 @@ autoUpdater.on('error', async (error) => {
   isAppUpdating = false
   logError(`Error updating HyperPlay: ${error.message}`, LogPrefix.AutoUpdater)
 
+  updateAttempts++
+
+  if (updateAttempts < MAX_UPDATE_ATTEMPTS) {
+    logInfo(
+      `Retrying update attempt ${updateAttempts + 1}/${MAX_UPDATE_ATTEMPTS}`,
+      LogPrefix.AutoUpdater
+    )
+    // Wait 5 seconds before retrying
+    setTimeout(() => {
+      autoUpdater.checkForUpdates()
+    }, 5000)
+    return
+  }
+
+  // Only track error after all attempts failed
   trackEvent({
     event: 'Client Update Error',
     properties: {
@@ -115,9 +132,13 @@ autoUpdater.on('error', async (error) => {
     tags: {
       event: 'Client Update Error',
       currentVersion: autoUpdater.currentVersion.version,
-      newVersion
+      newVersion,
+      totalAttempts: MAX_UPDATE_ATTEMPTS
     }
   })
+
+  // Reset attempts for next time
+  updateAttempts = 0
 
   const { response } = await dialog.showMessageBox({
     title: t('box.error.update.title', 'Error Updating'),
