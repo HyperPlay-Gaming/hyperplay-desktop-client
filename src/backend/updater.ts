@@ -111,14 +111,12 @@ autoUpdater.on('error', async (error) => {
       `Retrying update attempt ${updateAttempts + 1}/${MAX_UPDATE_ATTEMPTS}`,
       LogPrefix.AutoUpdater
     )
-    // Wait 5 seconds before retrying
     setTimeout(() => {
       autoUpdater.checkForUpdates()
     }, 5000)
     return
   }
 
-  // Only track error after all attempts failed
   trackEvent({
     event: 'Client Update Error',
     properties: {
@@ -137,7 +135,6 @@ autoUpdater.on('error', async (error) => {
     }
   })
 
-  // Reset attempts for next time
   updateAttempts = 0
 
   const { response } = await dialog.showMessageBox({
