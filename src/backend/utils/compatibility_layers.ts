@@ -598,7 +598,9 @@ export async function initializeCompatibilityLayer() {
   }
 
   if (isMac || isLinux) {
-    initializationTasks.push(checkRosettaInstall())
+    if (isMac) {
+      initializationTasks.push(checkRosettaInstall())
+    }
     initializationTasks.push(setDefaultCompatibilityLayer())
   }
 
