@@ -4,7 +4,6 @@ import { t } from 'i18next'
 
 import { configStore, icon, isLinux } from './constants'
 import { logError, logInfo, LogPrefix } from './logger/logger'
-import { isOnline } from './online_monitor'
 import { captureException } from '@sentry/electron'
 import { getFileSize } from './utils'
 import { ClientUpdateStatuses } from '@hyperplay/utils'
@@ -27,13 +26,13 @@ const MAX_UPDATE_ATTEMPTS = 3
 // check for updates every hour
 const checkUpdateInterval = 1 * 60 * 60 * 1000
 setInterval(() => {
-  if (isOnline() && shouldCheckForUpdates) {
+  if (shouldCheckForUpdates) {
     autoUpdater.checkForUpdates()
   }
 }, checkUpdateInterval)
 
 autoUpdater.on('update-available', async (info) => {
-  if (!isOnline() || !shouldCheckForUpdates) {
+  if (!shouldCheckForUpdates) {
     return
   }
   newVersion = info.version
@@ -97,10 +96,6 @@ autoUpdater.on('update-downloaded', async () => {
 })
 
 autoUpdater.on('error', async (error) => {
-  if (!isOnline()) {
-    return
-  }
-
   isAppUpdating = false
   logError(`Error updating HyperPlay: ${error.message}`, LogPrefix.AutoUpdater)
 
