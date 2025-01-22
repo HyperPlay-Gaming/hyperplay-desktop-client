@@ -67,7 +67,7 @@ jobs:
           if-no-files-found: error
 
   release-arm64:
-    runs-on: macos-latest-xlarge
+    runs-on: macos-latest
 
     steps:
       - name: Checkout code
