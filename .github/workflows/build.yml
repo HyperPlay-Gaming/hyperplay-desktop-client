@@ -95,10 +95,10 @@ jobs:
         run: pnpm dist:linux:ci:rpm
       - name: Build pacman artifact
         run: pnpm dist:linux:ci:pacman
-  build_mac_x64:
-    runs-on: macos-13
+  build_mac_arm64:
+    runs-on: macos-latest
     concurrency:
-      group: build-mac-x64-${{ github.ref }}
+      group: build-mac-arm64-${{ github.ref }}
       cancel-in-progress: true
     steps:
       - name: Checkout repository.
@@ -127,14 +127,14 @@ jobs:
           echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - name: Build artifacts.
-        run: pnpm run dist:mac:x64
+        run: pnpm run dist:mac:arm64
         env:
           NOTARIZE: false
       - name: Upload Intel build.
         uses: actions/upload-artifact@v4
         with:
-          name: mac-dmg-x64
-          path: dist/HyperPlay*x64.dmg
+          name: mac-dmg-arm64
+          path: dist/HyperPlay*arm64.dmg
           retention-days: 7
           if-no-files-found: error
           compression-level: 3
