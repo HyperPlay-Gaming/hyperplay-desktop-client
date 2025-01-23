@@ -257,21 +257,10 @@ export function logError(
   logBase(input, 'ERROR', options_or_prefix)
   if (
     typeof options_or_prefix === 'object' &&
-    options_or_prefix?.sendToSentry
+    options_or_prefix?.sentryException
   ) {
-    const error = Array.isArray(input) ? input[0] : input
-    const errorToSend =
-      error instanceof Error ? error : new Error(String(error))
-
-    if (Array.isArray(input) && input.length > 1) {
-      options_or_prefix.sentryExtra = {
-        ...options_or_prefix.sentryExtra,
-        additionalInfo: input.slice(1)
-      }
-    }
-
-    captureException(errorToSend, {
-      extra: options_or_prefix.sentryExtra,
+    captureException(options_or_prefix.sentryException, {
+      extra: { ...options_or_prefix.sentryExtra, input },
       tags: options_or_prefix.sentryTags
     })
   }

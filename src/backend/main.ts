@@ -1098,7 +1098,9 @@ ipcMain.handle('refreshLibrary', async (e, library?) => {
   }
 })
 
-ipcMain.on('logError', (e, err) => logError(err, LogPrefix.Frontend))
+ipcMain.on('logError', (e, err, options) =>
+  logError(err, { ...options, prefix: LogPrefix.Frontend })
+)
 
 ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
