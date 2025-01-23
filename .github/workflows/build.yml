@@ -114,8 +114,11 @@ jobs:
       - name: Install node-gyp
         run: pnpm add --global node-gyp
         shell: bash
-      - name: install python setuptools
-        run: pip3 install setuptools
+      - name: Setup Python virtual environment
+        run: |
+          python3 -m venv .venv
+          source .venv/bin/activate
+          python3 -m pip install setuptools
         shell: bash
       - name: Reconfigure git to use HTTP authentication
         run: >
