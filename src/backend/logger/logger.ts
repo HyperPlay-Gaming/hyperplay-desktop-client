@@ -246,7 +246,7 @@ export function logDebug(
  *   - prefix: Added before the message
  *   - skipLogToFile: Set true to not log to file
  *   - showDialog: Set true to show in frontend
- *   - sendToSentry: Set true to send error to Sentry
+ *   - sentryException: Error object to send to Sentry
  *   - sentryExtra: Additional context data for Sentry
  *   - sentryTags: Tags for filtering in Sentry
  */
