@@ -13,8 +13,11 @@ import { Channel, ContractMetadata } from '@valist/sdk/dist/typesApi'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { DropdownItemType } from '@hyperplay/ui'
 export type { Quest } from '@hyperplay/utils'
+import { LogPrefix, LogOptions } from '../backend/logger/logger'
 
 import { MetaMaskInpageProvider } from '@metamask/providers'
+
+export type { LogPrefix, LogOptions }
 
 export type {
   Listing as HyperPlayRelease,

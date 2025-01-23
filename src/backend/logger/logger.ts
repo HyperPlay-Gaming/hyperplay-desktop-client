@@ -11,6 +11,8 @@ import { backendEvents } from 'backend/backend_events'
 import { GlobalConfig } from 'backend/config'
 import { formatSystemInfo, getSystemInfo } from '../utils/systeminfo'
 import { getAuthSession } from 'backend/auth'
+import { captureException } from '@sentry/electron'
+import { LogOptions as LogOptionsBase } from '@hyperplay/utils'
 
 export enum LogPrefix {
   General = '',
@@ -45,7 +47,7 @@ export const RunnerToLogPrefixMap = {
 
 type LogInputType = unknown[] | unknown
 
-interface LogOptions {
+export interface LogOptions extends LogOptionsBase {
   prefix?: LogPrefix
   showDialog?: boolean
   skipLogToFile?: boolean
@@ -238,18 +240,41 @@ export function logDebug(
 }
 
 /**
- * Log error messages
- * @param input error messages to log
- * @param prefix added before the message {@link LogPrefix}
- * @param skipLogToFile set true to not log to file
- * @param showDialog set true to show in frontend
- * @defaultvalue {@link LogPrefix.General}
+ * Log error messages with optional Sentry integration
+ * @param input Error message or object to log
+ * @param options_or_prefix Configuration options or LogPrefix
+ *   - prefix: Added before the message
+ *   - skipLogToFile: Set true to not log to file
+ *   - showDialog: Set true to show in frontend
+ *   - sendToSentry: Set true to send error to Sentry
+ *   - sentryExtra: Additional context data for Sentry
+ *   - sentryTags: Tags for filtering in Sentry
  */
 export function logError(
   input: LogInputType,
   options_or_prefix?: LogOptions | LogPrefix
 ) {
   logBase(input, 'ERROR', options_or_prefix)
+  if (
+    typeof options_or_prefix === 'object' &&
+    options_or_prefix?.sendToSentry
+  ) {
+    const error = Array.isArray(input) ? input[0] : input
+    const errorToSend =
+      error instanceof Error ? error : new Error(String(error))
+
+    if (Array.isArray(input) && input.length > 1) {
+      options_or_prefix.sentryExtra = {
+        ...options_or_prefix.sentryExtra,
+        additionalInfo: input.slice(1)
+      }
+    }
+
+    captureException(errorToSend, {
+      extra: options_or_prefix.sentryExtra,
+      tags: options_or_prefix.sentryTags
+    })
+  }
 }
 
 export type LogFunction = typeof logError
