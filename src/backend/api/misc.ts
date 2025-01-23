@@ -48,7 +48,8 @@ export const refreshLibrary = async (library?: Runner | 'all') =>
 export const gamepadAction = async (args: GamepadActionArgs) =>
   ipcRenderer.invoke('gamepadAction', args)
 
-export const logError = (error: string) => ipcRenderer.send('logError', error)
+export const logError = (error: string, options?: LogOptions) =>
+  ipcRenderer.send('logError', error, options)
 export const logInfo = (info: string) => ipcRenderer.send('logInfo', info)
 export const showConfigFileInFolder = (appName: string) =>
   ipcRenderer.send('showConfigFileInFolder', appName)
@@ -103,6 +104,7 @@ export const handleShowDialog = (
 export const focusMainWindow = () => ipcRenderer.send('focusMainWindow')
 
 import Store from 'electron-store'
+import { LogOptions } from '@hyperplay/utils'
 // TODO: Refactor this into the backend so in order to set nodeIntegration: false
 // here is how the store methods can be refactored
 // but converting sync methods to async propagates through frontend
