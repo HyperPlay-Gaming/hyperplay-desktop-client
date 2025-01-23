@@ -114,11 +114,8 @@ jobs:
       - name: Install node-gyp
         run: pnpm add --global node-gyp
         shell: bash
-      - name: install pipx
-        run: brew install pipx
-        shell: bash
-      - name: install python setuptools
-        run: pipx install setuptools
+      - name: install setuptools
+        run: brew install python-setuptools
         shell: bash
       - name: Reconfigure git to use HTTP authentication
         run: >
