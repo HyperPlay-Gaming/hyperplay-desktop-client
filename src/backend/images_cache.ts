@@ -18,12 +18,14 @@ export const initImagesCache = () => {
 }
 
 const getImageFromCache = (url: string) => {
-  const realUrl = url.replace('imagecache://', '')
+  let realUrl = url.replace('imagecache://', '')
   // digest of the image url for the file name
   const digest = createHash('sha256').update(realUrl).digest('hex')
   const cachePath = join(imagesCachePath, digest)
 
   if (!existsSync(cachePath) && realUrl.startsWith('http')) {
+    realUrl = realUrl.replace('https//', 'https://')
+    realUrl = realUrl.replace('http//', 'http://')
     // if not found, download in the background
     axios
       .get(realUrl, { responseType: 'stream' })

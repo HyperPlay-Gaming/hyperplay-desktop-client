@@ -492,7 +492,12 @@
             "queued": "Queued",
             "remove": "Аднавіць з загрузак",
             "pause": "Паўзаваць загрузку",
-            "resume": "Працягнуць загрузку"
+            "resume": "Працягнуць загрузку",
+            "stop": "Спыніць спампоўку",
+            "launch": "Запусціць гульню",
+            "retry-update": "Паўторная спроба абнаўлення",
+            "timeElapsed": "Час, які прайшоў: {{elapsed}}",
+            "retry-install": "Паўторная ўстаноўка"
         }
     },
     "Recent": "Нядаўна гулялі",
@@ -824,7 +829,16 @@
                 "body": "HyperPlay хацела б сабраць дадзеныя аб выкарыстанні, каб лепш зразумець, як нашы карыстальнікі ўзаемадзейнічаюць з прыкладаннем. Гэтыя звесткі дапамагаюць нам зразумець, як вы карыстаецеся прыкладаннем, і дазваляюць зрабіць HyperPlay яшчэ лепшым для вас.",
                 "title": "Дапамажыце нам палепшыць HyperPlay!",
                 "anonymized": "Адправіць анонімны клік і ўзаемадзеянне з гульнёй;",
-                "hyperplayWill": "HyperPlay будзе:"
+                "hyperplayWill": "HyperPlay будзе:",
+                "privacyPolicy": "Палітыка канфідэнцыяльнасці.",
+                "paragraphOne": "HyperPlay хацела б сабраць дадзеныя аб выкарыстанні, каб лепш зразумець, як нашы карыстальнікі ўзаемадзейнічаюць з прыкладаннем. \n           Гэта дазваляе нам зрабіць HyperPlay яшчэ лепшым для вас.",
+                "text": {
+                    "externalLink": "Даведайцеся больш",
+                    "title": "Мы абнавілі нашу палітыку канфідэнцыяльнасці"
+                },
+                "bulletOne": "Заўсёды дазваляйце адмовіцца",
+                "bulletTwo": "Адправіць анонімныя націсканні і ўзаемадзеянне з гульнёй",
+                "titleOne": "Дапамажыце нам палепшыць HyperPlay!"
             },
             "connectionCanceled": {
                 "description": "Калі ласка, пацвердзіце запыт на злучэнне ў вашым мабільным кашальку, каб працягнуць.",
@@ -836,9 +850,19 @@
                     "construction": "HyperPlay знаходзіцца ў распрацоўцы.",
                     "description": "HyperPlay — гэта запускальнік гульняў і агрэгатар крам гульняў з будучыні. З HyperPlay вы можаце перанесці свой кашалёк, токены і актывы ў кожную гульню. HyperPlay падтрымлівае ўсю бібліятэку Epic Store, GOG і нашу ўласную краму HyperPlay. Выкарыстоўваючы HyperPlay, вы згаджаецеся з нашымі",
                     "communityCTA_1": "Мы былі б рады вашым водгукам і запрасіць вас далучыцца да нас у нашым",
-                    "communityCTA_2": "Супольнасць. Давайце разам фармаваць будучыню гульняў!"
+                    "communityCTA_2": "Супольнасць. Давайце разам фармаваць будучыню гульняў!",
+                    "lastParagraph": "У цяперашні час у бэта-версіі, мы вельмі цэнім вашыя водгукі і \n            заклікаем вас паведамляць пра любыя праблемы або прапановы ў наш",
+                    "bulletPointFive": "Запускайце гульні Windows на macOS, Linux і SteamDeck, выкарыстоўваючы наш\n              перадавы",
+                    "bulletPointFour": "Усталюйце Steam (версія для Windows) на macOS адным простым клікам",
+                    "bulletPointOne": "Атрымаць вялікую калекцыю з 100+ гульняў з падтрымкай on-chain",
+                    "bulletPointThree": "Гуляйце ў гульні Epic і GOG непасрэдна праз HyperPlay",
+                    "bulletPointTwo": "Зарабляйце токены, NFT і ўзнагароды за межамі сеткі, завяршаючы квесты",
+                    "paragraphOne": "У HyperPlay мы будуем гульнявы магазін наступнага пакалення \n            для будучыні гульняў.",
+                    "paragraphThr": "Бесперашкодна перанясеце свой кашалёк, токены \n           і актывы ў кожную гульню, атрымліваючы доступ \n           да шырокіх бібліятэк Epic Store, \n           GOG і нашага ўласнага HyperPlay Store - усё ў адным месцы.",
+                    "TitleList": "З HyperPlay вы можаце:"
                 },
-                "title": "Сардэчна запрашаем у HyperPlay Early Access!"
+                "title": "Сардэчна запрашаем у HyperPlay Early Access!",
+                "titleIntro": "Сардэчна запрашаем у HyperPlay!"
             },
             "connectionConnected": {
                 "title": "Гаманець падключаны!",
@@ -853,14 +877,17 @@
         "Sync": "Сінхронізацыя",
         "buttons": {
             "noThanks": "Не, дзякуй.  \nНе, дзякуй вам.  \nНе, дзякуй за прапанову.",
-            "agree": "Я згодны"
+            "agree": "Я згодны",
+            "primaryButton": "Я згодны",
+            "secondaryButton": "Не, дзякуй"
         },
         "gamecard": {
             "paused": "Затрымана",
             "distributables": "Усталёўка распаўсюджвальных файлаў...",
             "extracting": "Выдзяленне...",
             "installed": "Гатова да гульні",
-            "installing": "Загрузка..."
+            "installing": "Загрузка...",
+            "patching": "Патчынг..."
         },
         "discordApp": "Дыскорд",
         "folder": "Дырка",
@@ -878,11 +905,13 @@
         "accesscodes": {
             "requirescode": "Гэтае абнаўленне гульні патрабуе кода доступу.",
             "error": {
-                "validation": "Код доступу недзейсны"
+                "validation": "Код доступу недзейсны",
+                "licenseUndefined": "Не ўдалося праверыць код доступу. Калі ласка, праверце доступ у інтэрнэт або налады брандмаўэра."
             },
             "success": {
                 "validation": "Успех! Код доступу сапраўдны"
-            }
+            },
+            "placeholder": "Увядзіце код доступу"
         },
         "otp": "Аднаразовы код доступу",
         "achievements": {
@@ -898,7 +927,9 @@
         "analyticsOn": "Аналітыка ўключана",
         "linkSteamAccountCta": "Перайдзіце да ўваходу ў Steam",
         "linkSteamAccountTitle": "Падключыць уліковы запіс Steam",
-        "connectWallet": "Падключыць кашалёк"
+        "connectWallet": "Падключыць кашалёк",
+        "compatibilityLayer": "Сумяшчальнасць (Бэта)",
+        "discordAppLink": "Супольнасць Discord."
     },
     "notification": {
         "wine-download": {
@@ -940,11 +971,17 @@
         "claimAll": "Патрабуйце ўсё",
         "noG7ConnectionClaim": "Вам неабходна мець уліковы запіс Game7, звязаны з {{email}}, каб атрымаць вашы ўзнагароды.",
         "type": {
-            "playstreak": "Гульнявы шэраг"
+            "playstreak": "Гульнявы шэраг",
+            "reputation": "Рэпутацыя"
         },
         "g7Numclaimed": "Агульная колькасць заяўленых крэдытаў G7",
-        "noG7ConnectionSync": "Вам неабходна мець уліковы запіс Game7, звязаны з {{email}}, каб перасінхраніць вашы задачы.",
-        "notEnoughGas": "Недастаткова баланс кашалька для атрымання вашай узнагароды з-за газавых збораў. Спробуйце іншы кашальок або папоўніце гэты перад паўторнай спробай.",
+        "noG7ConnectionSync": {
+            "message": "Вам неабходна звязаць акаўнт Game7 з {{email}}, каб паўторна сінхранізаваць вашы задачы.",
+            "title": "Не звязаны акаўнт G7"
+        },
+        "notEnoughGas": {
+            "message": "Недастаткова сродкаў у кашальку, каб атрымаць вашу ўзнагароду з-за газавых збораў. Спробуйце іншы кашелек або папоўніце гэты перад паўторнай спробай."
+        },
         "quests": "Квесты",
         "reputation": "Рэпутацыя",
         "needMoreAchievements": "Вы павінны завяршыць {{percent}}% дасягненняў у адной з гэтых гульняў.",
@@ -953,7 +990,28 @@
         "linkAccount": "Падключыце свой уліковы запіс Steam, каб праверыць права на ўдзел.",
         "reward": "Узнагарода",
         "pointsClaimed": "Пункты, якія былі заяўлены",
-        "View Game": "Прагляд гульні"
+        "View Game": "Прагляд гульні",
+        "claim": "Атрымаць",
+        "claimFailed": "Не ўдалося атрымаць",
+        "claimFailedMessage": "Калі ласка, паспрабуйце яшчэ раз. Калі гэта ўсё яшчэ не працуе, стварыце запыт на падтрымку ў Discord.",
+        "notEligible": {
+            "title": "Пакуль не адпавядае патрабаванням",
+            "message": "Вы не завяршылі неабходную колькасць дзён гульнявога шляху і не можаце атрымаць сваю ўзнагароду ў гэты час."
+        },
+        "notEnoughBalance": {
+            "title": "Нізкі баланс"
+        },
+        "notSignedIn": {
+            "message": "Вам трэба ўвайсці ў сістэму, каб атрымаць вашу ўзнагароду.",
+            "title": "Не ўвайшлі ў сістэму"
+        },
+        "questAvailable": "Квест даступны!",
+        "questComplete": "Квест завершаны!",
+        "toClaimReward": "каб атрымаць вашу ўзнагароду.",
+        "toSeeDetails": "каб убачыць падрабязнасці.",
+        "createDiscordTicket": "Стварыць білет у Discord",
+        "youHaveClaimed": "Вы атрымалі ўзнагароду {{totalRewards}} {{plural}}.",
+        "rewardClaimed": "Атрыманне паспяховае"
     },
     "accounts": "профілі",
     "gameRelease": {
@@ -1014,7 +1072,15 @@
     "overlay": {
         "WALLET_DISCONNECTED": "У вас няма гаманца, падключанага да HyperPlay.",
         "comingSoon": "Скоро",
-        "EXTERNAL_WALLET_CONNECTED": "Вы падключаны да HyperPlay з дапамогай знешняга кашалька."
+        "EXTERNAL_WALLET_CONNECTED": "Вы падключаны да HyperPlay з дапамогай знешняга кашалька.",
+        "links": {
+            "bridge": "Мост",
+            "buy": "Купіць",
+            "sell": "Прадаць",
+            "swap": "Абмяняць",
+            "portfolio": "Партфоліо",
+            "marketplace": "Маркетплейс"
+        }
     },
     "quests": {
         "g7CreditsModal": {
@@ -1090,14 +1156,17 @@
             "step1": {
                 "webtorrent": "Торэнт (магнітная спасылка)",
                 "chromieCraft": "ChromieCraft",
-                "description": "Гэтая гульня з'яўляецца модам для World of Warcraft: Wrath of the Lich King (3.3.5a). Каб гуляць у гэты мод, гульцы павінны валодаць копіяй World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay не хостыць World of Warcraft. Гульцы, якія валодаюць World of Warcraft, могуць атрымаць версію 3.3.5a з такіх крыніц, як:",
+                "description": "Гэтая гульня з'яўляецца модам для World of Warcraft: Wrath of the Lich King (3.3.5a). Каб гуляць у гэты мод, гульцы павінны валодаць копіяй World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay не хостыць World of Warcraft. Гульцы, якія валодаюць World of Warcraft, могуць атрымаць неабходную версію з наступных крыніц:",
                 "subtitle": "Спампаваць World of Warcraft 3.3.5a",
-                "title": "Крок 1"
+                "title": "Крок 1",
+                "link1": "Спасылка 1",
+                "link2": "Спасылка 2 (Магнітная спасылка)"
             },
             "step2": {
                 "description": "Выберыце загружаны файл ChromieCraft_3.3.5a.zip.",
                 "subtitle": "Выберыце файл ChromieCraft_3.3.5a.zip",
-                "title": "Крок 2"
+                "title": "Крок 2",
+                "subtitle1": "Выберыце загружаны zip-файл 3.3.5a"
             },
             "step3": {
                 "description": "Калі ласка, выберыце тэчку, куды павінна быць усталявана World of Warcraft: Wrath of the Lich King (3.3.5a).",
@@ -1134,5 +1203,27 @@
         " Please follow Steam instructions on their installer;": "HyperPlay загрузіць і запусціць ўсталёўшчык Steam для вас. Калі ласка, прытрымлівайцеся інструкцый Steam у іх усталёўшчыку;"
     },
     "HyperPlay will notify you once the installation is done;": "HyperPlay паведаміць вам, калі ўстаноўка будзе завершана;",
-    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Пры першым запуску Steam загрузіць неабходныя файлы, і гэта зойме некалькі хвілін, каб завяршыць і з'явіцца экран уваходу;"
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Пры першым запуску Steam загрузіць неабходныя файлы, і гэта зойме некалькі хвілін, каб завяршыць і з'явіцца экран уваходу;",
+    "Apple Silicon M1 or above": "Apple Silicon M1 або вышэй",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Будзьце ўважлівыя, што не ўсе гульні будуць працаваць, і нават калі яны будуць, яны могуць не працаваць так, як чакалася.",
+    "Downloading": "Спампоўка {{percent}}%",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Калі вы жадаеце працягнуць, калі ласка, будзьце цярплівымі, бо гэта можа заняць некалькі хвілін у залежнасці ад вашага інтэрнэт-злучэння і канфігурацыі сістэмы.",
+    "installModal": {
+        "loginRequired": "Патрабуецца ўваход",
+        "loginRequiredMessage": "Вы павінны быць увайшлі ў HyperPlay, каб унесці свой код доступу і ўсталяваць гэтую гульню. ",
+        "loginRequiredMessageUpdate": "Вам неабходна ўвайсці ў HyperPlay, каб увести свой код доступу і абнавіць гэтую гульню. "
+    },
+    "Please Wait": "Калі ласка, пачакайце",
+    "Recommended specs for a better experience": "Рэкамендаваныя спецыфікацыі для лепшага досведу",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "Партфоліо MetaMask даступна толькі пры падключэнні да MetaMask."
+        },
+        "unsupported": "Непадтрымліваемая сувязь з кашальком"
+    },
+    "16GB of RAM": "16 ГБ аператыўнай памяці",
+    "Installing": "Усталёўка",
+    "macOS 14": {
+        "0 or above": "macOS 14.0 або вышэй"
+    }
 }

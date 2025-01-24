@@ -29,23 +29,34 @@
         "stopInstall": {
             "keepInstalling": "നടീല് തുടര്ന്നുകൊള്ളൂ",
             "message": "ഇറക്കിയെടുത്ത രേഖകള് സുക്ഷിക്കണോ?",
-            "title": "നടീല് നിര്ത്തൂ"
+            "title": "നിങ്ങൾ ഡൗൺലോഡ് റദ്ദാക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?",
+            "keepFilesMessage": "റദ്ദാക്കുന്നതിന് ശേഷം ഡൗൺലോഡ് ഫയലുകൾ നിലനിർത്താൻ നിങ്ങൾക്ക് ആഗ്രഹിക്കുന്നുവെങ്കിൽ ഇവിടെ പരിശോധിക്കുക."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "ഇാ കളി എടുത്തുനീക്കട്ടെ?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
             "title": "എടുത്തു നീക്കൂ",
-            "dlc": "ഈ അപ്ലിക്കേഷൻ അൺഇൻസ്റ്റാളുചെയ്യണോ?"
+            "dlc": "ഈ അപ്ലിക്കേഷൻ അൺഇൻസ്റ്റാളുചെയ്യണോ?",
+            "prefix_warning": "ഈ ഗെയിമിന് വേണ്ടി വൈൻ പ്രിഫിക്‌സ് ഡിഫോൾട്ട് പ്രിഫിക്‌സ് ആണ്. നിങ്ങൾ അതിനെ യഥാർത്ഥത്തിൽ ഇല്ലാതാക്കാൻ ആഗ്രഹിക്കുന്നുവെങ്കിൽ, നിങ്ങൾക്ക് അത് കൈമാറേണ്ടതുണ്ട്."
         },
         "update": {
             "message": "ഈ ഗെയിമിന് ഒരു അപ്ഡേറ്റ് ഉണ്ട്, ഇപ്പോൾ അപ്ഡേറ്റ് ചെയ്യട്ടെ?",
-            "title": "കളി പുതുക്കേണ്ടതുണ്ട്"
+            "title": "കളി പുതുക്കേണ്ടതുണ്ട്",
+            "message-cancel": "അപ്ഡേറ്റ് ചെയ്യാതെ ഈ ഗെയിം കളിക്കാൻ സാധ്യമല്ല"
         },
         "wineprefix": "വൈൻ പ്രിഫിക്സ് ഫോൾഡർ തിരഞ്ഞെടുക്കൂ",
         "yes": "ശരി",
         "dont-show-again": "വീണ്ടും കാണിക്കരുത്",
-        "ok": "ശരി"
+        "ok": "ശരി",
+        "aware": "ഞാൻ അറിയുന്നു",
+        "yesCancel": "അതെ, റദ്ദാക്കുക",
+        "stopExtraction": {
+            "title": "നിങ്ങൾ എക്സ്ട്രാക്ഷൻ റദ്ദാക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?"
+        },
+        "compability": {
+            "message": "ഈ വിൻഡോസ് ഗെയിം ഒരു സാങ്കേതികCompatibility ലെയർ ഉപയോഗിച്ച് പ്രവർത്തിക്കും. നിങ്ങൾക്ക് ചില പ്രശ്നങ്ങൾ നേരിടാൻ കഴിയും അല്ലെങ്കിൽ ഗെയിം പ്രവർത്തിക്കാതിരിക്കാൻ കഴിയും."
+        }
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -75,7 +86,8 @@
         "update": "പുതുക്കൂ",
         "details": "വിശദാംശങ്ങള്‍",
         "favorites": "ഇഷ്ടപ്പെട്ടവ",
-        "remove_from_library": "നീക്കം ചെയ്യുക"
+        "remove_from_library": "നീക്കം ചെയ്യുക",
+        "unfavorites": "അനുകൂലമാക്കുക"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "പ്രവര്ത്തനരഹിതം",
@@ -86,15 +98,17 @@
     "game": {
         "downloadSize": "ഇറക്കിയെടുപ്പിന്റെ വലുപ്പം",
         "firstPlayed": "ആദ്യം കളിച്ചത്",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "ഡൗൺലോഡ് വലുപ്പം നേടുന്നു",
+        "getting-install-size": "ഇൻസ്റ്റാൾ വലുപ്പം നേടുന്നു",
         "installSize": "നടീലിന്റെ വലുപ്പം",
         "language": "ഭാഷ",
         "lastPlayed": "ഒടുക്കം കളിച്ചത്",
         "neverPlayed": "കളിച്ചിട്ടേയില്ല",
         "platform": "Select Platform",
         "requirements": "System Requirements",
-        "totalPlayed": "കളിച്ച നേരം"
+        "totalPlayed": "കളിച്ച നേരം",
+        "selectChannelName": "ചാനൽ നാമം തിരഞ്ഞെടുക്കുക",
+        "dlcs": "DLCകൾ"
     },
     "gamecard": {
         "moving": "മാറ്റുന്നു",
@@ -127,7 +141,8 @@
         "path-not-writtable": "Warning: path might not be writable.",
         "space-after-install": "After Install",
         "wineprefix": "വൈൻ പ്രിഫിക്സ്",
-        "wineversion": "Wine Version"
+        "wineversion": "Wine Version",
+        "compatibility-warning": "ഈ വിൻഡോസ് ഗെയിം ഒരു സാങ്കേതികCompatibility ലെയർ ഉപയോഗിച്ച് പ്രവർത്തിക്കും. നിങ്ങളുടെ അനുഭവം വ്യത്യാസപ്പെടാം."
     },
     "label": {
         "game": {
@@ -200,7 +215,18 @@
         "updating": "കളി പുതുക്കുന്നു",
         "downloading": "ഡൌൺലോഡ് ചെയ്യുന്നു",
         "paused": "താല്‍ക്കാലികമായി നിര്‍ത്തിയിരിക്കുന്നു",
-        "syncingSaves": "സൂക്ഷിപ്പുകള് ഒന്നിപ്പിക്കുന്നു"
+        "syncingSaves": "സൂക്ഷിപ്പുകള് ഒന്നിപ്പിക്കുന്നു",
+        "gog-goodie": "ഈ ഗെയിം ഇൻസ്റ്റാൾ ചെയ്യാൻ കഴിയുന്നില്ല. https://gog.com/account ൽ ഡൗൺലോഡബിൾ ഉള്ളടക്കം പരിശോധിക്കുക",
+        "goodie": "ഇൻസ്റ്റാൾ ചെയ്യാൻ കഴിയുന്നില്ല",
+        "patching": "ഫയലുകൾ പാച്ച് ചെയ്യുന്നു ",
+        "moving-files": "ഫയൽ '{{file}}' നീക്കുന്നു: {{percent}} ",
+        "preparing": "ഡൗൺലോഡ് ഒരുക്കുന്നു, ദയവായി കാത്തിരിക്കുക",
+        "extracting": {
+            "progress": "എക്സ്ട്രാക്റ്റ് ചെയ്യുന്നു",
+            "cancel": "എക്സ്ട്രാക്ഷൻ റദ്ദാക്കുക"
+        },
+        "distributables": "ഡിസ്ട്രിബ്യൂട്ടബിളുകൾ ഇൻസ്റ്റാൾ ചെയ്യുന്നു",
+        "playing": "കളിക്കുന്നു"
     },
     "submenu": {
         "addShortcut": "കുറുക്കുവഴി ചേര്ക്കൂ",
@@ -214,6 +240,12 @@
         "removeShortcut": "Remove shortcuts",
         "settings": "ക്രമീകരണങ്ങള്",
         "store": "കടത്താള്",
-        "verify": "കണ്ടെത്തി നന്നാക്കൂ"
+        "verify": "കണ്ടെത്തി നന്നാക്കൂ",
+        "extraInfo": "അധിക വിവരങ്ങൾ"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "ഈ സന്ദേശവുമായി ഹൈപ്പർപ്ലേ ടീമിനെ ബന്ധപ്പെടുക: {{error}} - {{context}}."
+        }
     }
 }

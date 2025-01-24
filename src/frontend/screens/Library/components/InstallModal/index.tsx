@@ -54,12 +54,9 @@ export default React.memo(function InstallModal({
   const [crossoverBottle, setCrossoverBottle] = useState('')
   const [accessCode, setAccessCode] = useState('')
 
-  const numberOfChannels =
-    (gameInfo?.channels && Object.keys(gameInfo?.channels).length) ?? 0
-  const initChannelName =
-    gameInfo?.channels && numberOfChannels > 0
-      ? Object.keys(gameInfo?.channels)[0]
-      : 'main'
+  const channelKeys = Object.keys(gameInfo?.channels || {})
+  const numberOfChannels = channelKeys.length
+  const initChannelName = numberOfChannels > 0 ? channelKeys[0] : 'main'
   const [channelNameToInstall, setChannelNameToInstall] =
     useState(initChannelName)
 
@@ -312,6 +309,7 @@ export default React.memo(function InstallModal({
             winePrefix={winePrefix}
             wineVersion={wineVersion}
             crossoverBottle={crossoverBottle}
+            isGated={selectedChannel?.license_config?.access_codes ?? false}
           >
             <div style={{ paddingTop: 'var(--space-md)' }}>
               {runner === 'hyperplay' && numberOfChannels > 1 ? (

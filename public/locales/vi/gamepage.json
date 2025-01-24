@@ -42,14 +42,21 @@
         },
         "update": {
             "message": "Game này đã có bản cập nhật, bạn có muốn tiến hành cập nhật ngay không?",
-            "title": "Cần cập nhật trò chơi"
+            "title": "Cần cập nhật trò chơi",
+            "message-cancel": "Không thể chơi trò chơi này mà không cập nhật"
         },
         "wineprefix": "Chọn thư mục chứa WinePrefix",
         "yes": "Có chứ",
         "dont-show-again": "Không hiển thị lại",
         "ok": "Đống ý",
         "yesCancel": "Có, hủy bỏ",
-        "aware": "Tôi đã biết"
+        "aware": "Tôi đã biết",
+        "stopExtraction": {
+            "title": "Bạn có muốn hủy bỏ việc trích xuất không?"
+        },
+        "compability": {
+            "message": "Trò chơi Windows này sẽ chạy bằng cách sử dụng một lớp tương thích. Bạn có thể gặp một số vấn đề hoặc trò chơi có thể không hoạt động."
+        }
     },
     "button": {
         "add_to_favourites": "Thêm vào mục ưa thích",
@@ -91,7 +98,7 @@
     "game": {
         "downloadSize": "Dung lượng tải xuống",
         "firstPlayed": "Lần chơi đầu tiên",
-        "getting-download-size": "Geting download size",
+        "getting-download-size": "Đang lấy kích thước tải xuống",
         "getting-install-size": "Đang lấy kích thước cài đặt",
         "installSize": "Kích thước cài",
         "language": "Ngôn ngữ hỗ trợ",
@@ -100,7 +107,8 @@
         "platform": "Chọn nền tảng mà bạn muốn cài đặt",
         "requirements": "Cấu hình hệ thống cần thiết",
         "totalPlayed": "Thời gian chơi đã qua",
-        "selectChannelName": "Chọn Tên Kênh"
+        "selectChannelName": "Chọn Tên Kênh",
+        "dlcs": "DLC"
     },
     "gamecard": {
         "moving": "Đang chuyển động",
@@ -133,7 +141,8 @@
         "path-not-writtable": "Cảnh báo: Có thể không thể ghi vào đường dẫn này.",
         "space-after-install": "Sau khi cài",
         "wineprefix": "WinePrefix==WEBLATE_PART==Thư mục Wine==WEBLATE_PART==Khu vực Wine",
-        "wineversion": "Phiên bản Wine đang sử dụng"
+        "wineversion": "Phiên bản Wine đang sử dụng",
+        "compatibility-warning": "Trò chơi Windows này sẽ chạy bằng cách sử dụng một lớp tương thích. Trải nghiệm của bạn có thể khác nhau."
     },
     "label": {
         "game": {
@@ -210,10 +219,14 @@
         "downloading": "Đang tải về",
         "preparing": "Đang chuẩn bị tải xuống, vui lòng chờ",
         "extracting": {
-            "progress": "Đang giải nén"
+            "progress": "Đang giải nén",
+            "cancel": "Hủy bỏ trích xuất"
         },
         "distributables": "Cài đặt các gói phân phối",
-        "moving-files": "Đang di chuyển tệp '{{file}}': {{percent}} "
+        "moving-files": "Đang di chuyển tệp '{{file}}': {{percent}} ",
+        "patching": "Cập nhật tệp ",
+        "gog-goodie": "Trò chơi này dường như không thể cài đặt. Kiểm tra nội dung có thể tải xuống tại https://gog.com/account",
+        "goodie": "Không thể cài đặt"
     },
     "submenu": {
         "addShortcut": "Thêm đường tắt",

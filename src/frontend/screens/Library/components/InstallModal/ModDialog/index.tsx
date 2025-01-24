@@ -24,6 +24,7 @@ interface Props {
   winePrefix: string
   crossoverBottle: string
   wineVersion: WineInstallation | undefined
+  isGated: boolean
 }
 
 const userHome = configStore.get('userHome', '')
@@ -43,7 +44,8 @@ const ModDialog: React.FC<Props> = ({
   enableCTAButton,
   winePrefix,
   wineVersion,
-  crossoverBottle
+  crossoverBottle,
+  isGated
 }) => {
   const { t } = useTranslation()
   const flags = useFlags()
@@ -246,19 +248,23 @@ const ModDialog: React.FC<Props> = ({
               className={styles.step}
               style={{ paddingBottom: 'var(--space-xl-fixed)' }}
             >
-              <div className={styles.stepTitle}>
-                {t('mods.instructions.step4.title', 'Step 4')}
-              </div>
-              <div className={styles.stepSubtitle}>
-                {t('mods.instructions.step4.subtitle', 'Access Code')}
-              </div>
-              <span className={styles.stepDescription}>
-                {t('mods.instructions.step4.description', {
-                  defaultValue:
-                    'Enter the access code to proceed with installing the game.',
-                  newline: '\n'
-                })}
-              </span>
+              {isGated && (
+                <>
+                  <div className={styles.stepTitle}>
+                    {t('mods.instructions.step4.title', 'Step 4')}
+                  </div>
+                  <div className={styles.stepSubtitle}>
+                    {t('mods.instructions.step4.subtitle', 'Access Code')}
+                  </div>
+                  <span className={styles.stepDescription}>
+                    {t('mods.instructions.step4.description', {
+                      defaultValue:
+                        'Enter the access code to proceed with installing the game.',
+                      newline: '\n'
+                    })}
+                  </span>
+                </>
+              )}
               {children}
             </div>
           )}

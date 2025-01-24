@@ -39,7 +39,8 @@ import {
   DMQueueElement,
   ConnectivityStatus,
   GamepadActionArgs,
-  ExtraInfo
+  ExtraInfo,
+  LogOptions
 } from 'common/types'
 import { LegendaryInstallInfo, SelectiveDownload } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
@@ -135,7 +136,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   createNewWindow: (url: string) => void
   logoutGOG: () => void
   toggleVKD3D: (args: ToolArgs) => void
-  logError: (message: unknown) => void
+  logError: (message: unknown, options?: LogOptions) => void
   logInfo: (message: unknown) => void
   showItemInFolder: (item: string) => void
   clipboardWriteText: (text: string) => void
