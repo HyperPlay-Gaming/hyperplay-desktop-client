@@ -146,3 +146,21 @@ ipcMain.handle(
 ipcMain.on('openOnboarding', () => {
   sendFrontendMessage('openOnboarding')
 })
+
+ipcMain.handle('getActiveWallet', async () => {
+  const url = `${DEV_PORTAL_URL}/api/v1/active_wallet`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.walletAddress
+})
+
+ipcMain.handle(
+  'setActiveWallet',
+  async (e, { message, signature }: { message: string; signature: string }) => {
+    const url = `${DEV_PORTAL_URL}/api/v1/active_wallet`
+    return fetchWithCookie({
+      url,
+      method: 'POST',
+      body: JSON.stringify({ message, signature })
+    })
+  }
+)

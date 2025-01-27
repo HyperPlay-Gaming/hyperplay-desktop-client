@@ -317,6 +317,14 @@ interface HyperPlayAsyncIPCFunctions {
     wallet: string
     questId: number
   }) => Promise<boolean>
+  getActiveWallet: () => Promise<string>
+  setActiveWallet: ({
+    message,
+    signature
+  }: {
+    message: string
+    signature: string
+  }) => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
