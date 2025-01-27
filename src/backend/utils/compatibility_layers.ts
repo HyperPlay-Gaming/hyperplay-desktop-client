@@ -597,9 +597,11 @@ export async function initializeCompatibilityLayer() {
     initializationTasks.push(downloadDefaultWine())
   }
 
-  if (isMac) {
-    initializationTasks.push(checkRosettaInstall())
-    initializationTasks.push(setGPTKDefaultOnMacOS())
+  if (isMac || isLinux) {
+    if (isMac) {
+      initializationTasks.push(checkRosettaInstall())
+    }
+    initializationTasks.push(setDefaultCompatibilityLayer())
   }
 
   try {
@@ -616,21 +618,17 @@ export async function downloadDefaultWine() {
   if (isWindows) return null
 
   try {
-    // Refresh wine list
     await updateWineVersionInfos(true)
 
     // Get list of available wine versions
     const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
 
-    // use Wine-GE type if on Linux and GPTK or Wine-Crossover if on Mac
+    // use Proton-GE type if on Linux and GPTK or Wine-Crossover if on Mac
     const isGPTKCompatible = isMac ? await isMacSonomaOrHigher() : false
     const results = await Promise.all(
       availableWine.map(async (version) => {
         if (isLinux) {
-          return (
-            version.type === 'Wine-GE' &&
-            version.version.includes('Wine-GE-Proton')
-          )
+          return version.type === 'Proton-GE'
         }
 
         if (isMac) {
@@ -705,16 +703,27 @@ export async function downloadDefaultWine() {
   }
 }
 
-export async function setGPTKDefaultOnMacOS() {
-  const isGPTKCompatible = await isMacSonomaOrHigher()
-  if (!isGPTKCompatible) {
+export async function setDefaultCompatibilityLayer() {
+  if (!isMac && !isLinux) {
     return
+  }
+
+  // For MacOS, check GPTK compatibility
+  if (isMac) {
+    const isGPTKCompatible = await isMacSonomaOrHigher()
+    if (!isGPTKCompatible) {
+      return
+    }
   }
 
   const { wineVersion: defaultWine } = GlobalConfig.get().getSettings()
 
-  const ignoreList = ['crossover', 'toolkit']
+  // Get target wine type and prefix name based on platform
+  const targetType = isMac ? 'toolkit' : 'proton'
+  const prefixName = isMac ? 'GPTK' : 'Proton'
 
+  // Early return if already using target type
+  const ignoreList = ['crossover', 'toolkit', 'proton']
   if (
     ignoreList.includes(defaultWine.type.toLowerCase()) ||
     defaultWine.name.includes('Toolkit')
@@ -722,15 +731,18 @@ export async function setGPTKDefaultOnMacOS() {
     return
   }
 
+  // Find target wine version
   const wineList = await GlobalConfig.get().getAlternativeWine()
-  const gptk = wineList.find((wine) => wine.type === 'toolkit')
+  const targetWine = wineList.find((wine) => wine.type === targetType)
 
-  if (gptk && existsSync(gptk.bin)) {
-    logInfo(`Changing wine version to ${gptk.name}`)
-    GlobalConfig.get().setSetting('wineVersion', gptk)
-    // update prefix to use the new one as well
+  // Set as default if found and valid
+  if (targetWine && existsSync(targetWine.bin)) {
+    logInfo(`Changing wine version to ${targetWine.name}`)
+    GlobalConfig.get().setSetting('wineVersion', targetWine)
+
+    // Update prefix path
     const installPath = GlobalConfig.get().getSettings().defaultInstallPath
-    const newPrefix = join(installPath, 'Prefixes', 'GPTK')
+    const newPrefix = join(installPath, 'Prefixes', prefixName)
     GlobalConfig.get().setSetting('winePrefix', newPrefix)
   }
   return
