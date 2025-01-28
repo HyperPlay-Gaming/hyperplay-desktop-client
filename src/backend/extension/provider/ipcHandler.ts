@@ -37,6 +37,7 @@ ipcMain.prependListener('reloadApp', async () => {
 providerEvents.on(
   'request',
   (method: string, currentRequestId: number, args: unknown) => {
+    console.log('providerEvents request in backend: ', method, args)
     getMainWindow()?.webContents.send(method, currentRequestId, args)
   }
 )
