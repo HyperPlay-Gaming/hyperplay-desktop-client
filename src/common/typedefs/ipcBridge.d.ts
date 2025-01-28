@@ -324,7 +324,7 @@ interface HyperPlayAsyncIPCFunctions {
   }: {
     message: string
     signature: string
-  }) => Promise<void>
+  }) => Promise<Response>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

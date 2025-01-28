@@ -1,5 +1,6 @@
 import { sendFrontendMessage } from 'backend/main_window'
 import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
+import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { checkG7ConnectionStatus } from 'backend/utils/quests'
 import { DEV_PORTAL_URL } from 'common/constants'
 import {
@@ -157,9 +158,17 @@ ipcMain.handle(
   'setActiveWallet',
   async (e, { message, signature }: { message: string; signature: string }) => {
     const url = `${DEV_PORTAL_URL}/api/v1/active_wallet`
-    return fetchWithCookie({
-      url,
+
+    const cookieString = await getPartitionCookies({
+      partition: 'persist:auth',
+      url: DEV_PORTAL_URL
+    })
+
+    return fetch(url, {
       method: 'POST',
+      headers: {
+        Cookie: cookieString
+      },
       body: JSON.stringify({ message, signature })
     })
   }
