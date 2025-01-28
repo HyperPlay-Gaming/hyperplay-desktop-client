@@ -405,7 +405,8 @@
       "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
       "@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
       "@hyperplay/overlay>electron": false,
-      "sass>@parcel/watcher": false
+      "sass>@parcel/watcher": false,
+      "@hyperplay/overlay>@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": false
     }
   },
   "packageManager": "pnpm@9.15.0+sha256.09a8fe31a34fda706354680619f4002f4ccef6dadff93240d24ef6c831f0fd28"
