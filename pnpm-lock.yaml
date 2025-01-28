@@ -113,6 +113,9 @@ importers:
       bn.js:
         specifier: ^5.2.1
         version: 5.2.1
+      call-bind-apply-helpers:
+        specifier: ^1.0.1
+        version: 1.0.1
       classic-level:
         specifier: ^1.4.1
         version: 1.4.1
