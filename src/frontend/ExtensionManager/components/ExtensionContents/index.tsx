@@ -33,6 +33,11 @@ export const ExtensionContents = observer(() => {
       src={`chrome-extension://${extensionState.extensionId}/${state}.html`}
       className={ExtensionContentsStyles.mmWindow}
       allowpopups={trueAsStr}
+      /**
+       * The webview won't reload by just changing its src if it already loaded,
+       * so we change the key to get it to reload when the url changes
+       */
+      key={state}
     ></webview>
   )
 })
