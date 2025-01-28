@@ -164,12 +164,25 @@ ipcMain.handle(
       url: DEV_PORTAL_URL
     })
 
-    return fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         Cookie: cookieString
       },
       body: JSON.stringify({ message, signature })
     })
+
+    if (!response.ok) {
+      return {
+        status: response.status,
+        success: false,
+        message: await response.text()
+      }
+    }
+
+    return {
+      status: response.status,
+      success: true
+    }
   }
 )
