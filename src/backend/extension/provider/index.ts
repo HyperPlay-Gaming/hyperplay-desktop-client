@@ -20,6 +20,5 @@ async function initExtensionProvider() {
 initExtensionProvider()
 
 providerRequests.on('request', (method, ...args) => {
-  console.log('provider request in backend: ', method, args)
   getMainWindow()?.webContents.send(method, ...args)
 })
