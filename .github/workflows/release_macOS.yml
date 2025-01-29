@@ -100,6 +100,14 @@ jobs:
           echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
 
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
+
+      - name: install setuptools
+        run: brew install python-setuptools
+        shell: bash
+
       - name: Build artifacts.
         run: pnpm release:mac:arm64
         env:
