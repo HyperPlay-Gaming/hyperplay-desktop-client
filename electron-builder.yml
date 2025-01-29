@@ -60,8 +60,6 @@ mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
     com.apple.security.cs.allow-jit: true
-  notarize:
-    teamId: DLB2RYLUDX
   asarUnpack:
     - build/bin/darwin/legendary
     - build/bin/darwin/gogdl
