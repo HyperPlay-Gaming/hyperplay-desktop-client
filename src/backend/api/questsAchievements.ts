@@ -101,3 +101,9 @@ export const setActiveWallet = async ({
   message: string
   signature: string
 }) => ipcRenderer.invoke('setActiveWallet', { message, signature })
+
+export const getGameplayWallets = async () =>
+  ipcRenderer.invoke('getGameplayWallets')
+
+export const updateActiveWallet = async (walletId: number) =>
+  ipcRenderer.invoke('updateActiveWallet', walletId)

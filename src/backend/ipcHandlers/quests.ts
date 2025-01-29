@@ -186,3 +186,18 @@ ipcMain.handle(
     }
   }
 )
+
+ipcMain.handle('updateActiveWallet', async (e, walletId) => {
+  const url = `${DEV_PORTAL_URL}/api/v1/active_wallet`
+  await fetchWithCookie({
+    url,
+    method: 'PUT',
+    body: JSON.stringify({ wallet_id: walletId })
+  })
+})
+
+ipcMain.handle('getGameplayWallets', async () => {
+  const url = `${DEV_PORTAL_URL}/api/v1/gameplay_wallets`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.wallets
+})

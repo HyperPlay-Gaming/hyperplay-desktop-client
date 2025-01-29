@@ -63,7 +63,7 @@ import { SiweMessage } from 'siwe'
  * t("gameplayWallet.detected.message", "To track progress with this wallet, add it as a Gameplay Wallet below by setting it.")
  * t("gameplayWallet.verify.message", "You only need to verify each address once and can switch freely at any time.")
  * t("gameplayWallet.new.title", "New Wallet Detected")
- * t("gameplayWallet.new.message", "Your connected wallet doesn't match any Gameplay wallet tracked for this Quest. To track progress with this wallet, add it as a Gameplay Wallet below by setting it.")
+ * t("gameplayWallet.new.message", "Your connected wallet doesn't match any Gameplay wallet tracked for this Quest.To track progress with this wallet, set it as a Gameplay Wallet below.")
  * t("gameplayWallet.action.set", "Set")
  * t("gameplayWallet.noWallet.message", "No wallet connected. Connect wallet to track Quest progress.")
  * t("gameplayWallet.active.title", "Active Gameplay Wallet")
@@ -143,6 +143,8 @@ export default function QuestDetails({
       getActiveWalletSignature={getActiveWalletSignature}
       getActiveWallet={window.api.getActiveWallet}
       setActiveWallet={window.api.setActiveWallet}
+      getGameplayWallets={window.api.getGameplayWallets}
+      updateActiveWallet={window.api.updateActiveWallet}
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }

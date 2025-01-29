@@ -325,6 +325,8 @@ interface HyperPlayAsyncIPCFunctions {
     message: string
     signature: string
   }) => Promise<{ status: number; success: boolean; message?: string }>
+  getGameplayWallets: () => Promise<{ id: number; wallet_address: string }[]>
+  updateActiveWallet: (walletId: number) => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

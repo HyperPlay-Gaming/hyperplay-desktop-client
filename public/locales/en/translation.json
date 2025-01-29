@@ -280,7 +280,7 @@
             "title": "What is a Gameplay Wallet?"
         },
         "new": {
-            "message": "Your connected wallet doesn't match any Gameplay wallet tracked for this Quest. To track progress with this wallet, add it as a Gameplay Wallet below by setting it.",
+            "message": "Your connected wallet doesn't match any Gameplay wallet tracked for this Quest.To track progress with this wallet, set it as a Gameplay Wallet below.",
             "title": "New Wallet Detected"
         },
         "noWallet": {
