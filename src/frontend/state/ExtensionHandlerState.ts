@@ -10,15 +10,11 @@ class ExtensionHandlerState {
     id: number,
     args: Record<string, unknown>
   ) {
-    console.log('handling extension request for ', id, args)
     try {
-      console.log('waiting for connection')
       await this.waitForConnection()
-      console.log('requesting from window.ethereum ', args)
       /* eslint-disable-next-line */
       //@ts-ignore
       const value = await window.ethereum?.request(args)
-      console.log('window.ethereum returned with ', value)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
       console.error(`error during request: ${err}`)
