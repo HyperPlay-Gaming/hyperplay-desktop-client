@@ -190,6 +190,20 @@ import { checkG7ConnectionStatus, postPlaySessionTime } from './utils/quests'
 
 import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'
 
+async function initExtensionOnLaunch() {
+  try {
+    const extImporter = await import('@hyperplay/extension-importer')
+    await extImporter.initExtensionBeforeWindowCreation(hpApi)
+  } catch (err) {
+    logError(
+      `Error initializing extension on launch ${err}`,
+      LogPrefix.HyperPlay
+    )
+  }
+}
+
+initExtensionOnLaunch()
+
 async function startProxyServer() {
   try {
     const proxyServer = await import('@hyperplay/proxy-server')
@@ -681,6 +695,8 @@ ipcMain.once('loadingScreenReady', () => {
 ipcMain.once('frontendReady', async () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
   await initExtension(hpApi)
+  // wait for mm SW to initialize
+  await wait(5000)
   ipcMain.emit('reloadApp')
   handleProtocol([openUrlArgument, ...process.argv])
   setTimeout(() => {

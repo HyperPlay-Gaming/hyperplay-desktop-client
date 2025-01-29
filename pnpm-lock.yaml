@@ -113,6 +113,9 @@ importers:
       bn.js:
         specifier: ^5.2.1
         version: 5.2.1
+      call-bind-apply-helpers:
+        specifier: ^1.0.1
+        version: 1.0.1
       classic-level:
         specifier: ^1.4.1
         version: 1.4.1
@@ -292,8 +295,8 @@ importers:
         version: 3.24.1
     optionalDependencies:
       '@hyperplay/extension-importer':
-        specifier: ^0.1.1-alpha.0
-        version: 0.1.1-alpha.1
+        specifier: ^0.3.0
+        version: 0.3.0
       '@hyperplay/extension-provider':
         specifier: ^0.0.9
         version: 0.0.9(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
@@ -1831,8 +1834,8 @@ packages:
     resolution: {integrity: sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==}
     engines: {node: '>=16'}
 
-  '@hyperplay/extension-importer@0.1.1-alpha.1':
-    resolution: {integrity: sha512-aRTDzn/nsrYI2s82WzTvJoYSke0U6c3NENGnb8bSLtOiITj9jGJNjTf2c8hAGsfpb7tZXJ7Q4ciToux+xaU4VA==}
+  '@hyperplay/extension-importer@0.3.0':
+    resolution: {integrity: sha512-Hmn2b1BpCvPu0UUfZ3COsDWTJCisATIf2vfUTmnWeIo7kVEbGMqhTxD2TsIu2SX4ekJb8gliQK+FTNUeh3bK9A==}
 
   '@hyperplay/extension-provider@0.0.9':
     resolution: {integrity: sha512-67x/FnhVXY/bUvWrQ3n1rmosxTymB5j9TRkFlNzI1wLU9zA05vJsIEGKBpXTrf/tQMspMfnKTvFFt7O9RtugiQ==}
@@ -11059,7 +11062,7 @@ snapshots:
 
   '@hyperplay/check-disk-space@3.5.2': {}
 
-  '@hyperplay/extension-importer@0.1.1-alpha.1':
+  '@hyperplay/extension-importer@0.3.0':
     dependencies:
       '@hyperplay/utils': 0.0.9
       classic-level: 1.4.1
