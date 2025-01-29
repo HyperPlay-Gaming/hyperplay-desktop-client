@@ -26,6 +26,51 @@ import { observer } from 'mobx-react-lite'
 import DeviceState from 'frontend/state/DeviceState'
 import { Tabs, getTabsClassNames } from '@hyperplay/ui'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import { Connector, useChainId, useConnect } from 'wagmi'
+
+function Connect() {
+  const chainId = useChainId()
+  const { connectors, connect } = useConnect()
+
+  return (
+    <div className="buttons">
+      {connectors.map((connector) => (
+        <ConnectorButton
+          key={connector.uid}
+          connector={connector}
+          onClick={() => connect({ connector, chainId })}
+        />
+      ))}
+    </div>
+  )
+}
+
+function ConnectorButton({
+  connector,
+  onClick
+}: {
+  connector: Connector
+  onClick: () => void
+}) {
+  const [ready, setReady] = React.useState(false)
+  React.useEffect(() => {
+    ;(async () => {
+      const provider = await connector.getProvider()
+      setReady(!!provider)
+    })()
+  }, [connector, setReady])
+
+  return (
+    <button
+      className="button"
+      disabled={!ready}
+      onClick={onClick}
+      type="button"
+    >
+      {connector.name}
+    </button>
+  )
+}
 
 export const defaultWineVersion: WineInstallation = {
   bin: '/usr/bin/wine',
@@ -113,6 +158,7 @@ function Settings() {
         }
       ]}
     >
+      <Connect />
       <SettingsContext.Provider value={contextValues}>
         <div className="Settings contentContainer">
           <div role="list" className="settingsWrapper">

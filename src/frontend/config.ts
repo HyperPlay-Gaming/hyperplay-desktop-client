@@ -1,6 +1,7 @@
 import { createConfig, http } from 'wagmi'
 import { Chain, hardhat, mainnet, polygon } from 'wagmi/chains'
 import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
+import { injected, walletConnect } from 'wagmi/connectors'
 
 let chainsToSupport: Chain[] = []
 const transports: { [key: number]: unknown } = {}
@@ -19,7 +20,11 @@ for (const chainId in chainMap) {
 chainsToSupport = chainsToSupport.filter((chain) => chain.id !== hardhat.id)
 chainsToSupport.push(hardhat)
 
+const projectId = '878099c5ebd1a07a3785ec7ebee59ba6'
+
 export const config = createConfig({
+  connectors: [injected(), walletConnect({ projectId })],
+
   // @ts-expect-error: Chain[] is a valid type for chains but wagmi a constant assertion which we can't do since the array is dynamic
   chains: chainsToSupport,
   transports: {
