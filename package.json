@@ -226,7 +226,7 @@
     "vite-plugin-svgr": "^2.2.2"
   },
   "optionalDependencies": {
-    "@hyperplay/extension-importer": "0.2.3-debug",
+    "@hyperplay/extension-importer": "0.2.3-debug.1",
     "@hyperplay/extension-provider": "0.0.10-debug",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/overlay": "^0.0.7",
