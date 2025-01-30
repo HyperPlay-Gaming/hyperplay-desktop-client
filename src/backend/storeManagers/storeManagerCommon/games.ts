@@ -30,7 +30,6 @@ import {
   app,
   BrowserWindow,
   BrowserWindowConstructorOptions,
-  session,
   WindowOpenHandlerResponse
 } from 'electron'
 import { gameManagerMap } from '../index'
@@ -146,7 +145,6 @@ const openNewBrowserGameWindow = async (
   const hpOverlay = await getHpOverlay()
 
   return new Promise((res) => {
-    const partition = `persist:${appName}`
     const browserGame = new BrowserWindow({
       icon: icon,
       fullscreen: true,
@@ -154,8 +152,7 @@ const openNewBrowserGameWindow = async (
         webviewTag: true,
         contextIsolation: true,
         nodeIntegration: true,
-        preload: path.join(__dirname, '../preload/preload.js'),
-        partition
+        preload: path.join(__dirname, '../preload/preload.js')
       },
       show: false
     })
@@ -217,19 +214,6 @@ const openNewBrowserGameWindow = async (
       }
     }
     app.on('web-contents-created', interceptFullscreenKeyInput)
-
-    // Clear cache on launch to avoid issues with game updates
-    const gameSession = session.fromPartition(partition)
-    gameSession.clearCache()
-    gameSession.clearStorageData({
-      storages: ['filesystem', 'shadercache', 'cachestorage'],
-      quotas: ['temporary', 'syncable']
-    })
-
-    // Open DevTools
-    if (!app.isPackaged || process.env.HP_ENABLE_DEVTOOLS === 'true') {
-      browserGame.webContents.openDevTools()
-    }
 
     browserGame.loadURL(url)
     // this is electron's suggested way to prevent visual flash
