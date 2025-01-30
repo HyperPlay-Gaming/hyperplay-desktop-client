@@ -38,6 +38,7 @@ export const ExtensionContents = observer(() => {
        * so we change the key to get it to reload when the url changes
        */
       key={state}
+      partition='persist:injectedProvider'
     ></webview>
   )
 })

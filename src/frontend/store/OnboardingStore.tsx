@@ -62,12 +62,7 @@ class OnboardingStore {
     defaultProvider?: PROVIDERS
   ) {
     if (defaultProvider === PROVIDERS.METAMASK_EXTENSION) {
-      when(
-        () => ExtensionHandlerState.ethereumListenersBound,
-        () => {
-          this.bootstrapOnboarding(context, defaultProvider)
-        }
-      )
+      this.bootstrapOnboarding(context, defaultProvider)
     } else {
       this.bootstrapOnboarding(context, defaultProvider)
     }
