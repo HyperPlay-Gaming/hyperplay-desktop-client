@@ -69,7 +69,6 @@ ipcMain.on('enableOnEvents', (ev, topic) => {
 // electron cannot handle errors thrown here in the preload script
 // so we catch and return the error object, then check and rethrow in preload
 ipcMain.handle('providerRequest', async (ev, args) => {
-  console.log('handling provider request')
   try {
     const providers = await import('@hyperplay/providers')
     // this will actually call request on the wrapped EIP1193 provider, not the deprecated send method

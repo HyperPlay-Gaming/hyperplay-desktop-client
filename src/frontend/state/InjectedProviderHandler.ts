@@ -81,7 +81,6 @@ class InjectedProviderHandler {
       ) {
         return
       }
-      console.log('window message received = ', JSON.stringify(event, null, 4))
     })
 
     /* eslint-disable-next-line */
@@ -112,7 +111,6 @@ class InjectedProviderHandler {
       window.api.extensionOnEvent('chainChanged', chainId)
     })
 
-    console.log('binding request listener')
     const removeRequestListener = window.api.handleMetamaskExtensionRequests(
       this.handleRequest.bind(this)
     )
@@ -134,11 +132,10 @@ class InjectedProviderHandler {
   }
 
   constructor() {
-    console.log('initializing injected provider handler')
     makeAutoObservable(this)
     const bindListeners = (): boolean => {
       if (typeof window.ethereum !== 'undefined') {
-        console.log('binding ehtereum listeners')
+        console.log('binding ethereum listeners')
         this.bindEthereumListeners()
         return true
       }
