@@ -37,7 +37,22 @@ const listenToRendererCalls = (
     ipcRenderer.send('enableOnEvents', topic)
     onEventsEnabled[topic] = true
   }
-  ipcRenderer[fxn]('providerApi' + topic, (ev: any, ...args: any[]) => {
+  let prevAccounts: string[] = []
+  ipcRenderer[fxn]('providerApi' + topic, async (ev: any, ...args: any[]) => {
+    if (topic === 'accountsChanged' && args.length > 0){
+      const newAccts = args[0]
+      /**
+       * Our current implementation causes an infinite loop with wagmi here https://github.com/wevm/wagmi/blob/651aa72827a79f38a89f5a64209592816c8e6492/packages/connectors/src/metaMask.ts#L428-L452
+       * since we emit and "accountsChanged" event after a "eth_requestAccounts" request in our provider implementation. This causes onConnect to fire again in the MM connector.
+       * @TODO fix our provider implementation so "accountsChanged" is only emitted when accounts do change
+       */
+      if (JSON.stringify(newAccts) === JSON.stringify(prevAccounts)){
+        return
+      }
+      prevAccounts = newAccts
+      cb(newAccts)
+      return
+    }
     cb(...args)
   })
 }
