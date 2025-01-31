@@ -87,7 +87,7 @@ export const createMainWindow = async () => {
       contextIsolation: true,
       nodeIntegration: true,
       preload: path.join(__dirname, '../preload/preload.js'),
-      session: session.fromPartition('persist:hyperplay_windows'),
+      session: session?.fromPartition('persist:hyperplay_windows'),
       webSecurity: app.isPackaged
     }
   })
