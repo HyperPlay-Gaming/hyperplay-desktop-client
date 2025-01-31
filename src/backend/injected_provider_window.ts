@@ -8,17 +8,8 @@ export const getInjectedBrowserWindow = () => {
   return injectedBrowserWindow
 }
 
-let injectedProviderSession: Electron.Session | null = null
-
-export const getInjectedProviderSession = () => {
-  if (injectedProviderSession === null) {
-    injectedProviderSession = session.fromPartition('persist:injectedProvider')
-  }
-  return injectedProviderSession
-}
-
 export function createInjectedProviderWindow() {
-  const sessionForInjectedProviderWindow = getInjectedProviderSession()
+  // must be the default session to prevent wiping old wallets
   injectedBrowserWindow = new BrowserWindow({
     show: false,
     webPreferences: {
@@ -26,7 +17,6 @@ export function createInjectedProviderWindow() {
       contextIsolation: true,
       nodeIntegration: true,
       webSecurity: app.isPackaged,
-      session: sessionForInjectedProviderWindow,
       preload: path.join(__dirname, '../preload/preload.js')
     }
   })

@@ -25,7 +25,6 @@ const MetaMaskHome = function ({ path = 'home.html' }: MetaMaskHomeProps) {
           )}`}
           allowpopups={trueAsStr}
           key={'metamask_home' + path + hash}
-          partition="persist:injectedProvider"
         />
       </div>
     </>

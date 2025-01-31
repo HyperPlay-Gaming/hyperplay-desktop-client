@@ -474,8 +474,9 @@ if (!gotTheLock) {
       __dirname,
       '../preload/providerPreload.js'
     )
+    const hpWindowsSession = session.fromPartition('persist:hyperplay_windows')
     // inject window.ethereum into the main window and the overlay window
-    session.defaultSession.setPreloads([providerPreloadPath])
+    hpWindowsSession.setPreloads([providerPreloadPath])
 
     const ses = session.fromPartition(
       'persist:InPageWindowEthereumExternalWallet'
