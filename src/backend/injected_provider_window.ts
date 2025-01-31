@@ -1,4 +1,4 @@
-import { app, BrowserWindow, session } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import { publicDir } from './constants'
 import path from 'path'
 
