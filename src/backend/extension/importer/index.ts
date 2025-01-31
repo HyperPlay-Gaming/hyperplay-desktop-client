@@ -1,4 +1,3 @@
-import { session } from 'electron'
 import store from './store'
 import { HyperPlayAPI } from '@hyperplay/utils'
 import './backendEventHandlers'

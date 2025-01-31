@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 
 class InjectedProviderHandler {
   ethereumListenersBound = false
@@ -8,7 +8,6 @@ class InjectedProviderHandler {
     id: number,
     args: Record<string, unknown>
   ) {
-    console.log('handle request')
     try {
       await this.waitForConnection()
       /* eslint-disable-next-line */
@@ -40,7 +39,6 @@ class InjectedProviderHandler {
     id: number,
     args: unknown[]
   ) {
-    console.log('handling send')
     try {
       await this.waitForConnection()
       /* eslint-disable-next-line */
@@ -58,7 +56,6 @@ class InjectedProviderHandler {
     id: number,
     args: unknown[]
   ) {
-    console.log('handling send async')
     try {
       await this.waitForConnection()
       /* eslint-disable-next-line */

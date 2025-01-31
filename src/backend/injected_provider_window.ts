@@ -1,6 +1,6 @@
-import { app, BrowserWindow, session } from "electron";
-import { publicDir } from "./constants";
-import path from "path";
+import { app, BrowserWindow, session } from 'electron';
+import { publicDir } from './constants';
+import path from 'path';
 
 let injectedBrowserWindow: BrowserWindow | null = null
 
