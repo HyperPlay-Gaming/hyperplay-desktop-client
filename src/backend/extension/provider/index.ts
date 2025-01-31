@@ -22,7 +22,7 @@ initExtensionProvider()
 providerRequests.on('request', (method, ...args) => {
   console.log('sending proivder request to injected browser window')
   const win = getInjectedBrowserWindow()
-  if (win === null){
+  if (win === null) {
     throw 'tried to send a provider request to injected provider browser window but it is not initialized yet!'
   }
   win.webContents.send(method, ...args)

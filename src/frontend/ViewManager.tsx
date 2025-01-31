@@ -9,7 +9,7 @@ const Views = {
   InjectedProviderApp: <InjectedProviderApp />
 }
 
-type Keys<T> = keyof T;
+type Keys<T> = keyof T
 
 type URLSearchParamsProxy = URLSearchParams & {
   view?: Keys<typeof Views> & 'BrowserGame'

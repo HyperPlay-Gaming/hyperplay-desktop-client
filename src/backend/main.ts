@@ -470,7 +470,10 @@ if (!gotTheLock) {
 
     createInjectedProviderWindow()
 
-    const providerPreloadPath = path.join(__dirname, '../preload/providerPreload.js')
+    const providerPreloadPath = path.join(
+      __dirname,
+      '../preload/providerPreload.js'
+    )
     // inject window.ethereum into the main window and the overlay window
     session.defaultSession.setPreloads([providerPreloadPath])
 
@@ -2121,4 +2124,3 @@ ipcMain.handle('getHyperPlayListings', async () => {
  */
 
 import './storeManagers/legendary/eos_overlay/ipc_handler'
-
