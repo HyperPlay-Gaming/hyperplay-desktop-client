@@ -23,8 +23,30 @@ class ExtensionHandlerState {
     this.navigateTo = 'metamaskPortfolio' + pathname
   }
 
+  bindListeners() {
+    const removeOpenMetaMaskHomePageListener =
+      window.api.handleOpenMetaMaskHomePage(
+        this.handleOpenMMHomePage.bind(this)
+      )
+    const removeOpenMetaMaskSnapsPageListener =
+      window.api.handleOpenMetaMaskSnapsPage(
+        this.handleOpenMMSnapsPage.bind(this)
+      )
+    const removeOpenMetaMaskPortfolioPageListener =
+      window.api.handleOpenMetaMaskPortfolioPage(
+        this.handleOpenMMPortfolioPage.bind(this)
+      )
+
+    return () => {
+      removeOpenMetaMaskHomePageListener()
+      removeOpenMetaMaskSnapsPageListener()
+      removeOpenMetaMaskPortfolioPageListener()
+    }
+  }
+
   constructor() {
     makeAutoObservable(this)
+    this.bindListeners()
   }
 }
 
