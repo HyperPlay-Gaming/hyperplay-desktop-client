@@ -255,6 +255,7 @@ export function logError(
   options_or_prefix?: LogOptions | LogPrefix
 ) {
   logBase(input, 'ERROR', options_or_prefix)
+  console.log(input, options_or_prefix)
   if (
     typeof options_or_prefix === 'object' &&
     options_or_prefix?.sentryException
