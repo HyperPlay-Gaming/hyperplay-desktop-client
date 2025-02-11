@@ -10,8 +10,7 @@ class InjectedProviderHandler {
   ) {
     try {
       await this.waitForConnection()
-      /* eslint-disable-next-line */
-      //@ts-ignore
+      // @ts-expect-error TODO: fix window.ethereum typings
       const value = await window.ethereum?.request(args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
@@ -28,8 +27,7 @@ class InjectedProviderHandler {
     }
 
     return new Promise((resolve) => {
-      /* eslint-disable-next-line */
-      //@ts-ignore
+      // @ts-expect-error TODO: fix window.ethereum typings
       window.ethereum?.on('connect', resolve)
     })
   }
@@ -41,8 +39,7 @@ class InjectedProviderHandler {
   ) {
     try {
       await this.waitForConnection()
-      /* eslint-disable-next-line */
-      //@ts-ignore
+      // @ts-expect-error TODO: fix window.ethereum typings
       const value = await window.ethereum?.send(...args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
@@ -58,8 +55,7 @@ class InjectedProviderHandler {
   ) {
     try {
       await this.waitForConnection()
-      /* eslint-disable-next-line */
-      //@ts-ignore
+      // @ts-expect-error TODO: fix window.ethereum typings
       const value = await window.ethereum?.sendAsync(...args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
@@ -83,8 +79,7 @@ class InjectedProviderHandler {
       }
     })
 
-    /* eslint-disable-next-line */
-    //@ts-ignore
+    // @ts-expect-error TODO: fix window.ethereum typings
     window.ethereum?.on('accountsChanged', (accounts: string[]) => {
       window.api.extensionOnEvent('accountsChanged', accounts)
     })
@@ -101,12 +96,12 @@ class InjectedProviderHandler {
       window.api.extensionOnEvent('disconnect', error)
     })
 
-    // @ts-ignore TODO: fix window.ethereum typings
+    // @ts-expect-error TODO: fix window.ethereum typings
     window.ethereum?.on('connect', (connectInfo: string) => {
       window.api.extensionOnEvent('connect', connectInfo)
     })
 
-    // @ts-ignore TODO: fix window.ethereum typings
+    // @ts-expect-error TODO: fix window.ethereum typings
     window.ethereum?.on('chainChanged', (chainId: number) => {
       window.api.extensionOnEvent('chainChanged', chainId)
     })
