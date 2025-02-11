@@ -88,7 +88,8 @@ class InjectedProviderHandler {
     window.ethereum?.on('disconnect', (error: any) => {
       // Relevant issue https://github.com/MetaMask/metamask-extension/issues/13375
       if (error.code === 1013) {
-        const reconnectingMessage = 'MetaMask disconnected from chain. Reconnecting...'
+        const reconnectingMessage =
+          'MetaMask disconnected from chain. Reconnecting...'
         window.api.logInfo(reconnectingMessage)
         console.log(reconnectingMessage)
         return
