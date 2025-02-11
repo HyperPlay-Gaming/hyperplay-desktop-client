@@ -101,14 +101,12 @@ class InjectedProviderHandler {
       window.api.extensionOnEvent('disconnect', error)
     })
 
-    /* eslint-disable-next-line */
-    //@ts-ignore
+    // @ts-ignore TODO: fix window.ethereum typings
     window.ethereum?.on('connect', (connectInfo: string) => {
       window.api.extensionOnEvent('connect', connectInfo)
     })
 
-    /* eslint-disable-next-line */
-    //@ts-ignore
+    // @ts-ignore TODO: fix window.ethereum typings
     window.ethereum?.on('chainChanged', (chainId: number) => {
       window.api.extensionOnEvent('chainChanged', chainId)
     })
