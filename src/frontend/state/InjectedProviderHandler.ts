@@ -93,7 +93,9 @@ class InjectedProviderHandler {
     window.ethereum?.on('disconnect', (error: any) => {
       // Relevant issue https://github.com/MetaMask/metamask-extension/issues/13375
       if (error.code === 1013) {
-        console.log('MetaMask disconnected from chain. Reconnecting...')
+        const reconnectingMessage = 'MetaMask disconnected from chain. Reconnecting...'
+        window.api.logInfo(reconnectingMessage)
+        console.log(reconnectingMessage)
         return
       }
       window.api.extensionOnEvent('disconnect', error)
@@ -135,7 +137,9 @@ class InjectedProviderHandler {
     makeAutoObservable(this)
     const bindListeners = (): boolean => {
       if (typeof window.ethereum !== 'undefined') {
-        console.log('binding ethereum listeners')
+        const bindingMessage = 'binding ethereum listeners'
+        console.log(bindingMessage)
+        window.api.logInfo(bindingMessage)
         this.bindEthereumListeners()
         return true
       }
