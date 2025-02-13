@@ -867,7 +867,8 @@ async function callRunner(
     const child = spawn(bin, commandParts, {
       cwd: runner.dir,
       env: { ...process.env, ...options?.env },
-      signal: abortController.signal
+      signal: abortController.signal,
+      detached: true
     })
 
     childPid = child.pid
