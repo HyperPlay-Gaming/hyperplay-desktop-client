@@ -1,14 +1,18 @@
 import React, { lazy } from 'react'
 import OverlayManager from './OverlayManager'
 import { Runner } from 'common/types'
+import InjectedProviderApp from './InjectedProviderApp'
 const App = lazy(async () => import('./App'))
 
 const Views = {
-  App: <App />
+  App: <App />,
+  InjectedProviderApp: <InjectedProviderApp />
 }
 
+type Keys<T> = keyof T
+
 type URLSearchParamsProxy = URLSearchParams & {
-  view?: string
+  view?: Keys<typeof Views> & 'BrowserGame'
   appName?: string
   runner?: Runner
 }

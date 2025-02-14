@@ -4,7 +4,7 @@ import {
   providerEvents,
   returnExtensionRequestEvents
 } from './emitters'
-import { getMainWindow } from 'backend/main_window'
+import { getInjectedBrowserWindow } from 'backend/injected_provider_window'
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 ipcMain.on('extensionOnEvent', (e: any, topic: string, ...args: any[]) => {
@@ -37,6 +37,6 @@ ipcMain.prependListener('reloadApp', async () => {
 providerEvents.on(
   'request',
   (method: string, currentRequestId: number, args: unknown) => {
-    getMainWindow()?.webContents.send(method, currentRequestId, args)
+    getInjectedBrowserWindow()?.webContents.send(method, currentRequestId, args)
   }
 )

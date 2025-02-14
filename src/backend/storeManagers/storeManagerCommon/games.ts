@@ -30,6 +30,7 @@ import {
   app,
   BrowserWindow,
   BrowserWindowConstructorOptions,
+  session,
   WindowOpenHandlerResponse
 } from 'electron'
 import { gameManagerMap } from '../index'
@@ -152,6 +153,7 @@ const openNewBrowserGameWindow = async (
         webviewTag: true,
         contextIsolation: true,
         nodeIntegration: true,
+        session: session.fromPartition('persist:hyperplay_windows'),
         preload: path.join(__dirname, '../preload/preload.js')
       },
       show: false

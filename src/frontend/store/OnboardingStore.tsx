@@ -4,7 +4,6 @@ import React, { useContext, useEffect } from 'react'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { useLocation } from 'react-router-dom'
-import ExtensionHandlerState from 'frontend/state/ExtensionHandlerState'
 import WalletState from '../state/WalletState'
 
 class OnboardingStore {
@@ -62,12 +61,7 @@ class OnboardingStore {
     defaultProvider?: PROVIDERS
   ) {
     if (defaultProvider === PROVIDERS.METAMASK_EXTENSION) {
-      when(
-        () => ExtensionHandlerState.ethereumListenersBound,
-        () => {
-          this.bootstrapOnboarding(context, defaultProvider)
-        }
-      )
+      this.bootstrapOnboarding(context, defaultProvider)
     } else {
       this.bootstrapOnboarding(context, defaultProvider)
     }

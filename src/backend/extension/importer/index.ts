@@ -1,9 +1,9 @@
-import { session } from 'electron'
 import store from './store'
 import { HyperPlayAPI } from '@hyperplay/utils'
 import './backendEventHandlers'
 import './ipcHandler'
 import { LogPrefix, logError } from 'backend/logger/logger'
+import { session } from 'electron'
 
 export const initExtension = async function (api: HyperPlayAPI) {
   try {
