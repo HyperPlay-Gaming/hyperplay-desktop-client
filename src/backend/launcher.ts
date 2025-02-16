@@ -863,8 +863,8 @@ async function callRunner(
   const hpOverlay = await getHpOverlay()
   let shouldOpenOverlay = false
   let hyperPlayListing: Listing | undefined = undefined
-  if (isOnline()){
-    let shouldLaunchResult = await launchingGameShouldOpenOverlay(gameInfo)
+  if (isOnline()) {
+    const shouldLaunchResult = await launchingGameShouldOpenOverlay(gameInfo)
     shouldOpenOverlay = shouldLaunchResult.shouldOpenOverlay
     hyperPlayListing = shouldLaunchResult.hyperPlayListing
   }
