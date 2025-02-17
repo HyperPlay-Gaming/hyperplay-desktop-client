@@ -5,7 +5,6 @@
   "main": "build/main/main.js",
   "homepage": "./",
   "license": "GPL-3.0-only",
-  "description": "An Open Source Launcher for Web3, GOG and Epic Games",
   "repository": {
     "type": "Github",
     "url": "https://github.com/HyperPlay-Gaming/hyperplay-desktop-client"
