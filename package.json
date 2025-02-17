@@ -3,6 +3,7 @@
   "version": "0.23.0",
   "private": true,
   "main": "build/main/main.js",
+  "productName": "HyperPlay",
   "homepage": "./",
   "license": "GPL-3.0-only",
   "repository": {
