@@ -67,6 +67,7 @@ import { commandToArgsArray } from './storeManagers/legendary/library'
 import { searchForExecutableOnPath } from './utils/os/path'
 import { getHpOverlay } from './overlay'
 import { launchingGameShouldOpenOverlay } from './utils/shouldOpenOverlay'
+import { Listing } from '@valist/sdk/dist/typesApi'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -864,8 +865,13 @@ async function callRunner(
     return currentPromise
   }
   const hpOverlay = await getHpOverlay()
-  const { shouldOpenOverlay, hyperPlayListing } =
-    await launchingGameShouldOpenOverlay(gameInfo)
+  let shouldOpenOverlay = false
+  let hyperPlayListing: Listing | undefined = undefined
+  if (isOnline()) {
+    const shouldLaunchResult = await launchingGameShouldOpenOverlay(gameInfo)
+    shouldOpenOverlay = shouldLaunchResult.shouldOpenOverlay
+    hyperPlayListing = shouldLaunchResult.hyperPlayListing
+  }
 
   let promise = new Promise<ExecResult>((res, rej) => {
     const child = spawn(bin, commandParts, {
