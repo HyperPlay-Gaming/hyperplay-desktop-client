@@ -190,6 +190,8 @@ import { checkG7ConnectionStatus, postPlaySessionTime } from './utils/quests'
 
 import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'
 
+import { createInjectedProviderWindow } from './injected_provider_window'
+
 async function initExtensionOnLaunch() {
   try {
     const extImporter = await import('@hyperplay/extension-importer')
@@ -466,14 +468,24 @@ if (!gotTheLock) {
 
     initLogger()
 
+    createInjectedProviderWindow()
+
+    const providerPreloadPath = path.join(
+      __dirname,
+      '../preload/providerPreload.js'
+    )
+    const hpWindowsSession = session.fromPartition('persist:hyperplay_windows')
+    // inject window.ethereum into the main window and the overlay window
+    hpWindowsSession.setPreloads([providerPreloadPath])
+
     const ses = session.fromPartition(
       'persist:InPageWindowEthereumExternalWallet'
     )
-    ses.setPreloads([path.join(__dirname, '../preload/providerPreload.js')])
+    ses.setPreloads([providerPreloadPath])
 
     const authSession = session.fromPartition('persist:auth')
     authSession.setPreloads([
-      path.join(__dirname, '../preload/providerPreload.js'),
+      providerPreloadPath,
       path.join(__dirname, '../preload/auth_provider_preload.js')
     ])
 
@@ -489,7 +501,7 @@ if (!gotTheLock) {
     const g7PortalSession = session.fromPartition('persist:g7portal')
     g7PortalSession.setPreloads([
       path.join(__dirname, '../preload/hyperplay_store_preload.js'),
-      path.join(__dirname, '../preload/providerPreload.js')
+      providerPreloadPath
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
