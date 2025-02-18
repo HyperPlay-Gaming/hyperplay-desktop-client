@@ -1,4 +1,4 @@
-import { BrowserWindow, screen, app } from 'electron'
+import { BrowserWindow, screen, app, session } from 'electron'
 import path from 'path'
 import { configStore } from './constants'
 import { getHpOverlay } from './overlay'
@@ -86,8 +86,8 @@ export const createMainWindow = async () => {
       webviewTag: true,
       contextIsolation: true,
       nodeIntegration: true,
-      // sandbox: false,
       preload: path.join(__dirname, '../preload/preload.js'),
+      session: session?.fromPartition('persist:hyperplay_windows'),
       webSecurity: app.isPackaged
     }
   })

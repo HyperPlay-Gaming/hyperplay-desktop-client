@@ -11,9 +11,13 @@ const StoreController = () => {
 
     async function initializableStores() {
       for await (const storeKey of storeKeys) {
-        const store = (await stores[storeKey]()).default
+        try {
+          const store = (await stores[storeKey]()).default
 
-        await store.init?.()
+          await store.init?.()
+        } catch (err) {
+          console.error(`Error initializing store ${storeKey} ${err}`)
+        }
       }
     }
 

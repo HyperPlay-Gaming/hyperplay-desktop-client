@@ -790,7 +790,10 @@ async function callRunner(
   commandParts = commandParts.filter(Boolean)
 
   let bin = runner.bin
-  let fullRunnerPath = join(runner.dir, bin)
+  const singlePathRunners: Runner[] = ['hyperplay', 'sideload']
+  let fullRunnerPath = singlePathRunners.includes(runner.name)
+    ? bin
+    : join(runner.dir, bin)
 
   // macOS/Linux: `spawn`ing an executable in the current working directory
   // requires a "./"
@@ -807,7 +810,7 @@ async function callRunner(
     shouldUsePowerShell = isWindows && powershellExists
   }
 
-  if (shouldUsePowerShell && runner.name === 'legendary') {
+  if (shouldUsePowerShell && runner.name !== 'gog') {
     const argsAsString = commandParts
       .map((part) => part.replaceAll('\\', '\\\\'))
       .map((part) => `"\`"${part}\`""`)
@@ -818,8 +821,9 @@ async function callRunner(
       '-Wait',
       '-NoNewWindow'
     ]
-    if (argsAsString) commandParts.push('-ArgumentList', argsAsString)
-
+    if (argsAsString) {
+      commandParts.push('-ArgumentList', argsAsString)
+    }
     bin = 'powershell'
     fullRunnerPath = 'powershell'
   }

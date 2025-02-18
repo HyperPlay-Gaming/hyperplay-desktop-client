@@ -304,14 +304,14 @@ importers:
         specifier: ^0.0.1
         version: 0.0.1
       '@hyperplay/overlay':
-        specifier: ^0.0.7
-        version: 0.0.7(@hyperplay/providers@0.0.6(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10))(electron@33.2.0)
+        specifier: ^1.0.0
+        version: 1.0.0(@hyperplay/providers@0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10))(electron@33.2.0)
       '@hyperplay/patcher':
         specifier: ^0.0.21
         version: 0.0.21(@valist/sdk@2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@hyperplay/providers':
-        specifier: ^0.0.6
-        version: 0.0.6(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)
+        specifier: ^0.1.0
+        version: 0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)
       '@hyperplay/proxy-server':
         specifier: ^0.0.11
         version: 0.0.11(bufferutil@4.0.8)(utf-8-validate@5.0.10)
@@ -1846,10 +1846,10 @@ packages:
   '@hyperplay/mock-backend@0.0.1':
     resolution: {integrity: sha512-e+Opn7x/2axWJvnQ0Vm0/QYgObjhxNs90m/KKcBSpYT45v4slIQW54Af/trjlkDVK3S2YQuZ4mbvMV1ona05JA==}
 
-  '@hyperplay/overlay@0.0.7':
-    resolution: {integrity: sha512-iIKdcFewYLh32aqwDPYxUQHJ5LCNTayhfYU/8ZhL4t8/PmjZtmzSKiBoMH/U+8S31m9kE4aoavMmHYX5xhkqtw==}
+  '@hyperplay/overlay@1.0.0':
+    resolution: {integrity: sha512-oSIt/fRr3a2cHeTu2JfCwmaAo4QNBi3IVgSfS1X4RdQzwSbmIiUrS9reo9E+OO10hl1PgLvkQ+d5RQzqZ8RBAg==}
     peerDependencies:
-      '@hyperplay/providers': ^0.0.5
+      '@hyperplay/providers': 0.1.0
       electron: ^28.0.0
 
   '@hyperplay/patcher@0.0.21':
@@ -1857,8 +1857,8 @@ packages:
     peerDependencies:
       '@valist/sdk': ^2.10.5
 
-  '@hyperplay/providers@0.0.6':
-    resolution: {integrity: sha512-W/9k4Qre0DpNpbLyEcFyiMxe8ZMbMI6gU6B+Ae/cckw/YZtfEGj57KFiuTVqPBodxMS6s1h3j3PF2e2puwuRdw==}
+  '@hyperplay/providers@0.1.0':
+    resolution: {integrity: sha512-hGEDlZ25bH5HDe971IjOQ6Wzi8sJ/2RPmFl/f/fSsu92nsfTuztMowA10He74Yv9tIMLnPgKeMH20pdshHT3EA==}
     peerDependencies:
       ethers: ^6.12.0
 
@@ -6571,6 +6571,7 @@ packages:
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.isplainobject@4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
@@ -11092,9 +11093,9 @@ snapshots:
       - supports-color
     optional: true
 
-  '@hyperplay/overlay@0.0.7(@hyperplay/providers@0.0.6(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10))(electron@33.2.0)':
+  '@hyperplay/overlay@1.0.0(@hyperplay/providers@0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10))(electron@33.2.0)':
     dependencies:
-      '@hyperplay/providers': 0.0.6(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)
+      '@hyperplay/providers': 0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)
       '@hyperplay/utils': 0.3.7
       electron: 33.2.0
       mobx: 6.13.5
@@ -11109,7 +11110,7 @@ snapshots:
       - utf-8-validate
     optional: true
 
-  '@hyperplay/providers@0.0.6(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)':
+  '@hyperplay/providers@0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)':
     dependencies:
       '@metamask/sdk': 0.18.6(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)
       '@types/qrcode': 1.5.5
