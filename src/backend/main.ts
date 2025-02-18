@@ -190,6 +190,22 @@ import { checkG7ConnectionStatus, postPlaySessionTime } from './utils/quests'
 
 import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'
 
+import { createInjectedProviderWindow } from './injected_provider_window'
+
+async function initExtensionOnLaunch() {
+  try {
+    const extImporter = await import('@hyperplay/extension-importer')
+    await extImporter.initExtensionBeforeWindowCreation(hpApi)
+  } catch (err) {
+    logError(
+      `Error initializing extension on launch ${err}`,
+      LogPrefix.HyperPlay
+    )
+  }
+}
+
+initExtensionOnLaunch()
+
 async function startProxyServer() {
   try {
     const proxyServer = await import('@hyperplay/proxy-server')
@@ -452,14 +468,24 @@ if (!gotTheLock) {
 
     initLogger()
 
+    createInjectedProviderWindow()
+
+    const providerPreloadPath = path.join(
+      __dirname,
+      '../preload/providerPreload.js'
+    )
+    const hpWindowsSession = session.fromPartition('persist:hyperplay_windows')
+    // inject window.ethereum into the main window and the overlay window
+    hpWindowsSession.setPreloads([providerPreloadPath])
+
     const ses = session.fromPartition(
       'persist:InPageWindowEthereumExternalWallet'
     )
-    ses.setPreloads([path.join(__dirname, '../preload/providerPreload.js')])
+    ses.setPreloads([providerPreloadPath])
 
     const authSession = session.fromPartition('persist:auth')
     authSession.setPreloads([
-      path.join(__dirname, '../preload/providerPreload.js'),
+      providerPreloadPath,
       path.join(__dirname, '../preload/auth_provider_preload.js')
     ])
 
@@ -475,7 +501,7 @@ if (!gotTheLock) {
     const g7PortalSession = session.fromPartition('persist:g7portal')
     g7PortalSession.setPreloads([
       path.join(__dirname, '../preload/hyperplay_store_preload.js'),
-      path.join(__dirname, '../preload/providerPreload.js')
+      providerPreloadPath
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
@@ -681,6 +707,8 @@ ipcMain.once('loadingScreenReady', () => {
 ipcMain.once('frontendReady', async () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
   await initExtension(hpApi)
+  // wait for mm SW to initialize
+  await wait(5000)
   ipcMain.emit('reloadApp')
   handleProtocol([openUrlArgument, ...process.argv])
   setTimeout(() => {
@@ -1098,7 +1126,9 @@ ipcMain.handle('refreshLibrary', async (e, library?) => {
   }
 })
 
-ipcMain.on('logError', (e, err) => logError(err, LogPrefix.Frontend))
+ipcMain.on('logError', (e, err, options) =>
+  logError(err, { ...options, prefix: LogPrefix.Frontend })
+)
 
 ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
