@@ -789,7 +789,10 @@ async function callRunner(
   commandParts = commandParts.filter(Boolean)
 
   let bin = runner.bin
-  let fullRunnerPath = runner.name === 'hyperplay' ? bin : join(runner.dir, bin)
+  const singlePathRunners: Runner[] = ['hyperplay', 'sideload']
+  let fullRunnerPath = singlePathRunners.includes(runner.name)
+    ? bin
+    : join(runner.dir, bin)
 
   // macOS/Linux: `spawn`ing an executable in the current working directory
   // requires a "./"
