@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.23.0",
+  "version": "0.23.1",
   "private": true,
   "main": "build/main/main.js",
   "homepage": "./",
@@ -229,9 +229,9 @@
     "@hyperplay/extension-importer": "^0.3.0",
     "@hyperplay/extension-provider": "^0.0.9",
     "@hyperplay/mock-backend": "^0.0.1",
-    "@hyperplay/overlay": "^0.0.7",
+    "@hyperplay/overlay": "^1.0.0",
     "@hyperplay/patcher": "^0.0.21",
-    "@hyperplay/providers": "^0.0.6",
+    "@hyperplay/providers": "^0.1.0",
     "@hyperplay/proxy-server": "^0.0.11"
   },
   "lavamoat": {
