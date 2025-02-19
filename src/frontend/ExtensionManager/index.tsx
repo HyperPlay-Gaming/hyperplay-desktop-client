@@ -47,10 +47,9 @@ const ExtensionManager = function () {
    * there were performance issues with them running in the background while playing some games like Kokodi.
    */
   if (isOverlay) {
-    if (OverlayState.showOverlay){
+    if (OverlayState.showOverlay) {
       return <ExtensionContents />
-    }
-    else {
+    } else {
       return null
     }
   }
