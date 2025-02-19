@@ -88,7 +88,7 @@
                 "title": "Ubisoft Connect"
             },
             "update": {
-                "message": "Something went wrong with the update! Please manually uninstall and reinstall HyperPlay.",
+                "body": "Something went wrong with the update after multiple attempts! Please manually uninstall and reinstall HyperPlay. error: {{error}}",
                 "title": "Update Error"
             },
             "winetricks": {
