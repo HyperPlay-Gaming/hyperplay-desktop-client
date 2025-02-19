@@ -67,6 +67,7 @@ import { commandToArgsArray } from './storeManagers/legendary/library'
 import { searchForExecutableOnPath } from './utils/os/path'
 import { getHpOverlay } from './overlay'
 import { launchingGameShouldOpenOverlay } from './utils/shouldOpenOverlay'
+import { Listing } from '@valist/sdk/dist/typesApi'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -789,7 +790,10 @@ async function callRunner(
   commandParts = commandParts.filter(Boolean)
 
   let bin = runner.bin
-  let fullRunnerPath = join(runner.dir, bin)
+  const singlePathRunners: Runner[] = ['hyperplay', 'sideload']
+  let fullRunnerPath = singlePathRunners.includes(runner.name)
+    ? bin
+    : join(runner.dir, bin)
 
   // macOS/Linux: `spawn`ing an executable in the current working directory
   // requires a "./"
@@ -806,7 +810,7 @@ async function callRunner(
     shouldUsePowerShell = isWindows && powershellExists
   }
 
-  if (shouldUsePowerShell && runner.name === 'legendary') {
+  if (shouldUsePowerShell && runner.name !== 'gog') {
     const argsAsString = commandParts
       .map((part) => part.replaceAll('\\', '\\\\'))
       .map((part) => `"\`"${part}\`""`)
@@ -817,8 +821,9 @@ async function callRunner(
       '-Wait',
       '-NoNewWindow'
     ]
-    if (argsAsString) commandParts.push('-ArgumentList', argsAsString)
-
+    if (argsAsString) {
+      commandParts.push('-ArgumentList', argsAsString)
+    }
     bin = 'powershell'
     fullRunnerPath = 'powershell'
   }
@@ -860,8 +865,13 @@ async function callRunner(
     return currentPromise
   }
   const hpOverlay = await getHpOverlay()
-  const { shouldOpenOverlay, hyperPlayListing } =
-    await launchingGameShouldOpenOverlay(gameInfo)
+  let shouldOpenOverlay = false
+  let hyperPlayListing: Listing | undefined = undefined
+  if (isOnline()) {
+    const shouldLaunchResult = await launchingGameShouldOpenOverlay(gameInfo)
+    shouldOpenOverlay = shouldLaunchResult.shouldOpenOverlay
+    hyperPlayListing = shouldLaunchResult.hyperPlayListing
+  }
 
   let promise = new Promise<ExecResult>((res, rej) => {
     const child = spawn(bin, commandParts, {
