@@ -11,8 +11,8 @@ import { trackEvent } from './metrics/metrics'
 import { homedir } from 'os'
 import { join } from 'path'
 import { rm } from 'fs/promises'
-// to test auto update on windows locally make sure you added the option "verifyUpdateCodeSignature": false
-// under build.win in package.json and also change the app version to an old one there
+// to test auto update on windows locally make sure you added the option verifyUpdateCodeSignature: false
+// under build.win in electron-builder.yml and also change the app version to an old one there
 
 const appSettings = configStore.get_nodefault('settings')
 const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
@@ -24,7 +24,7 @@ autoUpdater.autoInstallOnAppQuit = true
 let isAppUpdating = false
 let hasUpdated = false
 let updateAttempts = 0
-const MAX_UPDATE_ATTEMPTS = 5
+const MAX_UPDATE_ATTEMPTS = 10
 
 // check for updates every hour
 const checkUpdateInterval = 1 * 1000 * 60 * 60
@@ -117,7 +117,7 @@ autoUpdater.on('error', async (error) => {
   isAppUpdating = false
 
   // To avoid false positives, we should not show the error dialog if the app has already updated successfully
-  if (hasUpdated) {
+  if (hasUpdated || !newVersion) {
     return
   }
 
@@ -125,7 +125,9 @@ autoUpdater.on('error', async (error) => {
   logError(`Error updating HyperPlay: ${errorMessage}`, LogPrefix.AutoUpdater)
 
   // will remove cached updates when it fails to avoid corrupted updates
-  await removeCachedUpdatesFolder()
+  if (updateAttempts > 2) {
+    await removeCachedUpdatesFolder()
+  }
 
   updateAttempts++
 
@@ -136,7 +138,7 @@ autoUpdater.on('error', async (error) => {
     )
     setTimeout(() => {
       autoUpdater.checkForUpdates()
-    }, 5000)
+    }, 6000)
     return
   }
 
