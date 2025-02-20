@@ -9,10 +9,11 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import authState from 'frontend/state/authState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { useTranslation } from 'react-i18next'
-import { useAccount } from 'wagmi'
+import { useAccount, useSignMessage } from 'wagmi'
 import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import extensionState from 'frontend/state/ExtensionState'
 import { PossibleMetricPayloads } from 'backend/metrics/types'
+import { SiweMessage } from 'siwe'
 
 /**
  * Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -58,6 +59,22 @@ import { PossibleMetricPayloads } from 'backend/metrics/types'
  * t('quest.claimWarning.body2', 'Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>')
  * t('quest.claimWarning.cancel', 'Cancel')
  * t('quest.claimWarning.confirm', 'Confirm')
+ * t("gameplayWallet.detected.title", "Wallet Detected")
+ * t("gameplayWallet.detected.message", "To track progress with this wallet, add it as a Gameplay Wallet below by setting it.")
+ * t("gameplayWallet.verify.message", "You only need to verify each address once and can switch freely at any time.")
+ * t("gameplayWallet.new.title", "New Wallet Detected")
+ * t("gameplayWallet.new.message", "Your connected wallet doesn't match any Gameplay wallet tracked for this Quest.To track progress with this wallet, set it as a Gameplay Wallet below.")
+ * t("gameplayWallet.action.set", "Set")
+ * t("gameplayWallet.noWallet.message", "No wallet connected. Connect wallet to track Quest progress.")
+ * t("gameplayWallet.active.title", "Active Gameplay Wallet")
+ * t("gameplayWallet.noWallet.status", "No wallet connected")
+ * t("gameplayWallet.connected.title", "Connected Wallet")
+ * t("gameplayWallet.setConnected.title", "Set Connected Wallet")
+ * t("gameplayWallet.error.title", "Something went wrong")
+ * t("gameplayWallet.error.message", "Please try once more. If it still doesn't work, create a Discord support ticket.")
+ * t("gameplayWallet.error.action", "Create Discord Ticket")
+ * t("gameplayWallet.info.title", "What is a Gameplay Wallet?")
+ * t("gameplayWallet.info.description", "Your progress for each Quest is based on the Gameplay wallet you use to start the game.<br/><br/> This allows game studios to properly sync and issue Rewards, regardless if they are in-game or off-chain.<br/><br/>Switching wallets? No problem. Your progress will be saved to each Gameplay wallet address separately.")
  */
 
 export default function QuestDetails({
@@ -75,6 +92,8 @@ export default function QuestDetails({
   const { isSignedIn, data } = useAuthSession()
   const { t } = useTranslation()
   const flags = useFlags()
+  const { signMessageAsync } = useSignMessage()
+
   const sessionEmail = data?.linkedAccounts.get('email')
   const { invalidateQuery } = useGetUserPlayStreak(
     questId,
@@ -94,8 +113,40 @@ export default function QuestDetails({
       refreshPlayStreak: invalidateQuery
     })
 
+  const getActiveWalletSignature = async () => {
+    const nonce = await window.api.getCSRFToken()
+
+    const siweMessage = new SiweMessage({
+      domain: window.location.host,
+      address,
+      statement: 'Sign to confirm your active wallet.',
+      uri: window.location.origin,
+      version: '1',
+      chainId: 1,
+      nonce: nonce
+    })
+
+    const message = siweMessage.prepareMessage()
+
+    const signature = await signMessageAsync({
+      message
+    })
+
+    return {
+      message,
+      signature
+    }
+  }
+
+  console.log({ ...flags })
+
   return (
     <QuestDetailsWrapper
+      getActiveWalletSignature={getActiveWalletSignature}
+      getActiveWallet={window.api.getActiveWallet}
+      setActiveWallet={window.api.setActiveWallet}
+      getGameplayWallets={window.api.getGameplayWallets}
+      updateActiveWallet={window.api.updateActiveWallet}
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }
@@ -122,7 +173,8 @@ export default function QuestDetails({
           POINTS: flags.pointsRewardsClaim,
           'EXTERNAL-TASKS': flags.externalTasksRewardsClaim
         },
-        questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled
+        questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled,
+        gameplayWalletSectionVisible: flags.gameplayWalletSectionVisible
       }}
       trackEvent={async (eventPayload) =>
         window.api.trackEvent(eventPayload as PossibleMetricPayloads)
