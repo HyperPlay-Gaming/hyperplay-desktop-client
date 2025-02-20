@@ -138,6 +138,8 @@ export default function QuestDetails({
     }
   }
 
+  console.log({ ...flags })
+
   return (
     <QuestDetailsWrapper
       getActiveWalletSignature={getActiveWalletSignature}
@@ -171,7 +173,8 @@ export default function QuestDetails({
           POINTS: flags.pointsRewardsClaim,
           'EXTERNAL-TASKS': flags.externalTasksRewardsClaim
         },
-        questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled
+        questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled,
+        gameplayWalletSectionVisible: flags.gameplayWalletSectionVisible
       }}
       trackEvent={async (eventPayload) =>
         window.api.trackEvent(eventPayload as PossibleMetricPayloads)
