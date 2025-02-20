@@ -64,12 +64,14 @@ export default function QuestDetails({
   questId,
   className,
   isQuestsPage,
-  onPlayClick = () => {}
+  onPlayClick = () => {},
+  streakIsProgressing
 }: {
   questId: number | null
   className?: string
   isQuestsPage?: boolean
   onPlayClick?: (quest: Quest) => void
+  streakIsProgressing?: boolean
 }) {
   const { address } = useAccount()
   const { isSignedIn, data } = useAuthSession()
@@ -151,6 +153,7 @@ export default function QuestDetails({
       isSignedIn={isSignedIn}
       isQuestsPage={isQuestsPage}
       key={'questDetailsLoading'}
+      streakIsProgressing={streakIsProgressing}
     />
   )
 }
