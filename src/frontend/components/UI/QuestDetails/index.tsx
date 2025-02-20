@@ -124,7 +124,8 @@ export default function QuestDetails({
           POINTS: flags.pointsRewardsClaim,
           'EXTERNAL-TASKS': flags.externalTasksRewardsClaim
         },
-        questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled
+        questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled,
+        gameplayWalletSectionVisible: false
       }}
       trackEvent={async (eventPayload) =>
         window.api.trackEvent(eventPayload as PossibleMetricPayloads)
@@ -154,6 +155,13 @@ export default function QuestDetails({
       isQuestsPage={isQuestsPage}
       key={'questDetailsLoading'}
       streakIsProgressing={streakIsProgressing}
+      getActiveWallet={async () => 'getActiveWallet'}
+      setActiveWallet={async () => ({ success: true, status: 100 })}
+      getGameplayWallets={async () => []}
+      updateActiveWallet={async () => {
+        console.log('updateActiveWallet')
+      }}
+      getActiveWalletSignature={async () => ({ message: '', signature: '' })}
     />
   )
 }
