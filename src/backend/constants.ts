@@ -107,8 +107,7 @@ const eventsToCloseMetaMaskPopupOn = [
   'mouseDown',
   'mouseUp'
 ]
-const valistListingsApiUrl =
-  'https://gameplay-wallet-preview.hyperplay.xyz/api/v1/listings'
+const valistListingsApiUrl = 'https://developers.hyperplay.xyz/api/v1/listings'
 const mainReleaseChannelName = 'main'
 export let qaToken = ''
 
