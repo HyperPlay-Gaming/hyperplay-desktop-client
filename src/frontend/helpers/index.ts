@@ -119,8 +119,11 @@ function getProgress(progress: InstallProgress): number {
 }
 
 function removeSpecialcharacters(text: string): string {
-  const regexp = new RegExp(/[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®]/, 'gi')
-  return text.replaceAll(regexp, '')
+  const regexp = new RegExp(
+    /[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®|\s]/,
+    'gi'
+  )
+  return text.replaceAll(regexp, '').trim()
 }
 
 const getStoreName = (runner: Runner, other: string) => {
