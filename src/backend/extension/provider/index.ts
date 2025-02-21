@@ -2,7 +2,7 @@ import { hpApi } from 'backend/utils/hyperplay_api'
 import './ipcHandler'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { providerRequests } from './emitters'
-import { getMainWindow } from 'backend/main_window'
+import { getInjectedBrowserWindow } from 'backend/injected_provider_window'
 
 async function initExtensionProvider() {
   try {
@@ -20,5 +20,9 @@ async function initExtensionProvider() {
 initExtensionProvider()
 
 providerRequests.on('request', (method, ...args) => {
-  getMainWindow()?.webContents.send(method, ...args)
+  const win = getInjectedBrowserWindow()
+  if (win === null) {
+    throw 'tried to send a provider request to injected provider browser window but it is not initialized yet!'
+  }
+  win.webContents.send(method, ...args)
 })
