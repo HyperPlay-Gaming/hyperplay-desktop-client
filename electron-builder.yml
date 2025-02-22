@@ -32,6 +32,7 @@ protocols:
 win:
   artifactName: ${productName}-${version}-Setup-${arch}.${ext}
   icon: build/win_icon.ico
+  verifyUpdateCodeSignature: false
   asarUnpack:
     - build/bin/win32/legendary.exe
     - build/bin/win32/gogdl.exe
