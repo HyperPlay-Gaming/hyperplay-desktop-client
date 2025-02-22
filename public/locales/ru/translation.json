@@ -696,7 +696,10 @@
         "achievements": "Достижения",
         "store": "Интернет-магазин",
         "library": "Библиотека",
-        "downloadManager": "Скачать менеджер"
+        "downloadManager": "Скачать менеджер",
+        "docs": "Документы",
+        "quests": "Квесты",
+        "settings": "Настройки"
     },
     "status": {
         "installing": "Установка",
@@ -1028,7 +1031,8 @@
         },
         "viewAllQuests": {
             "title": "Просмотр всех квестов"
-        }
+        },
+        "search": "Поиск"
     },
     "ALL": "Все",
     "analytics": "Аналитика",
