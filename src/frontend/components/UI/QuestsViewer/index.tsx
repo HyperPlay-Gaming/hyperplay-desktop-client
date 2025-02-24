@@ -49,6 +49,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         <QuestDetails
           questId={visibleQuestId}
           className={styles.detailsWrapper}
+          streakIsProgressing={true}
         />
       </div>
     </div>
