@@ -28,9 +28,9 @@ export default React.memo(function WineManager(): JSX.Element | null {
   const { refreshWineVersionInfo, platform } = useContext(ContextProvider)
   const isLinux = platform === 'linux'
 
-  const winege: WineManagerUISettings = {
-    type: 'Wine-GE',
-    value: 'winege',
+  const protonge: WineManagerUISettings = {
+    type: 'Proton-GE',
+    value: 'protonge',
     enabled: isLinux
   }
 
@@ -41,13 +41,13 @@ export default React.memo(function WineManager(): JSX.Element | null {
   }
 
   const [repository, setRepository] = useState<WineManagerUISettings>(
-    isLinux ? winege : gamePortingToolkit
+    isLinux ? protonge : gamePortingToolkit
   )
   const [wineManagerSettings, setWineManagerSettings] = useState<
     WineManagerUISettings[]
   >([
-    { type: 'Wine-GE', value: 'winege', enabled: isLinux },
     { type: 'Proton-GE', value: 'protonge', enabled: isLinux },
+    { type: 'Wine-GE', value: 'winege', enabled: isLinux },
     { type: 'Game-Porting-Toolkit', value: 'toolkit', enabled: !isLinux },
     { type: 'Wine-Crossover', value: 'winecrossover', enabled: !isLinux }
   ])
@@ -69,6 +69,10 @@ export default React.memo(function WineManager(): JSX.Element | null {
   // Track the screen view once
   useEffect(() => {
     window.api.trackScreen('Compatibility Layer ')
+
+    if (wineVersions.length === 0) {
+      refreshWineVersionInfo(true)
+    }
   }, [])
 
   useEffect(() => {
