@@ -28,7 +28,7 @@ export const wineDownloaderInfoStore = new TypeCheckedStoreBackend(
 
 async function updateWineVersionInfos(
   fetch = false,
-  count = 50
+  count = 15
 ): Promise<WineVersionInfo[]> {
   if (isWindows) {
     return []
