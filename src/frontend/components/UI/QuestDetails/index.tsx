@@ -138,8 +138,6 @@ export default function QuestDetails({
     }
   }
 
-  console.log({ ...flags })
-
   return (
     <QuestDetailsWrapper
       getActiveWalletSignature={getActiveWalletSignature}
