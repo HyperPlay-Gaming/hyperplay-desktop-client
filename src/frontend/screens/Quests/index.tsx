@@ -137,7 +137,16 @@ export function QuestsPage() {
     const questTitleMatch = quest.name
       .toLowerCase()
       .startsWith(searchText.toLowerCase())
-    return questTitleMatch || gameTitleMatches(quest)
+    const gameTitleMatch = gameTitleMatches(quest)
+    const searchByKeywords = searchText
+      .toLowerCase()
+      .split(' ')
+      .some(
+        (term) =>
+          quest.name?.toLowerCase().includes(term) ||
+          quest.description?.toLowerCase().includes(term)
+      )
+    return questTitleMatch || gameTitleMatch || searchByKeywords
   })
 
   const initialQuestId = searchFilteredQuests?.[0]?.id ?? null
