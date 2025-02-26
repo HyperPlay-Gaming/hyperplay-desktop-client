@@ -10,7 +10,6 @@ import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
 import { Quest } from '@hyperplay/utils'
 import { QuestRewardClaimedToast } from 'frontend/components/UI/QuestRewardClaimedToast'
-import { itemType } from '@hyperplay/ui/dist/components/Dropdowns/Dropdown'
 import useGetHyperPlayListings from 'frontend/hooks/useGetHyperPlayListings'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import {
