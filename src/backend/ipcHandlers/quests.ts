@@ -20,7 +20,7 @@ async function fetchQuests({
   const url = new URL(`${DEV_PORTAL_URL}api/v1/quests`)
   url.searchParams.append('questStatus', status)
   url.searchParams.append('sortBy', 'start_date')
-  url.searchParams.append('order', 'asc')
+  url.searchParams.append('order', 'desc')
   if (projectId) {
     url.searchParams.append('projectId', projectId)
   }
