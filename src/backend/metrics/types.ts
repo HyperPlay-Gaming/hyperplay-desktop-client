@@ -424,6 +424,12 @@ export interface AccountDropdownPortfolioClicked {
   sensitiveProperties?: never
 }
 
+export interface MainWindowClosed {
+  event: 'Main Window Closed'
+  properties?: never
+  sensitiveProperties?: never
+}
+
 export type PossibleMetricPayloads =
   | MetricsOptIn
   | MetricsOptOut
@@ -467,5 +473,6 @@ export type PossibleMetricPayloads =
   | PatchingFailed
   | PatchingTooSlow
   | AccountDropdownPortfolioClicked
+  | MainWindowClosed
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']

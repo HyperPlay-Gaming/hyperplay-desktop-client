@@ -82,6 +82,7 @@ import {
 } from './utils/systeminfo/gpu/pci_ids'
 import { copyFile, lstat, mkdir, readdir } from 'fs/promises'
 import { GameConfig } from './game_config'
+import { trackEvent } from './metrics/metrics'
 
 const execAsync = promisify(exec)
 
@@ -260,6 +261,7 @@ async function handleExit() {
     // Kill all child processes
     callAllAbortControllers()
   }
+  trackEvent({ event: 'Main Window Closed' })
   app.exit()
 }
 
