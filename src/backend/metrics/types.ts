@@ -424,6 +424,12 @@ export interface AccountDropdownPortfolioClicked {
   sensitiveProperties?: never
 }
 
+export interface HyperPlayExited {
+  event: 'HyperPlay Exited'
+  properties?: never
+  sensitiveProperties?: never
+}
+
 export type PossibleMetricPayloads =
   | MetricsOptIn
   | MetricsOptOut
@@ -467,5 +473,6 @@ export type PossibleMetricPayloads =
   | PatchingFailed
   | PatchingTooSlow
   | AccountDropdownPortfolioClicked
+  | HyperPlayExited
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']
