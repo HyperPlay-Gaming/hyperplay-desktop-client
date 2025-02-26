@@ -424,8 +424,8 @@ export interface AccountDropdownPortfolioClicked {
   sensitiveProperties?: never
 }
 
-export interface MainWindowClosed {
-  event: 'Main Window Closed'
+export interface HyperPlayExited {
+  event: 'HyperPlay Exited'
   properties?: never
   sensitiveProperties?: never
 }
@@ -473,6 +473,6 @@ export type PossibleMetricPayloads =
   | PatchingFailed
   | PatchingTooSlow
   | AccountDropdownPortfolioClicked
-  | MainWindowClosed
+  | HyperPlayExited
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']

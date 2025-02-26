@@ -261,7 +261,7 @@ async function handleExit() {
     // Kill all child processes
     callAllAbortControllers()
   }
-  trackEvent({ event: 'Main Window Closed' })
+  trackEvent({ event: 'HyperPlay Exited' })
   app.exit()
 }
 
