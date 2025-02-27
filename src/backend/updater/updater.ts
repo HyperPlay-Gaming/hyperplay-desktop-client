@@ -21,6 +21,7 @@ autoUpdater.autoInstallOnAppQuit = true
 
 let isAppUpdating = false
 let hasUpdated = false
+let hasReportedDownloadStart = false
 
 let updateAttempts = 0
 const MAX_UPDATE_ATTEMPTS = 10
@@ -73,6 +74,19 @@ autoUpdater.on('update-available', async (info) => {
 // log download progress
 autoUpdater.on('download-progress', (progress) => {
   isAppUpdating = true
+
+  // Track download start only once
+  if (!hasReportedDownloadStart) {
+    trackEvent({
+      event: 'Downloading Client Update',
+      properties: {
+        currentVersion: autoUpdater.currentVersion.version,
+        newVersion
+      }
+    })
+    hasReportedDownloadStart = true
+  }
+
   logInfo(
     'Downloading HyperPlay update...' +
       `Download speed: ${progress.bytesPerSecond}, ` +
@@ -88,6 +102,7 @@ autoUpdater.on('update-downloaded', async () => {
   logInfo('The App update was downloaded', LogPrefix.AutoUpdater)
   hasUpdated = true
   isAppUpdating = false
+  hasReportedDownloadStart = false // Reset for potential future updates
 
   trackEvent({
     event: 'Client Update Downloaded',
