@@ -85,8 +85,9 @@ autoUpdater.on('download-progress', (progress) => {
 })
 
 autoUpdater.on('update-downloaded', async () => {
-  logInfo('App update is downloaded')
+  logInfo('The App update was downloaded', LogPrefix.AutoUpdater)
   hasUpdated = true
+  isAppUpdating = false
 
   trackEvent({
     event: 'Client Update Downloaded',
