@@ -10,7 +10,6 @@ import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
 import { Quest } from '@hyperplay/utils'
 import { QuestRewardClaimedToast } from 'frontend/components/UI/QuestRewardClaimedToast'
-import { itemType } from '@hyperplay/ui/dist/components/Dropdowns/Dropdown'
 import useGetHyperPlayListings from 'frontend/hooks/useGetHyperPlayListings'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import {
@@ -41,10 +40,6 @@ export function QuestsPage() {
   const searchParam = searchParams.get('search')
   const [searchText, setSearchText] = useState(searchParam ?? '')
   const [activeFilter, setActiveFilter] = useState<QuestFilter>('all')
-  const [selectedSort, setSelectedSort] = useState<itemType>({
-    text: 'Alphabetically (ASC)',
-    id: 'ALPHA_ASC'
-  })
 
   useEffect(() => {
     window.api.trackScreen('Quests Page')
@@ -123,30 +118,29 @@ export function QuestsPage() {
     }
   })
 
-  const sortedQuests = [...(quests ?? [])].sort((a, b) => {
-    const sortMultiplier = selectedSort.id === 'ALPHA_ASC' ? 1 : -1
-    return a.name.localeCompare(b.name) * sortMultiplier
-  })
-
   const gameTitleMatches = (quest: Quest) => {
     const title = listings ? listings[quest.project_id]?.project_meta?.name : ''
     return title?.toLowerCase().startsWith(searchText.toLowerCase())
   }
 
-  const searchFilteredQuests = sortedQuests?.filter((quest) => {
+  const searchFilteredQuests = quests?.filter((quest) => {
     const questTitleMatch = quest.name
       .toLowerCase()
       .startsWith(searchText.toLowerCase())
-    return questTitleMatch || gameTitleMatches(quest)
+    const gameTitleMatch = gameTitleMatches(quest)
+    const searchByKeywords = searchText
+      .toLowerCase()
+      .split(' ')
+      .some(
+        (term) =>
+          quest.name?.toLowerCase().includes(term) ||
+          quest.description?.toLowerCase().includes(term)
+      )
+    return questTitleMatch || gameTitleMatch || searchByKeywords
   })
 
   const initialQuestId = searchFilteredQuests?.[0]?.id ?? null
   const visibleQuestId = selectedQuestId ?? initialQuestId
-
-  const achievementsSortOptions = [
-    { text: 'Alphabetically (ASC)', id: 'ALPHA_ASC' },
-    { text: 'Alphabetically (DES)', id: 'ALPHA_DES' }
-  ]
 
   const imagesToPreload: string[] = []
   const gameElements =
@@ -197,11 +191,6 @@ export function QuestsPage() {
         <QuestsSummaryTable
           games={gameElements}
           imagesToPreload={imagesToPreload}
-          sortProps={{
-            options: achievementsSortOptions,
-            selected: selectedSort,
-            onItemChange: setSelectedSort
-          }}
           filterProps={{ activeFilter, setActiveFilter }}
           isFetching={questsResults?.data.isFetching}
           isPageLoading={questsResults?.data.isLoading}

@@ -383,6 +383,13 @@ const GameCard = ({
           actionDisabled={isLaunching}
           alwaysShowInColor={allTilesInColor}
           store={runner}
+          i18n={{
+            logoTextTooltip: {
+              hyperplay: { installed: 'HyperPlay', notInstalled: 'HyperPlay' },
+              epic: { installed: 'Epic', notInstalled: 'Epic' },
+              gog: { installed: 'GOG', notInstalled: 'GOG' }
+            }
+          }}
         />
       </Link>
     </>
