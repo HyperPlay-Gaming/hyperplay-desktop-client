@@ -307,8 +307,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(@hyperplay/providers@0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10))(electron@33.2.0)
       '@hyperplay/patcher':
-        specifier: 0.0.24-ebusy
-        version: 0.0.24-ebusy(@valist/sdk@2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+        specifier: 0.0.26-ebusy
+        version: 0.0.26-ebusy(@valist/sdk@2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@hyperplay/providers':
         specifier: ^0.1.0
         version: 0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)
@@ -1852,8 +1852,8 @@ packages:
       '@hyperplay/providers': 0.1.0
       electron: ^28.0.0
 
-  '@hyperplay/patcher@0.0.24-ebusy':
-    resolution: {integrity: sha512-Jns12WQDQvUDFgt2QV0FFk0H2oY5x2gYLvDslEMPfjv8SQBRkIS2josbKHSA08jIvPs07pLXX9Q9+Vb5EJX7uw==}
+  '@hyperplay/patcher@0.0.26-ebusy':
+    resolution: {integrity: sha512-RQcmPdsoyaqN19uvW5PiinoN6UI5vXhlzZeR/8ckZfQaYwwElEjHVDbDwBIj5jlqNQutD8QgQyUvFV23mrV7wA==}
     peerDependencies:
       '@valist/sdk': ^2.10.5
 
@@ -11102,7 +11102,7 @@ snapshots:
       mobx: 6.13.5
     optional: true
 
-  '@hyperplay/patcher@0.0.24-ebusy(@valist/sdk@2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
+  '@hyperplay/patcher@0.0.26-ebusy(@valist/sdk@2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
     dependencies:
       '@valist/sdk': 2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
       ethers: 6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)
