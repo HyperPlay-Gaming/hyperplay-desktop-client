@@ -72,7 +72,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@hyperplay/chains": "^0.5.0",
     "@hyperplay/check-disk-space": "^3.5.2",
-    "@hyperplay/quests-ui": "0.1.25-alpha.1",
+    "@hyperplay/quests-ui": "^0.1.25",
     "@hyperplay/ui": "^1.9.8",
     "@hyperplay/utils": "^0.3.7",
     "@mantine/carousel": "^7.12.0",
