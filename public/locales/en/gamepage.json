@@ -59,6 +59,7 @@
         "yesCancel": "Yes, cancel"
     },
     "button": {
+        "add_to_library": "Add to library",
         "cancel": "Pause/Cancel",
         "continue": "Continue Download",
         "details": "Details",
@@ -229,5 +230,13 @@
         "settings": "Settings",
         "store": "Store Page",
         "verify": "Verify and Repair"
+    },
+    "tooltip": {
+        "installed_from_epic": "Installed from Epic Store",
+        "installed_from_gog": "Installed from GOG Store",
+        "installed_from_hyperplay": "Installed from HyperPlay Store",
+        "will_install_from_epic": "Will install from Epic Store",
+        "will_install_from_gog": "Will install from GOG Store",
+        "will_install_from_hyperplay": "Will install from HyperPlay Store"
     }
 }
