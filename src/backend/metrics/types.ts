@@ -399,6 +399,15 @@ export interface ClientUpdateNotified {
   sensitiveProperties?: never
 }
 
+export interface ClientUpdateDownloading {
+  event: 'Downloading Client Update'
+  properties: {
+    currentVersion: string
+    newVersion: string
+  }
+  sensitiveProperties?: never
+}
+
 export interface ClientUpdateError {
   event: 'Client Update Error'
   properties: {
@@ -460,6 +469,7 @@ export type PossibleMetricPayloads =
   | RewardClaimSuccess
   | RewardClaimError
   | ClientUpdateNotified
+  | ClientUpdateDownloading
   | ClientUpdateError
   | ClientUpdateDownloaded
   | PatchingStarted

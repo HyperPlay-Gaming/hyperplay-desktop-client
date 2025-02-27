@@ -1,16 +1,16 @@
-import { dialog, shell } from 'electron'
+import { app, dialog, shell } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
-import { configStore, icon, isLinux } from './constants'
-import { logError, logInfo, LogPrefix } from './logger/logger'
-import { isOnline } from './online_monitor'
+import { configStore, icon, isLinux } from '../constants'
+import { logError, logInfo, LogPrefix } from '../logger/logger'
 import { captureException } from '@sentry/electron'
-import { getFileSize } from './utils'
+import { getFileSize } from '../utils'
 import { ClientUpdateStatuses } from '@hyperplay/utils'
-import { trackEvent } from './metrics/metrics'
-// to test auto update on windows locally make sure you added the option "verifyUpdateCodeSignature": false
-// under build.win in package.json and also change the app version to an old one there
+import { trackEvent } from '../metrics/metrics'
+import { getErrorMessage, removeCachedUpdatesFolder } from './utils'
+// to test auto update on windows locally make sure you added the option verifyUpdateCodeSignature: false
+// under build.win in electron-builder.yml and also change the app version to an old one there
 
 const appSettings = configStore.get_nodefault('settings')
 const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
@@ -21,17 +21,35 @@ autoUpdater.autoInstallOnAppQuit = true
 
 let isAppUpdating = false
 let hasUpdated = false
+let hasReportedDownloadStart = false
 
-// check for updates every hour
-const checkUpdateInterval = 1 * 60 * 60 * 1000
-setInterval(() => {
-  if (isOnline() && shouldCheckForUpdates) {
-    autoUpdater.checkForUpdates()
+let updateAttempts = 0
+const MAX_UPDATE_ATTEMPTS = 10
+// check for updates every 3 hours
+const checkUpdateInterval = 3 * 1000 * 60 * 60
+
+setInterval(async () => {
+  if (shouldCheckForUpdates && !hasUpdated && !isAppUpdating) {
+    logInfo('Checking for client updates...', LogPrefix.AutoUpdater)
+    await autoUpdater.checkForUpdates()
   }
 }, checkUpdateInterval)
 
 autoUpdater.on('update-available', async (info) => {
-  if (!isOnline() || !shouldCheckForUpdates) {
+  if (isAppUpdating && hasUpdated) {
+    logInfo(
+      'New update available, but user has already updated the app',
+      LogPrefix.AutoUpdater
+    )
+    return
+  }
+
+  if (!shouldCheckForUpdates) {
+    logInfo(
+      'New update available, but user has disabled auto updates',
+      LogPrefix.AutoUpdater
+    )
+
     return
   }
   newVersion = info.version
@@ -56,6 +74,19 @@ autoUpdater.on('update-available', async (info) => {
 // log download progress
 autoUpdater.on('download-progress', (progress) => {
   isAppUpdating = true
+
+  // Track download start only once
+  if (!hasReportedDownloadStart) {
+    trackEvent({
+      event: 'Downloading Client Update',
+      properties: {
+        currentVersion: autoUpdater.currentVersion.version,
+        newVersion
+      }
+    })
+    hasReportedDownloadStart = true
+  }
+
   logInfo(
     'Downloading HyperPlay update...' +
       `Download speed: ${progress.bytesPerSecond}, ` +
@@ -68,7 +99,10 @@ autoUpdater.on('download-progress', (progress) => {
 })
 
 autoUpdater.on('update-downloaded', async () => {
-  logInfo('App update is downloaded')
+  logInfo('The App update was downloaded', LogPrefix.AutoUpdater)
+  hasUpdated = true
+  isAppUpdating = false
+  hasReportedDownloadStart = false // Reset for potential future updates
 
   trackEvent({
     event: 'Client Update Downloaded',
@@ -91,16 +125,38 @@ autoUpdater.on('update-downloaded', async () => {
   if (response === 1) {
     return autoUpdater.quitAndInstall()
   }
-  hasUpdated = true
+  logInfo('User chose not to update the app for now.', LogPrefix.AutoUpdater)
 })
 
 autoUpdater.on('error', async (error) => {
-  if (!isOnline()) {
+  isAppUpdating = false
+  const isNewVersion = newVersion !== app.getVersion()
+
+  // To avoid false positives, we should not show the error dialog if the app has already updated successfully
+  if (hasUpdated || !isNewVersion) {
     return
   }
 
-  isAppUpdating = false
-  logError(`Error updating HyperPlay: ${error.message}`, LogPrefix.AutoUpdater)
+  const errorMessage = getErrorMessage(error.message)
+  logError(`Error updating HyperPlay: ${errorMessage}`, LogPrefix.AutoUpdater)
+
+  // will remove cached updates when it fails to avoid corrupted updates
+  if (updateAttempts > 3) {
+    await removeCachedUpdatesFolder()
+  }
+
+  updateAttempts++
+
+  if (updateAttempts < MAX_UPDATE_ATTEMPTS) {
+    logInfo(
+      `Retrying update attempt ${updateAttempts + 1}/${MAX_UPDATE_ATTEMPTS}`,
+      LogPrefix.AutoUpdater
+    )
+    setTimeout(() => {
+      autoUpdater.checkForUpdates()
+    }, 6000)
+    return
+  }
 
   trackEvent({
     event: 'Client Update Error',
@@ -115,17 +171,19 @@ autoUpdater.on('error', async (error) => {
     tags: {
       event: 'Client Update Error',
       currentVersion: autoUpdater.currentVersion.version,
-      newVersion
+      newVersion,
+      totalAttempts: MAX_UPDATE_ATTEMPTS
     }
   })
 
+  updateAttempts = 0
+
   const { response } = await dialog.showMessageBox({
-    title: t('box.error.update.title', 'Error Updating'),
+    title: t('box.error.update.message', 'Error Updating'),
     message: t(
-      'box.error.update.message',
-      `Something went wrong with the update after multiple attempts! Please manually uninstall and reinstall HyperPlay. error: ${JSON.stringify(
-        error
-      )}`
+      'box.error.update.body',
+      `Something went wrong with the update after multiple attempts! Please check the error message below or reinstall HyperPlay. error: {{error}}`,
+      { error: errorMessage }
     ),
     type: 'error',
     buttons: [t('button.cancel', 'Cancel'), t('button.download', 'Download')]
