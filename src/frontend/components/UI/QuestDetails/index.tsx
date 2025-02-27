@@ -125,7 +125,7 @@ export default function QuestDetails({
           'EXTERNAL-TASKS': flags.externalTasksRewardsClaim
         },
         questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled,
-        gameplayWalletSectionVisible: false
+        gameplayWalletSectionVisible: flags.gameplayWalletSectionVisible
       }}
       trackEvent={async (eventPayload) =>
         window.api.trackEvent(eventPayload as PossibleMetricPayloads)
