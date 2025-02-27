@@ -1,5 +1,4 @@
 appId: gg.hyperplay.HyperPlay
-name: HyperPlay
 productName: HyperPlay
 files:
   - build/**/*
