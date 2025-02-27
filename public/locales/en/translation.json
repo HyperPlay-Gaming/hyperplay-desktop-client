@@ -88,8 +88,25 @@
                 "title": "Ubisoft Connect"
             },
             "update": {
-                "message": "Something went wrong with the update! Please manually uninstall and reinstall HyperPlay.",
-                "title": "Update Error"
+                "addressUnreachable": "Address unreachable. Please check your internet connection.",
+                "body": "Something went wrong with the update after multiple attempts! Please check the error message below or reinstall HyperPlay. error: {{error}}",
+                "certAuthorityInvalid": "Certificate authority invalid. Please check your system time and date or open a ticket with HyperPlay support.",
+                "certDateInvalid": "Certificate date invalid. Please check your system time and date or open a ticket with HyperPlay support.",
+                "connectionAborted": "Connection aborted. Please check your internet connection.",
+                "connectionClosed": "Connection closed. Please check your internet connection.",
+                "connectionRefused": "Connection refused. Please check your internet connection.",
+                "connectionReset": "Connection reset. Please check your internet connection.",
+                "connectionTimedOut": "Connection timed out. Please check your internet connection.",
+                "emptyResponse": "Empty response. Please check your internet connection.",
+                "failed": "Download Failed. Please check your internet connection.",
+                "http2ServerRefusedStream": "HTTP2 server refused stream. Please check your internet connection.",
+                "internetDisconnected": "Internet disconnected. Please check your internet connection.",
+                "message": "Error Updating",
+                "nameNotResolved": "Name not resolved. Please check your internet connection.",
+                "networkAccessDenied": "Network access denied. Please check your internet connection.",
+                "networkChanged": "Network changed. Please check your internet connection.",
+                "proxyConnectionFailed": "Proxy connection failed. Please check your proxy settings.",
+                "sslProtocolError": "SSL protocol error. Please check your system time and date or open a ticket with HyperPlay support."
             },
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
