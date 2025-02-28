@@ -151,7 +151,7 @@ import {
   checkWineBeforeLaunch,
   runWineCommandOnGame
 } from './utils/compatibility_layers'
-import { isClientUpdating } from 'backend/updater'
+import { isClientUpdating } from 'backend/updater/updater'
 
 /*
  * INSERT OTHER IPC HANDLERS HERE
