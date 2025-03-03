@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.23.2",
+  "version": "0.22.999",
   "private": true,
   "main": "build/main/main.js",
   "productName": "HyperPlay",
