@@ -983,7 +983,7 @@ export async function downloadFile(
   abortController: AbortController,
   progressCallback?: ProgressCallback,
   onCompleted?: (file: File) => void,
-  onCancel?: (item: DownloadItem) => void
+  onCancel?: (item: DownloadItem) => Promise<void>
 ): Promise<DownloadItem> {
   let lastProgressUpdateTime = Date.now()
   let lastBytesWritten = 0
