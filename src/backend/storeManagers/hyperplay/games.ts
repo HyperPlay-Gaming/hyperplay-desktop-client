@@ -1922,6 +1922,14 @@ async function applyPatching(
       return { status: 'abort' }
     }
 
+    signal.onabort = async () => {
+      aborted = true
+      await safeRemoveDirectory(datastoreDir, {
+        sizeThresholdMB: blockSize * totalBlocks
+      })
+      return { status: 'abort' }
+    }
+
     for await (const output of generator) {
       logInfo(output, LogPrefix.HyperPlay)
 
