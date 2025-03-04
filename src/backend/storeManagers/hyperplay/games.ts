@@ -2011,8 +2011,35 @@ async function applyPatching(
     }
     // need this to cover 100% of abort cases
     if (aborted) {
-      await safeRemoveDirectory(datastoreDir, {
-        sizeThresholdMB: blockSize * totalBlocks
+      try {
+        await safeRemoveDirectory(datastoreDir, {
+          sizeThresholdMB: blockSize * totalBlocks
+        })
+      } catch (cleanupError) {
+        trackEvent({
+          event: 'Patching Cleanup Failed',
+          properties: {
+            error: `${cleanupError}`,
+            game_name: gameInfo.app_name,
+            game_title: gameInfo.title,
+            platform: getPlatformName(platform),
+            platform_arch: platform
+          }
+        })
+
+        logWarning(
+          `Patching aborted and cleanup failed: ${cleanupError}`,
+          LogPrefix.HyperPlay
+        )
+      }
+      trackEvent({
+        event: 'Patching Aborted',
+        properties: {
+          game_name: gameInfo.app_name,
+          game_title: gameInfo.title,
+          platform: getPlatformName(platform),
+          platform_arch: platform
+        }
       })
       return { status: 'abort' }
     }
@@ -2028,9 +2055,27 @@ async function applyPatching(
     })
 
     logInfo(`Patching ${appName} completed`, LogPrefix.HyperPlay)
-    await safeRemoveDirectory(datastoreDir, {
-      sizeThresholdMB: blockSize * totalBlocks
-    })
+    try {
+      await safeRemoveDirectory(datastoreDir, {
+        sizeThresholdMB: blockSize * totalBlocks
+      })
+    } catch (cleanupError) {
+      trackEvent({
+        event: 'Patching Cleanup Failed',
+        properties: {
+          error: `${cleanupError}`,
+          game_name: gameInfo.app_name,
+          game_title: gameInfo.title,
+          platform: getPlatformName(platform),
+          platform_arch: platform
+        }
+      })
+
+      logWarning(
+        `Patching succeeded but cleanup failed: ${cleanupError}`,
+        LogPrefix.HyperPlay
+      )
+    }
     return { status: 'done' }
   } catch (error) {
     if (error instanceof PatchingError) {
@@ -2070,7 +2115,23 @@ async function applyPatching(
 
     // errors can be thrown before datastore dir created. rmSync on nonexistent dir blocks indefinitely
     if (existsSync(datastoreDir)) {
-      await safeRemoveDirectory(datastoreDir)
+      try {
+        await safeRemoveDirectory(datastoreDir)
+      } catch (cleanupError) {
+        trackEvent({
+          event: 'Patching Cleanup Failed',
+          properties: {
+            error: `${cleanupError}`,
+            game_name: gameInfo.app_name,
+            game_title: gameInfo.title
+          }
+        })
+
+        logWarning(
+          `Patching failed and cleanup failed: ${cleanupError}`,
+          LogPrefix.HyperPlay
+        )
+      }
     }
 
     return { status: 'error', error: `Error while patching ${error}` }
