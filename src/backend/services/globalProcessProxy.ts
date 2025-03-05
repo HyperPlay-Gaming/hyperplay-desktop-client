@@ -13,15 +13,17 @@ function isCallFromExtractZipService() {
   })
 }
 
-// Create a proxy to intercept global property access
-globalThis.process = new Proxy(global.process, {
-  get(target, prop, receiver) {
-    logInfo(
-      `XXXXXXXXXX \n \n calling global process \n \n XXXXXXXXXXXXXXXXXXXXXXXXX ', ${prop.toString()}`
-    )
-    if (isCallFromExtractZipService() && prop === 'noAsar') {
-      return true
+export function init() {
+  // Create a proxy to intercept global property access
+  globalThis.process = new Proxy(global.process, {
+    get(target, prop, receiver) {
+      logInfo(
+        `XXXXXXXXXX \n \n calling global process \n \n XXXXXXXXXXXXXXXXXXXXXXXXX ', ${prop.toString()}`
+      )
+      if (isCallFromExtractZipService() && prop === 'noAsar') {
+        return true
+      }
+      return Reflect.get(target, prop, receiver)
     }
-    return Reflect.get(target, prop, receiver)
-  }
-})
+  })
+}
