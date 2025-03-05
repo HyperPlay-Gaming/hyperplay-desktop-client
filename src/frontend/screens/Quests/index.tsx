@@ -144,16 +144,20 @@ export function QuestsPage() {
     }) ?? []
 
   const fuse = new Fuse(questsWithGameNames ?? [], fuseOptions)
-  const searchFilteredQuests = searchText
-    ? (fuse.search(searchText) as FuseResult<Quest>[])
-    : quests?.map((quest) => ({
-        id: quest.id,
-        project_id: quest.project_id,
-        name: quest.name,
-        title: listings?.[quest.project_id]?.project_meta?.name ?? '',
-        item: quest,
-        refIndex: 0
-      })) ?? []
+
+  let searchFilteredQuests: FuseResult<Quest>[] = []
+  if (searchText) {
+    searchFilteredQuests = fuse.search(searchText) as FuseResult<Quest>[]
+  } else if (quests) {
+    searchFilteredQuests = quests.map((quest) => ({
+      id: quest.id,
+      project_id: quest.project_id,
+      name: quest.name,
+      title: listings?.[quest.project_id]?.project_meta?.name ?? '',
+      item: quest,
+      refIndex: 0
+    }))
+  }
 
   const searchQuests = (quests: Quest[], query: string) => {
     if (!query) return quests
@@ -196,21 +200,21 @@ export function QuestsPage() {
       const title = listings
         ? listings[result.item.project_id]?.project_meta?.name
         : ''
+      const id = result.item.id
+      const name = result.item.name
       return (
         <QuestCard
-          key={result.item.id}
+          key={id}
           image={imageUrl ?? ''}
           title={title}
           onClick={() => {
-            if (selectedQuestId !== result.item.id) {
-              navigate(`/quests/${result.item.id}`)
+            if (selectedQuestId !== id) {
+              navigate(`/quests/${id}`)
             }
           }}
-          selected={result.item.id === visibleQuestId}
-          description={result.item.name}
-          className={
-            result.item.id === visibleQuestId ? 'gradientBorder' : undefined
-          }
+          selected={id === visibleQuestId}
+          description={name}
+          className={id === visibleQuestId ? 'gradientBorder' : undefined}
         />
       )
     }) ?? []
