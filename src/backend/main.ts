@@ -191,6 +191,7 @@ import { checkG7ConnectionStatus, postPlaySessionTime } from './utils/quests'
 import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'
 
 import { createInjectedProviderWindow } from './injected_provider_window'
+import { init } from 'backend/services/globalProcessProxy'
 
 async function initExtensionOnLaunch() {
   try {
@@ -694,6 +695,7 @@ if (!gotTheLock) {
       }
     }, checkGameUpdatesInterval)
 
+    init()
     return
   })
 }
