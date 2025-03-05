@@ -165,6 +165,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   focusMainWindow: () => void
   openOnboarding: () => void
   restartClient: () => void
+  reloadForMM: () => void
 }
 
 interface RequestArguments {
