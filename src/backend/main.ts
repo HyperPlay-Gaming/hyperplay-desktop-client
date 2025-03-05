@@ -706,10 +706,6 @@ ipcMain.once('loadingScreenReady', () => {
 
 ipcMain.once('frontendReady', async () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
-  await initExtension(hpApi)
-  // wait for mm SW to initialize
-  await wait(5000)
-  ipcMain.emit('reloadApp')
   handleProtocol([openUrlArgument, ...process.argv])
   setTimeout(() => {
     logInfo('Starting the Download Queue', LogPrefix.Backend)
@@ -717,6 +713,16 @@ ipcMain.once('frontendReady', async () => {
   }, 5000)
 
   watchLibraryChanges()
+})
+
+ipcMain.once('reloadForMM', async () => {
+  logInfo('Initializing Extensions', LogPrefix.Backend)
+  await initExtension(hpApi)
+  // wait for mm SW to initialize
+  logInfo('Waiting for SW to initialize', LogPrefix.Backend)
+  await wait(5000)
+  logInfo('Reloading the app to apply changes...', LogPrefix.Backend)
+  ipcMain.emit('reloadApp')
 })
 
 // Maybe this can help with white screens
