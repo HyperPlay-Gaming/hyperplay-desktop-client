@@ -4,6 +4,7 @@ import { open, ZipFile, Entry } from 'yauzl'
 import { mkdirSync, createWriteStream, rmSync, existsSync } from 'graceful-fs'
 import { captureException } from '@sentry/electron'
 import { join } from 'path'
+import './globalProcessProxy'
 
 export interface ExtractZipProgressResponse {
   /** Percentage of extraction progress. */
