@@ -15,7 +15,10 @@ function isCallFromExtractZipService() {
 
 export function init() {
   // Create a proxy to intercept global property access
-  globalThis.process = new Proxy(global.process, {
+  // @ts-expect-error fix later
+  global.process_old = global.process
+  // @ts-expect-error fix later
+  global.process = new Proxy(global.process_old, {
     get(target, prop, receiver) {
       logInfo(
         `XXXXXXXXXX \n \n calling global process \n \n XXXXXXXXXXXXXXXXXXXXXXXXX ', ${prop.toString()}`
