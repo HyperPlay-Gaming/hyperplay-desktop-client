@@ -21,7 +21,8 @@ import {
   fixAsarPath,
   publicDir,
   isCLINoGui,
-  tsStore
+  tsStore,
+  gamesConfigPath
 } from 'backend/constants'
 import { GameConfig } from 'backend/game_config'
 import { verifyWinePrefix, runWineCommand } from 'backend/launcher'
@@ -59,6 +60,7 @@ import {
   existsSync,
   readdirSync,
   readFileSync,
+  rmSync,
   writeFileSync
 } from 'fs'
 import { cpus, platform } from 'os'
@@ -68,10 +70,15 @@ import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/librar
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
 import setup from 'backend/storeManagers/gog/setup'
 import { isClientUpdating } from 'backend/updater/updater'
-import { AppSettings, GameSettings, Runner, StatusPromise } from 'common/types'
+import {
+  AppSettings,
+  GamepadInputEvent,
+  GameSettings,
+  Runner,
+  StatusPromise
+} from 'common/types'
 import { getFonts } from 'font-list'
 import shlex from 'shlex'
-import { trackEvent } from 'backend/api/metrics'
 import { logFileLocation as getLogFileLocation } from 'backend/storeManagers/storeManagerCommon/games'
 
 import { addRecentGame } from 'backend/recent_games/recent_games'
@@ -85,6 +92,15 @@ import { hrtime } from 'process'
 import { getFlag } from 'backend/flags/flags'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from 'common/constants'
+import { showDialogBoxModalAuto, notify } from 'backend/dialog/dialog'
+import i18next from 'i18next'
+import { trackEvent } from 'backend/metrics/metrics'
+
+const devAppUrl = 'http://localhost:5173/?view=App'
+const prodAppUrl = `file://${path.join(
+  publicDir,
+  '../build/index.html?view=App'
+)}`
 
 // Calls WineCFG or Winetricks. If is WineCFG, use the same binary as wine to launch it to dont update the prefix
 ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
@@ -767,12 +783,404 @@ ipcMain.handle(
 )
 
 ipcMain.handle(
+  'uninstall',
+  async (event, appName, runner, shouldRemovePrefix, shouldRemoveSetting) => {
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      runner,
+      status: 'uninstalling'
+    })
+
+    const {
+      title,
+      install: { platform }
+    } = gameManagerMap[runner].getGameInfo(appName)
+
+    trackEvent({
+      event: 'Game Uninstall Started',
+      properties: {
+        game_name: appName,
+        store_name: getStoreName(runner),
+        game_title: title,
+        platform_arch: platform!,
+        platform: getPlatformName(platform!)
+      }
+    })
+
+    let uninstalled = false
+
+    try {
+      await gameManagerMap[runner].uninstall({ appName })
+      uninstalled = true
+    } catch (error) {
+      trackEvent({
+        event: 'Game Uninstall Failed',
+        properties: {
+          game_name: appName,
+          store_name: getStoreName(runner),
+          error: `${error}`,
+          game_title: title,
+          platform_arch: platform!,
+          platform: getPlatformName(platform!)
+        }
+      })
+      notify({
+        title,
+        body: i18next.t('notify.uninstalled.error', 'Error uninstalling')
+      })
+      logError(error, LogPrefix.Backend)
+    }
+
+    if (uninstalled) {
+      if (shouldRemovePrefix) {
+        const { winePrefix } = await gameManagerMap[runner].getSettings(appName)
+        logInfo(`Removing prefix ${winePrefix}`, LogPrefix.Backend)
+        // remove prefix if exists
+        if (existsSync(winePrefix)) {
+          rmSync(winePrefix, { recursive: true })
+        }
+      }
+      if (shouldRemoveSetting) {
+        const removeIfExists = (filename: string) => {
+          logInfo(`Removing ${filename}`, LogPrefix.Backend)
+          const gameSettingsFile = join(gamesConfigPath, filename)
+          if (existsSync(gameSettingsFile)) {
+            rmSync(gameSettingsFile)
+          }
+        }
+
+        removeIfExists(appName.concat('.json'))
+        removeIfExists(appName.concat('.log'))
+        removeIfExists(appName.concat('-lastPlay.log'))
+      }
+
+      trackEvent({
+        event: 'Game Uninstall Success',
+        properties: {
+          game_name: appName,
+          store_name: getStoreName(runner),
+          game_title: title,
+          platform_arch: platform!,
+          platform: getPlatformName(platform!)
+        }
+      })
+
+      notify({ title, body: i18next.t('notify.uninstalled') })
+      logInfo('Finished uninstalling', LogPrefix.Backend)
+    }
+
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      runner,
+      status: 'done'
+    })
+  }
+)
+
+ipcMain.handle('repair', async (event, appName, runner) => {
+  if (!isOnline()) {
+    logWarning(
+      `App offline, skipping repair for game '${appName}'.`,
+      LogPrefix.Backend
+    )
+    return
+  }
+
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    runner,
+    status: 'repairing'
+  })
+
+  const { title } = gameManagerMap[runner].getGameInfo(appName)
+
+  try {
+    await gameManagerMap[runner].repair(appName)
+  } catch (error) {
+    notify({
+      title,
+      body: i18next.t('notify.error.reparing', 'Error Repairing')
+    })
+    logError(error, LogPrefix.Backend)
+  }
+  notify({ title, body: i18next.t('notify.finished.reparing') })
+  logInfo('Finished repairing', LogPrefix.Backend)
+
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    runner,
+    status: 'done'
+  })
+})
+
+ipcMain.handle(
+  'moveInstall',
+  async (event, { appName, path, runner }): Promise<void> => {
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      runner,
+      status: 'moving'
+    })
+
+    const { title } = gameManagerMap[runner].getGameInfo(appName)
+    notify({ title, body: i18next.t('notify.moving', 'Moving Game') })
+
+    const moveRes = await gameManagerMap[runner].moveInstall(appName, path)
+    if (moveRes.status === 'error') {
+      notify({
+        title,
+        body: i18next.t('notify.error.move', 'Error Moving Game')
+      })
+      logError(
+        `Error while moving ${appName} to ${path}: ${moveRes.error} `,
+        LogPrefix.Backend
+      )
+
+      showDialogBoxModalAuto({
+        event,
+        title: i18next.t('box.error.title', 'Error'),
+        message: i18next.t('box.error.moving', 'Error Moving Game {{error}}', {
+          error: moveRes.error
+        }),
+        type: 'ERROR'
+      })
+    }
+
+    if (moveRes.status === 'done') {
+      notify({ title, body: i18next.t('notify.moved') })
+      logInfo(`Finished moving ${appName} to ${path}.`, LogPrefix.Backend)
+    }
+
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      runner,
+      status: 'done'
+    })
+  }
+)
+
+ipcMain.handle(
+  'importGame',
+  async (event, { appName, path, runner, platform }): StatusPromise => {
+    const epicOffline = await isEpicServiceOffline()
+    if (epicOffline && runner === 'legendary') {
+      showDialogBoxModalAuto({
+        event,
+        title: i18next.t('box.warning.title', 'Warning'),
+        message: i18next.t(
+          'box.warning.epic.import',
+          'Epic Servers are having major outage right now, the game cannot be imported!'
+        ),
+        type: 'ERROR'
+      })
+      return { status: 'error' }
+    }
+
+    const title = gameManagerMap[runner].getGameInfo(appName).title
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      runner,
+      status: 'installing'
+    })
+
+    const abortMessage = () => {
+      notify({ title, body: i18next.t('notify.install.canceled') })
+      sendFrontendMessage('gameStatusUpdate', {
+        appName,
+        runner,
+        status: 'done'
+      })
+    }
+
+    try {
+      const { abort, error } = await gameManagerMap[runner].importGame(
+        appName,
+        path,
+        platform
+      )
+      if (abort || error) {
+        abortMessage()
+        return { status: 'done' }
+      }
+    } catch (error) {
+      abortMessage()
+      logError(error, LogPrefix.Backend)
+      return { status: 'error' }
+    }
+
+    notify({
+      title,
+      body: i18next.t('notify.install.imported', 'Game Imported')
+    })
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      runner,
+      status: 'done'
+    })
+    logInfo(`imported ${title}`, LogPrefix.Backend)
+    return { status: 'done' }
+  }
+)
+
+ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
+  if (!isOnline()) {
+    logWarning(
+      `App offline, skipping install for game '${appName}'.`,
+      LogPrefix.Backend
+    )
+    return { status: 'error' }
+  }
+
+  const epicOffline = await isEpicServiceOffline()
+  if (epicOffline && runner === 'legendary') {
+    showDialogBoxModalAuto({
+      event,
+      title: i18next.t('box.warning.title', 'Warning'),
+      message: i18next.t(
+        'box.warning.epic.update',
+        'Epic Servers are having major outage right now, the game cannot be updated!'
+      ),
+      type: 'ERROR'
+    })
+    return { status: 'error' }
+  }
+
+  const { title } = gameManagerMap[runner].getGameInfo(appName)
+  notify({
+    title,
+    body: i18next.t('notify.update.started', 'Update Started')
+  })
+
+  let status: 'done' | 'error' | 'abort' = 'error'
+  try {
+    status = (await gameManagerMap[runner].update(appName)).status
+  } catch (error) {
+    logError(error, LogPrefix.Backend)
+    notify({ title, body: i18next.t('notify.update.canceled') })
+    return { status: 'error' }
+  }
+  notify({
+    title,
+    body:
+      status === 'done'
+        ? i18next.t('notify.update.finished')
+        : i18next.t('notify.update.canceled')
+  })
+  logInfo('finished updating', LogPrefix.Backend)
+  return { status }
+})
+
+ipcMain.handle(
   'syncPlaySession',
   async (e, appName: string, runner: Runner) => {
     const sessionPlaytimeInMs = syncPlaySession(appName)
     await postPlaySession(appName, runner, sessionPlaytimeInMs)
   }
 )
+
+// Simulate keyboard and mouse actions as if the real input device is used
+ipcMain.handle('gamepadAction', async (event, args) => {
+  const senderUrl = event.sender.getURL()
+  if (!senderUrl.includes(devAppUrl) && !senderUrl.includes(prodAppUrl)) {
+    return
+  }
+
+  // we can only receive gamepad events if the main window exists
+  const mainWindow = getMainWindow()!
+
+  const { action, metadata } = args
+  const inputEvents: GamepadInputEvent[] = []
+
+  /*
+   * How to extend:
+   *
+   * Valid values for type are 'keyDown', 'keyUp' and 'char'
+   * Valid values for keyCode are defined here:
+   * https://www.electronjs.org/docs/latest/api/accelerator#available-key-codes
+   *
+   */
+  switch (action) {
+    case 'rightStickUp':
+      inputEvents.push({
+        type: 'mouseWheel',
+        deltaY: 50,
+        x: mainWindow.getBounds().width / 2,
+        y: mainWindow.getBounds().height / 2
+      })
+      break
+    case 'rightStickDown':
+      inputEvents.push({
+        type: 'mouseWheel',
+        deltaY: -50,
+        x: mainWindow.getBounds().width / 2,
+        y: mainWindow.getBounds().height / 2
+      })
+      break
+    case 'leftStickUp':
+    case 'leftStickDown':
+    case 'leftStickLeft':
+    case 'leftStickRight':
+    case 'padUp':
+    case 'padDown':
+    case 'padLeft':
+    case 'padRight':
+      // spatial navigation
+      inputEvents.push({
+        type: 'keyDown',
+        keyCode: action.replace(/pad|leftStick/, '')
+      })
+      inputEvents.push({
+        type: 'keyUp',
+        keyCode: action.replace(/pad|leftStick/, '')
+      })
+      break
+    case 'leftClick':
+      inputEvents.push({
+        type: 'mouseDown',
+        button: 'left',
+        x: metadata.x,
+        y: metadata.y
+      })
+      inputEvents.push({
+        type: 'mouseUp',
+        button: 'left',
+        x: metadata.x,
+        y: metadata.y
+      })
+      break
+    case 'rightClick':
+      inputEvents.push({
+        type: 'mouseDown',
+        button: 'right',
+        x: metadata.x,
+        y: metadata.y
+      })
+      inputEvents.push({
+        type: 'mouseUp',
+        button: 'right',
+        x: metadata.x,
+        y: metadata.y
+      })
+      break
+    case 'back':
+      mainWindow.webContents.goBack()
+      break
+    case 'esc':
+      inputEvents.push({
+        type: 'keyDown',
+        keyCode: 'Esc'
+      })
+      inputEvents.push({
+        type: 'keyUp',
+        keyCode: 'Esc'
+      })
+      break
+  }
+
+  if (inputEvents.length) {
+    inputEvents.forEach((event) => mainWindow.webContents.sendInputEvent(event))
+  }
+})
 
 async function postPlaySession(
   appName: string,

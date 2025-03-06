@@ -1,8 +1,6 @@
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
-import { GamepadInputEvent, StatusPromise } from 'common/types'
 import * as path from 'path'
-import { join } from 'path'
 import {
   app,
   BrowserWindow,
@@ -16,25 +14,17 @@ import {
 import { uuid } from 'short-uuid'
 import { autoUpdater } from 'electron-updater'
 import { platform } from 'os'
-import { existsSync, rmSync, watch } from 'graceful-fs'
+import { existsSync, watch } from 'graceful-fs'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
 import { GlobalConfig } from './config'
 import { LegendaryUser } from 'backend/storeManagers/legendary/user'
 import { GOGUser } from './storeManagers/gog/user'
-import {
-  getPlatformName,
-  getStoreName,
-  isEpicServiceOffline,
-  handleExit,
-  wait,
-  checkGameUpdates
-} from './utils'
+import { handleExit, wait, checkGameUpdates } from './utils'
 import {
   configStore,
   createNecessaryFolders,
   eventsToCloseMetaMaskPopupOn,
-  gamesConfigPath,
   icon,
   installed,
   isCLIFullscreen,
@@ -53,12 +43,7 @@ import {
 } from './logger/logger'
 import { gameInfoStore } from 'backend/storeManagers/legendary/electronStores'
 import { initQueue } from './downloadmanager/downloadqueue'
-import {
-  initOnlineMonitor,
-  isOnline,
-  runOnceWhenOnline
-} from './online_monitor'
-import { notify, showDialogBoxModalAuto } from './dialog/dialog'
+import { initOnlineMonitor, runOnceWhenOnline } from './online_monitor'
 import { initTrayIcon } from './tray_icon/tray_icon'
 import {
   createMainWindow,
@@ -71,7 +56,7 @@ import { syncQueuedPlaytimeGOG } from 'backend/storeManagers/gog/games'
 import { playtimeSyncQueue } from './storeManagers/gog/electronStores'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
 import { initLDClient } from './flags/flags'
-import { gameManagerMap, initStoreManagers } from './storeManagers'
+import { initStoreManagers } from './storeManagers'
 
 import * as Sentry from '@sentry/electron'
 import { devSentryDsn, prodSentryDsn } from 'common/constants'
@@ -97,14 +82,14 @@ import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/extension/provider'
 import 'backend/proxy/ipcHandlers'
+import './storeManagers/legendary/eos_overlay/ipc_handler'
+import './ipcHandlers/index'
 
 import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
 import { PROVIDERS } from 'common/types/proxy-types'
-
-import './ipcHandlers/index'
 
 import 'backend/utils/auto_launch'
 
@@ -612,398 +597,6 @@ if (existsSync(installed)) {
   })
 }
 
-ipcMain.handle(
-  'uninstall',
-  async (event, appName, runner, shouldRemovePrefix, shouldRemoveSetting) => {
-    sendFrontendMessage('gameStatusUpdate', {
-      appName,
-      runner,
-      status: 'uninstalling'
-    })
-
-    const {
-      title,
-      install: { platform }
-    } = gameManagerMap[runner].getGameInfo(appName)
-
-    trackEvent({
-      event: 'Game Uninstall Started',
-      properties: {
-        game_name: appName,
-        store_name: getStoreName(runner),
-        game_title: title,
-        platform_arch: platform!,
-        platform: getPlatformName(platform!)
-      }
-    })
-
-    let uninstalled = false
-
-    try {
-      await gameManagerMap[runner].uninstall({ appName })
-      uninstalled = true
-    } catch (error) {
-      trackEvent({
-        event: 'Game Uninstall Failed',
-        properties: {
-          game_name: appName,
-          store_name: getStoreName(runner),
-          error: `${error}`,
-          game_title: title,
-          platform_arch: platform!,
-          platform: getPlatformName(platform!)
-        }
-      })
-      notify({
-        title,
-        body: i18next.t('notify.uninstalled.error', 'Error uninstalling')
-      })
-      logError(error, LogPrefix.Backend)
-    }
-
-    if (uninstalled) {
-      if (shouldRemovePrefix) {
-        const { winePrefix } = await gameManagerMap[runner].getSettings(appName)
-        logInfo(`Removing prefix ${winePrefix}`, LogPrefix.Backend)
-        // remove prefix if exists
-        if (existsSync(winePrefix)) {
-          rmSync(winePrefix, { recursive: true })
-        }
-      }
-      if (shouldRemoveSetting) {
-        const removeIfExists = (filename: string) => {
-          logInfo(`Removing ${filename}`, LogPrefix.Backend)
-          const gameSettingsFile = join(gamesConfigPath, filename)
-          if (existsSync(gameSettingsFile)) {
-            rmSync(gameSettingsFile)
-          }
-        }
-
-        removeIfExists(appName.concat('.json'))
-        removeIfExists(appName.concat('.log'))
-        removeIfExists(appName.concat('-lastPlay.log'))
-      }
-
-      trackEvent({
-        event: 'Game Uninstall Success',
-        properties: {
-          game_name: appName,
-          store_name: getStoreName(runner),
-          game_title: title,
-          platform_arch: platform!,
-          platform: getPlatformName(platform!)
-        }
-      })
-
-      notify({ title, body: i18next.t('notify.uninstalled') })
-      logInfo('Finished uninstalling', LogPrefix.Backend)
-    }
-
-    sendFrontendMessage('gameStatusUpdate', {
-      appName,
-      runner,
-      status: 'done'
-    })
-  }
-)
-
-ipcMain.handle('repair', async (event, appName, runner) => {
-  if (!isOnline()) {
-    logWarning(
-      `App offline, skipping repair for game '${appName}'.`,
-      LogPrefix.Backend
-    )
-    return
-  }
-
-  sendFrontendMessage('gameStatusUpdate', {
-    appName,
-    runner,
-    status: 'repairing'
-  })
-
-  const { title } = gameManagerMap[runner].getGameInfo(appName)
-
-  try {
-    await gameManagerMap[runner].repair(appName)
-  } catch (error) {
-    notify({
-      title,
-      body: i18next.t('notify.error.reparing', 'Error Repairing')
-    })
-    logError(error, LogPrefix.Backend)
-  }
-  notify({ title, body: i18next.t('notify.finished.reparing') })
-  logInfo('Finished repairing', LogPrefix.Backend)
-
-  sendFrontendMessage('gameStatusUpdate', {
-    appName,
-    runner,
-    status: 'done'
-  })
-})
-
-ipcMain.handle(
-  'moveInstall',
-  async (event, { appName, path, runner }): Promise<void> => {
-    sendFrontendMessage('gameStatusUpdate', {
-      appName,
-      runner,
-      status: 'moving'
-    })
-
-    const { title } = gameManagerMap[runner].getGameInfo(appName)
-    notify({ title, body: i18next.t('notify.moving', 'Moving Game') })
-
-    const moveRes = await gameManagerMap[runner].moveInstall(appName, path)
-    if (moveRes.status === 'error') {
-      notify({
-        title,
-        body: i18next.t('notify.error.move', 'Error Moving Game')
-      })
-      logError(
-        `Error while moving ${appName} to ${path}: ${moveRes.error} `,
-        LogPrefix.Backend
-      )
-
-      showDialogBoxModalAuto({
-        event,
-        title: i18next.t('box.error.title', 'Error'),
-        message: i18next.t('box.error.moving', 'Error Moving Game {{error}}', {
-          error: moveRes.error
-        }),
-        type: 'ERROR'
-      })
-    }
-
-    if (moveRes.status === 'done') {
-      notify({ title, body: i18next.t('notify.moved') })
-      logInfo(`Finished moving ${appName} to ${path}.`, LogPrefix.Backend)
-    }
-
-    sendFrontendMessage('gameStatusUpdate', {
-      appName,
-      runner,
-      status: 'done'
-    })
-  }
-)
-
-ipcMain.handle(
-  'importGame',
-  async (event, { appName, path, runner, platform }): StatusPromise => {
-    const epicOffline = await isEpicServiceOffline()
-    if (epicOffline && runner === 'legendary') {
-      showDialogBoxModalAuto({
-        event,
-        title: i18next.t('box.warning.title', 'Warning'),
-        message: i18next.t(
-          'box.warning.epic.import',
-          'Epic Servers are having major outage right now, the game cannot be imported!'
-        ),
-        type: 'ERROR'
-      })
-      return { status: 'error' }
-    }
-
-    const title = gameManagerMap[runner].getGameInfo(appName).title
-    sendFrontendMessage('gameStatusUpdate', {
-      appName,
-      runner,
-      status: 'installing'
-    })
-
-    const abortMessage = () => {
-      notify({ title, body: i18next.t('notify.install.canceled') })
-      sendFrontendMessage('gameStatusUpdate', {
-        appName,
-        runner,
-        status: 'done'
-      })
-    }
-
-    try {
-      const { abort, error } = await gameManagerMap[runner].importGame(
-        appName,
-        path,
-        platform
-      )
-      if (abort || error) {
-        abortMessage()
-        return { status: 'done' }
-      }
-    } catch (error) {
-      abortMessage()
-      logError(error, LogPrefix.Backend)
-      return { status: 'error' }
-    }
-
-    notify({
-      title,
-      body: i18next.t('notify.install.imported', 'Game Imported')
-    })
-    sendFrontendMessage('gameStatusUpdate', {
-      appName,
-      runner,
-      status: 'done'
-    })
-    logInfo(`imported ${title}`, LogPrefix.Backend)
-    return { status: 'done' }
-  }
-)
-
-ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
-  if (!isOnline()) {
-    logWarning(
-      `App offline, skipping install for game '${appName}'.`,
-      LogPrefix.Backend
-    )
-    return { status: 'error' }
-  }
-
-  const epicOffline = await isEpicServiceOffline()
-  if (epicOffline && runner === 'legendary') {
-    showDialogBoxModalAuto({
-      event,
-      title: i18next.t('box.warning.title', 'Warning'),
-      message: i18next.t(
-        'box.warning.epic.update',
-        'Epic Servers are having major outage right now, the game cannot be updated!'
-      ),
-      type: 'ERROR'
-    })
-    return { status: 'error' }
-  }
-
-  const { title } = gameManagerMap[runner].getGameInfo(appName)
-  notify({
-    title,
-    body: i18next.t('notify.update.started', 'Update Started')
-  })
-
-  let status: 'done' | 'error' | 'abort' = 'error'
-  try {
-    status = (await gameManagerMap[runner].update(appName)).status
-  } catch (error) {
-    logError(error, LogPrefix.Backend)
-    notify({ title, body: i18next.t('notify.update.canceled') })
-    return { status: 'error' }
-  }
-  notify({
-    title,
-    body:
-      status === 'done'
-        ? i18next.t('notify.update.finished')
-        : i18next.t('notify.update.canceled')
-  })
-  logInfo('finished updating', LogPrefix.Backend)
-  return { status }
-})
-
-// Simulate keyboard and mouse actions as if the real input device is used
-ipcMain.handle('gamepadAction', async (event, args) => {
-  const senderUrl = event.sender.getURL()
-  if (!senderUrl.includes(devAppUrl) && !senderUrl.includes(prodAppUrl)) {
-    return
-  }
-
-  // we can only receive gamepad events if the main window exists
-  const mainWindow = getMainWindow()!
-
-  const { action, metadata } = args
-  const inputEvents: GamepadInputEvent[] = []
-
-  /*
-   * How to extend:
-   *
-   * Valid values for type are 'keyDown', 'keyUp' and 'char'
-   * Valid values for keyCode are defined here:
-   * https://www.electronjs.org/docs/latest/api/accelerator#available-key-codes
-   *
-   */
-  switch (action) {
-    case 'rightStickUp':
-      inputEvents.push({
-        type: 'mouseWheel',
-        deltaY: 50,
-        x: mainWindow.getBounds().width / 2,
-        y: mainWindow.getBounds().height / 2
-      })
-      break
-    case 'rightStickDown':
-      inputEvents.push({
-        type: 'mouseWheel',
-        deltaY: -50,
-        x: mainWindow.getBounds().width / 2,
-        y: mainWindow.getBounds().height / 2
-      })
-      break
-    case 'leftStickUp':
-    case 'leftStickDown':
-    case 'leftStickLeft':
-    case 'leftStickRight':
-    case 'padUp':
-    case 'padDown':
-    case 'padLeft':
-    case 'padRight':
-      // spatial navigation
-      inputEvents.push({
-        type: 'keyDown',
-        keyCode: action.replace(/pad|leftStick/, '')
-      })
-      inputEvents.push({
-        type: 'keyUp',
-        keyCode: action.replace(/pad|leftStick/, '')
-      })
-      break
-    case 'leftClick':
-      inputEvents.push({
-        type: 'mouseDown',
-        button: 'left',
-        x: metadata.x,
-        y: metadata.y
-      })
-      inputEvents.push({
-        type: 'mouseUp',
-        button: 'left',
-        x: metadata.x,
-        y: metadata.y
-      })
-      break
-    case 'rightClick':
-      inputEvents.push({
-        type: 'mouseDown',
-        button: 'right',
-        x: metadata.x,
-        y: metadata.y
-      })
-      inputEvents.push({
-        type: 'mouseUp',
-        button: 'right',
-        x: metadata.x,
-        y: metadata.y
-      })
-      break
-    case 'back':
-      mainWindow.webContents.goBack()
-      break
-    case 'esc':
-      inputEvents.push({
-        type: 'keyDown',
-        keyCode: 'Esc'
-      })
-      inputEvents.push({
-        type: 'keyUp',
-        keyCode: 'Esc'
-      })
-      break
-  }
-
-  if (inputEvents.length) {
-    inputEvents.forEach((event) => mainWindow.webContents.sendInputEvent(event))
-  }
-})
-
 /*
   Other Keys that should go into translation files:
   t('box.error.generic.title')
@@ -1045,9 +638,3 @@ function watchLibraryChanges() {
     }
   })
 }
-
-/*
- * INSERT OTHER IPC HANDLERS HERE
- */
-
-import './storeManagers/legendary/eos_overlay/ipc_handler'
