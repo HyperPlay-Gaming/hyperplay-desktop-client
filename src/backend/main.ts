@@ -470,6 +470,17 @@ if (!gotTheLock) {
 
     createInjectedProviderWindow()
 
+    const currentStoredVersion = configStore.get('appVersion')
+
+    // Add MM reload here after a couple of version
+    if (currentStoredVersion !== app.getVersion()) {
+      logInfo(
+        `App version changed from ${currentStoredVersion} to ${app.getVersion()}`,
+        LogPrefix.Backend
+      )
+      configStore.set('appVersion', app.getVersion())
+    }
+
     const providerPreloadPath = path.join(
       __dirname,
       '../preload/providerPreload.js'
