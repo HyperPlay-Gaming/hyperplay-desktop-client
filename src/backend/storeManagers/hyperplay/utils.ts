@@ -22,6 +22,7 @@ import { existsSync, rmSync } from 'graceful-fs'
 import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from 'common/constants'
+import { captureException } from '@sentry/electron'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -485,6 +486,16 @@ export async function safeRemoveDirectory(
         logWarning(
           `Failed to remove directory ${directory} on attempt ${attempt}/${maxRetries}, directory still exists`,
           LogPrefix.HyperPlay
+        )
+        captureException(
+          new Error(`Failed to remove directory, directory still exists`),
+          {
+            extra: {
+              directory,
+              attempts: attempt,
+              method: 'safeRemoveDirectory'
+            }
+          }
         )
       } catch {
         // Directory doesn't exist (access threw an error), removal succeeded
