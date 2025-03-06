@@ -34,7 +34,10 @@ import cn from 'classnames'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
-  return urlToTest.hostname === 'store.hyperplay.xyz'
+  return (
+    urlToTest.hostname ===
+    'hyperplay-store-git-tech-refactorlaunchercheck-hyperplay.vercel.app'
+  )
 }
 
 function shouldInjectProvider(url: string) {
@@ -96,9 +99,7 @@ function WebView({
     const searchParams = new URLSearchParams(search)
     const queryParam = searchParams.get('store-url')
     if (queryParam) {
-      const queryParamAppends = urlIsHpUrl(queryParam) ? '?isLauncher=true' : ''
-
-      startUrl = queryParam + queryParamAppends
+      startUrl = queryParam
     }
   } else if (pathname.match('/marketplace')) {
     const searchParams = new URLSearchParams(search)
@@ -279,6 +280,11 @@ function WebView({
   else if (shouldInjectProvider(startUrl) || pathname.match('/marketplace'))
     partitionForWebview = 'persist:InPageWindowEthereumExternalWallet'
 
+  let userAgent: string | undefined =
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/200.0'
+  if (urlIsHpUrl(startUrl)) {
+    userAgent = undefined
+  }
   return (
     <div className={cn('WebView', classNames?.root)}>
       {webviewRef.current && (
@@ -296,7 +302,7 @@ function WebView({
         partition={partitionForWebview}
         src={startUrl}
         allowpopups={trueAsStr}
-        useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/200.0"
+        useragent={userAgent}
         {...(preloadPath ? { preload: `file://${preloadPath}` } : {})}
       />
       {showLoginWarningFor && (
