@@ -3,7 +3,12 @@ import { Steps } from 'intro.js-react'
 import 'intro.js/introjs.css'
 import { useTranslation } from 'react-i18next'
 import { useTourGuide } from './TourContext'
-import { libraryTourSteps, sidebarTourSteps, TourStep } from './TourSteps'
+import {
+  libraryTourSteps,
+  sidebarTourSteps,
+  gamePageTourSteps,
+  TourStep
+} from './TourSteps'
 import './TourGuide.scss'
 
 export const TourGuide: React.FC = () => {
@@ -24,6 +29,9 @@ export const TourGuide: React.FC = () => {
           break
         case 'sidebar':
           steps = sidebarTourSteps(t)
+          break
+        case 'gamepage':
+          steps = gamePageTourSteps(t)
           break
         // Add more tour types here as needed
         default:

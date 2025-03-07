@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 import { useTourGuide } from './TourContext'
 
-export type TourType = 'library' | 'sidebar'
+export type TourType = 'library' | 'sidebar' | 'gamepage'
 
 interface TourTriggerButtonProps {
   tourId?: TourType
@@ -23,7 +23,8 @@ export const TourTriggerButton: React.FC<TourTriggerButtonProps> = ({
   showText = true
 }) => {
   const { t } = useTranslation('tour')
-  const { activateLibraryTour, activateSidebarTour } = useTourGuide()
+  const { activateLibraryTour, activateSidebarTour, activateGamePageTour } =
+    useTourGuide()
 
   const handleClick = () => {
     switch (tourId) {
@@ -32,6 +33,9 @@ export const TourTriggerButton: React.FC<TourTriggerButtonProps> = ({
         break
       case 'sidebar':
         activateSidebarTour()
+        break
+      case 'gamepage':
+        activateGamePageTour()
         break
       default:
         activateLibraryTour()

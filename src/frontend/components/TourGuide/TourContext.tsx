@@ -6,6 +6,7 @@ type TourState = {
   completedTours: string[]
   activateLibraryTour: () => void
   activateSidebarTour: () => void
+  activateGamePageTour: () => void
   deactivateTour: () => void
   markTourAsComplete: (tourId: string) => void
   isTourCompleted: (tourId: string) => boolean
@@ -17,6 +18,7 @@ const initialState: TourState = {
   completedTours: [],
   activateLibraryTour: () => {},
   activateSidebarTour: () => {},
+  activateGamePageTour: () => {},
   deactivateTour: () => {},
   markTourAsComplete: () => {},
   isTourCompleted: () => false
@@ -47,6 +49,11 @@ export const TourProvider: React.FC<TourProviderProps> = ({ children }) => {
     setIsTourActive(true)
   }
 
+  const activateGamePageTour = () => {
+    setCurrentTour('gamepage')
+    setIsTourActive(true)
+  }
+
   const deactivateTour = () => {
     setIsTourActive(false)
     setCurrentTour(null)
@@ -72,6 +79,7 @@ export const TourProvider: React.FC<TourProviderProps> = ({ children }) => {
         completedTours,
         activateLibraryTour,
         activateSidebarTour,
+        activateGamePageTour,
         deactivateTour,
         markTourAsComplete,
         isTourCompleted

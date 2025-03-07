@@ -167,3 +167,89 @@ export const sidebarTourSteps = (t: TFunction): TourStep[] => [
     position: 'right'
   }
 ]
+
+// Game page tour steps
+export const gamePageTourSteps = (t: TFunction): TourStep[] => [
+  {
+    element: '[data-tour="game-page-container"]',
+    intro: t(
+      'tour.gamepage.welcome',
+      'Welcome to the Game Page. This is where you can view details about a game, install it, or launch it.'
+    ),
+    position: 'center'
+  },
+  {
+    element: '[data-tour="game-page-back-button"]',
+    intro: t(
+      'tour.gamepage.back',
+      'Click here to go back to the previous page.'
+    ),
+    position: 'right'
+  },
+  {
+    element: '[data-tour="game-page-title"]',
+    intro: t('tour.gamepage.title', 'This is the name of the game.'),
+    position: 'bottom'
+  },
+  {
+    element: '[data-tour="game-page-settings"]',
+    intro: t(
+      'tour.gamepage.settings',
+      'Click here to access game settings, such as compatibility options, launch arguments, and more.'
+    ),
+    position: 'left'
+  },
+  {
+    element: '[data-tour="game-page-actions"]',
+    intro: t(
+      'tour.gamepage.actions',
+      'This menu offers additional actions like visiting the store page, showing system requirements, and checking for updates.'
+    ),
+    position: 'left'
+  },
+  {
+    element: '[data-tour="game-page-description"]',
+    intro: t('tour.gamepage.description', "This is the game's description."),
+    position: 'top'
+  },
+  {
+    element: '[data-tour="game-page-details"]',
+    intro: t(
+      'tour.gamepage.details',
+      'Here you can find technical details about the game, such as install size, version, and whether it supports web3 features.'
+    ),
+    position: 'top'
+  },
+  {
+    element: '[data-tour="game-page-status"]',
+    intro: t(
+      'tour.gamepage.status',
+      'This shows the current status of the game (installed, not installed, downloading, etc).'
+    ),
+    position: 'top'
+  },
+  {
+    element: '[data-tour="game-page-buttons"]',
+    intro: t(
+      'tour.gamepage.buttons',
+      'Use these buttons to install, update, or launch the game.'
+    ),
+    position: 'top'
+  },
+  {
+    element: '[data-tour="game-page-report"]',
+    intro: t(
+      'tour.gamepage.report',
+      'If you encounter any issues with the game, click here to report a problem.'
+    ),
+    position: 'top'
+  },
+  {
+    element: '[data-tour="game-page-container"]',
+    intro: t(
+      'tour.gamepage.finish',
+      "That's it! Now you know how to navigate and use the game page."
+    ),
+    position: 'center'
+  }
+]

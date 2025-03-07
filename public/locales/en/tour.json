@@ -1,6 +1,19 @@
 {
     "tour": {
         "done": "Done",
+        "gamepage": {
+            "actions": "This menu offers additional actions like visiting the store page, showing system requirements, and checking for updates.",
+            "back": "Click here to go back to the previous page.",
+            "buttons": "Use these buttons to install, update, or launch the game.",
+            "description": "This is the game's description.",
+            "details": "Here you can find technical details about the game, such as install size, version, and whether it supports web3 features.",
+            "finish": "That's it! Now you know how to navigate and use the game page.",
+            "report": "If you encounter any issues with the game, click here to report a problem.",
+            "settings": "Click here to access game settings, such as compatibility options, launch arguments, and more.",
+            "status": "This shows the current status of the game (installed, not installed, downloading, etc).",
+            "title": "This is the name of the game.",
+            "welcome": "Welcome to the Game Page. This is where you can view details about a game, install it, or launch it."
+        },
         "help": "Help",
         "library": {
             "add_game": "You can add custom games to your library by clicking this button.",
