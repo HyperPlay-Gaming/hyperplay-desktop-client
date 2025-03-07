@@ -15,6 +15,17 @@
         },
         "next": "Next",
         "prev": "Prev",
+        "sidebar": {
+            "discord": "Join our Discord community to get help, share experiences, and stay updated.",
+            "docs": "Access documentation and guides to help you get the most out of HyperPlay.",
+            "downloads": "Check the status of your downloads, updates, and installations in the Download Manager.",
+            "finish": "That's it! Now you know how to navigate through HyperPlay using the sidebar.",
+            "library": "This is your Library where all your games are displayed. Click here to access your game collection.",
+            "quests": "Complete quests to earn rewards. Participate in challenges and boost your gaming experience.",
+            "settings": "Configure your app settings, manage accounts, and customize your HyperPlay experience.",
+            "store": "This is the Store navigation. Access the HyperPlay Store, Epic Games, and GOG stores to browse and purchase games.",
+            "x": "Follow us on X (formerly Twitter) for news, updates, and announcements."
+        },
         "start_tour": "Start guided tour"
     }
 }

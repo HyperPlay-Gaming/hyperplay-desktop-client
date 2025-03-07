@@ -5,36 +5,52 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 import { useTourGuide } from './TourContext'
 
+export type TourType = 'library' | 'sidebar'
+
 interface TourTriggerButtonProps {
-  tourId?: string // If not provided, uses the 'library' tour by default
+  tourId?: TourType
   className?: string
+  buttonType?: 'primary' | 'secondary' | 'tertiary'
+  showIcon?: boolean
+  showText?: boolean
 }
 
 export const TourTriggerButton: React.FC<TourTriggerButtonProps> = ({
   tourId = 'library',
-  className = ''
+  className = '',
+  buttonType = 'tertiary',
+  showIcon = true,
+  showText = true
 }) => {
   const { t } = useTranslation('tour')
-  const { activateLibraryTour } = useTourGuide()
+  const { activateLibraryTour, activateSidebarTour } = useTourGuide()
 
   const handleClick = () => {
-    if (tourId === 'library') {
-      activateLibraryTour()
+    switch (tourId) {
+      case 'library':
+        activateLibraryTour()
+        break
+      case 'sidebar':
+        activateSidebarTour()
+        break
+      default:
+        activateLibraryTour()
     }
-    // Add additional tour activation functions as needed
   }
 
   return (
     <Button
-      type="tertiary"
+      type={buttonType}
       className={className}
       onClick={handleClick}
       title={t('tour.start_tour', 'Start guided tour')}
       leftIcon={
-        <FontAwesomeIcon icon={faQuestionCircle} height={14} width={14} />
+        showIcon ? (
+          <FontAwesomeIcon icon={faQuestionCircle} height={14} width={14} />
+        ) : undefined
       }
     >
-      {t('tour.help', 'Help')}
+      {showText && t('tour.help', 'Help')}
     </Button>
   )
 }
