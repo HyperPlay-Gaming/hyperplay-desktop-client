@@ -253,3 +253,71 @@ export const gamePageTourSteps = (t: TFunction): TourStep[] => [
     position: 'center'
   }
 ]
+
+// TopNav tour steps
+export const topNavTourSteps = (t: TFunction): TourStep[] => [
+  {
+    element: '[data-tour="topnav-container"]',
+    intro: t(
+      'tour.topnav.welcome',
+      "Welcome to HyperPlay! Let's explore the navigation bar and its features."
+    ),
+    position: 'bottom'
+  },
+  {
+    element: '[data-tour="topnav-hyperplay-store"]',
+    intro: t(
+      'tour.topnav.hyperplay_store',
+      'Access the HyperPlay Store to discover exciting web3 games.'
+    ),
+    position: 'bottom'
+  },
+  {
+    element: '[data-tour="topnav-epic-store"]',
+    intro: t(
+      'tour.topnav.epic_store',
+      'Browse and buy games from the Epic Games Store.'
+    ),
+    position: 'bottom'
+  },
+  {
+    element: '[data-tour="topnav-gog-store"]',
+    intro: t(
+      'tour.topnav.gog_store',
+      'Browse and buy games from the GOG Store.'
+    ),
+    position: 'bottom'
+  },
+  {
+    element: '[data-testid="searchBar"]',
+    intro: t(
+      'tour.library.search',
+      'Search for specific games by title using the search bar.'
+    ),
+    position: 'bottom'
+  },
+  {
+    element: '[data-tour="topnav-metamask"]',
+    intro: t(
+      'tour.topnav.metamask',
+      'Quick access to your MetaMask wallet for web3 transactions.'
+    ),
+    position: 'left'
+  },
+  {
+    element: '[data-tour="topnav-account"]',
+    intro: t(
+      'tour.topnav.account',
+      'Change your connected wallet, manage connected stores, view your portfolio, and more.'
+    ),
+    position: 'left'
+  },
+  {
+    element: '[data-tour="topnav-container"]',
+    intro: t(
+      'tour.topnav.finish',
+      "That's it! You now know how to navigate HyperPlay's top bar and account features."
+    ),
+    position: 'center'
+  }
+]

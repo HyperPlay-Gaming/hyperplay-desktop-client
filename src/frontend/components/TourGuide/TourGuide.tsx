@@ -7,6 +7,7 @@ import {
   libraryTourSteps,
   sidebarTourSteps,
   gamePageTourSteps,
+  topNavTourSteps,
   TourStep
 } from './TourSteps'
 import './TourGuide.scss'
@@ -33,7 +34,9 @@ export const TourGuide: React.FC = () => {
         case 'gamepage':
           steps = gamePageTourSteps(t)
           break
-        // Add more tour types here as needed
+        case 'topnav':
+          steps = topNavTourSteps(t)
+          break
         default:
           steps = []
       }

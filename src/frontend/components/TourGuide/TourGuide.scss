@@ -72,12 +72,16 @@
 }
 
 .introjs-helperLayer {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: transparent;
   border: 2px solid var(--primary);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
 .introjs-overlay {
-  opacity: 0.7 !important;
+  opacity: 0.5 !important;
   background-color: var(--background-darker);
+}
+
+.introjs-fixParent {
+  z-index: 999999 !important;
 }
