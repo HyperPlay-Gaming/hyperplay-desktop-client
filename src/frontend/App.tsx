@@ -41,6 +41,8 @@ import { QuestsPage } from './screens/Quests'
 import { NavigateListener } from './NavigateListener'
 import G7Webview from './screens/G7Webview'
 import CardPrivacyPolicy from './screens/Onboarding/analytics/CardPrivacyPolicy'
+// Import the TourProvider
+import { TourProvider } from './components/TourGuide/TourContext'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
@@ -50,106 +52,112 @@ function App() {
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
-      <HashRouter>
-        <OfflineMessage />
-        <TopNavBar />
-        <Sidebar />
-        <main className="content">
-          <CardPrivacyPolicy />
-          <QaAuthHandler />
-          <NavigateListener />
-          <ExtensionHandler />
-          <ExtensionManager />
-          <DialogHandler />
-          <ExternalLinkDialog />
-          <AuthModal />
-          <EmailSubscriptionModal />
-          <StoreNavHandler />
-          {isSettingsModalOpen.gameInfo && (
-            <SettingsModal
-              gameInfo={isSettingsModalOpen.gameInfo}
-              type={isSettingsModalOpen.type}
-            />
-          )}
-          <Routes>
-            <Route
-              path="/"
-              element={<Navigate replace to={firstDestination} />}
-            />
-            <Route path="/library" element={<Library />} />
-            <Route
-              path="/achievements"
-              element={
-                <AchievementsLayout>
-                  <Outlet />
-                </AchievementsLayout>
-              }
-            >
-              <Route index element={<Achievements />} />
-              <Route
-                path="/achievements/:id"
-                element={<GameAchievementDetails />}
+      {/* Wrap the entire app with the TourProvider */}
+      <TourProvider>
+        <HashRouter>
+          <OfflineMessage />
+          <TopNavBar />
+          <Sidebar />
+          <main className="content">
+            <CardPrivacyPolicy />
+            <QaAuthHandler />
+            <NavigateListener />
+            <ExtensionHandler />
+            <ExtensionManager />
+            <DialogHandler />
+            <ExternalLinkDialog />
+            <AuthModal />
+            <EmailSubscriptionModal />
+            <StoreNavHandler />
+            {isSettingsModalOpen.gameInfo && (
+              <SettingsModal
+                gameInfo={isSettingsModalOpen.gameInfo}
+                type={isSettingsModalOpen.type}
               />
-            </Route>
-            <Route path="login" element={<Login />} />
-            <Route
-              path="hyperplaystore"
-              element={<WebView key="hyperplaystore" />}
-            />
-            <Route path="epicstore" element={<WebView key="epicstore" />} />
-            <Route path="gogstore" element={<WebView key="gogstore" />} />
-            <Route path="docs" element={<WebView key="docs" />} />
-            <Route path="metamaskHome" element={<MetaMaskHome />} />
-            <Route
-              path="metamaskSnaps"
-              element={<WebView key="metamaskSnaps" />}
-            />
-            <Route path="game7Portal" element={<G7Webview />} />
-            <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />}>
-              <Route path=":page" element={<MetaMaskPortfolio />} />
-            </Route>
-            <Route path="/gamepage">
-              <Route path=":runner">
-                <Route path=":appName" element={<GamePage />} />
+            )}
+            <Routes>
+              <Route
+                path="/"
+                element={<Navigate replace to={firstDestination} />}
+              />
+              <Route path="/library" element={<Library />} />
+              <Route
+                path="/achievements"
+                element={
+                  <AchievementsLayout>
+                    <Outlet />
+                  </AchievementsLayout>
+                }
+              >
+                <Route index element={<Achievements />} />
+                <Route
+                  path="/achievements/:id"
+                  element={<GameAchievementDetails />}
+                />
               </Route>
-            </Route>
-            <Route path="/store-page" element={<WebView key="store-page" />} />
-            <Route path="loginweb">
-              <Route path=":runner" element={<WebView key="loginweb" />} />
-            </Route>
-            <Route path="settings">
-              <Route path=":runner">
-                <Route path=":appName">
-                  <Route path=":type" element={<Settings />} />
+              <Route path="login" element={<Login />} />
+              <Route
+                path="hyperplaystore"
+                element={<WebView key="hyperplaystore" />}
+              />
+              <Route path="epicstore" element={<WebView key="epicstore" />} />
+              <Route path="gogstore" element={<WebView key="gogstore" />} />
+              <Route path="docs" element={<WebView key="docs" />} />
+              <Route path="metamaskHome" element={<MetaMaskHome />} />
+              <Route
+                path="metamaskSnaps"
+                element={<WebView key="metamaskSnaps" />}
+              />
+              <Route path="game7Portal" element={<G7Webview />} />
+              <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />}>
+                <Route path=":page" element={<MetaMaskPortfolio />} />
+              </Route>
+              <Route path="/gamepage">
+                <Route path=":runner">
+                  <Route path=":appName" element={<GamePage />} />
                 </Route>
               </Route>
-            </Route>
-            <Route path="/download-manager" element={<DownloadManager />} />
-            <Route path="/quests" element={<QuestsPage />}>
-              <Route path=":questId" element={<QuestsPage />} />
-            </Route>
-          </Routes>
-        </main>
-        <div className="controller">
-          <ControllerHints />
-          <div className="simple-keyboard"></div>
-        </div>
-        <OnboardingStoreController />
-        {onboardingStore.isOnboardingOpen && (
-          <Onboarding
-            disableOnboarding={(disableReason: WalletOnboardCloseReason) => {
-              if (disableReason === 'skipped') {
-                window.api.trackEvent({ event: 'Onboarding Skipped' })
-              }
-              onboardingStore.closeOnboarding()
-            }}
-          />
-        )}
-      </HashRouter>
-      <TransactionNotification />
-      <DownloadToastManager />
-      <DeviceStateController />
-      <UpdateModalController />
+              <Route
+                path="/store-page"
+                element={<WebView key="store-page" />}
+              />
+              <Route path="loginweb">
+                <Route path=":runner" element={<WebView key="loginweb" />} />
+              </Route>
+              <Route path="settings">
+                <Route path=":runner">
+                  <Route path=":appName">
+                    <Route path=":type" element={<Settings />} />
+                  </Route>
+                </Route>
+              </Route>
+              <Route path="/download-manager" element={<DownloadManager />} />
+              <Route path="/quests" element={<QuestsPage />}>
+                <Route path=":questId" element={<QuestsPage />} />
+              </Route>
+            </Routes>
+          </main>
+          <div className="controller">
+            <ControllerHints />
+            <div className="simple-keyboard"></div>
+          </div>
+          <OnboardingStoreController />
+          {onboardingStore.isOnboardingOpen && (
+            <Onboarding
+              disableOnboarding={(disableReason: WalletOnboardCloseReason) => {
+                if (disableReason === 'skipped') {
+                  window.api.trackEvent({ event: 'Onboarding Skipped' })
+                }
+                onboardingStore.closeOnboarding()
+              }}
+            />
+          )}
+        </HashRouter>
+        <TransactionNotification />
+        <DownloadToastManager />
+        <DeviceStateController />
+        <UpdateModalController />
+      </TourProvider>
     </div>
   )
 }

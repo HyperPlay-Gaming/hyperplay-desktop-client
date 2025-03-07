@@ -49,6 +49,7 @@ export const LibraryTopBar = observer(
             libraryState.category = val as Category
           }
         }}
+        data-tour="filters"
         defaultValue={category}
         classNames={getTabsClassNames(
           { list: styles.tabsList },

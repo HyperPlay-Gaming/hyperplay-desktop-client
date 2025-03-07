@@ -26,6 +26,9 @@ import libraryState from '../../state/libraryState'
 import { observer } from 'mobx-react-lite'
 import storeAuthState from 'frontend/state/storeAuthState'
 import SteamInstallButton from './components/SteamInstall/SteamInstallButton'
+import { useTourGuide } from 'frontend/components/TourGuide/TourContext'
+import TourGuide from 'frontend/components/TourGuide/TourGuide'
+import TourTriggerButton from 'frontend/components/TourGuide/TourTriggerButton'
 
 const storage = window.localStorage
 
@@ -40,6 +43,7 @@ export default observer(function Library(): JSX.Element {
   const { layout, epic, gog, platform, connectivity } =
     useContext(ContextProvider)
   const { t } = useTranslation()
+  const { isTourCompleted, activateLibraryTour } = useTourGuide()
 
   const isOffline = connectivity.status !== 'online'
 
@@ -97,6 +101,16 @@ export default observer(function Library(): JSX.Element {
   useEffect(() => {
     window.api.trackScreen('Library')
     libraryState.selectedFilter = filters[0]
+
+    // Start library tour if it hasn't been completed
+    if (!isTourCompleted('library')) {
+      // Delay to allow components to fully render
+      const timer = setTimeout(() => {
+        activateLibraryTour()
+      }, 1000)
+      return () => clearTimeout(timer)
+    }
+    return
   }, [])
 
   const backToTop = () => {
@@ -226,7 +240,7 @@ export default observer(function Library(): JSX.Element {
     <>
       <Background style={{ position: 'absolute' }}></Background>
       <div className="Library contentContainer" ref={listing}>
-        <div className={styles.libraryTopHeader}>
+        <div data-tour="library-top-header" className={styles.libraryTopHeader}>
           <h3>{t('library.label', 'Library')}</h3>
           <span className={`${styles.numberOfgames} title`}>
             {numberOfGames}
@@ -234,6 +248,7 @@ export default observer(function Library(): JSX.Element {
           <Button
             className={styles.refreshButton}
             type="tertiary"
+            data-tour="refresh"
             title={t('generic.library.refresh', 'Refresh Library')}
             disabled={isOffline}
             onClick={async () =>
@@ -252,12 +267,14 @@ export default observer(function Library(): JSX.Element {
           </Button>
           <Button
             type="tertiary"
+            data-tour="add-game"
             onClick={() => handleModal('', 'sideload', null)}
             leftIcon={<FontAwesomeIcon icon={faPlus} height={14} width={14} />}
           >
             {t('add_game', 'Add Game')}
           </Button>
           {isMac ? <SteamInstallButton /> : null}
+          <TourTriggerButton className={styles.tourButton} />
         </div>
         <LibraryTopBar
           filters={filters}
@@ -272,6 +289,7 @@ export default observer(function Library(): JSX.Element {
           <span id="top" />
           {showRecentGames && (
             <RecentlyPlayed
+              data-tour="recently-played"
               handleModal={handleModal}
               onlyInstalled={libraryState.libraryTopSection.endsWith(
                 'installed'
@@ -332,6 +350,7 @@ export default observer(function Library(): JSX.Element {
           />
         )}
       </div>
+      <TourGuide />
     </>
   )
 })
