@@ -1,0 +1,20 @@
+{
+    "tour": {
+        "done": "Done",
+        "help": "Help",
+        "library": {
+            "add_game": "You can add custom games to your library by clicking this button.",
+            "back_to_top": "Once you have many games, use this button to quickly scroll back to the top.",
+            "filters": "Use these filters to sort your games and find what you're looking for quickly.",
+            "finish": "That's it! You now know how to navigate your Library. Happy gaming!",
+            "games_list": "This is your games collection. Click on any game to install, launch, or modify it.",
+            "header": "This is the Library header. You can see how many games you have in your collection.",
+            "refresh": "Click here to refresh your game library to see the latest additions or updates.",
+            "search": "Search for specific games by title using the search bar.",
+            "welcome": "Welcome to your Library! This is where all your games are displayed. Let's explore the main features."
+        },
+        "next": "Next",
+        "prev": "Prev",
+        "start_tour": "Start guided tour"
+    }
+}

@@ -1,0 +1,83 @@
+// Custom styling for intro.js to match HyperPlay design system
+.introjs-tooltip {
+  background-color: var(--background-secondary);
+  color: var(--text-default);
+  border-radius: var(--space-xs);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--accent);
+  min-width: 400px;
+}
+
+.introjs-tooltiptext {
+  font-size: var(--text-xl);
+  line-height: 1.5;
+  padding: var(--space-sm);
+}
+
+.introjs-button {
+  background-color: var(--background-lighter);
+  color: var(--text-default);
+  border-radius: var(--space-3xs-fixed);
+  font-size: var(--text-xs);
+  padding: var(--space-3xs) var(--space-xs);
+  border: 1px solid var(--accent);
+  text-shadow: none;
+
+  &:hover {
+    background-color: var(--primary);
+    color: var(--text-title);
+  }
+}
+
+.introjs-prevbutton {
+  margin-right: var(--space-3xs);
+}
+
+.introjs-bullets ul li a {
+  background-color: var(--background-lighter);
+
+  &.active {
+    background-color: var(--primary);
+  }
+}
+
+.introjs-progress {
+  background-color: var(--background-lighter);
+
+  .introjs-progressbar {
+    background-color: var(--primary);
+  }
+}
+
+.introjs-arrow {
+  &.top,
+  &.top-right,
+  &.top-middle {
+    border-bottom-color: var(--background-secondary);
+  }
+
+  &.bottom,
+  &.bottom-right,
+  &.bottom-middle {
+    border-top-color: var(--background-secondary);
+  }
+
+  &.left {
+    border-right-color: var(--background-secondary);
+  }
+
+  &.right {
+    border-left-color: var(--background-secondary);
+  }
+}
+
+.introjs-helperLayer {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--primary);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+}
+
+.introjs-overlay {
+  opacity: 0.7 !important;
+  background-color: var(--background-darker);
+}
