@@ -1,8 +1,8 @@
 {
     "accessibility": {
-        "actions_font_family_no_default": "Toimintojen fonttiperhe (oletus): ",
+        "actions_font_family_no_default": "Toimintojen kirjaisinperhe (oletus): ",
         "all_tiles_in_color": "Näytä kaikki pelin laatat värillisinä",
-        "content_font_family_no_default": "Sisältöfonttiperhe (oletus): ",
+        "content_font_family_no_default": "Sisältökirjaisinperhe (oletus): ",
         "fonts": "Fontit",
         "title": "Esteettömyys",
         "zoom": "Zoom"
