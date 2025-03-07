@@ -470,7 +470,7 @@ if (!gotTheLock) {
 
     createInjectedProviderWindow()
 
-    const currentStoredVersion = configStore.get('appVersion')
+    const currentStoredVersion = configStore.get('appVersion', '')
 
     // Add MM reload here after a couple of version
     if (currentStoredVersion !== app.getVersion()) {
