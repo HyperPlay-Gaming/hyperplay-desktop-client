@@ -185,6 +185,12 @@ importers:
       ini:
         specifier: ^3.0.1
         version: 3.0.1
+      intro.js:
+        specifier: ^7.2.0
+        version: 7.2.0
+      intro.js-react:
+        specifier: ^1.0.0
+        version: 1.0.0(intro.js@7.2.0)(react@18.3.1)
       jest-environment-jsdom:
         specifier: ^29.7.0
         version: 29.7.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
@@ -5853,6 +5859,15 @@ packages:
   into-stream@6.0.0:
     resolution: {integrity: sha512-XHbaOAvP+uFKUFsOgoNPRjLkwB+I22JFPFe5OjTkQ0nwgj6+pSjb4NmB6VMxaPshLiOf+zcpOCBQuLwC1KHhZA==}
     engines: {node: '>=10'}
+
+  intro.js-react@1.0.0:
+    resolution: {integrity: sha512-zR8pbTyX20RnCZpJMc0nuHBpsjcr1wFkj3ZookV6Ly4eE/LGpFTQwPsaA61Cryzwiy/tTFsusf4hPU9NpI9UOg==}
+    peerDependencies:
+      intro.js: '>=2.5.0'
+      react: '>=0.14.0'
+
+  intro.js@7.2.0:
+    resolution: {integrity: sha512-qbMfaB70rOXVBceIWNYnYTpVTiZsvQh/MIkfdQbpA9di9VBfj1GigUPfcCv3aOfsbrtPcri8vTLTA4FcEDcHSQ==}
 
   invariant@2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
@@ -16928,6 +16943,13 @@ snapshots:
     dependencies:
       from2: 2.3.0
       p-is-promise: 3.0.0
+
+  intro.js-react@1.0.0(intro.js@7.2.0)(react@18.3.1):
+    dependencies:
+      intro.js: 7.2.0
+      react: 18.3.1
+
+  intro.js@7.2.0: {}
 
   invariant@2.2.4:
     dependencies:
