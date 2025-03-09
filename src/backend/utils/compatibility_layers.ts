@@ -3,6 +3,7 @@ import {
   configPath,
   getSteamLibraries,
   icon,
+  isIntelMac,
   isLinux,
   isMac,
   isWindows,
@@ -624,7 +625,9 @@ export async function downloadDefaultWine() {
     const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
 
     // use Proton-GE type if on Linux and GPTK or Wine-Crossover if on Mac
-    const isGPTKCompatible = isMac ? await isMacSonomaOrHigher() : false
+    const isMacOSUpToDate = await isMacSonomaOrHigher()
+    const isGPTKCompatible = isMac ? isMacOSUpToDate && !isIntelMac : false
+
     const results = await Promise.all(
       availableWine.map(async (version) => {
         if (isLinux) {
