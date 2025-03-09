@@ -91,7 +91,7 @@ export default function WebviewControls({
 
   const _url = url !== '' ? new URL(url) : null
   const allowList = [
-    'store.hyperplay.xyz',
+    'hyperplay-store-git-tech-refactorlaunchercheck-hyperplay.vercel.app',
     'docs.hyperplay.xyz',
     'app.game7.io'
   ]
