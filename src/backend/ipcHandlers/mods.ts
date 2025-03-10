@@ -125,8 +125,6 @@ export async function prepareBaseGameForModding({
     extractService.on('canceled', () => {
       logInfo(`Canceled Extracting of base game file`, LogPrefix.HyperPlay)
 
-      process.noAsar = false
-
       cancelQueueExtraction()
       callAbortController(appName)
 

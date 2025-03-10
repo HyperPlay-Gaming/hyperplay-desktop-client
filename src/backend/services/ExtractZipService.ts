@@ -2,8 +2,9 @@ import { EventEmitter } from 'node:events'
 import { Readable } from 'node:stream'
 import { open, ZipFile, Entry } from 'yauzl'
 import { mkdirSync, createWriteStream, rmSync, existsSync } from 'graceful-fs'
-import { captureException } from '@sentry/electron'
 import { join } from 'path'
+import { extractOptions, ExtractZipServiceCommand } from './types'
+import { isMainThread, parentPort } from 'node:worker_threads'
 
 export interface ExtractZipProgressResponse {
   /** Percentage of extraction progress. */
@@ -20,10 +21,6 @@ enum ExtractionValidation {
   NOT_EXIST = 'NOT_EXIST',
   INVALID_FILE_NAME_ASCII = 'INVALID_FILE_NAME_ASCII',
   VALID = 'VALID'
-}
-
-type extractOptions = {
-  deleteOnEnd?: boolean
 }
 
 /**
@@ -423,7 +420,6 @@ export class ExtractZipService extends EventEmitter {
       return await this.#extractionPromise
     } catch (error) {
       this.#onError(error as Error)
-      captureException(error)
 
       return false
     } finally {
@@ -433,4 +429,43 @@ export class ExtractZipService extends EventEmitter {
       this.#rejectExtraction = null
     }
   }
+}
+
+let extractZipService: ExtractZipService | undefined = undefined
+const eventsToListenTo = ['progress', 'finished', 'error', 'canceled']
+
+if (!isMainThread) {
+  // disables electron's fs wrapper called when extracting .asar files
+  // which is necessary to extract electron app/game zip files
+  process.noAsar = true
+  parentPort?.on('message', (data) => {
+    const command: ExtractZipServiceCommand = data.type
+    switch (command) {
+      case 'INIT':
+        extractZipService = new ExtractZipService(
+          data.zipFile,
+          data.destinationPath,
+          data.options
+        )
+        for (const evName of eventsToListenTo) {
+          extractZipService.on(evName, (...args) => {
+            parentPort?.postMessage({ eventType: evName, args })
+          })
+        }
+        parentPort?.postMessage({ initEvent: 'ZIP_SERVICE_INSTANTIATED' })
+        break
+      case 'CANCEL':
+        extractZipService?.cancel()
+        break
+      case 'PAUSE':
+        extractZipService?.pause()
+        break
+      case 'EXTRACT':
+        extractZipService?.extract()
+        break
+      default:
+        break
+    }
+  })
+  parentPort?.postMessage({ initEvent: 'INITIALIZED' })
 }
