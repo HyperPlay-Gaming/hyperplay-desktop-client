@@ -6,9 +6,7 @@ import path from 'node:path'
 export class ExtractZipServiceWorker extends EventEmitter {
   worker: Worker
   initPromise: Promise<void>
-  #resolveInitPromise: () => void = () => {
-    console.error('resolve init promise not assigned!')
-  }
+  #resolveInitPromise: () => void
 
   constructor(
     zipFile: string,
@@ -16,6 +14,9 @@ export class ExtractZipServiceWorker extends EventEmitter {
     options?: extractOptions
   ) {
     super()
+    this.#resolveInitPromise = () => {
+      console.error('resolve init promise not assigned!')
+    }
     this.initPromise = new Promise((res) => {
       this.#resolveInitPromise = res
     })
