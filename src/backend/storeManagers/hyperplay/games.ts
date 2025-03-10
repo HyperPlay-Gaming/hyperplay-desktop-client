@@ -21,7 +21,10 @@ import {
   logInfo,
   logWarning
 } from 'backend/logger/logger'
-import { ExtractZipProgressResponse } from 'backend/services/ExtractZipService'
+import {
+  ExtractZipProgressResponse,
+  ExtractZipService
+} from 'backend/services/ExtractZipService'
 import {
   existsSync,
   mkdirSync,
@@ -112,8 +115,10 @@ interface ProgressDownloadingItem {
 }
 
 const inProgressDownloadsMap: Map<string, ProgressDownloadingItem> = new Map()
-export const inProgressExtractionsMap: Map<string, ExtractZipServiceWorker> =
-  new Map()
+export const inProgressExtractionsMap: Map<
+  string,
+  ExtractZipServiceWorker | ExtractZipService
+> = new Map()
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
