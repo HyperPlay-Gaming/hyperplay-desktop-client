@@ -2,7 +2,7 @@ import { app, dialog, shell } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
-import { configStore, icon, isLinux } from '../constants'
+import { icon, isLinux } from '../constants'
 import { logError, logInfo, LogPrefix } from '../logger/logger'
 import { captureException } from '@sentry/electron'
 import { getFileSize } from '../utils'
@@ -12,11 +12,9 @@ import { getErrorMessage, removeCachedUpdatesFolder } from './utils'
 // to test auto update on windows locally make sure you added the option verifyUpdateCodeSignature: false
 // under build.win in electron-builder.yml and also change the app version to an old one there
 
-const appSettings = configStore.get_nodefault('settings')
-const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
 let newVersion: string
 
-autoUpdater.autoDownload = shouldCheckForUpdates && !isLinux
+autoUpdater.autoDownload = !isLinux
 autoUpdater.autoInstallOnAppQuit = true
 
 let isAppUpdating = false
@@ -29,7 +27,7 @@ const MAX_UPDATE_ATTEMPTS = 10
 const checkUpdateInterval = 3 * 1000 * 60 * 60
 
 setInterval(async () => {
-  if (shouldCheckForUpdates && !hasUpdated && !isAppUpdating) {
+  if (!hasUpdated && !isAppUpdating) {
     logInfo('Checking for client updates...', LogPrefix.AutoUpdater)
     await autoUpdater.checkForUpdates()
   }
@@ -44,14 +42,6 @@ autoUpdater.on('update-available', async (info) => {
     return
   }
 
-  if (!shouldCheckForUpdates) {
-    logInfo(
-      'New update available, but user has disabled auto updates',
-      LogPrefix.AutoUpdater
-    )
-
-    return
-  }
   newVersion = info.version
 
   trackEvent({
