@@ -72,7 +72,7 @@
     "@hyperplay/chains": "^0.5.0",
     "@hyperplay/check-disk-space": "^3.5.2",
     "@hyperplay/quests-ui": "^0.1.26",
-    "@hyperplay/ui": "^1.9.9",
+    "@hyperplay/ui": "^1.11.1",
     "@hyperplay/utils": "^0.3.7",
     "@mantine/carousel": "^7.12.0",
     "@mantine/core": "^7.12.0",
