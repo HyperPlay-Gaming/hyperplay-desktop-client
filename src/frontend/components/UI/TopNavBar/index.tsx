@@ -107,7 +107,7 @@ const TopNavBar = observer(() => {
             onMouseEnter={() => extensionStore.lockPopup()}
             onMouseLeave={() => extensionStore.unlockPopup()}
           >
-            <Images.MetaMask fill="white" />
+            <Images.MetaMask className={styles.metaMaskIcon} />
             {badgeText !== '' && badgeText !== '0' ? (
               <div className={styles.badge}>{badgeText}</div>
             ) : null}
