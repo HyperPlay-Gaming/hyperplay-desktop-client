@@ -16,13 +16,12 @@ import {
   valistListingsApiUrl
 } from 'backend/constants'
 import { getGameInfo } from './games'
-import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
+import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { join } from 'path'
-import { existsSync, rmSync } from 'graceful-fs'
+import { existsSync } from 'graceful-fs'
 import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from 'common/constants'
-import { captureException } from '@sentry/electron'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -419,113 +418,4 @@ export const runModPatcher = async (appName: string) => {
   } catch (error) {
     throw new Error(`Error running patcher: ${error}`)
   }
-}
-
-type SafeRemoveDirectoryOptions = {
-  maxRetries?: number
-  retryDelay?: number
-  sizeThresholdMB?: number
-}
-
-/**
- * Safely removes a directory with retry logic to handle Windows EPERM issues
- * @param directory Path to the directory to remove
- * @param options Optional configuration for removal
- * @param options.maxRetries Maximum number of removal attempts before giving up (default: 5)
- * @param options.retryDelay Delay in milliseconds between removal attempts (default: 10000)
- * @param options.sizeThresholdMB Threshold in MB above which async removal is used (default: 500)
- * @returns True if directory was successfully removed or doesn't exist, false otherwise
- * @warning This function MUST always be awaited to prevent race conditions
- */
-export async function safeRemoveDirectory(
-  directory: string,
-  {
-    maxRetries = 10,
-    retryDelay = 6000,
-    sizeThresholdMB = 500
-  }: SafeRemoveDirectoryOptions = {}
-): Promise<boolean> {
-  if (!existsSync(directory)) {
-    return true // Directory doesn't exist, nothing to remove
-  }
-
-  // Log start of removal process
-  logInfo(`Starting removal of directory ${directory}`, LogPrefix.HyperPlay)
-
-  // Import fs promises for async operations only when needed
-  const fsPromises = await import('fs/promises')
-
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    try {
-      // Use different removal strategies based on expected size
-      // For directories larger than threshold, use async removal to not block the main thread
-      if (sizeThresholdMB > 250) {
-        try {
-          await fsPromises.rm(directory, {
-            recursive: true,
-            force: true,
-            maxRetries: 3
-          })
-        } catch (asyncError) {
-          // Fallback to sync if async fails
-          logWarning(
-            `Async removal failed, falling back to sync removal: ${asyncError}`,
-            LogPrefix.HyperPlay
-          )
-          rmSync(directory, { recursive: true, force: true, maxRetries: 3 })
-        }
-      } else {
-        // For smaller directories, use sync removal
-        rmSync(directory, { recursive: true, force: true, maxRetries: 3 })
-      }
-
-      // Verify directory was actually removed
-      try {
-        await fsPromises.access(directory)
-        // If we get here, directory still exists
-        logWarning(
-          `Failed to remove directory ${directory} on attempt ${attempt}/${maxRetries}, directory still exists`,
-          LogPrefix.HyperPlay
-        )
-        captureException(
-          new Error(`Failed to remove directory, directory still exists`),
-          {
-            extra: {
-              directory,
-              attempts: attempt,
-              method: 'safeRemoveDirectory'
-            }
-          }
-        )
-      } catch {
-        // Directory doesn't exist (access threw an error), removal succeeded
-        logInfo(
-          `Successfully removed directory ${directory}`,
-          LogPrefix.HyperPlay
-        )
-        return true
-      }
-    } catch (error) {
-      logWarning(
-        `Error removing directory ${directory} on attempt ${attempt}/${maxRetries}: ${error}`,
-        LogPrefix.HyperPlay
-      )
-    }
-
-    // Use exponential backoff for retries (increases wait time with each attempt)
-    if (attempt < maxRetries) {
-      const backoffDelay = retryDelay * Math.pow(1.5, attempt - 1)
-      logInfo(
-        `Waiting ${backoffDelay}ms before retry ${attempt + 1}/${maxRetries}`,
-        LogPrefix.HyperPlay
-      )
-      await new Promise((resolve) => setTimeout(resolve, backoffDelay))
-    }
-  }
-
-  logError(
-    `Failed to remove directory ${directory} after ${maxRetries} attempts`,
-    LogPrefix.HyperPlay
-  )
-  return false
 }
