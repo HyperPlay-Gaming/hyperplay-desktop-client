@@ -228,29 +228,6 @@ export interface PatchingFailed {
   sensitiveProperties?: never
 }
 
-export interface PatchingAborted {
-  event: 'Patching Aborted'
-  properties: {
-    game_name: string
-    game_title: string
-    platform: ReturnType<typeof getPlatformName>
-    platform_arch: InstallPlatform
-  }
-  sensitiveProperties?: never
-}
-
-export interface PatchingCleanupFailed {
-  event: 'Patching Cleanup Failed'
-  properties: {
-    game_name: string
-    error: string
-    game_title: string
-    platform?: ReturnType<typeof getPlatformName>
-    platform_arch?: InstallPlatform
-  }
-  sensitiveProperties?: never
-}
-
 export interface PatchingTooSlow {
   event: 'Patching Too Slow'
   properties: {
@@ -498,8 +475,6 @@ export type PossibleMetricPayloads =
   | PatchingStarted
   | PatchingSuccess
   | PatchingFailed
-  | PatchingAborted
-  | PatchingCleanupFailed
   | PatchingTooSlow
   | AccountDropdownPortfolioClicked
 

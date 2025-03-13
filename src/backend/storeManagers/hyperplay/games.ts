@@ -65,8 +65,7 @@ import {
   handleArchAndPlatform,
   handlePlatformReversed,
   runModPatcher,
-  sanitizeVersion,
-  safeRemoveDirectory
+  sanitizeVersion
 } from './utils'
 import { getSettings as getSettingsSideload } from 'backend/storeManagers/sideload/games'
 import {
@@ -424,11 +423,11 @@ const findExecutables = async (folderPath: string): Promise<string[]> => {
   return executables
 }
 
-export async function cleanUpDownload(appName: string, directory: string) {
+export function cleanUpDownload(appName: string, directory: string) {
   inProgressDownloadsMap.delete(appName)
   inProgressExtractionsMap.delete(appName)
   deleteAbortController(appName)
-  await safeRemoveDirectory(directory)
+  rmSync(directory, { recursive: true, force: true })
 }
 
 function getDownloadUrl(platformInfo: PlatformConfig, appName: string) {
@@ -524,9 +523,9 @@ async function downloadGame(
       res()
     }
 
-    async function onCancel() {
+    function onCancel() {
       try {
-        await cleanUpDownload(appName, directory)
+        cleanUpDownload(appName, directory)
       } catch (err) {
         rej(err)
       }
@@ -1172,7 +1171,7 @@ export async function extract(
             body: `Installed`
           })
 
-          await cleanUpDownload(appName, directory)
+          cleanUpDownload(appName, directory)
 
           sendFrontendMessage('refreshLibrary', 'hyperplay')
 
@@ -1181,13 +1180,13 @@ export async function extract(
           })
         }
       )
-      extractService.once('error', async (error: Error) => {
+      extractService.once('error', (error: Error) => {
         logError(`Extracting Error ${error.message}`, LogPrefix.HyperPlay)
 
         cancelQueueExtraction()
         callAbortController(appName)
 
-        await cleanUpDownload(appName, directory)
+        cleanUpDownload(appName, directory)
 
         sendFrontendMessage('refreshLibrary', 'hyperplay')
 
@@ -1195,7 +1194,7 @@ export async function extract(
           status: 'error'
         })
       })
-      extractService.once('canceled', async () => {
+      extractService.once('canceled', () => {
         logInfo(
           `Canceled Extracting: Cancellation completed on ${appName} - Destination ${destinationPath}`,
           LogPrefix.HyperPlay
@@ -1231,7 +1230,7 @@ export async function extract(
           body: 'Installation Stopped'
         })
 
-        await cleanUpDownload(appName, directory)
+        cleanUpDownload(appName, directory)
 
         sendFrontendMessage('refreshLibrary', 'hyperplay')
 
@@ -1901,18 +1900,13 @@ async function applyPatching(
 
     if (signal.aborted) {
       logInfo(`Patching ${appName} aborted`, LogPrefix.HyperPlay)
-      await safeRemoveDirectory(datastoreDir, {
-        sizeThresholdMB: blockSize * totalBlocks
-      })
-      aborted = true
+      rmSync(datastoreDir, { recursive: true })
       return { status: 'abort' }
     }
 
-    signal.onabort = async () => {
+    signal.onabort = () => {
       aborted = true
-      await safeRemoveDirectory(datastoreDir, {
-        sizeThresholdMB: blockSize * totalBlocks
-      })
+      rmSync(datastoreDir, { recursive: true })
       return { status: 'abort' }
     }
 
@@ -1997,36 +1991,7 @@ async function applyPatching(
     }
     // need this to cover 100% of abort cases
     if (aborted) {
-      try {
-        await safeRemoveDirectory(datastoreDir, {
-          sizeThresholdMB: blockSize * totalBlocks
-        })
-      } catch (cleanupError) {
-        trackEvent({
-          event: 'Patching Cleanup Failed',
-          properties: {
-            error: `${cleanupError}`,
-            game_name: gameInfo.app_name,
-            game_title: gameInfo.title,
-            platform: getPlatformName(platform),
-            platform_arch: platform
-          }
-        })
-
-        logWarning(
-          `Patching aborted and cleanup failed: ${cleanupError}`,
-          LogPrefix.HyperPlay
-        )
-      }
-      trackEvent({
-        event: 'Patching Aborted',
-        properties: {
-          game_name: gameInfo.app_name,
-          game_title: gameInfo.title,
-          platform: getPlatformName(platform),
-          platform_arch: platform
-        }
-      })
+      rmSync(datastoreDir, { recursive: true })
       return { status: 'abort' }
     }
 
@@ -2041,27 +2006,8 @@ async function applyPatching(
     })
 
     logInfo(`Patching ${appName} completed`, LogPrefix.HyperPlay)
-    try {
-      await safeRemoveDirectory(datastoreDir, {
-        sizeThresholdMB: blockSize * totalBlocks
-      })
-    } catch (cleanupError) {
-      trackEvent({
-        event: 'Patching Cleanup Failed',
-        properties: {
-          error: `${cleanupError}`,
-          game_name: gameInfo.app_name,
-          game_title: gameInfo.title,
-          platform: getPlatformName(platform),
-          platform_arch: platform
-        }
-      })
+    rmSync(datastoreDir, { recursive: true })
 
-      logWarning(
-        `Patching succeeded but cleanup failed: ${cleanupError}`,
-        LogPrefix.HyperPlay
-      )
-    }
     return { status: 'done' }
   } catch (error) {
     if (error instanceof PatchingError) {
@@ -2101,23 +2047,7 @@ async function applyPatching(
 
     // errors can be thrown before datastore dir created. rmSync on nonexistent dir blocks indefinitely
     if (existsSync(datastoreDir)) {
-      try {
-        await safeRemoveDirectory(datastoreDir)
-      } catch (cleanupError) {
-        trackEvent({
-          event: 'Patching Cleanup Failed',
-          properties: {
-            error: `${cleanupError}`,
-            game_name: gameInfo.app_name,
-            game_title: gameInfo.title
-          }
-        })
-
-        logWarning(
-          `Patching failed and cleanup failed: ${cleanupError}`,
-          LogPrefix.HyperPlay
-        )
-      }
+      rmSync(datastoreDir, { recursive: true })
     }
 
     return { status: 'error', error: `Error while patching ${error}` }
