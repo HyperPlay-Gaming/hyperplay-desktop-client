@@ -26,6 +26,7 @@ const configStore = new TypeCheckedStoreFrontend('wineManagerConfigStore', {
 export default React.memo(function WineManager(): JSX.Element | null {
   const { t } = useTranslation()
   const { refreshWineVersionInfo, platform } = useContext(ContextProvider)
+  const isIntelMac = platform === 'darwin' && process.arch === 'x64'
   const isLinux = platform === 'linux'
 
   const protonge: WineManagerUISettings = {
@@ -40,9 +41,26 @@ export default React.memo(function WineManager(): JSX.Element | null {
     enabled: !isLinux
   }
 
+  const wineCrossover: WineManagerUISettings = {
+    type: 'Wine-Crossover',
+    value: 'winecrossover',
+    enabled: !isLinux
+  }
+
+  const getDefaultRepository = (): WineManagerUISettings => {
+    if (isLinux) {
+      return protonge
+    } else if (isIntelMac) {
+      return wineCrossover
+    } else {
+      return gamePortingToolkit
+    }
+  }
+
   const [repository, setRepository] = useState<WineManagerUISettings>(
-    isLinux ? protonge : gamePortingToolkit
+    getDefaultRepository()
   )
+
   const [wineManagerSettings, setWineManagerSettings] = useState<
     WineManagerUISettings[]
   >([
