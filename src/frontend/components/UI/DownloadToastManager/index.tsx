@@ -160,9 +160,16 @@ export default function DownloadToastManager() {
     return 'inProgress'
   }
 
-  const adjustedDownloadedInBytes = downloadedMB * 1024 * 1024
-  const adjustedDownloadSizeInBytes =
-    progress.totalSize || installInfo?.manifest.download_size || 0
+  let adjustedDownloadedInBytes = downloadedMB * 1024 * 1024
+  const adjustedDownloadSizeInBytes = isExtracting
+    ? installInfo?.manifest.disk_size || 0
+    : installInfo?.manifest.download_size || 0
+
+  if (isExtracting) {
+    if (adjustedDownloadedInBytes > adjustedDownloadSizeInBytes) {
+      adjustedDownloadedInBytes = adjustedDownloadSizeInBytes
+    }
+  }
 
   return (
     <Draggable>
