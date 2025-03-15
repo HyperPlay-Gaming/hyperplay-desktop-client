@@ -1052,9 +1052,15 @@ export async function extract(
     const zipFile = path.join(directory, fileName)
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
 
-    // disables electron's fs wrapper called when extracting .asar files
-    // which is necessary to extract electron app/game zip files
-    process.noAsar = true
+    /**
+     * @dev disables electron's fs wrapper called when extracting .asar files
+     * which is necessary to extract electron app/game zip files.
+     * @TODO rm this code when we have a long term sol'n for running extraction in a separate process
+     */
+    const enableProcessNoAsar = getFlag('enable-process-no-asar', false)
+    if (enableProcessNoAsar) {
+      process.noAsar = true
+    }
 
     sendFrontendMessage('gameStatusUpdate', {
       appName,
