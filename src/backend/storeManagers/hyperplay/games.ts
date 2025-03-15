@@ -22,8 +22,8 @@ import {
   logWarning
 } from 'backend/logger/logger'
 import {
-  ExtractZipService,
-  ExtractZipProgressResponse
+  ExtractZipProgressResponse,
+  ExtractZipService
 } from 'backend/services/ExtractZipService'
 import {
   existsSync,
@@ -102,6 +102,7 @@ import { ipfsGateway } from 'backend/vite_constants'
 import { GlobalConfig } from 'backend/config'
 import { PatchingError } from './types'
 import { SiweMessage } from 'siwe'
+import { ExtractZipServiceWorker } from 'backend/services/ExtractZipServiceWorker'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -114,8 +115,10 @@ interface ProgressDownloadingItem {
 }
 
 const inProgressDownloadsMap: Map<string, ProgressDownloadingItem> = new Map()
-export const inProgressExtractionsMap: Map<string, ExtractZipService> =
-  new Map()
+export const inProgressExtractionsMap: Map<
+  string,
+  ExtractZipServiceWorker | ExtractZipService
+> = new Map()
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -764,8 +767,6 @@ export async function cancelExtraction(appName: string) {
   )
 
   try {
-    process.noAsar = false
-
     const extractZipService = inProgressExtractionsMap.get(appName)
     if (extractZipService) {
       extractZipService.cancel()
@@ -963,8 +964,6 @@ export async function install(
     }
     return { status: 'done' }
   } catch (error) {
-    process.noAsar = false
-
     logInfo(
       `Error while downloading and extracting game: ${error}`,
       LogPrefix.HyperPlay
@@ -1052,10 +1051,6 @@ export async function extract(
     const zipFile = path.join(directory, fileName)
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
 
-    // disables electron's fs wrapper called when extracting .asar files
-    // which is necessary to extract electron app/game zip files
-    process.noAsar = true
-
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       status: 'extracting',
@@ -1078,7 +1073,8 @@ export async function extract(
       }
     })
 
-    const extractService = new ExtractZipService(zipFile, destinationPath)
+    const extractService = new ExtractZipServiceWorker(zipFile, destinationPath)
+    await extractService.initPromise
 
     inProgressExtractionsMap.set(appName, extractService)
 
@@ -1154,8 +1150,6 @@ export async function extract(
             status: 'extracting'
           })
 
-          process.noAsar = false
-
           if (isMac && executable.endsWith('.app')) {
             const macAppExecutable = readdirSync(
               join(executable, 'Contents', 'MacOS')
@@ -1192,6 +1186,7 @@ export async function extract(
       )
       extractService.once('error', (error: Error) => {
         logError(`Extracting Error ${error.message}`, LogPrefix.HyperPlay)
+        captureException(error)
 
         cancelQueueExtraction()
         callAbortController(appName)
@@ -1209,8 +1204,6 @@ export async function extract(
           `Canceled Extracting: Cancellation completed on ${appName} - Destination ${destinationPath}`,
           LogPrefix.HyperPlay
         )
-
-        process.noAsar = false
 
         cancelQueueExtraction()
         callAbortController(appName)
@@ -1254,8 +1247,6 @@ export async function extract(
       extractService.extract().then()
     })
   } catch (error: unknown) {
-    process.noAsar = false
-
     logInfo(`Error while extracting game ${error}`, LogPrefix.HyperPlay)
 
     window.webContents.send('gameStatusUpdate', {
