@@ -470,6 +470,17 @@ if (!gotTheLock) {
 
     createInjectedProviderWindow()
 
+    const currentStoredVersion = configStore.get('appVersion', '')
+    const currentVersion = app.getVersion()
+
+    if (currentStoredVersion !== currentVersion) {
+      logInfo(
+        `App version changed from ${currentStoredVersion} to ${app.getVersion()}`,
+        LogPrefix.Backend
+      )
+      configStore.set('appVersion', currentVersion)
+    }
+
     const providerPreloadPath = path.join(
       __dirname,
       '../preload/providerPreload.js'
@@ -706,10 +717,32 @@ ipcMain.once('loadingScreenReady', () => {
 
 ipcMain.once('frontendReady', async () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
-  await initExtension(hpApi)
-  // wait for mm SW to initialize
-  await wait(5000)
-  ipcMain.emit('reloadApp')
+  const currentVersion = app.getVersion()
+  const lastVersion = configStore.get('appVersion', '')
+
+  if (!lastVersion || lastVersion !== currentVersion) {
+    // Only initialize extension and reload if a wallet is connected
+    const walletStateIsConnected = configStore.get(
+      'walletState.isConnected',
+      false
+    )
+    if (walletStateIsConnected) {
+      logInfo(
+        'App version changed and wallet connected, reloading to update MM',
+        LogPrefix.Backend
+      )
+      await initExtension(hpApi)
+      // wait for mm SW to initialize
+      await wait(5000)
+      ipcMain.emit('reloadApp')
+    } else {
+      logInfo(
+        'App version changed but no wallet connected, skipping MM update',
+        LogPrefix.Backend
+      )
+    }
+  }
+
   handleProtocol([openUrlArgument, ...process.argv])
   setTimeout(() => {
     logInfo('Starting the Download Queue', LogPrefix.Backend)
@@ -2026,6 +2059,44 @@ ipcMain.handle(
  */
 
 // sends messages to renderer process through preload.ts callbacks
+backendEvents.on('walletConnected', function (accounts: string[]) {
+  getMainWindow()?.webContents.send('walletConnected', accounts)
+  // Store wallet connection state
+  configStore.set('walletState.isConnected', true)
+  if (accounts && accounts.length > 0) {
+    configStore.set('walletState.address', accounts[0])
+  }
+})
+
+backendEvents.on('walletDisconnected', function (code: number, reason: string) {
+  getMainWindow()?.webContents.send('walletDisconnected', code, reason)
+  // Update wallet connection state
+  configStore.set('walletState.isConnected', false)
+})
+
+backendEvents.on('connectionRequestRejected', function () {
+  getMainWindow()?.webContents.send('connectionRequestRejected')
+})
+
+backendEvents.on('chainChanged', function (chainId: number) {
+  getMainWindow()?.webContents.send('chainChanged', chainId)
+})
+
+backendEvents.on(
+  'accountsChanged',
+  function (accounts: string[], provider: PROVIDERS) {
+    getMainWindow()?.webContents.send('accountChanged', accounts, provider)
+    // Update wallet details in configStore
+    if (accounts && accounts.length > 0) {
+      configStore.set('walletState.address', accounts[0])
+      configStore.set('walletState.provider', provider)
+      configStore.set('walletState.isConnected', true)
+    } else {
+      configStore.set('walletState.isConnected', false)
+    }
+  }
+)
+
 backendEvents.on('walletConnected', function (accounts: string[]) {
   getMainWindow()?.webContents.send('walletConnected', accounts)
 })
