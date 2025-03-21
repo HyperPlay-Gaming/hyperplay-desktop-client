@@ -23,6 +23,7 @@ import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from 'common/constants'
 import { captureException } from '@sentry/electron'
+import { access, rm } from 'fs/promises'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -452,16 +453,13 @@ export async function safeRemoveDirectory(
   // Log start of removal process
   logInfo(`Starting removal of directory ${directory}`, LogPrefix.HyperPlay)
 
-  // Import fs promises for async operations only when needed
-  const fsPromises = await import('fs/promises')
-
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       // Use different removal strategies based on expected size
       // For directories larger than threshold, use async removal to not block the main thread
       if (sizeThresholdMB > 250) {
         try {
-          await fsPromises.rm(directory, {
+          await rm(directory, {
             recursive: true,
             force: true,
             maxRetries: 3
@@ -481,7 +479,7 @@ export async function safeRemoveDirectory(
 
       // Verify directory was actually removed
       try {
-        await fsPromises.access(directory)
+        await access(directory)
         // If we get here, directory still exists
         logWarning(
           `Failed to remove directory ${directory} on attempt ${attempt}/${maxRetries}, directory still exists`,
