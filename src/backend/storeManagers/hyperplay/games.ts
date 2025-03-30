@@ -1088,7 +1088,7 @@ export async function extract(
 
     inProgressExtractionsMap.set(appName, extractService)
 
-    return await new Promise<InstallResult>((resolve) => {
+    return await new Promise<InstallResult>((resolve, reject) => {
       extractService.on(
         'progress',
         ({
@@ -1197,7 +1197,7 @@ export async function extract(
         }
       )
       extractService.once('error', (error: Error) => {
-        logError(`Extracting Error ${error.message}`, LogPrefix.HyperPlay)
+        logError(`Extracting Error ${error}`, LogPrefix.HyperPlay)
 
         cancelQueueExtraction()
         callAbortController(appName)
@@ -1207,7 +1207,8 @@ export async function extract(
         sendFrontendMessage('refreshLibrary', 'hyperplay')
 
         resolve({
-          status: 'error'
+          status: 'error',
+          error: `${error}`
         })
       })
       extractService.once('canceled', () => {
@@ -1257,7 +1258,7 @@ export async function extract(
         })
       })
 
-      extractService.extract().then()
+      extractService.extract().catch(reject)
     })
   } catch (error: unknown) {
     process.noAsar = false
@@ -1272,9 +1273,8 @@ export async function extract(
     })
 
     captureException(error)
+    return { status: 'error', error: `${error}` }
   }
-
-  return { status: 'error' }
 }
 
 export function appIsInLibrary(appName: string): boolean {
