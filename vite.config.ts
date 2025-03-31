@@ -58,6 +58,11 @@ const preloads = [
 ]
 
 export default defineConfig(({ mode }) => ({
+  test: {
+    coverage: {
+      include: ['src/backend']
+    }
+  },
   main: {
     build: {
       rollupOptions: {
