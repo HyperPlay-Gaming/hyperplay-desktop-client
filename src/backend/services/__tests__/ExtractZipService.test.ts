@@ -10,6 +10,9 @@ const returnDataMockup = {
   totalSizeInBytes: 1000,
   processedSizeInBytes: 500
 }
+jest.mock('backend/logger/logger', () => ({
+  logInfo: console.log
+}))
 jest.mock('yauzl', () => ({
   open: jest.fn()
 }))
