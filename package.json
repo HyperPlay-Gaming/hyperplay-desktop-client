@@ -21,15 +21,15 @@
     "debug:react": "react-devtools",
     "codecheck": "tsc --noEmit",
     "find-deadcode": "ts-prune --error",
-    "test": "jest",
-    "testProxy": "jest proxy.test.ts",
-    "test-watch": "jest --watch --maxWorkers=25%",
-    "test:ci": "jest --runInBand --silent",
+    "test": "vitest",
+    "testProxy": "vitest proxy.test.ts",
+    "test-watch": "vitest --watch --maxWorkers=25%",
+    "test:ci": "vitest --runInBand --silent",
     "test:e2e-ci": "cross-env-shell bash e2e/entrypoint.sh",
     "test:e2ePackaged-ci": "cross-env TEST_PACKAGED=true pnpm test:e2e-ci",
     "test:e2e": "cross-env-shell docker compose -f e2e/docker-compose.yml run --rm --build process_all bash e2e/entrypoint.sh",
     "test:e2ePackaged": "cross-env TEST_PACKAGED=true pnpm test:e2e",
-    "manualTestProxyJest": "jest mmExtIntegration.test.ts",
+    "manualUnitTestProxy": "vitest mmExtIntegration.test.ts",
     "release:linux": "pnpm pkgResetExtension:x64:linux && export NODE_ENV_ELECTRON_VITE=production && electron-vite build && cross-env ELECTRON_MIRROR=https://github.com/HyperPlay-Gaming/electron-releases/releases/download/ ELECTRON_CUSTOM_DIR=v33.2.0 electron-builder -p always --linux deb rpm pacman tar.xz",
     "release:updateFlathub:ci": "tsc flathub/update-flathub.ts --skipLibCheck --target es2015 --moduleResolution node --module commonjs && node flathub/update-flathub.js",
     "release:mac:x64": "pnpm pkgResetExtension:x64:mac && export NODE_ENV_ELECTRON_VITE=production && electron-vite build && cross-env ELECTRON_MIRROR=https://github.com/HyperPlay-Gaming/electron-releases/releases/download/ ELECTRON_CUSTOM_DIR=v33.2.0 electron-builder -p always --mac --x64",
@@ -119,7 +119,6 @@
     "i18next-fs-backend": "^2.3.2",
     "i18next-http-backend": "^2.5.2",
     "ini": "^3.0.1",
-    "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^20.0.0",
     "json5": "^2.2.3",
     "launchdarkly-electron-client-sdk": "^1.7.0",
@@ -159,8 +158,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "devDependencies": {
@@ -172,7 +170,6 @@
     "@playwright/test": "^1.46.0",
     "@tanstack/react-query-devtools": "^5.59.20",
     "@testing-library/dom": "^7.31.2",
-    "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^14.3.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/auto-launch": "^5.0.5",
@@ -183,7 +180,6 @@
     "@types/graceful-fs": "^4.1.9",
     "@types/i18next-fs-backend": "^1.1.5",
     "@types/ini": "^1.3.34",
-    "@types/jest": "^29.5.14",
     "@types/jsdom": "^20.0.1",
     "@types/mime": "^3.0.2",
     "@types/node": "^20.16.2",
@@ -211,7 +207,6 @@
     "fast-xml-parser": "^4.4.1",
     "husky": "^9.1.4",
     "i18next-parser": "^9.0.1",
-    "jest": "^29.7.0",
     "pkg": "^5.8.1",
     "playwright": "^1.46.0",
     "prettier": "^2.8.8",
@@ -220,11 +215,11 @@
     "rimraf": "^6.0.1",
     "sass": "^1.55.0",
     "tmp": "^0.2.3",
-    "ts-jest": "^29.2.5",
     "type-fest": "^3.2.0",
     "typescript": "5.3.3",
     "vite": "^5.4.0",
-    "vite-plugin-svgr": "^2.2.2"
+    "vite-plugin-svgr": "^2.2.2",
+    "vitest": "^3.0.9"
   },
   "optionalDependencies": {
     "@hyperplay/extension-importer": "^0.3.0",

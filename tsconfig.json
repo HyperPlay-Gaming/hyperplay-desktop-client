@@ -24,7 +24,7 @@
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src/",
-    "types": ["@types/chrome", "@types/jest"],
+    "types": ["@types/chrome"],
     "typeRoots": ["./node_modules", "src/common/typedefs"],
     "strictPropertyInitialization": true
   },
