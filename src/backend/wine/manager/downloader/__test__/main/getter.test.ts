@@ -2,10 +2,11 @@ import { Repositorys, VersionInfo } from 'common/types'
 import { getAvailableVersions } from '../../main'
 import { test_data_release_list } from '../test_data/github-api-test-data.json'
 import * as axios from 'axios'
+import { vi, test, describe, expect } from 'vitest'
 
 describe('Main - GetAvailableVersions', () => {
   test('fetch releases succesfully', async () => {
-    axios.default.get = jest.fn().mockResolvedValue(test_data_release_list)
+    axios.default.get = vi.fn().mockResolvedValue(test_data_release_list)
 
     await getAvailableVersions({})
       .then((releases: VersionInfo[]) => {
@@ -23,7 +24,7 @@ describe('Main - GetAvailableVersions', () => {
   })
 
   test('fetch releases succesfully independent', async () => {
-    axios.default.get = jest.fn().mockResolvedValue(test_data_release_list)
+    axios.default.get = vi.fn().mockResolvedValue(test_data_release_list)
 
     for (let key = 0; key < Object.keys(Repositorys).length / 2; key++) {
       await getAvailableVersions({
@@ -45,7 +46,7 @@ describe('Main - GetAvailableVersions', () => {
   })
 
   test('fetch releases failed because of 404', async () => {
-    axios.default.get = jest.fn().mockRejectedValue('Could not fetch tag 404')
+    axios.default.get = vi.fn().mockRejectedValue('Could not fetch tag 404')
 
     for (let key = 0; key < Object.keys(Repositorys).length / 2; key++) {
       await getAvailableVersions({ repositorys: [key] })
@@ -63,8 +64,8 @@ describe('Main - GetAvailableVersions', () => {
   })
 
   test('Invalid repository key returns nothing', async () => {
-    axios.default.get = jest.fn()
-    console.warn = jest.fn()
+    axios.default.get = vi.fn()
+    console.warn = vi.fn()
 
     /* eslint-disable-next-line */
     //@ts-ignore

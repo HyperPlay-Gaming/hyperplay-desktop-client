@@ -1,7 +1,8 @@
 import Store from 'electron-store'
 import CacheStore from '../cache'
+import { vi, test, describe, expect, afterEach, afterAll } from 'vitest'
 
-jest.mock('electron-store')
+vi.mock('electron-store')
 
 describe('backend/cache.ts', () => {
   const testStore = new CacheStore<string>('test_store')
@@ -11,10 +12,10 @@ describe('backend/cache.ts', () => {
   })
 
   const now = new Date()
-  jest.useFakeTimers().setSystemTime(now)
+  vi.useFakeTimers().setSystemTime(now)
 
   afterEach(testStore.clear)
-  afterAll(jest.useRealTimers)
+  afterAll(vi.useRealTimers)
 
   test('Value is written', () => {
     testStore.set('foo', 'bar')
@@ -33,9 +34,9 @@ describe('backend/cache.ts', () => {
 
   test('Invalid value is cleared', () => {
     const eight_hours_ago = new Date(now).setHours(now.getHours() - 8)
-    jest.setSystemTime(eight_hours_ago)
+    vi.setSystemTime(eight_hours_ago)
     testStore.set('foo', 'bar')
-    jest.setSystemTime(now)
+    vi.setSystemTime(now)
     expect(testStore.get('foo')).toBe(undefined)
     expect(internalStore.has('foo')).toBe(false)
     expect(internalStore.has('__timestamp.foo')).toBe(false)
@@ -44,18 +45,18 @@ describe('backend/cache.ts', () => {
   test('Custom lifetime works', () => {
     const testStore2 = new CacheStore<string>('test_store_2', 60)
     const three_hours_ago = new Date(now).setHours(now.getHours() - 3)
-    jest.setSystemTime(three_hours_ago)
+    vi.setSystemTime(three_hours_ago)
     testStore2.set('foo', 'bar')
-    jest.setSystemTime(now)
+    vi.setSystemTime(now)
     expect(testStore2.get('foo')).toBe(undefined)
   })
 
   test('Allows having no expiration time', () => {
     const testStore2 = new CacheStore<string>('test_store_2', null)
     const three_hours_ago = new Date(now).setHours(now.getHours() - 3)
-    jest.setSystemTime(three_hours_ago)
+    vi.setSystemTime(three_hours_ago)
     testStore2.set('foo', 'bar')
-    jest.setSystemTime(now)
+    vi.setSystemTime(now)
     expect(testStore2.get('foo')).toBe('bar')
   })
 })
