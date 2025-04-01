@@ -73,7 +73,12 @@ import { showDialogBoxModalAuto } from './dialog/dialog'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { runWineCommand } from './launcher'
-import { gameManagerMap } from 'backend/storeManagers'
+import {
+  autoUpdate,
+  gameManagerMap,
+  libraryManagerMap,
+  sendGameUpdatesNotifications
+} from 'backend/storeManagers'
 
 import * as si from 'systeminformation'
 import {
@@ -1363,4 +1368,25 @@ export async function copyRecursiveAsync(src: string, dest: string) {
       })
     ])
   }
+}
+
+export async function checkGameUpdates(runners: Runner[]): Promise<string[]> {
+  let oldGames: string[] = []
+  const { autoUpdateGames } = GlobalConfig.get().getSettings()
+  for (const runner of runners) {
+    let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
+    if (autoUpdateGames) {
+      gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
+    }
+    oldGames = [...oldGames, ...gamesToUpdate]
+  }
+
+  sendGameUpdatesNotifications().catch((e) =>
+    logError(
+      `Something went wrong sending update notifications: ${e}`,
+      LogPrefix.Backend
+    )
+  )
+
+  return oldGames
 }
