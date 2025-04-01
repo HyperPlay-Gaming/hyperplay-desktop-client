@@ -1,11 +1,12 @@
 import { existsSync, mkdirSync, rmSync } from 'graceful-fs'
 import { downloadFile } from '../../utilities'
+import { vi, test, describe, expect } from 'vitest'
 
 const workDir = process.cwd()
 
 describe('Utilities - Download', () => {
   test('download file fails because of invalid installDir', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     await downloadFile({
       url: '',
       downloadDir: 'invalid',
@@ -21,7 +22,7 @@ describe('Utilities - Download', () => {
   })
 
   test('download file fails because of installDir is a file', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     await downloadFile({
       url: '',
       downloadDir: __filename,
@@ -39,7 +40,7 @@ describe('Utilities - Download', () => {
   })
 
   test('download file can be aborted', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     const installDir = __dirname + '/test_download'
     let failed = false
 
@@ -77,7 +78,7 @@ describe('Utilities - Download', () => {
   })
 
   test('download file succeed', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     const installDir = __dirname + '/test_download'
     let failed = false
 

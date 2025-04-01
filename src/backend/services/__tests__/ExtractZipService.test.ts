@@ -3,6 +3,7 @@ import yauzl from 'yauzl'
 import { resolve } from 'path'
 import { mkdirSync } from 'graceful-fs'
 import { ExtractZipService } from '../ExtractZipService'
+import { vi, beforeEach, describe, expect, it, afterEach } from 'vitest'
 
 const returnDataMockup = {
   progressPercentage: 0,
@@ -10,19 +11,19 @@ const returnDataMockup = {
   totalSizeInBytes: 1000,
   processedSizeInBytes: 500
 }
-jest.mock('yauzl', () => ({
-  open: jest.fn()
+vi.mock('yauzl', () => ({
+  open: vi.fn()
 }))
-jest.mock('@sentry/electron', () => ({
-  captureException: jest.fn()
+vi.mock('@sentry/electron', () => ({
+  captureException: vi.fn()
 }))
-jest.mock('graceful-fs', () => ({
-  ...jest.requireActual('graceful-fs'),
-  mkdirSync: jest.fn(),
+vi.mock('graceful-fs', () => ({
+  ...vi.requireActual('graceful-fs'),
+  mkdirSync: vi.fn(),
   createWriteStream: () => ({
-    pipe: jest.fn((writeStream) => writeStream),
-    once: jest.fn(),
-    on: jest.fn((event, streamCallback) => {
+    pipe: vi.fn((writeStream) => writeStream),
+    once: vi.fn(),
+    on: vi.fn((event, streamCallback) => {
       if (event === 'close') {
         streamCallback()
       } else if (event === 'data') {
@@ -34,9 +35,9 @@ jest.mock('graceful-fs', () => ({
       }
     })
   }),
-  rm: jest.fn(),
-  rmSync: jest.fn(),
-  copyFileSync: jest.fn()
+  rm: vi.fn(),
+  rmSync: vi.fn(),
+  copyFileSync: vi.fn()
 }))
 const yauzlMockupLib = (
   fileName = 'test.zip',
@@ -48,14 +49,14 @@ const yauzlMockupLib = (
   const stream = {
     _read: () => null,
     destroyed: false,
-    pipe: jest.fn((args) => args),
-    unpipe: jest.fn(),
-    destroy: jest.fn(() => {
+    pipe: vi.fn((args) => args),
+    unpipe: vi.fn(),
+    destroy: vi.fn(() => {
       stream.destroyed = true
     }),
-    resume: jest.fn(),
-    pause: jest.fn(),
-    on: jest.fn(
+    resume: vi.fn(),
+    pause: vi.fn(),
+    on: vi.fn(
       (
         event: string,
         streamCallback: (...args: unknown[]) => ReadableStream
@@ -81,17 +82,17 @@ const yauzlMockupLib = (
 
   const mockZipFile = {
     fileSize,
-    readEntry: jest.fn(),
-    close: jest.fn(),
+    readEntry: vi.fn(),
+    close: vi.fn(),
     isOpen: true,
-    once: jest.fn((event, streamCallback) => {
+    once: vi.fn((event, streamCallback) => {
       if (event === 'end') {
         streamCallback()
       } else if (event === 'error') {
         streamCallback()
       }
     }),
-    on: jest.fn((event, entryCallback) => {
+    on: vi.fn((event, entryCallback) => {
       if (event === 'entry') {
         entryCallback({
           fileName,
@@ -100,12 +101,12 @@ const yauzlMockupLib = (
         })
       }
     }),
-    openReadStream: jest.fn((entry, openReadStreamCallback) => {
+    openReadStream: vi.fn((entry, openReadStreamCallback) => {
       openReadStreamCallback(error, stream)
     })
   }
 
-  ;(yauzl.open as jest.Mock).mockImplementation(
+  ;(yauzl.open as vi.Mock).mockImplementation(
     (_path, _options, yauzlOpenCallback) => {
       yauzlOpenCallback(error, mockZipFile)
     }
@@ -134,14 +135,14 @@ describe('ExtractZipService', () => {
 
   beforeEach(() => {
     yauzlMockupLib('test.zip', false)
-    jest.useFakeTimers()
+    vi.useFakeTimers()
     extractZipService = new ExtractZipService(zipFile, destinationPath)
     extractZipService.getUncompressedSize = async () => Promise.resolve(15000)
   }, 1000)
 
   afterEach(() => {
-    jest.clearAllMocks()
-    jest.useRealTimers()
+    vi.clearAllMocks()
+    vi.useRealTimers()
   })
 
   it('should have `source` and `destination` always available', () => {
@@ -153,7 +154,7 @@ describe('ExtractZipService', () => {
   it('should emit progress events', async () => {
     const { makeFakeProgress } = yauzlMockupLib('test.zip')
 
-    const progressListener = jest.fn()
+    const progressListener = vi.fn()
     extractZipService.on('progress', progressListener)
 
     extractZipService.extract()
@@ -166,7 +167,7 @@ describe('ExtractZipService', () => {
   })
 
   it('should emit end event on successful extraction', async () => {
-    const endListener = jest.fn()
+    const endListener = vi.fn()
     extractZipService.on('finished', endListener)
 
     await extractZipService.extract()
@@ -177,7 +178,7 @@ describe('ExtractZipService', () => {
   it('should emit error event on extraction failure', async () => {
     yauzlMockupLib('test.zip', true)
     const error = 'Mock example'
-    const mockEventListener = jest.fn()
+    const mockEventListener = vi.fn()
     extractZipService.on('error', mockEventListener)
 
     process.nextTick(async () => {
@@ -190,9 +191,9 @@ describe('ExtractZipService', () => {
   it('should cancel extraction when cancel is called', async () => {
     const { makeFakeProgress } = yauzlMockupLib('test.zip')
 
-    const endListener = jest.fn()
-    const progressListener = jest.fn()
-    const onCanceledListener = jest.fn()
+    const endListener = vi.fn()
+    const progressListener = vi.fn()
+    const onCanceledListener = vi.fn()
     extractZipService.on('finished', endListener)
     extractZipService.on('progress', progressListener)
     extractZipService.on('canceled', onCanceledListener)
@@ -233,7 +234,7 @@ describe('ExtractZipService', () => {
   it('should handle directory entry', async () => {
     yauzlMockupLib('directory/test.zip', false)
 
-    const endListener = jest.fn()
+    const endListener = vi.fn()
     extractZipService.on('finished', endListener)
 
     await extractZipService.extract()
@@ -248,7 +249,7 @@ describe('ExtractZipService', () => {
   it('should emit correct progress values', async () => {
     const { makeFakeProgress } = yauzlMockupLib('test.zip')
 
-    const progressListener = jest.fn(() => returnDataMockup)
+    const progressListener = vi.fn(() => returnDataMockup)
     extractZipService.on('progress', progressListener)
 
     extractZipService.extract()
@@ -268,7 +269,7 @@ describe('ExtractZipService', () => {
   })
 
   it('should emit correct end values', async () => {
-    const endListener = jest.fn(() => returnDataMockup)
+    const endListener = vi.fn(() => returnDataMockup)
     extractZipService.on('finished', endListener)
 
     await extractZipService.extract()
@@ -288,7 +289,7 @@ describe('ExtractZipService', () => {
   it('should emit correct pause values', async () => {
     const { makeFakeProgress } = yauzlMockupLib('test.zip')
 
-    const pausedListener = jest.fn(() => returnDataMockup)
+    const pausedListener = vi.fn(() => returnDataMockup)
     extractZipService.on('paused', pausedListener)
 
     extractZipService.extract()
@@ -311,7 +312,7 @@ describe('ExtractZipService', () => {
   it('should emit correct resume values', async () => {
     const { makeFakeProgress } = yauzlMockupLib('test.zip')
 
-    const resumedListener = jest.fn(() => returnDataMockup)
+    const resumedListener = vi.fn(() => returnDataMockup)
     extractZipService.on('resumed', resumedListener)
 
     extractZipService.extract()
@@ -334,7 +335,7 @@ describe('ExtractZipService', () => {
   it('should not continue the progress upon paused', async () => {
     const { makeFakeProgress } = yauzlMockupLib('test.zip')
 
-    const progressListener = jest.fn()
+    const progressListener = vi.fn()
     extractZipService.on('progress', progressListener)
 
     extractZipService.extract()
@@ -348,7 +349,7 @@ describe('ExtractZipService', () => {
   it('should continue the progress after resumed', async () => {
     const { makeFakeProgress } = yauzlMockupLib('test.zip')
 
-    const progressListener = jest.fn()
+    const progressListener = vi.fn()
     extractZipService.on('progress', progressListener)
 
     extractZipService.extract()
@@ -366,8 +367,8 @@ describe('ExtractZipService', () => {
   it('should extract files successfully', async () => {
     const { makeFakeProgress } = yauzlMockupLib('test.zip')
 
-    const onProgress = jest.fn()
-    const onEnd = jest.fn()
+    const onProgress = vi.fn()
+    const onEnd = vi.fn()
     extractZipService.on('progress', onProgress)
     extractZipService.on('finished', onEnd)
 
@@ -385,7 +386,7 @@ describe('ExtractZipService', () => {
   it('should throttle emit progress', async () => {
     const { makeFakeProgress } = yauzlMockupLib('test.zip')
 
-    const mockEventListener = jest.fn()
+    const mockEventListener = vi.fn()
     extractZipService.on('progress', mockEventListener)
 
     extractZipService.extract()
@@ -398,7 +399,7 @@ describe('ExtractZipService', () => {
   })
 
   it('should clear all event listeners after finished, canceled or error', () => {
-    const removeAllListenersSpy = jest.spyOn(
+    const removeAllListenersSpy = vi.spyOn(
       extractZipService,
       'removeAllListeners'
     )
@@ -413,7 +414,7 @@ describe('ExtractZipService', () => {
   it('Should fail validation if the zip file does not exist for extracting', async () => {
     const error = 'Zip file not found'
     const service = new ExtractZipService('noneexisting.zip', destinationPath)
-    const mockEventListener = jest.fn()
+    const mockEventListener = vi.fn()
     service.on('error', mockEventListener)
 
     process.nextTick(async () => {
@@ -429,7 +430,7 @@ describe('ExtractZipService', () => {
       '谷���新道ひばりヶ�.zip',
       destinationPath
     )
-    const mockEventListener = jest.fn()
+    const mockEventListener = vi.fn()
     service.on('error', mockEventListener)
 
     process.nextTick(async () => {

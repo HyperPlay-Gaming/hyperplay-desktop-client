@@ -6,16 +6,17 @@ import { configStore } from '../../constants'
 import * as logfile from '../logfile'
 import { logError } from '../logger'
 import { platform } from 'os'
+import { vi, test, describe, expect, beforeEach, it, afterEach } from 'vitest'
 
-jest.mock('electron')
-jest.mock('electron-store')
-jest.mock('../../constants')
-jest.mock('../logger')
-jest.unmock('../logfile')
-jest.mock('backend/vite_constants', () => ({
+vi.mock('electron')
+vi.mock('electron-store')
+vi.mock('../../constants')
+vi.mock('../logger')
+vi.unmock('../logfile')
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 let tmpDir = {} as DirResult
@@ -37,13 +38,13 @@ describe('logger/logfile.ts', () => {
   })
 
   afterEach(() => {
-    jest.restoreAllMocks()
+    vi.restoreAllMocks()
     tmpDir.removeCallback()
   })
 
   test('createNewLogFileAndClearOldOnes fails because logDir does not exist', () => {
-    const spyAppGetPath = jest.spyOn(app, 'getPath').mockReturnValue('invalid')
-    const spyOpenSync = jest.spyOn(graceful_fs, 'openSync')
+    const spyAppGetPath = vi.spyOn(app, 'getPath').mockReturnValue('invalid')
+    const spyOpenSync = vi.spyOn(graceful_fs, 'openSync')
 
     logfile.createNewLogFileAndClearOldOnes()
 
@@ -64,7 +65,7 @@ describe('logger/logfile.ts', () => {
   })
 
   test('createNewLogFileAndClearOldOnes success', () => {
-    jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
+    vi.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
 
     configStore.set('general-logs', {
       currentLogFile: 'old/log/path/file.log',
@@ -73,7 +74,7 @@ describe('logger/logfile.ts', () => {
       gogdlLogFile: ''
     })
 
-    jest.spyOn(app, 'requestSingleInstanceLock').mockImplementation(() => true)
+    vi.spyOn(app, 'requestSingleInstanceLock').mockImplementation(() => true)
     const data = logfile.createNewLogFileAndClearOldOnes()
 
     expect(logError).not.toBeCalled()
@@ -94,7 +95,7 @@ describe('logger/logfile.ts', () => {
   })
 
   test('appendMessageToLogFile success', () => {
-    const appendFileSyncSpy = jest
+    const appendFileSyncSpy = vi
       .spyOn(graceful_fs, 'appendFileSync')
       .mockReturnValue()
 
@@ -103,23 +104,17 @@ describe('logger/logfile.ts', () => {
   })
 
   test('appendMessageToLogFile logfile undefined', () => {
-    const appendFileSyncSpy = jest
+    const appendFileSyncSpy = vi
       .spyOn(graceful_fs, 'appendFileSync')
       .mockReturnValue()
 
-    const mockConstants = jest.requireMock('../../constants')
-    const defaultCurrentLogName = mockConstants.currentLogFile
-    mockConstants.currentLogFile = ''
-
     logfile.appendMessageToLogFile('Hello World')
-
-    mockConstants.currentLogFile = defaultCurrentLogName
 
     expect(appendFileSyncSpy).not.toBeCalled()
   })
 
   test('appendMessageToLogFile fails', () => {
-    jest.spyOn(graceful_fs, 'appendFileSync').mockImplementation(() => {
+    vi.spyOn(graceful_fs, 'appendFileSync').mockImplementation(() => {
       throw Error('append failed')
     })
 

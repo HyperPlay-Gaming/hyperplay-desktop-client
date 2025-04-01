@@ -1,10 +1,11 @@
 import { fixAsarPath } from '../constants'
+import { vi, describe, expect, test } from 'vitest'
 
-jest.mock('../logger/logfile')
-jest.mock('backend/vite_constants', () => ({
+vi.mock('../logger/logfile')
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 
@@ -33,7 +34,7 @@ describe('Constants - getShell', () => {
   }
 
   async function getShell(): Promise<string> {
-    jest.resetModules()
+    vi.resetModules()
     return import('../constants').then((module) => {
       return module.execOptions.shell
     })
