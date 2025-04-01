@@ -14,6 +14,7 @@ import DMQueueState from 'frontend/state/DMQueueState'
 import { isNotNative } from 'frontend/helpers/library'
 import { hasProgress } from 'frontend/hooks/hasProgress'
 import { useGameInfo } from 'frontend/hooks/useGameInfo'
+import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 
 export default function DownloadToastManager() {
   const [latestElement, setLatestElement] = useState<DMQueueElement>()
@@ -37,6 +38,7 @@ export default function DownloadToastManager() {
   const installedPlatform = currentElement?.params.platformToInstall
   const isExtracting = status === 'extracting'
   const isPatching = status === 'patching'
+  const isInstalling = status === 'installing'
   const { progress, etaInMs } = hasProgress(appName, isExtracting)
 
   let showPlayTimeout: NodeJS.Timeout | undefined = undefined
@@ -160,9 +162,22 @@ export default function DownloadToastManager() {
     return 'inProgress'
   }
 
-  const adjustedDownloadedInBytes = downloadedMB * 1024 * 1024
-  const adjustedDownloadSizeInBytes =
-    progress.totalSize || installInfo?.manifest.download_size || 0
+  const uncompressedSize = useEstimatedUncompressedSize(
+    platform,
+    installInfo?.manifest?.disk_size || 0,
+    installInfo?.manifest?.download_size || 0
+  )
+
+  let adjustedDownloadedInBytes = downloadedMB * 1024 * 1024
+  const adjustedDownloadSizeInBytes = isInstalling
+    ? installInfo?.manifest.download_size || 0
+    : uncompressedSize
+
+  if (isExtracting) {
+    if (adjustedDownloadedInBytes > adjustedDownloadSizeInBytes) {
+      adjustedDownloadedInBytes = adjustedDownloadSizeInBytes
+    }
+  }
 
   return (
     <Draggable>
