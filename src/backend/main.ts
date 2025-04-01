@@ -719,20 +719,12 @@ ipcMain.once('frontendReady', async () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
   const currentVersion = app.getVersion()
   const lastVersion = configStore.get('appVersion', '')
-  const walletStateIsConnected = configStore.get(
-    'walletState.isConnected',
-    false
-  )
 
   await initExtension(hpApi)
 
   // Only reload the app if a wallet is not connected
   // or the app version has changed
-  if (
-    !walletStateIsConnected ||
-    !lastVersion ||
-    lastVersion !== currentVersion
-  ) {
+  if (!lastVersion || lastVersion !== currentVersion) {
     logInfo(
       'App version changed and wallet connected, reloading to update MM',
       LogPrefix.Backend
