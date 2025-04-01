@@ -1,8 +1,8 @@
-import Store from 'electron-store'
-import CacheStore from '../cache'
 import { vi, test, describe, expect, afterEach, afterAll } from 'vitest'
 
-vi.mock('electron-store')
+import Store from 'electron-store'
+
+import CacheStore from '../cache'
 
 describe('backend/cache.ts', () => {
   const testStore = new CacheStore<string>('test_store')
@@ -14,7 +14,7 @@ describe('backend/cache.ts', () => {
   const now = new Date()
   vi.useFakeTimers().setSystemTime(now)
 
-  afterEach(testStore.clear)
+  afterEach(() => testStore.clear())
   afterAll(vi.useRealTimers)
 
   test('Value is written', () => {
