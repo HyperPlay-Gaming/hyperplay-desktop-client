@@ -61,7 +61,8 @@ export default defineConfig(({ mode }) => ({
   test: {
     coverage: {
       include: ['src/backend']
-    }
+    },
+    setupFiles: ['src/backend/test_setup/index.ts']
   },
   main: {
     build: {
