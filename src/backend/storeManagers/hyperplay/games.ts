@@ -969,7 +969,7 @@ export async function install(
       `Error while downloading and extracting game: ${error}`,
       LogPrefix.HyperPlay
     )
-    if (!`${error}`.includes('Download stopped or paused')) {
+    if (!`${error}`.includes('Download stopped or paused') && !`${error}`.includes('Asar File')) {
       callAbortController(appName)
       return {
         status: 'abort'
@@ -1199,17 +1199,19 @@ export async function extract(
       extractService.once('error', (error: Error) => {
         logError(`Extracting Error ${error}`, LogPrefix.HyperPlay)
 
-        cancelQueueExtraction()
-        callAbortController(appName)
+        try {
+          cancelQueueExtraction()
+          callAbortController(appName)
+  
+          cleanUpDownload(appName, directory)
+  
+          sendFrontendMessage('refreshLibrary', 'hyperplay')
+        }catch(err){
+          logError(`Error while cleaning up zip download ${error}`, LogPrefix.HyperPlay)
+        }
 
-        cleanUpDownload(appName, directory)
-
-        sendFrontendMessage('refreshLibrary', 'hyperplay')
-
-        resolve({
-          status: 'error',
-          error: `${error}`
-        })
+         // need to reject for proper mixpanel error handling
+        reject(`${error}`)
       })
       extractService.once('canceled', () => {
         logInfo(
@@ -1273,7 +1275,8 @@ export async function extract(
     })
 
     captureException(error)
-    return { status: 'error', error: `${error}` }
+    // need to rethrow for proper mixpanel error handling
+    throw error
   }
 }
 
