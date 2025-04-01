@@ -5,6 +5,7 @@ import child_process from 'child_process'
 import { downloadFile, extractTarFile } from '../../util'
 import { dirSync } from 'tmp'
 import { platform } from 'os'
+import { vi, afterEach, describe, it, expect } from 'vitest'
 
 const testUrl =
   'https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.3.9/Heroic-2.3.9.AppImage'
@@ -14,7 +15,7 @@ const testTarFileWithSubfolder = join(
   'test_data/ArchiveWithSubfolder.tar.xz'
 )
 
-afterEach(jest.restoreAllMocks)
+afterEach(vi.restoreAllMocks)
 
 const shouldSkip = platform() !== 'linux'
 const skipMessage = 'not on linux so skipping test'
@@ -32,17 +33,15 @@ describe('downloadFile', () => {
   it('Success', async () => {
     const expectedData = readFileSync(testTarFilePath)
 
-    jest.spyOn(axios, 'get').mockResolvedValue({
+    vi.spyOn(axios, 'get').mockResolvedValue({
       status: 200,
       data: expectedData
     })
-    jest
-      .spyOn(graceful_fs, 'writeFile')
-      .mockImplementation(
-        (path, data, callback: (err: NodeJS.ErrnoException | null) => void) => {
-          callback(null)
-        }
-      )
+    vi.spyOn(graceful_fs, 'writeFile').mockImplementation(
+      (path, data, callback: (err: NodeJS.ErrnoException | null) => void) => {
+        callback(null)
+      }
+    )
 
     const tmpFileName = '/tmp/someFile'
     await expect(downloadFile(testUrl, tmpFileName)).resolves.toBeUndefined()
@@ -56,7 +55,7 @@ describe('downloadFile', () => {
   it('Axios error', async () => {
     expect.assertions(1)
 
-    jest.spyOn(axios, 'get').mockRejectedValue({
+    vi.spyOn(axios, 'get').mockRejectedValue({
       toJSON: () => '{ "message": "Some error message" }'
     })
 
@@ -70,7 +69,7 @@ describe('downloadFile', () => {
   it('HTTP error', async () => {
     expect.assertions(1)
 
-    jest.spyOn(axios, 'get').mockResolvedValue({
+    vi.spyOn(axios, 'get').mockResolvedValue({
       status: 404,
       data: {}
     })
@@ -84,12 +83,12 @@ describe('downloadFile', () => {
       join(__dirname, 'test_data/TestArchive.tar.xz')
     )
 
-    jest.spyOn(axios, 'get').mockResolvedValue({
+    vi.spyOn(axios, 'get').mockResolvedValue({
       status: 200,
       data: expectedData
     })
 
-    jest.spyOn(graceful_fs, 'writeFile').mockImplementation((fn, data, cb) => {
+    vi.spyOn(graceful_fs, 'writeFile').mockImplementation((fn, data, cb) => {
       cb({ stack: 'Mocked error stack' } as Error)
     })
 
@@ -107,7 +106,7 @@ describe('extractTarFile', () => {
   }
   it('Success without strip', async () => {
     const tmpDir = dirSync({ unsafeCleanup: true })
-    jest.spyOn(child_process, 'spawn')
+    vi.spyOn(child_process, 'spawn')
 
     await expect(
       extractTarFile(testTarFilePath, 'application/x-xz', {
@@ -129,7 +128,7 @@ describe('extractTarFile', () => {
   // Largely the same as the test above
   it('Success with strip', async () => {
     const tmpDir = dirSync({ unsafeCleanup: true })
-    jest.spyOn(child_process, 'spawn')
+    const spawnMock = vi.spyOn(child_process, 'spawn')
 
     await expect(
       extractTarFile(testTarFileWithSubfolder, 'application/x-xz', {
@@ -139,7 +138,7 @@ describe('extractTarFile', () => {
     ).resolves.toEqual(0)
 
     expect(existsSync(join(tmpDir.name, 'empty'))).toBe(true)
-    expect(child_process.spawn).toBeCalledWith('tar', [
+    expect(spawnMock).toBeCalledWith('tar', [
       '--directory',
       tmpDir.name,
       '--strip-components',
@@ -151,12 +150,12 @@ describe('extractTarFile', () => {
 
   it('Success without pre-defined extraction dir', async () => {
     let child: child_process.ChildProcess
-    jest.spyOn(child_process, 'spawn').mockImplementation(() => {
+    vi.spyOn(child_process, 'spawn').mockImplementation(() => {
       child = new child_process.ChildProcess()
       return child
     })
 
-    jest.spyOn(graceful_fs, 'mkdirSync').mockImplementation()
+    vi.spyOn(graceful_fs, 'mkdirSync').mockImplementation(() => undefined)
 
     const promise = extractTarFile(testTarFilePath, 'application/x-xz')
     child!.emit('close', 0)
@@ -170,7 +169,7 @@ describe('extractTarFile', () => {
   it('File does not exist', async () => {
     expect.assertions(1)
 
-    jest.spyOn(graceful_fs, 'existsSync').mockReturnValue(false)
+    vi.spyOn(graceful_fs, 'existsSync').mockReturnValue(false)
 
     await expect(extractTarFile(testTarFilePath, '')).rejects.toEqual(
       Error('Specified file does not exist: ' + testTarFilePath)
@@ -181,7 +180,7 @@ describe('extractTarFile', () => {
     expect.assertions(1)
 
     // Don't create archive extraction directory
-    jest.spyOn(graceful_fs, 'mkdirSync').mockImplementation()
+    vi.spyOn(graceful_fs, 'mkdirSync').mockImplementation(() => undefined)
 
     // Let's try extracting a PDF file :^)
     await expect(
@@ -194,12 +193,12 @@ describe('extractTarFile', () => {
     // everything either results in `child` being undefined or a deadlock. If someone successfully
     // creates a helper to mock spawn, they deserve at least a medal
     let child: child_process.ChildProcess
-    jest.spyOn(child_process, 'spawn').mockImplementation(() => {
+    vi.spyOn(child_process, 'spawn').mockImplementation(() => {
       child = new child_process.ChildProcess()
       return child
     })
 
-    jest.spyOn(graceful_fs, 'mkdirSync').mockImplementation()
+    vi.spyOn(graceful_fs, 'mkdirSync').mockImplementation(() => undefined)
 
     const promise = extractTarFile(testTarFilePath, 'application/x-xz')
     child!.emit('error', Error('Some error'))

@@ -1,12 +1,13 @@
 import * as HpStoreUtils from '../utils'
 import { GameInfo, HyperPlayRelease } from '../../../../common/types'
-jest.mock('electron')
-jest.mock('../../../logger/logger')
-jest.mock('../../../logger/logfile')
-jest.mock('backend/vite_constants', () => ({
+import { vi, describe, expect } from 'vitest'
+vi.mock('electron')
+vi.mock('../../../logger/logger')
+vi.mock('../../../logger/logfile')
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 const TESTS_ENABLED = false

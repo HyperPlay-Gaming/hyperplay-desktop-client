@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { spawn } from 'child_process'
+import child_process from 'child_process'
 import { existsSync, mkdirSync, writeFile } from 'graceful-fs'
 
 interface GithubAssetMetadata {
@@ -100,7 +100,7 @@ async function extractTarFile(
 
   const strip = options?.strip
   return new Promise((res, rej) => {
-    const child = spawn('tar', [
+    const child = child_process.spawn('tar', [
       '--directory',
       extractedPath,
       ...(strip ? ['--strip-components', `${strip}`] : []),

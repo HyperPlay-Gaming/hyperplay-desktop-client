@@ -6,26 +6,27 @@ import {
 } from 'electron'
 import { tmpdir } from 'os'
 import { join } from 'path'
+import { vi } from 'vitest'
 
-const fs = jest.createMockFromModule('fs')
+const fs = vi.createMockFromModule('fs')
 
 const appBasePath = tmpdir()
 const dialog = {
   // dialog override
-  showErrorBox: jest.fn(),
-  showMessageBox: jest.fn()
+  showErrorBox: vi.fn(),
+  showMessageBox: vi.fn()
 }
 
 class App extends EventEmitter {
   // app override
-  getPath = jest.fn().mockImplementation((path: string) => {
+  getPath = vi.fn().mockImplementation((path: string) => {
     return join(appBasePath, path)
   })
   getVersion(): string {
     return '1.0.0'
   }
 
-  requestSingleInstanceLock = jest.fn().mockReturnValue(true)
+  requestSingleInstanceLock = vi.fn().mockReturnValue(true)
 }
 
 const app = new App()
@@ -157,11 +158,11 @@ class Tray {
 }
 
 const ipcMain = {
-  on: jest.fn().mockReturnThis(),
-  handle: jest.fn().mockReturnThis(),
-  once: jest.fn().mockReturnThis(),
-  emit: jest.fn().mockReturnThis(),
-  prependListener: jest.fn().mockReturnThis()
+  on: vi.fn().mockReturnThis(),
+  handle: vi.fn().mockReturnThis(),
+  once: vi.fn().mockReturnThis(),
+  emit: vi.fn().mockReturnThis(),
+  prependListener: vi.fn().mockReturnThis()
 }
 
 export {

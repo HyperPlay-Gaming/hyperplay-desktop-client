@@ -4,14 +4,15 @@ import { join } from 'path'
 import { DirResult, dirSync } from 'tmp'
 import { addNonSteamGame, removeNonSteamGame } from '../nonesteamgame'
 import { showDialogBoxModalAuto } from 'backend/dialog/dialog'
+import { vi, beforeEach, describe, expect, test, afterEach } from 'vitest'
 
-jest.mock('backend/logger/logfile')
-jest.mock('backend/dialog/dialog')
-jest.mock('backend/utils')
-jest.mock('backend/vite_constants', () => ({
+vi.mock('backend/logger/logfile')
+vi.mock('backend/dialog/dialog')
+vi.mock('backend/utils')
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 
@@ -31,9 +32,9 @@ describe('NonSteamGame', () => {
     tmpDir = dirSync({ unsafeCleanup: true })
     tmpSteamUserConfigDir = join(tmpDir.name, 'steam_user', 'config')
     mkdirSync(tmpSteamUserConfigDir, { recursive: true })
-    console.log = jest.fn()
-    console.error = jest.fn()
-    console.warn = jest.fn()
+    console.log = vi.fn()
+    console.error = vi.fn()
+    console.warn = vi.fn()
   })
 
   afterEach(() => {

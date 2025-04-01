@@ -10,12 +10,13 @@ import { VersionInfo } from 'common/types'
 import * as axios from 'axios'
 import * as crypto from 'crypto'
 import { clearInterval } from 'timers'
+import { vi, describe, expect, test } from 'vitest'
 
 const workDir = process.cwd()
 
 describe('Main - InstallVersion', () => {
   test('install fails because installDir does not exist', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
 
     const releaseVersion: VersionInfo = {
       version: '1.2.3',
@@ -42,7 +43,7 @@ describe('Main - InstallVersion', () => {
   })
 
   test('install fails because installDir is not a directory', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
 
     const releaseVersion: VersionInfo = {
       version: '1.2.3',
@@ -69,7 +70,7 @@ describe('Main - InstallVersion', () => {
   })
 
   test('install fails because no download link provided', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
 
     const releaseVersion: VersionInfo = {
       version: '1.2.3',
@@ -94,7 +95,7 @@ describe('Main - InstallVersion', () => {
   })
 
   test('install fails because no download link provided', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
 
     const releaseVersion: VersionInfo = {
       version: '1.2.3',
@@ -123,8 +124,8 @@ describe('Main - InstallVersion', () => {
 
     const installDir = __dirname + '/test_install'
     let failed = false
-    axios.default.get = jest.fn().mockReturnValue({ data: checksum })
-    const progress = jest.fn()
+    axios.default.get = vi.fn().mockReturnValue({ data: checksum })
+    const progress = vi.fn()
 
     if (!existsSync(installDir)) {
       mkdirSync(installDir)
@@ -175,9 +176,9 @@ describe('Main - InstallVersion', () => {
   test('install warns because no checksum provided', async () => {
     const installDir = __dirname + '/test_install'
     let failed = false
-    axios.default.get = jest.fn()
-    const progress = jest.fn()
-    console.warn = jest.fn()
+    axios.default.get = vi.fn()
+    const progress = vi.fn()
+    console.warn = vi.fn()
 
     if (!existsSync(installDir)) {
       mkdirSync(installDir)
@@ -229,8 +230,8 @@ describe('Main - InstallVersion', () => {
   test('install succeed because already exist', async () => {
     const installDir = __dirname + '/test_install'
     let failed = false
-    axios.default.get = jest.fn().mockReturnValue({ data: '' })
-    const progress = jest.fn()
+    axios.default.get = vi.fn().mockReturnValue({ data: '' })
+    const progress = vi.fn()
 
     if (!existsSync(installDir)) {
       mkdirSync(`${installDir}/Wine-1.2.3`, { recursive: true })
@@ -280,8 +281,8 @@ describe('Main - InstallVersion', () => {
 
     const installDir = __dirname + '/test_install'
     let failed = false
-    axios.default.get = jest.fn().mockReturnValue({ data: checksum })
-    const progress = jest.fn()
+    axios.default.get = vi.fn().mockReturnValue({ data: checksum })
+    const progress = vi.fn()
 
     if (!existsSync(installDir)) {
       mkdirSync(installDir)
@@ -347,8 +348,8 @@ describe('Main - InstallVersion', () => {
 
     const installDir = __dirname + '/test_install'
     let failed = false
-    axios.default.get = jest.fn().mockReturnValue({ data: checksum })
-    const progress = jest.fn()
+    axios.default.get = vi.fn().mockReturnValue({ data: checksum })
+    const progress = vi.fn()
 
     if (!existsSync(installDir)) {
       mkdirSync(installDir)
@@ -414,8 +415,8 @@ describe('Main - InstallVersion', () => {
 
     const installDir = __dirname + '/test_install'
     let failed = false
-    axios.default.get = jest.fn().mockReturnValue({ data: checksum })
-    const progress = jest.fn()
+    axios.default.get = vi.fn().mockReturnValue({ data: checksum })
+    const progress = vi.fn()
 
     if (!existsSync(installDir)) {
       mkdirSync(installDir)
@@ -473,8 +474,8 @@ describe('Main - InstallVersion', () => {
 
     const installDir = __dirname + '/test_install'
     let failed = false
-    axios.default.get = jest.fn().mockReturnValue({ data: checksum })
-    const progress = jest.fn()
+    axios.default.get = vi.fn().mockReturnValue({ data: checksum })
+    const progress = vi.fn()
 
     if (!existsSync(installDir)) {
       mkdirSync(installDir)
@@ -537,8 +538,8 @@ describe('Main - InstallVersion', () => {
 
     const installDir = __dirname + '/test_install'
     let failed = false
-    axios.default.get = jest.fn().mockReturnValue({ data: checksum })
-    const progress = jest.fn()
+    axios.default.get = vi.fn().mockReturnValue({ data: checksum })
+    const progress = vi.fn()
 
     if (!existsSync(installDir)) {
       mkdirSync(installDir)

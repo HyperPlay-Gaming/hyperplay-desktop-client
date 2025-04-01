@@ -8,28 +8,29 @@ import { getWikiGameInfo } from '../wiki_game_info'
 import * as PCGamingWiki from '../pcgamingwiki/utils'
 import * as AppleGamingWiki from '../applegamingwiki/utils'
 import { logError } from '../../logger/logger'
+import { vi, describe, expect, test } from 'vitest'
 
-jest.mock('electron-store')
-jest.mock('../../logger/logfile')
-jest.mock('../../logger/logger')
-jest.mock('../../constants', () => {
+vi.mock('electron-store')
+vi.mock('../../logger/logfile')
+vi.mock('../../logger/logger')
+vi.mock('../../constants', () => {
   return {
     isMac: true
   }
 })
-jest.mock('backend/vite_constants', () => ({
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 
 describe('getWikiGameInfo', () => {
   test('use cached data', async () => {
-    const mockPCGamingWiki = jest
+    const mockPCGamingWiki = vi
       .spyOn(PCGamingWiki, 'getInfoFromPCGamingWiki')
       .mockResolvedValue(testPCGamingWikiInfo)
-    const mockAppleGamingWiki = jest
+    const mockAppleGamingWiki = vi
       .spyOn(AppleGamingWiki, 'getInfoFromAppleGamingWiki')
       .mockResolvedValue(testAppleGamingWikiInfo)
 
@@ -58,10 +59,10 @@ describe('getWikiGameInfo', () => {
     const oneMonthAgo = new Date(testExtraGameInfo.timestampLastFetch)
     oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1)
 
-    const mockPCGamingWiki = jest
+    const mockPCGamingWiki = vi
       .spyOn(PCGamingWiki, 'getInfoFromPCGamingWiki')
       .mockResolvedValue(testPCGamingWikiInfo)
-    const mockAppleGamingWiki = jest
+    const mockAppleGamingWiki = vi
       .spyOn(AppleGamingWiki, 'getInfoFromAppleGamingWiki')
       .mockResolvedValue(testAppleGamingWikiInfo)
 
@@ -90,9 +91,9 @@ describe('getWikiGameInfo', () => {
   })
 
   test('catches throws', async () => {
-    jest
-      .spyOn(PCGamingWiki, 'getInfoFromPCGamingWiki')
-      .mockRejectedValueOnce(new Error('Failed'))
+    vi.spyOn(PCGamingWiki, 'getInfoFromPCGamingWiki').mockRejectedValueOnce(
+      new Error('Failed')
+    )
 
     wikiGameInfoStore.clear()
 

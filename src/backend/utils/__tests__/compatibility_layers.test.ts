@@ -11,12 +11,13 @@ import {
   NonEmptyString,
   Path
 } from '../../storeManagers/legendary/commands/base'
+import { vi, describe, expect, test, it } from 'vitest'
 
-jest.mock('../../logger/logfile')
-jest.mock('backend/vite_constants', () => ({
+vi.mock('../../logger/logfile')
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 describe('getDefaultWine', () => {
@@ -41,7 +42,7 @@ describe('getDefaultWine', () => {
 
       // spy on the execSync calling which wine and returning /usr/bin/wine
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const execSync = jest.spyOn(require('child_process'), 'execSync')
+      const execSync = vi.spyOn(require('child_process'), 'execSync')
       execSync.mockImplementation((command: unknown) => {
         if (command === 'which wine') {
           return '/usr/bin/wine\n'

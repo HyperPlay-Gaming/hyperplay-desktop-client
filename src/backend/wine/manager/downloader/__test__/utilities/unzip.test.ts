@@ -1,11 +1,12 @@
 import { existsSync, mkdirSync, rmSync } from 'graceful-fs'
 import { unzipFile } from '../../utilities'
+import { vi, test, describe, expect } from 'vitest'
 
 const workDir = process.cwd()
 
 describe('Utilities - Unzip', () => {
   test('unzip file fails because of invalid archive path', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     await unzipFile({
       filePath: 'invalid.tar.xz',
       unzipDir: __dirname,
@@ -20,7 +21,7 @@ describe('Utilities - Unzip', () => {
   })
 
   test('unzip file fails because of archive is not a file', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     await unzipFile({
       filePath: __dirname,
       unzipDir: __dirname,
@@ -37,7 +38,7 @@ describe('Utilities - Unzip', () => {
   })
 
   test('unzip file fails because of invalid install path', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     await unzipFile({
       filePath: `${__dirname}/../test_data/test.tar.xz`,
       unzipDir: 'invalid',
@@ -52,7 +53,7 @@ describe('Utilities - Unzip', () => {
   })
 
   test('unzip file can be aborted', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     const installDir = __dirname + '/test_unzip'
     let failed = false
 
@@ -89,7 +90,7 @@ describe('Utilities - Unzip', () => {
   })
 
   test('unzip tar.xz file succeesfully', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     const installDir = __dirname + '/test_unzip'
     let failed = false
 
@@ -121,7 +122,7 @@ describe('Utilities - Unzip', () => {
   })
 
   test('unzip tar.gz file succeesfully', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     const installDir = __dirname + '/test_unzip'
     let failed = false
 
@@ -152,7 +153,7 @@ describe('Utilities - Unzip', () => {
   })
 
   test('unzip tar.gz file twice to the same direction succeesfully', async () => {
-    const progress = jest.fn()
+    const progress = vi.fn()
     const installDir = __dirname + '/test_unzip'
     let failed = false
 

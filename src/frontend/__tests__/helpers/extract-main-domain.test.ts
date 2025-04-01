@@ -1,4 +1,5 @@
 import { extractMainDomain } from 'frontend/helpers/extract-main-domain'
+import { describe, expect, it } from 'vitest'
 
 describe('extractMainDomain', () => {
   it('should correctly extract main domain without subdomain', () => {
@@ -26,7 +27,7 @@ describe('extractMainDomain', () => {
   })
 
   it('return null when url is invalid', () => {
-    jest.spyOn(console, 'warn').mockImplementationOnce(jest.fn)
+    vi.spyOn(console, 'warn').mockImplementationOnce(vi.fn)
     const url = 'invalid url'
     const mainDomain = extractMainDomain(url)
     expect(mainDomain).toEqual(null)

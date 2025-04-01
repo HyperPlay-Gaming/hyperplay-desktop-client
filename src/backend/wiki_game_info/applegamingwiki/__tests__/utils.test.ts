@@ -2,19 +2,20 @@ import { logError } from '../../../logger/logger'
 import { getInfoFromAppleGamingWiki } from '../utils'
 import axios from 'axios'
 import { AppleGamingWikiInfo } from '../../../../common/types'
+import { vi, describe, expect, test } from 'vitest'
 
-jest.mock('backend/logger/logfile')
-jest.mock('backend/logger/logger')
-jest.mock('electron-store')
-jest.mock('backend/vite_constants', () => ({
+vi.mock('backend/logger/logfile')
+vi.mock('backend/logger/logger')
+vi.mock('electron-store')
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 describe('getAppleGamingWikiInfo', () => {
   test('fetches successfully', async () => {
-    const mockAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({
+    const mockAxios = vi.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { cargoquery: [{ title: { pageID: 1, crossover: 'perfect' } }] }
     })
     mockAxios.mockResolvedValueOnce({
@@ -34,7 +35,7 @@ describe('getAppleGamingWikiInfo', () => {
   })
 
   test('does not find page id', async () => {
-    jest.spyOn(axios, 'get').mockResolvedValueOnce({
+    vi.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { cargoquery: [{ title: { pageID: undefined } }] }
     })
 
@@ -43,7 +44,7 @@ describe('getAppleGamingWikiInfo', () => {
   })
 
   test('does not find wikitext', async () => {
-    const mockAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({
+    const mockAxios = vi.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { cargoquery: [{ title: { pageID: 1, crossover: undefined } }] }
     })
     mockAxios.mockResolvedValueOnce({
@@ -63,7 +64,7 @@ describe('getAppleGamingWikiInfo', () => {
   })
 
   test('wikitext empty', async () => {
-    const mockAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({
+    const mockAxios = vi.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { cargoquery: [{ title: { pageID: 1, crossover: 'perfect' } }] }
     })
     mockAxios.mockResolvedValueOnce({
@@ -82,7 +83,7 @@ describe('getAppleGamingWikiInfo', () => {
   })
 
   test('catches axios throws', async () => {
-    jest.spyOn(axios, 'get').mockRejectedValueOnce(new Error('Failed'))
+    vi.spyOn(axios, 'get').mockRejectedValueOnce(new Error('Failed'))
 
     const result = await getInfoFromAppleGamingWiki('The Witcher 3')
     expect(result).toBeNull()

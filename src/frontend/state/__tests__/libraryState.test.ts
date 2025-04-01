@@ -1,12 +1,13 @@
-/** @jest-environment jsdom */
+/** @vi-environment jsdom */
+import { vi, describe, expect, test, beforeEach } from 'vitest'
 
 Object.defineProperty(window, 'api', {
   writable: true,
   value: {
-    install: jest.fn(),
-    storeNew: jest.fn(),
-    storeGet: jest.fn(),
-    storeSet: jest.fn()
+    install: vi.fn(),
+    storeNew: vi.fn(),
+    storeGet: vi.fn(),
+    storeSet: vi.fn()
   }
 })
 

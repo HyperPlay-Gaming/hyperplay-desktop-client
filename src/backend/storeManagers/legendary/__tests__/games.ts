@@ -1,12 +1,13 @@
 import { LegendaryGame } from '../games'
 import * as library from '../library'
+import { vi, describe, expect, it } from 'vitest'
 
-jest.mock('../../logger/logger')
-jest.mock('../../logger/logfile')
+vi.mock('../../logger/logger')
+vi.mock('../../logger/logfile')
 
 describe('LegendaryGame', () => {
   it('Save-sync uses correct path', async () => {
-    const spy = jest
+    const spy = vi
       .spyOn(library, 'runLegendaryCommand')
       .mockImplementation(async () => {
         return { stderr: '', stdout: '' }
@@ -28,7 +29,7 @@ describe('LegendaryGame', () => {
   })
 
   it('Save-sync fails with empty path', async () => {
-    jest.spyOn(library, 'runLegendaryCommand')
+    vi.spyOn(library, 'runLegendaryCommand')
     const game = LegendaryGame.get('SomeAppName')
     expect(await game.syncSaves('', '')).toBe('No path provided.')
   })

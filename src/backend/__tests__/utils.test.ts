@@ -6,15 +6,16 @@ import { existsSync } from 'fs'
 import { rimraf } from 'rimraf'
 import os from 'os'
 import * as fs from 'fs'
+import { vi, test, describe, expect, it, beforeEach, afterEach } from 'vitest'
 
-jest.mock('electron')
-jest.mock('../logger/logger')
-jest.mock('../logger/logfile')
-jest.mock('../dialog/dialog')
-jest.mock('backend/vite_constants', () => ({
+vi.mock('electron')
+vi.mock('../logger/logger')
+vi.mock('../logger/logfile')
+vi.mock('../dialog/dialog')
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 
@@ -319,14 +320,14 @@ describe('backend/utils.ts', () => {
     const destDir = join(testDir, 'dest')
 
     beforeEach(async () => {
-      jest.useFakeTimers({ advanceTimers: true })
+      vi.useFakeTimers({ shouldAdvanceTime: true })
       await mkdir(sourceDir, { recursive: true })
       await mkdir(destDir, { recursive: true })
     })
 
     afterEach(async () => {
-      jest.clearAllTimers() // Clear pending timers
-      jest.useRealTimers() // Restore real timers
+      vi.clearAllTimers() // Clear pending timers
+      vi.useRealTimers() // Restore real timers
       await rimraf(testDir)
     })
 
@@ -368,7 +369,7 @@ describe('backend/utils.ts', () => {
       await writeFile(testFile, 'test content')
 
       // Mock the copyFile function to simulate a slow operation
-      const mockCopyFile = jest
+      const mockCopyFile = vi
         .spyOn(fs.promises, 'copyFile')
         .mockImplementation(async () => {
           return new Promise((resolve) => {
@@ -382,7 +383,7 @@ describe('backend/utils.ts', () => {
       const copyPromise = copyRecursiveAsync(testFile, destFile)
 
       // Advance timers to trigger timeout
-      jest.advanceTimersByTime(COPY_TIMEOUT_MS + 100)
+      vi.advanceTimersByTime(COPY_TIMEOUT_MS + 100)
 
       // Now check if it throws
       await expect(copyPromise).rejects.toThrow('Timeout')

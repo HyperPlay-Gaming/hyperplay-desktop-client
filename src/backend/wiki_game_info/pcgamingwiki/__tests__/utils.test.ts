@@ -1,19 +1,20 @@
 import { logError } from 'backend/logger/logger'
 import { getInfoFromPCGamingWiki } from '../utils'
 import axios from 'axios'
+import { vi, test, describe, expect } from 'vitest'
 
-jest.mock('backend/logger/logfile')
-jest.mock('backend/logger/logger')
-jest.mock('backend/vite_constants', () => ({
+vi.mock('backend/logger/logfile')
+vi.mock('backend/logger/logger')
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 
 describe('getPCGamingWikiInfo', () => {
   test('fetches successfully via title', async () => {
-    const mockAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({
+    const mockAxios = vi.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { cargoquery: [{ title: { pageID: 1 } }] }
     })
     mockAxios.mockResolvedValueOnce({
@@ -37,7 +38,7 @@ describe('getPCGamingWikiInfo', () => {
   })
 
   test('fetches successfully via id', async () => {
-    const mockAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({
+    const mockAxios = vi.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { cargoquery: [{ title: { pageID: 1 } }] }
     })
     mockAxios.mockResolvedValueOnce({
@@ -61,7 +62,7 @@ describe('getPCGamingWikiInfo', () => {
   })
 
   test('does not find page id', async () => {
-    jest.spyOn(axios, 'get').mockResolvedValueOnce({
+    vi.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { cargoquery: [{ title: { pageID: undefined } }] }
     })
 
@@ -70,7 +71,7 @@ describe('getPCGamingWikiInfo', () => {
   })
 
   test('does not find wikitext', async () => {
-    const mockAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({
+    const mockAxios = vi.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { cargoquery: [{ title: { pageID: 1 } }] }
     })
     mockAxios.mockResolvedValueOnce({
@@ -86,7 +87,7 @@ describe('getPCGamingWikiInfo', () => {
   })
 
   test('wikitext empty', async () => {
-    const mockAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({
+    const mockAxios = vi.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { cargoquery: [{ title: { pageID: 1 } }] }
     })
     mockAxios.mockResolvedValueOnce({
@@ -102,7 +103,7 @@ describe('getPCGamingWikiInfo', () => {
   })
 
   test('catches axios throws', async () => {
-    jest.spyOn(axios, 'get').mockRejectedValueOnce(new Error('Failed'))
+    vi.spyOn(axios, 'get').mockRejectedValueOnce(new Error('Failed'))
 
     const result = await getInfoFromPCGamingWiki('The Witcher 3')
     expect(result).toBeNull()

@@ -7,13 +7,14 @@ import { configStore } from '../../constants'
 import { wait } from '../../utils'
 import i18next from 'i18next'
 import translations_en from '../../../../public/locales/en/translation.json'
+import { vi, it, describe, expect, afterEach } from 'vitest'
 
-jest.mock('../../logger/logfile')
-jest.mock('../../config')
-jest.mock('backend/vite_constants', () => ({
+vi.mock('../../logger/logfile')
+vi.mock('../../config')
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 i18next.init({ resources: { en: { translations_en } } })
@@ -22,11 +23,11 @@ describe('TrayIcon', () => {
   const mainWindow = new BrowserWindow()
 
   const setRecentGames = (games: RecentGame[]) => {
-    jest.spyOn(configStore, 'get').mockReturnValue(games)
+    vi.spyOn(configStore, 'get').mockReturnValue(games)
   }
 
   afterEach(() => {
-    configStore.get = jest.fn()
+    configStore.get = vi.fn()
   })
 
   describe('content', () => {

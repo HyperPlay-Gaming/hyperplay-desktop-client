@@ -1,12 +1,21 @@
 import { createMainWindow, sendFrontendMessage } from '../main_window'
 import { BrowserWindow, Display, screen } from 'electron'
 import { configStore } from '../constants'
+import {
+  vi,
+  describe,
+  expect,
+  beforeEach,
+  it,
+  beforeAll,
+  afterAll
+} from 'vitest'
 
-jest.mock('../logger/logfile')
-jest.mock('backend/vite_constants', () => ({
+vi.mock('../logger/logfile')
+vi.mock('backend/vite_constants', () => ({
   VITE_IPFS_API: 'https://ipfs.io/ipfs/'
 }))
-jest.mock('backend/flags/flags', () => ({
+vi.mock('backend/flags/flags', () => ({
   VITE_LD_ENVIRONMENT_ID: '123'
 }))
 
@@ -25,7 +34,7 @@ describe('main_window', () => {
     describe('if there is a main window', () => {
       const window = {
         webContents: {
-          send: jest.fn()
+          send: vi.fn()
         }
       }
 
@@ -36,7 +45,7 @@ describe('main_window', () => {
 
       // spy the `send` method
       beforeEach(() => {
-        window.webContents.send = jest.fn()
+        window.webContents.send = vi.fn()
       })
 
       // cleanup stubs
@@ -59,8 +68,8 @@ describe('main_window', () => {
   describe('createMainWindow', () => {
     describe('with stored window geometry', () => {
       beforeEach(() => {
-        jest.spyOn(configStore, 'has').mockReturnValue(true)
-        jest.spyOn(configStore, 'get').mockReturnValue({
+        vi.spyOn(configStore, 'has').mockReturnValue(true)
+        vi.spyOn(configStore, 'get').mockReturnValue({
           width: 800,
           height: 600,
           x: 0,
@@ -83,7 +92,7 @@ describe('main_window', () => {
 
     describe('without stored window geometry', () => {
       beforeAll(() => {
-        jest.spyOn(configStore, 'has').mockReturnValue(false)
+        vi.spyOn(configStore, 'has').mockReturnValue(false)
       })
 
       it('creates the new window with the default geometry', async () => {
@@ -98,7 +107,7 @@ describe('main_window', () => {
 
       it('ensures windows is not bigger than the screen', async () => {
         // mock a smaller screen info
-        jest.spyOn(screen, 'getPrimaryDisplay').mockReturnValue({
+        vi.spyOn(screen, 'getPrimaryDisplay').mockReturnValue({
           workAreaSize: {
             height: 768,
             width: 1024
