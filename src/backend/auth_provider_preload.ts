@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer, webFrame } from 'electron'
-const DEV_PORTAL_URL = 'https://developers.hyperplay.xyz/'
+const DEV_PORTAL_URL = 'https://fix-session-conflict.hyperplay.xyz/'
 
 const removeBackground = `
 document.onreadystatechange = function(e)
