@@ -4,6 +4,8 @@ import { open, ZipFile, Entry } from 'yauzl'
 import { mkdirSync, createWriteStream, rmSync, existsSync } from 'graceful-fs'
 import { captureException } from '@sentry/electron'
 import { join } from 'path'
+import path from 'node:path'
+import { logInfo } from 'backend/logger/logger'
 
 export interface ExtractZipProgressResponse {
   /** Percentage of extraction progress. */
@@ -254,7 +256,7 @@ export class ExtractZipService extends EventEmitter {
       return
     }
 
-    console.log('error', error)
+    logInfo(`error ${error}`)
     this.emit('error', error)
 
     if (this.#options.deleteOnEnd) {
@@ -374,6 +376,9 @@ export class ExtractZipService extends EventEmitter {
                   }
 
                   this.#readStream = readStream
+                  if (path.extname(entry.fileName) === '.asar') {
+                    reject('Extraction Failed: Asar File')
+                  }
                   const writeStream = createWriteStream(
                     join(this.#destinationPath, entry.fileName)
                   )
