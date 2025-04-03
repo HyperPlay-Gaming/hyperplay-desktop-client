@@ -59,22 +59,22 @@ import { SiweMessage } from 'siwe'
  * t('quest.claimWarning.body2', 'Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>')
  * t('quest.claimWarning.cancel', 'Cancel')
  * t('quest.claimWarning.confirm', 'Confirm')
- * t("gameplayWallet.detected.title", "Wallet Detected")
- * t("gameplayWallet.detected.message", "To track progress with this wallet, add it as a Gameplay Wallet below by setting it.")
- * t("gameplayWallet.verify.message", "You only need to verify each address once and can switch freely at any time.")
- * t("gameplayWallet.new.title", "New Wallet Detected")
- * t("gameplayWallet.new.message", "Your connected wallet doesn't match any Gameplay wallet tracked for this Quest.To track progress with this wallet, set it as a Gameplay Wallet below.")
- * t("gameplayWallet.action.set", "Set")
- * t("gameplayWallet.noWallet.message", "No wallet connected. Connect wallet to track Quest progress.")
- * t("gameplayWallet.active.title", "Active Gameplay Wallet")
+ * t("gameplayWallet.detected.title", "Wallet Connected")
+ * t("gameplayWallet.detected.message", "To track your quest eligibility, set this as your active wallet.")
+ * t("gameplayWallet.new.title", "New Wallet Connected")
+ * t("gameplayWallet.new.message", "To track your quest eligibility on this new wallet, set it as your active wallet.")
+ * t("gameplayWallet.action.set", "Set as Active")
+ * t("gameplayWallet.noWallet.message", "Connect your wallet to start tracking eligibility for this Quest.")
+ * t("gameplayWallet.active.title", "Active Wallet")
  * t("gameplayWallet.noWallet.status", "No wallet connected")
  * t("gameplayWallet.connected.title", "Connected Wallet")
- * t("gameplayWallet.setConnected.title", "Set Connected Wallet")
+ * t("gameplayWallet.setConnected.title", "Connected Wallet")
  * t("gameplayWallet.error.title", "Something went wrong")
  * t("gameplayWallet.error.message", "Please try once more. If it still doesn't work, create a Discord support ticket.")
  * t("gameplayWallet.error.action", "Create Discord Ticket")
- * t("gameplayWallet.info.title", "What is a Gameplay Wallet?")
- * t("gameplayWallet.info.description", "Your progress for each Quest is based on the Gameplay wallet you use to start the game.<br/><br/> This allows game studios to properly sync and issue Rewards, regardless if they are in-game or off-chain.<br/><br/>Switching wallets? No problem. Your progress will be saved to each Gameplay wallet address separately.")
+ * t("gameplayWallet.error.alreadyLinked.title", "Wallet Already Linked")
+ * t("gameplayWallet.error.alreadyLinked.message", "This wallet is linked to another HyperPlay account. Try a different one or sign in to to the associated account to continue.")
+ * t("gameplayWallet.info.description", "This wallet address is set to track your quest eligibility. You can switch to a different wallet address at anytime—quest eligibility is saved to each wallet address separately.")
  */
 
 export default function QuestDetails({
@@ -204,13 +204,6 @@ export default function QuestDetails({
       isQuestsPage={isQuestsPage}
       key={'questDetailsLoading'}
       streakIsProgressing={streakIsProgressing}
-      getActiveWallet={async () => 'getActiveWallet'}
-      setActiveWallet={async () => ({ success: true, status: 100 })}
-      getGameplayWallets={async () => []}
-      updateActiveWallet={async () => {
-        console.log('updateActiveWallet')
-      }}
-      getActiveWalletSignature={async () => ({ message: '', signature: '' })}
     />
   )
 }
