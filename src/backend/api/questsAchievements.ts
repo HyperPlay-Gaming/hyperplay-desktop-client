@@ -91,3 +91,19 @@ export const handleOpenOnboarding = (
     ipcRenderer.removeListener('openOnboarding', onChange)
   }
 }
+
+export const getActiveWallet = async () => ipcRenderer.invoke('getActiveWallet')
+
+export const setActiveWallet = async ({
+  message,
+  signature
+}: {
+  message: string
+  signature: string
+}) => ipcRenderer.invoke('setActiveWallet', { message, signature })
+
+export const getGameplayWallets = async () =>
+  ipcRenderer.invoke('getGameplayWallets')
+
+export const updateActiveWallet = async (walletId: number) =>
+  ipcRenderer.invoke('updateActiveWallet', walletId)
