@@ -10,9 +10,9 @@ import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
 import { Quest } from '@hyperplay/utils'
 import { QuestRewardClaimedToast } from 'frontend/components/UI/QuestRewardClaimedToast'
-import { itemType } from '@hyperplay/ui/dist/components/Dropdowns/Dropdown'
 import useGetHyperPlayListings from 'frontend/hooks/useGetHyperPlayListings'
 import useGetQuests from 'frontend/hooks/useGetQuests'
+import Fuse from 'fuse.js'
 import {
   Alert,
   Background,
@@ -41,10 +41,15 @@ export function QuestsPage() {
   const searchParam = searchParams.get('search')
   const [searchText, setSearchText] = useState(searchParam ?? '')
   const [activeFilter, setActiveFilter] = useState<QuestFilter>('all')
-  const [selectedSort, setSelectedSort] = useState<itemType>({
-    text: 'Alphabetically (ASC)',
-    id: 'ALPHA_ASC'
-  })
+
+  interface FuseResult<T> {
+    id: number
+    project_id: string
+    name: string
+    title: string
+    item: T
+    refIndex: number
+  }
 
   useEffect(() => {
     window.api.trackScreen('Quests Page')
@@ -122,57 +127,86 @@ export function QuestsPage() {
       )
     }
   })
-
-  const sortedQuests = [...(quests ?? [])].sort((a, b) => {
-    const sortMultiplier = selectedSort.id === 'ALPHA_ASC' ? 1 : -1
-    return a.name.localeCompare(b.name) * sortMultiplier
-  })
-
-  const gameTitleMatches = (quest: Quest) => {
-    const title = listings ? listings[quest.project_id]?.project_meta?.name : ''
-    return title?.toLowerCase().startsWith(searchText.toLowerCase())
+  //Search Quest
+  const fuseOptions = {
+    keys: ['name', 'title'],
+    threshold: 0.2
   }
 
-  const searchFilteredQuests = sortedQuests?.filter((quest) => {
-    const questTitleMatch = quest.name
-      .toLowerCase()
-      .startsWith(searchText.toLowerCase())
-    const gameTitleMatch = gameTitleMatches(quest)
-    const searchByKeywords = searchText
-      .toLowerCase()
-      .split(' ')
-      .some(
-        (term) =>
-          quest.name?.toLowerCase().includes(term) ||
-          quest.description?.toLowerCase().includes(term)
+  const questsWithGameNames =
+    quests?.map((quest) => {
+      const gameName = listings?.[quest.project_id]?.project_meta?.name ?? ''
+      return {
+        ...quest,
+        title: gameName,
+        name: quest.name
+      }
+    }) ?? []
+
+  const fuse = new Fuse(questsWithGameNames ?? [], fuseOptions)
+
+  let searchFilteredQuests: FuseResult<Quest>[] = []
+  if (searchText) {
+    searchFilteredQuests = fuse.search(searchText) as FuseResult<Quest>[]
+  } else if (quests) {
+    searchFilteredQuests = quests.map((quest) => ({
+      id: quest.id,
+      project_id: quest.project_id,
+      name: quest.name,
+      title: listings?.[quest.project_id]?.project_meta?.name ?? '',
+      item: quest,
+      refIndex: 0
+    }))
+  }
+
+  const searchQuests = (quests: Quest[], query: string) => {
+    if (!query) return quests
+    const results = fuse.search(query)
+    return results.map((result) => result.item)
+  }
+
+  const filteredQuests = searchQuests(quests ?? [], searchText)
+
+  useEffect(() => {
+    if (filteredQuests.length > 0) {
+      const currentQuestExists = filteredQuests.find(
+        (quest) => quest.id === selectedQuestId
       )
-    return questTitleMatch || gameTitleMatch || searchByKeywords
-  })
+      if (!currentQuestExists) {
+        const firstQuest = filteredQuests[0]
+        if (firstQuest) {
+          const searchParams = new URLSearchParams(window.location.search)
+          const newUrl = `/quests/${firstQuest.id}${
+            searchParams.toString() ? `?${searchParams.toString()}` : ''
+          }#card-${firstQuest.id}`
+          navigate(newUrl)
+        }
+      }
+    }
+  }, [filteredQuests, navigate, selectedQuestId])
 
-  const initialQuestId = searchFilteredQuests?.[0]?.id ?? null
+  const initialQuestId = searchFilteredQuests?.[0]?.item?.id ?? null
   const visibleQuestId = selectedQuestId ?? initialQuestId
-
-  const achievementsSortOptions = [
-    { text: 'Alphabetically (ASC)', id: 'ALPHA_ASC' },
-    { text: 'Alphabetically (DES)', id: 'ALPHA_DES' }
-  ]
 
   const imagesToPreload: string[] = []
   const gameElements =
-    searchFilteredQuests?.map(({ id, project_id, name, ...rest }) => {
+    searchFilteredQuests?.map((result: FuseResult<Quest>) => {
       const imageUrl = listings
-        ? listings[project_id]?.project_meta?.main_capsule
+        ? listings[result.item.project_id]?.project_meta?.main_capsule
         : ''
       if (imageUrl) {
         imagesToPreload.push(imageUrl)
       }
-      const title = listings ? listings[project_id]?.project_meta?.name : ''
+      const title = listings
+        ? listings[result.item.project_id]?.project_meta?.name
+        : ''
+      const id = result.item.id
+      const name = result.item.name
       return (
         <QuestCard
           key={id}
           image={imageUrl ?? ''}
           title={title}
-          {...rest}
           onClick={() => {
             if (selectedQuestId !== id) {
               navigate(`/quests/${id}`)
@@ -186,9 +220,11 @@ export function QuestsPage() {
     }) ?? []
 
   let suggestedSearchTitles = undefined
-
   if (searchText) {
-    suggestedSearchTitles = searchFilteredQuests?.map((val) => val.name)
+    suggestedSearchTitles = searchFilteredQuests?.map((val) => {
+      const gameName = listings?.[val.item.project_id]?.project_meta?.name ?? ''
+      return `${val.item.name} (${gameName})`
+    })
   }
 
   return (
@@ -206,11 +242,6 @@ export function QuestsPage() {
         <QuestsSummaryTable
           games={gameElements}
           imagesToPreload={imagesToPreload}
-          sortProps={{
-            options: achievementsSortOptions,
-            selected: selectedSort,
-            onItemChange: setSelectedSort
-          }}
           filterProps={{ activeFilter, setActiveFilter }}
           isFetching={questsResults?.data.isFetching}
           isPageLoading={questsResults?.data.isLoading}

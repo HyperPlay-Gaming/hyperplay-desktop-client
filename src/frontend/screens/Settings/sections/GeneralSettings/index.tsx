@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import LanguageSelector from 'frontend/components/UI/LanguageSelector'
 import {
   AutoUpdateGames,
-  CheckUpdatesOnStartup,
   DefaultInstallPath,
   DefaultSteamPath,
   EgsSettings,
@@ -39,8 +38,6 @@ export default function GeneralSettings() {
       <EgsSettings />
 
       <AutoLaunchHyperPlay />
-
-      <CheckUpdatesOnStartup />
 
       <AutoUpdateGames />
 

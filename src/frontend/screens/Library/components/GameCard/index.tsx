@@ -383,6 +383,45 @@ const GameCard = ({
           actionDisabled={isLaunching}
           alwaysShowInColor={allTilesInColor}
           store={runner}
+          i18n={{
+            addedToLibrary: t(
+              'button.remove_from_library',
+              'Remove from library'
+            ),
+            notAddedToLibrary: t('button.add_to_library', 'Add to library'),
+            logoTextTooltip: {
+              hyperplay: {
+                installed: t(
+                  'tooltip.installed_from_hyperplay',
+                  'Installed from HyperPlay Store'
+                ),
+                notInstalled: t(
+                  'tooltip.will_install_from_hyperplay',
+                  'Will install from HyperPlay Store'
+                )
+              },
+              epic: {
+                installed: t(
+                  'tooltip.installed_from_epic',
+                  'Installed from Epic Store'
+                ),
+                notInstalled: t(
+                  'tooltip.will_install_from_epic',
+                  'Will install from Epic Store'
+                )
+              },
+              gog: {
+                installed: t(
+                  'tooltip.installed_from_gog',
+                  'Installed from GOG Store'
+                ),
+                notInstalled: t(
+                  'tooltip.will_install_from_gog',
+                  'Will install from GOG Store'
+                )
+              }
+            }
+          }}
         />
       </Link>
     </>

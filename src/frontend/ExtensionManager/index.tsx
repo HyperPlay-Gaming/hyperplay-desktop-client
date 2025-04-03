@@ -42,8 +42,16 @@ const ExtensionManager = function () {
     rootRef.current?.close()
   }
 
+  /**
+   * @dev We remove the popup/notification windows from the overlay when it is hidden because
+   * there were performance issues with them running in the background while playing some games like Kokodi.
+   */
   if (isOverlay) {
-    return <ExtensionContents />
+    if (OverlayState.showOverlay) {
+      return <ExtensionContents />
+    } else {
+      return null
+    }
   }
 
   /* eslint-disable react/no-unknown-property */
