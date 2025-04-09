@@ -21,6 +21,7 @@ import { UserData } from 'common/types/gog'
 
 export interface StoreStructure {
   configStore: {
+    appVersion: string
     userHome: string
     userInfo: UserInfo
     games: {
@@ -43,6 +44,11 @@ export interface StoreStructure {
     'window-props': Electron.Rectangle
     settings: AppSettings
     skipVcRuntime: boolean
+    walletState: {
+      isConnected: boolean
+      address: string
+      provider: PROVIDERS
+    }
   }
   wineDownloaderInfoStore: {
     'wine-releases': WineVersionInfo[]
