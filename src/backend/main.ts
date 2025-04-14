@@ -2049,7 +2049,6 @@ ipcMain.handle(
  */
 
 // sends messages to renderer process through preload.ts callbacks
-
 backendEvents.on('walletConnected', function (accounts: string[]) {
   getMainWindow()?.webContents.send('walletConnected', accounts)
 })
