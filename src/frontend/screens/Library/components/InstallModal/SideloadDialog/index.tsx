@@ -163,6 +163,7 @@ export default function SideloadDialog({
       title,
       install: {
         executable: selectedExe,
+        is_dlc: false,
         platform: gameInfo.install?.platform ?? platformToInstall
       },
       art_cover: imageUrl,
@@ -186,11 +187,13 @@ export default function SideloadDialog({
       }
     })
 
-    await libraryState.refreshLibrary({
+    backdropClick()
+
+    return libraryState.refreshLibrary({
       runInBackground: true,
-      checkForUpdates: true
+      checkForUpdates: false,
+      library: 'sideload'
     })
-    return backdropClick()
   }
 
   const fileFilters = {
