@@ -236,14 +236,27 @@ async function updateQueueElement(params: InstallParams): Promise<{
 
   try {
     const prevVersion = params.gameInfo.install.version
-    const { status } = await gameManagerMap[runner].update(appName, {
+    const { status, error } = await gameManagerMap[runner].update(appName, {
       siweValues,
       accessCode: params.accessCode
     })
     const newVersion = params.gameInfo.install.version
 
     if (status === 'error') {
-      errorMessage('')
+      const errMsg = `${error ?? ''}`
+      errorMessage(errMsg)
+      // needed to track asar extraction failures
+      trackEvent({
+        event: 'Game Update Failed',
+        properties: {
+          game_name: appName,
+          store_name: getStoreName(runner),
+          error: errMsg,
+          game_title: title,
+          platform: getPlatformName(params.platformToInstall),
+          platform_arch: params.platformToInstall
+        }
+      })
     } else {
       trackEvent({
         event: 'Game Update Success',
