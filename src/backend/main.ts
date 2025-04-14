@@ -722,8 +722,7 @@ ipcMain.once('frontendReady', async () => {
 
   await initExtension(hpApi)
 
-  // Only reload the app if a wallet is not connected
-  // or the app version has changed
+  // Only reload the app if the app version has changed
   if (!lastVersion || lastVersion !== currentVersion) {
     logInfo(
       'App version changed and wallet connected, reloading to update MM',
