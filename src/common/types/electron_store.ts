@@ -44,11 +44,6 @@ export interface StoreStructure {
     'window-props': Electron.Rectangle
     settings: AppSettings
     skipVcRuntime: boolean
-    walletState: {
-      isConnected: boolean
-      address: string
-      provider: PROVIDERS
-    }
   }
   wineDownloaderInfoStore: {
     'wine-releases': WineVersionInfo[]

@@ -2050,43 +2050,6 @@ ipcMain.handle(
  */
 
 // sends messages to renderer process through preload.ts callbacks
-backendEvents.on('walletConnected', function (accounts: string[]) {
-  getMainWindow()?.webContents.send('walletConnected', accounts)
-  // Store wallet connection state
-  configStore.set('walletState.isConnected', true)
-  if (accounts && accounts.length > 0) {
-    configStore.set('walletState.address', accounts[0])
-  }
-})
-
-backendEvents.on('walletDisconnected', function (code: number, reason: string) {
-  getMainWindow()?.webContents.send('walletDisconnected', code, reason)
-  // Update wallet connection state
-  configStore.set('walletState.isConnected', false)
-})
-
-backendEvents.on('connectionRequestRejected', function () {
-  getMainWindow()?.webContents.send('connectionRequestRejected')
-})
-
-backendEvents.on('chainChanged', function (chainId: number) {
-  getMainWindow()?.webContents.send('chainChanged', chainId)
-})
-
-backendEvents.on(
-  'accountsChanged',
-  function (accounts: string[], provider: PROVIDERS) {
-    getMainWindow()?.webContents.send('accountChanged', accounts, provider)
-    // Update wallet details in configStore
-    if (accounts && accounts.length > 0) {
-      configStore.set('walletState.address', accounts[0])
-      configStore.set('walletState.provider', provider)
-      configStore.set('walletState.isConnected', true)
-    } else {
-      configStore.set('walletState.isConnected', false)
-    }
-  }
-)
 
 backendEvents.on('walletConnected', function (accounts: string[]) {
   getMainWindow()?.webContents.send('walletConnected', accounts)
