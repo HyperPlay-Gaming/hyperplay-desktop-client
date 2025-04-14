@@ -25,6 +25,7 @@ import {
   configStore,
   createNecessaryFolders,
   eventsToCloseMetaMaskPopupOn,
+  fixAsarPath,
   icon,
   installed,
   isCLIFullscreen,
@@ -603,6 +604,10 @@ app.on('open-url', (event, url) => {
   } else {
     openUrlArgument = url
   }
+})
+
+ipcMain.handle('getLocalPreloadPath', async () => {
+  return fixAsarPath(path.join(publicDir, 'webviewPreload.js'))
 })
 
 /// IPC handlers begin here.

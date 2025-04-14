@@ -1,9 +1,5 @@
 import { wait } from '@hyperplay/utils'
-import {
-  getGameOverride,
-  getGameSdl,
-  getEpicListingUrl
-} from 'backend/api/library'
+
 import {
   logError,
   logInfo,
@@ -18,7 +14,6 @@ import {
   isFlatpak,
   configStore,
   fontsStore,
-  fixAsarPath,
   publicDir,
   isCLINoGui,
   tsStore,
@@ -36,7 +31,10 @@ import {
 } from 'backend/storeManagers/gog/games'
 import { GOGUser } from 'backend/storeManagers/gog/user'
 import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
-import { getHyperPlayReleaseObject } from 'backend/storeManagers/hyperplay/utils'
+import {
+  getEpicListingUrl,
+  getHyperPlayReleaseObject
+} from 'backend/storeManagers/hyperplay/utils'
 import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 import { LegendaryUser } from 'backend/storeManagers/legendary/user'
 import { Winetricks, DXVK, SteamWindows } from 'backend/tools'
@@ -95,6 +93,10 @@ import { DEV_PORTAL_URL } from 'common/constants'
 import { showDialogBoxModalAuto, notify } from 'backend/dialog/dialog'
 import i18next from 'i18next'
 import { trackEvent } from 'backend/metrics/metrics'
+import {
+  getGameOverride,
+  getGameSdl
+} from 'backend/storeManagers/legendary/library'
 
 const devAppUrl = 'http://localhost:5173/?view=App'
 const prodAppUrl = `file://${path.join(
@@ -528,10 +530,6 @@ ipcMain.handle('requestSettings', async (event, appName) => {
 
   const config = await GameConfig.get(appName).getSettings()
   return mapOtherSettings(config)
-})
-
-ipcMain.handle('getLocalPreloadPath', async () => {
-  return fixAsarPath(join(publicDir, 'webviewPreload.js'))
 })
 
 let powerDisplayId: number | null

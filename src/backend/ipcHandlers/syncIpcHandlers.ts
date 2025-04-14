@@ -38,12 +38,12 @@ import { clearCache } from 'backend/utils'
 import { getHpOverlay } from '../overlay'
 import { hpApi } from '../utils/hyperplay_api'
 import { onboardLocalStore } from '../constants'
-import { addNewApp } from 'backend/api/library'
 import { GlobalConfig } from 'backend/config'
 import { GameConfig } from 'backend/game_config'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import { autoUpdater } from 'electron-updater'
 import { GOGUser } from 'backend/storeManagers/gog/user'
+import { addNewApp } from 'backend/storeManagers/sideload/library'
 
 const mainWindow = getMainWindow()
 
