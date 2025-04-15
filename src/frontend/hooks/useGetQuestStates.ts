@@ -37,13 +37,15 @@ export function useGetQuestStates({
   let getUserPlaystreakQueries: getUserPlaystreakQueryOptionsType[] = []
   if (isSignedIn) {
     getUserPlaystreakQueries =
-      quests?.map((quest) => ({
-        ...getUserPlaystreakQueryOptions(
-          quest.id,
-          window.api.getUserPlayStreak
-        ),
-        enabled
-      })) ?? []
+      quests
+        ?.filter((quest) => quest.type === 'PLAYSTREAK')
+        .map((quest) => ({
+          ...getUserPlaystreakQueryOptions(
+            quest.id,
+            window.api.getUserPlayStreak
+          ),
+          enabled
+        })) ?? []
   }
   const getUserPlaystreakQuery = useQueries({
     queries: getUserPlaystreakQueries
