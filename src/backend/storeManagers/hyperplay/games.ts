@@ -969,7 +969,10 @@ export async function install(
       `Error while downloading and extracting game: ${error}`,
       LogPrefix.HyperPlay
     )
-    if (!`${error}`.includes('Download stopped or paused')) {
+    if (
+      !`${error}`.includes('Download stopped or paused') &&
+      !`${error}`.includes('Asar File')
+    ) {
       callAbortController(appName)
       return {
         status: 'abort'
@@ -1052,9 +1055,15 @@ export async function extract(
     const zipFile = path.join(directory, fileName)
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
 
-    // disables electron's fs wrapper called when extracting .asar files
-    // which is necessary to extract electron app/game zip files
-    process.noAsar = true
+    /**
+     * @dev disables electron's fs wrapper called when extracting .asar files
+     * which is necessary to extract electron app/game zip files.
+     * @TODO rm this code when we have a long term sol'n for running extraction in a separate process
+     */
+    const enableProcessNoAsar = getFlag('enable-process-no-asar', false)
+    if (enableProcessNoAsar) {
+      process.noAsar = true
+    }
 
     sendFrontendMessage('gameStatusUpdate', {
       appName,
@@ -1082,7 +1091,7 @@ export async function extract(
 
     inProgressExtractionsMap.set(appName, extractService)
 
-    return await new Promise<InstallResult>((resolve) => {
+    return await new Promise<InstallResult>((resolve, reject) => {
       extractService.on(
         'progress',
         ({
@@ -1191,18 +1200,24 @@ export async function extract(
         }
       )
       extractService.once('error', (error: Error) => {
-        logError(`Extracting Error ${error.message}`, LogPrefix.HyperPlay)
+        logError(`Extracting Error ${error}`, LogPrefix.HyperPlay)
 
-        cancelQueueExtraction()
-        callAbortController(appName)
+        try {
+          cancelQueueExtraction()
+          callAbortController(appName)
 
-        cleanUpDownload(appName, directory)
+          cleanUpDownload(appName, directory)
 
-        sendFrontendMessage('refreshLibrary', 'hyperplay')
+          sendFrontendMessage('refreshLibrary', 'hyperplay')
+        } catch (err) {
+          logError(
+            `Error while cleaning up zip download ${error}`,
+            LogPrefix.HyperPlay
+          )
+        }
 
-        resolve({
-          status: 'error'
-        })
+        // need to reject for proper mixpanel error handling
+        reject(`${error}`)
       })
       extractService.once('canceled', () => {
         logInfo(
@@ -1251,7 +1266,7 @@ export async function extract(
         })
       })
 
-      extractService.extract().then()
+      extractService.extract().catch(reject)
     })
   } catch (error: unknown) {
     process.noAsar = false
@@ -1266,9 +1281,9 @@ export async function extract(
     })
 
     captureException(error)
+    // need to rethrow for proper mixpanel error handling
+    throw error
   }
-
-  return { status: 'error' }
 }
 
 export function appIsInLibrary(appName: string): boolean {

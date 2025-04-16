@@ -1,5 +1,6 @@
 import { sendFrontendMessage } from 'backend/main_window'
 import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
+import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { checkG7ConnectionStatus } from 'backend/utils/quests'
 import { DEV_PORTAL_URL } from 'common/constants'
 import {
@@ -147,4 +148,58 @@ ipcMain.handle(
 
 ipcMain.on('openOnboarding', () => {
   sendFrontendMessage('openOnboarding')
+})
+
+ipcMain.handle('getActiveWallet', async () => {
+  const url = `${DEV_PORTAL_URL}/api/v1/active_wallet`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.walletAddress
+})
+
+ipcMain.handle(
+  'setActiveWallet',
+  async (e, { message, signature }: { message: string; signature: string }) => {
+    const url = `${DEV_PORTAL_URL}/api/v1/active_wallet`
+
+    const cookieString = await getPartitionCookies({
+      partition: 'persist:auth',
+      url: DEV_PORTAL_URL
+    })
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Cookie: cookieString
+      },
+      body: JSON.stringify({ message, signature })
+    })
+
+    if (!response.ok) {
+      return {
+        status: response.status,
+        success: false,
+        message: await response.text()
+      }
+    }
+
+    return {
+      status: response.status,
+      success: true
+    }
+  }
+)
+
+ipcMain.handle('updateActiveWallet', async (e, walletId) => {
+  const url = `${DEV_PORTAL_URL}/api/v1/active_wallet`
+  await fetchWithCookie({
+    url,
+    method: 'PUT',
+    body: JSON.stringify({ wallet_id: walletId })
+  })
+})
+
+ipcMain.handle('getGameplayWallets', async () => {
+  const url = `${DEV_PORTAL_URL}/api/v1/gameplay_wallets`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.wallets
 })

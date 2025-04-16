@@ -273,6 +273,44 @@
         "store": "Store",
         "title": "Game Title"
     },
+    "gameplayWallet": {
+        "action": {
+            "set": "Set as Active"
+        },
+        "active": {
+            "title": "Active Wallet"
+        },
+        "connected": {
+            "title": "Connected Wallet"
+        },
+        "detected": {
+            "message": "To track your quest eligibility, set this as your active wallet.",
+            "title": "Wallet Connected"
+        },
+        "error": {
+            "action": "Create Discord Ticket",
+            "alreadyLinked": {
+                "message": "This wallet is linked to another HyperPlay account. Try a different one or sign in to to the associated account to continue.",
+                "title": "Wallet Already Linked"
+            },
+            "message": "Please try once more. If it still doesn't work, create a Discord support ticket.",
+            "title": "Something went wrong"
+        },
+        "info": {
+            "description": "This wallet address is set to track your quest eligibility. You can switch to a different wallet address at anytime—quest eligibility is saved to each wallet address separately."
+        },
+        "new": {
+            "message": "To track your quest eligibility on this new wallet, set it as your active wallet.",
+            "title": "New Wallet Connected"
+        },
+        "noWallet": {
+            "message": "Connect your wallet to start tracking eligibility for this Quest.",
+            "status": "No wallet connected"
+        },
+        "setConnected": {
+            "title": "Connected Wallet"
+        }
+    },
     "gameRelease": {
         "alpha": "Alpha",
         "beta": "Beta",
@@ -884,7 +922,6 @@
         "autoUpdateGames": "Automatically update games",
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",
         "change-target-exe": "Select an alternative EXE to run",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
         "crossover-version": "Crossover/Wine Version",
         "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Custom Wine/Proton Paths",
