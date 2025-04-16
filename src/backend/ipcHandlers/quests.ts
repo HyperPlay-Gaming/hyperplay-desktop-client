@@ -29,17 +29,17 @@ async function fetchQuests({
   if (!questMetaResults.ok) {
     throw await questMetaResults.text()
   }
-  let questsMetaJson = await questMetaResults.json()
+  const questsMetaJson = await questMetaResults.json()
 
-  if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
-    url.searchParams.append('isTest', 'true')
-    const testQuestMetaResults = await fetch(url)
-    if (!testQuestMetaResults.ok) {
-      throw await testQuestMetaResults.text()
-    }
-    const testQuestsMetaJson = await testQuestMetaResults.json()
-    questsMetaJson = questsMetaJson.concat(testQuestsMetaJson)
-  }
+  // if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
+  //   url.searchParams.append('isTest', 'true')
+  //   const testQuestMetaResults = await fetch(url)
+  //   if (!testQuestMetaResults.ok) {
+  //     throw await testQuestMetaResults.text()
+  //   }
+  //   const testQuestsMetaJson = await testQuestMetaResults.json()
+  //   questsMetaJson = questsMetaJson.concat(testQuestsMetaJson)
+  // }
 
   return questsMetaJson
 }
