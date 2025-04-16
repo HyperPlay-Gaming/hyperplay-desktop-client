@@ -17,14 +17,12 @@ const TraySettings = () => {
         title={t('setting.exit-to-tray', 'Exit to System Tray')}
       />
 
-      {exitToTray && (
-        <ToggleSwitch
-          htmlId="startInTray"
-          value={startInTray}
-          handleChange={() => setStartInTray(!startInTray)}
-          title={t('setting.start-in-tray', 'Start Minimized')}
-        />
-      )}
+      <ToggleSwitch
+        htmlId="startInTray"
+        value={startInTray}
+        handleChange={() => setStartInTray(!startInTray)}
+        title={t('setting.start-in-tray', 'Start Minimized')}
+      />
     </>
   )
 }
