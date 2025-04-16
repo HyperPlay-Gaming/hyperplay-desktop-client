@@ -45,7 +45,8 @@ import {
   isWindows,
   publicDir,
   isMac,
-  configStore
+  configStore,
+  isIntelMac
 } from './constants'
 import {
   logChangedSetting,
@@ -743,15 +744,7 @@ export const spawnAsync = async (
 }
 
 export async function checkRosettaInstall() {
-  if (!isMac) {
-    return
-  }
-
-  // check if on arm64 macOS
-  const { stdout: archCheck } = await execAsync('arch')
-  const isArm64 = archCheck.trim() === 'arm64'
-
-  if (!isArm64) {
+  if (isIntelMac) {
     return
   }
 
