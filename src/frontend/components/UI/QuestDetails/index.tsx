@@ -147,6 +147,7 @@ export default function QuestDetails({
       setActiveWallet={window.api.setActiveWallet}
       getGameplayWallets={window.api.getGameplayWallets}
       updateActiveWallet={window.api.updateActiveWallet}
+      getExternalEligibility={window.api.getExternalEligibility}
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }

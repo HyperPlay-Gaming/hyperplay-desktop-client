@@ -34,11 +34,15 @@ export default function useGetQuests(projectId?: string) {
    * In these cases, the user can no longer earn a reward or claim a reward.
    */
   if (isSignedIn && !isGetQuestStatesPending && quests) {
-    quests = quests.filter(
-      (quest_i) =>
-        Object.hasOwn(questIdToQuestStateMap, quest_i.id) &&
-        questIdToQuestStateMap[quest_i.id]
-    )
+    quests = quests.filter((quest_i) => {
+      if (quest_i.type === 'PLAYSTREAK') {
+        return (
+          Object.hasOwn(questIdToQuestStateMap, quest_i.id) &&
+          questIdToQuestStateMap[quest_i.id]
+        )
+      }
+      return true
+    })
   }
 
   /**

@@ -16,10 +16,13 @@ async function fetchQuests({
   status
 }: {
   projectId?: string
-  status: 'ACTIVE' | 'COMPLETED'
+  status: Quest['status'] | Quest['status'][]
 }): Promise<Quest[]> {
   const url = new URL(`${DEV_PORTAL_URL}api/v1/quests`)
-  url.searchParams.append('questStatus', status)
+  url.searchParams.append(
+    'questStatus',
+    Array.isArray(status) ? status.join(',') : status
+  )
   url.searchParams.append('sortBy', 'start_date')
   url.searchParams.append('order', 'desc')
   if (projectId) {
@@ -38,6 +41,7 @@ async function fetchQuests({
       throw await testQuestMetaResults.text()
     }
     const testQuestsMetaJson = await testQuestMetaResults.json()
+    console.log('testQuestsMetaJson', testQuestsMetaJson.length)
     questsMetaJson = questsMetaJson.concat(testQuestsMetaJson)
   }
 
@@ -45,10 +49,10 @@ async function fetchQuests({
 }
 
 export async function getQuests(projectId?: string): Promise<Quest[]> {
-  const activeQuests = await fetchQuests({ projectId, status: 'ACTIVE' })
-  const completedQuests = await fetchQuests({ projectId, status: 'COMPLETED' })
-
-  return activeQuests.concat(completedQuests)
+  return fetchQuests({
+    projectId,
+    status: ['CLAIMABLE', 'ACTIVE', 'COMPLETED']
+  })
 }
 
 ipcMain.handle('getQuests', async (e, projectId) => getQuests(projectId))
@@ -202,4 +206,30 @@ ipcMain.handle('getGameplayWallets', async () => {
   const url = `${DEV_PORTAL_URL}/api/v1/gameplay_wallets`
   const response = await fetchWithCookie({ url, method: 'GET' })
   return response.wallets
+})
+
+ipcMain.handle('getExternalEligibility', async (e, questId) => {
+  const url = `${DEV_PORTAL_URL}/api/v1/quests/${questId}/eligibility/external`
+
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Cookie: cookieString
+    }
+  })
+
+  if (!response.ok) {
+    if (response.status === 400) {
+      return null
+    } else {
+      throw new Error(await response.text())
+    }
+  }
+
+  return response.json()
 })
