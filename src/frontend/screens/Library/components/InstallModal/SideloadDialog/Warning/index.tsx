@@ -4,7 +4,7 @@ import { AlertCard, Typography, Images } from '@hyperplay/ui'
 import styles from './index.module.scss'
 import { t } from 'i18next'
 
-const { ButtonText } = Typography
+const { Button } = Typography
 const { WarningIcon } = Images
 
 export default function SideloadDialogWarning() {
@@ -29,9 +29,9 @@ export default function SideloadDialogWarning() {
           onClick={() => setIsOpen(!isOpen)}
         >
           <WarningIcon />
-          <ButtonText className={styles.title}>
+          <Button className={styles.title}>
             {t('sideload.warningTitle', 'Important')}
-          </ButtonText>
+          </Button>
         </div>
       )}
     </div>
