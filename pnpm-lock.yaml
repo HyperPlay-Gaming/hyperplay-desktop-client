@@ -42,11 +42,11 @@ importers:
         specifier: ^3.5.2
         version: 3.5.2
       '@hyperplay/quests-ui':
-        specifier: ^0.1.31
-        version: 0.1.31(6tmqhevda4bh62dfykwyuktkty)
+        specifier: ^0.1.32
+        version: 0.1.32(vvy3mz2girll2ljewrm6frcft4)
       '@hyperplay/ui':
-        specifier: ^1.19.3
-        version: 1.19.3(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)
+        specifier: ^1.19.4
+        version: 1.19.4(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)
       '@hyperplay/utils':
         specifier: ^0.3.13
         version: 0.3.13
@@ -1865,8 +1865,8 @@ packages:
   '@hyperplay/proxy-server@0.0.11':
     resolution: {integrity: sha512-IhR5cum3M2FiC7AlTLXzjBG+Kg7jiF3N2Bx4bNciFwSLMtZ7rvHSdr3DSwcS3wyhplkBydCs0Qv+QfVg38jbsw==}
 
-  '@hyperplay/quests-ui@0.1.31':
-    resolution: {integrity: sha512-8KyvOZCHdITxuIezRSaYuY/l1Hzhx6HKEmH0TebFTLonPKi8m8nB15HHthuvTK3WbEi/REh92Qvn2UoVNi7Jqg==}
+  '@hyperplay/quests-ui@0.1.32':
+    resolution: {integrity: sha512-NfGeMXu9VCtOvmUmPk4asIJo09YrAisiUyKbGi4nYOV8jMvoLAny9A4V8zzM546gqgNdQCrTm9BU0q8PBMg8hA==}
     peerDependencies:
       '@hyperplay/chains': ^0.3.0
       '@hyperplay/ui': ^1.9.5
@@ -1886,8 +1886,8 @@ packages:
       vite-plugin-svgr: ^2.4.0
       wagmi: ^2.14.12
 
-  '@hyperplay/ui@1.19.3':
-    resolution: {integrity: sha512-TXU1/UD7QaR2/Dwrz5Kx/6dvvvLvgpTnU3bP1LFDHlOve7wkTOyIE9Z3j4814N9UZusfVedkxtgt6xPdXH0Qkw==}
+  '@hyperplay/ui@1.19.4':
+    resolution: {integrity: sha512-mkCBUImADTZmsiYQ1W1KUYn5QNKJA8jREmCZ6s2rtaw1Q0MblQkeHQ6l1fRDwUP7ABIBTt7z18IyzU46BrNxiw==}
     peerDependencies:
       '@mantine/carousel': ^7.16.3
       '@mantine/core': ^7.16.3
@@ -11169,10 +11169,10 @@ snapshots:
       - utf-8-validate
     optional: true
 
-  '@hyperplay/quests-ui@0.1.31(6tmqhevda4bh62dfykwyuktkty)':
+  '@hyperplay/quests-ui@0.1.32(vvy3mz2girll2ljewrm6frcft4)':
     dependencies:
       '@hyperplay/chains': 0.5.0(bufferutil@4.0.8)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.24.1)
-      '@hyperplay/ui': 1.19.3(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)
+      '@hyperplay/ui': 1.19.4(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)
       '@hyperplay/utils': 0.3.13
       '@mantine/core': 7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/hooks': 7.15.1(react@18.3.1)
@@ -11196,7 +11196,7 @@ snapshots:
       - encoding
       - utf-8-validate
 
-  '@hyperplay/ui@1.19.3(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)':
+  '@hyperplay/ui@1.19.4(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@mantine/carousel': 7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/core': 7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
