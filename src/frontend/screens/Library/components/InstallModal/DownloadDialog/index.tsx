@@ -397,7 +397,7 @@ export default function DownloadDialog({
   const { validPath, notEnoughDiskSpace, message, spaceLeftAfter } = spaceLeft
   const title = gameInfo?.title
 
-  const isThirdPartyDownloader = true
+  const isThirdPartyDownloader = gameInfo?.usesThirdPartyLauncher
 
   function getInstallLabel() {
     if (isThirdPartyDownloader) {
