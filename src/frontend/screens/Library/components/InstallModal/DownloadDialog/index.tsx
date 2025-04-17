@@ -455,7 +455,7 @@ export default function DownloadDialog({
   const showNFTWarning = requiresToken && showAlert.siwe
 
   return (
-    <>
+    <div className={styles.downloadDialogContainer}>
       <DialogHeader onClose={backdropClick}>
         {title ? title : '...'}
         {availablePlatforms.map((p) => (
@@ -710,6 +710,6 @@ export default function DownloadDialog({
           {readyToInstall && getInstallLabel()}
         </Button>
       </DialogFooter>
-    </>
+    </div>
   )
 }
