@@ -72,7 +72,7 @@
     "@hyperplay/chains": "^0.5.0",
     "@hyperplay/check-disk-space": "^3.5.2",
     "@hyperplay/quests-ui": "^0.1.27",
-    "@hyperplay/ui": "^1.11.1",
+    "@hyperplay/ui": "1.19.5-beta.0",
     "@hyperplay/utils": "^0.3.7",
     "@mantine/carousel": "^7.12.0",
     "@mantine/core": "^7.12.0",
@@ -270,5 +270,5 @@
       "@hyperplay/overlay>@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true
     }
   },
-  "packageManager": "pnpm@9.15.0+sha256.09a8fe31a34fda706354680619f4002f4ccef6dadff93240d24ef6c831f0fd28"
+  "packageManager": "pnpm@10.8.1"
 }
