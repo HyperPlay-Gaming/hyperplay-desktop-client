@@ -414,7 +414,6 @@
             "primaryButton": "I Agree",
             "secondaryButton": "No, Thanks"
         },
-        "changeWallet": "Swap wallet account",
         "compatibilityLayer": "Compatibility Layer (Beta)",
         "connectWallet": "Connect wallet",
         "copyUrl": "Copy URL",
@@ -510,6 +509,7 @@
             }
         },
         "otp": "One Time Passcode",
+        "swapConnectedWallet": "Swap connected wallet",
         "Sync": "Sync",
         "syncing": "Syncing...",
         "turnAnalyticsOff": "Turn off",
