@@ -1,7 +1,9 @@
 import {
   getPlaystreakQuestStatus,
   getUserPlaystreakQueryOptions,
-  getQuestQueryOptions
+  getQuestQueryOptions,
+  getExternalEligibilityQueryOptions,
+  getExternalQuestStatus
 } from '@hyperplay/quests-ui'
 import { QuestLogInfo } from '@hyperplay/ui'
 import { Quest } from '@hyperplay/utils'
@@ -17,6 +19,10 @@ type getQuestQueryOptionsType = ReturnType<typeof getQuestQueryOptions>
 type getUserPlaystreakQueryOptionsType = ReturnType<
   typeof getUserPlaystreakQueryOptions
 >
+type getExternalEligibilityQueryOptionsType = ReturnType<
+  typeof getExternalEligibilityQueryOptions
+>
+
 export function useGetQuestStates({
   quests,
   enabled = true
@@ -47,8 +53,28 @@ export function useGetQuestStates({
           enabled
         })) ?? []
   }
+
+  let externalEligibilityQueries: getExternalEligibilityQueryOptionsType[] = []
+
+  if (isSignedIn) {
+    externalEligibilityQueries =
+      quests
+        ?.filter((quest) => quest.type === 'LEADERBOARD')
+        .map((quest) => ({
+          ...getExternalEligibilityQueryOptions({
+            questId: quest.id,
+            getExternalEligibility: window.api.getExternalEligibility,
+            enabled
+          })
+        })) ?? []
+  }
+
   const getUserPlaystreakQuery = useQueries({
     queries: getUserPlaystreakQueries
+  })
+
+  const getExternalEligibilityQuery = useQueries({
+    queries: externalEligibilityQueries
   })
 
   const questMap: Record<number, Quest> = {}
@@ -78,7 +104,23 @@ export function useGetQuestStates({
     ))
   })
 
-  const allQueries = [...getQuestQuery, ...getUserPlaystreakQuery]
+  getExternalEligibilityQuery.forEach((val) => {
+    if (!val.data || !Object.hasOwn(questMap, val.data.questId)) {
+      return
+    }
+    const questId = val.data.questId
+    const questData = questMap[questId]
+    questIdToQuestStateMap[questId] = getExternalQuestStatus(
+      questData,
+      val.data.externalEligibility
+    )
+  })
+
+  const allQueries = [
+    ...getQuestQuery,
+    ...getUserPlaystreakQuery,
+    ...getExternalEligibilityQuery
+  ]
 
   return {
     isPending: allQueries.some((val) => val.status === 'pending'),

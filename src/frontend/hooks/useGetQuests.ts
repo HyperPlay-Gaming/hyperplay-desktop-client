@@ -40,6 +40,11 @@ export default function useGetQuests(projectId?: string) {
           Object.hasOwn(questIdToQuestStateMap, quest_i.id) &&
           questIdToQuestStateMap[quest_i.id]
         )
+      } else if (quest_i.type === 'LEADERBOARD') {
+        return (
+          Object.hasOwn(questIdToQuestStateMap, quest_i.id) &&
+          questIdToQuestStateMap[quest_i.id]
+        )
       }
       return true
     })
