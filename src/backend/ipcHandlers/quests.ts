@@ -41,7 +41,6 @@ async function fetchQuests({
       throw await testQuestMetaResults.text()
     }
     const testQuestsMetaJson = await testQuestMetaResults.json()
-    console.log('testQuestsMetaJson', testQuestsMetaJson.length)
     questsMetaJson = questsMetaJson.concat(testQuestsMetaJson)
   }
 
