@@ -397,9 +397,15 @@ export default function DownloadDialog({
   const { validPath, notEnoughDiskSpace, message, spaceLeftAfter } = spaceLeft
   const title = gameInfo?.title
 
+  const isThirdPartyDownloader = true
+
   function getInstallLabel() {
+    if (isThirdPartyDownloader) {
+      return t('button.install-downloader', 'Download Installer')
+    }
+
     if (requiresToken) {
-      return 'Sign and Install'
+      return t('button.sign-and-install', 'Sign and Install')
     }
 
     if (installPath) {
@@ -425,8 +431,9 @@ export default function DownloadDialog({
       .then((path) => setInstallPath(path || getDefaultInstallPath()))
   }
 
-  const isWebGame =
-    gameInstallInfo?.game['name'] === 'web' || platformToInstall === 'Browser'
+  const isWebGame = gameInstallInfo?.game['name'] === 'web' || isBrowserGame
+
+  const showImportButton = isWebGame || isThirdPartyDownloader
 
   const nativeGameIsReadyToInstall =
     installPath && gameDownloadSize && !gettingInstallInfo
@@ -443,6 +450,9 @@ export default function DownloadDialog({
   const doneFetchingGameInfo = isWebGame || downloadSize()
 
   const showInstallandDownloadSizes = !isWebGame
+
+  const showThirdPartyWarning = isThirdPartyDownloader && showAlert.thirdParty
+  const showNFTWarning = requiresToken && showAlert.siwe
 
   return (
     <>
@@ -467,28 +477,23 @@ export default function DownloadDialog({
       </DialogHeader>
       {gameInfo && <Anticheat gameInfo={gameInfo} />}
       <div>
-        {requiresToken ? (
+        {showNFTWarning ? (
           <div style={{ maxWidth: 500, overflow: 'hidden' }}>
-            {showAlert.siwe ? (
-              <AlertCard
-                title=""
-                message={t(
-                  'alert.install.siwe-message',
-                  'Please purchase to proceed or ensure that NFT is in the current wallet.'
-                )}
-                actionText={t('alert.install.siwe-action', 'Buy NFT')}
-                variant={'warning'}
-                onClose={() => setShowAlert({ ...showAlert, siwe: false })}
-                onActionClick={() =>
-                  marketplaceUrl
-                    ? window.api.openExternalUrl(marketplaceUrl)
-                    : console.log(
-                        'marketplace url is invalid: ',
-                        marketplaceUrl
-                      )
-                }
-              />
-            ) : null}
+            <AlertCard
+              title=""
+              message={t(
+                'alert.install.siwe-message',
+                'Please purchase to proceed or ensure that NFT is in the current wallet.'
+              )}
+              actionText={t('alert.install.siwe-action', 'Buy NFT')}
+              variant={'warning'}
+              onClose={() => setShowAlert({ ...showAlert, siwe: false })}
+              onActionClick={() =>
+                marketplaceUrl
+                  ? window.api.openExternalUrl(marketplaceUrl)
+                  : console.log('marketplace url is invalid: ', marketplaceUrl)
+              }
+            />
           </div>
         ) : null}
         {showInstallandDownloadSizes ? (
@@ -562,7 +567,7 @@ export default function DownloadDialog({
               ))}
           </SelectField>
         )}
-        {showAlert.thirdParty ? (
+        {showThirdPartyWarning ? (
           <AlertCard
             title={t('alert.install.tdp-title', 'Third-Party Downloader')}
             message={
@@ -684,7 +689,7 @@ export default function DownloadDialog({
         )}
       </div>
       <DialogFooter>
-        {isBrowserGame ? null : (
+        {showImportButton ? null : (
           <Button
             type="tertiary"
             size="medium"
