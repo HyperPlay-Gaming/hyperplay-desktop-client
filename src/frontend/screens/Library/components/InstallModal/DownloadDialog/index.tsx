@@ -121,7 +121,10 @@ export default function DownloadDialog({
   requiresToken,
   marketplaceUrl
 }: Props) {
-  const [showAlert, setShowAlert] = useState(true)
+  const [showAlert, setShowAlert] = useState({
+    siwe: true,
+    thirdParty: true
+  })
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
   ) as InstallProgress
@@ -466,15 +469,16 @@ export default function DownloadDialog({
       <div>
         {requiresToken ? (
           <div style={{ maxWidth: 500, overflow: 'hidden' }}>
-            {showAlert ? (
+            {showAlert.siwe ? (
               <AlertCard
                 title=""
-                message={
+                message={t(
+                  'alert.install.siwe-message',
                   'Please purchase to proceed or ensure that NFT is in the current wallet.'
-                }
-                actionText={'Buy NFT'}
+                )}
+                actionText={t('alert.install.siwe-action', 'Buy NFT')}
                 variant={'warning'}
-                onClose={() => setShowAlert(false)}
+                onClose={() => setShowAlert({ ...showAlert, siwe: false })}
                 onActionClick={() =>
                   marketplaceUrl
                     ? window.api.openExternalUrl(marketplaceUrl)
@@ -558,7 +562,27 @@ export default function DownloadDialog({
               ))}
           </SelectField>
         )}
-
+        {showAlert.thirdParty ? (
+          <AlertCard
+            title={t('alert.install.tdp-title', 'Third-Party Downloader')}
+            message={
+              <>
+                {t(
+                  'alert.install.tpd-message-part1',
+                  `Third-party downloaders bypass HyperPlay's security review. `
+                )}
+                <strong>
+                  {t(
+                    'alert.install.tpd-message-part2',
+                    'Proceed only if you trust this game development studio.'
+                  )}
+                </strong>
+              </>
+            }
+            variant={'warning'}
+            onClose={() => setShowAlert({ ...showAlert, thirdParty: false })}
+          />
+        ) : null}
         {isBrowserGame ? null : (
           <TextInputWithIconField
             htmlId="setinstallpath"
