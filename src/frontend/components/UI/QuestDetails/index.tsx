@@ -116,13 +116,14 @@ export default function QuestDetails({
     })
 
   const getActiveWalletSignature = async () => {
+    const { domain, origin } = await window.api.getSiweMessageDomainAndUri()
     const nonce = await window.api.getCSRFToken()
 
     const siweMessage = new SiweMessage({
-      domain: window.location.host,
+      domain,
       address,
       statement: 'Sign to confirm your active wallet.',
-      uri: window.location.origin,
+      uri: origin,
       version: '1',
       chainId: 1,
       nonce: nonce
@@ -147,6 +148,7 @@ export default function QuestDetails({
       setActiveWallet={window.api.setActiveWallet}
       getGameplayWallets={window.api.getGameplayWallets}
       updateActiveWallet={window.api.updateActiveWallet}
+      getExternalEligibility={window.api.getExternalEligibility}
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }
