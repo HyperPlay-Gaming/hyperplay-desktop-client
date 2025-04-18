@@ -162,6 +162,7 @@ export interface GameInfo {
   gog_save_location?: GOGCloudSavesLocation[]
   title: string
   canRunOffline: boolean
+  // ex: EA APP, Ubisoft Connect, etc
   thirdPartyManagedApp?: string | undefined
   is_mac_native?: boolean
   is_linux_native?: boolean
@@ -185,6 +186,8 @@ export interface GameInfo {
   siweValues?: SiweValues
   networks?: ContractMetadata[]
   type?: GameType
+  // HyperPlay games that has their own installer/launcher
+  usesThirdPartyLauncher?: boolean
 }
 
 export interface GameSettings {
