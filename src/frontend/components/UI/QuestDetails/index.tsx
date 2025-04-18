@@ -13,7 +13,6 @@ import { useAccount, useSignMessage } from 'wagmi'
 import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import extensionState from 'frontend/state/ExtensionState'
 import { PossibleMetricPayloads } from 'backend/metrics/types'
-import { SiweMessage } from 'siwe'
 
 /**
  * Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -117,23 +116,10 @@ export default function QuestDetails({
 
   const getActiveWalletSignature = async () => {
     const nonce = await window.api.getCSRFToken()
-
-    const siweMessage = new SiweMessage({
-      domain: window.location.host,
-      address,
-      statement: 'Sign to confirm your active wallet.',
-      uri: window.location.origin,
-      version: '1',
-      chainId: 1,
-      nonce: nonce
-    })
-
-    const message = siweMessage.prepareMessage()
-
+    const message = `Sign to confirm your active wallet. \n\nNonce: ${nonce}`
     const signature = await signMessageAsync({
       message
     })
-
     return {
       message,
       signature
