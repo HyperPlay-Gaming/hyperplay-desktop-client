@@ -1416,19 +1416,7 @@ export async function launch(appName: string): Promise<boolean> {
 }
 
 async function createSiweMessage(signerAddress: string): Promise<SiweMessage> {
-  const mainWindowUrl = getMainWindow()?.webContents.getURL()
-  if (mainWindowUrl === undefined) {
-    throw 'could not get main window url'
-  }
-  const url = new URL(mainWindowUrl)
-  let domain = url.host
-  let origin = url.origin
-  // host is empty string and origin is null on the artifact
-  if (url.protocol === 'file:') {
-    domain = 'hyperplay'
-    origin = 'file://hyperplay'
-  }
-
+  const { domain, origin } = await getSiweMessageDomainAndUri()
   const statementRes = await fetch(
     DEV_PORTAL_URL + 'api/v1/license_contracts/validate/get-nonce'
   )
@@ -1446,6 +1434,22 @@ async function createSiweMessage(signerAddress: string): Promise<SiweMessage> {
     version: '1',
     chainId: 1
   })
+}
+
+export async function getSiweMessageDomainAndUri() {
+  const mainWindowUrl = getMainWindow()?.webContents.getURL()
+  if (mainWindowUrl === undefined) {
+    throw 'could not get main window url'
+  }
+  const url = new URL(mainWindowUrl)
+  let domain = url.host
+  let origin = url.origin
+  // host is empty string and origin is null on the artifact
+  if (url.protocol === 'file:') {
+    domain = 'hyperplay'
+    origin = 'file://hyperplay'
+  }
+  return { domain, origin }
 }
 
 export async function requestSIWE() {

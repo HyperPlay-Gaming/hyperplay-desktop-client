@@ -496,6 +496,10 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     signature: string
     address: string
   }>
+  getSiweMessageDomainAndUri: () => Promise<{
+    domain: string
+    origin: string
+  }>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file
