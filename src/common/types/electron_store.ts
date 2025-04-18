@@ -21,7 +21,6 @@ import { UserData } from 'common/types/gog'
 
 export interface StoreStructure {
   configStore: {
-    appVersion: string
     userHome: string
     userInfo: UserInfo
     games: {
