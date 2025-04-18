@@ -470,17 +470,6 @@ if (!gotTheLock) {
 
     createInjectedProviderWindow()
 
-    const currentStoredVersion = configStore.get('appVersion', '')
-    const currentVersion = app.getVersion()
-
-    if (currentStoredVersion !== currentVersion) {
-      logInfo(
-        `App version changed from ${currentStoredVersion} to ${app.getVersion()}`,
-        LogPrefix.Backend
-      )
-      configStore.set('appVersion', currentVersion)
-    }
-
     const providerPreloadPath = path.join(
       __dirname,
       '../preload/providerPreload.js'
@@ -717,22 +706,10 @@ ipcMain.once('loadingScreenReady', () => {
 
 ipcMain.once('frontendReady', async () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
-  const currentVersion = app.getVersion()
-  const lastVersion = configStore.get('appVersion', '')
-
   await initExtension(hpApi)
-
-  // Only reload the app if the app version has changed
-  if (!lastVersion || lastVersion !== currentVersion) {
-    logInfo(
-      'App version changed and wallet connected, reloading to update MM',
-      LogPrefix.Backend
-    )
-    // wait for mm SW to initialize
-    await wait(5000)
-    ipcMain.emit('reloadApp')
-  }
-
+  // wait for mm SW to initialize
+  await wait(5000)
+  ipcMain.emit('reloadApp')
   handleProtocol([openUrlArgument, ...process.argv])
   setTimeout(() => {
     logInfo('Starting the Download Queue', LogPrefix.Backend)
