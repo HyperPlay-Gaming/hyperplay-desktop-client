@@ -49,3 +49,11 @@
   flex-direction: column;
   height: 100%;
 }
+
+.walletConnectIconsStack:first-child {
+  :nth-child(6) {
+    background: linear-gradient(43deg, #8313cc 3.02%, #12b9e0 100%);
+    width: 22px;
+    height: 22px;
+  }
+}

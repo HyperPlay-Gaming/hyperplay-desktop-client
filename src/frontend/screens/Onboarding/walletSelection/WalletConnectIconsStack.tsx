@@ -1,5 +1,6 @@
 import React from 'react'
 import { Images, IconsStack } from '@hyperplay/ui'
+import styles from './index.module.scss'
 
 const walletIcons = [
   <Images.MetaMaskWallet key={'metamaskwallet'} />,
@@ -12,5 +13,11 @@ const walletIcons = [
 ]
 
 export default function WalletConnectIconsStack() {
-  return <IconsStack icons={walletIcons} forceShowMore />
+  return (
+    <IconsStack
+      icons={walletIcons}
+      forceShowMore
+      className={styles.walletConnectIconsStack}
+    />
+  )
 }
