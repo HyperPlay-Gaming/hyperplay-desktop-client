@@ -14,6 +14,7 @@ export default function SideloadDialogWarning() {
     <div className={styles.container}>
       {isOpen ? (
         <AlertCard
+          icon={<Images.WarningIcon />}
           style={{ maxWidth: 670 }}
           onClose={() => setIsOpen(!isOpen)}
           variant="warning"

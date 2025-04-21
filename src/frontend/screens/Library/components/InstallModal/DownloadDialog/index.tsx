@@ -433,7 +433,7 @@ export default function DownloadDialog({
 
   const isWebGame = gameInstallInfo?.game['name'] === 'web' || isBrowserGame
 
-  const showImportButton = isWebGame || isThirdPartyDownloader
+  const hideImportButton = isWebGame || isThirdPartyDownloader
 
   const nativeGameIsReadyToInstall =
     installPath && gameDownloadSize && !gettingInstallInfo
@@ -485,19 +485,19 @@ export default function DownloadDialog({
                 'alert.install.siwe-message',
                 'Please purchase to proceed or ensure that NFT is in the current wallet.'
               )}
-              buttons={{
-                tertiary: {
-                  text: t('alert.install.siwe-action', 'Buy NFT'),
-                  onClick: () =>
-                    marketplaceUrl
-                      ? window.api.openExternalUrl(marketplaceUrl)
-                      : console.log(
-                          'marketplace url is invalid: ',
-                          marketplaceUrl
-                        )
-                }
+              link={{
+                text: t('alert.install.siwe-action', 'Buy NFT'),
+                onClick: () =>
+                  marketplaceUrl
+                    ? window.api.openExternalUrl(marketplaceUrl)
+                    : console.log(
+                        'marketplace url is invalid: ',
+                        marketplaceUrl
+                      )
               }}
+              size="large"
               variant={'warning'}
+              icon={<Images.WarningIcon />}
               onClose={() => setShowAlert({ ...showAlert, siwe: false })}
             />
           </div>
@@ -575,6 +575,7 @@ export default function DownloadDialog({
         )}
         {showThirdPartyWarning ? (
           <AlertCard
+            icon={<Images.WarningIcon />}
             title={t('alert.install.tdp-title', 'Third-Party Downloader')}
             message={
               <>
@@ -591,6 +592,7 @@ export default function DownloadDialog({
               </>
             }
             variant={'warning'}
+            size="large"
             onClose={() => setShowAlert({ ...showAlert, thirdParty: false })}
           />
         ) : null}
@@ -695,7 +697,7 @@ export default function DownloadDialog({
         )}
       </div>
       <DialogFooter>
-        {showImportButton ? null : (
+        {hideImportButton ? (
           <Button
             type="tertiary"
             size="medium"
@@ -703,7 +705,7 @@ export default function DownloadDialog({
           >
             {t('button.import')}
           </Button>
-        )}
+        ) : null}
         <Button
           type="secondary"
           size="medium"
