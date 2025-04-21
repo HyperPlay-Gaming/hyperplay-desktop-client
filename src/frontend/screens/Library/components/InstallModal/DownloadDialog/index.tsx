@@ -469,20 +469,24 @@ export default function DownloadDialog({
             {showAlert ? (
               <AlertCard
                 title=""
-                message={
+                message={t(
+                  'alert.install.siwe-message',
                   'Please purchase to proceed or ensure that NFT is in the current wallet.'
-                }
-                actionText={'Buy NFT'}
+                )}
+                link={{
+                  text: t('alert.install.siwe-action', 'Buy NFT'),
+                  onClick: () =>
+                    marketplaceUrl
+                      ? window.api.openExternalUrl(marketplaceUrl)
+                      : console.log(
+                          'marketplace url is invalid: ',
+                          marketplaceUrl
+                        )
+                }}
+                size="large"
                 variant={'warning'}
+                icon={<Images.WarningIcon />}
                 onClose={() => setShowAlert(false)}
-                onActionClick={() =>
-                  marketplaceUrl
-                    ? window.api.openExternalUrl(marketplaceUrl)
-                    : console.log(
-                        'marketplace url is invalid: ',
-                        marketplaceUrl
-                      )
-                }
               />
             ) : null}
           </div>
