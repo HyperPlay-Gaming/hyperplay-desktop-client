@@ -16,7 +16,7 @@ export default function SideloadDialogWarning() {
         <AlertCard
           style={{ maxWidth: 670 }}
           onClose={() => setIsOpen(!isOpen)}
-          variant="danger"
+          variant="warning"
           title={t('sideload.warningTitle', 'Important')}
           message={t(
             'sideload.warningMessage',
