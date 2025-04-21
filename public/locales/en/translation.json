@@ -863,6 +863,7 @@
         "toClaimReward": "to claim your reward.",
         "toSeeDetails": "to see details.",
         "type": {
+            "leaderboard": "Leaderboard",
             "playstreak": "Play Streak",
             "reputation": "Reputation"
         },

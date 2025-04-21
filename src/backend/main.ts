@@ -872,6 +872,10 @@ ipcMain.handle(
 )
 
 ipcMain.handle('requestSIWE', HyperPlayGameManager.requestSIWE)
+ipcMain.handle(
+  'getSiweMessageDomainAndUri',
+  HyperPlayGameManager.getSiweMessageDomainAndUri
+)
 
 ipcMain.handle('getEpicGamesStatus', async () => isEpicServiceOffline())
 
