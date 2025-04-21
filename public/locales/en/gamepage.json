@@ -1,4 +1,10 @@
 {
+    "alert": {
+        "install": {
+            "siwe-action": "Buy NFT",
+            "siwe-message": "Please purchase to proceed or ensure that NFT is in the current wallet."
+        }
+    },
     "box": {
         "aware": "I am aware",
         "change": {
