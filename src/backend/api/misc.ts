@@ -68,8 +68,8 @@ export const getGOGLinuxInstallersLangs = async (appName: string) =>
   ipcRenderer.invoke('getGOGLinuxInstallersLangs', appName)
 export const getAlternativeWine = async () =>
   ipcRenderer.invoke('getAlternativeWine')
-export const getLocalPeloadPath = async () =>
-  ipcRenderer.invoke('getLocalPeloadPath')
+export const getLocalPreloadPath = async () =>
+  ipcRenderer.invoke('getLocalPreloadPath')
 export const getShellPath = async (saveLocation: string) =>
   ipcRenderer.invoke('getShellPath', saveLocation)
 export const callTool = async (toolArgs: Tools) =>
