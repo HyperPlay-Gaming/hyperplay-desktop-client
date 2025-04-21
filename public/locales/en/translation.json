@@ -462,6 +462,7 @@
                 "metamaskMobile": "MetaMask Mobile",
                 "metamaskMobileSubtext": "Transactions on mobile. Most secure.",
                 "pleaseConnect": "Please connect your wallet, or download the Metamask mobile-app to get\n        started:",
+                "recommended": "Recommended",
                 "screens": {
                     "import": {
                         "cantFindProfile": "Can't find your browser profile?",

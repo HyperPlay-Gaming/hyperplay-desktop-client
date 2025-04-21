@@ -33,6 +33,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ONBOARDING_SCREEN } from '../types'
 import emailSubscriptionState from '../../../state/EmailSubscriptionState'
+import WalletConnectIconsStack from './WalletConnectIconsStack'
 
 const wait = async (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))
@@ -311,6 +312,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
             icon={<WalletConnect height={34} width={34} />}
             onClick={async () => providerClicked(PROVIDERS.WALLET_CONNECT)}
             isRecommended={false}
+            walletIcons={<WalletConnectIconsStack />}
           />
         </div>
       </div>
