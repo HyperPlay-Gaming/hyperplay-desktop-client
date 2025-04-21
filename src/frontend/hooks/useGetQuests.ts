@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { useGetQuestStates } from './useGetQuestStates'
 import useAuthSession from './useAuthSession'
+import { useGetQuestStates } from '@hyperplay/quests-ui'
 
 export default function useGetQuests(projectId?: string) {
   const queryClient = useQueryClient()
@@ -25,7 +25,10 @@ export default function useGetQuests(projectId?: string) {
     isLoading: isGetQuestStatesLoading
   } = useGetQuestStates({
     quests: quests,
-    enabled: !!quests
+    enabled: !!quests,
+    getQuest: window.api.getQuest,
+    getUserPlayStreak: window.api.getUserPlayStreak,
+    getExternalEligibility: window.api.getExternalEligibility
   })
 
   const { isSignedIn } = useAuthSession()
