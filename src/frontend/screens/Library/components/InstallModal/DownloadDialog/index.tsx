@@ -697,7 +697,7 @@ export default function DownloadDialog({
         )}
       </div>
       <DialogFooter>
-        {hideImportButton ? (
+        {hideImportButton ? null : (
           <Button
             type="tertiary"
             size="medium"
@@ -705,7 +705,7 @@ export default function DownloadDialog({
           >
             {t('button.import')}
           </Button>
-        ) : null}
+        )}
         <Button
           type="secondary"
           size="medium"
