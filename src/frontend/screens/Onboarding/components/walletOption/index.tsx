@@ -9,7 +9,7 @@ interface WalletOptionProps {
   icon: React.ReactNode
   onClick: () => void
   isRecommended: boolean
-  walletIcons?: React.ReactNode
+  additionalContent?: React.ReactNode
 }
 
 const WalletOption: React.FC<WalletOptionProps> = function (props) {
@@ -37,7 +37,7 @@ const WalletOption: React.FC<WalletOptionProps> = function (props) {
           </div>
           <div className={`caption ${WalletOptionStyles.walletOptionSubtext}`}>
             {props.subtext}
-            {props.walletIcons}
+            {props.additionalContent}
           </div>
         </div>
       </div>
