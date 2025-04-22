@@ -2,7 +2,10 @@
     "alert": {
         "install": {
             "siwe-action": "Buy NFT",
-            "siwe-message": "Please purchase to proceed or ensure that NFT is in the current wallet."
+            "siwe-message": "Please purchase to proceed or ensure that NFT is in the current wallet.",
+            "tdp-title": "Third-Party Downloader",
+            "tpd-message-part1": "Third-party downloaders bypass HyperPlay's security review. ",
+            "tpd-message-part2": "Proceed only if you trust this game development studio."
         }
     },
     "box": {
@@ -76,6 +79,7 @@
         "hide_game": "Hide Game",
         "import": "Import Game",
         "install": "Install",
+        "install-downloader": "Download Installer",
         "no-path-selected": "No path selected",
         "queue": {
             "cancel": "Cancel Download",
@@ -89,6 +93,7 @@
         "sideload": {
             "edit": "Edit App/Game"
         },
+        "sign-and-install": "Sign and Install",
         "unfavorites": "Unfavorite",
         "unhide_game": "Unhide Game",
         "uninstall": "Uninstall",

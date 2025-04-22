@@ -42,14 +42,14 @@ importers:
         specifier: ^3.5.2
         version: 3.5.2
       '@hyperplay/quests-ui':
-        specifier: ^0.1.27
-        version: 0.1.27(k2ivv5nwdpefjkwfqqgpty2thy)
+        specifier: ^0.1.39
+        version: 0.1.39(4bbe2efbfb4793228c669435ab6b0a5c)
       '@hyperplay/ui':
         specifier: 1.24.0
         version: 1.24.0(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)
       '@hyperplay/utils':
-        specifier: ^0.3.7
-        version: 0.3.7
+        specifier: ^0.3.13
+        version: 0.3.13
       '@mantine/carousel':
         specifier: ^7.12.0
         version: 7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -90,8 +90,8 @@ importers:
         specifier: ^5.59.15
         version: 5.62.7(react@18.3.1)
       '@valist/sdk':
-        specifier: ^2.10.5
-        version: 2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
+        specifier: ^2.10.12
+        version: 2.10.12(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
       '@wagmi/core':
         specifier: 2.15.2
         version: 2.15.2(@tanstack/query-core@5.62.7)(@types/react@18.3.17)(react@18.3.1)(typescript@5.3.3)(use-sync-external-store@1.4.0(react@18.3.1))(viem@2.21.55(bufferutil@4.0.8)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.24.1))
@@ -296,28 +296,6 @@ importers:
       zod:
         specifier: ^3.23.8
         version: 3.24.1
-    optionalDependencies:
-      '@hyperplay/extension-importer':
-        specifier: ^0.3.0
-        version: 0.3.0
-      '@hyperplay/extension-provider':
-        specifier: ^0.0.9
-        version: 0.0.9(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
-      '@hyperplay/mock-backend':
-        specifier: ^0.0.1
-        version: 0.0.1
-      '@hyperplay/overlay':
-        specifier: ^1.0.0
-        version: 1.0.0(@hyperplay/providers@0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10))(electron@33.2.0)
-      '@hyperplay/patcher':
-        specifier: 0.0.22
-        version: 0.0.22(@valist/sdk@2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(utf-8-validate@5.0.10)
-      '@hyperplay/providers':
-        specifier: ^0.1.0
-        version: 0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)
-      '@hyperplay/proxy-server':
-        specifier: ^0.0.11
-        version: 0.0.11(bufferutil@4.0.8)(utf-8-validate@5.0.10)
     devDependencies:
       '@babel/plugin-transform-arrow-functions':
         specifier: ^7.24.7
@@ -499,6 +477,28 @@ importers:
       vite-plugin-svgr:
         specifier: ^2.2.2
         version: 2.4.0(rollup@4.28.1)(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.37.0))
+    optionalDependencies:
+      '@hyperplay/extension-importer':
+        specifier: ^0.3.0
+        version: 0.3.0
+      '@hyperplay/extension-provider':
+        specifier: ^0.0.9
+        version: 0.0.9(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
+      '@hyperplay/mock-backend':
+        specifier: ^0.0.1
+        version: 0.0.1
+      '@hyperplay/overlay':
+        specifier: ^1.0.0
+        version: 1.0.0(@hyperplay/providers@0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10))(electron@33.2.0)
+      '@hyperplay/patcher':
+        specifier: 0.0.22
+        version: 0.0.22(@valist/sdk@2.10.12(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      '@hyperplay/providers':
+        specifier: ^0.1.0
+        version: 0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)
+      '@hyperplay/proxy-server':
+        specifier: ^0.0.11
+        version: 0.0.11(bufferutil@4.0.8)(utf-8-validate@5.0.10)
 
 packages:
 
@@ -1865,22 +1865,25 @@ packages:
   '@hyperplay/proxy-server@0.0.11':
     resolution: {integrity: sha512-IhR5cum3M2FiC7AlTLXzjBG+Kg7jiF3N2Bx4bNciFwSLMtZ7rvHSdr3DSwcS3wyhplkBydCs0Qv+QfVg38jbsw==}
 
-  '@hyperplay/quests-ui@0.1.27':
-    resolution: {integrity: sha512-SsW+7JJtmiL7AG3tUBVl0xEMXrOsP9yicRU2jMKtgb06lV0ixU1CZSLJO3sQno4uyOB+G1biLHJUS6vkrEGh5Q==}
+  '@hyperplay/quests-ui@0.1.39':
+    resolution: {integrity: sha512-+U9et8Bx/8DG9HvJ7sl03sdyEKl58ozJ4fFtlfcZp0Rsog9XuiF3TIdliwfQrCO6M2VTeQmYzRwyDxal3DnxHQ==}
     peerDependencies:
-      '@hyperplay/chains': ^0.3.0
+      '@hyperplay/chains': ^0.5.0
       '@hyperplay/ui': ^1.9.5
       '@hyperplay/utils': ^0.3.4
       '@mantine/core': ^7.12.0
       '@mantine/hooks': ^7.12.0
+      '@tabler/icons-react': ^2.46.0
       '@tanstack/query-core': ^5.59.20
       '@tanstack/react-query': ^5.59.20
       '@wagmi/core': 2.15.2
+      dayjs: ^1.11.13
       i18next: ^23.12.3
       mobx: ^6.13.3
       react: ^18.3.1
       react-i18next: ^15.0.1
       viem: ^2.19.4
+      vite-plugin-svgr: ^2.4.0
       wagmi: ^2.14.12
 
   '@hyperplay/ui@1.24.0':
@@ -1900,8 +1903,8 @@ packages:
   '@hyperplay/utils@0.0.9':
     resolution: {integrity: sha512-gMAa6gdFXfLrJUjPAD2is06qNo4MHzpb6Cbzt4xfNd7wI9chOblQ+piwTI1oFWs44GgfacsMq6i5esNly3hELg==}
 
-  '@hyperplay/utils@0.3.7':
-    resolution: {integrity: sha512-8VE3YMsK35JPkVts9UHOweDV8bdG4CDUQ+cxY+511/UJ4IRdsaHUosc0sw+6VSQsi1GgkNe/J2y+JPYJsnraGQ==}
+  '@hyperplay/utils@0.3.13':
+    resolution: {integrity: sha512-WXNZfgKkKhO9VwgSXeyRpLuGj+LeirW6Z97v1szUdo8W0oVLNnnIbmDqq1oCP/Kpt4L5trrDwQf4mh1RHcH8OA==}
 
   '@ioredis/commands@1.2.0':
     resolution: {integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg==}
@@ -2950,6 +2953,14 @@ packages:
     resolution: {integrity: sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==}
     engines: {node: '>=10'}
 
+  '@tabler/icons-react@2.47.0':
+    resolution: {integrity: sha512-iqly2FvCF/qUbgmvS8E40rVeYY7laltc5GUjRxQj59DuX0x/6CpKHTXt86YlI2whg4czvd/c8Ce8YR08uEku0g==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+
+  '@tabler/icons@2.47.0':
+    resolution: {integrity: sha512-4w5evLh+7FUUiA1GucvGj2ReX2TvOjEr4ejXdwL/bsjoSkof6r1gQmzqI+VHrE2CpJpB3al7bCTulOkFa/RcyA==}
+
   '@tanstack/query-core@5.62.7':
     resolution: {integrity: sha512-fgpfmwatsrUal6V+8EC2cxZIQVl9xvL7qYa03gsdsCy985UTUlS4N+/3hCzwR0PclYDqisca2AqR1BVgJGpUDA==}
 
@@ -3340,8 +3351,8 @@ packages:
   '@ungap/structured-clone@1.2.1':
     resolution: {integrity: sha512-fEzPV3hSkSMltkw152tJKNARhOupqbH96MZWyRjNaYZOMIzbrTeQDG+MTc6Mr2pgzFQzFxAfmhGDNP5QK++2ZA==}
 
-  '@valist/sdk@2.10.5':
-    resolution: {integrity: sha512-2m95VJfljJQXaSUfqfVwfHsaVcgynY4yy6wKjIsACYgiKkzck2XqjyAOtLhRESyzvuNvBA/ypj0mP+JxdmCtOw==}
+  '@valist/sdk@2.10.12':
+    resolution: {integrity: sha512-i6zi7qw3js3NtDh/aDb986tFfSbGSu/JZmop9Lnpa9qbSDS9zsPHNlE0eLIBeJ5zpC8s3qxLuwluY3zvNtr7QA==}
 
   '@vitejs/plugin-react@4.3.4':
     resolution: {integrity: sha512-SCCPBJtYLdE8PX/7ZQAs1QAZ8Jqwih+0VBLum1EGqmCCQal+MIUqLCzj3ZUy8ufbC0cAM4LRlSTm7IQJwWT4ug==}
@@ -11073,7 +11084,7 @@ snapshots:
 
   '@hyperplay/extension-provider@0.0.9(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))':
     dependencies:
-      '@hyperplay/utils': 0.3.7
+      '@hyperplay/utils': 0.3.13
       electron: 33.2.0
       ethers: 6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       fs-extra: 11.2.0
@@ -11096,14 +11107,14 @@ snapshots:
   '@hyperplay/overlay@1.0.0(@hyperplay/providers@0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10))(electron@33.2.0)':
     dependencies:
       '@hyperplay/providers': 0.1.0(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react-dom@18.3.1(react@18.3.1))(react-i18next@15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.28.1)(utf-8-validate@5.0.10)
-      '@hyperplay/utils': 0.3.7
+      '@hyperplay/utils': 0.3.13
       electron: 33.2.0
       mobx: 6.13.5
     optional: true
 
-  '@hyperplay/patcher@0.0.22(@valist/sdk@2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
+  '@hyperplay/patcher@0.0.22(@valist/sdk@2.10.12(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
     dependencies:
-      '@valist/sdk': 2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
+      '@valist/sdk': 2.10.12(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
       ethers: 6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
@@ -11160,23 +11171,26 @@ snapshots:
       - utf-8-validate
     optional: true
 
-  '@hyperplay/quests-ui@0.1.27(k2ivv5nwdpefjkwfqqgpty2thy)':
+  '@hyperplay/quests-ui@0.1.39(4bbe2efbfb4793228c669435ab6b0a5c)':
     dependencies:
       '@hyperplay/chains': 0.5.0(bufferutil@4.0.8)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.24.1)
       '@hyperplay/ui': 1.24.0(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)
-      '@hyperplay/utils': 0.3.7
+      '@hyperplay/utils': 0.3.13
       '@mantine/core': 7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/hooks': 7.15.1(react@18.3.1)
+      '@tabler/icons-react': 2.47.0(react@18.3.1)
       '@tanstack/query-core': 5.62.7
       '@tanstack/react-query': 5.62.7(react@18.3.1)
-      '@valist/sdk': 2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
+      '@valist/sdk': 2.10.12(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
       '@wagmi/core': 2.15.2(@tanstack/query-core@5.62.7)(@types/react@18.3.17)(react@18.3.1)(typescript@5.3.3)(use-sync-external-store@1.4.0(react@18.3.1))(viem@2.21.55(bufferutil@4.0.8)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.24.1))
       classnames: 2.5.1
+      dayjs: 1.11.13
       i18next: 23.16.8
       mobx: 6.13.5
       react: 18.3.1
       react-i18next: 15.2.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.5(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)
       viem: 2.21.55(bufferutil@4.0.8)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.24.1)
+      vite-plugin-svgr: 2.4.0(rollup@4.28.1)(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.37.0))
       wagmi: 2.14.12(@tanstack/query-core@5.62.7)(@tanstack/react-query@5.62.7(react@18.3.1))(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ioredis@5.4.1)(react@18.3.1)(typescript@5.3.3)(utf-8-validate@5.0.10)(viem@2.21.55(bufferutil@4.0.8)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.24.1))(zod@3.24.1)
     transitivePeerDependencies:
       - bufferutil
@@ -11202,7 +11216,7 @@ snapshots:
       bignumber.js: 9.1.2
     optional: true
 
-  '@hyperplay/utils@0.3.7':
+  '@hyperplay/utils@0.3.13':
     dependencies:
       bignumber.js: 9.1.2
 
@@ -12735,6 +12749,14 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
+  '@tabler/icons-react@2.47.0(react@18.3.1)':
+    dependencies:
+      '@tabler/icons': 2.47.0
+      prop-types: 15.8.1
+      react: 18.3.1
+
+  '@tabler/icons@2.47.0': {}
+
   '@tanstack/query-core@5.62.7': {}
 
   '@tanstack/query-devtools@5.61.4': {}
@@ -13215,7 +13237,7 @@ snapshots:
 
   '@ungap/structured-clone@1.2.1': {}
 
-  '@valist/sdk@2.10.5(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)':
+  '@valist/sdk@2.10.12(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)':
     dependencies:
       '@ethersproject/contracts': 5.7.0
       axios: 1.7.9
