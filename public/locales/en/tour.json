@@ -12,53 +12,6 @@
             "title4": "Start your journey",
             "welcome": "Begin your journey through the Web3 galaxy and discover top-tier games."
         },
-        "gamepage": {
-            "actions": "This menu offers additional actions like visiting the store page, showing system requirements, and checking for updates.",
-            "back": "Click here to go back to the previous page.",
-            "buttons": "Use these buttons to install, update, or launch the game.",
-            "description": "This is the game's description.",
-            "details": "Here you can find technical details about the game, such as install size, version, and whether it supports web3 features.",
-            "finish": "That's it! Now you know how to navigate and use the game page.",
-            "report": "If you encounter any issues with the game, click here to report a problem.",
-            "settings": "Click here to access game settings, such as compatibility options, launch arguments, and more.",
-            "status": "This shows the current status of the game (installed, not installed, downloading, etc).",
-            "title": "This is the name of the game.",
-            "welcome": "Welcome to the Game Page. This is where you can view details about a game, install it, or launch it."
-        },
-        "help": "Help",
-        "library": {
-            "add_game": "You can add custom games to your library by clicking this button.",
-            "back_to_top": "Once you have many games, use this button to quickly scroll back to the top.",
-            "filters": "Use these filters to sort your games and find what you're looking for quickly.",
-            "finish": "That's it! You now know how to navigate your Library. Happy gaming!",
-            "games_list": "This is your games collection. Click on any game to install, launch, or modify it.",
-            "header": "This is the Library header. You can see how many games you have in your collection.",
-            "refresh": "Click here to refresh your game library to see the latest additions or updates.",
-            "search": "Search for specific games by title using the search bar.",
-            "title": "Welcome to HyperPlay Library",
-            "welcome": "Welcome to your Library! This is where all your games are displayed. Let's explore the main features."
-        },
-        "next": "Next",
-        "sidebar": {
-            "discord": "Join our Discord community to get help, share experiences, and stay updated.",
-            "docs": "Access documentation and guides to help you get the most out of HyperPlay.",
-            "downloads": "Check the status of your downloads, updates, and installations in the Download Manager.",
-            "finish": "That's it! Now you know how to navigate through HyperPlay using the sidebar.",
-            "library": "This is your Library where all your games are displayed. Click here to access your game collection.",
-            "quests": "Complete quests to earn rewards. Participate in challenges and boost your gaming experience.",
-            "settings": "Configure your app settings, manage accounts, and customize your HyperPlay experience.",
-            "store": "This is the Store navigation. Access the HyperPlay Store, Epic Games, and GOG stores to browse and purchase games.",
-            "x": "Follow us on X (formerly Twitter) for news, updates, and announcements."
-        },
-        "start_tour": "Start guided tour",
-        "topnav": {
-            "account": "Change your connected wallet, manage connected stores, view your portfolio, and more.",
-            "epic_store": "Browse and buy games from the Epic Games Store.",
-            "finish": "That's it! You now know how to navigate HyperPlay's top bar and account features.",
-            "gog_store": "Browse and buy games from the GOG Store.",
-            "hyperplay_store": "Access the HyperPlay Store to discover exciting web3 games.",
-            "metamask": "Quick access to your MetaMask wallet for web3 transactions.",
-            "welcome": "Welcome to HyperPlay! Let's explore the navigation bar and its features."
-        }
+        "next": "Next"
     }
 }

@@ -26,7 +26,6 @@ import libraryState from '../../state/libraryState'
 import { observer } from 'mobx-react-lite'
 import storeAuthState from 'frontend/state/storeAuthState'
 import SteamInstallButton from './components/SteamInstall/SteamInstallButton'
-import { useTourGuide } from 'frontend/components/TourGuide/TourContext'
 import TourGuide from 'frontend/components/TourGuide/TourGuide'
 
 const storage = window.localStorage
@@ -42,7 +41,6 @@ export default observer(function Library(): JSX.Element {
   const { layout, epic, gog, platform, connectivity } =
     useContext(ContextProvider)
   const { t } = useTranslation()
-  const { isTourCompleted, activateLibraryTour } = useTourGuide()
 
   const isOffline = connectivity.status !== 'online'
 
@@ -100,15 +98,6 @@ export default observer(function Library(): JSX.Element {
   useEffect(() => {
     window.api.trackScreen('Library')
     libraryState.selectedFilter = filters[0]
-
-    // Start library tour if it hasn't been completed
-    if (!isTourCompleted('library')) {
-      // Delay to allow components to fully render
-      const timer = setTimeout(() => {
-        activateLibraryTour()
-      }, 1000)
-      return () => clearTimeout(timer)
-    }
     return
   }, [])
 

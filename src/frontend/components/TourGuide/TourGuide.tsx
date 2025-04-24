@@ -3,14 +3,7 @@ import { Steps } from 'intro.js-react'
 import 'intro.js/introjs.css'
 import { useTranslation } from 'react-i18next'
 import { useTourGuide } from './TourContext'
-import {
-  libraryTourSteps,
-  sidebarTourSteps,
-  gamePageTourSteps,
-  topNavTourSteps,
-  firstWelcomeTourSteps,
-  TourStep
-} from './TourSteps'
+import { firstWelcomeTourSteps, TourStep } from './TourSteps'
 import './TourGuide.scss'
 import { FIRST_TIME_TOUR } from './constants'
 
@@ -22,32 +15,12 @@ export const TourGuide: React.FC = () => {
   const [currentSteps, setCurrentSteps] = useState<TourStep[]>([])
   const [initialStep, setInitialStep] = useState(0)
 
-  // Disabled tours for now until product decides what to do with them
-  const disabledTours = ['sidebar', 'gamepage', 'topnav', 'library']
-
   useEffect(() => {
     if (isTourActive && currentTour) {
       let steps: TourStep[] = []
 
-      // Check if the current tour is disabled
-      if (disabledTours.includes(currentTour)) {
-        setStepsEnabled(false)
-        return
-      }
-
+      // Add more tours here as needed
       switch (currentTour) {
-        case 'library':
-          steps = libraryTourSteps(t)
-          break
-        case 'sidebar':
-          steps = sidebarTourSteps(t)
-          break
-        case 'gamepage':
-          steps = gamePageTourSteps(t)
-          break
-        case 'topnav':
-          steps = topNavTourSteps(t)
-          break
         case FIRST_TIME_TOUR:
           steps = firstWelcomeTourSteps(t)
           break
@@ -65,9 +38,6 @@ export const TourGuide: React.FC = () => {
 
   const onExit = () => {
     setStepsEnabled(false)
-    if (currentTour) {
-      markTourAsComplete(currentTour)
-    }
     deactivateTour()
   }
 
@@ -78,16 +48,7 @@ export const TourGuide: React.FC = () => {
     deactivateTour()
   }
 
-  const onClose = () => {
-    setStepsEnabled(false)
-    if (currentTour) {
-      markTourAsComplete(currentTour)
-    }
-    deactivateTour()
-  }
-
   const options = {
-    onClose: onClose,
     showStepNumbers: false,
     showBullets: true,
     showProgress: false,
@@ -97,8 +58,7 @@ export const TourGuide: React.FC = () => {
     prevLabel: t('tour.back', 'Back'),
     doneLabel: t('tour.done', 'Done'),
     overlayOpacity: 0.7,
-    scrollToElement: true,
-    showSkip: true
+    scrollToElement: true
   }
 
   return (
