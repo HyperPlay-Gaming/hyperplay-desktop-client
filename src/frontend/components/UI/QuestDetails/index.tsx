@@ -9,10 +9,11 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import authState from 'frontend/state/authState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { useTranslation } from 'react-i18next'
-import { useAccount } from 'wagmi'
+import { useAccount, useSignMessage } from 'wagmi'
 import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import extensionState from 'frontend/state/ExtensionState'
 import { PossibleMetricPayloads } from 'backend/metrics/types'
+import { SiweMessage } from 'siwe'
 
 /**
  * Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -58,6 +59,22 @@ import { PossibleMetricPayloads } from 'backend/metrics/types'
  * t('quest.claimWarning.body2', 'Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>')
  * t('quest.claimWarning.cancel', 'Cancel')
  * t('quest.claimWarning.confirm', 'Confirm')
+ * t("gameplayWallet.detected.title", "Wallet Connected")
+ * t("gameplayWallet.detected.message", "To track your quest eligibility, set this as your active wallet.")
+ * t("gameplayWallet.new.title", "New Wallet Connected")
+ * t("gameplayWallet.new.message", "To track your quest eligibility on this new wallet, set it as your active wallet.")
+ * t("gameplayWallet.action.set", "Set as Active")
+ * t("gameplayWallet.noWallet.message", "Connect your wallet to start tracking eligibility for this Quest.")
+ * t("gameplayWallet.active.title", "Active Wallet")
+ * t("gameplayWallet.noWallet.status", "No wallet connected")
+ * t("gameplayWallet.connected.title", "Connected Wallet")
+ * t("gameplayWallet.setConnected.title", "Connected Wallet")
+ * t("gameplayWallet.error.title", "Something went wrong")
+ * t("gameplayWallet.error.message", "Please try once more. If it still doesn't work, create a Discord support ticket.")
+ * t("gameplayWallet.error.action", "Create Discord Ticket")
+ * t("gameplayWallet.error.alreadyLinked.title", "Wallet Already Linked")
+ * t("gameplayWallet.error.alreadyLinked.message", "This wallet is linked to another HyperPlay account. Try a different one or sign in to to the associated account to continue.")
+ * t("gameplayWallet.info.description", "This wallet address is set to track your quest eligibility. You can switch to a different wallet address at anytime—quest eligibility is saved to each wallet address separately.")
  */
 
 export default function QuestDetails({
@@ -77,6 +94,8 @@ export default function QuestDetails({
   const { isSignedIn, data } = useAuthSession()
   const { t } = useTranslation()
   const flags = useFlags()
+  const { signMessageAsync } = useSignMessage()
+
   const sessionEmail = data?.linkedAccounts.get('email')
   const { invalidateQuery } = useGetUserPlayStreak(
     questId,
@@ -96,8 +115,40 @@ export default function QuestDetails({
       refreshPlayStreak: invalidateQuery
     })
 
+  const getActiveWalletSignature = async () => {
+    const { domain, origin } = await window.api.getSiweMessageDomainAndUri()
+    const nonce = await window.api.getCSRFToken()
+
+    const siweMessage = new SiweMessage({
+      domain,
+      address,
+      statement: 'Sign to confirm your active wallet.',
+      uri: origin,
+      version: '1',
+      chainId: 1,
+      nonce: nonce
+    })
+
+    const message = siweMessage.prepareMessage()
+
+    const signature = await signMessageAsync({
+      message
+    })
+
+    return {
+      message,
+      signature
+    }
+  }
+
   return (
     <QuestDetailsWrapper
+      getActiveWalletSignature={getActiveWalletSignature}
+      getActiveWallet={window.api.getActiveWallet}
+      setActiveWallet={window.api.setActiveWallet}
+      getGameplayWallets={window.api.getGameplayWallets}
+      updateActiveWallet={window.api.updateActiveWallet}
+      getExternalEligibility={window.api.getExternalEligibility}
       onRewardClaimed={(reward) =>
         claimedRewardToastState.showClaimedReward(reward)
       }
@@ -155,13 +206,6 @@ export default function QuestDetails({
       isQuestsPage={isQuestsPage}
       key={'questDetailsLoading'}
       streakIsProgressing={streakIsProgressing}
-      getActiveWallet={async () => 'getActiveWallet'}
-      setActiveWallet={async () => ({ success: true, status: 100 })}
-      getGameplayWallets={async () => []}
-      updateActiveWallet={async () => {
-        console.log('updateActiveWallet')
-      }}
-      getActiveWalletSignature={async () => ({ message: '', signature: '' })}
     />
   )
 }

@@ -1,5 +1,6 @@
 import { sendFrontendMessage } from 'backend/main_window'
 import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
+import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import { checkG7ConnectionStatus } from 'backend/utils/quests'
 import { DEV_PORTAL_URL } from 'common/constants'
 import {
@@ -15,10 +16,13 @@ async function fetchQuests({
   status
 }: {
   projectId?: string
-  status: 'ACTIVE' | 'COMPLETED'
+  status: Quest['status'] | Quest['status'][]
 }): Promise<Quest[]> {
   const url = new URL(`${DEV_PORTAL_URL}api/v1/quests`)
-  url.searchParams.append('questStatus', status)
+  url.searchParams.append(
+    'questStatus',
+    Array.isArray(status) ? status.join(',') : status
+  )
   url.searchParams.append('sortBy', 'start_date')
   url.searchParams.append('order', 'desc')
   if (projectId) {
@@ -44,10 +48,10 @@ async function fetchQuests({
 }
 
 export async function getQuests(projectId?: string): Promise<Quest[]> {
-  const activeQuests = await fetchQuests({ projectId, status: 'ACTIVE' })
-  const completedQuests = await fetchQuests({ projectId, status: 'COMPLETED' })
-
-  return activeQuests.concat(completedQuests)
+  return fetchQuests({
+    projectId,
+    status: ['CLAIMABLE', 'ACTIVE', 'COMPLETED']
+  })
 }
 
 ipcMain.handle('getQuests', async (e, projectId) => getQuests(projectId))
@@ -147,4 +151,84 @@ ipcMain.handle(
 
 ipcMain.on('openOnboarding', () => {
   sendFrontendMessage('openOnboarding')
+})
+
+ipcMain.handle('getActiveWallet', async () => {
+  const url = `${DEV_PORTAL_URL}/api/v1/active_wallet`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.walletAddress
+})
+
+ipcMain.handle(
+  'setActiveWallet',
+  async (e, { message, signature }: { message: string; signature: string }) => {
+    const url = `${DEV_PORTAL_URL}/api/v1/active_wallet`
+
+    const cookieString = await getPartitionCookies({
+      partition: 'persist:auth',
+      url: DEV_PORTAL_URL
+    })
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Cookie: cookieString
+      },
+      body: JSON.stringify({ message, signature })
+    })
+
+    if (!response.ok) {
+      return {
+        status: response.status,
+        success: false,
+        message: await response.text()
+      }
+    }
+
+    return {
+      status: response.status,
+      success: true
+    }
+  }
+)
+
+ipcMain.handle('updateActiveWallet', async (e, walletId) => {
+  const url = `${DEV_PORTAL_URL}/api/v1/active_wallet`
+  await fetchWithCookie({
+    url,
+    method: 'PUT',
+    body: JSON.stringify({ wallet_id: walletId })
+  })
+})
+
+ipcMain.handle('getGameplayWallets', async () => {
+  const url = `${DEV_PORTAL_URL}/api/v1/gameplay_wallets`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.wallets
+})
+
+ipcMain.handle('getExternalEligibility', async (e, questId) => {
+  const url = `${DEV_PORTAL_URL}/api/v1/quests/${questId}/eligibility/external`
+
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Cookie: cookieString
+    }
+  })
+
+  if (!response.ok) {
+    if (response.status === 400) {
+      return null
+    } else {
+      throw new Error(await response.text())
+    }
+  }
+
+  return response.json()
 })

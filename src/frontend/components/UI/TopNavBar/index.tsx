@@ -112,7 +112,7 @@ const TopNavBar = observer(() => {
             onMouseLeave={() => extensionStore.unlockPopup()}
             data-tour="topnav-metamask"
           >
-            <Images.MetaMask fill="white" />
+            <Images.MetaMask className={styles.metaMaskIcon} />
             {badgeText !== '' && badgeText !== '0' ? (
               <div className={styles.badge}>{badgeText}</div>
             ) : null}

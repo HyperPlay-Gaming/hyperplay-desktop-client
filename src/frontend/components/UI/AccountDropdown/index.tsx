@@ -81,7 +81,7 @@ const WalletDropdown: React.FC = observer(() => {
         >
           <div className={`body ${styles.itemContents}`}>
             {showWalletConnectedLinks
-              ? t('hyperplay.changeWallet', `Swap wallet account`)
+              ? t('hyperplay.swapConnectedWallet', `Swap connected wallet`)
               : t('hyperplay.connectWallet', `Connect wallet`)}
           </div>
         </Menu.Item>
