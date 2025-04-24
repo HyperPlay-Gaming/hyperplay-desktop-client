@@ -64,6 +64,9 @@ export const TourGuide: React.FC = () => {
 
   const onExit = () => {
     setStepsEnabled(false)
+    if (currentTour) {
+      markTourAsComplete(currentTour)
+    }
     deactivateTour()
   }
 
@@ -74,8 +77,16 @@ export const TourGuide: React.FC = () => {
     deactivateTour()
   }
 
-  // For first-welcome tour, add a skip button
+  const onClose = () => {
+    setStepsEnabled(false)
+    if (currentTour) {
+      markTourAsComplete(currentTour)
+    }
+    deactivateTour()
+  }
+
   const options = {
+    onClose: onClose,
     showStepNumbers: false,
     showBullets: true,
     showProgress: false,
@@ -86,7 +97,7 @@ export const TourGuide: React.FC = () => {
     doneLabel: t('tour.done', 'Done'),
     overlayOpacity: 0.7,
     scrollToElement: true,
-    showSkip: currentTour === 'first-welcome'
+    showSkip: true
   }
 
   return (
