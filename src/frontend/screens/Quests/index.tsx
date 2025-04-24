@@ -175,9 +175,9 @@ export function QuestsPage() {
       if (!currentQuestExists) {
         const firstQuest = filteredQuests[0]
         if (firstQuest) {
-          const searchParams = new URLSearchParams(window.location.search)
-          const newUrl = `/quests/${firstQuest.id}${
-            searchParams.toString() ? `?${searchParams.toString()}` : ''
+          const searchParamVal = searchParams.get('search')
+          const newUrl = `/quests/${firstQuest.id}?search=${
+            searchParamVal ?? ''
           }#card-${firstQuest.id}`
           navigate(newUrl)
         }
