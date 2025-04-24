@@ -1,8 +1,9 @@
 import { TFunction } from 'i18next'
 
 export interface TourStep {
-  element: string
+  element?: string
   intro: string
+  title?: string
   position?: 'top' | 'bottom' | 'left' | 'right' | 'center'
   tooltipClass?: string
   highlightClass?: string
@@ -11,12 +12,11 @@ export interface TourStep {
 // Library tour steps
 export const libraryTourSteps = (t: TFunction<'tour'>): TourStep[] => [
   {
-    element: '.Library',
+    title: t('tour.library.title', 'Welcome to HyperPlay Library'),
     intro: t(
       'tour.library.welcome',
       "Welcome to your Library! This is where all your games are displayed. Let's explore the main features."
-    ),
-    position: 'center'
+    )
   },
   {
     element: '[data-tour="library-top-header"]',

@@ -20,9 +20,18 @@ export const TourGuide: React.FC = () => {
   const [currentSteps, setCurrentSteps] = useState<TourStep[]>([])
   const [initialStep, setInitialStep] = useState(0)
 
+  // Disabled tours for now until product decides what to do with them
+  const disabledTours = ['sidebar', 'gamepage', 'topnav', 'library']
+
   useEffect(() => {
     if (isTourActive && currentTour) {
       let steps: TourStep[] = []
+
+      // Check if the current tour is disabled
+      if (disabledTours.includes(currentTour)) {
+        setStepsEnabled(false)
+        return
+      }
 
       switch (currentTour) {
         case 'library':

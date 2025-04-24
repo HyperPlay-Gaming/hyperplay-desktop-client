@@ -28,7 +28,6 @@ import storeAuthState from 'frontend/state/storeAuthState'
 import SteamInstallButton from './components/SteamInstall/SteamInstallButton'
 import { useTourGuide } from 'frontend/components/TourGuide/TourContext'
 import TourGuide from 'frontend/components/TourGuide/TourGuide'
-import TourTriggerButton from 'frontend/components/TourGuide/TourTriggerButton'
 
 const storage = window.localStorage
 
@@ -274,7 +273,6 @@ export default observer(function Library(): JSX.Element {
             {t('add_game', 'Add Game')}
           </Button>
           {isMac ? <SteamInstallButton /> : null}
-          <TourTriggerButton className={styles.tourButton} />
         </div>
         <LibraryTopBar
           filters={filters}

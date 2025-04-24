@@ -69,7 +69,7 @@ import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import authState from 'frontend/state/authState'
-import { TourGuide, TourTriggerButton } from 'frontend/components/TourGuide'
+import { TourGuide } from 'frontend/components/TourGuide'
 
 type locationState = {
   fromDM?: boolean
@@ -679,13 +679,6 @@ export default observer(function GamePage(): JSX.Element | null {
                   runner={runner}
                 />
               )}
-              <TourTriggerButton
-                tourId="gamepage"
-                className="tourButton"
-                buttonType="tertiary"
-                showIcon
-                showText
-              />
               {is_installed && (
                 <span
                   onClick={() => setIsSettingsModalOpen(true, 'log', gameInfo)}

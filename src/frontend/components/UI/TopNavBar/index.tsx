@@ -17,7 +17,7 @@ import {
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { extractMainDomain } from '../../../helpers/extract-main-domain'
 import AppVersion from '../AppVersion'
-import { TourTriggerButton, TourGuide } from '../../TourGuide'
+import { TourGuide } from '../../TourGuide'
 
 const TopNavBar = observer(() => {
   const { t } = useTranslation()
@@ -121,13 +121,6 @@ const TopNavBar = observer(() => {
         <div data-tour="topnav-account">
           <AccountDropdown />
         </div>
-        <TourTriggerButton
-          tourId="topnav"
-          className={styles.tourButton}
-          buttonType="tertiary"
-          showIcon={true}
-          showText={false}
-        />
       </div>
       <TourGuide />
     </div>
