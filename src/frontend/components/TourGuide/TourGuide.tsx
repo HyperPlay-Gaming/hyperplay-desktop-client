@@ -8,6 +8,7 @@ import {
   sidebarTourSteps,
   gamePageTourSteps,
   topNavTourSteps,
+  firstWelcomeTourSteps,
   TourStep
 } from './TourSteps'
 import './TourGuide.scss'
@@ -46,6 +47,9 @@ export const TourGuide: React.FC = () => {
         case 'topnav':
           steps = topNavTourSteps(t)
           break
+        case 'first-welcome':
+          steps = firstWelcomeTourSteps(t)
+          break
         default:
           steps = []
       }
@@ -70,6 +74,7 @@ export const TourGuide: React.FC = () => {
     deactivateTour()
   }
 
+  // For first-welcome tour, add a skip button
   const options = {
     showStepNumbers: false,
     showBullets: true,
@@ -80,7 +85,8 @@ export const TourGuide: React.FC = () => {
     prevLabel: t('tour.back', 'Back'),
     doneLabel: t('tour.done', 'Done'),
     overlayOpacity: 0.7,
-    scrollToElement: true
+    scrollToElement: true,
+    showSkip: currentTour === 'first-welcome'
   }
 
   return (

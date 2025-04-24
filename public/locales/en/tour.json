@@ -2,6 +2,16 @@
     "tour": {
         "back": "Back",
         "done": "Done",
+        "first-welcome": {
+            "account": "Login and connect your primary wallet to track progress.",
+            "quests": "Take on quests, make leaderboards, and earn along the way.",
+            "stores": "Explore all the titles from HyperPlay, Epic Games, and GOG.",
+            "title1": "Ready for takeoff 🚀",
+            "title2": "A galaxy of games",
+            "title3": "Earn real rewards 🎁",
+            "title4": "Start your journey",
+            "welcome": "Begin your journey through the Web3 galaxy and discover top-tier games."
+        },
         "gamepage": {
             "actions": "This menu offers additional actions like visiting the store page, showing system requirements, and checking for updates.",
             "back": "Click here to go back to the previous page.",
@@ -40,6 +50,7 @@
             "store": "This is the Store navigation. Access the HyperPlay Store, Epic Games, and GOG stores to browse and purchase games.",
             "x": "Follow us on X (formerly Twitter) for news, updates, and announcements."
         },
+        "skip": "Skip",
         "start_tour": "Start guided tour",
         "topnav": {
             "account": "Change your connected wallet, manage connected stores, view your portfolio, and more.",

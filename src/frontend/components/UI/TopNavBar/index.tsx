@@ -70,7 +70,7 @@ const TopNavBar = observer(() => {
             <AppVersion />
           </div>
         </div>
-        <>
+        <div data-tour="topnav-store-links">
           <NavLink to="/hyperplaystore" data-tour="topnav-hyperplay-store">
             <Button
               type="link"
@@ -98,7 +98,7 @@ const TopNavBar = observer(() => {
               {t('GOG', 'GOG')}
             </Button>
           </NavLink>
-        </>
+        </div>
       </div>
       <div>
         {pathname === '/library' ? (

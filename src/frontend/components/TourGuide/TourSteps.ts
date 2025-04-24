@@ -321,3 +321,42 @@ export const topNavTourSteps = (t: TFunction): TourStep[] => [
     position: 'center'
   }
 ]
+
+// First Welcome tour steps for new users landing on the Store Page
+export const firstWelcomeTourSteps = (t: TFunction): TourStep[] => [
+  {
+    title: t('tour.first-welcome.title1', 'Ready for takeoff 🚀'),
+    intro: t(
+      'tour.first-welcome.welcome',
+      'Begin your journey through the Web3 galaxy and discover top-tier games.'
+    ),
+    position: 'center'
+  },
+  {
+    element: '[data-tour="topnav-store-links"]',
+    title: t('tour.first-welcome.title2', 'A galaxy of games'),
+    intro: t(
+      'tour.first-welcome.stores',
+      'Explore all the titles from HyperPlay, Epic Games, and GOG.'
+    ),
+    position: 'bottom'
+  },
+  {
+    element: '[data-tour="sidebar-quests"]',
+    title: t('tour.first-welcome.title3', 'Earn real rewards 🎁'),
+    intro: t(
+      'tour.first-welcome.quests',
+      'Take on quests, make leaderboards, and earn along the way.'
+    ),
+    position: 'right'
+  },
+  {
+    element: '[data-tour="topnav-account"]',
+    title: t('tour.first-welcome.title4', 'Start your journey'),
+    intro: t(
+      'tour.first-welcome.account',
+      'Login and connect your primary wallet to track progress.'
+    ),
+    position: 'left'
+  }
+]
