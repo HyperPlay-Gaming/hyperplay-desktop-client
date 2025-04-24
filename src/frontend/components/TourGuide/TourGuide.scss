@@ -1,6 +1,5 @@
-// Custom styling for intro.js to match HyperPlay design system
 .introjs-tooltip {
-  background-color: var(--background-secondary);
+  background: #222530;
   color: var(--text-default);
   border-radius: var(--space-xs);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
@@ -15,14 +14,18 @@
 }
 
 .introjs-button {
-  background-color: var(--background-lighter);
-  color: var(--text-default);
-  border-radius: var(--space-3xs-fixed);
-  font-size: var(--text-xs);
-  padding: var(--space-3xs) var(--space-xs);
-  border: 1px solid var(--accent);
-  text-shadow: none;
+  border: 2px solid var(--stroke-brand-strong, #ab82fe);
+  border-radius: var(--space-sm, 8px);
+  background: var(--Fill-Brand-strong, #6b2adc);
+  color: var(--Text-Strong, #fff);
+  text-align: center;
 
+  /* Text/Button-Sm */
+  font-family: var(--font-family-body, Poppins);
+
+  /* Shadow/Raised */
+  box-shadow: 0px 2px 4px -2px rgba(124, 58, 237, 0.08),
+    0px 4px 8px -2px rgba(124, 58, 237, 0.04);
   &:hover {
     background-color: var(--primary);
     color: var(--text-title);
@@ -30,7 +33,10 @@
 }
 
 .introjs-prevbutton {
-  margin-right: var(--space-3xs);
+  color: var(--Text-Brand, #ab82fe);
+  background: rgba(255, 255, 255, 0.01);
+  box-shadow: 0px 2px 4px -2px rgba(124, 58, 237, 0.08),
+    0px 4px 8px -2px rgba(124, 58, 237, 0.04);
 }
 
 .introjs-bullets ul li a {

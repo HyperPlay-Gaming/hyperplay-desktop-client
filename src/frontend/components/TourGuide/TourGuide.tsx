@@ -64,12 +64,11 @@ export const TourGuide: React.FC = () => {
   const options = {
     showStepNumbers: false,
     showBullets: true,
-    showProgress: true,
-    hideNext: false,
-    hidePrev: false,
+    showProgress: false,
+    exitOnEsc: true,
     exitOnOverlayClick: false,
     nextLabel: t('tour.next', 'Next'),
-    prevLabel: t('tour.prev', 'Prev'),
+    prevLabel: t('tour.back', 'Back'),
     doneLabel: t('tour.done', 'Done'),
     overlayOpacity: 0.7,
     scrollToElement: true
