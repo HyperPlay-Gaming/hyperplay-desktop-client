@@ -50,7 +50,6 @@
             "store": "This is the Store navigation. Access the HyperPlay Store, Epic Games, and GOG stores to browse and purchase games.",
             "x": "Follow us on X (formerly Twitter) for news, updates, and announcements."
         },
-        "skip": "Skip",
         "start_tour": "Start guided tour",
         "topnav": {
             "account": "Change your connected wallet, manage connected stores, view your portfolio, and more.",

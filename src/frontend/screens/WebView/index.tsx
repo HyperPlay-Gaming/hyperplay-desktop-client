@@ -32,6 +32,7 @@ import { METAMASK_SNAPS_URL } from 'common/constants'
 import storeAuthState from 'frontend/state/storeAuthState'
 import { getGameInfo } from 'frontend/helpers'
 import cn from 'classnames'
+import { FIRST_TIME_TOUR } from 'frontend/components/TourGuide/constants'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
@@ -51,7 +52,7 @@ function WebView({
   const { pathname, search } = useLocation()
   const { t } = useTranslation()
   const { epic, gog, connectivity } = useContext(ContextProvider)
-  const { isTourCompleted, activateFirstWelcomeTour } = useTourGuide()
+  const { isTourCompleted, activateTour } = useTourGuide()
   const [loading, setLoading] = useState<{
     refresh: boolean
     message: string
@@ -145,13 +146,13 @@ function WebView({
     const isStorePage = pathname === '/hyperplaystore'
 
     if (isStorePage && !loading.refresh) {
-      if (!isTourCompleted('first-welcome')) {
+      if (!isTourCompleted(FIRST_TIME_TOUR)) {
         setTimeout(() => {
-          activateFirstWelcomeTour()
+          activateTour(FIRST_TIME_TOUR)
         }, 1000)
       }
     }
-  }, [pathname, loading.refresh, isTourCompleted, activateFirstWelcomeTour])
+  }, [pathname, loading.refresh, isTourCompleted])
 
   useEffect(() => {
     if (!urlIsHpUrl(startUrl) && pathname !== '/game7Portal') {

@@ -4,11 +4,7 @@ type TourState = {
   isTourActive: boolean
   currentTour: string | null
   completedTours: string[]
-  activateLibraryTour: () => void
-  activateSidebarTour: () => void
-  activateGamePageTour: () => void
-  activateTopNavTour: () => void
-  activateFirstWelcomeTour: () => void
+  activateTour: (tourId: string) => void
   deactivateTour: () => void
   markTourAsComplete: (tourId: string) => void
   isTourCompleted: (tourId: string) => boolean
@@ -18,11 +14,7 @@ const initialState: TourState = {
   isTourActive: false,
   currentTour: null,
   completedTours: [],
-  activateLibraryTour: () => {},
-  activateSidebarTour: () => {},
-  activateGamePageTour: () => {},
-  activateTopNavTour: () => {},
-  activateFirstWelcomeTour: () => {},
+  activateTour: () => {},
   deactivateTour: () => {},
   markTourAsComplete: () => {},
   isTourCompleted: () => false
@@ -43,28 +35,8 @@ export const TourProvider: React.FC<TourProviderProps> = ({ children }) => {
     return saved ? JSON.parse(saved) : []
   })
 
-  const activateLibraryTour = () => {
-    setCurrentTour('library')
-    setIsTourActive(true)
-  }
-
-  const activateSidebarTour = () => {
-    setCurrentTour('sidebar')
-    setIsTourActive(true)
-  }
-
-  const activateGamePageTour = () => {
-    setCurrentTour('gamepage')
-    setIsTourActive(true)
-  }
-
-  const activateTopNavTour = () => {
-    setCurrentTour('topnav')
-    setIsTourActive(true)
-  }
-
-  const activateFirstWelcomeTour = () => {
-    setCurrentTour('first-welcome')
+  const activateTour = (tourId: string) => {
+    setCurrentTour(tourId)
     setIsTourActive(true)
   }
 
@@ -91,11 +63,7 @@ export const TourProvider: React.FC<TourProviderProps> = ({ children }) => {
         isTourActive,
         currentTour,
         completedTours,
-        activateLibraryTour,
-        activateSidebarTour,
-        activateGamePageTour,
-        activateTopNavTour,
-        activateFirstWelcomeTour,
+        activateTour,
         deactivateTour,
         markTourAsComplete,
         isTourCompleted

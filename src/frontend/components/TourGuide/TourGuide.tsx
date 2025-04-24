@@ -12,6 +12,7 @@ import {
   TourStep
 } from './TourSteps'
 import './TourGuide.scss'
+import { FIRST_TIME_TOUR } from './constants'
 
 export const TourGuide: React.FC = () => {
   const { t } = useTranslation('tour')
@@ -47,7 +48,7 @@ export const TourGuide: React.FC = () => {
         case 'topnav':
           steps = topNavTourSteps(t)
           break
-        case 'first-welcome':
+        case FIRST_TIME_TOUR:
           steps = firstWelcomeTourSteps(t)
           break
         default:
