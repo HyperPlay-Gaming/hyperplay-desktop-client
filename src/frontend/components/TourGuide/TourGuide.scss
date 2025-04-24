@@ -4,7 +4,7 @@
   border-radius: var(--space-xs);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
   border: 1px solid var(--accent);
-  min-width: 400px;
+  min-width: 320px;
 }
 
 .introjs-tooltiptext {
@@ -17,8 +17,9 @@
   border: 2px solid var(--stroke-brand-strong, #ab82fe);
   border-radius: var(--space-sm, 8px);
   background: var(--Fill-Brand-strong, #6b2adc);
-  color: var(--Text-Strong, #fff);
+  color: var(--text-strong, #fff);
   text-align: center;
+  text-shadow: none;
 
   /* Text/Button-Sm */
   font-family: var(--font-family-body, Poppins);
@@ -26,6 +27,8 @@
   /* Shadow/Raised */
   box-shadow: 0px 2px 4px -2px rgba(124, 58, 237, 0.08),
     0px 4px 8px -2px rgba(124, 58, 237, 0.04);
+
+  &:focus,
   &:hover {
     background-color: var(--primary);
     color: var(--text-title);
@@ -43,14 +46,6 @@
   background-color: var(--background-lighter);
 
   &.active {
-    background-color: var(--primary);
-  }
-}
-
-.introjs-progress {
-  background-color: var(--background-lighter);
-
-  .introjs-progressbar {
     background-color: var(--primary);
   }
 }
@@ -77,17 +72,6 @@
   }
 }
 
-.introjs-helperLayer {
-  background-color: transparent;
-  border: 2px solid var(--primary);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-}
-
-.introjs-overlay {
-  opacity: 0.5 !important;
-  background-color: var(--background-darker);
-}
-
-.introjs-fixParent {
-  z-index: 999999 !important;
+.introjs-skipbutton {
+  color: var(--text-default);
 }
