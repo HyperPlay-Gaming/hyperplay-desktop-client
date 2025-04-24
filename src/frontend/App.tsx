@@ -41,7 +41,6 @@ import { QuestsPage } from './screens/Quests'
 import { NavigateListener } from './NavigateListener'
 import G7Webview from './screens/G7Webview'
 import CardPrivacyPolicy from './screens/Onboarding/analytics/CardPrivacyPolicy'
-// Import the TourProvider
 import { TourProvider } from './components/TourGuide/TourContext'
 
 function App() {
@@ -52,7 +51,6 @@ function App() {
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
-      {/* Wrap the entire app with the TourProvider */}
       <TourProvider>
         <HashRouter>
           <OfflineMessage />
