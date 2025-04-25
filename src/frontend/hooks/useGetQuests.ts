@@ -1,8 +1,9 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { useGetQuestStates } from './useGetQuestStates'
 import useAuthSession from './useAuthSession'
+import { useGetQuestStates } from '@hyperplay/quests-ui'
 
 export default function useGetQuests(projectId?: string) {
+  const { isSignedIn } = useAuthSession()
   const queryClient = useQueryClient()
   const queryKey = `getQuestsForProject:${projectId ?? 'allActive'}`
   const query = useQuery({
@@ -25,10 +26,13 @@ export default function useGetQuests(projectId?: string) {
     isLoading: isGetQuestStatesLoading
   } = useGetQuestStates({
     quests: quests,
-    enabled: !!quests
+    enabled: !!quests,
+    getQuest: window.api.getQuest,
+    getUserPlayStreak: window.api.getUserPlayStreak,
+    getExternalEligibility: window.api.getExternalEligibility,
+    isSignedIn
   })
 
-  const { isSignedIn } = useAuthSession()
   /**
    * Filter out the completed status quests where the user hasn't met the eligibility requirements yet.
    * In these cases, the user can no longer earn a reward or claim a reward.

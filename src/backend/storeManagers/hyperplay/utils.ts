@@ -274,7 +274,8 @@ export function refreshGameInfoFromHpRelease(
     is_mac_native: hasMacNativeBuild,
     is_linux_native: hasLinuxNativeBuild,
     account_name: data.account_name,
-    networks: data.project_meta.networks
+    networks: data.project_meta.networks,
+    usesThirdPartyLauncher: data.project_meta.uses_third_party_launcher
   }
 }
 

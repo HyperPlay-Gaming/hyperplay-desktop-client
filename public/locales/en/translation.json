@@ -457,7 +457,12 @@
                 "title": "Wallet connected!"
             },
             "walletSelection": {
+                "metamaskExtension": "MetaMask Browser Extension",
+                "metamaskExtensionSubtext": "Approve transactions in-game.",
+                "metamaskMobile": "MetaMask Mobile",
+                "metamaskMobileSubtext": "Transactions on mobile. Most secure.",
                 "pleaseConnect": "Please connect your wallet, or download the Metamask mobile-app to get\n        started:",
+                "recommended": "Recommended",
                 "screens": {
                     "import": {
                         "cantFindProfile": "Can't find your browser profile?",
@@ -491,7 +496,8 @@
                         "updateWarning": "Having issues? Make sure MetaMask is up to date."
                     }
                 },
-                "title": "Wallet Connections"
+                "title": "Wallet Connections",
+                "walletConnectSubtext": "Most Flexible. Choose from 400+ wallets."
             },
             "welcome": {
                 "text": {
@@ -863,6 +869,7 @@
         "toClaimReward": "to claim your reward.",
         "toSeeDetails": "to see details.",
         "type": {
+            "leaderboard": "Leaderboard",
             "playstreak": "Play Streak",
             "reputation": "Reputation"
         },

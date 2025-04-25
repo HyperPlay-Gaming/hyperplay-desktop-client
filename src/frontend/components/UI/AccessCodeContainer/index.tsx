@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
 import { GameInfo } from 'common/types'
-import { AlertCard } from '@hyperplay/ui'
+import { AlertCard, Images } from '@hyperplay/ui'
 
 type AccessCodeContainerProps = {
   children: ReactNode
@@ -34,6 +34,7 @@ const AccessCodeContainer = ({
       accessCodeContent = (
         <AlertCard
           showClose={false}
+          icon={<Images.WarningIcon />}
           title={t('installModal.loginRequired', 'Login Required')}
           message={warningMessage}
           variant="warning"

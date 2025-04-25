@@ -10,8 +10,7 @@ import { useTranslation } from 'react-i18next'
 import useGetG7UserCredits from 'frontend/hooks/useGetG7UserCredits'
 import useGetPointsBalancesForProject from 'frontend/hooks/useGetPointsBalances'
 import { Quest } from '@hyperplay/utils'
-import { useGetQuestStates } from 'frontend/hooks/useGetQuestStates'
-
+import { useGetQuestStates } from '@hyperplay/quests-ui'
 export interface QuestLogWrapperProps {
   quests: Quest[] | null | undefined
   isLoading: boolean
@@ -34,7 +33,10 @@ export function QuestLogWrapper({
   const { t } = useTranslation()
   const { questIdToQuestStateMap, isPending: isGetQuestStatesPending } =
     useGetQuestStates({
-      quests
+      quests,
+      getQuest: window.api.getQuest,
+      getUserPlayStreak: window.api.getUserPlayStreak,
+      getExternalEligibility: window.api.getExternalEligibility
     })
 
   const questsUi =
@@ -62,7 +64,8 @@ export function QuestLogWrapper({
     active: t('quest.active', 'Active'),
     type: {
       REPUTATION: t('quest.reputation', 'Reputation'),
-      PLAYSTREAK: t('quest.type.playstreak', 'Play Streak')
+      PLAYSTREAK: t('quest.type.playstreak', 'Play Streak'),
+      LEADERBOARD: t('quest.type.leaderboard', 'Leaderboard')
     },
     pointsClaimed: t('quest.pointsClaimed', 'Points Claimed')
   }
