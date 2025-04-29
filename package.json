@@ -232,7 +232,7 @@
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/overlay": "^1.0.0",
     "@hyperplay/patcher": "0.0.22",
-    "@hyperplay/providers": "^0.1.1",
+    "@hyperplay/providers": "^0.1.2",
     "@hyperplay/proxy-server": "^0.0.11"
   },
   "lavamoat": {

@@ -40,13 +40,16 @@ ipcMain?.handle(
     const useWCForMMM = getFlag('use-wc-for-mmm', true)
 
     let providerSelectionToUse = providerSelection
+    let providerToEmitOverride = undefined
     if (useWCForMMM && providerSelection === PROVIDERS.METAMASK_MOBILE) {
       providerSelectionToUse = PROVIDERS.WALLET_CONNECT
+      providerToEmitOverride = PROVIDERS.METAMASK_MOBILE
     }
     const baseUri = await providers.getConnectionUri(
       providerSelectionToUse,
       isBootstrapping,
-      api
+      api,
+      providerToEmitOverride
     )
     const proxyServer = await import('@hyperplay/proxy-server')
     proxyServer.setProvider(providers.provider)
