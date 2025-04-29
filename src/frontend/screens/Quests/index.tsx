@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import QuestDetails from 'frontend/components/UI/QuestDetails'
@@ -14,7 +13,6 @@ import useGetHyperPlayListings from 'frontend/hooks/useGetHyperPlayListings'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import Fuse from 'fuse.js'
 import {
-  Alert,
   Background,
   QuestCard,
   QuestFilter,
@@ -28,7 +26,6 @@ export function QuestsPage() {
   const navigate = useNavigate()
   const { questId = null } = useParams()
   const selectedQuestId = questId === null ? questId : parseInt(questId)
-  const { isSignedIn } = useAuthSession()
   const { t } = useTranslation()
 
   const questsResults = useGetQuests()
@@ -58,23 +55,6 @@ export function QuestsPage() {
   useEffect(() => {
     setSearchText(searchParam ?? '')
   }, [searchParam])
-
-  let alertComponent = null
-  const showAlert = !isSignedIn
-  let contentWithAlertClass = styles['no-alert']
-  if (showAlert) {
-    contentWithAlertClass = styles['with-alert']
-    alertComponent = (
-      <Alert
-        className={styles.alert}
-        message={t(
-          'quests.playstreak.signInWarning.client',
-          'You are currently not logged in, play streak progress will not be tracked. Please login to HyperPlay via the top-right dropdown to track progress.'
-        )}
-        variant="warning"
-      />
-    )
-  }
 
   const navigateToGame = useMutation({
     mutationFn: async (quest: Quest) => {
@@ -230,14 +210,7 @@ export function QuestsPage() {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
-      <div
-        className={classNames(
-          'contentContainer',
-          contentWithAlertClass,
-          styles.root
-        )}
-      >
-        {alertComponent}
+      <div className={classNames('contentContainer', styles.root)}>
         <QuestRewardClaimedToast className={styles.toast} />
         <QuestsSummaryTable
           games={gameElements}
