@@ -6351,37 +6351,12 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
   font-style: normal;
 }
-/**
-  These colors are pending to be approved for the design system's design-token package
-  Disabling Stylelint's hex color rule so this file is ignored.
-  Before adding a color here make sure that there isn't a design token available.
-**/
-/* stylelint-disable color-no-hex */
-/**
-* Dark Theme Colors
-* Colors for dark theme
-*/
-:root {
-  --color-error-muted-hover: #d738473f;
-  --color-error-muted-pressed: #d738474c;
-}
-
-/**
-* Dark Theme Colors
-* Colors for dark theme
-*/
-[data-theme=dark] {
-  --color-error-muted-hover: #d738473f;
-  --color-error-muted-pressed: #d738474c;
-}
-
 /*
 Disabling Stylelint's hex color rule so this file is ignored.
 Before adding a color here make sure that there isn't a design token available.
 */
 /* stylelint-disable color-no-hex */
 :root {
-  --mainnet: #29b6af;
   --inherit: inherit;
   --transparent: transparent;
   --qr-code-white-background: #fff;
@@ -6455,24 +6430,16 @@ html {
     color: var(--brand-colors-white);
     background-color: var(--brand-colors-grey-grey900);
   }
+
+  html:not([data-theme]) body {
+    color: var(--brand-colors-white);
+  }
 }
 
 @media screen and (prefers-color-scheme: dark) and (max-width: calc(576px - 1px)) {
   html:not([data-theme]) {
     background-color: var(--brand-colors-grey-grey800);
   }
-}
-
-/*
-  This error class is used in the following files still:
-  /ui/pages/create-account/import-account/json.js
-  /ui/pages/create-account/import-account/private-key.js
-*/
-.error {
-  color: var(--color-error-default);
-  margin-top: 3px;
-  margin-bottom: 9px;
-  overflow-wrap: anywhere;
 }
 
 /* stylelint-disable */
@@ -6501,54 +6468,6 @@ a {
 
 a:hover {
   color: var(--color-primary-alternative);
-}
-
-.input-label {
-  padding-bottom: 10px;
-  font-weight: 400;
-  display: inline-block;
-}
-
-input.form-control {
-  font-size: 14px;
-  height: 40px;
-  border: 1px solid var(--color-border-default);
-  color: 1px solid var(--color-text-default);
-  background: transparent;
-  border-radius: 3px;
-  width: 100%;
-}
-
-[dir="ltr"] input.form-control {
-  padding-left: 10px;
-}
-
-[dir="rtl"] input.form-control {
-  padding-right: 10px;
-}
-
-input.form-control::-webkit-input-placeholder {
-  font-weight: 100;
-  color: var(--color-text-muted);
-}
-
-input.form-control::-moz-placeholder {
-  font-weight: 100;
-  color: var(--color-text-muted);
-}
-
-input.form-control:-ms-input-placeholder {
-  font-weight: 100;
-  color: var(--color-text-muted);
-}
-
-input.form-control:-moz-placeholder {
-  font-weight: 100;
-  color: var(--color-text-muted);
-}
-
-input.form-control--error {
-  border: 1px solid var(--color-error-default);
 }
 
 /** Default Typography on base elements **/
@@ -15193,6 +15112,10 @@ DEPRECATED
   border-color: var(--color-background-alternative);
 }
 
+.mm-box--border-color-background-muted {
+  border-color: var(--color-background-muted);
+}
+
 .mm-box--border-color-background-hover {
   border-color: var(--color-background-hover);
 }
@@ -15313,10 +15236,6 @@ DEPRECATED
   border-color: var(--color-info-inverse);
 }
 
-.mm-box--border-color-mainnet {
-  border-color: var(--mainnet);
-}
-
 .mm-box--border-color-goerli {
   border-color: var(--color-network-goerli-default);
 }
@@ -15382,6 +15301,12 @@ DEPRECATED
 @media screen and (min-width: 576px) {
   .mm-box--sm\:border-color-background-alternative {
     border-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .mm-box--sm\:border-color-background-muted {
+    border-color: var(--color-background-muted);
   }
 }
 
@@ -15566,12 +15491,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 576px) {
-  .mm-box--sm\:border-color-mainnet {
-    border-color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 576px) {
   .mm-box--sm\:border-color-goerli {
     border-color: var(--color-network-goerli-default);
   }
@@ -15664,6 +15583,12 @@ DEPRECATED
 @media screen and (min-width: 768px) {
   .mm-box--md\:border-color-background-alternative {
     border-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mm-box--md\:border-color-background-muted {
+    border-color: var(--color-background-muted);
   }
 }
 
@@ -15848,12 +15773,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 768px) {
-  .mm-box--md\:border-color-mainnet {
-    border-color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 768px) {
   .mm-box--md\:border-color-goerli {
     border-color: var(--color-network-goerli-default);
   }
@@ -15946,6 +15865,12 @@ DEPRECATED
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:border-color-background-alternative {
     border-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .mm-box--lg\:border-color-background-muted {
+    border-color: var(--color-background-muted);
   }
 }
 
@@ -16126,12 +16051,6 @@ DEPRECATED
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:border-color-info-inverse {
     border-color: var(--color-info-inverse);
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .mm-box--lg\:border-color-mainnet {
-    border-color: var(--mainnet);
   }
 }
 
@@ -18949,6 +18868,10 @@ DEPRECATED
   background-color: var(--color-background-alternative);
 }
 
+.mm-box--background-color-background-muted {
+  background-color: var(--color-background-muted);
+}
+
 .mm-box--background-color-background-hover {
   background-color: var(--color-background-hover);
 }
@@ -19069,10 +18992,6 @@ DEPRECATED
   background-color: var(--color-info-inverse);
 }
 
-.mm-box--background-color-mainnet {
-  background-color: var(--mainnet);
-}
-
 .mm-box--background-color-goerli {
   background-color: var(--color-network-goerli-default);
 }
@@ -19138,6 +19057,12 @@ DEPRECATED
 @media screen and (min-width: 576px) {
   .mm-box--sm\:background-color-background-alternative {
     background-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .mm-box--sm\:background-color-background-muted {
+    background-color: var(--color-background-muted);
   }
 }
 
@@ -19322,12 +19247,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 576px) {
-  .mm-box--sm\:background-color-mainnet {
-    background-color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 576px) {
   .mm-box--sm\:background-color-goerli {
     background-color: var(--color-network-goerli-default);
   }
@@ -19420,6 +19339,12 @@ DEPRECATED
 @media screen and (min-width: 768px) {
   .mm-box--md\:background-color-background-alternative {
     background-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mm-box--md\:background-color-background-muted {
+    background-color: var(--color-background-muted);
   }
 }
 
@@ -19604,12 +19529,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 768px) {
-  .mm-box--md\:background-color-mainnet {
-    background-color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 768px) {
   .mm-box--md\:background-color-goerli {
     background-color: var(--color-network-goerli-default);
   }
@@ -19702,6 +19621,12 @@ DEPRECATED
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:background-color-background-alternative {
     background-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .mm-box--lg\:background-color-background-muted {
+    background-color: var(--color-background-muted);
   }
 }
 
@@ -19886,12 +19811,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 1280px) {
-  .mm-box--lg\:background-color-mainnet {
-    background-color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 1280px) {
   .mm-box--lg\:background-color-goerli {
     background-color: var(--color-network-goerli-default);
   }
@@ -19981,6 +19900,10 @@ DEPRECATED
 
 .mm-box--color-background-alternative {
   color: var(--color-background-alternative);
+}
+
+.mm-box--color-background-muted {
+  color: var(--color-background-muted);
 }
 
 .mm-box--color-background-hover {
@@ -20103,10 +20026,6 @@ DEPRECATED
   color: var(--color-info-inverse);
 }
 
-.mm-box--color-mainnet {
-  color: var(--mainnet);
-}
-
 .mm-box--color-goerli {
   color: var(--color-network-goerli-default);
 }
@@ -20172,6 +20091,12 @@ DEPRECATED
 @media screen and (min-width: 576px) {
   .mm-box--sm\c olor-background-alternative {
     color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .mm-box--sm\c olor-background-muted {
+    color: var(--color-background-muted);
   }
 }
 
@@ -20356,12 +20281,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 576px) {
-  .mm-box--sm\c olor-mainnet {
-    color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 576px) {
   .mm-box--sm\c olor-goerli {
     color: var(--color-network-goerli-default);
   }
@@ -20454,6 +20373,12 @@ DEPRECATED
 @media screen and (min-width: 768px) {
   .mm-box--md\c olor-background-alternative {
     color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mm-box--md\c olor-background-muted {
+    color: var(--color-background-muted);
   }
 }
 
@@ -20638,12 +20563,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 768px) {
-  .mm-box--md\c olor-mainnet {
-    color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 768px) {
   .mm-box--md\c olor-goerli {
     color: var(--color-network-goerli-default);
   }
@@ -20736,6 +20655,12 @@ DEPRECATED
 @media screen and (min-width: 1280px) {
   .mm-box--lg\c olor-background-alternative {
     color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .mm-box--lg\c olor-background-muted {
+    color: var(--color-background-muted);
   }
 }
 
@@ -20916,12 +20841,6 @@ DEPRECATED
 @media screen and (min-width: 1280px) {
   .mm-box--lg\c olor-info-inverse {
     color: var(--color-info-inverse);
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .mm-box--lg\c olor-mainnet {
-    color: var(--mainnet);
   }
 }
 
@@ -21678,8 +21597,8 @@ DEPRECATED
 * Mixin that renders the CSS values for badge positions and value
 */
 .mm-badge-wrapper {
-  --badge-wrapper-position-circular: 14%;
-  --badge-wrapper-position-rectangular: 0;
+  --badge-wrapper-position-circular: 7%;
+  --badge-wrapper-position-rectangular: 11%;
   position: relative;
   align-self: start;
 }
@@ -22119,6 +22038,28 @@ a.mm-button-base:hover {
   opacity: var(--input-opacity-disabled);
 }
 
+.mm-skeleton {
+  animation: skeleton-pulse 1400ms cubic-bezier(0, 0, 1, 1) infinite;
+  background-clip: padding-box;
+  cursor: default;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.1;
+  }
+}
+
+.mm-skeleton--hide-children * {
+  visibility: hidden;
+}
+
 .mm-picker-network {
   --picker-network-height: 32px;
   height: var(--picker-network-height);
@@ -22175,6 +22116,10 @@ a.mm-button-base:hover {
 .mm-text-field__input {
   width: 100%;
   flex-grow: 1;
+}
+
+.mm-textarea {
+  max-width: 100%;
 }
 
 .mm-textarea--is-disabled, .mm-textarea:disabled {
@@ -22280,8 +22225,6 @@ DEPRECATED
   position: fixed;
   top: 0;
   z-index: 1050;
-  overflow: auto;
-  overscroll-behavior-y: none;
   scrollbar-width: thin;
   scrollbar-color: var(--color-icon-muted) transparent;
 }
@@ -22315,6 +22258,19 @@ DEPRECATED
   box-shadow: var(--shadow-size-lg) var(--color-shadow-default);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .mm-modal-content__dialog {
+    animation: modal-dialog-slide-up 400ms cubic-bezier(0.3, 0.8, 0.3, 1) forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-modal-content__dialog {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .mm-modal-content__dialog--size-sm {
   --size: 360px;
   max-width: var(--modal-content-size);
@@ -22330,6 +22286,21 @@ DEPRECATED
   max-width: var(--modal-content-size);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes modal-dialog-slide-up {
+    from {
+      transform: translateY(24px);
+      opacity: 0;
+      overflow: hidden;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+      overflow: hidden;
+    }
+  }
+}
 /*
 Responsive breakpoints
 */
@@ -22354,6 +22325,25 @@ DEPRECATED
   right: 0;
   bottom: 0;
   z-index: 1050;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mm-modal-overlay {
+    animation: modal-overlay-fade-in 250ms linear forwards;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes modal-overlay-fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 .mm-modal-body {
@@ -22950,79 +22940,6 @@ DEPRECATED
   pointer-events: none;
 }
 
-.nfts-items__collection {
-  margin-bottom: 24px;
-}
-
-.nfts-items__collection:last-child {
-  margin-bottom: 0;
-}
-
-.nfts-items__collection-accordion-title {
-  cursor: pointer;
-}
-
-.nfts-items__collection-wrapper {
-  background-color: transparent;
-  border: 0;
-  width: 100%;
-}
-
-.nfts-items__collection-image {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-}
-
-.nfts-items__collection-image-alt {
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  padding: 8px;
-  background: var(--color-overlay-alternative);
-  color: var(--color-overlay-inverse);
-  text-align: center;
-}
-
-.nfts-items__item-wrapper {
-  align-self: center;
-}
-
-.nfts-items__item-wrapper__card {
-  overflow: hidden;
-}
-
-.nfts-items__item {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  align-self: center;
-  padding: 0;
-}
-
-.nfts-items__item-image {
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-}
-
-.nfts-tab__fetching {
-  display: flex;
-  height: 100px;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-}
-
-.nfts-tab__loading {
-  display: flex;
-  height: 200px;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-}
-
 /*
 Responsive breakpoints
 */
@@ -23072,10 +22989,6 @@ DEPRECATED
   .buttonDescriptionContainer {
     bottom: 3px;
   }
-}
-
-.badge-wrapper {
-  height: 70vh;
 }
 
 .fade-in {
@@ -23180,7 +23093,7 @@ DEPRECATED
   padding-left: 16px;
   padding-right: 16px;
   border-radius: var(--Spacing-sm, 8px);
-  border: 1px solid var(--border-muted, #d6d9dc);
+  border: 1px solid var(--color-border-muted);
 }
 
 .nft-details__nft-attribute-frame {
@@ -23499,17 +23412,9 @@ DEPRECATED
 /*
   Z-Indicies
 */
-.snap-ui-renderer__content {
-  margin-bottom: 0 !important;
-}
-
 .snap-ui-renderer__container > *:first-child {
   gap: 16px;
-  padding: 16px;
-}
-
-.snap-ui-renderer__error {
-  margin-top: 0 !important;
+  margin: 16px;
 }
 
 .snap-ui-renderer__spinner {
@@ -23540,6 +23445,10 @@ DEPRECATED
   max-width: 36px;
   min-height: 24px;
   max-height: 36px;
+}
+
+.snap-ui-renderer__address-input > .mm-text-field {
+  border-color: var(--color-border-muted);
 }
 
 .snap-ui-renderer__panel {
@@ -23585,6 +23494,44 @@ DEPRECATED
   }
 }
 
+.snap-ui-renderer__panel.box--flex-direction-row .snap-ui-renderer__field {
+  flex: 1 1 50%;
+}
+
+.snap-ui-renderer__panel.box--flex-direction-row .snap-ui-renderer__field .snap-ui-renderer__asset-selector {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.snap-ui-renderer__panel.box--flex-direction-row .snap-ui-renderer__field .snap-ui-renderer__asset-selector .snap-ui-renderer__asset-selector-option__balance {
+  display: none;
+}
+
+.snap-ui-renderer [disabled],
+.snap-ui-renderer__content [disabled] {
+  cursor: not-allowed !important;
+}
+
+.snap-ui-renderer .mm-text-field--disabled,
+.snap-ui-renderer .toggle-button--disabled,
+.snap-ui-renderer .toggle-button--disabled * div,
+.snap-ui-renderer__content .mm-text-field--disabled,
+.snap-ui-renderer__content .toggle-button--disabled,
+.snap-ui-renderer__content .toggle-button--disabled * div {
+  cursor: not-allowed;
+}
+
+.snap-ui-renderer .mm-form-text-field--disabled label,
+.snap-ui-renderer__content .mm-form-text-field--disabled label {
+  opacity: 1;
+}
+
+.snap-ui-snap-ui-renderer__file-input__drop-zone--disabled,
+.snap-ui-renderer__radio-label--disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+
 .snap-ui-markdown__text em {
   font-style: revert;
 }
@@ -23608,6 +23555,11 @@ DEPRECATED
   cursor: default !important;
 }
 
+.snap-ui-renderer__input > .mm-text-field {
+  height: 100%;
+  max-height: 58px;
+}
+
 .snap-ui-renderer__input .mm-text-field > .snap-ui-renderer__panel {
   gap: 8px;
 }
@@ -23629,6 +23581,7 @@ DEPRECATED
 
 .snap-ui-renderer__file-input__drop-zone {
   background-color: var(--color-background-alternative);
+  cursor: pointer;
 }
 
 .snap-ui-renderer__file-input__drop-zone .mm-icon,
@@ -23646,6 +23599,7 @@ DEPRECATED
 
 .snap-ui-renderer__selector {
   width: 100%;
+  border: 1px solid var(--color-border-muted);
 }
 
 .snap-ui-renderer__selector > span:first-child {
@@ -23658,6 +23612,7 @@ DEPRECATED
 
 .snap-ui-renderer__selector:hover {
   background-color: var(--color-background-alternative-hover);
+  border-color: var(--color-border-default);
 }
 
 .snap-ui-renderer__selector-item {
@@ -23907,11 +23862,6 @@ DEPRECATED
   background: linear-gradient(-90deg, transparent 0%, var(--color-background-default) 33%);
 }
 
-.insights-warnings-modal__content {
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
 .snaps-authorship-header__button {
   cursor: pointer;
 }
@@ -23930,8 +23880,6 @@ DEPRECATED
 
 .snap-ui-renderer__footer-button:not(.hide-snap-branding).mm-button-primary {
   box-shadow: none;
-  color: var(--color-text-alternative);
-  background-color: var(--color-icon-default);
 }
 
 .snap-ui-renderer__footer-button:not(.hide-snap-branding).mm-button-primary:hover:not(.snap-ui-renderer__footer-button:not(.hide-snap-branding).mm-button-primary--disabled) {
@@ -23943,9 +23891,13 @@ DEPRECATED
   opacity: 60%;
 }
 
+.snap-ui-renderer__footer-button:not(.hide-snap-branding).mm-button-primary:not(.mm-button-primary--type-danger) {
+  color: var(--color-text-alternative);
+  background-color: var(--color-icon-default);
+}
+
 .snap-ui-renderer__footer-button:not(.hide-snap-branding).mm-button-secondary {
   border-color: var(--color-icon-default);
-  color: var(--color-icon-default);
 }
 
 .snap-ui-renderer__footer-button:not(.hide-snap-branding).mm-button-secondary span {
@@ -23969,6 +23921,10 @@ DEPRECATED
 }
 
 .snap-ui-renderer__footer-button:not(.hide-snap-branding).mm-button-secondary:active:not(.snap-ui-renderer__footer-button:not(.hide-snap-branding).mm-button-secondary--disabled) span {
+  color: var(--color-icon-default);
+}
+
+.snap-ui-renderer__footer-button:not(.hide-snap-branding).mm-button-secondary:not(.mm-button-primary--type-danger) {
   color: var(--color-icon-default);
 }
 
@@ -24159,12 +24115,8 @@ DEPRECATED
   border-radius: 8px;
   min-height: 116px;
   padding: 16px;
-}
-
-@media screen and (min-width: 576px) {
-  .home-notification {
-    min-width: 472px;
-  }
+  width: calc(100% - 16px);
+  max-width: 472px;
 }
 
 .home-notification__content-container {
@@ -25352,47 +25304,26 @@ DEPRECATED
   flex-flow: column nowrap;
 }
 
-.confirm-action-jwt__jwt {
-  border: 1px solid var(--color-border-muted);
-}
-
-.confirm-action-jwt__show-more {
-  cursor: pointer;
-}
-
-.confirm-action-jwt__accounts-list {
-  overflow: hidden;
-}
-
-[dir="ltr"] .confirm-action-jwt__accounts-list {
-  margin-left: -5%;
-}
-
-[dir="rtl"] .confirm-action-jwt__accounts-list {
-  margin-right: -5%;
-}
-
-.custody-confirm-link__description {
-  border-bottom: 1px solid var(--brand-colors-grey-grey200);
-}
-
-.custody-confirm-link__img {
-  margin: 0 20px;
-  display: block;
-  padding: 20px 0;
-  width: 45px;
-  text-align: center;
-}
-
-.custody-confirm-link__btn {
-  width: 300px !important;
-  margin: 20px auto;
-}
-
-.transaction-failed__description {
-  border: 1px solid var(--color-border-muted);
-  max-width: 100%;
-  overflow-wrap: anywhere;
+/*
+Responsive breakpoints
+*/
+/*
+DEPRECATED
+*/
+/**
+* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
+* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
+* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
+* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
+* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
+* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
+*/
+/*
+  Z-Indicies
+*/
+.visit-support-data-consent-modal__body__preference-checkbox {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .modal {
@@ -25793,7 +25724,7 @@ ul.two-steps {
   content: counter(step);
   counter-increment: step;
   line-height: 30px;
-  border: 2px solid var(--color-border-muted);
+  border: 2px solid var(--color-background-alternative);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25962,7 +25893,15 @@ DEPRECATED
 */
 .import-srp__container {
   display: grid;
-  grid-template-areas: "title dropdown" "paste-tip paste-tip" "input input" "error error" "too-many-words-error too-many-words-error";
+  grid-template-areas: "title" "paste-tip" "input" "error" "too-many-words-error";
+}
+
+.import-srp__dropdown-container {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
 }
 
 @media screen and (max-width: calc(768px - 1px)) {
@@ -25978,10 +25917,11 @@ DEPRECATED
 
 .import-srp__number-of-words-dropdown {
   grid-area: dropdown;
+  width: 100%;
 }
 
 .import-srp__paste-tip {
-  margin: 24px 0;
+  margin: 24px 0 12px 0;
   grid-area: paste-tip;
   width: auto;
   margin-left: auto;
@@ -25996,7 +25936,7 @@ DEPRECATED
 
 @media screen and (max-width: calc(768px - 1px)) {
   .import-srp__srp {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
@@ -26118,6 +26058,7 @@ DEPRECATED
   display: flex;
   align-items: center;
   position: relative;
+  overflow: hidden;
   width: 100%;
 }
 
@@ -26127,6 +26068,9 @@ DEPRECATED
   line-height: 140%;
   font-style: normal;
   font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media screen and (min-width: 576px) {
@@ -26268,6 +26212,44 @@ DEPRECATED
 
 .token-cell--outdated .list-item__heading {
   color: var(--color-text-alternative);
+}
+
+/*
+Responsive breakpoints
+*/
+/*
+DEPRECATED
+*/
+/**
+* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
+* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
+* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
+* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
+* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
+* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
+*/
+/*
+  Z-Indicies
+*/
+.nft-items__wrapper {
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  /* When used in the send NFT modal */
+}
+
+.mm-modal-content .nft-items__wrapper {
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+}
+
+@media screen and (max-width: calc(768px - 1px)) {
+  .nft-items__wrapper {
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+  }
+}
+
+@media screen and (max-width: calc(576px - 1px)) {
+  .nft-items__wrapper {
+    grid-template-columns: repeat(3, minmax(85px, 1fr));
+  }
 }
 
 /*
@@ -26764,20 +26746,6 @@ DEPRECATED
   white-space: nowrap;
 }
 
-.transaction-list-item__icon-badge {
-  position: absolute;
-  top: 18px;
-  transform: scale(0.8);
-}
-
-[dir="ltr"] .transaction-list-item__icon-badge {
-  left: 18px;
-}
-
-[dir="rtl"] .transaction-list-item__icon-badge {
-  right: 18px;
-}
-
 /*
 Responsive breakpoints
 */
@@ -26838,10 +26806,6 @@ DEPRECATED
 
 .transaction-list__transactions {
   flex: 1;
-}
-
-.transaction-list__pending-transactions {
-  margin-bottom: 16px;
 }
 
 .transaction-list__empty {
@@ -27116,103 +27080,6 @@ DEPRECATED
 /*
   Z-Indicies
 */
-.whats-new-popup__notifications {
-  display: flex;
-  flex-direction: column;
-}
-
-.whats-new-popup__notification, .whats-new-popup__first-notification {
-  display: flex;
-  flex-direction: column;
-  margin: 0 16px 16px 16px;
-  border-bottom: 1px solid var(--color-border-muted);
-  position: relative;
-}
-
-.whats-new-popup__last-notification > *:nth-last-child(2) {
-  margin-bottom: 0;
-}
-
-.whats-new-popup__last-notification .whats-new-popup__intersection-observable {
-  bottom: 8px;
-}
-
-.whats-new-popup__notification:last-child {
-  border-bottom: none;
-}
-
-.whats-new-popup__notification-image {
-  align-self: center;
-  margin-bottom: 16px;
-}
-
-.whats-new-popup__description-and-date {
-  margin-bottom: 16px;
-}
-
-.whats-new-popup__notification-date {
-  color: var(--color-text-alternative);
-}
-
-[dir="ltr"] .whats-new-popup__button {
-  margin-right: auto;
-}
-
-[dir="rtl"] .whats-new-popup__button {
-  margin-left: auto;
-}
-
-.whats-new-popup__button, .whats-new-popup__link {
-  margin-bottom: 24px;
-}
-
-.whats-new-popup__link {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-primary-default);
-  cursor: pointer;
-}
-
-.whats-new-popup__intersection-observable {
-  bottom: 22px;
-  position: absolute;
-  height: 1px;
-  width: 100%;
-}
-
-@media screen and (min-width: 576px) {
-  .popover-wrap.whats-new-popup__popover {
-    max-height: 750px;
-    width: 500px;
-  }
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .popover-wrap.whats-new-popup__popover {
-    max-height: 568px;
-  }
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
 .popover-wrap.terms-of-use__popover .terms-of-use__terms-list {
   list-style: decimal none outside;
 }
@@ -27430,6 +27297,10 @@ DEPRECATED
   padding: 1px 4px 1px 8px;
 }
 
+.name__clickable {
+  cursor: pointer;
+}
+
 .name__missing {
   background-color: var(--color-background-alternative);
 }
@@ -27496,96 +27367,6 @@ DEPRECATED
 
 .expandIcon.expanded {
   rotate: -180deg;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.interactive-replacement-token-notification {
-  height: 24px;
-}
-
-@media screen and (min-width: 576px) {
-  .interactive-replacement-token-notification {
-    width: 85vw;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .interactive-replacement-token-notification {
-    width: 80vw;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .interactive-replacement-token-notification {
-    width: 62vw;
-  }
-}
-
-.confirm-action-jwt__jwt {
-  border: 1px solid var(--color-border-muted);
-}
-
-.confirm-action-jwt__show-more {
-  cursor: pointer;
-}
-
-.confirm-action-jwt__accounts-list {
-  overflow: hidden;
-}
-
-[dir="ltr"] .confirm-action-jwt__accounts-list {
-  margin-left: -5%;
-}
-
-[dir="rtl"] .confirm-action-jwt__accounts-list {
-  margin-right: -5%;
-}
-
-.custody-confirm-link__description {
-  border-bottom: 1px solid var(--brand-colors-grey-grey200);
-}
-
-.custody-confirm-link__img {
-  margin: 0 20px;
-  display: block;
-  padding: 20px 0;
-  width: 45px;
-  text-align: center;
-}
-
-.custody-confirm-link__btn {
-  width: 300px !important;
-  margin: 20px auto;
-}
-
-.transaction-failed__description {
-  border: 1px solid var(--color-border-muted);
-  max-width: 100%;
-  overflow-wrap: anywhere;
-}
-
-.snap-insight {
-  word-wrap: break-word;
-}
-
-.snap-insight__container {
-  padding: 16px;
 }
 
 /** Please import your files in alphabetical order **/
@@ -36672,6 +36453,10 @@ DEPRECATED
   border-color: var(--color-background-alternative);
 }
 
+.box--border-color-background-muted {
+  border-color: var(--color-background-muted);
+}
+
 .box--border-color-background-hover {
   border-color: var(--color-background-hover);
 }
@@ -36792,10 +36577,6 @@ DEPRECATED
   border-color: var(--color-info-inverse);
 }
 
-.box--border-color-mainnet {
-  border-color: var(--mainnet);
-}
-
 .box--border-color-goerli {
   border-color: var(--color-network-goerli-default);
 }
@@ -36861,6 +36642,12 @@ DEPRECATED
 @media screen and (min-width: 576px) {
   .box--sm\:border-color-background-alternative {
     border-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .box--sm\:border-color-background-muted {
+    border-color: var(--color-background-muted);
   }
 }
 
@@ -37045,12 +36832,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 576px) {
-  .box--sm\:border-color-mainnet {
-    border-color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 576px) {
   .box--sm\:border-color-goerli {
     border-color: var(--color-network-goerli-default);
   }
@@ -37143,6 +36924,12 @@ DEPRECATED
 @media screen and (min-width: 768px) {
   .box--md\:border-color-background-alternative {
     border-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .box--md\:border-color-background-muted {
+    border-color: var(--color-background-muted);
   }
 }
 
@@ -37327,12 +37114,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 768px) {
-  .box--md\:border-color-mainnet {
-    border-color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 768px) {
   .box--md\:border-color-goerli {
     border-color: var(--color-network-goerli-default);
   }
@@ -37425,6 +37206,12 @@ DEPRECATED
 @media screen and (min-width: 1280px) {
   .box--lg\:border-color-background-alternative {
     border-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .box--lg\:border-color-background-muted {
+    border-color: var(--color-background-muted);
   }
 }
 
@@ -37605,12 +37392,6 @@ DEPRECATED
 @media screen and (min-width: 1280px) {
   .box--lg\:border-color-info-inverse {
     border-color: var(--color-info-inverse);
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .box--lg\:border-color-mainnet {
-    border-color: var(--mainnet);
   }
 }
 
@@ -39908,6 +39689,10 @@ DEPRECATED
   background-color: var(--color-background-alternative);
 }
 
+.box--background-color-background-muted {
+  background-color: var(--color-background-muted);
+}
+
 .box--background-color-background-hover {
   background-color: var(--color-background-hover);
 }
@@ -40028,10 +39813,6 @@ DEPRECATED
   background-color: var(--color-info-inverse);
 }
 
-.box--background-color-mainnet {
-  background-color: var(--mainnet);
-}
-
 .box--background-color-goerli {
   background-color: var(--color-network-goerli-default);
 }
@@ -40097,6 +39878,12 @@ DEPRECATED
 @media screen and (min-width: 576px) {
   .box--sm\:background-color-background-alternative {
     background-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .box--sm\:background-color-background-muted {
+    background-color: var(--color-background-muted);
   }
 }
 
@@ -40281,12 +40068,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 576px) {
-  .box--sm\:background-color-mainnet {
-    background-color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 576px) {
   .box--sm\:background-color-goerli {
     background-color: var(--color-network-goerli-default);
   }
@@ -40379,6 +40160,12 @@ DEPRECATED
 @media screen and (min-width: 768px) {
   .box--md\:background-color-background-alternative {
     background-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .box--md\:background-color-background-muted {
+    background-color: var(--color-background-muted);
   }
 }
 
@@ -40563,12 +40350,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 768px) {
-  .box--md\:background-color-mainnet {
-    background-color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 768px) {
   .box--md\:background-color-goerli {
     background-color: var(--color-network-goerli-default);
   }
@@ -40661,6 +40442,12 @@ DEPRECATED
 @media screen and (min-width: 1280px) {
   .box--lg\:background-color-background-alternative {
     background-color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .box--lg\:background-color-background-muted {
+    background-color: var(--color-background-muted);
   }
 }
 
@@ -40845,12 +40632,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 1280px) {
-  .box--lg\:background-color-mainnet {
-    background-color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 1280px) {
   .box--lg\:background-color-goerli {
     background-color: var(--color-network-goerli-default);
   }
@@ -40940,6 +40721,10 @@ DEPRECATED
 
 .box--color-background-alternative {
   color: var(--color-background-alternative);
+}
+
+.box--color-background-muted {
+  color: var(--color-background-muted);
 }
 
 .box--color-background-hover {
@@ -41062,10 +40847,6 @@ DEPRECATED
   color: var(--color-info-inverse);
 }
 
-.box--color-mainnet {
-  color: var(--mainnet);
-}
-
 .box--color-goerli {
   color: var(--color-network-goerli-default);
 }
@@ -41131,6 +40912,12 @@ DEPRECATED
 @media screen and (min-width: 576px) {
   .box--sm\c olor-background-alternative {
     color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .box--sm\c olor-background-muted {
+    color: var(--color-background-muted);
   }
 }
 
@@ -41315,12 +41102,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 576px) {
-  .box--sm\c olor-mainnet {
-    color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 576px) {
   .box--sm\c olor-goerli {
     color: var(--color-network-goerli-default);
   }
@@ -41413,6 +41194,12 @@ DEPRECATED
 @media screen and (min-width: 768px) {
   .box--md\c olor-background-alternative {
     color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .box--md\c olor-background-muted {
+    color: var(--color-background-muted);
   }
 }
 
@@ -41597,12 +41384,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 768px) {
-  .box--md\c olor-mainnet {
-    color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 768px) {
   .box--md\c olor-goerli {
     color: var(--color-network-goerli-default);
   }
@@ -41695,6 +41476,12 @@ DEPRECATED
 @media screen and (min-width: 1280px) {
   .box--lg\c olor-background-alternative {
     color: var(--color-background-alternative);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .box--lg\c olor-background-muted {
+    color: var(--color-background-muted);
   }
 }
 
@@ -41879,12 +41666,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 1280px) {
-  .box--lg\c olor-mainnet {
-    color: var(--mainnet);
-  }
-}
-
-@media screen and (min-width: 1280px) {
   .box--lg\c olor-goerli {
     color: var(--color-network-goerli-default);
   }
@@ -42058,7 +41839,7 @@ DEPRECATED
   opacity: 0.5;
 }
 
-.radio-button-group .radio-button {
+.radio-button-group__button {
   font-size: 0.75rem;
   font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
   line-height: 140%;
@@ -42073,27 +41854,27 @@ DEPRECATED
   padding: 0;
 }
 
-[dir="ltr"] .radio-button-group .radio-button {
+[dir="ltr"] .radio-button-group__button {
   margin-right: 8px;
 }
 
-[dir="rtl"] .radio-button-group .radio-button {
+[dir="rtl"] .radio-button-group__button {
   margin-left: 8px;
 }
 
-.radio-button-group .radio-button--active {
+.radio-button-group__button--active {
   background: var(--color-primary-default);
   color: var(--color-primary-inverse);
   border: none;
 }
 
-.radio-button-group .radio-button--danger {
+.radio-button-group__button--danger {
   border: 1px solid var(--color-error-default);
   color: var(--color-error-default);
   background: var(--color-background-default);
 }
 
-.radio-button-group .radio-button:hover {
+.radio-button-group__button:hover {
   box-shadow: var(--shadow-size-sm) var(--color-shadow-default);
 }
 
@@ -42609,6 +42390,14 @@ DEPRECATED
   background-color: var(--color-background-alternative);
 }
 
+.chip--border-color-background-muted {
+  border-color: var(--color-background-muted);
+}
+
+.chip--background-color-background-muted {
+  background-color: var(--color-background-muted);
+}
+
 .chip--border-color-background-hover {
   border-color: var(--color-background-hover);
 }
@@ -42847,14 +42636,6 @@ DEPRECATED
 
 .chip--background-color-info-inverse {
   background-color: var(--color-info-inverse);
-}
-
-.chip--border-color-mainnet {
-  border-color: var(--mainnet);
-}
-
-.chip--background-color-mainnet {
-  background-color: var(--mainnet);
 }
 
 .chip--border-color-goerli {
@@ -43180,6 +42961,22 @@ DEPRECATED
 }
 
 .color-indicator--color-background-alternative .color-indicator__icon {
+  color: var(--color-icon-default);
+}
+
+.color-indicator--color-background-muted {
+  border-color: var(--color-background-muted);
+}
+
+.color-indicator--color-background-muted.color-indicator--partial-filled .color-indicator__inner-circle {
+  background-color: var(--color-background-muted);
+}
+
+.color-indicator--color-background-muted.color-indicator--filled {
+  background-color: var(--color-background-muted);
+}
+
+.color-indicator--color-background-muted .color-indicator__icon {
   color: var(--color-icon-default);
 }
 
@@ -43663,22 +43460,6 @@ DEPRECATED
   color: var(--color-icon-default);
 }
 
-.color-indicator--color-mainnet {
-  border-color: var(--mainnet);
-}
-
-.color-indicator--color-mainnet.color-indicator--partial-filled .color-indicator__inner-circle {
-  background-color: var(--mainnet);
-}
-
-.color-indicator--color-mainnet.color-indicator--filled {
-  background-color: var(--mainnet);
-}
-
-.color-indicator--color-mainnet .color-indicator__icon {
-  color: var(--color-icon-default);
-}
-
 .color-indicator--color-goerli {
   border-color: var(--color-network-goerli-default);
 }
@@ -43911,6 +43692,10 @@ DEPRECATED
   border-color: var(--color-background-alternative);
 }
 
+.color-indicator--border-color-background-muted {
+  border-color: var(--color-background-muted);
+}
+
 .color-indicator--border-color-background-hover {
   border-color: var(--color-background-hover);
 }
@@ -44029,10 +43814,6 @@ DEPRECATED
 
 .color-indicator--border-color-info-inverse {
   border-color: var(--color-info-inverse);
-}
-
-.color-indicator--border-color-mainnet {
-  border-color: var(--mainnet);
 }
 
 .color-indicator--border-color-goerli {
@@ -44757,13 +44538,18 @@ DEPRECATED
   text-align: start;
   align-items: center;
   width: 100%;
-  padding: 14px 16px;
+  padding: 16px;
   cursor: pointer;
   color: inherit;
 }
 
 .menu-item:hover, .menu-item:active {
   background: var(--color-background-default-hover);
+}
+
+.menu-item:focus {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: -2px;
 }
 
 .menu-item__icon {
@@ -44777,71 +44563,6 @@ DEPRECATED
 
 [dir="rtl"] .menu-item__icon {
   margin-left: 8px;
-}
-
-.new-network-info__wrapper {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.214);
-  border-radius: 8px;
-}
-
-.new-network-info__wrapper .popover-footer {
-  border-top: none;
-  width: 100%;
-  gap: 16px;
-}
-
-.new-network-info__wrapper .popover-footer .footer__button {
-  flex: 1;
-  flex-grow: 1;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.new-network-info__wrapper .popover-footer a:hover > span {
-  color: var(--inherit);
-}
-
-.new-network-info__wrapper .popover-header {
-  padding-bottom: 1px;
-}
-
-.new-network-info__wrapper .popover-header__button {
-  color: var(--color-icon-default);
-}
-
-.new-network-info__token-box {
-  align-self: center;
-  margin-top: 8px;
-  max-width: 245px;
-}
-
-.new-network-info__button {
-  display: contents;
-  padding: 0;
-}
-
-.new-network-info__bullet-icon-container {
-  background-color: var(--color-info-muted);
-  border-radius: 50%;
-  padding: 6px;
-}
-
-.new-network-info__bullet-icon-container .mm-icon {
-  display: flex;
-  color: var(--color-info-default);
-}
-
-.chip--with-left-icon {
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
-[dir="ltr"] .chip--with-left-icon {
-  padding-left: 8px;
-}
-
-[dir="rtl"] .chip--with-left-icon {
-  padding-right: 8px;
 }
 
 .numeric-input {
@@ -46128,10 +45849,22 @@ DEPRECATED
   margin-inline-end: 6px;
 }
 
+.tab {
+  border-bottom: 2px solid var(--color-border-muted);
+  color: var(--color-text-alternative);
+  font-weight: 500;
+}
+
 .tab button {
   min-width: 50px;
   background-color: unset;
   color: unset;
+  font-weight: 500;
+}
+
+.tab--single {
+  color: var(--color-text-default);
+  border-bottom: none;
 }
 
 .tab--active {
@@ -46144,68 +45877,11 @@ DEPRECATED
 }
 
 .tabs__list {
-  border-bottom: 1px solid var(--color-border-default);
   position: sticky;
   top: 0;
   z-index: 2;
 }
 
-[dir="ltr"] .transaction-insight-dropdown .dropdown__select, [dir="ltr"] .transaction-insight-dropdown-wrapper::before {
-  padding: 8px 20px 6px 4px;
-}
-
-[dir="rtl"] .transaction-insight-dropdown .dropdown__select, [dir="rtl"] .transaction-insight-dropdown-wrapper::before {
-  padding: 8px 4px 6px 20px;
-}
-
-.transaction-insight-dropdown select, .transaction-insight-dropdown-wrapper::before {
-  font-size: 0.75rem;
-  overflow: hidden !important;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.transaction-insight-dropdown-wrapper::before {
-  content: attr(title);
-  visibility: hidden;
-  pointer-events: none;
-  display: inline-block;
-  max-width: 150px;
-}
-
-.transaction-insight-dropdown {
-  cursor: pointer;
-}
-
-.transaction-insight-dropdown,
-.transaction-insight-dropdown select {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.transaction-insight-dropdown select {
-  border: none;
-  cursor: pointer;
-}
-
-.transaction-insight-dropdown select:focus {
-  outline: none;
-}
-
-.transaction-insight-dropdown .dropdown__icon-caret-down {
-  top: 50% !important;
-  cursor: pointer;
-}
-
-[dir="ltr"] .transaction-insight-dropdown .dropdown__icon-caret-down {
-  right: 4px;
-}
-
-[dir="rtl"] .transaction-insight-dropdown .dropdown__icon-caret-down {
-  left: 4px;
-}
 /*
 Responsive breakpoints
 */
@@ -46544,6 +46220,10 @@ DEPRECATED
   color: var(--color-background-alternative);
 }
 
+.typography--color-background-muted {
+  color: var(--color-background-muted);
+}
+
 .typography--color-background-hover {
   color: var(--color-background-hover);
 }
@@ -46662,10 +46342,6 @@ DEPRECATED
 
 .typography--color-info-inverse {
   color: var(--color-info-inverse);
-}
-
-.typography--color-mainnet {
-  color: var(--mainnet);
 }
 
 .typography--color-goerli {
@@ -47239,38 +46915,6 @@ DEPRECATED
   background: var(--color-overlay-alternative);
 }
 
-.custody-label {
-  z-index: 1;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-  max-width: 150px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: block;
-}
-
-.note-header {
-  line-height: 100%;
-  margin: 0 0 5px 0;
-}
-
-.note-header label {
-  color: var(--black);
-  margin: 0 0 4px 0;
-}
-
-.note-field textarea {
-  min-height: 90px;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 12px;
-  resize: none;
-}
-
-.note-field textarea::placeholder {
-  color: var(--color-icon-alternative);
-}
-
 .form-combo-field {
   width: 100%;
 }
@@ -47345,74 +46989,6 @@ DEPRECATED
 .delineator__header--disabled {
   cursor: default;
   opacity: 0.5;
-}
-
-/**
-* Please import your styles in order of atomicity.
-* The most atomic styles should be imported first.
-* This will help improve specificity and reduce the chance of
-* unintended overrides.
-**/
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.custody-search-jwt__select {
-  height: 54px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.custody-search-jwt__select-title {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-}
-
-.note-header {
-  line-height: 100%;
-  margin: 0 0 5px 0;
-}
-
-.note-header label {
-  color: var(--black);
-  margin: 0 0 4px 0;
-}
-
-.note-field textarea {
-  min-height: 90px;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 12px;
-  resize: none;
-}
-
-.note-field textarea::placeholder {
-  color: var(--color-icon-alternative);
-}
-
-.institutional-qr-code-modal__qr-code {
-  background-color: var(--qr-code-white-background);
-}
-
-.institutional-qr-code-modal__spinner {
-  width: 100px;
 }
 
 /**
@@ -47550,13 +47126,6 @@ DEPRECATED
   height: auto;
 }
 
-.custody-logo {
-  height: 20px;
-  background-color: var(--brand-colors-white);
-  padding: 1px;
-  border-radius: 5px;
-}
-
 .address-list-item {
   /* Set explicitly to match the font-size of AccountListItem */
 }
@@ -47686,21 +47255,6 @@ DEPRECATED
   font-size: 12px !important;
 }
 
-.multichain-account-list-item .custody-logo {
-  height: 32px;
-  padding: 4px;
-  margin-top: 5px;
-  border-radius: 5px;
-}
-
-[dir="ltr"] .multichain-account-list-item .custody-logo {
-  margin-right: 8px;
-}
-
-[dir="rtl"] .multichain-account-list-item .custody-logo {
-  margin-left: 8px;
-}
-
 /*
 Responsive breakpoints
 */
@@ -47782,8 +47336,6 @@ DEPRECATED
   font-style: normal;
   font-weight: normal;
   flex-grow: 1;
-  color: var(--color-icon-default);
-  font-weight: 500;
 }
 
 .account-overview__tab--active {
@@ -48046,7 +47598,7 @@ DEPRECATED
 .name-snap-account-page {
   width: 100%;
   flex-flow: column nowrap;
-  margin: 0 auto;
+  margin: 0 auto !important;
 }
 
 @media screen and (max-width: calc(576px - 1px)) {
@@ -48132,17 +47684,21 @@ DEPRECATED
   align-self: center;
 }
 
-.multichain-token-list-item__badge__avatar-network {
-  box-sizing: content-box;
-}
-
 .multichain-network-list-item {
   position: relative;
   cursor: pointer;
 }
 
-.multichain-network-list-item:not(.multichain-network-list-item--selected):hover, .multichain-network-list-item:not(.multichain-network-list-item--selected):focus-within {
+.multichain-network-list-item:not(.multichain-network-list-item--selected, .multichain-network-list-item--disabled):hover, .multichain-network-list-item:not(.multichain-network-list-item--selected, .multichain-network-list-item--disabled):focus-within {
   background: var(--color-background-default-hover);
+}
+
+.multichain-network-list-item--disabled {
+  opacity: 0.4;
+}
+
+.multichain-network-list-item--disabled .mm-avatar-network {
+  filter: grayscale(1);
 }
 
 .multichain-network-list-item a:hover,
@@ -48208,6 +47764,18 @@ DEPRECATED
 .multichain-network-list-menu-content-wrapper__dialog {
   height: 100vh;
   max-height: 100%;
+  transform: unset;
+  animation: network-menu-fade 400ms cubic-bezier(0.3, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes network-menu-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .multichain-network-list-menu {
@@ -48221,6 +47789,81 @@ DEPRECATED
 
 .rpc-list-item button {
   text-align: start;
+}
+
+.mm-carousel {
+  height: 100px;
+}
+
+.mm-carousel--single-slide {
+  height: 70px;
+}
+
+.mm-carousel--single-slide .control-dots {
+  display: none !important;
+}
+
+.mm-carousel-slide {
+  position: relative;
+  cursor: pointer;
+  /* !important needed to override react-responsive-carousel default padding */
+  padding: 0 !important;
+  background-color: var(--color-background-muted);
+}
+
+.mm-carousel-slide:hover {
+  background-color: var(--color-background-muted-hover);
+}
+
+.mm-carousel-slide:active, .mm-carousel-slide.active {
+  background-color: var(--color-background-muted-pressed);
+}
+
+.mm-carousel__loading {
+  cursor: default;
+}
+
+.mm-carousel-slide__accessory {
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  /* !important needed to override react-responsive-carousel default width */
+  width: 60px !important;
+}
+
+.mm-carousel-slide__close-button {
+  position: absolute;
+  top: 8px;
+}
+
+[dir="ltr"] .mm-carousel-slide__close-button {
+  right: 6px;
+}
+
+[dir="rtl"] .mm-carousel-slide__close-button {
+  left: 6px;
+}
+
+.control-dots {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 40px;
+  align-items: center;
+  gap: 8px;
+  /* !important needed to override react-responsive-carousel default margin */
+  margin: 0 !important;
+}
+
+.dot {
+  /* !important rules needed to override react-responsive-carousel default styles */
+  margin: 0 !important;
+  background: var(--color-icon-muted) !important;
+  box-shadow: none !important;
+}
+
+.dot.selected {
+  background: var(--color-icon-default) !important;
 }
 
 .add-rpc-modal {
@@ -48360,18 +48003,37 @@ DEPRECATED
   background-color: var(--color-primary-inverse);
 }
 
+/*
+Responsive breakpoints
+*/
+/*
+DEPRECATED
+*/
+/**
+* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
+* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
+* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
+* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
+* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
+* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
+*/
+/*
+  Z-Indicies
+*/
+.nft-item__card {
+  cursor: pointer;
+}
+
 .nft-item__container {
   width: 100%;
   padding: 0;
   border-radius: 8px;
-  cursor: unset;
 }
 
 .nft-item__badge-wrapper {
   max-width: 100%;
   position: relative;
   align-self: center;
-  cursor: unset;
 }
 
 .nft-item__badge-wrapper__clickable {
@@ -48380,7 +48042,31 @@ DEPRECATED
 
 .nft-item__item-image {
   border-radius: 8px;
-  padding: 0;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+.nft-item__item-image--hidden {
+  border-radius: 8px;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.5);
+  mix-blend-mode: lighten;
+}
+
+@media screen and (max-width: calc(576px - 1px)) {
+  .nft-item__item-image--hidden {
+    background: rgba(255, 255, 255, 0.5);
+    mix-blend-mode: lighten;
+  }
+}
+
+.nft-item__item-detail {
+  border-radius: 8px;
+  object-fit: cover;
+  aspect-ratio: 1;
   width: 100%;
   height: 100%;
 }
@@ -48737,18 +48423,6 @@ button.asset-picker-amount__max-clear:hover:not(.--disabled) {
   cursor: not-allowed;
 }
 
-.asset-picker__fallback {
-  text-wrap: nowrap;
-}
-
-[dir="ltr"] .asset-picker__fallback {
-  padding-left: 8px;
-}
-
-[dir="rtl"] .asset-picker__fallback {
-  padding-right: 8px;
-}
-
 /*
 Responsive breakpoints
 */
@@ -48766,12 +48440,12 @@ DEPRECATED
 /*
   Z-Indicies
 */
-.multichain-asset-picker__network-modal {
-  overflow-y: auto;
+.multichain-asset-picker__network-modal .mm-modal-content__dialog {
+  overflow: hidden;
 }
 
-.multichain-asset-picker__network-modal .mm-modal-content__dialog {
-  overflow-y: scroll;
+.multichain-asset-picker__network-modal .multichain-asset-picker__network-list {
+  overflow-y: auto;
 }
 
 .asset-picker-modal__search-list {
@@ -48793,6 +48467,7 @@ DEPRECATED
   cursor: pointer;
   overflow-y: auto;
   max-height: 50vh;
+  white-space: nowrap;
 }
 
 .asset-picker-modal .multichain-asset-picker-list-item:not(.multichain-asset-picker-list-item--selected):hover, .asset-picker-modal .multichain-asset-picker-list-item:not(.multichain-asset-picker-list-item--selected):focus-within {
@@ -48825,10 +48500,18 @@ DEPRECATED
 
 .asset-picker-modal .network-picker {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding-top: 4px;
   button-background: var(--color-background-alternative);
+}
+
+[dir="ltr"] .asset-picker-modal .network-picker {
+  padding-left: 16px;
+}
+
+[dir="rtl"] .asset-picker-modal .network-picker {
+  padding-right: 16px;
 }
 
 .asset-picker-modal .modal-tab__main-view {
@@ -49046,6 +48729,108 @@ DEPRECATED
   background-color: var(--color-error-alternative);
 }
 
+/*
+Responsive breakpoints
+*/
+/*
+DEPRECATED
+*/
+/**
+* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
+* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
+* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
+* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
+* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
+* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
+*/
+/*
+  Z-Indicies
+*/
+.select-srp__container {
+  cursor: pointer;
+}
+
+/*
+Responsive breakpoints
+*/
+/*
+DEPRECATED
+*/
+/**
+* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
+* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
+* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
+* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
+* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
+* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
+*/
+/*
+  Z-Indicies
+*/
+.srp-list__container {
+  overflow-y: scroll;
+}
+
+.srp-list__divider {
+  height: 1px;
+  background-color: var(--color-border-muted);
+}
+
+.srp-list__show-accounts {
+  color: var(--color-primary-default);
+  cursor: pointer;
+}
+
+.srp-list__show-accounts:hover {
+  text-decoration: underline;
+}
+
+.srp-list__account-name {
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 80px;
+}
+
+/*
+Responsive breakpoints
+*/
+/*
+DEPRECATED
+*/
+/**
+* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
+* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
+* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
+* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
+* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
+* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
+*/
+/*
+  Z-Indicies
+*/
+.import-multi-srp__srp {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-area: input;
+  gap: 0 24px;
+}
+
+.import-multi-srp__multi-srp-label {
+  min-width: 16px;
+  max-width: 16px;
+  flex-shrink: 0;
+}
+
+.import-multi-srp__srp-word {
+  display: flex;
+  align-items: center;
+  width: "80%";
+}
+
+.import-multi-srp__srp-word input {
+  flex: 1;
+}
+
 /** Please import your files in alphabetical order **/
 /*
 Responsive breakpoints
@@ -49142,517 +48927,6 @@ DEPRECATED
 /*
   Z-Indicies
 */
-.confirm-approve-content {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  width: 100%;
-  font-style: normal;
-  flex: 1 1 auto;
-}
-
-.confirm-approve-content__warning {
-  padding: 0 24px 16px 24px;
-}
-
-.confirm-approve-content__approval-asset-link {
-  color: var(--color-primary-default);
-}
-
-.confirm-approve-content__approval-asset-title {
-  cursor: pointer;
-}
-
-.confirm-approve-content__icon-display-content {
-  height: 40px;
-  margin-top: 16px;
-  padding: 12px 12px 14px 12px;
-  border: 1px solid var(--color-border-muted);
-  box-sizing: border-box;
-  border-radius: 100px;
-  align-items: center;
-  position: relative;
-}
-
-.confirm-approve-content__metafoxlogo, .confirm-approve-content__siteinfo {
-  position: absolute;
-}
-
-.confirm-approve-content__address-display-content {
-  display: flex;
-  height: 27px;
-  padding: 12px 12px 14px 12px;
-  background-color: var(--color-background-alternative);
-  border-radius: 100px;
-  align-items: center;
-  justify-content: center;
-}
-
-.confirm-approve-content__siteimage-identicon {
-  width: 24px;
-  height: 24px;
-  margin-top: 4px;
-  box-shadow: none;
-  background: none;
-}
-
-[dir="ltr"] .confirm-approve-content__address-identicon {
-  margin: 4px 8px 0 4px;
-}
-
-[dir="rtl"] .confirm-approve-content__address-identicon {
-  margin: 4px 4px 0 8px;
-}
-
-[dir="ltr"] .confirm-approve-content__copy-address, [dir="ltr"] .confirm-approve-content__etherscan-link {
-  padding: 0 0 0 8px;
-}
-
-[dir="rtl"] .confirm-approve-content__copy-address, [dir="rtl"] .confirm-approve-content__etherscan-link {
-  padding: 0 8px 0 0;
-}
-
-.confirm-approve-content__etherscan-link img {
-  width: 9px;
-  height: 9px;
-}
-
-[dir="ltr"] .confirm-approve-content .app-header__logo-container {
-  margin-right: 0;
-}
-
-[dir="rtl"] .confirm-approve-content .app-header__logo-container {
-  margin-left: 0;
-}
-
-.confirm-approve-content .app-header__metafox-logo--icon {
-  height: 33px;
-  width: 33px;
-}
-
-.confirm-approve-content__full-tx-content {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  max-width: 100%;
-  font-style: normal;
-}
-
-.confirm-approve-content__card-wrapper {
-  width: 100%;
-}
-
-.confirm-approve-content__title {
-  font-size: 1.5rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  margin-top: 22px;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-.confirm-approve-content__description {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  margin-top: 16px;
-  color: var(--color-text-alternative);
-  text-align: center;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-.confirm-approve-content__card, .confirm-approve-content__card--no-border {
-  display: flex;
-  flex-flow: column;
-  border-bottom: 1px solid var(--color-border-default);
-  position: relative;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-.confirm-approve-content__card__bold-text, .confirm-approve-content__card--no-border__bold-text {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: bold;
-}
-
-.confirm-approve-content__card__thin-text, .confirm-approve-content__card--no-border__thin-text {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-}
-
-.confirm-approve-content__card--no-border {
-  border-bottom: none;
-}
-
-.confirm-approve-content__card-header {
-  display: flex;
-  flex-flow: row;
-  margin-top: 20px;
-  align-items: center;
-  position: relative;
-  justify-content: flex-end;
-}
-
-.confirm-approve-content__card-header__symbol {
-  width: auto;
-}
-
-.confirm-approve-content__card-header__symbol--aligned {
-  width: 100%;
-}
-
-.confirm-approve-content__card-header__title, .confirm-approve-content__card-header__title-value {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: bold;
-}
-
-.confirm-approve-content__card-header__title {
-  width: 100%;
-}
-
-[dir="ltr"] .confirm-approve-content__card-header__title {
-  margin-left: 16px;
-}
-
-[dir="rtl"] .confirm-approve-content__card-header__title {
-  margin-right: 16px;
-}
-
-.confirm-approve-content__card-header__title--aligned {
-  position: absolute;
-  width: auto;
-}
-
-[dir="ltr"] .confirm-approve-content__card-header__title--aligned {
-  margin-left: 27px;
-}
-
-[dir="rtl"] .confirm-approve-content__card-header__title--aligned {
-  margin-right: 27px;
-}
-
-.confirm-approve-content__card-content {
-  margin-top: 6px;
-  margin-bottom: 12px;
-}
-
-[dir="ltr"] .confirm-approve-content__card-content--aligned {
-  margin-left: 42px;
-}
-
-[dir="rtl"] .confirm-approve-content__card-content--aligned {
-  margin-right: 42px;
-}
-
-.confirm-approve-content__transaction-total-symbol {
-  width: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 16px;
-}
-
-.confirm-approve-content__transaction-total-symbol__x {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.confirm-approve-content__transaction-total-symbol__x div {
-  width: 22px;
-  height: 2px;
-  background: var(--color-primary-default);
-  position: absolute;
-}
-
-[dir="ltr"] .confirm-approve-content__transaction-total-symbol__x div:first-of-type {
-  transform: rotate(45deg);
-}
-
-[dir="rtl"] .confirm-approve-content__transaction-total-symbol__x div:first-of-type {
-  transform: rotate(-45deg);
-}
-
-[dir="ltr"] .confirm-approve-content__transaction-total-symbol__x div:last-of-type {
-  transform: rotate(-45deg);
-}
-
-[dir="rtl"] .confirm-approve-content__transaction-total-symbol__x div:last-of-type {
-  transform: rotate(45deg);
-}
-
-.confirm-approve-content__transaction-total-symbol__circle {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--color-primary-default);
-  border-radius: 50%;
-  background: var(--color-background-default);
-  position: absolute;
-}
-
-.confirm-approve-content__ledger-instruction-wrapper {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.confirm-approve-content__transaction-details-content {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-}
-
-.confirm-approve-content__transaction-details-content .confirm-approve-content__small-text {
-  width: 160px;
-}
-
-.confirm-approve-content__transaction-details-content__fee {
-  display: flex;
-  flex-flow: column;
-  align-items: flex-end;
-}
-
-[dir="ltr"] .confirm-approve-content__transaction-details-content__fee {
-  text-align: right;
-}
-
-[dir="rtl"] .confirm-approve-content__transaction-details-content__fee {
-  text-align: left;
-}
-
-.confirm-approve-content__transaction-details-content__primary-fee {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: bold;
-  color: var(--color-text-default);
-}
-
-.confirm-approve-content__transaction-details-content__secondary-fee, .confirm-approve-content__transaction-details-content__labelled-fee {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: normal;
-  color: var(--color-text-muted);
-}
-
-.confirm-approve-content__transaction-details-content__labelled-fee {
-  display: flex;
-  justify-content: space-between;
-}
-
-.confirm-approve-content__transaction-details-content__labelled-fee h6.typography--h6 {
-  font-weight: normal;
-}
-
-.confirm-approve-content__transaction-details-extra-content {
-  display: flex;
-  flex-flow: column;
-  width: 100%;
-}
-
-.confirm-approve-content__view-full-tx-button-wrapper {
-  display: flex;
-  flex-flow: row;
-  margin-bottom: 16px;
-  justify-content: center;
-}
-
-.confirm-approve-content__view-full-tx-button-wrapper i {
-  display: flex;
-  color: var(--color-primary-default);
-  align-items: center;
-}
-
-[dir="ltr"] .confirm-approve-content__view-full-tx-button-wrapper i {
-  margin-left: 6px;
-}
-
-[dir="rtl"] .confirm-approve-content__view-full-tx-button-wrapper i {
-  margin-right: 6px;
-}
-
-.confirm-approve-content__view-full-tx-button {
-  display: flex;
-  flex-flow: row;
-}
-
-.confirm-approve-content__edit-submission-button-container {
-  display: flex;
-  flex-flow: row;
-  padding-top: 15px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid var(--color-border-muted);
-  width: 100%;
-  justify-content: center;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-.confirm-approve-content__large-text {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-default);
-}
-
-.confirm-approve-content__medium-link-text {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: 500;
-  color: var(--color-primary-default);
-}
-
-.confirm-approve-content__medium-text, .confirm-approve-content__label {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-default);
-}
-
-.confirm-approve-content__label {
-  font-weight: bold;
-}
-
-[dir="ltr"] .confirm-approve-content__label {
-  margin-right: 4px;
-}
-
-[dir="rtl"] .confirm-approve-content__label {
-  margin-left: 4px;
-}
-
-.confirm-approve-content__small-text, .confirm-approve-content__small-blue-text, .confirm-approve-content__info-row {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-}
-
-.confirm-approve-content__small-blue-text {
-  color: var(--color-primary-default);
-}
-
-.confirm-approve-content__verify-contract-details {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-primary-default);
-  padding: 0;
-}
-
-.confirm-approve-content__info-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-
-.confirm-approve-content__data, .confirm-approve-content__permission {
-  width: 100%;
-}
-
-.confirm-approve-content__permission .flex-row {
-  margin-top: 14px;
-}
-
-.confirm-approve-content__data__data-block {
-  overflow-wrap: break-word;
-  margin-top: 12px;
-}
-
-[dir="ltr"] .confirm-approve-content__data__data-block {
-  margin-right: 16px;
-}
-
-[dir="rtl"] .confirm-approve-content__data__data-block {
-  margin-left: 16px;
-}
-
-.confirm-approve-content__footer {
-  display: flex;
-  align-items: flex-end;
-  margin-top: 16px;
-}
-
-[dir="ltr"] .confirm-approve-content__footer {
-  padding-left: 34px;
-  padding-right: 24px;
-}
-
-[dir="rtl"] .confirm-approve-content__footer {
-  padding-right: 34px;
-  padding-left: 24px;
-}
-
-[dir="ltr"] .confirm-approve-content__footer .confirm-approve-content__small-text {
-  margin-left: 16px;
-}
-
-[dir="rtl"] .confirm-approve-content__footer .confirm-approve-content__small-text {
-  margin-right: 16px;
-}
-
-.confirm-approve-content__custom-nonce-warning {
-  width: 100%;
-  height: 30px;
-}
-
-.confirm-approve-content--full {
-  height: auto;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
 .confirm_wrapper {
   box-shadow: var(--shadow-size-lg) var(--color-shadow-default);
 }
@@ -49691,19 +48965,19 @@ DEPRECATED
   padding: 16px;
 }
 
-[dir="ltr"] .confirmation-footer__actions .button:first-child {
+[dir="ltr"] .confirmation-footer__actions button:first-child {
   margin-right: 16px;
 }
 
-[dir="rtl"] .confirmation-footer__actions .button:first-child {
+[dir="rtl"] .confirmation-footer__actions button:first-child {
   margin-left: 16px;
 }
 
-[dir="ltr"] .confirmation-footer__actions .button.centered {
+[dir="ltr"] .confirmation-footer__actions button.centered {
   margin-right: 0;
 }
 
-[dir="rtl"] .confirmation-footer__actions .button.centered {
+[dir="rtl"] .confirmation-footer__actions button.centered {
   margin-left: 0;
 }
 
@@ -49834,78 +49108,6 @@ DEPRECATED
 
 .confirmation-page .actionable-message {
   margin-top: 0;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.gas-display {
-  overflow-y: auto;
-  flex: 1;
-}
-
-.gas-display .transaction-detail-rows {
-  padding: 10px;
-}
-
-.gas-display .transaction-detail-rows .transaction-detail-item:not(:first-child) {
-  border-top: 1px solid var(--color-border-default);
-}
-
-.gas-display__title__estimate {
-  font-size: 12px;
-  line-height: inherit;
-}
-
-.gas-display__gas-fee-warning {
-  color: var(--color-warning-default);
-}
-
-.gas-display__gas-fee-label {
-  position: relative;
-  white-space: nowrap;
-}
-
-.gas-display__warning-message {
-  height: 120px;
-}
-
-.gas-display__total-amount, .gas-display__total-value {
-  position: relative;
-}
-
-@media screen and (max-width: 575px) {
-  .gas-display__confirm-approve-content__warning {
-    position: fixed;
-    bottom: 80px;
-    z-index: 1026;
-  }
-
-  [dir="ltr"] .gas-display__confirm-approve-content__warning {
-    padding: 0 32px 16px 16px;
-  }
-
-  [dir="rtl"] .gas-display__confirm-approve-content__warning {
-    padding: 0 16px 16px 32px;
-  }
-}
-
-.gas-display__link {
-  text-transform: lowercase;
 }
 
 /*
@@ -50181,54 +49383,6 @@ DEPRECATED
   margin-right: 0.75rem;
 }
 
-.token-allowance-container__icon-display-content {
-  width: -moz-fit-content;
-  width: fit-content;
-  height: 40px;
-  box-sizing: border-box;
-  border-radius: 100px;
-  position: relative;
-}
-
-.token-allowance-container__icon-display-content__siteimage-identicon {
-  width: 24px;
-  height: 24px;
-  box-shadow: none;
-  background: none;
-}
-
-.token-allowance-container a.token-allowance-container__verify-link {
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-inline-start: auto;
-  margin-inline-end: auto;
-  padding: 0;
-}
-
-.token-allowance-container a.token-allowance-container__view-details {
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-inline-start: 108px;
-  margin-inline-end: 108px;
-}
-
-.token-allowance-container__card-wrapper {
-  width: 100%;
-}
-
-.token-allowance-container__data {
-  width: 100%;
-}
-
-.token-allowance-container__full-tx-content {
-  max-width: 100%;
-}
-
-.token-allowance-container__custom-nonce-warning {
-  width: 100%;
-  height: 30px;
-}
-
 /** Please import your files in alphabetical order **/
 .advanced-gas-controls__row {
   margin-bottom: 20px;
@@ -50447,55 +49601,6 @@ DEPRECATED
   margin-left: 8px;
 }
 
-.approve-content-card-container__card, .approve-content-card-container__card--no-border {
-  border-bottom: 1px solid var(--color-border-default);
-  position: relative;
-  padding-inline-start: 24px;
-  padding-inline-end: 24px;
-}
-
-.approve-content-card-container__card--no-border {
-  border-bottom: none;
-}
-
-.approve-content-card-container__card-header {
-  position: relative;
-}
-
-.approve-content-card-container__card-header__symbol {
-  width: auto;
-}
-
-.approve-content-card-container__card-header__symbol--aligned {
-  width: 100%;
-}
-
-.approve-content-card-container__card-header__title {
-  width: 100%;
-}
-
-.approve-content-card-container__card-header__title--aligned {
-  margin-inline-start: 27px;
-  position: absolute;
-  width: auto;
-}
-
-.approve-content-card-container__card-content--aligned {
-  margin-inline-start: 42px;
-}
-
-.approve-content-card-container__transaction-details-extra-content {
-  width: 100%;
-}
-
-.approve-content-card-container__data {
-  width: 100%;
-}
-
-.approve-content-card-container__data__data-block {
-  overflow-wrap: break-word;
-}
-
 .confirmation-warning-modal__content ul {
   padding-inline-start: 1rem;
   margin-block-start: 0;
@@ -50506,556 +49611,17 @@ DEPRECATED
   display: list-item;
 }
 
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.confirm-page-container-warning {
-  background-color: var(--color-warning-muted);
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--color-border-muted);
-  padding: 12px 24px;
-}
-
-.confirm-page-container-warning__icon {
-  flex: 0 0 auto;
-  color: var(--color-warning-default);
-}
-
-[dir="ltr"] .confirm-page-container-warning__icon {
-  margin-right: 8px;
-}
-
-[dir="rtl"] .confirm-page-container-warning__icon {
-  margin-left: 8px;
-}
-
-.confirm-page-container-warning__warning {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-default);
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.confirm-page-container-summary {
-  padding: 16px 24px;
-  background-color: var(--color-background-alternative);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.confirm-page-container-summary__origin, .confirm-page-container-summary__action-row {
-  padding-bottom: 8px;
-}
-
-.confirm-page-container-summary__origin {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-}
-
-.confirm-page-container-summary__action-row {
-  display: flex;
-  justify-content: space-between;
-}
-
-.confirm-page-container-summary__action {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-  padding: 3px 8px;
-  border: 1px solid var(--color-border-default);
-  border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-}
-
-.confirm-page-container-summary__action__name {
-  text-transform: uppercase;
-}
-
-.confirm-page-container-summary__action .info-tooltip {
-  margin-inline-start: 4px;
-}
-
-.confirm-page-container-summary__action .info-tooltip__tooltip-container {
-  margin-bottom: -3px;
-}
-
-.confirm-page-container-summary__action__contract-address {
-  margin-inline-end: 4px;
-}
-
-.confirm-page-container-summary__action__contract-address-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  margin-inline-end: 4px;
-  color: var(--color-primary-default);
-}
-
-.confirm-page-container-summary__nonce {
-  color: var(--color-text-alternative);
-}
-
-.confirm-page-container-summary__title {
-  display: flex;
-  align-items: center;
-}
-
-.confirm-page-container-summary__icon {
-  flex: 0 0 auto;
-}
-
-[dir="ltr"] .confirm-page-container-summary__icon {
-  margin-right: 8px;
-}
-
-[dir="rtl"] .confirm-page-container-summary__icon {
-  margin-left: 8px;
-}
-
-.confirm-page-container-summary--border {
-  border-bottom: 1px solid var(--color-border-muted);
-}
-
-.confirm-page-container-content {
-  overflow-y: auto;
-  height: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.confirm-page-container-content--with-top-border {
-  border-top: 1px solid var(--color-border-muted);
-}
-
-.confirm-page-container-content__details {
-  box-sizing: border-box;
-}
-
-.confirm-page-container-content__gas-fee {
-  border-bottom: 1px solid var(--color-border-muted);
-}
-
-.confirm-page-container-content__gas-fee .advanced-gas-inputs__gas-edit-rows {
-  margin-bottom: 16px;
-}
-
-.confirm-page-container-content__tab {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-  text-transform: uppercase;
-}
-
-.confirm-page-container-content__tab button {
-  color: var(--color-text-alternative);
-  text-transform: uppercase;
-  max-width: 170px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.confirm-page-container-content__tab .dropdown__select {
-  color: var(--color-text-alternative);
-  text-transform: uppercase;
-}
-
-.confirm-page-container-content__tab .dropdown__select option {
-  text-transform: none;
-}
-
-.confirm-page-container-content__tab .dropdown__icon-caret-down {
-  top: 40%;
-}
-
-.confirm-page-container-content__total-amount {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.confirm-page-container-content__total-value {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.confirm-page-container-content .page-container__footer {
-  margin-top: auto;
-}
-
-.confirm-page-container-content__currency-container, .confirm-page-container-content__total-amount, .confirm-page-container-content__total-value {
-  position: relative;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.confirm-page-container-header {
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 auto;
-}
-
-.confirm-page-container-header__row {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--color-border-muted);
-  padding: 4px 13px 4px 13px;
-  flex: 0 0 auto;
-  align-items: center;
-}
-
-.confirm-page-container-header__row .network-display {
-  height: 25px;
-}
-
-[dir="ltr"] .confirm-page-container-header__row .network-display {
-  margin-right: 0;
-}
-
-[dir="rtl"] .confirm-page-container-header__row .network-display {
-  margin-left: 0;
-}
-
-.confirm-page-container-header__back-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-primary-default);
-}
-
-[dir="ltr"] [dir=rtl] .confirm-page-container-header__back-button-container img {
-  transform: rotate(180deg);
-}
-
-[dir="rtl"] [dir=rtl] .confirm-page-container-header__back-button-container img {
-  transform: rotate(-180deg);
-}
-
-.confirm-page-container-header__back-button {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-primary-default);
-  cursor: pointer;
-}
-
-[dir="ltr"] .confirm-page-container-header__back-button {
-  padding-left: 5px;
-}
-
-[dir="rtl"] .confirm-page-container-header__back-button {
-  padding-right: 5px;
-}
-
-.confirm-page-container-header__address-container {
-  display: flex;
-  align-items: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-}
-
-.confirm-page-container-header__address {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-}
-
-[dir="ltr"] .confirm-page-container-header__address {
-  margin-left: 6px;
-}
-
-[dir="rtl"] .confirm-page-container-header__address {
-  margin-right: 6px;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.confirm-detail-row {
-  padding: 14px 0;
-  margin: 15px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.confirm-detail-row__label {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: 500;
-  color: var(--color-text-alternative);
-  text-transform: uppercase;
-}
-
-.confirm-detail-row__details {
-  flex: 1;
-  text-align: end;
-  min-width: 0;
-}
-
-.confirm-detail-row__primary {
-  font-size: 1.5rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  justify-content: flex-end;
-}
-
-.confirm-detail-row__secondary {
-  color: var(--color-text-alternative);
-  justify-content: flex-end;
-}
-
-.confirm-detail-row__header-text {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-  color: var(--color-text-default);
-}
-
-.confirm-detail-row__header-text--edit {
-  color: var(--color-primary-default);
-  cursor: pointer;
-}
-
-.confirm-detail-row__header-text--total {
-  font-size: 0.625rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-}
-
-.confirm-detail-row .advanced-gas-inputs__gas-edit-rows {
-  margin-bottom: 16px;
-}
-
-.confirm-detail-row .custom-nonce-input input {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 90px;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.confirm-page-container-navigation {
-  display: flex;
-  justify-content: space-between;
-  font: inherit;
-  padding: 4px 10px 4px 10px;
-  border-bottom: 1px solid var(--color-border-muted);
-  flex: 0 0 auto;
-}
-
-.confirm-page-container-navigation__container {
-  display: flex;
-}
-
-.confirm-page-container-navigation__arrow {
-  cursor: pointer;
-  display: flex;
-  padding-left: 4px;
-  padding-right: 4px;
-  background: none;
-  border: none;
-  color: var(--color-icon-default);
-}
-
-.confirm-page-container-navigation__arrow:hover {
-  transform: scale(1.1);
-}
-
-.confirm-page-container-navigation__arrow:active {
-  transform: scale(0.95);
-}
-
-.confirm-page-container-navigation__textcontainer {
-  text-align: center;
-}
-
-.confirm-page-container-navigation__navtext {
-  font-size: 0.5rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: bold;
-}
-
-.confirm-page-container-navigation__longtext {
-  font-size: 0.5rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-}
-
-.confirm-page-container-navigation__imageflip {
-  transform: scaleX(-1);
-}
-
-.confirm-page-container__dialog {
-  margin: 12px 16px;
-}
-
-.page-container__content-component-wrapper {
-  height: 100%;
-}
-
-.page-container__link {
-  background: transparent;
-  border: 0 transparent;
-  display: inline;
-  padding: 0;
-  font-size: 0.75rem;
-}
-
 .confirm-footer_page-footer {
   box-shadow: var(--shadow-size-md) var(--color-shadow-default);
   z-index: 1;
+}
+
+.confirm-footer_page-footer .mm-checkbox__input-wrapper {
+  margin-top: 3px;
+}
+
+a {
+  color: var(--color-primary-default);
 }
 
 .confirm_header__wrapper {
@@ -51074,6 +49640,64 @@ DEPRECATED
 
 [dir="rtl"] .confirm_header__avatar-network {
   margin-right: -12px;
+}
+
+.gas-fee-token-list-item {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.gas-fee-token-list-item:not(.gas-fee-token-list-item--selected):hover, .gas-fee-token-list-item:not(.gas-fee-token-list-item--selected):focus-within {
+  background: var(--color-background-default-hover);
+}
+
+.gas-fee-token-list-item__selected-indicator {
+  width: 4px;
+  height: calc(100% - 8px);
+  position: absolute;
+  top: 4px;
+}
+
+[dir="ltr"] .gas-fee-token-list-item__selected-indicator {
+  left: 4px;
+}
+
+[dir="rtl"] .gas-fee-token-list-item__selected-indicator {
+  right: 4px;
+}
+
+/*
+Responsive breakpoints
+*/
+/*
+DEPRECATED
+*/
+/**
+* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
+* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
+* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
+* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
+* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
+* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
+*/
+/*
+  Z-Indicies
+*/
+.toast_wrapper {
+  bottom: 80px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  position: fixed;
+  width: 100%;
+  z-index: 1050;
+}
+
+@media screen and (min-width: calc(576px - 1px)) {
+  .toast_wrapper {
+    max-width: 408px;
+  }
 }
 
 .confirm-scroll-to-bottom__button {
@@ -51125,72 +49749,6 @@ DEPRECATED
 
 .confirm_nav__left_btn > span, .confirm_nav__right_btn > span {
   font-size: 12px;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.toast_wrapper {
-  bottom: 70px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  position: fixed;
-  width: 100%;
-  z-index: 1050;
-}
-
-@media screen and (min-width: calc(576px - 1px)) {
-  .toast_wrapper {
-    max-width: 408px;
-  }
-}
-
-.contract-details-modal {
-  width: 100% !important;
-  max-width: 408px;
-}
-
-.contract-details-modal__content {
-  border-bottom: 1px solid var(--color-border-muted);
-}
-
-.contract-details-modal__content__contract__identicon {
-  margin: 16px;
-  box-shadow: none;
-  background: none;
-}
-
-.contract-details-modal__content__contract .name {
-  margin: 5px;
-}
-
-.custom-nonce__content {
-  height: 49px;
-  border: 1px solid var(--color-border-muted);
-  box-sizing: border-box;
-}
-
-.custom-nonce__header {
-  flex: 1;
-}
-
-.custom-nonce__value {
-  flex: 0;
 }
 
 .edit-gas-display__top-tooltip {
@@ -51695,27 +50253,6 @@ DEPRECATED
   padding-top: 8px;
 }
 
-.review-spending-cap__heading {
-  width: 100%;
-}
-
-.review-spending-cap__heading-title__tooltip {
-  width: 180px;
-}
-
-.review-spending-cap__heading-title__tooltip__question-icon {
-  color: var(--color-icon-muted);
-}
-
-.review-spending-cap__heading-detail {
-  flex-grow: 1;
-  align-self: center;
-}
-
-.review-spending-cap__value {
-  word-break: break-word;
-}
-
 .set-approval-for-all-warning__content__header {
   border-bottom: 1px solid var(--color-border-muted);
 }
@@ -51740,659 +50277,6 @@ DEPRECATED
 .set-approval-for-all-warning__footer {
   width: 100%;
   height: 100px;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.signature-request-header {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: flex;
-  padding: 1rem;
-  border-bottom: 1px solid var(--color-border-default);
-  justify-content: space-between;
-}
-
-.signature-request-header--account, .signature-request-header--network {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
-.signature-request-header--account .account-list-item__top-row {
-  display: flex;
-  align-items: center;
-}
-
-.signature-request-header--account .account-list-item__account-name {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: 500;
-}
-
-.signature-request-header--account .account-list-item__top-row {
-  margin: 0;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.signature-request-message {
-  flex: 1 60%;
-  max-height: 231px;
-  position: relative;
-}
-
-.signature-request-message__root {
-  flex: 1 100%;
-  overflow: auto;
-}
-
-@media screen and (min-width: 576px) {
-  .signature-request-message__root {
-    width: auto;
-  }
-}
-
-.signature-request-message__scroll-button {
-  position: absolute;
-  bottom: 12px;
-  border-radius: 50%;
-  height: 24px;
-  width: 24px;
-  cursor: pointer;
-}
-
-[dir="ltr"] .signature-request-message__scroll-button {
-  right: 28px;
-}
-
-[dir="rtl"] .signature-request-message__scroll-button {
-  left: 28px;
-}
-
-.signature-request-data__node {
-  align-items: center;
-}
-
-.signature-request-data__node__value {
-  white-space: pre-line;
-  overflow: hidden;
-  word-wrap: break-word;
-}
-
-[dir=rtl] .signature-request-data__node__value__address {
-  direction: ltr;
-  text-align: right;
-}
-
-[dir=rtl] .signature-request-data__node__value__address span {
-  display: block;
-  direction: rtl;
-}
-
-.signature-request {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  min-width: 0;
-  width: 408px;
-  min-height: 100%;
-  height: max-content;
-  background-color: var(--color-background-default);
-  box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
-  border-radius: 8px;
-}
-
-@media screen and (min-width: 576px) {
-  .signature-request {
-    max-height: max-content;
-    min-height: 570px;
-    flex: 0 0 auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.signature-request__reject-all-button {
-  padding-bottom: 20px;
-}
-
-.signature-request__origin {
-  margin-top: 16px;
-}
-
-.signature-request-header {
-  flex: 1;
-}
-
-.signature-request-header .network-display {
-  justify-content: flex-end;
-}
-
-[dir="ltr"] .signature-request-header .network-display {
-  margin-left: auto;
-}
-
-[dir="rtl"] .signature-request-header .network-display {
-  margin-right: auto;
-}
-
-.signature-request-content {
-  flex: 1 40%;
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  min-height: min-content;
-}
-
-.signature-request-content__info {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  padding: 0 12px 4px;
-}
-
-.signature-request-content__info--bolded {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: 500;
-}
-
-a.signature-request-content__verify-contract-details {
-  padding: 0;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.request-signature__container {
-  width: 380px;
-  border-radius: 8px;
-  background-color: var(--color-background-default);
-  box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
-  display: flex;
-  flex-flow: column nowrap;
-  z-index: 25;
-  align-items: center;
-  position: relative;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .request-signature__container {
-    width: 100%;
-    top: 0;
-    box-shadow: none;
-  }
-}
-
-@media screen and (min-width: 576px) {
-  .request-signature__container {
-    height: 650px;
-  }
-}
-
-.request-signature__container__reject {
-  padding-bottom: 20px;
-}
-
-.request-signature__typed-container {
-  padding: 17px;
-}
-
-.request-signature__typed-container h1 {
-  font-weight: 900;
-  margin-bottom: 5px;
-}
-
-.request-signature__typed-container * {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.request-signature__typed-container > div {
-  margin-bottom: 10px;
-}
-
-.request-signature__content__title {
-  font-size: 1.5rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: flex;
-  justify-content: center;
-  color: var(--color-default-text);
-  z-index: 3;
-}
-
-.request-signature__account, .request-signature__navigation {
-  width: 100%;
-}
-
-.request-signature__body {
-  display: flex;
-  flex-flow: column;
-  flex: 1 1 0;
-  min-height: 0;
-  max-width: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.request-signature__body > * {
-  flex: 0 0 auto;
-  min-height: 0;
-}
-
-.request-signature__origin {
-  display: flex;
-  justify-content: center;
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
-
-.request-signature__notice, .request-signature__warning {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  text-align: center;
-  margin-top: 21px;
-  margin-bottom: 11px;
-  width: 100%;
-}
-
-.request-signature__notice {
-  color: var(--color-text-alternative);
-  padding: 0 10px;
-}
-
-.request-signature__rows {
-  border-top: 1px solid var(--color-border-default);
-  display: flex;
-  flex-flow: column;
-}
-
-.request-signature__row {
-  display: flex;
-  flex-flow: column;
-}
-
-.request-signature__row-title {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 80px;
-  color: var(--color-text-alternative);
-  margin-top: 12px;
-  width: 100%;
-}
-
-[dir="ltr"] .request-signature__row-title {
-  margin-left: 18px;
-}
-
-[dir="rtl"] .request-signature__row-title {
-  margin-right: 18px;
-}
-
-.request-signature__row-value {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-  width: 100%;
-  overflow-wrap: break-word;
-  border-bottom: 1px solid var(--color-border-default);
-  padding: 6px 18px 15px;
-  white-space: pre-wrap;
-}
-
-.request-signature__help-link {
-  cursor: pointer;
-  text-decoration: underline;
-  color: var(--color-primary-default);
-  margin-inline-start: 3px;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.signature-request-siwe-header {
-  display: flex;
-  padding: 16px;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.signature-request-siwe-header__tooltip__container {
-  display: flex !important;
-}
-
-.signature-request-siwe-header .account-list-item {
-  margin: 8px 0 0;
-}
-
-.signature-request-siwe-header .account-list-item__top-row {
-  align-items: center;
-  margin: 0;
-}
-
-.signature-request-siwe-header .account-list-item__account-name {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: 500;
-}
-
-[dir="ltr"] .signature-request-siwe-header .chip__right-icon {
-  padding: 4px 8px 4px 0;
-}
-
-[dir="rtl"] .signature-request-siwe-header .chip__right-icon {
-  padding: 4px 0 4px 8px;
-}
-
-.signature-request-siwe-message {
-  flex: 1 100%;
-  border-radius: 8px;
-  padding: 8px 16px;
-  margin: 16px;
-  border: 1px solid var(--color-border-muted);
-}
-
-.signature-request-siwe-message__sub-text {
-  white-space: pre-line;
-  overflow: hidden;
-}
-
-.signature-request-siwe-icon {
-  border-radius: 100%;
-  height: 32px;
-  width: 32px;
-}
-
-.signature-request-siwe {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  min-width: 0;
-  background-color: var(--color-background-default);
-  margin-right: auto;
-  margin-left: auto;
-  overflow-y: auto;
-}
-
-@media screen and (min-width: 576px) {
-  .signature-request-siwe {
-    width: 408px;
-    max-height: 82vh;
-    min-height: 570px;
-    flex: 0 0 auto;
-    border-radius: 8px;
-    box-shadow: var(--shadow-size-sm) var(--color-shadow-default);
-  }
-}
-
-.signature-request-siwe__warning-popover .page-container__footer {
-  border-top: none;
-  padding: 0;
-  display: block;
-}
-
-.signature-request-siwe__warning-popover .popover-footer {
-  padding: inherit;
-  display: block;
-}
-
-.signature-request-siwe__warning-popover__checkbox-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 8px 16px 24px;
-}
-
-.signature-request-siwe__warning-popover__checkbox-wrapper__label {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-default);
-  margin-inline-start: 8px;
-  margin-top: 1px;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  cursor: pointer;
-}
-
-.signature-request-siwe__warning-popover__checkbox-wrapper .check-box {
-  color: var(--color-error-default);
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.transaction-alerts {
-  margin: 15px;
-}
-
-[dir="ltr"] .transaction-alerts {
-  text-align: left;
-}
-
-[dir="rtl"] .transaction-alerts {
-  text-align: right;
-}
-
-.transaction-alerts > *:first-of-type {
-  margin-top: 20px;
-}
-
-.transaction-alerts > *:not(:first-of-type) {
-  margin-top: 12px;
-}
-
-.transaction-alerts strong {
-  font-weight: bold;
-}
-
-.transaction-alerts__pending-transactions a {
-  color: var(--color-primary-default);
-}
-
-.transaction-alerts__link {
-  background: transparent;
-  border: 0 transparent;
-  display: inline;
-  padding: 0;
-  font-size: 0.75rem;
-}
-
-.transaction-alerts .security-provider-banner-message {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.copy-raw-data {
-  display: flex;
-  align-items: center;
-}
-
-.copy-raw-data__button {
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  margin-top: 5px;
-  background-color: transparent;
-}
-
-.copy-raw-data__button:hover {
-  background-color: var(--color-background-default-hover);
-}
-
-.copy-raw-data__button:active {
-  background-color: var(--color-background-default-hover);
-}
-
-.copy-raw-data__icon {
-  padding-inline-end: 6px;
-}
-
-.copy-raw-data__label {
-  color: var(--color-text-alternative);
-}
-
-.tx-insight-component-address {
-  display: flex;
-  align-items: center;
-  overflow: visible;
-}
-
-[dir="ltr"] .tx-insight-component-address__sender-icon {
-  padding-right: 5px;
-}
-
-[dir="rtl"] .tx-insight-component-address__sender-icon {
-  padding-left: 5px;
-}
-
-.tx-insight-component-address__name {
-  cursor: pointer;
 }
 
 /*
@@ -52916,6 +50800,7 @@ DEPRECATED
   flex-flow: column;
   flex: 1 1 auto;
   height: 0;
+  overflow-y: auto;
 }
 
 .request-decrypt-message__notice {
@@ -54375,104 +52260,6 @@ DEPRECATED
   margin-right: 8px;
 }
 
-.custody-account-list {
-  flex: 1;
-  overflow: auto;
-}
-
-.custody-account-list__item {
-  border-bottom: 1px solid var(--color-border-muted);
-}
-
-[dir="ltr"] .custody-account-list__item input {
-  margin: 12px 0 0 4px;
-}
-
-[dir="rtl"] .custody-account-list__item input {
-  margin: 12px 4px 0 0;
-}
-
-.custody-account-list__item__title {
-  flex-flow: row;
-}
-
-.custody-account-list__item__name {
-  display: block;
-  white-space: nowrap;
-  max-width: 200px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.custody-account-list__item__clipboard {
-  background-color: transparent;
-}
-
-.custody-account-list__item:first-child {
-  border-top: 1px solid var(--color-border-muted);
-}
-
-.custody-account-list__item:last-child {
-  border: 0;
-}
-
-.custody-account-list__item:hover {
-  background-color: var(--color-background-hover);
-}
-
-.custody-account-list__buttons {
-  border-top: 1px solid var(--color-border-muted);
-}
-
-[dir="ltr"] .custody-account-list__button:not(:last-child) {
-  margin-right: 16px;
-}
-
-[dir="rtl"] .custody-account-list__button:not(:last-child) {
-  margin-left: 16px;
-}
-
-.institutional-entity-done__img {
-  max-width: 250px;
-  max-height: 80px;
-  margin-top: 40px;
-  margin-bottom: 20px;
-}
-
-.add_custodian_token_confirm__token, .add_custodian_token_confirm__url {
-  height: auto;
-  overflow-wrap: break-word;
-  opacity: 0.8;
-}
-
-.interactive-replacement-token-page {
-  opacity: 0.8;
-}
-
-.interactive-replacement-token-page__item {
-  border-bottom: 1px solid --color-border-default;
-}
-
-.interactive-replacement-token-page__item-clipboard {
-  background-color: transparent;
-}
-
-.interactive-replacement-token-page__item:first-child {
-  margin-top: 12px;
-}
-
-.interactive-replacement-token-page__item:last-child {
-  border: 0;
-}
-
-.interactive-replacement-token-page__item:hover {
-  background-color: var(--color-background-hover);
-}
-
-.recovery-phrase-continue {
-  max-width: 320px;
-}
-
 /*
 Responsive breakpoints
 */
@@ -54608,12 +52395,6 @@ DEPRECATED
   font-style: normal;
   font-weight: normal;
   flex-grow: 1;
-  color: var(--color-icon-default);
-  font-weight: 500;
-}
-
-.notifications__tab--active {
-  color: var(--color-primary-default);
 }
 
 .notifications__tab button {
@@ -55036,12 +52817,18 @@ DEPRECATED
   margin-left: 1rem;
 }
 
-.secure-your-wallet__video {
-  max-width: 100%;
-}
-
 .secure-your-wallet__list {
   list-style: disc inside;
+}
+
+.secure-your-wallet__srp-design-container {
+  margin-bottom: 36px;
+}
+
+.secure-your-wallet__srp-design-image {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
 }
 
 .skip-srp-backup-popover {
@@ -55149,11 +52936,6 @@ DEPRECATED
 
 .privacy-settings__network {
   position: relative;
-}
-
-.privacy-settings__network .dropdown-menu-item {
-  font-size: 14px !important;
-  padding: 8px !important;
 }
 
 .privacy-settings .container {
@@ -55642,6 +53424,10 @@ DEPRECATED
   background: var(--color-icon-default);
 }
 
+.onboarding-welcome .slide {
+  min-height: 400px;
+}
+
 .onboarding-welcome .carousel.carousel-slider .control-arrow {
   opacity: 1;
   color: var(--color-icon-default);
@@ -55715,7 +53501,7 @@ DEPRECATED
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .import-srp__description a {
@@ -55906,6 +53692,35 @@ DEPRECATED
 
 .permissions-connect-choose-account__footer .page-container__footer {
   border-top: 0;
+}
+
+/*
+Responsive breakpoints
+*/
+/*
+DEPRECATED
+*/
+/**
+* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
+* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
+* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
+* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
+* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
+* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
+*/
+/*
+  Z-Indicies
+*/
+.connect-page .multichain-page-content {
+  overflow: hidden;
+}
+
+.connect-page .multichain-account-list-item:hover, .connect-page .multichain-account-list-item:focus-within {
+  background: var(--color-background-default);
+}
+
+.connect-page__accounts-empty {
+  min-height: 200px;
 }
 
 /*
@@ -56264,6 +54079,11 @@ DEPRECATED
   color: var(--color-primary-inverse);
 }
 
+.networks-tab__content__icon-with-fallback--color-background-muted {
+  background: var(--color-background-muted);
+  color: var(--color-primary-inverse);
+}
+
 .networks-tab__content__icon-with-fallback--color-background-hover {
   background: var(--color-background-hover);
   color: var(--color-primary-inverse);
@@ -56411,11 +54231,6 @@ DEPRECATED
 
 .networks-tab__content__icon-with-fallback--color-info-inverse {
   background: var(--color-info-inverse);
-  color: var(--color-primary-inverse);
-}
-
-.networks-tab__content__icon-with-fallback--color-mainnet {
-  background: var(--mainnet);
   color: var(--color-primary-inverse);
 }
 
@@ -57106,8 +54921,12 @@ DEPRECATED
 }
 
 @media screen and (min-width: 576px) {
-  .settings-page__header__title-container__title {
-    width: 197px;
+  [dir="ltr"] .settings-page__header__title-container__title {
+    margin-right: 16px;
+  }
+
+  [dir="rtl"] .settings-page__header__title-container__title {
+    margin-left: 16px;
   }
 }
 
@@ -57329,6 +55148,7 @@ DEPRECATED
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  max-width: 100vw;
 }
 
 @media screen and (min-width: 576px) {
@@ -57889,6 +55709,13 @@ DEPRECATED
   padding-right: 32px;
 }
 
+.awaiting-swap__mascot {
+  margin-bottom: 16px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
 .awaiting-swap div {
   text-align: center;
   display: flex;
@@ -58277,7 +56104,14 @@ DEPRECATED
 
 .prepare-swap-page__from-token-amount {
   border: 0;
-  outline: none;
+}
+
+[dir="ltr"] .prepare-swap-page__from-token-amount {
+  margin-right: -4px;
+}
+
+[dir="rtl"] .prepare-swap-page__from-token-amount {
+  margin-left: -4px;
 }
 
 .prepare-swap-page__from-token-amount input {
@@ -58288,12 +56122,12 @@ DEPRECATED
 }
 
 [dir="ltr"] .prepare-swap-page__from-token-amount input {
-  padding-right: 0;
+  padding-right: 4px;
   text-align: right;
 }
 
 [dir="rtl"] .prepare-swap-page__from-token-amount input {
-  padding-left: 0;
+  padding-left: 4px;
   text-align: left;
 }
 
@@ -59796,6 +57630,11 @@ DEPRECATED
   }
 }
 
+.transaction-settings__button-group {
+  display: flex;
+  flex-direction: row;
+}
+
 .transaction-settings__button-group .transaction-settings__button-group-custom-button {
   cursor: text;
   display: flex;
@@ -59803,14 +57642,6 @@ DEPRECATED
   justify-content: center;
   position: relative;
   min-width: 72px;
-}
-
-[dir="ltr"] .transaction-settings__button-group .transaction-settings__button-group-custom-button {
-  margin-right: 0;
-}
-
-[dir="rtl"] .transaction-settings__button-group .transaction-settings__button-group-custom-button {
-  margin-left: 0;
 }
 
 .transaction-settings__custom-input {
@@ -60323,158 +58154,35 @@ DEPRECATED
 /*
   Z-Indicies
 */
-.tokens-main-view-modal .multichain-asset-picker-list-item .mm-badge-wrapper__badge-container {
-  display: none;
-}
-
 .prepare-bridge-page {
-  display: flex;
-  flex-flow: column;
   flex: 1;
-  width: 100%;
-  gap: 24px;
 }
 
-.prepare-bridge-page__content {
-  display: flex;
-  flex-direction: column;
-  padding: 16px 0 16px 0;
-  border-radius: 8px;
-  border: 1px solid var(--color-border-muted);
-}
-
-.prepare-bridge-page .bridge-box {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  justify-content: center;
-  padding: 8px 16px 8px 16px;
-}
-
-.prepare-bridge-page__input-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 298px;
-  gap: 16px;
-}
-
-.prepare-bridge-page__input-row input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  display: none;
-}
-
-.prepare-bridge-page__input-row input[type=number]:hover::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  display: none;
-}
-
-.prepare-bridge-page__input-row .mm-text-field {
+.prepare-bridge-page .mm-text-field {
   background-color: inherit;
 }
 
-.prepare-bridge-page__input-row .mm-text-field--focused {
+.prepare-bridge-page .mm-text-field--focused {
   outline: none;
 }
 
-.prepare-bridge-page__input-row .defined {
+.prepare-bridge-page .defined > .mm-input--disabled,
+.prepare-bridge-page .defined p {
   opacity: 1;
 }
 
-.prepare-bridge-page__input-row .defined > .mm-input--disabled {
-  opacity: 1;
+.prepare-bridge-page .mm-select-button__content {
+  max-height: 100%;
+  overflow: hidden;
 }
 
 .prepare-bridge-page .amount-input {
   border: none;
-}
-
-.prepare-bridge-page .amount-input input {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-[dir="ltr"] .prepare-bridge-page .amount-input input {
-  text-align: right;
-  padding-right: 0;
-}
-
-[dir="rtl"] .prepare-bridge-page .amount-input input {
-  text-align: left;
-  padding-left: 0;
-}
-
-.prepare-bridge-page .amount-input input:focus, .prepare-bridge-page .amount-input input:focus-visible {
-  outline: none;
-}
-
-.prepare-bridge-page .amount-input .mm-text-field--focused {
-  outline: none;
-}
-
-.prepare-bridge-page__amounts-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 298px;
-  height: 22px;
-}
-
-.prepare-bridge-page__amounts-row p,
-.prepare-bridge-page__amounts-row span {
-  color: var(--color-text-alternative);
-  font-size: 12px;
-}
-
-.prepare-bridge-page .asset-picker {
-  border: 1px solid var(--color-border-muted);
-  height: 40px;
-  min-width: -moz-fit-content;
-  min-width: fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
-  background-color: inherit;
-}
-
-.prepare-bridge-page .asset-picker p {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.prepare-bridge-page .asset-picker .mm-avatar-token {
-  height: 24px;
-  width: 24px;
-  border: 1px solid var(--color-border-muted);
-}
-
-.prepare-bridge-page .asset-picker .mm-badge-wrapper__badge-container .mm-avatar-base {
-  height: 10px;
-  width: 10px;
-  border: none;
-}
-
-.prepare-bridge-page__switch-tokens {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.prepare-bridge-page__switch-tokens::before, .prepare-bridge-page__switch-tokens::after {
-  content: "";
-  border-top: 1px solid var(--color-border-muted);
-  flex-grow: 1;
-}
-
-.prepare-bridge-page__switch-tokens button {
-  border-radius: 50%;
-  padding: 10px;
-  border: 1px solid var(--color-border-muted);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
+  padding: 0;
+  width: 100%;
+  gap: 4px;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .prepare-bridge-page__switch-tokens button:hover:enabled {
@@ -60502,12 +58210,76 @@ DEPRECATED
 }
 
 .prepare-bridge-page__switch-tokens .mm-icon {
-  color: var(--color-icon-alternative);
   transition: all 0.3s ease-in-out;
 }
 
-.prepare-bridge-page__switch-tokens:disabled {
-  cursor: not-allowed;
+.prepare-bridge-page .mascot-background-animation__animation {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.prepare-bridge-page .highlight {
+  padding: 16px;
+  background: var(--color-background-default);
+  border: none;
+  border-radius: 8px;
+}
+
+.prepare-bridge-page .highlight .row-with-warning {
+  max-width: calc(100% + 32px);
+  width: calc(100% + 32px);
+}
+
+[dir="ltr"] .prepare-bridge-page .highlight .row-with-warning {
+  padding-left: 16px;
+  padding-right: 12px;
+  margin-left: -16px;
+}
+
+[dir="rtl"] .prepare-bridge-page .highlight .row-with-warning {
+  padding-right: 16px;
+  padding-left: 12px;
+  margin-right: -16px;
+}
+
+.prepare-bridge-page .highlight [data-theme=light],
+.prepare-bridge-page .highlight .light {
+  box-shadow: 0 0 2px 0 #e2e4e9, 0 0 16px 0 rgba(226, 228, 233, 0.16);
+}
+
+.prepare-bridge-page .highlight [data-theme=dark],
+.prepare-bridge-page .highlight .dark {
+  box-shadow: 0 0 2px 0 #18191b, 0 0 16px 0 #18191b;
+}
+
+.bridge-settings-modal .mm-button-secondary:hover {
+  background-color: var(--color-background-default-hover);
+}
+
+.bridge-settings-modal .mm-text-field {
+  height: 32px;
+  width: 94px;
+}
+
+.bridge-settings-modal .mm-text-field--focused, .bridge-settings-modal .mm-text-field:focus-visible {
+  outline: none;
+}
+
+.bridge-settings-modal .mm-text-field input {
+  font-size: var(--font-size-2);
+  padding-top: 1px;
+  width: 100%;
+  height: 32px;
+}
+
+[data-theme=light],
+.light {
+  --shadow-bridge-picker: 0 0 2px 0 var(--color-border-muted), 0 0 16px 0 rgba(226, 228, 233, 0.16);
+}
+
+[data-theme=dark],
+.dark {
+  --shadow-bridge-picker: 0 0 2px 0 var(--color-border-muted), 0 0 16px 0 rgba(226, 228, 233, 0.16);
 }
 
 /*
@@ -60527,97 +58299,128 @@ DEPRECATED
 /*
   Z-Indicies
 */
-.quote-card {
-  flex-direction: column;
-  display: flex;
-  text-align: center;
-}
-
-.quote-card p {
-  font-size: 12px;
-}
-
-.quote-card__content {
-  padding: 16px;
-  gap: 4px;
-}
-
-.quote-card__timer {
-  height: 32px;
-}
-
-.quote-card__timer p {
-  color: var(--color-text-alternative);
-}
-
-.bridge-box > .quote-card__footer {
-  gap: 0;
-}
-
-.bridge-box > .quote-card__footer p {
-  color: var(--color-text-alternative);
-}
-
-.quote-card__info-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.quote-card__info-row__label {
-  display: inline-flex;
-  gap: 4px;
-}
-
-.quote-card__info-row__label p {
-  font-weight: var(--font-weight-medium);
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-.quote-card__info-row__label__tooltip {
-  align-items: center;
-  height: 100%;
-}
-
-.quote-card__info-row__description {
-  display: inline-flex;
-  gap: 4px;
-}
-
-.quote-card__info-row__description__secondary {
-  color: var(--color-text-alternative);
-}
-
 .quotes-modal .mm-modal-content__dialog {
   display: flex;
   height: 100%;
 }
 
-.bridge {
-  max-height: 100vh;
-  width: 360px;
-  position: relative;
+.bridge-transaction-details__content {
+  overflow-y: hidden;
+}
+
+.bridge-transaction-details__icon-loading {
+  animation: loading-dot 1.2s linear infinite;
+}
+
+.bridge-transaction-details__segment {
+  height: 4px;
+  width: 0;
+  transition: width 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.bridge-transaction-details__segment--pending {
+  width: 50%;
+}
+
+.bridge-transaction-details__segment--complete {
+  width: 100%;
+}
+
+.bridge-transaction-details__step-grid {
+  display: grid;
+  grid-template-columns: 1rem 6fr;
+  column-gap: 1rem;
+  justify-items: center;
+  align-items: center;
+}
+
+.bridge-transaction-details__step-grid--desc {
+  justify-self: start;
+}
+
+@keyframes loading-dot {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  45% {
+    transform: scale(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.awaiting-bridge-signatures {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  margin-top: 40%;
+}
+
+.awaiting-bridge-signatures__content {
+  flex-flow: column;
+}
+
+.awaiting-bridge-signatures div {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.awaiting-bridge-signatures__steps {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 16px auto 12px auto;
+}
+
+.awaiting-bridge-signatures__steps li {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.mm-avatar-base--size-xxs {
+  --size: 12px;
+}
+
+[data-theme=light],
+.light {
+  --color-background-alternative-soft: #f9fafb;
+  --color-text-alternative-soft: #6a737d;
+  --color-icon-alternative-soft: #6a737d;
+}
+
+[data-theme=dark],
+.dark {
+  --color-background-alternative-soft: #1f2124;
+  --color-text-alternative-soft: #848c96;
+  --color-icon-alternative-soft: #848c96;
+}
+
+.mm-box--color-text-alternative-soft {
+  color: var(--color-text-alternative-soft);
+}
+
+.mm-box--color-icon-alternative-soft {
+  color: var(--color-icon-alternative-soft);
+}
+
+.mm-box--background-color-background-alternative-soft {
+  background-color: var(--color-background-alternative-soft);
 }
 
 .bridge__container {
-  width: 100%;
-}
-
-.bridge__container .multichain-page-footer {
-  position: absolute;
-  width: 100%;
-  height: 80px;
-  bottom: 0;
-  padding: 16px;
-  display: flex;
-}
-
-.bridge__container .multichain-page-footer button {
-  flex: 1;
   height: 100%;
-  font-size: 14px;
-  font-weight: 500;
+  min-width: 360px;
+  max-width: 480px;
 }
 
 /*
@@ -60710,7 +58513,7 @@ DEPRECATED
   max-width: 600px;
   border-radius: 4px;
   background-color: var(--color-warning-muted);
-  color: var(--color-text-default);
+  color: inherit;
   display: flex;
   gap: 8px;
   line-height: 24px;
@@ -60813,315 +58616,6 @@ DEPRECATED
 }
 
 /*
-  Utility Classes
- */
-/* lib */
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.cursor-pointer {
-  cursor: pointer;
-  transform-origin: center center;
-  transition: transform 50ms ease-in-out;
-}
-
-.cursor-pointer:hover {
-  transform: scale(1.05);
-}
-
-.cursor-pointer:active {
-  transform: scale(0.97);
-}
-
-.drop-menu-item {
-  display: flex;
-  align-items: center;
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.network-component--disabled {
-  cursor: not-allowed;
-}
-
-.network-component--disabled .fa-caret-down {
-  opacity: 0;
-}
-
-.network-component.pointer {
-  border: 1px solid var(--color-border-muted);
-  border-radius: 82px;
-  padding: 6px 3px;
-  flex: 0 0 auto;
-  display: flex;
-}
-
-.network-component.pointer.ethereum-network .menu-icon-circle div {
-  background-color: rgba(3, 135, 137, 0.7) !important;
-}
-
-.network-component.pointer.goerli-test-network .menu-icon-circle div {
-  background-color: rgba(48, 153, 242, 0.7) !important;
-}
-
-.network-component.pointer.sepolia-test-network .menu-icon-circle div {
-  background-color: rgba(207, 181, 240, 0.7) !important;
-}
-
-.network-component.pointer.linea-test-network .menu-icon-circle div {
-  background-color: rgba(0, 0, 0, 0.7) !important;
-}
-
-.network-component.pointer.localhost-network .menu-icon-circle div {
-  background-color: rgba(3, 135, 137, 0.7) !important;
-}
-
-.dropdown-menu-item .menu-icon-circle,
-.dropdown-menu-item .menu-icon-circle--active {
-  margin: 0 14px;
-}
-
-.dropdown-menu-item .fa.delete {
-  color: var(--color-icon-default);
-  display: none;
-}
-
-[dir="ltr"] .dropdown-menu-item .fa.delete {
-  margin-right: 10px;
-}
-
-[dir="rtl"] .dropdown-menu-item .fa.delete {
-  margin-left: 10px;
-}
-
-.dropdown-menu-item:hover .fa.delete {
-  display: inherit;
-}
-
-.network-droppo {
-  background-color: var(--color-background-default);
-  border-radius: 4px;
-}
-
-[dir="ltr"] .network-droppo {
-  right: 2px;
-}
-
-[dir="rtl"] .network-droppo {
-  left: 2px;
-}
-
-[dir="ltr"] .network-droppo .color-indicator {
-  margin: 0 14px 0 4px;
-}
-
-[dir="rtl"] .network-droppo .color-indicator {
-  margin: 0 4px 0 14px;
-}
-
-@media screen and (min-width: 576px) {
-  [dir="ltr"] .network-droppo {
-    right: calc((100% - 85vw) / 2 + 2px);
-  }
-
-  [dir="rtl"] .network-droppo {
-    left: calc((100% - 85vw) / 2 + 2px);
-  }
-}
-
-@media screen and (min-width: 768px) {
-  [dir="ltr"] .network-droppo {
-    right: calc((100% - 80vw) / 2 + 2px);
-  }
-
-  [dir="rtl"] .network-droppo {
-    left: calc((100% - 80vw) / 2 + 2px);
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  [dir="ltr"] .network-droppo {
-    right: calc((100% - 65vw) / 2 + 2px);
-  }
-
-  [dir="rtl"] .network-droppo {
-    left: calc((100% - 65vw) / 2 + 2px);
-  }
-}
-
-.network-name-item {
-  flex: 1;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.network-check__transparent {
-  opacity: 0;
-  width: 24px;
-}
-
-.menu-icon-circle,
-.menu-icon-circle--active {
-  background: none;
-  border-radius: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid transparent;
-  margin: 0 4px;
-}
-
-.menu-icon-circle--active {
-  border: 1px solid var(--color-border-default);
-  background: var(--color-background-default);
-}
-
-.menu-icon-circle div,
-.menu-icon-circle--active div {
-  height: 12px;
-  width: 12px;
-  border-radius: 17px;
-}
-
-.menu-icon-circle--active div {
-  opacity: 1;
-}
-
-.network-dropdown-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.network-dropdown-list {
-  max-height: 330px;
-  overflow-y: auto;
-  margin-bottom: 8px;
-}
-
-.network-dropdown-divider {
-  width: 100%;
-  height: 1px;
-  margin: 10px 0;
-  background-color: var(--color-border-default);
-}
-
-.network-dropdown-title {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  height: 25px;
-  width: 120px;
-  color: var(--color-text-default);
-  text-align: center;
-}
-
-.network-dropdown-content {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  min-height: 36px;
-  width: 265px;
-  color: var(--color-text-default);
-}
-
-.network-dropdown-content--link {
-  color: var(--color-primary-default);
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.network-dropdown-content--link:hover {
-  color: var(--color-primary-alternative);
-}
-
-.network-dropdown-content--dismiss {
-  position: absolute;
-  top: 63px;
-  padding: 2px 8px;
-  width: auto;
-}
-
-[dir="ltr"] .network-dropdown-content--dismiss {
-  right: 10px;
-}
-
-[dir="rtl"] .network-dropdown-content--dismiss {
-  left: 10px;
-}
-
-.network-caret {
-  margin: 0 8px;
-}
-
-.network-loading-spinner {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  position: relative;
-  height: 16px;
-  width: 16px;
-}
-
-[dir="ltr"] .network-loading-spinner {
-  margin-left: 5px;
-}
-
-[dir="rtl"] .network-loading-spinner {
-  margin-right: 5px;
-}
-
-.network-loading-spinner img {
-  height: 26px;
-  position: absolute;
-  top: -5px;
-}
-
-[dir="ltr"] .network-loading-spinner img {
-  left: -6px;
-}
-
-[dir="rtl"] .network-loading-spinner img {
-  right: -6px;
-}
-
-.network__add-network-button {
-  padding: 0 16px;
-}
-
-/*
 Responsive breakpoints
 */
 /*
@@ -61195,14 +58689,6 @@ DEPRECATED
 }
 
 @media screen and (min-width: 576px) {
-  .lap-visible {
-    display: flex;
-  }
-
-  .phone-visible {
-    display: none;
-  }
-
   .main-container {
     width: 85vw;
     min-height: 90vh;
@@ -61227,14 +58713,6 @@ DEPRECATED
 }
 
 @media screen and (max-width: calc(576px - 1px)) {
-  .lap-visible {
-    display: none;
-  }
-
-  .phone-visible {
-    display: flex;
-  }
-
   .main-container {
     width: 100%;
     overflow-y: auto;
@@ -61244,14 +58722,6 @@ DEPRECATED
   .main-container-wrapper {
     flex: 1;
   }
-}
-
-.fiat-amount {
-  text-transform: uppercase;
-}
-
-.token-balance__amount {
-  padding: 0 6px;
 }
 
 .first-view-main {
@@ -61284,24 +58754,6 @@ DEPRECATED
   }
 }
 
-.unlock-screen-container {
-  z-index: 18;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1 0 auto;
-  background: var(--color-background-alternative);
-  width: 100%;
-}
-
-.unlock-screen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1 0 auto;
-}
-
 .first-view-main-wrapper {
   display: flex;
   width: 100%;
@@ -61309,1207 +58761,6 @@ DEPRECATED
   justify-content: center;
   padding: 0 10px;
   background: var(--color-background-default);
-}
-
-/*
-Responsive breakpoints
-*/
-/*
-DEPRECATED
-*/
-/**
-* @deprecated The typography mixins `@include design-system.H1` - `@include design-system.H9` have been deprecated in favor of the `<Text>` component from the component-library.
-* Please update your code to use the `<Text>` component instead, which can be found in ui/components/component-library/text/text.tsx.
-* You can find documentation for the new `<Text>` component in the MetaMask Storybook:
-* {@link https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--docs}
-* If you would like to help with the replacement of the old mixins `@include design-system.H1` - `@include design-system.H9`, please submit a pull request against this GitHub issue:
-* {@link https://github.com/MetaMask/metamask-extension/issues/19533}
-*/
-/*
-  Z-Indicies
-*/
-.send-screen-wrapper {
-  display: flex;
-  flex-flow: column nowrap;
-  z-index: 25;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-screen-wrapper {
-    width: 100%;
-    overflow-y: auto;
-  }
-}
-
-.send-screen-wrapper section {
-  flex: 0 0 auto;
-}
-
-.send-screen-card {
-  background-color: var(--color-background-default);
-  box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
-  padding: 46px 40.5px 26px;
-  position: relative;
-  align-items: center;
-  display: flex;
-  flex-flow: column nowrap;
-  width: 498px;
-  flex: 1 0 auto;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-screen-card {
-    top: 0;
-    width: 100%;
-    box-shadow: none;
-    padding: 12px;
-  }
-}
-
-/* Send Screen */
-.send-screen section {
-  margin: 4px 16px;
-}
-
-.send-screen input {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 100%;
-}
-
-.send-eth-icon {
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  border: 1px solid var(--color-border-muted);
-  box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
-  position: absolute;
-  top: -35px;
-  z-index: 25;
-  padding: 4px;
-  background-color: var(--color-background-default);
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-eth-icon {
-    position: relative;
-    top: 0;
-  }
-}
-
-.send-screen-input-wrapper {
-  width: 95%;
-  position: relative;
-}
-
-[dir="ltr"] .send-screen-input-wrapper .fa-bolt {
-  padding-right: 4px;
-}
-
-[dir="rtl"] .send-screen-input-wrapper .fa-bolt {
-  padding-left: 4px;
-}
-
-.send-screen-input-wrapper .send-screen-gas-input {
-  border: 1px solid transparent;
-}
-
-.send-screen-input-wrapper__error-message {
-  display: none;
-}
-
-.send-screen-input-wrapper--error input,
-.send-screen-input-wrapper--error .send-screen-gas-input {
-  border-color: var(--color-error-default) !important;
-}
-
-.send-screen-input-wrapper--error .send-screen-input-wrapper__error-message {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: block;
-  position: absolute;
-  bottom: 4px;
-  color: var(--color-error-default);
-}
-
-[dir="ltr"] .send-screen-input-wrapper--error .send-screen-input-wrapper__error-message {
-  left: 8px;
-}
-
-[dir="rtl"] .send-screen-input-wrapper--error .send-screen-input-wrapper__error-message {
-  right: 8px;
-}
-
-.send-screen-input-wrapper .send-screen-input-wrapper__error-message {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: block;
-  position: absolute;
-  bottom: 4px;
-  color: var(--color-error-default);
-}
-
-[dir="ltr"] .send-screen-input-wrapper .send-screen-input-wrapper__error-message {
-  left: 8px;
-}
-
-[dir="rtl"] .send-screen-input-wrapper .send-screen-input-wrapper__error-message {
-  right: 8px;
-}
-
-.send-screen-input {
-  width: 100%;
-}
-
-.send-screen-gas-input {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 100%;
-  height: 41px;
-  border-radius: 3px;
-  background-color: var(--color-background-default);
-  border-width: 0;
-  border-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--color-text-alternative);
-}
-
-[dir="ltr"] .send-screen-gas-input {
-  padding-left: 10px;
-  padding-right: 12px;
-}
-
-[dir="rtl"] .send-screen-gas-input {
-  padding-right: 10px;
-  padding-left: 12px;
-}
-
-.send-screen-amount-labels {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.send-screen-gas-labels {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.currency-toggle__item {
-  color: var(--color-primary-default);
-  cursor: pointer;
-}
-
-.currency-toggle__item--selected {
-  color: var(--color-text-default);
-  cursor: default;
-}
-
-.send-screen-gas-input-customize {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-primary-default);
-  cursor: pointer;
-}
-
-.gas-tooltip-close-area {
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
-  height: 100%;
-}
-
-[dir="ltr"] .gas-tooltip-close-area {
-  left: 0;
-}
-
-[dir="rtl"] .gas-tooltip-close-area {
-  right: 0;
-}
-
-.gas-tooltip-arrow {
-  height: 25px;
-  width: 25px;
-  z-index: 1200;
-  background: var(--color-background-default);
-  position: absolute;
-  top: 294px;
-  box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
-}
-
-[dir="ltr"] .gas-tooltip-arrow {
-  transform: rotate(45deg);
-  left: 107px;
-}
-
-[dir="rtl"] .gas-tooltip-arrow {
-  transform: rotate(-45deg);
-  right: 107px;
-}
-
-.gas-tooltip {
-  display: flex;
-  justify-content: center;
-}
-
-.gas-tooltip-label {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-}
-
-.gas-tooltip-header {
-  padding-bottom: 12px;
-}
-
-.gas-tooltip-input-label {
-  margin-bottom: 5px;
-}
-
-.gas-tooltip-input-label i {
-  color: var(--color-icon-muted);
-}
-
-[dir="ltr"] .gas-tooltip-input-label i {
-  margin-left: 6px;
-}
-
-[dir="rtl"] .gas-tooltip-input-label i {
-  margin-right: 6px;
-}
-
-.gas-tooltip-input-detail {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  position: absolute;
-  top: 4px;
-  color: var(--color-text-muted);
-}
-
-[dir="ltr"] .gas-tooltip-input-detail {
-  right: 26px;
-}
-
-[dir="rtl"] .gas-tooltip-input-detail {
-  left: 26px;
-}
-
-.gas-tooltip-input-arrows {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  position: absolute;
-  top: 0;
-  width: 17px;
-  height: 28px;
-  border: 1px solid var(--color-icon-muted);
-  display: flex;
-  flex-direction: column;
-  color: var(--color-text-muted);
-  padding: 1px 4px;
-  cursor: pointer;
-}
-
-[dir="ltr"] .gas-tooltip-input-arrows {
-  right: 4px;
-  border-left: 0;
-}
-
-[dir="rtl"] .gas-tooltip-input-arrows {
-  left: 4px;
-  border-right: 0;
-}
-
-.token-gas__amount {
-  display: inline-block;
-}
-
-[dir="ltr"] .token-gas__amount {
-  margin-right: 4px;
-}
-
-[dir="rtl"] .token-gas__amount {
-  margin-left: 4px;
-}
-
-.token-gas__symbol {
-  display: inline-block;
-}
-
-.send-screen__title {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-}
-
-.send-screen__subtitle {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  margin: 10px 0 20px;
-}
-
-.send-screen__send-button, .send-screen__cancel-button {
-  width: 163px;
-  text-align: center;
-}
-
-.send-screen__send-button__disabled {
-  opacity: 0.5;
-  cursor: auto;
-}
-
-.send-token {
-  display: flex;
-  flex-flow: column nowrap;
-  z-index: 25;
-}
-
-.send-token__content {
-  width: 498px;
-  height: 605px;
-  background-color: var(--color-background-default);
-  box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
-  padding: 46px 40.5px 26px;
-  position: relative;
-  align-items: center;
-  display: flex;
-  flex-flow: column nowrap;
-  flex: 1 0 auto;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-token__content {
-    top: 0;
-    width: 100%;
-    box-shadow: none;
-    padding: 12px;
-  }
-}
-
-.send-token .identicon {
-  position: absolute;
-  top: -35px;
-  z-index: 25;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-token .identicon {
-    position: relative;
-    top: 0;
-    flex: 0 0 auto;
-  }
-}
-
-.send-token__title {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-}
-
-.send-token__description, .send-token__balance-text, .send-token__token-symbol {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.send-token__token-balance {
-  font-size: 2.5rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  margin-top: 13px;
-}
-
-[dir="ltr"] .send-token__token-balance .token-balance__amount {
-  padding-right: 12px;
-}
-
-[dir="rtl"] .send-token__token-balance .token-balance__amount {
-  padding-left: 12px;
-}
-
-.send-token__button-group {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  flex: 0 0 auto;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-token__button-group {
-    margin-top: 24px;
-  }
-}
-
-.send-token__button-group button {
-  width: 163px;
-}
-
-.confirm-send-token__hero-amount-wrapper {
-  width: 100%;
-}
-
-.send-v2__container {
-  width: 380px;
-  border-radius: 8px;
-  background-color: var(--color-background-default);
-  box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
-  display: flex;
-  flex-flow: column nowrap;
-  z-index: 25;
-  align-items: center;
-  position: relative;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-v2__container {
-    width: 100%;
-    top: 0;
-    box-shadow: none;
-    flex: 1 1 auto;
-  }
-}
-
-.send-v2__send-header-icon-container {
-  z-index: 25;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-v2__send-header-icon-container {
-    position: relative;
-    top: 0;
-  }
-}
-
-.send-v2__send-header-icon {
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--color-border-muted);
-  z-index: 25;
-  padding: 4px;
-  background-color: var(--color-background-default);
-}
-
-.send-v2__arrow-background {
-  background-color: var(--color-background-default);
-  height: 14px;
-  width: 14px;
-  position: absolute;
-  top: 52px;
-  border-radius: 50%;
-  z-index: 100;
-}
-
-[dir="ltr"] .send-v2__arrow-background {
-  left: 199px;
-}
-
-[dir="rtl"] .send-v2__arrow-background {
-  right: 199px;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-v2__arrow-background {
-    top: 36px;
-  }
-}
-
-.send-v2__header {
-  height: 88px;
-  width: 380px;
-  background-color: var(--color-background-alternative);
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-v2__header {
-    height: 59px;
-    width: 100vw;
-  }
-}
-
-.send-v2__header-tip {
-  height: 25px;
-  width: 25px;
-  background-color: var(--color-background-alternative);
-  position: absolute;
-  top: 75px;
-}
-
-[dir="ltr"] .send-v2__header-tip {
-  transform: rotate(45deg);
-  left: 178px;
-}
-
-[dir="rtl"] .send-v2__header-tip {
-  transform: rotate(-45deg);
-  right: 178px;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-v2__header-tip {
-    top: 46px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-  }
-}
-
-.send-v2__title {
-  font-size: 1.5rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-  text-align: center;
-  margin-top: 25px;
-}
-
-.send-v2__copy {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-  text-align: center;
-  margin-top: 10px;
-  width: 287px;
-}
-
-.send-v2__error {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-error-default);
-}
-
-[dir="ltr"] .send-v2__error {
-  left: 8px;
-}
-
-[dir="rtl"] .send-v2__error {
-  right: 8px;
-}
-
-.send-v2__error-amount {
-  margin-top: 5px;
-}
-
-.send-v2__warning {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-warning-default);
-}
-
-[dir="ltr"] .send-v2__warning {
-  left: 8px;
-}
-
-[dir="rtl"] .send-v2__warning {
-  right: 8px;
-}
-
-.send-v2__error-border {
-  color: var(--color-error-default);
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-v2__form {
-    margin: 0;
-    flex: 1 1 auto;
-  }
-}
-
-.send-v2__form-header, .send-v2__form-header-copy {
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
-
-.send-v2__form-row {
-  margin: 1rem 1rem 0;
-  position: relative;
-  display: flex;
-  flex-flow: row;
-  flex: 1 0 auto;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.send-v2__form-field-container {
-  display: flex;
-  flex-direction: column;
-  width: 277px;
-}
-
-.send-v2__form-field {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.send-v2__form-field .currency-display {
-  color: var(--color-text-alternative);
-}
-
-.send-v2__form-field .currency-display__currency-symbol {
-  color: var(--color-text-alternative);
-}
-
-.send-v2__form-field .currency-display__converted-value, .send-v2__form-field .currency-display__converted-currency {
-  color: var(--color-text-alternative);
-}
-
-.send-v2__form-field .account-list-item__account-secondary-balance {
-  color: var(--color-text-alternative);
-}
-
-.send-v2__form-label {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-  width: 95px;
-  flex: 0 0 auto;
-}
-
-.send-v2__from-dropdown, .send-v2__asset-dropdown {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 100%;
-  border: 1px solid var(--color-border-muted);
-  border-radius: 4px;
-  background-color: var(--color-background-default);
-  color: var(--color-text-default);
-  position: relative;
-}
-
-.send-v2__from-dropdown__close-area, .send-v2__asset-dropdown__close-area {
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
-  height: 100%;
-}
-
-[dir="ltr"] .send-v2__from-dropdown__close-area, [dir="ltr"] .send-v2__asset-dropdown__close-area {
-  left: 0;
-}
-
-[dir="rtl"] .send-v2__from-dropdown__close-area, [dir="rtl"] .send-v2__asset-dropdown__close-area {
-  right: 0;
-}
-
-.send-v2__from-dropdown__list, .send-v2__asset-dropdown__list {
-  z-index: 1050;
-  position: absolute;
-  height: 220px;
-  width: 100%;
-  border: 1px solid var(--color-border-muted);
-  border-radius: 4px;
-  background-color: var(--color-background-default);
-  box-shadow: var(--shadow-size-sm) var(--color-shadow-default);
-  margin-top: 11px;
-  overflow-y: scroll;
-}
-
-[dir="ltr"] .send-v2__from-dropdown__list, [dir="ltr"] .send-v2__asset-dropdown__list {
-  margin-left: -1px;
-}
-
-[dir="rtl"] .send-v2__from-dropdown__list, [dir="rtl"] .send-v2__asset-dropdown__list {
-  margin-right: -1px;
-}
-
-.send-v2__from-dropdown {
-  height: 73px;
-}
-
-.send-v2__asset-dropdown {
-  height: 54px;
-  border: none;
-  position: relative;
-}
-
-.send-v2__asset-dropdown__single-asset {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  padding: 8px 8px;
-}
-
-.send-v2__asset-dropdown__caret {
-  color: var(--color-icon-default);
-  padding: 0 10px;
-}
-
-.send-v2__asset-dropdown__asset {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  padding: 0 8px;
-  cursor: pointer;
-  /* Prevents the contents of the asset from going outside the dropdown area  */
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.send-v2__asset-dropdown__asset-icon .identicon {
-  border: 1px solid var(--color-border-muted);
-}
-
-.send-v2__asset-dropdown__asset-data {
-  display: flex;
-  flex-flow: column nowrap;
-  flex-grow: 1;
-  /* Keeps the down arrow on screen */
-  overflow: hidden;
-}
-
-[dir="ltr"] .send-v2__asset-dropdown__asset-data {
-  margin-left: 8px;
-}
-
-[dir="rtl"] .send-v2__asset-dropdown__asset-data {
-  margin-right: 8px;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .send-v2__asset-dropdown__asset-data {
-    width: 60%;
-  }
-}
-
-.send-v2__asset-dropdown__symbol {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  margin-bottom: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.send-v2__asset-dropdown__name {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  /* Prevents the token balance or NFT title from wrapping or silently truncating */
-  display: flex;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.send-v2__asset-dropdown__name__label {
-  min-width: 52px;
-}
-
-[dir="ltr"] .send-v2__asset-dropdown__name__label {
-  margin-right: 0.25rem;
-}
-
-[dir="rtl"] .send-v2__asset-dropdown__name__label {
-  margin-left: 0.25rem;
-}
-
-.send-v2__asset-dropdown__close-area {
-  z-index: 2000;
-}
-
-.send-v2__asset-dropdown__list {
-  z-index: 2050;
-  position: absolute;
-  height: 220px;
-  width: 100%;
-  border: 1px solid var(--color-border-muted);
-  border-radius: 4px;
-  background-color: var(--color-background-default);
-  box-shadow: var(--shadow-size-sm) var(--color-shadow-default);
-  top: 65px;
-  box-sizing: content-box;
-  overflow-y: scroll;
-  margin-top: 0;
-  padding: 4px 0;
-}
-
-[dir="ltr"] .send-v2__asset-dropdown__list {
-  left: 0;
-}
-
-[dir="rtl"] .send-v2__asset-dropdown__list {
-  right: 0;
-}
-
-.send-v2__asset-dropdown__list .send-v2__asset-dropdown__asset {
-  padding: 8px;
-}
-
-.send-v2__asset-dropdown__input-wrapper {
-  border: 1px solid var(--color-border-muted);
-  border-radius: 4px;
-  height: 100%;
-}
-
-.send-v2__asset-dropdown__input-wrapper--opened {
-  position: relative;
-  z-index: 2050;
-}
-
-.send-v2__asset-dropdown__input-wrapper .send-v2__asset-dropdown__asset {
-  height: 100%;
-}
-
-.send-v2__asset-dropdown__input-wrapper .send-v2__asset-dropdown__asset:hover {
-  background-color: var(--color-background-default-hover);
-}
-
-.send-v2__asset-dropdown__input {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  z-index: 1025;
-  position: relative;
-  height: 54px;
-  width: 100%;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--color-background-default);
-  color: var(--color-text-alternative);
-  padding: 10px;
-}
-
-.send-v2__memo-text-area__input, .send-v2__hex-data__input {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  z-index: 1025;
-  position: relative;
-  height: 54px;
-  width: 100%;
-  border: 1px solid var(--color-border-muted);
-  border-radius: 4px;
-  background-color: var(--color-background-default);
-  color: var(--color-text-alternative);
-  padding: 10px;
-}
-
-.send-v2__amount-max {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  position: relative;
-  display: inline-block;
-  width: 56px;
-  height: 20px;
-  margin-top: 5px;
-  border-radius: 100px;
-}
-
-.send-v2__amount-max__button {
-  width: 56px;
-  height: 20px;
-  position: absolute;
-  border: 1px solid var(--color-primary-default);
-  border-radius: 100px;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-primary-default);
-  background: var(--color-background-default);
-}
-
-.send-v2__amount-max__button__disabled {
-  opacity: 0.5;
-  cursor: auto;
-}
-
-input:checked + .send-v2__amount-max__button {
-  background-color: var(--color-primary-default);
-  border: 1px solid var(--color-primary-default);
-  color: var(--color-primary-inverse);
-}
-
-.send-v2__amount-max input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.send-v2__sliders-icon-container {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 24px;
-  width: 24px;
-  border: 1px solid var(--color-primary-default);
-  border-radius: 4px;
-  background-color: var(--color-background-default);
-  position: absolute;
-  top: 14px;
-  cursor: pointer;
-}
-
-[dir="ltr"] .send-v2__sliders-icon-container {
-  right: 15px;
-}
-
-[dir="rtl"] .send-v2__sliders-icon-container {
-  left: 15px;
-}
-
-.send-v2__sliders-icon {
-  color: var(--color-primary-default);
-}
-
-.send-v2__memo-text-area__input {
-  padding: 6px 10px;
-}
-
-.send-v2__footer {
-  height: 92px;
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  border-top: 1px solid var(--color-border-muted);
-  background: var(--color-background-default);
-  padding: 0 12px;
-  flex-shrink: 0;
-}
-
-.send-v2__next-btn, .send-v2__cancel-btn {
-  width: 163px;
-  margin: 0 4px;
-}
-
-.send-v2__gas-modal-card {
-  width: 360px;
-  display: flex;
-  flex-flow: column;
-  align-items: flex-start;
-}
-
-[dir="ltr"] .send-v2__gas-modal-card {
-  padding-left: 20px;
-}
-
-[dir="rtl"] .send-v2__gas-modal-card {
-  padding-right: 20px;
-}
-
-.send-v2__gas-modal-card__title {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  height: 26px;
-  color: var(--color-text-alternative);
-  margin-top: 17px;
-}
-
-.send-v2__gas-modal-card__copy {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  height: 38px;
-  width: 314px;
-  color: var(--color-text-alternative);
-  margin-top: 17px;
-}
-
-.send-v2__gas-modal-card .gas-tooltip-input-arrows {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 32px;
-  height: 54px;
-  color: var(--color-text-alternative);
-  padding: 0;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-[dir="ltr"] .send-v2__gas-modal-card .gas-tooltip-input-arrows {
-  border-left: 1px solid var(--color-border-muted);
-  right: 0;
-}
-
-[dir="rtl"] .send-v2__gas-modal-card .gas-tooltip-input-arrows {
-  border-right: 1px solid var(--color-border-muted);
-  left: 0;
-}
-
-.send-v2__gas-modal-card .gas-tooltip-input-arrow-wrapper {
-  align-items: center;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: center;
-}
-
-.send-v2__gas-modal-card input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  display: none;
-}
-
-.send-v2__gas-modal-card input[type=number]:hover::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  display: none;
-}
-
-.advanced-gas-options-btn {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: flex;
-  justify-content: flex-end;
-  color: var(--color-primary-default);
-  cursor: pointer;
-  margin-top: 5px;
-}
-
-.sliders-icon-container {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 24px;
-  width: 24px;
-  border: 1px solid var(--color-primary-default);
-  border-radius: 4px;
-  background-color: var(--color-background-default);
-  position: absolute;
-  top: 14px;
-  cursor: pointer;
-}
-
-[dir="ltr"] .sliders-icon-container {
-  right: 15px;
-}
-
-[dir="rtl"] .sliders-icon-container {
-  left: 15px;
-}
-
-.gas-fee-reset {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 24px;
-  border-radius: 4px;
-  background-color: var(--color-background-default);
-  position: absolute;
-  top: 14px;
-  cursor: pointer;
-  color: var(--color-primary-default);
-}
-
-[dir="ltr"] .gas-fee-reset {
-  right: 12px;
-}
-
-[dir="rtl"] .gas-fee-reset {
-  left: 12px;
-}
-
-.sliders-icon {
-  color: var(--color-primary-default);
 }
 
 /*
@@ -63427,82 +59678,82 @@ input:checked + .send-v2__amount-max__button {
 }
 
 :root {
-  --brand-colors-grey-grey100:#d6d9dc;
-  --brand-colors-grey-grey200:#bbc0c5;
-  --brand-colors-grey-grey300:#9fa6ae;
-  --brand-colors-grey-grey400:#848c96;
-  --brand-colors-grey-grey500:#6a737d;
-  --brand-colors-grey-grey600:#535a61;
-  --brand-colors-grey-grey700:#3b4046;
-  --brand-colors-grey-grey800:#24272a;
-  --brand-colors-grey-grey900:#141618;
+  --brand-colors-grey-grey100:#dadce5;
+  --brand-colors-grey-grey200:#b7bbc8;
+  --brand-colors-grey-grey300:#9ca1af;
+  --brand-colors-grey-grey400:#858b9a;
+  --brand-colors-grey-grey500:#686e7d;
+  --brand-colors-grey-grey600:#4b505c;
+  --brand-colors-grey-grey700:#31333a;
+  --brand-colors-grey-grey800:#222325;
+  --brand-colors-grey-grey900:#121314;
   --brand-colors-grey-grey1000:#000000;
-  --brand-colors-grey-grey050:#f2f4f6;
+  --brand-colors-grey-grey050:#f3f5f9;
   --brand-colors-grey-grey000:#ffffff;
-  --brand-colors-grey-grey025:#fafbfc;
-  --brand-colors-blue-blue100:#a7d9fe;
-  --brand-colors-blue-blue200:#75c4fd;
-  --brand-colors-blue-blue300:#43aefc;
-  --brand-colors-blue-blue400:#1098fc;
-  --brand-colors-blue-blue500:#0376c9;
-  --brand-colors-blue-blue600:#0260a4;
-  --brand-colors-blue-blue700:#024272;
-  --brand-colors-blue-blue800:#01253f;
-  --brand-colors-blue-blue900:#00080d;
-  --brand-colors-blue-blue050:#eaf6ff;
-  --brand-colors-blue-blue025:#eaf6ff;
-  --brand-colors-green-green100:#afecbd;
-  --brand-colors-green-green200:#5dd879;
-  --brand-colors-green-green300:#28a745;
-  --brand-colors-green-green400:#28a745;
-  --brand-colors-green-green500:#1c8234;
-  --brand-colors-green-green600:#145523;
-  --brand-colors-green-green700:#145523;
-  --brand-colors-green-green800:#0a2c12;
-  --brand-colors-green-green900:#041007;
-  --brand-colors-green-green050:#d6ffdf;
-  --brand-colors-green-green025:#f3fcf5;
-  --brand-colors-red-red100:#f7d5d8;
-  --brand-colors-red-red200:#f1b9be;
-  --brand-colors-red-red300:#e88f97;
-  --brand-colors-red-red400:#e06470;
-  --brand-colors-red-red500:#d73847;
-  --brand-colors-red-red600:#8e1d28;
-  --brand-colors-red-red700:#64141c;
-  --brand-colors-red-red800:#3a0c10;
-  --brand-colors-red-red900:#3a0c10;
-  --brand-colors-red-red050:#fcf2f3;
-  --brand-colors-red-red025:#fcf2f3;
-  --brand-colors-yellow-yellow100:#ffdf70;
-  --brand-colors-yellow-yellow200:#ffc70a;
-  --brand-colors-yellow-yellow300:#f8883b;
-  --brand-colors-yellow-yellow400:#f66a0a;
-  --brand-colors-yellow-yellow500:#bf5208;
-  --brand-colors-yellow-yellow600:#954005;
-  --brand-colors-yellow-yellow700:#632b04;
-  --brand-colors-yellow-yellow800:#321602;
-  --brand-colors-yellow-yellow900:#321602;
-  --brand-colors-yellow-yellow050:#fff2c5;
-  --brand-colors-yellow-yellow025:#fefcde;
-  --brand-colors-orange-orange100:#fbc49d;
-  --brand-colors-orange-orange200:#faa66c;
-  --brand-colors-orange-orange300:#f8883b;
-  --brand-colors-orange-orange400:#f66a0a;
-  --brand-colors-orange-orange500:#bf5208;
-  --brand-colors-orange-orange600:#954005;
-  --brand-colors-orange-orange700:#632b04;
-  --brand-colors-orange-orange800:#321602;
-  --brand-colors-orange-orange900:#321602;
-  --brand-colors-orange-orange050:#fde2cf;
-  --brand-colors-orange-orange025:#fef5ef;
+  --brand-colors-grey-grey025:#f7f9fc;
+  --brand-colors-blue-blue100:#d6dbff;
+  --brand-colors-blue-blue200:#adb6fe;
+  --brand-colors-blue-blue300:#8b99ff;
+  --brand-colors-blue-blue400:#6f7eff;
+  --brand-colors-blue-blue500:#4459ff;
+  --brand-colors-blue-blue600:#2c3dc5;
+  --brand-colors-blue-blue700:#1c277f;
+  --brand-colors-blue-blue800:#131b59;
+  --brand-colors-blue-blue900:#0b0f32;
+  --brand-colors-blue-blue050:#f4f5ff;
+  --brand-colors-blue-blue025:#f8f9ff;
+  --brand-colors-green-green100:#c1e6c9;
+  --brand-colors-green-green200:#80cb91;
+  --brand-colors-green-green300:#4cb564;
+  --brand-colors-green-green400:#279f41;
+  --brand-colors-green-green500:#1c7e33;
+  --brand-colors-green-green600:#145d25;
+  --brand-colors-green-green700:#0d3b18;
+  --brand-colors-green-green800:#092912;
+  --brand-colors-green-green900:#051709;
+  --brand-colors-green-green050:#ebf7ee;
+  --brand-colors-green-green025:#f1faf4;
+  --brand-colors-red-red100:#ffd2d5;
+  --brand-colors-red-red200:#ffa1aa;
+  --brand-colors-red-red300:#ff7584;
+  --brand-colors-red-red400:#f74d5e;
+  --brand-colors-red-red500:#ca3542;
+  --brand-colors-red-red600:#952731;
+  --brand-colors-red-red700:#611a20;
+  --brand-colors-red-red800:#431216;
+  --brand-colors-red-red900:#3b0f13;
+  --brand-colors-red-red050:#fff2f3;
+  --brand-colors-red-red025:#fff6f7;
+  --brand-colors-yellow-yellow100:#ffd957;
+  --brand-colors-yellow-yellow200:#f0b034;
+  --brand-colors-yellow-yellow300:#e18f01;
+  --brand-colors-yellow-yellow400:#c37b02;
+  --brand-colors-yellow-yellow500:#9a6300;
+  --brand-colors-yellow-yellow600:#714802;
+  --brand-colors-yellow-yellow700:#482d01;
+  --brand-colors-yellow-yellow800:#321f00;
+  --brand-colors-yellow-yellow900:#1c1100;
+  --brand-colors-yellow-yellow050:#fff5d5;
+  --brand-colors-yellow-yellow025:#fff9e6;
+  --brand-colors-orange-orange100:#ffd4c1;
+  --brand-colors-orange-orange200:#ffa47c;
+  --brand-colors-orange-orange300:#ff7940;
+  --brand-colors-orange-orange400:#f35714;
+  --brand-colors-orange-orange500:#c3420d;
+  --brand-colors-orange-orange600:#932d06;
+  --brand-colors-orange-orange700:#631800;
+  --brand-colors-orange-orange800:#451100;
+  --brand-colors-orange-orange900:#280a00;
+  --brand-colors-orange-orange050:#fff0ea;
+  --brand-colors-orange-orange025:#fff8f5;
   --brand-colors-purple-purple100:#efd2ff;
-  --brand-colors-purple-purple200:#cfb5f0;
+  --brand-colors-purple-purple200:#dfa4ff;
   --brand-colors-purple-purple300:#d27dff;
   --brand-colors-purple-purple400:#b864f5;
-  --brand-colors-purple-purple500:#8b45b6;
+  --brand-colors-purple-purple500:#8f44e4;
   --brand-colors-purple-purple600:#6c2ab2;
-  --brand-colors-purple-purple700:#4c1178;
-  --brand-colors-purple-purple800:#32054d;
+  --brand-colors-purple-purple700:#6c2ab2;
+  --brand-colors-purple-purple800:#380658;
   --brand-colors-purple-purple900:#280a00;
   --brand-colors-purple-purple050:#fbf2ff;
   --brand-colors-purple-purple025:#fcf6ff;
@@ -63513,7 +59764,7 @@ input:checked + .send-v2__amount-max__button {
   --brand-colors-lime-lime500:#457a39;
   --brand-colors-lime-lime600:#275b35;
   --brand-colors-lime-lime700:#093a31;
-  --brand-colors-lime-lime800:#022321;
+  --brand-colors-lime-lime800:#012826;
   --brand-colors-lime-lime900:#011515;
   --brand-colors-lime-lime025:#effed9;
   --brand-colors-lime-lime050:#e3febd;
@@ -63521,15 +59772,18 @@ input:checked + .send-v2__amount-max__button {
   --brand-colors-black:#000000;
 }
 
-:root, [data-theme=light] {
+.light, :root, [data-theme=light] {
   --color-background-default:var(--brand-colors-grey-grey000);
   --color-background-alternative:var(--brand-colors-grey-grey050);
-  --color-background-default-hover:#f5f5f5;
-  --color-background-default-pressed:#ebebeb;
-  --color-background-alternative-hover:#e7ebee;
-  --color-background-alternative-pressed:#dbe0e6;
-  --color-background-hover:#0000000a;
-  --color-background-pressed:#00000014;
+  --color-background-muted:var(--brand-colors-grey-grey050);
+  --color-background-default-hover:#f6f6f7;
+  --color-background-default-pressed:#ebecef;
+  --color-background-alternative-hover:#f6f6f7;
+  --color-background-alternative-pressed:#ebecef;
+  --color-background-muted-hover:#e7ebee;
+  --color-background-muted-pressed:#ebecef;
+  --color-background-hover:#858b9a14;
+  --color-background-pressed:#858b9a29;
   --color-text-default:var(--brand-colors-grey-grey900);
   --color-text-alternative:var(--brand-colors-grey-grey500);
   --color-text-muted:var(--brand-colors-grey-grey300);
@@ -63537,51 +59791,62 @@ input:checked + .send-v2__amount-max__button {
   --color-icon-alternative:var(--brand-colors-grey-grey500);
   --color-icon-muted:var(--brand-colors-grey-grey300);
   --color-border-default:var(--brand-colors-grey-grey200);
-  --color-border-muted:#bbc0c566;
-  --color-overlay-default:#00000099;
+  --color-border-muted:#b7bbc866;
+  --color-overlay-default:#00000066;
   --color-overlay-alternative:#000000cc;
   --color-overlay-inverse:var(--brand-colors-grey-grey000);
   --color-primary-default:var(--brand-colors-blue-blue500);
   --color-primary-alternative:var(--brand-colors-blue-blue600);
-  --color-primary-muted:#0376c91a;
+  --color-primary-muted:#4459ff1a;
   --color-primary-inverse:var(--brand-colors-grey-grey000);
-  --color-primary-default-hover:#036ab5;
-  --color-primary-default-pressed:#025ea1;
+  --color-primary-default-hover:#384df5;
+  --color-primary-default-pressed:#2b3eda;
+  --color-primary-muted-hover:#4459ff26;
+  --color-primary-muted-pressed:#4459ff33;
   --color-error-default:var(--brand-colors-red-red500);
   --color-error-alternative:var(--brand-colors-red-red600);
-  --color-error-muted:#d738471a;
+  --color-error-muted:#ca35421a;
   --color-error-inverse:var(--brand-colors-grey-grey000);
-  --color-error-default-hover:#d02a3a;
-  --color-error-default-pressed:#bf2635;
+  --color-error-default-hover:#ba313d;
+  --color-error-default-pressed:#9a2832;
+  --color-error-muted-hover:#ca354226;
+  --color-error-muted-pressed:#ca354233;
   --color-warning-default:var(--brand-colors-yellow-yellow500);
-  --color-warning-muted:#bf52081a;
+  --color-warning-muted:#9a63001a;
   --color-warning-inverse:var(--brand-colors-grey-grey000);
-  --color-warning-default-hover:#ac4a07;
-  --color-warning-default-pressed:#984106;
+  --color-warning-default-hover:#855500;
+  --color-warning-default-pressed:#5c3b00;
+  --color-warning-muted-hover:#9a630026;
+  --color-warning-muted-pressed:#9a630033;
   --color-success-default:var(--brand-colors-green-green500);
-  --color-success-muted:#1c82341a;
+  --color-success-muted:#1c7e331a;
   --color-success-inverse:var(--brand-colors-grey-grey000);
-  --color-success-default-hover:#18712d;
-  --color-success-default-pressed:#156127;
+  --color-success-default-hover:#186c2c;
+  --color-success-default-pressed:#114b1e;
+  --color-success-muted-hover:#1c7e3326;
+  --color-success-muted-pressed:#1c7e3333;
   --color-info-default:var(--brand-colors-blue-blue500);
-  --color-info-muted:#0376c91a;
+  --color-info-muted:#4459ff1a;
   --color-info-inverse:var(--brand-colors-grey-grey000);
   --color-flask-default:var(--brand-colors-purple-purple500);
   --color-flask-inverse:var(--brand-colors-grey-grey000);
   --color-shadow-default:#0000001a;
-  --color-shadow-primary:#0376c933;
+  --color-shadow-primary:#4459ff33;
   --color-shadow-error:#ca354266;
 }
 
-[data-theme=dark] {
-  --color-background-default:var(--brand-colors-grey-grey800);
-  --color-background-alternative:var(--brand-colors-grey-grey900);
-  --color-background-default-hover:#313235;
-  --color-background-default-pressed:#3f4145;
-  --color-background-alternative-hover:#1f2123;
-  --color-background-alternative-pressed:#2e3033;
-  --color-background-hover:#ffffff0a;
-  --color-background-pressed:#ffffff14;
+.dark, [data-theme=dark] {
+  --color-background-default:var(--brand-colors-grey-grey900);
+  --color-background-alternative:var(--brand-colors-grey-grey1000);
+  --color-background-muted:var(--brand-colors-grey-grey800);
+  --color-background-default-hover:#1a1b1c;
+  --color-background-default-pressed:#222424;
+  --color-background-alternative-hover:#0d0d0e;
+  --color-background-alternative-pressed:#161617;
+  --color-background-muted-hover:#2a2b2d;
+  --color-background-muted-pressed:#303234;
+  --color-background-hover:#dadce50a;
+  --color-background-pressed:#dadce514;
   --color-text-default:var(--brand-colors-grey-grey000);
   --color-text-alternative:var(--brand-colors-grey-grey200);
   --color-text-muted:var(--brand-colors-grey-grey400);
@@ -63589,40 +59854,48 @@ input:checked + .send-v2__amount-max__button {
   --color-icon-alternative:var(--brand-colors-grey-grey200);
   --color-icon-muted:var(--brand-colors-grey-grey400);
   --color-border-default:var(--brand-colors-grey-grey400);
-  --color-border-muted:#848c9629;
-  --color-overlay-default:#00000099;
+  --color-border-muted:#858b9a33;
+  --color-overlay-default:#00000066;
   --color-overlay-alternative:#000000cc;
   --color-overlay-inverse:var(--brand-colors-grey-grey000);
   --color-primary-default:var(--brand-colors-blue-blue300);
   --color-primary-alternative:var(--brand-colors-blue-blue200);
-  --color-primary-muted:#43aefc26;
+  --color-primary-muted:#8b99ff26;
   --color-primary-inverse:var(--brand-colors-grey-grey900);
-  --color-primary-default-hover:#26a2fc;
-  --color-primary-default-pressed:#3baafd;
+  --color-primary-default-hover:#9eaaff;
+  --color-primary-default-pressed:#c7ceff;
+  --color-primary-muted-hover:#8b99ff33;
+  --color-primary-muted-pressed:#8b99ff40;
   --color-error-default:var(--brand-colors-red-red300);
   --color-error-alternative:var(--brand-colors-red-red200);
-  --color-error-muted:#e88f9726;
+  --color-error-muted:#ff758426;
   --color-error-inverse:var(--brand-colors-grey-grey900);
-  --color-error-default-hover:#e47782;
-  --color-error-default-pressed:#e78891;
+  --color-error-default-hover:#ff8a96;
+  --color-error-default-pressed:#ffb2bb;
+  --color-error-muted-hover:#ff758433;
+  --color-error-muted-pressed:#ff758440;
   --color-warning-default:var(--brand-colors-yellow-yellow100);
-  --color-warning-muted:#ffdf7026;
+  --color-warning-muted:#ffd95726;
   --color-warning-inverse:var(--brand-colors-grey-grey900);
-  --color-warning-default-hover:#ffe485;
-  --color-warning-default-pressed:#ffe899;
+  --color-warning-default-hover:#ffde6b;
+  --color-warning-default-pressed:#ffe794;
+  --color-warning-muted-hover:#ffd95733;
+  --color-warning-muted-pressed:#ffd95740;
   --color-success-default:var(--brand-colors-green-green300);
-  --color-success-muted:#28a74526;
+  --color-success-muted:#4cb56426;
   --color-success-inverse:var(--brand-colors-grey-grey900);
-  --color-success-default-hover:#2cb94c;
-  --color-success-default-pressed:#30ca53;
+  --color-success-default-hover:#59ba6f;
+  --color-success-default-pressed:#76c688;
+  --color-success-muted-hover:#4cb56433;
+  --color-success-muted-pressed:#4cb56440;
   --color-info-default:var(--brand-colors-blue-blue300);
-  --color-info-muted:#43aefc26;
+  --color-info-muted:#8b99ff26;
   --color-info-inverse:var(--brand-colors-grey-grey900);
   --color-flask-default:var(--brand-colors-purple-purple300);
   --color-flask-inverse:var(--brand-colors-grey-grey900);
   --color-shadow-default:#00000066;
-  --color-shadow-primary:#43aefc33;
-  --color-shadow-error:#ff758466;
+  --color-shadow-primary:#8b99ff33;
+  --color-shadow-error:#ff758433;
 }
 
 :root {
