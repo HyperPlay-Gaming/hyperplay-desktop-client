@@ -4,13 +4,13 @@
         "done": "Done",
         "first-welcome": {
             "account": "Login and connect your primary wallet to track progress.",
+            "account-title": "Start Your Journey",
+            "links-title": "A Galaxy of Games",
             "quests": "Take on quests, make leaderboards, and earn along the way.",
+            "rewards-title": "Earn Real Rewards 🎁",
             "stores": "Explore all the titles from HyperPlay, Epic Games, and GOG.",
-            "title1": "Ready for takeoff 🚀",
-            "title2": "A galaxy of games",
-            "title3": "Earn real rewards 🎁",
-            "title4": "Start your journey",
-            "welcome": "Begin your journey through the Web3 galaxy and discover top-tier games."
+            "welcome": "Begin your journey through the Web3 galaxy and discover top-tier games.",
+            "welcome-title": "Ready for Takeoff 🚀"
         },
         "next": "Next"
     }
