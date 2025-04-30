@@ -1,4 +1,4 @@
-import { app, dialog, shell } from 'electron'
+import { app, dialog } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
@@ -167,21 +167,6 @@ autoUpdater.on('error', async (error) => {
   })
 
   updateAttempts = 0
-
-  const { response } = await dialog.showMessageBox({
-    title: t('box.error.update.message', 'Error Updating'),
-    message: t(
-      'box.error.update.body',
-      `Something went wrong with the update after multiple attempts! Please check the error message below or reinstall HyperPlay. error: {{error}}`,
-      { error: errorMessage }
-    ),
-    type: 'error',
-    buttons: [t('button.cancel', 'Cancel'), t('button.download', 'Download')]
-  })
-
-  if (response === 1) {
-    shell.openExternal('https://www.hyperplay.xyz/downloads')
-  }
 })
 
 export function isClientUpdating(): ClientUpdateStatuses {
