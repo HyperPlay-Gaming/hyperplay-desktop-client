@@ -6,6 +6,7 @@ import { useTourGuide } from './TourContext'
 import { firstWelcomeTourSteps, TourStep } from './TourSteps'
 import './TourGuide.scss'
 import { FIRST_TIME_TOUR } from './constants'
+import CustomTourButtons from './CustomButtons'
 
 export const TourGuide: React.FC = () => {
   const { t } = useTranslation('tour')
@@ -14,6 +15,7 @@ export const TourGuide: React.FC = () => {
   const [stepsEnabled, setStepsEnabled] = useState(false)
   const [currentSteps, setCurrentSteps] = useState<TourStep[]>([])
   const [initialStep, setInitialStep] = useState(0)
+  const [currentStepIndex, setCurrentStepIndex] = useState(0)
 
   useEffect(() => {
     if (isTourActive && currentTour) {
@@ -48,6 +50,10 @@ export const TourGuide: React.FC = () => {
     deactivateTour()
   }
 
+  const onChange = (nextStepIndex: number) => {
+    setCurrentStepIndex(nextStepIndex)
+  }
+
   const options = {
     showStepNumbers: false,
     showBullets: true,
@@ -62,14 +68,23 @@ export const TourGuide: React.FC = () => {
   }
 
   return (
-    <Steps
-      enabled={stepsEnabled}
-      steps={currentSteps}
-      initialStep={initialStep}
-      onExit={onExit}
-      onComplete={onComplete}
-      options={options}
-    />
+    <>
+      <Steps
+        enabled={stepsEnabled}
+        steps={currentSteps}
+        initialStep={initialStep}
+        onExit={onExit}
+        onComplete={onComplete}
+        onChange={onChange}
+        options={options}
+      />
+      {stepsEnabled && (
+        <CustomTourButtons
+          isFirstStep={currentStepIndex === 0}
+          isFinalStep={currentStepIndex === currentSteps.length - 1}
+        />
+      )}
+    </>
   )
 }
 
