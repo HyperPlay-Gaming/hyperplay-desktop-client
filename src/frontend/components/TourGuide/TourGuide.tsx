@@ -57,7 +57,7 @@ export const TourGuide: React.FC = () => {
     nextLabel: t('tour.next', 'Next'),
     prevLabel: t('tour.back', 'Back'),
     doneLabel: t('tour.done', 'Done'),
-    overlayOpacity: 0.7,
+    overlayOpacity: 0.9,
     scrollToElement: true
   }
 

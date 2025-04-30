@@ -1,9 +1,8 @@
 .introjs-tooltip {
-  background: #222530;
+  background: var(--color-neutral-600);
   color: var(--text-default);
   border-radius: var(--space-xs);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--accent);
   min-width: 320px;
 }
 
@@ -14,32 +13,98 @@
 }
 
 .introjs-button {
-  border: 2px solid var(--stroke-brand-strong, #ab82fe);
-  border-radius: var(--space-sm, 8px);
-  background: var(--Fill-Brand-strong, #6b2adc);
-  color: var(--text-strong, #fff);
-  text-align: center;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  font-family: var(--font-family-body, 'Poppins');
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-shadow: none;
+  border-radius: var(--space-xs);
+  border: none;
 
-  /* Text/Button-Sm */
-  font-family: var(--font-family-body, Poppins);
+  &:active {
+    color: var(--color-neutral-200);
+  }
 
-  /* Shadow/Raised */
-  box-shadow: 0px 2px 4px -2px rgba(124, 58, 237, 0.08),
-    0px 4px 8px -2px rgba(124, 58, 237, 0.04);
+  &:disabled,
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  border-image-source: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  color: var(--text-strong);
+  background-color: var(--fill-brand-strong);
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--fill-hover);
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+
+  &:focus-visible,
+  &.focusVisible {
+    outline-offset: 2px;
+    outline: 2px solid var(--fill-brand-strong);
+  }
 
   &:focus,
   &:hover {
-    background-color: var(--primary);
-    color: var(--text-title);
+    background-color: var(--fill-brand-strong);
+    color: var(--text-strong);
+    opacity: 80%;
   }
 }
 
 .introjs-prevbutton {
-  color: var(--Text-Brand, #ab82fe);
-  background: rgba(255, 255, 255, 0.01);
-  box-shadow: 0px 2px 4px -2px rgba(124, 58, 237, 0.08),
-    0px 4px 8px -2px rgba(124, 58, 237, 0.04);
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: none;
+
+  &:active {
+    color: var(--color-neutral-200);
+  }
+
+  &:disabled,
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  border-image-source: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  color: var(--text-brand);
+  border: 2px solid var(--color-stroke-brand-strong);
+  background: transparent;
+  position: relative;
+  isolation: isolate;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent;
+    color: var(--text-brand);
+    opacity: 80%;
+    z-index: 1;
+    cursor: pointer;
+    border: 1px solid var(--color-stroke-brand-strong);
+  }
 }
 
 .introjs-bullets ul li a {
@@ -51,27 +116,40 @@
 }
 
 .introjs-arrow {
+  border: 15px solid transparent;
+
+  &.top {
+    top: -29px;
+  }
+
   &.top,
   &.top-right,
   &.top-middle {
-    border-bottom-color: var(--background-secondary);
+    border-bottom-color: var(--color-neutral-600);
   }
 
   &.bottom,
   &.bottom-right,
   &.bottom-middle {
-    border-top-color: var(--background-secondary);
+    border-top-color: var(--color-neutral-600);
   }
 
   &.left {
-    border-right-color: var(--background-secondary);
+    border-right-color: var(--color-neutral-600);
+    left: -29px;
   }
 
   &.right {
-    border-left-color: var(--background-secondary);
+    border-left-color: var(--color-neutral-600);
+    right: -29px;
   }
 }
 
 .introjs-skipbutton {
   color: var(--text-default);
+
+  &:hover {
+    color: var(--text-default);
+    opacity: 0.8;
+  }
 }
