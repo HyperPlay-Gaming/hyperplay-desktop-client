@@ -44,6 +44,6 @@ export const firstWelcomeTourSteps = (t: TFunction<'tour'>): TourStep[] => [
       'tour.first-welcome.account',
       'Login and connect your primary wallet to track progress.'
     ),
-    position: 'left'
+    position: 'bottom'
   }
 ]

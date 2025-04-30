@@ -119,16 +119,13 @@
 }
 
 .introjs-arrow {
-  border: 15px solid transparent;
-
-  &.top {
-    top: -29px;
-  }
+  border: 10px solid transparent;
 
   &.top,
   &.top-right,
   &.top-middle {
     border-bottom-color: var(--color-neutral-600);
+    top: -18px;
   }
 
   &.bottom,
@@ -139,12 +136,12 @@
 
   &.left {
     border-right-color: var(--color-neutral-600);
-    left: -29px;
+    left: -18px;
   }
 
   &.right {
+    right: -18px;
     border-left-color: var(--color-neutral-600);
-    right: -29px;
   }
 }
 
