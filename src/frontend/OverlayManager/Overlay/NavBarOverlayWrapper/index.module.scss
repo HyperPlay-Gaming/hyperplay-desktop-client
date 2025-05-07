@@ -21,7 +21,7 @@ $modalBgColor: var(--color-neutral-600);
   border: 'none';
   display: flex;
   flex-direction: column;
-  background-color: $modalBgColor;
+  background-color: var(--background-raised);
   border-radius: var(--space-xs-fixed);
   padding: var(--space-sm);
   color: var(--color-neutral-100);
