@@ -220,7 +220,7 @@ function LogSettings() {
               'setting.log.copy-to-clipboard',
               'Copy log content to clipboard.'
             )}
-            className="button is-footer"
+            className="buttoncopy"
           >
             <div className="button-icontext-flex">
               <div className="button-icon-flex">

@@ -16,7 +16,7 @@
 }
 
 .log-buttons:hover {
-  color: var(--text-hover);
+  color: var(--color-primary-200);
 }
 
 .logs-wrapper {
@@ -78,7 +78,7 @@ dialog .logs-wrapper {
 }
 
 .log-buttons:hover {
-  color: var(--text-hover);
+  color: var(--color-primary-200);
 }
 
 .log-error,
@@ -118,4 +118,33 @@ dialog .logs-wrapper {
 .report-problem-instructions {
   text-align: left;
   padding-bottom: var(--space-md);
+}
+
+.footerFlex {
+  display: flex;
+  padding-top: var(--space-2lg);
+  align-items: center;
+  gap: var(--space-xl);
+
+  > a {
+    border: 1px solid var(--text-brand);
+    padding: var(--space-2xs) var(--space-md);
+    border-radius: var(--space-xs);
+
+    &:hover {
+      background-color: var(--color-primary-200);
+      color: var(--text-brand);
+    }
+  }
+}
+
+.button-icon-text,
+.button-icon-flex {
+  color: var(--text-brand);
+}
+
+.button-icon-text:hover,
+.button-icon-flex:hover {
+  color: var(--color-primary-200);
+  border-bottom: none;
 }

@@ -81,8 +81,8 @@ export default function SystemInfo() {
   if (!systemInformation) return <LoadingSpinner />
 
   return (
-    <div style={{ width: '770px', textAlign: 'start' }} className="systeminfo">
-      <h5 style={{ marginBottom: 'var(--space-xs)' }}>
+    <div className="systeminfo">
+      <h5 className="systeminfo-title">
         {t('settings.navbar.systemInformation', 'System Information')}
       </h5>
       <div className={styles.gridContainer}>
@@ -93,17 +93,20 @@ export default function SystemInfo() {
         ) : (
           <SystemSpecifications systemInformation={systemInformation} />
         )}
-        <OSInfo
-          os={systemInformation.OS}
-          isFlatpak={systemInformation.isFlatpak}
-        />
-        <div>
+        <div className="osinfo">
+          <OSInfo
+            os={systemInformation.OS}
+            isFlatpak={systemInformation.isFlatpak}
+          />
+        </div>
+        <div className="softwareinfo">
           <SoftwareInfo software={systemInformation.softwareInUse} />
         </div>
       </div>
       <Button
         className="copyToClipboardButton"
         type="secondary"
+        size="small"
         leftIcon={<FontAwesomeIcon icon={faCopy} />}
         onClick={window.api.systemInfo.copyToClipboard}
       >

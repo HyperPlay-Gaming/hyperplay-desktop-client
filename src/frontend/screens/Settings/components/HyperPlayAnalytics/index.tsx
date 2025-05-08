@@ -37,7 +37,7 @@ const HyperPlayAnalytics = () => {
           ? t('hyperplay.analyticsOn', `Analytics is turned on`)
           : t('hyperplay.analyticsOff', `Analytics is turned off`)}
       </div>
-      <Button type="tertiary" onClick={toggleAnalytics}>
+      <Button type="secondary" size="small" onClick={toggleAnalytics}>
         {analyticsOn
           ? t('hyperplay.turnAnalyticsOff', `Turn off`)
           : t('hyperplay.turnAnalyticsOn', `Turn on`)}

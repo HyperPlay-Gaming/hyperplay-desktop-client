@@ -1,8 +1,9 @@
 .tabsWrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: var(--space-xs);
   width: 100%;
-  align-items: center;
+  align-items: flex-start;
 
   .FormControl__button {
     width: fit-content;
@@ -37,8 +38,10 @@
   min-width: 100%;
 
   .gameListHeader {
+    display: grid;
     grid-template-columns: 4fr 2fr 2fr 1fr;
     margin: 0 var(--space-xl-fixed);
+
     span:last-child {
       justify-self: center;
     }

@@ -84,7 +84,7 @@ const EmailSubscriptionModal = () => {
             )}
           </Modal.Body>
           <Button
-            type="secondary"
+            type="primary"
             className={styles.manualClose}
             onClick={closeModal}
           >

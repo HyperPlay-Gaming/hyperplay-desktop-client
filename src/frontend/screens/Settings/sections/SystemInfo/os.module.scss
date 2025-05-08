@@ -1,3 +1,44 @@
 .logoContainer {
   width: 32px;
+  height: 32px;
+}
+
+.osinfo {
+  display: flex;
+  gap: var(--space-xs);
+  > div {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-bottom: 40px;
+  }
+}
+
+.gridItemContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.osinfoname {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: flex-start;
+}
+
+.osinfoversion {
+  display: flex;
+  padding-bottom: 20px;
+  padding-top: 0;
+
+  > div {
+    align-items: flex-start;
+  }
+}
+
+.memorytitle {
+  padding-bottom: 20px;
+  padding-top: 0;
+  > div {
+    gap: var(--space-xs);
+  }
 }

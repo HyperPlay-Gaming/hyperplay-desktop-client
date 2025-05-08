@@ -167,6 +167,7 @@
   user-select: text;
   padding: var(--space-xl) var(--space-lg) var(--space-xl) var(--space-lg);
   min-height: 92vh;
+  gap: var(--space-2lg);
 
   .title {
     font-weight: var(--bold);
