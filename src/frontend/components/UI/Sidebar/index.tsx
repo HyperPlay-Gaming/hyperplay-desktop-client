@@ -5,8 +5,10 @@ import styles from './index.module.scss'
 
 const Sidebar = () => {
   return (
-    <aside className={`${styles.Sidebar}`}>
-      <SidebarLinks />
+    <aside className={`${styles.Sidebar}`} data-tour="sidebar-container">
+      <div className={styles.sidebarContent}>
+        <SidebarLinks />
+      </div>
     </aside>
   )
 }

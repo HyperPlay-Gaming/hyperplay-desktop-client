@@ -83,6 +83,7 @@ const GamesList = observer(
           gameListLayout: layout === 'list',
           firstLane: isFirstLane
         })}
+        data-tour="games-list"
       >
         {layout === 'list' && (
           <div className="gameListHeader">

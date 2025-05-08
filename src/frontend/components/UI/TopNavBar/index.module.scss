@@ -7,6 +7,22 @@
   align-items: center;
   padding: var(--space-md) var(--space-lg);
   z-index: 100000;
+
+  .tourButton {
+    margin-left: var(--space-2xs);
+    color: var(--text-default);
+    background-color: var(--transparent);
+    border: none;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    &:hover {
+      color: var(--text-hover);
+    }
+  }
 }
 
 .navBar > :first-child {

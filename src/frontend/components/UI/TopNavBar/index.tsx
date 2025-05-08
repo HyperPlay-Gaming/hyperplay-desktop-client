@@ -17,6 +17,7 @@ import {
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { extractMainDomain } from '../../../helpers/extract-main-domain'
 import AppVersion from '../AppVersion'
+import { TourGuide } from '../../TourGuide'
 
 const TopNavBar = observer(() => {
   const { t } = useTranslation()
@@ -52,12 +53,13 @@ const TopNavBar = observer(() => {
   }
 
   return (
-    <div className={styles.navBar}>
+    <div className={styles.navBar} data-tour="topnav-container">
       <div>
         <HyperPlayLogoWhite
           height="27px"
           width="27px"
           className={styles.hpLogo}
+          data-tour="topnav-logo"
         />
         <Images.HyperPlayTextLogo
           fill="var(--color-neutral-100)"
@@ -68,8 +70,8 @@ const TopNavBar = observer(() => {
             <AppVersion />
           </div>
         </div>
-        <>
-          <NavLink to="/hyperplaystore">
+        <div data-tour="topnav-store-links">
+          <NavLink to="/hyperplaystore" data-tour="topnav-hyperplay-store">
             <Button
               type="link"
               size="small"
@@ -78,7 +80,7 @@ const TopNavBar = observer(() => {
               HyperPlay
             </Button>
           </NavLink>
-          <NavLink to="/epicstore">
+          <NavLink to="/epicstore" data-tour="topnav-epic-store">
             <Button
               type="link"
               size="small"
@@ -87,7 +89,7 @@ const TopNavBar = observer(() => {
               {t('Epic Games', 'Epic Games')}
             </Button>
           </NavLink>
-          <NavLink to="/gogstore">
+          <NavLink to="/gogstore" data-tour="topnav-gog-store">
             <Button
               type="link"
               size="small"
@@ -96,16 +98,19 @@ const TopNavBar = observer(() => {
               {t('GOG', 'GOG')}
             </Button>
           </NavLink>
-        </>
+        </div>
       </div>
       <div>
-        {pathname === '/library' ? <SearchBar /> : null}
+        {pathname === '/library' ? (
+          <SearchBar data-tour="topnav-search" />
+        ) : null}
         {showMetaMaskBrowserSidebarLinks && (
           <button
             className={styles.iconButton}
             onClick={() => extensionStore.toggleIsPopupOpen()}
             onMouseEnter={() => extensionStore.lockPopup()}
             onMouseLeave={() => extensionStore.unlockPopup()}
+            data-tour="topnav-metamask"
           >
             <Images.MetaMask className={styles.metaMaskIcon} />
             {badgeText !== '' && badgeText !== '0' ? (
@@ -113,8 +118,11 @@ const TopNavBar = observer(() => {
             ) : null}
           </button>
         )}
-        <AccountDropdown />
+        <div data-tour="topnav-account">
+          <AccountDropdown />
+        </div>
       </div>
+      <TourGuide />
     </div>
   )
 })

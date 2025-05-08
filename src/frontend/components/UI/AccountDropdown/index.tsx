@@ -17,15 +17,18 @@ import useAuthSession from '../../../hooks/useAuthSession'
 function NavigationMenuItem({
   label,
   to,
-  showMetaMaskExtensionLinks
+  showMetaMaskExtensionLinks,
+  dataTour
 }: {
   label: string
   to: string
   showMetaMaskExtensionLinks: boolean
+  dataTour?: string
 }) {
   return (
     <Menu.Item
       id={showMetaMaskExtensionLinks ? 'topMenuItemWalletDropdown' : undefined}
+      data-tour={dataTour}
     >
       <NavLink
         to={to}
@@ -74,6 +77,7 @@ const WalletDropdown: React.FC = observer(() => {
         <Menu.Item
           className={styles.menuItem}
           onClick={() => onboardingStore.openOnboarding()}
+          data-tour="account-wallet-connect"
         >
           <div className={`body ${styles.itemContents}`}>
             {showWalletConnectedLinks
@@ -87,7 +91,8 @@ const WalletDropdown: React.FC = observer(() => {
               label={t('hyperplay.viewFullscreen', `View fullscreen`)}
               to={'/metamaskHome'}
               showMetaMaskExtensionLinks={showMetaMaskExtensionLinks}
-            ></NavigationMenuItem>
+              dataTour="account-metamask-fullscreen"
+            />
             <NavigationMenuItem
               label={t('hyperplay.viewItem', {
                 defaultValue: 'View {{item}}',
@@ -95,17 +100,19 @@ const WalletDropdown: React.FC = observer(() => {
               })}
               showMetaMaskExtensionLinks={showMetaMaskExtensionLinks}
               to={'/metamaskSnaps'}
-            ></NavigationMenuItem>
+              dataTour="account-metamask-snaps"
+            />
           </>
         )}
         {showMetaMaskExtensionLinks && (
           <Menu.Item
-            className={`${styles.menuItem} `}
+            className={styles.menuItem}
             id={
               !showWalletConnectedLinks
                 ? 'topMenuItemWalletDropdown'
                 : undefined
             }
+            data-tour="account-metamask-portfolio"
           >
             <NavLink
               to={'/metamaskPortfolio'}
@@ -127,7 +134,7 @@ const WalletDropdown: React.FC = observer(() => {
           </Menu.Item>
         )}
         <Menu.Label>Epic/GoG {t('accounts', `accounts`)}</Menu.Label>
-        <Menu.Item>
+        <Menu.Item data-tour="account-manage-stores">
           <NavLink to={'/login'}>
             <div className={`body ${styles.itemContents}`}>
               {t('userselector.manageStore', `Manage stores`)}
@@ -140,7 +147,10 @@ const WalletDropdown: React.FC = observer(() => {
             <Menu.Label>HyperPlay {t('profile', `Profile`)}</Menu.Label>
             {isSignedIn ? (
               <>
-                <Menu.Item onClick={() => authState.openSignInModal()}>
+                <Menu.Item
+                  onClick={() => authState.openSignInModal()}
+                  data-tour="account-manage-accounts"
+                >
                   <div className={`body ${styles.itemContents}`}>
                     {t('userselector.manageaccounts', `Manage accounts`)}
                   </div>
@@ -150,6 +160,7 @@ const WalletDropdown: React.FC = observer(() => {
                     await window.api.logOut()
                     await invalidateQuery()
                   }}
+                  data-tour="account-logout"
                 >
                   <div
                     className={`body ${styles.itemContents} ${styles.logOut}`}
@@ -159,7 +170,10 @@ const WalletDropdown: React.FC = observer(() => {
                 </Menu.Item>
               </>
             ) : (
-              <Menu.Item onClick={() => authState.openSignInModal()}>
+              <Menu.Item
+                onClick={() => authState.openSignInModal()}
+                data-tour="account-login"
+              >
                 <div className={`body ${styles.itemContents}`}>
                   {t('userselector.logIn', `Log in`)}
                 </div>

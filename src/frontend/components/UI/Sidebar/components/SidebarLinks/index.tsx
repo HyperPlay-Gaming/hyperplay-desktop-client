@@ -76,7 +76,7 @@ export default observer(function SidebarLinks() {
   return (
     <>
       <div className="SidebarLinks Sidebar__section">
-        <div className="sidebarLinkGradientWrapper">
+        <div className="sidebarLinkGradientWrapper" data-tour="sidebar-store">
           <Tooltip {...tooltipProps} label={t('sidebar.store', 'Store')}>
             <NavLink
               className={({ isActive }) =>
@@ -98,7 +98,7 @@ export default observer(function SidebarLinks() {
             </NavLink>
           </Tooltip>
         </div>
-        <div className="sidebarLinkGradientWrapper">
+        <div className="sidebarLinkGradientWrapper" data-tour="sidebar-library">
           <Tooltip {...tooltipProps} label={t('sidebar.library', 'Library')}>
             <NavLink
               className={({ isActive }) =>
@@ -118,7 +118,10 @@ export default observer(function SidebarLinks() {
           </Tooltip>
         </div>
         {SHOW_ACHIEVEMENTS && (
-          <div className="sidebarLinkGradientWrapper">
+          <div
+            className="sidebarLinkGradientWrapper"
+            data-tour="sidebar-achievements"
+          >
             <Tooltip
               {...tooltipProps}
               label={t('sidebar.achievements', 'Achievements')}
@@ -140,7 +143,10 @@ export default observer(function SidebarLinks() {
           </div>
         )}
         {SHOW_QUESTS ? (
-          <div className="sidebarLinkGradientWrapper">
+          <div
+            className="sidebarLinkGradientWrapper"
+            data-tour="sidebar-quests"
+          >
             <Tooltip {...tooltipProps} label={t('sidebar.quests', 'Quests')}>
               <NavLink
                 data-testid="quests"
@@ -159,7 +165,10 @@ export default observer(function SidebarLinks() {
             </Tooltip>
           </div>
         ) : null}
-        <div className="sidebarLinkGradientWrapper">
+        <div
+          className="sidebarLinkGradientWrapper"
+          data-tour="sidebar-downloads"
+        >
           <Tooltip
             {...tooltipProps}
             label={t('sidebar.downloadManager', 'Download Manager')}
@@ -174,7 +183,10 @@ export default observer(function SidebarLinks() {
             </NavLink>
           </Tooltip>
         </div>
-        <div className="sidebarLinkGradientWrapper">
+        <div
+          className="sidebarLinkGradientWrapper"
+          data-tour="sidebar-settings"
+        >
           <Tooltip {...tooltipProps} label={t('sidebar.settings', 'Settings')}>
             <NavLink
               data-testid="settings"
@@ -194,10 +206,11 @@ export default observer(function SidebarLinks() {
         </div>
       </div>
 
-      <div className=" SidebarLinks Sidebar__section">
+      <div className="SidebarLinks Sidebar__section">
         <div
           className="sidebarLinkGradientWrapper"
           onClick={() => handleExternalLink(window.api.openDiscordLink)}
+          data-tour="sidebar-discord"
         >
           <Tooltip {...tooltipProps} label="Discord">
             <div className="Sidebar__item">
@@ -208,8 +221,9 @@ export default observer(function SidebarLinks() {
           </Tooltip>
         </div>
         <div
-          className="sidebarLinkGradientWrapper "
+          className="sidebarLinkGradientWrapper"
           onClick={() => handleExternalLink(window.api.openTwitterLink)}
+          data-tour="sidebar-x"
         >
           <Tooltip {...tooltipProps} label="X">
             <div className="Sidebar__item">
@@ -219,7 +233,7 @@ export default observer(function SidebarLinks() {
             </div>
           </Tooltip>
         </div>
-        <div className="sidebarLinkGradientWrapper">
+        <div className="sidebarLinkGradientWrapper" data-tour="sidebar-docs">
           <Tooltip {...tooltipProps} label={t('sidebar.docs', 'Docs')}>
             <NavLink
               data-testid="Docs"
@@ -232,7 +246,7 @@ export default observer(function SidebarLinks() {
             </NavLink>
           </Tooltip>
         </div>
-        <div className="sidebarLinkGradientWrapper">
+        <div className="sidebarLinkGradientWrapper" data-tour="sidebar-quit">
           {(isFullscreen || activeController) && <QuitButton />}
         </div>
       </div>
