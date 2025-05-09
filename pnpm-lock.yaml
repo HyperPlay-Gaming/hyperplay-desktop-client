@@ -482,8 +482,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
       '@hyperplay/extension-provider':
-        specifier: ^0.0.9
-        version: 0.0.9(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
+        specifier: 0.1.0-alpha.0
+        version: 0.1.0-alpha.0(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
       '@hyperplay/mock-backend':
         specifier: ^0.0.1
         version: 0.0.1
@@ -1868,11 +1868,11 @@ packages:
   '@hyperplay/extension-importer@0.3.0':
     resolution: {integrity: sha512-Hmn2b1BpCvPu0UUfZ3COsDWTJCisATIf2vfUTmnWeIo7kVEbGMqhTxD2TsIu2SX4ekJb8gliQK+FTNUeh3bK9A==}
 
-  '@hyperplay/extension-provider@0.0.9':
-    resolution: {integrity: sha512-67x/FnhVXY/bUvWrQ3n1rmosxTymB5j9TRkFlNzI1wLU9zA05vJsIEGKBpXTrf/tQMspMfnKTvFFt7O9RtugiQ==}
+  '@hyperplay/extension-provider@0.1.0-alpha.0':
+    resolution: {integrity: sha512-WHT3IqPsfbALSX6AqT7Cxi4U6K0bG6eGk5ToA+HLXfn146vVsaBPggr5yNq7srcDZxg9OXqVLPQHxGide9oGfQ==}
     peerDependencies:
       electron: 33.2.0
-      ethers: ^6.9.0
+      ethers: ^6.13.5
 
   '@hyperplay/mock-backend@0.0.1':
     resolution: {integrity: sha512-e+Opn7x/2axWJvnQ0Vm0/QYgObjhxNs90m/KKcBSpYT45v4slIQW54Af/trjlkDVK3S2YQuZ4mbvMV1ona05JA==}
@@ -8583,6 +8583,12 @@ packages:
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
 
+  systeminformation@5.25.11:
+    resolution: {integrity: sha512-jI01fn/t47rrLTQB0FTlMCC+5dYx8o0RRF+R4BPiUNsvg5OdY0s9DKMFmJGrx5SwMZQ4cag0Gl6v8oycso9b/g==}
+    engines: {node: '>=8.0.0'}
+    os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
+    hasBin: true
+
   tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
 
@@ -11092,13 +11098,14 @@ snapshots:
       graceful-fs: 4.2.11
     optional: true
 
-  '@hyperplay/extension-provider@0.0.9(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))':
+  '@hyperplay/extension-provider@0.1.0-alpha.0(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))':
     dependencies:
       '@hyperplay/utils': 0.3.13
       electron: 33.2.0
       ethers: 6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       fs-extra: 11.2.0
       graceful-fs: 4.2.11
+      systeminformation: 5.25.11
       zod: 3.24.1
     optional: true
 
@@ -20325,6 +20332,9 @@ snapshots:
   system-architecture@0.1.0: {}
 
   systeminformation@5.23.13: {}
+
+  systeminformation@5.25.11:
+    optional: true
 
   tabbable@6.2.0: {}
 

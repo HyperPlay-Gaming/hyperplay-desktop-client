@@ -46,6 +46,8 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - name: Build artifacts.
         run: pnpm dist:win
+        env:
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
       - name: Upload EXE.
         uses: actions/upload-artifact@v4
         with:
@@ -91,10 +93,16 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env
       - name: Build deb artifact
         run: pnpm dist:linux:ci:deb
+        env:
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
       - name: Build rpm artifact
         run: pnpm dist:linux:ci:rpm
+        env:
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
       - name: Build pacman artifact
         run: pnpm dist:linux:ci:pacman
+        env:
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
   build_mac_arm64:
     runs-on: macos-latest
     concurrency:
@@ -133,6 +141,7 @@ jobs:
         run: pnpm run dist:mac:arm64
         env:
           NOTARIZE: false
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
       - name: Upload Intel build.
         uses: actions/upload-artifact@v4
         with:

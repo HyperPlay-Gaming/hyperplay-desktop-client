@@ -49,3 +49,4 @@ jobs:
         run: pnpm release:mac:x64
         env:
           NOTARIZE: true
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}

@@ -57,6 +57,12 @@ const preloads = [
   'src/backend/auth_provider_preload.ts'
 ]
 
+let protectedStrings: string[] = []
+
+if (process.env.PROTECTED_STRING_1) {
+  protectedStrings.push(process.env.PROTECTED_STRING_1)
+}
+
 export default defineConfig(({ mode }) => ({
   main: {
     build: {
@@ -70,7 +76,7 @@ export default defineConfig(({ mode }) => ({
     resolve: { alias: srcAliases },
     plugins: [
       externalizeDepsPlugin({ exclude: dependenciesToNotExternalize }),
-      bytecodePlugin()
+      bytecodePlugin({ protectedStrings })
     ]
   },
   preload: {
