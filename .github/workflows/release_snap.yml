@@ -41,3 +41,5 @@ jobs:
           echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
       - name: Update package on Snap Store
         run: pnpm run dist:linux snap --publish always
+        env:
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}

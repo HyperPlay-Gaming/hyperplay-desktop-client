@@ -60,6 +60,7 @@ jobs:
         run: pnpm release:mac:x64
         env:
           NOTARIZE: true
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
       - name: Copy dist/latest-mac.yml to dist/latest-mac-x64.yml
         run: |
           cp dist/latest-mac.yml dist/latest-mac-x64.yml
@@ -113,6 +114,7 @@ jobs:
         run: pnpm release:mac:arm64
         env:
           NOTARIZE: true
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
       - name: Copy dist/latest-mac.yml to dist/latest-mac-arm64.yml
         run: |
           cp dist/latest-mac.yml dist/latest-mac-arm64.yml

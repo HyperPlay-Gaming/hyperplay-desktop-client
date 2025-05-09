@@ -69,6 +69,8 @@ jobs:
 
       - name: Build artifacts.
         run: pnpm run dist:win
+        env:
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
 
       - name: Upload build file to Signpath
         run: |

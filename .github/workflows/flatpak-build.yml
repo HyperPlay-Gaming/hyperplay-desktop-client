@@ -57,6 +57,8 @@ jobs:
         run: pnpm run setup
       - name: Build artifacts.
         run: pnpm run dist:linux:ci:flatpak
+        env:
+          PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
       - name: Clean up build files to save space
         run: rm -rf build dist/linux-unpacked node_modules public/bin/win32 public/bin/darwin ~/.cache
       - name: Prepare Flatpak
