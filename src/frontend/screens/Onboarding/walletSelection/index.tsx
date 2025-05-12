@@ -12,7 +12,7 @@ import {
   WalletConnectedType
 } from 'common/types/proxy-types'
 // import './index.css'
-import { MMTransparent, WCBlue } from 'frontend/assets/hyperplay'
+import { MMTransparent, WalletConnect } from 'frontend/assets/hyperplay'
 import { Images } from '@hyperplay/ui'
 import { t } from 'i18next'
 import WalletSelectionStyles from './index.module.scss'
@@ -33,6 +33,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ONBOARDING_SCREEN } from '../types'
 import emailSubscriptionState from '../../../state/EmailSubscriptionState'
+import WalletConnectIconsStack from './WalletConnectIconsStack'
 
 const wait = async (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))
@@ -277,25 +278,41 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
         </div>
         <div className={WalletSelectionStyles.walletOptionsContainer}>
           <WalletOption
-            title="MetaMask Mobile"
-            subtext="Transactions on mobile. Most secure."
+            title={t(
+              'hyperplay.onboarding.walletSelection.metamaskMobile',
+              `MetaMask Mobile`
+            )}
+            subtext={t(
+              'hyperplay.onboarding.walletSelection.metamaskMobileSubtext',
+              `Transactions on mobile. Most secure.`
+            )}
             icon={<MMTransparent height={34} width={34} />}
             onClick={async () => providerClicked(PROVIDERS.METAMASK_MOBILE)}
             isRecommended={false}
           />
           <WalletOption
-            title="MetaMask Extension"
-            subtext="Approve transactions in-game."
-            icon={<MMTransparent height={34} width={34} />}
+            title={t(
+              'hyperplay.onboarding.walletSelection.metamaskExtension',
+              `MetaMask Browser Extension`
+            )}
+            subtext={t(
+              'hyperplay.onboarding.walletSelection.metamaskExtensionSubtext',
+              `Approve transactions in-game.`
+            )}
+            icon={<MMTransparent height={48} width={48} />}
             onClick={handleMmExtensionProviderClicked}
             isRecommended={false}
           />
           <WalletOption
             title="WalletConnect"
-            subtext="Use 40+ other wallets."
-            icon={<WCBlue height={34} width={34} />}
+            subtext={t(
+              'hyperplay.onboarding.walletSelection.walletConnectSubtext',
+              `Most Flexible. Choose from 400+ wallets.`
+            )}
+            icon={<WalletConnect height={34} width={34} />}
             onClick={async () => providerClicked(PROVIDERS.WALLET_CONNECT)}
             isRecommended={false}
+            additionalContent={<WalletConnectIconsStack />}
           />
         </div>
       </div>

@@ -89,7 +89,6 @@
             },
             "update": {
                 "addressUnreachable": "Address unreachable. Please check your internet connection.",
-                "body": "Something went wrong with the update after multiple attempts! Please check the error message below or reinstall HyperPlay. error: {{error}}",
                 "certAuthorityInvalid": "Certificate authority invalid. Please check your system time and date or open a ticket with HyperPlay support.",
                 "certDateInvalid": "Certificate date invalid. Please check your system time and date or open a ticket with HyperPlay support.",
                 "connectionAborted": "Connection aborted. Please check your internet connection.",
@@ -101,7 +100,6 @@
                 "failed": "Download Failed. Please check your internet connection.",
                 "http2ServerRefusedStream": "HTTP2 server refused stream. Please check your internet connection.",
                 "internetDisconnected": "Internet disconnected. Please check your internet connection.",
-                "message": "Error Updating",
                 "nameNotResolved": "Name not resolved. Please check your internet connection.",
                 "networkAccessDenied": "Network access denied. Please check your internet connection.",
                 "networkChanged": "Network changed. Please check your internet connection.",
@@ -194,7 +192,6 @@
     "button": {
         "cancel": "Cancel",
         "continue": "Continue",
-        "download": "Download",
         "go_to_library": "Go to Library",
         "install": "Install",
         "sync": "Sync",
@@ -414,7 +411,6 @@
             "primaryButton": "I Agree",
             "secondaryButton": "No, Thanks"
         },
-        "changeWallet": "Swap wallet account",
         "compatibilityLayer": "Compatibility Layer (Beta)",
         "connectWallet": "Connect wallet",
         "copyUrl": "Copy URL",
@@ -458,7 +454,12 @@
                 "title": "Wallet connected!"
             },
             "walletSelection": {
+                "metamaskExtension": "MetaMask Browser Extension",
+                "metamaskExtensionSubtext": "Approve transactions in-game.",
+                "metamaskMobile": "MetaMask Mobile",
+                "metamaskMobileSubtext": "Transactions on mobile. Most secure.",
                 "pleaseConnect": "Please connect your wallet, or download the Metamask mobile-app to get\n        started:",
+                "recommended": "Recommended",
                 "screens": {
                     "import": {
                         "cantFindProfile": "Can't find your browser profile?",
@@ -492,7 +493,8 @@
                         "updateWarning": "Having issues? Make sure MetaMask is up to date."
                     }
                 },
-                "title": "Wallet Connections"
+                "title": "Wallet Connections",
+                "walletConnectSubtext": "Most Flexible. Choose from 400+ wallets."
             },
             "welcome": {
                 "text": {
@@ -510,6 +512,7 @@
             }
         },
         "otp": "One Time Passcode",
+        "swapConnectedWallet": "Swap connected wallet",
         "Sync": "Sync",
         "syncing": "Syncing...",
         "turnAnalyticsOff": "Turn off",
@@ -863,6 +866,7 @@
         "toClaimReward": "to claim your reward.",
         "toSeeDetails": "to see details.",
         "type": {
+            "leaderboard": "Leaderboard",
             "playstreak": "Play Streak",
             "reputation": "Reputation"
         },

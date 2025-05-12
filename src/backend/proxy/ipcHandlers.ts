@@ -6,6 +6,7 @@ import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { trackEvent } from 'backend/metrics/metrics'
 import defaultProviderStore from './provider_store'
 import { getHpOverlay } from 'backend/overlay'
+import { getFlag } from '../flags/flags'
 
 async function init() {
   try {
@@ -36,10 +37,19 @@ ipcMain?.handle(
       extensionProvider: extensionProvider.extensionProvider
     }
     const providers = await import('@hyperplay/providers')
+    const useWCForMMM = getFlag('use-wc-for-mmm', true)
+
+    let providerSelectionToUse = providerSelection
+    let providerToEmitOverride = undefined
+    if (useWCForMMM && providerSelection === PROVIDERS.METAMASK_MOBILE) {
+      providerSelectionToUse = PROVIDERS.WALLET_CONNECT
+      providerToEmitOverride = PROVIDERS.METAMASK_MOBILE
+    }
     const baseUri = await providers.getConnectionUri(
-      providerSelection,
+      providerSelectionToUse,
       isBootstrapping,
-      api
+      api,
+      providerToEmitOverride
     )
     const proxyServer = await import('@hyperplay/proxy-server')
     proxyServer.setProvider(providers.provider)

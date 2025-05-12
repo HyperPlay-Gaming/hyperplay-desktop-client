@@ -166,3 +166,6 @@ export const importGameFolder = async (gameFolder: string) =>
   ipcRenderer.invoke('importGameFolder', gameFolder)
 
 export const requestSIWE = async () => ipcRenderer.invoke('requestSIWE')
+
+export const getSiweMessageDomainAndUri = async () =>
+  ipcRenderer.invoke('getSiweMessageDomainAndUri')

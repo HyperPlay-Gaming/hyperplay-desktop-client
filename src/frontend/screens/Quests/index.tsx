@@ -72,6 +72,7 @@ export function QuestsPage() {
           'You are currently not logged in, play streak progress will not be tracked. Please login to HyperPlay via the top-right dropdown to track progress.'
         )}
         variant="warning"
+        showClose={false}
       />
     )
   }
@@ -175,9 +176,9 @@ export function QuestsPage() {
       if (!currentQuestExists) {
         const firstQuest = filteredQuests[0]
         if (firstQuest) {
-          const searchParams = new URLSearchParams(window.location.search)
-          const newUrl = `/quests/${firstQuest.id}${
-            searchParams.toString() ? `?${searchParams.toString()}` : ''
+          const searchParamVal = searchParams.get('search')
+          const newUrl = `/quests/${firstQuest.id}?search=${
+            searchParamVal ?? ''
           }#card-${firstQuest.id}`
           navigate(newUrl)
         }
