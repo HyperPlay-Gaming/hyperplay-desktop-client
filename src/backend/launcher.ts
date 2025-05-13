@@ -14,6 +14,7 @@ import {
   flatPakHome,
   isLinux,
   isMac,
+  isWindows,
   runtimePath,
   userHome
 } from './constants'
@@ -21,10 +22,11 @@ import {
   constructAndUpdateRPC,
   getSteamRuntime,
   isEpicServiceOffline,
-  searchForExecutableOnPath,
   quoteIfNecessary,
   errorHandler,
-  removeQuoteIfNecessary
+  removeQuoteIfNecessary,
+  isMacSonomaOrHigher,
+  spawnAsync
 } from './utils'
 import {
   logDebug,
@@ -38,7 +40,6 @@ import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { DXVK } from './tools'
 import setup from './storeManagers/gog/setup'
-import nileSetup from './storeManagers/nile/setup'
 import {
   CallRunnerOptions,
   GameInfo,
@@ -57,11 +58,16 @@ import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
+import { legendarySetup } from './storeManagers/legendary/setup'
 import { gameManagerMap } from 'backend/storeManagers'
-import { trackPidPlaytime } from './metrics/metrics'
-import { closeOverlay, openOverlay } from 'backend/hyperplay-overlay'
 import * as VDF from '@node-steam/vdf'
 import { readFileSync } from 'fs'
+import { LegendaryCommand } from './storeManagers/legendary/commands'
+import { commandToArgsArray } from './storeManagers/legendary/library'
+import { searchForExecutableOnPath } from './utils/os/path'
+import { getHpOverlay } from './overlay'
+import { launchingGameShouldOpenOverlay } from './utils/shouldOpenOverlay'
+import { Listing } from '@valist/sdk/dist/typesApi'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -94,7 +100,7 @@ async function prepareLaunch(
 
   // Figure out where MangoHud/GameMode are located, if they're enabled
   let mangoHudCommand: string[] = []
-  let gameModeBin = ''
+  let gameModeBin: string | null = null
   if (gameSettings.showMangohud) {
     const mangoHudBin = await searchForExecutableOnPath('mangohud')
     if (!mangoHudBin) {
@@ -140,38 +146,24 @@ async function prepareLaunch(
         )
       }
     }
-    // for native games lets use scout for now
-    const runtimeType = isNative ? 'scout' : nonNativeRuntime
+    const runtimeType = isNative ? 'sniper' : nonNativeRuntime
     const { path, args } = await getSteamRuntime(runtimeType)
-    if (!path) {
-      return {
-        success: false,
-        failureReason:
-          'Steam Runtime is enabled, but no runtimes could be found\n' +
-          `Make sure Steam ${
-            isNative
-              ? 'is'
-              : `and the SteamLinuxRuntime - ${
-                  nonNativeRuntime === 'sniper' ? 'Sniper' : 'Soldier'
-                } are`
-          } installed`
-      }
+    if (path) {
+      steamRuntime = [
+        path,
+        isNative || !gameInfo.install['install_path']
+          ? ''
+          : `--filesystem=${gameInfo.install['install_path']}`,
+        ...args
+      ]
     }
-
-    steamRuntime = [
-      path,
-      isNative || !gameInfo.install['install_path']
-        ? ''
-        : `--filesystem=${gameInfo.install['install_path']}`,
-      ...args
-    ]
   }
 
   return {
     success: true,
     rpcClient,
     mangoHudCommand,
-    gameModeBin,
+    gameModeBin: gameModeBin ?? undefined,
     steamRuntime,
     offlineMode
   }
@@ -241,8 +233,8 @@ async function prepareWineLaunch(
     if (runner === 'gog') {
       await setup(appName)
     }
-    if (runner === 'nile') {
-      await nileSetup(appName)
+    if (runner === 'legendary') {
+      await legendarySetup(appName)
     }
   }
 
@@ -251,7 +243,10 @@ async function prepareWineLaunch(
     if (gameSettings.autoInstallDxvk) {
       await DXVK.installRemove(gameSettings, 'dxvk', 'backup')
     }
-    if (gameSettings.autoInstallVkd3d) {
+    if (isLinux && gameSettings.autoInstallDxvkNvapi) {
+      await DXVK.installRemove(gameSettings, 'dxvk-nvapi', 'backup')
+    }
+    if (isLinux && gameSettings.autoInstallVkd3d) {
       await DXVK.installRemove(gameSettings, 'vkd3d', 'backup')
     }
   }
@@ -314,6 +309,8 @@ function setupWineEnvVars(
   const { wineVersion, winePrefix, wineCrossoverBottle } = gameSettings
 
   const ret: Record<string, string> = {}
+
+  ret.DOTNET_BUNDLE_EXTRACT_BASE_DIR = ''
 
   // Add WINEPREFIX / STEAM_COMPAT_DATA_PATH / CX_BOTTLE
   const steamInstallPath = join(flatPakHome, '.steam', 'steam')
@@ -379,17 +376,34 @@ function setupWineEnvVars(
       )
     }
   }
+  if (isMac && gameSettings.enableMsync) {
+    ret.WINEMSYNC = '1'
+    // due to a bug on D3DMetal Esync needs to be enabled as well for msync to work
+    if (gameSettings.wineVersion.type === 'toolkit') {
+      ret.WINEESYNC = '1'
+    }
+  }
+
   if (gameSettings.enableEsync && wineVersion.type !== 'proton') {
     ret.WINEESYNC = '1'
   }
+
   if (!gameSettings.enableEsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_ESYNC = '1'
   }
-  if (gameSettings.enableFsync && wineVersion.type !== 'proton') {
+  if (isLinux && gameSettings.enableFsync && wineVersion.type !== 'proton') {
     ret.WINEFSYNC = '1'
   }
-  if (!gameSettings.enableFsync && wineVersion.type === 'proton') {
+  if (isLinux && !gameSettings.enableFsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_FSYNC = '1'
+  }
+  if (gameSettings.autoInstallDxvkNvapi && wineVersion.type === 'proton') {
+    ret.PROTON_ENABLE_NVAPI = '1'
+    ret.DXVK_NVAPI_ALLOW_OTHER_DRIVERS = '1'
+  }
+  if (gameSettings.autoInstallDxvkNvapi && wineVersion.type === 'wine') {
+    ret.DXVK_ENABLE_NVAPI = '1'
+    ret.DXVK_NVAPI_ALLOW_OTHER_DRIVERS = '1'
   }
   if (gameSettings.eacRuntime) {
     ret.PROTON_EAC_RUNTIME = join(runtimePath, 'eac_runtime')
@@ -484,7 +498,7 @@ function setupWrappers(
  * @returns true if the wine version exists, false if it doesn't
  */
 export async function validWine(
-  wineVersion: WineInstallation
+  wineVersion: WineInstallation | undefined
 ): Promise<boolean> {
   if (!wineVersion) {
     return false
@@ -499,6 +513,13 @@ export async function validWine(
   const { bin, wineserver, type } = wineVersion
   const necessary = type === 'wine' ? [bin, wineserver] : [bin]
   const haveAll = necessary.every((binary) => existsSync(binary as string))
+
+  if (isMac && type === 'toolkit') {
+    const isGPTKCompatible = await isMacSonomaOrHigher()
+    if (!isGPTKCompatible) {
+      return false
+    }
+  }
 
   // if wine version does not exist, use the default one
   if (!haveAll) {
@@ -577,7 +598,8 @@ async function runWineCommand({
   installFolderName,
   options,
   startFolder,
-  skipPrefixCheckIKnowWhatImDoing = false
+  skipPrefixCheckIKnowWhatImDoing = false,
+  overlayInfo
 }: WineCommandArgs): Promise<{ stderr: string; stdout: string }> {
   const settings = gameSettings
     ? gameSettings
@@ -634,6 +656,7 @@ async function runWineCommand({
   const wineBin = wineVersion.bin.replaceAll("'", '')
 
   logDebug(['Running Wine command:', commandParts.join(' ')], LogPrefix.Backend)
+  const hpOverlay = await getHpOverlay()
 
   return new Promise<{ stderr: string; stdout: string }>((res) => {
     const wrappers = options?.wrappers || []
@@ -651,6 +674,11 @@ async function runWineCommand({
     })
     child.stdout.setEncoding('utf-8')
     child.stderr.setEncoding('utf-8')
+
+    if (overlayInfo) {
+      const { showOverlay, appName, runner } = overlayInfo
+      if (showOverlay) hpOverlay?.openOverlay(appName, runner)
+    }
 
     if (!logsDisabled) {
       if (options?.logFile) {
@@ -710,11 +738,27 @@ async function runWineCommand({
         })
       }
 
+      if (overlayInfo) {
+        const { showOverlay } = overlayInfo
+        if (showOverlay) {
+          const hpOverlay = await getHpOverlay()
+          hpOverlay?.closeOverlay()
+        }
+      }
+
       res(response)
     })
 
-    child.on('error', (error) => {
+    child.on('error', async (error) => {
       console.log(error)
+
+      if (overlayInfo) {
+        const { showOverlay } = overlayInfo
+        if (showOverlay) {
+          const hpOverlay = await getHpOverlay()
+          hpOverlay?.closeOverlay()
+        }
+      }
     })
   })
 }
@@ -728,20 +772,61 @@ interface RunnerProps {
 
 const commandsRunning = {}
 
+let shouldUsePowerShell: boolean | null = null
+
 async function callRunner(
   commandParts: string[],
   runner: RunnerProps,
   abortController: AbortController,
   options?: CallRunnerOptions,
-  gameInfo?: GameInfo,
-  shouldTrackPlaytime = false
+  gameInfo?: GameInfo
 ): Promise<ExecResult> {
-  const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
+  let childPid: number | undefined
+  const isGame = gameInfo !== undefined
 
   // Necessary to get rid of possible undefined or null entries, else
   // TypeError is triggered
   commandParts = commandParts.filter(Boolean)
+
+  let bin = runner.bin
+  const singlePathRunners: Runner[] = ['hyperplay', 'sideload']
+  let fullRunnerPath = singlePathRunners.includes(runner.name)
+    ? bin
+    : join(runner.dir, bin)
+
+  // macOS/Linux: `spawn`ing an executable in the current working directory
+  // requires a "./"
+  if (!isWindows) {
+    if (runner.name === 'legendary' || runner.name === 'gog') {
+      bin = './' + bin
+    }
+  }
+
+  // On Windows: Use PowerShell's `Start-Process` to wait for the process and
+  // its children to exit, provided PowerShell is available
+  if (shouldUsePowerShell === null && isWindows) {
+    const powershellExists = !!(await searchForExecutableOnPath('powershell'))
+    shouldUsePowerShell = isWindows && powershellExists
+  }
+
+  if (shouldUsePowerShell && runner.name !== 'gog') {
+    const argsAsString = commandParts
+      .map((part) => part.replaceAll('\\', '\\\\'))
+      .map((part) => `"\`"${part}\`""`)
+      .join(',')
+    commandParts = [
+      'Start-Process',
+      `"\`"${fullRunnerPath}\`""`,
+      '-Wait',
+      '-NoNewWindow'
+    ]
+    if (argsAsString) {
+      commandParts.push('-ArgumentList', argsAsString)
+    }
+    bin = 'powershell'
+    fullRunnerPath = 'powershell'
+  }
 
   const safeCommand = getRunnerCallWithoutCredentials(
     [...commandParts],
@@ -771,8 +856,6 @@ async function callRunner(
     }
   }
 
-  const bin = runner.bin
-
   // check if the same command is currently running
   // if so, return the same promise instead of running it again
   const key = [runner.name, commandParts].join(' ')
@@ -781,38 +864,31 @@ async function callRunner(
   if (currentPromise) {
     return currentPromise
   }
+  const hpOverlay = await getHpOverlay()
+  let shouldOpenOverlay = false
+  let hyperPlayListing: Listing | undefined = undefined
+  if (isOnline()) {
+    const shouldLaunchResult = await launchingGameShouldOpenOverlay(gameInfo)
+    shouldOpenOverlay = shouldLaunchResult.shouldOpenOverlay
+    hyperPlayListing = shouldLaunchResult.hyperPlayListing
+  }
 
-  const promise = new Promise<ExecResult>((res, rej) => {
+  let promise = new Promise<ExecResult>((res, rej) => {
     const child = spawn(bin, commandParts, {
       cwd: runner.dir,
       env: { ...process.env, ...options?.env },
       signal: abortController.signal
     })
 
-    if (gameInfo && gameInfo.runner === 'hyperplay')
-      openOverlay(gameInfo?.app_name, gameInfo.runner)
+    childPid = child.pid
 
-    /*
-     * gogdl remains open while the game is running
-     * by tracking gogdl instead of the game, we do not need to rely on
-     * gogdl outputting the game's PID to stdout
-     *
-     * hyperplay and sideload game exes are launched directly so tracking the child process
-     * works well unless the exe launches a separate process and then closes
-     *
-     * legendary closes after launching the game so we need to track the game's PID
-     * which is outputted to stdout
-     */
-    const shouldTrackChildProcess = (runner: Runner) =>
-      runner === 'hyperplay' || runner === 'gog' || runner === 'sideload'
-
-    if (
-      gameInfo &&
-      shouldTrackChildProcess(gameInfo.runner) &&
-      child.pid !== undefined &&
-      shouldTrackPlaytime
-    )
-      trackPidPlaytime(child.pid, gameInfo)
+    if (gameInfo && shouldOpenOverlay) {
+      if (hyperPlayListing?.project_id) {
+        hpOverlay?.openOverlay(hyperPlayListing?.project_id, gameInfo.runner)
+      } else {
+        hpOverlay?.openOverlay(gameInfo?.app_name, gameInfo.runner)
+      }
+    }
 
     const stdout: string[] = []
     const stderr: string[] = []
@@ -820,32 +896,17 @@ async function callRunner(
     child.stdout.setEncoding('utf-8')
     child.stdout.on('data', (data: string) => {
       const dataStr = data.toString()
-      const pidPrefix = 'pid for popen process:'
-      const pidPrefixStartIndex = dataStr.search(pidPrefix)
-      if (pidPrefixStartIndex >= 0) {
-        const PID = dataStr
-          .substring(pidPrefixStartIndex + pidPrefix.length)
-          .trim()
-        logInfo(
-          `Process PID for Gogdl or Epic game injected: ${child.pid}`,
-          runner.logPrefix
-        )
+      const stringToLog = options?.logSanitizer
+        ? options.logSanitizer(data)
+        : data
 
-        // track when this pid is closed
-        if (
-          gameInfo &&
-          !shouldTrackChildProcess(gameInfo.runner) &&
-          shouldTrackPlaytime
-        )
-          trackPidPlaytime(PID.trim(), gameInfo)
-      }
       if (!logsDisabled) {
         if (options?.logFile) {
-          appendFileSync(options.logFile, data)
+          appendFileSync(options.logFile, stringToLog)
         }
 
         if (options?.verboseLogFile) {
-          appendFileSync(options.verboseLogFile, data)
+          appendFileSync(options.verboseLogFile, stringToLog)
         }
       }
 
@@ -858,13 +919,17 @@ async function callRunner(
 
     child.stderr.setEncoding('utf-8')
     child.stderr.on('data', (data: string) => {
+      const stringToLog = options?.logSanitizer
+        ? options.logSanitizer(data)
+        : data
+
       if (!logsDisabled) {
         if (options?.logFile) {
-          appendFileSync(options.logFile, data)
+          appendFileSync(options.logFile, stringToLog)
         }
 
         if (options?.verboseLogFile) {
-          appendFileSync(options.verboseLogFile, data)
+          appendFileSync(options.verboseLogFile, stringToLog)
         }
       }
 
@@ -876,13 +941,22 @@ async function callRunner(
     })
 
     child.on('close', (code, signal) => {
-      if (runner.name === 'hyperplay') closeOverlay()
+      try {
+        if (shouldOpenOverlay) hpOverlay?.closeOverlay()
+      } catch (err) {
+        logError(`Error closing overlay: ${err}`, LogPrefix.HyperPlay)
+      }
       errorHandler({
         error: `${stdout.join().concat(stderr.join())}`,
         logPath: options?.logFile,
         runner: runner.name,
         appName
       })
+
+      // close processes created by this process
+      if (childPid !== undefined) {
+        stopChildProcesses({ childPid })
+      }
 
       if (signal && !child.killed) {
         rej('Process terminated with signal ' + signal)
@@ -895,22 +969,27 @@ async function callRunner(
     })
 
     child.on('error', (error) => {
-      if (runner.name === 'hyperplay') closeOverlay()
+      if (shouldOpenOverlay) hpOverlay?.closeOverlay()
       rej(error)
     })
   })
 
-  // keep track of which commands are running
-  commandsRunning[key] = promise
+  abortController.signal.onabort = () => {
+    if (childPid !== undefined) {
+      stopChildProcesses({ childPid, shouldLog: isGame })
+    }
+  }
 
-  promise
+  promise = promise
     .then(({ stdout, stderr }) => {
       return { stdout, stderr, fullCommand: safeCommand }
     })
     .catch((error) => {
       if (abortController.signal.aborted) {
         logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
-
+        if (childPid !== undefined) {
+          stopChildProcesses({ childPid })
+        }
         return {
           stdout: '',
           stderr: '',
@@ -942,12 +1021,107 @@ async function callRunner(
       delete commandsRunning[key]
     })
 
+  // keep track of which commands are running
+  commandsRunning[key] = promise
+
   return promise
+}
+
+async function stopChildProcesses({
+  childPid,
+  shouldLog = false
+}: {
+  childPid: number
+  shouldLog?: boolean
+}) {
+  if (isWindows) {
+    logWarning(
+      `Killing all processes spawned by PID ${childPid}`,
+      LogPrefix.Backend
+    )
+
+    try {
+      // Get the list of child processes
+      const getChildProcesses = async (parentPid: number) => {
+        const result = await spawnAsync('powershell.exe', [
+          '-NoProfile',
+          '-Command',
+          `Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq ${parentPid} } | Select-Object -ExpandProperty ProcessId`
+        ])
+
+        if (result.stderr) {
+          if (shouldLog) {
+            logDebug(
+              `Error getting child processes: ${result.stderr}`,
+              LogPrefix.Backend
+            )
+          }
+        }
+
+        return result.stdout
+          .trim()
+          .split('\n')
+          .map((pid) => pid.trim())
+          .filter((pid) => pid)
+      }
+
+      // Recursively stop child processes
+      const stopProcessTree = async (parentPid: number) => {
+        const childPids = await getChildProcesses(parentPid)
+        for (const pid of childPids) {
+          stopProcessTree(parseInt(pid, 10))
+        }
+
+        // Stop the parent process
+        const stopResult = await spawnAsync('powershell.exe', [
+          '-NoProfile',
+          '-Command',
+          `Stop-Process -Id ${parentPid} -Force`
+        ])
+
+        if (stopResult.stderr) {
+          if (shouldLog) {
+            logDebug(
+              `Error stopping process with PID ${parentPid}: ${stopResult.stderr}`,
+              LogPrefix.Backend
+            )
+          }
+        }
+
+        if (shouldLog) {
+          logInfo(
+            `Successfully stopped process with PID: ${parentPid}`,
+            LogPrefix.Backend
+          )
+        }
+      }
+
+      stopProcessTree(childPid)
+    } catch (error) {
+      if (shouldLog) {
+        logDebug(
+          `Error stopping child processes from PID: ${childPid}: ${error}`,
+          LogPrefix.Backend
+        )
+      }
+    }
+
+    return
+  }
+
+  try {
+    return await spawnAsync('pkill', ['-TERM', '-P', childPid.toString()])
+  } catch (error) {
+    return logWarning(
+      `could not stop child processes from PID: ${childPid}. Maybe they were already stopped`,
+      LogPrefix.Backend
+    )
+  }
 }
 
 /**
  * Generates a formatted, safe command that can be logged
- * @param commandParts The runner command that's executed, e. g. install, list, etc.
+ * @param command The runner command that's executed, e.g. install, list, etc.
  * Note that this will be modified, so pass a copy of your actual command parts
  * @param env Enviroment variables to use
  * @param wrappers Wrappers to use (gamemode, steam runtime, etc.)
@@ -955,18 +1129,34 @@ async function callRunner(
  * @returns
  */
 function getRunnerCallWithoutCredentials(
-  commandParts: string[],
+  command: string[] | LegendaryCommand,
   env: Record<string, string> | NodeJS.ProcessEnv = {},
   runnerPath: string
 ): string {
-  const modifiedCommandParts = [...commandParts]
+  if (!Array.isArray(command)) command = commandToArgsArray(command)
+
+  const modifiedCommand = [...command]
   // Redact sensitive arguments (Authorization Code for Legendary, token for GOGDL)
   for (const sensitiveArg of ['--code', '--token']) {
-    const sensitiveArgIndex = modifiedCommandParts.indexOf(sensitiveArg)
-    if (sensitiveArgIndex === -1) {
-      continue
+    // PowerShell's argument formatting is quite different, instead of having
+    // arguments as members of `command`, they're all in one specific member
+    // (the one after "-ArgumentList")
+    if (runnerPath === 'powershell') {
+      const argumentListIndex = modifiedCommand.indexOf('-ArgumentList') + 1
+      if (!argumentListIndex) continue
+      modifiedCommand[argumentListIndex] = modifiedCommand[
+        argumentListIndex
+      ].replace(
+        new RegExp(`"${sensitiveArg}","(.*?)"`),
+        `"${sensitiveArg}","<redacted>"`
+      )
+    } else {
+      const sensitiveArgIndex = modifiedCommand.indexOf(sensitiveArg)
+      if (sensitiveArgIndex === -1) {
+        continue
+      }
+      modifiedCommand[sensitiveArgIndex + 1] = '<redacted>'
     }
-    modifiedCommandParts[sensitiveArgIndex + 1] = '<redacted>'
   }
 
   const formattedEnvVars: string[] = []
@@ -980,12 +1170,10 @@ function getRunnerCallWithoutCredentials(
     formattedEnvVars.push(`${key}=${quoteIfNecessary(value ?? '')}`)
   }
 
-  commandParts = commandParts.filter(Boolean)
-
   return [
     ...formattedEnvVars,
     quoteIfNecessary(runnerPath),
-    ...modifiedCommandParts.map(quoteIfNecessary)
+    ...modifiedCommand.map(quoteIfNecessary)
   ].join(' ')
 }
 

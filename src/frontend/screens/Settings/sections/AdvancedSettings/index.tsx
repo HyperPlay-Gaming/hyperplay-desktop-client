@@ -1,26 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  CleaningServicesOutlined,
-  ContentCopyOutlined,
-  DeleteOutline,
-  CachedOutlined,
-  UploadOutlined,
-  DownloadOutlined,
-  CancelOutlined,
-  SelectAllOutlined,
-  DeselectOutlined
-} from '@mui/icons-material'
 import classNames from 'classnames'
 import SettingsContext from '../../SettingsContext'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { GameStatus } from 'common/types'
+import { DisableLogs, DownloadNoHTTPS } from '../../components'
+import libraryState from 'frontend/state/libraryState'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  AltGOGdlBin,
-  AltLegendaryBin,
-  DisableLogs,
-  DownloadNoHTTPS
-} from '../../components'
+  faBoxOpen,
+  faCancel,
+  faCopy,
+  faDownload,
+  faPaintBrush,
+  faRefresh,
+  faTrash,
+  faUpload,
+  faX
+} from '@fortawesome/free-solid-svg-icons'
+import { ImportGameFolder } from 'frontend/components/UI/ImportGameFolder'
 
 export default function AdvancedSettings() {
   const { config } = useContext(SettingsContext)
@@ -38,10 +36,11 @@ export default function AdvancedSettings() {
     useState(false)
   const eosOverlayAppName = '98bc04bc842e4906993fd6d6644ffb8d'
 
-  const { libraryStatus, platform, refreshLibrary, showResetDialog } =
+  const { libraryStatus, platform, showResetDialog, showResetExtensionDialog } =
     useContext(ContextProvider)
   const { t } = useTranslation()
   const isWindows = platform === 'win32'
+  const isMac = platform === 'darwin'
 
   useEffect(() => {
     // set copied to clipboard status to true if it's not already set to true
@@ -162,8 +161,8 @@ export default function AdvancedSettings() {
   async function clearAppCache() {
     const storage: Storage = window.localStorage
     storage.removeItem('updates')
-    window.api.clearCache(true)
-    return refreshLibrary({ runInBackground: true })
+    window.api.clearCache(true, false)
+    return libraryState.refreshLibrary({ runInBackground: true })
   }
 
   return (
@@ -172,130 +171,134 @@ export default function AdvancedSettings() {
         {t('settings.navbar.advanced')}
       </div>
 
-      <AltLegendaryBin />
-
-      <AltGOGdlBin />
-
       <DownloadNoHTTPS />
 
       <DisableLogs />
 
+      <ImportGameFolder />
+
       <hr />
 
-      <div className="eosSettings">
-        <div className="settingsSectionHeader title">Epic Overlay</div>
-        <div>{getMainEosText()}</div>
-        <br />
-        {eosOverlayInstalled && !eosOverlayInstallingOrUpdating && (
-          <>
-            <div>
-              {t(
-                'setting.eosOverlay.currentVersion',
-                'Current Version: {{version}}',
-                { version: eosOverlayVersion }
-              )}
-            </div>
-            <div>
-              {t(
-                'setting.eosOverlay.latestVersion',
-                'Latest Version: {{version}}',
-                { version: eosOverlayLatestVersion }
-              )}
-            </div>
-            <br />
-          </>
-        )}
-        <div className="footerFlex">
-          {eosOverlayInstalled && (
+      {isMac ? null : (
+        <div className="eosSettings">
+          <div className="settingsSectionHeader title">Epic Overlay</div>
+          <div>{getMainEosText()}</div>
+          <br />
+          {eosOverlayInstalled && !eosOverlayInstallingOrUpdating && (
             <>
-              {/* Check for updates */}
-              {(eosOverlayVersion === eosOverlayLatestVersion ||
-                eosOverlayCheckingForUpdates) && (
-                <button
-                  className="button is-primary"
-                  onClick={checkForEosOverlayUpdates}
-                >
-                  <CachedOutlined />
-                  <span>
-                    {eosOverlayCheckingForUpdates
-                      ? t(
-                          'setting.eosOverlay.checkingForUpdates',
-                          'Checking for updates...'
-                        )
-                      : t(
-                          'setting.eosOverlay.checkForUpdates',
-                          'Check for updates'
-                        )}
-                  </span>
-                </button>
-              )}
-              {/* Update */}
-              {eosOverlayVersion !== eosOverlayLatestVersion &&
-                !eosOverlayCheckingForUpdates && (
+              <div>
+                {t(
+                  'setting.eosOverlay.currentVersion',
+                  'Current Version: {{version}}',
+                  { version: eosOverlayVersion }
+                )}
+              </div>
+              <div>
+                {t(
+                  'setting.eosOverlay.latestVersion',
+                  'Latest Version: {{version}}',
+                  { version: eosOverlayLatestVersion }
+                )}
+              </div>
+              <br />
+            </>
+          )}
+          <div className="footerFlex">
+            {eosOverlayInstalled && (
+              <>
+                {/* Check for updates */}
+                {(eosOverlayVersion === eosOverlayLatestVersion ||
+                  eosOverlayCheckingForUpdates) && (
                   <button
                     className="button is-primary"
-                    onClick={updateEosOverlay}
+                    onClick={checkForEosOverlayUpdates}
                   >
-                    <UploadOutlined />
+                    <FontAwesomeIcon icon={faRefresh} />
                     <span>
-                      {eosOverlayInstallingOrUpdating
-                        ? t('setting.eosOverlay.updating', 'Updating...')
-                        : t('setting.eosOverlay.updateNow', 'Update')}
+                      {eosOverlayCheckingForUpdates
+                        ? t(
+                            'setting.eosOverlay.checkingForUpdates',
+                            'Checking for updates...'
+                          )
+                        : t(
+                            'setting.eosOverlay.checkForUpdates',
+                            'Check for updates'
+                          )}
                     </span>
                   </button>
                 )}
-              {/* Enable/Disable */}
-              {isWindows && (
-                <button
-                  className={
-                    eosOverlayEnabledGlobally
-                      ? 'button is-danger'
-                      : 'button is-primary'
-                  }
-                  onClick={toggleEosOverlay}
-                >
-                  {eosOverlayEnabledGlobally ? (
-                    <DeselectOutlined />
-                  ) : (
-                    <SelectAllOutlined />
+                {/* Update */}
+                {eosOverlayVersion !== eosOverlayLatestVersion &&
+                  !eosOverlayCheckingForUpdates && (
+                    <button
+                      className="button is-primary"
+                      onClick={updateEosOverlay}
+                    >
+                      <FontAwesomeIcon icon={faUpload} />
+                      <span>
+                        {eosOverlayInstallingOrUpdating
+                          ? t('setting.eosOverlay.updating', 'Updating...')
+                          : t('setting.eosOverlay.updateNow', 'Update')}
+                      </span>
+                    </button>
                   )}
-                  <span>
-                    {eosOverlayEnabledGlobally
-                      ? t('setting.eosOverlay.disable', 'Disable')
-                      : t('setting.eosOverlay.enable', 'Enable')}
-                  </span>
-                </button>
-              )}
-              {/* Remove */}
-              {!eosOverlayInstallingOrUpdating && (
-                <button className="button is-danger" onClick={removeEosOverlay}>
-                  <DeleteOutline />
-                  <span>{t('setting.eosOverlay.remove', 'Uninstall')}</span>
-                </button>
-              )}
-            </>
-          )}
-          {/* Install */}
-          {!eosOverlayInstalled && !eosOverlayInstallingOrUpdating && (
-            <button className="button is-primary" onClick={installEosOverlay}>
-              <DownloadOutlined />
-              <span>{t('setting.eosOverlay.install', 'Install')}</span>
-            </button>
-          )}
-          {/* Cancel install/update */}
-          {eosOverlayInstallingOrUpdating && (
-            <button
-              className="button is-danger"
-              onClick={cancelEosOverlayInstallOrUpdate}
-            >
-              <CancelOutlined />
-              <span>{t('setting.eosOverlay.cancelInstall', 'Cancel')}</span>
-            </button>
-          )}
+                {/* Enable/Disable */}
+                {isWindows && (
+                  <button
+                    className={
+                      eosOverlayEnabledGlobally
+                        ? 'button is-danger'
+                        : 'button is-primary'
+                    }
+                    onClick={toggleEosOverlay}
+                  >
+                    {eosOverlayEnabledGlobally ? (
+                      <FontAwesomeIcon icon={faX} />
+                    ) : (
+                      <FontAwesomeIcon icon={faBoxOpen} />
+                    )}
+                    <span>
+                      {eosOverlayEnabledGlobally
+                        ? t('setting.eosOverlay.disable', 'Disable')
+                        : t('setting.eosOverlay.enable', 'Enable')}
+                    </span>
+                  </button>
+                )}
+                {/* Remove */}
+                {!eosOverlayInstallingOrUpdating && (
+                  <button
+                    className="button is-danger"
+                    onClick={removeEosOverlay}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                    <span>{t('setting.eosOverlay.remove', 'Uninstall')}</span>
+                  </button>
+                )}
+              </>
+            )}
+            {/* Install */}
+            {!eosOverlayInstalled && !eosOverlayInstallingOrUpdating && (
+              <button className="button is-primary" onClick={installEosOverlay}>
+                <FontAwesomeIcon icon={faDownload} />
+                <span>{t('setting.eosOverlay.install', 'Install')}</span>
+              </button>
+            )}
+            {/* Cancel install/update */}
+            {eosOverlayInstallingOrUpdating && (
+              <button
+                className="button is-danger"
+                onClick={cancelEosOverlayInstallOrUpdate}
+              >
+                <FontAwesomeIcon icon={faCancel} />
+                <span>{t('setting.eosOverlay.cancelInstall', 'Cancel')}</span>
+              </button>
+            )}
+          </div>
+          <br />
+          <hr />
+          <hr />
         </div>
-        <br />
-        <hr />
-      </div>
+      )}
       <div className="footerFlex">
         <button
           className={classNames('button', 'is-footer', {
@@ -310,7 +313,7 @@ export default function AdvancedSettings() {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-              <ContentCopyOutlined />
+              <FontAwesomeIcon icon={faCopy} />
             </div>
             <span className="button-icon-text">
               {isCopiedToClipboard
@@ -328,7 +331,7 @@ export default function AdvancedSettings() {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-              <CleaningServicesOutlined />
+              <FontAwesomeIcon icon={faPaintBrush} />
             </div>
             <span className="button-icon-text">
               {t('settings.clear-cache', 'Clear HyperPlay Cache')}
@@ -342,10 +345,23 @@ export default function AdvancedSettings() {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-              <DeleteOutline />
+              <FontAwesomeIcon icon={faX} />
             </div>
             <span className="button-icon-text">
               {t('settings.reset-hyperplay', 'Reset HyperPlay')}
+            </span>
+          </div>
+        </button>
+        <button
+          className="button is-footer is-danger"
+          onClick={showResetExtensionDialog}
+        >
+          <div className="button-icontext-flex">
+            <div className="button-icon-flex">
+              <FontAwesomeIcon icon={faX} />
+            </div>
+            <span className="button-icon-text">
+              {t('settings.reset-extension', 'Reset Extension')}
             </span>
           </div>
         </button>

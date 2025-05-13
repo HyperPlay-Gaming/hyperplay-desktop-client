@@ -4,12 +4,14 @@ import {
   GameInfo,
   InstallProgress,
   Runner,
-  UpdateParams
+  SiweValues
 } from 'common/types'
 
 import { TFunction } from 'i18next'
-import { getGameInfo } from './index'
+import { getGameInfo, getPlatformName } from './index'
 import { DialogModalOptions } from 'frontend/types'
+import authState from 'frontend/state/authState'
+import gameUpdateState from 'frontend/state/GameUpdateState'
 
 const storage: Storage = window.localStorage
 
@@ -28,6 +30,10 @@ type InstallArgs = {
   installLanguage?: string
   channelName?: string
   accessCode?: string
+  siweValues?: SiweValues
+  modOptions?: {
+    zipFilePath: string
+  }
 }
 
 async function install({
@@ -41,7 +47,9 @@ async function install({
   installLanguage = 'en-US',
   platformToInstall = 'Windows',
   channelName,
-  accessCode
+  accessCode,
+  siweValues,
+  modOptions
 }: InstallArgs) {
   if (!installPath) {
     console.error('installPath is undefined')
@@ -99,9 +107,11 @@ async function install({
     installLanguage,
     runner,
     platformToInstall,
-    gameInfo,
+    gameInfo: JSON.parse(JSON.stringify(gameInfo)),
     channelName,
-    accessCode
+    accessCode,
+    siweValues,
+    modOptions
   })
 }
 
@@ -115,6 +125,18 @@ type LaunchOptions = {
   runner: Runner
   hasUpdate: boolean
   showDialogModal: (options: DialogModalOptions) => void
+  isNotNative: boolean
+}
+
+export const SHOW_COMPATIBILITY_LAYER_WARNING =
+  'show-compatibility-layer-warning'
+
+export const isNotNative = (
+  platform: NodeJS.Platform | 'unknown',
+  installedPlatform: InstallPlatform
+) => {
+  const isWindows = platform === 'win32'
+  return !isWindows && getPlatformName(installedPlatform) === 'Windows'
 }
 
 const launch = async ({
@@ -123,18 +145,65 @@ const launch = async ({
   launchArguments = '',
   runner,
   hasUpdate,
-  showDialogModal
+  showDialogModal,
+  isNotNative
 }: LaunchOptions): Promise<{ status: 'done' | 'error' | 'abort' }> => {
-  if (hasUpdate) {
+  const showCompatibilityWarningDialog: boolean =
+    isNotNative &&
+    JSON.parse(
+      localStorage.getItem(`${SHOW_COMPATIBILITY_LAYER_WARNING}-${appName}`) ??
+        'true'
+    )
+
+  const showWarningDialog = new Promise<void>((res) => {
+    if (!showCompatibilityWarningDialog) {
+      return res()
+    }
+    showDialogModal({
+      isModal: false,
+      message: t(
+        'gamepage:box.compability.message',
+        'This Windows game will run using a compatibility layer. You might encounter some issues or the game might not work at all.'
+      ),
+      title: t('infobox.warning', 'Warning'),
+      className: 'compatibility-warning',
+      buttons: [
+        {
+          text: t('gamepage:box.dont-show-again', "Don't show again"),
+          onClick: () => {
+            localStorage.setItem(
+              `${SHOW_COMPATIBILITY_LAYER_WARNING}-${appName}`,
+              JSON.stringify(false)
+            )
+            res()
+          }
+        },
+        {
+          text: t('gamepage:box.aware', 'I am aware'),
+          onClick: () => {
+            res()
+          }
+        }
+      ],
+      onClose: () => {
+        res()
+      }
+    })
+  })
+
+  if (hasUpdate && !authState.isQaModeActive) {
     const { ignoreGameUpdates } = await window.api.requestGameSettings(appName)
 
-    if (ignoreGameUpdates) {
+    if (ignoreGameUpdates && runner !== 'hyperplay') {
       return window.api.launch({
         appName,
         runner,
         launchArguments: runner === 'legendary' ? '--skip-version-check' : ''
       })
     }
+
+    // focus the window if minimized or hidden
+    window.api.focusMainWindow()
 
     // promisifies the showDialogModal button click callbacks
     const launchFinished = new Promise<{ status: 'done' | 'error' | 'abort' }>(
@@ -148,7 +217,7 @@ const launch = async ({
               onClick: async () => {
                 const gameInfo = await getGameInfo(appName, runner)
                 if (gameInfo && gameInfo.runner !== 'sideload') {
-                  updateGame({ appName, runner, gameInfo })
+                  updateGame(gameInfo)
                   res({ status: 'done' })
                 }
                 res({ status: 'error' })
@@ -157,6 +226,24 @@ const launch = async ({
             {
               text: t('box.no'),
               onClick: async () => {
+                if (runner === 'hyperplay') {
+                  return showDialogModal({
+                    message: t(
+                      'gamepage:box.update.message-cancel',
+                      'It is not possible to play this game without updating'
+                    ),
+                    title: t('gamepage:box.update.title'),
+                    buttons: [
+                      {
+                        text: t('gamepage:box.ok', 'OK'),
+                        onClick: async () => {
+                          res({ status: 'abort' })
+                        }
+                      }
+                    ]
+                  })
+                }
+
                 res(
                   window.api.launch({
                     appName,
@@ -177,17 +264,25 @@ const launch = async ({
     return launchFinished
   }
 
+  await showWarningDialog
+
   return window.api.launch({ appName, launchArguments, runner })
 }
 
-const updateGame = async (args: UpdateParams) => {
-  return window.api.updateGame(args)
+const updateGame = async (gameInfo: GameInfo) => {
+  const channelRequiresTokens =
+    gameInfo?.channels?.[gameInfo.install.channelName ?? ''].license_config
+      .tokens
+  let siweValues = undefined
+  if (channelRequiresTokens) {
+    siweValues = await window.api.requestSIWE()
+  }
+  return gameUpdateState.updateGame({ ...gameInfo, siweValues })
 }
 
 export const epicCategories = ['all', 'legendary', 'epic']
 export const gogCategories = ['all', 'gog']
 export const sideloadedCategories = ['all', 'sideload']
 export const hyperPlayCategories = ['all', 'hyperplay']
-export const amazonCategories = ['all', 'nile', 'amazon']
 
 export { install, launch, repair, updateGame }

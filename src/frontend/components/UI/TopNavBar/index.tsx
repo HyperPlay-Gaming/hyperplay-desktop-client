@@ -4,20 +4,19 @@ import { HyperPlayLogoWhite } from 'frontend/assets/hyperplay'
 import { Button, Images } from '@hyperplay/ui'
 import SearchBar from '../SearchBar'
 import AccountDropdown from '../AccountDropdown'
-import extensionStore from 'frontend/store/ExtensionStore'
+import extensionStore from 'frontend/state/ExtensionState'
 import { observer } from 'mobx-react-lite'
-import { observable } from 'mobx'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { NavLink, useLocation } from 'react-router-dom'
 import {
   EPIC_STORE_URL,
   GOG_STORE_URL,
-  AMAZON_STORE,
   HYPERPLAY_STORE_URL
 } from 'frontend/constants'
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { extractMainDomain } from '../../../helpers/extract-main-domain'
+import AppVersion from '../AppVersion'
 
 const TopNavBar = observer(() => {
   const { t } = useTranslation()
@@ -25,15 +24,6 @@ const TopNavBar = observer(() => {
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
   const { pathname } = useLocation()
-  const pagesToShowStoreNavOptions = [
-    '/hyperplaystore',
-    '/gogstore',
-    '/epicstore',
-    '/amazonstore',
-    '/store-page'
-  ]
-
-  const showStoreNavOptions = pagesToShowStoreNavOptions.includes(pathname)
 
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   function setBadgeString(err: any, text: string) {
@@ -69,52 +59,44 @@ const TopNavBar = observer(() => {
           width="27px"
           className={styles.hpLogo}
         />
-        <Images.HyperPlayTextLogo fill="var(--color-neutral-100)" />
+        <Images.HyperPlayTextLogo
+          fill="var(--color-neutral-100)"
+          className={styles.hpTextLogo}
+        />
         <div className={styles.alphaBadge}>
-          <div className={`caption ${styles.alphaCaption}`}>
-            {t(`hyperplay.publicAlpha`, `Public Alpha`)}
+          <div className={`menu-item ${styles.alphaCaption}`}>
+            <AppVersion />
           </div>
         </div>
-        {showStoreNavOptions && (
-          <>
-            <NavLink to="/hyperplaystore">
-              <Button
-                type="link"
-                size="small"
-                style={getStoreTextStyle(HYPERPLAY_STORE_URL)}
-              >
-                HyperPlay
-              </Button>
-            </NavLink>
-            <NavLink to="/epicstore">
-              <Button
-                type="link"
-                size="small"
-                style={getStoreTextStyle(EPIC_STORE_URL)}
-              >
-                {t('Epic Games', 'Epic Games')}
-              </Button>
-            </NavLink>
-            <NavLink to="/gogstore">
-              <Button
-                type="link"
-                size="small"
-                style={getStoreTextStyle(GOG_STORE_URL)}
-              >
-                {t('GOG', 'GOG')}
-              </Button>
-            </NavLink>
-            <NavLink to="/amazonstore">
-              <Button
-                type="link"
-                size="small"
-                style={getStoreTextStyle(AMAZON_STORE)}
-              >
-                {t('Amazon', 'Amazon')}
-              </Button>
-            </NavLink>
-          </>
-        )}
+        <>
+          <NavLink to="/hyperplaystore">
+            <Button
+              type="link"
+              size="small"
+              style={getStoreTextStyle(HYPERPLAY_STORE_URL)}
+            >
+              HyperPlay
+            </Button>
+          </NavLink>
+          <NavLink to="/epicstore">
+            <Button
+              type="link"
+              size="small"
+              style={getStoreTextStyle(EPIC_STORE_URL)}
+            >
+              {t('Epic Games', 'Epic Games')}
+            </Button>
+          </NavLink>
+          <NavLink to="/gogstore">
+            <Button
+              type="link"
+              size="small"
+              style={getStoreTextStyle(GOG_STORE_URL)}
+            >
+              {t('GOG', 'GOG')}
+            </Button>
+          </NavLink>
+        </>
       </div>
       <div>
         {pathname === '/library' ? <SearchBar /> : null}
@@ -125,18 +107,16 @@ const TopNavBar = observer(() => {
             onMouseEnter={() => extensionStore.lockPopup()}
             onMouseLeave={() => extensionStore.unlockPopup()}
           >
-            <Images.MetaMask fill="white" />
+            <Images.MetaMask className={styles.metaMaskIcon} />
             {badgeText !== '' && badgeText !== '0' ? (
               <div className={styles.badge}>{badgeText}</div>
             ) : null}
           </button>
         )}
-        <div style={{ width: '200px' }}>
-          <AccountDropdown />
-        </div>
+        <AccountDropdown />
       </div>
     </div>
   )
 })
 
-export default React.memo(observable(TopNavBar))
+export default TopNavBar

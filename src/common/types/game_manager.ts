@@ -5,12 +5,11 @@ import {
   GameSettings,
   ExecResult,
   InstallArgs,
-  CallRunnerOptions,
-  HyperPlayInstallInfo
+  HyperPlayInstallInfo,
+  UpdateArgs
 } from 'common/types'
 import { GOGCloudSavesLocation, GogInstallInfo } from './gog'
 import { LegendaryInstallInfo } from './legendary'
-import { NileInstallInfo } from './nile'
 
 export interface InstallResult {
   status: 'done' | 'error' | 'abort'
@@ -55,10 +54,11 @@ export interface GameManager {
     gogSaves?: GOGCloudSavesLocation[]
   ) => Promise<string>
   uninstall: (args: RemoveArgs) => Promise<ExecResult>
-  update: (appName: string) => Promise<InstallResult>
+  update: (appName: string, args?: UpdateArgs) => Promise<InstallResult>
   forceUninstall: (appName: string) => Promise<void>
   stop: (appName: string) => Promise<void>
-  isGameAvailable: (appName: string) => boolean
+  isGameAvailable: (appName: string) => Promise<boolean>
+  pause: (appName: string) => Promise<void>
 }
 
 export interface LibraryManager {
@@ -70,18 +70,9 @@ export interface LibraryManager {
     lang?: string,
     channelNameToInstall?: string
   ) => Promise<
-    | LegendaryInstallInfo
-    | GogInstallInfo
-    | HyperPlayInstallInfo
-    | NileInstallInfo
-    | undefined
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | undefined
   >
   listUpdateableGames: () => Promise<string[]>
   changeGameInstallPath: (appName: string, newPath: string) => Promise<void>
   installState: (appName: string, state: boolean) => void
-  runRunnerCommand: (
-    commandParts: string[],
-    abortController: AbortController,
-    options?: CallRunnerOptions
-  ) => Promise<ExecResult>
 }

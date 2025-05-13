@@ -10,9 +10,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { SelectField, TextInputWithIconField, InfoBox } from '..'
 import { AppSettings } from 'common/types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
-import { Backspace } from '@mui/icons-material'
-import { writeConfig } from 'frontend/helpers'
+import { faBackspace, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 
 export const defaultThemes = {
   classic: 'Classic',
@@ -47,7 +45,7 @@ export const ThemeSelector = () => {
 
     const newAppConfig = { ...appConfig, customThemesPath: path }
     setThemesPath(path)
-    await writeConfig({ appName: 'default', config: newAppConfig })
+    await window.api.writeConfig({ appName: 'default', config: newAppConfig })
     setAppConfig(newAppConfig)
     loadThemes()
   }
@@ -122,7 +120,8 @@ export const ThemeSelector = () => {
           !themesPath ? (
             <FontAwesomeIcon icon={faFolderOpen} />
           ) : (
-            <Backspace
+            <FontAwesomeIcon
+              icon={faBackspace}
               data-testid="setGogdlBinaryBackspace"
               style={{ color: '#currentColor' }}
             />

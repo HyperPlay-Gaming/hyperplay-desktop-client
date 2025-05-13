@@ -1,4 +1,5 @@
 import { Runner, Status } from 'common/types'
+import libraryState from 'frontend/state/libraryState'
 import { TFunction } from 'i18next'
 
 type StatusArgs = {
@@ -26,7 +27,7 @@ export function getStatusLabel({
     installing: `${t('gamepage:status.downloading', 'Downloading')} ${Math.ceil(
       percent || 0
     )}%`,
-    extracting: t('gamepage:status.extracting', 'Extracting'),
+    extracting: t('gamepage:status.extracting.progress', 'Extracting'),
     'syncing-saves': t('gamepage:status.syncingSaves', 'Syncing Saves'),
     moving: t('gamepage:gamecard.moving', 'Moving'),
     repairing: t('gamepage:gamecard.repairing', 'Repairing'),
@@ -35,15 +36,20 @@ export function getStatusLabel({
     }`,
     notInstalled: t('gamepage:status.notinstalled'),
     paused: t('gamepage:status.paused', 'Paused'),
-    preparing: t('gamepage:status.preparing', 'Preparing')
+    preparing: t('gamepage:status.preparing', 'Preparing'),
+    distributables: t(
+      'gamepage:status.distributables',
+      'Installing Distributables'
+    ),
+    patching: t('gamepage:status.patching', 'Patching')
   }
 
   return statusMap[status] || t('gamepage:status.notinstalled')
 }
 
 const storage = window.localStorage
-const nonAvailbleGames = storage.getItem('nonAvailableGames') || '[]'
-const nonAvailbleGamesArray = JSON.parse(nonAvailbleGames)
+const nonAvailableGames = storage.getItem('nonAvailableGames') || '[]'
+const nonAvailableGamesArray = JSON.parse(nonAvailableGames)
 
 export async function handleNonAvailableGames(appName: string, runner: Runner) {
   const gameAvailable = await window.api.isGameAvailable({
@@ -52,20 +58,14 @@ export async function handleNonAvailableGames(appName: string, runner: Runner) {
   })
 
   if (!gameAvailable) {
-    if (!nonAvailbleGamesArray.includes(appName)) {
-      nonAvailbleGamesArray.push(appName)
-      storage.setItem(
-        'nonAvailableGames',
-        JSON.stringify(nonAvailbleGamesArray)
-      )
+    if (!nonAvailableGamesArray.includes(appName)) {
+      nonAvailableGamesArray.push(appName)
+      libraryState.nonAvailableGames = nonAvailableGamesArray
     }
   } else {
-    if (nonAvailbleGamesArray.includes(appName)) {
-      nonAvailbleGamesArray.splice(nonAvailbleGamesArray.indexOf(appName), 1)
-      storage.setItem(
-        'nonAvailableGames',
-        JSON.stringify(nonAvailbleGamesArray)
-      )
+    if (nonAvailableGamesArray.includes(appName)) {
+      nonAvailableGamesArray.splice(nonAvailableGamesArray.indexOf(appName), 1)
+      libraryState.nonAvailableGames = nonAvailableGamesArray
     }
   }
   return gameAvailable

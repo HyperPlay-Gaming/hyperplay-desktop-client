@@ -6,7 +6,7 @@ import React, {
   useState
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useLocation, useParams } from 'react-router'
+import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import { DidNavigateEvent, WebviewTag } from 'electron'
 
 import { UpdateComponent } from 'frontend/components/UI'
@@ -16,19 +16,21 @@ import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { Runner } from 'common/types'
 import './index.css'
 import LoginWarning from '../Login/components/LoginWarning'
-import { NileLoginData } from 'common/types/nile'
-import authStore from 'frontend/store/AuthStore'
+import authState from 'frontend/state/authState'
 import { observer } from 'mobx-react-lite'
 import {
   EPIC_LOGIN_URL,
   EPIC_STORE_URL,
+  G7_PORTAL,
   GOG_LOGIN_URL,
   GOG_STORE_URL,
   HYPERPLAY_STORE_URL,
-  WIKI_URL,
-  AMAZON_STORE
+  DOCS_URL
 } from '../../constants'
 import { METAMASK_SNAPS_URL } from 'common/constants'
+import storeAuthState from 'frontend/state/storeAuthState'
+import { getGameInfo } from 'frontend/helpers'
+import cn from 'classnames'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
@@ -39,11 +41,15 @@ function shouldInjectProvider(url: string) {
   return url === METAMASK_SNAPS_URL
 }
 
-function WebView() {
+function WebView({
+  classNames
+}: {
+  classNames?: { root?: string; webview?: string; webviewControls?: string }
+}) {
   const { i18n } = useTranslation()
   const { pathname, search } = useLocation()
   const { t } = useTranslation()
-  const { epic, gog, amazon, connectivity } = useContext(ContextProvider)
+  const { epic, gog, connectivity } = useContext(ContextProvider)
   const [loading, setLoading] = useState<{
     refresh: boolean
     message: string
@@ -51,9 +57,6 @@ function WebView() {
     refresh: true,
     message: t('loading.website', 'Loading Website')
   }))
-  const [amazonLoginData, setAmazonLoginData] = useState<NileLoginData | null>(
-    null
-  )
   const navigate = useNavigate()
   const webviewRef = useRef<WebviewTag>(null)
 
@@ -64,7 +67,7 @@ function WebView() {
 
   const hyperplayStore =
     HYPERPLAY_STORE_URL +
-    (authStore.authToken !== '' ? '&qamode=' + authStore.authToken : '')
+    (authState.authToken !== '' ? '&qamode=' + authState.authToken : '')
 
   const epicStore = `${EPIC_STORE_URL}/${lang}/`
   const gogEmbedRegExp = new RegExp('https://embed.gog.com/on_login_success?')
@@ -76,14 +79,13 @@ function WebView() {
     '/hyperplaystore': hyperplayStore,
     '/epicstore': epicStore,
     '/gogstore': GOG_STORE_URL,
-    '/amazonstore': AMAZON_STORE,
-    '/wiki': WIKI_URL,
+    '/docs': DOCS_URL,
     '/loginEpic': EPIC_LOGIN_URL,
     '/loginGOG': GOG_LOGIN_URL,
     '/loginweb/legendary': EPIC_LOGIN_URL,
     '/loginweb/gog': GOG_LOGIN_URL,
-    '/loginweb/nile': amazonLoginData ? amazonLoginData.url : AMAZON_STORE,
-    '/metamaskSnaps': METAMASK_SNAPS_URL
+    '/metamaskSnaps': METAMASK_SNAPS_URL,
+    '/game7Portal': G7_PORTAL
   }
 
   let startUrl = Object.prototype.hasOwnProperty.call(urls, pathname)
@@ -97,6 +99,12 @@ function WebView() {
       const queryParamAppends = urlIsHpUrl(queryParam) ? '?isLauncher=true' : ''
 
       startUrl = queryParam + queryParamAppends
+    }
+  } else if (pathname.match('/marketplace')) {
+    const searchParams = new URLSearchParams(search)
+    const queryParam = searchParams.get('url')
+    if (queryParam) {
+      startUrl = decodeURIComponent(queryParam)
     }
   }
 
@@ -121,57 +129,6 @@ function WebView() {
     }
   }, [])
 
-  useEffect(() => {
-    if (pathname !== '/loginweb/nile') return
-    console.log('Loading amazon login data')
-
-    setLoading({
-      refresh: true,
-      message: t('status.preparing_login', 'Preparing Login...')
-    })
-    const getAmazonLoginData = async () => {
-      await amazon
-        .getLoginData()
-        .then((data) => {
-          setAmazonLoginData(data)
-          setLoading({
-            ...loading,
-            refresh: false
-          })
-        })
-        .catch((error) => {
-          console.error('Failed to load Amazon login data', { error })
-          setLoading({
-            ...loading,
-            refresh: false
-          })
-        })
-    }
-    getAmazonLoginData()
-  }, [pathname])
-
-  const handleAmazonLogin = (code: string) => {
-    if (!amazonLoginData) {
-      console.error('Could not login to Amazon because login data is missing')
-      return
-    }
-
-    setLoading({
-      refresh: true,
-      message: t('status.logging', 'Logging In...')
-    })
-    amazon
-      .login({
-        client_id: amazonLoginData.client_id,
-        code: code,
-        code_verifier: amazonLoginData.code_verifier,
-        serial: amazonLoginData.serial
-      })
-      .then(() => {
-        handleSuccessfulLogin()
-      })
-  }
-
   const handleSuccessfulLogin = () => {
     navigate('/login')
   }
@@ -180,6 +137,25 @@ function WebView() {
   useEffect(() => {
     window.api.trackScreen('WebView', { url: startUrl, runner })
   }, [startUrl, runner])
+
+  useEffect(() => {
+    if (!urlIsHpUrl(startUrl) && pathname !== '/game7Portal') {
+      return
+    }
+
+    const removeHandleGoToGamePage = window.api.handleGoToGamePage(
+      async (_, gameId, action) => {
+        const gameInfo = await getGameInfo(gameId, 'hyperplay')
+        navigate(`/gamepage/hyperplay/${gameId}`, {
+          state: { gameInfo, fromDM: false, action }
+        })
+      }
+    )
+
+    return () => {
+      removeHandleGoToGamePage()
+    }
+  }, [])
 
   useLayoutEffect(() => {
     const webview = webviewRef.current
@@ -208,7 +184,8 @@ function WebView() {
         // Ignore the login handling if not on login page
         if (!runner) {
           return
-        } else if (runner === 'gog') {
+        }
+        if (runner === 'gog') {
           const pageUrl = webview.getURL()
           if (pageUrl.match(gogEmbedRegExp)) {
             const parsedURL = new URL(pageUrl)
@@ -222,15 +199,6 @@ function WebView() {
                 handleSuccessfulLogin()
               })
             }
-          }
-        } else if (runner === 'nile') {
-          const pageURL = webview.getURL()
-          const parsedURL = new URL(pageURL)
-          const code = parsedURL.searchParams.get(
-            'openid.oa2.authorization_code'
-          )
-          if (code) {
-            handleAmazonLogin(code)
           }
         }
       }
@@ -253,24 +221,22 @@ function WebView() {
       }
     }
     return
-  }, [webviewRef.current, preloadPath, amazonLoginData])
+  }, [webviewRef.current, preloadPath])
 
   const [showLoginWarningFor, setShowLoginWarningFor] = useState<
-    null | 'epic' | 'gog' | 'amazon'
+    null | 'epic' | 'gog'
   >(null)
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (startUrl.match(/epicgames\.com/) && !epic.username) {
+      if (startUrl.match(/epicgames\.com/) && !storeAuthState.epic.username) {
         setShowLoginWarningFor('epic')
       } else if (
         startUrl.match(/gog\.com/) &&
         !startUrl.match(/auth\.gog\.com/) &&
-        !gog.username
+        !storeAuthState.gog.username
       ) {
         setShowLoginWarningFor('gog')
-      } else if (startUrl === AMAZON_STORE && !amazon.user_id) {
-        setShowLoginWarningFor('amazon')
       } else {
         setShowLoginWarningFor(null)
       }
@@ -291,6 +257,13 @@ function WebView() {
     }
   }, [webviewRef])
 
+  useEffect(() => {
+    const isOffline = connectivity.status !== 'online'
+    if (isOffline) {
+      navigate('/library')
+    }
+  }, [connectivity.status])
+
   const onLoginWarningClosed = () => {
     setShowLoginWarningFor(null)
   }
@@ -301,23 +274,25 @@ function WebView() {
 
   let partitionForWebview = 'persist:epicstore'
 
+  if (pathname === '/game7Portal') partitionForWebview = 'persist:g7portal'
   if (urlIsHpUrl(startUrl)) partitionForWebview = 'persist:hyperplaystore'
-  else if (shouldInjectProvider(startUrl))
+  else if (shouldInjectProvider(startUrl) || pathname.match('/marketplace'))
     partitionForWebview = 'persist:InPageWindowEthereumExternalWallet'
 
   return (
-    <div className="WebView">
+    <div className={cn('WebView', classNames?.root)}>
       {webviewRef.current && (
         <WebviewControls
           webview={webviewRef.current}
           initURL={startUrl}
           openInBrowser={!startUrl.startsWith('login')}
+          classNames={{ root: classNames?.webviewControls }}
         />
       )}
       {loading.refresh && <UpdateComponent message={loading.message} />}
       <webview
         ref={webviewRef}
-        className="WebView__webview"
+        className={cn('WebView__webview', classNames?.webview)}
         partition={partitionForWebview}
         src={startUrl}
         allowpopups={trueAsStr}

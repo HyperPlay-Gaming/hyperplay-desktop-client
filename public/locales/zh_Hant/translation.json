@@ -78,7 +78,20 @@
                 "message": "Winetricks 在執行過程中出現以下錯誤：{{newLine}}{{error}}",
                 "title": "Winetricks 錯誤"
             },
-            "moving": "移動遊戲錯誤 {{error}}"
+            "moving": "移動遊戲錯誤 {{error}}",
+            "ubisoft-connect": {
+                "title": "UbisoftLink",
+                "message": "在游戏前安装UbisoftLink的工作失败。 在https://github.com/Heroic-Games-Launcher/HeroicGames Launcher/wiki/How-to-install-Ubisoft-Connect-on-HCHand-Mac安装."
+            },
+            "delete-files": {
+                "body": "{{path}} 请人工删除。\n{{paragraph}}\n{{error}}",
+                "title": "删除摘取的夹"
+            },
+            "steam": {
+                "error": "无法查获的是油轮。 安装可能由用户取消,或者在船上失败.",
+                "message": "船舶安装工作失败! 请仔细阅读这些指示并再次尝试! {{paragraph}} {{error}}",
+                "title": "2. 船舶错误"
+            }
         },
         "info": {
             "update": {
@@ -87,7 +100,9 @@
                 "message": "目前有新版本可用！",
                 "message-finished": "你想立即重啟 HyperPlay 嗎？",
                 "title": "HyperPlay 遊戲啓動器",
-                "title-finished": "更新完成"
+                "title-finished": "更新完成",
+                "appUpdated": "更新了超Play",
+                "appUpdated-message": "对超Play进行了更新。 现在是否需要更新和重新启动超Play?"
             }
         },
         "no": "否",
@@ -144,12 +159,25 @@
             "title": "警告",
             "wine-change": {
                 "message": "我們無法找到啓動此標題（{{selectedWine}}）所需的選定Wine版本。{{newline}}。我們找到了另一個版本，您是否希望繼續使用 {{foundWine}} 啓動?",
-                "title": "未找到Wine！"
+                "title": "未找到Wine！",
+                "title-gptk": "捕猎工具包 ",
+                "message-gptk": "为了能够利用果阿加明港工具包来管理游戏,你需要将玉米提高到14(Sonoma)或更高。 {{newline}} 我们发现 Wine在你的系统中,你是否希望继续使用{{foundWine}}发射?"
+            },
+            "rosetta": {
+                "title": "Rosetta",
+                "message": "所需加班费 Rosetta与Angap Silicon 团在马库西进行正确操作。 请使用以下指挥从马科斯终端安装:“软件——内斯特罗沙塔”和“重塑超级Play”. "
             }
         },
         "wineprefix": "選擇 WinePrefix 資料夾",
         "yes": "是",
-        "dontShowAgain": "不再顯示"
+        "dontShowAgain": "不再顯示",
+        "choose-nile-binary": "選擇尼羅河二進製文件",
+        "reset-extension": {
+            "question": {
+                "message": "你们是否希望重新确定MetaMask的延伸?",
+                "title": "延期"
+            }
+        }
     },
     "button": {
         "cancel": "取消",
@@ -157,9 +185,11 @@
         "login": "登入",
         "sync": "同步",
         "syncing": "正在同步",
-        "unsync": "不同步",
+        "unsync": "取消同步",
         "continue": "繼續",
-        "download": "下載"
+        "download": "下載",
+        "update": "更新",
+        "install": "安裝"
     },
     "controller": {
         "hints": {
@@ -199,7 +229,8 @@
             "type": "類型"
         },
         "title": "下載",
-        "ETA": "預計時間"
+        "ETA": "預計時間",
+        "title_dm": "下载主管"
     },
     "epic": {
         "offline-notification-body": "因為Epic Games伺服器離線，可能無法提供完整線上服務！",
@@ -271,7 +302,11 @@
         "wine": {
             "part1": "HyperPlay啟動器會在以下資料夾中搜尋現有的Wine/Proton/CrossOver：",
             "part2": "如果在其它位置，請使用軟鏈接連接到這些中的一個資料夾"
-        }
+        },
+        "disable_logs": "吸引这一检查箱,以解脱大部分的文字记录档案(关键信息总是贴上标签)。 确保在报告任何问题之前,将这种局面变为外国.",
+        "msync": "Msync旨在减少CPU密集型游戏中的 wine料。 增强能力可提高一些游戏的绩效.",
+        "dxvknvapi": "DXVK-NVAPI是在DXVK和linux 原住民民族自治政府的基础上实施的,允许在Nvidia GPUs上使用住房和财产管理局.",
+        "dxvkfpslimit": "DXVK游戏设定了基准率上限"
     },
     "info": {
         "hyperplay": {
@@ -322,10 +357,12 @@
         "website": "載入網站"
     },
     "login": {
-        "alternative_method": "其他登入方法",
-        "epic": "Epic Games 登入",
-        "gog": "GOG 登入",
-        "message": "登入您的平台。您可以同時登入多個平台。"
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "亞馬遜登錄",
+        "old-mac": "页: 1 macOS 12或新手必须登录."
     },
     "message": {
         "sync": "完成同步",
@@ -384,7 +421,7 @@
         "offline-retry-in": "離線。重試時間為 {{seconds}} 秒。",
         "retrying": "重試中"
     },
-    "Open": "",
+    "Open": "開啟",
     "options": {
         "advanced": {
             "key": "變量名稱",
@@ -419,7 +456,8 @@
     "other": {
         "gogdl-version": "GOGDL 版本: ",
         "legendary-version": "Legendary 版本: ",
-        "weblate": "請幫助翻譯HyperPlay啟動器。"
+        "weblate": "請幫助翻譯HyperPlay啟動器。",
+        "nile-version": "尼羅河版本： "
     },
     "Other": "其他",
     "placeholder": {
@@ -427,7 +465,9 @@
         "alt-legendary-bin": "使用內置的 Legendary 二進制文件...",
         "custom_themes_path": "選擇查找自定義 CSS 文件的路徑",
         "egs-prefix": "Epic Games商城安裝位置",
-        "prefered_language": "雙字元代碼 (如: \"en\" 或 \"fr\")"
+        "prefered_language": "雙字元代碼 (如: \"en\" 或 \"fr\")",
+        "alt-nile-bin": "使用內置 Nile 二進製文件...",
+        "dxvkfpsvalue": "积极的分类价值(例如30、60、......)"
     },
     "platforms": {
         "linux": "Linux",
@@ -441,12 +481,20 @@
             "canceled": "已取消",
             "clear": "清除列表",
             "downloading": "下載中",
-            "empty": "沒有文件下載",
+            "empty": {
+                "finished": "未下载",
+                "queue": "沒有文件下載"
+            },
             "finished": "已完成",
             "queued": "排隊等候",
             "remove": "從下載中移除",
             "pause": "暫停下載",
-            "resume": "恢復下載"
+            "resume": "恢復下載",
+            "retry-update": "重試更新",
+            "stop": "停止下載",
+            "timeElapsed": "經過時間： {{elapsed}}",
+            "launch": "啟動遊戲",
+            "retry-install": "重試安裝"
         }
     },
     "Recent": "最近遊玩的遊戲",
@@ -469,7 +517,7 @@
         "default-install-path": "預設安裝路徑",
         "default-steam-path": "預設 Steam 路徑",
         "defaultWinePrefix": "為新的 Wine Prefix 設定資料夾",
-        "disable_controller": "禁止使用控制器操作 HyperPlay",
+        "disable_controller": "使用控制器禁用 Hyperplay 導航",
         "discordRPC": "啟用Discord的Rich Presence（活動狀態）",
         "download-no-https": "不使用 HTTPS 下載遊戲 （對 LanCache 等 CDN 有用）",
         "egs-sync": "與已安裝的Epic Games同步",
@@ -516,7 +564,8 @@
             "no-file": "未找到日誌檔案",
             "show-in-folder": "顯示日誌所在資料夾",
             "instructions-part-01": "如果您在使用 HyperPlay 時遇到任何問題，我們在 Discord 服務器中有兩個指定區域可以報告您的問題。如果您是玩家，請訪問玩家支持論壇報告任何問題。如果您是遊戲開發人員，請訪問開發人員支持論壇報告任何問題。",
-            "instructions-part-02": "為了幫助我們盡快診斷和解決問題，請提供盡可能多的信息，包括您的日誌副本。我們的支持團隊將監控這兩個渠道，並盡最大努力盡快回復您的問題。在我們努力解決您可能遇到的任何問題時，感謝您的耐心和理解。"
+            "instructions-part-02": "為了幫助我們盡快診斷和解決問題，請提供盡可能多的信息，包括您的日誌副本。我們的支持團隊將監控這兩個渠道，並盡最大努力盡快回復您的問題。在我們努力解決您可能遇到的任何問題時，感謝您的耐心和理解。",
+            "join-hyperplay-discord": "加入我们的分歧"
         },
         "mangohud": "啟用MangoHud（需要已安裝Mangohud）",
         "manualsync": {
@@ -558,7 +607,16 @@
         "wineprefix": "WINEPREFIX文件夾",
         "wineversion": "Wine 版本",
         "autoUpdateGames": "自動更新遊戲",
-        "ignoreGameUpdates": "忽略遊戲更新"
+        "ignoreGameUpdates": "忽略遊戲更新",
+        "disable_logs": "禁用日誌",
+        "addgamestoapplications": "自動將遊戲新增到應用程式",
+        "showMetalOverlay": "顯示統計數據疊加",
+        "alt-nile-bin": "選擇替代尼羅河二進制",
+        "msync": "啟用 Esync",
+        "dxvkfpslimit": "通行证(DX9、10和11)",
+        "steamId": "热液",
+        "autoLaunchHyperPlay": "自动发射 游乐",
+        "autodxvknvapi": "Auto Install/Update DXVK-NVAPI on Prefix"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -593,7 +651,9 @@
             "log": "日誌",
             "other": "其他",
             "sync": "存檔-同步",
-            "wineExt": "Wine 擴充元件"
+            "wineExt": "Wine 擴充元件",
+            "accounts": "帳戶",
+            "systemInformation": "系統資訊(_Y)"
         },
         "open-config-file": "開啟配置檔案",
         "reset-hyperplay": "重設 HyperPlay",
@@ -601,17 +661,47 @@
             "label": "Save Location:",
             "warning": "雲端存檔功能處於測試階段，請在同步前備份你的存檔（以防出現問題）"
         },
-        "gamesSettings": "遊戲設置"
+        "gamesSettings": "遊戲設置",
+        "systemInformation": {
+            "copyToClipboard": "複製到剪貼簿",
+            "os": "Operating system:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "showDetailed": "详细的系统规格",
+            "legendaryVersion": "说明:{{legendaryVersion}}",
+            "memoryStats": "{{percentUsed}}%",
+            "osNameFlatpak": "{{osName}}",
+            "version": "FCCC/SBI/2008/8",
+            "cpu": "CPU:",
+            "osVersion": "{{versionNumber}}",
+            "steamDeck": "Iii",
+            "systemModel": "系统模式:",
+            "gpu": "GPU:",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpuDriver": "司机:{{driverVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "memory": "记忆:"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine 管理員"
+            }
+        },
+        "reset-extension": "延期"
     },
     "Settings": "設定",
     "sidebar": {
         "collapse": "收起側邊欄",
-        "uncollapse": "展開側邊欄"
+        "uncollapse": "展開側邊欄",
+        "store": "Marketplace",
+        "achievements": "成就",
+        "library": "庫",
+        "downloadManager": "下载主管"
     },
     "status": {
         "installing": "正在安裝",
         "logging": "正在登入...",
-        "processing": "檔案處理中，請等待"
+        "processing": "檔案處理中，請等待",
+        "preparing_login": "正在準備登錄... "
     },
     "store": "Epic 商店",
     "stores": "商店",
@@ -644,7 +734,9 @@
         "logout": "登出",
         "logout_confirmation": "您確定要登出嗎？",
         "manageaccounts": "管理帳號",
-        "quit": "退出"
+        "quit": "退出",
+        "logIn": "登入",
+        "manageStore": "管理商店"
     },
     "webview": {
         "controls": {
@@ -698,8 +790,11 @@
                         "title": "選擇要從哪個瀏覽器導入",
                         "cantFindProfile": "找不到您的瀏覽器配置文件？",
                         "createNewWallet": "創建新的 MM 擴展錢包",
-                        "details": "通過導入，您的 MetaMask 安裝和  設置將被導入 HyperPlay。",
-                        "useRecoveryPhrase": "使用秘密恢復短語訪問"
+                        "details": "以下瀏覽器已安裝 MetaMask。請選擇您想要導入的瀏覽器。",
+                        "useRecoveryPhrase": "使用秘密恢復短語導入",
+                        "learnMore": "了解更多",
+                        "useRecoveryPhraseInfo": "建议先进用户和开发商使用这一特点。 你的秘密恢复短语在当地存放在Meta Mask,从未与超Play分享.",
+                        "orWord": "页: 1"
                     }
                 },
                 "title": "錢包連接",
@@ -715,7 +810,16 @@
                 "body": "HyperPlay希望收集使用數據，以便更好地瞭解我們的用戶如何與應用程序互動。這些信息有助於我們瞭解您是如何使用應用程序的，並讓我們為您提供更好的HyperPlay。",
                 "hyperplayWill": "HyperPlay 將:",
                 "neverCollectIP": " 收集您的完整 IP 地址;",
-                "neverCollectPersonal": " 收集密鑰、地址、餘額、哈希值或任何個人信息;"
+                "neverCollectPersonal": " 收集密鑰、地址、餘額、哈希值或任何個人信息;",
+                "bulletOne": "始終允許您選擇退出",
+                "bulletTwo": "發送匿名點擊和遊戲互動",
+                "paragraphOne": "HyperPlay 希望收集使用數據，以更好地了解我們的用戶如何與應用程序互動。 \n           這使我們能夠讓 HyperPlay 對您變得更好。",
+                "privacyPolicy": "隱私政策。",
+                "text": {
+                    "externalLink": "了解更多",
+                    "title": "我們已更新隱私政策"
+                },
+                "titleOne": "幫助我們改善 HyperPlay！"
             },
             "welcome": {
                 "text": {
@@ -723,9 +827,19 @@
                     "communityCTA_2": "社區。讓我們一起塑造遊戲的未來！",
                     "bugs": "請注意，HyperPlay 是一個公開的 alpha 版本。許多功能仍\n          許多功能仍在開發中，可能會出現錯誤。",
                     "communityCTA_1": "我們希望您能提供反饋意見，並加入我們的",
-                    "construction": "HyperPlay 正在建設中。"
+                    "construction": "HyperPlay 正在建設中。",
+                    "paragraphOne": "在 HyperPlay，我們正在為未來的遊戲打造下一代遊戲商店。",
+                    "bulletPointFive": "在 macOS、Linux 和 SteamDeck 上運行 Windows 遊戲，使用我們的\n              先進技術",
+                    "bulletPointFour": "在 macOS 上輕鬆一鍵安裝 Steam（Windows 版本）",
+                    "TitleList": "使用 HyperPlay，您可以：",
+                    "bulletPointOne": "訪問超過 100 款鏈上啟用遊戲的龐大收藏",
+                    "bulletPointThree": "直接通過 HyperPlay 玩 Epic 和 GOG 遊戲",
+                    "bulletPointTwo": "通過完成任務獲得代幣、NFT 和鏈外獎勵",
+                    "lastParagraph": "目前處於測試版，我們非常重視您的反饋，並鼓勵您在我們的",
+                    "paragraphThr": "無縫地將您的錢包、代幣和資產帶入每個遊戲，同時訪問 Epic Store、GOG 和我們自己的 HyperPlay Store 的廣泛庫存——一切盡在一處。"
                 },
-                "title": "歡迎來到 HyperPlay Early Access！"
+                "title": "歡迎來到 HyperPlay Early Access！",
+                "titleIntro": "歡迎來到 HyperPlay！"
             },
             "connectAgain": "再次連接",
             "connectionCanceled": {
@@ -738,9 +852,11 @@
         "analyticsOn": "分析功能已開啓",
         "buttons": {
             "agree": "我同意",
-            "noThanks": "不，謝謝"
+            "noThanks": "不，謝謝",
+            "primaryButton": "我同意",
+            "secondaryButton": "不，謝謝"
         },
-        "changeWallet": "更換錢包",
+        "changeWallet": "切換錢包帳戶",
         "copyUrl": "複製 URL",
         "misc": "從不",
         "turnAnalyticsOff": "關閉",
@@ -754,7 +870,51 @@
         "wallet": {
             "connected": "已連接",
             "notConnected": "未連接"
-        }
+        },
+        "folder": "資料夾",
+        "gamecard": {
+            "installing": "下載中...",
+            "paused": "暫停",
+            "extracting": "提取...",
+            "distributables": "批发",
+            "installed": "愿意发挥作用",
+            "patching": "修補中..."
+        },
+        "browserImport": {
+            "profile": "個人資料",
+            "appId": "App Id"
+        },
+        "logOut": "登出",
+        "Sync": "同步",
+        "accesscodes": {
+            "requirescode": "这一游戏更新需要一部准入法.",
+            "error": {
+                "validation": "准入法无效",
+                "licenseUndefined": "無法驗證訪問代碼。請檢查您的網絡訪問或防火牆設置。"
+            },
+            "success": {
+                "validation": "成功! 准入法有效"
+            },
+            "placeholder": "輸入訪問代碼"
+        },
+        "achievements": {
+            "gamesToMint": "群众运动",
+            "addThisGame": "添加这种游戏",
+            "noAchievements": {
+                "oops": "Oops!",
+                "doubleCheckMessage": "现在,我们看不出在你的轮船账户中有任何游戏。 只是迅速提醒大家,你的游戏细节是公开的。 这样,我们就能够取得你们的成就,并向你提供最佳经验."
+            },
+            "freeMints": "自由广告"
+        },
+        "linkSteamAccountCta": "签字",
+        "linkSteamAccountTitle": "联系船",
+        "connectWallet": "连接围墙",
+        "viewItem": "观点{{item}}",
+        "syncing": "......",
+        "viewMyAccount": "观点",
+        "linkSteamAccountDescription": "为连接你的超Play账户而签字.",
+        "compatibilityLayer": "兼容性層（測試版）",
+        "discordAppLink": "Discord 社區。"
     },
     "hyperplayOverlay": {
         "chainRequest": {
@@ -774,7 +934,7 @@
             "INITIATED": "添加自定義代幣的請求待處理"
         },
         "extensionNotification": {
-            "DESCRIPTION": "按 Alt 或 Option + X 查看此交易",
+            "DESCRIPTION": "按 {{overlayKeyMod}} + X 查看此交易",
             "TITLE": "已要求進行交易"
         },
         "signatureRequest": {
@@ -789,7 +949,7 @@
             "FAILED": "交易中斷"
         },
         "greeting": {
-            "description": "HyperPlay Overlay已準備就緒！按 Alt + X 鍵顯示或隱藏。",
+            "description": "HyperPlay 覆蓋層已準備好！按 {{overlayKeyMod}} + X 來顯示或隱藏它。",
             "title": "HyperPlay Overlay"
         }
     },
@@ -804,25 +964,270 @@
         "actions": "行動",
         "noDlcFound": "未找到可下載內容",
         "size": "大小",
-        "title": "標題",
-        "installDlcs": "安裝所有可下載內容"
+        "installDlcs": "安裝所有DLC",
+        "title": "Title"
+    },
+    "amazon": "亞馬遜",
+    "Amazon Games": "亞馬遜遊戲",
+    "prime-gaming": "優質遊戲",
+    "gameRelease": {
+        "demo": "體驗",
+        "prototype": "原型",
+        "alpha": "透明度",
+        "beta": "Beta",
+        "main": "主要"
+    },
+    "notification": {
+        "wine-download": {
+            "title": "兼容性層",
+            "message": "建立缺省兼容性层"
+        },
+        "wine-download-failed": {
+            "message": "未能建立违约兼容性层",
+            "title": "故障"
+        }
+    },
+    "quest": {
+        "active": "有效",
+        "claimed": "已領取",
+        "connectSteamAccount": "連結團隊帳戶",
+        "quests": "任務",
+        "reputation": "聲望",
+        "signIn": "登錄",
+        "Play": "遊玩",
+        "playstreak": {
+            "days": "天",
+            "now": "當前",
+            "dayResets": "日志:",
+            "playEachDay": "每天玩 Play,使你们的tre子们 won!",
+            "playToStart": "日 本",
+            "progressTowardsStreak": "朝向今天的战.迈进.",
+            "streakCompleted": "Streak完成了! 现在请你奖励.",
+            "streakProgress": "Streak Progress",
+            "sync": "协同进步",
+            "syncSuccess": "A. 进展综述"
+        },
+        "points": "點",
+        "sync": "同步",
+        "type": {
+            "reputation": "聲望",
+            "playstreak": "国际乐施会"
+        },
+        "reward": "退学",
+        "associatedGames": "联系游戏",
+        "claimAll": "1. 要求",
+        "errorMessage": "交易有错误.",
+        "linkAccount": "联系 运输账户检查资格.",
+        "readyForClaim": "索赔的阅读",
+        "claimFailed": "索赔失败",
+        "claimFailedMessage": "由于汽油费,没有足够平衡地要求获得奖励。 在进行再造之前,打一条不同的围墙或补充.",
+        "createDiscordTicket": "伪造票",
+        "notEnoughGas": {
+            "message": "由於燃氣費，錢包餘額不足以領取您的獎勵。請嘗試其他錢包或在重試之前補充此錢包。"
+        },
+        "needMoreAchievements": "您需要完成其中一项比赛的{{percent}}%成就.",
+        "View Game": "观点",
+        "pointsClaimed": "要求",
+        "g7Numclaimed": "索赔总额",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> 请确保你在{{networkName}}网络上分配足够的天然气,以便在24小时内成功确认<bold>",
+            "body2": "否则,查询退款<bold>将到期,不再可以索偿",
+            "title": "1. 查询要求",
+            "cancel": "取消",
+            "confirm": "確認"
+        },
+        "noG7ConnectionClaim": "你们需要拥有一个与{{email}}相联的游戏7账户,以争取你们的奖励.",
+        "noG7ConnectionSync": {
+            "message": "您需要將 Game7 帳戶連結到 {{email}} 以重新同步您的任務。",
+            "title": "未連結 G7 帳戶"
+        },
+        "toSeeDetails": "以查看詳細信息。",
+        "notEligible": {
+            "message": "您尚未完成所需的遊玩連續天數，無法在此時索取獎勵。",
+            "title": "尚不符合資格"
+        },
+        "notEnoughBalance": {
+            "title": "餘額不足"
+        },
+        "notSignedIn": {
+            "message": "您需要登入才能領取獎勵。",
+            "title": "未登入"
+        },
+        "questAvailable": "任務可用！",
+        "questComplete": "任務完成！",
+        "claim": "索取",
+        "rewardClaimed": "申請成功",
+        "toClaimReward": "以領取您的獎勵。",
+        "youHaveClaimed": "您已索取 {{totalRewards}} 獎勵{{plural}}。"
     },
     "sideload": {
-        "warningTitle": "重要",
-        "warningMessage": "側載遊戲是專為開發人員和有經驗的高級用戶提供的功能。側載包含惡意軟件的安裝程序可能會危及你的電腦並導致資金被盜。"
+        "warningMessage": "側載遊戲是專為開發人員和有經驗的高級用戶提供的功能。側載包含惡意軟件的安裝程序可能會危及你的電腦並導致資金被盜。",
+        "warningTitle": "重要"
     },
-    "gameRelease": {
-        "beta": "Beta",
-        "main": "主要",
-        "prototype": "原型",
-        "alpha": "Alpha",
-        "demo": "演示"
-    },
-    "accounts": "賬戶",
     "ALL": "全部",
     "analytics": "分析",
-    "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "您使用外部錢包連接到 HyperPlay。\n \n 要批准 HyperPlay Overlay 中的交易，您需要使用 MetaMask 擴展連接 HyperPlay。"
+    "exit_game": "退出遊戲",
+    "quests": {
+        "quests": "任務",
+        "playstreak": {
+            "signInWarning": {
+                "client": "你们目前还未陷入困境,进展将无法追踪。 请通过直截了当的退步向超Play表示,以跟踪进展情况.",
+                "overlay": "你们目前还未陷入困境,进展将无法追踪。 请通过直截了当的倒塌,将游戏和标志从超Play转向跟踪进展."
+            }
+        },
+        "noneFound": {
+            "message": "没有发现任何要求.",
+            "title": "无勘探公司."
+        },
+        "g7CreditsModal": {
+            "description": "D. 进入超Play的最高游戏,挑动“游戏Streak”挑战。 每一项活动都鼓励你进行不同的游戏,展示网络3合并的最佳方式。 你的游戏时间!",
+            "title": "Earn Hor7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "观点"
+        }
     },
-    "exit_game": "退出遊戲"
+    "profile": "個人資料",
+    "dlcs": {
+        "label": "选择DLC安装:"
+    },
+    "email_subscription": {
+        "title": "感谢您赞助!",
+        "subtitle": "你们现在就是我们社区的一部分,我们恳请与你们分享宝贵的更新和见解."
+    },
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}}和其他游戏准备更新.",
+            "single": "{{gameName}}."
+        },
+        "title": "现有《野生动物最新情况》"
+    },
+    "importGameErrorMessageExecutable": "动物 无法执行,不可能进行进口游戏",
+    "accounts": "账户",
+    "achievements": {
+        "progress": {
+            "minted": "链条",
+            "notMinted": "链条"
+        }
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "你与超Play有外部围墙.",
+        "WALLET_DISCONNECTED": "你没有与超Play连接的围墙.",
+        "comingSoon": "即將到來",
+        "links": {
+            "buy": "購買",
+            "marketplace": "市場",
+            "portfolio": "投資組合",
+            "sell": "出售",
+            "bridge": "橋接",
+            "swap": "交換"
+        }
+    },
+    "back_to_game": "重获游戏",
+    "importGameErrorTitle": "进口游戏",
+    "importGameErrorMessage": "进口游戏不是有效的游戏夹,不可能",
+    "import-game-folder": {
+        "placeholder": "选择进口的游戏夹",
+        "success": "成功进口的游戏!",
+        "cta": "进口猎物",
+        "dialog": {
+            "title": "选择性游戏 Folder to Import"
+        },
+        "error": "进口期间有错误。 详情请见记录.",
+        "label": "进口猎物"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "取消的基层游戏",
+                "title": "Cancel Extraction"
+            },
+            "installed": {
+                "body": "修改适用于基础游戏",
+                "title": "地下室"
+            },
+            "installing": {
+                "body": "摘取基本游戏档案",
+                "title": "藏匿基地"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "选择性基地博爱",
+                "placeholder": "选择Zip 文件"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "這款遊戲是《魔獸世界：巫妖王之 wrath》（3.3.5a）的模組。為了玩這個模組，玩家必須擁有《魔獸世界 3.3.5a》的副本。{{newline}} {{newline}} HyperPlay 不提供《魔獸世界》的主機服務。擁有《魔獸世界》的玩家可以從以下來源獲得所需的版本：",
+                "subtitle": "3.3.5a",
+                "webtorrent": "Torrent(Magnet Link)",
+                "chromieCraft": "ChromieCraft",
+                "title": "第 1 步",
+                "link1": "鏈接 1",
+                "link2": "鏈接 2（磁鏈接）"
+            },
+            "step2": {
+                "description": "选择下载 ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "Selected ChromieCraft_3.3.5a.zip 文件",
+                "title": "第 2 步",
+                "subtitle1": "選擇下載的 3.3.5a zip 文件"
+            },
+            "step3": {
+                "description": "请选择安装世界军舰的夹:Lch King的Wrath(3.3.5a).",
+                "subtitle": "选 举 Folder",
+                "title": "第3步"
+            },
+            "step4": {
+                "description": "加入进入法,着手安装游戏.",
+                "subtitle": "准入法",
+                "title": "步骤4"
+            },
+            "title": "修改指示"
+        }
+    },
+    "Cancel Installation": "集装箱",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "超级邮局将下载和开始为你安装轮机。 请遵循关于安装厂的轮船指示;"
+    },
+    "HyperPlay will notify you once the installation is done;": "一旦安装完毕,超Play将通知你;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "如果您愿意继续学习,因为视您的互联网连接和系统配置情况,可以花几分钟时间完成学业;",
+    "Launch Steam": "发射场",
+    "Launching Steam": "发射船...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "第一次发射船将下载必要的文件,需要几分钟才能完成,日志屏幕将登上;",
+    "Install Steam": "1. 停泊船.",
+    "Installing Steam": "1. 停泊船.",
+    "At the end make sure to": "2. 船舶错误",
+    "steam-install": {
+        "compatibility-layer-not-available": "无法找到的合格等级。 请首先从“Settings”安装一个酒吧.",
+        "error-message": "安装船时发生错误。 请再次审判.",
+        "launch-tooltip": "利用超Play兼容性发射",
+        "success-message": "已经安装了轮船。 现在,你可以从图书馆发射.",
+        "tooltip": "这将安装Windows版本的轮船,它将使用超Play兼容性。\n\n某些游戏,特别是旧题目、新的3D游戏,或具有反制软件的游戏,可能无法正常运转。\n\n推荐的光谱是Mac和Ampa Silicon CPU(M1或以上)和至少16GB of RAM."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK'Runell 页: 1",
+    "wallet": {
+        "unsupported": "不支持的錢包連接",
+        "portfolio": {
+            "onlyExtension": "MetaMask 投資組合僅在連接到 MetaMask 時可用。"
+        }
+    },
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "請注意，並非所有遊戲都能正常運行，即使能運行，也可能無法如預期般運行。",
+    "16GB of RAM": "16GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 或更高版本",
+    "Downloading": "正在下載 {{percent}}%",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "如果您希望繼續，請耐心等待，因為根據您的網絡連接和系統配置，這可能需要幾分鐘才能完成。",
+    "Installing": "安裝中",
+    "installModal": {
+        "loginRequired": "需要登錄",
+        "loginRequiredMessage": "您需要登錄到 HyperPlay 才能輸入您的訪問代碼並安裝此遊戲。 ",
+        "loginRequiredMessageUpdate": "您需要登錄 HyperPlay 才能輸入您的訪問代碼並更新此遊戲。 "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 或更高版本"
+    },
+    "Please Wait": "請稍候",
+    "Recommended specs for a better experience": "為了更好的體驗，建議的規格"
 }

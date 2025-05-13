@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'graceful-fs'
 import { userInfo as user } from 'os'
+import { uuid } from 'short-uuid'
 
 import {
   AppSettings,
@@ -14,11 +15,11 @@ import {
   gamesConfigPath,
   installPath,
   userHome,
-  isFlatpak,
   isMac,
   isWindows,
   getSteamCompatFolder,
-  configStore
+  configStore,
+  isLinux
 } from './constants'
 
 import { logError, logInfo, LogPrefix } from './logger/logger'
@@ -27,8 +28,7 @@ import {
   getDefaultWine,
   getGamingPortingToolkitWine,
   getLinuxWineSet,
-  getWineOnMac,
-  getWineskinWine
+  getWineOnMac
 } from './utils/compatibility_layers'
 
 import { backendEvents } from './backend_events'
@@ -135,17 +135,11 @@ abstract class GlobalConfig {
       return new Set<WineInstallation>()
     }
 
+    const getGPTKWine = await getGamingPortingToolkitWine()
     const crossover = await getCrossover()
     const wineOnMac = await getWineOnMac()
-    const wineskinWine = await getWineskinWine()
-    const gamingPortingToolkitWine = await getGamingPortingToolkitWine()
 
-    return new Set([
-      ...gamingPortingToolkitWine,
-      ...crossover,
-      ...wineOnMac,
-      ...wineskinWine
-    ])
+    return new Set([...getGPTKWine, ...crossover, ...wineOnMac])
   }
 
   /**
@@ -296,12 +290,12 @@ class GlobalConfigV0 extends GlobalConfig {
       enableUpdates: false,
       addDesktopShortcuts: false,
       addStartMenuShortcuts: false,
-      autoInstallDxvk: true,
-      autoInstallVkd3d: true,
+      autoInstallDxvk: isLinux,
+      autoInstallVkd3d: isLinux,
+      autoInstallDxvkNvapi: false,
       addSteamShortcuts: false,
       preferSystemLibs: false,
-      checkForUpdatesOnStartup: !isFlatpak,
-      autoUpdateGames: false,
+      autoUpdateGames: true,
       customWinePaths: isWindows ? null : [],
       defaultInstallPath: installPath,
       libraryTopSection: 'disabled',
@@ -323,12 +317,17 @@ class GlobalConfigV0 extends GlobalConfig {
       wineCrossoverBottle: 'HyperPlay',
       winePrefix: isWindows ? '' : defaultWinePrefix,
       wineVersion: defaultWine,
-      enableEsync: true,
-      enableFsync: true
+      enableEsync: isMac,
+      enableMsync: isMac,
+      enableFsync: isLinux,
+      ldUser: {
+        kind: 'user',
+        key: uuid()
+      }
     } as AppSettings
   }
 
-  public setSetting(key: string, value: unknown) {
+  public setSetting(key: keyof AppSettings, value: never) {
     const config = this.getSettings()
     const configStoreSettings = configStore.get_nodefault('settings') || config
     configStore.set('settings', { ...configStoreSettings, [key]: value })

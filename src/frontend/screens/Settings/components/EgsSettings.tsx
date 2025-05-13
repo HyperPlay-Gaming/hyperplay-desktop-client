@@ -2,9 +2,8 @@ import React, { useContext, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import Backspace from '@mui/icons-material/Backspace'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
+import { faBackspace, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import ContextProvider from 'frontend/state/ContextProvider'
 import useSetting from 'frontend/hooks/useSetting'
 import {
@@ -12,12 +11,13 @@ import {
   TextInputWithIconField,
   ToggleSwitch
 } from 'frontend/components/UI'
+import libraryState from 'frontend/state/libraryState'
+import { Button } from '@hyperplay/ui'
 
 const EgsSettings = () => {
   const { t } = useTranslation()
   const [isSyncing, setIsSyncing] = useState(false)
-  const { platform, refreshLibrary, showDialogModal } =
-    useContext(ContextProvider)
+  const { platform, showDialogModal } = useContext(ContextProvider)
   const [egsPath, setEgsPath] = useSetting('egsLinkedPath', '')
   const isLinked = Boolean(egsPath.length)
   const isWindows = platform === 'win32'
@@ -33,7 +33,7 @@ const EgsSettings = () => {
         })
         setEgsPath('')
         setIsSyncing(false)
-        refreshLibrary({ runInBackground: false })
+        libraryState.refreshLibrary({ runInBackground: false })
       })
     }
 
@@ -57,7 +57,7 @@ const EgsSettings = () => {
 
       setIsSyncing(false)
       setEgsPath(isWindows ? 'windows' : egsPath)
-      refreshLibrary({ runInBackground: false })
+      libraryState.refreshLibrary({ runInBackground: false })
     })
   }
 
@@ -95,13 +95,14 @@ const EgsSettings = () => {
                 }}
               />
             ) : (
-              <Backspace
+              <FontAwesomeIcon
                 data-testid="setEpicSyncPathBackspace"
                 style={
                   isLinked
                     ? { color: 'transparent', pointerEvents: 'none' }
                     : { color: '#B0ABB6' }
                 }
+                icon={faBackspace}
               />
             )
           }
@@ -113,17 +114,11 @@ const EgsSettings = () => {
           afterInput={
             <>
               <span className="rightButton">
-                <button
+                <Button
                   data-testid="syncButton"
                   onClick={async () => handleSync()}
                   disabled={isSyncing || !egsPath.length}
-                  className={`button is-small ${
-                    isLinked
-                      ? 'is-danger'
-                      : isSyncing
-                      ? 'is-primary'
-                      : 'settings'
-                  }`}
+                  style={{ display: 'flex', marginTop: '27px' }}
                 >
                   {`${
                     isLinked
@@ -132,17 +127,17 @@ const EgsSettings = () => {
                       ? t('button.syncing')
                       : t('button.sync')
                   }`}
-                </button>
+                </Button>
               </span>
-              <div>
-                {!isWindows && (
-                  <InfoBox text="infobox.help">{t('help.general')}</InfoBox>
-                )}
-              </div>
             </>
           }
         />
       )}
+      <div>
+        {!isWindows && (
+          <InfoBox text="infobox.help">{t('help.general')}</InfoBox>
+        )}
+      </div>
       {isWindows && (
         <ToggleSwitch
           htmlId="syncToggle"

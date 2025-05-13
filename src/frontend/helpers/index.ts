@@ -8,28 +8,15 @@ import {
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GogInstallInfo } from 'common/types/gog'
-import { NileInstallInfo } from 'common/types/nile'
 
 import { install, launch, repair, updateGame } from './library'
-import fileSize from 'filesize'
-const readFile = window.api.readConfig
-
-const writeConfig = window.api.writeConfig
+import * as fileSize from 'filesize'
+import libraryState from 'frontend/state/libraryState'
 
 const notify = (args: { title: string; body: string }) =>
   window.api.notify(args)
 
-const loginPage = window.api.openLoginPage
-
-const getPlatform = window.api.getPlatform
-
-const sidInfoPage = window.api.openSidInfoPage
-
-const openDiscordLink = window.api.openDiscordLink
-
-export const size = fileSize.partial({ base: 2 })
-
-const sendKill = window.api.kill
+export const size = fileSize.partial({ base: 2 }) as (arg: unknown) => string
 
 const syncSaves = async (
   savesPath: string,
@@ -51,8 +38,10 @@ const getLegendaryConfig = async (): Promise<{
   user: string
 }> => {
   // TODO: I'd say we should refactor this to be two different IPC calls, makes type annotations easier
-  const library: GameInfo[] = (await readFile('library')) as GameInfo[]
-  const user: string = (await readFile('user')) as string
+  const library: GameInfo[] = (await window.api.readConfig(
+    'library'
+  )) as GameInfo[]
+  const user: string = (await window.api.readConfig('user')) as string
 
   if (!user) {
     return { library: [], user: '' }
@@ -62,6 +51,9 @@ const getLegendaryConfig = async (): Promise<{
 }
 
 const getGameInfo = async (appName: string, runner: Runner) => {
+  if (!appName || !runner) {
+    return null
+  }
   return window.api.getGameInfo(appName, runner)
 }
 
@@ -78,11 +70,7 @@ const getInstallInfo = async (
   installPlatform: InstallPlatform,
   channelNameToInstall?: string
 ): Promise<
-  | LegendaryInstallInfo
-  | GogInstallInfo
-  | HyperPlayInstallInfo
-  | NileInstallInfo
-  | null
+  LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
 > => {
   if (runner === 'hyperplay') {
     installPlatform = handleRunnersPlatforms(installPlatform, runner)
@@ -131,8 +119,11 @@ function getProgress(progress: InstallProgress): number {
 }
 
 function removeSpecialcharacters(text: string): string {
-  const regexp = new RegExp(/[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®]/, 'gi')
-  return text.replaceAll(regexp, '')
+  const regexp = new RegExp(
+    /[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®|\s]/,
+    'gi'
+  )
+  return text.replaceAll(regexp, '').trim()
 }
 
 const getStoreName = (runner: Runner, other: string) => {
@@ -141,8 +132,8 @@ const getStoreName = (runner: Runner, other: string) => {
       return 'Epic Games'
     case 'gog':
       return 'GOG'
-    case 'nile':
-      return 'Amazon Games'
+    case 'hyperplay':
+      return 'HyperPlay'
     default:
       return other
   }
@@ -166,25 +157,54 @@ export function getPlatformName(platform: string): string {
   }
 }
 
+const getLastPartOfUrl = (url: string) => {
+  return url.split('/').pop()
+}
+
+export const fetchEpicListing = async (projectId: string) => {
+  const epicListingUrl = await window.api.getEpicListingUrl(projectId)
+
+  if (!epicListingUrl) {
+    return { appName: '', epicListingUrl: '' }
+  }
+
+  if (!libraryState.epicLibrary.length) {
+    return { appName: '', epicListingUrl }
+  }
+
+  // filter libraryState using the epicListing url to get the appName
+  const lastPartOfHpUrl = getLastPartOfUrl(epicListingUrl)
+  const appName = libraryState.epicLibrary.filter((g) => {
+    const game = JSON.parse(JSON.stringify(g)) as GameInfo
+    if (!game.store_url) return false
+
+    const lastPartOfEpicUrl = getLastPartOfUrl(game.store_url)
+
+    if (!lastPartOfEpicUrl || !lastPartOfHpUrl) return false
+
+    // test the last part of the URL from the start since sometimes
+    // it might includes some numbers at the end but they are the same listing.
+    // in the future might need some adjustments depending on the game,
+    // so far work with Apeiron and Moonray
+    return lastPartOfHpUrl.startsWith(lastPartOfEpicUrl)
+  })[0].app_name
+
+  return { appName, epicListingUrl }
+}
+
 export {
   createNewWindow,
   getGameInfo,
   getGameSettings,
   getInstallInfo,
   getLegendaryConfig,
-  getPlatform,
   getProgress,
   install,
   launch,
-  loginPage,
   notify,
-  openDiscordLink,
   repair,
-  sendKill,
-  sidInfoPage,
   syncSaves,
   updateGame,
-  writeConfig,
   removeSpecialcharacters,
   getStoreName
 }

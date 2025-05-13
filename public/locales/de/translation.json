@@ -66,7 +66,8 @@
                 "title": "Unbekannter Fehler aufgetreten!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Update Error",
+                "message": "Etwas ging mit dem Update schief! Bitte manuell deinstallieren und HyperPlay neu installieren."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,6 +77,20 @@
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
+            },
+            "moving": "Fehlerbehebung Spiel {{error}}",
+            "ubisoft-connect": {
+                "message": "Installation von Ubisoft Connect im Spiel-Präfix gescheitert. Überprüfen Sie unsere Wiki-Seite unter https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, um sie maunally zu installieren.",
+                "title": "Ubisoft Connect"
+            },
+            "delete-files": {
+                "body": "Fehler entfernen extrahierter Ordner {{path}}. Bitte entfernen Sie es manuell.\n(X86X)\n(X117X)",
+                "title": "Entfernen des extrahierten Ordners"
+            },
+            "steam": {
+                "error": "Dampf ausführbar nicht gefunden. Die Installation wurde wahrscheinlich vom Benutzer storniert oder auf Steam Seite gescheitert.",
+                "message": "Dampfinstallation ist gescheitert! Bitte lesen Sie die Anweisungen sorgfältig und versuchen Sie es erneut! {{paragraph}} {{error}}",
+                "title": "Steam-Fehler"
             }
         },
         "info": {
@@ -85,7 +100,9 @@
                 "message": "Es ist eine neue Version verfügbar!",
                 "message-finished": "Möchtest du HyperPlay jetzt neu starten?",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Update abgeschlossen"
+                "title-finished": "Update abgeschlossen",
+                "appUpdated": "HyperPlay wurde aktualisiert",
+                "appUpdated-message": "HyperPlay wurde aktualisiert. Möchten Sie HyperPlay jetzt aktualisieren und neu starten?"
             }
         },
         "no": "NEIN",
@@ -120,7 +137,7 @@
             "title": "Verknüpfungen"
         },
         "sync": {
-            "button": "Auswählen",
+            "button": "Wählen",
             "error": "Ungültiger Pfad",
             "title": "Wähle das Spielstand-Verzeichnis"
         },
@@ -139,11 +156,28 @@
                 "install": "Die Epic-Server haben im Moment Probleme, das Spiel kann nicht installiert werden!",
                 "update": "Die Epic-Server haben im Moment Probleme, das Spiel kann nicht aktualisiert werden!"
             },
-            "title": "Warnung"
+            "title": "Warnung",
+            "rosetta": {
+                "message": "HyperPlay erfordert Rosetta korrekt auf macOS mit Apple Silicon Chips laufen. Bitte installieren Sie es vom macOS-Terminal mit dem folgenden Befehl: \"softwareupdate --install-rosetta\" und starten Sie HyperPlay neu. ",
+                "title": "Rosetta nicht gefunden"
+            },
+            "wine-change": {
+                "message": "Wir konnten die ausgewählte Weinversion nicht finden, um diesen Titel zu starten ({{selectedWine}}). {{newline}} Wir haben einen anderen gefunden, möchten Sie weiterhin mit {{foundWine}} starten?",
+                "message-gptk": "Um Spiele mit dem Apple Gaming Porting Toolkit ausführen zu können, müssen Sie Ihre macOS auf 14 (Sonoma) oder höher aktualisieren. {{newline}} Wir fanden Wein auf Ihrem System, möchten Sie weiterhin starten mit {{foundWine}}?",
+                "title": "Wein nicht gefunden!",
+                "title-gptk": "Spiel Porting Toolkit Nicht kompatibel "
+            }
         },
         "wineprefix": "Wine Prefix Ordner auswählen",
         "yes": "JA",
-        "dontShowAgain": "Nicht mehr anzeigen"
+        "dontShowAgain": "Nicht erneut anzeigen",
+        "choose-nile-binary": "Wählen Sie Nile-Binärdatei aus",
+        "reset-extension": {
+            "question": {
+                "message": "Sind Sie sicher, dass Sie die MetaMask Extension zurücksetzen möchten?",
+                "title": "Zurück zur Übersicht"
+            }
+        }
     },
     "button": {
         "cancel": "Abbrechen",
@@ -151,7 +185,11 @@
         "login": "Anmelden",
         "sync": "Synchronisieren",
         "syncing": "Synchronisiere",
-        "unsync": "Nicht mehr synchronisieren"
+        "unsync": "Nicht synchronisieren",
+        "update": "Aktualisieren",
+        "continue": "Fortfahren",
+        "download": "Herunterladen",
+        "install": "Installieren"
     },
     "controller": {
         "hints": {
@@ -190,7 +228,9 @@
             "start-time": "Gestartet am",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "title_dm": "Manager herunterladen",
+        "ETA": "Geschätzte Zeit"
     },
     "epic": {
         "offline-notification-body": "Online-Dienste funktionieren möglicherweise nicht vollständig, da die Server von Epic Games offline sind!",
@@ -220,7 +260,7 @@
         "ignore_hidden": "Ausgeblendete ignorieren",
         "platform": "Plattform",
         "show_all_games": "Alle Spiele anzeigen",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Nicht verfügbare Spiele anzeigen",
         "show_favourites_only": "Nur Favoriten anzeigen",
         "show_hidden": "Ausgeblendete anzeigen",
         "store": "Store filtern"
@@ -262,7 +302,11 @@
         "wine": {
             "part1": "HyperPlay sucht in den folgenden Verzeichnissen nach Versionen von Wine, Proton und CrossOver:",
             "part2": "Für andere Orte verwende einen symbolischen Link zu einem dieser Ordner"
-        }
+        },
+        "dxvknvapi": "DXVK-NVAPI ist eine Implementierung von NVAPI auf DXVK und der linux nativen NVAPI gebaut, ermöglicht es die Verwendung von DLSS auf Nvidia GPUs.",
+        "msync": "Msync zielt darauf ab, Winserver Overhead in CPU-intensiven Spielen zu reduzieren. Enabling kann die Leistung auf mehreren Spielen verbessern.",
+        "dxvkfpslimit": "Setzt eine Rahmensatzkappe für DXVK-Spiele",
+        "disable_logs": "Um das Kontrollkästchen ON zu deaktivieren, werden die meisten Schreibvorgänge zu Protokolldateien deaktiviert (kritische Informationen werden immer angemeldet). Stellen Sie sicher, diese Einstellung auszuschalten, bevor Sie irgendein Problem melden."
     },
     "info": {
         "hyperplay": {
@@ -288,7 +332,9 @@
         },
         "wine-repfix": {
             "message": "Wine verwendet einen so genannten WINEPREFIX, um Windows-Anwendungen abzukapseln. Dieser Präfix enthält die Wine-Konfigurationsdateien und eine Nachbildung der Dateihierarchie von C: (der Hauptfestplatte eines Windows-Betriebssystems). In dieser Reproduktion des Laufwerks C: werden deine Spielespeicherdateien und die über Winetricks installierten Abhängigkeiten gespeichert"
-        }
+        },
+        "wine-path-invalid": "Weinweg ist ungültig, bitte wählen Sie einen anderen.",
+        "wine-path-none-found": "Keine Weinversion wurde gefunden, eine vom Compatibility Manager herunterladen"
     },
     "install": {
         "path": "Installationspfad auswählen"
@@ -302,17 +348,21 @@
         "toggleLayout": {
             "grid": "Umschalten auf ein Rasterlayout",
             "list": "Umschalten auf ein Listenlayout"
-        }
+        },
+        "alphabeticalAZ": "Alphabetisches A-Z",
+        "alphabeticalZA": "Alphabetische Z-A"
     },
     "loading": {
         "default": "Wird geladen",
         "website": "Lade Webseite"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Alternative Anmeldemethode",
+        "epic": "Epic Games-Anmeldung",
+        "gog": "GOG-Anmeldung",
+        "message": "Melde dich bei deiner Plattform an. Du kannst auch bei mehreren gleichzeitig angemeldet sein.",
+        "amazon": "Amazon-Login",
+        "old-mac": "Ihre macOS-Version ist {{version}}. macOS 12 oder neuer ist zum Einloggen erforderlich."
     },
     "message": {
         "sync": "Synchronisation abgeschlossen",
@@ -345,7 +395,9 @@
             "error": "Installation fehlgeschlagen",
             "finished": "Installation abgeschlossen",
             "imported": "Spiel importiert",
-            "startInstall": "Installation gestartet"
+            "startInstall": "Installation gestartet",
+            "stopped": "Installation gestoppt",
+            "paused": "Installation Pausen"
         },
         "moved": "Verschieben abgeschlossen",
         "moving": "Spiel wird verschoben",
@@ -355,9 +407,11 @@
         },
         "uninstalled": "Deinstalliert",
         "update": {
-            "canceled": "Update abgebrochen",
+            "canceled": "Aktualisierung abgebrochen",
             "finished": "Update abgeschlossen",
-            "started": "Update gestartet"
+            "started": "Update gestartet",
+            "stopped": "Update gestoppt",
+            "paused": "Aktualisieren Pausen"
         }
     },
     "offline-message": {
@@ -367,7 +421,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Versuche erneut"
     },
-    "Open": "",
+    "Open": "Öffnen",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -402,15 +456,18 @@
     "other": {
         "gogdl-version": "GOGDL-Version: ",
         "legendary-version": "Legendary-Version: ",
-        "weblate": "Hilf bei der Übersetzung von HyperPlay."
+        "weblate": "Hilf bei der Übersetzung von HyperPlay.",
+        "nile-version": "Nil-Version: "
     },
     "Other": "Other",
     "placeholder": {
-        "alt-gogdl-bin": "Nutze eingebaute GOGDL Binärdatei...",
-        "alt-legendary-bin": "Benutze eingebaute Legendary Binärdatei...",
-        "custom_themes_path": "Select the path to look for custom CSS files",
-        "egs-prefix": "Prefix, in dem EGS installiert ist",
-        "prefered_language": "2-Zeichen-Code (z. B.: \"en\" oder \"fr\")"
+        "alt-gogdl-bin": "Integrierte GOGDL-Binärdatei wird verwendet …",
+        "alt-legendary-bin": "Integrierte Legendary-Binärdatei wird verwendet …",
+        "custom_themes_path": "Wähle den Pfad für benutzerdefinierte CSS-Dateien",
+        "dxvkfpsvalue": "Positiver ganzzahliger Wert (z. B. 30, 60, …)",
+        "egs-prefix": "Präfix, in dem EGS installiert ist",
+        "prefered_language": "Zwei-Zeichen-Code (z. B.: „en“ oder „fr“)",
+        "alt-nile-bin": "Verwendung der integrierten Nile-Binärdatei ..."
     },
     "platforms": {
         "linux": "Linux",
@@ -424,10 +481,20 @@
             "canceled": "Abgebrochen",
             "clear": "Liste leeren",
             "downloading": "Lade herunter",
-            "empty": "Nichts zum Herunterladen",
+            "empty": {
+                "finished": "Nichts heruntergeladen",
+                "queue": "Nichts zum Herunterladen"
+            },
             "finished": "Abgeschlossen",
             "queued": "In Warteschlange",
-            "remove": "Aus Downloads entfernen"
+            "remove": "Aus Downloads entfernen",
+            "pause": "Downloads anhalten",
+            "resume": "Download fortsetzen",
+            "timeElapsed": "Verstrichene Zeit: {{elapsed}}",
+            "launch": "Spiel starten",
+            "retry-install": "Installation erneut versuchen",
+            "retry-update": "Aktualisierung erneut versuchen",
+            "stop": "Download stoppen"
         }
     },
     "Recent": "Zuletzt gespielte Spiele",
@@ -450,7 +517,7 @@
         "default-install-path": "Standard-Installationspfad",
         "default-steam-path": "Standard Steam-Pfad",
         "defaultWinePrefix": "Ordner für neue Wine Präfixe festlegen",
-        "disable_controller": "HyperPlay Navigation mit Controller deaktivieren",
+        "disable_controller": "Hyperplay-Navigation mit dem Controller deaktivieren",
         "discordRPC": "Discord Rich Presence aktivieren",
         "download-no-https": "Spiele ohne HTTPS herunterladen (nützlich für CDNs z. B. LanCache)",
         "egs-sync": "Mit installiertem Epic Games synchronisieren",
@@ -496,7 +563,10 @@
             "instructions_title": "Wie melde ich ein Problem?",
             "last-log": "Letzter Log",
             "no-file": "Keine Log-Datei gefunden",
-            "show-in-folder": "Log-Datei in Ordner anzeigen"
+            "show-in-folder": "Log-Datei in Ordner anzeigen",
+            "join-hyperplay-discord": "Besuchen Sie uns",
+            "instructions-part-01": "Wenn Sie Probleme bei der Verwendung von HyperPlay haben wir zwei ausgewiesene Bereiche, um Ihre Probleme in unserem Discord Server zu melden. Wenn Sie ein Spieler sind, melden Sie sich bitte alle Probleme, indem Sie das Player-support-forum besuchen. Wenn Sie ein Game dev sind, melden Sie sich bitte alle Probleme, indem Sie das dev-support-forum besuchen.",
+            "instructions-part-02": "Um uns zu helfen, das Problem so schnell wie möglich zu diagnostizieren und zu beheben, geben Sie bitte so viele Informationen wie möglich, einschließlich einer Kopie Ihrer Protokolle. Unser Support-Team wird beide Kanäle überwachen und ihr Bestes tun, um so schnell wie möglich auf Ihr Problem zu reagieren. Vielen Dank für Ihre Geduld und Verständnis, während wir arbeiten, um Probleme zu lösen, denen Sie begegnen können."
         },
         "mangohud": "Mangohud aktivieren (Mangohud muss installiert sein)",
         "manualsync": {
@@ -534,9 +604,20 @@
         "showfps": "FPS anzeigen (DX9, 10 und 11)",
         "start-in-tray": "Minimiert starten",
         "steamruntime": "Steam Runtime verwenden",
-        "winecrossoverbottle": "CrossOver Flasche",
-        "wineprefix": "Wine Prefix Ordner",
-        "wineversion": "Wine-Version"
+        "winecrossoverbottle": "CrossOver Bottle",
+        "wineprefix": "Wine-Präfix-Ordner",
+        "wineversion": "Wine-Version",
+        "autoUpdateGames": "Spiele automatisch aktualisieren",
+        "ignoreGameUpdates": "Spielaktualisierungen ignorieren",
+        "disable_logs": "Logs deaktivieren",
+        "addgamestoapplications": "Spiele automatisch zu Anwendungen hinzufügen",
+        "showMetalOverlay": "Statistik-Overlay anzeigen",
+        "alt-nile-bin": "Wählen Sie eine alternative Nil-Binärdatei",
+        "dxvkfpslimit": "Begrenzung FPS (DX9, 10 und 11)",
+        "autodxvknvapi": "Auto Installieren/Update DXVK-NVAPI auf Präfix",
+        "autoLaunchHyperPlay": "Autostart Hyper Spielen",
+        "steamId": "Steam ID",
+        "msync": "Esync aktivieren"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -571,24 +652,57 @@
             "log": "Log",
             "other": "Andere",
             "sync": "Spielstände-Synchronisation",
-            "wineExt": "Wine-Erweiterungen"
+            "wineExt": "Wine-Erweiterungen",
+            "systemInformation": "Systeminformationen",
+            "accounts": "Konten"
         },
         "open-config-file": "Konfigurationsdatei öffnen",
         "reset-hyperplay": "HyperPlay zurücksetzen",
         "saves": {
             "label": "Speicherstand-Pfad:",
             "warning": "Die Cloudspeicher-Funktion befindet sich in der Beta-Phase, bitte sichere deine Speicherstände vor der Synchronisierung (falls etwas schiefgeht)"
+        },
+        "systemInformation": {
+            "steamDeck": "Steam Deck",
+            "gpuDriver": "Treiber: {{driverVersion}}",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpu": "GPU:",
+            "memory": "Speicher:",
+            "systemModel": "Systemmodell:",
+            "memoryStats": "{{percentUsed}}% verwendet ({{usedGib}} / {{totalGib}}",
+            "showDetailed": "Detaillierte Systemspezifikationen anzeigen",
+            "version": "Ausführung: {{appVersion}}",
+            "cpu": "CPU:",
+            "gpuWithNumber": "GPU {{number}}",
+            "legendaryVersion": "Legendär: {{legendaryVersion}}",
+            "osNameFlatpak": "{{osName}} (inside Flatpak)",
+            "osVersion": "Version {{versionNumber}}",
+            "os": "Betriebssystem:",
+            "copyToClipboard": "In Zwischenablage kopieren"
+        },
+        "reset-extension": "Zurück zur Übersicht",
+        "gamesSettings": "Spiele Einstellungen",
+        "wine": {
+            "manager": {
+                "title": "Wine-Manager"
+            }
         }
     },
     "Settings": "Einstellungen",
     "sidebar": {
         "collapse": "Seitenleiste einklappen",
-        "uncollapse": "Seitenleiste ausklappen"
+        "uncollapse": "Seitenleiste ausklappen",
+        "downloadManager": "Manager herunterladen",
+        "library": "Bibliothek",
+        "achievements": "Errungenschaften",
+        "store": "Store"
     },
     "status": {
-        "installing": "Wird installiert",
-        "logging": "Anmelden…",
-        "processing": "Dateien werden verarbeitet, bitte warten"
+        "installing": "Wird installiert …",
+        "logging": "Anmelden …",
+        "processing": "Bitte warten. Dateien werden verarbeitet …",
+        "preparing_login": "Anmeldung wird vorbereitet... "
     },
     "store": "Epic Store",
     "stores": "Shops",
@@ -621,7 +735,9 @@
         "logout": "Abmelden",
         "logout_confirmation": "Möchtest du dich wirklich abmelden?",
         "manageaccounts": "Konten verwalten",
-        "quit": "Beenden"
+        "quit": "Beenden",
+        "manageStore": "Verwalten von Geschäften",
+        "logIn": "Einloggen"
     },
     "webview": {
         "controls": {
@@ -636,13 +752,479 @@
         "manager": {
             "link": "Wine-Manager",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Wine-Manager",
+            "title": "Kompatibilitätsschicht ",
             "unzipping": "Entpacke"
         },
         "release": "Veröffentlichungsdatum",
         "size": "Größe"
     },
+    "externalLink": {
+        "warning": "Du bist dabei, einen externen Link zu öffnen.",
+        "dontAskAgain": "Nicht erneut fragen"
+    },
+    "wiki_info": {
+        "not_found": "Wir konnten keine zusätzlichen Informationen finden."
+    },
+    "dlc": {
+        "actions": "Aktionen",
+        "installDlcs": "Alle DLCs installieren",
+        "noDlcFound": "Keine DLCs gefunden",
+        "size": "Größe",
+        "title": "Titel"
+    },
+    "amazon": "Amazonas",
+    "prime-gaming": "Prime Gaming",
+    "Amazon Games": "Amazon-Spiele",
+    "hyperplay": {
+        "onboarding": {
+            "analytics": {
+                "optOut": "Erlauben Sie immer, sich über Einstellungen zu entscheiden;",
+                "privacyPolicyHere": "Datenschutz hier.",
+                "anonymized": "Senden Sie anonymisierte Klick & Spiel-Interaktion;",
+                "body": "HyperPlay möchte Nutzungsdaten sammeln, um besser zu verstehen, wie unsere Nutzer mit der Anwendung interagieren. Diese Informationen helfen uns, zu verstehen, wie Sie die App verwenden und lassen uns HyperPlay noch besser für Sie machen.",
+                "title": "Hilf uns, HyperPlay zu verbessern!",
+                "neverSellData": " verkaufen Daten für Gewinn. Immer!",
+                "neverCollectPersonal": " schlüssel, adressen, waagen, hashes oder persönliche informationen zu sammeln;",
+                "neverCollectIP": " ihre volle IP-Adresse einholen;",
+                "privacyCaption": "Diese Daten werden aggregiert und sind daher für die Zwecke der Datenschutz-Grundverordnung (EU) 2016/679 anonym. Weitere Informationen zu unseren Datenschutzpraktiken finden Sie unter ",
+                "hyperplayWill": "HyperPlay wird:",
+                "bulletOne": "Immer die Möglichkeit bieten, sich abzumelden",
+                "bulletTwo": "Anonymisierte Klick- und Spielinteraktionen senden",
+                "paragraphOne": "HyperPlay möchte Nutzungsdaten sammeln, um besser zu verstehen, wie unsere Nutzer mit der Anwendung interagieren. \n           Dies ermöglicht es uns, HyperPlay noch besser für Sie zu machen.",
+                "privacyPolicy": "Datenschutzrichtlinie.",
+                "text": {
+                    "externalLink": "Erfahren Sie mehr",
+                    "title": "Wir haben unsere Datenschutzrichtlinie aktualisiert"
+                },
+                "titleOne": "Helfen Sie uns, HyperPlay zu verbessern!"
+            },
+            "connectionCanceled": {
+                "title": "Verbindung abgebrochen!",
+                "description": "Bitte bestätigen Sie die Verbindungsanfrage an Ihrer mobilen Geldbörse."
+            },
+            "walletSelection": {
+                "pleaseConnect": "Bitte verbinden Sie Ihre Brieftasche oder laden Sie die Metamask mobile-app, um zu erhalten\ngestartet:",
+                "screens": {
+                    "import": {
+                        "cantFindProfile": "Finden Sie Ihr Browser-Profil nicht?",
+                        "createNewWallet": "Neues MM-Erweiterungs-Wandgerät erstellen",
+                        "orWord": "O",
+                        "useRecoveryPhrase": "Importieren Sie mit Secret Recovery Phrase",
+                        "useRecoveryPhraseInfo": "Diese Funktion wird für fortgeschrittene Benutzer und Entwickler empfohlen. Ihre geheime Wiederherstellung Phrase wird lokal in MetaMask gespeichert und nie mit HyperPlay geteilt.",
+                        "title": "Wählen Sie den Browser aus",
+                        "details": "Die unten aufgeführten Browser haben MetaMask bereits installiert. Wählen Sie die, von der Sie gerne importieren möchten.",
+                        "learnMore": "Erfahre mehr."
+                    },
+                    "info": {
+                        "createWalletDescription": "Klicken Sie unten auf “Kreieren Sie eine Geldbörse” wenn Sie keine Geldbörse haben oder eine neue erstellen möchten:",
+                        "login": {
+                            "title": "Ein neuer Weg zum Einloggen",
+                            "details": "Eine Alternative, um neue Konten und Passwörter auf jeder Website zu erstellen, verbinden Sie stattdessen einfach Ihre Geldbörse."
+                        },
+                        "digitalAssets": {
+                            "title": "Ein Zuhause für Ihre Digital Assets",
+                            "details": "Geldbörsen werden verwendet, um digitale Assets wie Token und NFTs zu senden, zu empfangen, zu speichern und anzuzeigen."
+                        },
+                        "title": "Was ist eine Brieftasche?",
+                        "createWalletCTA": "Eine Brieftasche erstellen",
+                        "skip": "Vorerst überspringen"
+                    },
+                    "scan": {
+                        "title": "Scan QR mit ",
+                        "details": "Erstellen Sie einen verschlüsselten Kommunikationskanal. Ihre Schlüssel werden nie mit HyperPlay geteilt.",
+                        "dontHaveWallet": "Haben Sie keine Geldbörse?",
+                        "getMetamask": "MetaMask kaufen",
+                        "updateWarning": "Probleme haben? Stellen Sie sicher, dass MetaMask aktuell ist."
+                    }
+                },
+                "title": "Wallet Verbindungen"
+            },
+            "welcome": {
+                "text": {
+                    "bugs": "Bitte beachten Sie, dass HyperPlay ein öffentliches Alpha ist. Viele Features sind noch\nin der Entwicklung, und es wird Bugs geben.",
+                    "description": "HyperPlay ist ein Spiel Launcher und Spielspeicher Aggregator aus dem\nZukunft. Mit HyperPlay können Sie Ihre Brieftasche, Token und Vermögenswerte tragen\nin jedes Spiel. HyperPlay unterstützt die gesamte Bibliothek des Epic\nStore, GOG und unser eigener HyperPlay Store. Durch die Verwendung von HyperPlay stimmen Sie zu\nzu uns",
+                    "communityCTA_2": "gemeinschaft. Gemeinsam gestalten wir die Zukunft des Spielens!",
+                    "communityCTA_1": "Wir würden Ihr Feedback lieben und Sie in unserem",
+                    "construction": "HyperPlay ist im Aufbau.",
+                    "bulletPointFour": "Installieren Sie Steam (Windows-Version) auf macOS mit einem einfachen Klick",
+                    "bulletPointOne": "Zugriff auf eine umfangreiche Sammlung von über 100 on-chain-fähigen Spielen",
+                    "bulletPointThree": "Spiele Epic- und GOG-Spiele direkt über HyperPlay",
+                    "bulletPointTwo": "Verdienen Sie Token, NFTs und Off-Chain-Belohnungen, indem Sie Quests abschließen",
+                    "lastParagraph": "Derzeit in der Beta-Phase, schätzen wir Ihr Feedback sehr und \n            ermutigen Sie, uns Probleme oder Vorschläge in unserem",
+                    "paragraphOne": "Bei HyperPlay bauen wir den nächsten Generationen-Spielespeicher \n            für die Zukunft des Gamings.",
+                    "paragraphThr": "Bringen Sie nahtlos Ihre Wallet, Tokens \n           und Vermögenswerte in jedes Spiel, während Sie auf \n           die umfangreichen Bibliotheken des Epic Store, \n           GOG und unseres eigenen HyperPlay Stores - alles an einem Ort - zugreifen.",
+                    "bulletPointFive": "Führen Sie Windows-Spiele auf macOS, Linux und SteamDeck mit unserer\n              fortschrittlichen",
+                    "TitleList": "Mit HyperPlay können Sie:"
+                },
+                "title": "Willkommen bei Hyper Spielen Sie Early Access!",
+                "titleIntro": "Willkommen bei HyperPlay!"
+            },
+            "connectionConnected": {
+                "title": "Wallet verbunden!",
+                "description": "Deine Brieftasche ist verbunden. Sie sind bereit zum Spiel."
+            },
+            "connectAgain": "Erneut verbinden",
+            "terms": "Nutzungsbedingungen"
+        },
+        "accesscodes": {
+            "requirescode": "Dieses Spiel-Update erfordert einen Zugangscode.",
+            "success": {
+                "validation": "Erfolg! Zugangscode ist gültig"
+            },
+            "error": {
+                "validation": "Zugangscode ist ungültig",
+                "licenseUndefined": "Zugangs-Code konnte nicht validiert werden. Bitte überprüfen Sie Ihren Internetzugang oder Ihre Firewall-Einstellungen."
+            },
+            "placeholder": "Zugangscode eingeben"
+        },
+        "analyticsOff": "Analytics wird ausgeschaltet",
+        "browserImport": {
+            "appId": "Anwendung I",
+            "profile": "Profil"
+        },
+        "gamecard": {
+            "extracting": "Ausziehen...",
+            "installed": "Bereit zu spielen",
+            "installing": "Wird heruntergeladen …",
+            "paused": "Pausiert",
+            "distributables": "Installation von Distributables",
+            "patching": "Patching..."
+        },
+        "linkSteamAccountTitle": "Link Steam Account",
+        "otp": "Eine Zeit Passcode",
+        "viewItem": "{{item}}",
+        "viewMyAccount": "Mein Konto ansehen",
+        "viewPortfolio": "Portfolio anzeigen",
+        "changeWallet": "Swap Wallet Konto",
+        "linkSteamAccountCta": "Gehen Sie zum Dampfzeichen",
+        "achievements": {
+            "freeMints": "Free Mints",
+            "gamesToMint": "Spiele zu mint",
+            "addThisGame": "Fügen Sie dieses Spiel",
+            "noAchievements": {
+                "doubleCheckMessage": "Es sieht so aus, als könnten wir momentan keine Spiele in Ihrem Steam-Konto finden. Nur eine schnelle Erinnerung, um zu überprüfen, dass Ihre Spieldetails auf die Öffentlichkeit gesetzt werden. Auf diese Weise können wir auf Ihre Leistungen zugreifen und Ihnen die beste Erfahrung bieten.",
+                "oops": "Upsi!"
+            }
+        },
+        "analyticsOn": "Analytics wird aktiviert",
+        "buttons": {
+            "agree": "Ich stimme zu",
+            "noThanks": "Nein Danke",
+            "primaryButton": "Ich stimme zu",
+            "secondaryButton": "Nein, danke"
+        },
+        "publicAlpha": "Öffentliches Alpha",
+        "connectWallet": "Portemonnaie verbinden",
+        "currentWallet": "Aktuelle Brieftasche",
+        "linkSteamAccountDescription": "Melden Sie sich an Steam, um Ihr HyperPlay-Konto zu verlinken.",
+        "turnAnalyticsOff": "Ausschalten",
+        "logOut": "Ausloggen",
+        "misc": "Nie",
+        "copyUrl": "URL kopieren",
+        "syncing": "Synchronisieren...",
+        "turnAnalyticsOn": "Einschalten",
+        "discordApp": "Discord",
+        "folder": "Verzeichnis",
+        "Sync": "Sync",
+        "viewFullscreen": "Vollbild anzeigen",
+        "compatibilityLayer": "Kompatibilitätsschicht (Beta)",
+        "discordAppLink": "Discord-Community."
+    },
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "CONFIRMED": "Transaktion bestätigt",
+            "FAILED": "Unterbrechung der Transaktion",
+            "PENDING": "Vorgelegte Transaktion",
+            "INITIATED": "Transaktionsanfrage anhängig"
+        },
+        "chainRequest": {
+            "CONFIRMED": "Zollnetz hinzugefügt",
+            "INITIATED": "Benutzerdefinierte Netzwerkanfrage",
+            "FAILED": "Kundenspezifisches Netzwerk abgebrochen"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Zoll-Token hinzugefügt",
+            "FAILED": "Benutzerdefinierte Token-Anforderung storniert",
+            "INITIATED": "Hinzufügen von benutzerdefinierten Token Anfrage anhängig"
+        },
+        "signatureRequest": {
+            "INITIATED": "Unterschriftsanfrage anhängig",
+            "CONFIRMED": "Unterschrift eingereicht",
+            "FAILED": "Unterschrift unterbrochen"
+        },
+        "extensionNotification": {
+            "TITLE": "Transaktion beantragt",
+            "DESCRIPTION": "Presse {{overlayKeyMod}} + X, um diese Transaktion zu sehen"
+        },
+        "greeting": {
+            "title": "HyperPlay Overlay",
+            "description": "HyperPlay Overlay ist bereit! Presse {{overlayKeyMod}} + X zu zeigen oder zu verstecken."
+        },
+        "description": {
+            "CONFIRMED": "Die Transaktion wurde erfolgreich bestätigt!",
+            "FAILED": "Die Transaktion wurde storniert oder nicht eingereicht, bitte versuchen Sie es erneut",
+            "INITIATED": "Eine Geldbörsenbestätigung steht in Ihrer mobilen Geldbörse an",
+            "PENDING": "Warten auf Blockchain Bestätigung. Wir lassen Sie wissen, wann es bestätigt ist"
+        }
+    },
+    "back_to_game": "Zurück zum Spiel",
+    "quest": {
+        "associatedGames": "Associated Spiele",
+        "claimAll": "Alle",
+        "playstreak": {
+            "dayResets": "Tag setzt zurück:",
+            "playEachDay": "Spielen Sie jeden Tag, damit Ihr Streak nicht zurückgesetzt wird!",
+            "playToStart": "Spielen Sie dieses Spiel, um Ihren Streak zu starten!",
+            "progressTowardsStreak": "fortschritte in richtung des heutigen streaks.",
+            "streakCompleted": "Streak ist fertig! Beanspruchen Sie jetzt Ihre Belohnungen.",
+            "streakProgress": "Streak Fortschritt",
+            "days": "Tage",
+            "now": "Jetzt",
+            "sync": "Synthetische Fortschritte",
+            "syncSuccess": "Fortschritt synchronisiert"
+        },
+        "readyForClaim": "Bereit für Anspruch",
+        "reward": "Zurück",
+        "type": {
+            "playstreak": "Spielen Sie Streak",
+            "reputation": "Ruf"
+        },
+        "View Game": "Spiel ansehen",
+        "claimFailed": "Schadensersatz",
+        "createDiscordTicket": "Erstellte Discord-Ticket",
+        "errorMessage": "Es gab einen Fehler bei der Transaktion.",
+        "linkAccount": "Link zur Seite Steam-Konto zur Überprüfung der Förderfähigkeit.",
+        "needMoreAchievements": "Sie müssen {{percent}}% der Leistungen in einem dieser Spiele abgeschlossen haben.",
+        "claimFailedMessage": "Bitte versuchen Sie es noch einmal. Wenn es noch nicht funktioniert, erstellen Sie ein Discord-Unterstützungsticket.",
+        "notEnoughGas": {
+            "message": "Unzureichendes Wallet-Guthaben, um Ihre Belohnung aufgrund von Gasgebühren zu beanspruchen. Versuchen Sie eine andere Wallet oder füllen Sie diese auf, bevor Sie es erneut versuchen."
+        },
+        "active": "Aktiv",
+        "claimed": "Eingesammelt",
+        "connectSteamAccount": "Teamkonto verknüpfen",
+        "quests": "Aufträge",
+        "Play": "Abspielen",
+        "points": "Punkte",
+        "reputation": "Ruf",
+        "signIn": "Einloggen",
+        "sync": "Sync",
+        "pointsClaimed": "Forderungen",
+        "g7Numclaimed": "G7-Kredite insgesamt",
+        "claimWarning": {
+            "body": "<bold>WICHTIG:</bold> Bitte stellen Sie sicher, dass Sie genügend Gas auf dem {{networkName}}-Netzwerk zuweisen, damit die Transaktion erfolgreich bestätigt wird <bold> innerhalb von 24 Stunden.</bold>",
+            "body2": "Andernfalls läuft der Quest Reward <bold> ab und wird nicht mehr beanspruchbar sein.</bold>",
+            "title": "Bestätigen Sie Quest Reward Claim",
+            "cancel": "Abbrechen",
+            "confirm": "Bestätigen"
+        },
+        "noG7ConnectionClaim": "Sie müssen ein Game7-Konto mit {{email}} verknüpft haben, um Ihre Belohnungen zu beanspruchen.",
+        "noG7ConnectionSync": {
+            "title": "Kein G7-Konto verknüpft",
+            "message": "Sie müssen ein Game7-Konto mit {{email}} verknüpft haben, um Ihre Aufgaben erneut zu synchronisieren."
+        },
+        "notEligible": {
+            "title": "Noch nicht berechtigt",
+            "message": "Sie haben die erforderlichen Spieltage nicht abgeschlossen und können Ihre Belohnung derzeit nicht beanspruchen."
+        },
+        "youHaveClaimed": "Sie haben {{totalRewards}} Belohnung{{plural}} beansprucht.",
+        "notEnoughBalance": {
+            "title": "Niedriger Kontostand"
+        },
+        "notSignedIn": {
+            "message": "Sie müssen angemeldet sein, um Ihre Belohnung zu beanspruchen.",
+            "title": "Nicht angemeldet"
+        },
+        "questAvailable": "Quest verfügbar!",
+        "questComplete": "Quest abgeschlossen!",
+        "rewardClaimed": "Anspruch erfolgreich",
+        "toClaimReward": "um Ihre Belohnung zu beanspruchen.",
+        "toSeeDetails": "Details anzeigen.",
+        "claim": "Beanspruchen"
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "client": "Sie sind derzeit nicht eingeloggt, Play Streak Fortschritt wird nicht verfolgt. Bitte melden Sie sich an HyperPlay über den oberen rechten Dropdown, um den Fortschritt zu verfolgen.",
+                "overlay": "Sie sind derzeit nicht eingeloggt, Play Streak Fortschritt wird nicht verfolgt. Bitte verlassen Sie das Spiel und melden Sie sich an HyperPlay über den oberen rechten Dropdown, um den Fortschritt zu verfolgen."
+            }
+        },
+        "quests": "Aufträge",
+        "noneFound": {
+            "title": "Keine Quests gefunden.",
+            "message": "Es wurden keine Quests gefunden."
+        },
+        "g7CreditsModal": {
+            "description": "Tauchen Sie mit spannenden Play Streak Challenges in die Top-Spiele von HyperPlay ein. Jede Aktivität ermutigt Sie, sich mit einem anderen Spiel zu engagieren, was das Beste von web3 Gaming zeigt. Deine Spielzeit zählt!",
+            "title": "Earn Game7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "Alle Quests anzeigen"
+        }
+    },
+    "gameRelease": {
+        "prototype": "Prototyp",
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "demo": "Demo",
+        "main": "Hauptdarsteller"
+    },
+    "gameUpdateNotifications": {
+        "title": "Spiele Updates verfügbar",
+        "body": {
+            "multiple": "{{gameName}} und andere Spiele sind bereit zu aktualisieren.",
+            "single": "Es gibt ein Update bereit für {{gameName}}."
+        }
+    },
+    "importGameErrorMessageExecutable": "Spiel Ausführbar nicht gefunden, Import Spiel ist nicht möglich",
+    "notification": {
+        "wine-download": {
+            "title": "Kompatibilitätsebene",
+            "message": "Einrichtung der Standardkompatibilitätsschicht"
+        },
+        "wine-download-failed": {
+            "message": "Nicht eingerichtet, um die Standard-Kompatibilitätsschicht",
+            "title": "Fehler"
+        }
+    },
+    "email_subscription": {
+        "subtitle": "Sie sind jetzt Teil unserer Community und wir freuen uns, Ihnen wertvolle Updates und Einblicke zu geben.",
+        "title": "Danke für die Anmeldung!"
+    },
+    "accounts": "konten",
+    "dlcs": {
+        "label": "Wählen Sie DLCs zur Installation aus:"
+    },
+    "importGameErrorTitle": "Import Spiel Fehler",
+    "achievements": {
+        "progress": {
+            "minted": "auf kette",
+            "notMinted": "von der kette"
+        }
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Sie sind mit HyperPlay mit einer externen Geldbörse verbunden.",
+        "WALLET_DISCONNECTED": "Sie haben keine Geldbörse mit HyperPlay verbunden.",
+        "comingSoon": "Demnächst verfügbar",
+        "links": {
+            "bridge": "Brücke",
+            "sell": "Verkaufen",
+            "portfolio": "Portfolio",
+            "marketplace": "Marktplatz",
+            "swap": "Tauschen",
+            "buy": "Kaufen"
+        }
+    },
+    "sideload": {
+        "warningMessage": "Side-loading ein Spiel ist eine Funktion für Entwickler und erfahrene Power-Nutzer. Side-loaden eines Installers, der Malware enthält könnte Ihren Computer kompromittieren und zu Diebstahl von Geld führen.",
+        "warningTitle": "Wichtig"
+    },
+    "importGameErrorMessage": "Nicht ein gültiger Spielordner, Import Spiel ist nicht möglich",
+    "exit_game": "Exit Spiel",
+    "profile": "Profil",
+    "ALL": "ALLE",
     "analytics": "Analytik",
-    "accounts": "Konten",
-    "ALL": "ALLE"
+    "import-game-folder": {
+        "label": "Import Spiel Folder",
+        "placeholder": "Wählen Sie den Spielordner zum Import",
+        "success": "Erfolgreich importierte Spiele!",
+        "cta": "Import Spiel Folder",
+        "dialog": {
+            "title": "Wählen Sie Game Folder zum Import"
+        },
+        "error": "Beim Import gab es einen Fehler. Weitere Details finden Sie in den Logs."
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "body": "Mod wird auf Basis-Spiel angewendet",
+                "title": "Basis-Spiel installiert"
+            },
+            "installing": {
+                "body": "Extrahieren von Basis-Spieldateien",
+                "title": "Installieren von Basis-Spiel"
+            },
+            "cancel": {
+                "body": "Basis-Spiel Extraktion abgebrochen",
+                "title": "Auszug abbrechen"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "placeholder": "Wählen Sie Zip-Datei",
+                "path": "Wählen Sie Base Game File Standort"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "Chromatographie",
+                "description": "Dieses Spiel ist ein Mod für World of Warcraft: Wrath of the Lich King (3.3.5a). Um diesen Mod zu spielen, müssen die Spieler eine Kopie von World of Warcraft 3.3.5a besitzen. {{newline}} {{newline}} HyperPlay hostet kein World of Warcraft. Spieler, die World of Warcraft besitzen, können die benötigte Version aus den folgenden Quellen beziehen:",
+                "subtitle": "World of Warcraft 3.3.5a herunterladen",
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "Schritt 1",
+                "link1": "Link 1",
+                "link2": "Link 2 (Magnetlink)"
+            },
+            "step2": {
+                "subtitle": "Wählen Sie ChromieCraft_3.3.5a.zip Datei",
+                "description": "Wählen Sie den Download aus ChromieCraft_3.3.5a.zip Datei.",
+                "title": "Schritt 2",
+                "subtitle1": "Wählen Sie die heruntergeladene 3.3.5a Zip-Datei aus"
+            },
+            "step3": {
+                "description": "Bitte wählen Sie den Ordner, in dem World of Warcraft: Zorn des Lich-Königs (3.3.5a) installiert werden sollte.",
+                "subtitle": "Installation auswählen Ordner",
+                "title": "Schritt 3"
+            },
+            "title": "Anleitung",
+            "step4": {
+                "description": "Geben Sie den Zugangscode ein, um das Spiel zu installieren.",
+                "subtitle": "Zugriffscode",
+                "title": "Schritt 4"
+            }
+        }
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay wird Sie nach der Installation benachrichtigen;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Kompatibilitätsschicht nicht verfügbar. Bitte installieren Sie eine von \"Settings > Wine Manager\" zuerst.",
+        "error-message": "Bei der Installation von Steam kam es zu einem Fehler. Bitte versuchen Sie es noch mal.",
+        "launch-tooltip": "Starten Sie Steam mit der HyperPlay Compatibility Layer",
+        "success-message": "Steam wurde installiert. Sie können es jetzt aus der Bibliothek starten.",
+        "tooltip": "Dies wird die Windows-Version von Steam installieren und es wird mit einer HyperPlay Compatibility Layer ausgeführt.\n\nEinige Spiele, vor allem ältere Titel, neuere 3D-Spiele, oder diejenigen mit Anti-Cheat-Software kann nicht richtig funktionieren.\n\nDie empfohlenen Spezifikationen sind ein Mac mit Apple Silicon CPU (M1 oder höher) und mindestens 16 GB RAM."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Wenn Sie fortfahren möchten, geduldig sein, da es ein paar Minuten dauern kann, um zu beenden, abhängig von Ihrer Internetverbindung und Systemkonfiguration;",
+    "Install Steam": "Installieren Sie Steam",
+    "Installing Steam": "Installation von Steam...",
+    "Launch Steam": "Start Steam",
+    "Launching Steam": "Steam starten...",
+    "At the end make sure to": "Am Ende stellen Sie sicher",
+    "Cancel Installation": "Installation abbrechen",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay wird das Steam Setup für Sie herunterladen und starten. Bitte folgen Sie Steam-Anweisungen auf ihrem Installer;"
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Beim ersten Start wird Steam die notwendigen Dateien herunterladen und ein paar Minuten dauern, um zu beenden und den Login-Bildschirm zu erscheinen;",
+    "Downloading": "Herunterladen {{percent}}%",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Wenn Sie fortfahren möchten, haben Sie bitte Geduld, da es je nach Internetverbindung und Systemkonfiguration einige Minuten dauern kann, bis es abgeschlossen ist.",
+    "installModal": {
+        "loginRequired": "Anmeldung erforderlich",
+        "loginRequiredMessage": "Sie müssen bei HyperPlay angemeldet sein, um Ihren Zugangscode einzugeben und dieses Spiel zu installieren. ",
+        "loginRequiredMessageUpdate": "Sie müssen bei HyperPlay angemeldet sein, um Ihren Zugangscode einzugeben und dieses Spiel zu aktualisieren. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 oder höher"
+    },
+    "Recommended specs for a better experience": "Empfohlene Spezifikationen für ein besseres Erlebnis",
+    "wallet": {
+        "portfolio": {
+            "onlyExtension": "Das MetaMask-Portfolio ist nur verfügbar, wenn es mit MetaMask verbunden ist."
+        },
+        "unsupported": "Nicht unterstützte Wallet-Verbindung"
+    },
+    "16GB of RAM": "16 GB RAM",
+    "Apple Silicon M1 or above": "Apple Silicon M1 oder höher",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Seien Sie sich bewusst, dass nicht alle Spiele funktionieren werden, und selbst wenn sie es tun, laufen sie möglicherweise nicht wie erwartet.",
+    "Installing": "Installieren",
+    "Please Wait": "Bitte warten"
 }

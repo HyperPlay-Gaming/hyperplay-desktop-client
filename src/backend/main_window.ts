@@ -1,8 +1,19 @@
-import { BrowserWindow, screen, app } from 'electron'
+import { BrowserWindow, screen, app, session } from 'electron'
 import path from 'path'
 import { configStore } from './constants'
+import { getHpOverlay } from './overlay'
 
 let mainWindow: BrowserWindow | null = null
+
+// Steam Deck resolution is 1280x800
+const minSupportedResolution = {
+  width: 1280,
+  height: 800
+}
+
+// 50% of the screen for the minimum supported resolution seems like a reasonable size
+const minSupportedHeight = Math.round(minSupportedResolution.height / 1.5)
+const minSupportedWidth = Math.round(minSupportedResolution.width / 1.5)
 
 export const getMainWindow = () => {
   return mainWindow
@@ -30,10 +41,10 @@ const hiddenPhrase = 'superhyper123'
 let hiddenPhraseCurrentIndex = 0
 
 // creates the mainWindow based on the configuration
-export const createMainWindow = () => {
+export const createMainWindow = async () => {
   let windowProps: Electron.Rectangle = {
-    height: 690,
-    width: 1200,
+    height: minSupportedResolution.height,
+    width: minSupportedResolution.width,
     x: 0,
     y: 0
   }
@@ -67,19 +78,22 @@ export const createMainWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     ...windowProps,
-    minHeight: 345,
-    minWidth: 600,
+    minHeight: minSupportedHeight,
+    minWidth: minSupportedWidth,
     show: false,
 
     webPreferences: {
       webviewTag: true,
       contextIsolation: true,
       nodeIntegration: true,
-      // sandbox: false,
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, '../preload/preload.js'),
+      session: session?.fromPartition('persist:hyperplay_windows'),
       webSecurity: app.isPackaged
     }
   })
+
+  const hpOverlay = await getHpOverlay()
+  hpOverlay?.controlWindow(mainWindow.webContents.id, 'mainWindow')
 
   mainWindow.webContents?.on('before-input-event', (ev, input) => {
     if (

@@ -9,23 +9,27 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
-  SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_ID }}
 
 jobs:
   draft-releases:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt-get install --no-install-recommends -y libarchive-tools libopenjp2-tools rpm snapcraft
+      - name: Update deps
+        run: sudo apt-get update
+      - run: sudo apt-get install --no-install-recommends -y libarchive-tools libopenjp2-tools rpm
       - name: Checkout repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
+
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'yarn'
+          node-version: '20'
+      - uses: pnpm/action-setup@v3
+        with:
+          standalone: ${{ runner.os == 'Windows' }}
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -33,6 +37,10 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
+      - name: setup env production file
+        run: |
+          echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
+          echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
       - name: Build artifacts.
-        run: yarn run release:linux
+        run: pnpm run release:linux

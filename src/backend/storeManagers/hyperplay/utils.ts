@@ -3,11 +3,25 @@ import {
   GameInfo,
   HyperPlayRelease,
   ChannelReleaseMeta,
-  InstallPlatform
+  InstallPlatform,
+  GameType
 } from 'common/types'
 import axios from 'axios'
-import { getTitleFromEpicStoreUrl } from 'backend/utils'
-import { getValistListingApiUrl, valistListingsApiUrl } from 'backend/constants'
+import { getTitleFromEpicStoreUrl, spawnAsync } from 'backend/utils'
+import {
+  getValistListingApiUrl,
+  isWindows,
+  patchApiUrl,
+  qaToken,
+  valistListingsApiUrl
+} from 'backend/constants'
+import { getGameInfo } from './games'
+import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
+import { join } from 'path'
+import { existsSync } from 'graceful-fs'
+import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
+import getPartitionCookies from 'backend/utils/get_partition_cookies'
+import { DEV_PORTAL_URL } from 'common/constants'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -16,6 +30,36 @@ export async function getHyperPlayStoreRelease(
   const res = await axios.get<HyperPlayRelease>(gameIdUrl)
   const data = res.data
   return data
+}
+
+export async function getIPDTManifestUrl(
+  releaseId: string,
+  platformName: string
+): Promise<string> {
+  const url = new URL(patchApiUrl)
+  url.searchParams.append('release_id', releaseId)
+  url.searchParams.append('platform_name', platformName)
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
+
+  const validateResult = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Cookie: cookieString
+    }
+  })
+  if (!validateResult.ok) {
+    const errMsg = await validateResult.text()
+    logError(
+      `Error getting release manifest for ${releaseId}. ${errMsg}`,
+      LogPrefix.HyperPlay
+    )
+    throw errMsg
+  }
+  const data = await validateResult.json()
+  return data?.manifest
 }
 
 export async function getHyperPlayReleaseMap() {
@@ -27,6 +71,41 @@ export async function getHyperPlayReleaseMap() {
 
   hpStoreGameReleases.forEach((val) => {
     hpStoreGameMap.set(val.project_id, val)
+  })
+
+  return hpStoreGameMap
+}
+
+export async function getHyperPlayNameToReleaseMap() {
+  const hpStoreGameReleases = (
+    await axios.get<HyperPlayRelease[]>(valistListingsApiUrl)
+  ).data
+
+  const hpStoreGameMap = new Map<string, HyperPlayRelease>()
+
+  hpStoreGameReleases
+    .filter((val) => !!val.project_meta.name)
+    .forEach((val) => {
+      hpStoreGameMap.set(val.project_meta.name!.toLowerCase(), val)
+    })
+
+  return hpStoreGameMap
+}
+
+/**
+ * @returns an object mapping project id key to listing value
+ * necessary for stringifying over ipc to send to the frontend.
+ * use getHyperPlayReleaseMap for backend/main process calls.
+ */
+export async function getHyperPlayReleaseObject() {
+  const hpStoreGameReleases = (
+    await axios.get<HyperPlayRelease[]>(valistListingsApiUrl)
+  ).data
+
+  const hpStoreGameMap = {}
+
+  hpStoreGameReleases.forEach((val) => {
+    hpStoreGameMap[val.project_id] = val
   })
 
   return hpStoreGameMap
@@ -44,7 +123,8 @@ export function handleArchAndPlatform(
     'windows_amd64',
     'linux_amd64',
     'darwin_amd64',
-    'web'
+    'web',
+    'webgl'
   ]
   const isHpPlatform = hpPlatforms.includes(platformToInstall)
 
@@ -167,8 +247,8 @@ export function refreshGameInfoFromHpRelease(
       },
       reqs: [
         {
-          minimum: JSON.stringify(data.project_meta.systemRequirements),
-          recommended: JSON.stringify(data.project_meta.systemRequirements),
+          minimum: JSON.stringify(data.project_meta.system_requirements),
+          recommended: JSON.stringify(data.project_meta.system_requirements),
           title: data.project_meta.name
             ? data.project_meta.name
             : data.project_name
@@ -183,7 +263,7 @@ export function refreshGameInfoFromHpRelease(
     is_windows_native: hasWindowsNativeBuild,
     channels: channelsMap,
     store_url: `https://store.hyperplay.xyz/game/${data.project_name}`,
-    wineSupport: data.project_meta.wineSupport,
+    wineSupport: data.project_meta.wine_support,
     description: newDescription,
     v: '1',
     project_name: data.project_name,
@@ -193,7 +273,9 @@ export function refreshGameInfoFromHpRelease(
     cloud_save_enabled: false,
     is_mac_native: hasMacNativeBuild,
     is_linux_native: hasLinuxNativeBuild,
-    account_name: data.account_name
+    account_name: data.account_name,
+    networks: data.project_meta.networks,
+    usesThirdPartyLauncher: data.project_meta.uses_third_party_launcher
   }
 }
 
@@ -235,7 +317,8 @@ export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
       title: data.project_meta.name
         ? data.project_meta.name
         : data.project_name,
-      browserUrl: isOnlyWeb ? platforms['web']?.external_url : undefined
+      browserUrl: isOnlyWeb ? platforms['web']?.external_url : undefined,
+      type: data.project_meta.type as GameType
     },
     data
   )
@@ -269,4 +352,71 @@ export async function loadEpicHyperPlayGameInfoMap() {
 
 export function sanitizeVersion(ver: string) {
   return ver.toLowerCase().replaceAll(' ', '')
+}
+
+// hit the valist api and get the info if the game is a epic listing
+export async function getEpicListingUrl(projectId: string): Promise<string> {
+  const listingUrl = getValistListingApiUrl(projectId)
+
+  try {
+    const getConfig =
+      qaToken !== '' ? { headers: { Authorization: `Bearer ${qaToken}` } } : {}
+    const res = await axios.get<HyperPlayRelease>(listingUrl, getConfig)
+
+    if (res.status !== 200) {
+      logError(`Error when trying to get listing info ${res}`)
+      return ''
+    }
+
+    const data = res.data
+    const { epic_game_url, launch_epic } =
+      data.project_meta as ProjectMetaInterface
+
+    if (
+      !!launch_epic &&
+      !!epic_game_url &&
+      epic_game_url.startsWith('https://store.epicgames.com/')
+    ) {
+      return epic_game_url
+    }
+    return ''
+  } catch (error) {
+    logError(`Error when trying to get listing info: ${error}`)
+    return ''
+  }
+}
+
+export const runModPatcher = async (appName: string) => {
+  const installPath = getGameInfo(appName)?.install.install_path
+  if (!installPath) {
+    logError(`Cannot find install path for ${appName}`, LogPrefix.HyperPlay)
+    return
+  }
+
+  const patcherBinary = isWindows ? 'client-patcher.exe' : 'client-patcher'
+  const patcher = join(installPath, patcherBinary)
+  const manifest = join(installPath, 'patch', 'manifest.json')
+
+  logInfo(
+    `Running patcher ${patcher} with manifest ${manifest}`,
+    LogPrefix.HyperPlay
+  )
+
+  if (!existsSync(patcher)) {
+    throw new Error(`Patcher not found at ${patcher}`)
+  }
+
+  try {
+    const { stderr, stdout } = await spawnAsync(
+      patcherBinary,
+      ['patch', '-m', 'patch/manifest.json'],
+      { cwd: installPath }
+    )
+    logInfo(['Patch Applied', stdout], LogPrefix.HyperPlay)
+    if (stderr) {
+      logError(stderr, LogPrefix.HyperPlay)
+    }
+  } catch (error) {
+    throw new Error(`Error running patcher: ${error}`)
+  }
 }

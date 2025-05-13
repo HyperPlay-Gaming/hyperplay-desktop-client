@@ -5,13 +5,14 @@ import {
   Tools,
   DialogType,
   ButtonOptions,
-  GamepadActionArgs
+  GamepadActionArgs,
+  WrapRendererCallback
 } from 'common/types'
-import { NileRegisterData } from 'common/types/nile'
 
-export const clearCache = (showDialog?: boolean) =>
-  ipcRenderer.send('clearCache', showDialog)
+export const clearCache = (showDialog?: boolean, fromVersionChange?: boolean) =>
+  ipcRenderer.send('clearCache', showDialog, fromVersionChange)
 export const resetApp = () => ipcRenderer.send('resetApp')
+export const resetExtension = () => ipcRenderer.send('resetExtension')
 
 export const openWeblate = () => ipcRenderer.send('openWeblate')
 export const changeLanguage = (newLanguage: string) =>
@@ -20,8 +21,6 @@ export const changeLanguage = (newLanguage: string) =>
 export const openExternalUrl = (url: string) =>
   ipcRenderer.send('openExternalUrl', url)
 export const getAppVersion = async () => ipcRenderer.invoke('getAppVersion')
-export const getLatestReleases = async () =>
-  ipcRenderer.invoke('getLatestReleases')
 
 export const openPatreonPage = () => ipcRenderer.send('openPatreonPage')
 export const openKofiPage = () => ipcRenderer.send('openKofiPage')
@@ -41,20 +40,16 @@ export const logoutLegendary = async () => ipcRenderer.invoke('logoutLegendary')
 export const authGOG = async (token: string) =>
   ipcRenderer.invoke('authGOG', token)
 export const logoutGOG = () => ipcRenderer.send('logoutGOG')
-export const getAmazonLoginData = async () =>
-  ipcRenderer.invoke('getAmazonLoginData')
-export const authAmazon = async (data: NileRegisterData) =>
-  ipcRenderer.invoke('authAmazon', data)
-export const logoutAmazon = async () => ipcRenderer.invoke('logoutAmazon')
-export const checkGameUpdates = async () =>
-  ipcRenderer.invoke('checkGameUpdates')
+export const checkGameUpdates = async (runners: Runner[]) =>
+  ipcRenderer.invoke('checkGameUpdates', runners)
 export const refreshLibrary = async (library?: Runner | 'all') =>
   ipcRenderer.invoke('refreshLibrary', library)
 
 export const gamepadAction = async (args: GamepadActionArgs) =>
   ipcRenderer.invoke('gamepadAction', args)
 
-export const logError = (error: string) => ipcRenderer.send('logError', error)
+export const logError = (error: string, options?: LogOptions) =>
+  ipcRenderer.send('logError', error, options)
 export const logInfo = (info: string) => ipcRenderer.send('logInfo', info)
 export const showConfigFileInFolder = (appName: string) =>
   ipcRenderer.send('showConfigFileInFolder', appName)
@@ -106,7 +101,10 @@ export const handleShowDialog = (
   }
 }
 
+export const focusMainWindow = () => ipcRenderer.send('focusMainWindow')
+
 import Store from 'electron-store'
+import { LogOptions } from '@hyperplay/utils'
 // TODO: Refactor this into the backend so in order to set nodeIntegration: false
 // here is how the store methods can be refactored
 // but converting sync methods to async propagates through frontend
@@ -128,6 +126,7 @@ import Store from 'electron-store'
 interface StoreMap {
   [key: string]: Store
 }
+
 const stores: StoreMap = {}
 
 export const storeNew = function (
@@ -188,3 +187,54 @@ export const fetchPlaytimeFromServer = async (
   runner: Runner,
   appName: string
 ) => ipcRenderer.invoke('getPlaytimeFromRunner', runner, appName)
+
+export const getLDEnvConfig = async () => ipcRenderer.invoke('getLDEnvConfig')
+
+export const handleQaModeActivated = (
+  onChange: (e: Electron.IpcRendererEvent) => void
+) => {
+  ipcRenderer.on('qaModeActive', onChange)
+  return () => {
+    ipcRenderer.removeListener('qaModeActive', onChange)
+  }
+}
+
+export const handleOtpDeepLink = (
+  cb: WrapRendererCallback<(otp: string) => void>
+): (() => void) => {
+  ipcRenderer.on('otpDeeplink', cb)
+  return () => {
+    ipcRenderer.removeListener('otpDeeplink', cb)
+  }
+}
+
+export const openAuthModalIfAppReloads = () => {
+  ipcRenderer.send('openAuthModalIfAppReloads')
+}
+
+export const openEmailModalIfAppReloads = () => {
+  ipcRenderer.send('openEmailModalIfAppReloads')
+}
+
+export const handleLogOut = (
+  cb: WrapRendererCallback<() => void>
+): (() => void) => {
+  ipcRenderer.on('logOut', cb)
+  return () => {
+    ipcRenderer.removeListener('logOut', cb)
+  }
+}
+
+export const handleNavigate = (
+  onChange: (e: Electron.IpcRendererEvent, route: string) => void
+) => {
+  ipcRenderer.on('navigate', onChange)
+  return () => {
+    ipcRenderer.removeListener('navigate', onChange)
+  }
+}
+
+export const isClientUpdating = async () =>
+  ipcRenderer.invoke('isClientUpdating')
+
+export const restartClient = () => ipcRenderer.send('restartClient')

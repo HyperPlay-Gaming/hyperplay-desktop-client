@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 
 import './App.css'
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import Login from './screens/Login'
 import WebView from './screens/WebView'
 import { GamePage } from './screens/Game'
 import Library from './screens/Library'
+import Achievements from './screens/Achievements'
 import Sidebar from './components/UI/Sidebar'
 import Settings from './screens/Settings'
 import ContextProvider from './state/ContextProvider'
@@ -29,9 +30,23 @@ import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
+import AchievementsLayout from './screens/Achievements/AchievementsLayout'
+import GameAchievementDetails from './screens/Achievements/GameAchievementDetails'
+import AuthModal from './components/UI/AuthModal'
+import { WalletOnboardCloseReason } from 'common/types'
+import { DeviceStateController } from './state/DeviceState'
+import EmailSubscriptionModal from './components/UI/EmailSubscriptionModal'
+import { UpdateModalController } from './components/UI/UpdateModalController'
+import { QuestsPage } from './screens/Quests'
+import { NavigateListener } from './NavigateListener'
+import G7Webview from './screens/G7Webview'
+import CardPrivacyPolicy from './screens/Onboarding/analytics/CardPrivacyPolicy'
 
 function App() {
-  const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
+  const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
+    useContext(ContextProvider)
+  const isOffline = connectivity.status !== 'online'
+  const firstDestination = isOffline ? '/library' : '/hyperplaystore'
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
@@ -40,11 +55,15 @@ function App() {
         <TopNavBar />
         <Sidebar />
         <main className="content">
+          <CardPrivacyPolicy />
           <QaAuthHandler />
+          <NavigateListener />
           <ExtensionHandler />
           <ExtensionManager />
           <DialogHandler />
           <ExternalLinkDialog />
+          <AuthModal />
+          <EmailSubscriptionModal />
           <StoreNavHandler />
           {isSettingsModalOpen.gameInfo && (
             <SettingsModal
@@ -55,9 +74,23 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Navigate replace to="/hyperplaystore" />}
+              element={<Navigate replace to={firstDestination} />}
             />
             <Route path="/library" element={<Library />} />
+            <Route
+              path="/achievements"
+              element={
+                <AchievementsLayout>
+                  <Outlet />
+                </AchievementsLayout>
+              }
+            >
+              <Route index element={<Achievements />} />
+              <Route
+                path="/achievements/:id"
+                element={<GameAchievementDetails />}
+              />
+            </Route>
             <Route path="login" element={<Login />} />
             <Route
               path="hyperplaystore"
@@ -65,19 +98,13 @@ function App() {
             />
             <Route path="epicstore" element={<WebView key="epicstore" />} />
             <Route path="gogstore" element={<WebView key="gogstore" />} />
-            <Route path="amazonstore" element={<WebView />} />
-            <Route path="wiki" element={<WebView key="wiki" />} />
+            <Route path="docs" element={<WebView key="docs" />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
             <Route
               path="metamaskSnaps"
               element={<WebView key="metamaskSnaps" />}
             />
-            <Route
-              path="metamaskSecretPhrase"
-              element={
-                <MetaMaskHome path="home.html#onboarding/import-with-recovery-phrase" />
-              }
-            />
+            <Route path="game7Portal" element={<G7Webview />} />
             <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />}>
               <Route path=":page" element={<MetaMaskPortfolio />} />
             </Route>
@@ -98,6 +125,9 @@ function App() {
               </Route>
             </Route>
             <Route path="/download-manager" element={<DownloadManager />} />
+            <Route path="/quests" element={<QuestsPage />}>
+              <Route path=":questId" element={<QuestsPage />} />
+            </Route>
           </Routes>
         </main>
         <div className="controller">
@@ -107,8 +137,10 @@ function App() {
         <OnboardingStoreController />
         {onboardingStore.isOnboardingOpen && (
           <Onboarding
-            disableOnboarding={() => {
-              window.api.trackEvent({ event: 'Onboarding Skipped' })
+            disableOnboarding={(disableReason: WalletOnboardCloseReason) => {
+              if (disableReason === 'skipped') {
+                window.api.trackEvent({ event: 'Onboarding Skipped' })
+              }
               onboardingStore.closeOnboarding()
             }}
           />
@@ -116,6 +148,8 @@ function App() {
       </HashRouter>
       <TransactionNotification />
       <DownloadToastManager />
+      <DeviceStateController />
+      <UpdateModalController />
     </div>
   )
 }

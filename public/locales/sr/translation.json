@@ -1,0 +1,1250 @@
+{
+    "box": {
+        "reset-hyperplay": {
+            "question": {
+                "message": "Да ли сте сигурни да желите да ресетујете HyperPlay? Ово ће избрисати сва подешавања и кеширања али неће избрисати ваше инсталиране игре или ваше Epic податке за пријаву. Преносиве верзије HyperPlay-а (AppImage, WinPortable, итд.) се морају после ручно рестартовати.",
+                "title": "Ресетуј HyperPlay"
+            }
+        },
+        "error": {
+            "credentials": {
+                "message": "Ваша пријава је истекла, молимо вас да се одјавите и да се поново пријавите."
+            },
+            "dxvk": {
+                "message": "Грешка при инсталацији DXVK/VKD3D! Проверите вашу везу!",
+                "title": "DXVK/VKD3D грешка"
+            },
+            "wine-not-found": {
+                "title": "Wine није пронађен",
+                "invalid": "Изабрана Wine верзија није пронађена. Инсталирајте је или изаберите другу верзију у подешавањима игре{{newline}}Верзија: {{version}}{{newline}}Путања: {{path}}",
+                "message": "Wine верзија није изабрана. Проверите подешавања игре!"
+            },
+            "folder-not-found": {
+                "title": "Изгледа да је фасцикла игре обрисана, да ли желите да уклоните игру са листе инсталираних?"
+            },
+            "title": "Грешка",
+            "uncaught-exception": {
+                "message": "Дошло је до неухваћеног изузетка:{{newLine}}{{error}}{{newLine}}{{newLine}} Пријавите изузетак на нашем Github репозиториуму.",
+                "title": "Дошло је до неухваћеног изузетка!"
+            },
+            "winetricks": {
+                "message": "Winetricks је вратио следећу грешку током покретања:{{newLine}}{{error}}",
+                "title": "Winetricks грешка"
+            },
+            "add": {
+                "steam": {
+                    "title": "Додавање грешке",
+                    "body": "Додавање {{game}} на Steam није успело са:{{newLine}} {{error}}"
+                }
+            },
+            "cx-bottle-not-found": {
+                "message": "CrossOver бочица \"{{bottle_name}}\" не постоји, не може се покренути!",
+                "title": "CrossOver бочица није пронађена"
+            },
+            "diskspace": {
+                "message": "Нема довољно простора на диску",
+                "title": "Нема простора"
+            },
+            "generic": {
+                "title": "Изаберите EXE за покретање",
+                "message": "генеричка порука о грешци"
+            },
+            "launchAborted": "Покретање прекинуто",
+            "update": {
+                "message": "Нешто није у реду са ажурирањем, проверите евиденције или покушајте после!",
+                "title": "Грешка током ажурирања"
+            },
+            "moving": "Грешка при премештању игре [Кс18Кс]",
+            "ubisoft-connect": {
+                "message": "Инсталација Ubisoft Connect-а у префиксу игре није успела. Проверите нашу вики страницу на https://github.com/HyperPlay-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac да бисте је ручно инсталирали.",
+                "title": "Убисофт Цоннецт"
+            },
+            "legendary": {
+                "generic": "Дошло је до грешке! Покушајте да се одјавите и пријавите на свој Епиц налог. [Кс69Кс] [Кс82Кс]"
+            },
+            "delete-files": {
+                "body": "#Zabuna #brisati #vaditi @folder [@X32@X]. @Please #brisati #free @manually. \n                [@X86@X] \n                [@X117@X]",
+                "title": "#Zabuna #brisati #vaditi @folder"
+            },
+            "steam": {
+                "title": "@Steam #zabuna",
+                "error": "@Steam executable ne #pronađen. #Instalacija #biti vjerojatno canceled @by #korisnik ili #zakazati @on @Steam #strana#.",
+                "message": "@Steam #instalacija #zakazati! @Please #čitati @the #izučavanje pažljivo a #pokušaj opet! [@X81@X] [@X95@X]"
+            }
+        },
+        "quit": {
+            "message": "Постоје недовршене операције, да ли сте сигурни?",
+            "title": "Изађи"
+        },
+        "info": {
+            "update": {
+                "detail": "Да ли желите да скинете ажурирање у позадини?",
+                "title-finished": "Ажурирање завршено",
+                "message-finished": "Да ли желите сад да поново покренете HyperPlay?",
+                "changelog": "Отвори белешке промена",
+                "message": "Нова верзија је доступна!",
+                "title": "HyperPlay Games Launcher",
+                "appUpdated": "HyperPlay #biti #poboljšati",
+                "appUpdated-message": "HyperPlay #biti #poboljšati. @Do #free @want# to #poboljšati a @restart HyperPlay sad#?"
+            }
+        },
+        "cache-cleared": {
+            "message": "HyperPlay кеш је очишћен.",
+            "title": "Кеш очишћен"
+        },
+        "choose": "Изабери",
+        "choose-gogdl-binary": "Изабери бинарни фајл GOGDL-а (потребан рестарт)",
+        "choose-legendary-binary": "Изабери бинарни фајл Legendary-а",
+        "default-install-path": "Изабери подразумевану путању за инсталацију",
+        "default-steam-path": "Путања Steam-а.",
+        "downloadNow": "Преузми сада",
+        "no": "НЕ",
+        "ok": "У реду",
+        "protocol": {
+            "install": {
+                "not_installed": "Тренутно није инсталирано. Желите ли да инсталирате?"
+            }
+        },
+        "select": {
+            "button": "Изабери",
+            "exe": "Изабери EXE"
+        },
+        "runexe": {
+            "title": "Изабери EXE за покретање"
+        },
+        "choose-egs-prefix": "Изабери префикс где је EGS инсталиран",
+        "customWine": "Изабери бинарни фајл Wine-а или Proton-а",
+        "shortcuts": {
+            "message-remove": "Пречице су уклоњене из радне површине и Старт менија",
+            "message": "Пречице су направљене на радној површини и Старт менију",
+            "message-mac": "Пречице су направљене у фолдеру апликација",
+            "message-remove-mac": "Пречице су уклоњене из фолдера апликација",
+            "title": "Пречице"
+        },
+        "sync": {
+            "error": "Неважећи пут",
+            "button": "Изаберите",
+            "title": "Изаберите фасциклу за чување"
+        },
+        "vcruntime": {
+            "notfound": {
+                "message": "Microsoft Visual C++ Runtimes није инсталиран, што је потребно за неке игре",
+                "title": "VCRuntime није инсталиран"
+            },
+            "install": {
+                "message": "Везе за преузимање за Visual C++ Runtimes су отворене. Молимо вас да инсталирате x86 и x64 верзије."
+            }
+        },
+        "warning": {
+            "epic": {
+                "import": "Epic сервери тренутно имају велики прекид рада, игра се не може увести!",
+                "install": "Epic сервери тренутно имају велики прекид рада, игра се не може инсталирати!",
+                "update": "Epic сервери тренутно имају велики прекид рада, игра се не може ажурирати!"
+            },
+            "title": "Упозорење",
+            "wine-change": {
+                "message": "Нисмо могли да пронађемо изабрану верзију вина за покретање овог наслова ([Кс66Кс]). [Кс85Кс] Пронашли смо још један, да ли желите да наставите са покретањем користећи [Кс159Кс] ?",
+                "title": "Вино није пронађено!",
+                "message-gptk": "#Na @be# able to #bijeg #igra #uporabiti @the #Jabuka Gaming porting toolkit #free #nužda #na #unapređivati #tvoj macOS #na #14 (Sonoma) ili #visok. [@X120@X] #Free #pronađen #Vino @on #tvoj #sustav, @do #free @want# to #nastaviti #započinjanje #uporabiti [@X202@X] #?",
+                "title-gptk": "#Igra Porting Toolkit Ne "
+            },
+            "rosetta": {
+                "title": "Rosetta ne #pronađen",
+                "message": "HyperPlay @require Rosetta #na #bijeg ispravno @on macOS #uz #Jabuka @Silicon #trijeska. @Please @install #free @from @the macOS @terminal #uporabiti @the @following #komanda: @parquotesoftwareupdate --@install-rosetta@parquote a @restart HyperPlay#. "
+            }
+        },
+        "wineprefix": "Изаберите Wine префикс фасциклу",
+        "yes": "ДА",
+        "dontShowAgain": "Не приказуј поново",
+        "choose-nile-binary": "Изаберите бинарни Нил",
+        "reset-extension": {
+            "question": {
+                "message": "#Biti #free @sure #free @want# to reset @the MetaMask #Produživanje#?",
+                "title": "Reset"
+            }
+        },
+        "reset-app": {
+            "question": {
+                "message": "#Biti #free @sure #free @want# to reset HyperPlay? @This #volja #brisati @all @Setting a Caching ali @will ne #brisati #tvoj @Install #igra ili #tvoj @Epic credentials. Portable #inačica (AppImage, WinPortable, #...) @of HyperPlay #nužda #na #biti @restart @manually @afterwards#.",
+                "title": "Ресетуј HyperPlay"
+            }
+        }
+    },
+    "anticheat": {
+        "status": "Статус",
+        "anticheats": "Античитови",
+        "may_not_work": "Можда неће радити због одбијене или покварене античит подршке.",
+        "reference": "Референца",
+        "source": "Извор",
+        "title": "Ова игра садржи античит систем"
+    },
+    "accessibility": {
+        "content_font_family_no_default": "Породица фонтова садржаја (Подразумевано: ",
+        "zoom": "Увеличавање",
+        "title": "Приступачност",
+        "actions_font_family_no_default": "Породица фонтова радње (Подразумевано: ",
+        "all_tiles_in_color": "Прикажи све плочице игара у боји",
+        "fonts": "Фонтови"
+    },
+    "add_game": "Додај игру",
+    "All": "Све",
+    "button": {
+        "cancel": "Откажи",
+        "go_to_library": "Иди у библиотеку",
+        "sync": "Sinhronizuj",
+        "syncing": "Sinhronizacija",
+        "unsync": "Isključi sinhronizaciju",
+        "login": "Пријави се",
+        "continue": "Настави",
+        "download": "Преузми",
+        "update": "Ажурирај",
+        "install": "Поступак инсталирања"
+    },
+    "controller": {
+        "hints": {
+            "back": "Назад",
+            "backspace": "Backspace",
+            "close_dialog": "Затвори дијалог",
+            "close_keyboard": "Затвори тастатуру",
+            "close_options": "Затвори опције",
+            "game_details": "Детаљи игре",
+            "game_settings": "Подешавања игре",
+            "install_game": "Инсталирај игру",
+            "move_cursor": "Помери курсор",
+            "open_virtual_keyboard": "Отвори виртуелну тастатуру",
+            "play_game": "Играј игру",
+            "scroll": "Scroll",
+            "select": "Изабери",
+            "update_game": "Ажурирај игру",
+            "options": "Опције",
+            "space": "Размак"
+        }
+    },
+    "docs": "Документација",
+    "download-manager": {
+        "install-type": {
+            "update": "Ажурирај",
+            "install": "Инсталирај"
+        },
+        "label": {
+            "disk": "Диск",
+            "speed": "Преузимање"
+        },
+        "link": "Преузимања",
+        "queue": {
+            "end-time": "Завршено у",
+            "queue-time": "Додато у",
+            "start-time": "Започето у",
+            "type": "Тип"
+        },
+        "title": "Преузимања",
+        "ETA": "Процењено време",
+        "title_dm": "#Preuzimanje"
+    },
+    "epic": {
+        "offline-notification-title": "ван мреже",
+        "offline-notification-body": "Мрежне услуге можда неће радити у потпуности јер су Epic Games сервери ван мреже!"
+    },
+    "Epic Games": "Epic Games",
+    "error": "Грешка",
+    "game": {
+        "store": "Продавница",
+        "title": "Наслов игре",
+        "status": "Статус"
+    },
+    "GameSettings": "Подешавања игре",
+    "generic": {
+        "error": {
+            "component": "Нема пронађених игара - Покушајте да се одјавите и да се поново пријавите или пробајте једну од опција испод"
+        },
+        "library": {
+            "refresh": "Освежи библиотеку"
+        }
+    },
+    "globalSettings": "Глобална подешавања",
+    "GOG": "GOG",
+    "header": {
+        "ignore_hidden": "Игнориши скривено",
+        "platform": "Платформа",
+        "show_all_games": "Прикажи све игре",
+        "show_hidden": "Прикажи скривено",
+        "store": "Филтеруј продавницу",
+        "show_favourites_only": "Прикажи само омиљено",
+        "show_available_games": "Прикажи недоступне игре",
+        "hide_non_available_games": "Сакриј недоступне игре"
+    },
+    "favourites": "Омиљено",
+    "gog-store": "Продавница GOG",
+    "help": {
+        "amdfsr": "AMD-ов FSR помаже у повећању сличица по секунди повећањем нижих резолуција у режиму целог екрана. Квалитет слике се повећава са 5 на 1 по цени благог смањења перформанси. Укључивањем се може побољшати перформансе.",
+        "custom_themes_path": "Немојте користити ЦСС датотеке из непоузданих извора. Када сте у недоумици, затражите рецензију на нашем Дисцорд каналу.",
+        "other": {
+            "part4": "Користити ",
+            "part6": " бити позван након команде за покретање, на пример: ",
+            "part7": " да прескочите покретач у неким играма итд.",
+            "part5": "Игра Аргументи"
+        },
+        "vkd3d": "ВКД3Д је транслацијски слој заснован на Вулкану за ДирецтКс 12 игре. Омогућавање може значајно побољшати компатибилност. Нема утицаја на старије ДирецтКс игре.",
+        "wine": {
+            "part2": "За друга места користите симболичку везу до једне од ових фасцикли",
+            "part1": "Хероиц тражи верзије Вине, Протон и ЦроссОвер у следећим фасциклама:"
+        },
+        "sync": {
+            "part4": "Аутоматски синхронизујте сачуване датотеке сваки пут када започнете игру и након завршетка играња.",
+            "part1": "Хероиц покушава да погоди праву фасциклу за чување и ово ће функционисати у већини случајева. У случају да је фасцикла погрешна, користите оквир за замену да бисте је променили.",
+            "part3": "Ручна синхронизација: Изаберите Преузми да бисте преузели сачуване игре сачуване у облаку. Отпремите да бисте отпремили локалне у облак. Присилно преузимање и принудно отпремање ће занемарити верзију која је локално или у облаку.",
+            "part2": "У случају да промените фасциклу префикса за Вине или Протон, мораћете поново да проверите путању пошто Протон користи другачији префикс (/пфк) и корисничко име (стеамусер). Тако да можете једноставно да обришете тренутну путању да изађете са странице подешавања синхронизације и вратите се поново да Хероиц још једном погоди фасциклу са правим префиксом."
+        },
+        "dxvkfpslimit": "Поставља ограничење брзине кадрова за ДКСВК игре",
+        "game_language": {
+            "fallback": "Оставите празно да бисте користили херојски језик.",
+            "in_game_config": "Не подржавају све игре ову конфигурацију, неке имају подешавање језика у игрици.",
+            "valid_codes": "Важећи кодови језика зависе од игре."
+        },
+        "custom_themes_wiki": "Проверите Вики за више детаља о додавању прилагођених тема. Кликните овде.",
+        "dxvk": "ДКСВК је транслацијски слој заснован на Вулкану за ДирецтКс 9, 10 и 11 игре. Омогућавање може побољшати компатибилност. Може изазвати проблеме посебно за старије ДирецтКс игре.",
+        "esync": "Есинц има за циљ да смањи трошкове винесервера у играма које захтевају ЦПУ. Омогућавање може побољшати перформансе.",
+        "primerun": "Користите наменску графичку картицу за приказивање игре на системима са више ГПУ-а. Потребно само на лаптоп рачунарима или десктоп рачунарима који користе ГПУ без главе за рендеровање (НВИДИА Оптимус, АМД ЦроссФире)",
+        "steam_path": {
+            "info": "Ова путања омогућава Хероицу да одреди коју верзију Протон Стеам-а користи за додавање игара које нису Стеам у Стеам."
+        },
+        "steamruntime": "Прилагођене библиотеке које обезбеђује Стеам за помоћ у покретању Линук и Виндовс (Протон) игара. Омогућавање може побољшати компатибилност.",
+        "preferSystemLibs": "Прилагођене Вине верзије (Вине-ГЕ, Вине-Лутрис) се испоручују са њиховим зависностима од библиотеке. Ако омогућите ову опцију, ове испоручене библиотеке ће бити занемарене и Вине ће уместо њих учитати системске библиотеке. Упозорење! Проблеми се могу појавити ако се не испуне зависности.",
+        "fsync": "Фсинц има за циљ да смањи оптерећење вине сервера у играма које захтевају ЦПУ. Омогућавање може побољшати перформансе на подржаним Линук језгрима.",
+        "gamemode": "Ферал ГамеМоде примењује аутоматска и привремена подешавања система када покреће игре. Омогућавање може побољшати перформансе.",
+        "general": "Синхронизујте са ЕГЛ-ом ако имате исправну инсталацију Епиц Гамес Лаунцхер-а негде другде и желите да увезете своје игре како бисте избегли поновно преузимање.",
+        "mangohud": "МангоХУД је прекривач који приказује и прати ФПС, температуре, оптерећење ЦПУ/ГПУ-а и друге системске ресурсе.",
+        "disable_logs": "Укључите ово поље за потврду да бисте онемогућили већину уписивања у датотеке евиденције (критичне информације се увек евидентирају). Обавезно ИСКЉУЧИТЕ ову поставку пре него што пријавите било какав проблем.",
+        "dxvknvapi": "DXVK-NVAPI @i @a #izvršenje @of NVAPI @build# on #vrh @of DXVK a @the linux @native NVAPI, #free #odobriti @for @the #korištenje @of DLSS @on Nvidia @GPU#.",
+        "msync": "Msync #cilj #na #smanjiti wineserver @overhead @in @CPU-#intenzivan #igra. #Omogućivati @may #poboljšati #nastup @on #više #igra#."
+    },
+    "infobox": {
+        "help": "Помоћ",
+        "requirements": "Системски захтеви",
+        "warning": "Упозорење",
+        "wine-path": "Вине Патх",
+        "wine-prefix": {
+            "title": "Вински префикс"
+        },
+        "wine-repfix": {
+            "message": "Вине користи оно што се зове ВИНЕПРЕФИКС да инкапсулира Виндовс апликације. Овај префикс садржи Вине конфигурационе датотеке и репродукцију хијерархије датотека Ц: (главни диск на Виндовс ОС-у). У овој репродукцији Ц: диска, сачуване су датотеке ваше игре и зависности инсталиране преко винетрицкс-а."
+        },
+        "wine-path-invalid": "Винска путања је неважећа, изаберите другу.",
+        "wine-path-none-found": "Није пронађена ниједна Вине верзија, преузмите је из Вине Манагер-а"
+    },
+    "install": {
+        "path": "Изаберите путању за инсталирање"
+    },
+    "label": {
+        "loading": "Лоадинг"
+    },
+    "Library": "Библиотека",
+    "loading": {
+        "default": "Лоадинг",
+        "website": "Лоадинг Вебсите"
+    },
+    "login": {
+        "message": "Пријавите се са својом платформом. Можете се пријавити на више платформи у исто време.",
+        "alternative_method": "Алтернативни начин пријаве",
+        "epic": "Епиц Гамес Логин",
+        "gog": "ГОГ Логин",
+        "amazon": "Амазон Логин",
+        "old-mac": "#Tvoj macOS #inačica @i [@X22@X]. macOS #12 ili #nov @i @require #na #zapisnik @in#."
+    },
+    "message": {
+        "sync": "Синхронизација је завршена",
+        "unsync": "Унсинц Цомплете"
+    },
+    "notify": {
+        "error": {
+            "move": "Грешка при премештању игре",
+            "reparing": "Еррор Репаиринг"
+        },
+        "finished": {
+            "add": {
+                "steam": {
+                    "success": "[Кс0Кс] је успешно додат у Стеам. Потребно је поновно покретање Стеам-а да би промене ступиле на снагу.",
+                    "title": "Додато у Стеам",
+                    "corrupt": "[Кс0Кс] није било могуће додати свим пронађеним Стеам корисницима. Погледајте дневнике за више информација. Потребно је поновно покретање Стеам-а да би промене ступиле на снагу."
+                }
+            },
+            "remove": {
+                "steam": {
+                    "title": "Уклони из Steam-а",
+                    "corrupt": "[Кс0Кс] није било могуће уклонити са свих пронађених Стеам корисника. Погледајте дневнике за више информација. Потребно је поновно покретање Стеам-а да би промене ступиле на снагу.",
+                    "success": "[Кс0Кс] је успешно уклоњен из Стеам-а. Потребно је поновно покретање Стеам-а да би промене ступиле на снагу."
+                }
+            },
+            "reparing": "Финисхед Репаиринг"
+        },
+        "install": {
+            "imported": "Гаме Импортед",
+            "canceled": "Инсталација је Отказана",
+            "error": "Инсталација није успела",
+            "finished": "Инсталација је Завршена",
+            "startInstall": "Инсталација је почела",
+            "failed": "Инсталација није успела",
+            "paused": "Инсталација је паузирана",
+            "stopped": "#Instalacija #stati"
+        },
+        "refresh": {
+            "error": "Није могуће преузети издања са упстреам-а, можда због ограничења Гитхуб АПИ-ја! Покушајте поново касније."
+        },
+        "uninstalled": "Деинсталирано",
+        "update": {
+            "canceled": "Ажурирање је Отказано",
+            "finished": "Ажурирање завршено",
+            "started": "Ажурирање је почело",
+            "failed": "Ажурирање није успело",
+            "paused": "Ажурирање је паузирано",
+            "stopped": "#Poboljšati #stati"
+        },
+        "moved": "Пресељење је завршено",
+        "moving": "Покретна игра",
+        "new-hyperplay-version": "Објављена је нова херојска верзија!"
+    },
+    "options": {
+        "env_variables": {
+            "error": {
+                "space_in_key": "Називи променљивих не могу да садрже размаке",
+                "equal_sign_in_key": "Имена променљивих не могу да садрже знак „=\"",
+                "empty_key": "Називи променљивих не могу да буду празни"
+            },
+            "example": "НЕМОЈТЕ укључивати знак \"=\", нпр.: за подешавање као што је \"МИ_ФЛАГ=123\", поставите МИ_ФЛАГ у НАМЕ и 123 у ВАЛУЕ.",
+            "info": "Подесите променљиве окружења које се додају команди."
+        },
+        "wrapper": {
+            "exe": "Враппер",
+            "args": "Аргументи",
+            "arguments_example": "Пример аргумената: --арг; --ектра-филе=\"путања до датотеке/ са/размацима\"",
+            "placeHolderKey": "Нев Враппер",
+            "placeHolderValue": "Аргументи омотача",
+            "title": "Команда омотача:"
+        },
+        "advanced": {
+            "placeHolderValue": "На пример: путања/до/екстрадатотеке",
+            "title": "Променљиве окружења",
+            "value": "Валуе",
+            "key": "Име променљиве",
+            "placeHolderKey": "НАМЕ"
+        },
+        "gameargs": {
+            "placeholder": "Ставите овде аргументе покретача",
+            "title": "Аргументи игре (за покретање након команде):"
+        },
+        "quote-args-with-spaces": "Упозорење: Обавезно цитирајте аргументе са размацима! Нпр.: „пут/са размацима/“"
+    },
+    "Other": "Остало",
+    "platforms": {
+        "mac": "Мац",
+        "linux": "Линук",
+        "win": "Виндовс",
+        "browser": "Прегледач"
+    },
+    "setting": {
+        "change-target-exe": "Изаберите алтернативни ЕКСЕ за покретање",
+        "crossover-version": "Crossover/Wine верзија",
+        "addgamestosteam": "Аутоматски додајте игре у Стеам",
+        "alt-gogdl-bin": "Изаберите алтернативни ГОГДЛ бинарни фајл који ћете користити",
+        "alt-legendary-bin": "Изаберите алтернативни легендарни бинарни запис",
+        "autodxvk": "Аутоматска инсталација/ажурирање ДКСВК на префиксу",
+        "autosync": "Аутосинц Савес",
+        "autovkd3d": "Аутоматска инсталација/ажурирање ВКД3Д на префиксу",
+        "eosOverlay": {
+            "cancelInstall": "Откажи",
+            "checkForUpdates": "Провери ажурирања",
+            "removeConfirm": "Да ли сте сигурни да желите да деинсталирате ЕОС Оверлаи?",
+            "removeConfirmTitle": "Потврдите уклањање преклапања",
+            "checkingForUpdates": "Проверу ажурирања...",
+            "currentVersion": "Тренутна верзија: [Кс17Кс]",
+            "disable": "Онемогући",
+            "enable": "Омогући",
+            "install": "Инсталирај",
+            "installed": "ЕОС Оверлаи је инсталиран",
+            "installing": "ЕОС Оверлаи се инсталира...",
+            "latestVersion": "Најновија верзија: [Кс16Кс]",
+            "notInstalled": "ЕОС Оверлаи није инсталиран",
+            "notInstalledMsg": "ЕОС Оверлаи није инсталиран. Да ли желите да га инсталирате сада?",
+            "notInstalledTitle": "Преклапање није инсталирано",
+            "remove": "Деинсталирај",
+            "updateNow": "Ажурирај",
+            "updating": "Ажурирање..."
+        },
+        "library_top_section": "Горњи одељак библиотеке",
+        "log": {
+            "copy-to-clipboard": "Копирајте садржај дневника у међуспремник",
+            "current-log": "Цуррент Лог",
+            "instructions_title": "Како пријавити проблем?",
+            "instructions": "Придружите се нашем Дисцорд-у и потражите одељак „#-подршка“. Прочитајте закачену нит „Прво ме прочитајте | Често постављана питања“ и пратите упутства да бисте поделили ове евиденције и све релевантне информације о свом проблему.",
+            "last-log": "Последњи дневник",
+            "no-file": "Није пронађена датотека евиденције",
+            "show-in-folder": "Прикажи датотеку евиденције у фасцикли",
+            "instructions-part-01": "Li #free @encounter @any #tema @while #uporabiti HyperPlay, #free #ima #dvojica #određivati #dio #na #dojava #tvoj #tema @in #naš @Discord Server. Li #free #biti @a #igrač, @please #dojava @any #problem @by #posjetiti @the #igrač-#pomoć-#forum. Li #free #biti @a #igra dev, @please #dojava @any #problem @by #posjetiti @the dev-#pomoć-#forum#.",
+            "instructions-part-02": "#Na #pomoć @u @diagnose a #popraviti @the #problem @as hitro @as #mogućan, @please #pružiti koliko god @information @as #mogućan, #uključivanje @a #kopija @of #tvoj #zapisnik. #Naš #pomoć #tim #volja #osmatrač @both #kanal a @do #svoj @best #na #odgovoriti #na #tvoj #tema @as hitro @as #mogućan. Hvala @for #tvoj #strpljenje a #shvaćanje @while #free #rad #na @resolve @any #problem #free @may @encounter#.",
+            "join-hyperplay-discord": "#Spajati #naš @Discord"
+        },
+        "winecrossoverbottle": "ЦроссОвер Боттле",
+        "wineprefix": "ВинеПрефик фолдер",
+        "wineversion": "Wine верзија",
+        "darktray": "Користите икону тамне траке",
+        "default-install-path": "Подразумевана путања за инсталацију",
+        "default-steam-path": "Подразумевана Стеам путања",
+        "defaultWinePrefix": "Подесите фасциклу за нове префиксе вина",
+        "disable_controller": "Онемогућите херојску навигацију помоћу контролера",
+        "download-no-https": "Преузмите игре без ХТТПС-а (корисно за ЦДН-ове, нпр. ЛанЦацхе)",
+        "dxvkfpslimit": "Ограничење ФПС (ДКС9, 10 и 11)",
+        "egs-sync": "Синхронизација са инсталираним Епиц Гамес",
+        "primerun": {
+            "description": "Користите наменску графичку картицу",
+            "confirmation": {
+                "message": "У овом систему је откривена само једна графичка картица. Имајте на уму да је ова опција намењена системима са више ГПУ-а са ГПУ-овима без главе (као што су лаптопови). На системима са једним ГПУ, ГПУ се аутоматски користи и омогућавање ове опције може изазвати проблеме. Да ли заиста желите да омогућите ову опцију?",
+                "title": "Откривен је само 1 ГПУ"
+            }
+        },
+        "savefolder": {
+            "placeholder": "Изаберите тачан фолдер за чување игара",
+            "not-found": "Сачувај фолдер није пронађен, изаберите га ручно (кликните да покушате поново)",
+            "warning": "Проверите двапут да ли је путања тачна (кликните да покушате поново)"
+        },
+        "select_theme": "Изаберите Тема",
+        "adddesktopshortcuts": "Аутоматски додајте пречице на радној површини",
+        "addgamestostartmenu": "Аутоматски додајте игре у старт мени",
+        "checkForUpdatesOnStartup": "Проверите херојска ажурирања при покретању",
+        "custom_themes_path": "Путања прилагођених тема",
+        "customWineProton": "Цустом Вине/Протон Патхс",
+        "discordRPC": "Омогући Дисцорд Рицх Пресенце",
+        "enableFSRHack": "Омогућите ФСР Хацк (Вине верзија треба да га подржава)",
+        "esync": "Омогућите Есинц",
+        "exit-to-tray": "Изађите у системску палету",
+        "FsrSharpnessStrenght": "ФСР Снага оштрине",
+        "fsync": "Омогући Фсинц",
+        "gamemode": "Користите ГамеМоде (Ферал Гаме Моде мора бити инсталиран)",
+        "hideChangelogsOnStartup": "Не приказуј евиденцију промена при покретању",
+        "language": "Изаберите Језик апликације",
+        "library_top_option": {
+            "disabled": "Онемогућено",
+            "favourites": "Омиљене игре",
+            "recently_played": "Недавно игране игре",
+            "recently_played_installed": "Недавно игране игре (само инсталиране)"
+        },
+        "mangohud": "Омогућите Мангохуд (Мангохуд мора бити инсталиран)",
+        "manualsync": {
+            "download": "Преузимање",
+            "forcedownload": "Присилно преузимање",
+            "forceupload": "Присилно отпремање",
+            "sync": "Синхронизуј",
+            "syncing": "Синхронизовање",
+            "title": "Ручно чување синхронизације",
+            "upload": "Отпремити"
+        },
+        "maxRecentGames": "Играно недавно за приказивање",
+        "maxworkers": "Максималан број радника при преузимању",
+        "minimize-on-launch": "Минимизирајте херојство након покретања игре",
+        "offlinemode": "Покрени игру ван мреже",
+        "prefered_language": "Жељени језик (код језика)",
+        "preferSystemLibs": "Преферирајте системске библиотеке",
+        "runexe": {
+            "message": "Превуците и отпустите датотеке овде",
+            "title": "Покрените ЕКСЕ на Префиксу"
+        },
+        "showfps": "Прикажи ФПС (ДКС9, 10 и 11)",
+        "start-in-tray": "Покрени минимизирано",
+        "steamruntime": "Користите Стеам Рунтиме",
+        "autoUpdateGames": "Аутоматски ажурирајте игре",
+        "ignoreGameUpdates": "Игноришите ажурирања игре",
+        "disable_logs": "Онемогући евиденцију",
+        "showMetalOverlay": "Прикажи преклапање статистике",
+        "addgamestoapplications": "Аутоматски додајте игре у апликације",
+        "alt-nile-bin": "Изаберите алтернативни Нил Бинари",
+        "autodxvknvapi": "#Automobil @Install/#Poboljšati DXVK-NVAPI @on #Prefiks",
+        "steamId": "@Steam",
+        "autoLaunchHyperPlay": "#Automobil #Otvaranje",
+        "msync": "Омогућите Есинц"
+    },
+    "settings": {
+        "battlEyeRuntime": {
+            "installing": "Инсталирање БаттлЕие Рунтиме-а...",
+            "name": "БаттлЕие АнтиЦхеат Рунтиме"
+        },
+        "clear-cache": "Очисти херојски кеш",
+        "copiedToClipboard": "Копирано у међуспремник!",
+        "copyToClipboard": "Копирајте сва подешавања у међуспремник",
+        "gameMode": {
+            "eacRuntimeEnabled": {
+                "title": "ЕАЦ време извођења је омогућено",
+                "message": "ЕАЦ време извођења је омогућено, које неће исправно функционисати без ГамеМоде-а. Да ли желите да онемогућите ЕАЦ Рунтиме и ГамеМоде?"
+            }
+        },
+        "navbar": {
+            "advanced": "Напредно",
+            "games_settings": "Подешавања игре",
+            "games_settings_defaults": "Гаме Дефаултс",
+            "general": "Генерал",
+            "log": "Пријава",
+            "other": "Остало",
+            "sync": "Синһронизација Чувања у Облаку",
+            "wineExt": "Вине Ектенсионс",
+            "systemInformation": "Информације о систему",
+            "accounts": "Налози"
+        },
+        "default_hint": "Промене у овом одељку се примењују само као подразумеване вредности приликом инсталирања игара. Ако желите да промените подешавања већ инсталиране игре, користите дугме Подешавања на страници игре.",
+        "eacRuntime": {
+            "gameModeRequired": {
+                "message": "ГамеМоде је неопходан да би ЕАЦ време извођења радило на Флатпак-у. Да ли желите да то омогућите сада?",
+                "title": "Потребан је ГамеМоде"
+            },
+            "installing": "Инсталирање ЕАЦ Рунтиме-а...",
+            "name": "ЕасиАнтиЦхеат Рунтиме"
+        },
+        "log": {
+            "long-log-hint": "Дневник је скраћен, приказано је последњих 1000 редова!"
+        },
+        "open-config-file": "Отворите конфигурациони фајл",
+        "reset-hyperplay": "Ресетуј HyperPlay",
+        "saves": {
+            "label": "Сачувај локацију:",
+            "warning": "Функција чувања у облаку је у бета верзији, направите резервну копију сачуваних података пре синхронизације (у случају да нешто крене наопако)"
+        },
+        "systemInformation": {
+            "osVersion": "#Inačica [@X8@X]",
+            "gogdlVersion": "Gogdl: [@X7@X]",
+            "osNameFlatpak": "[@X0@X] (#unutrašnjost Flatpak)",
+            "memory": "#Spomen#:",
+            "memoryStats": "[@X0@X]% #uporabiti ([@X23@X] / [@X37@X]",
+            "cpu": "@CPU#:",
+            "cpuDescription": "[@X0@X]@x [@X16@X]",
+            "gpu": "@GPU#:",
+            "gpuDriver": "#Šofer: [@X8@X]",
+            "gpuWithNumber": "@GPU [@X4@X]#:",
+            "legendaryVersion": "#Legendaran: [@X11@X]",
+            "showDetailed": "#Sajam @detail #sustav #specifikacija",
+            "systemModel": "#Sustav #Model#:",
+            "steamDeck": "@Steam",
+            "version": "#Inačica: [@X9@X]",
+            "copyToClipboard": "Копирај у клипборд",
+            "os": "Operating system:"
+        },
+        "gamesSettings": "#Igra",
+        "reset-extension": "Reset",
+        "wine": {
+            "manager": {
+                "title": "#Vino"
+            }
+        }
+    },
+    "toolbox": {
+        "settings": {
+            "default-wineprefix": "Изаберите подразумевану фасциклу са префиксом за нове конфигурације",
+            "wineprefix": "Изаберите фасциклу за нове префиксе вина"
+        }
+    },
+    "tooltip": {
+        "addpath": "Додај нову путању",
+        "removepath": "Уклони путању"
+    },
+    "wine": {
+        "manager": {
+            "not-found": "Није пронађена ниједна Вине верзија. Кликните на икону за освежавање да бисте покушали поново.",
+            "title": "Вине Манагер",
+            "unzipping": "Распакивање",
+            "link": "Вине Манагер"
+        },
+        "actions": "поступак",
+        "release": "Датум изласка",
+        "size": "Величина"
+    },
+    "info": {
+        "hyperplay": {
+            "click-to-see-changelog": "Кликните да видите дневник промена",
+            "beta": "Бета",
+            "newReleases": "Располагању новија верзија!",
+            "stable": "Стабилно",
+            "version": "Хероиц Версион"
+        },
+        "settings": "Подешавања се аутоматски чувају",
+        "version": "Wine верзија",
+        "save-sync": {
+            "searching": "Покушавам да откријем исправну фасциклу за чување (кликните за отказивање)"
+        }
+    },
+    "library": {
+        "refresh": "Освјежи",
+        "sortAscending": "Сортинг Асцендинг",
+        "sortByStatus": "Сортирај по статусу",
+        "sortDescending": "Сортирај опадајуће",
+        "toggleLayout": {
+            "grid": "Пребаците се на распоред мреже",
+            "list": "Пребаците се на изглед листе"
+        },
+        "alphabeticalZA": "Alphabetical @Z-@A",
+        "alphabeticalAZ": "Alphabetical @A-@Z",
+        "label": "Библиотека"
+    },
+    "status": {
+        "logging": "Пријављивањем...",
+        "installing": "Инсталирање",
+        "processing": "Обрада датотека, молимо вас сачекајте",
+        "preparing_login": "Припрема за пријаву... "
+    },
+    "sidebar": {
+        "collapse": "Скупи бочну траку",
+        "uncollapse": "Поништи бочну траку",
+        "downloadManager": "#Preuzimanje",
+        "achievements": "#Postignuće",
+        "library": "Библиотека",
+        "store": "Продавница"
+    },
+    "userselector": {
+        "discord": "Дисцорд",
+        "logging_out": "Одјављивања",
+        "logout": "Одјавити се",
+        "logout_confirmation": "Да ли сте сигурни да желите да се одјавите?",
+        "manageaccounts": "Управљајте налозима",
+        "quit": "Одустати",
+        "cancel": "Откажи",
+        "quitMessage": "Јесте ли сигурни да желите да прекинете?",
+        "manageStore": "#Snaći #trgovinica",
+        "logIn": "Пријавите се"
+    },
+    "webview": {
+        "controls": {
+            "back": "Вратити се",
+            "forward": "Иди напред",
+            "openInBrowser": "Отвори у претраживачу",
+            "reload": "Поново учитај страницу"
+        }
+    },
+    "tray": {
+        "show": "Прикажи",
+        "about": "О томе",
+        "quit": "Одустати",
+        "reload": "Освежи"
+    },
+    "two_col_table": {
+        "save_hint": "Промене у овој табели се не чувају аутоматски. Кликните на дугме +"
+    },
+    "offline-message": {
+        "hint": "Проверавамо повезаност са:{{newline}}github.com,{{newline}}gog.com,{{newline}}store.epicgames.com and{{newline}}cloudflare-dns.com",
+        "ignore": "Игнорирај",
+        "offline": "Одсутан",
+        "offline-retry-in": "Одсутан. Поновни покушај за [Кс21Кс] секунди.",
+        "retrying": "Поновни покушај"
+    },
+    "other": {
+        "legendary-version": "Легендарна верзија: ",
+        "weblate": "Помозите у преводу Хероиц.",
+        "gogdl-version": "ГОГЛ верзија: ",
+        "nile-version": "Нил верзија: "
+    },
+    "placeholder": {
+        "alt-gogdl-bin": "Коришћење уграђеног ГОГЛ бинарног...",
+        "alt-legendary-bin": "Коришћење уграђеног легендарног бинарног...",
+        "custom_themes_path": "Изаберите путању за тражење прилагођених ЦСС датотека",
+        "dxvkfpsvalue": "Позитивна целобројна вредност (нпр. 30, 60, ...)",
+        "egs-prefix": "Префикс где је ЕГС инсталиран",
+        "prefered_language": "Код од 2 знака (тј.: „ен“ или „фр“)",
+        "alt-nile-bin": "Користећи уграђени бинарни Нил..."
+    },
+    "please-wait": "Сачекајте...",
+    "progress": "Напредак",
+    "queue": {
+        "label": {
+            "canceled": "Отказано",
+            "clear": "Обриши листу",
+            "downloading": "Преузимање",
+            "empty": {
+                "finished": "#Ništica @download",
+                "queue": "Ништа за преузимање"
+            },
+            "finished": "Завршено",
+            "queued": "У реду",
+            "remove": "Уклони из преузимања",
+            "pause": "Паузирајте преузимање",
+            "resume": "Настави преузимање",
+            "launch": "Pokreni igru",
+            "retry-install": "Поновите инсталацију",
+            "retry-update": "Поновите ажурирање",
+            "stop": "Prekini preuzimanje",
+            "timeElapsed": "Prošlo vreme: {{elapsed}}"
+        }
+    },
+    "Recent": "Играно недавно",
+    "search": "Потражите игре",
+    "Settings": "Подешавања",
+    "store": "Епиц Сторе",
+    "stores": "Продавнице",
+    "title": {
+        "allGames": "Све игре"
+    },
+    "externalLink": {
+        "dontAskAgain": "Не питај поново",
+        "warning": "Управо ћете отворити спољну везу."
+    },
+    "wiki_info": {
+        "not_found": "Нисмо могли да пронађемо додатне информације."
+    },
+    "Open": "Отвори",
+    "Update Available!": "Располагању новија верзија!",
+    "dlc": {
+        "actions": "Акције",
+        "noDlcFound": "Није пронађен ниједан ДЛЦ",
+        "size": "Величина",
+        "title": "Наслов",
+        "installDlcs": "Инсталирај све DLC-ове"
+    },
+    "prime-gaming": "Приме Гаминг",
+    "amazon": "Амазон",
+    "Amazon Games": "Амазон игре",
+    "gameRelease": {
+        "prototype": "@Prototype",
+        "alpha": "Alpha",
+        "beta": "@Beta",
+        "demo": "Проба",
+        "main": "Glavni"
+    },
+    "hyperplay": {
+        "gamecard": {
+            "extracting": "#Vaditi#...",
+            "installed": "#Spreman #na #predstava",
+            "installing": "@Download#...",
+            "distributables": "#Instaliranje",
+            "paused": "Paused",
+            "patching": "Patchovanje..."
+        },
+        "onboarding": {
+            "analytics": {
+                "anonymized": "#Slati anonymized @click & #igra #interakcija#;",
+                "privacyPolicyHere": "#Privatnost #Politika tuda#.",
+                "neverSellData": " #prodati #podatak @for #profit. Ikad#!",
+                "optOut": "Uvijek #odobriti #free #na @opt-van @via @Setting#;",
+                "body": "HyperPlay @would @like #na #sabrati #korištenje #podatak #na @better #razumijeti kako #naš #korisnik @interact #uz @the #prijava. @This @information #pomoć @u #razumijeti kako #free #uporaba @the app a @let @u #kov HyperPlay @even @better @for #free#.",
+                "hyperplayWill": "HyperPlay #volja#:",
+                "neverCollectIP": " #pokupiti #tvoj #pun @IP #obraćanje#;",
+                "title": "#Pomoć @U #poboljšati HyperPlay#!",
+                "privacyCaption": "@This #podatak @i aggregated a @i @therefore #anoniman @for @the #cilj @of #General #Podatak #Protekcija #Odredba (@EU) 2016/#679. @For više @information @in #veza #na #naš #privatnost #praksa, @please #vidjeti #naš ",
+                "neverCollectPersonal": " #pokupiti #ključ, #obraćanje, #bilanca, hashes, ili @any @personal information#;",
+                "privacyPolicy": "Политика приватности.",
+                "text": {
+                    "externalLink": "Saznajte više",
+                    "title": "Ažurirali smo našu Politiku privatnosti"
+                },
+                "bulletOne": "Uvek vam omogućava da se isključite",
+                "bulletTwo": "Пошаљите анонимизоване кликове и интеракције у игри",
+                "paragraphOne": "HyperPlay želi da prikupi podatke o korišćenju kako bi bolje razumeo kako naši korisnici interaguju sa aplikacijom. \n           Ovo nam omogućava da učinimo HyperPlay još boljim za vas.",
+                "titleOne": "Pomozite nam da poboljšamo HyperPlay!"
+            },
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "details": "@The @browser @below već #ima MetaMask @install. #Birati @the one #free #ima @like #na #uvoz @from#.",
+                        "cantFindProfile": "#Moći ne #naći #tvoj @browser #profil#?",
+                        "createNewWallet": "#Stvarati @new @MM #produživanje #lisnica",
+                        "title": "@Select @the @browser #na #uvoz @from",
+                        "orWord": "@OR",
+                        "useRecoveryPhrase": "#Uvoz #Uporabiti #Tajna #Oporavak @phrase",
+                        "useRecoveryPhraseInfo": "@This @feature @i #predlagati @for #napredan #korisnik a developers. #Tvoj #tajna #oporavak @phrase @i #čuvati @locally @in MetaMask a nikad @share #uz HyperPlay#.",
+                        "learnMore": "Saznaj više"
+                    },
+                    "info": {
+                        "createWalletCTA": "#Stvarati @a #lisnica",
+                        "createWalletDescription": "@Click @in “#Stvarati @a #lisnica” @below li #free @do #nemati @a #lisnica ili @want# to #stvarati @a @new #jedan#:",
+                        "digitalAssets": {
+                            "details": "#Lisnica #biti #uporabiti #na #slati, #primiti, #trgovinica, a #prikaz @digital #sredstvo @like @token a @NFT#.",
+                            "title": "@A #Dom @for #tvoj @Digital"
+                        },
+                        "login": {
+                            "title": "@A @New #Put #na #Zapisnik",
+                            "details": "@A #alternativa #na #stvarati @new #račun a #lozinka @on #svaki #stranica, tek #spajati #tvoj #lisnica @instead#."
+                        },
+                        "skip": "@Skip zasada",
+                        "title": "#Sto @i @a #lisnica#?"
+                    },
+                    "scan": {
+                        "dontHaveWallet": "#Nemati @a #lisnica#?",
+                        "getMetamask": "#Dobiti",
+                        "updateWarning": "#Ima #tema? @Make sure MetaMask @i @up to #datum#.",
+                        "title": "@Scan @QR #uz ",
+                        "details": "#Stvarati @a encrypted #komunikacija #kanal. #Tvoj #ključ #volja nikad #biti @share #uz HyperPlay#."
+                    }
+                },
+                "pleaseConnect": "@Please #spajati #tvoj #lisnica, ili #preuzimanje @the Metamask @mobile-app #na #dobiti\n        #početi#:",
+                "title": "#Lisnica"
+            },
+            "welcome": {
+                "text": {
+                    "communityCTA_1": "#Free #ima #ljubav #tvoj feedback a #na #ima #free #spajati @u @in #naš",
+                    "communityCTA_2": "#opština. @Together, @let@'s #oblik @the #futur @of gaming#!",
+                    "construction": "HyperPlay @i ispod #izrada#.",
+                    "bugs": "@Please #nota da HyperPlay @i @a #narod alpha. Mnogo @feature #biti ipak\n          @in #razvoj, a tamo #volja #biti @bug#.",
+                    "description": "HyperPlay @i @a #igra launcher a #igra #trgovinica aggregator @from @the\n          #futur. #Uz HyperPlay, #free #limenka #nositi #tvoj #lisnica, @token, a #sredstvo\n          @into #svaki #igra. HyperPlay #pomoć @the #cijel #biblioteka @of @the @Epic\n          #Trgovinica, @GOG, a #naš #sam HyperPlay #trgovinica. @By #uporabiti HyperPlay, #free @agree# to\n           #naš",
+                    "paragraphOne": "U HyperPlay-u gradimo prodavnicu igara nove generacije \n            za budućnost igranja.",
+                    "bulletPointFive": "Pokrenite Windows igre na macOS-u, Linux-u i SteamDeck-u koristeći naš\n              napredni",
+                    "lastParagraph": "Trenutno u Beta verziji, veoma cenimo vaše povratne informacije i \n            podstičemo vas da prijavite bilo kakve probleme ili sugestije u našoj",
+                    "paragraphThr": "Besprekorno prenesite svoj novčanik, tokene, \n           i imovinu u svaku igru dok pristupate \n           opsežnim bibliotekama Epic Store-a, \n           GOG-a i našoj HyperPlay prodavnici - sve na jednom mestu.",
+                    "bulletPointFour": "Instalirajte Steam (Windows verzija) na macOS jednim lakim klikom",
+                    "bulletPointOne": "Pristupite ogromnoj kolekciji od 100+ igara omogućeno na lancu",
+                    "bulletPointThree": "Igrajte Epic i GOG igre direktno kroz HyperPlay",
+                    "bulletPointTwo": "Зарађујте токене, NFT-ове и награде ван ланца завршавањем Квестова",
+                    "TitleList": "Sa HyperPlay-om možete:"
+                },
+                "title": "#Dobrodošlica #na HyperPlay Rano #Pristup#!",
+                "titleIntro": "Dobrodošli u HyperPlay!"
+            },
+            "connectionCanceled": {
+                "description": "@Please #potvrditi @the #veza #zamolba @on #tvoj @mobile #lisnica #na @proceed#.",
+                "title": "#Veza canceled#!"
+            },
+            "connectAgain": "#Spajati opet",
+            "connectionConnected": {
+                "title": "#Lisnica #spajati#!",
+                "description": "#Tvoj #lisnica @i #spajati. #Free #biti #spreman #na #igra#."
+            },
+            "terms": "Услови коришћења"
+        },
+        "changeWallet": "Swap #lisnica #račun",
+        "accesscodes": {
+            "requirescode": "@This #igra #poboljšati @require @a #pristup #kôd#.",
+            "success": {
+                "validation": "#Uspjeh! #Pristup #kôd #važiti"
+            },
+            "error": {
+                "validation": "#Pristup #kôd @i @invalid",
+                "licenseUndefined": "Nije moguće potvrditi kod za pristup. Proverite svoj pristup internetu ili podešavanja vatrozida."
+            },
+            "placeholder": "Unesite pristupni kod"
+        },
+        "achievements": {
+            "noAchievements": {
+                "doubleCheckMessage": "#Free @look #free #moći ne #naći @any #igra @in #tvoj @Steam #račun momentalno. Tek @a @quick @reminder #na #dvostruk-#pregled da #tvoj #igra #detalj #biti #pribor #na #narod. Ovuda, #free #limenka #pristup #tvoj #postignuće a #pružiti #free #uz @the @best #iskustvo#.",
+                "oops": "Joj#!"
+            },
+            "addThisGame": "#Dodati @this #igra",
+            "freeMints": "@Free",
+            "gamesToMint": "#Igra #na @mint"
+        },
+        "linkSteamAccountDescription": "#Znak @in #na @Steam #na #veza #tvoj HyperPlay #račun#.",
+        "analyticsOff": "Analytics @i @turn# off",
+        "currentWallet": "#Struja #lisnica",
+        "linkSteamAccountTitle": "#Veza @Steam",
+        "analyticsOn": "Analytics @i @turn# on",
+        "browserImport": {
+            "appId": "App",
+            "profile": "Профил"
+        },
+        "connectWallet": "#Spajati #lisnica",
+        "viewMyAccount": "#Stav #moj #račun",
+        "viewPortfolio": "#Stav @portfolio",
+        "publicAlpha": "#Narod",
+        "otp": "#Jedan #Vrijeme",
+        "viewItem": "#Stav [@X5@X]",
+        "buttons": {
+            "agree": "@I #pristati",
+            "noThanks": "Не хвала",
+            "primaryButton": "Slažem se",
+            "secondaryButton": "Ne, hvala"
+        },
+        "discordApp": "@Discord",
+        "linkSteamAccountCta": "@Go# to @Steam #znak @in",
+        "folder": "Фолдер",
+        "misc": "Никад",
+        "logOut": "Одјавити се",
+        "syncing": "Синхронизовање…",
+        "turnAnalyticsOff": "Turn off",
+        "turnAnalyticsOn": "Укључи",
+        "copyUrl": "Копирај URL адресу",
+        "Sync": "Синхронизуј",
+        "viewFullscreen": "#Stav fullscreen",
+        "compatibilityLayer": "Sloj kompatibilnosti (Beta)",
+        "discordAppLink": "Discord zajednica."
+    },
+    "exit_game": "#Izlaz",
+    "accounts": "#račun",
+    "hyperplayOverlay": {
+        "extensionNotification": {
+            "TITLE": "#Transakcija @request",
+            "DESCRIPTION": "#Pečat [@X6@X] + @X #na #vidjeti @this #transakcija"
+        },
+        "greeting": {
+            "title": "HyperPlay",
+            "description": "HyperPlay Overlay @i #spreman! #Pečat [@X34@X] + @X #na #sajam ili @hide #free#."
+        },
+        "signatureRequest": {
+            "CONFIRMED": "#Potpis #podati",
+            "FAILED": "#Potpis @interrupt",
+            "INITIATED": "#Potpis #zamolba #predstojeći"
+        },
+        "txnRequest": {
+            "FAILED": "#Transakcija @interrupt",
+            "PENDING": "#Transakcija #podati",
+            "INITIATED": "#Transakcija #zamolba #predstojeći",
+            "CONFIRMED": "#Transakcija #potvrditi"
+        },
+        "chainRequest": {
+            "CONFIRMED": "#Običaj #mreža #dodati",
+            "FAILED": "#Običaj #mreža canceled",
+            "INITIATED": "#Običaj #mreža #zamolba"
+        },
+        "walletWatch": {
+            "CONFIRMED": "#Običaj @token #dodati",
+            "INITIATED": "#Dodati #običaj @token #zamolba #predstojeći",
+            "FAILED": "#Običaj @token #zamolba canceled"
+        },
+        "description": {
+            "INITIATED": "@A #lisnica #potvrda @i #predstojeći @in #tvoj @mobile #lisnica",
+            "PENDING": "@Wait# for blockchain #potvrda. #Free @will @let #free #znati kada #free #biti #potvrditi",
+            "CONFIRMED": "@The #transakcija #biti @successfully #potvrditi#!",
+            "FAILED": "@The #transakcija #biti canceled ili ne #podati, @please #pokušaj opet"
+        }
+    },
+    "back_to_game": "@Back #na #igra",
+    "dlcs": {
+        "label": "@Select @DLC #na @install#:"
+    },
+    "email_subscription": {
+        "subtitle": "#Free #biti sad @a #dio @of #naš #opština, a #free #biti @excited #na #dio @valuable #poboljšati a @insight #uz #free#.",
+        "title": "Hvala @for #pretplaćivati#!"
+    },
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "[@X0@X] a @other #igra #biti #spreman #na #poboljšati#.",
+            "single": "Tamo @i @a #poboljšati #spreman @for [@X29@X]#."
+        },
+        "title": "#Igra #Poboljšati"
+    },
+    "quest": {
+        "associatedGames": "#Povezan #igra",
+        "claimAll": "@Claim @all",
+        "claimed": "#Potraživati",
+        "connectSteamAccount": "#Spajati @Steam #račun",
+        "readyForClaim": "#Spreman @for @claim",
+        "View Game": "#Stav",
+        "playstreak": {
+            "dayResets": "#Dan resets#:",
+            "playEachDay": "#Predstava @each #dan #naime #tvoj streak @will ne reset#!",
+            "playToStart": "#Predstava @this #igra #na #početak #tvoj streak#!",
+            "progressTowardsStreak": "#napredak ususret #današnji streak#.",
+            "streakCompleted": "Streak #završen! @Claim #tvoj #nagrada sad#.",
+            "streakProgress": "Streak",
+            "days": "дана",
+            "now": "Now",
+            "sync": "Sync",
+            "syncSuccess": "#Napredak synced"
+        },
+        "type": {
+            "reputation": "#Reputacija",
+            "playstreak": "#Predstava"
+        },
+        "linkAccount": "#Veza #tvoj @Steam #račun #na #pregled eligibility#.",
+        "needMoreAchievements": "#Free #nužda #na #ima #završen [@X27@X]% @of @the #postignuće @in #jedan @of @this #igra#.",
+        "reputation": "#Reputacija",
+        "reward": "#Nagrada",
+        "claimFailed": "@Claim #zakazati",
+        "claimFailedMessage": "@Please #pokušaj jednom više. Li #free ipak @do ne #rad, #stvarati @a @Discord #pomoć #karta#.",
+        "createDiscordTicket": "@Created @Discord #karta",
+        "notEnoughGas": {
+            "message": "Nedovoljno sredstava u novčaniku za preuzimanje vaše nagrade zbog troškova gasa. Pokušajte sa drugim novčanikom ili dopunite ovaj pre ponovnog pokušaja."
+        },
+        "errorMessage": "Tamo #biti @a #zabuna #uz @the #transakcija#.",
+        "active": "Активан",
+        "Play": "Играј сад",
+        "signIn": "Prijavite se",
+        "points": "Points",
+        "sync": "Синхронизуј",
+        "quests": "#Poen",
+        "pointsClaimed": "#Poen",
+        "g7Numclaimed": "@Total #Potraživati G7 #Kredit",
+        "claimWarning": {
+            "confirm": "Potvrdi",
+            "cancel": "Откажи",
+            "title": "#Potvrditi #Potraga #Nagrada",
+            "body": "[@X0@X]#VAŽAN:[@X16@X] @Please #osigurati da #free #biti #dodijeliti dosta #gas @on @the [@X80@X] #mreža @for @the #transakcija #na #biti @successfully #potvrditi [@X153@X]#unutar #24 hrs.[@X173@X]",
+            "body2": "Inače, @the #Potraga #Nagrada [@X28@X]#volja #isteći a #volja @no longer #biti claimable.[@X78@X]"
+        },
+        "noG7ConnectionClaim": "#Free #nužda #na #ima @a Game7 #račun #povezati #na [@X43@X] #na @claim #tvoj #nagrada#.",
+        "noG7ConnectionSync": {
+            "title": "Нема повезаног G7 налога",
+            "message": "Морате имати повезан Game7 налог на {{email}} да бисте поново синхронизовали своје задатке."
+        },
+        "toClaimReward": "da preuzmete svoju nagradu.",
+        "notEligible": {
+            "message": "Нисте завршили потребан број дана играња и не можете да затражите своју награду у овом тренутку.",
+            "title": "Још нисте подобни"
+        },
+        "notEnoughBalance": {
+            "title": "Nizak saldo"
+        },
+        "notSignedIn": {
+            "message": "Morate biti prijavljeni da biste preuzeli svoju nagradu.",
+            "title": "Niste prijavljeni"
+        },
+        "questAvailable": "Misija dostupna!",
+        "questComplete": "Zadatak završen!",
+        "youHaveClaimed": "Затражили сте {{totalRewards}} награду{{plural}}.",
+        "toSeeDetails": "да бисте видели детаље.",
+        "claim": "Затражи",
+        "rewardClaimed": "Zahtev uspešan"
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "client": "#Free #biti @currently ne logged @in, #predstava streak #napredak #volja ne #biti tracked. @Please login #na HyperPlay @via @the #vrh-#pravo dropdown #na #traka #napredak#.",
+                "overlay": "#Free #biti @currently ne logged @in, #predstava streak #napredak #volja ne #biti tracked. @Please #izlaz @the #igra a login #na HyperPlay @via @the #vrh-#pravo dropdown #na #traka #napredak#."
+            }
+        },
+        "quests": "#Poen",
+        "noneFound": {
+            "message": "Tamo #biti @no #potraga #pronađen#.",
+            "title": "@No #Potraga #Pronađen#."
+        },
+        "g7CreditsModal": {
+            "description": "@Dive @into HyperPlay@'s #vrh #igra #uz @excite #Predstava Streak #Izazov. @Each #aktivnost #ohrabriti #free #na #sudjelovati #uz @a #drugačiji #igra, showcasing @the @best @of web3 gaming. #Tvoj playtime #pitanje#!",
+            "title": "#Steći Game7 #Kredit"
+        },
+        "viewAllQuests": {
+            "title": "#Stav @All"
+        }
+    },
+    "achievements": {
+        "progress": {
+            "minted": "@on #lanac",
+            "notMinted": "@off #lanac"
+        }
+    },
+    "importGameErrorMessage": "Ne @a #važeći #igra @folder, #uvesti #igra @i ne #mogućan",
+    "importGameErrorMessageExecutable": "#Igra Executable ne #pronađen, #uvesti #igra @i ne #mogućan",
+    "importGameErrorTitle": "#Uvoz #Igra",
+    "notification": {
+        "wine-download": {
+            "message": "@Setting up @the default #kompatibilnost #red",
+            "title": "Вине Манагер"
+        },
+        "wine-download-failed": {
+            "message": "#Zakazati #na setup @the default #kompatibilnost #red",
+            "title": "Грешка"
+        }
+    },
+    "sideload": {
+        "warningTitle": "#Važan",
+        "warningMessage": "#Strana-@loading @a #igra @i @a @feature @intend @for developers a @experienced #moć #korisnik. #Strana-@loading @a @installer da #sadržati malware #moći #kompromis #tvoj #računar a #olovo #na #krađa @of #fond#."
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#.",
+        "WALLET_DISCONNECTED": "#Free @do #nemati @a #lisnica #spajati #na HyperPlay#.",
+        "comingSoon": "#Doći",
+        "links": {
+            "portfolio": "Портфолио",
+            "sell": "Продај",
+            "bridge": "Most",
+            "buy": "Kupi",
+            "swap": "Zameni",
+            "marketplace": "Tržište"
+        }
+    },
+    "profile": "Профил",
+    "ALL": "СВЕ",
+    "analytics": "Рашчлањивања",
+    "import-game-folder": {
+        "success": "@Successfully #uvesti #igra#!",
+        "cta": "#Uvoz #Igra",
+        "dialog": {
+            "title": "@Select #Igra @Folder #na #Uvoz"
+        },
+        "error": "Tamo #biti @a #zabuna #tokom #uvoz. @Please #vidjeti @the #zapisnik @for više #detalj#.",
+        "label": "#Uvoz #Igra",
+        "placeholder": "#Birati @the #igra @folder #na #uvoz"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "#Baza #igra #ekstrakcija canceled",
+                "title": "#Ukidati"
+            },
+            "installed": {
+                "body": "Mod #volja #biti #važiti #na #baza #igra",
+                "title": "#Baza #Igra"
+            },
+            "installing": {
+                "body": "#Vaditi #baza #igra #kartoteka",
+                "title": "#Instaliranje #Baza"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "@Select #Baza #Igra #Dosje",
+                "placeholder": "@Select @Zip"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Ova igra je mod za World of Warcraft: Wrath of the Lich King (3.3.5a). Da bi igrali ovaj mod, igrači moraju imati kopiju World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay ne hostuje World of Warcraft. Igrači koji poseduju World of Warcraft mogu dobiti potrebnu verziju iz sledećih izvora:",
+                "subtitle": "#Preuzimanje #Svijet @of Warcraft 3.3.5@a",
+                "webtorrent": "#Bujica (@Magnet #Veza)",
+                "title": "Корак 1",
+                "link1": "Линк 1",
+                "link2": "Link 2 (Magnet link)"
+            },
+            "step2": {
+                "description": "@Select @the @download ChromieCraft_3.3.5@a.@zip #dosje#.",
+                "subtitle": "@Select ChromieCraft_3.3.5@a.@zip #Dosje",
+                "title": "Корак 2",
+                "subtitle1": "Izaberite preuzetu 3.3.5a zip datoteku"
+            },
+            "step3": {
+                "description": "@Please #birati @the @folder gdje #Svijet @of Warcraft: @Wrath @of @the Lich #Kralj (3.3.5@a) trebati #biti @install#.",
+                "subtitle": "@Select #Instalacija",
+                "title": "#Čin #3."
+            },
+            "step4": {
+                "description": "#Ući @the #pristup #kôd #na @proceed #uz #instaliranje @the #igra#.",
+                "subtitle": "#Pristup",
+                "title": "#Čin #4."
+            },
+            "title": "Mod"
+        }
+    },
+    "Cancel Installation": "#Ukidati",
+    "Install Steam": "@Install",
+    "Installing Steam": "#Instaliranje @Steam#...",
+    "Launch Steam": "#Otvaranje",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Li #free #želja #na #nastaviti, #biti #pacijent otkad #free #limenka #uzeti @a few #minuta #na @finish @depend @on #tvoj #internet #veza a #sustav #konfiguracija#;",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay #volja @notify #free jednom @the #instalacija @i #raditi#;",
+    "Launching Steam": "#Započinjanje @Steam#...",
+    "steam-install": {
+        "compatibility-layer-not-available": "#Kompatibilnost #red ne #dostupan. @Please @install #jedan @from @parquote@Setting > #Vino #Upravitelj@parquote najprije#.",
+        "error-message": "@A #zabuna @occur @while #instaliranje @Steam. @Please #pokušaj opet#.",
+        "launch-tooltip": "#Otvaranje @Steam #uporabiti @the HyperPlay #Kompatibilnost",
+        "success-message": "@Steam #ima #biti @install. #Free #limenka sad #otvaranje #free @from @the #Biblioteka#.",
+        "tooltip": "@This #volja @install @the #Prozor #inačica @of @Steam a #free #volja #bijeg #uporabiti @a HyperPlay #Kompatibilnost #Red. \n\n    #Kakav #igra osobito #star #naziv, #nov 3@D #igra, ili @that #uz @anti-@cheat #softver @may ne #rad @properly. \n\n    @The #Predlagati specs #biti @a @Mac #uz #Jabuka @Silicon @CPU (M1 ili @above) a barem 16@GB @of @RAM#."
+    },
+    "At the end make sure to": "@At the end @make sure #na",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay #volja #preuzimanje a #početak @the @Steam Setup @for #free. @Please @follow @Steam #izučavanje @on #svoj @installer#;"
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "@On najprije #otvaranje @Steam #volja #preuzimanje @the #neodložan #kartoteka a #volja #uzeti @a few #minuta #na @finish a @the login #ekran #na #nastati#;",
+    "UNCHECK 'Run Steam'": "UNCHECK '#Bijeg @Steam'",
+    "Be aware that not all games will work, and even if they do, they may not run as expected": "Budite svesni da ne rade sve igre, a čak i ako rade, možda neće funkcionisati kako se očekuje.",
+    "If you wish to continue, please be patient since it can take a few minutes to finish depending on your internet connection and system configuration": "Ако желите да наставите, молимо вас да будете стрпљиви, јер може потрајати неколико минута да се заврши у зависности од ваше интернет везе и конфигурације система.",
+    "installModal": {
+        "loginRequired": "Потребно је пријављивање",
+        "loginRequiredMessage": "Morate biti prijavljeni na HyperPlay da unesete svoj kod za pristup i instalirate ovu igru. ",
+        "loginRequiredMessageUpdate": "Morate biti prijavljeni na HyperPlay da unesete svoj pristupni kod i ažurirate ovu igru. "
+    },
+    "macOS 14": {
+        "0 or above": "macOS 14.0 ili noviji"
+    },
+    "wallet": {
+        "unsupported": "Nepodržana veza novčanika",
+        "portfolio": {
+            "onlyExtension": "MetaMask portfelj je dostupan samo kada ste povezani sa MetaMask-om."
+        }
+    },
+    "16GB of RAM": "16GB RAM-a",
+    "Apple Silicon M1 or above": "Apple Silicon M1 ili noviji",
+    "Downloading": "Preuzimanje {{percent}}%",
+    "Recommended specs for a better experience": "Preporučene specifikacije za bolje iskustvo",
+    "Installing": "Instaliranje",
+    "Please Wait": "Molimo sačekajte"
+}

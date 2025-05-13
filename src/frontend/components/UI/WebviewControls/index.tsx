@@ -1,20 +1,25 @@
-import {
-  ArrowBackOutlined,
-  ArrowForwardRounded,
-  OpenInBrowser,
-  Replay
-} from '@mui/icons-material'
 import cx from 'classnames'
 import { WebviewTag } from 'electron'
 import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import SvgButton from '../SvgButton'
 import './index.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faBackward,
+  faExternalLink,
+  faForward,
+  faRefresh
+} from '@fortawesome/free-solid-svg-icons'
 
 interface WebviewControlsProps {
   webview: WebviewTag | null
   initURL: string
   openInBrowser: boolean
+  disableUrl?: boolean
+  classNames?: {
+    root?: string
+  }
 }
 
 function removeSelection(event: SyntheticEvent<unknown>) {
@@ -31,7 +36,9 @@ function removeSelection(event: SyntheticEvent<unknown>) {
 export default function WebviewControls({
   webview,
   initURL,
-  openInBrowser
+  openInBrowser,
+  disableUrl,
+  classNames
 }: WebviewControlsProps) {
   const [url, setUrl] = React.useState(initURL)
   const { t } = useTranslation()
@@ -40,7 +47,11 @@ export default function WebviewControls({
 
   useEffect(() => {
     if (webview) {
-      const eventCallback = () => setUrl(webview.getURL())
+      const eventCallback = () => {
+        if (!disableUrl) {
+          setUrl(webview.getURL())
+        }
+      }
       webview.addEventListener('did-navigate-in-page', eventCallback)
       webview.addEventListener('did-navigate', eventCallback)
       webview.addEventListener('did-navigate-in-page', () => {
@@ -78,13 +89,17 @@ export default function WebviewControls({
     [webview]
   )
 
-  const _url = new URL(url)
-  const allowList = ['store.hyperplay.xyz', 'docs.hyperplaygaming.com']
+  const _url = url !== '' ? new URL(url) : null
+  const allowList = [
+    'store.hyperplay.xyz',
+    'docs.hyperplay.xyz',
+    'app.game7.io'
+  ]
 
-  if (allowList.includes(_url.host)) return null
+  if (_url && allowList.includes(_url.host)) return null
 
   return (
-    <div className="WebviewControls">
+    <div className={cx('WebviewControls', classNames?.root)}>
       <div className="WebviewControls__icons">
         <SvgButton
           className="WebviewControls__icon"
@@ -92,7 +107,7 @@ export default function WebviewControls({
           onClick={() => handleButtons('back')}
           disabled={!canGoBack}
         >
-          <ArrowBackOutlined />
+          <FontAwesomeIcon icon={faBackward} />
         </SvgButton>
         <SvgButton
           className="WebviewControls__icon"
@@ -100,14 +115,14 @@ export default function WebviewControls({
           onClick={() => handleButtons('forward')}
           disabled={!canGoForward}
         >
-          <ArrowForwardRounded />
+          <FontAwesomeIcon icon={faForward} />
         </SvgButton>
         <SvgButton
           className="WebviewControls__icon"
           title={t('webview.controls.reload')}
           onClick={() => handleButtons('reload')}
         >
-          <Replay />
+          <FontAwesomeIcon icon={faRefresh} />
         </SvgButton>
       </div>
       <span className="WebviewControls__url">
@@ -131,7 +146,7 @@ export default function WebviewControls({
           disabled={!openInBrowser || !url}
           onClick={() => window.api.openWebviewPage(url)}
         >
-          <OpenInBrowser />
+          <FontAwesomeIcon icon={faExternalLink} />
         </SvgButton>
       </div>
     </div>

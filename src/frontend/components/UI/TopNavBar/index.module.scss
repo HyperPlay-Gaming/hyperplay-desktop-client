@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   padding: var(--space-md) var(--space-lg);
-  z-index: 2000;
+  z-index: 100000;
 }
 
 .navBar > :first-child {
@@ -37,10 +37,10 @@
 }
 
 .alphaBadge {
-  background-color: var(--color-tertiary-700);
-  padding: var(--space-3xs) var(--space-sm);
+  background-color: var(--color-secondary-700);
+  padding: var(--space-2xs) var(--space-sm);
   border-radius: var(--space-xs);
-  margin-left: var(--space-sm);
+  margin: var(--space-xs) var(--space-md);
 }
 
 .hpLogo {
@@ -65,4 +65,15 @@
   align-items: center;
   justify-content: center;
   min-width: calc(1.3 * var(--text-xs));
+}
+
+@media screen and (max-width: 1000px) {
+  .alphaBadge,
+  .hpTextLogo {
+    display: none;
+  }
+}
+
+.metaMaskIcon {
+  width: var(--space-md-fixed);
 }

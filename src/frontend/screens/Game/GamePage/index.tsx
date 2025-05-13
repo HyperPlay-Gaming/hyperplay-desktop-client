@@ -1,6 +1,6 @@
 import './index.scss'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 
 import {
   BackArrowOutlinedCircled,
@@ -14,7 +14,6 @@ import {
   getPlatformName,
   getProgress,
   launch,
-  sendKill,
   size,
   updateGame
 } from 'frontend/helpers'
@@ -22,14 +21,18 @@ import { NavLink, useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { UpdateComponent, SelectField } from 'frontend/components/UI'
+import walletStore from 'frontend/state/WalletState'
+import onboardingStore from 'frontend/store/OnboardingStore'
 
 import {
   AppPlatforms,
   ExtraInfo,
   GameInfo,
   HyperPlayInstallInfo,
+  InstallProgress,
   Runner,
-  WineInstallation
+  WineInstallation,
+  GamePageActions
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GogInstallInfo } from 'common/types/gog'
@@ -40,7 +43,7 @@ import TimeContainer from '../TimeContainer'
 import GameRequirements from '../GameRequirements'
 import { GameSubMenu } from '..'
 import { InstallModal } from 'frontend/screens/Library/components'
-import { install } from 'frontend/helpers/library'
+import { install, isNotNative } from 'frontend/helpers/library'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faTriangleExclamation,
@@ -61,24 +64,32 @@ import { hasStatus } from 'frontend/hooks/hasStatus'
 import { Button } from '@hyperplay/ui'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import DLCList from 'frontend/components/UI/DLCList'
-import { NileInstallInfo } from 'common/types/nile'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
+import DMQueueState from 'frontend/state/DMQueueState'
+import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
+import authState from 'frontend/state/authState'
 
-export default React.memo(function GamePage(): JSX.Element | null {
+type locationState = {
+  fromDM?: boolean
+  gameInfo: GameInfo
+  fromQuests?: boolean
+  action: GamePageActions
+}
+
+export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
-    state: { fromDM: boolean; gameInfo: GameInfo }
+    state: locationState
   }
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation()
 
-  const { gameInfo: locationGameInfo } = location.state
+  const { gameInfo: locationGameInfo, action } = location.state
 
   const [showModal, setShowModal] = useState({ game: '', show: false })
 
   const {
-    epic,
-    gog,
-    gameUpdates,
     platform,
     showDialogModal,
     setIsSettingsModalOpen,
@@ -91,16 +102,12 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const { status, folder } = hasStatus(appName, gameInfo)
   const gameAvailable = gameInfo.is_installed && status !== 'notAvailable'
 
-  const [progress, previousProgress] = hasProgress(appName)
+  const { progress, previousProgress } = hasProgress(appName)
 
   const [extraInfo, setExtraInfo] = useState<ExtraInfo | null>(null)
   const [autoSyncSaves, setAutoSyncSaves] = useState(false)
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    | LegendaryInstallInfo
-    | GogInstallInfo
-    | HyperPlayInstallInfo
-    | NileInstallInfo
-    | null
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
   >(null)
   const [launchArguments, setLaunchArguments] = useState('')
   const [hasError, setHasError] = useState<{
@@ -119,16 +126,18 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const isMac = platform === 'darwin'
   const isSideloaded = runner === 'sideload'
 
-  const isInstalling = status === 'installing'
+  const isInstalling = DMQueueState.isInstalling(appName)
   const isPlaying = status === 'playing'
-  const isUpdating = status === 'updating'
+  const isUpdating = status === 'updating' || status === 'patching'
   const isQueued = status === 'queued'
   const isReparing = status === 'repairing'
   const isMoving = status === 'moving'
   const isUninstalling = status === 'uninstalling'
   const isSyncing = status === 'syncing-saves'
-  const isPaused = status === 'paused'
+  const isPaused = DMQueueState.isPaused(appName)
   const isExtracting = status === 'extracting'
+  const isPatching = status === 'patching'
+  const isInstallingDistributable = status === 'distributables'
   const isPreparing = status === 'preparing'
   const notAvailable = !gameAvailable && gameInfo.is_installed
   const notInstallable =
@@ -136,10 +145,43 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const notSupportedGame =
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
   const isOffline = connectivity.status !== 'online'
+  const installPlatform = gameInfo.install?.platform
+  const isBrowserGame =
+    installPlatform === 'Browser' || installPlatform === 'web'
+  const showProgress = isInstalling || isUpdating || isPatching
 
-  const backRoute = location.state?.fromDM ? '/download-manager' : '/library'
+  const backRoute = getBackRoute(location.state)
 
   const storage: Storage = window.localStorage
+
+  const uncompressedSize = useEstimatedUncompressedSize(
+    platform,
+    gameInstallInfo?.manifest?.disk_size || 0,
+    gameInstallInfo?.manifest?.download_size || 0
+  )
+
+  const hasRun = useRef(false)
+  useEffect(() => {
+    const mainAction = async () => {
+      if (!action || hasRun.current) return
+      hasRun.current = true
+
+      if (action === 'update') {
+        return updateGame(gameInfo)
+      }
+      if (action === 'install') {
+        return setShowModal({ game: appName, show: true })
+      }
+      if (action === 'launch') {
+        if (isBrowserGame || gameInfo.is_installed) {
+          handlePlay()()
+        } else {
+          return setShowModal({ game: appName, show: true })
+        }
+      }
+    }
+    mainAction()
+  }, [action])
 
   // Track the screen view once each time the appName, gameInfo or runner changes
   useEffect(() => {
@@ -159,7 +201,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       setExtraInfo(await window.api.getExtraInfo(appName, runner))
     }
     updateGameInfo()
-  }, [status, gog.library, epic.library, isMoving])
+  }, [status, libraryState.gogLibrary, libraryState.epicLibrary, isMoving])
 
   useEffect(() => {
     const updateConfig = async () => {
@@ -212,7 +254,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
           !notInstallable &&
           !isOffline
         ) {
-          getInstallInfo(appName, runner, installPlatform)
+          getInstallInfo(appName, runner, installPlatform, channelName)
             .then((info) => {
               if (!info) {
                 throw 'Cannot get game info'
@@ -220,9 +262,14 @@ export default React.memo(function GamePage(): JSX.Element | null {
               setGameInstallInfo(info)
             })
             .catch((error) => {
-              console.error(error)
-              window.api.logError(`${`${error}`}`)
-              setHasError({ error: true, message: `${error}` })
+              const errorMessage = t('method.getInstallInfo.error', {
+                defaultValue: `Please contact the HyperPlay Team with this message: {{error}} - {{context}}.`,
+                error: error,
+                context: `ProjectID: ${appName} | Runner: ${runner} | Install Platform: ${installPlatform} | Channel: ${channelName} | Screen: Game Page | Method: getInstallInfo`
+              })
+              console.error(errorMessage)
+              window.api.logError(errorMessage)
+              setHasError({ error: true, message: errorMessage })
             })
         }
 
@@ -260,12 +307,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       }
     }
     updateConfig()
-  }, [status, epic.library, gog.library, gameInfo, isSettingsModalOpen, isOffline])
-
-  function handleUpdate() {
-    if (gameInfo.runner !== 'sideload')
-      updateGame({ appName, runner, gameInfo })
-  }
+  }, [status, libraryState.hyperPlayLibrary, libraryState.epicLibrary, libraryState.gogLibrary, gameInfo, isSettingsModalOpen, isOffline])
 
   function handleModal() {
     setShowModal({ game: appName, show: true })
@@ -302,7 +344,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
     }
 
     hasRequirements = extraInfo?.reqs ? extraInfo.reqs.length > 0 : false
-    hasUpdate = is_installed && gameUpdates?.includes(appName)
+    hasUpdate = is_installed && libraryState.gameUpdates?.includes(appName)
     const appLocation = gameInfo.browserUrl
       ? false
       : install_path || folder_name
@@ -310,19 +352,20 @@ export default React.memo(function GamePage(): JSX.Element | null {
     const downloadSize =
       gameInstallInfo?.manifest?.download_size &&
       size(Number(gameInstallInfo?.manifest?.download_size))
-    const installSize =
-      gameInstallInfo?.manifest?.disk_size &&
-      size(Number(gameInstallInfo?.manifest?.disk_size))
+    const installSize = uncompressedSize && size(uncompressedSize)
+
     const launchOptions = gameInstallInfo?.game?.launch_options || []
 
     const isMac = ['osx', 'Mac', 'darwin_amd64', 'darwin_arm64']
     const isLinux = ['linux', 'linux_amd64', 'linux_arm64']
     const isMacNative = isMac.includes(installPlatform ?? '')
     const isLinuxNative = isLinux.includes(installPlatform ?? '')
-    const isBrowserGame = gameInfo.browserUrl
     const isNative = isWin || isMacNative || isLinuxNative || isBrowserGame
+    const isHyperPlayGame = runner === 'hyperplay'
 
-    const showCloudSaveInfo = cloud_save_enabled && !isLinuxNative
+    const showCloudSaveInfo =
+      is_installed && !isBrowserGame && !isHyperPlayGame && !isSideloaded
+    const isCloudSaveSupported = cloud_save_enabled && !isLinuxNative
     const supportsWeb3 = gameInfo.web3?.supported
 
     /*
@@ -363,8 +406,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
             installPath={folder}
             progress={progress}
             folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
-            appName={gameInfo.app_name}
-            runner={gameInfo.runner}
+            gameInfo={gameInfo}
+            status={status}
           />
         ) : null}
         {gameInfo.runner !== 'sideload' && showModal.show && (
@@ -423,8 +466,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
                         : '')
                     }
                     runner={gameInfo.runner}
-                    handleUpdate={handleUpdate}
-                    disableUpdate={isInstalling || isUpdating}
+                    handleUpdate={async () => updateGame(gameInfo)}
+                    disableUpdate={showProgress}
                     setShowExtraInfo={setShowExtraInfo}
                     onShowRequirements={
                       hasRequirements
@@ -473,7 +516,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                   </div>
                   {is_installed && !isBrowserGame && (
                     <>
-                      {showCloudSaveInfo ? (
+                      {showCloudSaveInfo && (
                         <>
                           <div className="hp-subtitle">
                             {t('info.syncsaves')}
@@ -484,21 +527,10 @@ export default React.memo(function GamePage(): JSX.Element | null {
                             }}
                             className="col2-item italic"
                           >
-                            {autoSyncSaves ? t('enabled') : t('disabled')}
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="hp-subtitle">
-                            {t('info.syncsaves')}:
-                          </div>
-                          <div
-                            style={{
-                              color: '#F45460'
-                            }}
-                            className="col2-item italic"
-                          >
-                            {t('cloud_save_unsupported', 'Unsupported')}
+                            {!isCloudSaveSupported &&
+                              t('cloud_save_unsupported', 'Unsupported')}
+                            {isCloudSaveSupported &&
+                              (autoSyncSaves ? t('enabled') : t('disabled'))}
                           </div>
                         </>
                       )}
@@ -561,18 +593,14 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       )}
                     </>
                   )}
-                  <TimeContainer runner={runner} game={appName} />
+                  <TimeContainer
+                    runner={runner}
+                    game={appName}
+                    status={status}
+                  />
                 </div>
               </div>
               <div className="gameStatus">
-                {isInstalling ||
-                  (isUpdating && (
-                    <progress
-                      className="installProgress"
-                      max={100}
-                      value={getProgress(progress)}
-                    />
-                  ))}
                 <p
                   style={{
                     color:
@@ -625,8 +653,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       isReparing ||
                       isMoving ||
                       isUninstalling ||
-                      notSupportedGame ||
-                      isExtracting
+                      notSupportedGame
                     }
                     autoFocus={true}
                     type={getButtonClass(is_installed)}
@@ -701,7 +728,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
     if (notAvailable) {
       return 'tertiary'
     }
-    if (isQueued) {
+    if (isQueued || (hasUpdate && !authState.isQaModeActive)) {
       return 'secondary'
     }
     if (isUpdating) {
@@ -714,6 +741,10 @@ export default React.memo(function GamePage(): JSX.Element | null {
   }
 
   function getPlayLabel(): React.ReactNode {
+    if (hasUpdate && !authState.isQaModeActive) {
+      return t('label.playing.update', 'Update')
+    }
+
     if (isSyncing) {
       return t('label.saves.syncing')
     }
@@ -775,29 +806,27 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return `${t('status.moving', 'Moving Installation, please wait')} ...`
     }
 
-    if (isExtracting) {
-      return `${t('status.extracting', 'Extracting files')}...`
-    }
+    const currentProgress = getCurrentProgress(progress, percent, bytes, eta)
 
-    const currentProgress =
-      getProgress(progress) >= 99
-        ? ''
-        : `${
-            percent && bytes
-              ? `${percent.toFixed(2)}% [${Number(bytes).toFixed(2)} MB]  ${
-                  eta ? `ETA: ${eta}` : ''
-                }`
-              : '...'
-          }`
-
-    if (isUpdating && is_installed) {
+    if (isPatching || (isUpdating && is_installed)) {
       if (!currentProgress) {
         return `${t('status.processing', 'Processing files, please wait')}...`
       }
       if (eta && eta.includes('verifying')) {
         return `${t('status.reparing')}: ${percent} [${bytes}]`
       }
+      if (isPatching) {
+        return `${t('status.patching', 'Patching Files ')} ${currentProgress}`
+      }
       return `${t('status.updating')} ${currentProgress}`
+    }
+
+    if (isInstallingDistributable) {
+      return `${t('status.distributables', 'Installing Distributables')}`
+    }
+
+    if (isExtracting) {
+      return `${t('status.extracting.progress')} ${currentProgress}`
     }
 
     if (!isUpdating && isInstalling) {
@@ -812,14 +841,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
     }
 
     if (hasUpdate) {
-      return (
-        <span onClick={async () => handleUpdate()} className="updateText">
-          {`${t('status.installed')} - ${t(
-            'status.hasUpdates',
-            'New Version Available!'
-          )} (${t('status.clickToUpdate', 'Click to Update')})`}
-        </span>
-      )
+      return null
     }
 
     if (is_installed) {
@@ -863,7 +885,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return t('submenu.settings')
     }
     if (isExtracting) {
-      return t('status.extracting', 'Extracting files')
+      return t('status.extracting.cancel', 'Cancel Extraction')
     }
     if (isInstalling || isPreparing) {
       return t('button.queue.cancel', 'Cancel Download')
@@ -872,10 +894,27 @@ export default React.memo(function GamePage(): JSX.Element | null {
   }
 
   function handlePlay() {
+    const isQAMode = authState.isQaModeActive
+
+    if (hasUpdate && !isQAMode) {
+      return async () => {
+        await updateGame(gameInfo)
+      }
+    }
+
     // kill game if running
     return async () => {
       if (isPlaying || isUpdating) {
-        return sendKill(appName, gameInfo.runner)
+        return window.api.kill(appName, gameInfo.runner)
+      }
+
+      // ask to connect the wallet if its a web3 game
+      if (gameInfo.web3?.supported && !walletStore.isConnected) {
+        try {
+          await onboardingStore.startOnboarding()
+        } catch (e) {
+          console.error('User denied onboarding')
+        }
       }
 
       // open game
@@ -885,12 +924,15 @@ export default React.memo(function GamePage(): JSX.Element | null {
         launchArguments,
         runner: gameInfo.runner,
         hasUpdate,
-        showDialogModal
+        showDialogModal,
+        isNotNative: isNotNative(platform, gameInfo.install.platform!)
       })
     }
   }
 
   async function mainAction(is_installed: boolean) {
+    // TODO: Add a way to pause download from the game page
+
     // resume download
     if (isPaused) {
       return window.api.resumeCurrentDownload()
@@ -906,6 +948,11 @@ export default React.memo(function GamePage(): JSX.Element | null {
     if (isInstalling) {
       setShowStopInstallModal(true)
       return
+    }
+
+    if (isExtracting) {
+      storage.removeItem(appName)
+      return window.api.cancelExtraction(appName)
     }
 
     // open install dialog
@@ -928,3 +975,37 @@ export default React.memo(function GamePage(): JSX.Element | null {
     })
   }
 })
+
+function getCurrentProgress(
+  progress: InstallProgress,
+  percent: number | undefined,
+  bytes: string | number,
+  eta: string | undefined
+) {
+  if (typeof bytes === 'string') {
+    bytes = Number(bytes.replaceAll('MB', '')).toFixed(2)
+  }
+
+  return getProgress(progress) >= 99
+    ? ''
+    : `${
+        percent && bytes
+          ? `${percent.toFixed(2)}% [${Number(bytes).toFixed(2)} MB]  ${
+              eta ? `ETA: ${eta}` : ''
+            }`
+          : '...'
+      }`
+}
+
+function getBackRoute(locationState?: locationState) {
+  if (!locationState) {
+    return '/library'
+  }
+  if (locationState.fromDM) {
+    return '/download-manager'
+  }
+  if (locationState.fromQuests) {
+    return '/quests'
+  }
+  return '/library'
+}

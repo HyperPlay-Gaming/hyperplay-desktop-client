@@ -4,8 +4,9 @@ import QrCodeGradientBorder from '../../../components/qrCodeGradientBorder'
 import ScanScreenStyles from './index.module.scss'
 import { WarningIcon } from 'frontend/assets/hyperplay'
 import { Button } from '@hyperplay/ui'
-import walletStore from 'frontend/store/WalletStore'
+import walletStore from 'frontend/state/WalletState'
 import { observer } from 'mobx-react-lite'
+import { METAMASK_DOWNLOAD_URL } from 'common/constants'
 
 interface ScanScreenProps {
   qrCodeSvg: string
@@ -32,16 +33,14 @@ const ScanScreen = (props: ScanScreenProps) => {
           `Create an encrypted communication channel. Your keys will never be shared with HyperPlay.`
         )}
       </div>
-      <QrCodeGradientBorder qrUrl={url} imageMargin="-14px" />
+      <QrCodeGradientBorder qrUrl={url} imageMargin="-7px" />
       <div className={`body-sm ${ScanScreenStyles.getWalletText}`}>
         {t(
           'hyperplay.onboarding.walletSelection.screens.scan.dontHaveWallet',
           `Don’t have a wallet?`
         )}{' '}
         <a
-          onClick={() =>
-            window.api.openExternalUrl('https://metamask.io/download/')
-          }
+          onClick={() => window.api.openExternalUrl(METAMASK_DOWNLOAD_URL)}
           className="button-sm"
         >
           {t(

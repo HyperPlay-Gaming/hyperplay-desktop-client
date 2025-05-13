@@ -2,34 +2,51 @@ import React, { useContext, useEffect, useState } from 'react'
 import './index.css'
 import Runner from './components/Runner'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 
 import { ReactComponent as EpicLogo } from 'frontend/assets/epic-logo.svg'
 import { ReactComponent as GOGLogo } from 'frontend/assets/gog-logo.svg'
-import { ReactComponent as HyperPlayLogo } from 'frontend/assets/hyperplay/hyperplay_logo.svg'
-import { ReactComponent as AmazonLogo } from 'frontend/assets/amazon-logo.svg'
 
 import { LanguageSelector, UpdateComponent } from '../../components/UI'
 import { FlagPosition } from '../../components/UI/LanguageSelector'
 import SIDLogin from './components/SIDLogin'
 import ContextProvider from '../../state/ContextProvider'
-import { Background } from '@hyperplay/ui'
+import { Background, Images } from '@hyperplay/ui'
+import libraryState from 'frontend/state/libraryState'
+import storeAuthState from 'frontend/state/storeAuthState'
+import { useAwaited } from '../../hooks/useAwaited'
 
 export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
-export const amazonLoginPath = '/loginweb/nile'
 
 export default React.memo(function NewLogin() {
-  const { epic, gog, amazon, refreshLibrary } = useContext(ContextProvider)
+  const { epic, gog } = useContext(ContextProvider)
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
   const [showSidLogin, setShowSidLogin] = useState(false)
-  const [isEpicLoggedIn, setIsEpicLoggedIn] = useState(Boolean(epic.username))
-  const [isGogLoggedIn, setIsGogLoggedIn] = useState(Boolean(gog.username))
-  const [isAmazonLoggedIn, setIsAmazonLoggedIn] = useState(
-    Boolean(amazon.user_id)
+  const [isEpicLoggedIn, setIsEpicLoggedIn] = useState(
+    Boolean(storeAuthState.epic.username)
   )
+  const [isGogLoggedIn, setIsGogLoggedIn] = useState(
+    Boolean(storeAuthState.gog.username)
+  )
+
+  const systemInfo = useAwaited(window.api.systemInfo.get)
+
+  let oldMac = false
+  let oldMacMessage = ''
+  if (systemInfo?.OS.platform === 'darwin') {
+    const version = parseInt(systemInfo.OS.version.split('.')[0])
+    if (version < 12) {
+      oldMac = true
+      oldMacMessage = t(
+        'login.old-mac',
+        'Your macOS version is {{version}}. macOS 12 or newer is required to log in.',
+        { version: systemInfo.OS.version }
+      )
+    }
+  }
 
   const loginMessage = t(
     'login.message',
@@ -46,13 +63,15 @@ export default React.memo(function NewLogin() {
   }, [epic, gog])
 
   useEffect(() => {
-    setIsEpicLoggedIn(Boolean(epic.username))
-    setIsGogLoggedIn(Boolean(gog.username))
-    setIsAmazonLoggedIn(Boolean(amazon.user_id))
-  }, [epic.username, gog.username, amazon.user_id, t])
+    setIsEpicLoggedIn(Boolean(storeAuthState.epic.username))
+    setIsGogLoggedIn(Boolean(storeAuthState.gog.username))
+  }, [storeAuthState.epic.username, storeAuthState.gog.username, t])
 
   async function handleLibraryClick() {
-    await refreshLibrary({ runInBackground: false })
+    await libraryState.refreshLibrary({
+      runInBackground: false,
+      checkForUpdates: false
+    })
     navigate('/library')
   }
 
@@ -75,7 +94,7 @@ export default React.memo(function NewLogin() {
       <div className="loginContentWrapper">
         <div className="runnerList">
           <div className="runnerHeader">
-            <HyperPlayLogo className="runnerHeaderIcon" />
+            <Images.HyperPlayLogoColored className="runnerHeaderIcon" />
             <div className="runnerHeaderText">
               <h1 className="title">HyperPlay</h1>
               <h2 className="subtitle">Games Launcher</h2>
@@ -90,6 +109,7 @@ export default React.memo(function NewLogin() {
           </div>
 
           <p className="runnerMessage">{loginMessage}</p>
+          {oldMac && <p className="disabledMessage">{oldMacMessage}</p>}
 
           <div className="runnerGroup">
             <Runner
@@ -97,7 +117,7 @@ export default React.memo(function NewLogin() {
               loginUrl={epicLoginPath}
               icon={() => <EpicLogo />}
               isLoggedIn={isEpicLoggedIn}
-              user={epic.username}
+              user={storeAuthState.epic.username}
               logoutAction={epic.logout}
               alternativeLoginAction={() => {
                 setShowSidLogin(true)
@@ -108,16 +128,8 @@ export default React.memo(function NewLogin() {
               icon={() => <GOGLogo />}
               loginUrl={gogLoginPath}
               isLoggedIn={isGogLoggedIn}
-              user={gog.username}
+              user={storeAuthState.gog.username}
               logoutAction={gog.logout}
-            />
-            <Runner
-              class="nile"
-              icon={() => <AmazonLogo />}
-              loginUrl={amazonLoginPath}
-              isLoggedIn={isAmazonLoggedIn}
-              user={amazon.username || 'Unknown'}
-              logoutAction={amazon.logout}
             />
           </div>
           <button

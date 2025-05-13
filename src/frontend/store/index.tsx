@@ -3,14 +3,21 @@ import { GenericStore } from './types'
 
 const StoreController = () => {
   useEffect(() => {
-    const stores = import.meta.glob<{ default: GenericStore }>('./*Store.ts*')
+    const stores = import.meta.glob<{ default: GenericStore }>([
+      './*Store.ts*',
+      '../state/*State.ts*'
+    ])
     const storeKeys = Object.keys(stores)
 
     async function initializableStores() {
       for await (const storeKey of storeKeys) {
-        const store = (await stores[storeKey]()).default
+        try {
+          const store = (await stores[storeKey]()).default
 
-        await store.init?.()
+          await store.init?.()
+        } catch (err) {
+          console.error(`Error initializing store ${storeKey} ${err}`)
+        }
       }
     }
 

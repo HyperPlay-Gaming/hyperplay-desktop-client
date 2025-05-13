@@ -42,7 +42,7 @@
     "message": "Cartera HW con QR"
   },
   "QRHardwareWalletSteps2Description": {
-    "message": "AirGap Vault y Ngrave (próximamente)"
+    "message": "Ngrave Zero"
   },
   "about": {
     "message": "Acerca de"
@@ -100,23 +100,6 @@
   "addContact": {
     "message": "Agregar contacto"
   },
-  "addEthereumChainConfirmationDescription": {
-    "message": "Esto permitirá que la red se utilice en MetaMask."
-  },
-  "addEthereumChainConfirmationRisks": {
-    "message": "MetaMask no verifica redes personalizadas."
-  },
-  "addEthereumChainConfirmationRisksLearnMore": {
-    "message": "Obtenga más información sobre $1.",
-    "description": "$1 is a link with text that is provided by the 'addEthereumChainConfirmationRisksLearnMoreLink' key"
-  },
-  "addEthereumChainConfirmationRisksLearnMoreLink": {
-    "message": "estafas y riesgos de seguridad de la red",
-    "description": "Link text for the 'addEthereumChainConfirmationRisksLearnMore' translation key"
-  },
-  "addEthereumChainConfirmationTitle": {
-    "message": "¿Permitir que este sitio agregue una red?"
-  },
   "addFriendsAndAddresses": {
     "message": "Agregue amigos y direcciones de confianza"
   },
@@ -157,30 +140,8 @@
   "alertDisableTooltip": {
     "message": "Esto se puede modificar en \"Configuración > Alertas\""
   },
-  "alertSettingsUnconnectedAccount": {
-    "message": "Explorando un sitio web con una cuenta no conectada seleccionada"
-  },
-  "alertSettingsUnconnectedAccountDescription": {
-    "message": "Esta alerta aparece en la ventana emergente cuando explora un sitio conectado de Web3, pero la cuenta actualmente seleccionada no está conectada."
-  },
-  "alertSettingsWeb3ShimUsage": {
-    "message": "Cuando un sitio web intenta utilizar la API de window.web3 que se eliminó"
-  },
-  "alertSettingsWeb3ShimUsageDescription": {
-    "message": "Esta alerta aparece en la ventana emergente cuando explora un sitio que intenta utilizar la API de window.web3 que se eliminó y que puede que no funcione."
-  },
   "alerts": {
     "message": "Alertas"
-  },
-  "allowExternalExtensionTo": {
-    "message": "Permitir que esta extensión externa haga lo siguiente:"
-  },
-  "allowSpendToken": {
-    "message": "¿Dar permiso para acceder a su $1?",
-    "description": "$1 is the symbol of the token that are requesting to spend"
-  },
-  "allowThisSiteTo": {
-    "message": "Permitir que este sitio haga lo siguiente:"
   },
   "allowWithdrawAndSpend": {
     "message": "Permitir que se retire $1 y gastar hasta el siguiente importe:",
@@ -219,9 +180,6 @@
   },
   "assetOptions": {
     "message": "Opciones de activos"
-  },
-  "attemptingConnect": {
-    "message": "Intentando una conexión a la cadena de bloques."
   },
   "attributions": {
     "message": "Atribuciones"
@@ -299,9 +257,6 @@
   "busy": {
     "message": "Ocupado"
   },
-  "buy": {
-    "message": "Comprar"
-  },
   "bytes": {
     "message": "Bytes"
   },
@@ -311,14 +266,8 @@
   "cancel": {
     "message": "Cancelar"
   },
-  "cancelEdit": {
-    "message": "Cancelar Editar"
-  },
   "cancelPopoverTitle": {
     "message": "Cancelar transacción"
-  },
-  "cancelSpeedUp": {
-    "message": "cancelar o acelerar una transacción."
   },
   "cancelSpeedUpLabel": {
     "message": "Esta tarifa de gas va a $1 el original.",
@@ -379,26 +328,6 @@
   },
   "connectManually": {
     "message": "Conectarse manualmente al sitio actual"
-  },
-  "connectTo": {
-    "message": "Conectarse a $1",
-    "description": "$1 is the name/origin of a web3 site/application that the user can connect to metamask"
-  },
-  "connectToAll": {
-    "message": "Conectarse a todas sus $1",
-    "description": "$1 will be replaced by the translation of connectToAllAccounts"
-  },
-  "connectToAllAccounts": {
-    "message": "cuentas",
-    "description": "will replace $1 in connectToAll, completing the sentence 'connect to all of your accounts', will be text that shows list of accounts on hover"
-  },
-  "connectToMultiple": {
-    "message": "Conectarse a $1",
-    "description": "$1 will be replaced by the translation of connectToMultipleNumberOfAccounts"
-  },
-  "connectToMultipleNumberOfAccounts": {
-    "message": "$1 cuentas",
-    "description": "$1 is the number of accounts to which the web3 site/application is asking to connect; this will substitute $1 in connectToMultiple"
   },
   "connectWithMetaMask": {
     "message": "Conectarse con MetaMask"
@@ -469,9 +398,6 @@
   "copyAddress": {
     "message": "Copiar dirección al Portapapeles"
   },
-  "copyRawTransactionData": {
-    "message": "Copiar los datos de las transacciones en bruto"
-  },
   "copyToClipboard": {
     "message": "Copiar al Portapapeles"
   },
@@ -537,9 +463,6 @@
   "data": {
     "message": "Datos"
   },
-  "dataHex": {
-    "message": "Hex"
-  },
   "decimal": {
     "message": "Decimales del token"
   },
@@ -568,9 +491,6 @@
   },
   "delete": {
     "message": "Eliminar"
-  },
-  "deleteNetwork": {
-    "message": "¿Eliminar red?"
   },
   "description": {
     "message": "Descripción"
@@ -694,10 +614,6 @@
   "editGasPriceTooltip": {
     "message": "Esta red requiere un campo \"Precio del gas\" cuando se envía una transacción. El precio del gas es la cantidad que se pagará por unidad de gas."
   },
-  "editGasSubTextAmountLabel": {
-    "message": "Cantidad máxima:",
-    "description": "This is meant to be used as the $1 substitution editGasSubTextAmount"
-  },
   "editGasSubTextFeeLabel": {
     "message": "Tarifa máxima:"
   },
@@ -725,12 +641,6 @@
   "enableFromSettings": {
     "message": " Actívela en Configuración."
   },
-  "enableOpenSeaAPI": {
-    "message": "Activar API de OpenSea"
-  },
-  "enableOpenSeaAPIDescription": {
-    "message": "Utilice la API de OpenSea para obtener los datos de NFT. La autodetección de NFT depende de la API de OpenSea y no estará disponible si la API está desactivada."
-  },
   "enableToken": {
     "message": "activar $1",
     "description": "$1 is a token symbol, e.g. ETH"
@@ -746,18 +656,6 @@
     "message": "El punto de conexión devolvió un id. de cadena diferente: $1",
     "description": "$1 is the return value of eth_chainId from an RPC endpoint"
   },
-  "ensIllegalCharacter": {
-    "message": "Caracter ilegal para ENS."
-  },
-  "ensNotFoundOnCurrentNetwork": {
-    "message": "El nombre de ENS no se encuentra en la red actual. Intente cambiar a la red principal de Ethereum."
-  },
-  "ensNotSupportedOnNetwork": {
-    "message": "La red no admite ENS"
-  },
-  "ensRegistrationError": {
-    "message": "Error en el registro del nombre de ENS"
-  },
   "ensUnknownError": {
     "message": "Error al buscar ENS."
   },
@@ -771,10 +669,6 @@
     "message": "Código: $1",
     "description": "Displayed error code for debugging purposes. $1 is the error code"
   },
-  "errorDetails": {
-    "message": "Detalles del error",
-    "description": "Title for collapsible section that displays error details for debugging purposes"
-  },
   "errorMessage": {
     "message": "Mensaje: $1",
     "description": "Displayed error message for debugging purposes. $1 is the error message"
@@ -782,14 +676,6 @@
   "errorName": {
     "message": "Código: $1",
     "description": "Displayed error name for debugging purposes. $1 is the error name"
-  },
-  "errorPageMessage": {
-    "message": "Vuelva a cargar la página para intentarlo de nuevo o comuníquese con soporte técnico $1.",
-    "description": "Message displayed on generic error page in the fullscreen or notification UI, $1 is a clickable link with text defined by the 'here' key. The link will open to a form where users can file support tickets."
-  },
-  "errorPagePopupMessage": {
-    "message": "Cierre la ventana emergente y vuelva a abrirla para intentarlo de nuevo o comuníquese con soporte técnico $1.",
-    "description": "Message displayed on generic error page in the popup UI, $1 is a clickable link with text defined by the 'here' key. The link will open to a form where users can file support tickets."
   },
   "errorPageTitle": {
     "message": "MetaMask encontró un error",
@@ -835,13 +721,6 @@
   "fast": {
     "message": "Rápido"
   },
-  "feeAssociatedRequest": {
-    "message": "Esta solicitud tiene asociada una tarifa."
-  },
-  "fiat": {
-    "message": "Fiduciaria",
-    "description": "Exchange type"
-  },
   "fileImportFail": {
     "message": "¿No funciona la importación del archivo? ¡Haga clic aquí!",
     "description": "Helps user import their account from a JSON file"
@@ -881,12 +760,6 @@
   "fromAddress": {
     "message": "De: $1",
     "description": "$1 is the address to include in the From label. It is typically shortened first using shortenAddress"
-  },
-  "functionApprove": {
-    "message": "Función: Aprobar"
-  },
-  "functionType": {
-    "message": "Tipo de función"
   },
   "gas": {
     "message": "Gas"
@@ -939,33 +812,13 @@
     "message": "$1 horas",
     "description": "$1 represents a number of hours"
   },
-  "gasTimingMinutes": {
-    "message": "$1 minutos",
-    "description": "$1 represents a number of minutes"
-  },
   "gasTimingMinutesShort": {
     "message": "$1 min",
     "description": "$1 represents a number of minutes"
   },
-  "gasTimingNegative": {
-    "message": "Quizás en $1",
-    "description": "$1 represents an amount of time"
-  },
-  "gasTimingPositive": {
-    "message": "Probablemente en < $1",
-    "description": "$1 represents an amount of time"
-  },
-  "gasTimingSeconds": {
-    "message": "$1 segundos",
-    "description": "$1 represents a number of seconds"
-  },
   "gasTimingSecondsShort": {
     "message": "$1 s",
     "description": "$1 represents a number of seconds"
-  },
-  "gasTimingVeryPositive": {
-    "message": "Muy probable en < $1",
-    "description": "$1 represents an amount of time"
   },
   "gasUsed": {
     "message": "Gas usado"
@@ -978,9 +831,6 @@
   },
   "goerli": {
     "message": "Red de prueba Goerli"
-  },
-  "grantedToWithColon": {
-    "message": "Concedido a:"
   },
   "gwei": {
     "message": "GWEI"
@@ -1037,9 +887,6 @@
     "message": "Importar",
     "description": "Button to import an account from a selected file"
   },
-  "importAccount": {
-    "message": "Importar cuenta"
-  },
   "importAccountError": {
     "message": "Error al importar la cuenta."
   },
@@ -1087,12 +934,6 @@
   "invalidAddressRecipient": {
     "message": "La dirección del destinatario no es válida"
   },
-  "invalidAddressRecipientNotEthNetwork": {
-    "message": "No es una red ETH; configurar en minúsculas"
-  },
-  "invalidBlockExplorerURL": {
-    "message": "Dirección URL del explorador de bloques no válida"
-  },
   "invalidChainIdTooBig": {
     "message": "ID de cadena no válido. El identificador de cadena es demasiado grande."
   },
@@ -1131,9 +972,6 @@
   "invalidSeedPhrase": {
     "message": "Frase secreta de recuperación no válida"
   },
-  "jsDeliver": {
-    "message": "jsDeliver"
-  },
   "jsonFile": {
     "message": "Archivo JSON",
     "description": "format for importing an account"
@@ -1149,10 +987,6 @@
   },
   "lastConnected": {
     "message": "Última conexión"
-  },
-  "learnCancelSpeeedup": {
-    "message": "Aprenda cómo $1",
-    "description": "$1 is link to cancel or speed up transactions"
   },
   "learnMore": {
     "message": "más información"
@@ -1179,25 +1013,11 @@
   "ledgerConnectionInstructionStepFour": {
     "message": "Habilite \"datos de contrato inteligente\" o \"firma ciega\" en su dispositivo Ledger"
   },
-  "ledgerConnectionInstructionStepOne": {
-    "message": "Habilite el uso de Ledger Live en Configuración > Avanzada"
-  },
   "ledgerConnectionInstructionStepThree": {
     "message": "Conecte su dispositivo Ledger y seleccione la aplicación Ethereum"
   },
-  "ledgerConnectionInstructionStepTwo": {
-    "message": "Abra y desbloquee la aplicación Ledger Live"
-  },
-  "ledgerConnectionPreferenceDescription": {
-    "message": "Personalice la forma de conectar su Ledger a MetaMask. Se recomienda $1, pero hay otras opciones disponibles. Lea más aquí: $2",
-    "description": "A description that appears above a dropdown where users can select between up to three options - Ledger Live, U2F or WebHID - depending on what is supported in their browser. $1 is the recommended browser option, it will be either WebHID or U2f. $2 is a link to an article where users can learn more, but will be the translation of the learnMore message."
-  },
   "ledgerDeviceOpenFailureMessage": {
     "message": "El dispositivo Ledger no pudo abrirse. Su Ledger podría estar conectado a otro software. Cierre Ledger Live u otras aplicaciones conectadas a su dispositivo Ledger, e intente conectarse de nuevo."
-  },
-  "ledgerLive": {
-    "message": "Ledger Live",
-    "description": "The name of a desktop app that can be used with your ledger device. We can also use it to connect a users Ledger device to MetaMask."
   },
   "ledgerLiveApp": {
     "message": "Aplicación Ledger Live"
@@ -1207,9 +1027,6 @@
   },
   "ledgerTimeout": {
     "message": "Ledger Live tardó mucho en responder o se excedió el tiempo de espera de la conexión. Asegúrese de que la aplicación de Ledger Live está abierta y que su dispositivo está desbloqueado."
-  },
-  "ledgerTransportChangeWarning": {
-    "message": "Si su aplicación Ledger Live está abierta, desconecte todas las conexiones abiertas de Ledger Live y cierre la aplicación."
   },
   "ledgerWebHIDNotConnectedErrorMessage": {
     "message": "El dispositivo Ledger no se ha conectado. Si desea conectar su Ledger, haga clic de nuevo en 'Continuar' y apruebe la conexión HID",
@@ -1232,9 +1049,6 @@
   },
   "loading": {
     "message": "Cargando..."
-  },
-  "loadingTokens": {
-    "message": "Cargando tokens..."
   },
   "localhost": {
     "message": "Host local 8545"
@@ -1356,9 +1170,6 @@
   "networkNameTestnet": {
     "message": "Red de prueba"
   },
-  "networkSettingsChainIdDescription": {
-    "message": "El ID de la cadena se usa para firmar transacciones. Debe coincidir con el ID de la cadena que devuelve la red. Puede escribir un número decimal o un número hexadecimal con el prefijo “0x”, pero el número se mostrará en decimal."
-  },
   "networkStatus": {
     "message": "Estado de la red"
   },
@@ -1410,10 +1221,6 @@
   "next": {
     "message": "Siguiente"
   },
-  "nextNonceWarning": {
-    "message": "El nonce es superior al nonce sugerido de $1",
-    "description": "The next nonce according to MetaMask's internal logic"
-  },
   "nfts": {
     "message": "NFT"
   },
@@ -1423,17 +1230,8 @@
   "noAccountsFound": {
     "message": "No se encuentran cuentas para la consulta de búsqueda determinada"
   },
-  "noAddressForName": {
-    "message": "No se estableció ninguna dirección para este nombre."
-  },
-  "noConversionDateAvailable": {
-    "message": "No hay fecha de conversión de moneda disponible"
-  },
   "noConversionRateAvailable": {
     "message": "No hay tasa de conversión disponible"
-  },
-  "noTransactions": {
-    "message": "No tiene transacciones"
   },
   "noWebcamFound": {
     "message": "No se encontró la cámara web del equipo. Vuelva a intentarlo."
@@ -1444,15 +1242,6 @@
   "nonce": {
     "message": "Nonce"
   },
-  "nonceField": {
-    "message": "Personalizar nonce de transacción"
-  },
-  "nonceFieldDescription": {
-    "message": "Active esta opción para cambiar el nonce (número de transacción) en las pantallas de confirmación. Esta es una función avanzada, úsela con precaución."
-  },
-  "nonceFieldHeading": {
-    "message": "Nonce personalizado"
-  },
   "notBusy": {
     "message": "No ocupado"
   },
@@ -1461,95 +1250,6 @@
   },
   "notEnoughGas": {
     "message": "No hay gas suficiente"
-  },
-  "notifications1Description": {
-    "message": "Los usuarios de la aplicación móvil de MetaMask ahora pueden canjear tokens en su cartera móvil. Escanee el código QR para obtener la aplicación móvil y comience a canjear.",
-    "description": "Description of a notification in the 'See What's New' popup. Describes the swapping on mobile feature."
-  },
-  "notifications1Title": {
-    "message": "¡El canje en dispositivos móviles ya está aquí!",
-    "description": "Title for a notification in the 'See What's New' popup. Tells users that they can now use MetaMask Swaps on Mobile."
-  },
-  "notifications3ActionText": {
-    "message": "Leer más",
-    "description": "The 'call to action' on the button, or link, of the 'Stay secure' notification. Upon clicking, users will be taken to a page about security on the metamask support website."
-  },
-  "notifications3Description": {
-    "message": "Manténgase al día con las mejores prácticas de seguridad de MetaMask y reciba los últimos consejos sobre seguridad del soporte técnico oficial de MetaMask.",
-    "description": "Description of a notification in the 'See What's New' popup. Describes the information they can get on security from the linked support page."
-  },
-  "notifications3Title": {
-    "message": "Mantenerse protegido",
-    "description": "Title for a notification in the 'See What's New' popup. Encourages users to consider security."
-  },
-  "notifications4ActionText": {
-    "message": "Iniciar canje",
-    "description": "The 'call to action' on the button, or link, of the 'Swap on Binance Smart Chain!' notification. Upon clicking, users will be taken to a page where then can swap tokens on Binance Smart Chain."
-  },
-  "notifications4Description": {
-    "message": "Obtenga los mejores precios en los canjes de tokens dentro de su cartera. MetaMask ahora lo conecta con varios agregadores de intercambio descentralizado y creadores de mercado profesionales en Binance Smart Chain.",
-    "description": "Description of a notification in the 'See What's New' popup."
-  },
-  "notifications4Title": {
-    "message": "Canjear en Binance Smart Chain",
-    "description": "Title for a notification in the 'See What's New' popup. Encourages users to do swaps on Binance Smart Chain."
-  },
-  "notifications5Description": {
-    "message": "Su \"frase de recuperación\" ahora se llama \"frase secreta de recuperación.\"",
-    "description": "Description of a notification in the 'See What's New' popup. Describes the seed phrase wording update."
-  },
-  "notifications6DescriptionOne": {
-    "message": "A partir de la versión 91 de Chrome, la API que habilitaba nuestro soporte para Ledger (U2F) ya no es compatible con carteras de hardware. MetaMask ha implementado un nuevo soporte para Ledger Live mediante el cual usted puede seguir conectándose a su dispositivo Ledger a través de la aplicación de escritorio Ledger Live.",
-    "description": "Description of a notification in the 'See What's New' popup. Describes the Ledger support update."
-  },
-  "notifications6DescriptionThree": {
-    "message": "Cuando interactúe con su cuenta de Ledger a través de MetaMask, se abrirá una nueva pestaña y se le pedirá que abra la aplicación Ledger Live.  Una vez que se abra la aplicación, se le pedirá que otorgue permiso para establecer una conexión WebSocket con su cuenta de MetaMask.  ¡Eso es todo!",
-    "description": "Description of a notification in the 'See What's New' popup. Describes the Ledger support update."
-  },
-  "notifications6DescriptionTwo": {
-    "message": "A fin de habilitar el soporte para Live Ledger, haga clic en Configuración > Avanzada > Utilizar Ledger Live.",
-    "description": "Description of a notification in the 'See What's New' popup. Describes the Ledger support update."
-  },
-  "notifications6Title": {
-    "message": "Actualización del soporte para Ledger destinada a usuarios de Chrome",
-    "description": "Title for a notification in the 'See What's New' popup. Lets users know about the Ledger support update"
-  },
-  "notifications7DescriptionOne": {
-    "message": "MetaMask v10.1.0 incluyó nuevo soporte para las transacciones EIP-1559 al utilizar dispositivos Ledger.",
-    "description": "Description of a notification in the 'See What's New' popup. Describes changes for ledger and EIP1559 in v10.1.0"
-  },
-  "notifications7DescriptionTwo": {
-    "message": "Para llevar a cabo transacciones en el Mainnet de Ethereum, asegúrese de que su dispositivo Ledger tenga el último firmware.",
-    "description": "Description of a notification in the 'See What's New' popup. Describes the need to update ledger firmware."
-  },
-  "notifications7Title": {
-    "message": "Actualización de firmware de Ledger",
-    "description": "Title for a notification in the 'See What's New' popup. Notifies ledger users of the need to update firmware."
-  },
-  "notifications8ActionText": {
-    "message": "Ir a Configuración Avanzada",
-    "description": "Description on an action button that appears in the What's New popup. Tells the user that if they click it, they will go to our Advanced settings page."
-  },
-  "notifications8DescriptionOne": {
-    "message": "A partir de MetaMask v10.4.0, ya no necesita Ledger Live para conectar su dispositivo Ledger a MetaMask.",
-    "description": "Description of a notification in the 'See What's New' popup. Describes changes for how Ledger Live is no longer needed to connect the device."
-  },
-  "notifications8DescriptionTwo": {
-    "message": "Para una experiencia más fácil y estable, vaya a la pestaña de Configuración Avanzada y cambie el 'Tipo de Conexión de Ledger Preferida' a 'WebHID'.",
-    "description": "Description of a notification in the 'See What's New' popup. Describes how the user can turn off the Ledger Live setting."
-  },
-  "notifications8Title": {
-    "message": "Mejora de la conexión de Ledger",
-    "description": "Title for a notification in the 'See What's New' popup. Notifies ledger users that there is an improvement in how they can connect their device."
-  },
-  "notifications9DescriptionOne": {
-    "message": "Ahora le ofrecemos más información en la pestaña \"Datos\" al confirmar las transacciones de contratos inteligentes."
-  },
-  "notifications9DescriptionTwo": {
-    "message": "Ahora puede entender mejor los detalles de la transacción antes de confirmarla y añadir más fácilmente las direcciones de las transacciones a su libreta de direcciones, lo que le ayudará a tomar decisiones seguras e informadas."
-  },
-  "notifications9Title": {
-    "message": "👓 Estamos facilitando la lectura de las transacciones."
   },
   "ofTextNofM": {
     "message": "de"
@@ -1608,11 +1308,9 @@
   "onboardingPinExtensionTitle": {
     "message": "¡Su instalación de MetaMask ha finalizado!"
   },
-  "onlyAddTrustedNetworks": {
-    "message": "Un proveedor de red malintencionado puede mentir sobre el estado de la cadena de bloques y registrar su actividad de red. Agregue solo redes personalizadas de confianza."
-  },
   "onlyConnectTrust": {
-    "message": "Conéctese solo con sitios de confianza."
+    "message": "Conéctese solo con sitios de confianza.",
+    "description": "Text displayed above the buttons for connection confirmation. $1 is the link to the learn more web page."
   },
   "openFullScreenForLedgerWebHid": {
     "message": "Abra MetaMask en pantalla completa para conectar su Ledger a través de WebHID.",
@@ -1621,17 +1319,8 @@
   "optional": {
     "message": "Opcional"
   },
-  "optionalWithParanthesis": {
-    "message": "(Opcional)"
-  },
-  "or": {
-    "message": "o"
-  },
   "origin": {
     "message": "Origen"
-  },
-  "parameters": {
-    "message": "Parámetros"
   },
   "participateInMetaMetrics": {
     "message": "Participar en MetaMetrics"
@@ -1661,19 +1350,6 @@
   "pending": {
     "message": "Pendiente"
   },
-  "pendingTransactionInfo": {
-    "message": "Esta transacción no se procesará hasta que aquella haya finalizado."
-  },
-  "pendingTransactionMultiple": {
-    "message": "Tiene ($1) transacciones pendientes."
-  },
-  "pendingTransactionSingle": {
-    "message": "Tiene (1) transacción pendiente.",
-    "description": "$1 is count of pending transactions"
-  },
-  "permissionRequest": {
-    "message": "Solicitud de permiso"
-  },
   "permission_ethereumAccounts": {
     "message": "Ver dirección, saldo de cuenta, actividad e iniciar transacciones",
     "description": "The description for the `eth_accounts` permission"
@@ -1688,18 +1364,8 @@
     "message": "+ $1 más",
     "description": "$1 is a number of additional but unshown items in a list- this message will be shown in place of those items"
   },
-  "preferredLedgerConnectionType": {
-    "message": "Tipo de conexión de Ledger preferida",
-    "description": "A header for a dropdown in Settings > Advanced. Appears above the ledgerConnectionPreferenceDescription message"
-  },
   "prev": {
     "message": "Ant."
-  },
-  "primaryCurrencySetting": {
-    "message": "Moneda principal"
-  },
-  "primaryCurrencySettingDescription": {
-    "message": "Seleccione Nativa para dar prioridad a mostrar los valores en la moneda nativa de la cadena (p. ej., ETH). Seleccione Fiduciaria para dar prioridad a mostrar los valores en la moneda fiduciaria seleccionada."
   },
   "priorityFee": {
     "message": "Tarifa de prioridad"
@@ -1740,9 +1406,6 @@
   },
   "receive": {
     "message": "Recibir"
-  },
-  "recipientAddressPlaceholder": {
-    "message": "Búsqueda, dirección pública (0x) o ENS"
   },
   "recommendedGasLabel": {
     "message": "Recomendado"
@@ -1789,9 +1452,6 @@
   "rejected": {
     "message": "Rechazado"
   },
-  "remember": {
-    "message": "Recuerde:"
-  },
   "remove": {
     "message": "Quitar"
   },
@@ -1806,9 +1466,6 @@
   },
   "replace": {
     "message": "reemplazar"
-  },
-  "requestsAwaitingAcknowledgement": {
-    "message": "solicitudes en espera de confirmación"
   },
   "required": {
     "message": "Requerido"
@@ -1853,9 +1510,6 @@
   "searchAccounts": {
     "message": "Buscar cuentas"
   },
-  "searchResults": {
-    "message": "Resultados de la búsqueda"
-  },
   "secretRecoveryPhrase": {
     "message": "Frase secreta de recuperación"
   },
@@ -1877,13 +1531,10 @@
   "seedPhraseIntroRecommendedButtonCopy": {
     "message": "Asegurar mi cartera (recomendado)"
   },
-  "seedPhraseIntroSidebarBulletFour": {
+  "seedPhraseIntroSidebarBulletOne": {
     "message": "Escríbala y guárdela en varios lugares secretos."
   },
-  "seedPhraseIntroSidebarBulletOne": {
-    "message": "Guárdela en un administrador de contraseñas"
-  },
-  "seedPhraseIntroSidebarBulletThree": {
+  "seedPhraseIntroSidebarBulletTwo": {
     "message": "Guárdela en una caja fuerte."
   },
   "seedPhraseIntroSidebarCopyOne": {
@@ -1906,9 +1557,6 @@
   },
   "seedPhraseIntroTitle": {
     "message": "Proteger su cartera"
-  },
-  "seedPhraseIntroTitleCopy": {
-    "message": "Antes de comenzar, mire este breve video para aprender sobre su frase de recuperación y sobre cómo proteger su cartera."
   },
   "seedPhraseReq": {
     "message": "Las frases secretas de recuperación contienen 12, 15, 18, 21 o 24 palabras"
@@ -1953,21 +1601,12 @@
     "message": "Enviar $1",
     "description": "Symbol of the specified token"
   },
-  "sendTo": {
-    "message": "Enviar a"
-  },
-  "sendTokens": {
-    "message": "Enviar tokens"
-  },
   "sendingDisabled": {
     "message": "Todavía no se admite el envío de activos ERC-1155 NFT."
   },
   "sendingNativeAsset": {
     "message": "Enviando $1",
     "description": "$1 represents the native currency symbol for the current network (e.g. ETH or BNB)"
-  },
-  "setAdvancedPrivacySettingsDetails": {
-    "message": "MetaMask utiliza estos servicios de terceros de confianza para mejorar la usabilidad y la seguridad de los productos."
   },
   "settings": {
     "message": "Configuración"
@@ -2002,9 +1641,6 @@
   },
   "showTestnetNetworksDescription": {
     "message": "Seleccione esta opción para mostrar las redes de prueba en la lista de redes"
-  },
-  "sigRequest": {
-    "message": "Solicitud de firma"
   },
   "sign": {
     "message": "Firmar"
@@ -2149,10 +1785,6 @@
     "message": "Necesita $1 más $2 para realizar este canje",
     "description": "Tells the user how many more of a given token they need for a specific swap. $1 is an amount of tokens and $2 is the token symbol."
   },
-  "swapBuildQuotePlaceHolderText": {
-    "message": "No hay tokens disponibles que coincidan con $1",
-    "description": "Tells the user that a given search string does not match any tokens in our token lists. $1 can be any string of text"
-  },
   "swapConfirmWithHwWallet": {
     "message": "Confirmar con la cartera de hardware"
   },
@@ -2204,9 +1836,6 @@
   "swapFetchingQuotesErrorTitle": {
     "message": "Error al capturar cotizaciones"
   },
-  "swapFetchingTokens": {
-    "message": "Capturando tokens..."
-  },
   "swapFromTo": {
     "message": "El canje de $1 por $2",
     "description": "Tells a user that they need to confirm on their hardware wallet a swap of 2 tokens. $1 is a source token and $2 is a destination token"
@@ -2224,15 +1853,9 @@
     "message": "Las tarifas de gas se pagan a los mineros de criptomonedas que procesan transacciones en la red $1. MetaMask no se beneficia de las tarifas de gas.",
     "description": "$1 is the selected network, e.g. Ethereum or BSC"
   },
-  "swapHighSlippageWarning": {
-    "message": "El monto del desfase es muy alto."
-  },
   "swapIncludesMMFee": {
     "message": "Incluye una tasa de MetaMask del $1%.",
     "description": "Provides information about the fee that metamask takes for swaps. $1 is a decimal number."
-  },
-  "swapLowSlippageError": {
-    "message": "Es posible que la transacción tenga errores, el desfase máximo es demasiado bajo."
   },
   "swapMaxSlippage": {
     "message": "Desfase máximo"
@@ -2263,9 +1886,6 @@
   "swapPriceDifferenceTitle": {
     "message": "Diferencia de precio de ~$1 %",
     "description": "$1 is a number (ex: 1.23) that represents the price difference."
-  },
-  "swapPriceImpactTooltip": {
-    "message": "El impacto sobre el precio es la diferencia entre el precio actual del mercado y el monto recibido durante la ejecución de la transacción. El impacto sobre el precio es una función del tamaño de su transacción respecto de la dimensión del fondo de liquidez."
   },
   "swapPriceUnavailableDescription": {
     "message": "No se pudo determinar el impacto sobre el precio debido a la falta de datos de los precios del mercado. Antes de realizar el canje, confirme que está de acuerdo con la cantidad de tokens que está a punto de recibir."
@@ -2306,9 +1926,6 @@
   "swapRequestForQuotation": {
     "message": "Solicitud de cotización"
   },
-  "swapReviewSwap": {
-    "message": "Revisar canje"
-  },
   "swapSelect": {
     "message": "Seleccionar"
   },
@@ -2321,14 +1938,8 @@
   "swapSelectQuotePopoverDescription": {
     "message": "A continuación se muestran todas las cotizaciones recopiladas de diversas fuentes de liquidez."
   },
-  "swapSlippageNegative": {
-    "message": "El desfase debe ser mayor o igual que cero"
-  },
   "swapSource": {
     "message": "Fuente de liquidez"
-  },
-  "swapSourceInfo": {
-    "message": "Buscamos varias fuentes de liquidez (creadores de mercado profesionales, agregadores y sitios de intercambio) para obtener las mejores tarifas y las tarifas de red más bajas."
   },
   "swapSuggested": {
     "message": "Swap sugerido"
@@ -2360,20 +1971,6 @@
     "message": "Canjear $1 por $2",
     "description": "Used in the transaction display list to describe a swap. $1 and $2 are the symbols of tokens in involved in a swap."
   },
-  "swapTokenVerificationAddedManually": {
-    "message": "Este token se añadió de forma manual."
-  },
-  "swapTokenVerificationMessage": {
-    "message": "Siempre confirme la dirección del token en $1.",
-    "description": "Points the user to Etherscan as a place they can verify information about a token. $1 is replaced with the translation for \"Etherscan\" followed by an info icon that shows more info on hover."
-  },
-  "swapTokenVerificationOnlyOneSource": {
-    "message": "Solo se verificó en una fuente."
-  },
-  "swapTokenVerificationSources": {
-    "message": "Verificar en $1 fuentes.",
-    "description": "Indicates the number of token information sources that recognize the symbol + address. $1 is a decimal number."
-  },
   "swapTooManyDecimalsError": {
     "message": "$1 permite hasta $2 decimales",
     "description": "$1 is a token symbol and $2 is the max. number of decimals allowed for the token"
@@ -2387,29 +1984,11 @@
   "swapUnknown": {
     "message": "Desconocido"
   },
-  "swapVerifyTokenExplanation": {
-    "message": "Varios tokens pueden usar el mismo nombre y símbolo. Revise $1 para comprobar que este es el token que busca.",
-    "description": "This appears in a tooltip next to the verifyThisTokenOn message. It gives the user more information about why they should check the token on a block explorer. $1 will be the name or url of the block explorer, which will be the translation of 'etherscan' or a block explorer url specified for a custom network."
-  },
-  "swapYourTokenBalance": {
-    "message": "$1 $2 disponible para canje",
-    "description": "Tells the user how much of a token they have in their balance. $1 is a decimal number amount of tokens, and $2 is a token symbol"
-  },
   "swapZeroSlippage": {
     "message": "0 % de desfase"
   },
-  "swapsAdvancedOptions": {
-    "message": "Opciones avanzadas"
-  },
-  "swapsExcessiveSlippageWarning": {
-    "message": "El monto del desfase es muy alto, por lo que recibirá una tasa de conversión desfavorable. Disminuya su tolerancia de desfase a un valor menor al 15 %."
-  },
   "swapsMaxSlippage": {
     "message": "Tolerancia de desfase"
-  },
-  "swapsNotEnoughForTx": {
-    "message": "No hay $1 suficientes para finalizar esta transacción",
-    "description": "Tells the user that they don't have enough of a token for a proposed swap. $1 is a token symbol"
   },
   "swapsViewInActivity": {
     "message": "Ver en actividad"
@@ -2499,44 +2078,8 @@
   "transactionCreated": {
     "message": "La transacción se creó con un valor de $1 en $2."
   },
-  "transactionData": {
-    "message": "Datos de transacción"
-  },
-  "transactionDecodingAccreditationDecoded": {
-    "message": "Decodificado por Truffle"
-  },
-  "transactionDecodingAccreditationVerified": {
-    "message": "Contrato verificado en $1"
-  },
-  "transactionDecodingUnsupportedNetworkError": {
-    "message": "La decodificación de la transacción no está disponible para chainId $1"
-  },
-  "transactionDetailDappGasMoreInfo": {
-    "message": "Sitio sugerido"
-  },
-  "transactionDetailDappGasTooltip": {
-    "message": "Editar para utilizar la tarifa de gas recomendada por MetaMask según el último bloque."
-  },
   "transactionDetailGasHeading": {
     "message": "Tarifa estimada de gas"
-  },
-  "transactionDetailGasInfoV2": {
-    "message": "estimada"
-  },
-  "transactionDetailGasTooltipConversion": {
-    "message": "Más información sobre las tarifas de gas"
-  },
-  "transactionDetailGasTooltipExplanation": {
-    "message": "Las tarifas de gas son fijadas por la red y fluctúan en función del tráfico de la red y la complejidad de las transacciones."
-  },
-  "transactionDetailGasTooltipIntro": {
-    "message": "Las tarifas de gas se pagan a los mineros de criptomonedas que procesan transacciones en la red $1. MetaMask no se beneficia de las tarifas de gas."
-  },
-  "transactionDetailGasTotalSubtitle": {
-    "message": "Cantidad + tarifa de gas"
-  },
-  "transactionDetailLayer2GasHeading": {
-    "message": "Tarifa de gas de la capa 2"
   },
   "transactionDetailMultiLayerTotalSubtitle": {
     "message": "Monto + cargos"
@@ -2552,9 +2095,6 @@
   },
   "transactionErrored": {
     "message": "La transacción encontró un error."
-  },
-  "transactionFee": {
-    "message": "Tarifa de transacción"
   },
   "transactionHistoryBaseFee": {
     "message": "Tarifa base (GWEI)"
@@ -2596,9 +2136,6 @@
     "message": "Tuvimos problemas al conectar su $1. Pruebe revisar $2 e inténtelo de nuevo.",
     "description": "$1 is the wallet device name; $2 is a link to wallet connection guide"
   },
-  "trustSiteApprovePermission": {
-    "message": "Al conceder el permiso, usted permite que los siguientes $1 tengan acceso a sus fondos"
-  },
   "tryAgain": {
     "message": "Vuelva a intentarlo"
   },
@@ -2607,9 +2144,6 @@
   },
   "twelveHrTitle": {
     "message": "12 horas:"
-  },
-  "txInsightsNotSupported": {
-    "message": "En este momento no se admiten informaciones sobre las transacciones para este contrato."
   },
   "u2f": {
     "message": "U2F",
@@ -2623,15 +2157,6 @@
   },
   "unknown": {
     "message": "Desconocido"
-  },
-  "unknownCameraError": {
-    "message": "Error al intentar acceder a la cámara. Vuelva a intentarlo..."
-  },
-  "unknownCameraErrorTitle": {
-    "message": "Lo lamentamos, se produjo un error..."
-  },
-  "unknownNetwork": {
-    "message": "Red privada desconocida"
   },
   "unknownQrCode": {
     "message": "Error: No se pudo identificar ese código QR"
@@ -2653,14 +2178,8 @@
     "message": "El envío de tokens coleccionables (ERC-721) no se admite actualmente",
     "description": "This is an error message we show the user if they attempt to send an NFT asset type, for which currently don't support sending"
   },
-  "updatedWithDate": {
-    "message": "$1 actualizado"
-  },
   "urlErrorMsg": {
     "message": "Las direcciones URL requieren el prefijo HTTP/HTTPS adecuado."
-  },
-  "urlExistsErrorMsg": {
-    "message": "En este momento, la red $1 está utilizando esta dirección URL."
   },
   "useNftDetection": {
     "message": "Autodetectar NFT"
@@ -2677,26 +2196,8 @@
   "userName": {
     "message": "Nombre de usuario"
   },
-  "verifyThisTokenDecimalOn": {
-    "message": "Los decimales del token se pueden encontrar en $1",
-    "description": "Points the user to etherscan as a place they can verify information about a token. $1 is replaced with the translation for \"etherscan\""
-  },
-  "verifyThisTokenOn": {
-    "message": "Verificar este token en $1",
-    "description": "Points the user to etherscan as a place they can verify information about a token. $1 is replaced with the translation for \"etherscan\""
-  },
-  "verifyThisUnconfirmedTokenOn": {
-    "message": "Verifique este token en $1 y asegúrese de que sea el token con el que quiere realizar la transacción.",
-    "description": "Points the user to etherscan as a place they can verify information about a token. $1 is replaced with the translation for \"etherscan\""
-  },
-  "viewAllDetails": {
-    "message": "Ver todos los detalles"
-  },
   "viewContact": {
     "message": "Ver contacto"
-  },
-  "viewFullTransactionDetails": {
-    "message": "Ver detalles completos de la transacción"
   },
   "viewMore": {
     "message": "Ver más"
@@ -2706,7 +2207,7 @@
   },
   "viewOnCustomBlockExplorer": {
     "message": "Ver $1 en $2",
-    "description": "$1 is the action type. e.g (Account, Transaction, Swap) and $2 is the Custom Block Exporer URL"
+    "description": "$1 is the action type. e.g (Account, Transaction, Swap) and $2 is the Custom Block Explorer URL"
   },
   "viewOnEtherscan": {
     "message": "Ver $1 en Etherscan",
@@ -2724,26 +2225,6 @@
   },
   "walletConnectionGuide": {
     "message": "nuestra guía de conexión de la cartera de hardware"
-  },
-  "walletCreationSuccessDetail": {
-    "message": "Ha protegido con éxito su cartera. Mantenga su frase secreta de recuperación a salvo y en secreto: ¡es su responsabilidad!"
-  },
-  "walletCreationSuccessReminder1": {
-    "message": "MetaMask no puede recuperar su frase secreta de recuperación."
-  },
-  "walletCreationSuccessReminder2": {
-    "message": "MetaMask nunca le pedirá su frase secreta de recuperación."
-  },
-  "walletCreationSuccessReminder3": {
-    "message": "$1 con nadie o se arriesga a que le roben los fondos",
-    "description": "$1 is separated as walletCreationSuccessReminder3BoldSection so that we can bold it"
-  },
-  "walletCreationSuccessReminder3BoldSection": {
-    "message": "Nunca comparta su frase secreta de recuperación",
-    "description": "This string is localized separately from walletCreationSuccessReminder3 so that we can bold it"
-  },
-  "walletCreationSuccessTitle": {
-    "message": "Creación exitosa de la cartera"
   },
   "web3ShimUsageNotification": {
     "message": "Parece que el sitio web actual intentó utilizar la API de window.web3 que se eliminó. Si el sitio no funciona, haga clic en $1 para obtener más información.",
@@ -2774,26 +2255,11 @@
   "welcomeToMetaMaskIntro": {
     "message": "Con la confianza de millones de personas, MetaMask es una cartera segura que pone el mundo de la web3 al alcance de todos."
   },
-  "whatsNew": {
-    "message": "Novedades",
-    "description": "This is the title of a popup that gives users notifications about new features and updates to MetaMask."
-  },
   "whatsThis": {
     "message": "¿Qué es esto?"
   },
-  "xOfY": {
-    "message": "$1 de $2",
-    "description": "$1 and $2 are intended to be two numbers, where $2 is a total, and $1 is a count towards that total"
-  },
-  "xOfYPending": {
-    "message": "$1 de $2 están pendientes",
-    "description": "$1 and $2 are intended to be two numbers, where $2 is a total number of pending confirmations, and $1 is a count towards that total"
-  },
   "youNeedToAllowCameraAccess": {
     "message": "Necesita permitir el acceso a la cámara para usar esta función."
-  },
-  "youSign": {
-    "message": "Está firmando"
   },
   "yourPrivateSeedPhrase": {
     "message": "Su frase secreta de recuperación privada"

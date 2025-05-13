@@ -16,16 +16,19 @@ const dialog = {
   showMessageBox: jest.fn()
 }
 
-const app = {
+class App extends EventEmitter {
   // app override
-  getPath: jest.fn().mockImplementation((path: string) => {
+  getPath = jest.fn().mockImplementation((path: string) => {
     return join(appBasePath, path)
-  }),
+  })
   getVersion(): string {
-    // TODO: What should we return here?
     return '1.0.0'
   }
+
+  requestSingleInstanceLock = jest.fn().mockReturnValue(true)
 }
+
+const app = new App()
 
 class Notification {
   public show() {
@@ -37,12 +40,51 @@ class Notification {
   }
 }
 
+class WebContents {
+  static contents: WebContents[] = []
+  static maxContentsId = 0
+  id: number = -1
+
+  constructor() {
+    this.id = WebContents.maxContentsId
+    WebContents.maxContentsId += 1
+    WebContents.contents.push(this)
+  }
+
+  emitter: EventEmitter = new EventEmitter()
+  send(topic: string, ...args: any[]): any {
+    this.emitter.emit(topic, ...args)
+  }
+  on(topic: string, cb: (...args: any[]) => void): any {
+    this.emitter.on(topic, cb)
+  }
+  static fromId(id: number): WebContents | undefined {
+    return WebContents.contents.find((val) => val.id === id)
+  }
+
+  isDestroyed() {
+    return false
+  }
+}
+
+export const webContents = {
+  fromId(id: number): WebContents | undefined {
+    return WebContents.fromId(id)
+  }
+}
+
 class BrowserWindow {
   static windows: BrowserWindow[] = []
   options: BrowserWindowConstructorOptions = {}
+  static maxWindowId = 0
+  id: number = -1
+  webContents: WebContents = new WebContents()
 
   constructor(options: BrowserWindowConstructorOptions) {
     this.options = options
+    this.id = BrowserWindow.maxWindowId
+    BrowserWindow.maxWindowId += 1
+    BrowserWindow.windows.push(this)
   }
 
   static getAllWindows() {
@@ -55,6 +97,18 @@ class BrowserWindow {
 
   public getOptions() {
     return this.options
+  }
+
+  static fromId(id: number): BrowserWindow | undefined {
+    return BrowserWindow.windows.find((val) => val.id === id)
+  }
+
+  static fromWebContents(wc: WebContents) {
+    return BrowserWindow.windows.find((val) => val.webContents.id === wc.id)
+  }
+
+  isDestroyed() {
+    return false
   }
 }
 
@@ -106,7 +160,8 @@ const ipcMain = {
   on: jest.fn().mockReturnThis(),
   handle: jest.fn().mockReturnThis(),
   once: jest.fn().mockReturnThis(),
-  emit: jest.fn().mockReturnThis()
+  emit: jest.fn().mockReturnThis(),
+  prependListener: jest.fn().mockReturnThis()
 }
 
 export {
@@ -114,6 +169,7 @@ export {
   app,
   Notification,
   BrowserWindow,
+  WebContents,
   Menu,
   nativeImage,
   Tray,

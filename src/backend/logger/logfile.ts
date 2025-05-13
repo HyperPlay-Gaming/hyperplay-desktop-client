@@ -6,12 +6,7 @@ import {
   appendFileSync
 } from 'graceful-fs'
 
-import {
-  configStore,
-  currentLogFile,
-  gamesConfigPath,
-  lastLogFile
-} from '../constants'
+import { configStore, currentLogFile, gamesConfigPath } from '../constants'
 import { app } from 'electron'
 import { join } from 'path'
 import { logError, LogPrefix, logsDisabled } from './logger'
@@ -21,7 +16,6 @@ interface createLogFileReturn {
   lastLogFile: string
   legendaryLogFile: string
   gogdlLogFile: string
-  nileLogFile: string
 }
 
 let longestPrefix = 0
@@ -44,18 +38,19 @@ const createLogFile = (filePath: string) => {
  * @returns path to current log file
  */
 export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
+  // If the app is already running, don't create a new log file
+  const isNewInstance = app.requestSingleInstanceLock()
+
   const date = new Date()
   const logDir = app.getPath('logs')
   const fmtDate = date.toISOString().replaceAll(':', '_')
   const newLogFile = join(logDir, `hyperplay-${fmtDate}.log`)
   const newLegendaryLogFile = join(logDir, `legendary-${fmtDate}.log`)
   const newGogdlLogFile = join(logDir, `gogdl-${fmtDate}.log`)
-  const newNileLogFile = join(logDir, `nile-${fmtDate}.log`)
 
   createLogFile(newLogFile)
   createLogFile(newLegendaryLogFile)
   createLogFile(newGogdlLogFile)
-  createLogFile(newNileLogFile)
 
   // Clean out logs that are more than a month old
   if (existsSync(logDir)) {
@@ -70,9 +65,9 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
         .map((dirent) => dirent.name)
 
       logs.forEach((log) => {
-        if (log.match(/(hyperplay|legendary|gogdl|nile)-/)) {
+        if (log.match(/(hyperplay|legendary|gogdl)-/)) {
           const dateString = log
-            .replace(/(hyperplay|legendary|gogdl|nile)-/, '')
+            .replace(/(hyperplay|legendary|gogdl)-/, '')
             .replace('.log', '')
             .replaceAll('_', ':')
           const logDate = new Date(dateString)
@@ -93,16 +88,17 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
     currentLogFile: '',
     lastLogFile: '',
     legendaryLogFile: '',
-    gogdlLogFile: '',
-    nileLogFile: ''
+    gogdlLogFile: ''
   })
+
+  if (!isNewInstance) {
+    return logs
+  }
 
   logs.lastLogFile = logs.currentLogFile
   logs.currentLogFile = newLogFile
   logs.legendaryLogFile = newLegendaryLogFile
   logs.gogdlLogFile = newGogdlLogFile
-  logs.nileLogFile = newNileLogFile
-
   configStore.set('general-logs', logs)
 
   // get longest prefix to log lines in a kind of table
@@ -117,19 +113,27 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
 
 /**
  * Returns according to options the fitting log file
- * @param appName     if given returns game log
- * @param defaultLast if set getting hyperplay default last log
+ * @param appNameOrRunner     if given returns game log
  * @returns path to log file
  */
-export function getLogFile(props: {
-  appName?: string
-  defaultLast?: boolean
-}): string {
-  return props.appName
-    ? join(gamesConfigPath, props.appName + '-lastPlay.log')
-    : props.defaultLast
-    ? lastLogFile
-    : currentLogFile
+export function getLogFile(appNameOrRunner: string): string {
+  const logs = configStore.get('general-logs', {
+    currentLogFile: '',
+    lastLogFile: '',
+    legendaryLogFile: '',
+    gogdlLogFile: ''
+  })
+
+  switch (appNameOrRunner) {
+    case 'hyperplay':
+      return logs.currentLogFile ?? logs.lastLogFile
+    case 'legendary':
+      return logs.legendaryLogFile
+    case 'gogdl':
+      return logs.gogdlLogFile
+    default:
+      return join(gamesConfigPath, appNameOrRunner + '-lastPlay.log')
+  }
 }
 
 /**

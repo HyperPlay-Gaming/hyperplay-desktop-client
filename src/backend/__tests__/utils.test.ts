@@ -1,23 +1,22 @@
-import axios from 'axios'
-import { app } from 'electron'
-import { extractZip } from '../../backend/utils'
-import { logError } from '../logger/logger'
 import * as utils from '../utils'
-import { test_data } from './test_data/github-api-heroic-test-data.json'
-import path from 'path'
-import {
-  copyFileSync,
-  existsSync,
-  readFileSync,
-  rmSync,
-  rmdirSync,
-  renameSync
-} from 'graceful-fs'
+import { getExecutableAndArgs, copyRecursiveAsync } from '../utils'
+import { mkdir, writeFile, symlink } from 'fs/promises'
+import { join } from 'path'
+import { existsSync } from 'fs'
+import { rimraf } from 'rimraf'
+import os from 'os'
+import * as fs from 'fs'
 
 jest.mock('electron')
 jest.mock('../logger/logger')
 jest.mock('../logger/logfile')
 jest.mock('../dialog/dialog')
+jest.mock('backend/vite_constants', () => ({
+  VITE_IPFS_API: 'https://ipfs.io/ipfs/'
+}))
+jest.mock('backend/flags/flags', () => ({
+  VITE_LD_ENVIRONMENT_ID: '123'
+}))
 
 describe('backend/utils.ts', () => {
   test('quoteIfNeccessary', () => {
@@ -86,79 +85,6 @@ describe('backend/utils.ts', () => {
         'https://store.epicgames.com/en-US/p/fortnite'
       )
     ).toEqual('fortnite')
-  })
-
-  describe('getLatestReleases', () => {
-    test('Simple version', async () => {
-      jest.spyOn(axios, 'get').mockResolvedValue(test_data)
-      jest.spyOn(app, 'getVersion').mockReturnValueOnce('2.4.0')
-
-      const releases = await utils.getLatestReleases()
-      expect(releases).toMatchInlineSnapshot(`
-        Array [
-          Object {
-            "body": "2.5.2 HOTFIX #2 Release",
-            "html_url": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/tag/v2.5.2",
-            "id": 200,
-            "name": "2.5.2 HOTFIX #2",
-            "prerelease": false,
-            "published_at": "2022-12-14T10:53:29Z",
-            "tag_name": "v2.5.2",
-            "type": "stable",
-          },
-          Object {
-            "body": "2.6.0 Beta Release",
-            "html_url": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/tag/v2.6.0-beta.1",
-            "id": 100,
-            "name": "2.6.0 Beta",
-            "prerelease": true,
-            "published_at": "2022-13-14T10:53:29Z",
-            "tag_name": "v2.6.0-beta.1",
-            "type": "beta",
-          },
-        ]
-      `)
-    })
-
-    test('Complex version', async () => {
-      jest.spyOn(axios, 'get').mockResolvedValue(test_data)
-      jest.spyOn(app, 'getVersion').mockReturnValueOnce('2.5.5-beta.3')
-
-      const releases = await utils.getLatestReleases()
-      expect(releases).toMatchInlineSnapshot(`
-        Array [
-          Object {
-            "body": "2.6.0 Beta Release",
-            "html_url": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/tag/v2.6.0-beta.1",
-            "id": 100,
-            "name": "2.6.0 Beta",
-            "prerelease": true,
-            "published_at": "2022-13-14T10:53:29Z",
-            "tag_name": "v2.6.0-beta.1",
-            "type": "beta",
-          },
-        ]
-      `)
-    })
-
-    test('Empty version', async () => {
-      jest.spyOn(axios, 'get').mockResolvedValue(test_data)
-      jest.spyOn(app, 'getVersion').mockReturnValueOnce('')
-
-      const releases = await utils.getLatestReleases()
-      expect(releases).toMatchInlineSnapshot(`Array []`)
-    })
-
-    test('Fetching available releases fails', async () => {
-      jest.spyOn(axios, 'get').mockRejectedValue('Failed to fetch!')
-
-      const releases = await utils.getLatestReleases()
-      expect(logError).toBeCalledWith(
-        ['Error when checking for updates', 'Failed to fetch!'],
-        'Backend'
-      )
-      expect(releases).toMatchInlineSnapshot(`Array []`)
-    })
   })
 
   describe('calculateEta', () => {
@@ -258,58 +184,211 @@ describe('backend/utils.ts', () => {
     })
   })
 
-  describe('extractZip', () => {
-    let testCopyZipPath: string
-    let destFilePath: string
+  describe('getExecutableAndArgs', () => {
+    it('should correctly parse executable with .exe extension and arguments', () => {
+      const input = 'path/to/executable.exe --arg1 --arg2'
+      const expected = {
+        executable: 'path/to/executable.exe',
+        launchArgs: '--arg1 --arg2'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
 
-    beforeEach(() => {
-      const testZipPath = path.resolve('./src/backend/__mocks__/test.zip')
-      //copy zip because extract will delete it
-      testCopyZipPath = path.resolve('./src/backend/__mocks__/test2.zip')
-      copyFileSync(testZipPath, testCopyZipPath)
-      destFilePath = path.resolve('./src/backend/__mocks__/test')
+    it('should correctly parse executable with .exe extension and arguments with backward slashes', () => {
+      const input = '\\path\\to\\executable.exe --arg1 --arg2'
+      const expected = {
+        executable: '\\path\\to\\executable.exe',
+        launchArgs: '--arg1 --arg2'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with .exe extension and no arguments', () => {
+      const input = 'path/to/application.exe'
+      const expected = {
+        executable: 'path/to/application.exe',
+        launchArgs: ''
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with .app extension and no arguments', () => {
+      const input = 'path/to/application.app'
+      const expected = {
+        executable: 'path/to/application.app',
+        launchArgs: ''
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with .app extension and arguments with spaces', () => {
+      const input =
+        'path/to/app li ca tion.app/Contents/MacOS/application --arg1 "arg"'
+      const expected = {
+        executable: 'path/to/app li ca tion.app/Contents/MacOS/application',
+        launchArgs: '--arg1 "arg"'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with .bin extension and single argument', () => {
+      const input = 'path/to/executable.bin -arg'
+      const expected = {
+        executable: 'path/to/executable.bin',
+        launchArgs: '-arg'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should return empty strings if no executable is found', () => {
+      const input = ''
+      const expected = {
+        executable: '',
+        launchArgs: ''
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with .sh extension and multiple arguments', () => {
+      const input = 'path/to/script.sh -arg1 --arg2 /arg3'
+      const expected = {
+        executable: 'path/to/script.sh',
+        launchArgs: '-arg1 --arg2 /arg3'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should handle case sensitivity in extensions', () => {
+      const input = 'path/to/Executable.EXE --option'
+      const expected = {
+        executable: 'path/to/Executable.EXE',
+        launchArgs: '--option'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with spaces', () => {
+      const input = 'path/t o/exec utable.exe --arg1 --arg2'
+      const expected = {
+        executable: 'path/t o/exec utable.exe',
+        launchArgs: '--arg1 --arg2'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should handle simple executable name without args', () => {
+      const input = 'executable.exe'
+      const expected = {
+        executable: 'executable.exe',
+        launchArgs: ''
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should handle simple executable name with args', () => {
+      const input = 'steam --no-browser'
+      const expected = {
+        executable: 'steam',
+        launchArgs: '--no-browser'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should handle absolute path from /usr/bin', () => {
+      const input = '/usr/bin/steam --no-browser'
+      const expected = {
+        executable: '/usr/bin/steam',
+        launchArgs: '--no-browser'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should handle absolute path from /usr/local/bin', () => {
+      const input = '/usr/local/bin/custom-launcher --fullscreen'
+      const expected = {
+        executable: '/usr/local/bin/custom-launcher',
+        launchArgs: '--fullscreen'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+  })
+
+  describe('copyRecursiveAsync', () => {
+    const testDir = join(os.tmpdir(), `test-copy-${Date.now()}`)
+    const sourceDir = join(testDir, 'source')
+    const destDir = join(testDir, 'dest')
+
+    beforeEach(async () => {
+      jest.useFakeTimers({ advanceTimers: true })
+      await mkdir(sourceDir, { recursive: true })
+      await mkdir(destDir, { recursive: true })
     })
 
     afterEach(async () => {
-      const extractPromise = utils.extractZip(testCopyZipPath, destFilePath)
-      await extractPromise
-      expect(extractPromise).resolves
-
-      const testTxtFilePath = path.resolve(destFilePath, './test.txt')
-      console.log('checking dest file path ', testTxtFilePath)
-      expect(existsSync(testTxtFilePath)).toBe(true)
-
-      const testMessage = readFileSync(testTxtFilePath).toString()
-      console.log('unzipped file contents: ', testMessage)
-      expect(testMessage).toEqual('this is a test message')
-
-      //extract deletes the zip file used to extract async so we wait and then check
-      await utils.wait(100)
-      expect(existsSync(testCopyZipPath)).toBe(false)
-
-      //clean up test
-      rmSync(testTxtFilePath)
-      rmdirSync(destFilePath)
-      expect(existsSync(testTxtFilePath)).toBe(false)
-      expect(existsSync(destFilePath)).toBe(false)
+      jest.clearAllTimers() // Clear pending timers
+      jest.useRealTimers() // Restore real timers
+      await rimraf(testDir)
     })
 
-    test('extract a normal test zip', async () => {
-      console.log('extracting test.zip')
+    it('should copy a single file', async () => {
+      const testFile = join(sourceDir, 'test.txt')
+      const destFile = join(destDir, 'test.txt')
+      await writeFile(testFile, 'test content')
+
+      await copyRecursiveAsync(testFile, destFile)
+
+      expect(existsSync(destFile)).toBe(true)
     })
 
-    test('extract a test zip with non ascii characters', async () => {
-      const renamedZipFilePath = path.resolve(
-        './src/backend/__mocks__/谷���新道ひばりヶ�.zip'
-      )
-      renameSync(testCopyZipPath, renamedZipFilePath)
-      testCopyZipPath = renamedZipFilePath
+    it('should copy a directory recursively', async () => {
+      const subDir = join(sourceDir, 'subdir')
+      const testFile = join(subDir, 'test.txt')
+      await mkdir(subDir, { recursive: true })
+      await writeFile(testFile, 'test content')
+
+      await copyRecursiveAsync(sourceDir, join(destDir, 'source'))
+
+      expect(existsSync(join(destDir, 'source/subdir/test.txt'))).toBe(true)
     })
 
-    it('should throw an error if the zip file does not exist', async () => {
-      await expect(
-        extractZip('nonexistent.zip', destFilePath)
-      ).rejects.toThrow()
+    it('should skip symbolic links', async () => {
+      const testFile = join(sourceDir, 'test.txt')
+      const linkFile = join(sourceDir, 'link.txt')
+      await writeFile(testFile, 'test content')
+      await symlink(testFile, linkFile)
+
+      await copyRecursiveAsync(linkFile, join(destDir, 'link.txt'))
+
+      expect(existsSync(join(destDir, 'link.txt'))).toBe(false)
+    })
+
+    it('should throw on timeout', async () => {
+      const COPY_TIMEOUT_MS = 30000
+      const testFile = join(sourceDir, 'test.txt')
+      await writeFile(testFile, 'test content')
+
+      // Mock the copyFile function to simulate a slow operation
+      const mockCopyFile = jest
+        .spyOn(fs.promises, 'copyFile')
+        .mockImplementation(async () => {
+          return new Promise((resolve) => {
+            setTimeout(resolve, COPY_TIMEOUT_MS + 1000)
+          })
+        })
+
+      const destFile = join(destDir, 'test.txt')
+
+      // Start the copy operation but don't await it yet
+      const copyPromise = copyRecursiveAsync(testFile, destFile)
+
+      // Advance timers to trigger timeout
+      jest.advanceTimersByTime(COPY_TIMEOUT_MS + 100)
+
+      // Now check if it throws
+      await expect(copyPromise).rejects.toThrow('Timeout')
+
+      // Restore original implementation
+      mockCopyFile.mockRestore()
     })
   })
 })

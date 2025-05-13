@@ -6,7 +6,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 
 type Props = {
   appName: string
-  gameInfo: GameInfo
+  gameInfo: GameInfo | null
   runner: Runner
 }
 

@@ -14,8 +14,6 @@ export function getLibraryTitle(
       return t('GOG', 'GOG')
     case 'hyperplay':
       return 'HyperPlay'
-    case 'nile':
-      return t('Amazon Games', 'Amazon Games')
     default:
       return t('Other', 'Other')
   }
@@ -38,5 +36,34 @@ export function translateChannelName(
       return t('gameRelease.main', 'Main')
     default:
       return channelNameEnglish
+  }
+}
+
+export function getMessage(
+  t: TFunction<'translation'>,
+  status:
+    | 'extracting'
+    | 'paused'
+    | 'installing'
+    | 'installed'
+    | 'distributables'
+    | 'patching'
+): string | undefined {
+  switch (status) {
+    case 'distributables':
+      return t(
+        'hyperplay.gamecard.distributables',
+        'Installing Distributables...'
+      )
+    case 'extracting':
+      return t('hyperplay.gamecard.extracting', 'Extracting...')
+    case 'paused':
+      return t('hyperplay.gamecard.paused', 'Paused')
+    case 'installing':
+      return t('hyperplay.gamecard.installing', 'Downloading...')
+    case 'installed':
+      return t('hyperplay.gamecard.installed', 'Ready to play')
+    case 'patching':
+      return t('hyperplay.gamecard.patching', 'Patching...')
   }
 }

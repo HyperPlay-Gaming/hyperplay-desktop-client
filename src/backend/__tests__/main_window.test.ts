@@ -3,6 +3,12 @@ import { BrowserWindow, Display, screen } from 'electron'
 import { configStore } from '../constants'
 
 jest.mock('../logger/logfile')
+jest.mock('backend/vite_constants', () => ({
+  VITE_IPFS_API: 'https://ipfs.io/ipfs/'
+}))
+jest.mock('backend/flags/flags', () => ({
+  VITE_LD_ENVIRONMENT_ID: '123'
+}))
 
 describe('main_window', () => {
   describe('sendFrontendMessage', () => {
@@ -102,8 +108,8 @@ describe('main_window', () => {
         const window = await createMainWindow()
         const options = window['options']
 
-        expect(options.height).toBe(614.4000000000001) // 80% of the workAreaSize.height
-        expect(options.width).toBe(1200) // 80% of the workAreaSize.width
+        expect(options.height).toBe(800)
+        expect(options.width).toBe(1280)
         expect(options.x).toBe(0)
         expect(options.y).toBe(0)
       })

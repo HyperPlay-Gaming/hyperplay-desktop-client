@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import { Button } from '@hyperplay/ui'
-import authStore from 'frontend/store/AuthStore'
+import authState from 'frontend/state/authState'
 
 const QaAuthHandler = function () {
   const [showHiddenTextBox, setShowHiddenTextBox] = useState(false)
@@ -23,7 +23,7 @@ const QaAuthHandler = function () {
       <Button
         size="small"
         onClick={() => {
-          authStore.setAuthToken(authToken)
+          authState.authToken = authToken
           setShowHiddenTextBox(false)
           window.api.setQaToken(authToken)
         }}

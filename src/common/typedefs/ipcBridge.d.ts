@@ -1,6 +1,15 @@
-import { HyperPlayInstallInfo, DownloadManagerState } from './../types'
-import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
-import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
+import {
+  HyperPlayInstallInfo,
+  DownloadManagerState,
+  Achievement,
+  SummaryAchievement,
+  LDEnv,
+  HyperPlayRelease,
+  PointsClaimReturn,
+  GenericApiResponse,
+  Quest,
+  ConfirmClaimParams
+} from './../types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
 
@@ -9,7 +18,6 @@ import {
   DiskSpaceData,
   Tools,
   WineCommandArgs,
-  Release,
   GameInfo,
   GameSettings,
   InstallPlatform,
@@ -31,17 +39,25 @@ import {
   DMQueueElement,
   ConnectivityStatus,
   GamepadActionArgs,
-  ExtraInfo
+  ExtraInfo,
+  LogOptions
 } from 'common/types'
 import { LegendaryInstallInfo, SelectiveDownload } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
-import { PROVIDERS } from 'common/types/proxy-types'
 import {
-  NileInstallInfo,
-  NileLoginData,
-  NileRegisterData,
-  NileUserData
-} from 'common/types/nile'
+  PROVIDERS,
+  ProxiedProviderEventCallback
+} from 'common/types/proxy-types'
+import { ToastKey } from 'frontend/store/types'
+import { AuthSession } from '../types/auth'
+import type { SystemInformation } from 'backend/utils/systeminfo'
+import {
+  MetaMaskInitMethod,
+  ImportableBrowser,
+  MetaMaskImportOptions,
+  ClientUpdateStatuses,
+  HyperPlayAPI
+} from '@hyperplay/utils'
 
 /**
  * Some notes here:
@@ -65,12 +81,27 @@ interface HyperPlaySyncIPCFunctions {
   providerRequestFailed: ProxiedProviderEventCallback
   loadingScreenReady: () => void
   reloadApp: () => void
-  createNewMetaMaskWallet: () => void
+  createNewMetaMaskWallet: (mmInitMethod: MetaMaskInitMethod) => void
   enableOnEvents: (topic: string) => void
   addHyperPlayShortcut: (gameId: string) => void
   ignoreExitToTray: () => void
   setQaToken: (qaToken: string) => void
   removeFromLibrary: (appName: string) => void
+  openAuthModalIfAppReloads: () => void
+  openEmailModalIfAppReloads: () => void
+  overlayReady: () => void
+  updateOverlayWindow: (state: OverlayWindowState) => void
+  toggleIsPopupOpen: () => void
+  showPopup: () => void
+  toastCloseOnClick: (key: ToastKey) => void
+  lockPopup: (lock: boolean) => void
+  killOverlay: () => void
+  toggleOverlay: HyperPlayAPI['toggleOverlay']
+  authConnected: () => void
+  goToGamePage: (gameId: string, action: GamePageActions) => void
+  authDisconnected: () => void
+  otp: (otp: string) => void
+  navigate: (route: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -99,20 +130,18 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   openCustomThemesWiki: () => void
   openHyperplaySite: () => void
   showConfigFileInFolder: (appName: string) => void
-  clearCache: (showDialog?: boolean) => void
+  clearCache: (showDialog?: boolean, fromVersionChange?: boolean) => void
   resetApp: () => void
+  resetExtension: () => void
   createNewWindow: (url: string) => void
   logoutGOG: () => void
   toggleVKD3D: (args: ToolArgs) => void
-  logError: (message: unknown) => void
+  logError: (message: unknown, options?: LogOptions) => void
   logInfo: (message: unknown) => void
   showItemInFolder: (item: string) => void
   clipboardWriteText: (text: string) => void
   addNewApp: (args: SideloadGame) => void
-  showLogFileInFolder: (args: {
-    appName: string
-    defaultLast?: boolean
-  }) => void
+  showLogFileInFolder: (appNameOrRunner: string) => void
   addShortcut: (appName: string, runner: Runner, fromMenu: boolean) => void
   removeShortcut: (appName: string, runner: Runner) => void
   removeFromDMQueue: (appName: string) => void
@@ -125,9 +154,17 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   optInStatusChanged: (optInStatus: MetricsOptInStatus) => void
   openGameInEpicStore: (url: string) => void
   resumeCurrentDownload: () => void
-  pauseCurrentDownload: () => void
   cancelDownload: (removeDownloaded: boolean) => void
+  copySystemInfoToClipboard: () => void
+  cancelExtraction: (appName: string) => void
   copyWalletConnectBaseURIToClipboard: () => void
+  closeAuthModal: () => void
+  'auth:accountConnected': () => void
+  'auth:accountNotConnected': () => void
+  'auth:otpFinished': () => void
+  focusMainWindow: () => void
+  openOnboarding: () => void
+  restartClient: () => void
 }
 
 interface RequestArguments {
@@ -148,7 +185,7 @@ interface HyperPlayAsyncIPCFunctions {
   chromeWindowsGetCurrent: (
     queryOptions?: chrome.windows.QueryOptions,
     callback?: (window: chrome.windows.Window) => void
-  ) => Promise<chrome.windows.Window>
+  ) => Promise<string>
   chromeWindowsRemove: (windowId: number) => Promise<void>
   chromeWindowsGetAll: (
     queryOptions?: string,
@@ -173,22 +210,28 @@ interface HyperPlayAsyncIPCFunctions {
     updateProperties: chrome.tabs.UpdateProperties
   ) => Promise<chrome.tabs.Tab>
   chromeTabsRemove: (tabIds: number | number[]) => Promise<void>
-  //
-  importMetaMask: (dbPath: string | null | undefined) => Promise<boolean>
+  importMetaMask: (
+    mmInitMethod: MetaMaskInitMethod,
+    dbPath?: string | null,
+    browser?: ImportableBrowser
+  ) => Promise<boolean>
   getMetaMaskImportOptions: () => Promise<MetaMaskImportOptions>
   isExtensionInitialized: () => Promise<boolean>
   getTabUrl: () => Promise<string>
   getExtensionId: () => Promise<string>
-  getConnectionUris: (providerSelection: PROVIDERS) => Promise<string>
+  getConnectionUris: (
+    providerSelection: PROVIDERS,
+    isBootstrapping?: boolean
+  ) => Promise<string>
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   providerRequest: (args: RequestArguments) => Promise<any>
-  getConnectedProvider: () => Promise<string>
+  getConnectedProvider: () => Promise<PROVIDERS>
   trackEvent: (payload: PossibleMetricPayloads) => Promise<void>
   trackScreen: (name: string, properties?: apiObject) => Promise<void>
   changeMetricsOptInStatus: (
     newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
   ) => Promise<void>
-  addHyperplayGame: (gameId: string, addHyperplayGame: string) => Promise<void>
+  addHyperplayGame: (gameId: string, addHyperplayGame?: string) => Promise<void>
   sendRequest: (args: unknown[]) => Promise<unknown>
   sendAsyncRequest: (
     payload: JsonRpcRequest,
@@ -201,6 +244,92 @@ interface HyperPlayAsyncIPCFunctions {
   removeTempDownloadFiles: (appName: string) => Promise<void>
   getImportFolderPath: () => Promise<string>
   appIsInLibrary: (appName: string, runner: Runner) => Promise<boolean>
+  getSummaryAchievements: (options: GetAchievementsOptions) => Promise<{
+    data: SummaryAchievement[]
+    totalPages: number
+  }>
+  getIndividualAchievements: (
+    options: GetIndividualAchievementsOptions
+  ) => Promise<{
+    data: Achievement[]
+    currentPage: number
+    totalPages: number
+  }>
+  getAchievementsStats: (options: PlayerOptions) => Promise<AchievementsStats>
+  syncAchievements: (options: PlayerOptions) => Promise<string>
+  getSyncProgress: (requestId: string) => Promise<number>
+  checkHyperPlayAccessCode: (
+    licenseConfigId: number,
+    accessCode: string
+  ) => Promise<LicenseConfigValidateResult>
+  callOrSendContract: (
+    isCall: boolean,
+    req: ContractInteractionRequest
+  ) => Promise<{
+    ok: boolean
+    /* eslint-disable-next-line */
+    result?: any
+    status?: number
+    message?: string
+  }>
+  get_wallet_state_address: () => Promise<string>
+  get_wallet_state_isConnected: () => Promise<boolean>
+  get_wallet_state_provider: () => Promise<PROVIDERS>
+  get_wallet_state_otp: () => Promise<string>
+  get_extension_state_isPopupOpen: () => Promise<boolean>
+  getLDEnvConfig: () => Promise<LDEnv>
+  getAuthSession: () => Promise<AuthSession | null>
+  logOut: () => Promise<void>
+  updateAutoLaunch: () => Promise<void>
+  getQuests: (projectId?: string) => Promise<Quest[]>
+  getQuest: (questId: number) => Promise<Quest>
+  getUserPlayStreak: (questId: number) => Promise<UserPlayStreak>
+  getSteamGameMetadata: (gameId: number) => Promise<{
+    name?: string
+    capsule_image?: string
+  }>
+  confirmRewardClaim: (params: ConfirmClaimParams) => Promise<void>
+  getHyperPlayListings: () => Promise<Record<string, HyperPlayRelease>>
+  getQuestRewardSignature: (
+    address: `0x${string}`,
+    rewardId: number,
+    tokenId?: number
+  ) => Promise<RewardClaimSignature>
+  getDepositContracts: (questId: number) => Promise<DepositContract[]>
+  claimQuestPointsReward: (rewardId: string) => Promise<PointsClaimReturn>
+  completeExternalTask: (rewardId: string) => Promise<GenericApiResponse>
+  resyncExternalTask: (rewardId: string) => Promise<GenericApiResponse>
+  getG7Credits: () => Promise<string>
+  getExternalTaskCredits: (rewardId: string) => Promise<string>
+  getPointsBalancesForProject: (
+    projectId: string
+  ) => Promise<{ pointsCollection: PointsCollection; balance: string }[]>
+  checkG7ConnectionStatus: () => Promise<boolean>
+  syncPlaySession: (appName: string, runner: Runner) => Promise<void>
+  getEpicListingUrl: (appName: string) => Promise<string>
+  importGameFolder: (gameFolder: string) => Promise<string>
+  syncPlayStreakWithExternalSource: (params: {
+    quest_id: number
+    signature: string
+  }) => Promise<GenericApiResponse>
+  getCSRFToken: () => Promise<string>
+  checkPendingSync: (params: {
+    wallet: string
+    questId: number
+  }) => Promise<boolean>
+  getActiveWallet: () => Promise<string>
+  setActiveWallet: ({
+    message,
+    signature
+  }: {
+    message: string
+    signature: string
+  }) => Promise<{ status: number; success: boolean; message?: string }>
+  getGameplayWallets: () => Promise<{ id: number; wallet_address: string }[]>
+  updateActiveWallet: (walletId: number) => Promise<void>
+  getExternalEligibility: (
+    questId: number
+  ) => Promise<{ walletOrEmail: string; amount: number } | null>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -211,19 +340,17 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   runWineCommand: (
     args: WineCommandArgs
   ) => Promise<{ stdout: string; stderr: string }>
-  checkGameUpdates: () => Promise<string[]>
+  checkGameUpdates: (runners: Runner[]) => Promise<string[]>
   getEpicGamesStatus: () => Promise<boolean>
   updateAll: () => Promise<({ status: 'done' | 'error' | 'abort' } | null)[]>
   getMaxCpus: () => number
   getAppVersion: () => string
   getLegendaryVersion: () => Promise<string>
   getGogdlVersion: () => Promise<string>
-  getNileVersion: () => Promise<string>
   isFullscreen: () => boolean
   isFlatpak: () => boolean
   getPlatform: () => NodeJS.Platform
   showUpdateSetting: () => boolean
-  getLatestReleases: () => Promise<Release[]>
   getGameInfo: (appName: string, runner: Runner) => Promise<GameInfo | null>
   getExtraInfo: (appName: string, runner: Runner) => Promise<ExtraInfo | null>
   getGameSettings: (
@@ -237,14 +364,9 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     installPlatform: InstallPlatform,
     channelNameToInstall?: string
   ) => Promise<
-    | LegendaryInstallInfo
-    | GogInstallInfo
-    | HyperPlayInstallInfo
-    | NileInstallInfo
-    | null
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
   >
   getUserInfo: () => Promise<UserInfo | undefined>
-  getAmazonUserInfo: () => Promise<NileUserData | undefined>
   isLoggedIn: () => boolean
   login: (sid: string) => Promise<{
     status: 'done' | 'failed'
@@ -254,12 +376,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     status: 'done' | 'error'
     data?: UserData
   }>
-  authAmazon: (data: NileRegisterData) => Promise<{
-    status: 'done' | 'failed'
-    user: NileUserData | undefined
-  }>
   logoutLegendary: () => Promise<void>
-  logoutAmazon: () => Promise<void>
   getAlternativeWine: () => Promise<WineInstallation[]>
   getLocalPeloadPath: () => Promise<string>
   readConfig: (config_class: 'library' | 'user') => Promise<GameInfo[] | string>
@@ -306,7 +423,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     runner: 'sideload' | 'hyperplay'
   ) => Promise<boolean>
   isNative: (args: { appName: string; runner: Runner }) => boolean
-  getLogContent: (args: { appName: string; defaultLast?: boolean }) => string
+  getLogContent: (appNameOrRunner: string) => string
   installWineVersion: (
     release: WineVersionInfo
   ) => Promise<'error' | 'abort' | 'success'>
@@ -342,7 +459,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     status: ConnectivityStatus
     retryIn: number
   }
-  getNumOfGpus: () => Promise<number>
+  getSystemInfo: (cache?: boolean) => Promise<SystemInformation>
   removeRecent: (appName: string) => Promise<void>
   getWikiGameInfo: (
     title: string,
@@ -359,6 +476,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     runner: Runner
   }) => Promise<boolean>
   toggleDXVK: (args: ToolArgs) => Promise<boolean>
+  toggleDXVKNVAPI: (args: ToolArgs) => Promise<boolean>
   pathExists: (path: string) => Promise<boolean>
   getExtensionId: () => Promise<string>
   addGameToLibrary: (appName: string) => Promise<void>
@@ -369,7 +487,19 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     runner: Runner,
     appName: string
   ) => Promise<number | undefined>
-  getAmazonLoginData: () => Promise<NileLoginData>
+  pauseCurrentDownload: () => Promise<void>
+  getQuestsForGame: (projectId: string) => Promise<Quest[]>
+  installSteamWindows: () => Promise<void>
+  isClientUpdating: () => Promise<ClientUpdateStatuses>
+  requestSIWE: () => Promise<{
+    message: string
+    signature: string
+    address: string
+  }>
+  getSiweMessageDomainAndUri: () => Promise<{
+    domain: string
+    origin: string
+  }>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file
@@ -398,6 +528,14 @@ declare namespace Electron {
 
   class IpcRenderer extends EventEmitter {
     public send: <
+      Name extends keyof SyncIPCFunctions,
+      Definition extends SyncIPCFunctions[Name]
+    >(
+      name: Name,
+      ...args: Parameters<Definition>
+    ) => void
+
+    public sendToHost: <
       Name extends keyof SyncIPCFunctions,
       Definition extends SyncIPCFunctions[Name]
     >(

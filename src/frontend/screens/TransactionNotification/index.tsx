@@ -2,38 +2,33 @@ import React from 'react'
 import styles from './index.module.css'
 
 import { observer } from 'mobx-react-lite'
-import transactionStore from 'frontend/store/TransactionStore'
-import { TITLE, DESCRIPTION } from './constants'
+import transactionState from 'frontend/state/TransactionState'
 import PhoneIcon from './components/PhoneIcon'
-import { TransactionState } from 'frontend/store/types'
+import WalletState from 'frontend/state/WalletState'
+import { PROVIDERS } from 'common/types/proxy-types'
 
 const TransactionNotification = () => {
-  const item = transactionStore.latestTxn
-
-  if (item === null || !item.isOpen) return <></>
-
-  const title = TITLE[item.method]
-    ? TITLE[item.method][item.state]()
-    : TITLE.default[item.state]()
-  const description = DESCRIPTION[item.state]()
+  const item = transactionState.latestToast
 
   if (
-    item.state === TransactionState.CONFIRMED ||
-    item.state === TransactionState.FAILED
+    item === null ||
+    !item.isOpen ||
+    WalletState.provider === PROVIDERS.METAMASK_EXTENSION ||
+    WalletState.provider === PROVIDERS.UNCONNECTED
   ) {
-    setTimeout(() => transactionStore.closeTransaction(item.id), 5000)
+    return <></>
   }
+
+  const title = item.title
+  const description = item.subtext
 
   return (
     <div className="blurBackground">
       <div className={styles.modal}>
         <h6 className={styles.title}>{title}</h6>
         <p className="content-sm text-secondary">{description}</p>
-        <PhoneIcon status={item.state} />
-        <button
-          className={styles.actionButton}
-          onClick={() => transactionStore.closeTransaction(item.id)}
-        >
+        <PhoneIcon status={item.status} />
+        <button className={styles.actionButton} onClick={() => item.onClick()}>
           Close
         </button>
       </div>

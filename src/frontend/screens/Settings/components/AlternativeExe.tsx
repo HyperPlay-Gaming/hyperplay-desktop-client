@@ -1,11 +1,11 @@
 import React, { useCallback, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import SettingsContext from '../SettingsContext'
-import CreateNewFolder from '@mui/icons-material/CreateNewFolder'
-import Backspace from '@mui/icons-material/Backspace'
 import useSetting from 'frontend/hooks/useSetting'
 import { getGameInfo } from 'frontend/helpers'
 import { TextInputWithIconField } from 'frontend/components/UI'
+import { faBackspace, faFolderPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const AlternativeExe = () => {
   const { t } = useTranslation()
@@ -43,9 +43,15 @@ const AlternativeExe = () => {
       onChange={(event) => setTargetExe(event.target.value)}
       icon={
         !targetExe.length ? (
-          <CreateNewFolder data-testid="setinstallpathbutton" />
+          <FontAwesomeIcon
+            className="material-icons refreshing"
+            icon={faFolderPlus}
+          />
         ) : (
-          <Backspace data-testid="setEpicSyncPathBackspace" />
+          <FontAwesomeIcon
+            className="setEpicSyncPathBackspace"
+            icon={faBackspace}
+          />
         )
       }
       onIconClick={handleTargetExe}

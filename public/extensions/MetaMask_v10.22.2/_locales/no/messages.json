@@ -75,9 +75,6 @@
   "asset": {
     "message": "Ressurs"
   },
-  "attemptingConnect": {
-    "message": "Prøver å opprette forbindelse med blokkjede"
-  },
   "attributions": {
     "message": "Henvisninger"
   },
@@ -205,9 +202,6 @@
   "delete": {
     "message": "Slett"
   },
-  "deleteNetwork": {
-    "message": "Slette nettverk? "
-  },
   "details": {
     "message": "Detaljer"
   },
@@ -228,12 +222,6 @@
   },
   "editContact": {
     "message": "Rediger kontakt"
-  },
-  "ensNotFoundOnCurrentNetwork": {
-    "message": "ENS-navn ikke funnet i det gjeldende nettverket. Prøv å bytte til hovednettverket for Ethereum."
-  },
-  "ensRegistrationError": {
-    "message": "Feil i ENS-navneregistrering"
   },
   "enterPasswordContinue": {
     "message": "Skriv inn passord for å fortsette"
@@ -262,9 +250,6 @@
   },
   "from": {
     "message": "Fra "
-  },
-  "functionType": {
-    "message": "Funksjonstype "
   },
   "gasLimit": {
     "message": "Datakraftsgrense "
@@ -319,9 +304,6 @@
     "message": "Importer",
     "description": "Button to import an account from a selected file"
   },
-  "importAccount": {
-    "message": "Importér konto"
-  },
   "importAccountMsg": {
     "message": "Importerte kontoer blir ikke tilknyttet den opprinnelig opprettede mnemoniske gjenopprettingsfrasen for MetaMask-kontoen din. Finn ut mer om importerte kontoer"
   },
@@ -346,12 +328,6 @@
   },
   "invalidAddressRecipient": {
     "message": "Mottaksadresse er ugyldig "
-  },
-  "invalidAddressRecipientNotEthNetwork": {
-    "message": "Ikke ETH-nettverk, bruk små bokstaver"
-  },
-  "invalidBlockExplorerURL": {
-    "message": "Ugyldig Block Explorer URL"
   },
   "invalidRPC": {
     "message": "Ugyldig RPC URL"
@@ -386,9 +362,6 @@
   },
   "loading": {
     "message": "Laster inn ..."
-  },
-  "loadingTokens": {
-    "message": "Laster tokener ..."
   },
   "localhost": {
     "message": "Lokalvert 8545"
@@ -449,14 +422,8 @@
   "next": {
     "message": "Neste"
   },
-  "noAddressForName": {
-    "message": "Ingen adresse har blitt angitt for dette navnet. "
-  },
   "noConversionRateAvailable": {
     "message": "Ingen konverteringsrate tilgjengelig "
-  },
-  "noTransactions": {
-    "message": "Du har ingen transaksjoner"
   },
   "noWebcamFound": {
     "message": "Datamaskinens webkamera ble ikke funnet. Vennligst prøv igjen."
@@ -481,9 +448,6 @@
   },
   "origin": {
     "message": "Opprinnelse"
-  },
-  "parameters": {
-    "message": "Parametre"
   },
   "participateInMetaMetrics": {
     "message": "Delta i MetaMetrics "
@@ -513,12 +477,6 @@
   "prev": {
     "message": "Tidligere"
   },
-  "primaryCurrencySetting": {
-    "message": "Hovedvaluta "
-  },
-  "primaryCurrencySettingDescription": {
-    "message": "Velg nasjonal for å prioritere å vise verdier i nasjonal valuta i kjeden (f.eks. ETH). Velg Fiat for å prioritere visning av verdier i den valgte fiat-valutaen."
-  },
   "privacyMsg": {
     "message": "Personvernerklæring"
   },
@@ -534,9 +492,6 @@
   },
   "readdToken": {
     "message": "Du kan legge til dette tokenet igjen i fremtiden ved å gå til \"Legg til token\" i menyen for kontoalternativer."
-  },
-  "recipientAddressPlaceholder": {
-    "message": "Søk, offentlig adresse (0x) eller ENS"
   },
   "reject": {
     "message": "Avslå"
@@ -561,9 +516,6 @@
   },
   "removeAccountDescription": {
     "message": "Denne kontoen blir fjernet fra lommeboken din. Forsikre deg om at du har den originale mnemoniske gjenopprettingsfrasen eller den private nøkkelen for denne importerte kontoen før du fortsetter. Du kan importere eller opprette kontoer igjen fra nedtrekksmenyen."
-  },
-  "requestsAwaitingAcknowledgement": {
-    "message": "forespørsler venter på godkjenning"
   },
   "required": {
     "message": "Påkrevd "
@@ -596,9 +548,6 @@
   "search": {
     "message": "Søk"
   },
-  "searchResults": {
-    "message": "Søkeresultater"
-  },
   "securityAndPrivacy": {
     "message": "Sikkerhet og personvern"
   },
@@ -617,9 +566,6 @@
   "selectType": {
     "message": "Velg type "
   },
-  "sendTokens": {
-    "message": "Send tokener"
-  },
   "settings": {
     "message": "Innstillinger"
   },
@@ -634,9 +580,6 @@
   },
   "showHexDataDescription": {
     "message": "Velg dette for å vise hex-datafeltet på sendskjermen"
-  },
-  "sigRequest": {
-    "message": "Signaturforespørsel "
   },
   "sign": {
     "message": "Undertegn"
@@ -728,9 +671,6 @@
   "transactionErrored": {
     "message": "Det oppsto en feil under transaksjonen."
   },
-  "transactionFee": {
-    "message": "Transaksjonsavgift"
-  },
   "transactionResubmitted": {
     "message": "Transaksjonen som ble sendt inn igjen med bensinavgift økte til $1 på $2"
   },
@@ -758,15 +698,6 @@
   "unknown": {
     "message": "Ukjent"
   },
-  "unknownCameraError": {
-    "message": "Det oppsto en feil under forsøket på å få tilgang til kameraet ditt. Vær så snill og prøv på nytt..."
-  },
-  "unknownCameraErrorTitle": {
-    "message": "Oisann! Noe gikk galt.... "
-  },
-  "unknownNetwork": {
-    "message": "Ukjent privat nettverk"
-  },
   "unknownQrCode": {
     "message": "Feil: Vi kunne ikke gjenkjenne denne QR-koden"
   },
@@ -775,9 +706,6 @@
   },
   "unlockMessage": {
     "message": "Det desentraliserte internett venter deg"
-  },
-  "updatedWithDate": {
-    "message": "Oppdatert $1"
   },
   "urlErrorMsg": {
     "message": "URI-er krever det aktuelle HTTP/HTTPS-prefikset."
@@ -799,9 +727,6 @@
   },
   "youNeedToAllowCameraAccess": {
     "message": "Du må gi kameratilgang for å bruke denne funksjonen."
-  },
-  "youSign": {
-    "message": "Du signerer"
   },
   "yourPrivateSeedPhrase": {
     "message": "Din private frøfrase"

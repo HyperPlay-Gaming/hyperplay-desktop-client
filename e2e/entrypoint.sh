@@ -30,27 +30,22 @@ then
 fi
 echo "OS is $os"
 
-yarn setup
+pnpm run setup
 
 # build
 if [[ "$TEST_PACKAGED" == "true" ]]
 then
     if [[ "$os" == "mac" ]]
     then
-        echo "Running yarn dist:mac:x64"
-        yarn dist:mac:x64
+        echo "Running pnpm run dist:mac:x64"
+        pnpm run dist:mac:x64
     else
-        echo "Running yarn dist:$os"
-        yarn dist:$os
+        echo "Running pnpm run dist:$os"
+        pnpm run dist:$os
     fi
 else
-    yarn vite build
+    pnpm electron-vite build
 fi
-
-# mock backend server
-cd e2e/__mocks__/hyperplay-mock-backend
-yarn
-cd ../../../
 
 echo
 echo "########"
@@ -61,9 +56,9 @@ echo
 # tests must be run sequentially because two hp clients cannot be open at the same time
 if [[ "$os" == "linux" ]]
 then
-    yarn playwright test .*/api.spec.ts
-    cd e2e/__mocks__/hyperplay-mock-backend && yarn start & sleep 5 && xvfb-run -a -e /dev/stdout -s "-screen 0 1280x960x24" yarn playwright test .*hpStoreApi.spec.ts
+    pnpm playwright test .*/api.spec.ts
+    # xvfb-run -a -e /dev/stdout -s "-screen 0 1280x960x24" pnpm playwright test .*hpStoreApi.spec.ts
 else
-    yarn playwright test .*/api.spec.ts
-    cd e2e/__mocks__/hyperplay-mock-backend && yarn start & sleep 5 && yarn playwright test .*hpStoreApi.spec.ts
+    pnpm playwright test .*/api.spec.ts
+    # pnpm playwright test .*hpStoreApi.spec.ts
 fi

@@ -75,9 +75,6 @@
   "asset": {
     "message": "נכס"
   },
-  "attemptingConnect": {
-    "message": "מנסה להתחבר לבלוקצ'יין."
-  },
   "attributions": {
     "message": "תכונות"
   },
@@ -208,9 +205,6 @@
   "delete": {
     "message": "מחיקה"
   },
-  "deleteNetwork": {
-    "message": "למחוק את הרשת?"
-  },
   "details": {
     "message": "פרטים"
   },
@@ -232,12 +226,6 @@
   "editContact": {
     "message": "ערוך איש קשר"
   },
-  "ensNotFoundOnCurrentNetwork": {
-    "message": "שם ENS לא נמצא ברשת הנוכחית. נסה/י לעבור לרשת אתריום הראשית."
-  },
-  "ensRegistrationError": {
-    "message": "שגיאה ברישום שם ENS"
-  },
   "enterPasswordContinue": {
     "message": "יש להזין ססמה כדי להמשיך"
   },
@@ -256,10 +244,6 @@
   "fast": {
     "message": "מהיר"
   },
-  "fiat": {
-    "message": "פיאט",
-    "description": "Exchange type"
-  },
   "fileImportFail": {
     "message": "ייבוא הקובץ לא עובד? לחצ/י כאן!",
     "description": "Helps user import their account from a JSON file"
@@ -269,9 +253,6 @@
   },
   "from": {
     "message": "מאת"
-  },
-  "functionType": {
-    "message": "סוג פונקציה"
   },
   "gasLimit": {
     "message": "הגבלת דלק"
@@ -332,9 +313,6 @@
     "message": "ייבוא",
     "description": "Button to import an account from a selected file"
   },
-  "importAccount": {
-    "message": "יבא חשבון"
-  },
   "importAccountMsg": {
     "message": "חשבונות מיובאים לא ישויכו לצירוף הגרעין (seed) שנוצר במקור עבור חשבון ה-MetaMask שלך. למד/י עוד על חשבונות מיובאים"
   },
@@ -359,12 +337,6 @@
   },
   "invalidAddressRecipient": {
     "message": "כתובת הנמען אינה חוקית"
-  },
-  "invalidAddressRecipientNotEthNetwork": {
-    "message": "לא רשת ETH, מוגדר במצב אותיות קטנות"
-  },
-  "invalidBlockExplorerURL": {
-    "message": "כתובת URL לא חוקית של Block Explorer"
   },
   "invalidRPC": {
     "message": "כתובת URL לא חוקית של RPC"
@@ -402,9 +374,6 @@
   },
   "loading": {
     "message": "טוען..."
-  },
-  "loadingTokens": {
-    "message": "טוען טוקנים..."
   },
   "lock": {
     "message": "התנתקות"
@@ -462,14 +431,8 @@
   "next": {
     "message": "הבא"
   },
-  "noAddressForName": {
-    "message": "לא הוגדרה כתובת עבור שם זה."
-  },
   "noConversionRateAvailable": {
     "message": "אין שער המרה זמין"
-  },
-  "noTransactions": {
-    "message": "אין לך עסקאות"
   },
   "noWebcamFound": {
     "message": "מצלמת הרשת של מחשבך לא נמצאה. נא לנסות שוב."
@@ -494,9 +457,6 @@
   },
   "origin": {
     "message": "מקור"
-  },
-  "parameters": {
-    "message": "פרמטרים"
   },
   "participateInMetaMetrics": {
     "message": "קח/י חלק ב- MetaMetrics"
@@ -526,12 +486,6 @@
   "prev": {
     "message": "הקודם"
   },
-  "primaryCurrencySetting": {
-    "message": "מטבע ראשי"
-  },
-  "primaryCurrencySettingDescription": {
-    "message": "בחר/י 'מקומי' כדי לתעדף הצגת ערכים במטבע המקומי של הצ'יין (למשל ETH). בחר/י פיאט כדי לתעדף הצגת ערכים במטבע הפיאט שבחרת."
-  },
   "privacyMsg": {
     "message": "מדיניות הפרטיות"
   },
@@ -547,9 +501,6 @@
   },
   "readdToken": {
     "message": "באפשרותך להוסיף טוקן זה בחזרה בעתיד על ידי מעבר אל \"הוסף טוקן\" בתפריט אפשרויות החשבונות שלך."
-  },
-  "recipientAddressPlaceholder": {
-    "message": "חיפוש, כתובת ציבורית (0x), או ENS"
   },
   "reject": {
     "message": "דחה"
@@ -574,9 +525,6 @@
   },
   "removeAccountDescription": {
     "message": "חשבון זה יוסר מארנקך. יש לוודא שיש לך את ה-seed phrase המקורי או המפתח האישי לחשבון מיובא זה לפני שתמשיך/י. באפשרותך ליבוא או לפתוח חשבונות שוב מהתפריט הנפתח של החשבון."
-  },
-  "requestsAwaitingAcknowledgement": {
-    "message": "בקשות הממתינות לאישור"
   },
   "required": {
     "message": "נדרש"
@@ -609,9 +557,6 @@
   "search": {
     "message": "חפש"
   },
-  "searchResults": {
-    "message": "תוצאות חיפוש"
-  },
   "securityAndPrivacy": {
     "message": "אבטחה ופרטיות"
   },
@@ -633,9 +578,6 @@
   "send": {
     "message": "שלח"
   },
-  "sendTokens": {
-    "message": "שלח טוקנים"
-  },
   "settings": {
     "message": "הגדרות"
   },
@@ -650,9 +592,6 @@
   },
   "showHexDataDescription": {
     "message": "בחר/י בזה כדי להציג את שדה הנתונים ההקסדצימאלים על מסך השליחה"
-  },
-  "sigRequest": {
-    "message": "בקשת חתימה"
   },
   "sign": {
     "message": "חתימה"
@@ -750,9 +689,6 @@
   "transactionErrored": {
     "message": "העסקה נתקלה בשגיאה."
   },
-  "transactionFee": {
-    "message": "עמלת עסקה"
-  },
   "transactionResubmitted": {
     "message": "העסקה הוגשה מחדש עם עמלת דלק שעלתה ל-$1 ב-$2"
   },
@@ -780,15 +716,6 @@
   "unknown": {
     "message": "לא ידוע"
   },
-  "unknownCameraError": {
-    "message": "אירעה שגיאה במהלך הניסיון לקבל גישה למצלמה שלך. נא לנסות שוב..."
-  },
-  "unknownCameraErrorTitle": {
-    "message": "אופס! משהו השתבש...."
-  },
-  "unknownNetwork": {
-    "message": "רשת פרטית לא ידועה"
-  },
   "unknownQrCode": {
     "message": "שגיאה: לא הצלחנו לזהות את קוד ה- QR הזה"
   },
@@ -797,9 +724,6 @@
   },
   "unlockMessage": {
     "message": "הרשת המבוזרת מחכה"
-  },
-  "updatedWithDate": {
-    "message": "עודכן $1"
   },
   "urlErrorMsg": {
     "message": "כתובות URI דורשות את קידומת HTTP/HTTPS המתאימה."
@@ -821,9 +745,6 @@
   },
   "youNeedToAllowCameraAccess": {
     "message": "עליך לאפשר גישה למצלמה כדי להשתמש בתכונה זו."
-  },
-  "youSign": {
-    "message": "הנך חותמ/ת"
   },
   "yourPrivateSeedPhrase": {
     "message": "ה-seed phrase הפרטי שלך"

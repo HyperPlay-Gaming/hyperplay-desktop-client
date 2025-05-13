@@ -5,7 +5,6 @@ import { UpdateComponent } from 'frontend/components/UI'
 
 import React, { lazy, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Tab, Tabs } from '@mui/material'
 import {
   TypeCheckedStoreFrontend,
   wineDownloaderInfoStore
@@ -13,6 +12,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import { WineVersionInfo, Type, WineManagerUISettings } from 'common/types'
+import libraryState from 'frontend/state/libraryState'
+import { Tabs } from '@hyperplay/ui'
 
 const WineItem = lazy(
   async () => import('frontend/screens/WineManager/components/WineItem')
@@ -24,31 +25,31 @@ const configStore = new TypeCheckedStoreFrontend('wineManagerConfigStore', {
 
 export default React.memo(function WineManager(): JSX.Element | null {
   const { t } = useTranslation()
-  const { refreshWineVersionInfo, refreshing, platform } =
-    useContext(ContextProvider)
+  const { refreshWineVersionInfo, platform } = useContext(ContextProvider)
   const isLinux = platform === 'linux'
 
-  const winege: WineManagerUISettings = {
-    type: 'Wine-GE',
-    value: 'winege',
+  const protonge: WineManagerUISettings = {
+    type: 'Proton-GE',
+    value: 'protonge',
     enabled: isLinux
   }
-  const winecrossover: WineManagerUISettings = {
-    type: 'Wine-Crossover',
-    value: 'winecrossover',
+
+  const gamePortingToolkit: WineManagerUISettings = {
+    type: 'Game-Porting-Toolkit',
+    value: 'toolkit',
     enabled: !isLinux
   }
 
   const [repository, setRepository] = useState<WineManagerUISettings>(
-    isLinux ? winege : winecrossover
+    isLinux ? protonge : gamePortingToolkit
   )
   const [wineManagerSettings, setWineManagerSettings] = useState<
     WineManagerUISettings[]
   >([
-    { type: 'Wine-GE', value: 'winege', enabled: isLinux },
     { type: 'Proton-GE', value: 'protonge', enabled: isLinux },
-    { type: 'Wine-Crossover', value: 'winecrossover', enabled: !isLinux },
-    { type: 'Wine-Staging-macOS', value: 'winestagingmacos', enabled: !isLinux }
+    { type: 'Wine-GE', value: 'winege', enabled: isLinux },
+    { type: 'Game-Porting-Toolkit', value: 'toolkit', enabled: !isLinux },
+    { type: 'Wine-Crossover', value: 'winecrossover', enabled: !isLinux }
   ])
 
   const getWineVersions = (repo: Type) => {
@@ -60,10 +61,7 @@ export default React.memo(function WineManager(): JSX.Element | null {
     getWineVersions(repository.type)
   )
 
-  const handleChangeTab = (
-    e: React.SyntheticEvent,
-    repo: WineManagerUISettings
-  ) => {
+  const handleChangeTab = (repo: WineManagerUISettings) => {
     setRepository(repo)
     setWineVersions(getWineVersions(repo.type))
   }
@@ -71,6 +69,10 @@ export default React.memo(function WineManager(): JSX.Element | null {
   // Track the screen view once
   useEffect(() => {
     window.api.trackScreen('Compatibility Layer ')
+
+    if (wineVersions.length === 0) {
+      refreshWineVersionInfo(true)
+    }
   }, [])
 
   useEffect(() => {
@@ -101,19 +103,22 @@ export default React.memo(function WineManager(): JSX.Element | null {
           <Tabs
             className="tabs"
             value={repository.value}
-            onChange={(e, value) => {
+            onChange={(value) => {
               const repo = wineManagerSettings.find(
                 (setting) => setting.value === value
               )
               if (repo) {
-                handleChangeTab(e, repo)
+                handleChangeTab(repo)
               }
             }}
-            centered={true}
           >
             {wineManagerSettings.map(({ type, value, enabled }) => {
               if (enabled) {
-                return <Tab value={value} label={type} key={value} />
+                return (
+                  <Tabs.Tab value={value} key={value}>
+                    <div className="menu">{type}</div>
+                  </Tabs.Tab>
+                )
               }
               return null
             })}
@@ -142,8 +147,8 @@ export default React.memo(function WineManager(): JSX.Element | null {
               <span>{t('wine.size', 'Size')}</span>
               <span>{t('wine.actions', 'Action')}</span>
             </div>
-            {refreshing && <UpdateComponent />}
-            {!refreshing &&
+            {libraryState.refreshing && <UpdateComponent />}
+            {!libraryState.refreshing &&
               !!wineVersions.length &&
               wineVersions.map((release) => {
                 return <WineItem key={release.version} {...release} />

@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FocusEvent, ReactNode } from 'react'
 import TextInputField from '../TextInputField'
 import SvgButton from '../SvgButton'
+import { TextInputProps } from '@hyperplay/ui'
 
 interface TextInputWithIconFieldProps {
   htmlId: string
@@ -14,6 +15,7 @@ interface TextInputWithIconFieldProps {
   disabled?: boolean
   extraClass?: string
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void
+  inputProps?: TextInputProps & React.RefAttributes<HTMLInputElement>
 }
 
 const TextInputWithIconField = (props: TextInputWithIconFieldProps) => {

@@ -5,7 +5,8 @@ import {
   LaunchParams,
   ImportGameArgs,
   GameStatus,
-  GameInfo
+  GameInfo,
+  GamePageActions
 } from 'common/types'
 
 export const openDialog = async (args: Electron.OpenDialogOptions) =>
@@ -22,7 +23,7 @@ export const uninstall = async (
     game_name: appName,
     store_name: runner
   })
-  if (runner === 'sideload' || runner === 'hyperplay') {
+  if (runner === 'sideload') {
     return ipcRenderer.invoke('removeApp', {
       appName,
       shouldRemovePrefix,
@@ -54,6 +55,19 @@ export const handleGameStatus = (
   ipcRenderer.on('gameStatusUpdate', onChange)
   return () => {
     ipcRenderer.removeListener('gameStatusUpdate', onChange)
+  }
+}
+
+export const handleGoToGamePage = (
+  onChange: (
+    e: Electron.IpcRendererEvent,
+    gameId: string,
+    action: GamePageActions
+  ) => void
+) => {
+  ipcRenderer.on('goToGamePage', onChange)
+  return () => {
+    ipcRenderer.removeListener('goToGamePage', onChange)
   }
 }
 
@@ -130,3 +144,28 @@ export const getGameSdl = async (appName: string) =>
 export const removeFromLibrary = async (appName: string) => {
   ipcRenderer.send('removeFromLibrary', appName)
 }
+
+export const checkHyperPlayAccessCode = async (
+  licenseConfigId: number,
+  accessCode: string
+) => {
+  return ipcRenderer.invoke(
+    'checkHyperPlayAccessCode',
+    licenseConfigId,
+    accessCode
+  )
+}
+
+export const getEpicListingUrl = async (appName: string) =>
+  ipcRenderer.invoke('getEpicListingUrl', appName)
+
+export const installSteamWindows = async () =>
+  ipcRenderer.invoke('installSteamWindows')
+
+export const importGameFolder = async (gameFolder: string) =>
+  ipcRenderer.invoke('importGameFolder', gameFolder)
+
+export const requestSIWE = async () => ipcRenderer.invoke('requestSIWE')
+
+export const getSiweMessageDomainAndUri = async () =>
+  ipcRenderer.invoke('getSiweMessageDomainAndUri')

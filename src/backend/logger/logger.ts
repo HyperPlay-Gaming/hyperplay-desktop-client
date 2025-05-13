@@ -9,14 +9,15 @@ import { showDialogBoxModalAuto } from '../dialog/dialog'
 import { appendMessageToLogFile, getLongestPrefix } from './logfile'
 import { backendEvents } from 'backend/backend_events'
 import { GlobalConfig } from 'backend/config'
-import { getGOGdlBin, getLegendaryBin, getSystemInfo } from 'backend/utils'
-import { join } from 'path'
+import { formatSystemInfo, getSystemInfo } from '../utils/systeminfo'
+import { getAuthSession } from 'backend/auth'
+import { captureException } from '@sentry/electron'
+import { LogOptions as LogOptionsBase } from '@hyperplay/utils'
 
 export enum LogPrefix {
   General = '',
   Legendary = 'Legendary',
   Gog = 'Gog',
-  Nile = 'Nile',
   WineDownloader = 'WineDownloader',
   DXVKInstaller = 'DXVKInstaller',
   GlobalConfig = 'GlobalConfig',
@@ -31,7 +32,10 @@ export enum LogPrefix {
   DownloadManager = 'DownloadManager',
   ExtraGameInfo = 'ExtraGameInfo',
   HyperPlay = 'HyperPlay',
-  Sideload = 'Sideload'
+  Sideload = 'Sideload',
+  Achievements = 'Achievements',
+  Auth = 'Auth',
+  AutoUpdater = 'AutoUpdater'
 }
 
 export const RunnerToLogPrefixMap = {
@@ -43,7 +47,7 @@ export const RunnerToLogPrefixMap = {
 
 type LogInputType = unknown[] | unknown
 
-interface LogOptions {
+export interface LogOptions extends LogOptionsBase {
   prefix?: LogPrefix
   showDialog?: boolean
   skipLogToFile?: boolean
@@ -68,28 +72,37 @@ export function initLogger() {
     )
   }
 
-  // log important information: binaries, system specs
-  getSystemInfo().then((systemInfo) => {
-    if (systemInfo === '') return
-    logInfo(`\n\n${systemInfo}\n`, {
-      prefix: LogPrefix.Backend,
-      forceLog: true
+  // log session details
+  getAuthSession()
+    .then((user) => {
+      logInfo(
+        `Session started by ${
+          user ? JSON.stringify(user) : 'unknown user'
+        } with userID: ${user ? user.userId : 'unknown'}`,
+        LogPrefix.Auth
+      )
     })
-  })
+    .catch((error) =>
+      logError(['Failed to fetch user information', error], LogPrefix.Auth)
+    )
 
-  logInfo(['Legendary location:', join(...Object.values(getLegendaryBin()))], {
-    prefix: LogPrefix.Legendary,
-    forceLog: true
-  })
-  logInfo(['GOGDL location:', join(...Object.values(getGOGdlBin()))], {
-    prefix: LogPrefix.Gog,
-    forceLog: true
-  })
+  // log important information: binaries, system specs
+  getSystemInfo()
+    .then(formatSystemInfo)
+    .then((systemInfo) => {
+      logInfo(`\nSystem Information:\n${systemInfo}\n`, {
+        prefix: LogPrefix.Backend,
+        forceLog: true
+      })
+    })
+    .catch((error) =>
+      logError(['Failed to fetch system information', error], LogPrefix.Backend)
+    )
 
   // listen to the settingChanged event, log change and enable/disable logging if needed
   backendEvents.on('settingChanged', ({ key, oldValue, newValue }) => {
     logInfo(
-      `Heroic: Setting ${key} to ${JSON.stringify(
+      `Hyperplay: Setting ${key} to ${JSON.stringify(
         newValue
       )} (previous value: ${JSON.stringify(oldValue)})`,
       { forceLog: true }
@@ -227,18 +240,30 @@ export function logDebug(
 }
 
 /**
- * Log error messages
- * @param input error messages to log
- * @param prefix added before the message {@link LogPrefix}
- * @param skipLogToFile set true to not log to file
- * @param showDialog set true to show in frontend
- * @defaultvalue {@link LogPrefix.General}
+ * Log error messages with optional Sentry integration
+ * @param input Error message or object to log
+ * @param options_or_prefix Configuration options or LogPrefix
+ *   - prefix: Added before the message
+ *   - skipLogToFile: Set true to not log to file
+ *   - showDialog: Set true to show in frontend
+ *   - sentryException: Error object to send to Sentry
+ *   - sentryExtra: Additional context data for Sentry
+ *   - sentryTags: Tags for filtering in Sentry
  */
 export function logError(
   input: LogInputType,
   options_or_prefix?: LogOptions | LogPrefix
 ) {
   logBase(input, 'ERROR', options_or_prefix)
+  if (
+    typeof options_or_prefix === 'object' &&
+    options_or_prefix?.sentryException
+  ) {
+    captureException(options_or_prefix.sentryException, {
+      extra: { ...options_or_prefix.sentryExtra, input },
+      tags: options_or_prefix.sentryTags
+    })
+  }
 }
 
 export type LogFunction = typeof logError

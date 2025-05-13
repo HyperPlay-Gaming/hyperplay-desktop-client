@@ -17,6 +17,11 @@ interface MessageBoxModalProps {
   onClose: () => void
   buttons: Array<ButtonOptions>
   type: DialogType
+  showCheckbox?: boolean
+  checkboxLabel?: string
+  checkboxValue?: boolean
+  isModal?: boolean
+  className?: string
 }
 
 const MessageBoxModal: React.FC<MessageBoxModalProps> = function (props) {
@@ -67,12 +72,24 @@ const MessageBoxModal: React.FC<MessageBoxModalProps> = function (props) {
     <Dialog
       onClose={props.onClose}
       showCloseButton
-      className={classNames({ errorDialog: props.type === 'ERROR' })}
+      className={classNames(
+        { errorDialog: props.type === 'ERROR' },
+        props.className
+      )}
+      isModal={props.isModal}
     >
       <DialogHeader onClose={props.onClose}>{props.title}</DialogHeader>
       <DialogContent className="body dialogContent">
         {getContent()}
+        {props.showCheckbox && (
+          <div className="checkbox">
+            <input type="checkbox" checked={props.checkboxValue ? true : false}>
+              {props.checkboxLabel}
+            </input>
+          </div>
+        )}
       </DialogContent>
+
       <DialogFooter>{getButtons()}</DialogFooter>
     </Dialog>
   )

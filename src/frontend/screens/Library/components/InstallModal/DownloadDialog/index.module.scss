@@ -1,0 +1,20 @@
+.downloadDialogContainer {
+  max-width: 600px;
+}
+
+.installModalWarning {
+  background: var(--color-neutral-700);
+  padding: var(--space-md);
+  margin: var(--space-xl) 0 var(--space-xs);
+  border-radius: 10px;
+  font-size: var(--text-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: var(--text-md);
+    height: var(--text-md);
+    margin-right: var(--space-xs);
+  }
+}

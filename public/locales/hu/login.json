@@ -1,6 +1,8 @@
 {
     "button": {
-        "login": "Bejelentkezés"
+        "login": "Bejelentkezés",
+        "error": "Hiba, próbálj meg egy másik kódot",
+        "loading": "Betöltés"
     },
     "message": {
         "part1": "Annak érdekében, hogy be tudj jelentkezni és le tudd tölteni a játékaid, először követned kell az itt lent felsoroltakat:",

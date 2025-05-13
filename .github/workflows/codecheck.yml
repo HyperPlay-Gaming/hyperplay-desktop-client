@@ -12,14 +12,17 @@ jobs:
       group: codecheck-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
-      - uses: actions/setup-node@v3
+          node-version: '20'
+      - uses: pnpm/action-setup@v3
         with:
-          node-version: '18'
-          cache: 'yarn'
+          standalone: ${{ runner.os == 'Windows' }}
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -27,6 +30,6 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn setup
+        run: pnpm run setup
       - name: Check Typescript syntax
-        run: yarn codecheck
+        run: pnpm codecheck

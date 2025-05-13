@@ -1,7 +1,7 @@
 import { gameManagerMap, libraryManagerMap } from 'backend/storeManagers'
 import { TypeCheckedStoreBackend } from './../electron_store'
 import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
-import { getFileSize, removeFolder } from '../utils'
+import { getFileSize } from '../utils'
 import { DMQueueElement, DMStatus, DownloadManagerState } from 'common/types'
 import { installQueueElement, updateQueueElement } from './utils'
 import { sendFrontendMessage } from '../main_window'
@@ -10,8 +10,7 @@ import { notify } from '../dialog/dialog'
 import i18next from 'i18next'
 import { configFolder } from 'backend/constants'
 import { join } from 'path'
-import { rmSync } from 'graceful-fs'
-import { clean } from 'hp-easydl/dist/utils'
+import { trackEvent } from 'backend/metrics/metrics'
 
 const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',
@@ -44,10 +43,12 @@ function addToFinished(element: DMQueueElement, status: DMStatus) {
     (el) => el.params.appName === element.params.appName
   )
 
+  const updatedElement = { ...element, status: status ?? 'abort' }
+
   if (elementIndex >= 0) {
-    elements[elementIndex] = { ...element, status: status ?? 'abort' }
+    elements[elementIndex] = { ...elements[elementIndex], ...updatedElement }
   } else {
-    elements.push({ ...element, status })
+    elements.push(updatedElement)
   }
 
   downloadManager.set('finished', elements)
@@ -130,15 +131,46 @@ async function addToQueue(element: DMQueueElement) {
   )
 
   if (elementIndex >= 0) {
-    elements[elementIndex] = element
+    elements[elementIndex] = { ...elements[elementIndex], ...element }
   } else {
     const installInfo = await libraryManagerMap[
       element.params.runner
-    ].getInstallInfo(element.params.appName, element.params.platformToInstall)
+    ].getInstallInfo(
+      element.params.appName,
+      element.params.platformToInstall,
+      element.params.channelName ?? 'main'
+    )
 
-    element.params.size = installInfo?.manifest?.download_size
-      ? getFileSize(installInfo?.manifest?.download_size)
-      : '?? MB'
+    element.channel = element.params.channelName ?? 'main'
+
+    if (!element.params.size) {
+      let size = '?? MB'
+      if (element.type === 'install') {
+        const installSize = installInfo?.manifest?.download_size
+        if (installSize) {
+          size = getFileSize(installSize)
+        }
+      } else {
+        const {
+          channelName,
+          platformToInstall,
+          gameInfo: { channels }
+        } = element.params
+
+        const updateSize =
+          // @ts-expect-error - confusion because of the platform type
+          channels[channelName ?? 'main'].release_meta.platforms[
+            platformToInstall
+          ]?.downloadSize
+
+        if (updateSize) {
+          size = getFileSize(updateSize)
+        }
+      }
+
+      element.params.size = size
+    }
+
     elements.push(element)
   }
 
@@ -190,6 +222,23 @@ function getQueueInformation() {
   return { elements, finished, state: queueState }
 }
 
+function cancelQueueExtraction() {
+  if (currentElement) {
+    if (Array.isArray(currentElement.params.installDlcs)) {
+      const dlcsToRemove = currentElement.params.installDlcs
+      for (const dlc of dlcsToRemove) {
+        removeFromQueue(dlc)
+      }
+    }
+    if (isRunning()) {
+      stopCurrentDownload()
+    }
+    removeFromQueue(currentElement.params.appName)
+
+    currentElement = null
+  }
+}
+
 function cancelCurrentDownload({ removeDownloaded = false }) {
   if (currentElement) {
     if (Array.isArray(currentElement.params.installDlcs)) {
@@ -203,34 +252,21 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
     }
     removeFromQueue(currentElement.params.appName)
 
-    if (removeDownloaded) {
-      const { appName, runner, gameInfo, channelName } = currentElement!.params
-      const { folder_name } = gameInfo
-      if (gameInfo.channels === undefined || channelName === undefined) {
-        console.error(
-          `Error when canceling current download channels ${gameInfo.channels} or channelName ${channelName} is undefined`
-        )
-        return
-      }
-      const releaseMeta = gameInfo.channels[channelName].release_meta
-
-      if (runner === 'hyperplay' && releaseMeta) {
-        const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
-        logInfo(`Removing ${tempfolder}...`, LogPrefix.DownloadManager)
-        clean(tempfolder).finally(() => {
-          rmSync(tempfolder, { recursive: true, force: true })
-        })
-      } else if (folder_name) {
-        removeFolder(currentElement.params.path, folder_name)
-      }
+    const { runner } = currentElement!.params
+    if (runner === 'hyperplay' && removeDownloaded) {
+      const { appName } = currentElement!.params
+      const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
+      logInfo(`Removing ${tempfolder}...`, LogPrefix.DownloadManager)
+      callAbortController(appName)
     }
     currentElement = null
   }
 }
 
-function pauseCurrentDownload() {
+async function pauseCurrentDownload() {
   if (currentElement) {
-    stopCurrentDownload()
+    const { appName, runner } = currentElement.params
+    await gameManagerMap[runner].pause(appName)
   }
   queueState = 'paused'
   sendFrontendMessage(
@@ -238,9 +274,28 @@ function pauseCurrentDownload() {
     downloadManager.get('queue', []),
     queueState
   )
+
+  const {
+    appName,
+    runner,
+    gameInfo: { title }
+  } = currentElement!.params
+  trackEvent({
+    event: 'Game Install Paused',
+    properties: { store_name: runner, game_title: title, game_name: appName }
+  })
 }
 
 function resumeCurrentDownload() {
+  const {
+    appName,
+    runner,
+    gameInfo: { title }
+  } = currentElement!.params
+  trackEvent({
+    event: 'Game Install Resumed',
+    properties: { store_name: runner, game_title: title, game_name: appName }
+  })
   initQueue()
 }
 
@@ -256,8 +311,6 @@ function processNotification(element: DMQueueElement, status: DMStatus) {
   const { title } = gameManagerMap[element.params.runner].getGameInfo(
     element.params.appName
   )
-
-  console.log('processNotification', status)
 
   if (status === 'abort') {
     if (isPaused()) {
@@ -316,13 +369,44 @@ function processNotification(element: DMQueueElement, status: DMStatus) {
   }
 }
 
+async function updateQueueElementParam<T extends keyof DMQueueElement>(
+  element: DMQueueElement,
+  prop: T,
+  value: DMQueueElement[T]
+) {
+  const queue: DMQueueElement[] = downloadManager.get('queue', [])
+
+  const index = queue.findIndex(
+    (el) => el.params.appName === element.params.appName
+  )
+  if (index !== -1) {
+    queue[index][prop] = value
+    updateCurrentElementParam(prop, value)
+    downloadManager.set('queue', queue)
+    sendFrontendMessage('changedDMQueueInformation', queue, queueState)
+  } else {
+    throw new Error('Element not found in the queue')
+  }
+}
+
+function updateCurrentElementParam<T extends keyof DMQueueElement>(
+  prop: T,
+  value: DMQueueElement[T]
+) {
+  if (currentElement) {
+    currentElement[prop] = value
+  }
+}
+
 export {
   initQueue,
   addToQueue,
   removeFromQueue,
   getQueueInformation,
   cancelCurrentDownload,
+  cancelQueueExtraction,
   pauseCurrentDownload,
   resumeCurrentDownload,
-  getFirstQueueElement
+  getFirstQueueElement,
+  updateQueueElementParam
 }

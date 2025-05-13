@@ -45,9 +45,6 @@ export const abort = (id: string) => ipcRenderer.send('abort', id)
 
 export const getUserInfo = async () => ipcRenderer.invoke('getUserInfo')
 
-export const getAmazonUserInfo = async () =>
-  ipcRenderer.invoke('getAmazonUserInfo')
-
 export const syncSaves = async (args: {
   arg: string | undefined
   path: string
@@ -124,3 +121,10 @@ export const isGameAvailable = async (args: {
   appName: string
   runner: Runner
 }) => ipcRenderer.invoke('isGameAvailable', args)
+
+export const getHyperPlayListings = async () =>
+  ipcRenderer.invoke('getHyperPlayListings')
+
+export const otp = async (otp: string) => ipcRenderer.send('otp', otp)
+
+export const openOnboarding = () => ipcRenderer.send('openOnboarding')

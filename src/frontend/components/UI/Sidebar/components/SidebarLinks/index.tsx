@@ -1,24 +1,33 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
-import { openDiscordLink } from 'frontend/helpers'
 import ContextProvider from 'frontend/state/ContextProvider'
 import './index.css'
 import QuitButton from '../QuitButton'
 import { SHOW_EXTERNAL_LINK_DIALOG_STORAGE_KEY } from 'frontend/components/UI/ExternalLinkDialog'
 import { Images } from '@hyperplay/ui'
+import libraryState from 'frontend/state/libraryState'
+import { observer } from 'mobx-react-lite'
+import storeAuthState from 'frontend/state/storeAuthState'
+import { useTranslation } from 'react-i18next'
+import { Tooltip, TooltipProps } from '@mantine/core'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
-export default function SidebarLinks() {
+const tooltipProps: Partial<TooltipProps> = {
+  offset: 16,
+  position: 'right',
+  withArrow: true,
+  className: 'Tooltip menu',
+  arrowSize: 10,
+  zIndex: 1001
+}
+
+export default observer(function SidebarLinks() {
   const location = useLocation() as { pathname: string }
+  const { t } = useTranslation()
 
-  const {
-    epic,
-    gog,
-    amazon,
-    activeController,
-    refreshLibrary,
-    handleExternalLinkDialog
-  } = useContext(ContextProvider)
+  const { activeController, handleExternalLinkDialog, connectivity } =
+    useContext(ContextProvider)
 
   const settingsPath = '/settings/app/default/general'
 
@@ -28,15 +37,24 @@ export default function SidebarLinks() {
     window.api.isFullscreen().then((res) => setIsFullscreen(res))
   }, [])
 
+  const flags = useFlags()
+  const SHOW_ACHIEVEMENTS = flags.achievements
+  const gamesToShowQuestsFor =
+    (flags.gamesToShowQuestsFor as string | undefined)?.split(',') ?? []
+  const SHOW_QUESTS =
+    flags.questsPageInClient || libraryState.hasGame(gamesToShowQuestsFor)
+
   async function handleRefresh() {
     localStorage.setItem('scrollPosition', '0')
 
     const shouldRefresh =
-      (epic.username && !epic.library.length) ||
-      (gog.username && !gog.library.length) ||
-      (amazon.user_id && !amazon.library.length)
+      (storeAuthState.epic.username && !libraryState.epicLibrary.length) ||
+      (storeAuthState.gog.username && !libraryState.gogLibrary.length)
     if (shouldRefresh) {
-      return refreshLibrary({ runInBackground: true })
+      return libraryState.refreshLibrary({
+        runInBackground: true,
+        checkForUpdates: false
+      })
     }
     return
   }
@@ -53,98 +71,166 @@ export default function SidebarLinks() {
   }
 
   const sidebarSvgUnselectedFill = 'var(--color-neutral-400)'
+  const isOffline = connectivity.status !== 'online'
 
   return (
     <>
-      <div className=" SidebarLinks Sidebar__section">
+      <div className="SidebarLinks Sidebar__section">
         <div className="sidebarLinkGradientWrapper">
-          <NavLink
-            className={({ isActive }) =>
-              classNames('Sidebar__item', {
-                active: isActive || location.pathname.includes('store')
-              })
-            }
-            to="/hyperplaystore"
-          >
-            <Images.Home fill={sidebarSvgUnselectedFill} />
-          </NavLink>
+          <Tooltip {...tooltipProps} label={t('sidebar.store', 'Store')}>
+            <NavLink
+              className={({ isActive }) =>
+                classNames('Sidebar__item', {
+                  active:
+                    (isActive && !isOffline) ||
+                    location.pathname.includes('store'),
+                  disabled: isOffline
+                })
+              }
+              to={isOffline ? '/library' : '/hyperplaystore'}
+              title={
+                isOffline
+                  ? t('Please connect to the internet to access the stores')
+                  : ''
+              }
+            >
+              <Images.Home fill={sidebarSvgUnselectedFill} />
+            </NavLink>
+          </Tooltip>
         </div>
         <div className="sidebarLinkGradientWrapper">
-          <NavLink
-            className={({ isActive }) =>
-              classNames('Sidebar__item', {
-                active:
-                  isActive ||
-                  location.pathname.includes('gamepage') ||
-                  location.pathname.includes('library')
-              })
-            }
-            end
-            to={'/library'}
-            onClick={async () => handleRefresh()}
+          <Tooltip {...tooltipProps} label={t('sidebar.library', 'Library')}>
+            <NavLink
+              className={({ isActive }) =>
+                classNames('Sidebar__item', {
+                  active:
+                    isActive ||
+                    location.pathname.includes('gamepage') ||
+                    location.pathname.includes('library')
+                })
+              }
+              end
+              to={'/library'}
+              onClick={handleRefresh}
+            >
+              <Images.Controller fill={sidebarSvgUnselectedFill} />
+            </NavLink>
+          </Tooltip>
+        </div>
+        {SHOW_ACHIEVEMENTS && (
+          <div className="sidebarLinkGradientWrapper">
+            <Tooltip
+              {...tooltipProps}
+              label={t('sidebar.achievements', 'Achievements')}
+            >
+              <NavLink
+                className={({ isActive }) =>
+                  classNames('Sidebar__item', {
+                    active:
+                      isActive || location.pathname.includes('achievements')
+                  })
+                }
+                end
+                to={'/achievements'}
+                onClick={handleRefresh}
+              >
+                <Images.TrophyOutline fill={sidebarSvgUnselectedFill} />
+              </NavLink>
+            </Tooltip>
+          </div>
+        )}
+        {SHOW_QUESTS ? (
+          <div className="sidebarLinkGradientWrapper">
+            <Tooltip {...tooltipProps} label={t('sidebar.quests', 'Quests')}>
+              <NavLink
+                data-testid="quests"
+                className={({ isActive }) =>
+                  classNames('Sidebar__item', {
+                    active: isActive || location.pathname.includes('quests')
+                  })
+                }
+                to={{ pathname: '/quests' }}
+                state={{
+                  fromGameCard: false
+                }}
+              >
+                <Images.QuestIcon fill={sidebarSvgUnselectedFill} />
+              </NavLink>
+            </Tooltip>
+          </div>
+        ) : null}
+        <div className="sidebarLinkGradientWrapper">
+          <Tooltip
+            {...tooltipProps}
+            label={t('sidebar.downloadManager', 'Download Manager')}
           >
-            <Images.Controller fill={sidebarSvgUnselectedFill} />
-          </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                classNames('Sidebar__item', { active: isActive })
+              }
+              to={{ pathname: '/download-manager' }}
+            >
+              <Images.DownloadIcon fill={sidebarSvgUnselectedFill} />
+            </NavLink>
+          </Tooltip>
         </div>
         <div className="sidebarLinkGradientWrapper">
-          <NavLink
-            className={({ isActive }) =>
-              classNames('Sidebar__item', { active: isActive })
-            }
-            to={{ pathname: '/download-manager' }}
-          >
-            <Images.DownloadIcon fill={sidebarSvgUnselectedFill} />
-          </NavLink>
-        </div>
-        <div className="sidebarLinkGradientWrapper">
-          <NavLink
-            data-testid="settings"
-            className={({ isActive }) =>
-              classNames('Sidebar__item', {
-                active: isActive || location.pathname.includes('settings')
-              })
-            }
-            to={{ pathname: settingsPath }}
-            state={{
-              fromGameCard: false
-            }}
-          >
-            <Images.Settings fill={sidebarSvgUnselectedFill} />
-          </NavLink>
+          <Tooltip {...tooltipProps} label={t('sidebar.settings', 'Settings')}>
+            <NavLink
+              data-testid="settings"
+              className={({ isActive }) =>
+                classNames('Sidebar__item', {
+                  active: isActive || location.pathname.includes('settings')
+                })
+              }
+              to={{ pathname: settingsPath }}
+              state={{
+                fromGameCard: false
+              }}
+            >
+              <Images.Settings fill={sidebarSvgUnselectedFill} />
+            </NavLink>
+          </Tooltip>
         </div>
       </div>
 
       <div className=" SidebarLinks Sidebar__section">
         <div
           className="sidebarLinkGradientWrapper"
-          onClick={() => handleExternalLink(openDiscordLink)}
+          onClick={() => handleExternalLink(window.api.openDiscordLink)}
         >
-          <div className="Sidebar__item">
-            <button>
-              <Images.Discord stroke={sidebarSvgUnselectedFill} />
-            </button>
-          </div>
+          <Tooltip {...tooltipProps} label="Discord">
+            <div className="Sidebar__item">
+              <button>
+                <Images.Discord stroke={sidebarSvgUnselectedFill} />
+              </button>
+            </div>
+          </Tooltip>
         </div>
         <div
           className="sidebarLinkGradientWrapper "
           onClick={() => handleExternalLink(window.api.openTwitterLink)}
         >
-          <div className="Sidebar__item">
-            <button>
-              <Images.Twitter fill={sidebarSvgUnselectedFill} />
-            </button>
-          </div>
+          <Tooltip {...tooltipProps} label="X">
+            <div className="Sidebar__item">
+              <button>
+                <Images.XLogo fill={sidebarSvgUnselectedFill} />
+              </button>
+            </div>
+          </Tooltip>
         </div>
         <div className="sidebarLinkGradientWrapper">
-          <NavLink
-            data-testid="wiki"
-            className={({ isActive }) =>
-              classNames('Sidebar__item', { active: isActive })
-            }
-            to={{ pathname: '/wiki' }}
-          >
-            <Images.Page fill={sidebarSvgUnselectedFill} />
-          </NavLink>
+          <Tooltip {...tooltipProps} label={t('sidebar.docs', 'Docs')}>
+            <NavLink
+              data-testid="Docs"
+              className={({ isActive }) =>
+                classNames('Sidebar__item', { active: isActive })
+              }
+              to={{ pathname: '/docs' }}
+            >
+              <Images.Page fill={sidebarSvgUnselectedFill} />
+            </NavLink>
+          </Tooltip>
         </div>
         <div className="sidebarLinkGradientWrapper">
           {(isFullscreen || activeController) && <QuitButton />}
@@ -152,4 +238,4 @@ export default function SidebarLinks() {
       </div>
     </>
   )
-}
+})

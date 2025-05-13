@@ -5,7 +5,6 @@ import {
   faFolderOpen
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DialogContent } from '@mui/material'
 
 import classNames from 'classnames'
 import {
@@ -26,13 +25,7 @@ import {
 } from 'frontend/components/UI'
 import Anticheat from 'frontend/components/UI/Anticheat'
 import { DialogHeader, DialogFooter } from 'frontend/components/UI/Dialog'
-import {
-  getProgress,
-  size,
-  getInstallInfo,
-  writeConfig,
-  install
-} from 'frontend/helpers'
+import { getProgress, size, getInstallInfo, install } from 'frontend/helpers'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { InstallProgress } from 'frontend/types'
 import React, {
@@ -44,9 +37,10 @@ import React, {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { configStore } from 'frontend/helpers/electronStores'
-import { Button } from '@hyperplay/ui'
+import { AlertCard, Button, Images } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
-import { NileInstallInfo } from 'common/types/nile'
+import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
+import styles from './index.module.scss'
 
 interface Props {
   backdropClick: () => void
@@ -60,7 +54,11 @@ interface Props {
   children: React.ReactNode
   gameInfo: GameInfo
   channelNameToInstall: string
+  channelId?: number
   accessCode: string
+  marketplaceUrl?: string
+  enableCTAButton: boolean
+  requiresToken: boolean
 }
 
 type DiskSpaceInfo = {
@@ -118,8 +116,15 @@ export default function DownloadDialog({
   gameInfo,
   crossoverBottle,
   channelNameToInstall,
-  accessCode
+  accessCode,
+  enableCTAButton,
+  requiresToken,
+  marketplaceUrl
 }: Props) {
+  const [showAlert, setShowAlert] = useState({
+    siwe: true,
+    thirdParty: true
+  })
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
   ) as InstallProgress
@@ -127,13 +132,11 @@ export default function DownloadDialog({
     useContext(ContextProvider)
 
   const isWin = platform === 'win32'
+  const isNotNative = platformToInstall === 'Windows' && !isWin
+  const isBrowserGame = platformToInstall === 'Browser'
 
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    | LegendaryInstallInfo
-    | GogInstallInfo
-    | HyperPlayInstallInfo
-    | NileInstallInfo
-    | null
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
   >(null)
   const [installLanguages, setInstallLanguages] = useState(Array<string>())
   const [installLanguage, setInstallLanguage] = useState('')
@@ -163,6 +166,14 @@ export default function DownloadDialog({
 
   const { i18n, t } = useTranslation('gamepage')
   const { t: tr } = useTranslation()
+
+  const diskSize = gameInstallInfo?.manifest?.disk_size || 0
+  const gameDownloadSize = gameInstallInfo?.manifest?.download_size || 0
+  const uncompressedSize = useEstimatedUncompressedSize(
+    platformToInstall,
+    diskSize,
+    gameDownloadSize
+  )
 
   const haveSDL = sdls.length > 0
 
@@ -195,14 +206,17 @@ export default function DownloadDialog({
   }
 
   async function handleInstall(path?: string) {
+    let siweValues
+    if (requiresToken) {
+      siweValues = await window.api.requestSIWE()
+    }
     backdropClick()
-
     // Write Default game config with prefix on linux
     if (!isWin) {
       const gameSettings = await window.api.requestGameSettings(appName)
 
       if (wineVersion) {
-        writeConfig({
+        window.api.writeConfig({
           appName,
           config: {
             ...gameSettings,
@@ -227,7 +241,8 @@ export default function DownloadDialog({
       platformToInstall,
       showDialogModal: () => backdropClick(),
       channelName: channelNameToInstall,
-      accessCode
+      accessCode,
+      siweValues
     })
   }
 
@@ -245,6 +260,7 @@ export default function DownloadDialog({
           platformToInstall,
           channelNameToInstall
         )
+
         setGameInstallInfo(gameInstallInfo)
         setGettingInstallInfo(false)
 
@@ -308,17 +324,23 @@ export default function DownloadDialog({
         installPath
       )
       if (gameInstallInfo?.manifest?.disk_size) {
-        let notEnoughDiskSpace = free < gameInstallInfo.manifest.disk_size
+        let notEnoughDiskSpace = free < uncompressedSize
+        // downloads the entire zip, then extracts the entire zip, then deletes the zip, so we need space for both
         let spaceLeftAfter = size(
-          free - Number(gameInstallInfo.manifest.disk_size)
+          free - Number(uncompressedSize) - Number(gameDownloadSize)
         )
-        if (previousProgress.folder === installPath) {
+
+        const partiallyDownloaded = previousProgress.folder === installPath
+        if (partiallyDownloaded) {
           const progress = 100 - getProgress(previousProgress)
           notEnoughDiskSpace =
-            free < (progress / 100) * Number(gameInstallInfo.manifest.disk_size)
+            free < (progress / 100) * Number(uncompressedSize)
 
+          // downloads the entire zip, then extracts the entire zip, then deletes the zip, so we need space for both
           spaceLeftAfter = size(
-            free - (progress / 100) * Number(gameInstallInfo.manifest.disk_size)
+            free -
+              Number(uncompressedSize) -
+              (progress / 100) * gameDownloadSize
           )
         }
 
@@ -331,14 +353,13 @@ export default function DownloadDialog({
       }
     }
     getSpace()
-  }, [installPath, gameInstallInfo?.manifest?.disk_size])
+  }, [installPath, uncompressedSize, gameInstallInfo?.manifest?.disk_size])
 
   const haveDLCs: boolean =
     gameInstallInfo?.game?.owned_dlc !== undefined &&
     gameInstallInfo.game.owned_dlc.length > 0
 
   const DLCList = gameInstallInfo?.game?.owned_dlc
-  const gameDownloadSize = gameInstallInfo?.manifest?.download_size
   const downloadSize = () => {
     if (gameDownloadSize !== undefined && gameInstallInfo !== null) {
       if (previousProgress.folder === installPath) {
@@ -353,9 +374,7 @@ export default function DownloadDialog({
     return ''
   }
 
-  const installSize =
-    gameInstallInfo?.manifest?.disk_size !== undefined &&
-    size(Number(gameInstallInfo?.manifest?.disk_size))
+  const installSize = uncompressedSize && size(uncompressedSize)
 
   const getLanguageName = useMemo(() => {
     return (language: string) => {
@@ -378,7 +397,17 @@ export default function DownloadDialog({
   const { validPath, notEnoughDiskSpace, message, spaceLeftAfter } = spaceLeft
   const title = gameInfo?.title
 
+  const isThirdPartyDownloader = gameInfo?.usesThirdPartyLauncher
+
   function getInstallLabel() {
+    if (isThirdPartyDownloader) {
+      return t('button.install-downloader', 'Download Installer')
+    }
+
+    if (requiresToken) {
+      return t('button.sign-and-install', 'Sign and Install')
+    }
+
     if (installPath) {
       if (notEnoughDiskSpace) {
         return t('button.force-innstall', 'Force Install')
@@ -391,11 +420,26 @@ export default function DownloadDialog({
     return t('button.no-path-selected', 'No path selected')
   }
 
-  const isWebGame = gameInstallInfo?.game['name'] === 'web'
+  async function handleInstallPathSelection() {
+    return window.api
+      .openDialog({
+        buttonLabel: t('box.choose'),
+        properties: ['openDirectory'],
+        title: t('install.path'),
+        defaultPath: getDefaultInstallPath()
+      })
+      .then((path) => setInstallPath(path || getDefaultInstallPath()))
+  }
+
+  const isWebGame = gameInstallInfo?.game['name'] === 'web' || isBrowserGame
+
+  const hideImportButton = isWebGame || isThirdPartyDownloader
+
   const nativeGameIsReadyToInstall =
     installPath && gameDownloadSize && !gettingInstallInfo
 
-  const readyToInstall = isWebGame || nativeGameIsReadyToInstall
+  const readyToInstall =
+    isWebGame || nativeGameIsReadyToInstall || requiresToken
 
   const showRemainingProgress =
     (runner === 'hyperplay' && previousProgress.percent) ||
@@ -407,8 +451,11 @@ export default function DownloadDialog({
 
   const showInstallandDownloadSizes = !isWebGame
 
+  const showThirdPartyWarning = isThirdPartyDownloader && showAlert.thirdParty
+  const showNFTWarning = requiresToken && showAlert.siwe
+
   return (
-    <>
+    <div className={styles.downloadDialogContainer}>
       <DialogHeader onClose={backdropClick}>
         {title ? title : '...'}
         {availablePlatforms.map((p) => (
@@ -418,9 +465,43 @@ export default function DownloadDialog({
             key={p.value}
           />
         ))}
+        {isNotNative && (
+          <div className={styles.installModalWarning}>
+            <Images.Info fill="var(--error-300)" />
+            {t(
+              'install.compatibility-warning',
+              'This Windows game will run using a compatibility layer. Your experience may vary.'
+            )}
+          </div>
+        )}
       </DialogHeader>
       {gameInfo && <Anticheat gameInfo={gameInfo} />}
-      <DialogContent>
+      <div>
+        {showNFTWarning ? (
+          <div style={{ maxWidth: 500, overflow: 'hidden' }}>
+            <AlertCard
+              title=""
+              message={t(
+                'alert.install.siwe-message',
+                'Please purchase to proceed or ensure that NFT is in the current wallet.'
+              )}
+              link={{
+                text: t('alert.install.siwe-action', 'Buy NFT'),
+                onClick: () =>
+                  marketplaceUrl
+                    ? window.api.openExternalUrl(marketplaceUrl)
+                    : console.log(
+                        'marketplace url is invalid: ',
+                        marketplaceUrl
+                      )
+              }}
+              size="large"
+              variant={'warning'}
+              icon={<Images.WarningIcon />}
+              onClose={() => setShowAlert({ ...showAlert, siwe: false })}
+            />
+          </div>
+        ) : null}
         {showInstallandDownloadSizes ? (
           <div className="InstallModal__sizes">
             <div className="InstallModal__size">
@@ -492,70 +573,86 @@ export default function DownloadDialog({
               ))}
           </SelectField>
         )}
-
-        <TextInputWithIconField
-          htmlId="setinstallpath"
-          label={t('install.path', 'Select Install Path')}
-          placeholder={getDefaultInstallPath()}
-          value={installPath.replaceAll("'", '')}
-          onChange={(event) => setInstallPath(event.target.value)}
-          icon={<FontAwesomeIcon icon={faFolderOpen} />}
-          onIconClick={async () =>
-            window.api
-              .openDialog({
-                buttonLabel: t('box.choose'),
-                properties: ['openDirectory'],
-                title: t('install.path'),
-                defaultPath: getDefaultInstallPath()
-              })
-              .then((path) => setInstallPath(path || getDefaultInstallPath()))
-          }
-          afterInput={
-            gameDownloadSize ? (
-              <span className="smallInputInfo">
-                {validPath && (
-                  <>
-                    <span>
-                      {`${t('install.disk-space-left', 'Space Available')}: `}
+        {showThirdPartyWarning ? (
+          <AlertCard
+            icon={<Images.WarningIcon />}
+            title={t('alert.install.tdp-title', 'Third-Party Downloader')}
+            message={
+              <>
+                {t(
+                  'alert.install.tpd-message-part1',
+                  `Third-party downloaders bypass HyperPlay's security review. `
+                )}
+                <strong>
+                  {t(
+                    'alert.install.tpd-message-part2',
+                    'Proceed only if you trust this game development studio.'
+                  )}
+                </strong>
+              </>
+            }
+            variant={'warning'}
+            size="large"
+            onClose={() => setShowAlert({ ...showAlert, thirdParty: false })}
+          />
+        ) : null}
+        {isBrowserGame ? null : (
+          <TextInputWithIconField
+            htmlId="setinstallpath"
+            label={t('install.path', 'Select Install Path')}
+            placeholder={getDefaultInstallPath()}
+            value={installPath.replaceAll("'", '')}
+            onChange={(event) => setInstallPath(event.target.value)}
+            icon={<FontAwesomeIcon icon={faFolderOpen} />}
+            inputProps={{ readOnly: true, className: styles.folderTextInput }}
+            onIconClick={handleInstallPathSelection}
+            afterInput={
+              gameDownloadSize ? (
+                <span className="smallInputInfo">
+                  {validPath && (
+                    <>
+                      <span>
+                        {`${t('install.disk-space-left', 'Space Available')}: `}
+                      </span>
+                      <span>
+                        <strong>{`${message}`}</strong>
+                      </span>
+                      {!notEnoughDiskSpace && (
+                        <>
+                          <span>
+                            {` - ${t(
+                              'install.space-after-install',
+                              'After Install'
+                            )}: `}
+                          </span>
+                          <span>
+                            <strong>{`${spaceLeftAfter}`}</strong>
+                          </span>
+                        </>
+                      )}
+                    </>
+                  )}
+                  {!validPath && (
+                    <span className="warning">
+                      {`${t(
+                        'install.path-not-writtable',
+                        'Warning: path might not be writable.'
+                      )}`}
                     </span>
-                    <span>
-                      <strong>{`${message}`}</strong>
+                  )}
+                  {validPath && notEnoughDiskSpace && (
+                    <span className="warning">
+                      {` (${t(
+                        'install.not-enough-disk-space',
+                        'Not enough disk space'
+                      )})`}
                     </span>
-                    {!notEnoughDiskSpace && (
-                      <>
-                        <span>
-                          {` - ${t(
-                            'install.space-after-install',
-                            'After Install'
-                          )}: `}
-                        </span>
-                        <span>
-                          <strong>{`${spaceLeftAfter}`}</strong>
-                        </span>
-                      </>
-                    )}
-                  </>
-                )}
-                {!validPath && (
-                  <span className="warning">
-                    {`${t(
-                      'install.path-not-writtable',
-                      'Warning: path might not be writable.'
-                    )}`}
-                  </span>
-                )}
-                {validPath && notEnoughDiskSpace && (
-                  <span className="warning">
-                    {` (${t(
-                      'install.not-enough-disk-space',
-                      'Not enough disk space'
-                    )})`}
-                  </span>
-                )}
-              </span>
-            ) : null
-          }
-        />
+                  )}
+                </span>
+              ) : null
+            }
+          />
+        )}
         {children}
         {haveSDL ? (
           <div className="InstallModal__sdls">
@@ -598,20 +695,22 @@ export default function DownloadDialog({
             </div>
           </div>
         )}
-      </DialogContent>
+      </div>
       <DialogFooter>
-        <Button
-          type="tertiary"
-          size="medium"
-          onClick={async () => handleInstall('import')}
-        >
-          {t('button.import')}
-        </Button>
+        {hideImportButton ? null : (
+          <Button
+            type="tertiary"
+            size="medium"
+            onClick={async () => handleInstall('import')}
+          >
+            {t('button.import')}
+          </Button>
+        )}
         <Button
           type="secondary"
           size="medium"
           onClick={async () => handleInstall()}
-          disabled={!readyToInstall}
+          disabled={!readyToInstall || !enableCTAButton}
         >
           {!readyToInstall && (
             <FontAwesomeIcon className="fa-spin-pulse" icon={faSpinner} />
@@ -619,6 +718,6 @@ export default function DownloadDialog({
           {readyToInstall && getInstallLabel()}
         </Button>
       </DialogFooter>
-    </>
+    </div>
   )
 }

@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg-fixed);
+  padding: var(--space-2lg-fixed);
+  width: 60vw;
+  flex-shrink: 1;
+}
+
+.questsViewerContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex: 1;
+  max-height: 100%;
+  min-height: 0px;
+}
+
+.detailsWrapper {
+  width: -webkit-fill-available;
+  width: 50vw;
+  min-width: 400px;
+  max-width: 1063px !important;
+
+  @media (max-width: 1300px) {
+    width: 540px;
+    min-width: 520px;
+    max-width: 1045px !important;
+  }
+}

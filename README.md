@@ -1,10 +1,5 @@
 # HyperPlay
 
-HyperPlay is an Open Source Game Launcher for Linux, Windows and macOS with Web3 features.
-It was conceived as a fork of [Heroic Games Launcher](https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher), so it keeps its features but also add new ones.
-Right now it supports launching games from the Epic Games Store using [Legendary](https://github.com/derrod/legendary) and GOG Games using [gogdl](https://github.com/App-Games-Launcher/heroic-gogdl).
-HyperPlay is built with Web3 and Web2 Technologies like: TypeScript, React, NodeJS, and Electron.
-
 ## Index
 
 - [HyperPlay](#hyperplay)
@@ -16,18 +11,18 @@ HyperPlay is built with Web3 and Web2 Technologies like: TypeScript, React, Node
       - [Other Distributions (TAR.XZ)](#other-distributions-tarxz)
     - [Windows](#windows)
     - [macOS](#macos)
-  - [Testing with Docker](#testing-with-docker)
+  - [Contributing](#contributing)
   - [Credits](#credits)
 
 ## Supported Operating Systems
 
+- Windows 8+ (might work on Win7 if you have the latest PowerShell but we do not give support for it)
 - Linux:
   - Ubuntu 20.04LTS or newer
   - Fedora 33 or newer
   - Arch Linux (Manjaro and Garuda as well)
   - HyperPlay will still work on most distros but we do not give official support for them. So do not open Issues here in these cases, instead, open a Discussion or try our Discord.
 - SteamOS (downloading using Discover only)
-- Windows 8+ (might work on Win7 if you have the latest PowerShell but we do not give support for it)
 - macOS 10.15 or higher
 
 ## Installation
@@ -74,32 +69,49 @@ Download HyperPlay-x.x.x.dmg and move the HyperPlay App to the Applications fold
 <img width="1840" alt="Hyperplay wallet signature during game" src="https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/assets/38574891/a56d34c6-f1a8-46dc-9a18-5e0c6035e468">
 <img width="1840" alt="Hyperplay game detail page" src="https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/assets/38574891/a4a2ffe9-2e2a-4f88-be34-8903d900385b">
 
+## Contributing
+
+Read our [Contribution License Agreement](https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/blob/main/doc/cla.md).
+
 ### Local Development
 
-This projects uses submodules, so you need to clone it with the `--recurse-submodules` flag or run `git submodule update --init --recursive` after cloning.
+This projects uses optional NPM packages.
+
+For internal developers, use:
 
 ```bash
-yarn setup
-yarn start
+pnpm run setup
+pnpm start
 ```
 
-### Testing with Docker
-
-It is recommended to run end to end tests with Docker so you don't alter your local config files or have your local config files interfere with the tests.
-
-To run e2e tests on the unpackaged app running in dev mode.
-From the root of your local Heroic directory, run:
+For external developers, use:
 
 ```bash
-yarn test:e2e
+pnpm run setupWithoutOptional
+pnpm start
 ```
 
-To run e2e tests on the packaged app.
-From the root of your local Heroic directory, run:
+#### M1/M2 Mac
+
+If you are using an M1 or M2 Mac and receive the following error message:
+
+```
+Error: Cannot find module @rollup/rollup-darwin-arm64. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.
+```
+
+Please try the following
 
 ```bash
-yarn test:e2ePackaged
+rm -f pnpm-lock.yaml
+rm -rf node_modules
+pnpm cache delete
+pnpm run setupWithoutOptional
+pnpm start
 ```
+
+#### Lavamoat
+
+Please note that at times, the console may alert you to run `pnpm exec allow-scripts auto`. This is from `@lavamoat/allow-scripts` and is due to a dependency adding a new preinstall or postinstall script. After running `pnpm exec allow-scripts auto` and updating the package.json to enable or disable the script, please run `pnpm run setup` or `pnpm run setupWithoutOptional` again.
 
 ## Credits
 

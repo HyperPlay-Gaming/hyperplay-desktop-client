@@ -15,23 +15,75 @@ env:
   APPLE_ID: ${{ secrets.APPLEID }}
   APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLEIDPASS }}
   TEAMID: ${{ secrets.TEAMID }}
+  APPLE_TEAM_ID: ${{ secrets.TEAMID }}
 
 jobs:
   release-x64:
+    runs-on: macos-13
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: pnpm/action-setup@v4
+        with:
+          standalone: ${{ runner.os == 'Windows' }}
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
+
+      - name: install python setuptools
+        run: pip3 install setuptools
+        shell: bash
+
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Install dependencies
+        run: pnpm run setup
+
+      - name: setup env production file
+        run: |
+          echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
+          echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
+
+      - name: Build artifacts.
+        run: pnpm release:mac:x64
+        env:
+          NOTARIZE: true
+      - name: Copy dist/latest-mac.yml to dist/latest-mac-x64.yml
+        run: |
+          cp dist/latest-mac.yml dist/latest-mac-x64.yml
+        shell: bash
+      - name: Save latest-mac-x64.yml as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: latest-mac-x64
+          path: dist/latest-mac-x64.yml
+          if-no-files-found: error
+
+  release-arm64:
     runs-on: macos-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'yarn'
+          node-version: '20'
+
+      - uses: pnpm/action-setup@v4
 
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -42,28 +94,52 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn setup
+        run: pnpm run setup
+
+      - name: setup env production file
+        run: |
+          echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
+          echo "VITE_IPFS_API=${{ secrets.VITE_IPFS_API }}" >> .env.production
+
+      - name: Install node-gyp
+        run: pnpm add --global node-gyp
+        shell: bash
+
+      - name: install setuptools
+        run: brew install python-setuptools
+        shell: bash
 
       - name: Build artifacts.
-        run: yarn release:mac:x64
+        run: pnpm release:mac:arm64
         env:
           NOTARIZE: true
+      - name: Copy dist/latest-mac.yml to dist/latest-mac-arm64.yml
+        run: |
+          cp dist/latest-mac.yml dist/latest-mac-arm64.yml
+        shell: bash
+      - name: Save latest-mac-arm64.yml as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: latest-mac-arm64
+          path: dist/latest-mac-arm64.yml
+          if-no-files-found: error
 
-  release-arm64:
-    runs-on: macos-latest-xlarge
+  generate-latest-mac:
+    needs:
+      - release-x64
+      - release-arm64
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'yarn'
+          node-version: '20'
+
+      - uses: pnpm/action-setup@v4
 
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -74,9 +150,29 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn setup
+        run: pnpm run setup
 
-      - name: Build artifacts.
-        run: yarn release:mac:arm64
-        env:
-          NOTARIZE: true
+      - name: Download artifacts from release-x64 and release-arm64 jobs
+        uses: actions/download-artifact@v4
+        with:
+          name: latest-mac-x64
+          path: dist-x64
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: latest-mac-arm64
+          path: dist-arm64
+
+      - name: Merge YMLs
+        run: |
+          pnpm install js-yaml
+          node merge-yml.js
+        working-directory: ${{ github.workspace }}
+
+      - name: Update draft with latest-mac.yml
+        uses: ncipollo/release-action@v1.13.0
+        with:
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+          draft: true
+          allowUpdates: true
+          artifacts: latest-mac.yml

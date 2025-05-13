@@ -1,0 +1,21 @@
+.tabsList {
+  margin: var(--space-2lg-fixed) 0px;
+}
+
+.tabsPanel {
+  margin-bottom: var(--space-xl-fixed);
+}
+
+.title {
+  text-align: left;
+}
+
+.empty {
+  text-align: center;
+  margin-top: var(--space-2lg-fixed);
+}
+
+.clearButton {
+  position: absolute;
+  right: var(--space-xl-fixed);
+}

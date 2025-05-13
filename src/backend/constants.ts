@@ -1,6 +1,6 @@
 import { spawnSync } from 'child_process'
 import { homedir, platform } from 'os'
-import { join, resolve } from 'path'
+import { join } from 'path'
 import { parse } from '@node-steam/vdf'
 
 import { GameConfigVersion, GlobalConfigVersion } from 'common/types'
@@ -11,6 +11,15 @@ import { app } from 'electron'
 import { existsSync, mkdirSync, readFileSync } from 'graceful-fs'
 import { GlobalConfig } from './config'
 import { TypeCheckedStoreBackend } from './electron_store'
+import { DEV_PORTAL_URL } from 'common/constants'
+import {
+  configFolder,
+  appConfigFolder,
+  publicDir,
+  fixAsarPath,
+  icon
+} from './constants/folders'
+export * from './constants/folders'
 
 const configStore = new TypeCheckedStoreBackend('configStore', {
   cwd: 'store'
@@ -38,10 +47,8 @@ const currentGlobalConfigVersion: GlobalConfigVersion = 'v0'
 
 const flatPakHome = env.XDG_DATA_HOME?.replace('/data', '') || homedir()
 const userHome = homedir()
-const configFolder = app.getPath('appData')
 const appFolder = join(configFolder, 'hyperplay')
 const legendaryConfigPath = join(appFolder, 'legendaryConfig', 'legendary')
-const appConfigFolder = join(configFolder, 'hyperplay')
 const configPath = join(appConfigFolder, 'config.json')
 const gamesConfigPath = join(appConfigFolder, 'GamesConfig')
 
@@ -56,22 +63,22 @@ const defaultWinePrefix = join(
   'default'
 )
 const anticheatDataPath = join(appConfigFolder, 'areweanticheatyet.json')
-const nileConfigPath = join(appFolder, 'nile_config', 'nile')
 const runtimePath = join(toolsPath, 'runtimes')
 const userInfo = join(legendaryConfigPath, 'user.json')
 const imagesCachePath = join(appConfigFolder, 'images-cache')
+const cachedUbisoftInstallerPath = join(
+  appFolder,
+  'tools',
+  'UbisoftConnectInstaller.exe'
+)
 
-const {
-  currentLogFile,
-  lastLogFile,
-  legendaryLogFile,
-  gogdlLogFile,
-  nileLogFile
-} = createNewLogFileAndClearOldOnes()
+const ipdtPatcher = join(toolsPath, 'ipdt')
+const ipdtManifestsPath = join(appConfigFolder, 'manifests')
 
-const publicDir = resolve(__dirname, '..', app.isPackaged ? '' : '../public')
+const { currentLogFile, lastLogFile, legendaryLogFile, gogdlLogFile } =
+  createNewLogFileAndClearOldOnes()
+
 const gogdlAuthConfig = join(app.getPath('userData'), 'gog_store', 'auth.json')
-const icon = fixAsarPath(join(publicDir, 'app_icon.png'))
 const iconDark = fixAsarPath(join(publicDir, 'trayIconDark24x24.png'))
 const iconLight = fixAsarPath(join(publicDir, 'trayIconLight24x24.png'))
 const vulkanHelperBin = fixAsarPath(
@@ -79,9 +86,6 @@ const vulkanHelperBin = fixAsarPath(
 )
 const installed = join(legendaryConfigPath, 'installed.json')
 const legendaryMetadata = join(legendaryConfigPath, 'metadata')
-const nileInstalled = join(nileConfigPath, 'installed.json')
-const nileLibrary = join(nileConfigPath, 'library.json')
-const nileUserData = join(nileConfigPath, 'user.json')
 const fallBackImage = 'fallback'
 const epicLoginUrl = 'https://legendary.gl/epiclogin'
 const sidInfoUrl =
@@ -92,10 +96,9 @@ const supportURL = 'https://github.com/G7DAO/HyperPlay/blob/main/Support.md'
 const discordLink = 'https://discord.gg/hyperplay'
 const twitterLink = 'https://twitter.com/HyperPlayGaming'
 const wikiLink = 'https://github.com/G7DAO/HyperPlay/wiki'
-const weblateUrl =
-  'https://hosted.weblate.org/projects/hyperplay-games-launcher'
+const weblateUrl = 'https://hosted.weblate.org/projects/hyperplay-client/'
 const wineprefixFAQ = 'https://wiki.winehq.org/FAQ#Wineprefixes'
-const hyperplaySite = 'https://docs.hyperplaygaming.com/faq'
+const hyperplaySite = 'https://docs.hyperplay.xyz/faq'
 const customThemesWikiLink =
   'https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/Custom-Themes'
 const eventsToCloseMetaMaskPopupOn = [
@@ -106,7 +109,6 @@ const eventsToCloseMetaMaskPopupOn = [
 ]
 const valistListingsApiUrl = 'https://developers.hyperplay.xyz/api/v1/listings'
 const mainReleaseChannelName = 'main'
-const valistBaseApiUrlv1 = 'https://api.valist.io/v1'
 export let qaToken = ''
 
 export function setQaToken(token: string) {
@@ -120,8 +122,10 @@ export function getValistListingApiUrl(projectId: string) {
   )
 }
 
+export const patchApiUrl = `${DEV_PORTAL_URL}api/v1/patches`
+
 export function getValidateLicenseKeysApiUrl() {
-  return `${valistBaseApiUrlv1}/license_keys/validate`
+  return `${DEV_PORTAL_URL}api/v1/license_keys/validate`
 }
 
 /**
@@ -141,18 +145,6 @@ function getShell() {
     default:
       return '/bin/bash'
   }
-}
-
-/**
- * Fix path for packed files with asar, else will do nothing.
- * @param origin  original path
- * @returns fixed path
- */
-function fixAsarPath(origin: string): string {
-  if (!origin.includes('app.asar.unpacked')) {
-    return origin.replace('app.asar', 'app.asar.unpacked')
-  }
-  return origin
 }
 
 export function getSteamCompatFolder() {
@@ -215,24 +207,36 @@ const execOptions = {
   shell: getShell()
 }
 
-const defaultFolders = [gamesConfigPath, iconsFolder, imagesCachePath]
+const defaultFolders = [
+  gamesConfigPath,
+  iconsFolder,
+  imagesCachePath,
+  toolsPath,
+  ipdtManifestsPath
+]
 
-const necessaryFoldersByPlatform = {
+const necessaryFoldersByPlatform: {
+  [key in 'win32' | 'linux' | 'darwin']: string[]
+} = {
   win32: [...defaultFolders],
-  linux: [...defaultFolders, toolsPath],
-  darwin: [...defaultFolders, toolsPath]
+  linux: [...defaultFolders],
+  darwin: [...defaultFolders]
 }
 
 export function createNecessaryFolders() {
-  necessaryFoldersByPlatform[platform()].forEach((folder: string) => {
-    if (!existsSync(folder)) {
-      mkdirSync(folder)
-    }
-  })
+  const platformKey = platform() as 'win32' | 'linux' | 'darwin'
+  if (necessaryFoldersByPlatform[platformKey]) {
+    necessaryFoldersByPlatform[platformKey].forEach((folder: string) => {
+      if (!existsSync(folder)) {
+        mkdirSync(folder)
+      }
+    })
+  }
 }
 
 const onboardLocalStore = new TypeCheckedStoreBackend('onboardingStore', {
-  cwd: 'store'
+  cwd: 'store',
+  name: 'onboarding-store'
 })
 
 export {
@@ -242,7 +246,6 @@ export {
   lastLogFile,
   legendaryLogFile,
   gogdlLogFile,
-  nileLogFile,
   discordLink,
   twitterLink,
   execOptions,
@@ -295,8 +298,7 @@ export {
   valistListingsApiUrl,
   mainReleaseChannelName,
   vulkanHelperBin,
-  nileConfigPath,
-  nileInstalled,
-  nileLibrary,
-  nileUserData
+  cachedUbisoftInstallerPath,
+  ipdtManifestsPath,
+  ipdtPatcher
 }

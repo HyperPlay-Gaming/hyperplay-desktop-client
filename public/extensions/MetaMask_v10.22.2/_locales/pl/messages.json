@@ -75,9 +75,6 @@
   "asset": {
     "message": "Składnik aktywów"
   },
-  "attemptingConnect": {
-    "message": "Próba połączenia z blockchainem."
-  },
   "attributions": {
     "message": "Atrybuty"
   },
@@ -208,9 +205,6 @@
   "delete": {
     "message": "Usuń"
   },
-  "deleteNetwork": {
-    "message": "Usunąć sieć?"
-  },
   "details": {
     "message": "Szczegóły"
   },
@@ -232,12 +226,6 @@
   "editContact": {
     "message": "Edytuj kontakt"
   },
-  "ensNotFoundOnCurrentNetwork": {
-    "message": "Nazwa ENS nie została znaleziona w bieżącej sieci. Spróbuj przełączyć się na Główną sieć Ethereum."
-  },
-  "ensRegistrationError": {
-    "message": "Błąd w rejestracji nazwy ENS"
-  },
   "enterPasswordContinue": {
     "message": "Podaj hasło żeby kontynuować"
   },
@@ -256,10 +244,6 @@
   "fast": {
     "message": "Szybko"
   },
-  "fiat": {
-    "message": "FIAT",
-    "description": "Exchange type"
-  },
   "fileImportFail": {
     "message": "Importowanie pliku nie działa? Kliknij tutaj!",
     "description": "Helps user import their account from a JSON file"
@@ -269,9 +253,6 @@
   },
   "from": {
     "message": "Z"
-  },
-  "functionType": {
-    "message": "Typ funkcji"
   },
   "gasLimit": {
     "message": "Limit gazu"
@@ -332,9 +313,6 @@
     "message": "Importuj",
     "description": "Button to import an account from a selected file"
   },
-  "importAccount": {
-    "message": "Importuj konto"
-  },
   "importAccountMsg": {
     "message": " Importowane konta nie będą powiązane z Twoją pierwotną frazą seed MetaMask. Dowiedz się więcej o importowaniu kont "
   },
@@ -359,12 +337,6 @@
   },
   "invalidAddressRecipient": {
     "message": "Nieprawidłowy adres odbiorcy"
-  },
-  "invalidAddressRecipientNotEthNetwork": {
-    "message": "To nie jest sieć ETH, zmień na małe litery"
-  },
-  "invalidBlockExplorerURL": {
-    "message": "Nieprawidłowe Block Explorer URI"
   },
   "invalidRPC": {
     "message": "Nieprawidłowe RPC URI"
@@ -402,9 +374,6 @@
   },
   "loading": {
     "message": "Ładowanie..."
-  },
-  "loadingTokens": {
-    "message": "Ładowanie tokenów..."
   },
   "localhost": {
     "message": "Serwer lokalny 8545"
@@ -462,14 +431,8 @@
   "next": {
     "message": "Dalej"
   },
-  "noAddressForName": {
-    "message": "Nie wybrano żadnego adresu dla tej nazwy."
-  },
   "noConversionRateAvailable": {
     "message": "Brak kursu waluty"
-  },
-  "noTransactions": {
-    "message": "Nie ma transakcji"
   },
   "noWebcamFound": {
     "message": "Twoja kamera nie została znaleziona. Spróbuj ponownie."
@@ -491,9 +454,6 @@
   },
   "origin": {
     "message": "Pochodzenie"
-  },
-  "parameters": {
-    "message": "Parametry"
   },
   "participateInMetaMetrics": {
     "message": "Weź udział w MetaMetrics"
@@ -523,12 +483,6 @@
   "prev": {
     "message": "Poprzednie"
   },
-  "primaryCurrencySetting": {
-    "message": "Waluta podstawowa"
-  },
-  "primaryCurrencySettingDescription": {
-    "message": "Wybierz walutę natywną, aby preferować wyświetlanie wartości w walucie natywnej łańcucha (np. ETH). Wybierz walutę fiat, aby preferować wyświetlanie wartości w wybranej przez siebie walucie fiat."
-  },
   "privacyMsg": {
     "message": "Polityka prywatności"
   },
@@ -544,9 +498,6 @@
   },
   "readdToken": {
     "message": "Możesz później ponownie dodać ten token poprzez \"Dodaj token\" w opcjach menu swojego konta."
-  },
-  "recipientAddressPlaceholder": {
-    "message": "Szukaj, adres publiczny (0x) lub ENS"
   },
   "reject": {
     "message": "Odrzuć"
@@ -571,9 +522,6 @@
   },
   "removeAccountDescription": {
     "message": "To konto będzie usunięte z Twojego portfela. Zanim przejdziesz dalej, upewnij się, że masz frazę seed i klucz prywatny do tego importowanego konta. Możesz później importować lub utworzyć nowe konta z rozwijanego menu kont. "
-  },
-  "requestsAwaitingAcknowledgement": {
-    "message": "wnioski oczekujące na zatwierdzenie"
   },
   "required": {
     "message": "Wymagane"
@@ -606,9 +554,6 @@
   "search": {
     "message": "Szukaj"
   },
-  "searchResults": {
-    "message": "Wyniki wyszukiwania"
-  },
   "securityAndPrivacy": {
     "message": "Bezpieczeństwo i prywatność"
   },
@@ -630,9 +575,6 @@
   "send": {
     "message": "Wyślij"
   },
-  "sendTokens": {
-    "message": "Wyślij tokeny"
-  },
   "settings": {
     "message": "Ustawienia"
   },
@@ -647,9 +589,6 @@
   },
   "showHexDataDescription": {
     "message": "Wybierz to żeby pokazać pole danych hex na ekranie wysyłania"
-  },
-  "sigRequest": {
-    "message": "Prośba o podpis"
   },
   "sign": {
     "message": "Podpisz"
@@ -741,9 +680,6 @@
   "transactionErrored": {
     "message": "Wystąpił błąd podczas wykonywania transakcji."
   },
-  "transactionFee": {
-    "message": "Opłata transakcyjna"
-  },
   "transactionResubmitted": {
     "message": "Transakcja wysłana ponownie z opłatą za gaz podwyższoną do $1 – $2"
   },
@@ -771,15 +707,6 @@
   "unknown": {
     "message": "Nieznane"
   },
-  "unknownCameraError": {
-    "message": "Podczas łączenia się z kamerą wystąpił błąd. Spróbuj ponownie..."
-  },
-  "unknownCameraErrorTitle": {
-    "message": "Ups! Coś poszło nie tak..."
-  },
-  "unknownNetwork": {
-    "message": "Nieznana sieć prywatna"
-  },
   "unknownQrCode": {
     "message": "Błąd: nie mogliśmy odczytać tego kodu QR"
   },
@@ -788,9 +715,6 @@
   },
   "unlockMessage": {
     "message": "Zdecentralizowana sieć oczekuje"
-  },
-  "updatedWithDate": {
-    "message": "Zaktualizowano $1"
   },
   "urlErrorMsg": {
     "message": "URI wymaga prawidłowego prefiksu HTTP/HTTPS."
@@ -812,9 +736,6 @@
   },
   "youNeedToAllowCameraAccess": {
     "message": "Żeby użyć tej opcji należy podłączyć kamerę"
-  },
-  "youSign": {
-    "message": "Podpisujesz"
   },
   "yourPrivateSeedPhrase": {
     "message": "Twoja prywatna fraza seed"

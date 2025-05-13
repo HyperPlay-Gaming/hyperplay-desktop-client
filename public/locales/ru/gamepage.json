@@ -29,20 +29,34 @@
         "stopInstall": {
             "keepInstalling": "Продолжить установку",
             "message": "Хотите ли вы оставить установленные файлы?",
-            "title": "Прекращение установки"
+            "title": "Вы хотите отменить загрузку?",
+            "keepFilesMessage": "Проверьте здесь, если вы хотите сохранить файлы загрузки после отмены."
         },
         "uninstall": {
             "checkbox": "Удалить префикс: {{prefix}}{{newLine}} Примечание: Это действие нельзя отменить, и оно также приведет к удалению файлов сохранений.",
             "message": "Удалить эту игру?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Удалить"
+            "title": "Удалить",
+            "dlc": "Вы хотите удалить этот DLC?",
+            "prefix_warning": "Префикс Wine для этой игры - префикс по умолчанию. Если вы действительно хотите удалить его, вы должны сделать это вручную."
         },
         "update": {
             "message": "Для игры вышло обновление. Обновить сейчас?",
-            "title": "Игра нуждается в обновлении"
+            "title": "Игра нуждается в обновлении",
+            "message-cancel": "Играть в эту игру невозможно без обновления"
         },
         "wineprefix": "Выбрать папку префикса Wine",
-        "yes": "ДА"
+        "yes": "ДА",
+        "aware": "Я знаю",
+        "yesCancel": "Да, отмена",
+        "compability": {
+            "message": "Эта игра Windows будет запущена с помощью слоя совместимости. Вы можете столкнуться с некоторыми проблемами или игра может вообще не работать."
+        },
+        "dont-show-again": "Не показывать снова",
+        "ok": "OK",
+        "stopExtraction": {
+            "title": "Вы хотите отменить экстракцию?"
+        }
     },
     "button": {
         "add_to_favourites": "Добавить в избранное",
@@ -56,7 +70,9 @@
         "install": "Установить",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Отменить загрузку",
+            "continue": "Продолжить загрузку"
         },
         "remove_from_favourites": "Удалить из избранного",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +83,11 @@
         },
         "unhide_game": "Показать игру",
         "uninstall": "Удалить",
-        "update": "Обновить"
+        "update": "Обновить",
+        "details": "Подробности",
+        "favorites": "Любимое",
+        "remove_from_library": "Удалить",
+        "unfavorites": "Нелюбимое"
     },
     "cloud_save_unsupported": "Не поддерживается",
     "disabled": "Выключено",
@@ -78,22 +98,25 @@
     "game": {
         "downloadSize": "Размер загрузки",
         "firstPlayed": "Первый запуск",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Получение размера загрузки",
+        "getting-install-size": "Получение размера установки",
         "installSize": "Размер установки",
         "language": "Язык",
         "lastPlayed": "Последний запуск",
         "neverPlayed": "Никогда",
         "platform": "Выберите версию платформы для установки",
         "requirements": "Системные требования",
-        "totalPlayed": "Проведено в игре"
+        "totalPlayed": "Проведено в игре",
+        "dlcs": "DLC",
+        "selectChannelName": "Выберите канал Имя"
     },
     "gamecard": {
         "moving": "Перемещение",
         "repairing": "Восстановление"
     },
     "generic": {
-        "error": "Неизвестная ошибка"
+        "error": "Неизвестная ошибка",
+        "noDescription": "Описание отсутствует"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -118,7 +141,14 @@
         "path-not-writtable": "Предупреждение: путь может быть недоступен для записи.",
         "space-after-install": "После установки",
         "wineprefix": "Префикс Wine",
-        "wineversion": "Версия Wine"
+        "wineversion": "Версия Wine",
+        "anticheat-warning": {
+            "cancel": "Нет",
+            "message": "Поддержка античита прервана или невозможна. Игра не будет работать. Вы всё равно хотите его установить?",
+            "install": "Да (я понимаю, что это не сработает)",
+            "title": "Античит прерван/отклонён"
+        },
+        "compatibility-warning": "Эта игра Windows будет запущена с помощью слоя совместимости. Ваш опыт может варьироваться."
     },
     "label": {
         "game": {
@@ -126,7 +156,8 @@
         },
         "playing": {
             "start": "Начать игру",
-            "stop": "Игра запущена (Остановить)"
+            "stop": "Игра запущена (Остановить)",
+            "update": "Обновить"
         },
         "saves": {
             "syncing": "Синхронизация сохранений"
@@ -136,17 +167,19 @@
         "options": "Параметры запуска..."
     },
     "not_logged_in": {
-        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "login": "Log in",
-        "title": "You are NOT logged in"
+        "epic": "Вы не вошли в HyperPlay с учетной записью Epic. Не используйте страницу магазина для входа, вместо этого нажмите следующую кнопку:",
+        "gog": "Вы не вошли в HyperPlay с учетной записью GOG. Не используйте страницу магазина для входа, вместо этого нажмите следующую кнопку:",
+        "login": "Войти",
+        "title": "Вы НЕ авторизованы",
+        "amazon": "Вы не вошли в HyperPlay с учетной записью Epic. Не используйте страницу магазина для входа, вместо этого нажмите следующую кнопку:"
     },
     "report_problem": "Сообщить о проблеме с запуском этой игры",
     "sdl": {
         "title": "Выбрать компоненты для установки"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Бутылка CrossOver"
     },
     "sideload": {
         "field": {
@@ -184,8 +217,24 @@
         "reparing": "Восстановление игры. Пожалуйста, подождите",
         "this-game-uses-third-party": "Эта игра использует сторонний лаунчер и пока не поддерживается",
         "totalDownloaded": "Всего загружено",
-        "uninstalling": "Uninstalling",
-        "updating": "Обновление игры"
+        "uninstalling": "Удаление",
+        "updating": "Обновление игры",
+        "playing": "Игра",
+        "moving-files": "Перемещение файла '{{file}}': {{percent}} ",
+        "syncingSaves": "Синхронизация сохранений",
+        "launching": "Запуск",
+        "ubisoft": "Установка Ubisoft",
+        "downloading": "Загрузка",
+        "extracting": {
+            "cancel": "Отменить экстракцию",
+            "progress": "Извлечение"
+        },
+        "gog-goodie": "Кажется, эту игру нельзя установить. Проверьте загружаемый контент на https://gog.com/account",
+        "goodie": "Не устанавливается",
+        "preparing": "Скачать, пожалуйста, подождите",
+        "distributables": "Установка распределенных",
+        "paused": "Пауза",
+        "patching": "Патчинг файлов "
     },
     "submenu": {
         "addShortcut": "Создать ярлык",
@@ -199,6 +248,12 @@
         "removeShortcut": "Удалить ярлыки",
         "settings": "Настройки",
         "store": "Страница в магазине",
-        "verify": "Проверить и восстановить"
+        "verify": "Проверить и восстановить",
+        "extraInfo": "Дополнительная информация"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Пожалуйста, свяжитесь с HyperPlay Team с этим сообщением: {{error}} - {{context}}."
+        }
     }
 }

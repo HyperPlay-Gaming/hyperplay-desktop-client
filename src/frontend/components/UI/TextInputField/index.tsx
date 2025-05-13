@@ -1,7 +1,8 @@
 import React, { ChangeEvent, FocusEvent, ReactNode, useContext } from 'react'
 import classnames from 'classnames'
 import ContextProvider from 'frontend/state/ContextProvider'
-import './index.css'
+import './index.scss'
+import { TextInput, TextInputProps } from '@hyperplay/ui'
 
 interface TextInputFieldProps {
   htmlId: string
@@ -16,6 +17,8 @@ interface TextInputFieldProps {
   warning?: ReactNode
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void
   maxLength?: number
+  isError?: boolean
+  inputProps?: TextInputProps & React.RefAttributes<HTMLInputElement>
 }
 
 const TextInputField = ({
@@ -30,9 +33,12 @@ const TextInputField = ({
   afterInput,
   warning,
   onBlur,
-  maxLength
+  maxLength,
+  isError,
+  inputProps
 }: TextInputFieldProps) => {
   const { isRTL } = useContext(ContextProvider)
+  const { className: inputPropsClassName, ...textInputProps } = inputProps ?? {}
 
   return (
     <div
@@ -40,9 +46,7 @@ const TextInputField = ({
         isRTL
       })}
     >
-      {label && <label htmlFor={htmlId}>{label}</label>}
-      {inputIcon}
-      <input
+      <TextInput
         type="text"
         id={htmlId}
         value={value}
@@ -51,9 +55,16 @@ const TextInputField = ({
         placeholder={placeholder}
         onBlur={onBlur}
         maxLength={maxLength}
+        className={classnames(
+          isError ? 'inputFieldError' : '',
+          inputPropsClassName
+        )}
+        rightSection={inputIcon}
+        label={label}
+        {...textInputProps}
       />
-      {value && warning}
-      {afterInput}
+      {afterInput && <span className="afterInput">{afterInput}</span>}
+      {value && <span className="smallMessage">{value && warning}</span>}
     </div>
   )
 }

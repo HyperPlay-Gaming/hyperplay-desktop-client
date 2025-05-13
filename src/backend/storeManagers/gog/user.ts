@@ -13,6 +13,19 @@ import {
 import { gogdlAuthConfig } from 'backend/constants'
 import { clearCache } from 'backend/utils'
 
+function authLogSanitizer(line: string) {
+  try {
+    const output = JSON.parse(line)
+    output.access_token = '<redacted>'
+    output.session_id = '<redacted>'
+    output.refresh_token = '<redacted>'
+    output.user_id = '<redacted>'
+    return JSON.stringify(output) + '\n'
+  } catch (error) {
+    return line
+  }
+}
+
 export class GOGUser {
   static async login(
     code: string
@@ -26,7 +39,10 @@ export class GOGUser {
     // Gets token from GOG basaed on authorization code
     const { stdout } = await runRunnerCommand(
       ['auth', '--code', code],
-      createAbortController('gogdl-auth')
+      createAbortController('gogdl-auth'),
+      {
+        logSanitizer: authLogSanitizer
+      }
     )
 
     try {
@@ -50,10 +66,9 @@ export class GOGUser {
 
   public static async getUserDetails() {
     if (!isOnline()) {
-      logError('Unable to login information, Heroic offline', LogPrefix.Gog)
+      logError('Unable to login information, HyperPlay offline', LogPrefix.Gog)
       return
     }
-    logInfo('Checking if login is valid', LogPrefix.Gog)
     if (!this.isLoggedIn()) {
       logWarning('User is not logged in', LogPrefix.Gog)
       return
@@ -84,7 +99,6 @@ export class GOGUser {
     delete data.email
 
     configStore.set('userData', data)
-    logInfo('Saved username to config file', LogPrefix.Gog)
 
     return data
   }
@@ -102,7 +116,10 @@ export class GOGUser {
     }
     const { stdout } = await runRunnerCommand(
       ['auth'],
-      createAbortController('gogdl-get-credentials')
+      createAbortController('gogdl-get-credentials'),
+      {
+        logSanitizer: authLogSanitizer
+      }
     )
 
     deleteAbortController('gogdl-get-credentials')

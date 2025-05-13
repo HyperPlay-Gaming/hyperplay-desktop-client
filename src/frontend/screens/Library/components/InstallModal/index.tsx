@@ -26,7 +26,11 @@ import WineSelector from './WineSelector'
 import { getPlatformName } from 'frontend/helpers'
 import PlatformSelection from 'frontend/components/UI/PlatformSelection'
 import ChannelNameSelection from 'frontend/components/UI/ChannelNameSelection'
-import TextInputField from 'frontend/components/UI/TextInputField'
+import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
+import ModDialog from './ModDialog'
+import { AccessCodeInput } from 'frontend/components/UI/AccessCodeInput'
+import { useTranslation } from 'react-i18next'
+import AccessCodeContainer from 'frontend/components/UI/AccessCodeContainer'
 
 type Props = {
   appName: string
@@ -41,6 +45,7 @@ export default React.memo(function InstallModal({
   runner,
   gameInfo = null
 }: Props) {
+  const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
 
   const [winePrefix, setWinePrefix] = useState('...')
@@ -49,12 +54,9 @@ export default React.memo(function InstallModal({
   const [crossoverBottle, setCrossoverBottle] = useState('')
   const [accessCode, setAccessCode] = useState('')
 
-  const numberOfChannels =
-    (gameInfo?.channels && Object.keys(gameInfo?.channels).length) ?? 0
-  const initChannelName =
-    gameInfo?.channels && numberOfChannels > 0
-      ? Object.keys(gameInfo?.channels)[0]
-      : 'main'
+  const channelKeys = Object.keys(gameInfo?.channels || {})
+  const numberOfChannels = channelKeys.length
+  const initChannelName = numberOfChannels > 0 ? channelKeys[0] : 'main'
   const [channelNameToInstall, setChannelNameToInstall] =
     useState(initChannelName)
 
@@ -66,6 +68,22 @@ export default React.memo(function InstallModal({
   const selectedChannel = gameInfo?.channels?.[channelNameToInstall]
 
   const channelPlatforms = selectedChannel?.release_meta.platforms ?? []
+  let listingMarketplaceUrl = ''
+
+  /*
+   * This just returns the first token's marketplace url
+   * TODO: return the licensing config info from /listings endpoint,
+   * so we can link to the gating token's marketplace URL
+   */
+  if (
+    gameInfo &&
+    gameInfo.networks &&
+    gameInfo.networks.length > 0 &&
+    gameInfo.networks[0].marketplace_urls &&
+    gameInfo.networks[0].marketplace_urls[0]
+  ) {
+    listingMarketplaceUrl = gameInfo.networks[0].marketplace_urls[0]
+  }
   const hpPlatforms = Object.keys(channelPlatforms) as AppPlatforms[]
   const isHpGame = runner === 'hyperplay'
 
@@ -153,9 +171,50 @@ export default React.memo(function InstallModal({
       setPlatformToInstall(availablePlatforms[0].value as InstallPlatform)
   }, [availablePlatforms])
 
-  const showDownloadDialog = !isSideload && gameInfo
+  const channelRequiresAccessCode = gameInfo
+    ? gameRequiresAccessCodes(gameInfo, channelNameToInstall)
+    : false
+
+  const channelRequiresToken = !!selectedChannel?.license_config.tokens
+
+  const showModDialog = gameInfo && gameInfo.account_name === 'marketwars'
+  const showDownloadDialog = !showModDialog && !isSideload && gameInfo
 
   const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)
+
+  const [accessCodeVerified, setAccessCodeVerified] = useState(false)
+
+  const enableCTAButton =
+    !channelRequiresAccessCode ||
+    (channelRequiresAccessCode && accessCodeVerified)
+
+  const accessCodeInput = (
+    <AccessCodeInput
+      setAccessCodeVerified={setAccessCodeVerified}
+      channelRequiresAccessCode={true}
+      accessCode={accessCode}
+      inputProps={{ onChange: (ev) => setAccessCode(ev.target.value) }}
+      licenseConfigId={selectedChannel?.license_config.id}
+    />
+  )
+
+  let accessCodeContent = null
+
+  if (gameInfo) {
+    accessCodeContent = (
+      <AccessCodeContainer
+        gameInfo={gameInfo}
+        channelNameToInstall={channelNameToInstall}
+        matchingRunner={runner === 'hyperplay'}
+        warningMessage={t(
+          'installModal.loginRequiredMessage',
+          'You need to be logged into HyperPlay to enter your access code and install this game. '
+        )}
+      >
+        {accessCodeInput}
+      </AccessCodeContainer>
+    )
+  }
 
   return (
     <div className="InstallModal">
@@ -164,7 +223,7 @@ export default React.memo(function InstallModal({
         showCloseButton
         className={'InstallModal__dialog'}
       >
-        {showDownloadDialog ? (
+        {showDownloadDialog && (
           <DownloadDialog
             appName={appName}
             runner={runner}
@@ -176,7 +235,11 @@ export default React.memo(function InstallModal({
             gameInfo={gameInfo}
             crossoverBottle={crossoverBottle}
             channelNameToInstall={channelNameToInstall}
+            channelId={selectedChannel?.channel_id}
             accessCode={accessCode}
+            enableCTAButton={enableCTAButton}
+            requiresToken={channelRequiresToken}
+            marketplaceUrl={listingMarketplaceUrl}
           >
             <PlatformSelection
               disabled={disabledPlatformSelection}
@@ -191,15 +254,7 @@ export default React.memo(function InstallModal({
                 gameInfo={gameInfo}
               />
             ) : null}
-            {runner === 'hyperplay' &&
-            selectedChannel?.license_config.access_codes ? (
-              <TextInputField
-                placeholder={'Enter access code'}
-                value={accessCode}
-                onChange={(ev) => setAccessCode(ev.target.value)}
-                htmlId="access_code_input"
-              ></TextInputField>
-            ) : null}
+            {accessCodeContent}
             {hasWine ? (
               <WineSelector
                 winePrefix={winePrefix}
@@ -213,7 +268,8 @@ export default React.memo(function InstallModal({
               />
             ) : null}
           </DownloadDialog>
-        ) : (
+        )}
+        {isSideload === true && (
           <SideloadDialog
             setWinePrefix={setWinePrefix}
             winePrefix={winePrefix}
@@ -242,6 +298,42 @@ export default React.memo(function InstallModal({
               />
             ) : null}
           </SideloadDialog>
+        )}
+        {showModDialog === true && (
+          <ModDialog
+            backdropClick={backdropClick}
+            gameInfo={gameInfo}
+            accessCode={accessCode}
+            requiresToken={channelRequiresToken}
+            enableCTAButton={enableCTAButton}
+            winePrefix={winePrefix}
+            wineVersion={wineVersion}
+            crossoverBottle={crossoverBottle}
+            isGated={selectedChannel?.license_config?.access_codes ?? false}
+          >
+            <div style={{ paddingTop: 'var(--space-md)' }}>
+              {runner === 'hyperplay' && numberOfChannels > 1 ? (
+                <ChannelNameSelection
+                  channelNameToInstall={channelNameToInstall}
+                  setChannelNameToInstall={setChannelNameToInstall}
+                  gameInfo={gameInfo}
+                />
+              ) : null}
+              {accessCodeContent}
+            </div>
+            {hasWine ? (
+              <WineSelector
+                winePrefix={winePrefix}
+                wineVersion={wineVersion}
+                wineVersionList={wineVersionList}
+                title={gameInfo?.title}
+                setWinePrefix={setWinePrefix}
+                setWineVersion={setWineVersion}
+                crossoverBottle={crossoverBottle}
+                setCrossoverBottle={setCrossoverBottle}
+              />
+            ) : null}
+          </ModDialog>
         )}
       </Dialog>
     </div>

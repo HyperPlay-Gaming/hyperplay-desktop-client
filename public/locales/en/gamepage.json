@@ -1,11 +1,25 @@
 {
+    "alert": {
+        "install": {
+            "siwe-action": "Buy NFT",
+            "siwe-message": "Please purchase to proceed or ensure that NFT is in the current wallet.",
+            "tdp-title": "Third-Party Downloader",
+            "tpd-message-part1": "Third-party downloaders bypass HyperPlay's security review. ",
+            "tpd-message-part2": "Proceed only if you trust this game development studio."
+        }
+    },
     "box": {
+        "aware": "I am aware",
         "change": {
             "message": "This will change the install location of this game, are you sure?",
             "path": "Choose a new install path",
             "title": "Change Games Install Path"
         },
         "choose": "Choose",
+        "compability": {
+            "message": "This Windows game will run using a compatibility layer. You might encounter some issues or the game might not work at all."
+        },
+        "dont-show-again": "Don't show again",
         "importpath": "Choose Game Folder to import",
         "move": {
             "message": "This can take a long time, are you sure?",
@@ -13,6 +27,7 @@
             "title": "Move Game Installation"
         },
         "no": "NO",
+        "ok": "OK",
         "repair": {
             "message": "Do you want to try to repair this game? This can take a long time.",
             "title": "Verify and Repair"
@@ -25,6 +40,9 @@
         },
         "sideload": {
             "exe": "Select Executable"
+        },
+        "stopExtraction": {
+            "title": "Do you want to cancel the Extraction?"
         },
         "stopInstall": {
             "keepFilesMessage": "Check here if you want to keep the download files after canceling.",
@@ -42,6 +60,7 @@
         },
         "update": {
             "message": "This game has an update, apply update now?",
+            "message-cancel": "It is not possible to play this game without updating",
             "title": "Game Needs Update"
         },
         "wineprefix": "Select WinePrefix Folder",
@@ -49,6 +68,7 @@
         "yesCancel": "Yes, cancel"
     },
     "button": {
+        "add_to_library": "Add to library",
         "cancel": "Pause/Cancel",
         "continue": "Continue Download",
         "details": "Details",
@@ -59,6 +79,7 @@
         "hide_game": "Hide Game",
         "import": "Import Game",
         "install": "Install",
+        "install-downloader": "Download Installer",
         "no-path-selected": "No path selected",
         "queue": {
             "cancel": "Cancel Download",
@@ -72,6 +93,7 @@
         "sideload": {
             "edit": "Edit App/Game"
         },
+        "sign-and-install": "Sign and Install",
         "unfavorites": "Unfavorite",
         "unhide_game": "Unhide Game",
         "uninstall": "Uninstall",
@@ -106,13 +128,6 @@
         "error": "Unknown error",
         "noDescription": "No description available"
     },
-    "hyperplay": {
-        "gamecard": {
-            "extracting": "Extracting...",
-            "installing": "Downloading...",
-            "paused": "Paused"
-        }
-    },
     "info": {
         "canRunOffline": "Online Required",
         "installedPlatform": "Installed Platform",
@@ -123,6 +138,7 @@
         "web3-supported": "Has Web3 features"
     },
     "install": {
+        "compatibility-warning": "This Windows game will run using a compatibility layer. Your experience may vary.",
         "disk-space-left": "Space Available",
         "not-enough-disk-space": "Not enough disk space",
         "path": "Select Install Path",
@@ -134,7 +150,8 @@
     "label": {
         "playing": {
             "start": "Play",
-            "stop": "Playing (Stop)"
+            "stop": "Playing (Stop)",
+            "update": "Update"
         },
         "saves": {
             "syncing": "Syncing Saves"
@@ -143,8 +160,12 @@
     "launch": {
         "options": "Launch Options..."
     },
+    "method": {
+        "getInstallInfo": {
+            "error": "Please contact the HyperPlay Team with this message: {{error}} - {{context}}."
+        }
+    },
     "not_logged_in": {
-        "amazon": "You are not logged in with an Amazon account in Heroic. Don't use the store page to login, click the following button instead:",
         "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "login": "Log in",
@@ -177,13 +198,15 @@
         "recommended": "Recommended"
     },
     "status": {
-        "clickToUpdate": "Click to Update",
+        "distributables": "Installing Distributables",
         "downloading": "Downloading",
-        "extracting": "Extracting",
+        "extracting": {
+            "cancel": "Cancel Extraction",
+            "progress": "Extracting"
+        },
         "gameNotAvailable": "Game not available",
         "gog-goodie": "This game doesn't appear to be installable. Check downloadable content on https://gog.com/account",
         "goodie": "Not installable",
-        "hasUpdates": "New Version Available!",
         "installed": "Installed",
         "installing": "Installing",
         "moving": "Moving Installation, please wait",
@@ -191,6 +214,7 @@
         "notinstalled": "This game is not installed",
         "notSupported": "Not supported",
         "notSupportedGame": "Not Supported",
+        "patching": "Patching Files ",
         "paused": "Paused",
         "playing": "Playing",
         "preparing": "Preparing Download, please wait",
@@ -217,5 +241,13 @@
         "settings": "Settings",
         "store": "Store Page",
         "verify": "Verify and Repair"
+    },
+    "tooltip": {
+        "installed_from_epic": "Installed from Epic Store",
+        "installed_from_gog": "Installed from GOG Store",
+        "installed_from_hyperplay": "Installed from HyperPlay Store",
+        "will_install_from_epic": "Will install from Epic Store",
+        "will_install_from_gog": "Will install from GOG Store",
+        "will_install_from_hyperplay": "Will install from HyperPlay Store"
     }
 }

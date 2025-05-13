@@ -75,9 +75,6 @@
   "asset": {
     "message": "Tillgång"
   },
-  "attemptingConnect": {
-    "message": "Försöker ansluta till blockkedja."
-  },
   "attributions": {
     "message": "Tillskrivningar"
   },
@@ -202,9 +199,6 @@
   "delete": {
     "message": "Radera"
   },
-  "deleteNetwork": {
-    "message": "Radera nätverk?"
-  },
   "details": {
     "message": "Info"
   },
@@ -225,12 +219,6 @@
   },
   "editContact": {
     "message": "Redigera kontakt"
-  },
-  "ensNotFoundOnCurrentNetwork": {
-    "message": "ENS-namnet hittades inte i det aktuella nätverket. Prova att byta till Ethereum Mainnet."
-  },
-  "ensRegistrationError": {
-    "message": "Fel i ENS-namnregistrering"
   },
   "enterPasswordContinue": {
     "message": "Ange lösenord för att fortsätta"
@@ -259,9 +247,6 @@
   },
   "from": {
     "message": "Från"
-  },
-  "functionType": {
-    "message": "Funktionstyp"
   },
   "gasLimit": {
     "message": "Gasgräns"
@@ -322,9 +307,6 @@
     "message": "Importera",
     "description": "Button to import an account from a selected file"
   },
-  "importAccount": {
-    "message": "Importera konto"
-  },
   "importAccountMsg": {
     "message": "Importerade konton kommer inte att kopplas till din ursprungligen skapade seedphrase för ditt MetaMask-konto. Läs mer om importerade konton"
   },
@@ -349,12 +331,6 @@
   },
   "invalidAddressRecipient": {
     "message": "Mottagarens adress är ogiltig"
-  },
-  "invalidAddressRecipientNotEthNetwork": {
-    "message": "Ej ETH-nätverk, ange med små bokstäver"
-  },
-  "invalidBlockExplorerURL": {
-    "message": "Ogiltig Block Explorer URL"
   },
   "invalidRPC": {
     "message": "Ogiltig RPC-URL"
@@ -392,9 +368,6 @@
   },
   "loading": {
     "message": "Läser in..."
-  },
-  "loadingTokens": {
-    "message": "Laddar tokens..."
   },
   "lock": {
     "message": "Logga ut"
@@ -449,14 +422,8 @@
   "next": {
     "message": "Nästa"
   },
-  "noAddressForName": {
-    "message": "Inga adresser har angetts för detta namn."
-  },
   "noConversionRateAvailable": {
     "message": "Ingen omräkningskurs tillgänglig"
-  },
-  "noTransactions": {
-    "message": "Du har inga överföringar"
   },
   "noWebcamFound": {
     "message": "Din dators webbkamera hittades inte. Vänligen försök igen."
@@ -481,9 +448,6 @@
   },
   "origin": {
     "message": "Ursprung"
-  },
-  "parameters": {
-    "message": "Parametrar"
   },
   "participateInMetaMetrics": {
     "message": "Delta i MetaMetrics"
@@ -513,12 +477,6 @@
   "prev": {
     "message": "Föregående"
   },
-  "primaryCurrencySetting": {
-    "message": "Primär valuta"
-  },
-  "primaryCurrencySettingDescription": {
-    "message": "Välj native för att prioritera visning av värden i den ursprungliga valutan i kedjan (t.ex. ETH). Välj Fiat för att prioritera visning av värden i din valda fiatvaluta."
-  },
   "privacyMsg": {
     "message": "Integritetspolicy"
   },
@@ -534,9 +492,6 @@
   },
   "readdToken": {
     "message": "Du kan lägga till denna token i framtiden genom att välja \"Lägg till token\" i kontots alternativmeny."
-  },
-  "recipientAddressPlaceholder": {
-    "message": "Sök, allmän adress (0x) eller ENS"
   },
   "reject": {
     "message": "Avvisa"
@@ -561,9 +516,6 @@
   },
   "removeAccountDescription": {
     "message": "Detta konto kommer att avlägsnas från din plånbok. Säkerställ att du har din ursprungliga seed phrase eller den privata nyckeln till detta importerade konto innan du fortsätter. Du kan importera eller skapa konton igen via kontots rullgardinsmeny."
-  },
-  "requestsAwaitingAcknowledgement": {
-    "message": "anrop som väntar på godkännande"
   },
   "required": {
     "message": "Krävs"
@@ -596,9 +548,6 @@
   "search": {
     "message": "Sök"
   },
-  "searchResults": {
-    "message": "Sökresultat"
-  },
   "securityAndPrivacy": {
     "message": "Säkerhet och integritet"
   },
@@ -620,9 +569,6 @@
   "send": {
     "message": "Skicka"
   },
-  "sendTokens": {
-    "message": "Skicka tokens"
-  },
   "settings": {
     "message": "Inställningar"
   },
@@ -637,9 +583,6 @@
   },
   "showHexDataDescription": {
     "message": "Välj detta för att visa hex-datafältet på sändarskärmen"
-  },
-  "sigRequest": {
-    "message": "Signaturförfrågan"
   },
   "sign": {
     "message": "Signera"
@@ -728,9 +671,6 @@
   "transactionErrored": {
     "message": "Transaktionen påträffade ett fel."
   },
-  "transactionFee": {
-    "message": "Transaktionsavgift"
-  },
   "transactionResubmitted": {
     "message": "Transaktion skickad igen med gas-avgift ökad till $1 på $2"
   },
@@ -758,15 +698,6 @@
   "unknown": {
     "message": "okänt"
   },
-  "unknownCameraError": {
-    "message": "Ett fel inträffade när din kamera försökte användas. Försök igen..."
-  },
-  "unknownCameraErrorTitle": {
-    "message": "Hoppsan! Något gick fel..."
-  },
-  "unknownNetwork": {
-    "message": "Okänt privatnätverk"
-  },
   "unknownQrCode": {
     "message": "Fel: Vi kunde inte identifiera denna QR-kod"
   },
@@ -775,9 +706,6 @@
   },
   "unlockMessage": {
     "message": "Den decentraliserade webben väntar"
-  },
-  "updatedWithDate": {
-    "message": "Uppdaterat $1"
   },
   "urlErrorMsg": {
     "message": "URI:er kräver lämpligt HTTP/HTTPS-prefix."
@@ -799,9 +727,6 @@
   },
   "youNeedToAllowCameraAccess": {
     "message": "Du måste tillåta åtkomst till kameran för att använda den här funktionen."
-  },
-  "youSign": {
-    "message": "Du signerar"
   },
   "yourPrivateSeedPhrase": {
     "message": "Din privata seedphrase"

@@ -1,6 +1,6 @@
 import './index.scss'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -9,15 +9,23 @@ import ContextMenu from '../Library/components/ContextMenu'
 import SettingsContext from './SettingsContext'
 import LogSettings from './sections/LogSettings'
 import FooterInfo from './sections/FooterInfo'
-import { GeneralSettings, GamesSettings, AdvancedSettings } from './sections'
+import {
+  GeneralSettings,
+  GamesSettings,
+  AdvancedSettings,
+  SystemInfo
+} from './sections'
 import { AppSettings, WineInstallation } from 'common/types'
 import { UpdateComponent } from 'frontend/components/UI'
 import { LocationState, SettingsContextType } from 'frontend/types'
 import useSettingsContext from 'frontend/hooks/useSettingsContext'
-import { Tabs } from '@hyperplay/ui'
 import Accessibility from '../Accessibility'
 import WineManager from '../WineManager'
-import ContextProvider from 'frontend/state/ContextProvider'
+import AccountSettings from './sections/AccountSettings'
+import { observer } from 'mobx-react-lite'
+import DeviceState from 'frontend/state/DeviceState'
+import { Tabs, getTabsClassNames } from '@hyperplay/ui'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export const defaultWineVersion: WineInstallation = {
   bin: '/usr/bin/wine',
@@ -26,12 +34,13 @@ export const defaultWineVersion: WineInstallation = {
 }
 
 function Settings() {
+  const flags = useFlags()
+  const SHOW_ACHIEVEMENTS = flags.achievements
   const { t, i18n } = useTranslation()
   const {
     state: { fromGameCard, runner, gameInfo }
   } = useLocation() as { state: LocationState }
-  const { platform } = useContext(ContextProvider)
-  const isWin = platform === 'win32'
+  const isWin = DeviceState.isWin
   const [title, setTitle] = useState('')
 
   const [currentConfig, setCurrentConfig] = useState<Partial<AppSettings>>({})
@@ -110,11 +119,14 @@ function Settings() {
             <h3 className="headerTitle" data-testid="headerTitle">
               Settings
             </h3>
-            <Tabs defaultValue="general">
-              <Tabs.List
-                style={{ marginBottom: 'var(--space-md)' }}
-                type="outline"
-              >
+            <Tabs
+              defaultValue="general"
+              classNames={getTabsClassNames(
+                { list: 'settingsTabList' },
+                { list: 'outline' }
+              )}
+            >
+              <Tabs.List>
                 <Tabs.Tab value="general">
                   <div className="menu">{t('settings.navbar.general')}</div>
                 </Tabs.Tab>
@@ -132,6 +144,9 @@ function Settings() {
                 <Tabs.Tab value="accessibility">
                   <div className="menu">{t('accessibility.title')}</div>
                 </Tabs.Tab>
+                <Tabs.Tab value="accounts">
+                  <div className="menu capitalize">{t('accounts')}</div>
+                </Tabs.Tab>
                 {!isWin ? (
                   <Tabs.Tab value="wineManager">
                     <div className="menu">
@@ -144,17 +159,23 @@ function Settings() {
                 <GeneralSettings />
               </Tabs.Panel>
               <Tabs.Panel value="gamesSettings">
-                <GamesSettings useDetails={false} />
+                <GamesSettings />
               </Tabs.Panel>
               <Tabs.Panel value="advSettings">
                 <AdvancedSettings />
               </Tabs.Panel>
               <Tabs.Panel value="logSettings">
+                <SystemInfo />
                 <LogSettings />
               </Tabs.Panel>
               <Tabs.Panel value="accessibility">
                 <Accessibility />
               </Tabs.Panel>
+              {SHOW_ACHIEVEMENTS && (
+                <Tabs.Panel value="accounts">
+                  <AccountSettings />
+                </Tabs.Panel>
+              )}
               {!isWin ? (
                 <Tabs.Panel value="wineManager">
                   <WineManager />
@@ -169,4 +190,4 @@ function Settings() {
   )
 }
 
-export default React.memo(Settings)
+export default observer(Settings)

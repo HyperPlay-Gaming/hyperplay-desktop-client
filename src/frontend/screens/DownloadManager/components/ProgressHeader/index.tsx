@@ -2,9 +2,10 @@ import './index.css'
 import { hasProgress } from 'frontend/hooks/hasProgress'
 import React, { useEffect, useState } from 'react'
 import { AreaChart, Area, ResponsiveContainer } from 'recharts'
-import { Box, LinearProgress, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { DownloadManagerState } from 'common/types'
+import { Progress } from '@mantine/core'
+import { size } from 'frontend/helpers'
 
 interface Point {
   download: number
@@ -21,7 +22,7 @@ export default function ProgressHeader(props: {
   state: DownloadManagerState
 }) {
   const { t } = useTranslation()
-  const [progress] = hasProgress(props.appName)
+  const { progress } = hasProgress(props.appName)
   const [avgSpeed, setAvgDownloadSpeed] = useState<Point[]>(
     Array<Point>(20).fill({ download: 0, disk: 0 })
   )
@@ -49,6 +50,11 @@ export default function ProgressHeader(props: {
 
   const showDownloadBar =
     props.state !== 'idle' && props.appName && progress.percent
+
+  const progressBytes =
+    typeof progress.bytes === 'number'
+      ? size(progress.bytes * 1024 * 1024)
+      : progress.bytes
 
   return (
     <>
@@ -104,35 +110,35 @@ export default function ProgressHeader(props: {
           </div>
         </div>
       </div>
-      {showDownloadBar && (
+      {showDownloadBar ? (
         <div className="downloadBar">
           <div className="downloadProgressStats">
             <p className="downloadStat" color="var(--text-default)">{`${
-              progress.percent?.toFixed(2) ?? 0
-            }% [${progress.bytes ?? ''}] `}</p>
+              progress.percent?.toFixed(1) ?? 0
+            }% [${progressBytes ?? ''}] `}</p>
           </div>
-          <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
-            <Box sx={{ width: '100%', mr: 1 }}>
-              <LinearProgress
+          <div style={{ display: 'flex', alignItems: 'baseline' }}>
+            <div style={{ width: '100%', marginRight: 'var(--space-md)' }}>
+              <Progress
                 style={{ height: 10 }}
                 variant="determinate"
                 className="linearProgress"
                 value={progress.percent || 0}
               />
-            </Box>
-            <Box sx={{ minWidth: 35 }}>
-              <Typography
-                variant="subtitle1"
+            </div>
+            <div style={{ minWidth: 35 }}>
+              <div
+                className="caption"
                 title={t('download-manager.ETA', 'Estimated Time')}
               >
                 {props.state === 'running'
                   ? progress.eta ?? '00.00.00'
                   : 'Paused'}
-              </Typography>
-            </Box>
-          </Box>
+              </div>
+            </div>
+          </div>
         </div>
-      )}
+      ) : null}
     </>
   )
 }

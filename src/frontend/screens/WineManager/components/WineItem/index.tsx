@@ -121,7 +121,7 @@ const WineItem = ({
       status = size(disksize)
     } else {
       if (isDownloading) {
-        status = getProgressElement(progress.progress, downsize)
+        status = getProgressElement(progress.progress)
       } else if (progress.state === 'unzipping') {
         status = t('wine.manager.unzipping', 'Unzipping')
       } else {
@@ -188,8 +188,8 @@ const WineItem = ({
   )
 }
 
-function getProgressElement(progress: ProgressInfo, downsize: number) {
-  const { percentage, eta, avgSpeed } = progress
+function getProgressElement(progress: ProgressInfo) {
+  const { percentage, eta } = progress
 
   let totalSeconds = eta
   const hours = Math.floor(totalSeconds / 3600)
@@ -207,21 +207,17 @@ function getProgressElement(progress: ProgressInfo, downsize: number) {
     .join(':')
 
   const percentageAsString = `${percentage}%`
-  const bytesAsString = `[${size((percentage / 100) * downsize)}]`
-  const etaAsString = `| ETA: ${formattedTime}`
-  const avgSpeedAsString = `(${size(avgSpeed)}ps)`
+  const etaAsString = ` (${formattedTime})`
 
   return (
-    <p
+    <span
       style={{
         color: '#0BD58C',
         fontStyle: 'italic'
       }}
     >
-      {[percentageAsString, bytesAsString, avgSpeedAsString, etaAsString].join(
-        ' '
-      )}
-    </p>
+      {[percentageAsString, etaAsString].join(' ')}
+    </span>
   )
 }
 

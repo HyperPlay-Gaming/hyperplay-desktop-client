@@ -1,22 +1,20 @@
 import React, { lazy } from 'react'
 import OverlayManager from './OverlayManager'
 import { Runner } from 'common/types'
+import InjectedProviderApp from './InjectedProviderApp'
 const App = lazy(async () => import('./App'))
 
 const Views = {
-  App: <App />
+  App: <App />,
+  InjectedProviderApp: <InjectedProviderApp />
 }
 
+type Keys<T> = keyof T
+
 type URLSearchParamsProxy = URLSearchParams & {
-  view?: string
-  browserUrl?: string
+  view?: Keys<typeof Views> & 'BrowserGame'
   appName?: string
   runner?: Runner
-  showToasts?: string
-  showExtension?: string
-  showBrowserGame?: string
-  showExitButton?: string
-  showHintText?: string
 }
 
 const ViewManager = function () {
@@ -30,30 +28,9 @@ const ViewManager = function () {
     }
   )
 
-  if (
-    params.view === 'BrowserGame' &&
-    params.browserUrl !== undefined &&
-    params.appName !== undefined &&
-    params.runner !== undefined
-  ) {
-    const parseShowParam = (showParam: string | undefined) =>
-      showParam !== undefined && showParam === 'false' ? false : true
-
-    // default to true if not supplied
-    const renderState = {
-      showToasts: parseShowParam(params.showToasts),
-      showExtension: parseShowParam(params.showExtension),
-      showBrowserGame: parseShowParam(params.showBrowserGame),
-      showExitButton: parseShowParam(params.showExitButton),
-      showHintText: parseShowParam(params.showHintText)
-    }
+  if (params.view === 'BrowserGame' && params.appName && params.runner) {
     return (
-      <OverlayManager
-        url={params.browserUrl}
-        appName={params.appName}
-        runner={params.runner}
-        renderState={renderState}
-      />
+      <OverlayManager appName={params.appName ?? ''} runner={params.runner} />
     )
   }
 

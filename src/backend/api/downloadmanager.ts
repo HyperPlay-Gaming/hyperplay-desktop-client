@@ -1,6 +1,6 @@
-import { DownloadManagerState } from './../../common/types'
+import { DownloadManagerState, GameInfo } from './../../common/types'
 import { ipcRenderer } from 'electron'
-import { DMQueueElement, InstallParams, UpdateParams } from 'common/types'
+import { DMQueueElement, InstallParams } from 'common/types'
 
 export const install = async (args: InstallParams) => {
   const dmQueueElement: DMQueueElement = {
@@ -33,26 +33,37 @@ export const install = async (args: InstallParams) => {
   }
 }
 
-export const updateGame = (args: UpdateParams) => {
+export const updateGame = (gameInfo: GameInfo, accessCode?: string) => {
   const {
-    gameInfo: {
-      install: { platform, install_path }
-    }
-  } = args
+    app_name: appName,
+    runner,
+    install: { install_path, platform },
+    siweValues
+  } = gameInfo
 
   const dmQueueElement: DMQueueElement = {
-    params: { ...args, path: install_path!, platformToInstall: platform! },
+    params: {
+      gameInfo,
+      appName,
+      runner,
+      path: install_path!,
+      platformToInstall: platform!,
+      accessCode,
+      siweValues,
+      channelName: gameInfo.install.channelName
+    },
     type: 'update',
     addToQueueTime: Date.now(),
     endTime: 0,
-    startTime: 0
+    startTime: 0,
+    channel: gameInfo.install.channelName
   }
 
   ipcRenderer.invoke('addToDMQueue', dmQueueElement)
 
   ipcRenderer.invoke('trackEvent', {
     event: 'Game Update Requested',
-    properties: { game_name: args.appName, store_name: args.runner }
+    properties: { game_name: appName, store_name: runner }
   })
 }
 
@@ -78,8 +89,15 @@ export const handleDMQueueInformation = (
 export const cancelDownload = (removeDownloaded: boolean) =>
   ipcRenderer.send('cancelDownload', removeDownloaded)
 
+export const cancelExtraction = (appName: string) =>
+  ipcRenderer.send('cancelExtraction', appName)
+
 export const resumeCurrentDownload = () =>
   ipcRenderer.send('resumeCurrentDownload')
 
-export const pauseCurrentDownload = () =>
-  ipcRenderer.send('pauseCurrentDownload')
+export const pauseCurrentDownload = async () =>
+  ipcRenderer.invoke('pauseCurrentDownload')
+
+export const addHyperplayGame = async (projectId: string) => {
+  await ipcRenderer.invoke('addHyperplayGame', projectId)
+}

@@ -1,24 +1,18 @@
 import './index.css'
 
-import React, { useContext, useMemo, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
-import {
-  DMQueueElement,
-  DownloadManagerState,
-  GameInfo,
-  HiddenGame,
-  Runner
-} from 'common/types'
+import { GameInfo, Runner } from 'common/types'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { getGameInfo, install, launch, sendKill } from 'frontend/helpers'
+import { getGameInfo, install, launch } from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
-import { updateGame } from 'frontend/helpers/library'
+import { isNotNative, updateGame } from 'frontend/helpers/library'
 import { hasProgress } from 'frontend/hooks/hasProgress'
 import UninstallModal from 'frontend/components/UI/UninstallModal'
 import { observer } from 'mobx-react-lite'
-import walletStore from 'frontend/store/WalletStore'
+import walletStore from 'frontend/state/WalletState'
 import onboardingStore from 'frontend/store/OnboardingStore'
 import { getCardStatus } from './constants'
 import { hasStatus } from 'frontend/hooks/hasStatus'
@@ -29,7 +23,10 @@ import {
   SettingsButtons
 } from '@hyperplay/ui'
 import classNames from 'classnames'
-import { DMQueue } from 'frontend/types'
+import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
+import libraryState from 'frontend/state/libraryState'
+import DMQueueState from 'frontend/state/DMQueueState'
+import authState from 'frontend/state/authState'
 
 interface Card {
   buttonClick: () => void
@@ -48,36 +45,13 @@ const GameCard = ({
   favorited,
   gameInfo: gameInfoFromProps
 }: Card) => {
-  const [gameInfo, setGameInfo] = useState<GameInfo>(gameInfoFromProps)
+  const [gameInfo, setGameInfo] = useState<GameInfo>(
+    JSON.parse(JSON.stringify(gameInfoFromProps))
+  )
   const [showUninstallModal, setShowUninstallModal] = useState(false)
   const [isLaunching, setIsLaunching] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
-  const [dmState, setDMState] = useState<DownloadManagerState>('idle')
-  const [currentElement, setCurrentElement] = useState<DMQueueElement>()
-
-  useEffect(() => {
-    window.api.getDMQueueInformation().then(({ state }: DMQueue) => {
-      setDMState(state)
-    })
-
-    const removeHandleDMQueueInformation = window.api.handleDMQueueInformation(
-      (
-        e: Electron.IpcRendererEvent,
-        elements: DMQueueElement[],
-        state: DownloadManagerState
-      ) => {
-        if (elements) {
-          setCurrentElement(elements[0])
-          setDMState(state)
-        }
-      }
-    )
-
-    return () => {
-      removeHandleDMQueueInformation()
-    }
-  }, [])
 
   const { t } = useTranslation('gamepage')
 
@@ -85,15 +59,13 @@ const GameCard = ({
 
   const {
     layout,
-    hiddenGames,
-    favouriteGames,
     allTilesInColor,
     showDialogModal,
-    setIsSettingsModalOpen
+    setIsSettingsModalOpen,
+    platform
   } = useContext(ContextProvider)
 
   const {
-    title,
     app_name: appName,
     runner,
     is_installed: isInstalled,
@@ -103,12 +75,16 @@ const GameCard = ({
   const isInstallable =
     gameInfo.installable === undefined || gameInfo.installable // If it's undefined we assume it's installable
 
-  const [progress, previousProgress] = hasProgress(appName)
+  const { progress, previousProgress } = hasProgress(appName)
   const { install_size: size = '0', platform: installPlatform } = {
     ...gameInstallInfo
   }
 
-  const { status, folder } = hasStatus(appName, gameInfo, size)
+  const { status = '', folder } = hasStatus(appName, gameInfo, size)
+  const { statusText: downloadStatusText } = useGetDownloadStatusText(
+    appName,
+    gameInfo
+  )
 
   useEffect(() => {
     setIsLaunching(false)
@@ -123,11 +99,6 @@ const GameCard = ({
     updateGameInfo()
   }, [status])
 
-  async function handleUpdate() {
-    if (gameInfo.runner !== 'sideload')
-      updateGame({ appName, runner, gameInfo })
-  }
-
   const {
     isInstalling,
     notSupportedGame,
@@ -136,7 +107,11 @@ const GameCard = ({
     isPlaying,
     notAvailable,
     isUpdating,
-    isPaused
+    isPaused,
+    isExtracting,
+    isPreparing,
+    isInstallingDistributables,
+    isPatching
   } = getCardStatus(status, isInstalled, layout)
 
   const handleRemoveFromQueue = () => {
@@ -145,12 +120,28 @@ const GameCard = ({
 
   const getState = (): GameCardState => {
     const showUpdateButton =
-      hasUpdate && !isUpdating && !isQueued && !notAvailable
+      hasUpdate &&
+      !isUpdating &&
+      !isQueued &&
+      !notAvailable &&
+      !authState.isQaModeActive
     if (notSupportedGame) {
       return 'NOT_SUPPORTED'
     }
+    if (isInstallingDistributables) {
+      return 'DOWNLOADING_DISTRIBUTABLES'
+    }
+    if (isPreparing) {
+      return 'PREPARING'
+    }
+    if (isPatching) {
+      return 'PATCHING'
+    }
     if (isUninstalling) {
       return 'UNINSTALLING'
+    }
+    if (isExtracting) {
+      return 'EXTRACTING'
     }
     if (isQueued) {
       return 'QUEUED'
@@ -158,7 +149,7 @@ const GameCard = ({
     if (isPlaying) {
       return 'PLAYING'
     }
-    if (isInstalling || isQueued) {
+    if (isQueued || DMQueueState.isInstalling(appName)) {
       return 'INSTALLING'
     }
     if (showUpdateButton) {
@@ -167,7 +158,7 @@ const GameCard = ({
     if (isInstalled) {
       return 'INSTALLED'
     }
-    if (dmState === 'paused' && currentElement?.params.appName === appName) {
+    if (DMQueueState.isPaused(appName)) {
       return 'PAUSED'
     }
     if (status === 'extracting') {
@@ -176,26 +167,9 @@ const GameCard = ({
     return 'NOT_INSTALLED'
   }
 
-  const getMessage = (): string | undefined => {
-    if (status === 'extracting') {
-      return t('hyperplay.gamecard.extracting', 'Extracting...')
-    }
-    if (isPaused) {
-      return t('hyperplay.gamecard.paused', 'Paused')
-    }
-    if (isInstalling) {
-      return t('hyperplay.gamecard.installing', 'Downloading...')
-    }
-    return undefined
-  }
-
-  const isHiddenGame = useMemo(() => {
-    return !!hiddenGames.list.find(
-      (hiddenGame: HiddenGame) => hiddenGame.appName === appName
-    )
-  }, [hiddenGames, appName])
-
-  const isBrowserGame = installPlatform === 'Browser'
+  const isHiddenGame = libraryState.isGameHidden(appName)
+  const isBrowserGame =
+    installPlatform === 'Browser' || installPlatform === 'web'
 
   const onUninstallClick = function () {
     setShowUninstallModal(true)
@@ -246,8 +220,13 @@ const GameCard = ({
     {
       // update
       label: t('button.update', 'Update'),
-      onClick: handleClickStopBubbling(async () => handleUpdate()),
-      show: hasUpdate && !isUpdating && !isQueued
+      onClick: handleClickStopBubbling(async () => updateGame(gameInfo)),
+      show:
+        hasUpdate &&
+        !isUpdating &&
+        !isQueued &&
+        !notAvailable &&
+        !authState.isQaModeActive
     },
     {
       // install
@@ -264,33 +243,37 @@ const GameCard = ({
     {
       // open the game page
       label: t('button.details', 'Details'),
-      onClick: handleClickStopBubbling(() =>
-        navigate(`/gamepage/${runner}/${appName}`, { state: { gameInfo } })
-      ),
+      onClick: handleClickStopBubbling(() => {
+        navigate(`/gamepage/${runner}/${appName}`, {
+          state: { gameInfo }
+        })
+      }),
       show: true
     },
     {
       // hide
       label: t('button.hide_game', 'Hide Game'),
-      onClick: handleClickStopBubbling(() => hiddenGames.add(appName, title)),
+      onClick: handleClickStopBubbling(() => libraryState.hideGame(appName)),
       show: !isHiddenGame
     },
     {
       // unhide
       label: t('button.unhide_game', 'Unhide Game'),
-      onClick: handleClickStopBubbling(() => hiddenGames.remove(appName)),
+      onClick: handleClickStopBubbling(() => libraryState.unhideGame(appName)),
       show: isHiddenGame
     },
     {
       label: t('button.favorites', 'Favorite'),
       onClick: handleClickStopBubbling(() =>
-        favouriteGames.add(appName, title)
+        libraryState.favouriteGame(appName)
       ),
       show: !favorited
     },
     {
       label: t('button.unfavorites', 'Unfavorite'),
-      onClick: handleClickStopBubbling(() => favouriteGames.remove(appName)),
+      onClick: handleClickStopBubbling(() =>
+        libraryState.unfavouriteGame(appName)
+      ),
       show: favorited
     },
     {
@@ -332,9 +315,9 @@ const GameCard = ({
           onClose={() => setShowStopInstallModal(false)}
           progress={progress}
           installPath={folder}
-          appName={appName}
-          runner={runner}
+          gameInfo={gameInfo}
           folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
+          status={status}
         />
       ) : null}
       {showUninstallModal && (
@@ -358,9 +341,11 @@ const GameCard = ({
           imageUrl={gameInfo.art_square}
           favorited={favorited}
           onFavoriteClick={handleClickStopBubbling(() => {
-            if (!favorited)
-              favouriteGames.add(gameInfo.app_name, gameInfo.title)
-            else favouriteGames.remove(gameInfo.app_name)
+            if (!favorited) {
+              libraryState.favouriteGame(gameInfo.app_name)
+            } else {
+              libraryState.unfavouriteGame(gameInfo.app_name)
+            }
           })}
           onDownloadClick={handleClickStopBubbling(buttonClick)}
           onRemoveFromQueueClick={handleClickStopBubbling(
@@ -390,19 +375,60 @@ const GameCard = ({
             () => setShowSettings(!showSettings),
             true
           )}
-          onUpdateClick={handleClickStopBubbling(async () => handleUpdate())}
+          onUpdateClick={handleClickStopBubbling(async () =>
+            updateGame(gameInfo)
+          )}
           progress={progress}
-          message={getMessage()}
+          message={downloadStatusText}
           actionDisabled={isLaunching}
           alwaysShowInColor={allTilesInColor}
           store={runner}
+          i18n={{
+            addedToLibrary: t(
+              'button.remove_from_library',
+              'Remove from library'
+            ),
+            notAddedToLibrary: t('button.add_to_library', 'Add to library'),
+            logoTextTooltip: {
+              hyperplay: {
+                installed: t(
+                  'tooltip.installed_from_hyperplay',
+                  'Installed from HyperPlay Store'
+                ),
+                notInstalled: t(
+                  'tooltip.will_install_from_hyperplay',
+                  'Will install from HyperPlay Store'
+                )
+              },
+              epic: {
+                installed: t(
+                  'tooltip.installed_from_epic',
+                  'Installed from Epic Store'
+                ),
+                notInstalled: t(
+                  'tooltip.will_install_from_epic',
+                  'Will install from Epic Store'
+                )
+              },
+              gog: {
+                installed: t(
+                  'tooltip.installed_from_gog',
+                  'Installed from GOG Store'
+                ),
+                notInstalled: t(
+                  'tooltip.will_install_from_gog',
+                  'Will install from GOG Store'
+                )
+              }
+            }
+          }}
         />
       </Link>
     </>
   )
 
   async function mainAction(runner: Runner) {
-    if (isInstalling || isPaused) {
+    if (isInstalling || isExtracting || isPaused) {
       return setShowStopInstallModal(true)
     }
 
@@ -421,7 +447,7 @@ const GameCard = ({
 
     // kill the game if it's running
     if (isPlaying || isUpdating) {
-      return sendKill(appName, runner)
+      return window.api.kill(appName, runner)
     }
 
     // remove the game from the queue
@@ -447,7 +473,8 @@ const GameCard = ({
         t,
         runner,
         hasUpdate,
-        showDialogModal
+        showDialogModal,
+        isNotNative: isNotNative(platform, gameInfo.install.platform!)
       })
     }
     return

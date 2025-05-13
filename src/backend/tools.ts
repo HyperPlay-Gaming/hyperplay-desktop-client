@@ -10,8 +10,14 @@ import {
   rm
 } from 'graceful-fs'
 import { exec, spawn } from 'child_process'
-
-import { execAsync, getWineFromProton } from './utils'
+import {
+  calculateProgress,
+  downloadFile,
+  execAsync,
+  getWineFromProton,
+  spawnAsync,
+  writeConfig
+} from './utils'
 import {
   execOptions,
   toolsPath,
@@ -26,12 +32,18 @@ import { dirname, join } from 'path'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
 import { runWineCommand, validWine } from './launcher'
-import { chmod } from 'fs/promises'
+import { chmod, mkdir } from 'fs/promises'
 import {
   any_gpu_supports_version,
+  get_nvngx_path,
   get_vulkan_instance_version
 } from './utils/graphics/vulkan'
 import { lt as semverLt } from 'semver'
+import { getMainWindow } from './main_window'
+import { createAbortController } from './utils/aborthandler/aborthandler'
+import { GlobalConfig } from './config'
+import { gameManagerMap } from './storeManagers'
+import { addNewApp } from './storeManagers/sideload/library'
 
 export const DXVK = {
   getLatest: async () => {
@@ -57,6 +69,12 @@ export const DXVK = {
         name: 'dxvk',
         url: getDxvkUrl(),
         extractCommand: 'tar -xf',
+        os: 'linux'
+      },
+      {
+        name: 'dxvk-nvapi',
+        url: 'https://api.github.com/repos/jp7677/dxvk-nvapi/releases/latest',
+        extractCommand: 'tar --one-top-level -xf',
         os: 'linux'
       },
       {
@@ -137,15 +155,19 @@ export const DXVK = {
 
   installRemove: async (
     gameSettings: GameSettings,
-    tool: 'dxvk' | 'vkd3d' | 'dxvk-macOS',
+    tool: 'dxvk' | 'dxvk-nvapi' | 'vkd3d' | 'dxvk-macOS',
     action: 'backup' | 'restore'
   ): Promise<boolean> => {
-    if (gameSettings.wineVersion.bin.includes('toolkit')) {
+    if (gameSettings.wineVersion.type === 'toolkit') {
       // we don't want to install dxvk on the toolkit prefix since it breaks Apple's implementation
       logWarning(
         'Skipping DXVK install on Game Porting Toolkit prefix!',
         LogPrefix.DXVKInstaller
       )
+      return true
+    }
+
+    if (isMac && tool !== 'dxvk') {
       return true
     }
 
@@ -176,11 +198,12 @@ export const DXVK = {
       .toString()
       .split('\n')[0]
 
-    const dlls = readdirSync(`${toolsPath}/${tool}/${globalVersion}/x64`)
     const toolPathx32 = `${toolsPath}/${tool}/${globalVersion}/${
       tool === 'vkd3d' ? 'x86' : 'x32'
     }`
+    const dlls32 = readdirSync(toolPathx32)
     const toolPathx64 = `${toolsPath}/${tool}/${globalVersion}/x64`
+    const dlls64 = readdirSync(toolPathx64)
     const currentVersionCheck = `${winePrefix}/current_${tool}`
     let currentVersion = ''
 
@@ -206,7 +229,24 @@ export const DXVK = {
       logInfo('Removing DLL overrides', LogPrefix.DXVKInstaller)
 
       // unregister the dlls on the wine prefix
-      dlls.forEach(async (dll) => {
+      dlls64.forEach(async (dll) => {
+        dll = dll.replace('.dll', '')
+        const unregisterDll = [
+          'reg',
+          'delete',
+          'HKEY_CURRENT_USER\\Software\\Wine\\DllOverrides',
+          '/v',
+          dll,
+          '/f'
+        ]
+        await runWineCommand({
+          gameSettings,
+          commandParts: unregisterDll,
+          wait: true,
+          protonVerb: 'waitforexitandrun'
+        })
+      })
+      dlls32.forEach(async (dll) => {
         dll = dll.replace('.dll', '')
         const unregisterDll = [
           'reg',
@@ -234,7 +274,7 @@ export const DXVK = {
     }
 
     // copy the new dlls to the prefix
-    dlls.forEach((dll) => {
+    dlls32.forEach((dll) => {
       if (!isMac) {
         copyFile(
           `${toolPathx32}/${dll}`,
@@ -249,7 +289,8 @@ export const DXVK = {
           }
         )
       }
-
+    })
+    dlls64.forEach((dll) => {
       copyFile(
         `${toolPathx64}/${dll}`,
         `${winePrefix}/drive_c/windows/system32/${dll}`,
@@ -265,7 +306,7 @@ export const DXVK = {
     })
 
     // register dlls on the wine prefix
-    dlls.forEach(async (dll) => {
+    dlls64.forEach(async (dll) => {
       // remove the .dll extension otherwise will fail
       dll = dll.replace('.dll', '')
       exec(
@@ -281,6 +322,74 @@ export const DXVK = {
         }
       )
     })
+    dlls32.forEach(async (dll) => {
+      // remove the .dll extension otherwise will fail
+      dll = dll.replace('.dll', '')
+      const registerDll = [
+        'reg',
+        'add',
+        'HKEY_CURRENT_USER\\Software\\Wine\\DllOverrides',
+        '/v',
+        dll,
+        '/d',
+        'native,builtin',
+        '/f'
+      ]
+      await runWineCommand({
+        gameSettings,
+        commandParts: registerDll,
+        wait: true,
+        protonVerb: 'waitforexitandrun'
+      })
+    })
+
+    //locate and copy nvngx.dll to support DLSS on Nvidia GPUs
+    if (tool === 'dxvk-nvapi' && action === 'backup') {
+      try {
+        let nvngx_path = get_nvngx_path()
+        if (nvngx_path.length !== 0) {
+          nvngx_path += '/nvidia/wine'
+          const copyDlls = ['nvngx.dll', '_nvngx.dll']
+          copyDlls.forEach((dll) => {
+            copyFile(
+              `${nvngx_path}/${dll}`,
+              `${winePrefix}/drive_c/windows/system32/${dll}`,
+              (err) => {
+                if (err) {
+                  logError(
+                    [`Error when copying ${dll}`, err],
+                    LogPrefix.DXVKInstaller
+                  )
+                }
+              }
+            )
+          })
+          const regModNvngx = [
+            'reg',
+            'add',
+            'HKEY_LOCAL_MACHINE\\SOFTWARE\\NVIDIA Corporation\\Global\\NGXCore',
+            '/v',
+            'FullPath',
+            '/d',
+            'C:\\windows\\system32',
+            '/f'
+          ]
+          await runWineCommand({
+            gameSettings,
+            commandParts: regModNvngx,
+            wait: true,
+            protonVerb: 'waitforexitandrun'
+          })
+        } else {
+          logWarning(
+            'Could not find nvngx.dll for DLSS!',
+            LogPrefix.DXVKInstaller
+          )
+        }
+      } catch (err) {
+        logError([`Error when finding nvngx.dll`, err], LogPrefix.DXVKInstaller)
+      }
+    }
 
     writeFile(currentVersionCheck, globalVersion, (err) => {
       if (err) {
@@ -296,15 +405,12 @@ export const DXVK = {
 
 export const Winetricks = {
   download: async () => {
-    if (!isLinux) {
+    if (isWindows) {
       return
     }
 
-    const linuxUrl =
+    const url =
       'https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks'
-    const macUrl =
-      'https://raw.githubusercontent.com/The-Wineskin-Project/winetricks/macOS/src/winetricks'
-    const url = isMac ? macUrl : linuxUrl
     const path = `${toolsPath}/winetricks`
 
     if (!isOnline()) {
@@ -335,7 +441,7 @@ export const Winetricks = {
     }
 
     return new Promise<void>((resolve) => {
-      const winetricks = `${toolsPath}/winetricks`
+      const winetricks = join(toolsPath, 'winetricks')
 
       const { winePrefix, wineBin } = getWineFromProton(
         wineVersion,
@@ -482,4 +588,172 @@ function getDxvkUrl(): string {
   // FIXME: We currently lack a "Don't download at all" option here, but
   //        that would also need bigger changes in the frontend
   return 'https://api.github.com/repos/doitsujin/dxvk/releases/latest'
+}
+
+/**
+ * Download and Install the Windows version of Steam on a Wine Prefix on macOS only
+ */
+export const SteamWindows = {
+  downloadSteam: async () => {
+    if (!isMac) {
+      return
+    }
+
+    const steamURL =
+      'https://drive.usercontent.google.com/download?id=1MXowtPBihbljXFs_5cM1AfyOjnC3raaT&export=download&authuser=0&confirm=t&uuid=e159346a-5836-4f7d-8aed-af3d8340fef7&at=AENtkXa2d83g4dE_UZYQKKLoEUje%3A1732794843031'
+    const directory = `${toolsPath}/steam`
+    const fileName = 'Steam.zip'
+    const window = getMainWindow()
+
+    if (!isOnline() || existsSync(join(directory, fileName)) || !window) {
+      return
+    }
+
+    const abortController = createAbortController('steam-download')
+
+    function handleProgess(
+      downloadedBytes: number,
+      downloadSpeed: number,
+      diskWriteSpeed: number,
+      progress: number
+    ) {
+      const currentProgress = calculateProgress(
+        downloadedBytes,
+        Number.parseInt('718394478'),
+        downloadSpeed,
+        diskWriteSpeed,
+        progress
+      )
+
+      window?.webContents.send(`progressUpdate-steam`, {
+        appName: 'steam',
+        status: 'installing',
+        runner: 'hyperplay',
+        progress: {
+          ...currentProgress
+        }
+      })
+    }
+
+    return new Promise<void>((resolve, reject) => {
+      downloadFile(
+        steamURL,
+        directory,
+        fileName,
+        abortController,
+        handleProgess,
+        () => resolve()
+      ).catch((error) => {
+        logWarning(['Error Downloading Steam', error], LogPrefix.Backend)
+        reject(error)
+      })
+    })
+  },
+  installSteam: async () => {
+    if (!isMac) {
+      return
+    }
+
+    const steamCoverArt =
+      'https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/a7e8ba67562ea4d4ca0421066466ece4.png'
+    const steamSetupPath = `${toolsPath}/steam/Steam.zip`
+    const { defaultWinePrefix, wineVersion } = GlobalConfig.get().getSettings()
+    // won't use just Steam here to avoid issue with people that already has a prefix with this name
+    const winePrefix = join(dirname(defaultWinePrefix), 'SteamHyperPlay')
+
+    if (!existsSync(steamSetupPath)) {
+      await SteamWindows.downloadSteam()
+    }
+
+    const gameSettings = await gameManagerMap['sideload'].getSettings('steam')
+    if (!gameSettings) {
+      return
+    }
+    writeConfig('steam', {
+      ...gameSettings,
+      winePrefix,
+      wineVersion,
+      launcherArgs:
+        '-noverifyfiles -nobootstrapupdate -skipinitialbootstrap -norepairfiles -overridepackageurl'
+    })
+
+    try {
+      await runWineCommand({
+        commandParts: ['wineboot', '-init'],
+        wait: true,
+        gameSettings: {
+          ...gameSettings,
+          winePrefix,
+          wineVersion
+        }
+      })
+
+      const unzipFile = join(toolsPath, 'steam', 'Steam.zip')
+      const unzipPath = `${winePrefix}/drive_c/Program Files (x86)/Steam`
+      if (!existsSync(unzipPath)) {
+        await mkdir(unzipPath, { recursive: true })
+      }
+
+      logInfo('Extracting Steam...', LogPrefix.Backend)
+      await spawnAsync('unzip', ['-o', unzipFile, '-d', unzipPath])
+
+      // Add Steam to the library
+      const executable = join(unzipPath, 'Steam.exe')
+
+      if (!existsSync(executable)) {
+        logError(['Steam executable not found', executable], LogPrefix.Backend)
+        showDialogBoxModalAuto({
+          title: i18next.t('box.error.steam.title', 'Steam error'),
+          message: i18next.t(
+            'box.error.steam.message',
+            'Steam installation failed! Please read the instructions carefully and try again! {{paragraph}} {{error}}',
+            {
+              paragraph: '\n \n',
+              error: i18next.t(
+                'box.error.steam.error',
+                'Steam executable not found. Installation was probably canceled by user or failed on Steam side.'
+              )
+            }
+          ),
+          type: 'ERROR'
+        })
+        throw new Error('Steam executable not found')
+      }
+
+      addNewApp({
+        app_name: 'steam',
+        runner: 'sideload',
+        art_cover: steamCoverArt,
+        art_square: steamCoverArt,
+        is_installed: true,
+        title: 'Steam for Windows',
+        canRunOffline: false,
+        install: {
+          executable,
+          is_dlc: false,
+          platform: 'windows'
+        },
+        description: 'Play Steam Windows Games on macOS'
+      })
+
+      logInfo(`Steam installed at ${dirname(executable)}`, LogPrefix.Backend)
+    } catch (error) {
+      logError(['Error Installing Steam', error], LogPrefix.Backend)
+
+      showDialogBoxModalAuto({
+        title: i18next.t('box.error.steam.title', 'Steam error'),
+        message: i18next.t(
+          'box.error.steam.message',
+          'Steam installation failed! Please read the instructions carefully and try again! {{paragraph}} {{error}}',
+          {
+            paragraph: '\n \n',
+            error: error
+          }
+        ),
+        type: 'ERROR'
+      })
+
+      throw new Error('Steam installation failed')
+    }
+  }
 }

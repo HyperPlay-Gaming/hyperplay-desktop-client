@@ -1,5 +1,5 @@
-@import '~@fontsource/rajdhani/index.css';
-@import '~@fontsource/barlow/index.css';
+@import '@fontsource/rajdhani/index.css';
+@import '@fontsource/barlow/index.css';
 /*
   Subset of font https://github.com/googlefonts/noto-emoji
   which includes only flags emoji generated using command:
@@ -159,4 +159,14 @@ svg.disabled {
 .contentContainer {
   padding: var(--space-xl-fixed) var(--space-xl-fixed) 0px 0px;
   z-index: 3;
+}
+
+.contentContainer:is(.Library) {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
+.contentContainer:is(.Library)::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }

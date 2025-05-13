@@ -1,17 +1,20 @@
 import { ContextType } from 'frontend/types'
 import { makeAutoObservable, when } from 'mobx'
-import walletStore from './WalletStore'
 import React, { useContext, useEffect } from 'react'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { useLocation } from 'react-router-dom'
+import WalletState from '../state/WalletState'
 
 class OnboardingStore {
-  isOnboardingOpen = true
+  isOnboardingOpen = false
   initialized = false
 
   constructor() {
     makeAutoObservable(this)
+    window.api.handleOpenOnboarding(() => {
+      this.openOnboarding()
+    })
   }
 
   public openOnboarding() {
@@ -32,7 +35,7 @@ class OnboardingStore {
       )
 
       when(
-        () => walletStore.isConnected,
+        () => WalletState.isConnected,
         () => resolve()
       )
     })
@@ -45,9 +48,22 @@ class OnboardingStore {
     this.initialized = true
     if (defaultProvider === PROVIDERS.METAMASK_EXTENSION) {
       context!.setShowMetaMaskBrowserSidebarLinks(true)
-      await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
+      await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION, true)
 
       this.closeOnboarding()
+    } else {
+      this.openOnboarding()
+    }
+  }
+
+  public async bootstrapOnboardingWhenListenersBound(
+    context: ContextType,
+    defaultProvider?: PROVIDERS
+  ) {
+    if (defaultProvider === PROVIDERS.METAMASK_EXTENSION) {
+      this.bootstrapOnboarding(context, defaultProvider)
+    } else {
+      this.bootstrapOnboarding(context, defaultProvider)
     }
   }
 }
@@ -62,14 +78,15 @@ export const OnboardingStoreController = () => {
 
   async function init() {
     const currentWeb3Provider = await window.api.getCurrentWeb3Provider()
-    onboardingStore.bootstrapOnboarding(context, currentWeb3Provider)
+    onboardingStore.bootstrapOnboardingWhenListenersBound(
+      context,
+      currentWeb3Provider
+    )
   }
 
   useEffect(() => {
     if (pathname !== '/metamaskSecretPhrase') {
       init()
-    } else {
-      onboardingStore.closeOnboarding()
     }
   }, [pathname])
 

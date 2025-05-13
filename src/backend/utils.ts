@@ -8,15 +8,13 @@ import {
   WineInstallation,
   RpcClient,
   SteamRuntime,
-  Release,
   GameInfo,
   GameSettings,
-  State,
-  ProgressInfo
+  AppSettings
 } from 'common/types'
 import axios from 'axios'
-import EasyDl from 'hp-easydl'
-import yauzl from 'yauzl'
+import download from 'backend/utils/downloadFile/download_file'
+import { File, Progress } from 'backend/utils/downloadFile/types'
 
 import {
   app,
@@ -24,7 +22,8 @@ import {
   shell,
   Notification,
   BrowserWindow,
-  ipcMain
+  ipcMain,
+  DownloadItem
 } from 'electron'
 import {
   exec,
@@ -33,42 +32,30 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import {
-  appendFileSync,
-  existsSync,
-  rmSync,
-  mkdirSync,
-  createWriteStream,
-  rm
-} from 'graceful-fs'
+import { existsSync, rmSync } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
-import si from 'systeminformation'
 
 import {
   fixAsarPath,
   getSteamLibraries,
-  GITHUB_API,
   configPath,
   gamesConfigPath,
   icon,
   isWindows,
   publicDir,
   isMac,
-  configStore,
-  isLinux
+  configStore
 } from './constants'
 import {
+  logChangedSetting,
   logError,
   logInfo,
   LogPrefix,
-  logsDisabled,
   logWarning
 } from './logger/logger'
-import { basename, dirname, join, normalize } from 'path'
+import { basename, dirname, isAbsolute, join, normalize } from 'path'
 import { runRunnerCommand as runLegendaryCommand } from 'backend/storeManagers/legendary/library'
-import { runRunnerCommand as runGogdlCommand } from './storeManagers/gog/library'
-import { runRunnerCommand as runNileCommand } from './storeManagers/nile/library'
 import {
   gameInfoStore,
   installStore,
@@ -79,24 +66,22 @@ import {
   installInfoStore as GOGinstallInfoStore,
   libraryStore as GOGlibraryStore
 } from './storeManagers/gog/electronStores'
-import fileSize from 'filesize'
-import {
-  installStore as nileInstallStore,
-  libraryStore as nileLibraryStore
-} from './storeManagers/nile/electronStores'
+import * as fileSize from 'filesize'
 
 import makeClient from 'discord-rich-presence-typescript'
-import { notify, showDialogBoxModalAuto } from './dialog/dialog'
+import { showDialogBoxModalAuto } from './dialog/dialog'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
-import { GameConfig } from './game_config'
-import { runWineCommand, validWine } from './launcher'
+import { runWineCommand } from './launcher'
 import { gameManagerMap } from 'backend/storeManagers'
+
+import * as si from 'systeminformation'
 import {
-  installWineVersion,
-  updateWineVersionInfos,
-  wineDownloaderInfoStore
-} from './wine/manager/utils'
+  deviceNameCache,
+  vendorNameCache
+} from './utils/systeminfo/gpu/pci_ids'
+import { copyFile, lstat, mkdir, readdir } from 'fs/promises'
+import { GameConfig } from './game_config'
 
 const execAsync = promisify(exec)
 
@@ -151,9 +136,9 @@ function semverGt(target: string, base: string) {
   return isGE
 }
 
-const getFileSize = fileSize.partial({ base: 2 })
+const getFileSize = fileSize.partial({ base: 2 }) as (arg: unknown) => string
 
-function getWineFromProton(
+export function getWineFromProton(
   wineVersion: WineInstallation,
   winePrefix: string
 ): { winePrefix: string; wineBin: string } {
@@ -226,71 +211,21 @@ async function isEpicServiceOffline(
   }
 }
 
-const getLegendaryVersion = async () => {
-  const abortID = 'legendary-version'
-  const { stdout, error, abort } = await runLegendaryCommand(
-    ['--version'],
-    createAbortController(abortID)
-  )
-
-  deleteAbortController(abortID)
-
-  if (error || abort) {
-    return 'invalid'
-  }
-
-  return stdout
-    .split('legendary version')[1]
-    .replaceAll('"', '')
-    .replaceAll(', codename', '')
-    .replaceAll('\n', '')
-}
-
-const getGogdlVersion = async () => {
-  const abortID = 'gogdl-version'
-  const { stdout, error } = await runGogdlCommand(
-    ['--version'],
-    createAbortController(abortID)
-  )
-
-  deleteAbortController(abortID)
-
-  if (error) {
-    return 'invalid'
-  }
-
-  return stdout
-}
-
-export const getAppVersion = () => {
-  const VERSION_NUMBER = app.getVersion()
-
-  return `${VERSION_NUMBER}`
-}
-
-const getNileVersion = async () => {
-  const abortID = 'nile-version'
-  const { stdout, error } = await runNileCommand(
-    ['--version'],
-    createAbortController(abortID)
-  )
-  deleteAbortController(abortID)
-
-  if (error) {
-    return 'invalid'
-  }
-  return stdout
-}
-
 const showAboutWindow = () => {
   app.setAboutPanelOptions({
     applicationName: 'HyperPlay',
     applicationVersion: getAppVersion(),
     copyright: 'GPL V3',
     iconPath: icon,
-    website: 'https://hyperplay.gg'
+    website: 'https://hyperplay.xyz'
   })
   return app.showAboutPanel()
+}
+
+export const getAppVersion = () => {
+  const VERSION_NUMBER = app.getVersion()
+
+  return `${VERSION_NUMBER}`
 }
 
 async function handleExit() {
@@ -326,59 +261,6 @@ async function handleExit() {
     callAllAbortControllers()
   }
   app.exit()
-}
-
-// This won't change while the app is running
-// Caching significantly increases performance when launching games
-let systemInfoCache = ''
-const getSystemInfo = async () => {
-  if (systemInfoCache !== '') {
-    return systemInfoCache
-  }
-  const hyperplayVersion = getAppVersion()
-  const legendaryVersion = await getLegendaryVersion()
-  const gogdlVersion = await getGogdlVersion()
-  const nileVersion = await getNileVersion()
-
-  // get CPU and RAM info
-  const { manufacturer, brand, speed, governor } = await si.cpu()
-  const { total, available } = await si.mem()
-
-  // get OS information
-  const { distro, kernel, arch, platform, release, codename } =
-    await si.osInfo()
-
-  // get GPU information
-  const { controllers } = await si.graphics()
-  const graphicsCards = String(
-    controllers.map(
-      ({ name, model, vram, driverVersion }, i) =>
-        `GPU${i}: ${name ? name : model} ${vram ? `VRAM: ${vram}MB` : ''} ${
-          driverVersion ? `DRIVER: ${driverVersion}` : ''
-        } \n`
-    )
-  )
-    .replaceAll(',', '')
-    .replaceAll('\n', '')
-
-  const isLinux = platform === 'linux'
-  const xEnv = isLinux
-    ? (await execAsync('echo $XDG_SESSION_TYPE')).stdout.replaceAll('\n', '')
-    : ''
-
-  systemInfoCache = `HyperPlay Version: ${hyperplayVersion}
-Legendary Version: ${legendaryVersion}
-GOGdl Version: ${gogdlVersion}
-Nile Version: ${nileVersion}
-
-OS: ${isMac ? `${codename} ${release}` : distro} KERNEL: ${kernel} ARCH: ${arch}
-CPU: ${manufacturer} ${brand} @${speed} ${
-    governor ? `GOVERNOR: ${governor}` : ''
-  }
-RAM: Total: ${getFileSize(total)} Available: ${getFileSize(available)}
-GRAPHICS: ${graphicsCards}
-${isLinux ? `PROTOCOL: ${xEnv}` : ''}`
-  return systemInfoCache
 }
 
 type ErrorHandlerMessage = {
@@ -458,7 +340,6 @@ async function errorHandler({
   }
 }
 
-// If you ever modify this range of characters, please also add them to nile
 // source as this function is used to determine how game directory will be named
 function removeSpecialcharacters(text: string): string {
   const regexp = new RegExp(/[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®]/, 'gi')
@@ -472,7 +353,7 @@ async function openUrlOrFile(url: string): Promise<string | void> {
   return shell.openPath(url)
 }
 
-function clearCache(library?: 'gog' | 'legendary' | 'nile') {
+function clearCache(library?: 'gog' | 'legendary', fromVersionChange = false) {
   if (library === 'gog' || !library) {
     GOGapiInfoCache.clear()
     GOGlibraryStore.clear()
@@ -483,13 +364,14 @@ function clearCache(library?: 'gog' | 'legendary' | 'nile') {
     libraryStore.clear()
     gameInfoStore.clear()
     const abortID = 'legendary-cleanup'
-    runLegendaryCommand(['cleanup'], createAbortController(abortID)).then(() =>
-      deleteAbortController(abortID)
-    )
+    runLegendaryCommand(
+      { subcommand: 'cleanup' },
+      createAbortController(abortID)
+    ).then(() => deleteAbortController(abortID))
   }
-  if (library === 'nile' || !library) {
-    nileInstallStore.clear()
-    nileLibraryStore.clear()
+  if (!fromVersionChange) {
+    deviceNameCache.clear()
+    vendorNameCache.clear()
   }
 }
 
@@ -498,6 +380,10 @@ function resetApp() {
   appConfigFolders.forEach((folder) => {
     rmSync(folder, { recursive: true, force: true })
   })
+  relaunchApp()
+}
+
+export function relaunchApp() {
   // wait a sec to avoid racing conditions
   setTimeout(() => {
     ipcMain.emit('ignoreExitToTray')
@@ -533,28 +419,14 @@ function splitPathAndName(fullPath: string): { dir: string; bin: string } {
 }
 
 function getLegendaryBin(): { dir: string; bin: string } {
-  const settings = GlobalConfig.get().getSettings()
-  if (settings?.altLegendaryBin) {
-    return splitPathAndName(settings.altLegendaryBin)
-  }
   return splitPathAndName(
     fixAsarPath(join(publicDir, 'bin', process.platform, 'legendary'))
   )
 }
 
 function getGOGdlBin(): { dir: string; bin: string } {
-  const settings = GlobalConfig.get().getSettings()
-  if (settings?.altGogdlBin) {
-    return splitPathAndName(settings.altGogdlBin)
-  }
   return splitPathAndName(
     fixAsarPath(join(publicDir, 'bin', process.platform, 'gogdl'))
-  )
-}
-
-function getNileBin(): { dir: string; bin: string } {
-  return splitPathAndName(
-    fixAsarPath(join(publicDir, 'bin', process.platform, 'nile'))
   )
 }
 
@@ -571,34 +443,6 @@ export function getFormattedOsName(): string {
   }
 }
 
-/**
- * Finds an executable on %PATH%/$PATH
- * @param executable The executable to find
- * @returns The full path to the executable, or nothing if it was not found
- */
-// This name could use some work
-async function searchForExecutableOnPath(executable: string): Promise<string> {
-  if (isWindows) {
-    // Todo: Respect %PATHEXT% here
-    const paths = process.env.PATH?.split(';') || []
-    for (const path of paths) {
-      const fullPath = join(path, executable)
-      if (existsSync(fullPath)) {
-        return fullPath
-      }
-    }
-    return ''
-  } else {
-    return execAsync(`which ${executable}`)
-      .then(({ stdout }) => {
-        return stdout.split('\n')[0]
-      })
-      .catch((error) => {
-        logError(error, LogPrefix.Backend)
-        return ''
-      })
-  }
-}
 async function getSteamRuntime(
   requestedType: SteamRuntime['type']
 ): Promise<SteamRuntime> {
@@ -811,78 +655,6 @@ function detectVCRedist(mainWindow: BrowserWindow) {
   })
 }
 
-function getFirstExistingParentPath(directoryPath: string): string {
-  let parentDirectoryPath = directoryPath
-  let parentDirectoryFound = existsSync(parentDirectoryPath)
-
-  while (!parentDirectoryFound) {
-    parentDirectoryPath = normalize(parentDirectoryPath + '/..')
-    parentDirectoryFound = existsSync(parentDirectoryPath)
-  }
-
-  return parentDirectoryPath !== '.' ? parentDirectoryPath : ''
-}
-
-const getLatestReleases = async (): Promise<Release[]> => {
-  const newReleases: Release[] = []
-  logInfo('Checking for new HerHyperPlayoic Updates', LogPrefix.Backend)
-
-  try {
-    const { data: releases } = await axios.get(GITHUB_API)
-    const latestStable: Release = releases.filter(
-      (rel: Release) => rel.prerelease === false
-    )[0]
-    const latestBeta: Release = releases.filter(
-      (rel: Release) => rel.prerelease === true
-    )[0]
-
-    const current = app.getVersion()
-
-    const thereIsNewStable = semverGt(latestStable.tag_name, current)
-    const thereIsNewBeta = semverGt(latestBeta.tag_name, current)
-
-    if (thereIsNewStable) {
-      newReleases.push({ ...latestStable, type: 'stable' })
-    }
-    if (thereIsNewBeta) {
-      newReleases.push({ ...latestBeta, type: 'beta' })
-    }
-
-    if (newReleases.length) {
-      notify({
-        title: t('Update Available!'),
-        body: t(
-          'notify.new-hyperplay-version',
-          'A new HyperPlay version was released!'
-        )
-      })
-    }
-
-    return newReleases
-  } catch (error) {
-    logError(['Error when checking for updates', error], LogPrefix.Backend)
-    return []
-  }
-}
-
-const getCurrentChangelog = async (): Promise<Release | null> => {
-  logInfo('Checking for current version changelog', LogPrefix.Backend)
-
-  try {
-    const current = app.getVersion()
-
-    const { data: release } = await axios.get(`${GITHUB_API}/tags/v${current}`)
-
-    return release as Release
-  } catch (error) {
-    logError(
-      ['Error when checking for current HyperPlay changelog'],
-      LogPrefix.Backend
-    )
-    return null
-  }
-}
-
 function getInfo(appName: string, runner: Runner): GameInfo {
   return gameManagerMap[runner].getGameInfo(appName)
 }
@@ -904,12 +676,18 @@ function killPattern(pattern: string) {
 }
 
 async function shutdownWine(gameSettings: GameSettings) {
-  await runWineCommand({
-    gameSettings,
-    commandParts: ['wineboot', '-k'],
-    wait: true,
-    protonVerb: 'waitforexitandrun'
-  })
+  if (gameSettings.wineVersion.wineserver) {
+    spawnSync(gameSettings.wineVersion.wineserver, ['-k'], {
+      env: { WINEPREFIX: gameSettings.winePrefix }
+    })
+  } else {
+    await runWineCommand({
+      gameSettings,
+      commandParts: ['wineboot', '-k'],
+      wait: true,
+      protonVerb: 'waitforexitandrun'
+    })
+  }
 }
 
 const getShellPath = async (path: string): Promise<string> =>
@@ -964,155 +742,67 @@ export const spawnAsync = async (
   })
 }
 
-async function ContinueWithFoundWine(
-  selectedWine: string,
-  foundWine: string
-): Promise<{ response: number }> {
-  const { response } = await dialog.showMessageBox({
-    title: i18next.t('box.warning.wine-change.title', 'Wine not found!'),
-    message: i18next.t('box.warning.wine-change.message', {
-      defaultValue:
-        'We could not find the selected wine version to launch this title ({{selectedWine}}). {{newline}} We found another one, do you want to continue launching using {{foundWine}} ?',
-      newline: '\n',
-      selectedWine: selectedWine,
-      foundWine: foundWine
-    }),
-    buttons: [i18next.t('box.yes'), i18next.t('box.no')],
-    icon: icon
-  })
-
-  return { response }
-}
-
-export async function downloadDefaultWine() {
-  // refresh wine list
-  await updateWineVersionInfos(true)
-  // get list of wines on wineDownloaderInfoStore
-  const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
-  // use Wine-GE type if on Linux and Wine-Crossover if on Mac
-  const release = availableWine.filter((version) => {
-    if (isLinux) {
-      return (
-        version.type === 'Wine-GE' && version.version.includes('Wine-GE-Proton')
-      )
-    } else if (isMac) {
-      return version.type === 'Wine-Crossover'
-    }
-    return false
-  })[0]
-
-  if (!release) {
-    logError('Could not find default wine version', LogPrefix.Backend)
-    return null
+export async function checkRosettaInstall() {
+  if (!isMac) {
+    return
   }
 
-  // download the latest version
-  const onProgress = (state: State, progress?: ProgressInfo) => {
-    sendFrontendMessage('progressOfWineManager' + release.version, {
-      state,
-      progress
-    })
+  // check if on arm64 macOS
+  const { stdout: archCheck } = await execAsync('arch')
+  const isArm64 = archCheck.trim() === 'arm64'
+
+  if (!isArm64) {
+    return
   }
-  const result = await installWineVersion(
-    release,
-    onProgress,
-    createAbortController(release.version).signal
+
+  const { stdout: rosettaCheck } = await execAsync(
+    'arch -x86_64 /usr/sbin/sysctl sysctl.proc_translated'
   )
-  deleteAbortController(release.version)
-  if (result === 'success') {
-    let downloadedWine = null
-    try {
-      const wineList = await GlobalConfig.get().getAlternativeWine()
-      // update the game config to use that wine
-      downloadedWine = wineList[0]
-      logInfo(`Changing wine version to ${downloadedWine.name}`)
-      GlobalConfig.get().setSetting('wineVersion', downloadedWine)
-    } catch (error) {
-      logError(
-        ['Error when changing wine version to default', error],
-        LogPrefix.Backend
-      )
-    }
-    return downloadedWine
+
+  const result = rosettaCheck.split(':')[1].trim() === '1'
+
+  logInfo(
+    `Rosetta is ${result ? 'available' : 'not available'} on this system.`,
+    LogPrefix.Backend
+  )
+
+  if (!result) {
+    // show a dialog saying that hyperplay wont run without rosetta and add information on how to install it
+    await dialog.showMessageBox({
+      title: i18next.t('box.warning.rosetta.title', 'Rosetta not found'),
+      message: i18next.t(
+        'box.warning.rosetta.message',
+        'HyperPlay requires Rosetta to run correctly on macOS with Apple Silicon chips. Please install it from the macOS terminal using the following command: "softwareupdate --install-rosetta" and restart HyperPlay. '
+      ),
+      buttons: ['OK'],
+      icon: icon
+    })
+
+    logInfo(
+      'Rosetta is not available, install it with softwareupdate --install-rosetta from the terminal',
+      LogPrefix.Backend
+    )
   }
-  return null
 }
 
-export async function checkWineBeforeLaunch(
-  appName: string,
-  gameSettings: GameSettings,
-  logFileLocation: string
-): Promise<boolean> {
-  const wineIsValid = await validWine(gameSettings.wineVersion)
-
-  if (wineIsValid) {
-    return true
-  } else {
-    if (!logsDisabled) {
-      logError(
-        `Wine version ${gameSettings.wineVersion.name} is not valid, trying another one.`,
-        LogPrefix.Backend
-      )
-
-      appendFileSync(
-        logFileLocation,
-        `Wine version ${gameSettings.wineVersion.name} is not valid, trying another one.`
-      )
-    }
-
-    // check if the default wine is valid now
-    const { wineVersion: defaultwine } = GlobalConfig.get().getSettings()
-    const defaultWineIsValid = await validWine(defaultwine)
-    if (defaultWineIsValid) {
-      const { response } = await ContinueWithFoundWine(
-        gameSettings.wineVersion.name,
-        defaultwine.name
-      )
-
-      if (response === 0) {
-        logInfo(`Changing wine version to ${defaultwine.name}`)
-        gameSettings.wineVersion = defaultwine
-        GameConfig.get(appName).setSetting('wineVersion', defaultwine)
-        return true
-      } else {
-        logInfo('User canceled the launch', LogPrefix.Backend)
-        return false
-      }
-    } else {
-      const wineList = await GlobalConfig.get().getAlternativeWine()
-      const firstFoundWine = wineList[0]
-
-      const isValidWine = await validWine(firstFoundWine)
-
-      if (!wineList.length || !firstFoundWine || !isValidWine) {
-        const firstFoundWine = await downloadDefaultWine()
-        if (firstFoundWine) {
-          logInfo(`Changing wine version to ${firstFoundWine.name}`)
-          gameSettings.wineVersion = firstFoundWine
-          GameConfig.get(appName).setSetting('wineVersion', firstFoundWine)
-          return true
-        }
-      }
-
-      if (firstFoundWine && isValidWine) {
-        const { response } = await ContinueWithFoundWine(
-          gameSettings.wineVersion.name,
-          firstFoundWine.name
-        )
-
-        if (response === 0) {
-          logInfo(`Changing wine version to ${firstFoundWine.name}`)
-          gameSettings.wineVersion = firstFoundWine
-          GameConfig.get(appName).setSetting('wineVersion', firstFoundWine)
-          return true
-        } else {
-          logInfo('User canceled the launch', LogPrefix.Backend)
-          return false
-        }
-      }
-    }
+export async function isMacSonomaOrHigher() {
+  if (!isMac) {
+    return false
   }
-  return false
+  logInfo('Checking if macOS is Sonoma or higher', LogPrefix.Backend)
+
+  const { release } = await si.osInfo()
+  const [major] = release.split('.').map(Number)
+  const isMacSonomaOrHigher = major >= 14
+
+  logInfo(
+    `macOS is ${
+      isMacSonomaOrHigher ? 'Sonoma or higher' : 'not Sonoma or higher'
+    }`,
+    LogPrefix.Backend
+  )
+
+  return isMacSonomaOrHigher
 }
 
 export async function moveOnWindows(
@@ -1288,103 +978,83 @@ export interface ProgressCallback {
  */
 export async function downloadFile(
   url: string,
-  dest: string,
+  directory: string,
+  fileName: string,
   abortController: AbortController,
-  progressCallback?: ProgressCallback
-): Promise<void> {
+  progressCallback?: ProgressCallback,
+  onCompleted?: (file: File) => void,
+  onCancel?: (item: DownloadItem) => void
+): Promise<DownloadItem> {
   let lastProgressUpdateTime = Date.now()
   let lastBytesWritten = 0
-  let fileSize = 0
 
-  let connections = 1
-  try {
-    const response = await axios.head(url)
-    const cdnCache = response.headers['cdn-cache']
-    const isCached = cdnCache === 'HIT' || cdnCache === 'STALE'
-    if (isCached) {
-      connections = 5
+  function handleProgress({
+    percent: downloadFraction,
+    transferredBytes,
+    totalBytes: totalDownloadSizeInBytes
+  }: Progress) {
+    const percentage = downloadFraction * 100
+    const currentTime = Date.now()
+    const timeElapsed = currentTime - lastProgressUpdateTime
+
+    // Throttle progress reporting to 1 second
+    if (timeElapsed >= 1000) {
+      const bytesWrittenSinceLastUpdate = transferredBytes - lastBytesWritten
+      const writingSpeed = bytesWrittenSinceLastUpdate / (timeElapsed / 1000) // Bytes per second
+
+      logInfo(
+        `Downloaded: ${bytesToSize(transferredBytes)} / ${bytesToSize(
+          totalDownloadSizeInBytes
+        )}  @${bytesToSize(writingSpeed)}/s (${percentage.toFixed(2)}%)`,
+        LogPrefix.HyperPlay
+      )
+
+      if (progressCallback) {
+        progressCallback(
+          transferredBytes,
+          writingSpeed,
+          writingSpeed,
+          percentage
+        )
+      }
+
+      lastProgressUpdateTime = currentTime
+      lastBytesWritten = transferredBytes
     }
-    fileSize = parseInt(response.headers['content-length'], 10)
-  } catch (err) {
-    logError(
-      `Downloader: Failed to get headers for ${url}. \nError: ${err}`,
-      LogPrefix.DownloadManager
-    )
-    throw new Error('Failed to get headers')
   }
 
   try {
-    const dl = new EasyDl(url, dest, {
-      existBehavior: 'overwrite',
-      connections
-    }).start()
+    const mainWindow = getMainWindow()
+    if (mainWindow === null) {
+      throw 'Main window not initialized!'
+    }
 
-    abortController.signal.addEventListener('abort', () => {
-      dl.destroy()
-    })
-
-    dl.on('error', (error) => {
-      logError(error, LogPrefix.HyperPlay)
-    })
-
-    dl.on('retry', (retry) => {
-      logInfo(`Retrying download: ${retry}`, LogPrefix.HyperPlay)
-    })
-
-    const throttledProgressCallback = throttle(
-      (
-        bytes: number,
-        speed: number,
-        writingSpeed: number,
-        percentage: number
-      ) => {
-        if (progressCallback) {
-          logInfo(
-            `Downloaded: ${bytesToSize(bytes)} / ${bytesToSize(
-              fileSize
-            )}  @${bytesToSize(speed)}/s (${percentage.toFixed(2)}%)`,
-            LogPrefix.HyperPlay
-          )
-          progressCallback(bytes, speed, writingSpeed, percentage)
+    const item = await download(mainWindow, url, {
+      directory: directory,
+      filename: fileName,
+      onStarted: (item) => {
+        logInfo(`Started downloading ${item.getFilename()}`, LogPrefix.Backend)
+      },
+      onProgress: handleProgress,
+      onCompleted: (file) => {
+        logInfo(`Download completed ${file.filename}`, LogPrefix.Backend)
+        if (onCompleted !== undefined) {
+          onCompleted(file)
         }
       },
-      1000
-    ) // Throttle progress reporting to 1 second
-
-    dl.on('progress', ({ total }) => {
-      const { bytes = 0, speed = 0, percentage = 0 } = total
-      const currentTime = Date.now()
-      const timeElapsed = currentTime - lastProgressUpdateTime
-
-      if (timeElapsed >= 1000) {
-        const bytesWrittenSinceLastUpdate = bytes - lastBytesWritten
-        const writingSpeed = bytesWrittenSinceLastUpdate / (timeElapsed / 1000) // Bytes per second
-
-        throttledProgressCallback(bytes, speed, writingSpeed, percentage)
-
-        lastProgressUpdateTime = currentTime
-        lastBytesWritten = bytes
+      onCancel: (item) => {
+        logInfo(`Canceled ${item.getFilename()}`, LogPrefix.Backend)
+        if (onCancel !== undefined) {
+          onCancel(item)
+        }
       }
     })
 
-    const downloaded = await dl.wait()
+    abortController.signal.addEventListener('abort', () => {
+      item.cancel()
+    })
 
-    if (!downloaded) {
-      logWarning(
-        `Downloader: Download stopped or paused`,
-        LogPrefix.DownloadManager
-      )
-      throw new Error('Download stopped or paused')
-    }
-
-    logInfo(
-      `Downloader: Finished downloading ${url}`,
-      LogPrefix.DownloadManager
-    )
-    logInfo(
-      `Downloader: Finished downloading ${url}`,
-      LogPrefix.DownloadManager
-    )
+    return item
   } catch (err) {
     logError(
       `Downloader: Download Failed with: ${err}`,
@@ -1436,56 +1106,6 @@ function removeFolder(path: string, folderName: string) {
   return
 }
 
-export async function extractZip(zipFile: string, destinationPath: string) {
-  return new Promise<void>((resolve, reject) => {
-    yauzl.open(zipFile, { lazyEntries: true }, (err, zipfile) => {
-      if (err) {
-        reject(err)
-        return
-      }
-
-      zipfile.readEntry()
-      zipfile.on('entry', (entry) => {
-        if (/\/$/.test(entry.fileName)) {
-          // Directory file names end with '/'
-          mkdirSync(join(destinationPath, entry.fileName), { recursive: true })
-          zipfile.readEntry()
-        } else {
-          // Ensure parent directory exists
-          mkdirSync(
-            join(
-              destinationPath,
-              entry.fileName.split('/').slice(0, -1).join('/')
-            ),
-            { recursive: true }
-          )
-
-          // Extract file
-          zipfile.openReadStream(entry, (err, readStream) => {
-            if (err) {
-              reject(err)
-              return
-            }
-
-            const writeStream = createWriteStream(
-              join(destinationPath, entry.fileName)
-            )
-            readStream.pipe(writeStream)
-            writeStream.on('close', () => {
-              zipfile.readEntry()
-            })
-          })
-        }
-      })
-
-      zipfile.on('end', () => {
-        resolve()
-        rm(zipFile, console.log)
-      })
-    })
-  })
-}
-
 export function calculateEta(
   downloadedBytes: number,
   downloadSpeed: number,
@@ -1518,21 +1138,6 @@ function formatTime(seconds: number): string {
     .padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function throttle<T extends (...args: any[]) => any>(
-  callback: T,
-  limit: number
-): (...args: Parameters<T>) => void {
-  let lastCall = 0
-  return (...args: Parameters<T>) => {
-    const now = Date.now()
-    if (now - lastCall >= limit) {
-      lastCall = now
-      callback(...args)
-    }
-  }
-}
-
 export function bytesToSize(bytes: number) {
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
   if (bytes === 0) return `0 ${sizes[0]}`
@@ -1543,7 +1148,6 @@ export function bytesToSize(bytes: number) {
 export {
   errorHandler,
   execAsync,
-  getCurrentChangelog,
   handleExit,
   isEpicServiceOffline,
   openUrlOrFile,
@@ -1554,9 +1158,7 @@ export {
   resetApp,
   getLegendaryBin,
   getGOGdlBin,
-  getNileBin,
   formatEpicStoreUrl,
-  searchForExecutableOnPath,
   getSteamRuntime,
   constructAndUpdateRPC,
   quoteIfNecessary,
@@ -1565,18 +1167,11 @@ export {
   killPattern,
   getInfo,
   getShellPath,
-  getFirstExistingParentPath,
-  getLatestReleases,
-  getSystemInfo,
-  getWineFromProton,
-  getFileSize,
-  getLegendaryVersion,
-  getGogdlVersion,
   getTitleFromEpicStoreUrl,
-  removeFolder,
   shutdownWine,
-  getNileVersion,
-  memoryLog
+  getFileSize,
+  memoryLog,
+  removeFolder
 }
 
 // Exported only for testing purpose
@@ -1607,4 +1202,165 @@ export const processIsClosed = async (pid: number) => {
     }
     check()
   })
+}
+
+type RunnerStore = {
+  [key in Runner]: 'Epic Games' | 'GOG' | 'HyperPlay' | 'Sideloaded'
+}
+
+const runnerStore: RunnerStore = {
+  legendary: 'Epic Games',
+  gog: 'GOG',
+  hyperplay: 'HyperPlay',
+  sideload: 'Sideloaded'
+}
+
+export const getStoreName = (runner: Runner) => {
+  return runnerStore[runner] || 'Unknown'
+}
+
+type PlatformName =
+  | 'Windows'
+  | 'Linux'
+  | 'macOS'
+  | 'Browser'
+  | 'Android'
+  | 'Unknown'
+
+const platformMap: Record<string, PlatformName> = {
+  windows_amd64: 'Windows',
+  windows_arm64: 'Windows',
+  linux_amd64: 'Linux',
+  linux_arm64: 'Linux',
+  darwin_amd64: 'macOS',
+  darwin_arm64: 'macOS',
+  web: 'Browser',
+  android_arm64: 'Android'
+}
+
+export function getPlatformName(platform: string): PlatformName {
+  return platformMap[platform] || platform || 'Unknown'
+}
+
+const splitExeAndArgs = (executableWithArgs: string) => {
+  const executable = executableWithArgs.split(' -')[0]
+  const launchArgs = executableWithArgs.replace(executable, '').trim()
+
+  return [executable, launchArgs]
+}
+
+export function getExecutableAndArgs(executableWithArgs: string): {
+  executable: string
+  launchArgs: string
+} {
+  if (!executableWithArgs) {
+    return { executable: '', launchArgs: '' }
+  }
+
+  // Handle absolute paths first
+  const isAbsolutePath = isAbsolute(executableWithArgs)
+  if (isAbsolutePath) {
+    const [exe, args] = splitExeAndArgs(executableWithArgs)
+    return { executable: exe, launchArgs: args }
+  }
+
+  // Handle .app paths
+  if (executableWithArgs.includes('.app')) {
+    const [executable, launchArgs] = splitExeAndArgs(executableWithArgs)
+    return { executable, launchArgs }
+  }
+
+  // Handle common extensions
+  const matchWithExt = executableWithArgs.match(/^(.*?\.(exe|bin|sh))/i)
+  if (matchWithExt) {
+    const executable = matchWithExt[0]
+    const launchArgs = executableWithArgs.replace(executable, '').trim()
+    return { executable, launchArgs }
+  }
+
+  // Handle executables without extension
+  const [executable, ...argParts] = splitExeAndArgs(executableWithArgs)
+  return {
+    executable,
+    launchArgs: argParts.join(' ')
+  }
+}
+
+function roundToTenth(x: number) {
+  return Math.round(x * 10) / 10
+}
+
+export function calculateProgress(
+  downloadedBytes: number,
+  downloadSize: number,
+  downloadSpeed: number,
+  diskWriteSpeed: number,
+  progress: number
+) {
+  const eta = calculateEta(downloadedBytes, downloadSpeed, downloadSize)
+
+  return {
+    percent: roundToTenth(progress),
+    diskSpeed: roundToTenth(diskWriteSpeed / 1024 / 1024),
+    downSpeed: roundToTenth(downloadSpeed / 1024 / 1024),
+    bytes: roundToTenth(downloadedBytes / 1024 / 1024),
+    eta
+  }
+}
+
+export const writeConfig = (appName: string, config: Partial<AppSettings>) => {
+  logInfo(
+    `Writing config for ${appName === 'default' ? 'HyperPlay' : appName}`,
+    LogPrefix.Backend
+  )
+  const oldConfig =
+    appName === 'default'
+      ? GlobalConfig.get().getSettings()
+      : GameConfig.get(appName).config
+
+  // log only the changed setting
+  logChangedSetting(config, oldConfig)
+
+  if (appName === 'default') {
+    GlobalConfig.get().set(config as AppSettings)
+    GlobalConfig.get().flush()
+    const currentConfigStore = configStore.get_nodefault('settings')
+    if (currentConfigStore) {
+      configStore.set('settings', { ...currentConfigStore, ...config })
+    }
+  } else {
+    GameConfig.get(appName).config = config as GameSettings
+    GameConfig.get(appName).flush()
+  }
+}
+
+const COPY_TIMEOUT_MS = 30000 // wait time before throwing a timeout error
+export async function copyRecursiveAsync(src: string, dest: string) {
+  const stats = await lstat(src)
+  if (stats.isSymbolicLink()) {
+    return // Skip symbolic links
+  }
+
+  const isDirectory = stats.isDirectory()
+
+  if (isDirectory) {
+    await mkdir(dest, { recursive: true })
+    const files = await readdir(src)
+    await Promise.all(
+      files.map(async (file) => {
+        const srcFile = join(src, file)
+        const destFile = join(dest, file)
+        await copyRecursiveAsync(srcFile, destFile)
+      })
+    )
+  } else {
+    await Promise.race([
+      copyFile(src, dest),
+      wait(COPY_TIMEOUT_MS).then(() => {
+        throw new Error(
+          `Timeout (${COPY_TIMEOUT_MS}ms) copying ${src} to ${dest}`
+        )
+      })
+    ])
+  }
 }

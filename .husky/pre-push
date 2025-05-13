@@ -1,2 +1,1 @@
-#!/bin/bash
-yarn codecheck && yarn lint 
+pnpm codecheck && pnpm lint && pnpm i18n --fail-on-update

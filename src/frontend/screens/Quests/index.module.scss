@@ -1,0 +1,112 @@
+@import '@hyperplay/ui/utilities/_variables.scss';
+
+.root {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  column-gap: var(--space-2lg-fixed);
+  row-gap: var(--space-lg-fixed);
+  padding-bottom: var(--space-2lg-fixed);
+  position: absolute;
+  inset: 0;
+
+  &.with-alert {
+    grid-template-areas:
+      'alert alert'
+      'questTable questDetails';
+
+    > &:nth-child(2) {
+      grid-area: questTable;
+    }
+    > &:nth-child(3) {
+      grid-area: questDetails;
+    }
+  }
+
+  &.no-alert {
+    grid-template-rows: 1fr;
+  }
+}
+
+.alert {
+  z-index: 4;
+  grid-area: alert;
+}
+
+.detailsWrapper {
+  width: 650px;
+  max-width: unset !important;
+
+  background-color: var(--color-neutral-800);
+  border: none;
+
+  //Steam Deck
+  @media (max-width: 1280px) {
+    width: 600px;
+  }
+
+  @media (max-width: 1024px) {
+    width: 390px;
+  }
+}
+
+.tableContainer {
+  background-color: var(--color-neutral-800);
+  overflow-y: hidden;
+
+  //Steam DecK
+  @media (max-width: 1280px) {
+    width: 510px;
+  }
+
+  @media (max-width: 1024px) {
+    width: 480px;
+  }
+}
+
+.questSelectedLayout {
+  @include for-big-desktop-up {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.searchBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--space-2xs);
+  font-size: var(--text-3xs);
+  padding-right: var(--space-2xs);
+}
+
+.loadingContainer {
+  padding: var(--space-2lg);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  font-size: var(--text-3xl);
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+  cursor: move;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

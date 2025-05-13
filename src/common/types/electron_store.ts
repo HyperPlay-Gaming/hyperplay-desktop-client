@@ -18,7 +18,6 @@ import {
 } from 'common/types'
 import { PROVIDERS } from './proxy-types'
 import { UserData } from 'common/types/gog'
-import { NileUserData } from './nile'
 
 export interface StoreStructure {
   configStore: {
@@ -40,7 +39,6 @@ export interface StoreStructure {
       lastLogFile: string
       legendaryLogFile: string
       gogdlLogFile: string
-      nileLogFile: string
     }
     'window-props': Electron.Rectangle
     settings: AppSettings
@@ -66,9 +64,6 @@ export interface StoreStructure {
     userData: UserData
     credentials: GOGLoginData
     isLoggedIn: boolean
-  }
-  nileConfigStore: {
-    userData?: NileUserData
   }
   sideloadedStore: {
     games: GameInfo[]
@@ -97,12 +92,21 @@ export interface StoreStructure {
   onboardingStore: {
     completedEarlyAccess: boolean
     completedDataPrivacy: boolean
+    openAuthModalIfAppReloads: boolean
+    openEmailModalIfAppReloads: boolean
   }
   hpLibraryStore: {
     [key: string]: GameInfo[]
   }
   providerMetadata: {
     currentWeb3Provider: PROVIDERS
+  }
+  extensionMetadata: {
+    isInitialized: boolean
+  }
+  newsLetterStore: {
+    subscribed: boolean
+    skipped: boolean
   }
 }
 

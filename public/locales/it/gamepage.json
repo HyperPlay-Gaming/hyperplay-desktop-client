@@ -29,20 +29,34 @@
         "stopInstall": {
             "keepInstalling": "Continua l'installazione",
             "message": "Desideri tenere i files scaricati?",
-            "title": "Ferma l'installazione"
+            "title": "Vuoi annullare il download?",
+            "keepFilesMessage": "Controllare qui se si desidera mantenere i file di download dopo la cancellazione."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Vuoi disinstallare questo gioco?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Disinstalla"
+            "title": "Disinstalla",
+            "dlc": "Vuoi disinstallare questo DLC?",
+            "prefix_warning": "Il prefisso del vino per questo gioco è il prefisso predefinito. Se vuoi davvero cancellarlo, devi farlo manualmente."
         },
         "update": {
             "message": "Questo gioco ha un aggiornamento, desideri aggiornarlo ora?",
-            "title": "Il gioco richiede un aggiornamento"
+            "title": "Il gioco richiede un aggiornamento",
+            "message-cancel": "Non è possibile giocare a questo gioco senza aggiornare"
         },
         "wineprefix": "Seleziona la cartella del prefisso di Wine",
-        "yes": "SI"
+        "yes": "SI",
+        "dont-show-again": "Non mostrare più",
+        "ok": "OK",
+        "aware": "Sono consapevole",
+        "compability": {
+            "message": "Questo gioco Windows verrà eseguito utilizzando uno strato di compatibilità. Si potrebbe incontrare alcuni problemi o il gioco potrebbe non funzionare affatto."
+        },
+        "yesCancel": "Sì, cancella",
+        "stopExtraction": {
+            "title": "Vuoi annullare l'estrazione?"
+        }
     },
     "button": {
         "add_to_favourites": "Aggiungi Ai Preferiti",
@@ -56,7 +70,9 @@
         "install": "Installa",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Annulla download",
+            "continue": "Continua Download"
         },
         "remove_from_favourites": "Rimuovi Dai Preferiti",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +83,11 @@
         },
         "unhide_game": "Mostra gioco",
         "uninstall": "Disinstalla",
-        "update": "Update"
+        "update": "Update",
+        "remove_from_library": "Rimuovi",
+        "unfavorites": "Non preferito",
+        "details": "Dettagli",
+        "favorites": "Preferito"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Disattivato",
@@ -78,22 +98,25 @@
     "game": {
         "downloadSize": "Dimensione del download",
         "firstPlayed": "Giocato per la prima volta",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Ottenendo la dimensione del download",
+        "getting-install-size": "Ottenendo la dimensione dell'installazione",
         "installSize": "Dimensione dell'installazione",
         "language": "Lingua",
         "lastPlayed": "Giocato recentemente",
         "neverPlayed": "Mai",
         "platform": "Seleziona la versione della piattaforma da installare",
         "requirements": "Requisiti Di Sistema",
-        "totalPlayed": "Tempo giocato"
+        "totalPlayed": "Tempo giocato",
+        "dlcs": "DLC",
+        "selectChannelName": "Seleziona Canale Nome"
     },
     "gamecard": {
         "moving": "Spostamento in corso",
         "repairing": "Riparazione in corso"
     },
     "generic": {
-        "error": "Errore sconosciuto"
+        "error": "Errore sconosciuto",
+        "noDescription": "Nessuna descrizione disponibile!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -109,6 +132,12 @@
         "size": "Dimensione",
         "syncsaves": "Sincronizza i salvataggi",
         "version": "Versione",
+        "apple-gaming-wiki": "Valutazione di AppleGamingWiki",
+        "clickToOpen": "Clicca per aprire",
+        "game-scores": "Punteggi di gioco",
+        "installedInfo": "Informazioni di installazione",
+        "protondb-compatibility-info": "Livello di compatibilità Proton",
+        "steamdeck-compatibility-info": "Compatibilità SteamDeck",
         "web3-supported": "Has Web3 features"
     },
     "install": {
@@ -118,7 +147,14 @@
         "path-not-writtable": "Attenzione: il percorso potrebbe non essere scrivibile.",
         "space-after-install": "Dopo l'installazione",
         "wineprefix": "Prefisso Wine",
-        "wineversion": "Versione Wine"
+        "wineversion": "Versione di Wine",
+        "anticheat-warning": {
+            "cancel": "No",
+            "message": "Il supporto dell'anticheat è non funzionante o negato. Il gioco non funzionerà. Vuoi installarlo comunque?",
+            "install": "Si (Capisco che non funzionerà)",
+            "title": "Anticheat Rotto/Negato"
+        },
+        "compatibility-warning": "Questo gioco Windows verrà eseguito utilizzando uno strato di compatibilità. La tua esperienza può variare."
     },
     "label": {
         "game": {
@@ -126,27 +162,32 @@
         },
         "playing": {
             "start": "Esegui ora",
-            "stop": "In esecuzione (Stop)"
+            "stop": "In esecuzione (Stop)",
+            "update": "Aggiorna"
         },
         "saves": {
             "syncing": "Sincronizzando i salvataggi"
-        }
+        },
+        "launching": "Avviando",
+        "ubisoft": "Installazione di Ubisoft Connect"
     },
     "launch": {
         "options": "Opzioni di avvio..."
     },
     "not_logged_in": {
-        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "login": "Log in",
-        "title": "You are NOT logged in"
+        "epic": "Non hai effettuato l'accesso con nessun account Epic in HyperPlay. Non usare la pagina dello store per accede ma clicca sul seguente pulsante:",
+        "gog": "Non hai effettuato l'accesso con nessun account GOG in HyperPlay. Non usare la pagina dello store per accede ma clicca sul seguente pulsante:",
+        "login": "Accedi",
+        "title": "NON hai effettuato l'accesso",
+        "amazon": "Non hai effettuato l'accesso con un account Amazon in HyperPlay. Non usare la pagina dello store per accede ma clicca sul seguente pulsante:"
     },
     "report_problem": "Segnala un problema nell'esecuzione di questo gioco",
     "sdl": {
         "title": "Seleziona i componenti da installare"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Bottiglia CrossOver"
     },
     "sideload": {
         "field": {
@@ -184,8 +225,24 @@
         "reparing": "Riparazione del gioco in corso, per favore attendi",
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Totale scaricato",
-        "uninstalling": "Uninstalling",
-        "updating": "Aggiornamento in corso"
+        "uninstalling": "Disinstallando",
+        "updating": "Aggiornamento in corso",
+        "playing": "Giocando",
+        "moving-files": "Spostamento del file '{{file}}': {{percent}} ",
+        "syncingSaves": "Sincronizzando i salvataggi",
+        "launching": "Avviando",
+        "ubisoft": "Installazione di Ubisoft",
+        "downloading": "Scaricamento",
+        "extracting": {
+            "progress": "Estrazione",
+            "cancel": "Annulla estrazione"
+        },
+        "gog-goodie": "Questo gioco non sembra essere installabile. Controlla i contenuti scaricabili su https://gog.com/account",
+        "goodie": "Non installabile",
+        "paused": "In pausa",
+        "distributables": "Installazione di distributori",
+        "preparing": "Preparing Download, si prega di attendere",
+        "patching": "Patch dei file "
     },
     "submenu": {
         "addShortcut": "Aggiungi scorciatoia",
@@ -199,6 +256,12 @@
         "removeShortcut": "Rimuovi le scorciatoie",
         "settings": "Impostazioni",
         "store": "Pagina dello store",
-        "verify": "Verifica e ripara"
+        "verify": "Verifica e ripara",
+        "extraInfo": "Informazioni aggiuntive"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Contatta il Team HyperPlay con questo messaggio: {{error}} - {{context}}."
+        }
     }
 }

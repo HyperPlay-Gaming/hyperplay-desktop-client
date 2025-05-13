@@ -1,0 +1,7 @@
+@mixin showScrollbar {
+  &::-webkit-scrollbar {
+    width: 20px;
+    height: 20px;
+    background: transparent;
+  }
+}

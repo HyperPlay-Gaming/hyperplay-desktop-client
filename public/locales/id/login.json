@@ -1,6 +1,8 @@
 {
     "button": {
-        "login": "Log Masuk"
+        "login": "Log Masuk",
+        "loading": "Memuat",
+        "error": "Error, coba Kode yang berbeda"
     },
     "message": {
         "part1": "Untuk masuk dan memasang permainanmu, kamu harus mengikuti langkah-langkah di bawah:",

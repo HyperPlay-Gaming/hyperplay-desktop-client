@@ -1,52 +1,52 @@
-import { TransactionState } from 'frontend/store/types'
+import { TRANSACTION_STATE } from 'frontend/store/types'
 import { t } from 'i18next'
 
-type ModalText = Record<string, Record<TransactionState, () => string>>
+type ModalText = Record<string, Record<TRANSACTION_STATE, () => string>>
 
 const signatureRequestTexts = {
-  [TransactionState.INITIATED]: () =>
+  [TRANSACTION_STATE.INITIATED]: () =>
     t(
       'hyperplayOverlay.signatureRequest.INITIATED',
       'Signature request pending'
     ),
-  [TransactionState.PENDING]: () => '',
-  [TransactionState.FAILED]: () =>
+  [TRANSACTION_STATE.PENDING]: () => '',
+  [TRANSACTION_STATE.FAILED]: () =>
     t('hyperplayOverlay.signatureRequest.FAILED', 'Signature interrupted'),
-  [TransactionState.CONFIRMED]: () =>
+  [TRANSACTION_STATE.CONFIRMED]: () =>
     t('hyperplayOverlay.signatureRequest.CONFIRMED', 'Signature submitted')
 }
 
 const txnRequestTexts = {
-  [TransactionState.INITIATED]: () =>
+  [TRANSACTION_STATE.INITIATED]: () =>
     t('hyperplayOverlay.txnRequest.INITIATED', 'Transaction request pending'),
-  [TransactionState.PENDING]: () =>
+  [TRANSACTION_STATE.PENDING]: () =>
     t('hyperplayOverlay.txnRequest.PENDING', 'Transaction submitted'),
-  [TransactionState.FAILED]: () =>
+  [TRANSACTION_STATE.FAILED]: () =>
     t('hyperplayOverlay.txnRequest.FAILED', 'Transaction interrupted'),
-  [TransactionState.CONFIRMED]: () =>
+  [TRANSACTION_STATE.CONFIRMED]: () =>
     t('hyperplayOverlay.txnRequest.CONFIRMED', 'Transaction confirmed')
 }
 
 const chainTexts = {
-  [TransactionState.INITIATED]: () =>
+  [TRANSACTION_STATE.INITIATED]: () =>
     t('hyperplayOverlay.chainRequest.INITIATED', 'Custom network request'),
-  [TransactionState.PENDING]: () => '',
-  [TransactionState.FAILED]: () =>
+  [TRANSACTION_STATE.PENDING]: () => '',
+  [TRANSACTION_STATE.FAILED]: () =>
     t('hyperplayOverlay.chainRequest.FAILED', 'Custom network canceled'),
-  [TransactionState.CONFIRMED]: () =>
+  [TRANSACTION_STATE.CONFIRMED]: () =>
     t('hyperplayOverlay.chainRequest.CONFIRMED', 'Custom network added')
 }
 
 const walletWatchTexts = {
-  [TransactionState.INITIATED]: () =>
+  [TRANSACTION_STATE.INITIATED]: () =>
     t(
       'hyperplayOverlay.walletWatch.INITIATED',
       'Add custom token request pending'
     ),
-  [TransactionState.PENDING]: () => '',
-  [TransactionState.FAILED]: () =>
+  [TRANSACTION_STATE.PENDING]: () => '',
+  [TRANSACTION_STATE.FAILED]: () =>
     t('hyperplayOverlay.walletWatch.FAILED', 'Custom token request canceled'),
-  [TransactionState.CONFIRMED]: () =>
+  [TRANSACTION_STATE.CONFIRMED]: () =>
     t('hyperplayOverlay.walletWatch.CONFIRMED', 'Custom token added')
 }
 
@@ -64,23 +64,23 @@ export const TITLE: ModalText = {
   wallet_switchEthereumChain: chainTexts
 }
 
-export const DESCRIPTION: Record<TransactionState, () => string> = {
-  [TransactionState.INITIATED]: () =>
+export const DESCRIPTION: Record<TRANSACTION_STATE, () => string> = {
+  [TRANSACTION_STATE.INITIATED]: () =>
     t(
       'hyperplayOverlay.description.INITIATED',
       'A wallet confirmation is pending in your mobile wallet'
     ),
-  [TransactionState.PENDING]: () =>
+  [TRANSACTION_STATE.PENDING]: () =>
     t(
       'hyperplayOverlay.description.PENDING',
       "Waiting for blockchain confirmation. We'll let you know when it's confirmed"
     ),
-  [TransactionState.FAILED]: () =>
+  [TRANSACTION_STATE.FAILED]: () =>
     t(
       'hyperplayOverlay.description.FAILED',
       'The transaction was canceled or not submitted, please try again'
     ),
-  [TransactionState.CONFIRMED]: () =>
+  [TRANSACTION_STATE.CONFIRMED]: () =>
     t(
       'hyperplayOverlay.description.CONFIRMED',
       'The transaction was successfully confirmed!'
@@ -97,7 +97,7 @@ export type statusType =
   | 'error'
 
 type TxnStateToStatusMapType = {
-  [key in TransactionState]: statusType
+  [key in TRANSACTION_STATE]: statusType
 }
 export const TxnStateToStatusMap: TxnStateToStatusMapType = {
   initiated: 'pending',
@@ -106,13 +106,13 @@ export const TxnStateToStatusMap: TxnStateToStatusMapType = {
   failed: 'error'
 }
 
-interface EXTENSION_NOTIFICATION_TYPE {
+interface NOTIFICATION_TYPE {
   TITLE: () => string
   DESCRIPTION: (isMac: boolean) => string
   STATUS: statusType
 }
 
-export const EXTENSION_NOTIFICATION: EXTENSION_NOTIFICATION_TYPE = {
+export const EXTENSION_NOTIFICATION: NOTIFICATION_TYPE = {
   TITLE: () =>
     t('hyperplayOverlay.extensionNotification.TITLE', 'Transaction requested'),
   DESCRIPTION: (isMac: boolean) => {
@@ -121,6 +121,17 @@ export const EXTENSION_NOTIFICATION: EXTENSION_NOTIFICATION_TYPE = {
       overlayKeyMod: isMac ? 'Option' : 'Alt'
     })
   },
-
   STATUS: 'pending'
+}
+
+export const INITIAL_TOAST: NOTIFICATION_TYPE = {
+  TITLE: () => t('hyperplayOverlay.greeting.title', 'HyperPlay Overlay'),
+  DESCRIPTION: (isMac: boolean) => {
+    return t('hyperplayOverlay.greeting.description', {
+      defaultValue:
+        'HyperPlay Overlay is ready! Press {{overlayKeyMod}} + X to show or hide it.',
+      overlayKeyMod: isMac ? 'Option' : 'Alt'
+    })
+  },
+  STATUS: 'success'
 }

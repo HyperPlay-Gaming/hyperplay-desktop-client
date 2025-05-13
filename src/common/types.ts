@@ -9,9 +9,15 @@ import {
   SupportedPlatform as AppPlatforms,
   PlatformsMetaInterface
 } from '@valist/sdk/dist/typesShared'
-import { Channel } from '@valist/sdk/dist/typesApi'
+import { Channel, ContractMetadata } from '@valist/sdk/dist/typesApi'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
-import { NileInstallPlatform } from './types/nile'
+import { DropdownItemType } from '@hyperplay/ui'
+export type { Quest } from '@hyperplay/utils'
+import { LogPrefix, LogOptions } from '../backend/logger/logger'
+
+import { MetaMaskInpageProvider } from '@metamask/providers'
+
+export type { LogPrefix, LogOptions }
 
 export type {
   Listing as HyperPlayRelease,
@@ -24,15 +30,6 @@ export type {
   SupportedPlatform as AppPlatforms,
   PlatformConfig
 } from '@valist/sdk/dist/typesShared'
-
-declare module '@valist/sdk/dist/typesApi' {
-  interface Channel {
-    license_config: {
-      id: number
-      access_codes: boolean
-    }
-  }
-}
 
 export interface LicenseConfigValidateResult {
   valid: boolean
@@ -54,7 +51,7 @@ export type WrapRendererCallback<
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>
 
-export type Runner = 'legendary' | 'gog' | 'sideload' | 'hyperplay' | 'nile'
+export type Runner = 'legendary' | 'gog' | 'sideload' | 'hyperplay'
 
 // NOTE: Do not put enum's in this module or it will break imports
 
@@ -76,24 +73,24 @@ interface About {
   shortDescription: string
 }
 
-export type Release = {
-  type: 'stable' | 'beta'
-  html_url: string
-  name: string
-  tag_name: string
-  published_at: string
-  prerelease: boolean
-  id: number
+export type LDUser = {
+  kind: string
+  key: string
+}
+
+export type LDEnv = {
+  envId: string
+  ldUser: LDUser
+  appVersion: string
 }
 
 export interface AppSettings extends GameSettings {
   addDesktopShortcuts: boolean
   addStartMenuShortcuts: boolean
   addSteamShortcuts: boolean
-  altGogdlBin: string
-  altLegendaryBin: string
   autoUpdateGames: boolean
   checkForUpdatesOnStartup: boolean
+  autoLaunchHyperPlay: boolean
   checkUpdatesInterval: number
   customThemesPath: string
   customWinePaths: string[]
@@ -115,6 +112,8 @@ export interface AppSettings extends GameSettings {
   minimizeOnGameLaunch: boolean
   startInTray: boolean
   userInfo: UserInfo
+  steamId: string
+  ldUser: LDUser
 }
 
 export type LibraryTopSectionOptions =
@@ -139,8 +138,10 @@ export interface ExtraInfo {
 
 export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
 
+export type GameType = 'native' | 'mod' | 'browser'
+
 export interface GameInfo {
-  runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload' | 'nile'
+  runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload'
   store_url?: string
   app_name: string
   art_cover: string
@@ -161,6 +162,7 @@ export interface GameInfo {
   gog_save_location?: GOGCloudSavesLocation[]
   title: string
   canRunOffline: boolean
+  // ex: EA APP, Ubisoft Connect, etc
   thirdPartyManagedApp?: string | undefined
   is_mac_native?: boolean
   is_linux_native?: boolean
@@ -181,11 +183,17 @@ export interface GameInfo {
   dlcList?: GameMetadataInner[]
   //key is channel_id, value is last access code used
   accessCodesCache?: Record<string, string>
+  siweValues?: SiweValues
+  networks?: ContractMetadata[]
+  type?: GameType
+  // HyperPlay games that has their own installer/launcher
+  usesThirdPartyLauncher?: boolean
 }
 
 export interface GameSettings {
   autoInstallDxvk: boolean
   autoInstallVkd3d: boolean
+  autoInstallDxvkNvapi: boolean
   autoSyncSaves: boolean
   battlEyeRuntime: boolean
   DXVKFpsCap: string //Entered as string but used as number
@@ -194,6 +202,7 @@ export interface GameSettings {
   enableEsync: boolean
   enableFSR: boolean
   enableFsync: boolean
+  enableMsync: boolean
   enviromentOptions: EnviromentVariable[]
   ignoreGameUpdates: boolean
   language: string
@@ -236,6 +245,8 @@ export type Status =
   | 'extracting'
   | 'paused'
   | 'preparing'
+  | 'distributables'
+  | 'patching'
 
 export interface GameStatus {
   appName: string
@@ -255,6 +266,7 @@ export interface InstallProgress {
   downSpeed?: number
   diskSpeed?: number
   file?: string
+  totalSize?: number
 }
 
 export interface InstalledInfo {
@@ -303,6 +315,11 @@ export interface InstallArgs {
   installLanguage?: string
   channelName?: string
   accessCode?: string
+  updateOnly?: boolean
+  siweValues?: SiweValues
+  modOptions?: {
+    zipFilePath: string
+  }
 }
 
 export interface InstallParams extends InstallArgs {
@@ -310,6 +327,12 @@ export interface InstallParams extends InstallArgs {
   gameInfo: GameInfo
   runner: Runner
   size?: string
+  channelName?: string
+}
+
+export interface UpdateArgs {
+  siweValues?: SiweValues
+  accessCode?: string
 }
 
 export interface UpdateParams {
@@ -389,7 +412,9 @@ export interface LaunchPreperationResult {
 
 export interface RpcClient {
   updatePresence(d: unknown): void
+
   reply(user: unknown, response: unknown): void
+
   disconnect(): void
 }
 
@@ -397,6 +422,7 @@ export interface CallRunnerOptions {
   logMessagePrefix?: string
   logFile?: string
   verboseLogFile?: string
+  logSanitizer?: (line: string) => string
   env?: Record<string, string> | NodeJS.ProcessEnv
   wrappers?: string[]
   onOutput?: (output: string, child: ChildProcess) => void
@@ -475,9 +501,15 @@ export type RecentGame = {
   title: string
 }
 
-export type HiddenGame = RecentGame
+export type HiddenGame = { appName: string }
 
 export type FavouriteGame = HiddenGame
+
+export interface GameCollection {
+  list: HiddenGame[]
+  add: (appNameToAdd: string, appTitle: string) => void
+  remove: (appNameToRemove: string) => void
+}
 
 export type RefreshOptions = {
   checkForUpdates?: boolean
@@ -536,11 +568,16 @@ interface GamepadActionArgsWithoutMetadata {
   metadata?: undefined
 }
 
+export type SiweValues = {
+  address: string
+  message: string
+  signature: string
+}
+
 export type InstallPlatform =
   | LegendaryInstallPlatform
   | GogInstallPlatform
   | AppPlatforms
-  | NileInstallPlatform
   | 'Browser'
 
 export type ConnectivityChangedCallback = (
@@ -566,6 +603,7 @@ export interface DMQueueElement {
   startTime: number
   endTime: number
   status?: DMStatus
+  channel?: string
 }
 
 type ProtonVerb =
@@ -586,6 +624,11 @@ export type WineCommandArgs = {
   options?: CallRunnerOptions
   startFolder?: string
   skipPrefixCheckIKnowWhatImDoing?: boolean
+  overlayInfo?: {
+    showOverlay: boolean
+    appName: string
+    runner: Runner
+  }
 }
 
 export type Web3Features = {
@@ -671,6 +714,7 @@ export type Type =
   | 'Wine-Kron4ek'
   | 'Wine-Crossover'
   | 'Wine-Staging-macOS'
+  | 'Game-Porting-Toolkit'
 
 /**
  * Interface contains information about a version
@@ -700,7 +744,8 @@ export enum Repositorys {
   PROTON,
   WINELUTRIS,
   WINECROSSOVER,
-  WINESTAGINGMACOS
+  WINESTAGINGMACOS,
+  GPTK
 }
 
 /**
@@ -783,3 +828,167 @@ export type AvailablePlatforms = {
   value: string
   icon: IconDefinition
 }[]
+
+export type AchievementStore = 'HYPERPLAY' | 'STEAM' | 'EPIC'
+
+export interface Achievement {
+  id: string
+  apiname: string
+  achieved: number
+  unlocktime: number
+  name: string
+  defaultvalue: number
+  displayName: string
+  hidden: number
+  description: string
+  icon: string
+  icongray: string
+  iconName: string
+  gameId: number
+  gameName: string
+  gameImageURL: string
+}
+
+export interface SummaryAchievement extends Achievement {
+  totalAchievementCount: number
+  mintedAchievementCount: number
+  mintableAchievementsCount: number
+  isNewAchievement: boolean
+  isMinted: boolean
+  tags: string[]
+}
+
+export type AchievementSort = 'ALPHA_A_TO_Z' | 'ALPHA_Z_TO_A' | 'SORT_BY_STATUS'
+
+export type AchievementFilter = 'ALL' | 'NEW' | 'MINTED'
+
+export interface PlayerOptions {
+  playerStoreId: string
+  playerAddress: string
+  store: AchievementStore
+}
+
+export interface GetAchievementsOptions extends PlayerOptions {
+  filter: AchievementFilter
+  sort: AchievementSort
+  page: number
+  pageSize?: number
+}
+
+export interface GetIndividualAchievementsOptions extends PlayerOptions {
+  gameId: number
+  sort: AchievementSort
+  page: number
+  pageSize: number
+}
+
+export interface AchievementsStats {
+  newAchievements: number
+  mintedAchievements: number
+  totalAchievements: number
+  totalGames: number
+  numFreeMints: number
+}
+
+export type WalletOnboardCloseReason =
+  | 'skipped'
+  | 'connected'
+  | 'requestedMetaMaskConnection'
+
+export type Filter =
+  | 'alphabeticalAscending'
+  | 'alphabeticalDescending'
+  | 'sortByInstalled'
+
+export interface FilterItem extends DropdownItemType {
+  id?: Filter
+}
+
+export interface OverlayRenderState {
+  showToasts: boolean
+  showBrowserGame: boolean
+  browserGameUrl: string
+  showHintText: boolean
+  showExitGameButton: boolean
+  showExtension: boolean
+  showBackgroundTint: boolean
+}
+
+export type OverlayAction = 'ON' | 'OFF' | 'TOGGLE'
+
+export interface RunnerBin {
+  dir: string
+  bin: string
+}
+
+export type OverlayType = 'native' | 'browser' | 'mainWindow'
+
+export interface Reward {
+  id: number
+  amount_per_user: number | null
+  chain_id: number | null
+  marketplace_url: string | null
+  reward_type: 'ERC20' | 'ERC721' | 'ERC1155' | 'POINTS' | 'EXTERNAL-TASKS'
+  name: string
+  contract_address: `0x${string}`
+  decimals: number | null
+  token_ids: {
+    amount_per_user: string
+    token_id: number
+    numClaimsLeft: string
+  }[]
+  image_url: string
+  numClaimsLeft: string
+}
+
+export interface RewardClaimSignature {
+  signature: `0x${string}`
+  nonce: string
+  expiration: number
+  tokenIds: number[]
+}
+
+export interface DepositContract {
+  contract_address: `0x${string}`
+  chain_id: number
+}
+
+export interface GenericApiResponse {
+  status?: string
+  message: string
+}
+
+export interface PointsClaimReturn {
+  // sent on error
+  status?: string
+  message?: string
+  // sent on success
+  success?: string
+}
+
+export interface ConfirmClaimParams {
+  transactionHash: string
+  signature: string
+}
+
+export interface UserPlayStreak {
+  current_playstreak_in_days: number
+  completed_counter: number
+  accumulated_playtime_today_in_seconds: number
+  last_play_session_completed_datetime: string
+}
+
+export interface PointsCollection {
+  id: string
+  name: string
+  symbol: string
+  image: string
+}
+
+export type { GamePageActions } from '@hyperplay/utils'
+
+declare global {
+  interface Window {
+    ethereum: MetaMaskInpageProvider
+  }
+}

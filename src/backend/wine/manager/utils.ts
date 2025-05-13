@@ -14,7 +14,7 @@ import {
 } from 'common/types'
 
 import { getAvailableVersions, installVersion } from './downloader/main'
-import { toolsPath, isMac } from '../../constants'
+import { toolsPath, isMac, isWindows } from '../../constants'
 import { sendFrontendMessage } from '../../main_window'
 import { TypeCheckedStoreBackend } from 'backend/electron_store'
 
@@ -28,15 +28,18 @@ export const wineDownloaderInfoStore = new TypeCheckedStoreBackend(
 
 async function updateWineVersionInfos(
   fetch = false,
-  count = 50
+  count = 15
 ): Promise<WineVersionInfo[]> {
+  if (isWindows) {
+    return []
+  }
   let releases: WineVersionInfo[] = []
 
   logInfo('Updating wine versions info', LogPrefix.WineDownloader)
   if (fetch) {
     logInfo('Fetching upstream information...', LogPrefix.WineDownloader)
     const repositorys = isMac
-      ? [Repositorys.WINECROSSOVER, Repositorys.WINESTAGINGMACOS]
+      ? [Repositorys.WINECROSSOVER, Repositorys.GPTK]
       : [Repositorys.WINEGE, Repositorys.PROTONGE]
     await getAvailableVersions({
       repositorys,
@@ -69,6 +72,7 @@ async function updateWineVersionInfos(
     }
 
     wineDownloaderInfoStore.set('wine-releases', releases)
+    logInfo('Wine version list was updated', LogPrefix.WineDownloader)
   } else {
     logInfo('Read local information ...', LogPrefix.WineDownloader)
     if (wineDownloaderInfoStore.has('wine-releases')) {
@@ -81,11 +85,24 @@ async function updateWineVersionInfos(
   return releases
 }
 
+function getInstallDir(release: WineVersionInfo): string {
+  if (release?.type?.includes('Wine')) {
+    return `${toolsPath}/wine`
+  } else if (release.type.includes('Toolkit')) {
+    return `${toolsPath}/game-porting-toolkit`
+  } else {
+    return `${toolsPath}/proton`
+  }
+}
+
 async function installWineVersion(
   release: WineVersionInfo,
   onProgress: (state: State, progress?: ProgressInfo) => void,
   abortSignal: AbortSignal
 ) {
+  if (isWindows) {
+    return
+  }
   let updatedInfo: WineVersionInfo
 
   if (!existsSync(`${toolsPath}/wine`)) {
@@ -96,14 +113,16 @@ async function installWineVersion(
     mkdirSync(`${toolsPath}/proton`, { recursive: true })
   }
 
+  if (isMac && !existsSync(`${toolsPath}/game-porting-toolkit`)) {
+    mkdirSync(`${toolsPath}/game-porting-toolkit`, { recursive: true })
+  }
+
   logInfo(
     `Start installation of wine version ${release.version}`,
     LogPrefix.WineDownloader
   )
 
-  const installDir = release?.type?.includes('Wine')
-    ? `${toolsPath}/wine`
-    : `${toolsPath}/proton`
+  const installDir = getInstallDir(release)
 
   try {
     const response = await installVersion({

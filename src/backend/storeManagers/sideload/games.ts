@@ -52,7 +52,7 @@ export async function removeShortcuts(appName: string): Promise<void> {
   return removeShortcutsUtil(getGameInfo(appName))
 }
 
-export function isGameAvailable(appName: string): boolean {
+export async function isGameAvailable(appName: string): Promise<boolean> {
   const { install } = getGameInfo(appName)
 
   if (install && install.platform === 'Browser') {
@@ -88,6 +88,10 @@ export async function stop(appName: string): Promise<void> {
       shutdownWine(gameSettings)
     }
   }
+}
+
+export async function pause(appName: string) {
+  return stop(appName)
 }
 
 export async function uninstall({

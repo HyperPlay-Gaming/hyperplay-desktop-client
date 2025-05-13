@@ -1,20 +1,5 @@
 .mmContainer {
-  position: fixed;
-  right: 357px;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  z-index: 100000;
-  top: var(--top-navbar-height);
-}
-
-.mmWindow {
-  width: 357px;
-  height: 600px;
-  overflow: hidden;
-  border-radius: 0px 0px 16px 16px;
-  background: #24272a;
-  position: absolute;
-  display: flex;
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }

@@ -75,9 +75,6 @@
   "asset": {
     "message": "Imovina"
   },
-  "attemptingConnect": {
-    "message": "Pokušaj povezivanja na podatkovni blok."
-  },
   "attributions": {
     "message": "Svojstva"
   },
@@ -208,9 +205,6 @@
   "delete": {
     "message": "Izbriši"
   },
-  "deleteNetwork": {
-    "message": "Izbrisati mrežu?"
-  },
   "details": {
     "message": "Detalji"
   },
@@ -231,12 +225,6 @@
   },
   "editContact": {
     "message": "Uredi kontakt"
-  },
-  "ensNotFoundOnCurrentNetwork": {
-    "message": "Naziv ENS nije pronađen na trenutačnoj mreži. Pokušajte prebaciti na glavnu mrežu Ethereum."
-  },
-  "ensRegistrationError": {
-    "message": "Greška u registraciji naziva ENS"
   },
   "enterPasswordContinue": {
     "message": "Upišite lozinku za nastavak"
@@ -265,9 +253,6 @@
   },
   "from": {
     "message": "Pošiljatelj"
-  },
-  "functionType": {
-    "message": "Vrsta funkcije"
   },
   "gasLimit": {
     "message": "Ograničenje goriva"
@@ -328,9 +313,6 @@
     "message": "Uvezi",
     "description": "Button to import an account from a selected file"
   },
-  "importAccount": {
-    "message": "Uvezi račun"
-  },
   "importAccountMsg": {
     "message": "Uvezeni se računi ne pridružuju vašoj izvorno stvorenoj početnoj rečenici za MetaMask. Saznajte više o uvezenim računima"
   },
@@ -355,12 +337,6 @@
   },
   "invalidAddressRecipient": {
     "message": "Adresa primatelja nije valjana"
-  },
-  "invalidAddressRecipientNotEthNetwork": {
-    "message": "Ne mreža ETH, postavite na mala slova"
-  },
-  "invalidBlockExplorerURL": {
-    "message": "Nevaljani URL Block Explorer-a"
   },
   "invalidRPC": {
     "message": "Nevaljani URL RPC-a"
@@ -398,9 +374,6 @@
   },
   "loading": {
     "message": "Učitavanje..."
-  },
-  "loadingTokens": {
-    "message": "Učitavanje tokena..."
   },
   "lock": {
     "message": "Odjava"
@@ -458,14 +431,8 @@
   "next": {
     "message": "Sljedeće"
   },
-  "noAddressForName": {
-    "message": "Nijedna adresa nije postavljena za ovaj naziv."
-  },
   "noConversionRateAvailable": {
     "message": "Nijedan konverzijski tečaj nije dostupan"
-  },
-  "noTransactions": {
-    "message": "Nemate transkacija"
   },
   "noWebcamFound": {
     "message": "Mrežna kamera vašeg računala nije pronađena. Pokušajte ponovno."
@@ -490,9 +457,6 @@
   },
   "origin": {
     "message": "Podrijetlo"
-  },
-  "parameters": {
-    "message": "Parametri"
   },
   "participateInMetaMetrics": {
     "message": "Sudjelujte u anketi MetaMetrics"
@@ -522,12 +486,6 @@
   "prev": {
     "message": "Prethodno"
   },
-  "primaryCurrencySetting": {
-    "message": "Glavna valuta"
-  },
-  "primaryCurrencySettingDescription": {
-    "message": "Odaberite da se prvo prikazuju valute u osnovnoj valuti bloka (npr. ETH). Odaberite mogućnost Fiat za prikazivanje valuta u odabranoj valuti Fiat."
-  },
   "privacyMsg": {
     "message": "Pravilnik o zaštiti privatnosti"
   },
@@ -543,9 +501,6 @@
   },
   "readdToken": {
     "message": "Ovaj token možete dodati kasnije odlaskom pod stavku „Dodaj token” u izborniku mogućnosti računa. "
-  },
-  "recipientAddressPlaceholder": {
-    "message": "Pretraži, javne adrese (0x) ili ENS"
   },
   "reject": {
     "message": "Odbaci"
@@ -570,9 +525,6 @@
   },
   "removeAccountDescription": {
     "message": "Ovaj se račun uklanja iz vašeg novčanika. Provjerite imate li izvornu početnu rečenicu ili privatni ključ za ovaj uvezeni račun prije nastavka. Ponovno možete uvoziti ili stvarati račune uporabom padajućeg izbornika za račun."
-  },
-  "requestsAwaitingAcknowledgement": {
-    "message": "zahtjevi se trebaju odobriti"
   },
   "required": {
     "message": "Zahtijeva se"
@@ -605,9 +557,6 @@
   "search": {
     "message": "Traži"
   },
-  "searchResults": {
-    "message": "Rezultati pretraživanja"
-  },
   "securityAndPrivacy": {
     "message": "Sigurnost i privatnost"
   },
@@ -629,9 +578,6 @@
   "send": {
     "message": "Pošalji"
   },
-  "sendTokens": {
-    "message": "Pošalji tokene"
-  },
   "settings": {
     "message": "Postavke"
   },
@@ -646,9 +592,6 @@
   },
   "showHexDataDescription": {
     "message": "Odaberite ovu stavku za prikaz polja namijenjenog za podatke hex na zaslonu za slanje"
-  },
-  "sigRequest": {
-    "message": "Zahtjev za potpisom"
   },
   "sign": {
     "message": "Potpis"
@@ -743,9 +686,6 @@
   "transactionErrored": {
     "message": "Došlo je do greške prilikom transakcije."
   },
-  "transactionFee": {
-    "message": "Naknada za transakciju"
-  },
   "transactionResubmitted": {
     "message": "Transakcija je ponovno poslana s naknadom za gorivo povećanom do vrijednosti od $1 u $2."
   },
@@ -773,15 +713,6 @@
   "unknown": {
     "message": "Nepoznato"
   },
-  "unknownCameraError": {
-    "message": "Došlo je do greške prilikom pokušaja pristupanja vašoj kameri. Pokušajte ponovno..."
-  },
-  "unknownCameraErrorTitle": {
-    "message": "Ups! Nešto je pošlo po zlu..."
-  },
-  "unknownNetwork": {
-    "message": "Nepoznata privatna mreža"
-  },
   "unknownQrCode": {
     "message": "Greška: ne možemo identificirati kôd QR"
   },
@@ -790,9 +721,6 @@
   },
   "unlockMessage": {
     "message": "Decentralizirani internet čeka"
-  },
-  "updatedWithDate": {
-    "message": "Ažurirano $1"
   },
   "urlErrorMsg": {
     "message": "URI-jevima se zahtijeva prikladan prefiks HTTP/HTTPS."
@@ -814,9 +742,6 @@
   },
   "youNeedToAllowCameraAccess": {
     "message": "Trebate dopustiti pristupanje kameri za korištenje ovom funkcijom."
-  },
-  "youSign": {
-    "message": "Vi potpisujete"
   },
   "yourPrivateSeedPhrase": {
     "message": "Vaša privatna početna rečenica"

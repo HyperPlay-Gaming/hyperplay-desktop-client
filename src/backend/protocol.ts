@@ -7,10 +7,11 @@ import { getMainWindow, sendFrontendMessage } from './main_window'
 import { icon } from './constants'
 import { getGameInfo } from 'backend/storeManagers/hyperplay/games'
 import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
+import { getHpOverlay } from './overlay'
 
-type Command = 'ping' | 'launch'
+type Command = 'ping' | 'launch' | 'otp-deeplink'
 
-const RUNNERS = ['hyperplay', 'legendary', 'gog', 'nile', 'sideload']
+const RUNNERS = ['hyperplay', 'legendary', 'gog', 'sideload']
 
 /**
  * Handles a protocol request
@@ -31,16 +32,33 @@ export async function handleProtocol(args: string[]) {
 
   const [command, runner, arg = ''] = parseUrl(url)
 
-  logInfo(`received '${url}'`, LogPrefix.ProtocolHandler)
+  logInfo(`received ${url}`, LogPrefix.ProtocolHandler)
 
+  const otp = new URL(url).searchParams.get('otp')
   switch (command) {
     case 'ping':
       return handlePing(arg)
     case 'launch':
       await handleLaunch(runner, arg, mainWindow)
       break
+    case 'otp-deeplink':
+      await handleOtp(otp)
+      break
     default:
       return
+  }
+}
+
+export async function handleOtp(otp: string | null) {
+  const channel = 'otpDeeplink'
+  const hpOverlay = await getHpOverlay()
+  // if no overlay window exists
+  if (!hpOverlay?.sendMessageToOverlayWindows(channel, otp)) {
+    // send to main window
+    logInfo('No overlay windows exist. Sending otp to main window.')
+    sendFrontendMessage(channel, otp)
+  } else {
+    logInfo('Sent otp to overlay windows.')
   }
 }
 
@@ -72,10 +90,12 @@ function getUrl(args: string[]): string | undefined {
  * parseUrl('hyperplay://launch/legendary/123')
  * // => ['launch', 'legendary', '123']
  **/
-function parseUrl(url: string): [Command, Runner?, string?, string?] {
+export function parseUrl(url: string): [Command, Runner?, string?, string?] {
   const [, fullCommand] = url.split('://')
 
-  //check if the second param is a runner or not and adjust parts accordingly
+  const urlObject = new URL(url)
+
+  // TODO: https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/issues/654
   const splitCommand = fullCommand.split('/')
   const hasRunner = RUNNERS.includes(splitCommand[1] as Runner)
   if (hasRunner) {
@@ -87,6 +107,12 @@ function parseUrl(url: string): [Command, Runner?, string?, string?] {
       const [command, runner, accountId, appId] = splitCommand
       return [command as Command, runner as Runner, accountId, appId]
     }
+  } else if (splitCommand[0].startsWith('otp-deeplink')) {
+    return [
+      'otp-deeplink',
+      undefined,
+      urlObject.searchParams.get('otp') ?? undefined
+    ]
   } else {
     const [command, appId] = splitCommand
     return [command as Command, undefined, appId]
@@ -107,8 +133,6 @@ async function handlePing(arg: string) {
  * // => 'Received launch! Runner: hyperplay, Arg: 123'
  * handleLaunch('legendary', '123')
  * // => 'Received launch! Runner: legendary, Arg: 123'
- * handleLaunch('nile', '123')
- * // => 'Received launch! Runner: nile, Arg: 123'
  **/
 async function handleLaunch(
   runner: Runner | undefined,
@@ -166,10 +190,6 @@ async function handleLaunch(
  * @example
  * findGame('gog', '123')
  * // => { app_name: '123', title: '123', is_installed: true, runner: 'gog' ...}
- * findGame('legendary', '123')
- * // => { app_name: '123', title: '123', is_installed: true, runner: 'legendary' ...}
- * findGame('nile', '123')
- * // => { app_name: '123', title: '123', is_installed: true, runner: 'nile' ...}
  **/
 async function findGame(
   runner: Runner | undefined,

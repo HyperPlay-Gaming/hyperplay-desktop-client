@@ -1,37 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef } from 'react'
 import BrowserGameStyles from './index.module.scss'
-import BrowserExtensionManager from './ExtensionManager'
-import BrowserToastManager from './ToastManager'
-import { PROVIDERS } from 'common/types/proxy-types'
-import BrowserExtensionToastManager from './ExtensionToastManager'
-import { Runner } from 'common/types'
+import { observer } from 'mobx-react-lite'
+import OverlayState from 'frontend/state/OverlayState'
+import { BrowserGameProps } from './types'
+import { Overlay } from './Overlay'
+import { WebviewTag } from 'electron'
+import WebviewControls from 'frontend/components/UI/WebviewControls'
+import AuthModal from 'frontend/components/UI/AuthModal'
+import { useKeepPlaystreaksInSync } from '@hyperplay/quests-ui'
 
-interface RenderState {
-  showToasts: boolean
-  showExtension: boolean
-  showBrowserGame: boolean
-  showExitButton: boolean
-  showHintText: boolean
-}
-
-interface BrowserGameProps {
-  url: string
-  appName: string
-  runner: Runner
-  renderState: RenderState
-}
-
-const OverlayManager = function ({
-  url,
+const OverlayManager = observer(function ({
   appName,
-  runner,
-  renderState
+  runner
 }: BrowserGameProps) {
-  const [provider, setProvider] = useState('')
-
-  useEffect(() => {
-    window.api.getConnectedProvider().then((val) => setProvider(val))
-  }, [])
+  useKeepPlaystreaksInSync({
+    appName,
+    runner,
+    getQuest: window.api.getQuest,
+    getQuests: window.api.getQuests,
+    getUserPlayStreak: window.api.getUserPlayStreak,
+    syncPlaySession: window.api.syncPlaySession
+  })
+  const url = OverlayState.renderState.browserGameUrl
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const trueAsStr = 'true' as any
@@ -39,68 +29,50 @@ const OverlayManager = function ({
     '--body-background': '#999999'
   } as React.CSSProperties
 
-  const txnToastContainerStyle = {} as React.CSSProperties
-  if (renderState.showToasts && !renderState.showExtension) {
-    txnToastContainerStyle.bottom = 0
-    txnToastContainerStyle.right = 0
-    txnToastContainerStyle.top = 0
-  }
-
-  function isFullscreenOverlay(showStates: RenderState) {
-    return (
-      showStates.showToasts &&
-      showStates.showExtension &&
-      showStates.showExitButton
-    )
-  }
-
   if (
-    !(isFullscreenOverlay(renderState) && !renderState.showBrowserGame) &&
+    !(
+      OverlayState.isFullscreenOverlay &&
+      !OverlayState.renderState.showBrowserGame
+    ) &&
     url === 'ignore'
   ) {
     style.width = '100%'
     style.height = '100%'
   }
+  const webviewRef = useRef<WebviewTag>(null)
 
   /* eslint-disable react/no-unknown-property */
   return (
-    <div
-      className={BrowserGameStyles.overlayContainer}
-      style={style}
-      id="overlay-manager"
-    >
-      {renderState.showToasts ? (
-        <div
-          className={BrowserGameStyles.txnToastContainer}
-          style={txnToastContainerStyle}
-        >
-          <BrowserToastManager showCloseButton={true} />
-          <BrowserExtensionToastManager showCloseButton={true} />
-        </div>
-      ) : null}
-      <BrowserExtensionManager
-        appName={appName}
-        runner={runner}
-        showExtension={renderState.showExtension}
-        showExitGameButton={renderState.showExitButton}
-        showHintText={renderState.showHintText}
-      />
-      {provider !== '' && url !== 'ignore' && renderState.showBrowserGame ? (
-        <webview
-          src={url}
-          className={BrowserGameStyles.browserGame}
-          partition={
-            provider === PROVIDERS.METAMASK_MOBILE || PROVIDERS.WALLET_CONNECT
-              ? 'persist:InPageWindowEthereumExternalWallet'
-              : undefined
-          }
-          webpreferences="contextIsolation=true"
-          // setting = to {true} does not work :(
-          allowpopups={trueAsStr}
-        />
-      ) : null}
-    </div>
+    <>
+      <AuthModal />
+      <div
+        className={BrowserGameStyles.overlayContainer}
+        style={style}
+        id="overlay-manager"
+      >
+        <Overlay appName={appName} runner={runner} />
+        {url !== 'ignore' && OverlayState.renderState.showBrowserGame ? (
+          <div>
+            <WebviewControls
+              webview={webviewRef.current}
+              initURL={''}
+              openInBrowser={false}
+              disableUrl={true}
+            />
+            <webview
+              src={url}
+              className={BrowserGameStyles.browserGame}
+              partition={'persist:InPageWindowEthereumExternalWallet'}
+              webpreferences="contextIsolation=true"
+              // setting = to {true} does not work :(
+              allowpopups={trueAsStr}
+              ref={webviewRef}
+            />
+          </div>
+        ) : null}
+      </div>
+    </>
   )
-}
+})
 
 export default OverlayManager
