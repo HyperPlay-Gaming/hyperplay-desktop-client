@@ -29,13 +29,15 @@ interface OSInfoProps {
 function OSInfo({ os, isFlatpak }: OSInfoProps) {
   const { t } = useTranslation()
   return (
-    <div style={{ padding: 1 }}>
-      <h6>{t('settings.systemInformation.os', 'Operating System:')}</h6>
-      <div className="gridItemContainer">
+    <div>
+      <h6 className={styles.osinfoname}>
+        {t('settings.systemInformation.os', 'Operating System:')}
+      </h6>
+      <div className={styles.gridItemContainer}>
         <div className={styles.logoContainer}>
           <OSLogo platform={os.platform} />
         </div>
-        <div>
+        <div className={styles.osinfoversion}>
           {isFlatpak
             ? t(
                 'settings.systemInformation.osNameFlatpak',

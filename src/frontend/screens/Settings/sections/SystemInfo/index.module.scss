@@ -4,4 +4,9 @@
   grid-template-columns: auto auto;
   row-gap: var(--space-md-fixed);
   column-gap: var(--space-md-fixed);
+  border: 1px solid var(--color-stroke-weak);
+  border-radius: var(--space-xs);
+  padding: var(--space-lg);
+  background-color: var(--background-base);
+  width: 80%;
 }

@@ -15,8 +15,10 @@ function MemoryProgress({ memory }: Props) {
   const memoryUsedInPercent = (used / total) * 100
 
   return (
-    <div style={{ height: '100%' }}>
-      <h6>{t('settings.systemInformation.memory', 'Memory:')}</h6>
+    <div>
+      <h6 className="memorytitle">
+        {t('settings.systemInformation.memory', 'Memory:')}
+      </h6>
       <Progress variant="determinate" value={memoryUsedInPercent} />
       <div>
         {t(

@@ -21,7 +21,7 @@ function SoftwareInfo({ software }: Props) {
         <div>
           <HyperPlayIcon className="app-icon" />
         </div>
-        <div style={{ margin: 'auto', paddingLeft: 'var(--space-xs-fixed)' }}>
+        <div className="osinfoname">
           {t('settings.systemInformation.version', 'Version: {{appVersion}}', {
             appVersion
           })}
