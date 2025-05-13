@@ -13,6 +13,7 @@ import { UpdateComponent } from 'frontend/components/UI'
 import WebviewControls from 'frontend/components/UI/WebviewControls'
 import ContextProvider from 'frontend/state/ContextProvider'
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
+import { useTourGuide } from 'frontend/components/TourGuide/TourContext'
 import { Runner } from 'common/types'
 import './index.css'
 import LoginWarning from '../Login/components/LoginWarning'
@@ -31,6 +32,7 @@ import { METAMASK_SNAPS_URL } from 'common/constants'
 import storeAuthState from 'frontend/state/storeAuthState'
 import { getGameInfo } from 'frontend/helpers'
 import cn from 'classnames'
+import { FIRST_TIME_TOUR } from 'frontend/components/TourGuide/constants'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
@@ -50,6 +52,7 @@ function WebView({
   const { pathname, search } = useLocation()
   const { t } = useTranslation()
   const { epic, gog, connectivity } = useContext(ContextProvider)
+  const { isTourCompleted, activateTour } = useTourGuide()
   const [loading, setLoading] = useState<{
     refresh: boolean
     message: string
@@ -137,6 +140,19 @@ function WebView({
   useEffect(() => {
     window.api.trackScreen('WebView', { url: startUrl, runner })
   }, [startUrl, runner])
+
+  // Check if on a store page and trigger first-welcome tour if not completed
+  useEffect(() => {
+    const isStorePage = pathname === '/hyperplaystore'
+
+    if (isStorePage && !loading.refresh) {
+      if (!isTourCompleted(FIRST_TIME_TOUR)) {
+        setTimeout(() => {
+          activateTour(FIRST_TIME_TOUR)
+        }, 1000)
+      }
+    }
+  }, [pathname, loading.refresh, isTourCompleted])
 
   useEffect(() => {
     if (!urlIsHpUrl(startUrl) && pathname !== '/game7Portal') {

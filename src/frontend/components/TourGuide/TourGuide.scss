@@ -1,0 +1,155 @@
+.introjs-tooltip {
+  background: var(--color-neutral-600);
+  border-radius: var(--space-md);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  min-width: 320px;
+}
+
+.introjs-tooltiptext {
+  color: var(--text-weak);
+  font-size: var(--text-xl);
+  line-height: 1.5;
+  padding: var(--space-md);
+}
+
+.introjs-tooltipbuttons {
+  border-top: 1px solid var(--color-neutral-500);
+}
+
+.introjs-bullets ul {
+  scale: 1.5;
+}
+
+.introjs-button {
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  font-family: var(--font-family-body, 'Poppins');
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: none;
+  border-radius: var(--space-xs);
+  border: none;
+
+  &:active {
+    color: var(--color-neutral-200);
+  }
+
+  border-image-source: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  color: var(--text-strong);
+  background-color: var(--fill-brand-strong);
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--fill-hover);
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+
+  &:focus-visible,
+  &.focusVisible {
+    outline-offset: 2px;
+    outline: 2px solid var(--color-primary-500);
+  }
+
+  &:focus,
+  &:hover {
+    background-color: var(--color-primary-600);
+    color: var(--text-strong);
+    opacity: 80%;
+  }
+}
+
+.introjs-prevbutton {
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: none;
+  color: var(--text-brand);
+
+  &:active {
+    color: var(--color-neutral-200);
+  }
+
+  &:disabled,
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  border-image-source: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  border: 2px solid var(--color-stroke-brand-strong);
+  background: transparent;
+  position: relative;
+  isolation: isolate;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--fill-hover);
+    color: var(--text-brand);
+    opacity: 80%;
+    z-index: 1;
+    cursor: pointer;
+    border: 2px solid var(--color-stroke-brand-strong);
+  }
+}
+
+.introjs-bullets ul li a {
+  background-color: var(--background-lighter);
+
+  &.active {
+    background-color: var(--primary);
+  }
+}
+
+.introjs-arrow {
+  border: 10px solid transparent;
+
+  &.top,
+  &.top-right,
+  &.top-middle {
+    border-bottom-color: var(--color-neutral-600);
+    top: -18px;
+  }
+
+  &.bottom,
+  &.bottom-right,
+  &.bottom-middle {
+    border-top-color: var(--color-neutral-600);
+  }
+
+  &.left {
+    border-right-color: var(--color-neutral-600);
+    left: -18px;
+  }
+
+  &.right {
+    right: -18px;
+    border-left-color: var(--color-neutral-600);
+  }
+}
+
+.introjs-skipbutton {
+  color: var(--text-default);
+
+  &:hover {
+    color: var(--text-default);
+    opacity: 0.8;
+  }
+}

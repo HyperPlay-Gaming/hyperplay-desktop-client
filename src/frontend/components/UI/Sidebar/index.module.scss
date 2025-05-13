@@ -25,3 +25,37 @@
 .Sidebar::-webkit-scrollbar {
   width: 0px;
 }
+
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.sidebarTourButtonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding: var(--space-sm) 0;
+}
+
+.sidebarTourButton {
+  margin-top: var(--space-md);
+  background-color: var(--transparent);
+  color: var(--text-default);
+  font-weight: 500;
+  text-align: center;
+  transition: background-color 0.2s, color 0.2s;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    background-color: var(--primary);
+    color: var(--text-title);
+  }
+}

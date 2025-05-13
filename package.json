@@ -119,6 +119,8 @@
     "i18next-fs-backend": "^2.3.2",
     "i18next-http-backend": "^2.5.2",
     "ini": "^3.0.1",
+    "intro.js": "^7.2.0",
+    "intro.js-react": "^1.0.0",
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^20.0.0",
     "json5": "^2.2.3",

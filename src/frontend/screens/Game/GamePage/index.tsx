@@ -69,6 +69,7 @@ import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import authState from 'frontend/state/authState'
+import { TourGuide } from 'frontend/components/TourGuide'
 
 type locationState = {
   fromDM?: boolean
@@ -399,7 +400,7 @@ export default observer(function GamePage(): JSX.Element | null {
       t('generic.noDescription', 'No description available')
 
     return (
-      <div className="gameConfigContainer">
+      <div className="gameConfigContainer" data-tour="game-page-container">
         {showStopInstallModal ? (
           <StopInstallationModal
             onClose={() => setShowStopInstallModal(false)}
@@ -420,7 +421,11 @@ export default observer(function GamePage(): JSX.Element | null {
         )}
         {title ? (
           <>
-            <GamePicture art_square={art_square} store={runner} />
+            <GamePicture
+              art_square={art_square}
+              store={runner}
+              data-tour="game-page-picture"
+            />
             <CyberDividerVertical
               className="cyberDivider"
               preserveAspectRatio="none"
@@ -430,14 +435,16 @@ export default observer(function GamePage(): JSX.Element | null {
               to={backRoute}
               title={t2('webview.controls.back', 'Go Back')}
             >
-              <BackArrowOutlinedCircled />
+              <BackArrowOutlinedCircled data-tour="game-page-back-button" />
             </NavLink>
-            <div className="store-icon">
+            <div className="store-icon" data-tour="game-page-store-icon">
               <StoreLogos runner={runner} />
             </div>
-            <div className="gameInfo">
+            <div className="gameInfo" data-tour="game-page-info">
               <div className="titleWrapper">
-                <h2 className="title">{title}</h2>
+                <h2 className="title" data-tour="game-page-title">
+                  {title}
+                </h2>
                 {is_installed && !isBrowserGame && (
                   <a
                     role={'button'}
@@ -445,11 +452,12 @@ export default observer(function GamePage(): JSX.Element | null {
                       setIsSettingsModalOpen(true, 'settings', gameInfo)
                     }
                     className={`settings-icon`}
+                    data-tour="game-page-settings"
                   >
                     <SettingsIcon />
                   </a>
                 )}
-                <div className="game-actions">
+                <div className="game-actions" data-tour="game-page-actions">
                   <button className="toggle">
                     <FontAwesomeIcon icon={faEllipsisV} />
                   </button>
@@ -480,10 +488,12 @@ export default observer(function GamePage(): JSX.Element | null {
                   />
                 </div>
               </div>
-              <div className="infoWrapper">
+              <div className="infoWrapper" data-tour="game-page-info-wrapper">
                 <div className="developer menu">{developer}</div>
-                <div className="summary">{description}</div>
-                <div className="grid-container">
+                <div className="summary" data-tour="game-page-description">
+                  {description}
+                </div>
+                <div className="grid-container" data-tour="game-page-details">
                   {!is_installed && !isSideloaded && (
                     <>
                       {downloadSize !== 0 ? (
@@ -600,7 +610,7 @@ export default observer(function GamePage(): JSX.Element | null {
                   />
                 </div>
               </div>
-              <div className="gameStatus">
+              <div className="gameStatus" data-tour="game-page-status">
                 <p
                   style={{
                     color:
@@ -620,6 +630,7 @@ export default observer(function GamePage(): JSX.Element | null {
                   onChange={(event) => setLaunchArguments(event.target.value)}
                   value={launchArguments}
                   prompt={t('launch.options', 'Launch Options...')}
+                  data-tour="game-page-launch-options"
                 >
                   {launchOptions.map(({ name, parameters }) => (
                     <option key={parameters} value={parameters}>
@@ -629,7 +640,7 @@ export default observer(function GamePage(): JSX.Element | null {
                 </SelectField>
               )}
               <Anticheat gameInfo={gameInfo} />
-              <div className="buttonsWrapper">
+              <div className="buttonsWrapper" data-tour="game-page-buttons">
                 {is_installed && !isQueued && (
                   <Button
                     onClick={handlePlay()}
@@ -673,6 +684,7 @@ export default observer(function GamePage(): JSX.Element | null {
                   onClick={() => setIsSettingsModalOpen(true, 'log', gameInfo)}
                   className="clickable reportProblem"
                   role={'button'}
+                  data-tour="game-page-report"
                 >
                   <>
                     {<FontAwesomeIcon icon={faTriangleExclamation} />}
@@ -715,6 +727,7 @@ export default observer(function GamePage(): JSX.Element | null {
               </Dialog>
             )}
             <div id="game-settings"></div>
+            <TourGuide />
           </>
         ) : (
           <UpdateComponent />
