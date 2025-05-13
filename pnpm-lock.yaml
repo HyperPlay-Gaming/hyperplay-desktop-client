@@ -42,8 +42,8 @@ importers:
         specifier: ^3.5.2
         version: 3.5.2
       '@hyperplay/quests-ui':
-        specifier: ^0.1.43
-        version: 0.1.43(67f5b4a2b751d2c6f25e73862c48b492)
+        specifier: ^0.1.46
+        version: 0.1.46(67f5b4a2b751d2c6f25e73862c48b492)
       '@hyperplay/ui':
         specifier: ^1.26.5
         version: 1.26.5(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)
@@ -1896,8 +1896,8 @@ packages:
   '@hyperplay/proxy-server@0.0.12':
     resolution: {integrity: sha512-ZpEnpOnavB5clOX2NYTRJC6QZ22lSuJysxB5nnKK0ibtLeJ6m93vldkHN78nFB5l3vl+NFchmfFjqORADHVh1w==}
 
-  '@hyperplay/quests-ui@0.1.43':
-    resolution: {integrity: sha512-VhkuQ6bUGQh1UmZLdrPj0kAg2CdTtZrfzX3AFF6pCXSK/lP1yDHWXGRI3sSqrp3In6URdc0Td4VMGgKmV7pXTQ==}
+  '@hyperplay/quests-ui@0.1.46':
+    resolution: {integrity: sha512-AaFP2sxpQpBLMuM2faFQKc9vMS7WmBOm5P8LeSD2JQzdv0MoWKOqbZ0A0XKwOpyva0Hs6GkCr0DhzJY7rgPjuQ==}
     peerDependencies:
       '@hyperplay/chains': ^0.5.0
       '@hyperplay/ui': ^1.20.0
@@ -11177,7 +11177,7 @@ snapshots:
       - utf-8-validate
     optional: true
 
-  '@hyperplay/quests-ui@0.1.43(67f5b4a2b751d2c6f25e73862c48b492)':
+  '@hyperplay/quests-ui@0.1.46(67f5b4a2b751d2c6f25e73862c48b492)':
     dependencies:
       '@hyperplay/chains': 0.5.0(bufferutil@4.0.8)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.24.1)
       '@hyperplay/ui': 1.26.5(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)
