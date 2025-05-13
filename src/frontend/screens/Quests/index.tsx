@@ -72,6 +72,7 @@ export function QuestsPage() {
           'You are currently not logged in, play streak progress will not be tracked. Please login to HyperPlay via the top-right dropdown to track progress.'
         )}
         variant="warning"
+        showClose={false}
       />
     )
   }
