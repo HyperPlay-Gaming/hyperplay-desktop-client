@@ -482,8 +482,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
       '@hyperplay/extension-provider':
-        specifier: 0.1.0-alpha.0
-        version: 0.1.0-alpha.0(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
+        specifier: 0.1.0-alpha.5
+        version: 0.1.0-alpha.5(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
       '@hyperplay/mock-backend':
         specifier: ^0.0.1
         version: 0.0.1
@@ -1868,8 +1868,8 @@ packages:
   '@hyperplay/extension-importer@0.3.0':
     resolution: {integrity: sha512-Hmn2b1BpCvPu0UUfZ3COsDWTJCisATIf2vfUTmnWeIo7kVEbGMqhTxD2TsIu2SX4ekJb8gliQK+FTNUeh3bK9A==}
 
-  '@hyperplay/extension-provider@0.1.0-alpha.0':
-    resolution: {integrity: sha512-WHT3IqPsfbALSX6AqT7Cxi4U6K0bG6eGk5ToA+HLXfn146vVsaBPggr5yNq7srcDZxg9OXqVLPQHxGide9oGfQ==}
+  '@hyperplay/extension-provider@0.1.0-alpha.5':
+    resolution: {integrity: sha512-UTNC9Y1Zp67FitOlYzl8iBgwxBDwGLudK0BVUzBaMepkzTxN4oXT+gPwhXwDGQPon4hjGRkVdfh+VE7UV9E77Q==}
     peerDependencies:
       electron: 33.2.0
       ethers: ^6.13.5
@@ -11098,7 +11098,7 @@ snapshots:
       graceful-fs: 4.2.11
     optional: true
 
-  '@hyperplay/extension-provider@0.1.0-alpha.0(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))':
+  '@hyperplay/extension-provider@0.1.0-alpha.5(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))':
     dependencies:
       '@hyperplay/utils': 0.3.13
       electron: 33.2.0

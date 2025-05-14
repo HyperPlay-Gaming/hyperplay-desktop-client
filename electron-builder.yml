@@ -3,6 +3,9 @@ productName: HyperPlay
 files:
   - build/**/*
   - node_modules/**/*
+  - '!node_modules/@hyperplay/**'
+  - node_modules/@hyperplay/utils/**/*
+  - node_modules/@hyperplay/chains/**/*
   - '!build/bin/*'
   - build/bin/legendary.LICENSE
 

@@ -228,7 +228,7 @@
   },
   "optionalDependencies": {
     "@hyperplay/extension-importer": "^0.3.0",
-    "@hyperplay/extension-provider": "0.1.0-alpha.0",
+    "@hyperplay/extension-provider": "0.1.0-alpha.5",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/overlay": "^1.0.0",
     "@hyperplay/patcher": "0.0.22",
