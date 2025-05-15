@@ -62,6 +62,13 @@ if (process.env.PROTECTED_STRING_1) {
   protectedStrings.push(JSON.parse(process.env.PROTECTED_STRING_1))
 }
 
+console.log(
+  'protected strings length is ',
+  protectedStrings.length,
+  ' string first few char ',
+  protectedStrings[0].substring(0, 4)
+)
+
 export default defineConfig(({ mode }) => ({
   main: {
     build: {
