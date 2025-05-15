@@ -15,6 +15,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
+  PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
 
 jobs:
   flatpak:

@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  electron-vite:
+    hash: 2d1f25038e5bf0e4bf1e006412dc9876f8120ff3122e836a5d5029161dfb1eca
+    path: patches/electron-vite.patch
+
 importers:
 
   .:
@@ -416,7 +421,7 @@ importers:
         version: 1.7.1
       electron-vite:
         specifier: ^2.3.0
-        version: 2.3.0(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.37.0))
+        version: 2.3.0(patch_hash=2d1f25038e5bf0e4bf1e006412dc9876f8120ff3122e836a5d5029161dfb1eca)(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.37.0))
       eslint:
         specifier: ^8.13.0
         version: 8.57.1
@@ -482,8 +487,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
       '@hyperplay/extension-provider':
-        specifier: 0.1.0-alpha.5
-        version: 0.1.0-alpha.5(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
+        specifier: 0.1.0-alpha.7
+        version: 0.1.0-alpha.7(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
       '@hyperplay/mock-backend':
         specifier: ^0.0.1
         version: 0.0.1
@@ -1868,8 +1873,8 @@ packages:
   '@hyperplay/extension-importer@0.3.0':
     resolution: {integrity: sha512-Hmn2b1BpCvPu0UUfZ3COsDWTJCisATIf2vfUTmnWeIo7kVEbGMqhTxD2TsIu2SX4ekJb8gliQK+FTNUeh3bK9A==}
 
-  '@hyperplay/extension-provider@0.1.0-alpha.5':
-    resolution: {integrity: sha512-UTNC9Y1Zp67FitOlYzl8iBgwxBDwGLudK0BVUzBaMepkzTxN4oXT+gPwhXwDGQPon4hjGRkVdfh+VE7UV9E77Q==}
+  '@hyperplay/extension-provider@0.1.0-alpha.7':
+    resolution: {integrity: sha512-hamEKMFPcKZwBCH5A5U5+CCqLl9vIEPipInLnB7t/dRxuJiEk99JlwKB6KC4+UqJmqOyk/lfIWQ2LfMap4d8YA==}
     peerDependencies:
       electron: 33.2.0
       ethers: ^6.13.5
@@ -11098,7 +11103,7 @@ snapshots:
       graceful-fs: 4.2.11
     optional: true
 
-  '@hyperplay/extension-provider@0.1.0-alpha.5(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))':
+  '@hyperplay/extension-provider@0.1.0-alpha.7(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))':
     dependencies:
       '@hyperplay/utils': 0.3.13
       electron: 33.2.0
@@ -15505,7 +15510,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron-vite@2.3.0(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.37.0)):
+  electron-vite@2.3.0(patch_hash=2d1f25038e5bf0e4bf1e006412dc9876f8120ff3122e836a5d5029161dfb1eca)(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.37.0)):
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-arrow-functions': 7.25.9(@babel/core@7.26.0)
