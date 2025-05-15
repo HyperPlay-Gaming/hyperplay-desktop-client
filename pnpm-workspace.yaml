@@ -1,0 +1,2 @@
+patchedDependencies:
+  electron-vite: patches/electron-vite.patch

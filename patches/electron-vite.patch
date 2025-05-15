@@ -1,0 +1,13 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index de8dc4e16ef627ce2edc0b48c684e610c4ba03b6..4611cec3f45f5e0ca9f9b74a3e6d74dea78ba46a 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -189,7 +189,7 @@ function bytecodePlugin(options = {}) {
+             let s;
+             protectedStrings.forEach(str => {
+                 const escapedStr = escapeRegExpString(str);
+-                const re = new RegExp(`\\u0027${escapedStr}\\u0027|\\u0022${escapedStr}\\u0022`, 'g');
++                const re = new RegExp(`\\u0027${escapedStr}\\u0027|\\u0022${escapedStr}\\u0022|\\u0060${escapedStr}\\u0060`, 'g');
+                 const charCodes = Array.from(str).map(s => s.charCodeAt(0));
+                 const replacement = `String.fromCharCode(${charCodes.toString()})`;
+                 while ((match = re.exec(code))) {
