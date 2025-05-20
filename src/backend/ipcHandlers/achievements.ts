@@ -10,7 +10,6 @@ import { DEV_PORTAL_URL } from 'common/constants'
 import { URLSearchParams } from 'url'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 import './quests'
-import { HardwareAttestation } from '@hyperplay/utils'
 
 const ACHIEVEMENTS_API_ENDPOINT = `${DEV_PORTAL_URL}api/achievements/v1`
 
@@ -255,14 +254,6 @@ async function getQuestRewardSignature(
     url: DEV_PORTAL_URL
   })
 
-  let hwAttestation: HardwareAttestation | undefined = undefined
-  try {
-    const extProvider = await import('@hyperplay/extension-provider')
-    hwAttestation = await extProvider.getHwSig()
-  } catch (err) {
-    logError(`Error getting hardware signature ${err}`)
-  }
-
   const result = await fetch(url, {
     method: 'POST',
     headers: {
@@ -271,8 +262,7 @@ async function getQuestRewardSignature(
     body: JSON.stringify({
       withdraw: true,
       address,
-      tokenId,
-      hwAttestation
+      tokenId
     })
   })
   if (!result.ok) {
