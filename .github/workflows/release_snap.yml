@@ -8,6 +8,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_ID }}
+  PROTECTED_STRING_1: ${{ secrets.PROTECTED_STRING_1 }}
 
 jobs:
   update-snap:

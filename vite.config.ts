@@ -57,6 +57,11 @@ const preloads = [
   'src/backend/auth_provider_preload.ts'
 ]
 
+const protectedStrings: string[] = []
+if (process.env.PROTECTED_STRING_1) {
+  protectedStrings.push(JSON.parse(process.env.PROTECTED_STRING_1))
+}
+
 export default defineConfig(({ mode }) => ({
   main: {
     build: {
@@ -64,13 +69,16 @@ export default defineConfig(({ mode }) => ({
         input: 'src/backend/main.ts'
       },
       outDir: 'build/main',
-      minify: mode === 'production',
+      // https://github.com/alex8088/electron-vite/issues/417#issuecomment-1975093134
+      minify: false,
       sourcemap: mode === 'development' ? 'inline' : false
     },
     resolve: { alias: srcAliases },
     plugins: [
       externalizeDepsPlugin({ exclude: dependenciesToNotExternalize }),
-      bytecodePlugin()
+      bytecodePlugin({
+        protectedStrings
+      })
     ]
   },
   preload: {
