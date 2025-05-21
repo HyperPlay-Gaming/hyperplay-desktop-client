@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  electron-vite:
+    hash: 2d1f25038e5bf0e4bf1e006412dc9876f8120ff3122e836a5d5029161dfb1eca
+    path: patches/electron-vite.patch
+
 importers:
 
   .:
@@ -42,14 +47,14 @@ importers:
         specifier: ^3.5.2
         version: 3.5.2
       '@hyperplay/quests-ui':
-        specifier: ^0.1.43
-        version: 0.1.43(67f5b4a2b751d2c6f25e73862c48b492)
+        specifier: ^0.1.46
+        version: 0.1.46(4dd2097219fc61a42dd770e4864071f4)
       '@hyperplay/ui':
         specifier: ^1.26.5
         version: 1.26.5(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)
       '@hyperplay/utils':
-        specifier: ^0.3.13
-        version: 0.3.13
+        specifier: ^0.3.14
+        version: 0.3.14
       '@mantine/carousel':
         specifier: ^7.12.0
         version: 7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -416,7 +421,7 @@ importers:
         version: 1.7.1
       electron-vite:
         specifier: ^2.3.0
-        version: 2.3.0(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.37.0))
+        version: 2.3.0(patch_hash=2d1f25038e5bf0e4bf1e006412dc9876f8120ff3122e836a5d5029161dfb1eca)(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.37.0))
       eslint:
         specifier: ^8.13.0
         version: 8.57.1
@@ -482,8 +487,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
       '@hyperplay/extension-provider':
-        specifier: ^0.0.9
-        version: 0.0.9(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
+        specifier: ^0.1.0
+        version: 0.1.0(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
       '@hyperplay/mock-backend':
         specifier: ^0.0.1
         version: 0.0.1
@@ -1868,11 +1873,11 @@ packages:
   '@hyperplay/extension-importer@0.3.0':
     resolution: {integrity: sha512-Hmn2b1BpCvPu0UUfZ3COsDWTJCisATIf2vfUTmnWeIo7kVEbGMqhTxD2TsIu2SX4ekJb8gliQK+FTNUeh3bK9A==}
 
-  '@hyperplay/extension-provider@0.0.9':
-    resolution: {integrity: sha512-67x/FnhVXY/bUvWrQ3n1rmosxTymB5j9TRkFlNzI1wLU9zA05vJsIEGKBpXTrf/tQMspMfnKTvFFt7O9RtugiQ==}
+  '@hyperplay/extension-provider@0.1.0':
+    resolution: {integrity: sha512-I3Puxl+PJfFOv41Vjn4qkDuAUJsR1Dcm54ztgl8rDGxefJEG8Y9WwWZh5ugz48shNFbV396uhASScTeSaJa0gw==}
     peerDependencies:
       electron: 33.2.0
-      ethers: ^6.9.0
+      ethers: ^6.13.5
 
   '@hyperplay/mock-backend@0.0.1':
     resolution: {integrity: sha512-e+Opn7x/2axWJvnQ0Vm0/QYgObjhxNs90m/KKcBSpYT45v4slIQW54Af/trjlkDVK3S2YQuZ4mbvMV1ona05JA==}
@@ -1896,8 +1901,8 @@ packages:
   '@hyperplay/proxy-server@0.0.12':
     resolution: {integrity: sha512-ZpEnpOnavB5clOX2NYTRJC6QZ22lSuJysxB5nnKK0ibtLeJ6m93vldkHN78nFB5l3vl+NFchmfFjqORADHVh1w==}
 
-  '@hyperplay/quests-ui@0.1.43':
-    resolution: {integrity: sha512-VhkuQ6bUGQh1UmZLdrPj0kAg2CdTtZrfzX3AFF6pCXSK/lP1yDHWXGRI3sSqrp3In6URdc0Td4VMGgKmV7pXTQ==}
+  '@hyperplay/quests-ui@0.1.46':
+    resolution: {integrity: sha512-AaFP2sxpQpBLMuM2faFQKc9vMS7WmBOm5P8LeSD2JQzdv0MoWKOqbZ0A0XKwOpyva0Hs6GkCr0DhzJY7rgPjuQ==}
     peerDependencies:
       '@hyperplay/chains': ^0.5.0
       '@hyperplay/ui': ^1.20.0
@@ -1934,8 +1939,8 @@ packages:
   '@hyperplay/utils@0.0.9':
     resolution: {integrity: sha512-gMAa6gdFXfLrJUjPAD2is06qNo4MHzpb6Cbzt4xfNd7wI9chOblQ+piwTI1oFWs44GgfacsMq6i5esNly3hELg==}
 
-  '@hyperplay/utils@0.3.13':
-    resolution: {integrity: sha512-WXNZfgKkKhO9VwgSXeyRpLuGj+LeirW6Z97v1szUdo8W0oVLNnnIbmDqq1oCP/Kpt4L5trrDwQf4mh1RHcH8OA==}
+  '@hyperplay/utils@0.3.14':
+    resolution: {integrity: sha512-sqcS850HDmL144y02zz7UgEEmj8ykxegRPsLi+0nMquKsLqznjUXabtKfHMqzo+1+viNPXMlWDWsQJiLy1HRaQ==}
 
   '@ioredis/commands@1.2.0':
     resolution: {integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg==}
@@ -8583,6 +8588,12 @@ packages:
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
 
+  systeminformation@5.25.11:
+    resolution: {integrity: sha512-jI01fn/t47rrLTQB0FTlMCC+5dYx8o0RRF+R4BPiUNsvg5OdY0s9DKMFmJGrx5SwMZQ4cag0Gl6v8oycso9b/g==}
+    engines: {node: '>=8.0.0'}
+    os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
+    hasBin: true
+
   tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
 
@@ -11092,13 +11103,14 @@ snapshots:
       graceful-fs: 4.2.11
     optional: true
 
-  '@hyperplay/extension-provider@0.0.9(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))':
+  '@hyperplay/extension-provider@0.1.0(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))':
     dependencies:
-      '@hyperplay/utils': 0.3.13
+      '@hyperplay/utils': 0.3.14
       electron: 33.2.0
       ethers: 6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       fs-extra: 11.2.0
       graceful-fs: 4.2.11
+      systeminformation: 5.25.11
       zod: 3.24.1
     optional: true
 
@@ -11117,7 +11129,7 @@ snapshots:
   '@hyperplay/overlay@1.0.0(@hyperplay/providers@0.1.3(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react@18.3.1)(utf-8-validate@5.0.10))(electron@33.2.0)':
     dependencies:
       '@hyperplay/providers': 0.1.3(@types/react@18.3.17)(bufferutil@4.0.8)(encoding@0.1.13)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))(ioredis@5.4.1)(react@18.3.1)(utf-8-validate@5.0.10)
-      '@hyperplay/utils': 0.3.13
+      '@hyperplay/utils': 0.3.14
       electron: 33.2.0
       mobx: 6.13.5
     optional: true
@@ -11177,11 +11189,11 @@ snapshots:
       - utf-8-validate
     optional: true
 
-  '@hyperplay/quests-ui@0.1.43(67f5b4a2b751d2c6f25e73862c48b492)':
+  '@hyperplay/quests-ui@0.1.46(4dd2097219fc61a42dd770e4864071f4)':
     dependencies:
       '@hyperplay/chains': 0.5.0(bufferutil@4.0.8)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.24.1)
       '@hyperplay/ui': 1.26.5(@mantine/carousel@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/dropzone@7.15.1(@mantine/core@7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.1(react@18.3.1))(dayjs@1.11.13)(embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1))(embla-carousel-react@8.5.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-markdown@9.0.1(@types/react@18.3.17)(react@18.3.1))(react@18.3.1)
-      '@hyperplay/utils': 0.3.13
+      '@hyperplay/utils': 0.3.14
       '@mantine/core': 7.15.1(@mantine/hooks@7.15.1(react@18.3.1))(@types/react@18.3.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/hooks': 7.15.1(react@18.3.1)
       '@tabler/icons-react': 2.47.0(react@18.3.1)
@@ -11222,7 +11234,7 @@ snapshots:
       bignumber.js: 9.1.2
     optional: true
 
-  '@hyperplay/utils@0.3.13':
+  '@hyperplay/utils@0.3.14':
     dependencies:
       bignumber.js: 9.1.2
 
@@ -15498,7 +15510,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron-vite@2.3.0(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.37.0)):
+  electron-vite@2.3.0(patch_hash=2d1f25038e5bf0e4bf1e006412dc9876f8120ff3122e836a5d5029161dfb1eca)(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.37.0)):
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-arrow-functions': 7.25.9(@babel/core@7.26.0)
@@ -20325,6 +20337,9 @@ snapshots:
   system-architecture@0.1.0: {}
 
   systeminformation@5.23.13: {}
+
+  systeminformation@5.25.11:
+    optional: true
 
   tabbable@6.2.0: {}
 

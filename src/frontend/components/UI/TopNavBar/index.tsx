@@ -68,35 +68,38 @@ const TopNavBar = observer(() => {
             <AppVersion />
           </div>
         </div>
-        <>
+        <div className={styles.storeLinks}>
           <NavLink to="/hyperplaystore">
             <Button
-              type="link"
+              type="menuItem"
               size="small"
               style={getStoreTextStyle(HYPERPLAY_STORE_URL)}
+              className={styles.hpStoreLink}
             >
               HyperPlay
             </Button>
           </NavLink>
           <NavLink to="/epicstore">
             <Button
-              type="link"
+              type="menuItem"
               size="small"
               style={getStoreTextStyle(EPIC_STORE_URL)}
+              className={styles.epicStoreLink}
             >
               {t('Epic Games', 'Epic Games')}
             </Button>
           </NavLink>
           <NavLink to="/gogstore">
             <Button
-              type="link"
+              type="menuItem"
               size="small"
               style={getStoreTextStyle(GOG_STORE_URL)}
+              className={styles.gogStoreLink}
             >
               {t('GOG', 'GOG')}
             </Button>
           </NavLink>
-        </>
+        </div>
       </div>
       <div>
         {pathname === '/library' ? <SearchBar /> : null}
