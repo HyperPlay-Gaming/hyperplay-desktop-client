@@ -820,6 +820,10 @@
         "createDiscordTicket": "Create Discord Ticket",
         "g7Numclaimed": "Total Claimed G7 Credits",
         "linkAccount": "Link your Steam account to check eligibility.",
+        "multipleClaimsDetected": {
+            "message": "You've already claimed this quest the max number of times. If this seems wrong, please open a support ticket. Please note that HyperPlay doesn't decide eligibility for this type of quest.",
+            "title": "Multiple claims detected"
+        },
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
         "noG7ConnectionClaim": "You need to have a Game7 account linked to {{email}} to claim your rewards.",
         "noG7ConnectionSync": {
@@ -862,6 +866,10 @@
         "reward": "Reward",
         "rewardClaimed": "Claim successful",
         "signIn": "Log in",
+        "switchChainFailed": {
+            "message": "Please switch to {{chainName}} within your wallet, or try again with MetaMask.",
+            "title": "Failed to switch to {{chainName}}"
+        },
         "sync": "Sync",
         "toClaimReward": "to claim your reward.",
         "toSeeDetails": "to see details.",
