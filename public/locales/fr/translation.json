@@ -982,6 +982,10 @@
     "back_to_game": "Retour au jeu",
     "quest": {
         "linkAccount": "Lien vers votre lien Compte de vapeur pour vérifier l'admissibilité.",
+        "multipleClaimsDetected": {
+            "message": "Vous avez déjà réclamé cette quête le nombre maximum de fois autorisé. Si cela vous semble incorrect, veuillez ouvrir un ticket d’assistance. Veuillez noter que HyperPlay ne détermine pas l’éligibilité pour ce type de quête.",
+            "title": "Plusieurs réclamations détectées"
+        },
         "needMoreAchievements": "Vous devez avoir terminé {{percent}}% des réalisations dans un de ces jeux.",
         "reward": "Reward",
         "errorMessage": "Il y avait une erreur avec la transaction.",

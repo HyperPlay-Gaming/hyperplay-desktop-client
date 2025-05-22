@@ -980,6 +980,10 @@
         "g7Numclaimed": "Tổng số tín dụng G7 đã yêu cầu",
         "View Game": "Xem Trò Chơi",
         "linkAccount": "Liên kết tài khoản Steam của bạn để kiểm tra đủ điều kiện.",
+        "multipleClaimsDetected": {
+            "message": "Bạn đã nhận nhiệm vụ này số lần tối đa cho phép. Nếu bạn cho rằng có sai sót, vui lòng gửi yêu cầu hỗ trợ. Xin lưu ý rằng HyperPlay không quyết định điều kiện đủ cho loại nhiệm vụ này.",
+            "title": "Phát hiện nhiều lượt nhận thưởng"
+        },
         "needMoreAchievements": "Bạn cần hoàn thành {{percent}}% các thành tựu trong một trong những trò chơi này.",
         "reputation": "Danh tiếng",
         "readyForClaim": "Sẵn sàng để yêu cầu",

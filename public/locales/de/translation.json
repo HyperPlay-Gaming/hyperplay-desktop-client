@@ -994,6 +994,10 @@
         "createDiscordTicket": "Erstellte Discord-Ticket",
         "errorMessage": "Es gab einen Fehler bei der Transaktion.",
         "linkAccount": "Link zur Seite Steam-Konto zur Überprüfung der Förderfähigkeit.",
+        "multipleClaimsDetected": {
+            "message": "Du hast diese Quest bereits die maximale Anzahl an Malen beansprucht. Falls du glaubst, dass ein Fehler vorliegt, öffne bitte ein Support-Ticket. Bitte beachte, dass HyperPlay nicht über die Teilnahmeberechtigung für diesen Quest-Typ entscheidet.",
+            "title": "Mehrfache Beanspruchungen erkannt"
+        },
         "needMoreAchievements": "Sie müssen {{percent}}% der Leistungen in einem dieser Spiele abgeschlossen haben.",
         "claimFailedMessage": "Bitte versuchen Sie es noch einmal. Wenn es noch nicht funktioniert, erstellen Sie ein Discord-Unterstützungsticket.",
         "notEnoughGas": {
