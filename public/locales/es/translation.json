@@ -1046,6 +1046,10 @@
         "reward": "Recompensa",
         "connectSteamAccount": "Conectar a una cuenta de Steam",
         "linkAccount": "Vincula tu cuenta de Steam para verificar la elegibilidad.",
+        "multipleClaimsDetected": {
+            "message": "Ya has reclamado esta misión el número máximo de veces. Si crees que esto es un error, por favor abre un ticket de soporte. Ten en cuenta que HyperPlay no decide la elegibilidad para este tipo de misión.",
+            "title": "Se detectaron múltiples reclamos"
+        },
         "needMoreAchievements": "Necesitas haber completado\n{{percent}}% de los logros en uno de estos juegos.",
         "claimed": "Reclamado",
         "quests": "Misiones",
