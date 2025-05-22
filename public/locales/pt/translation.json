@@ -1030,6 +1030,10 @@
         "associatedGames": "Jogos conectados",
         "claimAll": "Reclamar tudo",
         "linkAccount": "Associe sua conta Steam para confirmar a elegibilidade.",
+        "multipleClaimsDetected": {
+            "message": "Você já reivindicou esta missão o número máximo de vezes. Se isso parecer incorreto, por favor abra um chamado de suporte. Observe que a HyperPlay não decide a elegibilidade para este tipo de missão.",
+            "title": "Múltiplas reivindicações detectadas"
+        },
         "reward": "Bônus",
         "claimed": "Solicitado",
         "errorMessage": "Houve um erro com a transação.",
