@@ -3,7 +3,6 @@ import {
   configPath,
   getSteamLibraries,
   icon,
-  isIntelMac,
   isLinux,
   isMac,
   isWindows,
@@ -598,7 +597,7 @@ export async function initializeCompatibilityLayer() {
     initializationTasks.push(downloadDefaultWine())
   }
 
-  if (!isWindows) {
+  if (isMac || isLinux) {
     if (isMac) {
       initializationTasks.push(checkRosettaInstall())
     }
@@ -625,8 +624,7 @@ export async function downloadDefaultWine() {
     const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
 
     // use Proton-GE type if on Linux and GPTK or Wine-Crossover if on Mac
-    const isMacOSUpToDate = await isMacSonomaOrHigher()
-
+    const isGPTKCompatible = isMac ? await isMacSonomaOrHigher() : false
     const results = await Promise.all(
       availableWine.map(async (version) => {
         if (isLinux) {
@@ -634,10 +632,9 @@ export async function downloadDefaultWine() {
         }
 
         if (isMac) {
-          if (isMacOSUpToDate && !isIntelMac) {
-            return version.type === 'Game-Porting-Toolkit'
-          }
-          return version.type === 'Wine-Crossover'
+          return isGPTKCompatible
+            ? version.type === 'Game-Porting-Toolkit'
+            : version.type === 'Wine-Crossover'
         }
         return false
       })
