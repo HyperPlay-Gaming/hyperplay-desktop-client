@@ -999,6 +999,10 @@
         "claimAll": "Klaim semua",
         "associatedGames": "Permainan Associated",
         "linkAccount": "Login Akun uap untuk memeriksa kelayakan.",
+        "multipleClaimsDetected": {
+            "message": "Anda telah mengklaim quest ini sebanyak jumlah maksimum yang diperbolehkan. Jika ini tampak salah, silakan buka tiket dukungan. Harap dicatat bahwa HyperPlay tidak menentukan kelayakan untuk jenis quest ini.",
+            "title": "Beberapa klaim terdeteksi"
+        },
         "reputation": "Login",
         "reward": "Login",
         "View Game": "Lihat Game",
