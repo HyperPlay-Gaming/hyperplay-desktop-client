@@ -79,6 +79,19 @@ import { SiweMessage } from 'siwe'
  * t("gameplayWallet.error.alreadyLinked.title", "Wallet Already Linked")
  * t("gameplayWallet.error.alreadyLinked.message", "This wallet is linked to another HyperPlay account. Try a different one or sign in to to the associated account to continue.")
  * t("gameplayWallet.info.description", "This wallet address is set to track your quest eligibility. You can switch to a different wallet address at anytime—quest eligibility is saved to each wallet address separately.")
+ * t("quest.notEnoughGas.title-no-currency", "Not enough gas")
+ * t("quest.notEnoughGas.message-no-currency", "You'll need a bit of this chain's gas token to claim your reward")
+ * t("quest.notEnoughGas.title", "Not enough {{symbol}}")
+ * t("quest.notEnoughGas.message", "You'll need a bit of {{symbol}} to claim your reward.")
+ * t("quest.notEnoughGas.clickHere", "Click here")
+ * t("quest.notEnoughGas.thenComeBack", "to learn how to get some, then come back to try again.")
+ * t("quest.switchChainFailed.title", "Failed to switch to {{chainName}}")
+ * t("quest.switchChainFailed.message", "Please switch to {{chainName}} within your wallet, or try again with MetaMask.")
+ * t("quest.multipleClaimsDetected.title", "Multiple Claims Detected")
+ * t("quest.multipleClaimsDetected.message", "You've already claimed this quest the max number of times. If this seems wrong, please open a support ticket. Please note that HyperPlay doesn't decide eligibility for this type of quest.")
+ * t("quest.claimFailed", "Claim failed")
+ * t("quest.claimFailedMessage", "Please try once more. If it still doesn't work, create a Discord support ticket.")
+ * t("quest.createDiscordTicket", "Create Discord Ticket")
  */
 
 export default function QuestDetails({
