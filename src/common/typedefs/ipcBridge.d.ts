@@ -329,7 +329,11 @@ interface HyperPlayAsyncIPCFunctions {
   updateActiveWallet: (walletId: number) => Promise<void>
   getExternalEligibility: (
     questId: number
-  ) => Promise<{ walletOrEmail: string; amount: number } | null>
+  ) => Promise<{
+    walletOrEmail: string
+    amount: number
+    questId: number
+  } | null>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
