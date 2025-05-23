@@ -838,7 +838,12 @@
             "title": "Low balance"
         },
         "notEnoughGas": {
-            "message": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying."
+            "clickHere": "Click here",
+            "message": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.",
+            "message-no-currency": "You'll need a bit of this chain's gas token to claim your reward",
+            "thenComeBack": "to learn how to get some, then come back to try again.",
+            "title": "Not enough {{symbol}}",
+            "title-no-currency": "Not enough gas"
         },
         "notSignedIn": {
             "message": "You need to be signed in to claim your reward.",
