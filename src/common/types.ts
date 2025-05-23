@@ -191,6 +191,7 @@ export interface GameInfo {
 }
 
 export interface GameSettings {
+  advertiseAvxForRosetta: boolean
   autoInstallDxvk: boolean
   autoInstallVkd3d: boolean
   autoInstallDxvkNvapi: boolean

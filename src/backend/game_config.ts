@@ -206,6 +206,7 @@ class GameConfigV0 extends GameConfig {
     // The settings defined work as overrides.
 
     const {
+      advertiseAvxForRosetta,
       autoInstallDxvk,
       autoInstallVkd3d,
       preferSystemLibs,
@@ -236,6 +237,7 @@ class GameConfigV0 extends GameConfig {
     const defaultSettings = {
       autoInstallDxvk,
       autoInstallVkd3d,
+      advertiseAvxForRosetta,
       preferSystemLibs,
       autoSyncSaves,
       enableEsync,
@@ -288,8 +290,8 @@ class GameConfigV0 extends GameConfig {
     }
   }
 
-  public setSetting(key: string, value: unknown) {
-    this.config[key] = value
+  public setSetting(key: keyof GameSettings, value: unknown) {
+    this.config[key] = value as never
     logInfo(`${this.appName}: Setting ${key} to ${JSON.stringify(value)}`)
     return this.flush()
   }
