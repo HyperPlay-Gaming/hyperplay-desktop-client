@@ -232,3 +232,21 @@ ipcMain.handle('getExternalEligibility', async (e, questId) => {
 
   return response.json()
 })
+
+ipcMain.handle('getListingById', async (e, projectId) => {
+  const url = `${DEV_PORTAL_URL}/api/v1/listings/${projectId}`
+
+  const response = await fetch(url, {
+    method: 'GET'
+  })
+
+  if (!response.ok) {
+    if (response.status === 400) {
+      return null
+    } else {
+      throw new Error(await response.text())
+    }
+  }
+
+  return response.json()
+})
