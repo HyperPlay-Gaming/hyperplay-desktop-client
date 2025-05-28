@@ -179,6 +179,11 @@ export default function QuestDetails({
           POINTS: flags.pointsRewardsClaim,
           'EXTERNAL-TASKS': flags.externalTasksRewardsClaim
         },
+        questTypeClaimable: {
+          LEADERBOARD: flags.enableLeaderboardQuestsClaim,
+          PLAYSTREAK: flags.enablePlayStreakQuestsClaim,
+          'REPUTATIONAL-AIRDROP': flags.enableReputationQuestsClaim
+        },
         questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled,
         gameplayWalletSectionVisible: flags.gameplayWalletSectionVisible
       }}
