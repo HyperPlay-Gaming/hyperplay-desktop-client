@@ -210,6 +210,7 @@ export default function QuestDetails({
       isQuestsPage={isQuestsPage}
       key={'questDetailsLoading'}
       streakIsProgressing={streakIsProgressing}
+      getListingById={window.api.getListingById}
     />
   )
 }
