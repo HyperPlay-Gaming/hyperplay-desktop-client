@@ -332,6 +332,7 @@ interface HyperPlayAsyncIPCFunctions {
     amount: number
     questId: number
   } | null>
+  getListingById: (projectId: string) => Promise<Listing>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
