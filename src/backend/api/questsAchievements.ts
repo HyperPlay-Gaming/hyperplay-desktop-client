@@ -110,3 +110,6 @@ export const updateActiveWallet = async (walletId: number) =>
 
 export const getExternalEligibility = async (questId: number) =>
   ipcRenderer.invoke('getExternalEligibility', questId)
+
+export const getListingById = async (projectId: string) =>
+  ipcRenderer.invoke('getListingById', projectId)
