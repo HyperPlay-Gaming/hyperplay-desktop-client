@@ -10,6 +10,18 @@ export default function SideloadDialogWarning() {
   return (
     <div className={styles.container}>
       {isOpen ? (
+        <AlertCard
+          icon={<Images.AlertOctagon />}
+          style={{ maxWidth: 670 }}
+          onClose={() => setIsOpen(!isOpen)}
+          variant="error"
+          title={t('sideload.warningTitle', 'Important')}
+          message={t(
+            'sideload.warningMessage',
+            'Side-loading a game is a feature intended for developers and experienced power users. Side-loading an installer that contains malware could compromise your computer and lead to theft of funds.'
+          )}
+        />
+      ) : (
         <a className={styles.warningAlert}>
           <Images.AlertOctagon className={styles.warningAlertIcon} />
           <Typography.Button>
@@ -22,18 +34,6 @@ export default function SideloadDialogWarning() {
             </Link>
           </Typography.Button>
         </a>
-      ) : (
-        <AlertCard
-          icon={<Images.AlertOctagon />}
-          style={{ maxWidth: 670 }}
-          onClose={() => setIsOpen(!isOpen)}
-          variant="error"
-          title={t('sideload.warningTitle', 'Important')}
-          message={t(
-            'sideload.warningMessage',
-            'Side-loading a game is a feature intended for developers and experienced power users. Side-loading an installer that contains malware could compromise your computer and lead to theft of funds.'
-          )}
-        />
       )}
     </div>
   )
