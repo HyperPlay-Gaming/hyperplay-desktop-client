@@ -138,6 +138,9 @@ export default function QuestDetails({
     const signature = await signMessageAsync({
       message
     })
+    if (String(signature).includes('code=ACTION_REJECTED')) {
+      throw signature
+    }
 
     return {
       message,
