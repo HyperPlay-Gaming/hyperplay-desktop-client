@@ -14,6 +14,7 @@ import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayS
 import extensionState from 'frontend/state/ExtensionState'
 import { PossibleMetricPayloads } from 'backend/metrics/types'
 import { SiweMessage } from 'siwe'
+import onboardingStore from 'frontend/store/OnboardingStore'
 
 /**
  * Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -219,6 +220,7 @@ export default function QuestDetails({
       key={'questDetailsLoading'}
       streakIsProgressing={streakIsProgressing}
       getListingById={window.api.getListingById}
+      openWalletConnectionModal={() => onboardingStore.openOnboarding()}
     />
   )
 }
