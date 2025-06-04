@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { AlertCard, Images, Typography } from '@hyperplay/ui'
-import { Link } from 'react-router-dom'
 import styles from './index.module.scss'
 import { t } from 'i18next'
 
@@ -22,18 +21,15 @@ export default function SideloadDialogWarning() {
           )}
         />
       ) : (
-        <a className={styles.warningAlert}>
+        <button
+          className={styles.warningAlert}
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <Images.AlertOctagon className={styles.warningAlertIcon} />
           <Typography.Button>
-            <Link
-              to="#"
-              className={styles.warningAlertLink}
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {t('sideload.warningMessageLink', 'Important')}
-            </Link>
+            {t('sideload.warningTitle', 'Important')}
           </Typography.Button>
-        </a>
+        </button>
       )}
     </div>
   )
