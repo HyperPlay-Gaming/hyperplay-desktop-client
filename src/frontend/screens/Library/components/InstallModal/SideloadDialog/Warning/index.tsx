@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
-import { AlertCard, Typography, Images } from '@hyperplay/ui'
-
+import { AlertCard, Images, Typography } from '@hyperplay/ui'
 import styles from './index.module.scss'
 import { t } from 'i18next'
-
-const { Button } = Typography
-const { WarningIcon } = Images
 
 export default function SideloadDialogWarning() {
   const [isOpen, setIsOpen] = useState(true)
@@ -14,10 +10,10 @@ export default function SideloadDialogWarning() {
     <div className={styles.container}>
       {isOpen ? (
         <AlertCard
-          icon={<Images.WarningIcon />}
+          icon={<Images.AlertOctagon />}
           style={{ maxWidth: 670 }}
           onClose={() => setIsOpen(!isOpen)}
-          variant="warning"
+          variant="error"
           title={t('sideload.warningTitle', 'Important')}
           message={t(
             'sideload.warningMessage',
@@ -25,15 +21,15 @@ export default function SideloadDialogWarning() {
           )}
         />
       ) : (
-        <div
-          className={styles.titleContainer}
+        <button
+          className={styles.warningAlert}
           onClick={() => setIsOpen(!isOpen)}
         >
-          <WarningIcon />
-          <Button className={styles.title}>
+          <Images.AlertOctagon className={styles.warningAlertIcon} />
+          <Typography.Button>
             {t('sideload.warningTitle', 'Important')}
-          </Button>
-        </div>
+          </Typography.Button>
+        </button>
       )}
     </div>
   )

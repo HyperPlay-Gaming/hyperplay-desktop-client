@@ -1,18 +1,20 @@
 .container {
-  padding-top: 24px;
+  padding-top: var(--space-2lg);
 }
 
-.titleContainer {
-  cursor: pointer;
+.warningAlert {
   display: flex;
-  gap: var(--space-sm-fixed);
-  align-items: center;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  color: var(--text-error);
 
-  svg path {
-    fill: var(--color-status-error);
+  &:hover {
+    color: var(--color-error-300);
   }
+}
 
-  .title {
-    color: var(--color-status-error);
-  }
+.warningAlertIcon {
+  width: var(--space-2lg);
+  height: var(--space-2lg);
+  background-color: transparent;
 }
