@@ -338,6 +338,7 @@
         "store": "Filter Store"
     },
     "help": {
+        "advertiseAvxForRosetta": "Enables AVX instruction set support when running Windows games through Rosetta on Apple Silicon Macs. This may be required for some games like Death Stranding that need AVX support.",
         "amdfsr": "AMD's FSR helps boost framerate by upscaling lower resolutions in Fullscreen Mode. Image quality increases from 5 to 1 at the cost of a slight performance hit. Enabling may improve performance.",
         "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
         "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
@@ -927,6 +928,7 @@
         "addgamestoapplications": "Add games to Applications automatically",
         "addgamestostartmenu": "Add games to start menu automatically",
         "addgamestosteam": "Add games to Steam automatically",
+        "advertiseAvxForRosetta": "Advertise AVX for Rosetta",
         "autodxvk": "Auto Install/Update DXVK on Prefix",
         "autodxvknvapi": "Auto Install/Update DXVK-NVAPI on Prefix",
         "autoLaunchHyperPlay": "Auto Launch HyperPlay",
