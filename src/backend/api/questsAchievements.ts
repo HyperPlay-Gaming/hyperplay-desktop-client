@@ -113,3 +113,6 @@ export const getExternalEligibility = async (questId: number) =>
 
 export const getListingById = async (projectId: string) =>
   ipcRenderer.invoke('getListingById', projectId)
+
+export const getExistingSignature = async (questId: number, rewardId: number) =>
+  ipcRenderer.invoke('getExistingSignature', questId, rewardId)

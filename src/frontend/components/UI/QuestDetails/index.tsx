@@ -80,6 +80,9 @@ import onboardingStore from 'frontend/store/OnboardingStore'
  * t("gameplayWallet.error.alreadyLinked.title", "Wallet Already Linked")
  * t("gameplayWallet.error.alreadyLinked.message", "This wallet is linked to another HyperPlay account. Try a different one or sign in to to the associated account to continue.")
  * t("gameplayWallet.info.description", "This wallet address is set to track your quest eligibility. You can switch to a different wallet address at anytime—quest eligibility is saved to each wallet address separately.")
+ * t('quest.existingSignatureErrorTitle', 'Wrong Wallet. Switch to {{address}}')
+ * t('quest.existingSignatureErrorMessage', 'Looks like you started your claim with a different wallet. Try switching back to that one to finish claiming your reward.')
+ *
  */
 
 export default function QuestDetails({
@@ -151,6 +154,7 @@ export default function QuestDetails({
 
   return (
     <QuestDetailsWrapper
+      getExistingSignature={window.api.getExistingSignature}
       getActiveWalletSignature={getActiveWalletSignature}
       getActiveWallet={window.api.getActiveWallet}
       setActiveWallet={window.api.setActiveWallet}
