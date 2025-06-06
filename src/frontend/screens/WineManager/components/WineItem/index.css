@@ -1,11 +1,12 @@
 .wineManagerListItem > .icons {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  padding: 0 var(--space-md-fixed);
+  padding: 0;
   align-self: center;
   flex-wrap: wrap;
+  gap: var(--space-xs-fixed);
 }
 
 .wineManagerListItem > .icons > .material-icons.settings.folder {
@@ -14,33 +15,37 @@
 
 .wineManagerListItem > .icons > a > svg,
 .wineManagerListItem > .icons > svg {
-  width: min(calc(1vw + 9px), 36px);
-  height: min(calc(1vw + 9px), 36px);
-  min-width: 22px;
-  min-height: 22px;
-  margin-left: 12px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
 }
 
 .wineManagerListItem {
   display: grid;
   grid-template-columns: 4fr 2fr 2fr 1fr;
   grid-template-areas: 'name date size action';
-  margin: 0 var(--space-xl-fixed);
+  margin-right: var(--space-xl-fixed);
   align-items: center;
-  justify-items: baseline;
+  justify-items: start;
   position: relative;
   cursor: default;
-  place-self: center;
-  border-bottom: 1px solid gray;
-  padding: var(--space-xs-fixed) 0;
-  height: var(--space-2xl);
+  border-bottom: 1px solid var(--color-neutral-700);
+  padding: var(--space-md-fixed) 0;
+  min-height: var(--space-2xl);
+
+  &:hover {
+    background-color: var(--color-neutral-800);
+  }
 }
 
 .wineManagerTitleList {
   grid-area: name;
   font-size: var(--text-md);
-  font-weight: bold;
-  text-transform: capitalize;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .wineManagerListItem > a {
@@ -56,13 +61,16 @@
 }
 
 .wineManagerListDate {
-  font-size: var(--text-md);
+  font-size: var(--text-sm);
   grid-area: date;
+  color: var(--text-weak);
 }
 
 .wineManagerListSize {
-  font-size: var(--text-md);
+  font-size: var(--text-sm);
   grid-area: size;
+  color: var(--text-weak);
+  font-weight: 500;
 }
 
 .react-contextmenu--visible {
@@ -79,10 +87,6 @@
   font-family: var(--secondary-font-family);
   cursor: pointer;
   text-align: left;
-}
-
-.react-contextmenu-item:hover {
-  color: var(--download-button);
 }
 
 .react-contextmenu-item.disabled {

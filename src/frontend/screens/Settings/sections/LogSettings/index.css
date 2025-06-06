@@ -19,6 +19,11 @@
   color: var(--color-primary-200);
 }
 
+.title {
+  margin: var(--space-md) 0;
+  font-size: var(--text-3xl);
+}
+
 .logs-wrapper {
   display: grid;
   grid-template-columns: min-content 1fr;
@@ -40,10 +45,10 @@
   }
 
   .setting.log-box {
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    padding-block: 4px;
-    padding-inline: 6px;
+    background-color: var(--color-neutral-700);
+    border-radius: var(--space-xs);
+    padding-block: var(--space-2xs);
+    padding-inline: var(--space-2xs);
     overflow: auto;
     user-select: text;
     grid-column: 2;
@@ -65,10 +70,9 @@ dialog .logs-wrapper {
 
 .log-buttons.log-choosen,
 .log-buttons.log-choosen:hover {
-  color: var(--accent);
+  color: var(--text-brand);
   transition: all 350ms ease-out 0s;
   transform: scale(1.1);
-  text-decoration: underline;
 }
 
 .log-buttons {
@@ -94,20 +98,20 @@ dialog .logs-wrapper {
 }
 
 .log-error {
-  color: #c18672;
+  color: var(--text-error);
 }
 
 .log-warning {
-  color: var(--text-log);
+  color: var(--text-warning);
 }
 
 .log-info {
-  color: rgb(175, 172, 172);
+  color: var(--text-weak);
 }
 
 .long-log-hint {
   font-style: italic;
-  color: var(--text-log);
+  color: var(--text-warning);
 }
 
 .icon {
@@ -122,20 +126,9 @@ dialog .logs-wrapper {
 
 .footerFlex {
   display: flex;
-  padding-top: var(--space-2lg);
+  padding: var(--space-2lg) 0;
   align-items: center;
-  gap: var(--space-xl);
-
-  > a {
-    border: 1px solid var(--text-brand);
-    padding: var(--space-2xs) var(--space-md);
-    border-radius: var(--space-xs);
-
-    &:hover {
-      background-color: var(--color-primary-200);
-      color: var(--text-brand);
-    }
-  }
+  gap: var(--space-md);
 }
 
 .button-icon-text,
@@ -147,4 +140,8 @@ dialog .logs-wrapper {
 .button-icon-flex:hover {
   color: var(--color-primary-200);
   border-bottom: none;
+}
+
+.alert-card-container {
+  margin-bottom: var(--space-xl);
 }

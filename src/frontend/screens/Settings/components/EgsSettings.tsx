@@ -115,10 +115,11 @@ const EgsSettings = () => {
             <>
               <span className="rightButton">
                 <Button
+                  type="tertiary"
+                  size="medium"
                   data-testid="syncButton"
                   onClick={async () => handleSync()}
                   disabled={isSyncing || !egsPath.length}
-                  style={{ display: 'flex', marginTop: '27px' }}
                 >
                   {`${
                     isLinked

@@ -26,40 +26,26 @@ export default function GeneralSettings() {
       <div className="settingSubheader settingsSectionHeader title">
         {t('settings.navbar.general')}
       </div>
-
-      <LanguageSelector />
-
-      <DefaultInstallPath />
-
-      <WinePrefixesBasePath />
-
-      <DefaultSteamPath />
-
-      <EgsSettings />
-
-      <AutoLaunchHyperPlay />
-
-      <AutoUpdateGames />
-
-      <TraySettings />
-
-      <MinimizeOnGameLaunch />
-
-      <UseDarkTrayIcon />
-
-      <Shortcuts />
-
-      {/* 
+      <div className="general-section">
+        <HyperPlayAnalytics />
+        <LanguageSelector />
+        <DefaultInstallPath />
+        <WinePrefixesBasePath />
+        <DefaultSteamPath />
+        <EgsSettings />
+        <AutoLaunchHyperPlay />
+        <AutoUpdateGames />
+        <TraySettings />
+        <MinimizeOnGameLaunch />
+        <UseDarkTrayIcon />
+        <Shortcuts />
+        {/* 
       disabled until we fix the controller navigation in hyperplay
       <DisableController /> */}
-
-      <HyperPlayAnalytics />
-
-      <LibraryTopSection />
-
-      <MaxRecentGames />
-
-      <MaxWorkers />
+        <LibraryTopSection />
+        <MaxRecentGames />
+        <MaxWorkers />
+      </div>
     </>
   )
 }

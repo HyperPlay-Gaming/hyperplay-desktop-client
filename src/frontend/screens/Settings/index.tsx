@@ -24,7 +24,7 @@ import WineManager from '../WineManager'
 import AccountSettings from './sections/AccountSettings'
 import { observer } from 'mobx-react-lite'
 import DeviceState from 'frontend/state/DeviceState'
-import { Tabs, getTabsClassNames } from '@hyperplay/ui'
+import { Tabs, getTabsClassNames, Button } from '@hyperplay/ui'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export const defaultWineVersion: WineInstallation = {
@@ -93,26 +93,7 @@ function Settings() {
   }
 
   return (
-    <ContextMenu
-      items={[
-        {
-          label: t(
-            'settings.copyToClipboard',
-            'Copy All Settings to Clipboard'
-          ),
-          onClick: async () =>
-            window.api.clipboardWriteText(
-              JSON.stringify({ appName, title, ...currentConfig })
-            ),
-          show: !isLogSettings
-        },
-        {
-          label: t('settings.open-config-file', 'Open Config File'),
-          onClick: () => window.api.showConfigFileInFolder(appName),
-          show: !isLogSettings
-        }
-      ]}
-    >
+    <ContextMenu items={[]}>
       <SettingsContext.Provider value={contextValues}>
         <div className="Settings contentContainer">
           <div role="list" className="settingsWrapper">
@@ -120,7 +101,7 @@ function Settings() {
               Settings
             </h3>
             <Tabs
-              defaultValue="general"
+              defaultValue={isLogSettings ? 'logSettings' : 'general'}
               classNames={getTabsClassNames(
                 { list: 'settingsTabList' },
                 { list: 'outline' }
@@ -140,6 +121,9 @@ function Settings() {
                 </Tabs.Tab>
                 <Tabs.Tab value="logSettings">
                   <div className="menu">{t('settings.navbar.log')}</div>
+                </Tabs.Tab>
+                <Tabs.Tab value="systemInfo">
+                  <div className="menu">{t('System')}</div>
                 </Tabs.Tab>
                 <Tabs.Tab value="accessibility">
                   <div className="menu">{t('accessibility.title')}</div>
@@ -165,8 +149,10 @@ function Settings() {
                 <AdvancedSettings />
               </Tabs.Panel>
               <Tabs.Panel value="logSettings">
-                <SystemInfo />
                 <LogSettings />
+              </Tabs.Panel>
+              <Tabs.Panel value="systemInfo">
+                <SystemInfo />
               </Tabs.Panel>
               <Tabs.Panel value="accessibility">
                 <Accessibility />
@@ -186,6 +172,28 @@ function Settings() {
           </div>
         </div>
       </SettingsContext.Provider>
+      <a className="settings-page-buttons">
+        <Button
+          type="secondary-neutral"
+          size="small"
+          onClick={() => {
+            window.api.clipboardWriteText(
+              JSON.stringify({ appName, title, ...currentConfig })
+            )
+          }}
+        >
+          {t('settings.copyToClipboard', 'Copy All Settings to Clipboard')}
+        </Button>
+        <Button
+          type="secondary-neutral"
+          size="small"
+          onClick={() => {
+            window.api.showConfigFileInFolder(appName)
+          }}
+        >
+          {t('settings.open-config-file', 'Open Config File')}
+        </Button>
+      </a>
     </ContextMenu>
   )
 }

@@ -78,7 +78,9 @@ export function ImportGameFolder() {
             <LoadingSpinner />
           ) : (
             <Button
-              type="tertiary"
+              className={styles.buttonImport}
+              type="secondary"
+              size="small"
               onClick={async () =>
                 importGameFolderMutation.mutate(gameFolderToImport)
               }
