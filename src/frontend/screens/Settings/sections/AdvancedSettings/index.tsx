@@ -7,6 +7,7 @@ import { GameStatus } from 'common/types'
 import { DisableLogs, DownloadNoHTTPS } from '../../components'
 import libraryState from 'frontend/state/libraryState'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Button } from '@hyperplay/ui'
 import {
   faBoxOpen,
   faCancel,
@@ -209,9 +210,10 @@ export default function AdvancedSettings() {
                 {/* Check for updates */}
                 {(eosOverlayVersion === eosOverlayLatestVersion ||
                   eosOverlayCheckingForUpdates) && (
-                  <button
-                    className="button is-primary"
+                  <Button
+                    type="primary"
                     onClick={checkForEosOverlayUpdates}
+                    size="small"
                   >
                     <FontAwesomeIcon icon={faRefresh} />
                     <span>
@@ -225,14 +227,15 @@ export default function AdvancedSettings() {
                             'Check for updates'
                           )}
                     </span>
-                  </button>
+                  </Button>
                 )}
                 {/* Update */}
                 {eosOverlayVersion !== eosOverlayLatestVersion &&
                   !eosOverlayCheckingForUpdates && (
-                    <button
-                      className="button is-primary"
+                    <Button
+                      type="primary"
                       onClick={updateEosOverlay}
+                      size="small"
                     >
                       <FontAwesomeIcon icon={faUpload} />
                       <span>
@@ -240,15 +243,13 @@ export default function AdvancedSettings() {
                           ? t('setting.eosOverlay.updating', 'Updating...')
                           : t('setting.eosOverlay.updateNow', 'Update')}
                       </span>
-                    </button>
+                    </Button>
                   )}
                 {/* Enable/Disable */}
                 {isWindows && (
-                  <button
-                    className={
-                      eosOverlayEnabledGlobally
-                        ? 'button is-danger'
-                        : 'button is-primary'
+                  <Button
+                    type={
+                      eosOverlayEnabledGlobally ? 'danger-secondary' : 'primary'
                     }
                     onClick={toggleEosOverlay}
                   >
@@ -262,36 +263,34 @@ export default function AdvancedSettings() {
                         ? t('setting.eosOverlay.disable', 'Disable')
                         : t('setting.eosOverlay.enable', 'Enable')}
                     </span>
-                  </button>
+                  </Button>
                 )}
                 {/* Remove */}
                 {!eosOverlayInstallingOrUpdating && (
-                  <button
-                    className="button is-danger"
-                    onClick={removeEosOverlay}
-                  >
+                  <Button type="danger-secondary" onClick={removeEosOverlay}>
                     <FontAwesomeIcon icon={faTrash} />
                     <span>{t('setting.eosOverlay.remove', 'Uninstall')}</span>
-                  </button>
+                  </Button>
                 )}
               </>
             )}
             {/* Install */}
             {!eosOverlayInstalled && !eosOverlayInstallingOrUpdating && (
-              <button className="button is-primary" onClick={installEosOverlay}>
+              <Button type="primary" onClick={installEosOverlay} size="small">
                 <FontAwesomeIcon icon={faDownload} />
                 <span>{t('setting.eosOverlay.install', 'Install')}</span>
-              </button>
+              </Button>
             )}
             {/* Cancel install/update */}
             {eosOverlayInstallingOrUpdating && (
-              <button
-                className="button is-danger"
+              <Button
+                type="danger-secondary"
                 onClick={cancelEosOverlayInstallOrUpdate}
+                size="small"
               >
                 <FontAwesomeIcon icon={faCancel} />
                 <span>{t('setting.eosOverlay.cancelInstall', 'Cancel')}</span>
-              </button>
+              </Button>
             )}
           </div>
           <br />
@@ -300,8 +299,10 @@ export default function AdvancedSettings() {
         </div>
       )}
       <div className="footerFlex">
-        <button
-          className={classNames('button', 'is-footer', {
+        <Button
+          type="primary"
+          size="small"
+          className={classNames({
             isSuccess: isCopiedToClipboard
           })}
           onClick={() => {
@@ -311,60 +312,34 @@ export default function AdvancedSettings() {
             setCopiedToClipboard(true)
           }}
         >
-          <div className="button-icontext-flex">
-            <div className="button-icon-flex">
-              <FontAwesomeIcon icon={faCopy} />
-            </div>
-            <span className="button-icon-text">
-              {isCopiedToClipboard
-                ? t('settings.copiedToClipboard', 'Copied to Clipboard!')
-                : t(
-                    'settings.copyToClipboard',
-                    'Copy All Settings to Clipboard'
-                  )}
-            </span>
-          </div>
-        </button>
-        <button
-          className="button is-footer is-danger"
+          <FontAwesomeIcon icon={faCopy} />
+          <span>
+            {isCopiedToClipboard
+              ? t('settings.copiedToClipboard', 'Copied to Clipboard!')
+              : t('settings.copyClipboard', 'Copy Advanced Settings')}
+          </span>
+        </Button>
+        <Button
+          type="danger-secondary"
           onClick={async () => clearAppCache()}
+          size="small"
         >
-          <div className="button-icontext-flex">
-            <div className="button-icon-flex">
-              <FontAwesomeIcon icon={faPaintBrush} />
-            </div>
-            <span className="button-icon-text">
-              {t('settings.clear-cache', 'Clear HyperPlay Cache')}
-            </span>
-          </div>
-        </button>
+          <FontAwesomeIcon icon={faPaintBrush} />
+          <span>{t('settings.clear-cache', 'Clear HyperPlay Cache')}</span>
+        </Button>
 
-        <button
-          className="button is-footer is-danger"
-          onClick={showResetDialog}
-        >
-          <div className="button-icontext-flex">
-            <div className="button-icon-flex">
-              <FontAwesomeIcon icon={faX} />
-            </div>
-            <span className="button-icon-text">
-              {t('settings.reset-hyperplay', 'Reset HyperPlay')}
-            </span>
-          </div>
-        </button>
-        <button
-          className="button is-footer is-danger"
+        <Button type="danger-secondary" onClick={showResetDialog} size="small">
+          <FontAwesomeIcon icon={faX} />
+          <span>{t('settings.reset-hyperplay', 'Reset HyperPlay')}</span>
+        </Button>
+        <Button
+          type="danger-secondary"
           onClick={showResetExtensionDialog}
+          size="small"
         >
-          <div className="button-icontext-flex">
-            <div className="button-icon-flex">
-              <FontAwesomeIcon icon={faX} />
-            </div>
-            <span className="button-icon-text">
-              {t('settings.reset-extension', 'Reset Extension')}
-            </span>
-          </div>
-        </button>
+          <FontAwesomeIcon icon={faX} />
+          <span>{t('settings.reset-extension', 'Reset Extension')}</span>
+        </Button>
       </div>
     </div>
   )
