@@ -1,4 +1,4 @@
-import { createConfig, http } from 'wagmi'
+import { createConfig, http, injected } from 'wagmi'
 import {
   apeChain,
   arbitrum,
@@ -142,6 +142,7 @@ export const chains = [
 
 export const config = createConfig({
   chains,
+  connectors: [injected()],
   client({ chain }) {
     let transport = http()
 
