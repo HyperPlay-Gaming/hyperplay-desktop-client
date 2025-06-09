@@ -95,7 +95,7 @@ export default function QuestDetails({
   onPlayClick?: (quest: Quest) => void
   streakIsProgressing?: boolean
 }) {
-  const { address } = useAccount()
+  const { address, connector, chain, status } = useAccount()
   const { isSignedIn, data } = useAuthSession()
   const { t } = useTranslation()
   const flags = useFlags()
@@ -124,6 +124,22 @@ export default function QuestDetails({
     const { domain, origin } = await window.api.getSiweMessageDomainAndUri()
     const nonce = await window.api.getCSRFToken()
 
+    window.api.logInfo(
+      `[Wallet Signature] Initiating. Current state: ${JSON.stringify(
+        {
+          address,
+          connectionStatus: status,
+          connectorName: connector?.name,
+          connectorId: connector?.id,
+          connectedChainId: chain?.id,
+          connectedChainName: chain?.name,
+          getChainIdTypeOf: typeof connector?.getChainId
+        },
+        null,
+        4
+      )}`
+    )
+
     const siweMessage = new SiweMessage({
       domain,
       address,
@@ -139,6 +155,11 @@ export default function QuestDetails({
     const signature = await signMessageAsync({
       message
     })
+
+    window.api.logInfo(
+      `[Wallet Signature] Message: ${message}\nSignature: ${signature}`
+    )
+
     if (String(signature).includes('code=ACTION_REJECTED')) {
       throw signature
     }
