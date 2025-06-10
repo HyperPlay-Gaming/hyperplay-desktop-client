@@ -338,6 +338,7 @@ interface HyperPlayAsyncIPCFunctions {
     rewardId: number
   ) => Promise<{
     signature: string
+    wallet: string
     gameplayWallet: {
       walletAddress: string
     }
