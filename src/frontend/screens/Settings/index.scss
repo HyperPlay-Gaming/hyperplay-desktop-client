@@ -8,7 +8,7 @@
   grid-area: content;
   position: relative;
   margin-bottom: 35px;
-  max-width: 1050px;
+  max-width: 1080px;
 }
 
 .Settings .Field,
@@ -26,6 +26,7 @@
   font: var(--font-secondary-regular);
   font-size: var(--text-md);
   line-height: var(--space-lg);
+
   color: var(--text-secondary);
 }
 
@@ -75,7 +76,7 @@
   font-size: var(--text-sm);
   line-height: var(--space-md);
   /* identical to box height */
-  color: var(--text-secondary);
+  color: var(--text-warning);
 }
 
 .appName {
@@ -87,7 +88,7 @@
   font-size: var(--text-sm);
   line-height: var(--space-md);
   /* identical to box height */
-  color: #5a5e5f;
+  color: var(--text-weak);
 }
 
 .save > .material-icons {
@@ -96,7 +97,7 @@
 }
 
 .warning {
-  color: yellow;
+  color: var(--text-warning);
   font-size: var(--text-sm);
   width: 100%;
   max-width: 513px;
@@ -224,4 +225,15 @@ a {
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.settings-page-buttons {
+  display: flex;
+  gap: var(--space-md);
+  margin: var(--space-md) 0;
+}
+
+.rightButton {
+  display: flex;
+  margin-top: 27px;
 }

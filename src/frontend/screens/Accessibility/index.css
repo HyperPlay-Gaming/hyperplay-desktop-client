@@ -19,32 +19,13 @@ input[type='range'] {
 }
 
 .Accessibility label,
-.Accessibility span,
 .Accessibility select,
 .Accessibility option {
-  font-size: var(--text-xl) !important;
+  font-size: var(--text-lg);
 }
 
 .Accessibility .zoomHint span {
   font-size: var(--text-md);
-}
-
-.Accessibility .fonts-label {
-  justify-self: flex-start;
-}
-
-.Accessibility .fonts-label button {
-  width: auto;
-  margin-left: 1rem;
-}
-
-.Accessibility .fonts-label button:hover {
-  color: var(--accent);
-}
-
-.Accessibility .fonts-label button.refreshing svg {
-  color: var(--accent);
-  animation: refreshing 2s 1;
 }
 
 .Accessibility h1.headerTitle {
@@ -59,4 +40,9 @@ input[type='range'] {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.fonts {
+  display: flex;
+  margin: var(--space-xs) 0;
 }
