@@ -37,9 +37,7 @@ import useSetting from 'frontend/hooks/useSetting'
 import { defaultWineVersion } from '../..'
 import SyncSaves from '../SyncSaves'
 import EnableDXVKFpsLimit from '../../components/EnableDXVKFpsLimit'
-import { Tabs, getTabsClassNames } from '@hyperplay/ui'
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Tabs, AlertCard, getTabsClassNames } from '@hyperplay/ui'
 
 export default function GamesSettings() {
   const { t } = useTranslation()
@@ -74,14 +72,20 @@ export default function GamesSettings() {
 
   return (
     <>
+      <div className="title">
+        {t('settings.default_title', 'Games Settings')}
+      </div>
       {isDefault && (
-        <p className="defaults-hint">
-          <FontAwesomeIcon icon={faInfoCircle} />
-          {t(
-            'settings.default_hint',
+        <AlertCard
+          variant="warning"
+          size="small"
+          showClose={false}
+          title={t('settings.default_alert_title', 'Default Settings')}
+          message={t(
+            'settings.default_alert_message',
             'Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.'
           )}
-        </p>
+        />
       )}
       <Tabs
         defaultValue={showCrossPlatformOptions ? 'wine' : 'other'}
