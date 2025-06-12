@@ -122,7 +122,9 @@ function LogSettings() {
 
   return (
     <>
-      <div className="title">{t('setting.logs.title', 'Logs')}</div>
+      <div className={styles.logSettingsTitle}>
+        {t('setting.logs.title', 'Logs')}
+      </div>
       <div className={styles['alert-card-container']}>
         <AlertCard
           variant="information"

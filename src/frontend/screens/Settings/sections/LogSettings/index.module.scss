@@ -144,7 +144,9 @@ dialog .logs-wrapper {
   margin-bottom: var(--space-xl);
 }
 
-.title {
+.logSettingsTitle {
   font-size: var(--text-3xl);
-  margin: var(--space-md) 0;
+  font-weight: var(--semibold);
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-lg);
 }
