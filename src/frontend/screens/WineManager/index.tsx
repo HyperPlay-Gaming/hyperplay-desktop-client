@@ -14,6 +14,7 @@ import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import { WineVersionInfo, Type, WineManagerUISettings } from 'common/types'
 import libraryState from 'frontend/state/libraryState'
 import { Tabs, Button } from '@hyperplay/ui'
+import styles from './index.module.scss'
 
 const WineItem = lazy(
   async () => import('frontend/screens/WineManager/components/WineItem')
@@ -95,9 +96,9 @@ export default React.memo(function WineManager(): JSX.Element | null {
 
   return (
     <>
-      <h4 style={{ paddingTop: 'var(--space-md)' }}>
+      <div className={styles.wineManagerTitle}>
         {t('wine.manager.title', 'Compatibility Layer')}
-      </h4>
+      </div>
       <div className="wineManagerContent">
         <div className="tabsWrapper">
           <Tabs
