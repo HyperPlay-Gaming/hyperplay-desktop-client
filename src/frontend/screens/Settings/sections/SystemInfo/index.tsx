@@ -105,7 +105,7 @@ export default function SystemInfo() {
       </div>
       <Button
         className="copyToClipboardButton"
-        type="secondary"
+        type="primary"
         size="small"
         leftIcon={<FontAwesomeIcon icon={faCopy} />}
         onClick={window.api.systemInfo.copyToClipboard}
