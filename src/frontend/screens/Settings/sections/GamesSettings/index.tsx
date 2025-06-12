@@ -1,4 +1,4 @@
-import './index.module.scss'
+import styles from './index.module.scss'
 
 import React, { useContext, useState, useEffect } from 'react'
 
@@ -72,7 +72,7 @@ export default function GamesSettings() {
 
   return (
     <>
-      <div className="title">
+      <div className={styles.gameSettingsTitle}>
         {t('settings.default_title', 'Games Settings')}
       </div>
       {isDefault && (
@@ -81,6 +81,7 @@ export default function GamesSettings() {
           size="small"
           showClose={false}
           title={t('settings.default_alert_title', 'Default Settings')}
+          className={styles.defaultSettingsAlert}
           message={t(
             'settings.default_alert_message',
             'Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.'

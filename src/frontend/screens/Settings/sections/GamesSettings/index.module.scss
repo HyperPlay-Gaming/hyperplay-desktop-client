@@ -56,7 +56,12 @@
   padding-top: var(--space-2xs);
 }
 
-.title {
+.gameSettingsTitle {
   font-size: var(--text-3xl);
-  margin: var(--space-md) 0;
+  font-weight: var(--semibold);
+  padding: var(--space-xs) 0;
+}
+
+.defaultSettingsAlert {
+  margin: var(--space-lg) 0;
 }
