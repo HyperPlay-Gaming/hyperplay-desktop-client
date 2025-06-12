@@ -3366,7 +3366,7 @@ const assertEqual=  assert.equal;$h͏_once.assertEqual(assertEqual);
  * @import {Harden} from '../types.js'
  */
 
-// Obtain the string tag accessor of of TypedArray so we can indirectly use the
+// Obtain the string tag accessor of TypedArray so we can indirectly use the
 // TypedArray brand check it employs.
 const typedArrayToStringTag=  getOwnPropertyDescriptor(
   typedArrayPrototype,
