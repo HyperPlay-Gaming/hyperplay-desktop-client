@@ -1,4 +1,4 @@
-import './index.scss'
+import './index.module.scss'
 
 import React, { useContext, useState, useEffect } from 'react'
 
