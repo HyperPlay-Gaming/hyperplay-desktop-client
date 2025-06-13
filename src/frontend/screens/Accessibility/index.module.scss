@@ -8,28 +8,26 @@ input[type='range'] {
   justify-content: space-between;
   width: 103%;
   max-width: 522px;
+  padding: var(--space-2xs) 0;
 }
 
-.Accessibility .setting {
+.accessibility .setting {
   display: grid;
 }
 
-.Accessibility label {
+.accessibility label {
   justify-self: flex-start;
 }
 
-.Accessibility label,
-.Accessibility select,
-.Accessibility option {
+.accessibility label,
+.accessibility select,
+.accessibility option {
   font-size: var(--text-lg);
 }
 
-.Accessibility .zoomHint span {
+.accessibility .zoomHint span {
   font-size: var(--text-md);
-}
-
-.Accessibility h1.headerTitle {
-  margin-left: 0px;
+  margin: var(--space-2xs) 0;
 }
 
 .zoomRangeLabel {
@@ -45,4 +43,11 @@ input[type='range'] {
 .fonts {
   display: flex;
   margin: var(--space-xs) 0;
+}
+
+.accessibilityTitle {
+  font-size: var(--text-3xl);
+  font-weight: var(--semibold);
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-lg);
 }

@@ -50,8 +50,10 @@
 }
 
 .systeminfo-title {
-  margin-top: var(--space-lg);
-  margin-bottom: var(--space-xs);
+  font-size: var(--text-3xl);
+  font-weight: var(--semibold);
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-lg);
 }
 
 .osinfo,
