@@ -35,7 +35,14 @@ ipcMain.on('authConnected', () => {
       )
     })
     .catch((error) =>
-      logError(['Failed to fetch user information', error], LogPrefix.Auth)
+      logError(
+        `Failed to fetch user information: ${
+          error instanceof Error
+            ? error.message
+            : JSON.stringify(error, null, 2)
+        }`,
+        LogPrefix.Auth
+      )
     )
   refreshAllSessions()
 })
