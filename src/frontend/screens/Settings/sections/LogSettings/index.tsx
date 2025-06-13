@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { observer } from 'mobx-react-lite'
 import { UpdateComponent } from 'frontend/components/UI'
 import SettingsContext from '../../SettingsContext'
-import './index.css'
+import styles from './index.module.scss'
 import { GameInfo } from 'common/types'
 import libraryState from 'frontend/state/libraryState'
 import { AlertCard, Images, Button } from '@hyperplay/ui'
@@ -31,30 +31,30 @@ const LogBox: React.FC<LogBoxProps> = ({ logFileContent }) => {
   return (
     <>
       {sliced && (
-        <span className="setting long-log-hint">
+        <span className={styles['long-log-hint']}>
           {t(
             'settings.log.long-log-hint',
             'Log truncated, last 1000 lines are shown!'
           )}
         </span>
       )}
-      <div className="setting log-box">
+      <div className={styles['log-box']}>
         {lines.map((line, key) => {
           if (line.toLowerCase().includes(' err')) {
             return (
-              <p key={key} className="log-error">
+              <p key={key} className={styles['log-error']}>
                 {line}
               </p>
             )
           } else if (line.toLowerCase().includes(' warn')) {
             return (
-              <p key={key} className="log-warning">
+              <p key={key} className={styles['log-warning']}>
                 {line}
               </p>
             )
           } else {
             return (
-              <p key={key} className="log-info">
+              <p key={key} className={styles['log-info']}>
                 {line}
               </p>
             )
@@ -122,8 +122,10 @@ function LogSettings() {
 
   return (
     <>
-      <div className="title">{t('setting.logs.title', 'Logs')}</div>
-      <div className="alert-card-container">
+      <div className={styles.logSettingsTitle}>
+        {t('setting.logs.title', 'Logs')}
+      </div>
+      <div className={styles['alert-card-container']}>
         <AlertCard
           variant="information"
           size="large"
@@ -143,8 +145,8 @@ function LogSettings() {
           )}
         />
       </div>
-      <div className="logs-wrapper">
-        <span className="log-buttongroup">
+      <div className={styles['logs-wrapper']}>
+        <span className={styles['log-buttongroup']}>
           {[
             ['HyperPlay', 'hyperplay'],
             ['Epic/Legendary', 'legendary'],
@@ -154,8 +156,8 @@ function LogSettings() {
             return (
               <a
                 key={value}
-                className={`log-buttons ${
-                  showLogOf === value ? 'log-choosen' : ''
+                className={`${styles['log-buttons']} ${
+                  showLogOf === value ? styles['log-choosen'] : ''
                 }`}
                 onClick={() => {
                   setRefreshing(true)
@@ -171,8 +173,8 @@ function LogSettings() {
             return (
               <a
                 key={game.app_name}
-                className={`log-buttons ${
-                  showLogOf === game.app_name ? 'log-choosen' : ''
+                className={`${styles['log-buttons']} ${
+                  showLogOf === game.app_name ? styles['log-choosen'] : ''
                 }`}
                 onClick={() => {
                   setRefreshing(true)
@@ -187,7 +189,7 @@ function LogSettings() {
         </span>
 
         {refreshing ? (
-          <span className="setting log-box">
+          <span className={styles['log-box']}>
             <UpdateComponent inline />
           </span>
         ) : (
@@ -195,7 +197,7 @@ function LogSettings() {
         )}
       </div>
       {logFileExist && (
-        <span className="footerFlex">
+        <span className={styles.footerFlex}>
           <a>
             <Button
               type="primary"

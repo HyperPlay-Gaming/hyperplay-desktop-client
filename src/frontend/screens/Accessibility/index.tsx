@@ -14,7 +14,7 @@ import ToggleSwitch from 'frontend/components/UI/ToggleSwitch'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@hyperplay/ui'
-import './index.css'
+import styles from './index.module.scss'
 
 export default React.memo(function Accessibility() {
   const { t } = useTranslation()
@@ -106,14 +106,16 @@ export default React.memo(function Accessibility() {
   }, [fonts])
 
   return (
-    <div className="Accessibility">
-      <div className="settingsWrapper">
-        <div className="settingsSectionHeader title">
+    <div className={styles.accessibility}>
+      <div className={styles.settingsWrapper}>
+        <div className={styles.accessibilityTitle}>
           {t('accessibility.title', 'Accessibility')}
         </div>
 
-        <div className="rangeWrapper Field">
-          <label className={classNames({ isRTL: isRTL }, 'zoomRangeLabel')}>
+        <div className={styles.rangeWrapper}>
+          <label
+            className={classNames({ isRTL: isRTL }, styles.zoomRangeLabel)}
+          >
             {t('accessibility.zoom', 'Zoom')} ({zoomPercent}%)
           </label>
           <input
@@ -125,7 +127,7 @@ export default React.memo(function Accessibility() {
             step="10"
             list="zoom-levels"
           />
-          <div className="zoomHint">
+          <div className={styles.zoomHint}>
             {[60, 80, 100, 120, 140, 160, 180, 200].map((zoom) => (
               <span key={zoom}>{zoom}</span>
             ))}
@@ -171,7 +173,7 @@ export default React.memo(function Accessibility() {
           {options}
         </SelectField>
 
-        <div className="fonts">
+        <div className={styles.fonts}>
           <Button
             type="secondary"
             size="small"
@@ -190,8 +192,8 @@ export default React.memo(function Accessibility() {
           </Button>
         </div>
 
-        <span className="setting">
-          <label className={classNames('toggleWrapper', { isRTL: isRTL })}>
+        <span className={styles.setting}>
+          <label className={classNames(styles.toggleWrapper, { isRTL: isRTL })}>
             <ToggleSwitch
               htmlId="setAllTitlesInColor"
               value={allTilesInColor}

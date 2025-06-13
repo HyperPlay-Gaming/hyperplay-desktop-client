@@ -17,13 +17,14 @@ import {
   WinePrefixesBasePath
 } from '../../components'
 import AutoLaunchHyperPlay from '../../components/AutoLaunchHyperPlay'
+import styles from './index.module.scss'
 
 export default function GeneralSettings() {
   const { t } = useTranslation()
 
   return (
     <>
-      <div className="settingSubheader settingsSectionHeader title">
+      <div className={styles.generalSettingsTitle}>
         {t('settings.navbar.general')}
       </div>
       <div className="general-section">
