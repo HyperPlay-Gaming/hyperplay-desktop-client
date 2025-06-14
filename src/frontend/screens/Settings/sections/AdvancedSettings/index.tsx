@@ -20,6 +20,7 @@ import {
   faX
 } from '@fortawesome/free-solid-svg-icons'
 import { ImportGameFolder } from 'frontend/components/UI/ImportGameFolder'
+import styles from './index.module.scss'
 
 export default function AdvancedSettings() {
   const { config } = useContext(SettingsContext)
@@ -168,7 +169,7 @@ export default function AdvancedSettings() {
 
   return (
     <div>
-      <div className="settingSubheader settingsSectionHeader title">
+      <div className={styles.advancedSettingsTitle}>
         {t('settings.navbar.advanced')}
       </div>
 
@@ -298,7 +299,7 @@ export default function AdvancedSettings() {
           <hr />
         </div>
       )}
-      <div className="footerFlex">
+      <div className={styles.footerFlex}>
         <Button
           type="primary"
           size="small"
