@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useReducer,
-  Reducer,
-  useEffect,
-  useState
-} from 'react'
+import React, { useContext, useReducer, useEffect, useState } from 'react'
 import WalletOption from '../components/walletOption'
 import {
   ConnectionRequestRejectedType,
@@ -64,9 +58,10 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     qrCodeSvg: '',
     scanTitle: ''
   }
-  const [contentParams, setContentParams] = useReducer<
-    Reducer<ContentParams, Partial<ContentParams>>
-  >((state, newState) => ({ ...state, ...newState }), contentParamsInit)
+  const [contentParams, setContentParams] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    contentParamsInit
+  )
 
   const { setShowMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
 

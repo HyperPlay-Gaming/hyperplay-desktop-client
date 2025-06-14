@@ -36,7 +36,7 @@ type ModalState = {
   gameInfo: GameInfo | null
 }
 
-export default observer(function Library(): JSX.Element {
+export default observer(function Library(): React.JSX.Element {
   const { layout, epic, gog, platform, connectivity } =
     useContext(ContextProvider)
   const { t } = useTranslation()

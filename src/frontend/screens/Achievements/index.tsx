@@ -11,7 +11,7 @@ import AchievementState, {
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
 import { getAchievementNavTranslations } from './utils'
 
-export default observer(function Achievements(): JSX.Element {
+export default observer(function Achievements(): React.JSX.Element {
   const { t } = useTranslation()
 
   const numFreeMints = AchievementState.numFreeMints

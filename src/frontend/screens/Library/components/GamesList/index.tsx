@@ -27,7 +27,7 @@ const GamesList = observer(
     isFirstLane = false,
     onlyInstalled = false,
     isRecent = false
-  }: Props): JSX.Element => {
+  }: Props): React.JSX.Element => {
     const { t } = useTranslation()
 
     const favouriteGameMap: Record<string, HiddenGame> = {}

@@ -35,7 +35,7 @@ export const LibraryTopBar = observer(
     setSelectedFilter,
     selectedFilter,
     otherFiltersData
-  }: LibraryTopBarInterface): JSX.Element => {
+  }: LibraryTopBarInterface): React.JSX.Element => {
     const { t } = useTranslation()
     const category = libraryState.category
 

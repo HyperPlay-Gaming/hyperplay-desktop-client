@@ -10,7 +10,7 @@ import { downloadManagerStore } from 'frontend/helpers/electronStores'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export default React.memo(function DownloadManager(): JSX.Element | null {
+export default React.memo(function DownloadManager(): React.JSX.Element | null {
   const { t } = useTranslation()
   const [state, setState] = useState<DownloadManagerState>('idle')
   const [queuedElements, setQueuedElements] = useState<DMQueueElement[]>([])

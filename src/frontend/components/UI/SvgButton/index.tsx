@@ -4,7 +4,7 @@ import React, { MouseEvent } from 'react'
 
 interface Props {
   onClick: (e: MouseEvent) => void
-  children: JSX.Element
+  children: React.JSX.Element
   className?: string
   disabled?: boolean
   title?: string
