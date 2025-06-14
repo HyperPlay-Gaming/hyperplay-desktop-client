@@ -816,6 +816,8 @@
         },
         "connectSteamAccount": "Connect Steam account",
         "createDiscordTicket": "Create Discord Ticket",
+        "existingSignatureErrorMessage": "Looks like you started your claim with a different wallet. Try switching back to that one to finish claiming your reward.",
+        "existingSignatureErrorTitle": "Wrong Wallet. Switch to {{address}}",
         "g7Numclaimed": "Total Claimed G7 Credits",
         "linkAccount": "Link your Steam account to check eligibility.",
         "multipleClaimsDetected": {
