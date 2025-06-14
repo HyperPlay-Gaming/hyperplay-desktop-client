@@ -23,7 +23,7 @@ const configStore = new TypeCheckedStoreFrontend('wineManagerConfigStore', {
   cwd: 'store'
 })
 
-export default React.memo(function WineManager(): JSX.Element | null {
+export default React.memo(function WineManager(): React.JSX.Element | null {
   const { t } = useTranslation()
   const { refreshWineVersionInfo, platform } = useContext(ContextProvider)
   const isLinux = platform === 'linux'
