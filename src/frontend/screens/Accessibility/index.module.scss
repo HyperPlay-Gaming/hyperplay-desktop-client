@@ -1,0 +1,53 @@
+input[type='range'] {
+  width: 100%;
+  max-width: 513px;
+}
+
+.zoomHint {
+  display: flex;
+  justify-content: space-between;
+  width: 103%;
+  max-width: 522px;
+  padding: var(--space-2xs) 0;
+}
+
+.accessibility .setting {
+  display: grid;
+}
+
+.accessibility label {
+  justify-self: flex-start;
+}
+
+.accessibility label,
+.accessibility select,
+.accessibility option {
+  font-size: var(--text-lg);
+}
+
+.accessibility .zoomHint span {
+  font-size: var(--text-md);
+  margin: var(--space-2xs) 0;
+}
+
+.zoomRangeLabel {
+  display: block;
+}
+
+.rangeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.fonts {
+  display: flex;
+  margin: var(--space-xs) 0;
+}
+
+.accessibilityTitle {
+  font-size: var(--text-3xl);
+  font-weight: var(--semibold);
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-lg);
+}

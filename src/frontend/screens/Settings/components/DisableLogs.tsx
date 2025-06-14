@@ -22,7 +22,6 @@ const DisableLogs = () => {
         handleChange={() => setDisableLogs(!disableLogs)}
         title={t('setting.disable_logs', 'Disable Logs')}
       />
-
       <FontAwesomeIcon
         className="helpIcon"
         icon={faCircleInfo}
