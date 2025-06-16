@@ -1,30 +1,159 @@
-import { createConfig, http } from 'wagmi'
-import { Chain, hardhat, mainnet, polygon } from 'wagmi/chains'
-import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
+import { createConfig, http, injected } from 'wagmi'
+import {
+  apeChain,
+  arbitrum,
+  arbitrumNova,
+  arbitrumSepolia,
+  astar,
+  astarZkEVM,
+  aurora,
+  avalanche,
+  avalancheFuji,
+  bahamut,
+  base,
+  baseSepolia,
+  beam,
+  bob,
+  boba,
+  bsc,
+  bscTestnet,
+  bxn,
+  canto,
+  celo,
+  cronos,
+  degen,
+  dfk,
+  etherlink,
+  fantom,
+  filecoin,
+  flare,
+  fraxtal,
+  fuse,
+  gnosis,
+  goerli,
+  hedera,
+  iotex,
+  kava,
+  linea,
+  mainnet,
+  manta,
+  mantle,
+  mantleSepoliaTestnet,
+  merlin,
+  metis,
+  mode,
+  moonbeam,
+  moonriver,
+  neonMainnet,
+  oasys,
+  okc,
+  opBNB,
+  optimism,
+  optimismSepolia,
+  polygon,
+  polygonAmoy,
+  polygonMumbai,
+  polygonZkEvm,
+  pulsechain,
+  ronin,
+  rootstock,
+  sapphire,
+  sepolia,
+  shibarium,
+  taiko,
+  telos,
+  wanchain,
+  wemix,
+  zkFair
+} from 'wagmi/chains'
+import { createClient } from 'viem'
 
-let chainsToSupport: Chain[] = []
-const transports: { [key: number]: unknown } = {}
-
-for (const chainId in chainMap) {
-  const chainMetadata = chainMap[chainId]
-  try {
-    const chain = parseChainMetadataToViemChain(chainMetadata)
-    chainsToSupport.push(chain)
-    transports[chain.id] = http(chainMetadata.chain.rpc[0])
-    // eslint-disable-next-line no-empty
-  } catch (error) {}
-}
-
-// add hardhat chain for development
-chainsToSupport = chainsToSupport.filter((chain) => chain.id !== hardhat.id)
-chainsToSupport.push(hardhat)
+export const chains = [
+  mainnet,
+  polygon,
+  sepolia,
+  mantle,
+  mantleSepoliaTestnet,
+  goerli,
+  bsc,
+  bscTestnet,
+  base,
+  baseSepolia,
+  apeChain,
+  arbitrum,
+  arbitrumSepolia,
+  arbitrumNova,
+  avalanche,
+  avalancheFuji,
+  polygonAmoy,
+  polygonMumbai,
+  polygonZkEvm,
+  mantle,
+  cronos,
+  linea,
+  pulsechain,
+  gnosis,
+  taiko,
+  bob,
+  rootstock,
+  merlin,
+  kava,
+  mode,
+  ronin,
+  celo,
+  hedera,
+  fantom,
+  filecoin,
+  wemix,
+  metis,
+  manta,
+  fraxtal,
+  telos,
+  moonbeam,
+  iotex,
+  astar,
+  flare,
+  opBNB,
+  aurora,
+  canto,
+  moonriver,
+  astarZkEVM,
+  beam,
+  wanchain,
+  shibarium,
+  dfk,
+  bahamut,
+  bxn,
+  sapphire,
+  oasys,
+  degen,
+  okc,
+  boba,
+  zkFair,
+  neonMainnet,
+  fuse,
+  etherlink,
+  optimism,
+  optimismSepolia,
+  gnosis,
+  fuse,
+  fantom
+] as const
 
 export const config = createConfig({
-  // @ts-expect-error: Chain[] is a valid type for chains but wagmi a constant assertion which we can't do since the array is dynamic
-  chains: chainsToSupport,
-  transports: {
-    ...transports,
-    [mainnet.id]: http('https://rpc.valist.io/mainnet'),
-    [polygon.id]: http('https://rpc.valist.io/polygon')
+  chains,
+  connectors: [injected()],
+  client({ chain }) {
+    let transport = http()
+
+    if (chain.id === mainnet.id) {
+      transport = http('https://rpc.valist.io/mainnet')
+    }
+
+    if (chain.id === polygon.id) {
+      transport = http('https://rpc.valist.io/polygon')
+    }
+
+    return createClient({ chain, transport })
   }
 })
