@@ -11,7 +11,7 @@ import { AchievementStores } from './AchievementStores'
 
 export default React.memo(function AchievementsLayout({
   children
-}: PropsWithChildren): JSX.Element {
+}: PropsWithChildren): React.JSX.Element {
   const contextValues = useSettingsContext({
     appName: 'default',
     runner: 'hyperplay',

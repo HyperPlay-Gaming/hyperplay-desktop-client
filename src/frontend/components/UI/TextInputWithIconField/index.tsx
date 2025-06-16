@@ -7,7 +7,7 @@ interface TextInputWithIconFieldProps {
   htmlId: string
   value: string
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
-  icon: JSX.Element
+  icon: React.JSX.Element
   onIconClick: () => void
   afterInput?: ReactNode
   label?: string
