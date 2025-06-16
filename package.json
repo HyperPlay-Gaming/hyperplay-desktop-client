@@ -130,7 +130,6 @@
     "react": "^19.1.0",
     "react-blockies": "^1.4.1",
     "react-dom": "^19.1.0",
-    "react-draggable": "^4.4.6",
     "react-i18next": "^15.0.1",
     "react-router-dom": "^7.6.2",
     "recharts": "^2.12.7",
