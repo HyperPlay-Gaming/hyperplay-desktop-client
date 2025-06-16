@@ -133,7 +133,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const isUpdate = type === 'update'
   const isPatching = gameProgressStatus === 'patching'
 
-  const goToGamePage = (action?: GamePageActions) => {
+  const goToGamePage = async (action?: GamePageActions) => {
     if (is_dlc) {
       return
     }
@@ -294,7 +294,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
       <tr>
         <td
           role="button"
-          onClick={() => goToGamePage()}
+          onClick={async () => goToGamePage()}
           className="downloadManagerTitleList"
           style={{
             color: getStatusColor(),

@@ -10,7 +10,7 @@ export default function G7Webview() {
   return (
     <div className={styles.root}>
       <div className={styles.topBar}>
-        <CircularButton onClick={() => navigate('/quests')}>
+        <CircularButton onClick={async () => navigate('/quests')}>
           <Images.ArrowLeft />
         </CircularButton>
       </div>
