@@ -466,8 +466,8 @@ importers:
         version: 2.4.0(rollup@4.28.1)(vite@5.4.11(@types/node@20.17.10)(sass@1.83.0)(terser@5.41.0))
     optionalDependencies:
       '@hyperplay/extension-importer':
-        specifier: ^0.3.3
-        version: 0.3.3
+        specifier: 0.3.4-alpha.1
+        version: 0.3.4-alpha.1
       '@hyperplay/extension-provider':
         specifier: ^0.1.3
         version: 0.1.3(electron@33.2.0)(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
@@ -1946,8 +1946,8 @@ packages:
     resolution: {integrity: sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==}
     engines: {node: '>=16'}
 
-  '@hyperplay/extension-importer@0.3.3':
-    resolution: {integrity: sha512-Sk7P+V1D4M5WJ4AE/AYCa18BiNiv3gRe4eYvbpdvn85dGK5oburf90ORlgGDCDXspE3bNNoG9t41YfCls16lhA==}
+  '@hyperplay/extension-importer@0.3.4-alpha.1':
+    resolution: {integrity: sha512-/aZuAtOv6XCvDRT2yxROWaQCf1pXv0QSed2nG9RNYuXKjBKEO+xg52TBg97q+bJV8h6qTikH8nxL/qrr52PXXg==}
 
   '@hyperplay/extension-provider@0.1.3':
     resolution: {integrity: sha512-xyLnod5kEOXGPtTi/0TbPOrqLBD5ybsRbCVq0kEbpeOcfcYHs9aGSw2GwLNb0p48kmclukQxz28z/Hs7uZZliw==}
@@ -11572,7 +11572,7 @@ snapshots:
 
   '@hyperplay/check-disk-space@3.5.2': {}
 
-  '@hyperplay/extension-importer@0.3.3':
+  '@hyperplay/extension-importer@0.3.4-alpha.1':
     dependencies:
       '@hyperplay/utils': 0.0.9
       classic-level: 1.4.1
