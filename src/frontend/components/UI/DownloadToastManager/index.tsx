@@ -187,6 +187,14 @@ export default function DownloadToastManager() {
           downloadedInBytes={adjustedDownloadedInBytes}
           downloadSizeInBytes={adjustedDownloadSizeInBytes}
           estimatedCompletionTimeInMs={etaInMs}
+          i18n={{
+            play: t('label.playing.start', 'Play'),
+            pause: t('downloadToast.pause', 'Pause'),
+            resume: t('downloadToast.resume', 'Resume'),
+            cancel: t('downloadToast.cancel', 'Cancel'),
+            downloading: t('status.downloading', 'Downloading'),
+            of: t('downloadToast.of', 'of')
+          }}
           onCancelClick={() => {
             setShowStopInstallModal(true)
             window.api.trackEvent({
