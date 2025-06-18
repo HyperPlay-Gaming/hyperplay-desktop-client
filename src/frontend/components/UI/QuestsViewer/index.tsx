@@ -31,6 +31,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           'You are currently not logged in, play streak progress will not be tracked. Please exit the game and login to HyperPlay via the top-right dropdown to track progress.'
         )}
         variant="warning"
+        showClose={false}
       />
     )
   }
