@@ -27,6 +27,7 @@ import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusTex
 import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
 import authState from 'frontend/state/authState'
+import { getImageFormattingForArtSquare } from 'frontend/screens/Game/GamePicture'
 
 interface Card {
   buttonClick: () => void
@@ -338,7 +339,12 @@ const GameCard = ({
         <HpGameCard
           key={appName}
           title={gameInfo.title}
-          imageUrl={gameInfo.art_square}
+          imageUrl={
+            getImageFormattingForArtSquare({
+              art_square: gameInfo.art_square,
+              store: gameInfo.runner
+            }).src
+          }
           favorited={favorited}
           onFavoriteClick={handleClickStopBubbling(() => {
             if (!favorited) {
