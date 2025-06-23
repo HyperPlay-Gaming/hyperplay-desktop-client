@@ -13,7 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import { WineVersionInfo, Type, WineManagerUISettings } from 'common/types'
 import libraryState from 'frontend/state/libraryState'
-import { Tabs } from '@hyperplay/ui'
+import { Tabs, Button } from '@hyperplay/ui'
+import styles from './index.module.scss'
 
 const WineItem = lazy(
   async () => import('frontend/screens/WineManager/components/WineItem')
@@ -23,7 +24,7 @@ const configStore = new TypeCheckedStoreFrontend('wineManagerConfigStore', {
   cwd: 'store'
 })
 
-export default React.memo(function WineManager(): JSX.Element | null {
+export default React.memo(function WineManager(): React.JSX.Element | null {
   const { t } = useTranslation()
   const { refreshWineVersionInfo, platform } = useContext(ContextProvider)
   const isLinux = platform === 'linux'
@@ -95,11 +96,11 @@ export default React.memo(function WineManager(): JSX.Element | null {
 
   return (
     <>
-      <h4 style={{ paddingTop: 'var(--space-md)' }}>
+      <div className={styles.wineManagerTitle}>
         {t('wine.manager.title', 'Compatibility Layer')}
-      </h4>
-      <div className="wineManager">
-        <span className="tabsWrapper">
+      </div>
+      <div className="wineManagerContent">
+        <div className="tabsWrapper">
           <Tabs
             className="tabs"
             value={repository.value}
@@ -123,45 +124,49 @@ export default React.memo(function WineManager(): JSX.Element | null {
               return null
             })}
           </Tabs>
-          <button
-            className={'FormControl__button'}
-            title={t('generic.library.refresh', 'Refresh Library')}
+          <Button
+            className="refreshButton"
+            type="secondary-neutral"
+            size="small"
             onClick={async () => refreshWineVersionInfo(true)}
           >
-            <FontAwesomeIcon
-              className={'FormControl__segmentedFaIcon'}
-              icon={faSyncAlt}
-            />
-          </button>
-        </span>
-        {wineVersions.length ? (
-          <div
-            style={
-              !wineVersions.length ? { backgroundColor: 'transparent' } : {}
-            }
-            className="wineList"
-          >
-            <div className="gameListHeader">
-              <span>{t('info.version', 'Wine Version')}</span>
-              <span>{t('wine.release', 'Release Date')}</span>
-              <span>{t('wine.size', 'Size')}</span>
-              <span>{t('wine.actions', 'Action')}</span>
+            <FontAwesomeIcon icon={faSyncAlt} />
+            <span className="refreshButtonText">
+              {t('generic.library.refresh', 'Refresh Library')}
+            </span>
+          </Button>
+        </div>
+
+        <div className="wineManager">
+          {wineVersions.length ? (
+            <div
+              style={
+                !wineVersions.length ? { backgroundColor: 'transparent' } : {}
+              }
+              className="wineList"
+            >
+              <div className="gameListHeader">
+                <span>{t('info.version', 'Wine Version')}</span>
+                <span>{t('wine.release', 'Release Date')}</span>
+                <span>{t('wine.size', 'Size')}</span>
+                <span>{t('wine.actions', 'Action')}</span>
+              </div>
+              {libraryState.refreshing && <UpdateComponent />}
+              {!libraryState.refreshing &&
+                !!wineVersions.length &&
+                wineVersions.map((release) => {
+                  return <WineItem key={release.version} {...release} />
+                })}
             </div>
-            {libraryState.refreshing && <UpdateComponent />}
-            {!libraryState.refreshing &&
-              !!wineVersions.length &&
-              wineVersions.map((release) => {
-                return <WineItem key={release.version} {...release} />
-              })}
-          </div>
-        ) : (
-          <h5 className="wineList">
-            {t(
-              'wine.manager.not-found',
-              'No Wine versions found. Please click the refresh icon to try again.'
-            )}
-          </h5>
-        )}
+          ) : (
+            <h5 className="wineList">
+              {t(
+                'wine.manager.not-found',
+                'No Wine versions found. Please click the refresh icon to try again.'
+              )}
+            </h5>
+          )}
+        </div>
       </div>
     </>
   )

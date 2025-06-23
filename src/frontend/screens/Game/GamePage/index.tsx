@@ -77,7 +77,7 @@ type locationState = {
   action: GamePageActions
 }
 
-export default observer(function GamePage(): JSX.Element | null {
+export default observer(function GamePage(): React.JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
     state: locationState

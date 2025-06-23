@@ -12,7 +12,7 @@ import { getAchievementNavTranslations } from '../utils'
 
 const pageSize = 100
 
-export default observer(function GameAchievementDetails(): JSX.Element {
+export default observer(function GameAchievementDetails(): React.JSX.Element {
   const { t } = useTranslation()
   const { id } = useParams()
 

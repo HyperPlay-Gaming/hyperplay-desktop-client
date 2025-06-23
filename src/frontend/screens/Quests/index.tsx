@@ -38,8 +38,10 @@ export function QuestsPage() {
 
   const { search } = useLocation()
   const searchParams = new URLSearchParams(search)
-  const searchParam = searchParams.get('search')
-  const [searchText, setSearchText] = useState(searchParam ?? '')
+  const searchStringFromSearchParams = searchParams.get('search')
+  const [searchText, setSearchText] = useState(
+    searchStringFromSearchParams ?? ''
+  )
   const [activeFilter, setActiveFilter] = useState<QuestFilter>('all')
 
   interface FuseResult<T> {
@@ -56,8 +58,8 @@ export function QuestsPage() {
   }, [])
 
   useEffect(() => {
-    setSearchText(searchParam ?? '')
-  }, [searchParam])
+    setSearchText(searchStringFromSearchParams ?? '')
+  }, [searchStringFromSearchParams])
 
   let alertComponent = null
   const showAlert = !isSignedIn
@@ -99,7 +101,7 @@ export function QuestsPage() {
         storeRedirectUrl = quest.quest_external_game.store_redirect_url
       } // check for gameinfo to see if it is on the library
       return getGameInfo(name, runner)
-        .then((res) => {
+        .then(async (res) => {
           if (!res) {
             throw new Error('Game not found in library')
           }
@@ -262,11 +264,13 @@ export function QuestsPage() {
           }}
           searchBar={
             <SearchBar
-              searchText={searchText}
               setSearchText={setSearchText}
               i18n={{ placeholder: t('quests.search', 'Search') }}
               classNames={{ container: styles.searchBar }}
               suggestions={suggestedSearchTitles}
+              inputProps={{
+                defaultValue: searchStringFromSearchParams ?? undefined
+              }}
             />
           }
         />

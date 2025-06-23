@@ -253,7 +253,7 @@ export default function SideloadDialog({
   function platformIcon() {
     if (appPlatform !== 'Browser') {
       const platformIcon = availablePlatforms.filter(
-        (p) => p.name === platformToInstall
+        (p) => p.name.toLowerCase() === platformToInstall.toLowerCase()
       )[0]?.icon
 
       return (

@@ -50,7 +50,11 @@ export const FloatingExtensionContents = observer(() => {
       {shouldShow ? (
         <motion.div
           {...animation}
-          className={ExtensionContentsStyles.mmWindowContainer}
+          style={{
+            top: 'var(--top-navbar-height)',
+            position: 'fixed',
+            right: '0px'
+          }}
         >
           <ExtensionContents />
         </motion.div>

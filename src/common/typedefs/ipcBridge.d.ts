@@ -333,6 +333,16 @@ interface HyperPlayAsyncIPCFunctions {
     questId: number
   } | null>
   getListingById: (projectId: string) => Promise<Listing>
+  getExistingSignature: (
+    questId: number,
+    rewardId: number
+  ) => Promise<{
+    signature: string
+    wallet: string
+    gameplayWallet: {
+      walletAddress: string
+    }
+  } | null>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

@@ -104,6 +104,12 @@
     "dlc": {
         "installDlcs": "Install all DLCs"
     },
+    "downloadToast": {
+        "cancel": "Cancel",
+        "of": "of",
+        "pause": "Pause",
+        "resume": "Resume"
+    },
     "enabled": "Enabled",
     "game": {
         "dlcs": "DLCs",

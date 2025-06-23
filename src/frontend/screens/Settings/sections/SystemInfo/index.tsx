@@ -82,9 +82,9 @@ export default function SystemInfo() {
 
   return (
     <div className="systeminfo">
-      <h5 className="systeminfo-title">
+      <h6 className="systeminfo-title">
         {t('settings.navbar.systemInformation', 'System Information')}
-      </h5>
+      </h6>
       <div className={styles.gridContainer}>
         {systemInformation.isSteamDeck ? (
           <SteamDeckSystemSpecifications
@@ -105,7 +105,7 @@ export default function SystemInfo() {
       </div>
       <Button
         className="copyToClipboardButton"
-        type="secondary"
+        type="primary"
         size="small"
         leftIcon={<FontAwesomeIcon icon={faCopy} />}
         onClick={window.api.systemInfo.copyToClipboard}
