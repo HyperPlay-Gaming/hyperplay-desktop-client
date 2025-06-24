@@ -19,6 +19,14 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
+        "windows": "Alt+Shift+M",
+        "mac": "Alt+Shift+M",
+        "chromeos": "Alt+Shift+M",
+        "linux": "Alt+Shift+M"
+      }
+    },
+    "_execute_action": {
+      "suggested_key": {
         "default": "Alt+Shift+M",
         "windows": "Alt+Shift+M",
         "mac": "Alt+Shift+M",
@@ -67,7 +75,7 @@
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: 65c21f3b",
+  "description": "other build from git id: 8caa5f47",
   "host_permissions": [
     "http://localhost:8545/",
     "file://*/*",
@@ -109,12 +117,13 @@
   },
   "externally_connectable": {
     "matches": [
-      "https://metamask.io/*"
+      "http://*/*",
+      "https://*/*"
     ],
     "ids": [
       "*"
     ]
   },
-  "minimum_chrome_version": "89",
-  "version": "12.16.1"
+  "minimum_chrome_version": "109",
+  "version": "12.20.1"
 }
