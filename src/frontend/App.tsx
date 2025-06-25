@@ -41,6 +41,7 @@ import { QuestsPage } from './screens/Quests'
 import { NavigateListener } from './NavigateListener'
 import G7Webview from './screens/G7Webview'
 import CardPrivacyPolicy from './screens/Onboarding/analytics/CardPrivacyPolicy'
+import { Support } from './components/UI/Support'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
@@ -54,6 +55,7 @@ function App() {
         <OfflineMessage />
         <TopNavBar />
         <Sidebar />
+        <Support />
         <main className="content">
           <CardPrivacyPolicy />
           <QaAuthHandler />
