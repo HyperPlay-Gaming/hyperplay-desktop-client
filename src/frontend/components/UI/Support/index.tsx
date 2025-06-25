@@ -1,4 +1,6 @@
+import { Button, Images } from '@hyperplay/ui'
 import React, { useEffect } from 'react'
+import styles from './index.module.scss'
 
 declare global {
   interface Window {
@@ -15,7 +17,13 @@ export const Support = () => {
   })
   return (
     <>
-      <button onClick={() => window.zE('messenger', 'open')}>Support</button>
+      <Button
+        type="tertiary-neutral"
+        size="icon"
+        onClick={() => window.zE('messenger', 'open')}
+      >
+        <Images.QuestionMarkRounded className={styles.icon} />
+      </Button>
     </>
   )
 }
