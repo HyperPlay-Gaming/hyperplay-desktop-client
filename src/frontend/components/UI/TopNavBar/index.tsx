@@ -17,7 +17,6 @@ import {
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { extractMainDomain } from '../../../helpers/extract-main-domain'
 import AppVersion from '../AppVersion'
-import { Support } from '../Support'
 
 const TopNavBar = observer(() => {
   const { t } = useTranslation()
@@ -103,7 +102,6 @@ const TopNavBar = observer(() => {
         </div>
       </div>
       <div>
-        <Support />
         {pathname === '/library' ? <SearchBar /> : null}
         {showMetaMaskBrowserSidebarLinks && (
           <button
