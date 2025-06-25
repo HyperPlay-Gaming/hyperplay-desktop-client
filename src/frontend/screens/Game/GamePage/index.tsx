@@ -125,6 +125,7 @@ export default observer(function GamePage(): React.JSX.Element | null {
   const isLinux = platform === 'linux'
   const isMac = platform === 'darwin'
   const isSideloaded = runner === 'sideload'
+  const isSteam = runner === 'steam'
 
   const isInstalling = DMQueueState.isInstalling(appName)
   const isPlaying = status === 'playing'
@@ -249,7 +250,7 @@ export default observer(function GamePage(): React.JSX.Element | null {
           runner === 'hyperplay' ? hpPlatforms : othersPlatforms
 
         if (
-          runner !== 'sideload' &&
+          !['sideload', 'steam'].includes(runner) &&
           !notSupportedGame &&
           !notInstallable &&
           !isOffline
@@ -931,7 +932,10 @@ export default observer(function GamePage(): React.JSX.Element | null {
   }
 
   async function mainAction(is_installed: boolean) {
-    // TODO: Add a way to pause download from the game page
+    if (isSteam) {
+      window.api.openExternalUrl(`steam://install/${appName}`)
+      return
+    }
 
     // resume download
     if (isPaused) {

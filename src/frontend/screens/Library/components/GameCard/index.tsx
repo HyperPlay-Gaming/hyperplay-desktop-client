@@ -434,10 +434,14 @@ const GameCard = ({
   )
 
   async function mainAction(runner: Runner) {
+    if (runner === 'steam') {
+      window.api.openExternalUrl(`steam://install/${appName}`)
+      return
+    }
+
     if (isInstalling || isExtracting || isPaused) {
       return setShowStopInstallModal(true)
     }
-
     // ask to install if the game is not installed
     if (!isInstalled && !isQueued && gameInfo.runner !== 'sideload') {
       return install({
