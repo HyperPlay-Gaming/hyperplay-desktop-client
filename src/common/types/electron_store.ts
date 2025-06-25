@@ -79,6 +79,9 @@ export interface StoreStructure {
       [saveName: string]: string
     }
   }
+  steamEnabledUsersConfig: {
+    [userId: string]: boolean
+  }
   wineManagerConfigStore: {
     'wine-manager-settings': WineManagerUISettings[]
     'wine-releases': WineVersionInfo[]
