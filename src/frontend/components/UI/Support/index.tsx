@@ -1,7 +1,8 @@
 import { Button, Images } from '@hyperplay/ui'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
+import ContextProvider from 'frontend/state/ContextProvider'
 
 declare global {
   interface Window {
@@ -13,6 +14,10 @@ declare global {
 export const Support = () => {
   const [count, setCount] = useState(0)
   const [modalIsShown, setModalIsShown] = useState(false)
+
+  const { connectivity } = useContext(ContextProvider)
+  const isOffline = connectivity.status !== 'online'
+
   useEffect(() => {
     window.zE?.('messenger:on', 'unreadMessages', (newCount: number) => {
       setCount(newCount)
@@ -29,6 +34,7 @@ export const Support = () => {
       <Button
         type="tertiary-neutral"
         size="icon"
+        disabled={isOffline}
         onClick={() => {
           if (modalIsShown) {
             window.zE('messenger', 'close')
