@@ -25,7 +25,8 @@ import {
   epicCategories,
   gogCategories,
   hyperPlayCategories,
-  sideloadedCategories
+  sideloadedCategories,
+  steamCategories
 } from 'frontend/helpers/library'
 import storeAuthState from './storeAuthState'
 
@@ -347,10 +348,10 @@ class LibraryState {
     } else {
       const isEpic = epicCategories.includes(this.category)
       const isGog = gogCategories.includes(this.category)
+      const isSteam = steamCategories.includes(this.category)
       const epicLibrary = isEpic ? this.epicLibrary : []
       const gogLibrary = isGog ? this.gogLibrary : []
-      const steamLibrary =
-        this.category === 'steam' ? steamLibraryStore.get('games', []) : []
+      const steamLibrary = isSteam ? steamLibraryStore.get('games', []) : []
       const sideloadedApps = sideloadedCategories.includes(this.category)
         ? this.sideloadedLibrary
         : []
