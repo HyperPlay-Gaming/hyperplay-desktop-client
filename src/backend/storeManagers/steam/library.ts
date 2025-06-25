@@ -50,10 +50,9 @@ export async function getInstalledGames() {
   const steamLibraries = await getSteamLibraries()
   const steamAppsDirs = steamLibraries.map((lib) => path.join(lib, 'steamapps'))
 
-  console.log(
-    'Steam apps directories: ------------------------------->',
-    steamAppsDirs
-  )
+  logDebug(['Steam libraries found:', steamAppsDirs.join(', ')], {
+    prefix: LogPrefix.Steam
+  })
 
   installed.clear()
   for (const steamApps of steamAppsDirs) {
@@ -97,12 +96,6 @@ export async function refresh(): Promise<null> {
     return acc
   }, [] as Array<SteamLoginUser>)
 
-  console.log(
-    'Steam users: ------------------------------->',
-    steamUsers,
-    enabledSteamUsers
-  )
-
   libraryCache.get('games', []).forEach((game) => {
     library.set(game.app_name, game)
   })
@@ -110,10 +103,6 @@ export async function refresh(): Promise<null> {
   await getInstalledGames()
   // Get all user owned games
 
-  console.log(
-    'Installed games: ------------------------------->',
-    installed.size
-  )
   if (!isOnline()) {
     logDebug('App offline, skipping steam sync', { prefix: LogPrefix.Steam })
     return null
@@ -127,10 +116,6 @@ export async function refresh(): Promise<null> {
     if (!ownedGames?.length) {
       continue
     }
-    console.log(
-      'Owned games: ------------------------------->',
-      ownedGames.length
-    )
     apiInfoCache.use_in_memory()
     for (const steamGame of ownedGames) {
       if (ignoredAppIds.includes(steamGame.appid.toString())) {
@@ -157,11 +142,6 @@ export async function refresh(): Promise<null> {
           is_dlc: false
         }
       }
-
-      console.log(
-        'New game object: ------------------------------->',
-        newGameObject
-      )
 
       const installedGame = installed.get(steamGame.appid.toString())
       if (installedGame) {

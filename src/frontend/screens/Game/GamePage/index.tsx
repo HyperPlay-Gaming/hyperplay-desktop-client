@@ -961,6 +961,11 @@ export default observer(function GamePage(): React.JSX.Element | null {
 
     // open install dialog
     if (!is_installed) {
+      if (isSteam) {
+        return window.api.openExternalUrl(
+          `steam://install/${gameInfo.app_name}`
+        )
+      }
       return handleModal()
     }
 

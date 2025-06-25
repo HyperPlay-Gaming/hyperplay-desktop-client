@@ -111,6 +111,9 @@ export default observer(function Library(): React.JSX.Element {
     runner: Runner,
     gameInfo: GameInfo | null
   ) {
+    if (runner === 'steam') {
+      return window.api.openExternalUrl(`steam://install/${appName}`)
+    }
     setShowModal({ game: appName, show: true, runner, gameInfo })
   }
 
