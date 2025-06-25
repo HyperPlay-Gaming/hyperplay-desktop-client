@@ -72,6 +72,9 @@ export const LibraryTopBar = observer(
               <div className="menu">GOG</div>
             </Tabs.Tab>
           ) : null}
+          <Tabs.Tab value="steam">
+            <div className="menu">Steam</div>
+          </Tabs.Tab>
           <Tabs.Tab value="sideload">
             <div className="menu">{t('Other')}</div>
           </Tabs.Tab>
