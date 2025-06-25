@@ -1,3 +1,19 @@
 .icon {
   stroke: var(--icon-neutral);
 }
+
+.unreadCounter {
+  background-color: var(--fill-brand-strong);
+  border-radius: 100%;
+  border: 2px solid var(--color-stroke-inverse-strong);
+  color: var(--icon-neutral);
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  transform: translate(50%, -50%);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
