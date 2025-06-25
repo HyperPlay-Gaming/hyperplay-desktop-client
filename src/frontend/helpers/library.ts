@@ -57,6 +57,11 @@ async function install({
     return
   }
 
+  if (gameInfo.runner === 'steam') {
+    window.api.openExternalUrl(`steam://install/${gameInfo.app_name}`)
+    return
+  }
+
   const { folder_name, is_installed, app_name: appName, runner } = gameInfo
 
   if (isInstalling) {
@@ -148,6 +153,13 @@ const launch = async ({
   showDialogModal,
   isNotNative
 }: LaunchOptions): Promise<{ status: 'done' | 'error' | 'abort' }> => {
+  if (runner === 'steam') {
+    return new Promise((resolve) => {
+      window.api.openExternalUrl(`steam://run/${appName}`)
+      resolve({ status: 'done' })
+    })
+  }
+
   const showCompatibilityWarningDialog: boolean =
     isNotNative &&
     JSON.parse(
@@ -284,5 +296,6 @@ export const epicCategories = ['all', 'legendary', 'epic']
 export const gogCategories = ['all', 'gog']
 export const sideloadedCategories = ['all', 'sideload']
 export const hyperPlayCategories = ['all', 'hyperplay']
+export const steamCategories = ['all', 'steam']
 
 export { install, launch, repair, updateGame }
