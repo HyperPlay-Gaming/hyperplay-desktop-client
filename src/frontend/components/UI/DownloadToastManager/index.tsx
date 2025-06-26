@@ -93,7 +93,7 @@ export default function DownloadToastManager() {
         <CircularButton
           style={{
             backgroundColor: 'var(--color-neutral-700)',
-            padding: 'var(--space-xl)',
+            padding: 'var(--space-lg-fixed)',
             border: '1px solid var(--color-stroke-01)',
             borderRadius: '100%',
             zIndex: 1000
