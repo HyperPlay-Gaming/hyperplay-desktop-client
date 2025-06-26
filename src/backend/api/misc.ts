@@ -238,3 +238,7 @@ export const isClientUpdating = async () =>
   ipcRenderer.invoke('isClientUpdating')
 
 export const restartClient = () => ipcRenderer.send('restartClient')
+
+export const shouldPromptNps = async () => ipcRenderer.invoke('shouldPromptNps')
+
+export const npsSubmitted = () => ipcRenderer.send('npsSubmitted')
