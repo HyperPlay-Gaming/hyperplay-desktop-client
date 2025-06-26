@@ -130,11 +130,21 @@ export async function refresh(): Promise<null> {
         continue
       }
 
+      let artSquare = `${steamDBBaseURL}/${steamGame.appid}/library_600x900.jpg`
+      let artCover = `${steamDBBaseURL}/${steamGame.appid}/header.jpg`
+
+      try {
+        await axios.head(artSquare)
+      } catch (e) {
+        artSquare = 'fallback'
+        artCover = 'fallback'
+      }
+
       const newGameObject: GameInfo = {
         app_name: steamGame.appid.toString(),
         runner: 'steam',
-        art_square: `${steamDBBaseURL}/${steamGame.appid}/library_600x900.jpg`,
-        art_cover: `${steamDBBaseURL}/${steamGame.appid}/header.jpg`,
+        art_square: artSquare,
+        art_cover: artCover,
         canRunOffline: false,
         title: steamGame.name,
         is_installed: false,
