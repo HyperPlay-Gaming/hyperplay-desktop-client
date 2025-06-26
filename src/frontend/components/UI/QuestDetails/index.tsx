@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import {
   QuestDetailsWrapper,
   claimedRewardToastState,
@@ -15,6 +15,8 @@ import extensionState from 'frontend/state/ExtensionState'
 import { PossibleMetricPayloads } from 'backend/metrics/types'
 import { SiweMessage } from 'siwe'
 import onboardingStore from 'frontend/store/OnboardingStore'
+import { Widget } from '@typeform/embed-react'
+import styles from './index.module.scss'
 
 /**
  * Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -103,6 +105,7 @@ export default function QuestDetails({
   const { t } = useTranslation()
   const flags = useFlags()
   const { signMessageAsync } = useSignMessage()
+  const [showNPSModal, setShowNPSModal] = useState(false)
 
   const sessionEmail = data?.linkedAccounts.get('email')
   const { invalidateQuery } = useGetUserPlayStreak(
@@ -152,6 +155,21 @@ export default function QuestDetails({
     }
   }
 
+  const hideNpsModal = () => setShowNPSModal(false)
+  if (showNPSModal) {
+    return (
+      <Widget
+        id="PMddOcyz"
+        className={styles.npsModal}
+        onClose={hideNpsModal}
+        onSubmit={() => {
+          hideNpsModal()
+          window.api.npsSubmitted()
+        }}
+      />
+    )
+  }
+
   return (
     <QuestDetailsWrapper
       getExistingSignature={window.api.getExistingSignature}
@@ -161,9 +179,13 @@ export default function QuestDetails({
       getGameplayWallets={window.api.getGameplayWallets}
       updateActiveWallet={window.api.updateActiveWallet}
       getExternalEligibility={window.api.getExternalEligibility}
-      onRewardClaimed={(reward) =>
+      onRewardClaimed={async (reward) => {
         claimedRewardToastState.showClaimedReward(reward)
-      }
+        const shouldPromptNPS = await window.api.shouldPromptNps()
+        if (shouldPromptNPS) {
+          setShowNPSModal(true)
+        }
+      }}
       onShowMetaMaskPopup={async () => {
         const currentProvider = await window.api.getConnectedProvider()
         if (currentProvider === 'MetaMaskExtension') {

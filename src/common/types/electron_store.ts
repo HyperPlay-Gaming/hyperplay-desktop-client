@@ -108,6 +108,9 @@ export interface StoreStructure {
     subscribed: boolean
     skipped: boolean
   }
+  npsStore: {
+    lastClientVersionNpsSubmitted: string
+  }
 }
 
 export type StoreOptions<T extends Record<string, unknown>> = Store.Options<T>

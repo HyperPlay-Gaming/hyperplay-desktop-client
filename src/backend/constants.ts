@@ -35,6 +35,11 @@ const fontsStore = new TypeCheckedStoreBackend('fontsStore', {
   name: 'fonts'
 })
 
+const npsStore = new TypeCheckedStoreBackend('npsStore', {
+  cwd: 'store',
+  name: 'nps'
+})
+
 const isMac = platform() === 'darwin'
 const isWindows = platform() === 'win32'
 const isLinux = platform() === 'linux'
@@ -300,5 +305,6 @@ export {
   vulkanHelperBin,
   cachedUbisoftInstallerPath,
   ipdtManifestsPath,
-  ipdtPatcher
+  ipdtPatcher,
+  npsStore
 }

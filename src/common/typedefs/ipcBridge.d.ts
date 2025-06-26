@@ -102,6 +102,7 @@ interface HyperPlaySyncIPCFunctions {
   authDisconnected: () => void
   otp: (otp: string) => void
   navigate: (route: string) => void
+  npsSubmitted: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -343,6 +344,7 @@ interface HyperPlayAsyncIPCFunctions {
       walletAddress: string
     }
   } | null>
+  shouldPromptNps: () => Promise<boolean>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
