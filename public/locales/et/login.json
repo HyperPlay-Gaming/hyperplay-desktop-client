@@ -1,16 +1,16 @@
 {
     "button": {
-        "login": "Logige sisse",
-        "loading": "Laadimise protsess",
-        "error": "Viga, proovi teist koodi."
+        "login": "Logi sisse",
+        "loading": "Laadime andmeid",
+        "error": "Viga, proovi teist koodi"
     },
     "message": {
-        "part1": "Sisse logimiseks ja oma mängude installimiseks peate esmalt järgima järgmisi samme:  \nSisse logimiseks ja mängude installimiseks järgige esmalt alltoodud samme:  \nMängude paigaldamiseks ja sisse logimiseks peate kõigepealt täitma järgmised sammud:",
+        "part1": "Sisselogimiseks ja oma mängude paigaldaamiseks pead esmalt järgima järgmisi samme:",
         "part2": "Ava menüü",
         "part3": "Epic Store asub siin",
         "part4": ", logige oma kontole sisse ja salvestage oma",
         "part5": "autoriseerimiskoodi teabe number",
-        "part6": "Kleepige  \nKopeerige  \nKopeerige see",
+        "part6": "Aseta oma",
         "part7": "autoriseerimise koodi numbrikood",
         "part8": "sisendikastis allpool ja vajutage nuppu sisselogimiseks."
     },
@@ -18,5 +18,5 @@
         "error": "Viga",
         "loading": "Mängude loendi laadimine, palun oodake"
     },
-    "welcome": "Tere tulemast!  \nTere!  \nTere tulemast meie maailma!"
+    "welcome": "Tere tulemast!"
 }
