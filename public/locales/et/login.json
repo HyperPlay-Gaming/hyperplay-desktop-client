@@ -5,14 +5,14 @@
         "error": "Viga, proovi teist koodi"
     },
     "message": {
-        "part1": "Sisselogimiseks ja oma mängude paigaldaamiseks pead esmalt järgima järgmisi samme:",
+        "part1": "Sisselogimiseks ja oma mängude paigaldamiseks pead esmalt järgima järgmisi samme:",
         "part2": "Ava menüü",
         "part3": "Epic Store asub siin",
-        "part4": ", logige oma kontole sisse ja salvestage oma",
-        "part5": "autoriseerimiskoodi teabe number",
+        "part4": ", logi oma kontole sisse ja salvesta oma",
+        "part5": "autoriseerimiskoodi number",
         "part6": "Aseta oma",
-        "part7": "autoriseerimise koodi numbrikood",
-        "part8": "sisendikastis allpool ja vajutage nuppu sisselogimiseks."
+        "part7": "autoriseerimiskoodi number",
+        "part8": "sisendikastis allpool ja klõpsi sisselogimisnuppu."
     },
     "status": {
         "error": "Viga",
