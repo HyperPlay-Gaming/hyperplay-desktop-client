@@ -399,6 +399,8 @@ export default observer(function GamePage(): React.JSX.Element | null {
       gameInfo.extra?.about?.description ||
       t('generic.noDescription', 'No description available')
 
+    const showSettingsButton = is_installed && !isBrowserGame && !isSteam
+
     return (
       <div className="gameConfigContainer">
         {showStopInstallModal ? (
@@ -439,7 +441,7 @@ export default observer(function GamePage(): React.JSX.Element | null {
             <div className="gameInfo">
               <div className="titleWrapper">
                 <h2 className="title">{title}</h2>
-                {is_installed && !isBrowserGame && (
+                {showSettingsButton && (
                   <a
                     role={'button'}
                     onClick={() =>
@@ -450,36 +452,38 @@ export default observer(function GamePage(): React.JSX.Element | null {
                     <SettingsIcon />
                   </a>
                 )}
-                <div className="game-actions">
-                  <button className="toggle">
-                    <FontAwesomeIcon icon={faEllipsisV} />
-                  </button>
+                {isSteam ? null : (
+                  <div className="game-actions">
+                    <button className="toggle">
+                      <FontAwesomeIcon icon={faEllipsisV} />
+                    </button>
 
-                  <GameSubMenu
-                    appName={appName}
-                    isInstalled={is_installed}
-                    title={title}
-                    storeUrl={
-                      extraInfo?.storeUrl ||
-                      ('store_url' in gameInfo &&
-                      gameInfo.store_url !== undefined
-                        ? gameInfo.store_url
-                        : '')
-                    }
-                    runner={gameInfo.runner}
-                    handleUpdate={async () => updateGame(gameInfo)}
-                    disableUpdate={showProgress}
-                    setShowExtraInfo={setShowExtraInfo}
-                    onShowRequirements={
-                      hasRequirements
-                        ? () => setShowRequirements(true)
-                        : undefined
-                    }
-                    onShowDlcs={
-                      DLCs.length ? () => setShowDlcs(true) : undefined
-                    }
-                  />
-                </div>
+                    <GameSubMenu
+                      appName={appName}
+                      isInstalled={is_installed}
+                      title={title}
+                      storeUrl={
+                        extraInfo?.storeUrl ||
+                        ('store_url' in gameInfo &&
+                        gameInfo.store_url !== undefined
+                          ? gameInfo.store_url
+                          : '')
+                      }
+                      runner={gameInfo.runner}
+                      handleUpdate={async () => updateGame(gameInfo)}
+                      disableUpdate={showProgress}
+                      setShowExtraInfo={setShowExtraInfo}
+                      onShowRequirements={
+                        hasRequirements
+                          ? () => setShowRequirements(true)
+                          : undefined
+                      }
+                      onShowDlcs={
+                        DLCs.length ? () => setShowDlcs(true) : undefined
+                      }
+                    />
+                  </div>
+                )}
               </div>
               <div className="infoWrapper">
                 <div className="developer menu">{developer}</div>
@@ -669,7 +673,7 @@ export default observer(function GamePage(): React.JSX.Element | null {
                   runner={runner}
                 />
               )}
-              {is_installed && (
+              {is_installed && !isSteam && (
                 <span
                   onClick={() => setIsSettingsModalOpen(true, 'log', gameInfo)}
                   className="clickable reportProblem"
