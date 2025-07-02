@@ -9,10 +9,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { observer } from 'mobx-react-lite'
 import { UpdateComponent } from 'frontend/components/UI'
 import SettingsContext from '../../SettingsContext'
-import './index.css'
+import styles from './index.module.scss'
 import { GameInfo } from 'common/types'
 import libraryState from 'frontend/state/libraryState'
-import { faDiscord } from '@fortawesome/free-brands-svg-icons'
+import { AlertCard, Images, Button } from '@hyperplay/ui'
 
 interface LogBoxProps {
   logFileContent: string
@@ -31,30 +31,30 @@ const LogBox: React.FC<LogBoxProps> = ({ logFileContent }) => {
   return (
     <>
       {sliced && (
-        <span className="setting long-log-hint">
+        <span className={styles['long-log-hint']}>
           {t(
             'settings.log.long-log-hint',
             'Log truncated, last 1000 lines are shown!'
           )}
         </span>
       )}
-      <div className="setting log-box">
+      <div className={styles['log-box']}>
         {lines.map((line, key) => {
           if (line.toLowerCase().includes(' err')) {
             return (
-              <p key={key} className="log-error">
+              <p key={key} className={styles['log-error']}>
                 {line}
               </p>
             )
           } else if (line.toLowerCase().includes(' warn')) {
             return (
-              <p key={key} className="log-warning">
+              <p key={key} className={styles['log-warning']}>
                 {line}
               </p>
             )
           } else {
             return (
-              <p key={key} className="log-info">
+              <p key={key} className={styles['log-info']}>
                 {line}
               </p>
             )
@@ -120,29 +120,33 @@ function LogSettings() {
     window.api.showLogFileInFolder(showLogOf)
   }
 
-  const handleDiscordLink = () => {
-    window.api.openDiscordLink()
-  }
-
   return (
     <>
-      <div className="title">
-        {t('setting.log.instructions_title', 'How to report a problem?')}
+      <div className={styles.logSettingsTitle}>
+        {t('setting.logs.title', 'Logs')}
       </div>
-      <p className="report-problem-instructions">
-        {t(
-          'setting.log.instructions-part-01',
-          "If you encounter any issues while using HyperPlay, we have two designated areas to report your issues in our Discord Server. If you're a player, please report any problems by visiting the player-support-forum. If you are a game dev, please report any problems by visiting the dev-support-forum."
-        )}{' '}
-        <br />
-        <br />
-        {t(
-          'setting.log.instructions-part-02',
-          'To help us diagnose and fix the problem as quickly as possible, please provide as much information as possible, including a copy of your logs. Our support team will monitor both channels and do their best to respond to your issue as quickly as possible. Thank you for your patience and understanding while we work to resolve any problems you may encounter.'
-        )}
-      </p>
-      <div className="logs-wrapper">
-        <span className="log-buttongroup">
+      <div className={styles['alert-card-container']}>
+        <AlertCard
+          variant="information"
+          size="large"
+          showClose={false}
+          link={{
+            text: t('setting.log.create-ticket-discord', 'Create a ticket'),
+            onClick: () => {
+              window.api.openDiscordLink()
+            }
+          }}
+          style={{ width: '100%', maxWidth: '1048px' }}
+          icon={<Images.Info />}
+          title={t('setting.log.alert-title', 'Something Not Working?')}
+          message={t(
+            'setting.log.alert-message',
+            "If you encounter any issues while using HyperPlay, please head to our #create-ticket channel on Discord to get support from the team. We'll follow up with you directly via the ticket."
+          )}
+        />
+      </div>
+      <div className={styles['logs-wrapper']}>
+        <span className={styles['log-buttongroup']}>
           {[
             ['HyperPlay', 'hyperplay'],
             ['Epic/Legendary', 'legendary'],
@@ -152,8 +156,8 @@ function LogSettings() {
             return (
               <a
                 key={value}
-                className={`log-buttons ${
-                  showLogOf === value ? 'log-choosen' : ''
+                className={`${styles['log-buttons']} ${
+                  showLogOf === value ? styles['log-choosen'] : ''
                 }`}
                 onClick={() => {
                   setRefreshing(true)
@@ -169,8 +173,8 @@ function LogSettings() {
             return (
               <a
                 key={game.app_name}
-                className={`log-buttons ${
-                  showLogOf === game.app_name ? 'log-choosen' : ''
+                className={`${styles['log-buttons']} ${
+                  showLogOf === game.app_name ? styles['log-choosen'] : ''
                 }`}
                 onClick={() => {
                   setRefreshing(true)
@@ -185,7 +189,7 @@ function LogSettings() {
         </span>
 
         {refreshing ? (
-          <span className="setting log-box">
+          <span className={styles['log-box']}>
             <UpdateComponent inline />
           </span>
         ) : (
@@ -193,64 +197,34 @@ function LogSettings() {
         )}
       </div>
       {logFileExist && (
-        <span className="footerFlex">
-          <a
-            onClick={showLogFileInFolder}
-            title={t('setting.log.show-in-folder', 'Show log file in folder')}
-            className="button is-footer"
-          >
-            <div className="button-icontext-flex">
-              <div className="button-icon-flex">
-                <FontAwesomeIcon icon={faFolderOpen} />
-              </div>
-              <span className="button-icon-text">
-                {t('setting.log.show-in-folder', 'Show log file in folder')}
-              </span>
-            </div>
+        <span className={styles.footerFlex}>
+          <a>
+            <Button
+              type="primary"
+              size="small"
+              onClick={() => {
+                navigator.clipboard.writeText(logFileContent)
+                setCopiedLog(true)
+                setTimeout(() => {
+                  setCopiedLog(false)
+                }, 3000)
+              }}
+            >
+              {copiedLog ? (
+                <FontAwesomeIcon icon={faCheck} />
+              ) : (
+                <FontAwesomeIcon icon={faCopy} />
+              )}
+              {copiedLog
+                ? t('setting.log.copied-to-clipboard', 'Copied!')
+                : t('setting.log.copy-log-clipboard', 'Copy Log to Clipboard')}
+            </Button>
           </a>
-          <a
-            onClick={() => {
-              navigator.clipboard.writeText(logFileContent)
-              setCopiedLog(true)
-              setTimeout(() => {
-                setCopiedLog(false)
-              }, 3000)
-            }}
-            title={t(
-              'setting.log.copy-to-clipboard',
-              'Copy log content to clipboard.'
-            )}
-            className="buttoncopy"
-          >
-            <div className="button-icontext-flex">
-              <div className="button-icon-flex">
-                {copiedLog ? (
-                  <FontAwesomeIcon icon={faCheck} />
-                ) : (
-                  <FontAwesomeIcon icon={faCopy} />
-                )}
-              </div>
-              <span className="button-icon-text">
-                {t(
-                  'setting.log.copy-to-clipboard',
-                  'Copy log content to clipboard.'
-                )}
-              </span>
-            </div>
-          </a>
-          <a
-            onClick={handleDiscordLink}
-            title={t('setting.log.join-hyperplay-discord', 'Join our Discord')}
-            className="button is-footer"
-          >
-            <div className="button-icontext-flex">
-              <div className="button-icon-flex">
-                <FontAwesomeIcon icon={faDiscord} />
-              </div>
-              <span className="button-icon-text">
-                {t('setting.log.join-hyperplay-discord', 'Join our Discord')}
-              </span>
-            </div>
+          <a>
+            <Button type="secondary" size="small" onClick={showLogFileInFolder}>
+              <FontAwesomeIcon icon={faFolderOpen} />
+              {t('setting.log.show-log-folder', 'Show Log File in Folder')}
+            </Button>
           </a>
         </span>
       )}

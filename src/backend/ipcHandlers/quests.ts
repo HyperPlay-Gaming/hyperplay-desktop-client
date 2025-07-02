@@ -250,3 +250,9 @@ ipcMain.handle('getListingById', async (e, projectId) => {
 
   return response.json()
 })
+
+ipcMain.handle('getExistingSignature', async (e, questId, rewardId) => {
+  const url = `${DEV_PORTAL_URL}/api/v1/quests/${questId}/rewards/${rewardId}/pending-signature`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.pendingSignature
+})
