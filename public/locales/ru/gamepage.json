@@ -255,5 +255,10 @@
         "getInstallInfo": {
             "error": "Пожалуйста, свяжитесь с HyperPlay Team с этим сообщением: {{error}} - {{context}}."
         }
+    },
+    "alert": {
+        "install": {
+            "siwe-action": "Купить NFT"
+        }
     }
 }
