@@ -473,18 +473,23 @@
                         "useRecoveryPhraseInfo": "This feature is recommended for advanced users and developers. Your secret recovery phrase is stored locally in MetaMask and never shared with HyperPlay."
                     },
                     "info": {
-                        "createWalletCTA": "Create a wallet",
-                        "createWalletDescription": "Click in “Create a wallet” below if you do not have a wallet or want to create a new one:",
+                        "createWalletLink": "Get MetaMask",
                         "digitalAssets": {
-                            "details": "Wallets are used to send, receive, store, and display digital assets like tokens and NFTs.",
-                            "title": "A Home for your Digital Assets"
+                            "smallTitle": "Connect your wallet to activate powerful features:"
                         },
-                        "login": {
-                            "details": "An alternative to creating new accounts and passwords on every website, just connect your wallet instead.",
-                            "title": "A New Way to Log In"
+                        "list": {
+                            "bullet1": "Earn and claim quest rewards",
+                            "bullet2": "Track your in-game progress",
+                            "bullet3": "Access in-game transactions and marketplaces",
+                            "bullet4": "Buy, swap, and send tokens"
                         },
-                        "skip": "Skip for now",
-                        "title": "What is a wallet?"
+                        "noWallet": "Don't have a wallet?"
+                    },
+                    "metamask": {
+                        "issues": "Having issues? Make sure MetaMask is up to date."
+                    },
+                    "newInfo": {
+                        "title": "Don't Just Play-Get Rewarded"
                     },
                     "scan": {
                         "details": "Create an encrypted communication channel. Your keys will never be shared with HyperPlay.",
