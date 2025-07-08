@@ -18,3 +18,4 @@ export { ReactComponent as PhoneCompletedIcon } from './phone_completed_icon.svg
 export { ReactComponent as PhoneErrorIcon } from './phone_error_icon.svg'
 export { ReactComponent as PhoneWaitingConfimationSpinner } from './phone_waiting_confirmation.svg'
 export { ReactComponent as WarningIcon } from './warning_icon.svg'
+export { ReactComponent as ConnectWallet } from './ConnectWallet.svg'
