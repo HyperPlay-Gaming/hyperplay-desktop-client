@@ -6,6 +6,7 @@ import { ConnectWallet, WarningIcon } from 'frontend/assets/hyperplay'
 import { t } from 'i18next'
 
 interface WalletInfoScreenProps {
+  skipClicked: () => void
   createWalletClicked: () => void
   mmInitialized: boolean
 }
