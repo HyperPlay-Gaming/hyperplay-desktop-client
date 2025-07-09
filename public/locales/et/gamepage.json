@@ -251,7 +251,9 @@
     "alert": {
         "install": {
             "siwe-action": "Osta NFT",
-            "siwe-message": "Jätkamiseks osta NFT või taga, et ta on rahataskus olemas"
+            "siwe-message": "Jätkamiseks osta NFT või taga, et ta on rahataskus olemas.",
+            "tdp-title": "Kolmanda osapoole allalaadija",
+            "tpd-message-part1": "Kolmanda osapoole allalaadija "
         }
     }
 }
