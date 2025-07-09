@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.29.1",
+  "version": "0.30.0",
   "private": true,
   "main": "build/main/main.js",
   "homepage": "./",
@@ -72,7 +72,7 @@
     "@hyperplay/chains": "^0.6.1",
     "@hyperplay/check-disk-space": "^3.5.2",
     "@hyperplay/quests-ui": "^0.4.0",
-    "@hyperplay/ui": "^1.30.8",
+    "@hyperplay/ui": "^1.30.14",
     "@hyperplay/utils": "^0.3.14",
     "@mantine/carousel": "^7.12.0",
     "@mantine/core": "^7.12.0",
