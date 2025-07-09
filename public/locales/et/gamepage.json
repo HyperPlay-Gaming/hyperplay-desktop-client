@@ -37,7 +37,7 @@
             "message": "Kas soovid selle mängu eemaldada?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
             "title": "Eemalda",
-            "dlc": "Kas soovid selle rakenduse eemaldada?",
+            "dlc": "Kas soovid selle DLC eemaldada?",
             "prefix_warning": "Selle mängu Wine'i eesliide on vaikimisi eesliide. Kui soovid selle tõeliselt kustutada, pead seda tegema käsitsi."
         },
         "update": {
@@ -47,7 +47,7 @@
         },
         "wineprefix": "Vali Wine eesliite kaust",
         "yes": "JAH",
-        "dont-show-again": "Ära näita enam",
+        "dont-show-again": "Ära näita enam uuesti",
         "ok": "Sobib",
         "aware": "Olen teadlik",
         "compability": {
@@ -77,7 +77,7 @@
         "remove_from_favourites": "Eemalda lemmikutest",
         "remove_from_recent": "Eemalda hiljutiste alt",
         "run-exe-first": "Esmalt käivita paigaldaja",
-        "running-setup": "Käivitan seadistust",
+        "running-setup": "Seadistan",
         "sideload": {
             "edit": "Muuda rakendust/mängu"
         },
@@ -100,8 +100,8 @@
     "game": {
         "downloadSize": "Allalaadimise suurus",
         "firstPlayed": "Esimest korda mängitud",
-        "getting-download-size": "Laadimise suuruse määramine",
-        "getting-install-size": "Installeerimise suuruse määramine",
+        "getting-download-size": "Tuvastan allalaadimise suurust",
+        "getting-install-size": "Tuvastan paigaldaamise suurust",
         "installSize": "Paigaldamise suurus",
         "language": "Keel",
         "lastPlayed": "Viimati mängitud",
@@ -109,7 +109,7 @@
         "platform": "Valige paigaldatava platvormi versioon",
         "requirements": "Süsteeminõuded",
         "totalPlayed": "Mängitud aeg",
-        "selectChannelName": "Vali kanal nime",
+        "selectChannelName": "Vali kanali nimi",
         "dlcs": "DLC-d"
     },
     "gamecard": {
@@ -144,7 +144,7 @@
         "space-after-install": "Pärast paigaldamist",
         "wineprefix": "WinePrefiks",
         "wineversion": "Wine'i versioon",
-        "compatibility-warning": "See Windowsi mäng töötab ühilduvuse kihiga. Teie kogemus võib erineda."
+        "compatibility-warning": "See Windowsi mäng töötab ühilduvuskihiga. Sinu kasutuskogemus võib olla erinev."
     },
     "label": {
         "game": {
@@ -153,7 +153,7 @@
         "playing": {
             "start": "Mängi",
             "stop": "Mängib (Peata)",
-            "update": "Ajakohastamine"
+            "update": "Uuenda"
         },
         "saves": {
             "syncing": "Salvestuste sünkroonimine"
@@ -215,17 +215,17 @@
         "totalDownloaded": "Allalaaditud kokku",
         "uninstalling": "Eemaldan paigaldust",
         "updating": "Mängu uuendamine",
-        "downloading": "Allalaadimine",
+        "downloading": "Allalaadimisel",
         "syncingSaves": "Salvestuste sünkroonimine",
         "paused": "Peatatud",
         "patching": "Failide plaastrite rakendamine ",
-        "moving-files": "Faili '{{file}}' liigutamine: {{percent}} ",
+        "moving-files": "Fail on teisaldamisel '{{file}}' liigutamine: {{percent}} ",
         "extracting": {
-            "cancel": "Tühista ekstraktsioon",
-            "progress": "Ekstraktsioon"
+            "cancel": "Tühista lahtipakkimine",
+            "progress": "Lahtipakkimisel"
         },
-        "gog-goodie": "See mäng ei tundu olevat installitav. Kontrolli allalaaditavat sisu aadressil https://gog.com/account",
-        "goodie": "Ei ole installitav",
+        "gog-goodie": "See mäng ei tundu olevat paigaldatav. Kontrolli allalaaditavat sisu aadressil https://gog.com/account",
+        "goodie": "Ei ole paigaldatav",
         "distributables": "Jaotatavate installimine",
         "playing": "Mängimine",
         "preparing": "Laadimise ettevalmistamine, palun oodake"
@@ -247,7 +247,7 @@
     },
     "method": {
         "getInstallInfo": {
-            "error": "Palun võtke ühendust HyperPlay meeskonnaga selle sõnumiga: {{error}} - {{context}}."
+            "error": "Palun võta ühendust HyperPlay meeskonnaga selle sõnumiga: {{error}} - {{context}}."
         }
     },
     "alert": {
