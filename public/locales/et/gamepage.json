@@ -247,5 +247,11 @@
         "getInstallInfo": {
             "error": "Palun võtke ühendust HyperPlay meeskonnaga selle sõnumiga: {{error}} - {{context}}."
         }
+    },
+    "alert": {
+        "install": {
+            "siwe-action": "Osta NFT",
+            "siwe-message": "Jätkamiseks osta NFT või taga, et ta on rahataskus olemas"
+        }
     }
 }
