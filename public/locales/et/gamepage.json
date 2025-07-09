@@ -216,10 +216,10 @@
         "uninstalling": "Eemaldan paigaldust",
         "updating": "Mängu uuendamine",
         "downloading": "Allalaadimisel",
-        "syncingSaves": "Salvestuste sünkroonimine",
+        "syncingSaves": "Sünkroonin salvestusi",
         "paused": "Peatatud",
-        "patching": "Failide plaastrite rakendamine ",
-        "moving-files": "Fail on teisaldamisel '{{file}}' liigutamine: {{percent}} ",
+        "patching": "Failid on paikamisel ",
+        "moving-files": "„{{file}}“ fail on teisaldamisel : {{percent}} ",
         "extracting": {
             "cancel": "Tühista lahtipakkimine",
             "progress": "Lahtipakkimisel"
@@ -228,7 +228,7 @@
         "goodie": "Ei ole paigaldatav",
         "distributables": "Jaotatavate installimine",
         "playing": "Mängimine",
-        "preparing": "Laadimise ettevalmistamine, palun oodake"
+        "preparing": "Valmistan allalaadimist ette, palun oota"
     },
     "submenu": {
         "addShortcut": "Lisa otsetee",
