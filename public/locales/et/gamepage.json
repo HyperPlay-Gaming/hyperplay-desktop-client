@@ -89,7 +89,8 @@
         "remove_from_library": "Eemalda",
         "unfavorites": "Eemalda lemmik",
         "add_to_library": "Lisa kogusse",
-        "install-downloader": "Laadi paigaldaja alla"
+        "install-downloader": "Laadi paigaldaja alla",
+        "sign-and-install": "Allkirjasta ja paigalda"
     },
     "cloud_save_unsupported": "Mitte toetatud",
     "disabled": "Keelatud",
@@ -258,5 +259,19 @@
             "tpd-message-part1": "Kolmanda osapoole allalaadija pole läbinud HyperPlay turvakontrolli ",
             "tpd-message-part2": "Jätka vaid siis, kui usaldad seda mängutootjat."
         }
+    },
+    "downloadToast": {
+        "cancel": "Katkesta",
+        "of": "/",
+        "pause": "Peata",
+        "resume": "Jätka"
+    },
+    "tooltip": {
+        "installed_from_epic": "Paigalduse allikas: Epic Store",
+        "installed_from_gog": "Paigalduse allikas: GOG Store",
+        "installed_from_hyperplay": "Paigalduse allikas: HyperPlay Store",
+        "will_install_from_epic": "Saab olema paigaldatud allikast: Epic Store",
+        "will_install_from_gog": "Saab olema paigaldatud allikast: GOG Store",
+        "will_install_from_hyperplay": "Saab olema paigaldatud allikast: HyperPlay Store"
     }
 }
