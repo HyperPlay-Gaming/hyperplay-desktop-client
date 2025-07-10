@@ -1,8 +1,11 @@
 import React from 'react'
 import walletState from 'frontend/state/WalletState'
-import { AchievementCard, AchievementSummaryTable } from '@hyperplay/ui'
+import {
+  AchievementCardProps,
+  AchievementCard,
+  AchievementSummaryTable
+} from '@hyperplay/ui'
 import { NavLink } from 'react-router-dom'
-import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import AchievementState, {
@@ -80,7 +83,7 @@ export default observer(function Achievements(): React.JSX.Element {
                       mintedAchievementsCount={game.mintedAchievementCount}
                       totalAchievementsCount={game.totalAchievementCount}
                       isNewAchievement={game.isNewAchievement}
-                      state={state as StatusIconState}
+                      state={state as AchievementCardProps['state']}
                       ctaProps={{
                         onClick: (e) => {
                           e.preventDefault()
