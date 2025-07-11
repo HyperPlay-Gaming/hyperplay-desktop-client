@@ -13,6 +13,7 @@ import '@mantine/core/styles.css'
 // import HyperPlay styles after mantine to override their defaults with our design system
 import '@hyperplay/ui/style.css'
 import './index.scss'
+import './fonts.css'
 import Loading from './screens/Loading'
 import GlobalState from './state/GlobalState'
 import { initShortcuts } from './helpers/shortcuts'
