@@ -1,4 +1,4 @@
-@import '@hyperplay/ui/utilities/_variables.scss';
+@use '@hyperplay/ui/utilities/_variables.scss' as *;
 
 .root {
   display: grid;
