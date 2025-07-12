@@ -1,5 +1,7 @@
 @use './styles/colors';
 @use './styles/buttons';
+@use '@hyperplay/ui/styles' as *;
+
 :root {
   @include colors.colorSystem;
 

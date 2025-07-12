@@ -6,10 +6,10 @@ import {
   PhoneWaitingConfimationSpinner
 } from 'frontend/assets/hyperplay'
 import Loading from './Loading'
-import { statusType } from '@hyperplay/ui/dist/components/TransactionToasts'
+import { TransactionStatus } from '@hyperplay/ui'
 
 interface PhoneIconProps {
-  status: statusType
+  status: TransactionStatus
 }
 
 const PhoneIcon = ({ status }: PhoneIconProps) => {
