@@ -54,9 +54,8 @@
 }
 
 .description {
-  margin-top: var(--space-md);
-  margin-left: var(--space-xl);
-  margin-bottom: var(--space-2lg);
+  align-self: center;
+  margin: var(--space-xs) 0 var(--space-md) var(--space-lg);
   color: var(--text-weak);
 }
 
@@ -65,14 +64,13 @@
   align-items: center;
   justify-content: center;
   color: var(--text-warning);
-  margin-top: var(--space-lg);
 
   & > div {
     gap: 0;
   }
 
   & > div > div {
-    margin-left: var(--space-2xs);
+    margin-left: var(--space-xs-fixed);
     justify-self: center;
   }
 }
@@ -83,19 +81,4 @@
   path {
     fill: var(--icon-warning);
   }
-}
-
-.noWalletText {
-  color: var(--text-weak);
-  margin: var(--space-lg) 0 var(--space-lg) var(--space-xl);
-
-  & > a {
-    padding-left: 0 !important;
-  }
-}
-
-.createWalletLink {
-  display: inline;
-  margin-left: var(--space-2xs);
-  color: var(--text-brand) !important;
 }

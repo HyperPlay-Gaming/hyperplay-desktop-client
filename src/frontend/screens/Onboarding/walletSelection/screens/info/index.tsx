@@ -5,12 +5,6 @@ import { ConnectWallet, WarningIcon } from 'frontend/assets/hyperplay'
 
 import { t } from 'i18next'
 
-interface WalletInfoScreenProps {
-  skipClicked: () => void
-  createWalletClicked: () => void
-  mmInitialized: boolean
-}
-
 interface InfoTextProps {
   icon: React.ReactNode
   title: string
@@ -22,7 +16,7 @@ const InfoText = function ({ icon, title, details }: InfoTextProps) {
     <div className={WalletInfoStyles.walletInfoContainer}>
       <div>{icon}</div>
       <div className={WalletInfoStyles.walletTextContainer}>
-        <div className="menu">{title}</div>
+        <div className="caption">{title}</div>
         <div className={`caption-sm ${WalletInfoStyles.infoTextCaption}`}>
           {details}
         </div>
@@ -31,7 +25,7 @@ const InfoText = function ({ icon, title, details }: InfoTextProps) {
   )
 }
 
-const WalletInfoScreen = (props: WalletInfoScreenProps) => {
+const WalletInfoScreen = () => {
   return (
     <>
       <div className={WalletInfoStyles.walletInfoScreen}>
@@ -53,7 +47,6 @@ const WalletInfoScreen = (props: WalletInfoScreenProps) => {
         </div>
         <div className={`body-sm ${WalletInfoStyles.description}`}>
           <li>
-            {' '}
             {t(
               'hyperplay.onboarding.walletSelection.screens.info.list.bullet1',
               `Earn and claim quest rewards`
@@ -78,26 +71,7 @@ const WalletInfoScreen = (props: WalletInfoScreenProps) => {
             </li>
           </li>
         </div>
-        <div>
-          <span className={WalletInfoStyles.noWalletText}>
-            {t(
-              'hyperplay.onboarding.walletSelection.screens.info.noWallet',
-              `Don't have a wallet?`
-            )}
-          </span>
-          <a
-            rel="noreferrer"
-            href="https://metamask.io/"
-            target="_blank"
-            className={WalletInfoStyles.createWalletLink}
-            onClick={props.createWalletClicked}
-          >
-            {t(
-              'hyperplay.onboarding.walletSelection.screens.info.createWalletLink',
-              `Get MetaMask`
-            )}
-          </a>
-        </div>
+
         <div className={`eyebrow-sm ${WalletInfoStyles.walletIssues}`}>
           <InfoText
             icon={<WarningIcon className={WalletInfoStyles.warningIcon} />}
