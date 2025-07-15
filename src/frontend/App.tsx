@@ -41,7 +41,6 @@ import { QuestsPage } from './screens/Quests'
 import { NavigateListener } from './NavigateListener'
 import G7Webview from './screens/G7Webview'
 import CardPrivacyPolicy from './screens/Onboarding/analytics/CardPrivacyPolicy'
-import { Support } from './components/UI/Support'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
@@ -51,11 +50,15 @@ function App() {
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
+      <script
+        async
+        id="ze-snippet"
+        src="https://static.zdassets.com/ekr/snippet.js?key=ec50f0e8-03ba-4809-80f1-a9a4ef5848fc"
+      ></script>
       <HashRouter>
         <OfflineMessage />
         <TopNavBar />
         <Sidebar />
-        <Support />
         <main className="content">
           <CardPrivacyPolicy />
           <QaAuthHandler />

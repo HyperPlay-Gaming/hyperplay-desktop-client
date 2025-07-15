@@ -12,6 +12,7 @@ import '@mantine/core/styles.css'
 // keep @hyperplay/ui/index.css before index.scss until after frontend design rework
 // import HyperPlay styles after mantine to override their defaults with our design system
 import '@hyperplay/ui/style.css'
+import '@hyperplay/ui/fonts.css'
 import './index.scss'
 import Loading from './screens/Loading'
 import GlobalState from './state/GlobalState'
