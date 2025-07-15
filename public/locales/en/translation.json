@@ -473,7 +473,6 @@
                         "useRecoveryPhraseInfo": "This feature is recommended for advanced users and developers. Your secret recovery phrase is stored locally in MetaMask and never shared with HyperPlay."
                     },
                     "info": {
-                        "createWalletLink": "Get MetaMask",
                         "digitalAssets": {
                             "smallTitle": "Connect your wallet to activate powerful features:"
                         },
@@ -482,8 +481,7 @@
                             "bullet2": "Track your in-game progress",
                             "bullet3": "Access in-game transactions and marketplaces",
                             "bullet4": "Buy, swap, and send tokens"
-                        },
-                        "noWallet": "Don't have a wallet?"
+                        }
                     },
                     "metamask": {
                         "issues": "Having issues? Make sure MetaMask is up to date."
