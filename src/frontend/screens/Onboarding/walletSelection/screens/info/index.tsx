@@ -5,6 +5,12 @@ import { ConnectWallet, WarningIcon } from 'frontend/assets/hyperplay'
 
 import { t } from 'i18next'
 
+interface WalletInfoScreenProps {
+  skipClicked: () => void
+  createWalletClicked: () => void
+  mmInitialized: boolean
+}
+
 interface InfoTextProps {
   icon: React.ReactNode
   title: string
@@ -25,7 +31,8 @@ const InfoText = function ({ icon, title, details }: InfoTextProps) {
   )
 }
 
-const WalletInfoScreen = () => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const WalletInfoScreen = (props: WalletInfoScreenProps) => {
   return (
     <>
       <div className={WalletInfoStyles.walletInfoScreen}>
