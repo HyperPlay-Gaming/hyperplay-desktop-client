@@ -66,7 +66,7 @@ const ScanScreen = (props: ScanScreenProps) => {
           {t('hyperplay.otp', 'One Time Passcode')}: {oneTimePasscode}
         </div>
       ) : null}
-      <div className={`body-sm ${ScanScreenStyles.walletWarning}`}>
+      <div className={`caption ${ScanScreenStyles.walletWarning}`}>
         <WarningIcon height={15} fill={'var(--color-status-alert)'} />
         <div>
           {t(
