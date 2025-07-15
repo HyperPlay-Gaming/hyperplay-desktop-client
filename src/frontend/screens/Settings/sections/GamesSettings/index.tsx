@@ -5,6 +5,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   AlternativeExe,
+  AdvertiseAvxForRosetta,
   AutoDXVK,
   AutoDXVKNVAPI,
   AutoVKD3D,
@@ -120,6 +121,7 @@ export default function GamesSettings() {
             {!isCrossover && (
               <>
                 <AutoDXVK />
+                <AdvertiseAvxForRosetta />
                 {isLinux && (
                   <>
                     <AutoDXVKNVAPI />
