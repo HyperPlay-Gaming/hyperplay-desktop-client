@@ -5,7 +5,9 @@
         "content_font_family_no_default": "Sisu fondi perede valik (vaikimisi: ",
         "fonts": "Tähtede stiilid",
         "title": "Saadavus",
-        "zoom": "Suumi välja"
+        "zoom": "Suumi välja",
+        "refreshFonts": "Laadi kirjatüübid uuesti",
+        "refreshingFonts": "Laadin kirjatüüpe uuesti..."
     },
     "add_game": "Mängu juurde lisamine",
     "All": "Iga",
@@ -67,7 +69,21 @@
             },
             "update": {
                 "title": "Viga uuenduse tegemisel",
-                "message": "Uuendamisega tekkis probleem! Palun desinstallige ja installige HyperPlay käsitsi."
+                "message": "Uuendamisega tekkis probleem! Palun desinstallige ja installige HyperPlay käsitsi.",
+                "addressUnreachable": "Aadress pole leitav. Palun kontrolli internetiühenduse toimimist.",
+                "connectionAborted": "Ühendus katkes. Palun kontrolli internetiühenduse toimimist.",
+                "connectionClosed": "Ühendus on suletud. Palun kontrolli internetiühenduse toimimist.",
+                "connectionRefused": "Keeldumine ühendusest. Palun kontrolli internetiühenduse toimimist.",
+                "connectionReset": "Ühendus on lähtestatud. Palun kontrolli internetiühenduse toimimist.",
+                "connectionTimedOut": "Ühendus aegus. Palun kontrolli internetiühenduse toimimist.",
+                "emptyResponse": "Päringu vastus on tühi. Palun kontrolli internetiühenduse toimimist.",
+                "failed": "Allalaadimine ei õnnestunud. Palun kontrolli internetiühenduse toimimist.",
+                "http2ServerRefusedStream": "HTTP2 server keeldus andmevoo edastamisest. Palun kontrolli internetiühenduse toimimist.",
+                "internetDisconnected": "Internetiühendus on katkestatud. Palun kontrolli internetiühenduse toimimist.",
+                "nameNotResolved": "Nimelahendus ei toimi. Palun kontrolli internetiühenduse toimimist.",
+                "networkAccessDenied": "Ligipääs võrgule on keelatud. Palun kontrolli internetiühenduse toimimist.",
+                "networkChanged": "Võrguühendus on muutunud. Palun kontrolli internetiühenduse toimimist.",
+                "proxyConnectionFailed": "Ei õnnestu luua ühendust proksiserveriga. Palun kontrolli internetiühenduse toimimist."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -161,7 +177,7 @@
                 "message-gptk": "Et saaksite käivitada mänge Apple'i mängude portimise tööriistaga, peate oma macOS-i versiooni uuendama 14-le (Sonoma) või kõrgemale. {{newline}} Leidsime teie süsteemist Wine'i, kas soovite jätkata käivitamist kasutades {{foundWine}} ?",
                 "title-gptk": "Mängude Portimise Tööriist ei ole ühilduv ",
                 "message": "Me ei leidnud valitud veini versiooni selle pealkirja ({{selectedWine}}) käivitamiseks. {{newline}} Me leidsime teise, kas soovite jätkata käivitamist kasutades {{foundWine}} ?",
-                "title": "Wine'i ei leitud!"
+                "title": "Wine'i ei leidu!"
             },
             "rosetta": {
                 "title": "Rosetta ei leitud",
@@ -802,7 +818,7 @@
                         "getMetamask": "Hangi MetaMask",
                         "title": "Skaneeri QR koodiga ",
                         "updateWarning": "Kas on probleeme? Veenduge, et MetaMask oleks ajakohane.",
-                        "details": "Loo krüpteeritud suhtluskanal. Teie võtmeid ei jagata kunagi HyperPlay'ga."
+                        "details": "Loo krüptitud suhtluskanal. Sinu krüptovõtmeid ei jagata kunagi HyperPlay'ga."
                     },
                     "info": {
                         "createWalletCTA": "Loo rahakott",
@@ -820,7 +836,8 @@
                     }
                 },
                 "pleaseConnect": "Palun ühendage oma rahakott või laadige alla Metamaski mobiilirakendus, et alustada:",
-                "title": "Rahakoti ühendused"
+                "title": "Rahakoti ühendused",
+                "walletConnectSubtext": "Paindlikuim variant. Vali enam kui 400 rahatasku seast."
             },
             "connectionCanceled": {
                 "title": "Ühendus tühistatud!",
@@ -840,7 +857,7 @@
                     "bulletPointTwo": "Teenige tokeneid, NFT-sid ja off-chain auhindu, täites ülesandeid",
                     "lastParagraph": "Praegu beetaversioonis, hindame kõrgelt teie tagasisidet ja  \n            julgustame teid teatama mistahes probleemidest või ettepanekutest meie",
                     "paragraphOne": "HyperPlay's ehitame järgmise põlvkonna mängupoodi  \n            mängimise tuleviku jaoks.",
-                    "paragraphThr": "Viige oma rahakott, tokenid ja varad sujuvalt igasse mängu, samal ajal kui pääsete juurde  \n           ulatuslikele Epic Store'i, GOG-i ja meie enda HyperPlay poe raamatukogudele - kõik ühes kohas.",
+                    "paragraphThr": "Too oma rahatasku, tokenid ja varad sujuvalt igasse mängu, samal ajal kui pääsed juurde  \n           ulatuslikele Epic Store'i, GOG-i ja meie enda HyperPlay poe kogudele - kõik ühes kohas.",
                     "TitleList": "HyperPlay'ga saad:"
                 },
                 "title": "Tere tulemast HyperPlay varajasse juurdepääsu!",
@@ -926,7 +943,8 @@
         "publicAlpha": "Avalik alfa",
         "linkSteamAccountTitle": "Seosta Steam'i konto",
         "compatibilityLayer": "Ühilduvuse kiht (Beta)",
-        "discordAppLink": "Discordi kogukond."
+        "discordAppLink": "Discordi kogukond.",
+        "swapConnectedWallet": "Vaheta ühendatud rahataskut"
     },
     "gameRelease": {
         "beta": "Beeta test",
@@ -1004,7 +1022,8 @@
         "questAvailable": "Küsimus saadaval!",
         "questComplete": "Ülesanne täidetud!",
         "rewardClaimed": "Nõude täitmine õnnestus",
-        "toClaimReward": "oma auhinna nõudmiseks."
+        "toClaimReward": "oma auhinna nõudmiseks.",
+        "existingSignatureErrorTitle": "Vale rahatasku. Vaheta siia: {{address}}"
     },
     "accounts": "Kontod",
     "ALL": "Igaühe",
@@ -1127,7 +1146,7 @@
             "portfolio": "Portfell",
             "sell": "Müü"
         },
-        "WALLET_DISCONNECTED": "Sul ei ole HyperPlay'ga ühendatud rahakotti."
+        "WALLET_DISCONNECTED": "Sul ei ole HyperPlay'ga ühendatud rahataskut."
     },
     "importGameErrorMessageExecutable": "Mängu käivitatavat faili ei leitud, mängu importimine ei ole võimalik",
     "steam-install": {
@@ -1204,7 +1223,7 @@
     "Recommended specs for a better experience": "Soovitatavad spetsifikatsioonid parema kogemuse jaoks",
     "Cancel Installation": "Tühista installimine",
     "wallet": {
-        "unsupported": "Toetamata rahakoti ühendus",
+        "unsupported": "Toetamata rahatasku ühendus",
         "portfolio": {
             "onlyExtension": "MetaMaski portfell on saadaval ainult MetaMaskiga ühendatuna."
         }
@@ -1222,5 +1241,36 @@
     "macOS 14": {
         "0 or above": "macOS 14.0 või uuem"
     },
-    "Please Wait": "Palun oota"
+    "Please Wait": "Palun oota",
+    "gameplayWallet": {
+        "action": {
+            "set": "Määra aktiivseks"
+        },
+        "active": {
+            "title": "Aktiivne rahatasku"
+        },
+        "connected": {
+            "title": "Ühendatud rahatasku"
+        },
+        "detected": {
+            "title": "Rahatasku on ühendatud"
+        },
+        "error": {
+            "alreadyLinked": {
+                "message": "See rahatasku on seotud teise HyperPlay kasutajakontoga. Proovi mõnda muud rahataskut või logi sisse teise kasutajakontoga.",
+                "title": "Rahatasku link on juba olemas"
+            },
+            "message": "Palun proovi veel üks kord. Kui siis ka ei toimi, siis koosta Discordis kasutajatoe palve.",
+            "title": "Midagi läks valesti"
+        },
+        "new": {
+            "title": "Uus rahatasku on ühendatud"
+        },
+        "noWallet": {
+            "status": "Ühtegi rahataskut pole ühendatud"
+        },
+        "setConnected": {
+            "title": "Ühendatud rahatasku"
+        }
+    }
 }
