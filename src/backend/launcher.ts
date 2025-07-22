@@ -464,6 +464,12 @@ function setupWineEnvVars(
       )
     }
   }
+
+  // Set Rosetta AVX setting for macOS
+  if (isMac && gameSettings.advertiseAvxForRosetta) {
+    ret.ROSETTA_ADVERTISE_AVX = '1'
+  }
+
   return ret
 }
 
