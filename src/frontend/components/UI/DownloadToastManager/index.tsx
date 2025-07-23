@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { DownloadToast, Images, CircularButton } from '@hyperplay/ui'
+import {
+  DownloadToast,
+  Images,
+  CircularButton,
+  DownloadStatus
+} from '@hyperplay/ui'
 import { DMQueueElement } from 'common/types'
 import { DMQueue } from 'frontend/types'
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -7,7 +12,6 @@ import { useTranslation } from 'react-i18next'
 import DownloadToastManagerStyles from './index.module.scss'
 import { launch } from 'frontend/helpers'
 import StopInstallationModal from '../StopInstallationModal'
-import { downloadStatus } from '@hyperplay/ui/dist/components/DownloadToast'
 import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { isNotNative } from 'frontend/helpers/library'
@@ -93,7 +97,7 @@ export default function DownloadToastManager() {
         <CircularButton
           style={{
             backgroundColor: 'var(--color-neutral-700)',
-            padding: 'var(--space-xl)',
+            padding: 'var(--space-lg-fixed)',
             border: '1px solid var(--color-stroke-01)',
             borderRadius: '100%',
             zIndex: 1000
@@ -153,7 +157,7 @@ export default function DownloadToastManager() {
   }
   const installPath = currentElement?.params.path
 
-  function getDownloadStatus(): downloadStatus {
+  function getDownloadStatus(): DownloadStatus {
     if (isPatching) return 'showOnlyCancel'
     if (isExtracting) return 'inExtraction'
     if (DMQueueState.isPaused(appName)) return 'paused'

@@ -50,6 +50,11 @@ function App() {
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
+      <script
+        async
+        id="ze-snippet"
+        src="https://static.zdassets.com/ekr/snippet.js?key=ec50f0e8-03ba-4809-80f1-a9a4ef5848fc"
+      ></script>
       <HashRouter>
         <OfflineMessage />
         <TopNavBar />
