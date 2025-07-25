@@ -20,6 +20,7 @@ import { loadUsers } from './user'
 import { GameInfo, InstallPlatform } from 'common/types'
 import { getGamesdbData } from '../gog/library'
 import { apiInfoCache } from '../gog/electronStores'
+import { GlobalConfig } from 'backend/config'
 
 const library = new Map<string, GameInfo>()
 const installed = new Map<string, SteamInstallInfo>()
@@ -27,6 +28,12 @@ const installed = new Map<string, SteamInstallInfo>()
 export async function getOwnedGames(
   userId: string
 ): Promise<OwnedGame[] | undefined> {
+  if (!GlobalConfig.get().getSettings().enableSteamIntegration) {
+    logDebug('Steam integration is disabled in settings', {
+      prefix: LogPrefix.Steam
+    })
+    return []
+  }
   if (isMac) {
     logWarning('getOwnedGames is not supported on macOS', {
       prefix: LogPrefix.Steam
@@ -54,6 +61,12 @@ const ignoredAppIds = [
 ]
 
 export async function getInstalledGames() {
+  if (!GlobalConfig.get().getSettings().enableSteamIntegration) {
+    logDebug('Steam integration is disabled in settings', {
+      prefix: LogPrefix.Steam
+    })
+    return
+  }
   const steamLibraries = await getSteamLibraries()
   const steamAppsDirs = steamLibraries.map((lib) => path.join(lib, 'steamapps'))
 
@@ -94,6 +107,12 @@ export async function getInstalledGames() {
 }
 
 export async function refresh(): Promise<null> {
+  if (!GlobalConfig.get().getSettings().enableSteamIntegration) {
+    logDebug('Steam integration is disabled in settings', {
+      prefix: LogPrefix.Steam
+    })
+    return null
+  }
   const steamUsers = await loadUsers()
 
   const enabledSteamUsers = steamUsers.reduce((acc, val) => {

@@ -114,6 +114,7 @@ export interface AppSettings extends GameSettings {
   userInfo: UserInfo
   steamId: string
   ldUser: LDUser
+  enableSteamIntegration: boolean
 }
 
 export type LibraryTopSectionOptions =
