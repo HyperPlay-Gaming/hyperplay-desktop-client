@@ -5,7 +5,7 @@ import path from 'node:path'
 import { parse } from '@node-steam/vdf'
 import { existsSync, readFileSync } from 'graceful-fs'
 import { readdir } from 'node:fs/promises'
-import { getSteamLibraries } from 'backend/constants'
+import { getSteamLibraries, isMac } from 'backend/constants'
 import { logDebug, LogPrefix, logWarning } from 'backend/logger/logger'
 import { isOnline } from 'backend/online_monitor'
 import { steamDBBaseURL } from 'backend/shortcuts/nonesteamgame/constants'
@@ -27,6 +27,13 @@ const installed = new Map<string, SteamInstallInfo>()
 export async function getOwnedGames(
   userId: string
 ): Promise<OwnedGame[] | undefined> {
+  if (isMac) {
+    logWarning('getOwnedGames is not supported on macOS', {
+      prefix: LogPrefix.Steam
+    })
+    return []
+  }
+
   const url = new URL(
     'https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?format=json&include_appinfo=true'
   )
