@@ -139,6 +139,7 @@
         "installedPlatform": "Installed Platform",
         "path": "Install Path",
         "size": "Size",
+        "steam-game": "This is a Steam game, for more information check the game page on the Steam App.",
         "syncsaves": "Sync Saves",
         "version": "Version",
         "web3-supported": "Has Web3 features"

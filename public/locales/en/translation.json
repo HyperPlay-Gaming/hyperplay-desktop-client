@@ -950,6 +950,7 @@
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "dxvkfpslimit": "Limit FPS (DX9, 10 and 11)",
         "egs-sync": "Sync with Installed Epic Games",
+        "enable-steam-integration": "Enable Steam Integration (experimental)",
         "enableFSRHack": "Enable FSR Hack (Wine version needs to support it)",
         "eosOverlay": {
             "cancelInstall": "Cancel",
