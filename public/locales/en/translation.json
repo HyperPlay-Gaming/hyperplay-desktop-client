@@ -1130,6 +1130,21 @@
         "logging": "Logging In...",
         "processing": "Processing files, please wait"
     },
+    "steam": {
+        "integration": {
+            "requirements": {
+                "part1": "To ensure this integration works properly and HyperPlay can access your games, you must have",
+                "part2": "Steam installed",
+                "part3": "and be",
+                "part4": "Logged into",
+                "part5": "your account.",
+                "part6": "Additionally, your profile and game details should be set to ",
+                "part7": "Public",
+                "part8": "Steam > Profile > Edit Profile > Privacy Settings",
+                "title": "Steam Integration Requirements"
+            }
+        }
+    },
     "Steam Installation": "",
     "steam-install": {
         "compatibility-layer-not-available": "Compatibility layer not available. Please install one from \"Settings > Wine Manager\" first.",

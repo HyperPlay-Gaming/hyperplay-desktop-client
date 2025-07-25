@@ -75,7 +75,7 @@ export interface ContextType {
 export type DialogModalOptions = {
   showDialog?: boolean
   title?: string
-  message?: string
+  message?: string | React.ReactNode
   buttons?: Array<ButtonOptions>
   type?: DialogType
   onClose?: () => void
