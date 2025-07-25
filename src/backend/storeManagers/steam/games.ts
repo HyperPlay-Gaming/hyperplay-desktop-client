@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
+import { dirname, join } from 'node:path'
+import { GlobalConfig } from 'backend/config'
+import { isWindows, steamLogFile, userHome } from 'backend/constants'
+
 import { getGameInfo as getSteamLibraryGameInfo } from './library'
-import { logError, LogPrefix } from 'backend/logger/logger'
+import { logError, logInfo, LogPrefix, logWarning } from 'backend/logger/logger'
 import {
   GameInfo,
   GameSettings,
@@ -13,6 +18,8 @@ import {
 import { existsSync } from 'graceful-fs'
 import { GOGCloudSavesLocation } from 'common/types/gog'
 import { InstallResult, RemoveArgs } from 'common/types/game_manager'
+import { callRunner, setupEnvVars } from 'backend/launcher'
+import { createAbortController } from 'backend/utils/aborthandler/aborthandler'
 
 export function getGameInfo(appName: string): GameInfo {
   const info = getSteamLibraryGameInfo(appName)
@@ -88,8 +95,8 @@ export async function install(
 }
 
 export function isNative(appName: string): boolean {
-  // not used
-  return false
+  // Steam games are considered native if they run on the Steam client
+  return true
 }
 
 export async function addShortcuts(
@@ -107,8 +114,59 @@ export async function launch(
   appName: string,
   launchArguments?: string
 ): Promise<boolean> {
-  // not used
-  return false
+  const gameInfo = getGameInfo(appName)
+  if (!gameInfo || !gameInfo.is_installed) {
+    logWarning(`Game ${appName} is not installed or does not exist`, {
+      prefix: LogPrefix.Steam
+    })
+    return false
+  }
+
+  const steamBinaryPath = getSteamBinaryPath()
+  if (!existsSync(steamBinaryPath)) {
+    logError('Steam binary not found', { prefix: LogPrefix.Steam })
+    return false
+  }
+
+  const bin = getSteamBinaryPath()
+  const dir = dirname(bin)
+  const commandParts = [bin, '-applaunch', gameInfo.app_name]
+  const gameSettings = await getSettings(appName)
+  const commandEnv = isWindows
+    ? process.env
+    : { ...process.env, ...setupEnvVars(gameSettings) }
+  const options = {
+    env: {
+      ...commandEnv
+    },
+    logMessagePrefix: `Launching ${gameInfo.title}`
+  }
+  const abortController = createAbortController(appName)
+
+  const { error, abort } = await callRunner(
+    [...commandParts],
+    { name: 'steam', logPrefix: LogPrefix.Steam, bin, dir },
+    abortController,
+    {
+      ...options,
+      verboseLogFile: steamLogFile
+    },
+    gameInfo
+  )
+
+  if (error) {
+    logError(`Failed to launch game ${appName}: ${error}`, {
+      prefix: LogPrefix.Steam
+    })
+    return false
+  }
+
+  if (abort) {
+    logWarning(`Game ${appName} launch aborted`, { prefix: LogPrefix.Steam })
+    return false
+  }
+  logInfo(`Game ${appName} launched successfully`, { prefix: LogPrefix.Steam })
+  return true
 }
 
 export async function moveInstall(
@@ -157,4 +215,34 @@ export async function stop(appName: string): Promise<void> {
 
 export async function pause(appName: string): Promise<void> {
   // not used
+}
+
+function getSteamBinaryPath(): string {
+  const { defaultSteamPath } = GlobalConfig.get().getSettings()
+  const steamPath = defaultSteamPath.replaceAll("'", '')
+
+  if (process.platform === 'win32') {
+    return join(steamPath, 'steam.exe')
+  } else if (process.platform === 'darwin') {
+    const steamApp = join('/Applications', 'Steam.app')
+    if (existsSync(steamApp)) {
+      return join(steamApp, 'Contents', 'MacOS', 'steam_osx')
+    }
+  } else {
+    // For Linux it could be on /usr/bin/steam or in the flatpak path from home/.var/app/com.valvesoftware.Steam/.steam/steam
+    const flatpakSteamPath = join(
+      userHome,
+      '.var',
+      'app',
+      'com.valvesoftware.Steam',
+      '.steam',
+      'steam'
+    )
+
+    if (existsSync(flatpakSteamPath)) {
+      return flatpakSteamPath
+    }
+    return join('/usr', 'bin', 'steam')
+  }
+  return ''
 }

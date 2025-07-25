@@ -702,7 +702,7 @@ export default observer(function GamePage(): React.JSX.Element | null {
                   runner={runner}
                 />
               )}
-              {is_installed && !isSteam && (
+              {is_installed && (
                 <span
                   onClick={() => setIsSettingsModalOpen(true, 'log', gameInfo)}
                   className="clickable reportProblem"

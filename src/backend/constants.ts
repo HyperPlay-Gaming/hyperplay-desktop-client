@@ -80,8 +80,13 @@ const cachedUbisoftInstallerPath = join(
 const ipdtPatcher = join(toolsPath, 'ipdt')
 const ipdtManifestsPath = join(appConfigFolder, 'manifests')
 
-const { currentLogFile, lastLogFile, legendaryLogFile, gogdlLogFile } =
-  createNewLogFileAndClearOldOnes()
+const {
+  currentLogFile,
+  lastLogFile,
+  legendaryLogFile,
+  gogdlLogFile,
+  steamLogFile
+} = createNewLogFileAndClearOldOnes()
 
 const gogdlAuthConfig = join(app.getPath('userData'), 'gog_store', 'auth.json')
 const iconDark = fixAsarPath(join(publicDir, 'trayIconDark24x24.png'))
@@ -251,6 +256,7 @@ export {
   lastLogFile,
   legendaryLogFile,
   gogdlLogFile,
+  steamLogFile,
   discordLink,
   twitterLink,
   execOptions,

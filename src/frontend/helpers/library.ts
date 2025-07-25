@@ -153,13 +153,6 @@ const launch = async ({
   showDialogModal,
   isNotNative
 }: LaunchOptions): Promise<{ status: 'done' | 'error' | 'abort' }> => {
-  if (runner === 'steam') {
-    return new Promise((resolve) => {
-      window.api.openExternalUrl(`steam://run/${appName}`)
-      resolve({ status: 'done' })
-    })
-  }
-
   const showCompatibilityWarningDialog: boolean =
     isNotNative &&
     JSON.parse(

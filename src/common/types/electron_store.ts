@@ -39,6 +39,7 @@ export interface StoreStructure {
       lastLogFile: string
       legendaryLogFile: string
       gogdlLogFile: string
+      steamLogFile: string
     }
     'window-props': Electron.Rectangle
     settings: AppSettings
