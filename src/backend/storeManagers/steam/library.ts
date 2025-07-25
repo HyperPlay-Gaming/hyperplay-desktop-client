@@ -34,12 +34,6 @@ export async function getOwnedGames(
     })
     return []
   }
-  if (isMac) {
-    logWarning('getOwnedGames is not supported on macOS', {
-      prefix: LogPrefix.Steam
-    })
-    return []
-  }
 
   const url = new URL(
     'https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?format=json&include_appinfo=true'
