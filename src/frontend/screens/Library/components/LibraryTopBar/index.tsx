@@ -17,6 +17,7 @@ import { Category } from 'frontend/types'
 import { observer } from 'mobx-react-lite'
 import libraryState from '../../../../state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
+import { configStore } from 'frontend/helpers/electronStores'
 
 export interface LibraryTopBarInterface {
   filters: DropdownItemType[]
@@ -41,6 +42,9 @@ export const LibraryTopBar = observer(
 
     const isGOGLoggedin = storeAuthState.gog.username
     const isEpicLoggedin = storeAuthState.epic.username
+
+    const enableSteamIntegration =
+      configStore.get_nodefault('settings.enableSteamIntegration') ?? false
 
     return (
       <Tabs
@@ -72,9 +76,11 @@ export const LibraryTopBar = observer(
               <div className="menu">GOG</div>
             </Tabs.Tab>
           ) : null}
-          <Tabs.Tab value="steam">
-            <div className="menu">Steam</div>
-          </Tabs.Tab>
+          {enableSteamIntegration ? (
+            <Tabs.Tab value="steam">
+              <div className="menu">Steam</div>
+            </Tabs.Tab>
+          ) : null}
           <Tabs.Tab value="sideload">
             <div className="menu">{t('Other')}</div>
           </Tabs.Tab>
