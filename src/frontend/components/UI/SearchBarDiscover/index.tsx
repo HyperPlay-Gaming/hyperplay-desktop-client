@@ -31,7 +31,9 @@ export default function SearchBarDiscover() {
   const input = useRef<HTMLInputElement>(null)
   const [filterText, setFilterText] = useState('')
   const [allGames, setAllGames] = useState<GameResult[]>([])
+  const [searchResults, setSearchResults] = useState<GameResult[]>([])
   const [loading, setLoading] = useState(false)
+  const [searching, setSearching] = useState(false)
 
   useEffect(() => {
     let ignore = false
@@ -39,7 +41,7 @@ export default function SearchBarDiscover() {
       setLoading(true)
       try {
         const res = await fetch(
-          'https://developers.hyperplay.xyz/api/v2/listings'
+          'https://developers.hyperplay.xyz/api/v2/listings?pageSize=100'
         )
         const data = await res.json()
 
@@ -85,6 +87,68 @@ export default function SearchBarDiscover() {
     }
   }, [])
 
+  const searchGames = async (searchText: string) => {
+    if (!searchText.trim()) {
+      setSearchResults([])
+      return
+    }
+
+    setSearching(true)
+    try {
+      const res = await fetch(
+        `https://developers.hyperplay.xyz/api/v2/listings?search=${encodeURIComponent(
+          searchText
+        )}&pageSize=20`
+      )
+      const data = await res.json()
+
+      const listings = Array.isArray(data) ? data : []
+      const mapped: GameResult[] = listings
+        .map((listing: ListingApi) => ({
+          title:
+            (listing.project_meta?.name ??
+              listing.project_name ??
+              listing.id) ||
+            '',
+          appId:
+            (listing.project_id ?? listing.id ?? listing.project_name) || '',
+          storeUrl:
+            listing.account_name && listing.project_name
+              ? `/store/game/${listing.account_name}/${listing.project_name}`
+              : '',
+          accountName: listing.account_name || listing.account_meta?.name || '',
+          projectName: listing.project_name || ''
+        }))
+        .filter(
+          (game) =>
+            game.title &&
+            game.title.trim() !== '' &&
+            game.accountName &&
+            game.projectName
+        )
+
+      setSearchResults(mapped)
+    } catch (e) {
+      console.error('Search error:', e)
+      setSearchResults([])
+    } finally {
+      setSearching(false)
+    }
+  }
+
+  // Debounce effect
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (filterText.trim()) {
+        searchGames(filterText)
+      } else {
+        setSearchResults([])
+      }
+    }, 300) // 300ms
+
+    return () => clearTimeout(timeoutId)
+  }, [filterText])
+
   const fuse = useMemo(() => {
     return new Fuse(allGames, {
       keys: ['title', 'accountName', 'projectName', 'appId'],
@@ -99,13 +163,20 @@ export default function SearchBarDiscover() {
 
   const filteredGames = useMemo(() => {
     if (!filterText) return []
-    const result = fuse.search(filterText)
 
-    return result
+    const localResult = fuse.search(filterText)
+    const localGames = localResult
       .sort((a, b) => a.score! - b.score!)
-      .slice(0, 10)
+      .slice(0, 5)
       .map((item) => item.item)
-  }, [fuse, filterText])
+
+    const apiGames = searchResults.filter(
+      (apiGame) =>
+        !localGames.some((localGame) => localGame.appId === apiGame.appId)
+    )
+
+    return [...localGames, ...apiGames].slice(0, 10)
+  }, [fuse, filterText, searchResults])
 
   const showAutoComplete = filteredGames.length > 0 && filterText.length > 0
 
@@ -119,7 +190,12 @@ export default function SearchBarDiscover() {
 
   function handleGameClick(game: GameResult) {
     navigate(
-      `/store-page?store-url=https://store.hyperplay.xyz/game/${game.accountName}/${game.projectName}`
+      `/store-page?store-url=https://store.hyperplay.xyz/game/${game.accountName}/${game.projectName}`,
+      {
+        state: {
+          fromHyperPlayStore: true
+        }
+      }
     )
   }
 
@@ -141,6 +217,7 @@ export default function SearchBarDiscover() {
         onChange={(e) => setFilterText(e.target.value)}
       />
       {loading}
+      {searching}
       {showAutoComplete ? (
         <>
           <ul className="autoComplete body-sm">
