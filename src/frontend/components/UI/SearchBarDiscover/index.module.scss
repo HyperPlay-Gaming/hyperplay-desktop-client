@@ -1,0 +1,81 @@
+.SearchBar {
+  grid-area: search;
+  width: 48px;
+  position: relative;
+  display: inline-flex;
+  border-radius: var(--space-3xs);
+  padding: var(--space-3xs);
+  background: none;
+  transition: 250ms;
+  border-radius: 1000px;
+}
+
+div.SearchBar:has(*:focus),
+div.SearchBar:has(input:not(:placeholder-shown)) {
+  width: 500px;
+  background: var(--background-base);
+}
+
+div.SearchBar:has(*:focus) > button,
+div.SearchBar:has(input:not(:placeholder-shown)) > button {
+  border: transparent;
+}
+
+.autoComplete {
+  position: absolute;
+  top: 100%;
+  max-height: 200px;
+  width: 100%;
+  background-color: var(--background-base);
+  overflow: auto;
+  list-style: none;
+  margin: -2px -4px;
+  display: none;
+  padding: var(--space-xs) var(--space-md);
+  text-align: left;
+  overflow-x: hidden;
+  z-index: 1000;
+  border-radius: var(--space-sm);
+}
+
+.SearchBar:focus-within ul.autoComplete {
+  display: block;
+}
+
+.autoComplete li {
+  padding: var(--space-sm);
+}
+
+.autoComplete li:hover {
+  cursor: pointer;
+}
+
+.searchButton {
+  padding: var(--space-2xs) var(--space-2xs) 0 var(--space-2xs);
+}
+
+.clearSearchButton {
+  padding-right: var(--space-md);
+  transition: color 250ms;
+  background: transparent;
+  border: none;
+  color: var(--text-weak);
+}
+
+.searchBarInput {
+  width: 100%;
+  appearance: none;
+  background: transparent;
+  color: var(--text-weak);
+  padding: 0 var(--space-lg);
+  border: none;
+  outline: none;
+  transition: color 250ms;
+}
+
+@media screen and (max-width: 1280px) {
+  div.SearchBar:has(*:focus),
+  div.SearchBar:has(input:not(:placeholder-shown)) {
+    width: 243px;
+  }
+}
