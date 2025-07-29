@@ -10,6 +10,7 @@ import {
   MetricsOptInStatus,
   DownloadManagerState
 } from 'common/types'
+import { ReactElement } from 'react'
 
 export type Category =
   | 'all'
@@ -75,7 +76,7 @@ export interface ContextType {
 export type DialogModalOptions = {
   showDialog?: boolean
   title?: string
-  message?: string | React.ReactNode
+  message?: string | ReactElement
   buttons?: Array<ButtonOptions>
   type?: DialogType
   onClose?: () => void

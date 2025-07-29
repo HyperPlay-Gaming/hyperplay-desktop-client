@@ -1,5 +1,5 @@
 import './index.css'
-import React from 'react'
+import React, { ReactElement } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -13,7 +13,7 @@ import { Button } from '@hyperplay/ui'
 
 interface MessageBoxModalProps {
   title: string
-  message: string
+  message: string | ReactElement
   onClose: () => void
   buttons: Array<ButtonOptions>
   type: DialogType
@@ -55,9 +55,11 @@ const MessageBoxModal: React.FC<MessageBoxModalProps> = function (props) {
               {t('error', 'Error')}:
             </div>
             <div className="errorDialog error-box">
-              {props.message.split('\n').map((line, key) => {
-                return <p key={key}>{line}</p>
-              })}
+              {typeof props.message === 'string'
+                ? props.message.split('\n').map((line, key) => {
+                    return <p key={key}>{line}</p>
+                  })
+                : props.message}
             </div>
           </>
         )
