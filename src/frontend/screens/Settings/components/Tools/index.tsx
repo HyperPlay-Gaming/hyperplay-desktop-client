@@ -9,6 +9,7 @@ import { getGameInfo } from 'frontend/helpers'
 import { ProgressDialog } from 'frontend/components/UI/ProgressDialog'
 import SettingsContext from '../../SettingsContext'
 import ContextProvider from 'frontend/state/ContextProvider'
+import { Button } from '@hyperplay/ui'
 
 export default function Tools() {
   const { t } = useTranslation()
@@ -112,34 +113,40 @@ export default function Tools() {
           />
         )}
         <div className="toolsWrapper">
-          <button
+          <Button
             data-testid="wineCFG"
-            className={classNames('button outline', { active: winecfgRunning })}
+            className={classNames('buttonOutline', { active: winecfgRunning })}
             onClick={async () => callTools('winecfg')}
+            type="secondary"
+            size="medium"
           >
             <span className="toolTitle">Winecfg</span>
-          </button>
-          <button
+          </Button>
+          <Button
             data-testid="wineTricks"
-            className={classNames('button outline', {
+            className={classNames('buttonOutline', {
               active: winetricksRunning
             })}
             onClick={async () => callTools('winetricks')}
+            type="secondary"
+            size="medium"
           >
             <span className="toolTitle">Winetricks</span>
-          </button>
-          <a
+          </Button>
+          <Button
             onDrop={(ev) => {
               dropHandler(ev)
             }}
             onDragOver={(ev) => dragOverHandler(ev)}
-            className="button outline drag"
+            className="buttonOutlineDrag"
             onClick={handleRunExe}
+            type="tertiary"
+            size="medium"
           >
             {t('setting.runexe.title')}
             <br />
             <span>{t('setting.runexe.message')}</span>
-          </a>
+          </Button>
         </div>
       </div>
     </>
