@@ -113,7 +113,7 @@ function Settings() {
                 </Tabs.Tab>
                 <Tabs.Tab value="gamesSettings">
                   <div className="menu">
-                    {t('settings.gamesSettings', 'Games Settings')}
+                    {t('settings.gamesSettings', 'Game Settings')}
                   </div>
                 </Tabs.Tab>
                 <Tabs.Tab value="advSettings">
