@@ -3,19 +3,19 @@
   width: 100%;
   padding: var(--space-sm) var(--space-lg);
   font-size: var(--text-md);
-  line-height: 19px;
+  line-height: var(--space-md);
   background-color: var(--input-background);
   border-radius: 10px;
   text-align: start;
 }
 
 .helpLink {
+  display: flex;
   margin-block-start: var(--space-3xs);
   transition: 500ms;
   color: var(--accent);
   cursor: pointer;
-  display: flex;
-  height: 40px;
+  height: var(--space-2lg);
   position: relative;
   align-items: center;
   min-width: 45px;
@@ -27,11 +27,14 @@
 }
 
 .helpLink > svg {
+  width: var(--space-xs);
   margin-inline-end: var(--space-3xs);
 }
 
 .infoBox > ul {
-  text-align: left;
+  display: flex;
+  text-align: center;
+  align-items: center;
 }
 
 .infoBox > strong {
