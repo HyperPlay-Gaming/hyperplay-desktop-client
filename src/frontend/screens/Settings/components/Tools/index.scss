@@ -1,14 +1,9 @@
 .toolsWrapper {
   display: flex;
   cursor: pointer;
-  justify-content: space-between;
-  width: 430px;
+  justify-content: flex-start;
   max-width: fit-content;
-
-  .button {
-    padding-block: var(--space-lg);
-    margin: 0 var(--space-3xs);
-  }
+  gap: var(--space-md);
 
   .drag {
     font-family: var(--font-secondary-regular);
