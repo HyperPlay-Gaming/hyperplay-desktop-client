@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import './index.module.scss'
@@ -6,7 +6,6 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Images } from '@hyperplay/ui'
 import TopNavBarStyles from '../TopNavBar/index.module.scss'
-import Fuse from 'fuse.js'
 
 type ListingApi = {
   project_meta?: { name?: string }
@@ -30,62 +29,7 @@ export default function SearchBarDiscover() {
   const navigate = useNavigate()
   const input = useRef<HTMLInputElement>(null)
   const [filterText, setFilterText] = useState('')
-  const [allGames, setAllGames] = useState<GameResult[]>([])
   const [searchResults, setSearchResults] = useState<GameResult[]>([])
-  const [loading, setLoading] = useState(false)
-  const [searching, setSearching] = useState(false)
-
-  useEffect(() => {
-    let ignore = false
-    const fetchGames = async () => {
-      setLoading(true)
-      try {
-        const res = await fetch(
-          'https://developers.hyperplay.xyz/api/v2/listings?pageSize=100'
-        )
-        const data = await res.json()
-
-        const listings = Array.isArray(data) ? data : []
-        const mapped: GameResult[] = listings
-          .map((listing: ListingApi) => ({
-            title:
-              (listing.project_meta?.name ??
-                listing.project_name ??
-                listing.id) ||
-              '',
-            appId:
-              (listing.project_id ?? listing.id ?? listing.project_name) || '',
-            storeUrl:
-              listing.account_name && listing.project_name
-                ? `/store/game/${listing.account_name}/${listing.project_name}`
-                : '',
-            accountName:
-              listing.account_name || listing.account_meta?.name || '',
-            projectName: listing.project_name || ''
-          }))
-          .filter(
-            (game) =>
-              game.title &&
-              game.title.trim() !== '' &&
-              game.accountName &&
-              game.projectName
-          )
-        if (!ignore) {
-          setAllGames(mapped)
-          console.log('Total games loaded:', mapped.length)
-          console.log('Sample games:', mapped.slice(0, 3))
-        }
-      } catch (e) {
-        if (!ignore) setAllGames([])
-      } finally {
-        if (!ignore) setLoading(false)
-      }
-    }
-    fetchGames()
-    return () => {
-      ignore = true
-    }
-  }, [])
 
   const searchGames = async (searchText: string) => {
     if (!searchText.trim()) {
@@ -93,7 +37,6 @@ export default function SearchBarDiscover() {
       return
     }
 
-    setSearching(true)
     try {
       const res = await fetch(
         `https://developers.hyperplay.xyz/api/v2/listings?search=${encodeURIComponent(
@@ -131,8 +74,6 @@ export default function SearchBarDiscover() {
     } catch (e) {
       console.error('Search error:', e)
       setSearchResults([])
-    } finally {
-      setSearching(false)
     }
   }
 
@@ -149,36 +90,7 @@ export default function SearchBarDiscover() {
     return () => clearTimeout(timeoutId)
   }, [filterText])
 
-  const fuse = useMemo(() => {
-    return new Fuse(allGames, {
-      keys: ['title', 'accountName', 'projectName', 'appId'],
-      threshold: 0.4,
-      includeScore: true,
-      minMatchCharLength: 1,
-      ignoreLocation: true,
-      useExtendedSearch: true,
-      findAllMatches: true
-    })
-  }, [allGames])
-
-  const filteredGames = useMemo(() => {
-    if (!filterText) return []
-
-    const localResult = fuse.search(filterText)
-    const localGames = localResult
-      .sort((a, b) => a.score! - b.score!)
-      .slice(0, 5)
-      .map((item) => item.item)
-
-    const apiGames = searchResults.filter(
-      (apiGame) =>
-        !localGames.some((localGame) => localGame.appId === apiGame.appId)
-    )
-
-    return [...localGames, ...apiGames].slice(0, 10)
-  }, [fuse, filterText, searchResults])
-
-  const showAutoComplete = filteredGames.length > 0 && filterText.length > 0
+  const showAutoComplete = searchResults.length > 0 && filterText.length > 0
 
   const onClear = useCallback(() => {
     setFilterText('')
@@ -216,12 +128,10 @@ export default function SearchBarDiscover() {
         value={filterText}
         onChange={(e) => setFilterText(e.target.value)}
       />
-      {loading}
-      {searching}
       {showAutoComplete ? (
         <>
           <ul className="autoComplete body-sm">
-            {filteredGames.map((game) => (
+            {searchResults.map((game) => (
               <li
                 key={game.appId}
                 className="search-result-item"
