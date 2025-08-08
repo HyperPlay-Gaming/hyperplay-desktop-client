@@ -1,4 +1,4 @@
-# Frotend Design System
+# Frontend Design System
 
 ## Type System
 
