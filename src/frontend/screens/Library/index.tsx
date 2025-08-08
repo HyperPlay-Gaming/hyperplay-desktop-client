@@ -96,7 +96,7 @@ export default observer(function Library(): React.JSX.Element {
   // Track the screen view once and only once.
   useEffect(() => {
     window.api.trackScreen('Library')
-    libraryState.selectedFilter = filters[0]
+    libraryState.selectedFilter ??= filters[0]
   }, [])
 
   const backToTop = () => {
