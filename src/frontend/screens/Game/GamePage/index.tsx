@@ -20,6 +20,7 @@ import {
 import { NavLink, useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
+
 import { UpdateComponent, SelectField } from 'frontend/components/UI'
 import walletStore from 'frontend/state/WalletState'
 import onboardingStore from 'frontend/store/OnboardingStore'
@@ -69,6 +70,7 @@ import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import authState from 'frontend/state/authState'
+import { showSteamInstallDialog } from 'frontend/components/UI/DialogHandler/components/MessageBoxModal/showSteamInstallDialog'
 
 type locationState = {
   fromDM?: boolean
@@ -966,8 +968,7 @@ export default observer(function GamePage(): React.JSX.Element | null {
 
   async function mainAction(is_installed: boolean) {
     if (isSteam) {
-      window.api.openExternalUrl(`steam://install/${appName}`)
-      return
+      return showSteamInstallDialog(showDialogModal, t, appName)
     }
 
     // resume download

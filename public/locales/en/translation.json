@@ -1131,6 +1131,12 @@
         "processing": "Processing files, please wait"
     },
     "steam": {
+        "install": {
+            "later": "Install Later",
+            "launch": "Launch Steam",
+            "message": "Please install this game from Steam and refresh the library afterwards to play on HyperPlay.",
+            "title": "Install from Steam"
+        },
         "integration": {
             "requirements": {
                 "part1": "To ensure this integration works properly and HyperPlay can access your games, you must have",

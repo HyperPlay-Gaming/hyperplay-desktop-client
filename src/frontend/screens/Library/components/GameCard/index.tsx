@@ -28,6 +28,7 @@ import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
 import authState from 'frontend/state/authState'
 import { getImageFormattingForArtSquare } from 'frontend/screens/Game/GamePicture'
+import { showSteamInstallDialog } from 'frontend/components/UI/DialogHandler/components/MessageBoxModal/showSteamInstallDialog'
 
 interface Card {
   buttonClick: () => void
@@ -435,8 +436,7 @@ const GameCard = ({
 
   async function mainAction(runner: Runner) {
     if (runner === 'steam') {
-      window.api.openExternalUrl(`steam://install/${appName}`)
-      return
+      return showSteamInstallDialog(showDialogModal, t, appName)
     }
 
     if (isInstalling || isExtracting || isPaused) {
