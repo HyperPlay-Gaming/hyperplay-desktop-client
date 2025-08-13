@@ -72,9 +72,7 @@ export default function GamesSettings() {
 
   return (
     <>
-      <div className={styles.gameSettingsTitle}>
-        {t('settings.default_title', 'Games Settings')}
-      </div>
+      <div className={styles.gameSettingsTitle}></div>
       {isDefault && (
         <AlertCard
           variant="warning"

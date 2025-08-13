@@ -62,8 +62,8 @@ export default function StopInstallationModal(props: StopInstallProps) {
       </DialogContent>
       <DialogFooter>
         <Button
-          type="tertiary"
-          size="large"
+          type="primary"
+          size="medium"
           onClick={async () => {
             props.onClose()
           }}
@@ -72,7 +72,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
         </Button>
         <Button
           type="secondary"
-          size="large"
+          size="medium"
           onClick={async () => {
             // if user wants to keep downloaded files and cancel download
             if (checkbox.current && checkbox.current.checked) {
