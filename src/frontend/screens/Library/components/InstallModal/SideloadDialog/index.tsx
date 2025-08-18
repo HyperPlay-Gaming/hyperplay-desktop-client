@@ -73,8 +73,16 @@ export default function SideloadDialog({
   const { platform } = useContext(ContextProvider)
 
   function handleTitle(value: string) {
-    value = removeSpecialcharacters(value)
+    // Remove caracteres especiais mas mantém espaços
+    const regexp = new RegExp(
+      /[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®]/,
+      'gi'
+    )
+    value = value.replaceAll(regexp, '')
     setTitle(value)
+    if (!appName) {
+      setApp_name(short.generate().toString())
+    }
   }
 
   const appPlatform = gameInfo.install?.platform || platformToInstall
@@ -365,31 +373,31 @@ export default function SideloadDialog({
                 'This Game has Web3 Features'
               )}
             />
+            <DialogFooter>
+              {shouldShowRunExe && platformToInstall !== 'Browser' && (
+                <Button
+                  type="primary"
+                  size="medium"
+                  onClick={async () => handleRunExe()}
+                  disabled={runningSetup || !title.length}
+                >
+                  {runningSetup
+                    ? t('button.running-setup', 'Running Setup')
+                    : t('button.run-exe-first', 'Run Installer First')}
+                </Button>
+              )}
+              <Button
+                type="secondary"
+                size="medium"
+                onClick={async () => handleInstall()}
+                disabled={!selectedExe.length && !gameUrl}
+              >
+                {t('button.finish', 'Finish')}
+              </Button>
+            </DialogFooter>
           </div>
         </div>
       </DialogContent>
-      <DialogFooter>
-        {shouldShowRunExe && platformToInstall !== 'Browser' && (
-          <Button
-            type="tertiary"
-            size="large"
-            onClick={async () => handleRunExe()}
-            disabled={runningSetup || !title.length}
-          >
-            {runningSetup
-              ? t('button.running-setup', 'Running Setup')
-              : t('button.run-exe-first', 'Run Installer First')}
-          </Button>
-        )}
-        <Button
-          type="secondary"
-          size="large"
-          onClick={async () => handleInstall()}
-          disabled={!selectedExe.length && !gameUrl}
-        >
-          {t('button.finish', 'Finish')}
-        </Button>
-      </DialogFooter>
     </>
   )
 }
