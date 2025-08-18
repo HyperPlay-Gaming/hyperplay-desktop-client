@@ -17,11 +17,7 @@ import {
   ToggleSwitch
 } from 'frontend/components/UI'
 import { DialogContent, DialogFooter } from 'frontend/components/UI/Dialog'
-import {
-  getGameInfo,
-  getGameSettings,
-  removeSpecialcharacters
-} from 'frontend/helpers'
+import { getGameInfo, getGameSettings } from 'frontend/helpers'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import fallbackImage from 'frontend/assets/fallback_card.jpg'
@@ -73,7 +69,6 @@ export default function SideloadDialog({
   const { platform } = useContext(ContextProvider)
 
   function handleTitle(value: string) {
-    // Remove caracteres especiais mas mantém espaços
     const regexp = new RegExp(
       /[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®]/,
       'gi'
@@ -225,6 +220,8 @@ export default function SideloadDialog({
       buttonLabel: t('box.select.button', 'Select'),
       properties: ['openFile'],
       title: t('box.runexe.title', 'Select EXE to Run'),
+      /* eslint-disable-next-line */
+      //@ts-ignore
       filters: fileFilters[platformToInstall]
     })
     if (path) {
