@@ -109,6 +109,7 @@ export async function refresh(): Promise<null> {
   }
   const steamUsers = await loadUsers()
 
+  // TODO: All users are enabled for now, a setting could be added in the future to control which should be enabled or not.
   const enabledSteamUsers = steamUsers.reduce((acc, val) => {
     if (steamEnabledUsers.get(val.id, true)) {
       acc.push(val)
