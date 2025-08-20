@@ -17,11 +17,7 @@ import {
   ToggleSwitch
 } from 'frontend/components/UI'
 import { DialogContent, DialogFooter } from 'frontend/components/UI/Dialog'
-import {
-  getGameInfo,
-  getGameSettings,
-  removeSpecialcharacters
-} from 'frontend/helpers'
+import { getGameInfo, getGameSettings } from 'frontend/helpers'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import fallbackImage from 'frontend/assets/fallback_card.jpg'
@@ -73,8 +69,15 @@ export default function SideloadDialog({
   const { platform } = useContext(ContextProvider)
 
   function handleTitle(value: string) {
-    value = removeSpecialcharacters(value)
+    const regexp = new RegExp(
+      /[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®]/,
+      'gi'
+    )
+    value = value.replaceAll(regexp, '')
     setTitle(value)
+    if (!appName) {
+      setApp_name(short.generate().toString())
+    }
   }
 
   const appPlatform = gameInfo.install?.platform || platformToInstall
@@ -217,6 +220,8 @@ export default function SideloadDialog({
       buttonLabel: t('box.select.button', 'Select'),
       properties: ['openFile'],
       title: t('box.runexe.title', 'Select EXE to Run'),
+      /* eslint-disable-next-line */
+      //@ts-ignore
       filters: fileFilters[platformToInstall]
     })
     if (path) {
@@ -365,31 +370,31 @@ export default function SideloadDialog({
                 'This Game has Web3 Features'
               )}
             />
+            <DialogFooter>
+              {shouldShowRunExe && platformToInstall !== 'Browser' && (
+                <Button
+                  type="primary"
+                  size="medium"
+                  onClick={async () => handleRunExe()}
+                  disabled={runningSetup || !title.length}
+                >
+                  {runningSetup
+                    ? t('button.running-setup', 'Running Setup')
+                    : t('button.run-exe-first', 'Run Installer First')}
+                </Button>
+              )}
+              <Button
+                type="secondary"
+                size="medium"
+                onClick={async () => handleInstall()}
+                disabled={!selectedExe.length && !gameUrl}
+              >
+                {t('button.finish', 'Finish')}
+              </Button>
+            </DialogFooter>
           </div>
         </div>
       </DialogContent>
-      <DialogFooter>
-        {shouldShowRunExe && platformToInstall !== 'Browser' && (
-          <Button
-            type="tertiary"
-            size="large"
-            onClick={async () => handleRunExe()}
-            disabled={runningSetup || !title.length}
-          >
-            {runningSetup
-              ? t('button.running-setup', 'Running Setup')
-              : t('button.run-exe-first', 'Run Installer First')}
-          </Button>
-        )}
-        <Button
-          type="secondary"
-          size="large"
-          onClick={async () => handleInstall()}
-          disabled={!selectedExe.length && !gameUrl}
-        >
-          {t('button.finish', 'Finish')}
-        </Button>
-      </DialogFooter>
     </>
   )
 }
