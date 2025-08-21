@@ -14,7 +14,8 @@ import {
   Shortcuts,
   TraySettings,
   UseDarkTrayIcon,
-  WinePrefixesBasePath
+  WinePrefixesBasePath,
+  EnableSteamIntegration
 } from '../../components'
 import AutoLaunchHyperPlay from '../../components/AutoLaunchHyperPlay'
 import styles from './index.module.scss'
@@ -32,6 +33,7 @@ export default function GeneralSettings() {
         <LanguageSelector />
         <DefaultInstallPath />
         <WinePrefixesBasePath />
+        <EnableSteamIntegration />
         <DefaultSteamPath />
         <EgsSettings />
         <AutoLaunchHyperPlay />
@@ -40,7 +42,7 @@ export default function GeneralSettings() {
         <MinimizeOnGameLaunch />
         <UseDarkTrayIcon />
         <Shortcuts />
-        {/* 
+        {/*
       disabled until we fix the controller navigation in hyperplay
       <DisableController /> */}
         <LibraryTopSection />

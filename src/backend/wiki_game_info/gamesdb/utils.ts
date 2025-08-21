@@ -14,6 +14,7 @@ export async function getInfoFromGamesDB(
     legendary: 'epic',
     gog: 'gog',
     hyperplay: 'hyperplay',
+    steam: 'steam',
     sideload: undefined
   }
   const storeName = storeMap[runner]

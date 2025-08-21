@@ -3,6 +3,7 @@ import { CachedImage } from 'frontend/components/UI'
 
 import './index.css'
 import fallbackImage from 'frontend/assets/fallback_card.jpg'
+import steamFallBackImage from 'frontend/assets/steam-fallback-card.png'
 
 type Props = {
   art_square: string
@@ -10,8 +11,12 @@ type Props = {
 }
 
 export function getImageFormattingForArtSquare({ art_square, store }: Props) {
+  const isSteam = store === 'steam'
   if (art_square === 'fallback' || !art_square)
-    return { src: fallbackImage, fallback: fallbackImage }
+    return {
+      src: isSteam ? steamFallBackImage : fallbackImage,
+      fallback: fallbackImage
+    }
   if (store === 'legendary') {
     return {
       src: `${art_square}?h=800&resize=1&w=600`,

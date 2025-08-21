@@ -70,7 +70,8 @@ describe('logger/logfile.ts', () => {
       currentLogFile: 'old/log/path/file.log',
       lastLogFile: '',
       legendaryLogFile: '',
-      gogdlLogFile: ''
+      gogdlLogFile: '',
+      steamLogFile: ''
     })
 
     jest.spyOn(app, 'requestSingleInstanceLock').mockImplementation(() => true)
@@ -81,7 +82,8 @@ describe('logger/logfile.ts', () => {
       currentLogFile: expect.any(String),
       lastLogFile: expect.any(String),
       legendaryLogFile: expect.any(String),
-      gogdlLogFile: expect.any(String)
+      gogdlLogFile: expect.any(String),
+      steamLogFile: expect.any(String)
     })
   })
 
