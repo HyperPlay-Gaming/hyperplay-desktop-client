@@ -84,3 +84,7 @@
   justify-content: start;
   margin-top: var(--space-md);
 }
+
+.body {
+  padding-left: var(--space-sm);
+}

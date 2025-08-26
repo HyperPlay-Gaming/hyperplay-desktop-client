@@ -1,23 +1,6 @@
 .walletInfoContainer {
   display: flex;
   flex-direction: row;
-  margin-bottom: var(--space-xl);
-}
-
-.walletTextContainer {
-  margin-left: var(--space-md);
-}
-
-.actionButtonContainer {
-  display: flex;
-  flex-direction: row;
-  margin-top: auto;
-  justify-content: space-around;
-}
-
-.actionButtonContainer Button {
-  border-radius: var(--space-sm);
-  min-width: 171px;
 }
 
 .walletInfoScreen {
@@ -31,10 +14,71 @@
   margin-bottom: var(--space-lg);
 }
 
-.caption {
-  color: var(--color-neutral-300);
+.smallTitle {
+  display: flex;
+  align-items: center;
+  color: var(--text-weak);
 }
 
-.infoTextCaption {
-  color: var(--color-neutral-200);
+.connectWalletSvgContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blurBackground {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: var(--space-xl);
+  background: linear-gradient(
+    80deg,
+    rgba(53, 52, 252, 1) 24.51%,
+    rgba(255, 0, 196, 1) 108.24%
+  );
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: color;
+}
+
+.walletSvg {
+  margin: var(--space-2lg) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 140px;
+  height: 140px;
+}
+
+.description {
+  align-self: center;
+  margin: var(--space-xs) 0 var(--space-md) var(--space-lg);
+  color: var(--text-weak);
+}
+
+.walletIssues {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-warning);
+
+  & > div {
+    gap: 0;
+  }
+
+  & > div > div {
+    margin-left: var(--space-xs-fixed);
+    justify-self: center;
+  }
+}
+
+.warningIcon {
+  width: var(--space-2lg);
+  height: var(--space-2lg);
+  path {
+    fill: var(--icon-warning);
+  }
 }

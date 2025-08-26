@@ -38,11 +38,17 @@ export default function useGetQuests(projectId?: string) {
    * In these cases, the user can no longer earn a reward or claim a reward.
    */
   if (isSignedIn && !isGetQuestStatesPending && quests) {
-    quests = quests.filter(
-      (quest_i) =>
+    quests = quests.filter((quest_i) => {
+      if (quest_i.status !== 'COMPLETED') {
+        return true
+      }
+
+      // this means we detected that the user has met the eligibility requirements
+      return (
         Object.hasOwn(questIdToQuestStateMap, quest_i.id) &&
         questIdToQuestStateMap[quest_i.id]
-    )
+      )
+    })
   }
 
   /**
