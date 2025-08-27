@@ -99,6 +99,8 @@ export function initLogger() {
       logError(['Failed to fetch system information', error], LogPrefix.Backend)
     )
 
+  logInfo(`Chrome Version: ${process.versions.chrome}`, LogPrefix.Backend)
+
   // listen to the settingChanged event, log change and enable/disable logging if needed
   backendEvents.on('settingChanged', ({ key, oldValue, newValue }) => {
     logInfo(
