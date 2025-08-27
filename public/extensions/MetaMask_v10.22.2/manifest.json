@@ -75,7 +75,7 @@
     }
   ],
   "default_locale": "en",
-  "description": "pull-request build from git id: 501c46e8",
+  "description": "pull-request build from git id: d895b459",
   "host_permissions": [
     "http://localhost:8545/",
     "file://*/*",
