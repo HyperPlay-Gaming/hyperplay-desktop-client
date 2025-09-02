@@ -35,14 +35,16 @@ export enum LogPrefix {
   Sideload = 'Sideload',
   Achievements = 'Achievements',
   Auth = 'Auth',
-  AutoUpdater = 'AutoUpdater'
+  AutoUpdater = 'AutoUpdater',
+  Steam = 'Steam'
 }
 
 export const RunnerToLogPrefixMap = {
   legendary: LogPrefix.Legendary,
   gog: LogPrefix.Gog,
   hyperplay: LogPrefix.HyperPlay,
-  sideload: LogPrefix.Sideload
+  sideload: LogPrefix.Sideload,
+  steam: LogPrefix.Steam
 }
 
 type LogInputType = unknown[] | unknown

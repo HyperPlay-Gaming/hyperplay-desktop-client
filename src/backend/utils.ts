@@ -347,7 +347,7 @@ function removeSpecialcharacters(text: string): string {
 }
 
 async function openUrlOrFile(url: string): Promise<string | void> {
-  if (url.startsWith('http')) {
+  if (url.includes('://')) {
     return shell.openExternal(url)
   }
   return shell.openPath(url)
@@ -1205,14 +1205,15 @@ export const processIsClosed = async (pid: number) => {
 }
 
 type RunnerStore = {
-  [key in Runner]: 'Epic Games' | 'GOG' | 'HyperPlay' | 'Sideloaded'
+  [key in Runner]: 'Epic Games' | 'GOG' | 'HyperPlay' | 'Sideloaded' | 'Steam'
 }
 
 const runnerStore: RunnerStore = {
   legendary: 'Epic Games',
   gog: 'GOG',
   hyperplay: 'HyperPlay',
-  sideload: 'Sideloaded'
+  sideload: 'Sideloaded',
+  steam: 'Steam'
 }
 
 export const getStoreName = (runner: Runner) => {

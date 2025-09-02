@@ -51,7 +51,7 @@ export type WrapRendererCallback<
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>
 
-export type Runner = 'legendary' | 'gog' | 'sideload' | 'hyperplay'
+export type Runner = 'legendary' | 'gog' | 'sideload' | 'hyperplay' | 'steam'
 
 // NOTE: Do not put enum's in this module or it will break imports
 
@@ -114,6 +114,7 @@ export interface AppSettings extends GameSettings {
   userInfo: UserInfo
   steamId: string
   ldUser: LDUser
+  enableSteamIntegration: boolean
 }
 
 export type LibraryTopSectionOptions =
@@ -141,7 +142,7 @@ export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
 export type GameType = 'native' | 'mod' | 'browser'
 
 export interface GameInfo {
-  runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload'
+  runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload' | 'steam'
   store_url?: string
   app_name: string
   art_cover: string
@@ -925,7 +926,7 @@ export type OverlayType = 'native' | 'browser' | 'mainWindow'
 
 export interface Reward {
   id: number
-  amount_per_user: number | null
+  amount_per_user: string | null
   chain_id: number | null
   marketplace_url: string | null
   reward_type: 'ERC20' | 'ERC721' | 'ERC1155' | 'POINTS' | 'EXTERNAL-TASKS'

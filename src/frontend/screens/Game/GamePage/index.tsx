@@ -20,6 +20,7 @@ import {
 import { NavLink, useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
+
 import { UpdateComponent, SelectField } from 'frontend/components/UI'
 import walletStore from 'frontend/state/WalletState'
 import onboardingStore from 'frontend/store/OnboardingStore'
@@ -69,6 +70,7 @@ import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import authState from 'frontend/state/authState'
+import { showSteamInstallDialog } from 'frontend/components/UI/DialogHandler/components/MessageBoxModal/showSteamInstallDialog'
 
 type locationState = {
   fromDM?: boolean
@@ -125,6 +127,7 @@ export default observer(function GamePage(): React.JSX.Element | null {
   const isLinux = platform === 'linux'
   const isMac = platform === 'darwin'
   const isSideloaded = runner === 'sideload'
+  const isSteam = runner === 'steam'
 
   const isInstalling = DMQueueState.isInstalling(appName)
   const isPlaying = status === 'playing'
@@ -249,7 +252,7 @@ export default observer(function GamePage(): React.JSX.Element | null {
           runner === 'hyperplay' ? hpPlatforms : othersPlatforms
 
         if (
-          runner !== 'sideload' &&
+          !['sideload', 'steam'].includes(runner) &&
           !notSupportedGame &&
           !notInstallable &&
           !isOffline
@@ -398,6 +401,8 @@ export default observer(function GamePage(): React.JSX.Element | null {
       gameInfo.extra?.about?.description ||
       t('generic.noDescription', 'No description available')
 
+    const showSettingsButton = is_installed && !isBrowserGame && !isSteam
+
     return (
       <div className="gameConfigContainer">
         {showStopInstallModal ? (
@@ -438,7 +443,7 @@ export default observer(function GamePage(): React.JSX.Element | null {
             <div className="gameInfo">
               <div className="titleWrapper">
                 <h2 className="title">{title}</h2>
-                {is_installed && !isBrowserGame && (
+                {showSettingsButton && (
                   <a
                     role={'button'}
                     onClick={() =>
@@ -449,155 +454,186 @@ export default observer(function GamePage(): React.JSX.Element | null {
                     <SettingsIcon />
                   </a>
                 )}
-                <div className="game-actions">
-                  <button className="toggle">
-                    <FontAwesomeIcon icon={faEllipsisV} />
-                  </button>
+                {isSteam ? null : (
+                  <div className="game-actions">
+                    <button className="toggle">
+                      <FontAwesomeIcon icon={faEllipsisV} />
+                    </button>
 
-                  <GameSubMenu
-                    appName={appName}
-                    isInstalled={is_installed}
-                    title={title}
-                    storeUrl={
-                      extraInfo?.storeUrl ||
-                      ('store_url' in gameInfo &&
-                      gameInfo.store_url !== undefined
-                        ? gameInfo.store_url
-                        : '')
-                    }
-                    runner={gameInfo.runner}
-                    handleUpdate={async () => updateGame(gameInfo)}
-                    disableUpdate={showProgress}
-                    setShowExtraInfo={setShowExtraInfo}
-                    onShowRequirements={
-                      hasRequirements
-                        ? () => setShowRequirements(true)
-                        : undefined
-                    }
-                    onShowDlcs={
-                      DLCs.length ? () => setShowDlcs(true) : undefined
-                    }
-                  />
-                </div>
+                    <GameSubMenu
+                      appName={appName}
+                      isInstalled={is_installed}
+                      title={title}
+                      storeUrl={
+                        extraInfo?.storeUrl ||
+                        ('store_url' in gameInfo &&
+                        gameInfo.store_url !== undefined
+                          ? gameInfo.store_url
+                          : '')
+                      }
+                      runner={gameInfo.runner}
+                      handleUpdate={async () => updateGame(gameInfo)}
+                      disableUpdate={showProgress}
+                      setShowExtraInfo={setShowExtraInfo}
+                      onShowRequirements={
+                        hasRequirements
+                          ? () => setShowRequirements(true)
+                          : undefined
+                      }
+                      onShowDlcs={
+                        DLCs.length ? () => setShowDlcs(true) : undefined
+                      }
+                    />
+                  </div>
+                )}
               </div>
               <div className="infoWrapper">
-                <div className="developer menu">{developer}</div>
-                <div className="summary">{description}</div>
+                {!isSteam ? (
+                  <>
+                    <div className="developer menu">{developer}</div>
+                    <div className="summary">{description}</div>
+                  </>
+                ) : (
+                  <>
+                    <div className="summary">
+                      {t(
+                        'info.steam-game',
+                        'This is a Steam game, for more information check the game page on the Steam App.'
+                      )}
+                    </div>
+                  </>
+                )}
                 <div className="grid-container">
-                  {!is_installed && !isSideloaded && (
+                  {!isSteam && (
                     <>
-                      {downloadSize !== 0 ? (
+                      {!is_installed && !isSideloaded && (
                         <>
-                          <div className="hp-subtitle">
-                            {t('game.downloadSize', 'Download Size')}
-                          </div>
-                          <div className="col2-item italic">
-                            {downloadSize ?? '...'}
-                          </div>
-                        </>
-                      ) : null}
-                      {installSize !== 0 ? (
-                        <>
-                          <div className="hp-subtitle">
-                            {t('game.installSize', 'Install Size')}
-                          </div>
-                          <div className="col2-item italic">
-                            {installSize ?? '...'}
-                          </div>
-                        </>
-                      ) : null}
-                    </>
-                  )}
-                  <div className="hp-subtitle">
-                    {t('info.web3-supported', 'Has Web3 features')}
-                  </div>
-                  <div className="col2-item italic">
-                    {supportsWeb3 ? t('box.yes') : t('box.no')}
-                  </div>
-                  {is_installed && !isBrowserGame && (
-                    <>
-                      {showCloudSaveInfo && (
-                        <>
-                          <div className="hp-subtitle">
-                            {t('info.syncsaves')}
-                          </div>
-                          <div
-                            style={{
-                              color: autoSyncSaves ? '#07C5EF' : ''
-                            }}
-                            className="col2-item italic"
-                          >
-                            {!isCloudSaveSupported &&
-                              t('cloud_save_unsupported', 'Unsupported')}
-                            {isCloudSaveSupported &&
-                              (autoSyncSaves ? t('enabled') : t('disabled'))}
-                          </div>
-                        </>
-                      )}
-                      {!isSideloaded && installSize ? (
-                        <>
-                          <div className="hp-subtitle">{t('info.size')}</div>
-                          <div className="col2-item italic">{installSize}</div>
-                        </>
-                      ) : null}
-                      <div className="hp-subtitle">
-                        {t('info.installedPlatform', 'Installed Platform')}:
-                      </div>
-                      <div
-                        style={{ textTransform: 'capitalize' }}
-                        className="col2-item"
-                      >
-                        {installPlatform === 'osx'
-                          ? 'MacOS'
-                          : getPlatformName(installPlatform || '')}
-                      </div>
-                      {!isSideloaded && (
-                        <>
-                          <div className="hp-subtitle">{t('info.version')}</div>
-                          <div className="col2-item italic">{version}</div>
+                          {downloadSize !== 0 ? (
+                            <>
+                              <div className="hp-subtitle">
+                                {t('game.downloadSize', 'Download Size')}
+                              </div>
+                              <div className="col2-item italic">
+                                {downloadSize ?? '...'}
+                              </div>
+                            </>
+                          ) : null}
+                          {installSize !== 0 ? (
+                            <>
+                              <div className="hp-subtitle">
+                                {t('game.installSize', 'Install Size')}
+                              </div>
+                              <div className="col2-item italic">
+                                {installSize ?? '...'}
+                              </div>
+                            </>
+                          ) : null}
                         </>
                       )}
                       <div className="hp-subtitle">
-                        {t('info.canRunOffline', 'Online Required')}:
+                        {t('info.web3-supported', 'Has Web3 features')}
                       </div>
                       <div className="col2-item italic">
-                        {t(canRunOffline ? 'box.no' : 'box.yes')}
+                        {supportsWeb3 ? t('box.yes') : t('box.no')}
                       </div>
-                      <div className="hp-subtitle">
-                        {t('info.path', 'Install Path')}
-                      </div>
-                      {is_installed && appLocation && (
-                        <div className="col2-item italic">
-                          <div
-                            className="col2-item italic"
-                            onClick={() => window.api.openFolder(appLocation)}
-                          >
-                            {appLocation}
-                          </div>
-                        </div>
-                      )}
-                      {!isWin && !isNative && !isBrowserGame && (
+                      {is_installed && !isBrowserGame && (
                         <>
-                          <div className="hp-subtitle">Wine</div>
-                          <div className="col2-item italic">
-                            {wineVersion?.name}
+                          {showCloudSaveInfo && (
+                            <>
+                              <div className="hp-subtitle">
+                                {t('info.syncsaves')}
+                              </div>
+                              <div
+                                style={{
+                                  color: autoSyncSaves ? '#07C5EF' : ''
+                                }}
+                                className="col2-item italic"
+                              >
+                                {!isCloudSaveSupported &&
+                                  t('cloud_save_unsupported', 'Unsupported')}
+                                {isCloudSaveSupported &&
+                                  (autoSyncSaves
+                                    ? t('enabled')
+                                    : t('disabled'))}
+                              </div>
+                            </>
+                          )}
+                          {!isSideloaded && installSize ? (
+                            <>
+                              <div className="hp-subtitle">
+                                {t('info.size')}
+                              </div>
+                              <div className="col2-item italic">
+                                {installSize}
+                              </div>
+                            </>
+                          ) : null}
+                          <div className="hp-subtitle">
+                            {t('info.installedPlatform', 'Installed Platform')}:
                           </div>
-                          <div className="hp-subtitle">Prefix:</div>
                           <div
-                            className="col2-item italic"
-                            onClick={() => window.api.openFolder(winePrefix)}
+                            style={{ textTransform: 'capitalize' }}
+                            className="col2-item"
                           >
-                            {winePrefix}
+                            {installPlatform === 'osx'
+                              ? 'MacOS'
+                              : getPlatformName(installPlatform || '')}
                           </div>
+                          {!isSideloaded && (
+                            <>
+                              <div className="hp-subtitle">
+                                {t('info.version')}
+                              </div>
+                              <div className="col2-item italic">{version}</div>
+                            </>
+                          )}
+                          <div className="hp-subtitle">
+                            {t('info.canRunOffline', 'Online Required')}:
+                          </div>
+                          <div className="col2-item italic">
+                            {t(canRunOffline ? 'box.no' : 'box.yes')}
+                          </div>
+                          <div className="hp-subtitle">
+                            {t('info.path', 'Install Path')}
+                          </div>
+                          {is_installed && appLocation && (
+                            <div className="col2-item italic">
+                              <div
+                                className="col2-item italic"
+                                onClick={() =>
+                                  window.api.openFolder(appLocation)
+                                }
+                              >
+                                {appLocation}
+                              </div>
+                            </div>
+                          )}
+                          {!isWin && !isNative && !isBrowserGame && (
+                            <>
+                              <div className="hp-subtitle">Wine</div>
+                              <div className="col2-item italic">
+                                {wineVersion?.name}
+                              </div>
+                              <div className="hp-subtitle">Prefix:</div>
+                              <div
+                                className="col2-item italic"
+                                onClick={() =>
+                                  window.api.openFolder(winePrefix)
+                                }
+                              >
+                                {winePrefix}
+                              </div>
+                            </>
+                          )}
                         </>
                       )}
+                      <TimeContainer
+                        runner={runner}
+                        game={appName}
+                        status={status}
+                      />
                     </>
                   )}
-                  <TimeContainer
-                    runner={runner}
-                    game={appName}
-                    status={status}
-                  />
                 </div>
               </div>
               <div className="gameStatus">
@@ -931,7 +967,9 @@ export default observer(function GamePage(): React.JSX.Element | null {
   }
 
   async function mainAction(is_installed: boolean) {
-    // TODO: Add a way to pause download from the game page
+    if (isSteam) {
+      return showSteamInstallDialog(showDialogModal, t, appName)
+    }
 
     // resume download
     if (isPaused) {
@@ -957,6 +995,11 @@ export default observer(function GamePage(): React.JSX.Element | null {
 
     // open install dialog
     if (!is_installed) {
+      if (isSteam) {
+        return window.api.openExternalUrl(
+          `steam://install/${gameInfo.app_name}`
+        )
+      }
       return handleModal()
     }
 

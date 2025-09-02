@@ -323,7 +323,8 @@ class GlobalConfigV0 extends GlobalConfig {
       ldUser: {
         kind: 'user',
         key: uuid()
-      }
+      },
+      enableSteamIntegration: false
     } as AppSettings
   }
 
