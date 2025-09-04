@@ -15,10 +15,6 @@ const walletIcons = [
   },
   { title: 'Ronin Wallet', icon: <Images.RoninWallet key={'roninwallet'} /> },
   { title: 'Trust Wallet', icon: <Images.TrustWallet key={'trustwallet'} /> },
-  {
-    title: 'Phantom Wallet',
-    icon: <Images.PhantomWallet key={'phantomwallet'} />
-  },
   { title: 'OKX Wallet', icon: <Images.OKXWallet key={'okxwallet'} /> },
   { title: 'Sequence Wallet', icon: <SequenceIcon /> },
   {
