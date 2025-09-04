@@ -1,6 +1,6 @@
 export const EPIC_LOGIN_URL = 'https://legendary.gl/epiclogin'
 export const HYPERPLAY_STORE_URL =
-  'hyperplay-store-git-chore-bump-version-1362-hyperplay.vercel.app?isLauncher=true'
+  'https://hyperplay-store-git-chore-bump-version-1362-hyperplay.vercel.app?isLauncher=true'
 export const G7_PORTAL = 'https://app.game7.io/quests/hyperplay?layout=navless'
 export const EPIC_STORE_URL = 'https://www.epicgames.com/store'
 export const GOG_STORE_URL = `https://gog.com`
