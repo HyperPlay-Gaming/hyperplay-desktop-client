@@ -33,6 +33,7 @@ import { getGameInfo } from 'frontend/helpers'
 import cn from 'classnames'
 
 function urlIsHpUrl(url: string) {
+  return true
   const urlToTest = new URL(url)
   return urlToTest.hostname === 'store.hyperplay.xyz'
 }
