@@ -17,6 +17,7 @@ import {
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { extractMainDomain } from '../../../helpers/extract-main-domain'
 import AppVersion from '../AppVersion'
+import SearchBarDiscover from '../SearchBarDiscover'
 
 const TopNavBar = observer(() => {
   const { t } = useTranslation()
@@ -49,6 +50,15 @@ const TopNavBar = observer(() => {
     const currentURLMainDomain = extractMainDomain(currentUrl)
     const isActive = viewURLMainDomain === currentURLMainDomain
     return isActive ? activeStyle : inactiveStyle
+  }
+
+  const getSearchBarType = () => {
+    if (pathname === '/library') {
+      return <SearchBar />
+    } else if (pathname === '/hyperplaystore') {
+      return <SearchBarDiscover />
+    }
+    return null
   }
 
   return (
@@ -102,7 +112,7 @@ const TopNavBar = observer(() => {
         </div>
       </div>
       <div>
-        {pathname === '/library' ? <SearchBar /> : null}
+        {getSearchBarType()}
         {showMetaMaskBrowserSidebarLinks && (
           <button
             className={styles.iconButton}
