@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.30.2",
+  "version": "0.31.0",
   "private": true,
   "main": "build/main/main.js",
   "homepage": "./",
@@ -221,8 +221,8 @@
     "vite-plugin-svgr": "^2.2.2"
   },
   "optionalDependencies": {
-    "@hyperplay/extension-importer": "^0.3.4",
-    "@hyperplay/extension-provider": "^0.1.3",
+    "@hyperplay/extension-importer": "^0.3.6",
+    "@hyperplay/extension-provider": "^0.1.4",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/overlay": "^1.0.3",
     "@hyperplay/patcher": "^0.0.22",

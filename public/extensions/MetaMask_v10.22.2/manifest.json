@@ -19,6 +19,14 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
+        "windows": "Alt+Shift+M",
+        "mac": "Alt+Shift+M",
+        "chromeos": "Alt+Shift+M",
+        "linux": "Alt+Shift+M"
+      }
+    },
+    "_execute_action": {
+      "suggested_key": {
         "default": "Alt+Shift+M",
         "windows": "Alt+Shift+M",
         "mac": "Alt+Shift+M",
@@ -67,7 +75,7 @@
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: 65c21f3b",
+  "description": "pull-request build from git id: d895b459",
   "host_permissions": [
     "http://localhost:8545/",
     "file://*/*",
@@ -88,6 +96,9 @@
   },
   "manifest_version": 3,
   "name": "MetaMask MV3 lavamoat snow",
+  "optional_permissions": [
+    "clipboardRead"
+  ],
   "permissions": [
     "activeTab",
     "alarms",
@@ -95,7 +106,8 @@
     "storage",
     "unlimitedStorage",
     "webRequest",
-    "offscreen"
+    "offscreen",
+    "identity"
   ],
   "sandbox": {
     "pages": [
@@ -109,12 +121,13 @@
   },
   "externally_connectable": {
     "matches": [
-      "https://metamask.io/*"
+      "http://*/*",
+      "https://*/*"
     ],
     "ids": [
       "*"
     ]
   },
-  "minimum_chrome_version": "89",
-  "version": "12.16.1"
+  "minimum_chrome_version": "115",
+  "version": "13.1.1"
 }
