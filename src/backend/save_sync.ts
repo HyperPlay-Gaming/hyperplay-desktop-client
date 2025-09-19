@@ -37,6 +37,7 @@ async function getDefaultSavePath(
       return getDefaultLegendarySavePath(appName)
     case 'gog':
       return getDefaultGogSavePaths(appName, alreadyDefinedGogSaves)
+    case 'steam':
     case 'sideload':
       return ''
   }

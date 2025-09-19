@@ -9,6 +9,7 @@ import React, {
 import { UpdateComponent } from 'frontend/components/UI'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
+import { showSteamInstallDialog } from 'frontend/components/UI/DialogHandler/components/MessageBoxModal/showSteamInstallDialog'
 import GamesList from './components/GamesList'
 import { FilterItem, GameInfo, Runner } from 'common/types'
 import ErrorComponent from 'frontend/components/UI/ErrorComponent'
@@ -37,7 +38,7 @@ type ModalState = {
 }
 
 export default observer(function Library(): React.JSX.Element {
-  const { layout, epic, gog, platform, connectivity } =
+  const { layout, epic, gog, platform, connectivity, showDialogModal } =
     useContext(ContextProvider)
   const { t } = useTranslation()
 
@@ -111,6 +112,9 @@ export default observer(function Library(): React.JSX.Element {
     runner: Runner,
     gameInfo: GameInfo | null
   ) {
+    if (runner === 'steam') {
+      return showSteamInstallDialog(showDialogModal, t, appName)
+    }
     setShowModal({ game: appName, show: true, runner, gameInfo })
   }
 
