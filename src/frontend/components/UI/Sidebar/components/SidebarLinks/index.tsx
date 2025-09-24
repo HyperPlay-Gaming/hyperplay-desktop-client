@@ -93,6 +93,7 @@ export default observer(function SidebarLinks() {
                   ? t('Please connect to the internet to access the stores')
                   : ''
               }
+              data-testid="sidebar-store-link"
             >
               <Images.Home fill={sidebarSvgUnselectedFill} />
             </NavLink>
@@ -112,6 +113,7 @@ export default observer(function SidebarLinks() {
               end
               to={'/library'}
               onClick={handleRefresh}
+              data-testid="sidebar-library-link"
             >
               <Images.Controller fill={sidebarSvgUnselectedFill} />
             </NavLink>
@@ -133,6 +135,7 @@ export default observer(function SidebarLinks() {
                 end
                 to={'/achievements'}
                 onClick={handleRefresh}
+                data-testid="sidebar-achievements-link"
               >
                 <Images.TrophyOutline fill={sidebarSvgUnselectedFill} />
               </NavLink>
@@ -169,6 +172,7 @@ export default observer(function SidebarLinks() {
                 classNames('Sidebar__item', { active: isActive })
               }
               to={{ pathname: '/download-manager' }}
+              data-testid="sidebar-download-manager-link"
             >
               <Images.DownloadIcon fill={sidebarSvgUnselectedFill} />
             </NavLink>
@@ -187,6 +191,18 @@ export default observer(function SidebarLinks() {
               state={{
                 fromGameCard: false
               }}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowRight') {
+                  const firstTab = document.querySelector<HTMLElement>(
+                    '#settingsTabs [role="tab"]'
+                  )
+                  if (firstTab) {
+                    firstTab.focus()
+                    e.preventDefault()
+                    e.stopPropagation()
+                  }
+                }
+              }}
             >
               <Images.Settings fill={sidebarSvgUnselectedFill} />
             </NavLink>
@@ -195,27 +211,23 @@ export default observer(function SidebarLinks() {
       </div>
 
       <div className=" SidebarLinks Sidebar__section">
-        <div
-          className="sidebarLinkGradientWrapper"
-          onClick={() => handleExternalLink(window.api.openDiscordLink)}
-        >
+        <div className="sidebarLinkGradientWrapper">
           <Tooltip {...tooltipProps} label="Discord">
-            <div className="Sidebar__item">
-              <button>
-                <Images.Discord stroke={sidebarSvgUnselectedFill} />
-              </button>
+            <div
+              className="Sidebar__item"
+              onClick={() => handleExternalLink(window.api.openDiscordLink)}
+            >
+              <Images.Discord stroke={sidebarSvgUnselectedFill} />
             </div>
           </Tooltip>
         </div>
-        <div
-          className="sidebarLinkGradientWrapper "
-          onClick={() => handleExternalLink(window.api.openTwitterLink)}
-        >
+        <div className="sidebarLinkGradientWrapper">
           <Tooltip {...tooltipProps} label="X">
-            <div className="Sidebar__item">
-              <button>
-                <Images.XLogo fill={sidebarSvgUnselectedFill} />
-              </button>
+            <div
+              className="Sidebar__item"
+              onClick={() => handleExternalLink(window.api.openTwitterLink)}
+            >
+              <Images.XLogo fill={sidebarSvgUnselectedFill} />
             </div>
           </Tooltip>
         </div>

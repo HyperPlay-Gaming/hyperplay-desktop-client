@@ -170,6 +170,97 @@ export const initGamepad = () => {
         // so the spatial navigation works
         if (action !== 'leftClick' && action !== 'rightClick') {
           if (
+            (action === 'padLeft' || action === 'leftStickLeft') &&
+            insideTopNavBar()
+          ) {
+            const isHyperPlayFocused = !!(
+              currentElement() as HTMLElement | null
+            )?.closest('#topNavBar #topbarHyperplayLink')
+            if (isHyperPlayFocused) {
+              const storeLink = document.querySelector<HTMLElement>(
+                '[data-testid="sidebar-store-link"]'
+              )
+              if (storeLink) {
+                storeLink.focus()
+                return
+              }
+              const firstSidebarItem = document.querySelector<HTMLElement>(
+                '.SidebarLinks .Sidebar__item'
+              )
+              if (firstSidebarItem) {
+                firstSidebarItem.focus()
+                return
+              }
+            }
+          }
+
+          if (insideLibraryTopBarTabs()) {
+            const pos = getFocusedLibraryTabPosition()
+            if (pos) {
+              if (
+                (action === 'padLeft' || action === 'leftStickLeft') &&
+                pos.idx === 0
+              ) {
+                const sidebarLink = document.querySelector<HTMLElement>(
+                  '[data-testid="sidebar-library-link"]'
+                )
+                if (sidebarLink) {
+                  sidebarLink.focus()
+                  return
+                }
+              }
+              if (
+                (action === 'padRight' || action === 'leftStickRight') &&
+                pos.idx === pos.lastIdx
+              ) {
+                if (focusFirstFocusable('#librarySortContainer')) return
+                if (focusFirstFocusable('#libraryFiltersContainer')) return
+              }
+            }
+          }
+          // Move from Sidebar Settings to Settings tabs on Right
+          if (insideSidebar()) {
+            const isSettingsFocused = !!(
+              currentElement() as HTMLElement | null
+            )?.closest('[data-testid="settings"]')
+            if (
+              isSettingsFocused &&
+              (action === 'padRight' || action === 'leftStickRight')
+            ) {
+              if (focusSettingsFirstTab()) return
+            }
+          }
+          // Settings tabs navigation: Left from first -> sidebar; Right from last -> wrap to first
+          if (insideSettingsTabs()) {
+            const pos = getFocusedSettingsTabPosition()
+            if (pos) {
+              if (
+                (action === 'padLeft' || action === 'leftStickLeft') &&
+                pos.idx === 0
+              ) {
+                const sidebarSettings = document.querySelector<HTMLElement>(
+                  '[data-testid="settings"]'
+                )
+                if (sidebarSettings) {
+                  sidebarSettings.focus()
+                  return
+                }
+              }
+              if (
+                (action === 'padRight' || action === 'leftStickRight') &&
+                pos.idx === pos.lastIdx
+              ) {
+                if (focusSettingsFirstTab()) return
+              }
+            }
+          }
+          if (
+            (action === 'padLeft' || action === 'leftStickLeft') &&
+            insideLibraryTopBarFilters()
+          ) {
+            if (focusLibraryLastTab()) return
+          }
+          if (
             (currentElement()?.id === 'topElementWalletDropdown' ||
               currentElement()?.id === 'topMenuItemWalletDropdown') &&
             (action === 'padUp' || action === 'leftStickUp')
@@ -177,6 +268,36 @@ export const initGamepad = () => {
             document
               .querySelector<HTMLElement>('#accountWalletContainer')
               ?.focus()
+          }
+          if (insideDownloadManagerScreen()) {
+            // If anywhere in the Download Manager screen, allow Left from first tab to go to sidebar
+            if (insideDownloadManagerTabs()) {
+              const pos = getFocusedDownloadManagerTabPosition()
+              if (pos) {
+                if (
+                  (action === 'padLeft' || action === 'leftStickLeft') &&
+                  pos.idx === 0
+                ) {
+                  const sidebarLink = document.querySelector<HTMLElement>(
+                    '[data-testid="sidebar-download-manager-link"]'
+                  )
+                  if (sidebarLink) {
+                    sidebarLink.focus()
+                    return
+                  }
+                }
+              }
+            }
+            // If focus isn't on a tab, ArrowLeft should still go back to sidebar
+            if (action === 'padLeft' || action === 'leftStickLeft') {
+              const sidebarLink = document.querySelector<HTMLElement>(
+                '[data-testid="sidebar-download-manager-link"]'
+              )
+              if (sidebarLink) {
+                sidebarLink.focus()
+                return
+              }
+            }
           }
           window.api.gamepadAction({ action })
         } else {
@@ -230,6 +351,157 @@ export const initGamepad = () => {
     if (!parent) return false
 
     return parent.classList.contains('MuiMenu-list')
+  }
+
+  function insideTopNavBar() {
+    const el = currentElement()
+    if (!el) return false
+
+    return !!el.closest('#topNavBar')
+  }
+
+  function insideSidebar() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('.SidebarLinks')
+  }
+
+  function insideLibraryTopBarTabs() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#libraryTopBarTabs')
+  }
+
+  function insideLibraryTopBarFilters() {
+    const el = currentElement()
+    if (!el) return false
+    return (
+      !!el.closest('#librarySortContainer') ||
+      !!el.closest('#libraryFiltersContainer')
+    )
+  }
+
+  function insideSettingsTabs() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#settingsTabs')
+  }
+
+  function getFocusedLibraryTabPosition() {
+    const el = currentElement()
+    if (!el) return null
+    // Prefer role-based selection to be robust to test id changes
+    let tabs = Array.from(
+      document.querySelectorAll<HTMLElement>('#libraryTopBarTabs [role="tab"]')
+    )
+    if (!tabs.length) {
+      tabs = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '#libraryTopBarTabs [data-testid^="library-tab-"]'
+        )
+      )
+    }
+    if (!tabs.length) return null
+    const focusedTab = (el.closest('[role="tab"]') ||
+      el.closest('[data-testid^="library-tab-"]')) as HTMLElement | null
+    if (!focusedTab) return null
+    const idx = tabs.findIndex((t) => t === focusedTab)
+    if (idx === -1) return null
+    return { idx, lastIdx: tabs.length - 1 }
+  }
+
+  function getFocusedSettingsTabPosition() {
+    const el = currentElement()
+    if (!el) return null
+    let tabs = Array.from(
+      document.querySelectorAll<HTMLElement>('#settingsTabs [role="tab"]')
+    )
+    if (!tabs.length) return null
+    const focusedTab = el.closest('[role="tab"]') as HTMLElement | null
+    if (!focusedTab) return null
+    const idx = tabs.findIndex((t) => t === focusedTab)
+    if (idx === -1) return null
+    return { idx, lastIdx: tabs.length - 1 }
+  }
+
+  function focusLibraryLastTab() {
+    let tabs = Array.from(
+      document.querySelectorAll<HTMLElement>('#libraryTopBarTabs [role="tab"]')
+    )
+    if (!tabs.length) {
+      tabs = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '#libraryTopBarTabs [data-testid^="library-tab-"]'
+        )
+      )
+    }
+    if (!tabs.length) return false
+    const last = tabs[tabs.length - 1]
+    if (last) {
+      last.focus()
+      return true
+    }
+    return false
+  }
+
+  function focusSettingsFirstTab() {
+    const first = document.querySelector<HTMLElement>(
+      '#settingsTabs [role="tab"]'
+    )
+    if (first) {
+      first.focus()
+      return true
+    }
+    return false
+  }
+
+  function focusFirstFocusable(containerSelector: string) {
+    const container = document.querySelector<HTMLElement>(containerSelector)
+    if (!container) return false
+    const focusable = container.querySelector<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    if (focusable) {
+      focusable.focus()
+      return true
+    }
+    return false
+  }
+
+  function insideDownloadManagerTabs() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#downloadManagerTabs')
+  }
+
+  function insideDownloadManagerScreen() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#downloadManagerScreen')
+  }
+
+  function getFocusedDownloadManagerTabPosition() {
+    const el = currentElement()
+    if (!el) return null
+    let tabs = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        '#downloadManagerTabs [role="tab"]'
+      )
+    )
+    if (!tabs.length) {
+      tabs = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '#downloadManagerTabs [data-testid^="dm-tab-"]'
+        )
+      )
+    }
+    if (!tabs.length) return null
+    const focusedTab = (el.closest('[role="tab"]') ||
+      el.closest('[data-testid^="dm-tab-"]')) as HTMLElement | null
+    if (!focusedTab) return null
+    const idx = tabs.findIndex((t) => t === focusedTab)
+    if (idx === -1) return null
+    return { idx, lastIdx: tabs.length - 1 }
   }
 
   function playable() {

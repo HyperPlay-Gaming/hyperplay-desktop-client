@@ -54,10 +54,6 @@
   cursor: pointer;
 }
 
-.sidebarLinkGradientWrapper > button {
-  margin: 0 auto;
-}
-
 .sidebarLinkGradientWrapper:has(.Sidebar__item.active) {
   background: var(--color-gradient-01-border);
 }
