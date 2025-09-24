@@ -413,7 +413,7 @@ export const initGamepad = () => {
   function getFocusedSettingsTabPosition() {
     const el = currentElement()
     if (!el) return null
-    let tabs = Array.from(
+    const tabs = Array.from(
       document.querySelectorAll<HTMLElement>('#settingsTabs [role="tab"]')
     )
     if (!tabs.length) return null
