@@ -168,6 +168,7 @@ export const LibraryTopBar = observer(
           <div
             className={styles.dropdownContainer}
             id="libraryFiltersContainer"
+            data-testid="library-filters-dropdown"
           >
             <GenericDropdown
               target={
@@ -175,8 +176,7 @@ export const LibraryTopBar = observer(
                   text={'Other filters'}
                   className={styles.dropdownButton}
                   divProps={{
-                    className: 'body-sm',
-                    'data-testid': 'library-filters-dropdown'
+                    className: 'body-sm'
                   }}
                 ></GenericDropdown.GenericButton>
               }
