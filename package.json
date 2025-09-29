@@ -90,7 +90,7 @@
     "@valist/sdk": "^2.10.14",
     "@wagmi/core": "2.15.2",
     "auto-launch": "^5.0.6",
-    "axios": "^1.9.0",
+    "axios": "^1.12.0",
     "bn.js": "^5.2.1",
     "call-bind-apply-helpers": "^1.0.1",
     "classic-level": "^1.4.1",
@@ -264,5 +264,12 @@
       "@hyperplay/overlay>@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true
     }
   },
-  "packageManager": "pnpm@10.8.1"
+  "packageManager": "pnpm@10.8.1",
+  "pnpm": {
+    "overrides": {
+      "sha.js": "2.4.12",
+      "form-data": ">=4.0.4",
+      "axios": ">=1.12.0"
+    }
+  }
 }
