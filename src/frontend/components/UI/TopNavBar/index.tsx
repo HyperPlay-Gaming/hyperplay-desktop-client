@@ -58,10 +58,33 @@ const TopNavBar = observer(() => {
           }
         }
       }
+
+      // Right arrow navigation on /library page
+      if (e.key === 'ArrowRight' && pathname === '/library') {
+        const activeEl = document.activeElement as HTMLElement | null
+
+        // From MetaMask button -> Account dropdown
+        if (activeEl?.closest('#topbarMetaMaskButton')) {
+          const accountBtn = document.getElementById('accountWalletContainer')
+          if (accountBtn) {
+            accountBtn.focus()
+            e.preventDefault()
+            e.stopPropagation()
+          }
+          return
+        }
+
+        // From Account dropdown -> stay there
+        if (activeEl?.closest('#accountWalletContainer')) {
+          e.preventDefault()
+          e.stopPropagation()
+          return
+        }
+      }
     }
     nav.addEventListener('keydown', onKeyDown)
     return () => nav.removeEventListener('keydown', onKeyDown)
-  }, [])
+  }, [pathname])
 
   function getStoreTextStyle(viewURL: string) {
     const { currentUrl } = webviewNavigationStore

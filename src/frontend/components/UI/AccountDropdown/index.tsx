@@ -46,11 +46,14 @@ const WalletDropdown: React.FC = observer(() => {
   const showMetaMaskExtensionLinks =
     walletState.isConnected &&
     walletState.provider === PROVIDERS.METAMASK_EXTENSION
+  const [opened, setOpened] = React.useState(false)
 
   return (
     <Menu
       position="bottom-end"
       trigger="hover"
+      opened={opened}
+      onChange={setOpened}
       zIndex={100001}
       classNames={{
         dropdown: styles.menuDropdown,
@@ -64,6 +67,7 @@ const WalletDropdown: React.FC = observer(() => {
             onClick={() => {
               console.log('wallet clicked')
             }}
+            onFocus={() => setOpened(true)}
           />
         </div>
       </Menu.Target>
