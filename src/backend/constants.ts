@@ -106,12 +106,7 @@ const wineprefixFAQ = 'https://wiki.winehq.org/FAQ#Wineprefixes'
 const hyperplaySite = 'https://docs.hyperplay.xyz/faq'
 const customThemesWikiLink =
   'https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/Custom-Themes'
-const eventsToCloseMetaMaskPopupOn = [
-  'keyDown',
-  'keyUp',
-  'mouseDown',
-  'mouseUp'
-]
+const eventsToCloseMetaMaskPopupOn = ['mouseDown', 'mouseUp']
 const valistListingsApiUrl = 'https://developers.hyperplay.xyz/api/v1/listings'
 const mainReleaseChannelName = 'main'
 export let qaToken = ''

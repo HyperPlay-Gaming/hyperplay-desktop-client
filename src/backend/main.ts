@@ -1843,7 +1843,7 @@ ipcMain.handle('gamepadAction', async (event, args) => {
     case 'rightStickUp':
       inputEvents.push({
         type: 'mouseWheel',
-        deltaY: 50,
+        deltaY: 150,
         x: mainWindow.getBounds().width / 2,
         y: mainWindow.getBounds().height / 2
       })
@@ -1851,7 +1851,7 @@ ipcMain.handle('gamepadAction', async (event, args) => {
     case 'rightStickDown':
       inputEvents.push({
         type: 'mouseWheel',
-        deltaY: -50,
+        deltaY: -150,
         x: mainWindow.getBounds().width / 2,
         y: mainWindow.getBounds().height / 2
       })

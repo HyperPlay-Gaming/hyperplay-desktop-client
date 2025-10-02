@@ -57,6 +57,56 @@ export default React.memo(function DownloadManager(): React.JSX.Element | null {
     window.api.trackScreen('Download Manager')
   }, [])
 
+  // Controller/keyboard nav: Left on first tab -> sidebar Download Manager link; Right on last -> Clear List
+  useEffect(() => {
+    const tabsRoot = document.getElementById('downloadManagerTabs')
+    if (!tabsRoot) return
+
+    const getTabs = () =>
+      Array.from(tabsRoot.querySelectorAll<HTMLElement>('[role="tab"]'))
+
+    const focusSidebarDM = () => {
+      const el = document.querySelector<HTMLElement>(
+        '[data-testid="sidebar-download-manager-link"]'
+      )
+      el?.focus()
+    }
+
+    const focusClearList = () => {
+      const el = document.querySelector<HTMLElement>(
+        '[data-testid="dm-clear-list"]'
+      )
+      el?.focus()
+    }
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      const tabs = getTabs()
+      if (!tabs.length) return
+      const focused = (e.target as HTMLElement)?.closest('[role="tab"]')
+      if (!focused) return
+      const idx = tabs.findIndex((t) => t === focused)
+      if (idx === -1) return
+      if (e.key === 'ArrowLeft' && idx === 0) {
+        focusSidebarDM()
+        e.preventDefault()
+        e.stopPropagation()
+      }
+      if (e.key === 'ArrowRight' && idx === tabs.length - 1) {
+        if (activeTab !== 'downloaded') {
+          ;(tabs[idx] as HTMLElement).click()
+        }
+        requestAnimationFrame(() => {
+          focusClearList()
+        })
+        e.preventDefault()
+        e.stopPropagation()
+      }
+    }
+
+    tabsRoot.addEventListener('keydown', onKeyDown, true)
+    return () => tabsRoot.removeEventListener('keydown', onKeyDown, true)
+  }, [activeTab])
+
   const doneElements =
     (finishedElem?.length &&
       finishedElem.sort((a, b) => {
@@ -82,7 +132,7 @@ export default React.memo(function DownloadManager(): React.JSX.Element | null {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
-      <div className={'contentContainer'}>
+      <div className={'contentContainer'} id="downloadManagerScreen">
         <h3 className={styles.title}>
           {t('download-manager.title_dm', 'Download Manager')}
         </h3>
@@ -93,6 +143,7 @@ export default React.memo(function DownloadManager(): React.JSX.Element | null {
             { list: styles.tabsList, panel: styles.tabsPanel },
             { list: 'outline' }
           )}
+          id="downloadManagerTabs"
         >
           {showClearListButton ? (
             <Button
@@ -101,14 +152,21 @@ export default React.memo(function DownloadManager(): React.JSX.Element | null {
               type="tertiary"
               leftIcon={<FontAwesomeIcon icon={faTrash} />}
               size="small"
+              data-testid="dm-clear-list"
             >
               {t('queue.label.clear', 'Clear List')}
             </Button>
           ) : null}
           <Tabs.List>
-            <Tabs.Tab value="downloading">Downloading</Tabs.Tab>
-            <Tabs.Tab value="queued">Queued</Tabs.Tab>
-            <Tabs.Tab value="downloaded">Downloaded</Tabs.Tab>
+            <Tabs.Tab value="downloading" data-testid="dm-tab-downloading">
+              Downloading
+            </Tabs.Tab>
+            <Tabs.Tab value="queued" data-testid="dm-tab-queued">
+              Queued
+            </Tabs.Tab>
+            <Tabs.Tab value="downloaded" data-testid="dm-tab-downloaded">
+              Downloaded
+            </Tabs.Tab>
           </Tabs.List>
           <Tabs.Panel value="downloading">
             <div className={styles.downloadManager}>
