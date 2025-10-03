@@ -18,13 +18,13 @@
             "title": "Проверить и восстановить"
         },
         "runexe": {
-            "title": "Select EXE to Run"
+            "title": "Выберите исполняемый файл для запуска"
         },
         "select": {
-            "button": "Select"
+            "button": "Выберите"
         },
         "sideload": {
-            "exe": "Select Executable"
+            "exe": "Выберите исполняемый файл"
         },
         "stopInstall": {
             "keepInstalling": "Продолжить установку",
@@ -35,7 +35,7 @@
         "uninstall": {
             "checkbox": "Удалить префикс: {{prefix}}{{newLine}} Примечание: Это действие нельзя отменить, и оно также приведет к удалению файлов сохранений.",
             "message": "Удалить эту игру?",
-            "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
+            "settingcheckbox": "Сбросить настройки и удалить журнал{{newLine}}Примечание: это действие невозможно отменить. Все изменённые настройки будут сброшены, а журнал удалён.",
             "title": "Удалить",
             "dlc": "Вы хотите удалить этот DLC?",
             "prefix_warning": "Префикс Wine для этой игры - префикс по умолчанию. Если вы действительно хотите удалить его, вы должны сделать это вручную."
@@ -62,24 +62,24 @@
         "add_to_favourites": "Добавить в избранное",
         "cancel": "Пауза/Отмена",
         "continue": "Продолжить загрузку",
-        "finish": "Finish",
+        "finish": "Завершить",
         "force_update": "Принудительное обновление, если доступно",
-        "force-innstall": "Force Install",
+        "force-innstall": "Принудительная установка",
         "hide_game": "Скрыть игру",
         "import": "Импортировать игру",
         "install": "Установить",
-        "no-path-selected": "No path selected",
+        "no-path-selected": "Путь не выбран",
         "queue": {
-            "remove": "Remove from Queue",
+            "remove": "Удалить из очереди",
             "cancel": "Отменить загрузку",
             "continue": "Продолжить загрузку"
         },
         "remove_from_favourites": "Удалить из избранного",
-        "remove_from_recent": "Remove From Recent",
-        "run-exe-first": "Run Installer First",
-        "running-setup": "Running Setup",
+        "remove_from_recent": "Удалить из последних",
+        "run-exe-first": "Сначала запустить программу установки",
+        "running-setup": "Запуск программы настройки",
         "sideload": {
-            "edit": "Edit App/Game"
+            "edit": "Редактировать приложение / игру"
         },
         "unhide_game": "Показать игру",
         "uninstall": "Удалить",
@@ -87,7 +87,9 @@
         "details": "Подробности",
         "favorites": "Любимое",
         "remove_from_library": "Удалить",
-        "unfavorites": "Нелюбимое"
+        "unfavorites": "Нелюбимое",
+        "add_to_library": "Добавить в библиотеку",
+        "install-downloader": "Скачать установщик"
     },
     "cloud_save_unsupported": "Не поддерживается",
     "disabled": "Выключено",
@@ -132,7 +134,7 @@
         "size": "Размер",
         "syncsaves": "Синхронизация сохранений",
         "version": "Версия",
-        "web3-supported": "Has Web3 features"
+        "web3-supported": "Имеет функции Web3"
     },
     "install": {
         "disk-space-left": "Свободное место",
@@ -178,24 +180,24 @@
         "title": "Выбрать компоненты для установки"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "use-default-wine-settings": "Использовать настройки совместимости по умолчанию",
         "winecrossoverbottle": "Бутылка CrossOver"
     },
     "sideload": {
         "field": {
-            "title": "Title"
+            "title": "раздел"
         },
         "info": {
-            "broser": "BrowserURL",
-            "exe": "Select Executable",
-            "image": "App Image",
+            "broser": "URL Браузера",
+            "exe": "Выберите исполняемый файл",
+            "image": "Изображение приложения",
             "supports-web3": "This Game has Web3 Features",
-            "title": "Game/App Title"
+            "title": "Название игры / приложения"
         },
         "placeholder": {
-            "image": "Paste an Image URL here",
-            "title": "Add a title to your Game/App",
-            "url": "Paste the Game URL here"
+            "image": "Вставьте сюда URL-адрес изображения",
+            "title": "Добавьте заголовок к своей игре/приложению",
+            "url": "Вставьте URL-адрес игры сюда"
         }
     },
     "specs": {
@@ -213,7 +215,7 @@
         "notSupported": "Не поддерживается",
         "notSupportedGame": "Не поддерживается",
         "processing": "Обработка файлов, подождите",
-        "queued": "Queued",
+        "queued": "В Очереди",
         "reparing": "Восстановление игры. Пожалуйста, подождите",
         "this-game-uses-third-party": "Эта игра использует сторонний лаунчер и пока не поддерживается",
         "totalDownloaded": "Всего загружено",
@@ -233,7 +235,7 @@
         "goodie": "Не устанавливается",
         "preparing": "Скачать, пожалуйста, подождите",
         "distributables": "Установка распределенных",
-        "paused": "Пауза",
+        "paused": "На Паузе",
         "patching": "Патчинг файлов "
     },
     "submenu": {
@@ -255,5 +257,27 @@
         "getInstallInfo": {
             "error": "Пожалуйста, свяжитесь с HyperPlay Team с этим сообщением: {{error}} - {{context}}."
         }
+    },
+    "alert": {
+        "install": {
+            "siwe-action": "Купить NFT",
+            "siwe-message": "Пожалуйста, совершите покупку, чтобы продолжить, или убедитесь, что NFT находится в текущем кошельке.",
+            "tdp-title": "Сторонний загрузчик",
+            "tpd-message-part1": "Сторонние загрузчики обходят проверку безопасности HyperPlay. ",
+            "tpd-message-part2": "Продолжайте, только если вы доверяете этой студии разработки игр."
+        }
+    },
+    "downloadToast": {
+        "cancel": "Отмена",
+        "pause": "Пауза",
+        "resume": "Возобновить"
+    },
+    "tooltip": {
+        "installed_from_epic": "Установлен из Epic Store",
+        "installed_from_gog": "Установлено из GOG Store",
+        "installed_from_hyperplay": "Установлено из HyperPlay Store",
+        "will_install_from_epic": "Будет установлен из Epic Store",
+        "will_install_from_gog": "Будет установлено из GOG Store",
+        "will_install_from_hyperplay": "Будет установлено из HyperPlay Store"
     }
 }

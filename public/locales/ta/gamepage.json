@@ -21,7 +21,7 @@
             "title": "EXE ஐ இயக்க தேர்ந்தெடு"
         },
         "select": {
-            "button": "Select"
+            "button": "தேர்ந்தெடு"
         },
         "sideload": {
             "exe": "இயங்கக்கூடியதைத் தேர்ந்தெடுக்கவும்"
@@ -63,7 +63,7 @@
         "cancel": "இடைநிறுத்து/ரத்துசெய்",
         "continue": "பதிவிறக்கத்தை தொடரு",
         "finish": "முடிக்க",
-        "force_update": "கிடைத்தால் புதுப்பிப்பு புதுப்பிப்பு",
+        "force_update": "புதுப்பிப்பு கிடைத்தால் புதுப்பிப்பு",
         "force-innstall": "கட்டாய நிறுவலை கட்டாயப்படுத்துங்கள்",
         "hide_game": "விளையாட்டை மறைக்கவும்",
         "import": "விளையாட்டை இறக்குமதி செய்",
@@ -87,12 +87,15 @@
         "remove_from_library": "நீக்கு",
         "details": "விவரங்கள்",
         "favorites": "பிடித்தவை",
-        "unfavorites": "மாறாத"
+        "unfavorites": "மாறாத",
+        "add_to_library": "நூலகத்தில் சேர்க்கவும்",
+        "install-downloader": "நிறுவி பதிவிறக்கவும்",
+        "sign-and-install": "கையொப்பமிட்டு நிறுவவும்"
     },
     "cloud_save_unsupported": "ஆதரிக்கப்படாதது",
     "disabled": "முடக்கப்பட்டது",
     "dlc": {
-        "installDlcs": "Install all DLCs"
+        "installDlcs": "அனைத்து டி.எல்.சிகளையும் நிறுவவும்"
     },
     "enabled": "இயக்கப்பட்டது",
     "game": {
@@ -137,7 +140,7 @@
     "install": {
         "disk-space-left": "இடம் கிடைக்கிறது",
         "not-enough-disk-space": "போதுமான வட்டு இடம் இல்லை",
-        "path": "Select Install Path",
+        "path": "பாதையை நிறுவவும் என்பதைத் தேர்ந்தெடுக்கவும்",
         "path-not-writtable": "எச்சரிக்கை: பாதை எழுத முடியாததாக இருக்காது.",
         "space-after-install": "நிறுவிய பின்",
         "wineprefix": "வைன் ப்ரெஃபிக்ச்",
@@ -173,7 +176,7 @@
     },
     "setting": {
         "use-default-wine-settings": "இயல்புநிலை பொருந்தக்கூடிய அமைப்புகளைப் பயன்படுத்தவும்",
-        "winecrossoverbottle": "CrossOver Bottle"
+        "winecrossoverbottle": "குறுக்குவழி பாட்டில்"
     },
     "sideload": {
         "field": {
@@ -206,7 +209,7 @@
         "notinstalled": "இந்த விளையாட்டு நிறுவப்படவில்லை",
         "notSupported": "ஆதரிக்கப்படவில்லை",
         "notSupportedGame": "ஆதரிக்கப்படவில்லை",
-        "processing": "Processing files, please wait",
+        "processing": "கோப்புகளை செயலாக்குகிறது, தயவுசெய்து காத்திருங்கள்",
         "queued": "வரிசையில்",
         "reparing": "விளையாட்டு பழுதுபார்க்கப்படுகிறது, தயவுசெய்து காத்திருக்கவும்",
         "this-game-uses-third-party": "இந்த விளையாட்டு மூன்றாம் தரப்பு துவக்கியைப் பயன்படுத்துகிறது, அது இன்னும் ஆதரிக்கப்படவில்லை",
@@ -247,5 +250,28 @@
         "getInstallInfo": {
             "error": "இந்த செய்தியுடன் HyperPlay குழுவை தொடர்பு கொள்ளவும்: {{error}} - {{context}}."
         }
+    },
+    "alert": {
+        "install": {
+            "siwe-action": "NFT வாங்க",
+            "siwe-message": "தொடரவும் அல்லது தற்போதைய பணப்பையில் NFT இருப்பதை உறுதிப்படுத்தவும்.",
+            "tdp-title": "மூன்றாம் தரப்பு பதிவிறக்கம்",
+            "tpd-message-part1": "மூன்றாம் தரப்பு பதிவிறக்கிகள் ஐப்பர் பிளேயின் பாதுகாப்பு மதிப்பாய்வைத் தவிர்த்து விடுகின்றன. ",
+            "tpd-message-part2": "இந்த விளையாட்டு மேம்பாட்டு ச்டுடியோவை நீங்கள் நம்பினால் மட்டுமே தொடரவும்."
+        }
+    },
+    "downloadToast": {
+        "cancel": "ரத்துசெய்",
+        "of": "of",
+        "pause": "இடைநிறுத்தம்",
+        "resume": "மீண்டும் தொடங்குங்கள்"
+    },
+    "tooltip": {
+        "installed_from_epic": "காவிய கடையிலிருந்து நிறுவப்பட்டது",
+        "installed_from_gog": "GOG கடையிலிருந்து நிறுவப்பட்டது",
+        "installed_from_hyperplay": "ஐப்பர் பிளே கடையிலிருந்து நிறுவப்பட்டது",
+        "will_install_from_epic": "காவிய கடையிலிருந்து நிறுவப்படும்",
+        "will_install_from_gog": "GOG கடையில் இருந்து நிறுவப்படும்",
+        "will_install_from_hyperplay": "ஐப்பர் பிளே கடையிலிருந்து நிறுவப்படும்"
     }
 }
