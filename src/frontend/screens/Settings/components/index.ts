@@ -1,4 +1,5 @@
 export { default as AlternativeExe } from './AlternativeExe'
+export { default as AdvertiseAvxForRosetta } from './AdvertiseAvxForRosetta'
 export { default as AutoDXVK } from './AutoDXVK'
 export { default as AutoDXVKNVAPI } from './AutoDXVKNVAPI'
 export { default as AutoUpdateGames } from './AutoUpdateGames'

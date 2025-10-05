@@ -286,6 +286,8 @@ class GlobalConfigV0 extends GlobalConfig {
 
     // @ts-expect-error TODO: We need to settle on *one* place to define settings defaults
     return {
+      advertiseAvxForRosetta:
+        isMac && (defaultWine as WineInstallation)?.type === 'toolkit',
       checkUpdatesInterval: 10,
       enableUpdates: false,
       addDesktopShortcuts: false,
