@@ -156,6 +156,25 @@ export default observer(function SidebarLinks() {
                 state={{
                   fromGameCard: false
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === 'ArrowRight') {
+                    const search =
+                      document.querySelector<HTMLElement>('#search')
+                    if (search) {
+                      search.focus()
+                      e.preventDefault()
+                      e.stopPropagation()
+                    } else {
+                      const container = document.querySelector<HTMLElement>(
+                        '[data-testid="quests-search-container"]'
+                      )
+                      const input = container?.querySelector<HTMLElement>(
+                        'input, [role="searchbox"], [contenteditable="true"]'
+                      )
+                      input?.focus()
+                    }
+                  }
+                }}
               >
                 <Images.QuestIcon fill={sidebarSvgUnselectedFill} />
               </NavLink>

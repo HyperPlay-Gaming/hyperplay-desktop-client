@@ -194,6 +194,24 @@ export const initGamepad = () => {
             }
           }
 
+          // Move from Sidebar Quests to Quests search input on Right
+          if (insideSidebar()) {
+            const isQuestsFocused = !!(
+              currentElement() as HTMLElement | null
+            )?.closest('[data-testid="quests"]')
+            if (
+              isQuestsFocused &&
+              (action === 'padRight' || action === 'leftStickRight')
+            ) {
+              const questsSearch =
+                document.querySelector<HTMLElement>('#search')
+              if (questsSearch) {
+                questsSearch.focus()
+                return
+              }
+            }
+          }
+
           if (insideLibraryTopBarTabs()) {
             const pos = getFocusedLibraryTabPosition()
             if (pos) {
@@ -230,6 +248,18 @@ export const initGamepad = () => {
               if (focusSettingsFirstTab()) return
             }
           }
+          // Move from Sidebar Quests to Quests search input on Right (with fallbacks)
+          if (insideSidebar()) {
+            const isQuestsFocused = !!(
+              currentElement() as HTMLElement | null
+            )?.closest('[data-testid="quests"]')
+            if (
+              isQuestsFocused &&
+              (action === 'padRight' || action === 'leftStickRight')
+            ) {
+              if (focusQuestsSearchInput()) return
+            }
+          }
           // Settings tabs navigation: Left from first -> sidebar; Right from last -> wrap to first
           if (insideSettingsTabs()) {
             const pos = getFocusedSettingsTabPosition()
@@ -259,6 +289,29 @@ export const initGamepad = () => {
             insideLibraryTopBarFilters()
           ) {
             if (focusLibraryLastTab()) return
+          }
+
+          // Quests screen navigation: Down from search -> list, Left from search -> sidebar
+          if (insideQuestsScreen() && insideQuestsSearch()) {
+            if (action === 'padDown' || action === 'leftStickDown') {
+              if (focusQuestsFirstItem()) return
+            }
+            if (action === 'padLeft' || action === 'leftStickLeft') {
+              const sidebarQuests = document.querySelector<HTMLElement>(
+                '[data-testid="quests"]'
+              )
+              if (sidebarQuests) {
+                sidebarQuests.focus()
+                return
+              }
+            }
+          }
+
+          // Quests: Left from details panel -> focus selected quest card (or first)
+          if (insideQuestsScreen() && insideQuestsDetails()) {
+            if (action === 'padLeft' || action === 'leftStickLeft') {
+              if (focusQuestsSelectedOrFirst()) return
+            }
           }
           if (
             (currentElement()?.id === 'topElementWalletDropdown' ||
@@ -295,6 +348,19 @@ export const initGamepad = () => {
               )
               if (sidebarLink) {
                 sidebarLink.focus()
+                return
+              }
+            }
+          }
+
+          // Quests: Only Left from the search area returns to sidebar
+          if (insideQuestsScreen() && insideQuestsSearch()) {
+            if (action === 'padLeft' || action === 'leftStickLeft') {
+              const sidebarQuests = document.querySelector<HTMLElement>(
+                '[data-testid="quests"]'
+              )
+              if (sidebarQuests) {
+                sidebarQuests.focus()
                 return
               }
             }
@@ -502,6 +568,97 @@ export const initGamepad = () => {
     const idx = tabs.findIndex((t) => t === focusedTab)
     if (idx === -1) return null
     return { idx, lastIdx: tabs.length - 1 }
+  }
+
+  function insideQuestsScreen() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('[data-testid="quests-screen-root"]')
+  }
+
+  function insideQuestsSearch() {
+    const el = currentElement()
+    if (!el) return false
+    if (isSearchInput()) return true
+    return !!el.closest('[data-testid="quests-search-container"]')
+  }
+
+  function insideQuestsDetails() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('[data-testid="quests-details-panel"]')
+  }
+
+  function focusQuestsFirstItem() {
+    // Prefer the list container if present
+    const container = document.querySelector<HTMLElement>(
+      '#questsTableGamesList'
+    )
+    if (container) {
+      const focusable = container.querySelector<HTMLElement>(
+        '[data-testid="quest-card"], button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      if (focusable) {
+        focusable.focus()
+        return true
+      }
+    }
+    // Fallback to the first quest card
+    const firstCard = document.querySelector<HTMLElement>(
+      '[data-testid="quest-card"]'
+    )
+    if (firstCard) {
+      firstCard.focus()
+      return true
+    }
+    return false
+  }
+
+  function focusQuestsSearchInput() {
+    // Try direct id first (preferred)
+    const direct = document.querySelector<HTMLElement>('#search')
+    if (direct) {
+      direct.focus()
+      return true
+    }
+    // Then try inside the quests search container
+    const container = document.querySelector<HTMLElement>(
+      '[data-testid="quests-search-container"]'
+    )
+    if (!container) return false
+    const input = container.querySelector<HTMLElement>(
+      'input, [role="searchbox"], [contenteditable="true"]'
+    )
+    if (input) {
+      input.focus()
+      return true
+    }
+    // If input is not present/visible yet, click a toggle button and retry next frame
+    const toggle = container.querySelector<HTMLElement>(
+      'button, [role="button"]'
+    )
+    if (toggle) {
+      toggle.click()
+      requestAnimationFrame(() => {
+        const retryInput = container.querySelector<HTMLElement>(
+          'input, [role="searchbox"], [contenteditable="true"]'
+        )
+        retryInput?.focus()
+      })
+      return true
+    }
+    return false
+  }
+
+  function focusQuestsSelectedOrFirst() {
+    const selected = document.querySelector<HTMLElement>(
+      '[data-testid="quest-card"].gradientBorder, [data-testid="quest-card"][aria-selected="true"]'
+    )
+    if (selected) {
+      selected.focus()
+      return true
+    }
+    return focusQuestsFirstItem()
   }
 
   function playable() {
