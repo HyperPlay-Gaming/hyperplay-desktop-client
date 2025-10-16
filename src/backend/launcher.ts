@@ -810,7 +810,7 @@ async function callRunner(
     shouldUsePowerShell = isWindows && powershellExists
   }
 
-  if (shouldUsePowerShell && runner.name !== 'gog') {
+  if (shouldUsePowerShell && !['gog', 'steam'].includes(runner.name)) {
     const argsAsString = commandParts
       .map((part) => part.replaceAll('\\', '\\\\'))
       .map((part) => `"\`"${part}\`""`)

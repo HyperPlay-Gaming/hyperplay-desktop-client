@@ -891,16 +891,18 @@ ipcMain.on('clearCache', (event, showDialog, fromVersionChange = false) => {
   clearCache(undefined, fromVersionChange)
   sendFrontendMessage('refreshLibrary')
 
-  showDialogBoxModalAuto({
-    event,
-    title: i18next.t('box.cache-cleared.title', 'Cache Cleared'),
-    message: i18next.t(
-      'box.cache-cleared.message',
-      'HyperPlay Cache Was Cleared!'
-    ),
-    type: 'MESSAGE',
-    buttons: [{ text: i18next.t('box.ok', 'Ok') }]
-  })
+  if (showDialog) {
+    showDialogBoxModalAuto({
+      event,
+      title: i18next.t('box.cache-cleared.title', 'Cache Cleared'),
+      message: i18next.t(
+        'box.cache-cleared.message',
+        'HyperPlay Cache Was Cleared!'
+      ),
+      type: 'MESSAGE',
+      buttons: [{ text: i18next.t('box.ok', 'Ok') }]
+    })
+  }
 })
 
 ipcMain.on('resetApp', async () => {

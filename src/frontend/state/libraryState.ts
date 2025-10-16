@@ -18,13 +18,15 @@ import {
   libraryStore,
   sideloadLibrary,
   hyperPlayLibraryStore,
+  steamLibraryStore,
   configStore
 } from 'frontend/helpers/electronStores'
 import {
   epicCategories,
   gogCategories,
   hyperPlayCategories,
-  sideloadedCategories
+  sideloadedCategories,
+  steamCategories
 } from 'frontend/helpers/library'
 import storeAuthState from './storeAuthState'
 
@@ -54,6 +56,7 @@ class LibraryState {
   gogLibrary: GameInfo[] = []
   sideloadedLibrary: GameInfo[] = []
   hyperPlayLibrary: GameInfo[] = []
+  steamLibrary: GameInfo[] = []
   nonAvailableGames: GameInfo[] = []
   // array of appName's for games that need updating
   gameUpdates: string[] = []
@@ -108,6 +111,8 @@ class LibraryState {
         this.sideloadedLibrary = newLibrary
       } else if (runner === 'hyperplay') {
         this.hyperPlayLibrary = newLibrary
+      } else if (runner === 'steam') {
+        this.steamLibrary = newLibrary
       }
     })
   }
@@ -151,6 +156,13 @@ class LibraryState {
       window.api.logInfo('No cache found, getting data from gog...')
       await window.api.refreshLibrary('gog')
       this.refreshGogLibrary()
+    }
+
+    this.refreshSteamLibrary()
+    if (!this.steamLibrary.length || !this.steamLibrary.length) {
+      window.api.logInfo('No cache found, getting data from steam...')
+      await window.api.refreshLibrary('steam')
+      this.refreshSteamLibrary()
     }
 
     this.refreshSideloadedLibrary()
@@ -197,6 +209,7 @@ class LibraryState {
     this.refreshGogLibrary()
     this.refreshSideloadedLibrary()
     this.refreshHyperplayLibrary()
+    this.refreshSteamLibrary()
   }
 
   refreshEpicLibrary() {
@@ -217,6 +230,10 @@ class LibraryState {
     }
 
     this.gogLibrary = games
+  }
+
+  refreshSteamLibrary() {
+    this.steamLibrary = steamLibraryStore.get('games', [])
   }
 
   refreshHyperplayLibrary() {
@@ -314,6 +331,9 @@ class LibraryState {
       this.hyperPlayLibrary.forEach((game) => {
         if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
       })
+      this.steamLibrary.forEach((game) => {
+        if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
+      })
     }
     return tempArray
   }
@@ -328,8 +348,10 @@ class LibraryState {
     } else {
       const isEpic = epicCategories.includes(this.category)
       const isGog = gogCategories.includes(this.category)
+      const isSteam = steamCategories.includes(this.category)
       const epicLibrary = isEpic ? this.epicLibrary : []
       const gogLibrary = isGog ? this.gogLibrary : []
+      const steamLibrary = isSteam ? steamLibraryStore.get('games', []) : []
       const sideloadedApps = sideloadedCategories.includes(this.category)
         ? this.sideloadedLibrary
         : []
@@ -337,7 +359,13 @@ class LibraryState {
         ? this.hyperPlayLibrary
         : []
 
-      library = [...HPLibrary, ...sideloadedApps, ...epicLibrary, ...gogLibrary]
+      library = [
+        ...HPLibrary,
+        ...sideloadedApps,
+        ...epicLibrary,
+        ...gogLibrary,
+        ...steamLibrary
+      ]
 
       if (!this.showNonAvailable) {
         const nonAvailableAppNames = Object.fromEntries(

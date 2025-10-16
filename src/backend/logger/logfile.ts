@@ -16,6 +16,7 @@ interface createLogFileReturn {
   lastLogFile: string
   legendaryLogFile: string
   gogdlLogFile: string
+  steamLogFile: string
 }
 
 let longestPrefix = 0
@@ -47,10 +48,12 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
   const newLogFile = join(logDir, `hyperplay-${fmtDate}.log`)
   const newLegendaryLogFile = join(logDir, `legendary-${fmtDate}.log`)
   const newGogdlLogFile = join(logDir, `gogdl-${fmtDate}.log`)
+  const newSteamLogFile = join(logDir, `steam-${fmtDate}.log`)
 
   createLogFile(newLogFile)
   createLogFile(newLegendaryLogFile)
   createLogFile(newGogdlLogFile)
+  createLogFile(newSteamLogFile)
 
   // Clean out logs that are more than a month old
   if (existsSync(logDir)) {
@@ -88,7 +91,8 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
     currentLogFile: '',
     lastLogFile: '',
     legendaryLogFile: '',
-    gogdlLogFile: ''
+    gogdlLogFile: '',
+    steamLogFile: ''
   })
 
   if (!isNewInstance) {
@@ -99,6 +103,7 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
   logs.currentLogFile = newLogFile
   logs.legendaryLogFile = newLegendaryLogFile
   logs.gogdlLogFile = newGogdlLogFile
+  logs.steamLogFile = newSteamLogFile
   configStore.set('general-logs', logs)
 
   // get longest prefix to log lines in a kind of table
@@ -121,7 +126,8 @@ export function getLogFile(appNameOrRunner: string): string {
     currentLogFile: '',
     lastLogFile: '',
     legendaryLogFile: '',
-    gogdlLogFile: ''
+    gogdlLogFile: '',
+    steamLogFile: ''
   })
 
   switch (appNameOrRunner) {

@@ -217,6 +217,10 @@ async function addNonSteamGame(props: {
   bkgDataUrl?: string
   bigPicDataUrl?: string
 }): Promise<boolean> {
+  if (props.gameInfo?.install?.is_dlc || props.gameInfo.runner === 'steam') {
+    return false
+  }
+
   const steamUserdataDir =
     props.steamUserdataDir || (await getSteamUserdataDir())
 

@@ -39,6 +39,7 @@ export interface StoreStructure {
       lastLogFile: string
       legendaryLogFile: string
       gogdlLogFile: string
+      steamLogFile: string
     }
     'window-props': Electron.Rectangle
     settings: AppSettings
@@ -78,6 +79,9 @@ export interface StoreStructure {
     [appName: string]: {
       [saveName: string]: string
     }
+  }
+  steamEnabledUsersConfig: {
+    [userId: string]: boolean
   }
   wineManagerConfigStore: {
     'wine-manager-settings': WineManagerUISettings[]

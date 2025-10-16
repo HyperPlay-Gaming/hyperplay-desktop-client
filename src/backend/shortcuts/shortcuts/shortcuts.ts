@@ -29,7 +29,7 @@ import * as GogLibraryManager from '../../storeManagers/gog/library'
  * @public
  */
 async function addShortcuts(gameInfo: GameInfo, fromMenu?: boolean) {
-  if (gameInfo.install.is_dlc) {
+  if (gameInfo.install.is_dlc || gameInfo.runner === 'steam') {
     return
   }
   logInfo(`Adding shortcuts for ${gameInfo.title}`, LogPrefix.Backend)

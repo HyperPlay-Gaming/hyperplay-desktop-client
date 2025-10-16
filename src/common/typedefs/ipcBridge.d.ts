@@ -330,7 +330,7 @@ interface HyperPlayAsyncIPCFunctions {
   updateActiveWallet: (walletId: number) => Promise<void>
   getExternalEligibility: (questId: number) => Promise<{
     walletOrEmail: string
-    amount: number
+    amount: string
     questId: number
   } | null>
   getListingById: (projectId: string) => Promise<Listing>

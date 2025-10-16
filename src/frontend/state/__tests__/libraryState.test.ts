@@ -6,7 +6,9 @@ Object.defineProperty(window, 'api', {
     install: jest.fn(),
     storeNew: jest.fn(),
     storeGet: jest.fn(),
-    storeSet: jest.fn()
+    storeSet: jest.fn(),
+    storeHas: jest.fn().mockReturnValue(false),
+    storeDelete: jest.fn()
   }
 })
 
