@@ -57,6 +57,93 @@ export function QuestsPage() {
     window.api.trackScreen('Quests Page')
   }, [])
 
+  // Keyboard/controller nav parity with Settings:
+  // - ArrowLeft anywhere in Quests -> focus Sidebar Quests link
+  // - ArrowDown from search -> focus first quest item
+  useEffect(() => {
+    const root = document.querySelector<HTMLElement>(
+      '[data-testid="quests-screen-root"]'
+    )
+    if (!root) return
+
+    const isInsideSearch = (el: HTMLElement | null) => {
+      if (!el) return false
+      if (el.id === 'search') return true
+      return !!el.closest('[data-testid="quests-search-container"]')
+    }
+
+    const focusSidebarQuests = () => {
+      const el = document.querySelector<HTMLElement>('[data-testid="quests"]')
+      if (el) {
+        el.focus()
+        return true
+      }
+      return false
+    }
+
+    const focusFirstQuestItem = () => {
+      const container = document.querySelector<HTMLElement>(
+        '#questsTableGamesList'
+      )
+      const focusable = container?.querySelector<HTMLElement>(
+        '[data-testid="quest-card"], button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      if (focusable) {
+        focusable.focus()
+        return true
+      }
+      const firstCard = document.querySelector<HTMLElement>(
+        '[data-testid="quest-card"]'
+      )
+      if (firstCard) {
+        firstCard.focus()
+        return true
+      }
+      return false
+    }
+
+    const focusSelectedQuestCard = () => {
+      const selected = document.querySelector<HTMLElement>(
+        '[data-testid="quest-card"].gradientBorder, [data-testid="quest-card"][aria-selected="true"]'
+      )
+      if (selected) {
+        selected.focus()
+        return true
+      }
+      return focusFirstQuestItem()
+    }
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null
+      if (e.key === 'ArrowLeft' && isInsideSearch(target)) {
+        if (focusSidebarQuests()) {
+          e.preventDefault()
+          e.stopPropagation()
+        }
+      }
+      if (e.key === 'ArrowDown' && isInsideSearch(target)) {
+        if (focusFirstQuestItem()) {
+          e.preventDefault()
+          e.stopPropagation()
+        }
+      }
+      if (
+        e.key === 'ArrowLeft' &&
+        (target?.closest(
+          '[data-testid="quests-details-panel"]'
+        ) as HTMLElement | null)
+      ) {
+        if (focusSelectedQuestCard()) {
+          e.preventDefault()
+          e.stopPropagation()
+        }
+      }
+    }
+
+    root.addEventListener('keydown', onKeyDown, true)
+    return () => root.removeEventListener('keydown', onKeyDown, true)
+  }, [])
+
   useEffect(() => {
     setSearchText(searchStringFromSearchParams ?? '')
   }, [searchStringFromSearchParams])
@@ -215,6 +302,8 @@ export function QuestsPage() {
               navigate(`/quests/${id}`)
             }
           }}
+          tabIndex={0}
+          data-testid="quest-card"
           selected={id === visibleQuestId}
           description={name}
           className={id === visibleQuestId ? 'gradientBorder' : undefined}
@@ -234,6 +323,7 @@ export function QuestsPage() {
     <>
       <Background style={{ position: 'absolute' }}></Background>
       <div
+        data-testid="quests-screen-root"
         className={classNames(
           'contentContainer',
           contentWithAlertClass,
@@ -248,6 +338,7 @@ export function QuestsPage() {
           filterProps={{ activeFilter, setActiveFilter }}
           isFetching={questsResults?.data.isFetching}
           isPageLoading={questsResults?.data.isLoading}
+          listContainerId="questsTableGamesList"
           activeTab={activeFilter}
           tabs={[]}
           messageModalProps={{
@@ -263,26 +354,34 @@ export function QuestsPage() {
             gamesTable: classNames(visibleQuestId && styles.questSelectedLayout)
           }}
           searchBar={
-            <SearchBar
-              setSearchText={setSearchText}
-              i18n={{ placeholder: t('quests.search', 'Search') }}
-              classNames={{ container: styles.searchBar }}
-              suggestions={suggestedSearchTitles}
-              inputProps={{
-                defaultValue: searchStringFromSearchParams ?? undefined
-              }}
-            />
+            <div data-testid="quests-search-container">
+              <SearchBar
+                setSearchText={setSearchText}
+                i18n={{ placeholder: t('quests.search', 'Search') }}
+                classNames={{ container: styles.searchBar }}
+                suggestions={suggestedSearchTitles}
+                inputProps={{
+                  id: 'search',
+                  defaultValue: searchStringFromSearchParams ?? undefined
+                }}
+              />
+            </div>
           }
         />
         {visibleQuestId ? (
-          <QuestDetails
-            className={styles.detailsWrapper}
-            questId={visibleQuestId}
-            isQuestsPage={true}
-            onPlayClick={(quest) => {
-              navigateToGame.mutate(quest)
-            }}
-          />
+          <div
+            data-testid="quests-details-panel"
+            style={{ display: 'contents' }}
+          >
+            <QuestDetails
+              className={styles.detailsWrapper}
+              questId={visibleQuestId}
+              isQuestsPage={true}
+              onPlayClick={(quest) => {
+                navigateToGame.mutate(quest)
+              }}
+            />
+          </div>
         ) : (
           <>
             <DarkContainer

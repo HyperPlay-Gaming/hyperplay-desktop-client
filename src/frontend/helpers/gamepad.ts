@@ -13,7 +13,7 @@ import {
 import { VirtualKeyboardController } from './virtualKeyboard'
 
 const KEY_REPEAT_DELAY = 500
-const STICK_REPEAT_DELAY = 250
+const STICK_REPEAT_DELAY = 500 // Same as keyboard for natural navigation
 const SCROLL_REPEAT_DELAY = 50
 
 /*
@@ -169,6 +169,155 @@ export const initGamepad = () => {
         // we have to tell Electron to simulate key presses
         // so the spatial navigation works
         if (action !== 'leftClick' && action !== 'rightClick') {
+          // Global fallback when focus is lost: Left -> sidebar, Up -> topbar
+          if (!hasUsableFocus()) {
+            if (action === 'padLeft' || action === 'leftStickLeft') {
+              if (focusSidebarStoreOrFirst()) return
+            }
+            if (action === 'padUp' || action === 'leftStickUp') {
+              if (focusFirstFocusable('#topNavBar')) return
+            }
+          }
+
+          // Removed store webview forwarding logic
+
+          if (
+            (action === 'padLeft' || action === 'leftStickLeft') &&
+            insideTopNavBar()
+          ) {
+            // Only move focus to the sidebar if we're on the leftmost focusable in the topbar
+            if (isLeftmostTopNavBarFocusable()) {
+              if (focusSidebarStoreOrFirst()) return
+            }
+          }
+
+          // Move from Sidebar Quests to Quests search input on Right
+          if (insideSidebar()) {
+            const isQuestsFocused = !!(
+              currentElement() as HTMLElement | null
+            )?.closest('[data-testid="quests"]')
+            if (
+              isQuestsFocused &&
+              (action === 'padRight' || action === 'leftStickRight')
+            ) {
+              const questsSearch =
+                document.querySelector<HTMLElement>('#search')
+              if (questsSearch) {
+                questsSearch.focus()
+                return
+              }
+            }
+          }
+
+          if (insideLibraryTopBarTabs()) {
+            const pos = getFocusedLibraryTabPosition()
+            if (pos) {
+              if (
+                (action === 'padLeft' || action === 'leftStickLeft') &&
+                pos.idx === 0
+              ) {
+                const sidebarLink = document.querySelector<HTMLElement>(
+                  '[data-testid="sidebar-library-link"]'
+                )
+                if (sidebarLink) {
+                  sidebarLink.focus()
+                  return
+                }
+              }
+              if (
+                (action === 'padRight' || action === 'leftStickRight') &&
+                pos.idx === pos.lastIdx
+              ) {
+                if (focusFirstFocusable('#librarySortContainer')) return
+                if (focusFirstFocusable('#libraryFiltersContainer')) return
+              }
+            }
+          }
+          // Move from Sidebar Settings to Settings tabs on Right
+          if (insideSidebar()) {
+            const isSettingsFocused = !!(
+              currentElement() as HTMLElement | null
+            )?.closest('[data-testid="settings"]')
+            if (
+              isSettingsFocused &&
+              (action === 'padRight' || action === 'leftStickRight')
+            ) {
+              if (focusSettingsFirstTab()) return
+            }
+          }
+          // Move from Sidebar Quests to Quests search input on Right (with fallbacks)
+          if (insideSidebar()) {
+            const isQuestsFocused = !!(
+              currentElement() as HTMLElement | null
+            )?.closest('[data-testid="quests"]')
+            if (
+              isQuestsFocused &&
+              (action === 'padRight' || action === 'leftStickRight')
+            ) {
+              if (focusQuestsSearchInput()) return
+            }
+          }
+          // Settings tabs navigation: Left from first -> sidebar; Right from last -> wrap to first
+          if (insideSettingsTabs()) {
+            const pos = getFocusedSettingsTabPosition()
+            if (pos) {
+              if (
+                (action === 'padLeft' || action === 'leftStickLeft') &&
+                pos.idx === 0
+              ) {
+                const sidebarSettings = document.querySelector<HTMLElement>(
+                  '[data-testid="settings"]'
+                )
+                if (sidebarSettings) {
+                  sidebarSettings.focus()
+                  return
+                }
+              }
+              if (
+                (action === 'padRight' || action === 'leftStickRight') &&
+                pos.idx === pos.lastIdx
+              ) {
+                if (focusSettingsFirstTab()) return
+              }
+            }
+          }
+          // Library filters navigation: Left from filters -> Sort; Left from Sort -> tabs
+          if (
+            (action === 'padLeft' || action === 'leftStickLeft') &&
+            insideLibraryFiltersContainer()
+          ) {
+            if (focusFirstFocusable('#librarySortContainer')) return
+            if (focusLibraryLastTab()) return
+          }
+          if (
+            (action === 'padLeft' || action === 'leftStickLeft') &&
+            insideLibrarySortContainer()
+          ) {
+            if (focusLibraryLastTab()) return
+          }
+
+          // Quests screen navigation: Down from search -> list, Left from search -> sidebar
+          if (insideQuestsScreen() && insideQuestsSearch()) {
+            if (action === 'padDown' || action === 'leftStickDown') {
+              if (focusQuestsFirstItem()) return
+            }
+            if (action === 'padLeft' || action === 'leftStickLeft') {
+              const sidebarQuests = document.querySelector<HTMLElement>(
+                '[data-testid="quests"]'
+              )
+              if (sidebarQuests) {
+                sidebarQuests.focus()
+                return
+              }
+            }
+          }
+
+          // Quests: Left from details panel -> focus selected quest card (or first)
+          if (insideQuestsScreen() && insideQuestsDetails()) {
+            if (action === 'padLeft' || action === 'leftStickLeft') {
+              if (focusQuestsSelectedOrFirst()) return
+            }
+          }
           if (
             (currentElement()?.id === 'topElementWalletDropdown' ||
               currentElement()?.id === 'topMenuItemWalletDropdown') &&
@@ -178,6 +327,40 @@ export const initGamepad = () => {
               .querySelector<HTMLElement>('#accountWalletContainer')
               ?.focus()
           }
+          if (insideDownloadManagerScreen()) {
+            // If anywhere in the Download Manager screen, allow Left from first tab to go to sidebar
+            if (insideDownloadManagerTabs()) {
+              const pos = getFocusedDownloadManagerTabPosition()
+              if (pos) {
+                if (
+                  (action === 'padLeft' || action === 'leftStickLeft') &&
+                  pos.idx === 0
+                ) {
+                  const sidebarLink = document.querySelector<HTMLElement>(
+                    '[data-testid="sidebar-download-manager-link"]'
+                  )
+                  if (sidebarLink) {
+                    sidebarLink.focus()
+                    return
+                  }
+                }
+              }
+            }
+            // If focus isn't on a tab, ArrowLeft should still go back to sidebar
+            if (
+              (action === 'padLeft' || action === 'leftStickLeft') &&
+              !insideDownloadManagerTabs()
+            ) {
+              const sidebarLink = document.querySelector<HTMLElement>(
+                '[data-testid="sidebar-download-manager-link"]'
+              )
+              if (sidebarLink) {
+                sidebarLink.focus()
+                return
+              }
+            }
+          }
+
           window.api.gamepadAction({ action })
         } else {
           const data = metadata()
@@ -201,6 +384,14 @@ export const initGamepad = () => {
     if (!el) return false
 
     return el.tagName === 'SELECT'
+  }
+
+  function hasUsableFocus() {
+    const active = document.activeElement as HTMLElement | null
+    if (!active) return false
+    const tag = active.tagName
+    if (tag === 'BODY' || tag === 'HTML') return false
+    return true
   }
 
   function isSearchInput() {
@@ -230,6 +421,293 @@ export const initGamepad = () => {
     if (!parent) return false
 
     return parent.classList.contains('MuiMenu-list')
+  }
+
+  function insideTopNavBar() {
+    const el = currentElement()
+    if (!el) return false
+
+    return !!el.closest('#topNavBar')
+  }
+
+  function getTopNavBarFocusable(): HTMLElement[] {
+    const container = document.querySelector<HTMLElement>('#topNavBar')
+    if (!container) return []
+    const candidates = Array.from(
+      container.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+    )
+    // filter out disabled or not visible
+    return candidates.filter(
+      (el) => !el.hasAttribute('disabled') && el.offsetParent !== null
+    )
+  }
+
+  function isLeftmostTopNavBarFocusable(): boolean {
+    const focusables = getTopNavBarFocusable()
+    if (!focusables.length) return false
+    const el = currentElement()
+    if (!el) return false
+    const target =
+      el.closest<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      ) || el
+    const positions = focusables
+      .map((f) => ({ el: f, x: f.getBoundingClientRect().left }))
+      .filter((p) => Number.isFinite(p.x))
+    if (!positions.length) return false
+    const minX = Math.min(...positions.map((p) => p.x))
+    const targetX = target.getBoundingClientRect().left
+    // consider within 2px to account for subpixel/layout differences
+    return targetX - minX <= 2
+  }
+
+  function insideSidebar() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('.SidebarLinks')
+  }
+
+  function insideLibraryTopBarTabs() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#libraryTopBarTabs')
+  }
+
+  function insideLibraryTopBarFilters() {
+    const el = currentElement()
+    if (!el) return false
+    return (
+      !!el.closest('#librarySortContainer') ||
+      !!el.closest('#libraryFiltersContainer')
+    )
+  }
+
+  function insideLibrarySortContainer() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#librarySortContainer')
+  }
+
+  function insideLibraryFiltersContainer() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#libraryFiltersContainer')
+  }
+
+  function insideSettingsTabs() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#settingsTabs')
+  }
+
+  function getFocusedLibraryTabPosition() {
+    const el = currentElement()
+    if (!el) return null
+    // Prefer role-based selection to be robust to test id changes
+    let tabs = Array.from(
+      document.querySelectorAll<HTMLElement>('#libraryTopBarTabs [role="tab"]')
+    )
+    if (!tabs.length) {
+      tabs = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '#libraryTopBarTabs [data-testid^="library-tab-"]'
+        )
+      )
+    }
+    if (!tabs.length) return null
+    const focusedTab = (el.closest('[role="tab"]') ||
+      el.closest('[data-testid^="library-tab-"]')) as HTMLElement | null
+    if (!focusedTab) return null
+    const idx = tabs.findIndex((t) => t === focusedTab)
+    if (idx === -1) return null
+    return { idx, lastIdx: tabs.length - 1 }
+  }
+
+  function getFocusedSettingsTabPosition() {
+    const el = currentElement()
+    if (!el) return null
+    const tabs = Array.from(
+      document.querySelectorAll<HTMLElement>('#settingsTabs [role="tab"]')
+    )
+    if (!tabs.length) return null
+    const focusedTab = el.closest('[role="tab"]') as HTMLElement | null
+    if (!focusedTab) return null
+    const idx = tabs.findIndex((t) => t === focusedTab)
+    if (idx === -1) return null
+    return { idx, lastIdx: tabs.length - 1 }
+  }
+
+  function focusLibraryLastTab() {
+    let tabs = Array.from(
+      document.querySelectorAll<HTMLElement>('#libraryTopBarTabs [role="tab"]')
+    )
+    if (!tabs.length) {
+      tabs = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '#libraryTopBarTabs [data-testid^="library-tab-"]'
+        )
+      )
+    }
+    if (!tabs.length) return false
+    const last = tabs[tabs.length - 1]
+    if (last) {
+      last.focus()
+      return true
+    }
+    return false
+  }
+
+  function focusSettingsFirstTab() {
+    const first = document.querySelector<HTMLElement>(
+      '#settingsTabs [role="tab"]'
+    )
+    if (first) {
+      first.focus()
+      return true
+    }
+    return false
+  }
+
+  function focusFirstFocusable(containerSelector: string) {
+    const container = document.querySelector<HTMLElement>(containerSelector)
+    if (!container) return false
+    const focusable = container.querySelector<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    if (focusable) {
+      focusable.focus()
+      return true
+    }
+    return false
+  }
+
+  function insideDownloadManagerTabs() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#downloadManagerTabs')
+  }
+
+  function insideDownloadManagerScreen() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#downloadManagerScreen')
+  }
+
+  function getFocusedDownloadManagerTabPosition() {
+    const el = currentElement()
+    if (!el) return null
+    let tabs = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        '#downloadManagerTabs [role="tab"]'
+      )
+    )
+    if (!tabs.length) {
+      tabs = Array.from(
+        document.querySelectorAll<HTMLElement>(
+          '#downloadManagerTabs [data-testid^="dm-tab-"]'
+        )
+      )
+    }
+    if (!tabs.length) return null
+    const focusedTab = (el.closest('[role="tab"]') ||
+      el.closest('[data-testid^="dm-tab-"]')) as HTMLElement | null
+    if (!focusedTab) return null
+    const idx = tabs.findIndex((t) => t === focusedTab)
+    if (idx === -1) return null
+    return { idx, lastIdx: tabs.length - 1 }
+  }
+
+  function insideQuestsScreen() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('[data-testid="quests-screen-root"]')
+  }
+
+  function insideQuestsSearch() {
+    const el = currentElement()
+    if (!el) return false
+    if (isSearchInput()) return true
+    return !!el.closest('[data-testid="quests-search-container"]')
+  }
+
+  function insideQuestsDetails() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('[data-testid="quests-details-panel"]')
+  }
+
+  function focusQuestsFirstItem() {
+    // Prefer the list container if present
+    const container = document.querySelector<HTMLElement>(
+      '#questsTableGamesList'
+    )
+    if (container) {
+      const focusable = container.querySelector<HTMLElement>(
+        '[data-testid="quest-card"], button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      if (focusable) {
+        focusable.focus()
+        return true
+      }
+    }
+    // Fallback to the first quest card
+    const firstCard = document.querySelector<HTMLElement>(
+      '[data-testid="quest-card"]'
+    )
+    if (firstCard) {
+      firstCard.focus()
+      return true
+    }
+    return false
+  }
+
+  function focusQuestsSearchInput() {
+    // Try direct id first (preferred)
+    const direct = document.querySelector<HTMLElement>('#search')
+    if (direct) {
+      direct.focus()
+      return true
+    }
+    // Then try inside the quests search container
+    const container = document.querySelector<HTMLElement>(
+      '[data-testid="quests-search-container"]'
+    )
+    if (!container) return false
+    const input = container.querySelector<HTMLElement>(
+      'input, [role="searchbox"], [contenteditable="true"]'
+    )
+    if (input) {
+      input.focus()
+      return true
+    }
+    // If input is not present/visible yet, click a toggle button and retry next frame
+    const toggle = container.querySelector<HTMLElement>(
+      'button, [role="button"]'
+    )
+    if (toggle) {
+      toggle.click()
+      requestAnimationFrame(() => {
+        const retryInput = container.querySelector<HTMLElement>(
+          'input, [role="searchbox"], [contenteditable="true"]'
+        )
+        retryInput?.focus()
+      })
+      return true
+    }
+    return false
+  }
+
+  function focusQuestsSelectedOrFirst() {
+    const selected = document.querySelector<HTMLElement>(
+      '[data-testid="quest-card"].gradientBorder, [data-testid="quest-card"][aria-selected="true"]'
+    )
+    if (selected) {
+      selected.focus()
+      return true
+    }
+    return focusQuestsFirstItem()
   }
 
   function playable() {
@@ -362,6 +840,24 @@ export const initGamepad = () => {
       if (axes[axis] > 0.2 && axes[axis] <= 1)
         console.log(`axis ${axis} activated positive`)
     }
+  }
+
+  function focusSidebarStoreOrFirst() {
+    const storeLink = document.querySelector<HTMLElement>(
+      '[data-testid="sidebar-store-link"]'
+    )
+    if (storeLink) {
+      storeLink.focus()
+      return true
+    }
+    const firstSidebarItem = document.querySelector<HTMLElement>(
+      '.SidebarLinks .Sidebar__item'
+    )
+    if (firstSidebarItem) {
+      firstSidebarItem.focus()
+      return true
+    }
+    return false
   }
 
   function connecthandler(e: GamepadEvent) {

@@ -42,7 +42,6 @@ function Settings() {
   } = useLocation() as { state: LocationState }
   const isWin = DeviceState.isWin
   const [title, setTitle] = useState('')
-
   const [currentConfig, setCurrentConfig] = useState<Partial<AppSettings>>({})
 
   const { appName = '', type = '' } = useParams()
@@ -86,6 +85,56 @@ function Settings() {
     gameInfo,
     runner
   })
+  const hasSettingsContext = Boolean(contextValues)
+
+  // Controller/keyboard nav: Left on first tab -> sidebar Settings link; Right on last -> wrap to first
+  useEffect(() => {
+    if (!title || !hasSettingsContext) return
+
+    const tabsRoot = document.getElementById('settingsTabs')
+    if (!tabsRoot) return
+
+    const getTabs = () =>
+      Array.from(tabsRoot.querySelectorAll<HTMLElement>('[role="tab"]'))
+
+    const focusSidebarSettings = () => {
+      const el = document.querySelector<HTMLElement>('[data-testid="settings"]')
+      el?.focus()
+    }
+
+    const focusFirstTab = () => {
+      const first = document.querySelector<HTMLElement>(
+        '#settingsTabs [role="tab"]'
+      )
+      if (first) {
+        first.focus()
+        return true
+      }
+      return false
+    }
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      const tabs = getTabs()
+      if (!tabs.length) return
+      const focused = (e.target as HTMLElement)?.closest('[role="tab"]')
+      if (!focused) return
+      const idx = tabs.findIndex((t) => t === focused)
+      if (idx === -1) return
+      if (e.key === 'ArrowLeft' && idx === 0) {
+        focusSidebarSettings()
+        e.preventDefault()
+        e.stopPropagation()
+      }
+      if (e.key === 'ArrowRight' && idx === tabs.length - 1) {
+        focusFirstTab()
+        e.preventDefault()
+        e.stopPropagation()
+      }
+    }
+
+    tabsRoot.addEventListener('keydown', onKeyDown, true)
+    return () => tabsRoot.removeEventListener('keydown', onKeyDown, true)
+  }, [hasSettingsContext, title])
 
   // render `loading` while we fetch the settings
   if (!title || !contextValues) {
@@ -106,6 +155,7 @@ function Settings() {
                 { list: 'settingsTabList' },
                 { list: 'outline' }
               )}
+              id="settingsTabs"
             >
               <Tabs.List>
                 <Tabs.Tab value="general">

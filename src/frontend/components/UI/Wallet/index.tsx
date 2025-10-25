@@ -8,6 +8,7 @@ import walletState from '../../../state/WalletState'
 
 interface WalletProps {
   onClick: () => void
+  onFocus?: () => void
 }
 
 const WalletProviderIcons: Record<PROVIDERS, ReactNode> = {
@@ -23,6 +24,7 @@ const Wallet: React.FC<WalletProps> = observer((props) => {
   return (
     <button
       onClick={props.onClick}
+      onFocus={props.onFocus}
       className={styles.walletButton}
       id="accountWalletContainer"
     >

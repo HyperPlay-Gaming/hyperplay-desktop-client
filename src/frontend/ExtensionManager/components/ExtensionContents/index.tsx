@@ -38,6 +38,17 @@ export const ExtensionContents = observer(() => {
        * so we change the key to get it to reload when the url changes
        */
       key={state}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          // Close popup and return focus to the topbar MetaMask button
+          extensionState.unlockPopup()
+          extensionState.toggleIsPopupOpen()
+          const btn = document.getElementById(
+            'topbarMetaMaskButton'
+          ) as HTMLButtonElement | null
+          btn?.focus()
+        }
+      }}
     ></webview>
   )
 })

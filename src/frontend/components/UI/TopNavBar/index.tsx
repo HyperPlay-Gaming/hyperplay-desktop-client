@@ -39,6 +39,37 @@ const TopNavBar = observer(() => {
     }
   }, [])
 
+  useEffect(() => {
+    const nav = document.getElementById('topNavBar')
+    if (!nav) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      // Right arrow navigation on /library page
+      if (e.key === 'ArrowRight' && pathname === '/library') {
+        const activeEl = document.activeElement as HTMLElement | null
+
+        // From MetaMask button -> Account dropdown
+        if (activeEl?.closest('#topbarMetaMaskButton')) {
+          const accountBtn = document.getElementById('accountWalletContainer')
+          if (accountBtn) {
+            accountBtn.focus()
+            e.preventDefault()
+            e.stopPropagation()
+          }
+          return
+        }
+
+        // From Account dropdown -> stay there
+        if (activeEl?.closest('#accountWalletContainer')) {
+          e.preventDefault()
+          e.stopPropagation()
+          return
+        }
+      }
+    }
+    nav.addEventListener('keydown', onKeyDown)
+    return () => nav.removeEventListener('keydown', onKeyDown)
+  }, [pathname])
+
   function getStoreTextStyle(viewURL: string) {
     const { currentUrl } = webviewNavigationStore
     const inactiveStyle = { color: 'var(--color-neutral-400)' }
@@ -52,7 +83,7 @@ const TopNavBar = observer(() => {
   }
 
   return (
-    <div className={styles.navBar}>
+    <div className={styles.navBar} id="topNavBar">
       <div>
         <HyperPlayLogoWhite
           height="27px"
@@ -71,6 +102,7 @@ const TopNavBar = observer(() => {
         <div className={styles.storeLinks}>
           <NavLink to="/hyperplaystore">
             <Button
+              id="topbarHyperplayLink"
               type="menuItem"
               size="small"
               style={getStoreTextStyle(HYPERPLAY_STORE_URL)}
@@ -105,10 +137,16 @@ const TopNavBar = observer(() => {
         {pathname === '/library' ? <SearchBar /> : null}
         {showMetaMaskBrowserSidebarLinks && (
           <button
+            id="topbarMetaMaskButton"
             className={styles.iconButton}
-            onClick={() => extensionStore.toggleIsPopupOpen()}
+            onClick={() => {
+              extensionStore.lockPopup()
+              extensionStore.toggleIsPopupOpen()
+            }}
             onMouseEnter={() => extensionStore.lockPopup()}
             onMouseLeave={() => extensionStore.unlockPopup()}
+            onFocus={() => extensionStore.lockPopup()}
+            onBlur={() => extensionStore.unlockPopup()}
           >
             <Images.MetaMask className={styles.metaMaskIcon} />
             {badgeText !== '' && badgeText !== '0' ? (
