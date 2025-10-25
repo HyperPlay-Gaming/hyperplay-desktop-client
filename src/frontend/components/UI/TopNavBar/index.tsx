@@ -43,22 +43,6 @@ const TopNavBar = observer(() => {
     const nav = document.getElementById('topNavBar')
     if (!nav) return
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
-        const isHyperPlayFocused = !!(
-          document.activeElement as HTMLElement | null
-        )?.closest('#topbarHyperplayLink')
-        if (isHyperPlayFocused) {
-          const storeLink = document.querySelector<HTMLElement>(
-            '[data-testid="sidebar-store-link"]'
-          )
-          if (storeLink) {
-            storeLink.focus()
-            e.preventDefault()
-            e.stopPropagation()
-          }
-        }
-      }
-
       // Right arrow navigation on /library page
       if (e.key === 'ArrowRight' && pathname === '/library') {
         const activeEl = document.activeElement as HTMLElement | null

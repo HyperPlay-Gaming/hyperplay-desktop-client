@@ -13,7 +13,7 @@ import {
 import { VirtualKeyboardController } from './virtualKeyboard'
 
 const KEY_REPEAT_DELAY = 500
-const STICK_REPEAT_DELAY = 250
+const STICK_REPEAT_DELAY = 500 // Same as keyboard for natural navigation
 const SCROLL_REPEAT_DELAY = 50
 
 /*
@@ -169,28 +169,25 @@ export const initGamepad = () => {
         // we have to tell Electron to simulate key presses
         // so the spatial navigation works
         if (action !== 'leftClick' && action !== 'rightClick') {
+          // Global fallback when focus is lost: Left -> sidebar, Up -> topbar
+          if (!hasUsableFocus()) {
+            if (action === 'padLeft' || action === 'leftStickLeft') {
+              if (focusSidebarStoreOrFirst()) return
+            }
+            if (action === 'padUp' || action === 'leftStickUp') {
+              if (focusFirstFocusable('#topNavBar')) return
+            }
+          }
+
+          // Removed store webview forwarding logic
+
           if (
             (action === 'padLeft' || action === 'leftStickLeft') &&
             insideTopNavBar()
           ) {
-            const isHyperPlayFocused = !!(
-              currentElement() as HTMLElement | null
-            )?.closest('#topNavBar #topbarHyperplayLink')
-            if (isHyperPlayFocused) {
-              const storeLink = document.querySelector<HTMLElement>(
-                '[data-testid="sidebar-store-link"]'
-              )
-              if (storeLink) {
-                storeLink.focus()
-                return
-              }
-              const firstSidebarItem = document.querySelector<HTMLElement>(
-                '.SidebarLinks .Sidebar__item'
-              )
-              if (firstSidebarItem) {
-                firstSidebarItem.focus()
-                return
-              }
+            // Only move focus to the sidebar if we're on the leftmost focusable in the topbar
+            if (isLeftmostTopNavBarFocusable()) {
+              if (focusSidebarStoreOrFirst()) return
             }
           }
 
@@ -284,9 +281,17 @@ export const initGamepad = () => {
               }
             }
           }
+          // Library filters navigation: Left from filters -> Sort; Left from Sort -> tabs
           if (
             (action === 'padLeft' || action === 'leftStickLeft') &&
-            insideLibraryTopBarFilters()
+            insideLibraryFiltersContainer()
+          ) {
+            if (focusFirstFocusable('#librarySortContainer')) return
+            if (focusLibraryLastTab()) return
+          }
+          if (
+            (action === 'padLeft' || action === 'leftStickLeft') &&
+            insideLibrarySortContainer()
           ) {
             if (focusLibraryLastTab()) return
           }
@@ -342,7 +347,10 @@ export const initGamepad = () => {
               }
             }
             // If focus isn't on a tab, ArrowLeft should still go back to sidebar
-            if (action === 'padLeft' || action === 'leftStickLeft') {
+            if (
+              (action === 'padLeft' || action === 'leftStickLeft') &&
+              !insideDownloadManagerTabs()
+            ) {
               const sidebarLink = document.querySelector<HTMLElement>(
                 '[data-testid="sidebar-download-manager-link"]'
               )
@@ -353,18 +361,6 @@ export const initGamepad = () => {
             }
           }
 
-          // Quests: Only Left from the search area returns to sidebar
-          if (insideQuestsScreen() && insideQuestsSearch()) {
-            if (action === 'padLeft' || action === 'leftStickLeft') {
-              const sidebarQuests = document.querySelector<HTMLElement>(
-                '[data-testid="quests"]'
-              )
-              if (sidebarQuests) {
-                sidebarQuests.focus()
-                return
-              }
-            }
-          }
           window.api.gamepadAction({ action })
         } else {
           const data = metadata()
@@ -388,6 +384,14 @@ export const initGamepad = () => {
     if (!el) return false
 
     return el.tagName === 'SELECT'
+  }
+
+  function hasUsableFocus() {
+    const active = document.activeElement as HTMLElement | null
+    if (!active) return false
+    const tag = active.tagName
+    if (tag === 'BODY' || tag === 'HTML') return false
+    return true
   }
 
   function isSearchInput() {
@@ -426,6 +430,39 @@ export const initGamepad = () => {
     return !!el.closest('#topNavBar')
   }
 
+  function getTopNavBarFocusable(): HTMLElement[] {
+    const container = document.querySelector<HTMLElement>('#topNavBar')
+    if (!container) return []
+    const candidates = Array.from(
+      container.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+    )
+    // filter out disabled or not visible
+    return candidates.filter(
+      (el) => !el.hasAttribute('disabled') && el.offsetParent !== null
+    )
+  }
+
+  function isLeftmostTopNavBarFocusable(): boolean {
+    const focusables = getTopNavBarFocusable()
+    if (!focusables.length) return false
+    const el = currentElement()
+    if (!el) return false
+    const target =
+      el.closest<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      ) || el
+    const positions = focusables
+      .map((f) => ({ el: f, x: f.getBoundingClientRect().left }))
+      .filter((p) => Number.isFinite(p.x))
+    if (!positions.length) return false
+    const minX = Math.min(...positions.map((p) => p.x))
+    const targetX = target.getBoundingClientRect().left
+    // consider within 2px to account for subpixel/layout differences
+    return targetX - minX <= 2
+  }
+
   function insideSidebar() {
     const el = currentElement()
     if (!el) return false
@@ -445,6 +482,18 @@ export const initGamepad = () => {
       !!el.closest('#librarySortContainer') ||
       !!el.closest('#libraryFiltersContainer')
     )
+  }
+
+  function insideLibrarySortContainer() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#librarySortContainer')
+  }
+
+  function insideLibraryFiltersContainer() {
+    const el = currentElement()
+    if (!el) return false
+    return !!el.closest('#libraryFiltersContainer')
   }
 
   function insideSettingsTabs() {
@@ -791,6 +840,24 @@ export const initGamepad = () => {
       if (axes[axis] > 0.2 && axes[axis] <= 1)
         console.log(`axis ${axis} activated positive`)
     }
+  }
+
+  function focusSidebarStoreOrFirst() {
+    const storeLink = document.querySelector<HTMLElement>(
+      '[data-testid="sidebar-store-link"]'
+    )
+    if (storeLink) {
+      storeLink.focus()
+      return true
+    }
+    const firstSidebarItem = document.querySelector<HTMLElement>(
+      '.SidebarLinks .Sidebar__item'
+    )
+    if (firstSidebarItem) {
+      firstSidebarItem.focus()
+      return true
+    }
+    return false
   }
 
   function connecthandler(e: GamepadEvent) {
