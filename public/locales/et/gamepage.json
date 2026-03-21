@@ -1,105 +1,108 @@
 {
     "box": {
         "change": {
-            "message": "See muudab selle mängu paigaldusasukohta, kas olete kindel?",
-            "path": "Valige uus paigalduskoht",
-            "title": "Muuda mängude paigaldamiskohta"
+            "message": "See muudab selle mängu paigaldusasukohta, kas oled kindel?",
+            "path": "Vali uus paigalduskoht",
+            "title": "Muuda mängude paigalduskohta"
         },
-        "choose": "Valige",
-        "importpath": "Valige imporditav mängude kaust",
+        "choose": "Vali",
+        "importpath": "Vali imporditav mängude kaust",
         "move": {
-            "message": "See võib võtta kaua aega, kas olete kindel?",
-            "path": "Valige, kuhu soovite liigutada",
-            "title": "Liiguta mängu paigaldus"
+            "message": "See võib võtta kaua aega, kas oled kindel?",
+            "path": "Vali, kuhu soovid teisaldada",
+            "title": "Teisalda mängu paigaldus"
         },
         "no": "EI",
         "repair": {
-            "message": "Kas soovite proovida seda mängu parandada? See võib võtta kaua aega.",
+            "message": "Kas soovid proovida seda mängu parandada? See võib võtta kaua aega.",
             "title": "Kontrolli ja paranda"
         },
         "runexe": {
-            "title": "Select EXE to Run"
+            "title": "Vali käivitatav exe-fail"
         },
         "select": {
-            "button": "Select"
+            "button": "Vali"
         },
         "sideload": {
-            "exe": "Select Executable"
+            "exe": "Vali käsufail"
         },
         "stopInstall": {
-            "keepInstalling": "Jätka installimist",
-            "message": "Kas soovite allalaaditud faile alles hoida?",
-            "title": "Kas soovite allalaadimist tühistada?",
-            "keepFilesMessage": "Kontrollige siit, kui soovite allalaadimisfaile säilitada pärast tühistamist."
+            "keepInstalling": "Jätka paigaldamist",
+            "message": "Kas soovid allalaaditud faile alles hoida?",
+            "title": "Kas soovid allalaadimist tühistada?",
+            "keepFilesMessage": "Kontrolli siit, kui soovid allalaadimisfaile säilitada pärast tühistamist."
         },
         "uninstall": {
             "checkbox": "Eemalda prefiks: {{prefix}}{{newLine}}Märkus: seda ei saa tagasi võtta ja see eemaldab ka varundamata salvestusfailid.",
-            "message": "Kas soovite selle mängu eemaldada?",
-            "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
+            "message": "Kas soovid selle mängu eemaldada?",
+            "settingcheckbox": "Kustuta seadistused ja eemalda logi{{newLine}}Märkus: Seda tegevust ei saa tagasi pöörata. Kõik muudetud seadistused unustatakse ja logi kuulub kustutamisele.",
             "title": "Eemalda",
-            "dlc": "Kas soovid selle rakenduse eemaldada?",
-            "prefix_warning": "Selle mängu Wine'i eelmäärang on vaikimisi eelmäärang. Kui soovid selle tõeliselt kustutada, pead seda tegema käsitsi."
+            "dlc": "Kas soovid selle DLC eemaldada?",
+            "prefix_warning": "Selle mängu Wine'i eesliide on vaikimisi eesliide. Kui soovid selle tõeliselt kustutada, pead seda tegema käsitsi."
         },
         "update": {
-            "message": "Sellele mängule on saadaval uuendus, rakenda uuendus kohe?",
+            "message": "Sellele mängule on saadaval uuendus, kas käivitame uuenduse kohe?",
             "title": "Mäng vajab uuendust",
             "message-cancel": "Seda mängu ei ole võimalik mängida ilma uuendamata"
         },
-        "wineprefix": "Valige Wine prefiksi kaust",
+        "wineprefix": "Vali Wine eesliite kaust",
         "yes": "JAH",
-        "dont-show-again": "Ära näita enam",
-        "ok": "OK",
+        "dont-show-again": "Ära näita enam uuesti",
+        "ok": "Sobib",
         "aware": "Olen teadlik",
         "compability": {
-            "message": "See Windowsi mäng töötab ühilduvuse kihiga. Võite kohata mõningaid probleeme või mäng ei pruugi üldse töötada."
+            "message": "See Windowsi mäng töötab ühilduvuskihi abil. Võid kohata mõningaid probleeme või mäng ei pruugi üldse töötada."
         },
         "yesCancel": "Jah, tühista",
         "stopExtraction": {
-            "title": "Kas soovite ekstraktsiooni tühistada?"
+            "title": "Kas soovid lahtipakkimise tühistada?"
         }
     },
     "button": {
         "add_to_favourites": "Lisa lemmikute hulka",
         "cancel": "Peata/Tühista",
         "continue": "Jätka allalaadimist",
-        "finish": "Finish",
-        "force_update": "Sunni uuendus, kui see on saadaval",
-        "force-innstall": "Force Install",
+        "finish": "Lõpeta",
+        "force_update": "Kui uuendus on saadaval, siis sundkorras paigalda see",
+        "force-innstall": "Sundpaigaldus",
         "hide_game": "Peida mäng",
         "import": "Impordi mäng",
         "install": "Paigalda",
-        "no-path-selected": "No path selected",
+        "no-path-selected": "Asukoht on valimata",
         "queue": {
-            "remove": "Remove from Queue",
+            "remove": "Eemalda järjekorras",
             "cancel": "Tühista allalaadimine",
             "continue": "Jätka allalaadimist"
         },
         "remove_from_favourites": "Eemalda lemmikutest",
-        "remove_from_recent": "Remove From Recent",
-        "run-exe-first": "Run Installer First",
-        "running-setup": "Running Setup",
+        "remove_from_recent": "Eemalda hiljutiste alt",
+        "run-exe-first": "Esmalt käivita paigaldaja",
+        "running-setup": "Seadistan",
         "sideload": {
-            "edit": "Edit App/Game"
+            "edit": "Muuda rakendust/mängu"
         },
         "unhide_game": "Näita mäng",
         "uninstall": "Eemalda",
         "update": "Uuenda",
         "details": "Üksikasjad",
         "favorites": "Lemmik",
-        "remove_from_library": "Eemaldage",
-        "unfavorites": "Eemalda lemmik"
+        "remove_from_library": "Eemalda",
+        "unfavorites": "Eemalda lemmik",
+        "add_to_library": "Lisa kogusse",
+        "install-downloader": "Laadi paigaldaja alla",
+        "sign-and-install": "Allkirjasta ja paigalda"
     },
     "cloud_save_unsupported": "Mitte toetatud",
     "disabled": "Keelatud",
     "dlc": {
-        "installDlcs": "Paigalda kõik DLC'd"
+        "installDlcs": "Paigalda kõik DLC-d"
     },
     "enabled": "Lubatud",
     "game": {
         "downloadSize": "Allalaadimise suurus",
         "firstPlayed": "Esimest korda mängitud",
-        "getting-download-size": "Laadimise suuruse määramine",
-        "getting-install-size": "Installeerimise suuruse määramine",
+        "getting-download-size": "Tuvastan allalaadimise suurust",
+        "getting-install-size": "Tuvastan paigaldaamise suurust",
         "installSize": "Paigaldamise suurus",
         "language": "Keel",
         "lastPlayed": "Viimati mängitud",
@@ -107,7 +110,7 @@
         "platform": "Valige paigaldatava platvormi versioon",
         "requirements": "Süsteeminõuded",
         "totalPlayed": "Mängitud aeg",
-        "selectChannelName": "Vali kanal nime",
+        "selectChannelName": "Vali kanali nimi",
         "dlcs": "DLC-d"
     },
     "gamecard": {
@@ -116,7 +119,7 @@
     },
     "generic": {
         "error": "Teadmata viga",
-        "noDescription": "Raamatu kirjeldus pole saadaval."
+        "noDescription": "Kirjeldus pole saadaval"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -132,7 +135,7 @@
         "size": "Suurus",
         "syncsaves": "Sünkrooni salvestised",
         "version": "Versioon",
-        "web3-supported": "Has Web3 features"
+        "web3-supported": "Kasutab Web3 funktsionaalsust"
     },
     "install": {
         "disk-space-left": "Vaba ruumi",
@@ -142,7 +145,7 @@
         "space-after-install": "Pärast paigaldamist",
         "wineprefix": "WinePrefiks",
         "wineversion": "Wine'i versioon",
-        "compatibility-warning": "See Windowsi mäng töötab ühilduvuse kihiga. Teie kogemus võib erineda."
+        "compatibility-warning": "See Windowsi mäng töötab ühilduvuskihiga. Sinu kasutuskogemus võib olla erinev."
     },
     "label": {
         "game": {
@@ -151,7 +154,7 @@
         "playing": {
             "start": "Mängi",
             "stop": "Mängib (Peata)",
-            "update": "Ajakohastamine"
+            "update": "Uuenda"
         },
         "saves": {
             "syncing": "Salvestuste sünkroonimine"
@@ -164,7 +167,7 @@
         "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "login": "Log in",
-        "title": "You are NOT logged in",
+        "title": "Sa POLE sisse loginud",
         "amazon": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:"
     },
     "report_problem": "Teatage selle mängu käivitamise probleemist",
@@ -172,7 +175,7 @@
         "title": "Valige komponendid, mida installida"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "use-default-wine-settings": "Kasuta vaikimisi ühilduvusseadistusi",
         "winecrossoverbottle": "CrossOveri pudel"
     },
     "sideload": {
@@ -181,15 +184,15 @@
         },
         "info": {
             "broser": "BrowserURL",
-            "exe": "Select Executable",
+            "exe": "Vali k äsufail",
             "image": "App Image",
             "supports-web3": "This Game has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
-            "image": "Paste an Image URL here",
+            "image": "Aseta siia pildi võrguaadress",
             "title": "Add a title to your Game/App",
-            "url": "Paste the Game URL here"
+            "url": "Aseta siia mängu võrguaadress"
         }
     },
     "specs": {
@@ -198,35 +201,35 @@
     },
     "status": {
         "clickToUpdate": "Uuendamiseks klõpsake",
-        "gameNotAvailable": "Game not available",
+        "gameNotAvailable": "Mäng pole saadaval",
         "hasUpdates": "Uus versioon saadaval!",
         "installed": "Installitud",
-        "installing": "Paigaldamine",
+        "installing": "Paigaldan",
         "moving": "Paigalduse liiguatamine, palun oodake",
         "notinstalled": "See mäng ei ole paigaldatud",
-        "notSupported": "Not supported",
-        "notSupportedGame": "Not Supported",
+        "notSupported": "Pole toetatud",
+        "notSupportedGame": "Pole toetatud",
         "processing": "Failide töötlemine, palun oodake",
         "queued": "Queued",
         "reparing": "Mängu parandamine, palun oodake",
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Allalaaditud kokku",
-        "uninstalling": "Uninstalling",
+        "uninstalling": "Eemaldan paigaldust",
         "updating": "Mängu uuendamine",
-        "downloading": "Allalaadimine",
-        "syncingSaves": "Salvestuste sünkroonimine",
+        "downloading": "Allalaadimisel",
+        "syncingSaves": "Sünkroonin salvestusi",
         "paused": "Peatatud",
-        "patching": "Failide plaastrite rakendamine ",
-        "moving-files": "Faili '{{file}}' liigutamine: {{percent}} ",
+        "patching": "Failid on paikamisel ",
+        "moving-files": "„{{file}}“ fail on teisaldamisel : {{percent}} ",
         "extracting": {
-            "cancel": "Tühista ekstraktsioon",
-            "progress": "Ekstraktsioon"
+            "cancel": "Tühista lahtipakkimine",
+            "progress": "Lahtipakkimisel"
         },
-        "gog-goodie": "See mäng ei tundu olevat installitav. Kontrolli allalaaditavat sisu aadressil https://gog.com/account",
-        "goodie": "Ei ole installitav",
+        "gog-goodie": "See mäng ei tundu olevat paigaldatav. Kontrolli allalaaditavat sisu aadressil https://gog.com/account",
+        "goodie": "Ei ole paigaldatav",
         "distributables": "Jaotatavate installimine",
         "playing": "Mängimine",
-        "preparing": "Laadimise ettevalmistamine, palun oodake"
+        "preparing": "Valmistan allalaadimist ette, palun oota"
     },
     "submenu": {
         "addShortcut": "Lisa otsetee",
@@ -245,7 +248,30 @@
     },
     "method": {
         "getInstallInfo": {
-            "error": "Palun võtke ühendust HyperPlay meeskonnaga selle sõnumiga: {{error}} - {{context}}."
+            "error": "Palun võta ühendust HyperPlay meeskonnaga selle sõnumiga: {{error}} - {{context}}."
         }
+    },
+    "alert": {
+        "install": {
+            "siwe-action": "Osta NFT",
+            "siwe-message": "Jätkamiseks osta NFT või taga, et ta on rahataskus olemas.",
+            "tdp-title": "Kolmanda osapoole allalaadija",
+            "tpd-message-part1": "Kolmanda osapoole allalaadija pole läbinud HyperPlay turvakontrolli ",
+            "tpd-message-part2": "Jätka vaid siis, kui usaldad seda mängutootjat."
+        }
+    },
+    "downloadToast": {
+        "cancel": "Katkesta",
+        "of": "/",
+        "pause": "Peata",
+        "resume": "Jätka"
+    },
+    "tooltip": {
+        "installed_from_epic": "Paigalduse allikas: Epic Store",
+        "installed_from_gog": "Paigalduse allikas: GOG Store",
+        "installed_from_hyperplay": "Paigalduse allikas: HyperPlay Store",
+        "will_install_from_epic": "Saab olema paigaldatud allikast: Epic Store",
+        "will_install_from_gog": "Saab olema paigaldatud allikast: GOG Store",
+        "will_install_from_hyperplay": "Saab olema paigaldatud allikast: HyperPlay Store"
     }
 }
