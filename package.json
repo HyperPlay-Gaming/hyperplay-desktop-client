@@ -15,7 +15,7 @@
     "email": "support@hyperplay.xyz"
   },
   "scripts": {
-    "setup": "pnpm install --ignore-scripts && patch-package && pnpm exec allow-scripts",
+    "setup": "pnpm install --ignore-scripts && patch-package && pnpm exec allow-scripts && node scripts/envcheck.js",
     "setupWithoutOptional": "node ./dev/rmOptionalDependencies.js && pnpm prettier-fix && pnpm install --ignore-optional && pnpm exec allow-scripts",
     "start": "electron-vite dev --watch",
     "debug:react": "react-devtools",
